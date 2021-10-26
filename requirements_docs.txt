@@ -1,3 +1,0 @@
-pyansys-sphinx-theme
-numpydoc
-sphinx==4.0.3

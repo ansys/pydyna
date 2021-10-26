@@ -1,10 +1,10 @@
-from ansys.product.library import __version__
+from ansys.DynaSolver import DynaSolver
 
 # Project information
 project = 'pyansys_library_'
 copyright = '(c) 2021 ANSYS, Inc. All rights reserved'
 author = 'ANSYS Inc.'
-release = version = __version__
+release = version = DynaSolver.__version__
 
 # optionally use the default pyansys logo
 html_logo = 'https://docs.pyansys.com/_static/pyansys-logo-black-cropped.png'
@@ -13,7 +13,7 @@ html_theme = 'pyansys_sphinx_theme'
 
 # specify the location of your github repo
 html_theme_options = {
-    "github_url": "https://github.com/pyansys/pyansys-sphinx-theme",
+    "github_url": "https://github.com/pyansys/pyDynaSolver",
     "show_prev_next": False
 }
 

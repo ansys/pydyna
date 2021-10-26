@@ -1,66 +1,50 @@
-PyAnsys Library Template
-########################
+﻿PyDynaSolver
+#############
 
-This repository is a template repository where you can `Create a
-repository from a template`_ and create a new PyAnsys project that
-follows the guidelines specified in the `PyAnsys Developer's Guide`_.
-
-The following sections should be filled and documented for your project.
-
-.. _Create a repository from a template: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
-.. _PyAnsys Developer's Guide: https://github.com/pyansys/about
+This repository holds Python code for a simple gRPC interface
+to the LS-DYNA solver.
 
 
 Project Overview
 ----------------
-Provide a description of your PyAnsys Python library.
+As LS-DYNA is primarily a batch solver with very limited interactive
+capabilities, the code here is similarly limited.  The target
+use case is that LS-DYNA will be running in a container environment
+such as Docker or Kubernetes.  The code here then allows for pushing
+input files to the container, starting LS-DYNA and monitoring its
+progress, and retrieving results files.
 
 
 Installation
 ------------
-Include installation directions.  Note that this README will be
-included in your PyPI package, so be sure to include ``pip``
-directions along with developer installation directions.  For example.
-
-Install <PyAnsys Library> with:
+I have as yet no idea how to set this up under PyPI, nor exactly when
+it will be ready for that.  So for now the only real option is for
+you to download the code from GitHub:
 
 .. code::
 
-   pip install ansys-<product/service>-<library>
+   git clone https://github.com/pyansys/pyDynaSolver
 
-Alternatively, clone and install in development mode with:
-
-.. code::
-
-   git clone https://github.com/pyansys/
-   cd <PyAnsys-Library>
-   pip install -e .
-
+and copy the required files
 
 Documentation
 -------------
-Include a link to the full sphinx documentation.  For example `PyAnsys <https://docs.pyansys.com/>`_
 
 
 Usage
 -----
-It's best to provide a sample code or even a figure demonstrating the usage of your library.  For example:
+Here is a basic example:
 
 .. code:: python
 
-   >>> from ansys.<product/service> import <library>
-   >>> my_object.<library>()
-   >>> my_object.foo()
-   'bar'
-
-
-Testing
--------
-You can feel free to include this at the README level or in CONTRIBUTING.md
+   >>> from DynaSolver import *
+   >>> dyna=DynaSovler(hostname,port)                  # connect to the container
+   >>> dyna.push("input.k")                            # push an input file
+   >>> dyna.start(4)                                   # start 4 ranks of mppdyna
+   >>> dyna.run("i=input.k memory=10m ncycle=20000")   # begin execution
 
 
 License
 -------
-Be sure to point out your license (and any acknowledgments).  State
-that the full license can be found in the root directory of the
-repository.
+Distributed under the MIT license.  See LICENSE in the root directory
+of the repository for details.
