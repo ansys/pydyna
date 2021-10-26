@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option java_package = "ex.grpc";
+
+package dynasolver;
+
+// Defines the service
+service DynaSolverComm {
+    // Function invoked to send the request to server, which is passed to Dyna
+    rpc sendRequest (DynaSolverRelay) returns (DynaSolverRelay) {}
+    // upload a local file to the server, who puts in in Dyna's working directory
+    rpc uploadFile (stream DynaSolverFileData) returns (DynaSolverStatus) {}
+    // download a from Dyna's working directory
+    rpc downloadFile (DynaSolverFileRequest) returns (stream DynaSolverFileData) {}
+    // monitor the standard output or standard error
+    rpc tailFile (DynaSolverTailRequest) returns (stream DynaSolverFileData) {}
+    // return file & size info for all files in Dyna's working directory
+    rpc listFiles (DynaSolverFileRequest) returns (DynaSolverFileList) {}
+    // Start Dyna, which then pauses and waits for command line info
+    rpc startSolver (DynaSolverStart) returns (DynaSolverStatus) {}
+    // Terminate the server.  The server actually ignores this when running
+    // in a container, so there may not be much point here...
+    rpc quitServer (QuitServer) returns (DynaSolverStatus) {}
+}
+
+// The request packet, and also the reply packet, for most
+// communications that get passed to DYNA
+// There does not seem to be a 32 bit or 64 bit float in grpc,
+// just 'float' and 'double', so I hope these work OK
+message DynaSolverRelay {
+             int32  tag = 1;
+    repeated int64   i8 = 2;
+    repeated double  r8 = 3;
+    repeated int32   i4 = 4;
+    repeated float   r4 = 5;
+             bytes   b  = 6;
+}
+
+// No data needed
+message QuitServer {
+}
+// Sent or returned byte stream for file contents
+message DynaSolverFileData {
+  bytes b = 1;
+}
+// Command to start DYNA executable on the given number of cores
+message DynaSolverStart {
+  bytes exename = 1;  
+  int32 nproc = 2;
+}
+// File name to download, or optional filter text for listFiles
+message DynaSolverFileRequest {
+  bytes name = 1;
+}
+// Which file to monitor/return: 1=stdout, 2=stderr
+message DynaSolverTailRequest {
+  int32 which = 1;
+}
+// Command status flag, for commands that don't return other content
+message DynaSolverStatus {
+  int32 status = 1;
+}
+// Directory listing information
+message DynaSolverFileList {
+  repeated bytes name = 1;
+  repeated int64 size = 2;
+}
