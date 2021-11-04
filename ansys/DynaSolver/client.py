@@ -8,11 +8,11 @@ from DynaSolver import *
 hostname = 'localhost'
 port = '5000'
 #
-def get_from_minikube():
+def get_from_minikube(service):
   f=os.popen("minikube ip","r")
   ip=f.readline().strip()
   f.close
-  f=os.popen("kubectl get svc server","r")
+  f=os.popen("kubectl get svc %s" % service,"r")
   f.readline()
   p=f.readline()
   n1=p.find(":")
@@ -28,16 +28,19 @@ try:
 except:
   hostname = 'localhost'
 try:
-  port = sys.argv[2]
+  port    = sys.argv[2]
+  service = port
 except:
-  port = '5000'
+  port    = '5000'
+  service = 'server'
 #
 # Special code here for testing on my system with minikube:
 # if run with just "minikube" as the argument, figure out
-# the correct IP address and port to use
+# the correct IP address and port to use.  If there is a second
+# argument, it is the name of the "server" service, which defaults to "server"
 #
 if(hostname == 'minikube'):
-  (hostname,port) = get_from_minikube()
+  (hostname,port) = get_from_minikube(service)
   print("Using %s:%s" % (hostname,port))
 #
 # Open gRPC connection to the server
