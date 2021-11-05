@@ -8,6 +8,16 @@ from DynaSolver import *
 hostname = 'localhost'
 port = '5000'
 #
+def get_from_k8s(service):
+  ip='localhost'   # for local k8s cluster
+  f=os.popen("kubectl get service %s" % service,"r")
+  f.readline()
+  p=f.readline()
+  n1=p.find(":")
+  n2=p.find("/")
+  p=p[n1+1:n2]
+  return (ip,p)
+#
 def get_from_minikube(service):
   f=os.popen("minikube ip","r")
   ip=f.readline().strip()
@@ -41,6 +51,9 @@ except:
 #
 if(hostname == 'minikube'):
   (hostname,port) = get_from_minikube(service)
+  print("Using %s:%s" % (hostname,port))
+elif(hostname == 'k8s'):
+  (hostname,port) = get_from_k8s(service)
   print("Using %s:%s" % (hostname,port))
 #
 # Open gRPC connection to the server
