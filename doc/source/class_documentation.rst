@@ -10,6 +10,6 @@ automatically generate class and method documentation.
 .. autosummary::
    :toctree: _autosummary/
 
-   ansys.DynaSolver.DynaSolver
+   ansys.dyna.solver.DynaSolver
 
 Note how each method or attribute has its own page.

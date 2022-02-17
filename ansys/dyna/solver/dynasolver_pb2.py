@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='dynasolver',
   syntax='proto3',
   serialized_options=_b('\n\007ex.grpc'),
-  serialized_pb=_b('\n\x10\x64ynasolver.proto\x12\ndynasolver\"Y\n\x0f\x44ynaSolverRelay\x12\x0b\n\x03tag\x18\x01 \x01(\x05\x12\n\n\x02i8\x18\x02 \x03(\x03\x12\n\n\x02r8\x18\x03 \x03(\x01\x12\n\n\x02i4\x18\x04 \x03(\x05\x12\n\n\x02r4\x18\x05 \x03(\x02\x12\t\n\x01\x62\x18\x06 \x01(\x0c\"\x0c\n\nQuitServer\"\x1f\n\x12\x44ynaSolverFileData\x12\t\n\x01\x62\x18\x01 \x01(\x0c\"1\n\x0f\x44ynaSolverStart\x12\x0f\n\x07\x65xename\x18\x01 \x01(\x0c\x12\r\n\x05nproc\x18\x02 \x01(\x05\"%\n\x15\x44ynaSolverFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\x0c\"&\n\x15\x44ynaSolverTailRequest\x12\r\n\x05which\x18\x01 \x01(\x05\"\"\n\x10\x44ynaSolverStatus\x12\x0e\n\x06status\x18\x01 \x01(\x05\"0\n\x12\x44ynaSolverFileList\x12\x0c\n\x04name\x18\x01 \x03(\x0c\x12\x0c\n\x04size\x18\x02 \x03(\x03\x32\xb9\x04\n\x0e\x44ynaSolverComm\x12I\n\x0bsendRequest\x12\x1b.dynasolver.DynaSolverRelay\x1a\x1b.dynasolver.DynaSolverRelay\"\x00\x12N\n\nuploadFile\x12\x1e.dynasolver.DynaSolverFileData\x1a\x1c.dynasolver.DynaSolverStatus\"\x00(\x01\x12U\n\x0c\x64ownloadFile\x12!.dynasolver.DynaSolverFileRequest\x1a\x1e.dynasolver.DynaSolverFileData\"\x00\x30\x01\x12Q\n\x08tailFile\x12!.dynasolver.DynaSolverTailRequest\x1a\x1e.dynasolver.DynaSolverFileData\"\x00\x30\x01\x12P\n\tlistFiles\x12!.dynasolver.DynaSolverFileRequest\x1a\x1e.dynasolver.DynaSolverFileList\"\x00\x12J\n\x0bstartSolver\x12\x1b.dynasolver.DynaSolverStart\x1a\x1c.dynasolver.DynaSolverStatus\"\x00\x12\x44\n\nquitServer\x12\x16.dynasolver.QuitServer\x1a\x1c.dynasolver.DynaSolverStatus\"\x00\x42\t\n\x07\x65x.grpcb\x06proto3')
+  serialized_pb=_b('\n\x10\x64ynasolver.proto\x12\ndynasolver\"Y\n\x0f\x44ynaSolverRelay\x12\x0b\n\x03tag\x18\x01 \x01(\x05\x12\n\n\x02i8\x18\x02 \x03(\x03\x12\n\n\x02r8\x18\x03 \x03(\x01\x12\n\n\x02i4\x18\x04 \x03(\x05\x12\n\n\x02r4\x18\x05 \x03(\x02\x12\t\n\x01\x62\x18\x06 \x01(\x0c\"\x19\n\x08LogLevel\x12\r\n\x05level\x18\x01 \x01(\x0c\"\x0c\n\nQuitServer\"\x1f\n\x12\x44ynaSolverFileData\x12\t\n\x01\x62\x18\x01 \x01(\x0c\"1\n\x0f\x44ynaSolverStart\x12\x0f\n\x07\x65xename\x18\x01 \x01(\x0c\x12\r\n\x05nproc\x18\x02 \x01(\x05\"%\n\x15\x44ynaSolverFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\x0c\"&\n\x15\x44ynaSolverTailRequest\x12\r\n\x05which\x18\x01 \x01(\x05\"\"\n\x10\x44ynaSolverStatus\x12\x0e\n\x06status\x18\x01 \x01(\x05\"0\n\x12\x44ynaSolverFileList\x12\x0c\n\x04name\x18\x01 \x03(\x0c\x12\x0c\n\x04size\x18\x02 \x03(\x03\x32\x83\x05\n\x0e\x44ynaSolverComm\x12J\n\x0csend_request\x12\x1b.dynasolver.DynaSolverRelay\x1a\x1b.dynasolver.DynaSolverRelay\"\x00\x12O\n\x0bupload_file\x12\x1e.dynasolver.DynaSolverFileData\x1a\x1c.dynasolver.DynaSolverStatus\"\x00(\x01\x12V\n\rdownload_file\x12!.dynasolver.DynaSolverFileRequest\x1a\x1e.dynasolver.DynaSolverFileData\"\x00\x30\x01\x12R\n\ttail_file\x12!.dynasolver.DynaSolverTailRequest\x1a\x1e.dynasolver.DynaSolverFileData\"\x00\x30\x01\x12Q\n\nlist_files\x12!.dynasolver.DynaSolverFileRequest\x1a\x1e.dynasolver.DynaSolverFileList\"\x00\x12K\n\x0cstart_solver\x12\x1b.dynasolver.DynaSolverStart\x1a\x1c.dynasolver.DynaSolverStatus\"\x00\x12\x45\n\x0bquit_server\x12\x16.dynasolver.QuitServer\x1a\x1c.dynasolver.DynaSolverStatus\"\x00\x12\x41\n\tlog_level\x12\x14.dynasolver.LogLevel\x1a\x1c.dynasolver.DynaSolverStatus\"\x00\x42\t\n\x07\x65x.grpcb\x06proto3')
 )
 
 
@@ -92,6 +92,37 @@ _DYNASOLVERRELAY = _descriptor.Descriptor(
 )
 
 
+_LOGLEVEL = _descriptor.Descriptor(
+  name='LogLevel',
+  full_name='dynasolver.LogLevel',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='level', full_name='dynasolver.LogLevel.level', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=123,
+  serialized_end=148,
+)
+
+
 _QUITSERVER = _descriptor.Descriptor(
   name='QuitServer',
   full_name='dynasolver.QuitServer',
@@ -111,8 +142,8 @@ _QUITSERVER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=123,
-  serialized_end=135,
+  serialized_start=150,
+  serialized_end=162,
 )
 
 
@@ -142,8 +173,8 @@ _DYNASOLVERFILEDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=137,
-  serialized_end=168,
+  serialized_start=164,
+  serialized_end=195,
 )
 
 
@@ -180,8 +211,8 @@ _DYNASOLVERSTART = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=170,
-  serialized_end=219,
+  serialized_start=197,
+  serialized_end=246,
 )
 
 
@@ -211,8 +242,8 @@ _DYNASOLVERFILEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=221,
-  serialized_end=258,
+  serialized_start=248,
+  serialized_end=285,
 )
 
 
@@ -242,8 +273,8 @@ _DYNASOLVERTAILREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=260,
-  serialized_end=298,
+  serialized_start=287,
+  serialized_end=325,
 )
 
 
@@ -273,8 +304,8 @@ _DYNASOLVERSTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=300,
-  serialized_end=334,
+  serialized_start=327,
+  serialized_end=361,
 )
 
 
@@ -311,11 +342,12 @@ _DYNASOLVERFILELIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=336,
-  serialized_end=384,
+  serialized_start=363,
+  serialized_end=411,
 )
 
 DESCRIPTOR.message_types_by_name['DynaSolverRelay'] = _DYNASOLVERRELAY
+DESCRIPTOR.message_types_by_name['LogLevel'] = _LOGLEVEL
 DESCRIPTOR.message_types_by_name['QuitServer'] = _QUITSERVER
 DESCRIPTOR.message_types_by_name['DynaSolverFileData'] = _DYNASOLVERFILEDATA
 DESCRIPTOR.message_types_by_name['DynaSolverStart'] = _DYNASOLVERSTART
@@ -331,6 +363,13 @@ DynaSolverRelay = _reflection.GeneratedProtocolMessageType('DynaSolverRelay', (_
   # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverRelay)
   })
 _sym_db.RegisterMessage(DynaSolverRelay)
+
+LogLevel = _reflection.GeneratedProtocolMessageType('LogLevel', (_message.Message,), {
+  'DESCRIPTOR' : _LOGLEVEL,
+  '__module__' : 'dynasolver_pb2'
+  # @@protoc_insertion_point(class_scope:dynasolver.LogLevel)
+  })
+_sym_db.RegisterMessage(LogLevel)
 
 QuitServer = _reflection.GeneratedProtocolMessageType('QuitServer', (_message.Message,), {
   'DESCRIPTOR' : _QUITSERVER,
@@ -390,12 +429,12 @@ _DYNASOLVERCOMM = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=387,
-  serialized_end=956,
+  serialized_start=414,
+  serialized_end=1057,
   methods=[
   _descriptor.MethodDescriptor(
-    name='sendRequest',
-    full_name='dynasolver.DynaSolverComm.sendRequest',
+    name='send_request',
+    full_name='dynasolver.DynaSolverComm.send_request',
     index=0,
     containing_service=None,
     input_type=_DYNASOLVERRELAY,
@@ -403,8 +442,8 @@ _DYNASOLVERCOMM = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='uploadFile',
-    full_name='dynasolver.DynaSolverComm.uploadFile',
+    name='upload_file',
+    full_name='dynasolver.DynaSolverComm.upload_file',
     index=1,
     containing_service=None,
     input_type=_DYNASOLVERFILEDATA,
@@ -412,8 +451,8 @@ _DYNASOLVERCOMM = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='downloadFile',
-    full_name='dynasolver.DynaSolverComm.downloadFile',
+    name='download_file',
+    full_name='dynasolver.DynaSolverComm.download_file',
     index=2,
     containing_service=None,
     input_type=_DYNASOLVERFILEREQUEST,
@@ -421,8 +460,8 @@ _DYNASOLVERCOMM = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='tailFile',
-    full_name='dynasolver.DynaSolverComm.tailFile',
+    name='tail_file',
+    full_name='dynasolver.DynaSolverComm.tail_file',
     index=3,
     containing_service=None,
     input_type=_DYNASOLVERTAILREQUEST,
@@ -430,8 +469,8 @@ _DYNASOLVERCOMM = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='listFiles',
-    full_name='dynasolver.DynaSolverComm.listFiles',
+    name='list_files',
+    full_name='dynasolver.DynaSolverComm.list_files',
     index=4,
     containing_service=None,
     input_type=_DYNASOLVERFILEREQUEST,
@@ -439,8 +478,8 @@ _DYNASOLVERCOMM = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='startSolver',
-    full_name='dynasolver.DynaSolverComm.startSolver',
+    name='start_solver',
+    full_name='dynasolver.DynaSolverComm.start_solver',
     index=5,
     containing_service=None,
     input_type=_DYNASOLVERSTART,
@@ -448,11 +487,20 @@ _DYNASOLVERCOMM = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='quitServer',
-    full_name='dynasolver.DynaSolverComm.quitServer',
+    name='quit_server',
+    full_name='dynasolver.DynaSolverComm.quit_server',
     index=6,
     containing_service=None,
     input_type=_QUITSERVER,
+    output_type=_DYNASOLVERSTATUS,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='log_level',
+    full_name='dynasolver.DynaSolverComm.log_level',
+    index=7,
+    containing_service=None,
+    input_type=_LOGLEVEL,
     output_type=_DYNASOLVERSTATUS,
     serialized_options=None,
   ),
