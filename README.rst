@@ -17,9 +17,8 @@ progress, and retrieving results files.
 
 Installation
 ------------
-I have as yet no idea how to set this up under PyPI, nor exactly when
-it will be ready for that.  So for now the only real option is for
-you to download the code from GitHub:
+This package is not yet available on PyPI, so for now the only real
+option is for you to download the code from GitHub:
 
 .. code::
 
@@ -37,8 +36,8 @@ Here is a basic example:
 
 .. code:: python
 
-   >>> from DynaSolver import *
-   >>> dyna=DynaSovler(hostname,port)                  # connect to the container
+   >>> import ansys.dyna.solver as solver
+   >>> dyna=solver.DynaSovler(hostname,port)           # connect to the container
    >>> dyna.push("input.k")                            # push an input file
    >>> dyna.start(4)                                   # start 4 ranks of mppdyna
    >>> dyna.run("i=input.k memory=10m ncycle=20000")   # begin execution

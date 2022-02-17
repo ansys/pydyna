@@ -1,10 +1,10 @@
-from ansys.DynaSolver import DynaSolver
+import ansys.dyna.solver as solver
 
 # Project information
 project = 'pyansys_library_'
 copyright = '(c) 2021 ANSYS, Inc. All rights reserved'
 author = 'ANSYS Inc.'
-release = version = DynaSolver.__version__
+release = version = solver.__version__
 
 # optionally use the default pyansys logo
 html_logo = 'https://docs.pyansys.com/_static/pyansys-logo-black-cropped.png'

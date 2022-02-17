@@ -24,10 +24,10 @@ Rendered Python Code
 
 .. code:: python
 
-   >>> from ansys.DynaSolver import *
+   >>> import ansys.dyna.solver as solver
    >>> hostname="localhost"
    >>> port="5000"
-   >>> dyna=DynaSolver(hostname,port)
+   >>> dyna=solver.DynaSolver(hostname,port)
    >>> dyna.push("input.k")
    >>> dyna.start(3)
    >>> dyna.run("i=input.k")
