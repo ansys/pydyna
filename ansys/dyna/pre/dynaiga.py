@@ -4,6 +4,7 @@ import logging
 
 from .dynabase import *
 
+
 class DynaIGA(DynaBase):
     """Contains methods to create keyword related to IGA"""
 
