@@ -8,8 +8,8 @@ from .dynabase import *
 class DynaIGA(DynaBase):
     """Contains methods to create keyword related to IGA"""
 
-    def __init__(self):
-        DynaBase.__init__(self)
+    def __init__(self, hostname = 'localhost'):
+        DynaBase.__init__(self, hostname)
 
     def create_section_igashell(self, secid, elform, shrf, thickness):
         """Create *SECTION_IGA_SHELL keyword
