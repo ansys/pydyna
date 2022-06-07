@@ -488,10 +488,24 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
             opcode += "_"+option.upper()
         newk = opcode
         card1 = str(sid)
-        card2 = genoption
-        for i in range(len(entities)):
-            card2 += ","+str(entities[i])
-        newk +=  "\n" + card1 + "\n"+card2 
+        if option.upper()=="GENERAL":
+            card2 = genoption
+            for i in range(len(entities)):
+                card2 += ","+str(entities[i])
+                newk +=  "\n" + card1 + "\n"+card2 
+        elif option.upper()=="LIST":
+            newk +=  "\n" + card1 + "\n"
+            repeatcard = ''
+            count = 0
+            for nid in entities:
+                repeatcard += str(nid)
+                count+=1
+                if count%8==0 or count >= len(entities):
+                    repeatcard += '\n'
+                    newk += repeatcard
+                    repeatcard=''
+                    continue
+                repeatcard+=','
         self.kwdproc.newkeyword(newk)
         msg = 'SET_NODE '+str(sid)+' Created...'
         print(msg)
