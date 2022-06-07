@@ -8,8 +8,8 @@ from .dynabase import *
 class DynaICFD(DynaBase):
     """Contains methods to create keyword related to ICFD"""
 
-    def __init__(self):
-        DynaBase.__init__(self)
+    def __init__(self, hostname = 'localhost'):
+        DynaBase.__init__(self, hostname)
 
     def create_control_time(self, tim, dt):
         """Create *ICFD_CONTROL_TIME keyword
