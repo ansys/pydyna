@@ -8,11 +8,11 @@ from .dynabase import *
 class DynaAirbag(DynaBase):
     """Contains methods to create keyword related to airbag"""
 
-    def __init__(self, hostname = 'localhost'):
+    def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
 
     def create_simple_airbag_model(
-        self, modeltype, sid, sidtyp, cv, cp, t,lcid,mu,area,pe,ro
+        self, modeltype, sid, sidtyp, cv, cp, t, lcid, mu, area, pe, ro
     ):
         """Define an airbag or control volume.
         Refer to: *SIMPLE_AIRBAG_MODEL
@@ -54,13 +54,12 @@ class DynaAirbag(DynaBase):
                 cv=cv,
                 cp=cp,
                 t=t,
-                lcid = lcid,
-                mu = mu,
-                area = area,
-                pe = pe,
-                ro = ro
+                lcid=lcid,
+                mu=mu,
+                area=area,
+                pe=pe,
+                ro=ro,
             )
         )
         logging.info("Airbag Model Created...")
         return ret
-

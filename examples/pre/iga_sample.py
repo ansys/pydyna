@@ -58,7 +58,27 @@ if __name__ == "__main__":
         )
         pids1.append(i)
     iga.create_partset(sid=1, pids=pids1)
-    iga.create_contact_automatic(ssid=2, msid=0, sstyp=2, mstyp=0, option=1)
-    iga.create_contact_tied(ssid=1, msid=2, sstyp=2, mstyp=2)
+    iga.create_contact(
+        cid=1,
+        title="automatic",
+        option1="AUTOMATIC_SINGLE_SURFACE",
+        option3=True,
+        ssid=2,
+        msid=0,
+        sstyp=2,
+        mstyp=0,
+        optionres=1,
+    )
+    iga.create_contact(
+        cid=2,
+        title="tied",
+        option1="TIED_SHELL_EDGE_TO_SURFACE",
+        option3=True,
+        offset="OFFSET",
+        ssid=1,
+        msid=2,
+        sstyp=2,
+        mstyp=2,
+    )
     elements = iga.get_solid_elements()
     iga.save_file()

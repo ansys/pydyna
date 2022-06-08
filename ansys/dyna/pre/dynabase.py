@@ -58,7 +58,7 @@ def init_log(log_file):
 class DynaBase:
     """Contains methods to create general LS-DYNA keyword"""
 
-    def __init__(self, hostname = 'localhost'):
+    def __init__(self, hostname="localhost"):
         init_log("client.log")
         channel = grpc.insecure_channel(hostname + ":50051")
         try:
@@ -133,7 +133,7 @@ class DynaBase:
         logging.info("Termination Created...")
         return ret
 
-    def control_accuracy(self, osu=0, inn=1, pidosu=0, iacc=0, exacc=0.0):
+    def create_control_accuracy(self, osu=0, inn=1, pidosu=0, iacc=0, exacc=0.0):
         """Define control parameters that can improve the accuracy of the calculation.
         Refer to: *CONTROL_ACCURACY
         Parameters
@@ -161,7 +161,7 @@ class DynaBase:
         logging.info("Control Accuracy Created...")
         return ret
 
-    def control_energy(self, hgen=1, rwen=2, slnten=1, rylen=1, irgen=2):
+    def create_control_energy(self, hgen=1, rwen=2, slnten=1, rylen=1, irgen=2):
         """Provide controls for energy dissipation options.
         Refer to: *CONTROL_ENERGY
         Parameters
@@ -189,7 +189,7 @@ class DynaBase:
         logging.info("Control Energy Created...")
         return ret
 
-    def control_shell(
+    def create_control_shell(
         self,
         wrpang=20,
         esort=0,
@@ -244,7 +244,7 @@ class DynaBase:
         logging.info("Control Shell Created...")
         return ret
 
-    def control_solid(
+    def create_control_solid(
         self,
         esort=0,
         fmatrx=0,
@@ -295,7 +295,7 @@ class DynaBase:
         logging.info("Control Solid Created...")
         return ret
 
-    def create_control_output(self, npopt=0,neecho=0):
+    def create_control_output(self, npopt=0, neecho=0):
         """Set miscellaneous output parameters.
         Refer to : *CONTROL_OUTPUT
         Parameters
@@ -305,10 +305,10 @@ class DynaBase:
             EQ.0: No suppression.
             EQ.1: Nodal coordinates, element connectivities, rigid wall definitions, nodal SPCs, initial velocities, initial strains, adaptive constraints, and SPR2/SPR3 constraints are not printed.
         neecho : int
-            Print suppression during input phase flag for echo file: 
+            Print suppression during input phase flag for echo file:
             EQ.0: All data printed.
             EQ.1: Nodal printing is suppressed.
-            EQ.2: Element printing is suppressed. 
+            EQ.2: Element printing is suppressed.
             EQ.3: Both nodal and element printing is suppressed.
         Returns
         -------
@@ -316,14 +316,14 @@ class DynaBase:
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateControlOutput(
-            ControlOutputRequest(
-                npopt=npopt, neecho=neecho
-            )
+            ControlOutputRequest(npopt=npopt, neecho=neecho)
         )
         logging.info("Control Output Created...")
         return ret
 
-    def create_control_contact(self, rwpnal, shlthk=0,orien=1, ssthk=0, ignore=0, igactc=0):
+    def create_control_contact(
+        self, rwpnal, shlthk=0, orien=1, ssthk=0, ignore=0, igactc=0
+    ):
         """Change defaults for computation with contact surfaces
         Refer to : *CONTROL_CONTACT
         Parameters
@@ -348,13 +348,20 @@ class DynaBase:
         """
         ret = self.stub.CreateControlContact(
             ControlContactRequest(
-                rwpnal=rwpnal, shlthk=shlthk,orien=orien, ssthk=ssthk, ignore=ignore, igactc=igactc
+                rwpnal=rwpnal,
+                shlthk=shlthk,
+                orien=orien,
+                ssthk=ssthk,
+                ignore=ignore,
+                igactc=igactc,
             )
         )
         logging.info("Control Contact Created...")
         return ret
 
-    def create_database_binary(self,filetype="D3PLOT", dt=0, maxint=3, ieverp=0,dcomp=1, nintsld=1):
+    def create_database_binary(
+        self, filetype="D3PLOT", dt=0, maxint=3, ieverp=0, dcomp=1, nintsld=1
+    ):
         """Request binary output.
         Refer to : *DATABASE_BINARY_*
                    *DATABASE_EXTENT_BINARY
@@ -365,7 +372,7 @@ class DynaBase:
         maxint : int
             Number of shell and thick shell through-thickness integration points for which output is written to d3plot.
         ieverp : int
-            Every output state for the d3plot database is written to a separate file. 
+            Every output state for the d3plot database is written to a separate file.
             EQ.0: More than one state can be on each plot file.
             EQ.1: One state only on each plot file.
         dcomp : int
@@ -379,7 +386,14 @@ class DynaBase:
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateDBBinary(
-            DBBinaryRequest(filetype=filetype,dt=dt, maxint=maxint,ieverp=ieverp, dcomp=dcomp, nintsld=nintsld)
+            DBBinaryRequest(
+                filetype=filetype,
+                dt=dt,
+                maxint=maxint,
+                ieverp=ieverp,
+                dcomp=dcomp,
+                nintsld=nintsld,
+            )
         )
         logging.info("DB Binary Created...")
         return ret
@@ -443,15 +457,13 @@ class DynaBase:
                 lcid=lcid,
                 vx=vx,
                 vy=vy,
-                vz=vz
+                vz=vz,
             )
         )
         logging.info("Cylinder Rigidwall Geometric Created...")
         return ret
-    
-    def create_rigidwall_planar(
-        self, nsid, tail, head, nsidex=0, boxid=0, fric=0
-    ):
+
+    def create_rigidwall_planar(self, nsid, tail, head, nsidex=0, boxid=0, fric=0):
         """Define planar rigid walls with either finite or infinite size.
         Parameters
         ----------
@@ -473,22 +485,16 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        normal = [tail[0],tail[1],tail[2],head[0],head[1],head[2]]
+        normal = [tail[0], tail[1], tail[2], head[0], head[1], head[2]]
         ret = self.stub.CreateRigidWallPlanar(
             RigidWallPlanarRequest(
-                nsid=nsid,
-                nsidex=nsidex,
-                boxid=boxid,
-                fric = fric,
-                normal = normal
+                nsid=nsid, nsidex=nsidex, boxid=boxid, fric=fric, normal=normal
             )
         )
         logging.info("Rigidwall Planar Created...")
         return ret
 
-    def create_init_vel(
-        self, nsid, velocity
-    ):
+    def create_init_vel(self, nsid, velocity):
         """Define initial nodal point velocities using nodal set ID.
         Refer to:*INITIAL_VELOCITY
         Parameters
@@ -504,11 +510,7 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateInitVel(
-            InitVelRequest(
-                nsid=nsid, velocity=velocity
-            )
-        )
+        ret = self.stub.CreateInitVel(InitVelRequest(nsid=nsid, velocity=velocity))
         logging.info("Initial velocity Created...")
         return ret
 
@@ -662,7 +664,7 @@ class DynaBase:
         logging.info("DefineVector Created...")
         return ret
 
-    def create_defineorientation(self, vid, iop, vector, node1,node2):
+    def create_defineorientation(self, vid, iop, vector, node1, node2):
         """Define orientation vectors for discrete springs and dampers.
         Refer to : *DEFINE_SD_ORIENTATION
         Parameters
@@ -670,16 +672,16 @@ class DynaBase:
         vid : int
             Orientation vector ID.
         iop : int
-            Option: 
-            EQ.0: deflections/rotations are measured and forces/moments applied along the following orientation vector. 
-            EQ.1: deflections/rotations are measured and forces/moments applied along the axis between the two spring/damper nodes projected onto the plane normal to the following orientation vector. 
-            EQ.2: deflections/rotations are measured and forces/moments applied along a vector defined by the following two nodes. 
+            Option:
+            EQ.0: deflections/rotations are measured and forces/moments applied along the following orientation vector.
+            EQ.1: deflections/rotations are measured and forces/moments applied along the axis between the two spring/damper nodes projected onto the plane normal to the following orientation vector.
+            EQ.2: deflections/rotations are measured and forces/moments applied along a vector defined by the following two nodes.
             EQ.3: deflections/rotations are measured and forces/moments applied along the axis between the two spring/damper nodes projected onto the plane normal to the a vector defined by the following two nodes.
         vector : list [x,y,z]
             x,y,z : x,y,z-value of orientation vector.
         node1 : int
             Node 1 ID.
-        node2 : int 
+        node2 : int
             Node 2 ID.
 
         Returns
@@ -689,11 +691,7 @@ class DynaBase:
         """
         ret = self.stub.CreateDefineOrientation(
             DefineOrientationRequest(
-                vid=vid,
-                iop=iop,
-                vector=vector,
-                node1=node1,
-                node2=node2
+                vid=vid, iop=iop, vector=vector, node1=node1, node2=node2
             )
         )
         logging.info("DefineOrientation Created...")
@@ -806,7 +804,7 @@ class DynaBase:
         logging.info("Solid Set Created...")
         return ret
 
-    def create_nodeset(self, option, sid, entities,genoption=""):
+    def create_nodeset(self, option, sid, entities, genoption=""):
         """Define a nodal set with some identical or unique attributes.
         Refer to: *SET_NODE
         Parameters
@@ -917,7 +915,9 @@ class DynaBase:
         logging.info("Section Solid Created...")
         return ret
 
-    def create_section_discrete(self, secid, dro=0,kd=0,v0=0,cl=0,fd=0,cdl=0,tdl=0):
+    def create_section_discrete(
+        self, secid, dro=0, kd=0, v0=0, cl=0, fd=0, cdl=0, tdl=0
+    ):
         """Defined spring and damper elements for translation and rotation.
         Refer to : *SECTION_DISCRETE
         Parameters
@@ -925,8 +925,8 @@ class DynaBase:
         secid : int
             Section ID.
         dro : int
-            Displacement/Rotation Option: 
-            EQ.0: the material describes a translational spring/damper, 
+            Displacement/Rotation Option:
+            EQ.0: the material describes a translational spring/damper,
             EQ.1: the material describes a torsional spring/damper.
         kd : float
             Dynamic magnification factor.
@@ -947,7 +947,9 @@ class DynaBase:
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateSectionDiscrete(
-            SectionDiscreteRequest( secid=secid, dro=dro,kd=kd,v0=v0,cl=cl,fd=fd,cdl=cdl,tdl=tdl)
+            SectionDiscreteRequest(
+                secid=secid, dro=dro, kd=kd, v0=v0, cl=cl, fd=fd, cdl=cdl, tdl=tdl
+            )
         )
         logging.info("Section Discrete Created...")
         return ret
@@ -988,15 +990,15 @@ class DynaBase:
         title,
         option1,
         option3=True,
-        offset = "",
+        offset="",
         ssid=0,
         msid=0,
         sstyp=3,
         mstyp=3,
         sapr=0,
         sbpr=0,
-        sfsa = 1,
-        sfsb = 1,
+        sfsa=1,
+        sfsb=1,
         fs=0,
         fd=0,
         vdc=0,
@@ -1059,15 +1061,15 @@ class DynaBase:
                 title=title,
                 option1=option1,
                 option3=option3,
-                offset = offset,
+                offset=offset,
                 ssid=ssid,
                 msid=msid,
                 sstyp=sstyp,
                 mstyp=mstyp,
                 sapr=sapr,
-                sbpr = sbpr,
-                sfsa = sfsa,
-                sfsb = sfsb,
+                sbpr=sbpr,
+                sfsa=sfsa,
+                sfsb=sfsb,
                 fs=fs,
                 fd=fd,
                 vdc=vdc,
@@ -1242,7 +1244,7 @@ class DynaBase:
         logging.info("Constrained extra nodes Created...")
         return ret
 
-    def create_constrained_joint(self, type, nodes, rps=1.0,damp=1.0):
+    def create_constrained_joint(self, type, nodes, rps=1.0, damp=1.0):
         """Define a joint between two rigid bodies.
         Refer to:*CONSTRAINED_JOINT
         Parameters
@@ -1262,7 +1264,7 @@ class DynaBase:
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateConstrainedJoint(
-            ConstrainedJointRequest(type=type,nodes=nodes,rps=rps,damp=damp)
+            ConstrainedJointRequest(type=type, nodes=nodes, rps=rps, damp=damp)
         )
         logging.info("Constrained joint Created...")
         return ret
@@ -1340,7 +1342,7 @@ class DynaBase:
         logging.info("Material Elastic Created...")
         return ret
 
-    def create_mat_fabric(self, mid, ro, ea, eb,prba,prab,gab):
+    def create_mat_fabric(self, mid, ro, ea, eb, prba, prab, gab):
         """This material is especially developed for airbag materials.
         Refer to:*MAT_FABRIC
         Parameters
@@ -1365,7 +1367,11 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateMatFabric(MatFabricRequest(mid=mid, ro=ro, ea=ea, eb=eb,prba=prba,prab=prab,gab=gab))
+        ret = self.stub.CreateMatFabric(
+            MatFabricRequest(
+                mid=mid, ro=ro, ea=ea, eb=eb, prba=prba, prab=prab, gab=gab
+            )
+        )
         logging.info("Material Fabric Created...")
         return ret
 
@@ -1384,7 +1390,9 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateMatSpringNonlinearElastic(MatSpringNonlinearElasticRequest(mid=mid, lcid=lcid))
+        ret = self.stub.CreateMatSpringNonlinearElastic(
+            MatSpringNonlinearElasticRequest(mid=mid, lcid=lcid)
+        )
         logging.info("Material Spring Nonlinear Elastic Created...")
         return ret
 
@@ -1422,7 +1430,9 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateMatDamperNonlinearViscous(MatDamperNonlinearViscousRequest(mid=mid, lcdr=lcdr))
+        ret = self.stub.CreateMatDamperNonlinearViscous(
+            MatDamperNonlinearViscousRequest(mid=mid, lcdr=lcdr)
+        )
         logging.info("Material Damper Nonlinear Viscous Created...")
         return ret
 
