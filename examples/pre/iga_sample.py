@@ -1,6 +1,6 @@
 import os
 
-from ansys.dyna.pre.dynaiga import DynaIGA
+from pydyna.dynaiga import DynaIGA
 
 if __name__ == "__main__":
     iga = DynaIGA()
@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     iga.create_timestep(tssfac=0.9, isdo=3, dt2ms=-0.0004)
     iga.create_termination(endtim=20)
-    iga.create_contact(rwpnal=1.0, ignore=1, igactc=1)
+    iga.create_control_contact(rwpnal=1.0, ignore=1, igactc=1)
     iga.create_database_binary(dt=0.1)
 
     cylinder1 = [2472.37, -600.000, 1270.98, 2472.37, -600.000, 2668.53, 100, 1000]
@@ -44,7 +44,7 @@ if __name__ == "__main__":
         )
         pids2.append(i)
     iga.create_partset(sid=2, pids=pids2)
-    iga.create_section_solid(secid=2, elform=1)
+    iga.create_section_solid(secid=2, elform=1, title="secsolid")
     iga.create_hourglass(ghid=1, ihq=1, qm=1, q1=0, q2=0, qb=0, qw=0)
 
     pids1 = []
@@ -58,9 +58,27 @@ if __name__ == "__main__":
         )
         pids1.append(i)
     iga.create_partset(sid=1, pids=pids1)
-    iga.create_contact_automatic(ssid=2, msid=0, sstyp=2, mstyp=0, option=1)
-    iga.create_contact_tied(ssid=1, msid=2, sstyp=2, mstyp=2)
+    iga.create_contact(
+        cid=1,
+        title="automatic",
+        option1="AUTOMATIC_SINGLE_SURFACE",
+        option3=True,
+        ssid=2,
+        msid=0,
+        sstyp=2,
+        mstyp=0,
+        optionres=1,
+    )
+    iga.create_contact(
+        cid=2,
+        title="tied",
+        option1="TIED_SHELL_EDGE_TO_SURFACE",
+        option3=True,
+        offset="OFFSET",
+        ssid=1,
+        msid=2,
+        sstyp=2,
+        mstyp=2,
+    )
     elements = iga.get_solid_elements()
     iga.save_file()
-
-    
