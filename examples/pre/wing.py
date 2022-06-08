@@ -1,11 +1,11 @@
 import os
 
 from pydyna.dynaicfd import DynaICFD
-from pydyna.dem import DEM
+from pydyna.dynadem import DynaDEM
 
 if __name__ == "__main__":
     icfd = DynaICFD()
-    dem = DEM()
+    dem = DynaDEM()
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep + "icfd_dem" + os.sep
     fns.append(path + "main.k")
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     icfd.create_control_dem_coupling(dt=0)
 
     # ---DEM
-    dem.Control_des(ndamp=0.99, tdamp=0.99, frics=0.9, fricr=0.9)
+    dem.create_control_des(ndamp=0.99, tdamp=0.99, frics=0.9, fricr=0.9)
     dem.create_define_de_mesh_surface(
         sid=6, type=1, despid=1500, desxid=1500, nquad=4, nsid=150, rsf=-1
     )
@@ -75,10 +75,10 @@ if __name__ == "__main__":
     icfd.create_bdy_non_slip(pid=3)
 
     # fe-rig.k
-    icfd.Control_Accuracy(osu=1, inn=4)
-    icfd.Control_Energy(hgen=2)
-    icfd.Control_Shell(wrpang=20, esort=1, irnxx=-1, bwc=1, proj=0, irquad=2)
-    icfd.Control_Solid(esort=2)
+    icfd.create_control_accuracy(osu=1, inn=4)
+    icfd.create_control_energy(hgen=2)
+    icfd.create_control_shell(wrpang=20, esort=1, irnxx=-1, bwc=1, proj=0, irquad=2)
+    icfd.create_control_solid(esort=2)
     icfd.create_database_ascii(type="BNDOUT", dt=0.001, ioopt=1)
     icfd.create_database_ascii(type="GLSTAT", dt=0.001, ioopt=1)
     icfd.create_database_ascii(type="MATSUM", dt=0.001, ioopt=1)
