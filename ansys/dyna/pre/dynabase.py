@@ -1506,6 +1506,43 @@ class DynaBase:
         elements = [elist, nlist]
         return elements
 
+    def create_general_keyword(self, opcode, keyworddata):
+        """Create general keyword.
+        Parameters
+        ----------
+        opcode : string
+            keyword card name.
+        keyworddata : string
+            keyword data.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+
+        example
+            create a *INITIAL_VELOCITY keyword
+            
+            $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            *INITIAL_VELOCITY
+            &     nsid    nsidex     boxid
+                     0
+
+            &       vx        vy        vz       vxr       vyr       vzr
+             1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
+            $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+            opcode = "INITIAL_VELOCITY"
+            keyworddata = "0\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
+            create_general_keyword(opcode = opcode,keyworddata=keyworddata)
+        """
+        ret = self.stub.CreateGeneralKWD(
+            GeneralKWDRequest(opcode=opcode, keyworddata=keyworddata)
+        )
+        msg = opcode + " Created..."
+        logging.info("msg")
+        return ret
+
     def save_file(self):
         """Save keyword files.
 
