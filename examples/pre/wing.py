@@ -1,11 +1,15 @@
 import os
+import sys
 
 from pydyna.dynaicfd import DynaICFD
 from pydyna.dynadem import DynaDEM
 
 if __name__ == "__main__":
-    icfd = DynaICFD()
-    dem = DynaDEM()
+    hostname = "localhost"
+    if len(sys.argv) > 1:
+        hostname = sys.argv[1]
+    icfd = DynaICFD(hostname = hostname)
+    dem = DynaDEM(hostname = hostname)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep + "icfd_dem" + os.sep
     fns.append(path + "main.k")

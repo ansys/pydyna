@@ -1,9 +1,13 @@
 import os
+import sys
 
 from pydyna.dynaiga import DynaIGA
 
 if __name__ == "__main__":
-    iga = DynaIGA()
+    hostname = "localhost"
+    if len(sys.argv) > 1:
+        hostname = sys.argv[1]
+    iga = DynaIGA(hostname=hostname)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep
     fns.append(path + "maino.k")

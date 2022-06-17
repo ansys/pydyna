@@ -1,9 +1,13 @@
 import os
+import sys
 
 from pydyna.dynabase import DynaBase
 
 if __name__ == "__main__":
-    dummy = DynaBase()
+    hostname = "localhost"
+    if len(sys.argv) > 1:
+        hostname = sys.argv[1]
+    dummy = DynaBase(hostname=hostname)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep + "belted_dummy" + os.sep
     fns.append(path + "belted_dummy.k")

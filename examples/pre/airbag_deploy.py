@@ -1,9 +1,13 @@
 import os
+import sys
 
 from pydyna.dynaairbag import DynaAirbag
 
 if __name__ == "__main__":
-    airbag = DynaAirbag()
+    hostname = "localhost"
+    if len(sys.argv) > 1:
+        hostname = sys.argv[1]
+    airbag = DynaAirbag(hostname=hostname)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep + "airbag_deploy" + os.sep
     fns.append(path + "airbag_deploy.k")

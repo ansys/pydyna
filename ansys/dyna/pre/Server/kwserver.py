@@ -1213,6 +1213,215 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.AirbagModelReply(answer = 0) 
 
+    def CreateEMControl(self,request,context):     
+        emsol = request.emsol
+        numls = request.numls
+        macrodt = request.macrodt
+        ncylfem = request.ncylfem
+        ncylbem= request.ncylbem
+        card1 = str(emsol) + "," + str(numls)+ "," + str(macrodt)+",0,2,,"+str(ncylfem)+ "," + str(ncylbem)
+        newk = "*EM_CONTROL\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_CONTROL Created...'
+        print(msg)
+        return kwprocess_pb2.EMControlReply(answer = 0) 
+
+    def CreateEMTimestep(self,request,context):     
+        tstype = request.tstype
+        dtconst = request.dtconst
+        card1 = str(tstype) + "," + str(dtconst)+ ",,1.0,,,25,0"
+        newk = "*EM_CONTROL_TIMESTEP\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_CONTROL_TIMESTEP Created...'
+        print(msg)
+        return kwprocess_pb2.EMTimestepReply(answer = 0) 
+
+    def CreateEMControlContact(self,request,context):     
+        emct = request.emct
+        cconly = request.cconly
+        ctype = request.ctype
+        dtype = request.dtype
+        card1 = str(emct) + "," + str(cconly) + "," + str(ctype)+ ","+ str(dtype)+ ",0.3,0.3,0.3,,"
+        newk = "*EM_CONTROL_CONTACT\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_CONTROL_CONTACT Created...'
+        print(msg)
+        return kwprocess_pb2.EMControlContactReply(answer = 0) 
+
+    def CreateEMContact(self,request,context):     
+        contid = request.contid
+        dtype = request.dtype
+        psidm = request.psidm
+        psids = request.psids
+        eps1 = request.eps1
+        eps2 = request.eps2
+        eps3 = request.eps3
+        d0 = request.d0
+        card1 = str(contid) + "," + str(dtype) + "," + str(psidm)+ ","+ str(psids)+","+str(eps1) + "," + str(eps2) + "," + str(eps3)+ ","+ str(d0)
+        newk = "*EM_CONTACT\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_CONTACT Created...'
+        print(msg)
+        return kwprocess_pb2.EMContactReply(answer = 0) 
+
+    def CreateEMCircuitRogo(self,request,context):     
+        rogid = request.rogid
+        setid = request.setid
+        settype = request.settype
+        curtyp = request.curtyp
+        card1 = str(rogid) + "," + str(setid) + "," + str(settype)+ ","+ str(curtyp)
+        newk = "*EM_CIRCUIT_ROGO\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_CIRCUIT_ROGO Created...'
+        print(msg)
+        return kwprocess_pb2.EMCircuitRogoReply(answer = 0) 
+
+    def CreateEMCircuit(self,request,context):     
+        circid = request.circid
+        circtyp = request.circtyp
+        lcid = request.lcid
+        sidcurr = request.sidcurr
+        sidvin = request.sidvin
+        sidvout = request.sidvout
+        card1 = str(circid) + "," + str(circtyp) + "," + str(lcid)+ ",,,,,0.0"
+        card2 = str(sidcurr) + "," + str(sidvin) + "," + str(sidvout)
+        newk = "*EM_CIRCUIT\n" + card1 + "\n" + card2
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_CIRCUIT Created...'
+        print(msg)
+        return kwprocess_pb2.EMCircuitReply(answer = 0) 
+
+    def CreateEMMat001(self,request,context):     
+        mid = request.mid
+        mtype = request.mtype
+        sigma = request.sigma
+        card1 = str(mid) + "," + str(mtype) + "," + str(sigma)+ ",,,,1e28"
+        newk = "*EM_MAT_001\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_MAT_001 Created...'
+        print(msg)
+        return kwprocess_pb2.EMMat001Reply(answer = 0) 
+
+    def CreateEMMat002(self,request,context):     
+        mid = request.mid
+        mtype = request.mtype
+        sigma = request.sigma
+        eosid = request.eosid
+        murel = request.murel
+        card1 = str(mid) + "," + str(mtype) + "," + str(sigma)+","+str(eosid) + "," + str(murel)+ ",0,1e28"
+        newk = "*EM_MAT_002\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_MAT_002 Created...'
+        print(msg)
+        return kwprocess_pb2.EMMat002Reply(answer = 0) 
+
+    def CreateEMSolverBem(self,request,context):     
+        reltol = request.reltol
+        maxite = request.maxite
+        stype = request.stype
+        precon = request.precon
+        uselast = request.uselast
+        ncylbem = request.ncylbem
+        card1 = str(reltol) +","+str(maxite)+","+str(stype)+","+str(precon)+","+str(uselast)+","+str(ncylbem)
+        newk = "*EM_SOLVER_BEM\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_SOLVER_BEM Created...'
+        print(msg)
+        return kwprocess_pb2.EMSolverBemReply(answer = 0) 
+
+    def CreateEMSolverFem(self,request,context):     
+        reltol = request.reltol
+        maxite = request.maxite
+        stype = request.stype
+        precon = request.precon
+        uselast = request.uselast
+        ncylbem = request.ncylbem
+        card1 = str(reltol) +","+str(maxite)+","+str(stype)+","+str(precon)+","+str(uselast)+","+str(ncylbem)
+        newk = "*EM_SOLVER_FEM\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_SOLVER_FEM Created...'
+        print(msg)
+        return kwprocess_pb2.EMSolverFemReply(answer = 0) 
+
+    def CreateEMSolverBemMat(self,request,context):     
+        matid = request.matid
+        card1 = str(matid) + ",,,,,,,1e-6"
+        newk = "*EM_SOLVER_BEMMAT\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_SOLVER_BEMMAT Created...'
+        print(msg)
+        return kwprocess_pb2.EMSolverBemMatReply(answer = 0) 
+
+    def CreateEMSolverFemBemMonolithic(self,request,context):     
+        mtype = request.mtype
+        stype = request.stype
+        abstol = request.abstol
+        reltol = request.reltol
+        maxit = request.maxit
+        card1 = str(mtype) + ","+str(stype)+ ","+str(abstol)+ ","+str(reltol)+ ","+str(maxit)
+        newk = "*EM_SOLVER_FEMBEM_MONOLITHIC\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_SOLVER_FEMBEM_MONOLITHIC Created...'
+        print(msg)
+        return kwprocess_pb2.EMSolverFemBemMonolithicReply(answer = 0)
+
+    def CreateEMOutput(self,request,context):     
+        mats = request.mats
+        matf = request.matf
+        sols = request.sols
+        solf = request.solf
+        card1 = str(mats)+ "," + str(matf)+ "," + str(sols)+ ","+ str(solf)+",0,0,0"
+        newk = "*EM_OUTPUT\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_OUTPUT Created...'
+        print(msg)
+        return kwprocess_pb2.EMOutputReply(answer = 0) 
+
+    def CreateEMDatabaseGlobalEnergy(self,request,context):     
+        outlv = request.outlv
+        card1 = str(outlv)+",0.0"
+        newk = "*EM_DATABASE_GLOBALENERGY\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_DATABASE_GLOBALENERGY Created...'
+        print(msg)
+        return kwprocess_pb2.EMDatabaseGlobalEnergyReply(answer = 0)
+
+    def CreateEMPermanentMagnet(self,request,context):     
+        id = request.id
+        partid = request.partid
+        mtype = request.mtype
+        north = request.north
+        sourth = request.sourth
+        hc = request.hc
+        card1 = str(id)+","+str(partid)+","+str(mtype)+","+str(north)+","+str(sourth)+","+str(hc)
+        newk = "*EM_PERMANENT_MAGNET\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_PERMANENT_MAGNET Created...'
+        print(msg)
+        return kwprocess_pb2.EMPermanentMagnetReply(answer = 0)
+
+    def CreateEMEOSPermeability(self,request,context):     
+        eosid = request.eosid
+        eostype = request.eostype
+        lcid = request.lcid
+        card1 = str(eosid)+","+str(eostype)+","+str(lcid)
+        newk = "*EM_EOS_PERMEABILITY\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*EM_EOS_PERMEABILITY Created...'
+        print(msg)
+        return kwprocess_pb2.EMEOSPermeabilityReply(answer = 0)
+
+    def CreateGeneralKWD(self,request,context): 
+        opcode = request.opcode    
+        keyworddata = request.keyworddata
+        if opcode[0]!='*':
+            opcode = "*"+opcode
+        newk = opcode +"\n"+keyworddata
+        self.kwdproc.newkeyword(newk)
+        msg = opcode + ' Created...'
+        print(msg)
+        return kwprocess_pb2.GeneralKWDReply(answer = 0) 
+
 if __name__ == '__main__':
     server = IGAServer()
     server.run()
