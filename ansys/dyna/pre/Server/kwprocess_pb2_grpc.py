@@ -109,6 +109,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.InitVelGenerationStartTimeRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.InitVelGenerationStartTimeReply.FromString,
                 )
+        self.CreateInitDetonation = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateInitDetonation',
+                request_serializer=kwprocess__pb2.InitDetonationRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.InitDetonationReply.FromString,
+                )
         self.CreateContact = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateContact',
                 request_serializer=kwprocess__pb2.ContactRequest.SerializeToString,
@@ -168,6 +173,46 @@ class kwC2SStub(object):
                 '/kwgrpc.kwC2S/CreateMatDamperNonlinearViscous',
                 request_serializer=kwprocess__pb2.MatDamperNonlinearViscousRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.MatDamperNonlinearViscousReply.FromString,
+                )
+        self.CreateMatNull = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateMatNull',
+                request_serializer=kwprocess__pb2.MatNullRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MatNullReply.FromString,
+                )
+        self.CreateMatJohnsonCook = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateMatJohnsonCook',
+                request_serializer=kwprocess__pb2.MatJohnsonCookRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MatJohnsonCookReply.FromString,
+                )
+        self.CreateMatHighExplosiveBurn = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateMatHighExplosiveBurn',
+                request_serializer=kwprocess__pb2.MatHighExplosiveBurnRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MatHighExplosiveBurnReply.FromString,
+                )
+        self.CreateMatVacuum = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateMatVacuum',
+                request_serializer=kwprocess__pb2.MatVacuumRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MatVacuumReply.FromString,
+                )
+        self.CreateMatAddErosion = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateMatAddErosion',
+                request_serializer=kwprocess__pb2.MatAddErosionRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MatAddErosionReply.FromString,
+                )
+        self.CreateEOSLinearPolynomial = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEOSLinearPolynomial',
+                request_serializer=kwprocess__pb2.EOSLinearPolynomialRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.EOSLinearPolynomialReply.FromString,
+                )
+        self.CreateEOSJWL = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEOSJWL',
+                request_serializer=kwprocess__pb2.EOSJWLRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.EOSJWLReply.FromString,
+                )
+        self.CreateEOSGruneisen = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEOSGruneisen',
+                request_serializer=kwprocess__pb2.EOSGruneisenRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.EOSGruneisenReply.FromString,
                 )
         self.CreateDefineCurve = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateDefineCurve',
@@ -363,6 +408,36 @@ class kwC2SStub(object):
                 '/kwgrpc.kwC2S/MESHCreateSizeShape',
                 request_serializer=kwprocess__pb2.MeshSizeShapeRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.MeshSizeShapeReply.FromString,
+                )
+        self.ALECreateControl = channel.unary_unary(
+                '/kwgrpc.kwC2S/ALECreateControl',
+                request_serializer=kwprocess__pb2.ControlALERequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ControlALEReply.FromString,
+                )
+        self.ALECreateStructuredMesh = channel.unary_unary(
+                '/kwgrpc.kwC2S/ALECreateStructuredMesh',
+                request_serializer=kwprocess__pb2.ALECreateStructuredMeshRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ALECreateStructuredMeshReply.FromString,
+                )
+        self.ALECreateStructuredMeshRefine = channel.unary_unary(
+                '/kwgrpc.kwC2S/ALECreateStructuredMeshRefine',
+                request_serializer=kwprocess__pb2.ALECreateStructuredMeshRefineRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ALECreateStructuredMeshRefineReply.FromString,
+                )
+        self.ALECreateStructuredMeshCtrlPoints = channel.unary_unary(
+                '/kwgrpc.kwC2S/ALECreateStructuredMeshCtrlPoints',
+                request_serializer=kwprocess__pb2.ALECreateStructuredMeshCtrlPointsRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ALECreateStructuredMeshControlPointsReply.FromString,
+                )
+        self.ALECreateStructuredMultiMaterialGroup = channel.unary_unary(
+                '/kwgrpc.kwC2S/ALECreateStructuredMultiMaterialGroup',
+                request_serializer=kwprocess__pb2.ALECreateStructuredMultiMatGroupRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ALECreateStructuredMultiMatGroupReply.FromString,
+                )
+        self.ALECreateStructuredMeshVolumeFilling = channel.unary_unary(
+                '/kwgrpc.kwC2S/ALECreateStructuredMeshVolumeFilling',
+                request_serializer=kwprocess__pb2.ALECreateStructuredMeshVolumeFillingRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ALECreateStructuredMeshVolumeFillingReply.FromString,
                 )
         self.CreateDampingGlobal = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateDampingGlobal',
@@ -587,6 +662,12 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateInitDetonation(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateContact(self, request, context):
         """---CONTACT
         """
@@ -659,6 +740,55 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateMatDamperNonlinearViscous(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateMatNull(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateMatJohnsonCook(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateMatHighExplosiveBurn(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateMatVacuum(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateMatAddErosion(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateEOSLinearPolynomial(self, request, context):
+        """---EOS
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateEOSJWL(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateEOSGruneisen(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -902,14 +1032,46 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CreateDampingGlobal(self, request, context):
+    def ALECreateControl(self, request, context):
         """---S-ALE
-        rpc ALECreateControlALE(ControlALERequest) returns (ControlALEReply) {}
-        rpc ALECreateDBALEMat(DBALEMatRequest) returns (DBALEMatReply) {}
-        rpc ALECreateSM(ALECreateSMRequest) returns (ALECreateSMReply) {}
-        rpc ALECreateSMRefine(ALECreateSMRefineRequest) returns (ALECreateSMRefineReply) {}
-        rpc ALECreateSMCtrlPoints(ALECreateSMCtrlPointsRequest) returns (ALECreateSMCtrlPointsReply) {}
-        ---DAMPING
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ALECreateStructuredMesh(self, request, context):
+        """rpc ALECreateDBALEMat(DBALEMatRequest) returns (DBALEMatReply) {}
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ALECreateStructuredMeshRefine(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ALECreateStructuredMeshCtrlPoints(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ALECreateStructuredMultiMaterialGroup(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ALECreateStructuredMeshVolumeFilling(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateDampingGlobal(self, request, context):
+        """---DAMPING
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1128,6 +1290,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.InitVelGenerationStartTimeRequest.FromString,
                     response_serializer=kwprocess__pb2.InitVelGenerationStartTimeReply.SerializeToString,
             ),
+            'CreateInitDetonation': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateInitDetonation,
+                    request_deserializer=kwprocess__pb2.InitDetonationRequest.FromString,
+                    response_serializer=kwprocess__pb2.InitDetonationReply.SerializeToString,
+            ),
             'CreateContact': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateContact,
                     request_deserializer=kwprocess__pb2.ContactRequest.FromString,
@@ -1187,6 +1354,46 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateMatDamperNonlinearViscous,
                     request_deserializer=kwprocess__pb2.MatDamperNonlinearViscousRequest.FromString,
                     response_serializer=kwprocess__pb2.MatDamperNonlinearViscousReply.SerializeToString,
+            ),
+            'CreateMatNull': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateMatNull,
+                    request_deserializer=kwprocess__pb2.MatNullRequest.FromString,
+                    response_serializer=kwprocess__pb2.MatNullReply.SerializeToString,
+            ),
+            'CreateMatJohnsonCook': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateMatJohnsonCook,
+                    request_deserializer=kwprocess__pb2.MatJohnsonCookRequest.FromString,
+                    response_serializer=kwprocess__pb2.MatJohnsonCookReply.SerializeToString,
+            ),
+            'CreateMatHighExplosiveBurn': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateMatHighExplosiveBurn,
+                    request_deserializer=kwprocess__pb2.MatHighExplosiveBurnRequest.FromString,
+                    response_serializer=kwprocess__pb2.MatHighExplosiveBurnReply.SerializeToString,
+            ),
+            'CreateMatVacuum': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateMatVacuum,
+                    request_deserializer=kwprocess__pb2.MatVacuumRequest.FromString,
+                    response_serializer=kwprocess__pb2.MatVacuumReply.SerializeToString,
+            ),
+            'CreateMatAddErosion': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateMatAddErosion,
+                    request_deserializer=kwprocess__pb2.MatAddErosionRequest.FromString,
+                    response_serializer=kwprocess__pb2.MatAddErosionReply.SerializeToString,
+            ),
+            'CreateEOSLinearPolynomial': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEOSLinearPolynomial,
+                    request_deserializer=kwprocess__pb2.EOSLinearPolynomialRequest.FromString,
+                    response_serializer=kwprocess__pb2.EOSLinearPolynomialReply.SerializeToString,
+            ),
+            'CreateEOSJWL': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEOSJWL,
+                    request_deserializer=kwprocess__pb2.EOSJWLRequest.FromString,
+                    response_serializer=kwprocess__pb2.EOSJWLReply.SerializeToString,
+            ),
+            'CreateEOSGruneisen': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEOSGruneisen,
+                    request_deserializer=kwprocess__pb2.EOSGruneisenRequest.FromString,
+                    response_serializer=kwprocess__pb2.EOSGruneisenReply.SerializeToString,
             ),
             'CreateDefineCurve': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateDefineCurve,
@@ -1382,6 +1589,36 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.MESHCreateSizeShape,
                     request_deserializer=kwprocess__pb2.MeshSizeShapeRequest.FromString,
                     response_serializer=kwprocess__pb2.MeshSizeShapeReply.SerializeToString,
+            ),
+            'ALECreateControl': grpc.unary_unary_rpc_method_handler(
+                    servicer.ALECreateControl,
+                    request_deserializer=kwprocess__pb2.ControlALERequest.FromString,
+                    response_serializer=kwprocess__pb2.ControlALEReply.SerializeToString,
+            ),
+            'ALECreateStructuredMesh': grpc.unary_unary_rpc_method_handler(
+                    servicer.ALECreateStructuredMesh,
+                    request_deserializer=kwprocess__pb2.ALECreateStructuredMeshRequest.FromString,
+                    response_serializer=kwprocess__pb2.ALECreateStructuredMeshReply.SerializeToString,
+            ),
+            'ALECreateStructuredMeshRefine': grpc.unary_unary_rpc_method_handler(
+                    servicer.ALECreateStructuredMeshRefine,
+                    request_deserializer=kwprocess__pb2.ALECreateStructuredMeshRefineRequest.FromString,
+                    response_serializer=kwprocess__pb2.ALECreateStructuredMeshRefineReply.SerializeToString,
+            ),
+            'ALECreateStructuredMeshCtrlPoints': grpc.unary_unary_rpc_method_handler(
+                    servicer.ALECreateStructuredMeshCtrlPoints,
+                    request_deserializer=kwprocess__pb2.ALECreateStructuredMeshCtrlPointsRequest.FromString,
+                    response_serializer=kwprocess__pb2.ALECreateStructuredMeshControlPointsReply.SerializeToString,
+            ),
+            'ALECreateStructuredMultiMaterialGroup': grpc.unary_unary_rpc_method_handler(
+                    servicer.ALECreateStructuredMultiMaterialGroup,
+                    request_deserializer=kwprocess__pb2.ALECreateStructuredMultiMatGroupRequest.FromString,
+                    response_serializer=kwprocess__pb2.ALECreateStructuredMultiMatGroupReply.SerializeToString,
+            ),
+            'ALECreateStructuredMeshVolumeFilling': grpc.unary_unary_rpc_method_handler(
+                    servicer.ALECreateStructuredMeshVolumeFilling,
+                    request_deserializer=kwprocess__pb2.ALECreateStructuredMeshVolumeFillingRequest.FromString,
+                    response_serializer=kwprocess__pb2.ALECreateStructuredMeshVolumeFillingReply.SerializeToString,
             ),
             'CreateDampingGlobal': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateDampingGlobal,
@@ -1817,6 +2054,23 @@ class kwC2S(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def CreateInitDetonation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateInitDetonation',
+            kwprocess__pb2.InitDetonationRequest.SerializeToString,
+            kwprocess__pb2.InitDetonationReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def CreateContact(request,
             target,
             options=(),
@@ -2017,6 +2271,142 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatDamperNonlinearViscous',
             kwprocess__pb2.MatDamperNonlinearViscousRequest.SerializeToString,
             kwprocess__pb2.MatDamperNonlinearViscousReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateMatNull(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatNull',
+            kwprocess__pb2.MatNullRequest.SerializeToString,
+            kwprocess__pb2.MatNullReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateMatJohnsonCook(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatJohnsonCook',
+            kwprocess__pb2.MatJohnsonCookRequest.SerializeToString,
+            kwprocess__pb2.MatJohnsonCookReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateMatHighExplosiveBurn(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatHighExplosiveBurn',
+            kwprocess__pb2.MatHighExplosiveBurnRequest.SerializeToString,
+            kwprocess__pb2.MatHighExplosiveBurnReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateMatVacuum(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatVacuum',
+            kwprocess__pb2.MatVacuumRequest.SerializeToString,
+            kwprocess__pb2.MatVacuumReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateMatAddErosion(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatAddErosion',
+            kwprocess__pb2.MatAddErosionRequest.SerializeToString,
+            kwprocess__pb2.MatAddErosionReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEOSLinearPolynomial(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEOSLinearPolynomial',
+            kwprocess__pb2.EOSLinearPolynomialRequest.SerializeToString,
+            kwprocess__pb2.EOSLinearPolynomialReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEOSJWL(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEOSJWL',
+            kwprocess__pb2.EOSJWLRequest.SerializeToString,
+            kwprocess__pb2.EOSJWLReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEOSGruneisen(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEOSGruneisen',
+            kwprocess__pb2.EOSGruneisenRequest.SerializeToString,
+            kwprocess__pb2.EOSGruneisenReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2680,6 +3070,108 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/MESHCreateSizeShape',
             kwprocess__pb2.MeshSizeShapeRequest.SerializeToString,
             kwprocess__pb2.MeshSizeShapeReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ALECreateControl(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ALECreateControl',
+            kwprocess__pb2.ControlALERequest.SerializeToString,
+            kwprocess__pb2.ControlALEReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ALECreateStructuredMesh(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ALECreateStructuredMesh',
+            kwprocess__pb2.ALECreateStructuredMeshRequest.SerializeToString,
+            kwprocess__pb2.ALECreateStructuredMeshReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ALECreateStructuredMeshRefine(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ALECreateStructuredMeshRefine',
+            kwprocess__pb2.ALECreateStructuredMeshRefineRequest.SerializeToString,
+            kwprocess__pb2.ALECreateStructuredMeshRefineReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ALECreateStructuredMeshCtrlPoints(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ALECreateStructuredMeshCtrlPoints',
+            kwprocess__pb2.ALECreateStructuredMeshCtrlPointsRequest.SerializeToString,
+            kwprocess__pb2.ALECreateStructuredMeshControlPointsReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ALECreateStructuredMultiMaterialGroup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ALECreateStructuredMultiMaterialGroup',
+            kwprocess__pb2.ALECreateStructuredMultiMatGroupRequest.SerializeToString,
+            kwprocess__pb2.ALECreateStructuredMultiMatGroupReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ALECreateStructuredMeshVolumeFilling(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ALECreateStructuredMeshVolumeFilling',
+            kwprocess__pb2.ALECreateStructuredMeshVolumeFillingRequest.SerializeToString,
+            kwprocess__pb2.ALECreateStructuredMeshVolumeFillingReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

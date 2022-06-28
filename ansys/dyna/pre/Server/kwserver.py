@@ -329,6 +329,18 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.InitVelGenerationStartTimeReply(answer = 0)
 
+    def CreateInitDetonation(self,request,context):
+        pid = request.pid
+        coord = request.coord
+        lt = request.lt
+        opcode ="*INITIAL_DETONATION"
+        card1 = str(pid)+","+str(coord[0])+","+str(coord[1])+","+str(coord[2])+","+str(lt)+",,0"
+        newk = opcode +"\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "*INITIAL_DETONATION Created..."
+        print(msg)
+        return kwprocess_pb2.InitDetonationReply(answer = 0)
+
     def CreateDefineCurve(self,request,context):
         lcid = request.lcid
         sfo = request.sfo
@@ -824,6 +836,125 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.MatDamperNonlinearViscousReply(ret = 0)
 
+    def CreateMatNull(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        pc = request.pc
+        card1 = str(mid)+","+str(ro)+","+str(pc)
+        opcode = "*MAT_NULL"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatNullReply(mid = mid)
+
+    def CreateMatJohnsonCook(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        g = request.g
+        e = request.e
+        pr = request.pr
+        constants = request.constants
+        tm = request.tm
+        tr = request.tr
+        eps0 = request.eps0
+        cp = request.cp
+        pc = request.pc
+        spall = request.spall
+        it = request.it
+        failure = request.failure
+        card1 = str(mid)+","+str(ro)+","+str(g)+","+str(e)+","+str(pr)
+        card2 = str(constants[0])+","+str(constants[1])+","+str(constants[2])+","+str(constants[3])+","+str(constants[4])+","+str(tm)+","+str(tr)+","+str(eps0)
+        card3 = str(cp)+","+str(pc)+","+str(spall)+","+str(it)+","+str(failure[0])+","+str(failure[1])+","+str(failure[2])+","+str(failure[3])
+        card4 = str(failure[4])
+        opcode = "*MAT_JOHNSON_COOK"
+        newk = opcode +"\n"+card1+"\n"+card2+"\n"+card3+"\n"+card4
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatJohnsonCookReply(mid = mid)
+
+    def CreateMatHighExplosiveBurn(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        d = request.d
+        pcj = request.pcj
+        card1 = str(mid)+","+str(ro)+","+str(d)+","+str(pcj)
+        opcode = "*MAT_HIGH_EXPLOSIVE_BURN"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatHighExplosiveBurnReply(mid = mid)
+
+    def CreateMatVacuum(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        rho = request.rho
+        card1 = str(mid)+","+str(rho)
+        opcode = "*MAT_VACUUM"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatVacuumReply(mid = mid)
+
+    def CreateMatAddErosion(self,request,context):
+        mid = request.mid
+        mnpres = request.mnpres
+        mxeps = request.mxeps
+        card1 = str(mid)
+        card2 = str(mnpres)+",,,"+str(mxeps)
+        opcode = "*MAT_ADD_EROSION"
+        newk = opcode +"\n"+card1+"\n"+card2
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatAddErosionReply(ret = 0)
+
+    def CreateEOSLinearPolynomial(self,request,context):
+        eosid = self.kwdproc.get_data(gdt.KWD_EOS_LASTID)+1
+        ci = request.ci
+        e0 = request.e0
+        v0 = request.v0
+        card1 = str(eosid)+","+str(ci[0])+","+str(ci[1])+","+str(ci[2])+","+str(ci[3])+","+str(ci[4])+","+str(ci[5])+","+str(ci[6])
+        card2 = str(e0)+","+str(v0)
+        opcode = "*EOS_LINEAR_POLYNOMIAL"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.EOSLinearPolynomialReply(eosid = eosid)
+
+    def CreateEOSJWL(self,request,context):
+        eosid = self.kwdproc.get_data(gdt.KWD_EOS_LASTID)+1
+        a = request.a
+        b = request.b
+        r1 = request.r1
+        r2 = request.r2
+        omeg = request.omeg
+        e0 = request.e0
+        v0 = request.v0
+        card1 = str(eosid)+","+str(a)+","+str(b)+","+str(r1)+","+str(r2)+","+str(omeg)+","+str(e0)+","+str(v0)
+        opcode = "*EOS_JWL"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.EOSJWLReply(eosid = eosid)
+  
+    def CreateEOSGruneisen(self,request,context):
+        eosid = self.kwdproc.get_data(gdt.KWD_EOS_LASTID)+1
+        constants = request.constants
+        a = request.a
+        e0 = request.e0
+        card1 = str(eosid)+","+str(constants[0])+","+str(constants[1])+","+str(constants[2])+","+str(constants[3])+","+str(constants[4])+","+str(a)+","+str(e0)
+        opcode = "*EOS_GRUNEISEN"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.EOSGruneisenReply(eosid = eosid)
+ 
     def CreateSectionIGAShell(self,request,context):
         secid = request.secid
         elform = request.elform
@@ -1410,6 +1541,112 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = '*EM_EOS_PERMEABILITY Created...'
         print(msg)
         return kwprocess_pb2.EMEOSPermeabilityReply(answer = 0)
+
+    def ALECreateStructuredMesh(self,request,context):     
+        nbid = request.nbid
+        ebid = request.ebid
+        cpidx = request.cpidx
+        cpidy = request.cpidy
+        cpidz = request.cpidz
+        mshid = self.kwdproc.get_data(gdt.KWD_ALE_STRUCTURED_MESH_LASTID)+1
+        lastpid = self.kwdproc.get_data(gdt.KWD_PART_LASTID)+1
+        card1 = str(mshid)+","+str(lastpid)+","+str(nbid)+","+str(ebid)
+        card2 = str(cpidx)+","+str(cpidy)+","+str(cpidz)
+        newk = "*ALE_STRUCTURED_MESH\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*ALE_STRUCTURED_MESH Created...'
+        print(msg)
+        return kwprocess_pb2.ALECreateStructuredMeshReply(meshid = mshid,partid = lastpid)
+
+    def ALECreateStructuredMeshCtrlPoints(self,request,context):     
+        icase = request.icase
+        sfo = request.sfo
+        n = request.n
+        x = request.x
+        ratio = request.ratio
+        cpid = self.kwdproc.get_data(gdt.KWD_ALE_STRUCTURED_MESH_CONTROL_POINTS_LASTID)+1
+        card1 = str(cpid)+",,"+str(icase)+","+str(sfo)
+        newk = "*ALE_STRUCTURED_MESH_CONTROL_POINTS\n" + card1
+        for i in range(len(n)):
+            newk += str(n[i])+","+str(x[i])+","+str(ratio[i])
+        self.kwdproc.newkeyword(newk)
+        msg = '*ALE_STRUCTURED_MESH_CONTROL_POINTS Created...'
+        print(msg)
+        return kwprocess_pb2.ALECreateStructuredMeshControlPointsReply(cpid = cpid)    
+    
+    def ALECreateStructuredMeshRefine(self,request,context):     
+        mshid = request.mshid
+        ifx = request.ifx
+        ify = request.ify
+        ifz = request.ifz
+        card1 = str(mshid)+","+str(ifx)+","+str(ify)+","+str(ifz)
+        newk = "*ALE_STRUCTURED_MESH_REFINE\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*ALE_STRUCTURED_MESH_REFINE Created...'
+        print(msg)
+        return kwprocess_pb2.ALECreateStructuredMeshRefineReply(answer = 0)
+
+    def ALECreateControl(self,request,context):     
+        dct = request.dct
+        nadv = request.nadv
+        meth = request.meth
+        afac = request.afac
+        end = request.end
+        aafac = request.aafac
+        vfact = request.vfact
+        pref = request.pref
+        card1 = str(dct)+","+str(nadv)+","+str(meth)+","+str(afac)+",0,0,0,0"
+        card2 = "0,"+str(end)+","+str(aafac)+","+str(vfact)+",0,0,"+str(pref)
+        newk = "*CONTROL_ALE\n" + card1 +"\n"+card2
+        self.kwdproc.newkeyword(newk)
+        msg = '*CONTROL_ALE Created...'
+        print(msg)
+        return kwprocess_pb2.ControlALEReply(answer = 0)
+
+    def ALECreateStructuredMultiMaterialGroup(self,request,context):     
+        nmmgnm = request.nmmgnm
+        mid = request.mid
+        eosid = request.eosid
+        pref = request.pref
+        card1 = str(nmmgnm)+","+str(mid)+","+str(eosid)+",,,,,"+str(pref)+",0,0,0,0"
+        newk = "*ALE_STRUCTURED_MULTI-MATERIAL_GROUP\n" + card1 +"\n"+card2
+        self.kwdproc.newkeyword(newk)
+        msg = '*ALE_STRUCTURED_MULTI-MATERIAL_GROUP Created...'
+        print(msg)
+        return kwprocess_pb2.ALECreateStructuredMultiMatGroupReply(answer = 0)
+
+    def ALECreateStructuredMeshVolumeFilling(self,request,context):     
+        mshid = request.mshid
+        ammgto = request.ammgto
+        nsample = request.nsample
+        vid = request.vid
+        geom = request.geom
+        inout = request.inout
+        e = request.e
+        card1 = str(mshid)+",,"+str(ammgto)+",,"+str(nsample)+",,,"+str(vid)
+        card2 = str(geom)+","+str(inout)+","+str(e[0])+","+str(e[1])+","+str(e[2])+","+str(e[3])+","+str(e[4])
+        newk = "*ALE_STRUCTURED_MESH_VOLUME_FILLING\n" + card1 +"\n"+card2
+        self.kwdproc.newkeyword(newk)
+        msg = '*ALE_STRUCTURED_MESH_VOLUME_FILLING Created...'
+        print(msg)
+        return kwprocess_pb2.ALECreateStructuredMeshVolumeFillingReply(answer = 0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def CreateGeneralKWD(self,request,context): 
         opcode = request.opcode    
