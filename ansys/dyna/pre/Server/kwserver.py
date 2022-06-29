@@ -266,6 +266,16 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.DBAsciiReply(answer = 0)
 
+    def CreateDBSALE(self,request,context):
+        switch = request.switch
+        opcode ="*DATABASE_SALE"
+        card1 = str(switch)
+        newk = opcode +"\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "*DATABASE_SALE Created..."
+        print(msg)
+        return kwprocess_pb2.DBSALEReply(answer = 0)
+
         #INITIAL
     def CreateInitVel(self,request,context):
         nsid = request.nsid
@@ -919,7 +929,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         card1 = str(eosid)+","+str(ci[0])+","+str(ci[1])+","+str(ci[2])+","+str(ci[3])+","+str(ci[4])+","+str(ci[5])+","+str(ci[6])
         card2 = str(e0)+","+str(v0)
         opcode = "*EOS_LINEAR_POLYNOMIAL"
-        newk = opcode +"\n"+card1
+        newk = opcode +"\n"+card1+"\n"+card2
         self.kwdproc.newkeyword(newk)
         msg = opcode+" Created..."
         print(msg)
@@ -927,14 +937,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
 
     def CreateEOSJWL(self,request,context):
         eosid = self.kwdproc.get_data(gdt.KWD_EOS_LASTID)+1
-        a = request.a
-        b = request.b
-        r1 = request.r1
-        r2 = request.r2
-        omeg = request.omeg
-        e0 = request.e0
-        v0 = request.v0
-        card1 = str(eosid)+","+str(a)+","+str(b)+","+str(r1)+","+str(r2)+","+str(omeg)+","+str(e0)+","+str(v0)
+        equ = request.jwl_equation
+        card1 = str(eosid)+","+str(equ[0])+","+str(equ[1])+","+str(equ[2])+","+str(equ[3])+","+str(equ[4])+","+str(equ[5])+","+str(equ[6])
         opcode = "*EOS_JWL"
         newk = opcode +"\n"+card1
         self.kwdproc.newkeyword(newk)
@@ -1552,7 +1556,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         lastpid = self.kwdproc.get_data(gdt.KWD_PART_LASTID)+1
         card1 = str(mshid)+","+str(lastpid)+","+str(nbid)+","+str(ebid)
         card2 = str(cpidx)+","+str(cpidy)+","+str(cpidz)
-        newk = "*ALE_STRUCTURED_MESH\n" + card1
+        newk = "*ALE_STRUCTURED_MESH\n" + card1 + "\n" + card2
         self.kwdproc.newkeyword(newk)
         msg = '*ALE_STRUCTURED_MESH Created...'
         print(msg)
@@ -1568,7 +1572,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         card1 = str(cpid)+",,"+str(icase)+","+str(sfo)
         newk = "*ALE_STRUCTURED_MESH_CONTROL_POINTS\n" + card1
         for i in range(len(n)):
-            newk += str(n[i])+","+str(x[i])+","+str(ratio[i])
+            newk += "\n"+str(n[i])+","+str(x[i])+","+str(ratio[i])
         self.kwdproc.newkeyword(newk)
         msg = '*ALE_STRUCTURED_MESH_CONTROL_POINTS Created...'
         print(msg)
@@ -1609,7 +1613,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         eosid = request.eosid
         pref = request.pref
         card1 = str(nmmgnm)+","+str(mid)+","+str(eosid)+",,,,,"+str(pref)+",0,0,0,0"
-        newk = "*ALE_STRUCTURED_MULTI-MATERIAL_GROUP\n" + card1 +"\n"+card2
+        newk = "*ALE_STRUCTURED_MULTI-MATERIAL_GROUP\n" + card1
         self.kwdproc.newkeyword(newk)
         msg = '*ALE_STRUCTURED_MULTI-MATERIAL_GROUP Created...'
         print(msg)
@@ -1624,7 +1628,9 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         inout = request.inout
         e = request.e
         card1 = str(mshid)+",,"+str(ammgto)+",,"+str(nsample)+",,,"+str(vid)
-        card2 = str(geom)+","+str(inout)+","+str(e[0])+","+str(e[1])+","+str(e[2])+","+str(e[3])+","+str(e[4])
+        card2 = str(geom)+","+str(inout)
+        for i in range(min(len(e),5)):
+            card2 += (","+str(e[i]))
         newk = "*ALE_STRUCTURED_MESH_VOLUME_FILLING\n" + card1 +"\n"+card2
         self.kwdproc.newkeyword(newk)
         msg = '*ALE_STRUCTURED_MESH_VOLUME_FILLING Created...'
