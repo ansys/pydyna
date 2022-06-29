@@ -4,8 +4,7 @@ This example demonstrates how to create a SALE input deck.
 import os
 import sys
 
-from pydyna.dynasale import DynaSALE
-from pydyna.dynasale import ControlPoint
+from pydyna.dynasale import *
 from pydyna.dynamaterial import *
 
 if __name__ == "__main__":
@@ -14,15 +13,15 @@ if __name__ == "__main__":
         hostname = sys.argv[1]
     #Import the initial mesh data(nodes and elements)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep
-    fns.append(path + "mesh.k")
-    efp = DynaSALE(hostname=hostname,filename=fns)
+    path = os.getcwd() + os.sep + "input" + os.sep+"sale"+os.sep
+    fns.append(path + "efpcase.k")
+    efp = DynaSALE(hostname=hostname,filenames=fns)
 
     efp.set_termination(280)
     efp.set_output_interval(5.0)
 
     #set analysis type
-    efp.set_analysis_type(method=2)
+    efp.set_analysis_type(method=AdvectionMethod.VAN_LEER_WITH_HIS)
 
     #define material  
     air = Air()
@@ -53,8 +52,8 @@ if __name__ == "__main__":
     
     mesh = efp.create_mesh(control_points_x,control_points_y,control_points_z)
     mesh.filling(material_name = air.name,geometry_type="ALL")
-    mesh.filling(material_name="HE",geometry_type="PART",define_geometry_parameters = [23],inout=1)
-    mesh.filling(material_name="liner",geometry_type="PART",define_geometry_parameters = [22],inout=1)
+    mesh.filling(material_name="HE",geometry_type="PART",define_geometry_parameters = [23],inout=FillDirection.OUTSIDE_THE_GEOMETRY)
+    mesh.filling(material_name="liner",geometry_type="PART",define_geometry_parameters = [22],inout=FillDirection.OUTSIDE_THE_GEOMETRY)
     #Set the initial conditions
     mesh.initial_detonation(detonation_point=[0,0,19.33])
 

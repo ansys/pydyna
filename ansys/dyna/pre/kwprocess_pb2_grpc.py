@@ -79,6 +79,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.DBAsciiRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.DBAsciiReply.FromString,
                 )
+        self.CreateDBSALE = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateDBSALE',
+                request_serializer=kwprocess__pb2.DBSALERequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.DBSALEReply.FromString,
+                )
         self.CreateRigidWallGeom = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateRigidWallGeom',
                 request_serializer=kwprocess__pb2.RigidWallGeomRequest.SerializeToString,
@@ -426,7 +431,7 @@ class kwC2SStub(object):
                 )
         self.ALECreateStructuredMeshCtrlPoints = channel.unary_unary(
                 '/kwgrpc.kwC2S/ALECreateStructuredMeshCtrlPoints',
-                request_serializer=kwprocess__pb2.ALECreateStructuredMeshCtrlPointsRequest.SerializeToString,
+                request_serializer=kwprocess__pb2.ALECreateStructuredMeshControlPointsRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ALECreateStructuredMeshControlPointsReply.FromString,
                 )
         self.ALECreateStructuredMultiMaterialGroup = channel.unary_unary(
@@ -619,6 +624,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateDBAscii(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateDBSALE(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1260,6 +1271,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.DBAsciiRequest.FromString,
                     response_serializer=kwprocess__pb2.DBAsciiReply.SerializeToString,
             ),
+            'CreateDBSALE': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateDBSALE,
+                    request_deserializer=kwprocess__pb2.DBSALERequest.FromString,
+                    response_serializer=kwprocess__pb2.DBSALEReply.SerializeToString,
+            ),
             'CreateRigidWallGeom': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateRigidWallGeom,
                     request_deserializer=kwprocess__pb2.RigidWallGeomRequest.FromString,
@@ -1607,7 +1623,7 @@ def add_kwC2SServicer_to_server(servicer, server):
             ),
             'ALECreateStructuredMeshCtrlPoints': grpc.unary_unary_rpc_method_handler(
                     servicer.ALECreateStructuredMeshCtrlPoints,
-                    request_deserializer=kwprocess__pb2.ALECreateStructuredMeshCtrlPointsRequest.FromString,
+                    request_deserializer=kwprocess__pb2.ALECreateStructuredMeshControlPointsRequest.FromString,
                     response_serializer=kwprocess__pb2.ALECreateStructuredMeshControlPointsReply.SerializeToString,
             ),
             'ALECreateStructuredMultiMaterialGroup': grpc.unary_unary_rpc_method_handler(
@@ -1948,6 +1964,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDBAscii',
             kwprocess__pb2.DBAsciiRequest.SerializeToString,
             kwprocess__pb2.DBAsciiReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateDBSALE(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDBSALE',
+            kwprocess__pb2.DBSALERequest.SerializeToString,
+            kwprocess__pb2.DBSALEReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3136,7 +3169,7 @@ class kwC2S(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ALECreateStructuredMeshCtrlPoints',
-            kwprocess__pb2.ALECreateStructuredMeshCtrlPointsRequest.SerializeToString,
+            kwprocess__pb2.ALECreateStructuredMeshControlPointsRequest.SerializeToString,
             kwprocess__pb2.ALECreateStructuredMeshControlPointsReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

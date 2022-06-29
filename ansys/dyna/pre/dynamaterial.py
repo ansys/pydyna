@@ -60,7 +60,7 @@ class Liner():
         poissons_ratio = 0.34,
         constants = [90e-5,292e-5,0.31,0.025,1.09],
         melt_temperature =  1356,
-        room_temperature = 193,
+        room_temperature = 293,
         strain_rate = 1e-6,
         specific_heat = 383.0E-8,
         tensile_failure_stress = -1.2E-2,
@@ -170,5 +170,6 @@ class Vacuum():
             MatVacuumRequest(rho=self.estimated_material_density)
         )
         self.material_id=ret.mid
+        self.eos_id = 0
         self.name = "vacuum"
         logging.info(f"Material {self.name} Created...")
