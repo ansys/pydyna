@@ -2,7 +2,19 @@
 
 import logging
 
-from .dynabase import *
+from pydyna.dynabase import *
+from enum import Enum
+
+class AdvectionMethod(Enum):
+    DONOR_CELL_WITH_HALF_INDEX_SHIFT = 1
+    VAN_LEER_WITH_HIS = 2
+    DONOR_CELL_WITH_HIS = 3
+    FINITE_VOLUME_METHOD = 6
+
+class FillDirection(Enum):
+    INSIDE_THE_GEOMETRY = 0
+    OUTSIDE_THE_GEOMETRY = 1
+
 
 class ControlPoint:
     def __init__(self,number,position,ratio):
@@ -14,12 +26,12 @@ class StructuredMesh:
     num_meshpart=0
 
     def __init__(self,stub,meshid,partid):
-        meshid = meshid
-        partid = partid
+        self.meshid = meshid
+        self.partid = partid
         self.stub = stub
         StructuredMesh.num_meshpart += 1
 
-    def filling(self, material_name, nsample,geometry_type,define_geometry_parameters,in_out=0,vid=0):
+    def filling(self, material_name,geometry_type, nsample=4,define_geometry_parameters=[0,0,0,0,0],inout=FillDirection.INSIDE_THE_GEOMETRY,vid=0):
         """Perform volume filling operations on a structured ALE mesh
         Parameters
         ----------
@@ -42,7 +54,7 @@ class StructuredMesh:
             "True" when successful, "False" when failed
         """
         ret = self.stub.ALECreateStructuredMeshVolumeFilling(
-            ALECreateStructuredMeshVolumeFillingRequest(mshid=self.meshid, ammgto=material_name, nsample=nsample,geom=geometry_type,vid=vid,inout=in_out,e=define_geometry_parameters))
+            ALECreateStructuredMeshVolumeFillingRequest(mshid=self.meshid, ammgto=material_name, nsample=nsample,geom=geometry_type,vid=vid,inout=inout.value,e=define_geometry_parameters))
         logging.info(f"Material {material_name} filled in Mesh {self.meshid}...")
         return ret
 
@@ -75,7 +87,7 @@ class StructuredMesh:
         bool
             "True" when successful, "False" when failed
         """
-        partid = self.partid + StructuredMesh.num_meshpart
+        partid = self.partid
         ret = self.stub.CreateInitDetonation(InitDetonationRequest(pid=partid,coord=detonation_point,lt=0))
         logging.info("Location of high explosive detonation Defined...")
         return ret
@@ -85,9 +97,10 @@ class StructuredMesh:
 class DynaSALE(DynaBase):
     """Setup SALE simulation process"""
 
-    def __init__(self, hostname = 'localhost',filename=''):
+    def __init__(self, hostname = 'localhost',filenames=[]):
         DynaBase.__init__(self, hostname)
-        DynaBase.open_files(filename)        
+        DynaBase.open_files(self,filenames=filenames) 
+        self.stub.CreateDBSALE(DBSALERequest(switch=1))       
         
     def set_termination(self, endtime):
         self.stub.CreateTermination(TerminationRequest(endtim=endtime))
@@ -95,7 +108,7 @@ class DynaSALE(DynaBase):
     def set_output_interval(self, database_plot_interval):
         self.stub.CreateDBBinary(DBBinaryRequest(filetype="D3PLOT",dt=database_plot_interval))
 
-    def set_analysis_type(self, num_of_cycle=1, method=1,background_pressure=0):
+    def set_analysis_type(self, num_of_cycle=1, method=AdvectionMethod.DONOR_CELL_WITH_HALF_INDEX_SHIFT,background_pressure=0):
         """Setup analysis type
         Parameters
         ----------
@@ -111,7 +124,7 @@ class DynaSALE(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.ALECreateControl(ControlALERequest(dct=0,nadv=num_of_cycle, meth=method,afac=0,end=1e20,aafac=1,vfact=1e-6,pref=background_pressure))
+        ret = self.stub.ALECreateControl(ControlALERequest(dct=0,nadv=num_of_cycle, meth=method.value,afac=0,end=1e20,aafac=1,vfact=1e-6,pref=background_pressure))
         logging.info("Setup Analysis...")
         return ret
 
@@ -166,7 +179,7 @@ class DynaSALE(DynaBase):
             ALECreateStructuredMeshControlPointsRequest(icase=2,sfo=1,n=ny,x=xy,ratio=ratioy)
             )
         cpidy = ret.cpid
-        self.stub.ALECreateStructuredMeshCtrlPoints(
+        ret = self.stub.ALECreateStructuredMeshCtrlPoints(
             ALECreateStructuredMeshControlPointsRequest(icase=2,sfo=1,n=nz,x=xz,ratio=ratioz)
             )
         cpidz = ret.cpid
@@ -195,11 +208,11 @@ class DynaSALE(DynaBase):
         """
         if matsum>0:
             self.stub.CreateDBAscii(
-                DBAsciiRequest(type=="MATSUM", dt=matsum, binary=1, lcur=0,ioopt=0)
+                DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0,ioopt=0)
             )
         if glstat>0:
             self.stub.CreateDBAscii(
-                DBAsciiRequest(type=="GLSTAT", dt=glstat, binary=1, lcur=0,ioopt=0)
+                DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0,ioopt=0)
             )
         ret = 1
         logging.info("Output Setting...")
