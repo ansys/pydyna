@@ -2,7 +2,7 @@
 
 import logging
 
-from pydyna.dynabase import *
+from .dynabase import *
 from enum import Enum
 
 class AdvectionMethod(Enum):

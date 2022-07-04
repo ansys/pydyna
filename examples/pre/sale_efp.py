@@ -3,9 +3,9 @@ This example demonstrates how to create a SALE input deck.
 """
 import os
 import sys
-
-from pydyna.dynasale import *
-from pydyna.dynamaterial import *
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
+from pre.dynasale import *
+from pre.dynamaterial import *
 
 if __name__ == "__main__":
     hostname = "localhost"
