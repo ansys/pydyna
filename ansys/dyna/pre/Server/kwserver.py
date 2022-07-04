@@ -1570,9 +1570,14 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         ratio = request.ratio
         cpid = self.kwdproc.get_data(gdt.KWD_ALE_STRUCTURED_MESH_CONTROL_POINTS_LASTID)+1
         card1 = str(cpid)+",,"+str(icase)+","+str(sfo)
+        size=20
         newk = "*ALE_STRUCTURED_MESH_CONTROL_POINTS\n" + card1
         for i in range(len(n)):
-            newk += "\n"+str(n[i])+","+str(x[i])+","+str(ratio[i])
+            if x[i]==0:
+                xstr=" "
+            else:
+                xstr=str(x[i])
+            newk += "\n"+str(n[i]).rjust(size,' ')+xstr.rjust(size,' ')+str(ratio[i]).rjust(size,' ')
         self.kwdproc.newkeyword(newk)
         msg = '*ALE_STRUCTURED_MESH_CONTROL_POINTS Created...'
         print(msg)
@@ -1630,7 +1635,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         card1 = str(mshid)+",,"+str(ammgto)+",,"+str(nsample)+",,,"+str(vid)
         card2 = str(geom)+","+str(inout)
         for i in range(min(len(e),5)):
-            card2 += (","+str(e[i]))
+            para=int(e[i])
+            card2 += (","+str(para))
         newk = "*ALE_STRUCTURED_MESH_VOLUME_FILLING\n" + card1 +"\n"+card2
         self.kwdproc.newkeyword(newk)
         msg = '*ALE_STRUCTURED_MESH_VOLUME_FILLING Created...'
