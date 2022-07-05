@@ -25,13 +25,9 @@ if __name__ == "__main__":
 
     #define material  
     air = Air()
-    efp.add_material(air,reference_pressure = 1.01325E-6)
     he = HighExplosive()
-    efp.add_material(he)
     liner = Liner()
-    efp.add_material(liner)
     vacuum = Vacuum()
-    efp.add_material(vacuum)
     
     #define mesh
     control_points_x=[ControlPoint(number=1,position=0,ratio=1),
@@ -51,9 +47,10 @@ if __name__ == "__main__":
                       ControlPoint(number=339,position=0,ratio=5)]
     
     mesh = efp.create_mesh(control_points_x,control_points_y,control_points_z)
-    mesh.filling(material_name = air.name,geometry_type="ALL")
-    mesh.filling(material_name="HE",geometry_type="PART",define_geometry_parameters = [23],inout=FillDirection.OUTSIDE_THE_GEOMETRY)
-    mesh.filling(material_name="liner",geometry_type="PART",define_geometry_parameters = [22],inout=FillDirection.OUTSIDE_THE_GEOMETRY)
+    mesh.filling(vacuum)
+    mesh.filling(air,geometry_type="ALL",reference_pressure = 1.01325E-6)
+    mesh.filling(he,geometry_type="PART",define_geometry_parameters = [23],inout=FillDirection.OUTSIDE_THE_GEOMETRY)
+    mesh.filling(liner,geometry_type="PART",define_geometry_parameters = [22],inout=FillDirection.OUTSIDE_THE_GEOMETRY)
     #Set the initial conditions
     mesh.initial_detonation(detonation_point=[0,0,19.33])
 

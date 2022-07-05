@@ -31,7 +31,7 @@ class StructuredMesh:
         self.stub = stub
         StructuredMesh.num_meshpart += 1
 
-    def filling(self, material_name,geometry_type, nsample=4,define_geometry_parameters=[0,0,0,0,0],inout=FillDirection.INSIDE_THE_GEOMETRY,vid=0):
+    def filling(self, material,geometry_type="NULL", nsample=4,define_geometry_parameters=[0,0,0,0,0],inout=FillDirection.INSIDE_THE_GEOMETRY,vid=0,reference_pressure = 0):
         """Perform volume filling operations on a structured ALE mesh
         Parameters
         ----------
@@ -53,9 +53,16 @@ class StructuredMesh:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.ALECreateStructuredMeshVolumeFilling(
-            ALECreateStructuredMeshVolumeFillingRequest(mshid=self.meshid, ammgto=material_name, nsample=nsample,geom=geometry_type,vid=vid,inout=inout.value,e=define_geometry_parameters))
-        logging.info(f"Material {material_name} filled in Mesh {self.meshid}...")
+        material.create(self.stub)
+        ret = self.stub.ALECreateStructuredMultiMaterialGroup(
+            ALECreateStructuredMultiMatGroupRequest(nmmgnm=material.name,mid=material.material_id,eosid=material.eos_id,pref=reference_pressure)
+        )
+
+        logging.info(f"Material {material.name} Created...")
+        if geometry_type.upper() != "NULL":
+            ret = self.stub.ALECreateStructuredMeshVolumeFilling(
+                ALECreateStructuredMeshVolumeFillingRequest(mshid=self.meshid, ammgto=material.name, nsample=nsample,geom=geometry_type.upper(),vid=vid,inout=inout.value,e=define_geometry_parameters))
+            logging.info(f"Material {material.name} filled in Mesh {self.meshid}...")
         return ret
 
     def refine(self, refine_factor_x=1, refine_factor_y=1, refine_factor_z=1):
@@ -126,15 +133,6 @@ class DynaSALE(DynaBase):
         """
         ret = self.stub.ALECreateControl(ControlALERequest(dct=0,nadv=num_of_cycle, meth=method.value,afac=0,end=1e20,aafac=1,vfact=1e-6,pref=background_pressure))
         logging.info("Setup Analysis...")
-        return ret
-
-    def add_material(self, material, reference_pressure = 0):
-        material.create(self.stub)
-        ret = self.stub.ALECreateStructuredMultiMaterialGroup(
-            ALECreateStructuredMultiMatGroupRequest(nmmgnm=material.name,mid=material.material_id,eosid=material.eos_id,pref=reference_pressure)
-        )
-
-        logging.info(f"Material {material.name} Created...")
         return ret
 
     def create_mesh(self, control_points_x,control_points_y,control_points_z):
