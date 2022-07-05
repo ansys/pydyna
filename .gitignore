@@ -43,3 +43,9 @@ test-output.xml
 .\#*
 /.ipynb_checkpoints
 
+/ansys/dyna/pre/Server/input/efpcase.k
+/ansys/dyna/pre/Server/input/KRDATA/Kwd_Log_7_5_8_19_42.log
+/ansys/dyna/pre/Server/input/KRDATA/Kwd_Log_7_5_8_19_43.log
+/ansys/dyna/pre/Server/output/efpcase.k
+/client.log
+/examples/pre/client.log
