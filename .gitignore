@@ -49,3 +49,7 @@ test-output.xml
 /ansys/dyna/pre/Server/output/efpcase.k
 /client.log
 /examples/pre/client.log
+/ansys/dyna/pre/Server/input/KRDATA/Kwd_Log_7_6_9_18_3.log
+/ansys/dyna/pre/Server/input/KRDATA/Kwd_Log_7_6_9_31_18.log
+/ansys/dyna/pre/Server/output/lspost.cfile
+/ansys/dyna/pre/Server/output/lspost.msg
