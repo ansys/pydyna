@@ -1,10 +1,30 @@
 import os
 import sys
 import traceback as tb
+import platform
 from concurrent import futures
 import grpc
 import kwprocess_pb2_grpc
 import kwprocess_pb2
+
+cwd = os.getcwd()
+if(platform.system() == 'Windows'):
+    if(sys.version_info[0]==3 and sys.version_info[1]==6):
+        sys.path.insert(0, os.path.normpath(os.path.join(
+            cwd,'lib','windows','cp36'
+        )))
+    elif(sys.version_info[0]==3 and sys.version_info[1]==8):
+        sys.path.insert(0, os.path.normpath(os.path.join(
+            cwd,'lib','windows','cp38'
+        )))
+    elif(sys.version_info[0]==3 and sys.version_info[1]==9):
+        sys.path.insert(0, os.path.normpath(os.path.join(
+            cwd,'lib','windows','cp39'
+        )))
+else:
+    sys.path.insert(0, os.path.normpath(os.path.join(
+        cwd, 'lib', 'linux'
+    )))
 
 try:
     from keywordreader import KeywordReader as kp
@@ -1642,23 +1662,6 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = '*ALE_STRUCTURED_MESH_VOLUME_FILLING Created...'
         print(msg)
         return kwprocess_pb2.ALECreateStructuredMeshVolumeFillingReply(answer = 0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     def CreateGeneralKWD(self,request,context): 
         opcode = request.opcode    
