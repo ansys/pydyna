@@ -31,7 +31,7 @@ class StructuredMesh:
         self.stub = stub
         StructuredMesh.num_meshpart += 1
 
-    def filling(self, material,geometry_type="NULL", nsample=4,define_geometry_parameters=[0,0,0,0,0],inout=FillDirection.INSIDE_THE_GEOMETRY,vid=0,reference_pressure = 0):
+    def fill(self, material,geometry_type="NULL", nsample=4,define_geometry_parameters=[0,0,0,0,0],inout=FillDirection.INSIDE_THE_GEOMETRY,vid=0,reference_pressure = 0):
         """Perform volume filling operations on a structured ALE mesh
         Parameters
         ----------
