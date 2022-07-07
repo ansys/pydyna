@@ -4,7 +4,7 @@ The PyDyna-pre provide the ability to create keyword inputdeck by grpc.
 
 ## Starting the Server
 
-So far, Python 3.6 is used to start server, make sure this like below:
+So far, Python 3.6/3.8/3.9 is used to start server, make sure this like below:
 
 ```
 PS C:\pyDyna\examples\pre> C:\python36\python.exe --version
@@ -23,7 +23,7 @@ kwprocess_pb2_grpc.py
 ```
 Start server by running command:
 ```shell
-PS C:\pyDyna\ansys\dyna\pre\Server> C:\Python36\python.exe .\kwserver.py
+PS C:\pyDyna\ansys\dyna\pre\Server> python .\kwserver.py
 kwgrpc Server listening on: localhost:50051
 ```
 
