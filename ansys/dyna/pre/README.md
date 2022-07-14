@@ -11,16 +11,24 @@ PS C:\pyDyna\examples\pre> C:\python36\python.exe --version
 Python 3.6.8
 ```
 
-### Starting the Server on Windows:
-
 Here is the minimal content in Server folder 
 ```
 Server/
-kwserver.py
-keywordreader.pyd
-kwprocess_pb2.py
-kwprocess_pb2_grpc.py
+
+      kwserver.py
+      kwprocess_pb2.py
+      kwprocess_pb2_grpc.py
+	  lib/
+	     linux/
+		       keywordreader.so
+         windows/
+               	cp36/keywordreader.pyd	
+                cp37/keywordreader.pyd
+                cp38/keywordreader.pyd				
 ```
+
+### Starting the Server on Windows:
+
 Start server by running command:
 ```shell
 PS C:\pyDyna\ansys\dyna\pre\Server> python .\kwserver.py
@@ -29,17 +37,7 @@ kwgrpc Server listening on: localhost:50051
 
 ### Starting the server on Linux:
 
-Keep these files in the same folder
-
-```
-Server/
-kwserver.py
-keywordreader.so
-kwprocess_pb2.py
-kwprocess_pb2_grpc.py
-```
-
-Start server:
+Start server by running command:
 
 ```
 :~/pyDyna/ansys/dyna/pre/Server> python kwserver.py
@@ -123,3 +121,66 @@ Mode                 LastWriteTime         Length Name
 ```
 
 Submit the result file, efpcase.k, to LS-Dyna for simulation results.
+
+## Running pyDyna-pre in virtualenv
+
+virtualenv is a CLI tool that needs a Python interpreter to run.
+
+Install virtualenv
+
+```
+pip install virtualenv
+```
+Create a python virtual environment of the same version as virtualenv,installed into the subdirectory "venv"
+
+```
+virtualenv venv
+```
+Activate venv
+
+```
+Activate venv on Windows by running command: 
+cd venv
+source Scripts/activate
+
+Activate venv on Linux by running command: 
+cd venv
+./bin/activate
+
+```
+Install dependent packages.
+
+```
+Copy corresponding requirements.txt file from pyDyna/requirements folder to venv folder.
+Then running command:
+pip install -r requirements.txt
+```
+
+Copy pyDyna package in venv folder
+
+```
+venv/
+    pyDyna/
+	      ansys
+		       /dyna/pre/Server
+		  doc
+		  examples
+		  .flake8
+		  LICENSE
+		  ...
+	
+```
+
+Start server by running command:
+
+```
+cd pyDyna/ansys/dyna/pre/Server
+python kwserver.py
+```
+
+Go to pyDyna/examples/pre,and run sale_efp.py example:
+
+```
+cd pyDyna/examples/pre
+python sale_efp.py
+```
