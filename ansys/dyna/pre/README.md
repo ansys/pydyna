@@ -1,6 +1,61 @@
 # pyDyna-pre
 
-The PyDyna-pre provide the ability to create keyword inputdeck by grpc.
+The PyDyna-pre provide the ability to create keyword inputdeck through gRPC framework. 
+
+## Running pyDyna-pre in virtualenv
+
+virtualenv is a CLI tool that needs a Python interpreter to run.
+
+Install virtualenv
+
+```
+pip install virtualenv
+```
+
+Create a python virtual environment of the same version as virtualenv,installed into the subdirectory "venv"
+
+```
+virtualenv venv
+```
+
+Activate venv on Windows by running command: 
+
+```
+cd venv
+source Scripts/activate
+```
+
+Activate venv on Linux by running command: 
+
+```
+cd venv
+./bin/activate
+```
+
+Copy pyDyna package in venv folder
+
+```
+venv/
+    pyDyna/
+	      ansys
+		       /dyna/pre/Server
+		  doc
+		  examples
+		  .flake8
+		  LICENSE
+		  ...
+	
+```
+
+## Requirements
+
+Go to pyDyna/requirements/pythonxx according to your Python version.
+Then running command:
+
+```
+cd pyDyna/requirement/pythonxx
+pip install -r requirements.txt
+```
 
 ## Starting the Server
 
@@ -120,66 +175,3 @@ Mode                 LastWriteTime         Length Name
 ```
 
 Submit the result file, efpcase.k, to LS-Dyna for simulation results.
-
-## Running pyDyna-pre in virtualenv
-
-virtualenv is a CLI tool that needs a Python interpreter to run.
-
-Install virtualenv
-
-```
-pip install virtualenv
-```
-Create a python virtual environment of the same version as virtualenv,installed into the subdirectory "venv"
-
-```
-virtualenv venv
-```
-Activate venv
-
-```
-Activate venv on Windows by running command: 
-cd venv
-source Scripts/activate
-
-Activate venv on Linux by running command: 
-cd venv
-./bin/activate
-
-```
-Install dependent packages.
-
-```
-Copy corresponding requirements.txt file from pyDyna/requirements folder to venv folder.
-Then running command:
-pip install -r requirements.txt
-```
-
-Copy pyDyna package in venv folder
-
-```
-venv/
-    pyDyna/
-	      ansys
-		       /dyna/pre/Server
-		  doc
-		  examples
-		  .flake8
-		  LICENSE
-		  ...
-	
-```
-
-Start server by running command:
-
-```
-cd pyDyna/ansys/dyna/pre/Server
-python kwserver.py
-```
-
-Go to pyDyna/examples/pre,and run sale_efp.py example:
-
-```
-cd pyDyna/examples/pre
-python sale_efp.py
-```
