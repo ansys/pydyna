@@ -14,7 +14,6 @@ Python 3.6.8
 Here is the minimal content in Server folder 
 ```
 Server/
-
       kwserver.py
       kwprocess_pb2.py
       kwprocess_pb2_grpc.py
