@@ -22,14 +22,14 @@ Activate venv on Windows by running command:
 
 ```
 cd venv
-source Scripts/activate
+./bin/activate
 ```
 
 Activate venv on Linux by running command: 
 
 ```
 cd venv
-./bin/activate
+source Scripts/activate
 ```
 
 Copy pyDyna package in venv folder
@@ -62,7 +62,7 @@ pip install -r requirements.txt
 So far, Python 3.6/3.8/3.9 is used to start server, make sure this like below:
 
 ```
-PS C:\pyDyna\examples\pre> C:\python36\python.exe --version
+(venv) C:\pyDyna\examples\pre> C:\python36\python.exe --version
 Python 3.6.8
 ```
 
@@ -77,15 +77,15 @@ Server/
 		       keywordreader.so
          windows/
                	cp36/keywordreader.pyd	
-                cp37/keywordreader.pyd
-                cp38/keywordreader.pyd				
+                cp38/keywordreader.pyd
+                cp39/keywordreader.pyd				
 ```
 
 ### Starting the Server on Windows:
 
 Start server by running command:
 ```shell
-PS C:\pyDyna\ansys\dyna\pre\Server> python .\kwserver.py
+(venv) C:\pyDyna\ansys\dyna\pre\Server> python .\kwserver.py
 kwgrpc Server listening on: localhost:50051
 ```
 
@@ -94,7 +94,7 @@ kwgrpc Server listening on: localhost:50051
 Start server by running command:
 
 ```
-:~/pyDyna/ansys/dyna/pre/Server> python kwserver.py
+(venv) :~/pyDyna/ansys/dyna/pre/Server> python kwserver.py
 ```
 
 ## Running pyDyna-pre client
@@ -106,7 +106,7 @@ See the examples in the examples folder for some basic example.  More will be ad
 Go to pyDyna/examples/pre,and run sale_efp.py:
 
 ```
-PS C:\pyDyna\examples\pre> python .\sale_efp.py
+(venv) C:\pyDyna\examples\pre> python .\sale_efp.py
 2022-07-05 08:19:42 :  Connected to kwServer...
 2022-07-05 08:19:42 :  C:\pyDyna\examples\pre\input\sale\input\efpcase.k uploaded to server...
 2022-07-05 08:19:43 :  Setup Analysis...
@@ -162,8 +162,8 @@ Saved Successfully!
 After running this file,the result file will be save in pyDyna/ansys/dyna/pre/Server/output
 
 ```
-PS C:\pyDyna\ansys\dyna\pre\Server> cd .\output\
-PS C:\pyDyna\ansys\dyna\pre\Server\output> ls
+(venv) C:\pyDyna\ansys\dyna\pre\Server> cd .\output\
+(venv) C:\pyDyna\ansys\dyna\pre\Server\output> ls
 
 
     目录: C:\pyDyna\ansys\dyna\pre\Server\output
