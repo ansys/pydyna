@@ -22,14 +22,14 @@ Activate venv on Windows by running command:
 
 ```
 cd venv
-./bin/activate
+./Scripts/activate
 ```
 
 Activate venv on Linux by running command: 
 
 ```
 cd venv
-source Scripts/activate
+source bin/activate
 ```
 
 Copy pyDyna package in venv folder
