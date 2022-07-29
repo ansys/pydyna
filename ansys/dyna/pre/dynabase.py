@@ -1,6 +1,8 @@
 """Module to create dyna input deck"""
 
+from bisect import bisect_right
 import os
+from subprocess import DETACHED_PROCESS
 import grpc
 import sys
 import logging
@@ -69,6 +71,11 @@ class DynaBase:
         logging.info("Connected to kwServer...")
         self.stub = kwC2SStub(channel)
         self.mainname = ""
+        DynaBase.stub=self.stub
+
+    def get_stub():
+        return DynaBase.stub
+
 
     def open_files(self, filenames):
         """Open IGA model files
@@ -189,6 +196,24 @@ class DynaBase:
         logging.info("Control Energy Created...")
         return ret
 
+    def set_hourglass(self, controltype=1, coefficient=0.1):
+        ret = self.stub.CreateControlHourglass(
+            ControlHourglassRequest(
+                ihq=controltype, qh=coefficient
+            )
+        )
+        logging.info("Control Hourglass Created...")
+        return ret
+
+    def set_bulk_viscosity(self, quadratic_viscosity_coeff=1.5, linear_viscosity_coeff=0.06,bulk_viscosity_type=1):
+        ret = self.stub.CreateControlBulkViscosity(
+            ControlBulkViscosityRequest(
+                q1=quadratic_viscosity_coeff, q2=linear_viscosity_coeff,type=bulk_viscosity_type
+            )
+        )
+        logging.info("Control Bulk Viscosity Created...")
+        return ret
+
     def create_control_shell(
         self,
         wrpang=20,
@@ -200,7 +225,7 @@ class DynaBase:
         miter=1,
         proj=0,
         irquad=0,
-    ):
+        ):
         """Provide controls for computing shell response.
         Refer to: *CONTROL_SHELL
         Parameters
@@ -1555,3 +1580,184 @@ class DynaBase:
         msg = self.mainname + " is outputed..."
         logging.info(msg)
         return ret
+#-------------------------------------------------------------------------------------------------
+    class box:
+        def __init__(self,xmin=0,xmax=0,ymin=0,ymax=0,zmin=0,zmax=0):
+            self.xmin=xmin
+            self.xmax=xmax
+            self.ymin=ymin
+            self.ymax=ymax
+            self.zmin=zmin
+            self.xmax=zmax
+
+        def create(self,stub):
+            ret = stub.CreateDefineBox(
+            DefineBoxRequest(xmin=self.xmin, xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,zmin=self.zmin,zmax=self.zmax)
+            )
+            self.boxid = ret.boxid
+            logging.info(f"Box {self.boxid} defined...")
+
+    class curve:
+        def __init__(self,sfo=1,abscissa=[],ordinate=[]):
+            self.sfo=sfo
+            self.abscissa = abscissa
+            self.ordinate = ordinate
+        
+        def create(self,stub):
+            ret = stub.CreateDefineCurve(
+            DefineCurveRequest(sfo=self.sfo, xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,zmin=self.zmin,zmax=self.zmax)
+            )
+            self.boxid = ret.boxid
+            logging.info(f"Box {self.boxid} defined...")
+
+    class nodeset:
+        def __init__(self,nodes=[]):
+            self.nodes = nodes
+            self.id = 0
+
+        def create(self,stub):
+            ret = stub.CreateNodeSet(
+                NodeSetRequest(
+                    option="LIST", sid=0, genoption="NODE", entities=self.nodes
+                )
+            )
+            self.id = ret.id
+            return self.id
+            
+        def num(self):
+            return self.nodes.len()
+        
+        def id(self,pos):
+            return self.nodes[pos]
+
+    class partset:
+        def __init__(self,parts=[]):
+            self.parts=parts
+            self.id = 0
+
+        def create(self,stub):
+            ret = stub.CreatePartSet(PartSetRequest(sid=0, pids=self.parts))
+            self.id = ret.id
+            return self.id
+
+        def num(self):
+            return self.parts.len()
+
+        def pos(self,pos):
+            return self.parts[pos]
+
+    class boundary:
+        def __init__(self):
+            self.stub = DynaBase.get_stub()
+
+        def spc(self,nodeset,
+            contraint_x_direction=0,
+            contraint_y_direction=0,
+            contraint_z_direction=0,
+            contraint_xaxis_rotate=0,
+            contraint_yaxis_rotate=0,
+            contraint_zaxis_rotate=0,
+            cid=0,
+            birth=0,
+            death=1e20
+            ):
+            if birth==0 and death == 1e20:
+                birthdeath = "BIRTH_DEATH"
+            else:
+                birthdeath=''
+            if nodeset.num()==1:
+                nid = nodeset.pos(pos=0)
+                option1='NODE'
+            else:
+                nid = nodeset.create(self.stub)
+                option1='SET'
+            ret = self.stub.CreateBdySpc(
+                BdySpcRequest(
+                    option1=option1,
+                    birthdeath=birthdeath,
+                    nid=nid,
+                    cid=cid,
+                    dofx=contraint_x_direction,
+                    dofy=contraint_y_direction,
+                    dofz=contraint_z_direction,
+                    dofrx=contraint_xaxis_rotate,
+                    dofry=contraint_yaxis_rotate,
+                    dofrz=contraint_zaxis_rotate,
+                    birth=birth,
+                    death=death,
+                )
+            )
+            logging.info("Boundary spc Created...")
+            return ret
+        
+    class part:
+        def __init__(self):
+           self.pid=0
+
+        def mat(mat):
+            pass
+
+        def section(sec):
+            pass
+
+        def cnrb(nodes):
+            pass
+
+
+    class implicit_analysis():
+        def __init__(self,analysis_type=0,initial_timestep_size=0):
+            self.imflag = analysis_type
+            self.dt0 = initial_timestep_size
+            self.stub = DynaBase.get_stub()
+            ret = self.stub.CreateControlImplicitGeneral(
+                ControlImplicitGeneralRequest(
+                    imflag=self.imflag,dt0=self.dt0
+                )
+            )
+            return ret
+
+        def automatic_timestep(self, control_flag=0,Optimum_equilibrium_iteration_count=11):
+            self.iato=control_flag
+            self.iteopt = Optimum_equilibrium_iteration_count
+            ret = self.stub.CreateControlImplicitAuto(
+                ControlImplicitAutoRequest(
+                    iauto=self.iauto,iteopt=self.iteopt
+                )
+            )
+            return ret
+
+        def activate_dynamic(self, analysis_type=0,gamma=0.5,beta=0.25):
+            self.imass = analysis_type
+            self.gamma = gamma
+            self.beta = beta
+            ret = self.stub.CreateControlImplicitDynamic(
+                ControlImplicitDynamicRequest(
+                    imass=self.imass,gamma=self.gamma,beta=self.beta
+                )
+            )
+            return ret
+
+        def activate_eigenvalue(self,number_eigenvalues=0,shift_scale=0):
+            self.neig = number_eigenvalues
+            self.shfscl= shift_scale
+            ret = self.stub.CreateControlImplicitEigenvalue(
+                ControlImplicitEigenvalueRequest(
+                    neig=self.neig,shfscl=self.shfscl
+                )
+            )
+            return ret
+
+        def solution(self,solution_method=12,
+            iteration_limit=11,
+            stiffness_reformation_limit=15,
+            absolute_convergence_tolerance=1e-10):
+            self.nsolver=solution_method
+            self.ilimit=iteration_limit
+            self.maxref=stiffness_reformation_limit
+            self.abstol=absolute_convergence_tolerance
+            ret = self.stub.CreateControlImplicitSolution(
+                ControlImplicitSolutionRequest(
+                    nsolver=self.nsolver,ilimit=self.ilimit,maxref=self.maxref,abstol=self.abstol
+                )
+            )
+            return ret
