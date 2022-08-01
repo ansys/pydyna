@@ -6,6 +6,7 @@ from subprocess import DETACHED_PROCESS
 import grpc
 import sys
 import logging
+from enum import Enum
 
 """
 import kwprocess_pb2
@@ -1761,3 +1762,48 @@ class DynaBase:
                 )
             )
             return ret
+
+    
+    class ContactCategory(Enum):
+        ONE_WAY_CONTACT = 1
+        TWO_WAY_CONTACT = 2
+        SINGLE_SURFACE_CONTACT = 3
+    
+    class ContactType(Enum):
+        AUTOMATIC = 1
+        GENERAL=2
+        RIGID = 3
+        TIED=4
+        TIED_WITH_FAILURE=5
+        ERODING = 6
+        EDGE=7
+
+    class ContactAlgorithm(Enum):
+        PENALTY_BASED = 1
+        CONSTRAINT_BASED = 2
+
+    class OffsetType(Enum):
+        OFFSET = 1
+        BEAM_OFFSET=2
+        CONSTRAINED_OFFSET=3
+
+    class contact:
+        def __init__(self,type=ContactType.AUTOMATIC,category=ContactCategory.SINGLE_SURFACE_CONTACT):
+            self.rigidwall_penalties_scale_factor= 1
+            self.max_penetration_check_multiplier = 4
+            self.initial_penetrations = 0
+            self.rigidwall_gap_stiffness =0
+            self.category = category
+            self.type = type
+            self.mortar = 0
+
+        def is_mortar(self,mortar):
+            self.mortar=mortar
+
+        def define_algorithm(self,algorithm=ContactAlgorithm.PENALTY_BASED):
+            self.algorithm = algorithm
+
+        def create(self):
+            pass
+
+
