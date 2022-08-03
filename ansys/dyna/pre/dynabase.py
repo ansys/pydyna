@@ -1765,9 +1765,10 @@ class DynaBase:
 
     
     class ContactCategory(Enum):
-        ONE_WAY_CONTACT = 1
-        TWO_WAY_CONTACT = 2
+        SURFACE_TO_SURFACE_CONTACT = 2
         SINGLE_SURFACE_CONTACT = 3
+        SHELL_EDGE_TO_SURFACE_CONTACT = 4
+
     
     class ContactType(Enum):
         AUTOMATIC = 1
@@ -1786,6 +1787,19 @@ class DynaBase:
         OFFSET = 1
         BEAM_OFFSET=2
         CONSTRAINED_OFFSET=3
+    
+    class contactsurface:
+        def __init__(self,set):
+            self.type = set.type
+            self.id = set.id
+            self.thickness = 0
+
+        def contact_region(self,box):
+            self.id = box.id
+            return self.id
+
+        def contact_thickness(self,thickness):
+            self.thickness = thickness
 
     class contact:
         def __init__(self,type=ContactType.AUTOMATIC,category=ContactCategory.SINGLE_SURFACE_CONTACT):
@@ -1795,15 +1809,93 @@ class DynaBase:
             self.rigidwall_gap_stiffness =0
             self.category = category
             self.type = type
-            self.mortar = 0
-
-        def is_mortar(self,mortar):
-            self.mortar=mortar
+            self.mortar = False
+            self.offset = 0
+            
+        def set_mortar(self):
+            self.mortar=True
 
         def define_algorithm(self,algorithm=ContactAlgorithm.PENALTY_BASED):
             self.algorithm = algorithm
 
-        def create(self):
-            pass
+        def friction_coefficient(self,static=0,dynamic=0):
+            self.static_friction_coeff = static
+            self.dynamic_friction_coeff = dynamic
+        
+        def allow_initial_penetration(self):
+            self.ignore=1
+
+        def create(self,slavesurface,mastersurface):
+            opcode = "CONTACT_"
+            if self.type==ContactType.AUTOMATIC:
+                opcode += "AUTOMATIC"
+            elif self.type == ContactType.TIED:
+                opcode += "TIED"
+            else:
+                opcode+=""
+
+            if self.category == ContactCategory.SURFACE_TO_SURFACE_CONTACT:
+                opcode += "_SURFACE_TO_SURFACE"
+            elif self.category == ContactCategory.SINGLE_SURFACE_CONTACT:
+                opcode += "_SINGLE_SURFACE"
+            elif self.category == ContactCategory.SHELL_EDGE_TO_SURFACE_CONTACT:
+                opcode += "_SHELL_EDGE_TO_SURFACE"
+            else:
+                opcode +=""
+
+            if self.offset == OffsetType.OFFSET:
+                opcode += "_OFFSET"
+            elif self.offset == OffsetType.BEAM_OFFSET:
+                opcode += "_BEAM_OFFSET"
+            elif self.offset == OffsetType.CONSTRAINED_OFFSET:
+                opcode += "_CONSTRAINED_OFFSET"
+            else:
+                opcode += ""
+            
+            if self.mortar == True:
+                opcode += "_MORTAR"
+            else:
+                opcode += ""
+            ret = self.stub.CreateContact(
+                ContactRequest(
+                    cid=0,
+                    title="",
+                    option1=opcode,
+                    option3="",
+                    offset=self.offset,
+                    ssid=slavesurface.id,
+                    msid=mastersurface.id,
+                    sstyp=slavesurface.type,
+                    mstyp=mastersurface.type,
+                    sapr=0,
+                    sbpr=0,
+                    fs=self.static_friction_coeff,
+                    fd=self.dynamic_friction_coeff,
+                    vdc=0,
+                    penchk=0,
+                    birthtime=0,
+                    sfsa=1,
+                    sfsb=1,
+                    sst=slavesurface.thickness,
+                    mst=mastersurface.thickness,
+                    optionres=0,
+                    nfls=0,
+                    sfls=0,
+                    param=0,
+                    ct2cn=1,
+                    soft=0,
+                    sofscl=0.1,
+                    lcidab=0,
+                    maxpar=1.025,
+                    sbopt=2,
+                    depth=2,
+                    bsort=100,
+                    frcfrq=1,
+                    igap=1,
+                    ignore = self.allow_initial_penetration
+                )
+            )
+            logging.info("Contact  Created...")
+            return ret
 
 
