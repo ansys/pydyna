@@ -712,14 +712,14 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         sapr = request.sapr
         sbpr = request.sbpr
         #card2
-        sfsa = request.sfsa
-        sfsb = request.sfsb
         fs = request.fs
         fd = request.fd
         vdc = request.vdc
         penchk = request.penchk
         birthtime = request.birthtime
         #card3
+        sfsa = request.sfsa
+        sfsb = request.sfsb
         sst = request.sst
         mst = request.mst
         #card4
@@ -739,6 +739,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         frcfrq = request.frcfrq
         #optionc
         igap = request.igap
+        ignore = request.ignore
         opcode = "*CONTACT_"+option1.upper()
         if(len(offset)>0):
             opcode += "_"+offset
@@ -752,7 +753,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         card4 = str(optionres)+","+str(nfls)+","+str(sfls)+","+str(param)+",,,"+str(ct2cn)
         carda = str(soft)+","+ str(sofscl) + "," + str(lcidab) + "," + str(maxpar)+","+str(sbopt)+","+ str(depth) + "," + str(bsort) + "," + str(frcfrq); 
         cardb = "0,1,2,0,0,0,0.5,0"
-        cardc = str(igap)
+        cardc = str(igap)+","+str(ignore)
         if (option1 == "TIED_SHELL_EDGE_TO_SURFACE" or option1 == "NODES_TO_SURFACE"or option1 == "SURFACE_TO_SURFACE"):
             newk = opcode+"\n"+card1+"\n"+card2+"\n"+card3
         if option1 == "AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK" :
@@ -832,6 +833,28 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = '*CONSTRAINED_EXTRA_NODES Created...'
         print(msg)
         return kwprocess_pb2.ConstrainedExtraNodesReply(answer = 0)  
+
+    def CreateConstrainedNodalRigidBody(self,request,context):
+        pid = request.pid
+        nsid = request.nsid
+        card1 = str(pid) + ",0," + str(nsid) + ",0,0,0,0"
+        opcode = "*CONSTRAINED_NODAL_RIGID_BODY"
+        newk = opcode+"\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*CNRB Created...'
+        print(msg)
+        return kwprocess_pb2.ConstrainedNodalRigidBodyReply(pid = pid) 
+
+    def CreateConstrainedSpotWeld(self,request,context):
+        node1 = request.node1
+        node2 = request.node2
+        card1 = str(node1) + "," + str(node2) + ",0,0,0,0,0,0"
+        opcode = "*CONSTRAINED_SPOTWELD"
+        newk = opcode+"\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*CONSTRAINED_SPOTWELD Created...'
+        print(msg)
+        return kwprocess_pb2.ConstrainedSpotWeldReply(id = 0)
 
     def CreateConstrainedJoint(self,request,context):
         type = request.type
