@@ -1608,8 +1608,8 @@ class DynaBase:
             ret = stub.CreateDefineCurve(
             DefineCurveRequest(sfo=self.sfo, xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,zmin=self.zmin,zmax=self.zmax)
             )
-            self.boxid = ret.boxid
-            logging.info(f"Box {self.boxid} defined...")
+            self.id = ret.id
+            logging.info(f"Curve {self.id} defined...")
 
     class nodeset:
         def __init__(self,nodes=[]):
@@ -1646,6 +1646,16 @@ class DynaBase:
 
         def pos(self,pos):
             return self.parts[pos]
+    
+    class motion(Enum):
+        VELOCITY = 0
+        ACCELERATION = 1
+        DISPLACEMENT = 2
+
+    class dof(Enum):
+        X_TRANSLATIONAL = 1
+        Y_TRANSLATIONAL = 2
+        Z_TRANSLATIONAL = 3
 
     class boundary:
         def __init__(self):
@@ -1690,6 +1700,28 @@ class DynaBase:
             )
             logging.info("Boundary spc Created...")
             return ret
+
+    def imposed_motion(self,partset,curve,motion=motion.DISPLACEMENT,dof=dof.X_TRANSLATIONAL,scalefactor=1):
+        partset.create()
+        curve.create()
+        for id in partset.parts:
+            ret = self.stub.CreateBdyPrescribedMotion(
+                BdyPrescribedMotionRequest(
+                    id=0,
+                    heading="",
+                    option="RIGID",
+                    typeid=id,
+                    dof=dof.value,
+                    vad=motion.value,
+                    lcid=curve.id,
+                    sf=scalefactor,
+                    vid=0,
+                    birth=0,
+                    death=0,
+                )
+            )
+        logging.info("Boundary prescribed motion Created...")
+        return ret
         
     class part:
         def __init__(self):
@@ -1825,7 +1857,13 @@ class DynaBase:
         def allow_initial_penetration(self):
             self.ignore=1
 
-        def create(self,slavesurface,mastersurface):
+        def set_slavesurface(self,surface):
+            self.slavesurface = surface
+
+        def set_mastersurface(self,surface):
+            self.mastersurface = surface
+
+        def create(self):
             opcode = "CONTACT_"
             if self.type==ContactType.AUTOMATIC:
                 opcode += "AUTOMATIC"
@@ -1833,11 +1871,16 @@ class DynaBase:
                 opcode += "TIED"
             else:
                 opcode+=""
-
+            msid=self.mastersurface.id
+            mstyp=self.mastersurface.type
+            mst=self.mastersurface.thickness
             if self.category == ContactCategory.SURFACE_TO_SURFACE_CONTACT:
                 opcode += "_SURFACE_TO_SURFACE"
             elif self.category == ContactCategory.SINGLE_SURFACE_CONTACT:
                 opcode += "_SINGLE_SURFACE"
+                msid = 0
+                mstyp = 0
+                mst = 0
             elif self.category == ContactCategory.SHELL_EDGE_TO_SURFACE_CONTACT:
                 opcode += "_SHELL_EDGE_TO_SURFACE"
             else:
@@ -1856,6 +1899,7 @@ class DynaBase:
                 opcode += "_MORTAR"
             else:
                 opcode += ""
+
             ret = self.stub.CreateContact(
                 ContactRequest(
                     cid=0,
@@ -1863,10 +1907,10 @@ class DynaBase:
                     option1=opcode,
                     option3="",
                     offset=self.offset,
-                    ssid=slavesurface.id,
-                    msid=mastersurface.id,
-                    sstyp=slavesurface.type,
-                    mstyp=mastersurface.type,
+                    ssid=self.slavesurface.id,
+                    msid=msid,
+                    sstyp=self.slavesurface.type,
+                    mstyp=mstyp,
                     sapr=0,
                     sbpr=0,
                     fs=self.static_friction_coeff,
@@ -1876,8 +1920,8 @@ class DynaBase:
                     birthtime=0,
                     sfsa=1,
                     sfsb=1,
-                    sst=slavesurface.thickness,
-                    mst=mastersurface.thickness,
+                    sst=self.slavesurface.thickness,
+                    mst=mst,
                     optionres=0,
                     nfls=0,
                     sfls=0,
@@ -1899,3 +1943,24 @@ class DynaBase:
             return ret
 
 
+    class spotweld:
+        def __init__(self,nodeid1,nodeid2):
+            ret = self.stub.CreateConstrainedSpotWeld(
+                ConstrainedSpotWeldRequest(
+                    node1=nodeid1,node1=nodeid2
+                )
+            )
+            return ret
+
+    class cnrb:
+        def __init__(self,pid,nodeset):
+            nodeset.create()
+            nsid = nodeset.id
+            ret = self.stub.CreateConstrainedNodalRigidBody(
+                ConstrainedNodalRigidBodyRequest(
+                    pid=pid,nsid=nsid
+                )
+            )
+            return ret
+
+    
