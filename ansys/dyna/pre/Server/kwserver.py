@@ -885,7 +885,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
 
     #MATERIAL
     def CreateMatRigid(self,request,context):
-        mid = request.mid
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
         ro = request.ro
         e = request.e
         pr = request.pr
@@ -901,7 +901,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = opcode+" Created..."
         print(msg)
-        return kwprocess_pb2.MatRigidReply(ret = 0)  
+        return kwprocess_pb2.MatRigidReply(mid = mid)  
 
     def CreateMatElastic(self,request,context):
         mid = request.mid
@@ -915,6 +915,54 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = opcode+" Created..."
         print(msg)
         return kwprocess_pb2.MatElasticReply(ret = 0) 
+
+    def CreateMatSpotweld(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        e = request.e
+        pr = request.pr
+        sigy = request.sigy
+        eh = request.eh
+        card1 = str(mid)+","+str(ro)+","+str(e)+","+str(pr)+","+str(sigy)+","+str(eh)
+        opcode = "*MAT_SPOTWELD"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatSpotweldReply(mid = mid)  
+
+    def CreateMatPiecewiseLinearPlasticity(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        e = request.e
+        pr = request.pr
+        sigy = request.sigy
+        etan = request.etan
+        card1 = str(mid)+","+str(ro)+","+str(e)+","+str(pr)+","+str(sigy)+","+str(etan)
+        opcode = "*MAT_PIECEWISE_LINEAR_PLASTICITY"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatPiecewiseLinearPlasticityReply(mid = mid)
+
+    def CreateMatModifiedPiecewiseLinearPlasticity(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        e = request.e
+        pr = request.pr
+        sigy = request.sigy
+        etan = request.etan
+        fail = request.fail
+        numint = request.numint
+        card1 = str(mid)+","+str(ro)+","+str(e)+","+str(pr)+","+str(sigy)+","+str(etan)+","+str(fail)
+        card2 = "0,0,0,0,0,0,0,"+str(numint)
+        opcode = "*MAT_MODIFIED_PIECEWISE_LINEAR_PLASTICITY"
+        newk = opcode +"\n"+card1 + "\n"+card2
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatModifiedPiecewiseLinearPlasticityReply(mid = mid)
 
     def CreateMatFabric(self,request,context):
         mid = request.mid
@@ -1092,8 +1140,22 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.SectionIGAShellReply(answer = 0)
 
+    def CreateSectionBeam(self,request,context):
+        secid = self.kwdproc.get_data(gdt.KWD_SECTION_LASTID)+1
+        elform = request.elform
+        shrf = request.shrf
+        cst = request.cst
+        ts1 = request.ts1
+        ts2 = request.ts2
+        card1 = str(secid) + "," + str(elform)+ "," + str(shrf)+ ",2.0," + str(cst)
+        card2 = str(ts1)+ "," + str(ts2)
+        newk = "*SECTION_BEAM\n" + card1 +"\n"+card2
+        self.kwdproc.newkeyword(newk)
+        print(f"Section Beam {secid} Created...")
+        return kwprocess_pb2.SectionBeamReply(id = secid)
+
     def CreateSectionShell(self,request,context):
-        secid = request.secid
+        secid = self.kwdproc.get_data(gdt.KWD_SECTION_LASTID)+1
         elform = request.elform
         shrf = request.shrf
         nip = request.nip
@@ -1106,19 +1168,17 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         card2 = str(t1)+ "," + str(t2)+ "," + str(t3)+ "," + str(t4)
         newk = "*SECTION_SHELL\n" + card1 +"\n"+card2
         self.kwdproc.newkeyword(newk)
-        msg = 'Section Shell '+str(secid)+' Created...'
-        print(msg)
-        return kwprocess_pb2.SectionShellReply(answer = 0)
+        print(f"Section Shell {secid} Created...")
+        return kwprocess_pb2.SectionShellReply(id = secid)
     
     def CreateSectionSolid(self,request,context):
-        secid = request.secid
+        secid = self.kwdproc.get_data(gdt.KWD_SECTION_LASTID)+1
         elform = request.elform
         card1 = str(secid) + "," + str(elform)
         newk = "*SECTION_SOLID\n" + card1
         self.kwdproc.newkeyword(newk)
-        msg = 'Section Solid '+str(secid)+' Created...'
-        print(msg)
-        return kwprocess_pb2.SectionSolidReply(answer = 0)
+        print(f"Section Solid {secid} Created...")
+        return kwprocess_pb2.SectionSolidReply(id = secid)
 
     def CreateSectionDiscrete(self,request,context):
         secid = request.secid

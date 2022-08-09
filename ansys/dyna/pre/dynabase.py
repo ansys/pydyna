@@ -196,8 +196,12 @@ class DynaBase:
         )
         logging.info("Control Energy Created...")
         return ret
+    
+    class HourglassControl(Enum):
+        STANDARD_VISCOSITY_FORM = 1
+        FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID = 2
 
-    def set_hourglass(self, controltype=1, coefficient=0.1):
+    def set_hourglass(self, controltype=HourglassControl.STANDARD_VISCOSITY_FORM, coefficient=0.1):
         ret = self.stub.CreateControlHourglass(
             ControlHourglassRequest(
                 ihq=controltype, qh=coefficient
@@ -206,10 +210,15 @@ class DynaBase:
         logging.info("Control Hourglass Created...")
         return ret
 
-    def set_bulk_viscosity(self, quadratic_viscosity_coeff=1.5, linear_viscosity_coeff=0.06,bulk_viscosity_type=1):
+    class BulkViscosity(Enum):
+        STANDARD_BULK_VISCOSITY = 1
+        RICHARDS_WILKINS_BULK_VISCOSITY=2
+        COMPUTE_INTERNAL_ENERGY_DISSIPATED = -2
+
+    def set_bulk_viscosity(self, quadratic_viscosity_coeff=1.5, linear_viscosity_coeff=0.06,bulk_viscosity_type=BulkViscosity.STANDARD_BULK_VISCOSITY):
         ret = self.stub.CreateControlBulkViscosity(
             ControlBulkViscosityRequest(
-                q1=quadratic_viscosity_coeff, q2=linear_viscosity_coeff,type=bulk_viscosity_type
+                q1=quadratic_viscosity_coeff, q2=linear_viscosity_coeff,type=bulk_viscosity_type.value
             )
         )
         logging.info("Control Bulk Viscosity Created...")
@@ -1724,21 +1733,25 @@ class DynaBase:
         return ret
         
     class part:
-        def __init__(self):
-           self.pid=0
+        def __init__(self,pid):
+           self.pid=pid
 
         def mat(mat):
-            pass
+            id = mat.id
+
 
         def section(sec):
-            pass
+            id = sec.id
+            
 
-        def cnrb(nodes):
-            pass
 
+    class AnalysisType(Enum):
+        EXPLICIT = 0
+        IMPLICIT = 1
+        EXPLICIT_FOLLOWED_BY_IMPLICIT=2
 
     class implicit_analysis():
-        def __init__(self,analysis_type=0,initial_timestep_size=0):
+        def __init__(self,analysis_type=AnalysisType.IMPLICIT,initial_timestep_size=0):
             self.imflag = analysis_type
             self.dt0 = initial_timestep_size
             self.stub = DynaBase.get_stub()
@@ -1748,8 +1761,12 @@ class DynaBase:
                 )
             )
             return ret
+        
+        class TimestepCtrol(Enum):
+            CONSTANT_TIMESTEP_SIZE = 0
+            AUTOMATICALLY_ADJUST_TIMESTEP_SIZE = 1
 
-        def automatic_timestep(self, control_flag=0,Optimum_equilibrium_iteration_count=11):
+        def timestep(self, control_flag=TimestepCtrol.CONSTANT_TIMESTEP_SIZE,Optimum_equilibrium_iteration_count=11):
             self.iato=control_flag
             self.iteopt = Optimum_equilibrium_iteration_count
             ret = self.stub.CreateControlImplicitAuto(
@@ -1759,8 +1776,12 @@ class DynaBase:
             )
             return ret
 
-        def activate_dynamic(self, analysis_type=0,gamma=0.5,beta=0.25):
-            self.imass = analysis_type
+        class Integration(Enum):
+            NEWMARK_TIME_INTEGRATION = 1
+            MODAL_SUPERPOSITION_FOLLOWING_EIGENVALUE = 2
+
+        def activate_dynamic(self, integration_method=Integration.NEWMARK_TIME_INTEGRATION,gamma=0.5,beta=0.25):
+            self.imass = integration_method.value
             self.gamma = gamma
             self.beta = beta
             ret = self.stub.CreateControlImplicitDynamic(
@@ -1963,4 +1984,33 @@ class DynaBase:
             )
             return ret
 
-    
+    class beamsection:
+        def __init__(self,element_formulation=1,
+            shear_factor=1,
+            cross_section=0,
+            thickness_n1=0,
+            thickness_n2=0):
+            stub = DynaBase.get_stub()
+            ret = stub.CreateSectionBeam(
+                SectionBeamRequest(
+                    elform=element_formulation,shrf=shear_factor,
+                    cst=cross_section,ts1=thickness_n1,ts2=thickness_n2
+                )
+            )
+            return ret
+
+    class shellsection:
+        def __init__(self,element_formulation=1,
+            shear_factor=1,
+            integration_points_num_through_thickness=2,
+            printout=0,
+            thickness1=0,thickness2=0,thickness3=0,thickness4=0):
+            stub = DynaBase.get_stub()
+            ret = stub.CreateSectionShell(
+                SectionShellRequest(
+                    elform=element_formulation,shrf=shear_factor,
+                    nip=integration_points_num_through_thickness,
+                    propt=printout,t1=thickness1,t2=thickness2,t3=thickness3,t4=thickness4,
+                )
+            )
+            return ret
