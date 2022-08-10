@@ -1823,23 +1823,6 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ALECreateStructuredMeshVolumeFillingReply(answer = 0)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     def CreateGeneralKWD(self,request,context): 
         opcode = request.opcode    
         keyworddata = request.keyworddata
