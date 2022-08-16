@@ -230,6 +230,15 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print('Control Bulk Viscosity Created...')
         return kwprocess_pb2.ControlBulkViscosityReply(answer = 0)
 
+    def CreateControlHourgalss(self,request,context):
+        ihq=request.ihq
+        qh=request.qh
+        card1=str(ihq)+","+str(qh)
+        newk='*CONTROL_HOURGLASS\n'+card1
+        self.kwdproc.newkeyword(newk)
+        print('Control Hourglass Created...')
+        return kwprocess_pb2.ControlHourglassReply(answer = 0)
+
     def CreateControlShell(self,request,context):
         wrpang = request.wrpang
         esort = request.esort
@@ -433,6 +442,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
 
     def CreateDefineCurve(self,request,context):
         lcid = request.lcid
+        lcid = self.kwdproc.get_data(gdt.KWD_DEFINE_BOX_LASTID)+1
         sfo = request.sfo
         abscissa = request.abscissa
         ordinate = request.ordinate
@@ -444,7 +454,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'DefineCurve '+str(lcid)+'Created...'
         print(msg)
-        return kwprocess_pb2.DefineCurveReply(answer = 0)   
+        return kwprocess_pb2.DefineCurveReply(id = lcid)   
 
     def CreateDefineVector(self,request,context):
         title = request.title
@@ -702,7 +712,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         cid = request.cid
         title = request.title
         option1 = request.option1
-        #option2 = request.option2
+        option2 = request.option2
         option3 = request.option3
         offset = request.offset
         ssid = request.ssid
@@ -760,8 +770,14 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
             newk = opcode+"\n"+card1+"\n"+card2+"\n"+card3+"\n"+card4+"\n"+carda
         if option1 == "AUTOMATIC_SINGLE_SURFACE_SMOOTH":
             newk = opcode+"\n"+card1+"\n"+card2+"\n"+card3+"\n"+carda+"\n"+cardb+"\n"+cardc
+        if option1 == "AUTOMATIC_SURFACE_TO_SURFACE":
+            if option2 == "MORTAR":
+                newk = "*CONTACT_"+option1+"_"+option2+"\n" +card1+"\n"+card2+"\n"+card3+"\n"+carda+"\n"+cardb+"\n"+cardc
         if option1 == "AUTOMATIC_SINGLE_SURFACE":
-            newk = opcode+"\n" + card1+"\n\n\n"+card4
+            if option2 == "MORTAR":
+                newk = "*CONTACT_"+option1+"_"+option2+"\n" +card1+"\n"+card2+"\n"+card3+"\n"+carda+"\n"+cardb+"\n"+cardc
+            else:
+                newk = opcode+"\n" + card1+"\n\n\n"+card4
         self.kwdproc.newkeyword(newk)
         print('Contact  Created...')
         return kwprocess_pb2.ContactReply(answer = 0)
@@ -835,7 +851,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.ConstrainedExtraNodesReply(answer = 0)  
 
     def CreateConstrainedNodalRigidBody(self,request,context):
-        pid = request.pid
+        pid = self.kwdproc.get_data(gdt.KWD_PART_LASTID)+1
         nsid = request.nsid
         card1 = str(pid) + ",0," + str(nsid) + ",0,0,0,0"
         opcode = "*CONSTRAINED_NODAL_RIGID_BODY"

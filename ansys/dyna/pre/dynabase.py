@@ -235,7 +235,7 @@ class DynaBase:
         return ret
 
     def set_hourglass(self, controltype=HourglassControl.STANDARD_VISCOSITY_FORM, coefficient=0.1):
-        ret = self.stub.CreateControlHourglass(
+        ret = self.stub.CreateControlHourgalss(
             ControlHourglassRequest(
                 ihq=controltype.value, qh=coefficient
             )
@@ -1605,6 +1605,51 @@ class DynaBase:
         msg = opcode + " Created..."
         logging.info("msg")
         return ret
+    
+    def set_output_database(self, matsum=0,glstat=0,elout=0,nodout=0,rbdout=0,rcforc=0,secforc=0):
+        """obtain output files containing results information.
+        Parameters
+        ----------
+        matsum : float
+            Time interval between outputs of part energies.
+        glstat : float      
+            Time interval between outputs of global statistics and energies.
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        if matsum>0:
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0,ioopt=0)
+            )
+        if glstat>0:
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0,ioopt=0)
+            )
+        if elout>0:
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="ELOUT", dt=glstat, binary=1, lcur=0,ioopt=0)
+            )
+        if nodout>0:
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="NODOUT", dt=glstat, binary=1, lcur=0,ioopt=0)
+            )
+        if rbdout>0:
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="RBDOUT", dt=glstat, binary=1, lcur=0,ioopt=0)
+            )
+        if rcforc>0:
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="RCFORC", dt=glstat, binary=1, lcur=0,ioopt=0)
+            )
+        if secforc>0:
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="SECFORC", dt=glstat, binary=1, lcur=0,ioopt=0)
+            )
+        ret = 1
+        logging.info("Output Setting...")
+        return ret
 
     def save_file(self):
         """Save keyword files.
@@ -1614,6 +1659,12 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
+        for obj in Contact.contactlist:
+            obj.create()
+        for obj in BeamPart.partlist:
+            obj.set_property()
+        for obj in ShellPart.partlist:
+            obj.set_property()
         ret = self.stub.SaveFile(SaveFileRequest(name=self.mainname))
         msg = self.mainname + " is outputed..."
         logging.info(msg)
@@ -1632,7 +1683,7 @@ class Box:
         ret = stub.CreateDefineBox(
         DefineBoxRequest(xmin=self.xmin, xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,zmin=self.zmin,zmax=self.zmax)
         )
-        self.boxid = ret.boxid
+        self.id = ret.boxid
         logging.info(f"Box {self.boxid} defined...")
 
 class Curve:
@@ -1643,7 +1694,7 @@ class Curve:
     
     def create(self,stub):
         ret = stub.CreateDefineCurve(
-        DefineCurveRequest(sfo=self.sfo, xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,zmin=self.zmin,zmax=self.zmax)
+        DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa,ordinate=self.ordinate)
         )
         self.id = ret.id
         logging.info(f"Curve {self.id} defined...")
@@ -1654,16 +1705,22 @@ class NodeSet:
         self.id = 0
 
     def create(self,stub):
+        if len(self.nodes)<=0:
+            return 0
         ret = stub.CreateNodeSet(
             NodeSetRequest(
                 option="LIST", sid=0, genoption="NODE", entities=self.nodes
             )
         )
         self.id = ret.id
+        if len(self.nodes)>1:
+            self.type = "NODESET"
+        else:
+            self.type = "NODE"
         return self.id
         
     def num(self):
-        return self.nodes.len()
+        return len(self.nodes)
     
     def id(self,pos):
         return self.nodes[pos]
@@ -1674,8 +1731,14 @@ class PartSet:
         self.id = 0
 
     def create(self,stub):
+        if len(self.parts)<=0:
+            return 0
         ret = stub.CreatePartSet(PartSetRequest(sid=0, pids=self.parts))
         self.id = ret.id
+        if len(self.parts)>1:
+            self.type = "PARTSET"
+        else:
+            self.type = "PART"
         return self.id
 
     def num(self):
@@ -1710,9 +1773,9 @@ class BoundaryCondition:
         death=1e20
         ):
         if birth==0 and death == 1e20:
-            birthdeath = "BIRTH_DEATH"
+            birthdeath = True
         else:
-            birthdeath=''
+            birthdeath=False
         if nodeset.num()==1:
             nid = nodeset.pos(pos=0)
             option1='NODE'
@@ -1739,8 +1802,8 @@ class BoundaryCondition:
         return ret
 
     def create_imposed_motion(self,partset,curve,motion=Motion.DISPLACEMENT,dof=DOF.X_TRANSLATIONAL,scalefactor=1):
-        partset.create()
-        curve.create()
+        partset.create(self.stub)
+        curve.create(self.stub)
         for id in partset.parts:
             ret = self.stub.CreateBdyPrescribedMotion(
                 BdyPrescribedMotionRequest(
@@ -1773,6 +1836,7 @@ class BeamSection:
                 cst=cross_section,ts1=thickness_n1,ts2=thickness_n2
             )
         )
+        self.id = ret.id
         return ret
 
 class ShellSection:
@@ -1789,11 +1853,13 @@ class ShellSection:
                 propt=printout,t1=thickness1,t2=thickness2,t3=thickness3,t4=thickness4,
             )
         )
+        self.id = ret.id
         return ret
 
 class Part:
-    def __init__(self,pid):
-        self.pid=pid
+    def __init__(self,id):
+        self.stub = DynaBase.get_stub()
+        self.id=id
         self.secid=0
         self.mid=0
         self.eosid=0
@@ -1801,18 +1867,24 @@ class Part:
         self.grav=0
         self.adpopt=0
         self.tmid=0
+        self.formulation = 0
 
     def set_material(self,mat):
-        self.mid = mat.id
+        mat.create(self.stub)
+        self.mid = mat.material_id
 
     def set_element_formulation(self,formulation):
         self.formulation = formulation
     
-    
+class BeamFormulation(Enum):
+    SPOTWELD = 9
+
 class BeamPart(Part):
+    partlist = []
     def __init__(self,pid):
         Part.__init__(self,pid)
         self.stub = DynaBase.get_stub()
+        BeamPart.partlist.append(self)
     
     def set_cross_type(self,cross):
         self.crosstype = cross
@@ -1821,7 +1893,7 @@ class BeamPart(Part):
         self.diameter=diameter
 
     def set_property(self):
-        sec=BeamSection(element_formulation=self.formation,
+        sec=BeamSection(element_formulation=self.formulation,
         cross_section=self.crosstype,
         thickness_n1=self.diameter,
         thickness_n2=self.diameter
@@ -1829,7 +1901,7 @@ class BeamPart(Part):
         self.secid = sec.id
         ret = self.stub.SetPartProperty(
             PartPropertyRequest(
-                pid=self.pid,
+                pid=self.id,
                 secid=self.secid,
                 mid=self.mid,
                 eosid=self.eosid,
@@ -1841,10 +1913,16 @@ class BeamPart(Part):
         )
         return ret
 
+class ShellFormulation(Enum):
+    FULLY_INTEGRATED = -16
+    BELYTSCHKO_TSAY = 2
+
 class ShellPart(Part):
+    partlist = []
     def __init__(self,pid):
         Part.__init__(self,pid)
         self.stub = DynaBase.get_stub()
+        ShellPart.partlist.append(self)
 
     def set_shear_factor(self,factor):
         self.shear_factor = factor
@@ -1859,7 +1937,7 @@ class ShellPart(Part):
         self.thickness = thickness
 
     def set_property(self):
-        sec=ShellSection(element_formulation=self.formation,
+        sec=ShellSection(element_formulation=self.formulation,
         shear_factor=self.shear_factor,
         integration_points=self.intpoints,
         printout=self.print,
@@ -1892,6 +1970,10 @@ class TimestepCtrol(Enum):
     CONSTANT_TIMESTEP_SIZE = 0
     AUTOMATICALLY_ADJUST_TIMESTEP_SIZE = 1
 
+class Integration(Enum):
+    NEWMARK_TIME_INTEGRATION = 1
+    MODAL_SUPERPOSITION_FOLLOWING_EIGENVALUE = 2
+
 class ImplicitAnalysis():
     def __init__(self,analysis_type=AnalysisType.IMPLICIT,initial_timestep_size=0):
         self.imflag = analysis_type.value
@@ -1902,10 +1984,9 @@ class ImplicitAnalysis():
                 imflag=self.imflag,dt0=self.dt0
             )
         )
-        return ret
     
     def set_timestep(self, control_flag=TimestepCtrol.CONSTANT_TIMESTEP_SIZE,Optimum_equilibrium_iteration_count=11):
-        self.iato=control_flag
+        self.iauto=control_flag.value
         self.iteopt = Optimum_equilibrium_iteration_count
         ret = self.stub.CreateControlImplicitAuto(
             ControlImplicitAutoRequest(
@@ -1914,45 +1995,41 @@ class ImplicitAnalysis():
         )
         return ret
 
-class Integration(Enum):
-    NEWMARK_TIME_INTEGRATION = 1
-    MODAL_SUPERPOSITION_FOLLOWING_EIGENVALUE = 2
-
-def activate_dynamic(self, integration_method=Integration.NEWMARK_TIME_INTEGRATION,gamma=0.5,beta=0.25):
-    self.imass = integration_method.value
-    self.gamma = gamma
-    self.beta = beta
-    ret = self.stub.CreateControlImplicitDynamic(
-        ControlImplicitDynamicRequest(
-            imass=self.imass,gamma=self.gamma,beta=self.beta
+    def set_dynamic(self, integration_method=Integration.NEWMARK_TIME_INTEGRATION,gamma=0.5,beta=0.25):
+        self.imass = integration_method.value
+        self.gamma = gamma
+        self.beta = beta
+        ret = self.stub.CreateControlImplicitDynamic(
+            ControlImplicitDynamicRequest(
+                imass=self.imass,gamma=self.gamma,beta=self.beta
+            )
         )
-    )
-    return ret
+        return ret
 
-def activate_eigenvalue(self,number_eigenvalues=0,shift_scale=0):
-    self.neig = number_eigenvalues
-    self.shfscl= shift_scale
-    ret = self.stub.CreateControlImplicitEigenvalue(
-        ControlImplicitEigenvalueRequest(
-            neig=self.neig,shfscl=self.shfscl
+    def set_eigenvalue(self,number_eigenvalues=0,shift_scale=0):
+        self.neig = number_eigenvalues
+        self.shfscl= shift_scale
+        ret = self.stub.CreateControlImplicitEigenvalue(
+            ControlImplicitEigenvalueRequest(
+                neig=self.neig,shfscl=self.shfscl
+            )
         )
-    )
-    return ret
+        return ret
 
-def set_solution(self,solution_method=12,
-    iteration_limit=11,
-    stiffness_reformation_limit=15,
-    absolute_convergence_tolerance=1e-10):
-    self.nsolver=solution_method
-    self.ilimit=iteration_limit
-    self.maxref=stiffness_reformation_limit
-    self.abstol=absolute_convergence_tolerance
-    ret = self.stub.CreateControlImplicitSolution(
-        ControlImplicitSolutionRequest(
-            nsolver=self.nsolver,ilimit=self.ilimit,maxref=self.maxref,abstol=self.abstol
+    def set_solution(self,solution_method=12,
+        iteration_limit=11,
+        stiffness_reformation_limit=15,
+        absolute_convergence_tolerance=1e-10):
+        self.nsolver=solution_method
+        self.ilimit=iteration_limit
+        self.maxref=stiffness_reformation_limit
+        self.abstol=absolute_convergence_tolerance
+        ret = self.stub.CreateControlImplicitSolution(
+            ControlImplicitSolutionRequest(
+                nsolver=self.nsolver,ilimit=self.ilimit,maxref=self.maxref,abstol=self.abstol
+            )
         )
-    )
-    return ret
+        return ret
 
 
 class ContactCategory(Enum):
@@ -1980,19 +2057,29 @@ class OffsetType(Enum):
 
 class ContactSurface:
     def __init__(self,set):
-        self.type = set.type
-        self.id = set.id
+        self.stub = DynaBase.get_stub()
+        self.id = set.create(self.stub)
         self.thickness = 0
+        if set.type.upper() == "PART":
+            self.type = 3
+        elif set.type.upper() == "PARTSET":
+            self.type = 2
+        elif set.type.upper() == "NODESET" or set.type.upper() == "NODE":
+            self.type = 4
+        else:
+            self.type = 0
 
-    def contact_region(self,box):
+    def set_contact_region(self,box):
         self.id = box.id
         return self.id
 
-    def contact_thickness(self,thickness):
+    def set_contact_thickness(self,thickness):
         self.thickness = thickness
 
 class Contact:
+    contactlist = []
     def __init__(self,type=ContactType.AUTOMATIC,category=ContactCategory.SINGLE_SURFACE_CONTACT):
+        self.stub = DynaBase.get_stub()
         self.rigidwall_penalties_scale_factor= 1
         self.max_penetration_check_multiplier = 4
         self.initial_penetrations = 0
@@ -2000,38 +2087,43 @@ class Contact:
         self.category = category
         self.type = type
         self.mortar = False
-        self.offset = 0
+        self.ignore = 0
+        self.offset = ""
+        self.static_friction_coeff=0
+        self.dynamic_friction_coeff=0
+        Contact.contactlist.append(self)
         
     def set_mortar(self):
         self.mortar=True
 
-    def define_algorithm(self,algorithm=ContactAlgorithm.PENALTY_BASED):
-        self.algorithm = algorithm
+    def set_algorithm(self,algorithm=ContactAlgorithm.PENALTY_BASED):
+        self.algorithm = algorithm.value
 
-    def friction_coefficient(self,static=0,dynamic=0):
+    def set_friction_coefficient(self,static=0,dynamic=0):
         self.static_friction_coeff = static
         self.dynamic_friction_coeff = dynamic
     
-    def allow_initial_penetration(self):
+    def set_initial_penetration(self):
         self.ignore=1
 
-    def set_slavesurface(self,surface):
+    def set_slave_surface(self,surface):
         self.slavesurface = surface
 
-    def set_mastersurface(self,surface):
+    def set_master_surface(self,surface):
         self.mastersurface = surface
 
     def create(self):
-        opcode = "CONTACT_"
+        opcode = ""
         if self.type==ContactType.AUTOMATIC:
             opcode += "AUTOMATIC"
         elif self.type == ContactType.TIED:
             opcode += "TIED"
         else:
             opcode+=""
-        msid=self.mastersurface.id
-        mstyp=self.mastersurface.type
-        mst=self.mastersurface.thickness
+        if self.category != ContactCategory.SINGLE_SURFACE_CONTACT:
+            msid=self.mastersurface.id
+            mstyp=self.mastersurface.type
+            mst=self.mastersurface.thickness
         if self.category == ContactCategory.SURFACE_TO_SURFACE_CONTACT:
             opcode += "_SURFACE_TO_SURFACE"
         elif self.category == ContactCategory.SINGLE_SURFACE_CONTACT:
@@ -2054,53 +2146,53 @@ class Contact:
             opcode += ""
         
         if self.mortar == True:
-            opcode += "_MORTAR"
+            option2 = "MORTAR"
         else:
-            opcode += ""
-
+            option2 = ""
         ret = self.stub.CreateContact(
             ContactRequest(
-                cid=0,
-                title="",
-                option1=opcode,
-                option3="",
-                offset=self.offset,
-                ssid=self.slavesurface.id,
-                msid=msid,
-                sstyp=self.slavesurface.type,
-                mstyp=mstyp,
-                sapr=0,
-                sbpr=0,
-                fs=self.static_friction_coeff,
-                fd=self.dynamic_friction_coeff,
-                vdc=0,
-                penchk=0,
-                birthtime=0,
-                sfsa=1,
-                sfsb=1,
-                sst=self.slavesurface.thickness,
-                mst=mst,
-                optionres=0,
-                nfls=0,
-                sfls=0,
-                param=0,
-                ct2cn=1,
-                soft=0,
-                sofscl=0.1,
-                lcidab=0,
-                maxpar=1.025,
-                sbopt=2,
-                depth=2,
-                bsort=100,
-                frcfrq=1,
-                igap=1,
-                ignore = self.allow_initial_penetration
+            cid=0,
+            title="",
+            option1=opcode,
+            option2=option2,
+            option3=False,
+            offset=self.offset,
+            ssid=self.slavesurface.id,
+            msid=msid,
+            sstyp=self.slavesurface.type,
+            mstyp=mstyp,
+            sapr=0,
+            sbpr=0,
+            fs=self.static_friction_coeff,
+            fd=self.dynamic_friction_coeff,
+            vdc=0,
+            penchk=0,
+            birthtime=0,
+            sfsa=1,
+            sfsb=1,
+            sst=self.slavesurface.thickness,
+            mst=mst,
+            optionres=0,
+            nfls=0,
+            sfls=0,
+            param=0,
+            ct2cn=1,
+            soft=0,
+            sofscl=0.1,
+            lcidab=0,
+            maxpar=1.025,
+            sbopt=2,
+            depth=2,
+            bsort=100,
+            frcfrq=1,
+            ignore = self.ignore,
+            igap=1  
             )
         )
         logging.info("Contact  Created...")
         return ret
 
-class Constrain:
+class Constraint:
     def __init__(self):
         self.stub = DynaBase.get_stub()
 
@@ -2113,15 +2205,13 @@ class Constrain:
         logging.info("Spotweld Created...")
         return ret
 
-    def create_cnrb(self,pid,nodeset):
-        nodeset.create()
+    def create_cnrb(self,nodeset):
+        nodeset.create(self.stub)
         nsid = nodeset.id
         ret = self.stub.CreateConstrainedNodalRigidBody(
             ConstrainedNodalRigidBodyRequest(
-                pid=pid,nsid=nsid
+                nsid=nsid
             )
         )
         logging.info("CNRB Created...")
         return ret
-
-    

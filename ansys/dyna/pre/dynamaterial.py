@@ -248,22 +248,22 @@ class MatModifiedPiecewiseLinearPlasticity():
         self.name = "Modified Piecewise Linear Plasticity"
         logging.info(f"Material {self.name} Created...")
 
-    class MatSpotweld():
-        def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
-        yield_stress=0,
-        plastic_hardening_modulus=0):  
-            self.ro = mass_density
-            self.e = young_modulus
-            self.pr=poisson_ratio
-            self.sigy = yield_stress
-            self.eh = plastic_hardening_modulus
+class MatSpotweld():
+    def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
+    yield_stress=0,
+    plastic_hardening_modulus=0):  
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr=poisson_ratio
+        self.sigy = yield_stress
+        self.eh = plastic_hardening_modulus
 
-        def create(self,stub):
-            ret = stub.CreateMatSpotweld(
-                MatSpotweldRequest(ro=self.ro,e=self.e,pr=self.pr,sigy=self.sigy,eh=self.eh)
-            )
-            self.material_id=ret.mid
-            self.name = "Spotweld"
-            logging.info(f"Material {self.name} Created...")
+    def create(self,stub):
+        ret = stub.CreateMatSpotweld(
+            MatSpotweldRequest(ro=self.ro,e=self.e,pr=self.pr,sigy=self.sigy,eh=self.eh)
+        )
+        self.material_id=ret.mid
+        self.name = "Spotweld"
+        logging.info(f"Material {self.name} Created...")
 
     
