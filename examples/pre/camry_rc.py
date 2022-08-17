@@ -43,9 +43,20 @@ if __name__ == "__main__":
     matplaten = MatRigid(mass_density=7.80e-09,young_modulus=2.00e+05,poisson_ratio=0.3,center_of_mass_constraint=1,rotational_constraint=7)
     spotweldharden2100 = MatSpotweld(mass_density=7.850e-09,young_modulus=2.100e+05,poisson_ratio=0.3,yield_stress=510,plastic_hardening_modulus=2100)
     spotweldharden2200 = MatSpotweld(mass_density=7.850e-09,young_modulus=2.100e+05,poisson_ratio=0.3,yield_stress=510,plastic_hardening_modulus=2200)
-    plastic = MatPiecewiseLinearPlasticity(mass_density=7.890e-09,young_modulus=2.100e+05,poisson_ratio=0.3,yield_stress=300,tangent_modulus=5000)
     windowshield = MatModifiedPiecewiseLinearPlasticity(mass_density=2.355e-09,young_modulus=7.000e+04,poisson_ratio=0.22,yield_stress=30,tangent_modulus=1400,plastic_strain_to_failure=0.015,integration_points_number=1)
     windowsrear = MatModifiedPiecewiseLinearPlasticity(mass_density=2.425e-09,young_modulus=7.000e+04,poisson_ratio=0.22,yield_stress=30,tangent_modulus=1400,plastic_strain_to_failure=0.015,integration_points_number=1)
+    plastic300 = MatPiecewiseLinearPlasticity(mass_density=7.890e-09,young_modulus=210000,yield_stress=300,tangent_modulus=5000)
+    plastic250 = MatPiecewiseLinearPlasticity(mass_density=7.890e-09,young_modulus=210000,yield_stress=250,tangent_modulus=5000)
+    plastic360 = MatPiecewiseLinearPlasticity(mass_density=7.890e-09,young_modulus=210000,yield_stress=360,tangent_modulus=5000)
+    plastic180 = MatPiecewiseLinearPlasticity(mass_density=7.850e-09,young_modulus=210000,yield_stress=180,tangent_modulus=5000)
+    plastic450 = MatPiecewiseLinearPlasticity(mass_density=7.850e-09,young_modulus=210000,yield_stress=450,tangent_modulus=5000)
+    plastic1300 = MatPiecewiseLinearPlasticity(mass_density=7.850e-09,young_modulus=210000,yield_stress=1300,tangent_modulus=5000)
+    plastic400 = MatPiecewiseLinearPlasticity(mass_density=7.890e-09,young_modulus=210000,yield_stress=400,tangent_modulus=5000)
+    plastic500 = MatPiecewiseLinearPlasticity(mass_density=7.890e-09,young_modulus=210000,yield_stress=500,tangent_modulus=5000)
+    plastic675 = MatPiecewiseLinearPlasticity(mass_density=7.850e-09,young_modulus=210000,yield_stress=675,tangent_modulus=5000)
+    plastic310 = MatPiecewiseLinearPlasticity(mass_density=2.255e-09,young_modulus=70000,yield_stress=310,tangent_modulus=5000)
+    plastic220 = MatPiecewiseLinearPlasticity(mass_density=7.890e-09,young_modulus=210000,yield_stress=220,tangent_modulus=5000)
+    plastic220_410 = MatPiecewiseLinearPlasticity(mass_density=7.890e-09,young_modulus=210000,yield_stress=220,tangent_modulus=410)
     
     #set model
     for bpart in beamparts:
@@ -69,8 +80,32 @@ if __name__ == "__main__":
             part.set_material(windowshield)
         elif part.id in [291]:
             part.set_material(windowsrear)
+        elif part.id in partswithmat300:
+            part.set_material(plastic300)
+        elif part.id in partswithmat250:
+            part.set_material(plastic250)
+        elif part.id in partswithmat360:
+            part.set_material(plastic360)
+        elif part.id in partswithmat180:
+            part.set_material(plastic180)
+        elif part.id in partswithmat450:
+            part.set_material(plastic450)
+        elif part.id in partswithmat400:
+            part.set_material(plastic400)
+        elif part.id in partswithmat500:
+            part.set_material(plastic500)
+        elif part.id in [335]:
+            part.set_material(plastic1300)
+        elif part.id in [564]:
+            part.set_material(plastic675)
+        elif part.id in [5000000]:
+            part.set_material(plastic310)
+        elif part.id in [5000006]:
+            part.set_material(plastic220)
+        elif part.id in [5000007]:
+            part.set_material(plastic220_410)
         else:
-            part.set_material(plastic)
+            pass
         part.set_element_formulation(spart[1])
         part.set_thickness(spart[2])
     
