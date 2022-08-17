@@ -175,6 +175,7 @@ class Vacuum():
         logging.info(f"Material {self.name} Created...")
 
 class MatNull():
+    """The Young's modulus and Poisson's ratio are used only for setting the contact stiffness"""
     def __init__(self,mass_density=0,pressure_cutoff=0):  
         self.ro = mass_density
         self.pc = pressure_cutoff
@@ -189,6 +190,7 @@ class MatNull():
 
    
 class MatRigid():
+    """Parts made from this material are considered to belong to a rigid body"""
     def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
     center_of_mass_constraint=0,
     translational_constraint=0,
@@ -209,7 +211,8 @@ class MatRigid():
         logging.info(f"Material {self.name} Created...")
 
 class MatPiecewiseLinearPlasticity():
-    def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
+    """It is an elasto-plastic material with an arbitrary stress as a function of strain curve that can also have an arbitrary strain rate dependency"""
+    def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0.3,
     yield_stress=0,
     tangent_modulus=0):  
         self.ro = mass_density
@@ -227,6 +230,7 @@ class MatPiecewiseLinearPlasticity():
         logging.info(f"Material {self.name} Created...")
 
 class MatModifiedPiecewiseLinearPlasticity():
+    """which is an elasto-plastic material supporting an arbitrary stress as a function of strain curve as well as arbitrary strain rate dependency."""
     def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
     yield_stress=0,
     tangent_modulus=0,
@@ -249,6 +253,7 @@ class MatModifiedPiecewiseLinearPlasticity():
         logging.info(f"Material {self.name} Created...")
 
 class MatSpotweld():
+    """Define material for spotweld"""
     def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
     yield_stress=0,
     plastic_hardening_modulus=0):  

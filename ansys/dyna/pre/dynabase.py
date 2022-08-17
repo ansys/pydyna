@@ -147,10 +147,12 @@ class DynaBase:
         return ret
 
     def set_termination(self, termination_time):
-        """Create *CONTROL_TERMINATION keyword
+        """
+        Setting termination time to stop the job.
+        Refer to: *CONTROL_TERMINATION keyword
         Parameters
         ----------
-        endtim : float
+        termination_time : float
             Termination time.
 
         Returns
@@ -159,7 +161,7 @@ class DynaBase:
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateTermination(TerminationRequest(endtim=termination_time))
-        logging.info("Termination Created...")
+        logging.info("Setting termination time ...")
         return ret
 
     def set_accuracy(self, objective_stress_updates=Switch.OFF, 
@@ -171,15 +173,15 @@ class DynaBase:
         Refer to: *CONTROL_ACCURACY
         Parameters
         ----------
-        osu : int
+        objective_stress_updates : int
             Global flag for 2nd order objective stress updates.
-        inn : int
+        invariant_node_number : int
             Invariant node numbering for shell and solid elements.
-        pidosu : int
+        partsetid_for_objective_stress_updates : int
             Part set ID for objective stress updates.
-        iacc : int
+        implicit_accuracy_flag : int
             Implicit accuracy flag.
-        exacc : float
+        explicit_accuracy_flag : float
              Explicit accuracy parameter.EQ.0.0: Off,GT.0.0: On
         Returns
         -------
@@ -207,15 +209,15 @@ class DynaBase:
         Refer to: *CONTROL_ENERGY
         Parameters
         ----------
-        hgen : int
+        hourglass_energy : enum
             Hourglass energy calculation option.
-        rwen : int
+        rigidwall_energy : int
             Rigidwall energy dissipation option.EQ.1: Energy dissipation is not computed,EQ.2: Energy dissipation is computed
-        slnten : int
+        sliding_interface_energy : int
             Sliding interface energy dissipation option.EQ.1: Energy dissipation is not computed,EQ.2: Energy dissipation is computed
-        rylen : int
+        rayleigh_energy : int
             Rayleigh energy dissipation option.EQ.1: Energy dissipation is not computed,EQ.2: Energy dissipation is computed
-        irgen : int
+        initial_reference_geometry_energy : int
              Initial reference geometry energy option.EQ.1: Initial reference geometry energy is not computed,EQ.2: Initial reference geometry energy is computed
         Returns
         -------
@@ -235,6 +237,20 @@ class DynaBase:
         return ret
 
     def set_hourglass(self, controltype=HourglassControl.STANDARD_VISCOSITY_FORM, coefficient=0.1):
+        """Redefine the default values of hourglass control type and coefficient.
+        Refer to: *CONTROL_HOURGLASS
+        Parameters
+        ----------
+        controltype : enum
+            Default hourglass control type.
+        coefficient : float
+            Default hourglass coefficient.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
         ret = self.stub.CreateControlHourgalss(
             ControlHourglassRequest(
                 ihq=controltype.value, qh=coefficient
@@ -244,6 +260,22 @@ class DynaBase:
         return ret
 
     def set_bulk_viscosity(self, quadratic_viscosity_coeff=1.5, linear_viscosity_coeff=0.06,bulk_viscosity_type=BulkViscosity.STANDARD_BULK_VISCOSITY):
+        """Reset the default values of the bulk viscosity coefficients globally.
+        Refer to: *CONTROL_BULK_VISCOSITY
+        Parameters
+        ----------
+        quadratic_viscosity_coeff : float
+            Default quadratic viscosity coefficient.
+        linear_viscosity_coeff : float
+            Default linear viscosity coefficient.
+        bulk_viscosity_type : enum
+            Default bulk viscosity type.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
         ret = self.stub.CreateControlBulkViscosity(
             ControlBulkViscosityRequest(
                 q1=quadratic_viscosity_coeff, q2=linear_viscosity_coeff,type=bulk_viscosity_type.value
@@ -1671,6 +1703,7 @@ class DynaBase:
         return ret
 #-------------------------------------------------------------------------------------------------
 class Box:
+    """Define a box-shaped volume."""
     def __init__(self,xmin=0,xmax=0,ymin=0,ymax=0,zmin=0,zmax=0):
         self.xmin=xmin
         self.xmax=xmax
@@ -1687,6 +1720,7 @@ class Box:
         logging.info(f"Box {self.boxid} defined...")
 
 class Curve:
+    """Define a curve [for example, load (ordinate value)] as a function of time"""
     def __init__(self,sfo=1,abscissa=[],ordinate=[]):
         self.sfo=sfo
         self.abscissa = abscissa
@@ -1700,6 +1734,7 @@ class Curve:
         logging.info(f"Curve {self.id} defined...")
 
 class NodeSet:
+    """Define a nodal set with some identical or unique attributes."""
     def __init__(self,nodes=[]):
         self.nodes = nodes
         self.id = 0
@@ -1726,6 +1761,7 @@ class NodeSet:
         return self.nodes[pos]
 
 class PartSet:
+    """Define a set of parts with optional attributes."""
     def __init__(self,parts=[]):
         self.parts=parts
         self.id = 0
@@ -1758,6 +1794,7 @@ class DOF(Enum):
     Z_TRANSLATIONAL = 3
 
 class BoundaryCondition:
+    """ provides a way of defining imposed motions on boundary nodes"""
     def __init__(self):
         self.stub = DynaBase.get_stub()
 
@@ -1772,6 +1809,18 @@ class BoundaryCondition:
         birth=0,
         death=1e20
         ):
+        """Define nodal single point constraints.
+        
+        Parameters
+        ----------
+        nodeset : NodeSet.
+            nodal set.
+        contraint_x/y/z_direction : int      
+            translational constraint in local x/y/z-direction.
+        contraint_x/y/zaxis_rotate : int
+            rotational constraint about local x/y/z-axis.
+        
+        """
         if birth==0 and death == 1e20:
             birthdeath = True
         else:
@@ -1802,6 +1851,22 @@ class BoundaryCondition:
         return ret
 
     def create_imposed_motion(self,partset,curve,motion=Motion.DISPLACEMENT,dof=DOF.X_TRANSLATIONAL,scalefactor=1):
+        """Define an imposed nodal motion (velocity, acceleration, or displacement) on a node or a set of nodes.
+        
+        Parameters
+        ----------
+        partset : PartSet.
+            part set.
+        curve : Curve      
+            Curve ID or function ID to describe motion value as a function of time.
+        motion : enum
+            Velocity/Acceleration/Displacement flag.
+        dof : enum
+            Applicable degrees-of-freedom.
+        scalefactor : float
+            Load curve scale factor.
+
+        """
         partset.create(self.stub)
         curve.create(self.stub)
         for id in partset.parts:
@@ -1823,8 +1888,15 @@ class BoundaryCondition:
         logging.info("Boundary prescribed motion Created...")
         return ret
 
+class BeamFormulation(Enum):
+    SPOTWELD = 9
+
+class ShellFormulation(Enum):
+    FULLY_INTEGRATED = -16
+    BELYTSCHKO_TSAY = 2
+    
 class BeamSection:
-    def __init__(self,element_formulation=1,
+    def __init__(self,element_formulation=BeamFormulation.SPOTWELD,
         shear_factor=1,
         cross_section=0,
         thickness_n1=0,
@@ -1832,29 +1904,27 @@ class BeamSection:
         stub = DynaBase.get_stub()
         ret = stub.CreateSectionBeam(
             SectionBeamRequest(
-                elform=element_formulation,shrf=shear_factor,
+                elform=element_formulation.value,shrf=shear_factor,
                 cst=cross_section,ts1=thickness_n1,ts2=thickness_n2
             )
         )
         self.id = ret.id
-        return ret
 
 class ShellSection:
-    def __init__(self,element_formulation=1,
+    def __init__(self,element_formulation=ShellFormulation.FULLY_INTEGRATED,
         shear_factor=1,
-        integration_points_num_through_thickness=2,
+        integration_points=2,
         printout=0,
         thickness1=0,thickness2=0,thickness3=0,thickness4=0):
         stub = DynaBase.get_stub()
         ret = stub.CreateSectionShell(
             SectionShellRequest(
-                elform=element_formulation,shrf=shear_factor,
+                elform=element_formulation.value,shrf=shear_factor,
                 nip=integration_points,
                 propt=printout,t1=thickness1,t2=thickness2,t3=thickness3,t4=thickness4,
             )
         )
         self.id = ret.id
-        return ret
 
 class Part:
     def __init__(self,id):
@@ -1870,21 +1940,22 @@ class Part:
         self.formulation = 0
 
     def set_material(self,mat):
+        """Set material"""
         mat.create(self.stub)
         self.mid = mat.material_id
 
     def set_element_formulation(self,formulation):
+        """Element formulation options."""
         self.formulation = formulation
-    
-class BeamFormulation(Enum):
-    SPOTWELD = 9
 
 class BeamPart(Part):
+    """ Define parts, that is, combine material information, section properties, hourglass type, thermal properties, and a flag for part adaptivity."""
     partlist = []
     def __init__(self,pid):
         Part.__init__(self,pid)
         self.stub = DynaBase.get_stub()
         BeamPart.partlist.append(self)
+        self.crosstype = 1
     
     def set_cross_type(self,cross):
         self.crosstype = cross
@@ -1899,7 +1970,7 @@ class BeamPart(Part):
         thickness_n2=self.diameter
         )
         self.secid = sec.id
-        ret = self.stub.SetPartProperty(
+        self.stub.SetPartProperty(
             PartPropertyRequest(
                 pid=self.id,
                 secid=self.secid,
@@ -1911,29 +1982,33 @@ class BeamPart(Part):
                 tmid=self.tmid,
             )
         )
-        return ret
-
-class ShellFormulation(Enum):
-    FULLY_INTEGRATED = -16
-    BELYTSCHKO_TSAY = 2
 
 class ShellPart(Part):
+    """ Define parts, that is, combine material information, section properties, hourglass type, thermal properties, and a flag for part adaptivity."""
     partlist = []
     def __init__(self,pid):
         Part.__init__(self,pid)
         self.stub = DynaBase.get_stub()
         ShellPart.partlist.append(self)
+        self.shear_factor = 1
+        self.intpoints = 5
+        self.print = 0
+        self.thickness = 1
 
     def set_shear_factor(self,factor):
+        """Shear correction factor which scales the transverse shear stress."""
         self.shear_factor = factor
     
-    def set_integration_points(self,points):
+    def set_integration_points(self,points=5):
+        """Number of through thickness integration points."""
         self.intpoints = points
 
     def set_printout(self,print):
+        """Printout option."""
         self.print = print
 
     def set_thickness(self,thickness):
+        """Shell thickness."""
         self.thickness = thickness
 
     def set_property(self):
@@ -1947,9 +2022,9 @@ class ShellPart(Part):
         thickness4 = self.thickness,
         )
         self.secid = sec.id
-        ret = self.stub.SetPartProperty(
+        self.stub.SetPartProperty(
             PartPropertyRequest(
-                pid=self.pid,
+                pid=self.id, 
                 secid=self.secid,
                 mid=self.mid,
                 eosid=self.eosid,
@@ -1959,7 +2034,6 @@ class ShellPart(Part):
                 tmid=self.tmid,
             )
         )
-        return ret 
 
 class AnalysisType(Enum):
     EXPLICIT = 0
@@ -1975,6 +2049,7 @@ class Integration(Enum):
     MODAL_SUPERPOSITION_FOLLOWING_EIGENVALUE = 2
 
 class ImplicitAnalysis():
+    """Activate implicit analysis and define associated control parameters."""
     def __init__(self,analysis_type=AnalysisType.IMPLICIT,initial_timestep_size=0):
         self.imflag = analysis_type.value
         self.dt0 = initial_timestep_size
@@ -1986,6 +2061,19 @@ class ImplicitAnalysis():
         )
     
     def set_timestep(self, control_flag=TimestepCtrol.CONSTANT_TIMESTEP_SIZE,Optimum_equilibrium_iteration_count=11):
+        """Define parameters for automatic time step control during implicit analysis
+
+        Parameters
+        ----------
+        control_flag : int
+            Automatic time step control flag.
+        Optimum_equilibrium_iteration_count : int      
+            Optimum equilibrium iteration count per time step.
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
         self.iauto=control_flag.value
         self.iteopt = Optimum_equilibrium_iteration_count
         ret = self.stub.CreateControlImplicitAuto(
@@ -1996,6 +2084,21 @@ class ImplicitAnalysis():
         return ret
 
     def set_dynamic(self, integration_method=Integration.NEWMARK_TIME_INTEGRATION,gamma=0.5,beta=0.25):
+        """Activate implicit dynamic analysis and define time integration constants
+
+        Parameters
+        ----------
+        integration_method : enum
+            Implicit analysis type.
+        gamma : float      
+            Newmark time integration constant.
+        beta : float      
+            Newmark time integration constant.
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
         self.imass = integration_method.value
         self.gamma = gamma
         self.beta = beta
@@ -2007,6 +2110,20 @@ class ImplicitAnalysis():
         return ret
 
     def set_eigenvalue(self,number_eigenvalues=0,shift_scale=0):
+        """Activates implicit eigenvalue analysis and defines associated input parameters
+
+        Parameters
+        ----------
+        number_eigenvalues : int
+            Number of eigenvalues to extract.
+        shift_scale : float      
+            Shift scale.
+       
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
         self.neig = number_eigenvalues
         self.shfscl= shift_scale
         ret = self.stub.CreateControlImplicitEigenvalue(
@@ -2020,6 +2137,24 @@ class ImplicitAnalysis():
         iteration_limit=11,
         stiffness_reformation_limit=15,
         absolute_convergence_tolerance=1e-10):
+        """specify whether a linear or nonlinear solution is desired.
+
+        Parameters
+        ----------
+        solution_method : int
+            Solution method for implicit analysis.
+        iteration_limit : int      
+            Iteration limit between automatic stiffness reformations.
+        stiffness_reformation_limit : int
+            Stiffness reformation limit per time step.
+        absolute_convergence_tolerance : float
+            Absolute convergence tolerance.
+       
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
         self.nsolver=solution_method
         self.ilimit=iteration_limit
         self.maxref=stiffness_reformation_limit
@@ -2056,6 +2191,7 @@ class OffsetType(Enum):
     CONSTRAINED_OFFSET=3
 
 class ContactSurface:
+    """Define contact interface"""
     def __init__(self,set):
         self.stub = DynaBase.get_stub()
         self.id = set.create(self.stub)
@@ -2070,13 +2206,28 @@ class ContactSurface:
             self.type = 0
 
     def set_contact_region(self,box):
+        """Include in contact definition only those SURFA nodes/segments within box
+        
+        Parameters
+        ----------
+        box : Box
+            Define a box-shaped volume.
+        """
         self.id = box.id
         return self.id
 
     def set_contact_thickness(self,thickness):
+        """ contact thickness for SURFA surface
+        
+         Parameters
+        ----------
+        thickness : float
+            Contact thickness.
+        """
         self.thickness = thickness
 
 class Contact:
+    """Provides a way of treating interaction between disjoint parts"""
     contactlist = []
     def __init__(self,type=ContactType.AUTOMATIC,category=ContactCategory.SINGLE_SURFACE_CONTACT):
         self.stub = DynaBase.get_stub()
@@ -2094,22 +2245,35 @@ class Contact:
         Contact.contactlist.append(self)
         
     def set_mortar(self):
+        """The mortar contact,is a segment to segment penalty based contact."""
         self.mortar=True
 
     def set_algorithm(self,algorithm=ContactAlgorithm.PENALTY_BASED):
         self.algorithm = algorithm.value
 
     def set_friction_coefficient(self,static=0,dynamic=0):
+        """Define the coefficient of friction.
+
+        Parameters
+        ----------
+        static : float
+            Static coefficient of friction.
+        dynamic : float      
+            Dynamic coefficient of friction.
+        """
         self.static_friction_coeff = static
         self.dynamic_friction_coeff = dynamic
     
     def set_initial_penetration(self):
+        """Ignore initial penetrations"""
         self.ignore=1
 
     def set_slave_surface(self,surface):
+        """specifying the slave contact interface"""
         self.slavesurface = surface
 
     def set_master_surface(self,surface):
+        """specifying the master contact interface"""
         self.mastersurface = surface
 
     def create(self):
@@ -2193,10 +2357,24 @@ class Contact:
         return ret
 
 class Constraint:
+    """provides a way of constraining degrees of freedom to move together in some way."""
     def __init__(self):
         self.stub = DynaBase.get_stub()
 
     def create_spotweld(self,nodeid1,nodeid2):
+        """Define massless spot welds between non-contiguous nodal pairs.
+        Parameters
+        ----------
+        nodeid1 : int
+            Node ID.
+        nodeid2 : int      
+            Node ID.
+       
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
         ret = self.stub.CreateConstrainedSpotWeld(
             ConstrainedSpotWeldRequest(
                 node1=nodeid1,node2=nodeid2
@@ -2206,6 +2384,18 @@ class Constraint:
         return ret
 
     def create_cnrb(self,nodeset):
+        """Define a nodal rigid body which is a rigid body that consists of defined nodes.
+        
+        Parameters
+        ----------
+        nodeset : NodeSet
+            This nodal set defines the rigid body.
+       
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
         nodeset.create(self.stub)
         nsid = nodeset.id
         ret = self.stub.CreateConstrainedNodalRigidBody(
