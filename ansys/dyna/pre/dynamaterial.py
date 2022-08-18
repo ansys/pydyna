@@ -173,3 +173,102 @@ class Vacuum():
         self.eos_id = 0
         self.name = "vacuum"
         logging.info(f"Material {self.name} Created...")
+
+class MatNull():
+    """The Young's modulus and Poisson's ratio are used only for setting the contact stiffness"""
+    def __init__(self,mass_density=0,pressure_cutoff=0):  
+        self.ro = mass_density
+        self.pc = pressure_cutoff
+
+    def create(self,stub):
+        ret = stub.CreateMatNull(
+            MatNullRequest(ro=self.ro,pc=self.pc)
+        )
+        self.material_id=ret.mid
+        self.name = "NULL"
+        logging.info(f"Material {self.name} Created...")
+
+   
+class MatRigid():
+    """Parts made from this material are considered to belong to a rigid body"""
+    def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
+    center_of_mass_constraint=0,
+    translational_constraint=0,
+    rotational_constraint=0):  
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr=poisson_ratio
+        self.cmo = center_of_mass_constraint
+        self.con1 = translational_constraint
+        self.con2 = rotational_constraint
+
+    def create(self,stub):
+        ret = stub.CreateMatRigid(
+            MatRigidRequest(ro=self.ro,e=self.e,pr=self.pr,cmo=self.cmo,con1=self.con1,con2=self.con2)
+        )
+        self.material_id=ret.mid
+        self.name = "RIGID"
+        logging.info(f"Material {self.name} Created...")
+
+class MatPiecewiseLinearPlasticity():
+    """It is an elasto-plastic material with an arbitrary stress as a function of strain curve that can also have an arbitrary strain rate dependency"""
+    def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0.3,
+    yield_stress=0,
+    tangent_modulus=0):  
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr=poisson_ratio
+        self.sigy = yield_stress
+        self.etan = tangent_modulus
+
+    def create(self,stub):
+        ret = stub.CreateMatPiecewiseLinearPlasticity(
+            MatPiecewiseLinearPlasticityRequest(ro=self.ro,e=self.e,pr=self.pr,sigy=self.sigy,etan=self.etan)
+        )
+        self.material_id=ret.mid
+        self.name = "Piecewise Linear Plasticity"
+        logging.info(f"Material {self.name} Created...")
+
+class MatModifiedPiecewiseLinearPlasticity():
+    """which is an elasto-plastic material supporting an arbitrary stress as a function of strain curve as well as arbitrary strain rate dependency."""
+    def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
+    yield_stress=0,
+    tangent_modulus=0,
+    plastic_strain_to_failure=0,
+    integration_points_number=0):  
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr=poisson_ratio
+        self.sigy = yield_stress
+        self.etan = tangent_modulus
+        self.fail = plastic_strain_to_failure
+        self.numint = integration_points_number
+
+    def create(self,stub):
+        ret = stub.CreateMatModifiedPiecewiseLinearPlasticity(
+            MatModifiedPiecewiseLinearPlasticityRequest(ro=self.ro,e=self.e,pr=self.pr,sigy=self.sigy,etan=self.etan,fail=self.fail,numint=self.numint)
+        )
+        self.material_id=ret.mid
+        self.name = "Modified Piecewise Linear Plasticity"
+        logging.info(f"Material {self.name} Created...")
+
+class MatSpotweld():
+    """Define material for spotweld"""
+    def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
+    yield_stress=0,
+    plastic_hardening_modulus=0):  
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr=poisson_ratio
+        self.sigy = yield_stress
+        self.eh = plastic_hardening_modulus
+
+    def create(self,stub):
+        ret = stub.CreateMatSpotweld(
+            MatSpotweldRequest(ro=self.ro,e=self.e,pr=self.pr,sigy=self.sigy,eh=self.eh)
+        )
+        self.material_id=ret.mid
+        self.name = "Spotweld"
+        logging.info(f"Material {self.name} Created...")
+
+    

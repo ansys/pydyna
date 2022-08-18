@@ -220,6 +220,25 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print('Control Energy Created...')
         return kwprocess_pb2.ControlEnergyReply(answer = 0)
 
+    def CreateControlBulkViscosity(self,request,context):
+        q1=request.q1
+        q2=request.q2
+        type = request.type
+        card1=str(q1)+","+str(q2)+","+str(type)+",0,0"
+        newk='*CONTROL_BULK_VISCOSITY\n'+card1
+        self.kwdproc.newkeyword(newk)
+        print('Control Bulk Viscosity Created...')
+        return kwprocess_pb2.ControlBulkViscosityReply(answer = 0)
+
+    def CreateControlHourgalss(self,request,context):
+        ihq=request.ihq
+        qh=request.qh
+        card1=str(ihq)+","+str(qh)
+        newk='*CONTROL_HOURGLASS\n'+card1
+        self.kwdproc.newkeyword(newk)
+        print('Control Hourglass Created...')
+        return kwprocess_pb2.ControlHourglassReply(answer = 0)
+
     def CreateControlShell(self,request,context):
         wrpang = request.wrpang
         esort = request.esort
@@ -251,6 +270,56 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         print('Control Solid Created...')
         return kwprocess_pb2.ControlSolidReply(answer = 0)
+
+    def CreateControlImplicitGeneral(self,request,context):
+        imflag = request.imflag
+        dt0 = request.dt0
+        card1 = str(imflag)+","+str(dt0)+",2,1,2,0,0,0"
+        newk = '*CONTROL_IMPLICIT_GENERAL\n'+card1
+        self.kwdproc.newkeyword(newk)
+        print('Control Implicit General Created...')
+        return kwprocess_pb2.ControlImplicitGeneralReply(answer = 0)
+
+    def CreateControlImplicitAuto(self,request,context):
+        iauto = request.iauto
+        iteopt = request.iteopt
+        card1 = str(iauto)+","+str(iteopt)+",5,0,0,0"
+        newk = '*CONTROL_IMPLICIT_AUTO\n'+card1
+        self.kwdproc.newkeyword(newk)
+        print('Control Implicit Auto Created...')
+        return kwprocess_pb2.ControlImplicitAutoReply(answer = 0)
+    
+    def CreateControlImplicitDynamic(self,request,context):
+        imass = request.imass
+        gamma = request.gamma
+        beta = request.beta
+        card1 = str(imass)+","+str(gamma)+","+str(beta)+",0,1e28,1e28,0,0"
+        newk = '*CONTROL_IMPLICIT_DYNAMIC\n'+card1
+        self.kwdproc.newkeyword(newk)
+        print('Control Implicit Dynamic Created...')
+        return kwprocess_pb2.ControlImplicitDynamicReply(answer = 0)
+
+    def CreateControlImplicitEigenvalue(self,request,context):
+        neig = request.neig
+        shfscl = request.shfscl
+        card1 = str(neig)+",0,0,-1e29,0,1e29,2,0"
+        card2 = "0,0,0,0,0,0,"+str(shfscl)
+        newk = '*CONTROL_IMPLICIT_EIGENVALUE\n'+card1 +'\n' +card2
+        self.kwdproc.newkeyword(newk)
+        print('Control Implicit Eigenvalue Created...')
+        return kwprocess_pb2.ControlImplicitEigenvalueReply(answer = 0)
+
+    def CreateControlImplicitSolution(self,request,context):
+        nsolver = request.nsolver
+        ilimit = request.ilimit
+        maxref = request.maxref
+        abstol = request.abstol
+        card1 = str(nsolver)+','+str(ilimit)+','+str(maxref)+",0001,0.01,1e10,0.9,"+str(abstol)
+        card2 = "2,1,1,3,0,0,0"
+        newk = '*CONTROL_IMPLICIT_SOLUTION\n'+card1 +'\n' +card2
+        self.kwdproc.newkeyword(newk)
+        print('Control Implicit Solution Created...')
+        return kwprocess_pb2.ControlImplicitSolutionReply(answer = 0)
 
     def CreateDBBinary(self,request,context):
         filetype = request.filetype
@@ -373,6 +442,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
 
     def CreateDefineCurve(self,request,context):
         lcid = request.lcid
+        lcid = self.kwdproc.get_data(gdt.KWD_DEFINE_BOX_LASTID)+1
         sfo = request.sfo
         abscissa = request.abscissa
         ordinate = request.ordinate
@@ -384,7 +454,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'DefineCurve '+str(lcid)+'Created...'
         print(msg)
-        return kwprocess_pb2.DefineCurveReply(answer = 0)   
+        return kwprocess_pb2.DefineCurveReply(id = lcid)   
 
     def CreateDefineVector(self,request,context):
         title = request.title
@@ -406,6 +476,22 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = 'DefineVector '+str(vid)+'Created...'
         print(msg)
         return kwprocess_pb2.DefineVectorReply(answer = 0) 
+
+    def CreateDefineBox(self,request,context):
+        boxid = self.kwdproc.get_data(gdt.KWD_DEFINE_BOX_LASTID)+1
+        xmin = request.xmin
+        xmax = request.xmax
+        ymin = request.ymin
+        ymax = request.ymax
+        zmin = request.zmin
+        zmax = request.zmax
+        card1 = str(boxid)+","+str(xmin)+","+str(xmax)+","+str(ymin)+","+str(ymax)+","+str(zmin)+","+str(zmax)
+        opcode = "*DEFINE_BOX"
+        newk = opcode
+        newk += "\n" + card1
+        self.kwdproc.newkeyword(newk)
+        print(f"DefineBox {boxid} Created...")
+        return kwprocess_pb2.DefineBoxReply(boxid = boxid) 
 
     def CreateDefineDEMeshSurface(self,request,context):
         sid = request.sid
@@ -441,8 +527,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         sid = request.sid
         pids = request.pids
         if sid==0:
-            lastid = self.kwdproc.get_data(gdt.KWD_PARTSET_LASTID)
-            sid = lastid+1
+            sid = self.kwdproc.get_data(gdt.KWD_PARTSET_LASTID)+1 
         card1 = str(sid)
         newk =  "*SET_PART_LIST\n" + card1 + "\n";  
         repeatcard = ''
@@ -459,7 +544,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'PartSet '+str(sid)+'Created...'
         print(msg)
-        return kwprocess_pb2.PartSetReply(answer = sid)
+        return kwprocess_pb2.PartSetReply(id = sid)
 
     def CreateShellSet(self,request,context):
         option = request.option
@@ -525,6 +610,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         sid = request.sid
         genoption = request.genoption
         entities = request.entities
+        if sid==0:
+            sid = self.kwdproc.get_data(gdt.KWD_NODESET_LASTID)+1
         opcode = "*SET_NODE"
         if len(option)>0:
             opcode += "_"+option.upper()
@@ -551,7 +638,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'SET_NODE '+str(sid)+' Created...'
         print(msg)
-        return kwprocess_pb2.NodeSetReply(answer = 0) 
+        return kwprocess_pb2.NodeSetReply(id = sid) 
 
     def CreateSegmentSet(self,request,context):
         #title = request.title
@@ -625,7 +712,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         cid = request.cid
         title = request.title
         option1 = request.option1
-        #option2 = request.option2
+        option2 = request.option2
         option3 = request.option3
         offset = request.offset
         ssid = request.ssid
@@ -635,14 +722,14 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         sapr = request.sapr
         sbpr = request.sbpr
         #card2
-        sfsa = request.sfsa
-        sfsb = request.sfsb
         fs = request.fs
         fd = request.fd
         vdc = request.vdc
         penchk = request.penchk
         birthtime = request.birthtime
         #card3
+        sfsa = request.sfsa
+        sfsb = request.sfsb
         sst = request.sst
         mst = request.mst
         #card4
@@ -662,6 +749,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         frcfrq = request.frcfrq
         #optionc
         igap = request.igap
+        ignore = request.ignore
         opcode = "*CONTACT_"+option1.upper()
         if(len(offset)>0):
             opcode += "_"+offset
@@ -675,15 +763,21 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         card4 = str(optionres)+","+str(nfls)+","+str(sfls)+","+str(param)+",,,"+str(ct2cn)
         carda = str(soft)+","+ str(sofscl) + "," + str(lcidab) + "," + str(maxpar)+","+str(sbopt)+","+ str(depth) + "," + str(bsort) + "," + str(frcfrq); 
         cardb = "0,1,2,0,0,0,0.5,0"
-        cardc = str(igap)
+        cardc = str(igap)+","+str(ignore)
         if (option1 == "TIED_SHELL_EDGE_TO_SURFACE" or option1 == "NODES_TO_SURFACE"or option1 == "SURFACE_TO_SURFACE"):
             newk = opcode+"\n"+card1+"\n"+card2+"\n"+card3
         if option1 == "AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK" :
             newk = opcode+"\n"+card1+"\n"+card2+"\n"+card3+"\n"+card4+"\n"+carda
         if option1 == "AUTOMATIC_SINGLE_SURFACE_SMOOTH":
             newk = opcode+"\n"+card1+"\n"+card2+"\n"+card3+"\n"+carda+"\n"+cardb+"\n"+cardc
+        if option1 == "AUTOMATIC_SURFACE_TO_SURFACE":
+            if option2 == "MORTAR":
+                newk = "*CONTACT_"+option1+"_"+option2+"\n" +card1+"\n"+card2+"\n"+card3+"\n"+carda+"\n"+cardb+"\n"+cardc
         if option1 == "AUTOMATIC_SINGLE_SURFACE":
-            newk = opcode+"\n" + card1+"\n\n\n"+card4
+            if option2 == "MORTAR":
+                newk = "*CONTACT_"+option1+"_"+option2+"\n" +card1+"\n"+card2+"\n"+card3+"\n"+carda+"\n"+cardb+"\n"+cardc
+            else:
+                newk = opcode+"\n" + card1+"\n\n\n"+card4
         self.kwdproc.newkeyword(newk)
         print('Contact  Created...')
         return kwprocess_pb2.ContactReply(answer = 0)
@@ -756,6 +850,28 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ConstrainedExtraNodesReply(answer = 0)  
 
+    def CreateConstrainedNodalRigidBody(self,request,context):
+        pid = self.kwdproc.get_data(gdt.KWD_PART_LASTID)+1
+        nsid = request.nsid
+        card1 = str(pid) + ",0," + str(nsid) + ",0,0,0,0"
+        opcode = "*CONSTRAINED_NODAL_RIGID_BODY"
+        newk = opcode+"\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*CNRB Created...'
+        print(msg)
+        return kwprocess_pb2.ConstrainedNodalRigidBodyReply(pid = pid) 
+
+    def CreateConstrainedSpotWeld(self,request,context):
+        node1 = request.node1
+        node2 = request.node2
+        card1 = str(node1) + "," + str(node2) + ",0,0,0,0,0,0"
+        opcode = "*CONSTRAINED_SPOTWELD"
+        newk = opcode+"\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = '*CONSTRAINED_SPOTWELD Created...'
+        print(msg)
+        return kwprocess_pb2.ConstrainedSpotWeldReply(id = 0)
+
     def CreateConstrainedJoint(self,request,context):
         type = request.type
         nodes = request.nodes
@@ -785,7 +901,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
 
     #MATERIAL
     def CreateMatRigid(self,request,context):
-        mid = request.mid
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
         ro = request.ro
         e = request.e
         pr = request.pr
@@ -801,7 +917,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = opcode+" Created..."
         print(msg)
-        return kwprocess_pb2.MatRigidReply(ret = 0)  
+        return kwprocess_pb2.MatRigidReply(mid = mid)  
 
     def CreateMatElastic(self,request,context):
         mid = request.mid
@@ -815,6 +931,54 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = opcode+" Created..."
         print(msg)
         return kwprocess_pb2.MatElasticReply(ret = 0) 
+
+    def CreateMatSpotweld(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        e = request.e
+        pr = request.pr
+        sigy = request.sigy
+        eh = request.eh
+        card1 = str(mid)+","+str(ro)+","+str(e)+","+str(pr)+","+str(sigy)+","+str(eh)
+        opcode = "*MAT_SPOTWELD"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatSpotweldReply(mid = mid)  
+
+    def CreateMatPiecewiseLinearPlasticity(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        e = request.e
+        pr = request.pr
+        sigy = request.sigy
+        etan = request.etan
+        card1 = str(mid)+","+str(ro)+","+str(e)+","+str(pr)+","+str(sigy)+","+str(etan)
+        opcode = "*MAT_PIECEWISE_LINEAR_PLASTICITY"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatPiecewiseLinearPlasticityReply(mid = mid)
+
+    def CreateMatModifiedPiecewiseLinearPlasticity(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        e = request.e
+        pr = request.pr
+        sigy = request.sigy
+        etan = request.etan
+        fail = request.fail
+        numint = request.numint
+        card1 = str(mid)+","+str(ro)+","+str(e)+","+str(pr)+","+str(sigy)+","+str(etan)+","+str(fail)
+        card2 = "0,0,0,0,0,0,0,"+str(numint)
+        opcode = "*MAT_MODIFIED_PIECEWISE_LINEAR_PLASTICITY"
+        newk = opcode +"\n"+card1 + "\n"+card2
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatModifiedPiecewiseLinearPlasticityReply(mid = mid)
 
     def CreateMatFabric(self,request,context):
         mid = request.mid
@@ -992,8 +1156,22 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.SectionIGAShellReply(answer = 0)
 
+    def CreateSectionBeam(self,request,context):
+        secid = self.kwdproc.get_data(gdt.KWD_SECTION_LASTID)+1
+        elform = request.elform
+        shrf = request.shrf
+        cst = request.cst
+        ts1 = request.ts1
+        ts2 = request.ts2
+        card1 = str(secid) + "," + str(elform)+ "," + str(shrf)+ ",2.0," + str(cst)
+        card2 = str(ts1)+ "," + str(ts2)
+        newk = "*SECTION_BEAM\n" + card1 +"\n"+card2
+        self.kwdproc.newkeyword(newk)
+        print(f"Section Beam {secid} Created...")
+        return kwprocess_pb2.SectionBeamReply(id = secid)
+
     def CreateSectionShell(self,request,context):
-        secid = request.secid
+        secid = self.kwdproc.get_data(gdt.KWD_SECTION_LASTID)+1
         elform = request.elform
         shrf = request.shrf
         nip = request.nip
@@ -1006,19 +1184,17 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         card2 = str(t1)+ "," + str(t2)+ "," + str(t3)+ "," + str(t4)
         newk = "*SECTION_SHELL\n" + card1 +"\n"+card2
         self.kwdproc.newkeyword(newk)
-        msg = 'Section Shell '+str(secid)+' Created...'
-        print(msg)
-        return kwprocess_pb2.SectionShellReply(answer = 0)
+        print(f"Section Shell {secid} Created...")
+        return kwprocess_pb2.SectionShellReply(id = secid)
     
     def CreateSectionSolid(self,request,context):
-        secid = request.secid
+        secid = self.kwdproc.get_data(gdt.KWD_SECTION_LASTID)+1
         elform = request.elform
         card1 = str(secid) + "," + str(elform)
         newk = "*SECTION_SOLID\n" + card1
         self.kwdproc.newkeyword(newk)
-        msg = 'Section Solid '+str(secid)+' Created...'
-        print(msg)
-        return kwprocess_pb2.SectionSolidReply(answer = 0)
+        print(f"Section Solid {secid} Created...")
+        return kwprocess_pb2.SectionSolidReply(id = secid)
 
     def CreateSectionDiscrete(self,request,context):
         secid = request.secid
