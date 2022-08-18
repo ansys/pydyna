@@ -851,15 +851,16 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.ConstrainedExtraNodesReply(answer = 0)  
 
     def CreateConstrainedNodalRigidBody(self,request,context):
-        pid = self.kwdproc.get_data(gdt.KWD_PART_LASTID)+1
+        pid = request.pid
+        id = pid + self.kwdproc.get_data(gdt.KWD_PART_LASTID)+1
         nsid = request.nsid
-        card1 = str(pid) + ",0," + str(nsid) + ",0,0,0,0"
+        card1 = str(id) + ",0," + str(nsid) + ",0,0,0,0"
         opcode = "*CONSTRAINED_NODAL_RIGID_BODY"
         newk = opcode+"\n" + card1
         self.kwdproc.newkeyword(newk)
         msg = '*CNRB Created...'
         print(msg)
-        return kwprocess_pb2.ConstrainedNodalRigidBodyReply(pid = pid) 
+        return kwprocess_pb2.ConstrainedNodalRigidBodyReply(pid = id) 
 
     def CreateConstrainedSpotWeld(self,request,context):
         node1 = request.node1

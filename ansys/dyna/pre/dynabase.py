@@ -1691,12 +1691,21 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
+        self.set_accuracy(objective_stress_updates=Switch.ON,invariant_node_number=InvariantNode.ON_FOR_SHELL_TSHELL_SOLID,implicit_accuracy_flag=Switch.ON)
+        self.set_bulk_viscosity(bulk_viscosity_type=BulkViscosity.COMPUTE_INTERNAL_ENERGY_DISSIPATED)
+        self.set_energy(hourglass_energy=EnergyFlag.COMPUTED,sliding_interface_energy=EnergyFlag.COMPUTED)
+        self.set_hourglass(controltype=HourglassControl.FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID,coefficient=0)
+        self.create_control_shell(wrpang=0,esort=1,irnxx=0,istupd=4,theory=0,bwc=1,miter=1,proj=1,irquad=0)
+        self.create_control_contact(rwpnal=1.0)
         for obj in Contact.contactlist:
             obj.create()
         for obj in BeamPart.partlist:
             obj.set_property()
         for obj in ShellPart.partlist:
             obj.set_property()
+        Constraint.create(self.stub)
+
+
         ret = self.stub.SaveFile(SaveFileRequest(name=self.mainname))
         msg = self.mainname + " is outputed..."
         logging.info(msg)
@@ -1721,10 +1730,10 @@ class Box:
 
 class Curve:
     """Define a curve [for example, load (ordinate value)] as a function of time"""
-    def __init__(self,sfo=1,abscissa=[],ordinate=[]):
+    def __init__(self,sfo=1,x=[],y=[]):
         self.sfo=sfo
-        self.abscissa = abscissa
-        self.ordinate = ordinate
+        self.abscissa = x
+        self.ordinate = y
     
     def create(self,stub):
         ret = stub.CreateDefineCurve(
@@ -1799,12 +1808,12 @@ class BoundaryCondition:
         self.stub = DynaBase.get_stub()
 
     def create_spc(self,nodeset,
-        contraint_x_direction=0,
-        contraint_y_direction=0,
-        contraint_z_direction=0,
-        contraint_xaxis_rotate=0,
-        contraint_yaxis_rotate=0,
-        contraint_zaxis_rotate=0,
+        tx=True,
+        ty=True,
+        tz=True,
+        rx=True,
+        ry=True,
+        rz=True,
         cid=0,
         birth=0,
         death=1e20
@@ -1822,9 +1831,9 @@ class BoundaryCondition:
         
         """
         if birth==0 and death == 1e20:
-            birthdeath = True
+            birthdeath = False
         else:
-            birthdeath=False
+            birthdeath=True
         if nodeset.num()==1:
             nid = nodeset.pos(pos=0)
             option1='NODE'
@@ -1837,12 +1846,12 @@ class BoundaryCondition:
                 birthdeath=birthdeath,
                 nid=nid,
                 cid=cid,
-                dofx=contraint_x_direction,
-                dofy=contraint_y_direction,
-                dofz=contraint_z_direction,
-                dofrx=contraint_xaxis_rotate,
-                dofry=contraint_yaxis_rotate,
-                dofrz=contraint_zaxis_rotate,
+                dofx=tx,
+                dofy=ty,
+                dofz=tz,
+                dofrx=rx,
+                dofry=ry,
+                dofrz=rz,
                 birth=birth,
                 death=death,
             )
@@ -2135,7 +2144,7 @@ class ImplicitAnalysis():
 
     def set_solution(self,solution_method=12,
         iteration_limit=11,
-        stiffness_reformation_limit=15,
+        stiffness_reformation_limit=55,
         absolute_convergence_tolerance=1e-10):
         """specify whether a linear or nonlinear solution is desired.
 
@@ -2186,9 +2195,10 @@ class ContactAlgorithm(Enum):
     CONSTRAINT_BASED = 2
 
 class OffsetType(Enum):
-    OFFSET = 1
-    BEAM_OFFSET=2
-    CONSTRAINED_OFFSET=3
+    NULL = ""
+    OFFSET = "OFFSET"
+    BEAM_OFFSET= "BEAM_OFFSET"
+    CONSTRAINED_OFFSET= "CONSTRAINED_OFFSET"
 
 class ContactSurface:
     """Define contact interface"""
@@ -2198,6 +2208,7 @@ class ContactSurface:
         self.thickness = 0
         if set.type.upper() == "PART":
             self.type = 3
+            self.id = set.pos(0)
         elif set.type.upper() == "PARTSET":
             self.type = 2
         elif set.type.upper() == "NODESET" or set.type.upper() == "NODE":
@@ -2229,7 +2240,7 @@ class ContactSurface:
 class Contact:
     """Provides a way of treating interaction between disjoint parts"""
     contactlist = []
-    def __init__(self,type=ContactType.AUTOMATIC,category=ContactCategory.SINGLE_SURFACE_CONTACT):
+    def __init__(self,type=ContactType.AUTOMATIC,category=ContactCategory.SINGLE_SURFACE_CONTACT,offset=OffsetType.NULL):
         self.stub = DynaBase.get_stub()
         self.rigidwall_penalties_scale_factor= 1
         self.max_penetration_check_multiplier = 4
@@ -2239,7 +2250,7 @@ class Contact:
         self.type = type
         self.mortar = False
         self.ignore = 0
-        self.offset = ""
+        self.offset = offset.value
         self.static_friction_coeff=0
         self.dynamic_friction_coeff=0
         Contact.contactlist.append(self)
@@ -2358,8 +2369,9 @@ class Contact:
 
 class Constraint:
     """provides a way of constraining degrees of freedom to move together in some way."""
+    cnrbsetidlist = []
     def __init__(self):
-        self.stub = DynaBase.get_stub()
+        self.stub = stub = DynaBase.get_stub()
 
     def create_spotweld(self,nodeid1,nodeid2):
         """Define massless spot welds between non-contiguous nodal pairs.
@@ -2398,10 +2410,15 @@ class Constraint:
         """
         nodeset.create(self.stub)
         nsid = nodeset.id
-        ret = self.stub.CreateConstrainedNodalRigidBody(
-            ConstrainedNodalRigidBodyRequest(
-                nsid=nsid
-            )
-        )
+        Constraint.cnrbsetidlist.append(nsid)
         logging.info("CNRB Created...")
-        return ret
+    
+    @staticmethod
+    def create(stub):
+        for i in range(len(Constraint.cnrbsetidlist)):
+            stub.CreateConstrainedNodalRigidBody(
+                ConstrainedNodalRigidBodyRequest(pid=i,
+                    nsid=Constraint.cnrbsetidlist[i]
+                )
+            )
+        

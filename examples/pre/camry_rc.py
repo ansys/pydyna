@@ -2,10 +2,12 @@
 This example demonstrates how to create a simple crash input deck.
 """
 import os
+from re import X
 import sys
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
 
-from pydyna.dynabase import *
-from pydyna.dynamaterial import *
+from pre.dynabase import *
+from pre.dynamaterial import *
 from camry_rc_data import *
 
 if __name__ == "__main__":
@@ -26,16 +28,12 @@ if __name__ == "__main__":
 
     #global setting
     camry.set_termination(10)
-    camry.set_accuracy(objective_stress_updates=Switch.ON,invariant_node_number=InvariantNode.ON_FOR_SHELL_TSHELL_SOLID,implicit_accuracy_flag=Switch.ON)
-    camry.set_bulk_viscosity(bulk_viscosity_type=BulkViscosity.COMPUTE_INTERNAL_ENERGY_DISSIPATED)
-    camry.set_energy(hourglass_energy=EnergyFlag.COMPUTED,sliding_interface_energy=EnergyFlag.COMPUTED)
-    camry.set_hourglass(controltype=HourglassControl.FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID,coefficient=0)
     
     analysis = ImplicitAnalysis(initial_timestep_size=0.1)
     analysis.set_timestep(control_flag=TimestepCtrol.AUTOMATICALLY_ADJUST_TIMESTEP_SIZE,Optimum_equilibrium_iteration_count=511)
     analysis.set_dynamic(gamma=0.6,beta=0.38)
     analysis.set_eigenvalue()
-    analysis.set_solution(iteration_limit=1,stiffness_reformation_limit=50,absolute_convergence_tolerance=-100)
+    analysis.set_solution(stiffness_reformation_limit=55,absolute_convergence_tolerance=-100)
     
     #create material
     matnull = MatNull(mass_density=6e-11)
@@ -94,9 +92,9 @@ if __name__ == "__main__":
             part.set_material(plastic400)
         elif part.id in partswithmat500:
             part.set_material(plastic500)
-        elif part.id in [335]:
+        elif part.id in [57]:
             part.set_material(plastic1300)
-        elif part.id in [564]:
+        elif part.id in [286]:
             part.set_material(plastic675)
         elif part.id in [5000000]:
             part.set_material(plastic310)
@@ -132,7 +130,7 @@ if __name__ == "__main__":
     platebiw.set_slave_surface(surf1)
     platebiw.set_master_surface(surf2)
 
-    swcontact = Contact(type=ContactType.TIED,category=ContactCategory.SHELL_EDGE_TO_SURFACE_CONTACT)
+    swcontact = Contact(type=ContactType.TIED,category=ContactCategory.SHELL_EDGE_TO_SURFACE_CONTACT,offset=OffsetType.CONSTRAINED_OFFSET)
     spotweldbeam=ContactSurface(PartSet(spotweldbeams))
     spotweldbeam.set_contact_thickness(thickness=-0.9)
     spotweldsurface=ContactSurface(PartSet(spotweldsurfaces))
@@ -142,21 +140,14 @@ if __name__ == "__main__":
 
     #define boundary
     bdy = BoundaryCondition()
-    bdy.create_spc(NodeSet(spc),
-    contraint_x_direction=1,
-    contraint_y_direction=1,
-    contraint_z_direction=1,
-    contraint_xaxis_rotate=1,
-    contraint_yaxis_rotate=1,
-    contraint_zaxis_rotate=1
-    )
+    bdy.create_spc(NodeSet(spc))
     
-    crv = Curve(abscissa=[0,1,2,3,4,5,6,7,8,9,9.77,100],
-                ordinate=[0,13,26,39,52,65,78,91,104,117,127,127])
+    crv = Curve(x=[0,1,2,3,4,5,6,7,8,9,9.77,100],
+                y=[0,13,26,39,52,65,78,91,104,117,127,127])
     platen=PartSet([50000001])
-    bdy.create_imposed_motion(platen,crv,dof=DOF.X_TRANSLATIONAL)
-    bdy.create_imposed_motion(platen,crv,dof=DOF.Y_TRANSLATIONAL)
-    bdy.create_imposed_motion(platen,crv,dof=DOF.Z_TRANSLATIONAL)
+    bdy.create_imposed_motion(platen,crv,dof=DOF.X_TRANSLATIONAL,scalefactor=-0.0802216)
+    bdy.create_imposed_motion(platen,crv,dof=DOF.Y_TRANSLATIONAL,scalefactor=-0.0802216)
+    bdy.create_imposed_motion(platen,crv,dof=DOF.Z_TRANSLATIONAL,scalefactor=-0.0802216)
 
     camry.create_database_binary(dt=0.001)
     camry.set_output_database(elout=0.0001,glstat=0.0001,matsum=0.0001,nodout=0.0001,rbdout=0.0001,rcforc=0.0001,secforc=0.0001)
