@@ -940,9 +940,13 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         pr = request.pr
         sigy = request.sigy
         eh = request.eh
+        nrr = request.nrr
+        nrs = request.nrs
+        nrt = request.nrt
         card1 = str(mid)+","+str(ro)+","+str(e)+","+str(pr)+","+str(sigy)+","+str(eh)
+        card2 = "0,"+str(nrr)+","+str(nrs)+","+str(nrt)
         opcode = "*MAT_SPOTWELD"
-        newk = opcode +"\n"+card1
+        newk = opcode +"\n"+card1+"\n"+card2
         self.kwdproc.newkeyword(newk)
         msg = opcode+" Created..."
         print(msg)
@@ -1145,17 +1149,17 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.EOSGruneisenReply(eosid = eosid)
  
     def CreateSectionIGAShell(self,request,context):
-        secid = request.secid
+        secid = self.kwdproc.get_data(gdt.KWD_SECTION_LASTID)+1
         elform = request.elform
         shrf = request.shrf
         thickness = request.thickness
-        card1 = str(secid) + "," + str(elform) + "," + str(shrf)
+        card1 = str(secid) + "," + str(elform) + "," + str(shrf)+", ,"
         card2 = str(thickness)
         newk = "*SECTION_IGA_SHELL\n" + card1+"\n"+card2
         self.kwdproc.newkeyword(newk)
         msg = 'Section IGAShell '+str(secid)+' Created...'
         print(msg)
-        return kwprocess_pb2.SectionIGAShellReply(answer = 0)
+        return kwprocess_pb2.SectionIGAShellReply(id = secid)
 
     def CreateSectionBeam(self,request,context):
         secid = self.kwdproc.get_data(gdt.KWD_SECTION_LASTID)+1
@@ -1215,7 +1219,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.SectionDiscreteReply(answer = 0)
 
     def CreateHourglass(self,request,context):
-        ghid = request.ghid
+        ghid = self.kwdproc.get_data(gdt.KWD_HOURGLASS_LASTID)+1
         ihq = request.ihq
         qm = request.qm
         q1 = request.q1
@@ -1227,7 +1231,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'Hourglass '+str(ghid)+' Created...'
         print(msg)
-        return kwprocess_pb2.SectionSolidReply(answer = 0)
+        return kwprocess_pb2.SectionSolidReply(id = ghid)
 
     def SetPartProperty(self,request,context):
         pid = request.pid

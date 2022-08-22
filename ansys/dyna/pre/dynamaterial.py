@@ -256,16 +256,22 @@ class MatSpotweld():
     """Define material for spotweld"""
     def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
     yield_stress=0,
-    plastic_hardening_modulus=0):  
+    plastic_hardening_modulus=0,
+    axial_force_resultant_at_failure=0,
+    force_resultant_nrs_at_failure=0,
+    force_resultant_nrt_at_failure=0):  
         self.ro = mass_density
         self.e = young_modulus
         self.pr=poisson_ratio
         self.sigy = yield_stress
         self.eh = plastic_hardening_modulus
+        self.nrr = axial_force_resultant_at_failure
+        self.nrs = force_resultant_nrs_at_failure
+        self.nrt = force_resultant_nrt_at_failure
 
     def create(self,stub):
         ret = stub.CreateMatSpotweld(
-            MatSpotweldRequest(ro=self.ro,e=self.e,pr=self.pr,sigy=self.sigy,eh=self.eh)
+            MatSpotweldRequest(ro=self.ro,e=self.e,pr=self.pr,sigy=self.sigy,eh=self.eh,nrr=self.nrr,nrs=self.nrs,nrt=self.nrt)
         )
         self.material_id=ret.mid
         self.name = "Spotweld"

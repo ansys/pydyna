@@ -57,6 +57,16 @@ def init_log(log_file):
         console.setFormatter(formatter)
         logging.getLogger().addHandler(console)
 
+class Motion(Enum):
+    VELOCITY = 0
+    ACCELERATION = 1
+    DISPLACEMENT = 2
+
+class DOF(Enum):
+    X_TRANSLATIONAL = 1
+    Y_TRANSLATIONAL = 2
+    Z_TRANSLATIONAL = 3
+
 class Switch(Enum):
         OFF = 0
         ON = 1
@@ -80,6 +90,13 @@ class BulkViscosity(Enum):
     RICHARDS_WILKINS_BULK_VISCOSITY=2
     COMPUTE_INTERNAL_ENERGY_DISSIPATED = -2
 
+class CaseType(Enum):
+    STRUCTURE = 1
+    ICFD = 2
+    SALE = 3
+    EM = 4
+    IGA = 5
+
 class DynaBase:
     """Contains methods to create general LS-DYNA keyword"""
 
@@ -95,6 +112,7 @@ class DynaBase:
         self.stub = kwC2SStub(channel)
         self.mainname = ""
         DynaBase.stub=self.stub
+        self.casetype = CaseType.STRUCTURE
 
     def get_stub():
         return DynaBase.stub
@@ -124,7 +142,7 @@ class DynaBase:
         self.mainname = os.path.basename(filenames[0])
         return self.stub.LoadFile(LoadFileRequest())
 
-    def create_timestep(self, tssfac=0.0, isdo=0, dt2ms=0.0):
+    def set_timestep(self, tssfac=0.9, isdo=0, dt2ms=0.0):
         """Create *CONTROL_TIMESTEP keyword
         Parameters
         ----------
@@ -1696,13 +1714,23 @@ class DynaBase:
         self.set_energy(hourglass_energy=EnergyFlag.COMPUTED,sliding_interface_energy=EnergyFlag.COMPUTED)
         self.set_hourglass(controltype=HourglassControl.FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID,coefficient=0)
         self.create_control_shell(wrpang=0,esort=1,irnxx=0,istupd=4,theory=0,bwc=1,miter=1,proj=1,irquad=0)
-        self.create_control_contact(rwpnal=1.0)
+        if self.casetype == CaseType.IGA:
+            igactc=1
+        else:
+            igactc=0
+        self.create_control_contact(rwpnal=1.0,ignore=1,igactc=igactc)
         for obj in Contact.contactlist:
             obj.create()
         for obj in BeamPart.partlist:
             obj.set_property()
         for obj in ShellPart.partlist:
             obj.set_property()
+        for obj in SolidPart.partlist:
+            obj.set_property()
+        for obj in IGAPart.partlist:
+            obj.set_property()
+        for obj in RigidwallCylinder.rwlist:
+            obj.create()
         Constraint.create(self.stub)
 
 
@@ -1791,16 +1819,6 @@ class PartSet:
 
     def pos(self,pos):
         return self.parts[pos]
-
-class Motion(Enum):
-    VELOCITY = 0
-    ACCELERATION = 1
-    DISPLACEMENT = 2
-
-class DOF(Enum):
-    X_TRANSLATIONAL = 1
-    Y_TRANSLATIONAL = 2
-    Z_TRANSLATIONAL = 3
 
 class BoundaryCondition:
     """ provides a way of defining imposed motions on boundary nodes"""
@@ -1903,9 +1921,28 @@ class BeamFormulation(Enum):
 class ShellFormulation(Enum):
     FULLY_INTEGRATED = -16
     BELYTSCHKO_TSAY = 2
-    
+
+class IGAFormulation(Enum):
+    REISSNER_MINDLIN_FIBERS_AT_CONTROL_POINTS = 0
+    KIRCHHOFF_LOVE_FIBERS_AT_CONTROL_POINTS = 1
+    KIRCHHOFF_LOVE_FIBERS_AT_INTEGRATION_POINTS = 2
+    REISSNER_MINDLIN_FIBERS_AT_INTEGRATION_POINTS = 3
+
+class SolidFormulation(Enum):
+    CONSTANT_STRESS_SOLID_ELEMENT  = 1
+    EIGHT_POINT_HEXAHEDRON = 2
+    FULLY_INTEGRATED_QUADRATIC_EIGHT_NODE_ELEMENT = 3
+
+class HourglassType(Enum):
+    STANDARD_LSDYNA_VISCOUS = 1
+    FLANAGAN_BELYTSCHKO_VISOCOUS = 2
+    FLANAGAN_BELYTSCHKO_VISOCOUS_WITH_EXTRA_VOLUME_INTEGRATION = 3
+    FLANAGAN_BELYTSCHKO_STIFFNESS = 4
+    FLANAGAN_BELYTSCHKO_STIFFNESS_WITH_EXTRA_VOLUME_INTEGRATION = 5
+    BELYTSCHKO_BINDEMAN = 6
+
 class BeamSection:
-    def __init__(self,element_formulation=BeamFormulation.SPOTWELD,
+    def __init__(self,element_formulation,
         shear_factor=1,
         cross_section=0,
         thickness_n1=0,
@@ -1913,24 +1950,35 @@ class BeamSection:
         stub = DynaBase.get_stub()
         ret = stub.CreateSectionBeam(
             SectionBeamRequest(
-                elform=element_formulation.value,shrf=shear_factor,
+                elform=element_formulation,shrf=shear_factor,
                 cst=cross_section,ts1=thickness_n1,ts2=thickness_n2
             )
         )
         self.id = ret.id
 
 class ShellSection:
-    def __init__(self,element_formulation=ShellFormulation.FULLY_INTEGRATED,
+    def __init__(self,element_formulation,
         shear_factor=1,
-        integration_points=2,
+        integration_points=5,
         printout=0,
         thickness1=0,thickness2=0,thickness3=0,thickness4=0):
         stub = DynaBase.get_stub()
         ret = stub.CreateSectionShell(
             SectionShellRequest(
-                elform=element_formulation.value,shrf=shear_factor,
+                elform=element_formulation,shrf=shear_factor,
                 nip=integration_points,
                 propt=printout,t1=thickness1,t2=thickness2,t3=thickness3,t4=thickness4,
+            )
+        )
+        self.id = ret.id
+
+class IGASection:
+    def __init__(self,element_formulation,
+        shear_factor=1,thickness=1):
+        stub = DynaBase.get_stub()
+        ret = stub.CreateSectionIGAShell(
+            SectionIGAShellRequest(
+                elform=element_formulation,shrf=shear_factor,thickness=thickness
             )
         )
         self.id = ret.id
@@ -1955,7 +2003,7 @@ class Part:
 
     def set_element_formulation(self,formulation):
         """Element formulation options."""
-        self.formulation = formulation
+        self.formulation = formulation.value
 
 class BeamPart(Part):
     """ Define parts, that is, combine material information, section properties, hourglass type, thermal properties, and a flag for part adaptivity."""
@@ -2031,6 +2079,80 @@ class ShellPart(Part):
         thickness4 = self.thickness,
         )
         self.secid = sec.id
+        self.stub.SetPartProperty(
+            PartPropertyRequest(
+                pid=self.id, 
+                secid=self.secid,
+                mid=self.mid,
+                eosid=self.eosid,
+                hgid=self.hgid,
+                grav=self.grav,
+                adpopt=self.adpopt,
+                tmid=self.tmid,
+            )
+        )
+
+class IGAPart(Part):
+    """ Define parts, that is, combine material information, section properties, hourglass type, thermal properties, and a flag for part adaptivity."""
+    partlist = []
+    def __init__(self,pid):
+        Part.__init__(self,pid)
+        self.stub = DynaBase.get_stub()
+        IGAPart.partlist.append(self)
+        self.shear_factor = 1
+        self.thickness = 1
+
+    def set_shear_factor(self,factor):
+        """Shear correction factor which scales the transverse shear stress."""
+        self.shear_factor = factor
+
+    def set_thickness(self,thickness):
+        """Shell thickness."""
+        self.thickness = thickness
+
+    def set_property(self):
+        sec=IGASection(element_formulation=self.formulation,
+        shear_factor=self.shear_factor,
+        thickness = self.thickness,
+        )
+        self.secid = sec.id
+        self.stub.SetPartProperty(
+            PartPropertyRequest(
+                pid=self.id, 
+                secid=self.secid,
+                mid=self.mid,
+                eosid=self.eosid,
+                hgid=self.hgid,
+                grav=self.grav,
+                adpopt=self.adpopt,
+                tmid=self.tmid,
+            )
+        )
+
+class SolidPart(Part):
+    """ Define parts, that is, combine material information, section properties, hourglass type, thermal properties, and a flag for part adaptivity."""
+    partlist = []
+    def __init__(self,pid):
+        Part.__init__(self,pid)
+        self.stub = DynaBase.get_stub()
+        SolidPart.partlist.append(self)
+        self.hourglasstype = -1
+
+    def set_hourglass(self,type = HourglassType.STANDARD_LSDYNA_VISCOUS):
+        self.hourglasstype = type.value
+
+    def set_property(self):
+        ret = self.stub.CreateSectionSolid(
+            SectionSolidRequest(
+                elform=self.formulation
+            )
+        )
+        self.id = ret.id
+        if self.hourglasstype>0:
+            ret = self.stub.CreateHourglass(
+            HourglassRequest(ihq=self.hourglasstype, qm=1, q1=0, q2=0, qb=0, qw=0)
+            )
+            self.hgid = ret.id
         self.stub.SetPartProperty(
             PartPropertyRequest(
                 pid=self.id, 
@@ -2421,4 +2543,54 @@ class Constraint:
                     nsid=Constraint.cnrbsetidlist[i]
                 )
             )
-        
+
+class Point:
+    def __init__(self,x=0,y=0,z=0):
+        self.x = x
+        self.y = y
+        self.z = z
+
+class Direction:
+    def __init__(self,x=0,y=0,z=0):
+        self.x = x
+        self.y = y
+        self.z = z
+
+class RigidwallCylinder:
+    rwlist = []
+    def __init__(self,tail=Point(0,0,0),head=Point(0,0,0),radius=1,length=10):
+        self.stub = DynaBase.get_stub()
+        self.tail = tail
+        self.head = head
+        self.radius = radius
+        self.length = length
+        self.motion = 0
+        self.lcid = 0
+        self.dir = Direction(1,0,0)
+        RigidwallCylinder.rwlist.append(self)
+
+    def set_motion(self,curve,motion=Motion.VELOCITY,dir=Direction(1,0,0)):
+        curve.create(self.stub)
+        self.lcid=curve.id
+        self.motion = motion.value
+        if self.motion==Motion.DISPLACEMENT:
+            self.motion = 1
+        self.dir = dir
+
+    def create(self):
+        parameter = [self.tail.x,self.tail.y,self.tail.z,self.head.x,self.head.y,self.head.z,self.radius,self.length]
+        self.stub.CreateRigidWallGeom(
+            RigidWallGeomRequest(
+                geomtype=3,
+                motion=self.motion,
+                display=1,
+                parameter=parameter,
+                lcid=self.lcid,
+                vx=self.dir.x,
+                vy=self.dir.y,
+                vz=self.dir.z,
+            )
+        )
+        logging.info("Cylinder Rigidwall Created...")
+
+
