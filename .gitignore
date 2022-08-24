@@ -44,7 +44,7 @@ test-output.xml
 /.ipynb_checkpoints
 
 /ansys/dyna/pre/Server/input/
-/ansys/dyna/pre/Server/output/efpcase.k
+/ansys/dyna/pre/Server/output/
 /client.log
 /examples/pre/client.log
 /ansys/dyna/pre/Server/output/
