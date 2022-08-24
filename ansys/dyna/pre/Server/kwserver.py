@@ -1331,7 +1331,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.ICFDSectionReply(answer = 0)
 
     def ICFDCreateMat(self,request,context):     
-        mid = request.mid
+        mid = self.kwdproc.get_data(gdt.KWD_ICFD_MAT_LASTID)+1
         flg = request.flg
         ro = request.ro
         vis = request.vis
@@ -1340,7 +1340,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'ICFD material '+str(mid)+' Created...'
         print(msg)
-        return kwprocess_pb2.ICFDMatReply(answer = 0)    
+        return kwprocess_pb2.ICFDMatReply(id = mid)    
 
     def ICFDCreatePart(self,request,context):     
         pid = request.pid
@@ -1353,8 +1353,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ICFDPartReply(answer = 0)      
     
-    def ICFDCreatePartVol(self,request,context):     
-        pid = request.pid
+    def ICFDCreatePartVol(self,request,context):   
+        pid = self.kwdproc.get_data(gdt.KWD_ICFD_PART_VOL_LASTID)+1  
         secid = request.secid
         mid = request.mid
         spids = request.spids
@@ -1374,7 +1374,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'ICFD part vol '+str(pid)+' Created...'
         print(msg)
-        return kwprocess_pb2.ICFDPartVolReply(answer = 0) 
+        return kwprocess_pb2.ICFDPartVolReply(id = pid) 
 
     def ICFDCreateDBDrag(self,request,context):     
         pid = request.pid
@@ -1435,8 +1435,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ICFDBdyNonSlipReply(answer = 0)
 
-    def MESHCreateVolume(self,request,context):     
-        volid = request.volid
+    def MESHCreateVolume(self,request,context): 
+        volid = self.kwdproc.get_data(gdt.KWD_MESH_VOLUME_LASTID)+1    
         pids = request.pids
         card1 = str(volid)
         newk =  "*MESH_VOLUME\n" + card1 + "\n";  
@@ -1454,7 +1454,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'MESH volume '+str(volid)+' Created...'
         print(msg)
-        return kwprocess_pb2.MeshVolumeReply(answer = 0)
+        return kwprocess_pb2.MeshVolumeReply(id = volid)
 
     def MESHCreateEmbedShell(self,request,context):     
         volid = request.volid

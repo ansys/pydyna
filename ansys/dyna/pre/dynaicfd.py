@@ -10,8 +10,9 @@ class DynaICFD(DynaBase):
 
     def __init__(self, hostname = 'localhost'):
         DynaBase.__init__(self, hostname)
+        self.create_section_icfd(1)
 
-    def create_control_time(self, tim, dt):
+    def set_time(self, termination_time, dt=0):
         """Create *ICFD_CONTROL_TIME keyword
         Parameters
         ----------
@@ -25,7 +26,7 @@ class DynaICFD(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=tim, dt=dt))
+        ret = self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=termination_time, dt=dt))
         logging.info("ICFD control time Created...")
         return ret
 
@@ -406,4 +407,171 @@ class DynaICFD(DynaBase):
             MeshEmbedShellRequest(volid=volid, pids=pids)
         )
         logging.info("Embed surfaces Created...")
+        return ret
+#----second edition---------
+class Compressible(Enum):
+    VACUUM = 0
+    FULLY_INCOMPRESSIBLE_FLUID = 1
+
+class MatICFD():
+    """ Specify physical properties for the fluid material.
+    Parameters
+        ----------
+        mid : int
+            Material ID.
+        flg : int
+            Flag to choose between fully incompressible, slightly compressible, or barotropic flows:
+            EQ.0: Vacuum (free surface problems only)
+            EQ.1: Fully incompressible fluid.
+        ro : float
+            Flow density.
+        vis : float
+            Dynamic viscosity.
+    """
+    def __init__(self,flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID,flow_density=0,dynamic_viscosity=0):  
+        self.stub = DynaBase.get_stub()
+        ret = self.stub.ICFDCreateMat(ICFDMatRequest(flg=flag.value, ro=flow_density, vis=dynamic_viscosity))
+        self.id = ret.id
+        logging.info(f"ICFD material {self.id} Created...")
+
+class DOF(Enum):
+    X = 1
+    Y = 2
+    Z = 3
+
+class Vel(Enum):
+    LINEAR_VELOCITY = 1
+    ANGULAR_VELOCITY = 2
+
+class ICFDPart:
+    def __init__(self,id):
+        self.stub = DynaBase.get_stub()
+        self.id=id
+        self.secid=1
+        self.mid=0
+
+    def set_material(self,mat):
+        """Set material"""
+        self.mid = mat.material_id
+
+    def set_prescribed_velocity(self,motion,dof = DOF.X,velocity_flag = Vel.LINEAR_VELOCITY):
+        """Create *ICFD_BOUNDARY_PRESCRIBED_VEL keyword
+
+        Parameters
+        ----------
+        dof : int
+            Applicable degrees of freedom:
+            EQ.1: x-degree of freedom.
+            EQ.2: y-degree of freedom.
+            EQ.3: z-degree of freedom.
+            EQ.4: Normal direction degree of freedom.
+        velocity_flag : int
+            Velocity flag:
+            EQ.1: Linear velocity.
+            EQ.2: Angular velocity.
+            EQ.3: Parabolic velocity profile.
+            EQ.4: Activates synthetic turbulent field on part.
+        motion : Curve
+            Load curve used to describe motion value versus time."""
+        lcid = motion.id
+        ret = self.stub.ICFDCreateBdyPrescribedVel(
+            ICFDBdyPrescribedVelRequest(pid=self.id, dof=dof.value, vad=velocity_flag.value, lcid=lcid)
+        )
+        logging.info("ICFD boundary prescribed velocity Created...")
+
+    def set_prescribed_pre(self, pressure):
+        """Create *ICFD_BOUNDARY_PRESCRIBED_PRE keyword
+
+        Parameters
+        ----------
+        pressure : Curve
+            Load curve to describe the pressure value versus time.
+        """
+        lcid = pressure.id
+        ret = self.stub.ICFDCreateBdyPrescribedPre(
+            ICFDBdyPrescribedPreRequest(pid=self.id, lcid=lcid)
+        )
+        logging.info("ICFD boundary prescribed pressure Created...")
+        return ret
+    
+    def set_free_slip(self):
+        """Create *ICFD_BOUNDARY_FREESLIP keyword"""
+        ret = self.stub.ICFDCreateBdyFreeSlip(ICFDBdyFreeSlipRequest(pid=self.id))
+        logging.info("ICFD boundary freeslip Created...")
+        return ret
+
+    def set_non_slip(self):
+        """Create *ICFD_BOUNDARY_NONSLIP keyword"""
+        ret = self.stub.ICFDCreateBdyNonSlip(ICFDBdyNonSlipRequest(pid=self.id))
+        logging.info("ICFD boundary nonslip Created...")
+        return ret
+
+    def compute_drag_force(self):
+        """Enables the computation of drag forces over given surface parts of the model."""
+        ret = self.stub.ICFDCreateDBDrag(ICFDDBDragRequest(pid=self.id))
+        logging.info("ICFD database drag Created...")
+        return ret
+
+    def set_boundary_layer(self,number=3):
+        """define a boundary-layer mesh as a refinement on volume-mesh"""
+        """
+        Parameters
+        ----------
+        number : int
+            Number of elements normal to the surface (in the boundary layer).
+        """
+        ret = self.stub.MESHCreateBl(MeshBlRequest(pid=self.id, nelth=number-1))
+        logging.info("MESH boundary-layer Created...")
+        return ret
+
+class ICFDVolumePart:
+    def __init__(self,surfaces):
+        self.stub = DynaBase.get_stub()
+        self.id=id
+        self.secid=1
+        self.mid=0
+        self.surfaces = surfaces
+
+    def set_material(self,mat):
+        """Set material"""
+        self.mid = mat.material_id
+
+    def create(self):
+        """Create *ICFD_PART_VOL keyword
+        Parameters
+        ----------
+        pid : int
+            Part identifier for fluid volumes.
+        secid : int
+            Section identifier defined by the *ICFD_SECTION card.
+        mid : int
+            Material identifier.
+        spids : list
+            List of Part IDs for the surface elements that define the volume mesh.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        ret = self.stub.ICFDCreatePartVol(
+            ICFDPartVolRequest(secid=1, mid=self.mid, spids=self.surfaces)
+        )
+        self.id = ret.id
+        logging.info(f"ICFD part volume {self.id} Created...")
+        return ret
+
+class MeshedVolume:
+    """Defines the volume space that will be meshed.
+
+    Parameters
+        ----------
+    surfaces : list
+            list of Part IDs for the surface elements that are used to define the volume.
+    """
+    def __init__(self,surfaces):
+        self.surfaces = surfaces
+        ret = self.stub.MESHCreateVolume(MeshVolumeRequest(pids=self.surfaces))
+        self.id = ret.id
+        logging.info(f"MESH volume {self.id} Created...")
         return ret
