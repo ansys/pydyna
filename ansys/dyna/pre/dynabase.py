@@ -142,7 +142,7 @@ class DynaBase:
         self.mainname = os.path.basename(filenames[0])
         return self.stub.LoadFile(LoadFileRequest())
 
-    def set_timestep(self, tssfac=0.9, isdo=0, dt2ms=0.0):
+    def set_timestep(self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0):
         """Create *CONTROL_TIMESTEP keyword
         Parameters
         ----------
@@ -159,7 +159,7 @@ class DynaBase:
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateTimestep(
-            TimestepRequest(tssfac=tssfac, isdo=isdo, dt2ms=dt2ms)
+            TimestepRequest(tssfac=tssfac, isdo=isdo, dt2ms=timestep_size_for_mass_scaled)
         )
         logging.info("Timestep Created...")
         return ret
@@ -2147,7 +2147,7 @@ class SolidPart(Part):
                 elform=self.formulation
             )
         )
-        self.id = ret.id
+        self.secid = ret.id
         if self.hourglasstype>0:
             ret = self.stub.CreateHourglass(
             HourglassRequest(ihq=self.hourglasstype, qm=1, q1=0, q2=0, qb=0, qw=0)
@@ -2557,6 +2557,19 @@ class Direction:
         self.z = z
 
 class RigidwallCylinder:
+    """Define a rigid wall with a cylinder form.
+    
+    Parameters
+        ----------
+        tail : Point
+            The coordinate of tail of normal vector.
+        head : Point      
+            The coordinate of head of normal vector.
+        radius : float
+            Radius of cylinder.
+        length : float
+            Length of cylinder.
+    """
     rwlist = []
     def __init__(self,tail=Point(0,0,0),head=Point(0,0,0),radius=1,length=10):
         self.stub = DynaBase.get_stub()
@@ -2564,12 +2577,13 @@ class RigidwallCylinder:
         self.head = head
         self.radius = radius
         self.length = length
-        self.motion = 0
+        self.motion = -1
         self.lcid = 0
         self.dir = Direction(1,0,0)
         RigidwallCylinder.rwlist.append(self)
 
     def set_motion(self,curve,motion=Motion.VELOCITY,dir=Direction(1,0,0)):
+        """set prescribed motion"""
         curve.create(self.stub)
         self.lcid=curve.id
         self.motion = motion.value
@@ -2588,7 +2602,7 @@ class RigidwallCylinder:
                 lcid=self.lcid,
                 vx=self.dir.x,
                 vy=self.dir.y,
-                vz=self.dir.z,
+                vz=self.dir.z
             )
         )
         logging.info("Cylinder Rigidwall Created...")

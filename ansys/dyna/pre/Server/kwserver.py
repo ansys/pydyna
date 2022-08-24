@@ -678,15 +678,15 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         if geomtype == 3:
             card2 = str(parameter[0])+','+str(parameter[1])+','+str(parameter[2])+','+str(parameter[3])+','+str(parameter[4])+','+str(parameter[5])
             card3 = str(parameter[6])+','+str(parameter[7])
-            if motion != 0:
+            if motion >= 0:
                 card4 = str(lcid)+',0,'+str(vx)+','+str(vy)+','+str(vz)
             opcode = '*RIGIDWALL_GEOMETRIC_CYLINDER'
-            if motion != 0:
+            if motion >= 0:
                 opcode+='_MOTION'
             if display != 0:
                 opcode += '_DISPLAY'
             newk = opcode+"\n0,0,0\n" + card2 + "\n"+card3
-            if motion !=0:
+            if motion >=0:
                 newk += ('\n'+card4)
             if display !=0:
                 newk += "\n ,1e-9,1e-4,0.3"

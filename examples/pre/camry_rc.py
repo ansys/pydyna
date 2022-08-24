@@ -21,6 +21,7 @@ if __name__ == "__main__":
     fns.append(path + "Camry_RC_main.k")
     fns.append(path + "501_RIG_BAR_roof_crush_platen5.key")
     fns.append(path + "Camry_V1_NoSusAndPowerTrain_impl7.k")
+    fns.append(path + "Camry_V1_NoSusAndPowerTrain_impl7_nodes.k")
     fns.append(path + "roof_welds.k")
     fns.append(path + "weld7.k")
     fns.append(path + "xtra_sw.k")
