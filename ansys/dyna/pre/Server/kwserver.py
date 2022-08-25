@@ -442,7 +442,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
 
     def CreateDefineCurve(self,request,context):
         lcid = request.lcid
-        lcid = self.kwdproc.get_data(gdt.KWD_DEFINE_BOX_LASTID)+1
+        lcid = self.kwdproc.get_data(gdt.KWD_DEFINE_CURVE_LASTID)+1
         sfo = request.sfo
         abscissa = request.abscissa
         ordinate = request.ordinate
@@ -1247,6 +1247,26 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = 'Set Property for Part '+str(pid)
         print(msg)
         return kwprocess_pb2.PartPropertyReply(answer = 0)
+    
+    def SetICFDPartProperty(self,request,context):
+        pid = request.pid
+        secid = request.secid
+        mid = request.mid
+        self.kwdproc.set_kwd_data1(gdt.KWD_DETAILDATA_EXTERNALID, "*ICFD_PART", pid,3,secid)
+        self.kwdproc.set_kwd_data1(gdt.KWD_DETAILDATA_EXTERNALID, "*ICFD_PART", pid,4,mid)
+        msg = 'Set Property for ICFD Part '+str(pid)
+        print(msg)
+        return kwprocess_pb2.ICFDPartPropertyReply(answer = 0)
+
+    def SetICFDVolumePartProperty(self,request,context):
+        pid = request.pid
+        secid = request.secid
+        mid = request.mid
+        self.kwdproc.set_kwd_data(gdt.KWD_DETAILDATA_EXTERNALID, "ICFD_PART_VOL_KIND", pid,3,mid)
+        self.kwdproc.set_kwd_data(gdt.KWD_DETAILDATA_EXTERNALID, "ICFD_PART_VOL_KIND", pid,4,secid)
+        msg = 'Set Property for ICFD Volume Part '+str(pid)
+        print(msg)
+        return kwprocess_pb2.ICFDVolumePartPropertyReply(answer = 0)
 
     def GetSolidElements(self,request,context):
         coords = self.kwdproc.get_data_nodearray()

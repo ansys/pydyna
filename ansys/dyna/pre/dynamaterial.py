@@ -188,7 +188,6 @@ class MatNull():
         self.name = "NULL"
         logging.info(f"Material {self.name} Created...")
 
-   
 class MatRigid():
     """Parts made from this material are considered to belong to a rigid body"""
     def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
