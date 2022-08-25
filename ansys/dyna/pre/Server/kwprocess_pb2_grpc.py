@@ -464,6 +464,16 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.ICFDSolverTolMMOVRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ICFDSolverTolMMOVReply.FromString,
                 )
+        self.SetICFDPartProperty = channel.unary_unary(
+                '/kwgrpc.kwC2S/SetICFDPartProperty',
+                request_serializer=kwprocess__pb2.ICFDPartPropertyRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDPartPropertyReply.FromString,
+                )
+        self.SetICFDVolumePartProperty = channel.unary_unary(
+                '/kwgrpc.kwC2S/SetICFDVolumePartProperty',
+                request_serializer=kwprocess__pb2.ICFDVolumePartPropertyRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDVolumePartPropertyReply.FromString,
+                )
         self.MESHCreateVolume = channel.unary_unary(
                 '/kwgrpc.kwC2S/MESHCreateVolume',
                 request_serializer=kwprocess__pb2.MeshVolumeRequest.SerializeToString,
@@ -1173,6 +1183,18 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SetICFDPartProperty(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetICFDVolumePartProperty(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def MESHCreateVolume(self, request, context):
         """----MESH
         """
@@ -1810,6 +1832,16 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.ICFDCreateSolverTolMMOV,
                     request_deserializer=kwprocess__pb2.ICFDSolverTolMMOVRequest.FromString,
                     response_serializer=kwprocess__pb2.ICFDSolverTolMMOVReply.SerializeToString,
+            ),
+            'SetICFDPartProperty': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetICFDPartProperty,
+                    request_deserializer=kwprocess__pb2.ICFDPartPropertyRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDPartPropertyReply.SerializeToString,
+            ),
+            'SetICFDVolumePartProperty': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetICFDVolumePartProperty,
+                    request_deserializer=kwprocess__pb2.ICFDVolumePartPropertyRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDVolumePartPropertyReply.SerializeToString,
             ),
             'MESHCreateVolume': grpc.unary_unary_rpc_method_handler(
                     servicer.MESHCreateVolume,
@@ -3498,6 +3530,40 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateSolverTolMMOV',
             kwprocess__pb2.ICFDSolverTolMMOVRequest.SerializeToString,
             kwprocess__pb2.ICFDSolverTolMMOVReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetICFDPartProperty(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/SetICFDPartProperty',
+            kwprocess__pb2.ICFDPartPropertyRequest.SerializeToString,
+            kwprocess__pb2.ICFDPartPropertyReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetICFDVolumePartProperty(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/SetICFDVolumePartProperty',
+            kwprocess__pb2.ICFDVolumePartPropertyRequest.SerializeToString,
+            kwprocess__pb2.ICFDVolumePartPropertyReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

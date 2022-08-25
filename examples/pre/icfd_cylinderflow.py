@@ -43,7 +43,8 @@ if __name__ == "__main__":
     part_wall.compute_drag_force()
     part_wall.set_boundary_layer(number=3)
 
-    partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])  
+    partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
+    partvol.set_material(mat)  
     # define the volume space that will be meshed,The boundaries 
     #of the volume are the surfaces "spids"
     meshvol = MeshedVolume(surfaces = [1, 2, 3, 4])
