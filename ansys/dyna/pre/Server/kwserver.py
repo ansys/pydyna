@@ -901,6 +901,18 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.LoadBodyReply(answer = 0)    
 
     #MATERIAL
+    def CreateMatEM(self,request,context):
+        mid = request.mid
+        mtype = request.mtype
+        sigma = request.sigma
+        card1 = str(mid)+","+str(mtype)+","+str(sigma)
+        opcode = "*EM_MAT_001"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatEMReply(id = mid)  
+        
     def CreateMatRigid(self,request,context):
         mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
         ro = request.ro
@@ -931,7 +943,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = opcode+" Created..."
         print(msg)
-        return kwprocess_pb2.MatElasticReply(ret = 0) 
+        return kwprocess_pb2.MatElasticReply(mid = mid) 
 
     def CreateMatSpotweld(self,request,context):
         mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
