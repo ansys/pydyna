@@ -194,6 +194,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.LoadBodyRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.LoadBodyReply.FromString,
                 )
+        self.CreateMatEM = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateMatEM',
+                request_serializer=kwprocess__pb2.MatEMRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MatEMReply.FromString,
+                )
         self.CreateMatRigid = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateMatRigid',
                 request_serializer=kwprocess__pb2.MatRigidRequest.SerializeToString,
@@ -853,9 +858,15 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CreateMatRigid(self, request, context):
+    def CreateMatEM(self, request, context):
         """---MATERIAL
         """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateMatRigid(self, request, context):
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -1562,6 +1573,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateLoadBody,
                     request_deserializer=kwprocess__pb2.LoadBodyRequest.FromString,
                     response_serializer=kwprocess__pb2.LoadBodyReply.SerializeToString,
+            ),
+            'CreateMatEM': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateMatEM,
+                    request_deserializer=kwprocess__pb2.MatEMRequest.FromString,
+                    response_serializer=kwprocess__pb2.MatEMReply.SerializeToString,
             ),
             'CreateMatRigid': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateMatRigid,
@@ -2612,6 +2628,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateLoadBody',
             kwprocess__pb2.LoadBodyRequest.SerializeToString,
             kwprocess__pb2.LoadBodyReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateMatEM(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatEM',
+            kwprocess__pb2.MatEMRequest.SerializeToString,
+            kwprocess__pb2.MatEMReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

@@ -188,9 +188,41 @@ class MatNull():
         self.name = "NULL"
         logging.info(f"Material {self.name} Created...")
 
-class MatRigid():
+class MatAdditional:
+    """Define additional properties for material"""
+    def __init__(self):
+        self.em = False
+        self.thermal = False
+
+    def set_electromagnetic_property(self,material_type,initial_conductivity):
+        self.em_material_type = material_type
+        self.em_initial_conductivity = initial_conductivity
+
+    def create(self,stub,matid):
+        stub.CreateMatEM(
+            MatEMRequest(mid =matid, mtype=self.em_material_type,sigma=self.em_initial_conductivity)
+        )
+        logging.info(f"Material EM Created...")
+
+class MatElastic(MatAdditional):
+    """This is an isotropic hypoelastic material"""
+    def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0.3):  
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr=poisson_ratio
+
+    def create(self,stub):
+        ret = stub.CreateMatElastic(
+            MatRigidRequest(ro=self.ro,e=self.e,pr=self.pr)
+        )
+        self.material_id=ret.mid
+        self.name = "Elastic"
+        MatAdditional.create(stub,self.material_id)
+        logging.info(f"Material {self.name} Created...")
+
+class MatRigid(MatAdditional):
     """Parts made from this material are considered to belong to a rigid body"""
-    def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0,
+    def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0.3,
     center_of_mass_constraint=0,
     translational_constraint=0,
     rotational_constraint=0):  
@@ -207,6 +239,7 @@ class MatRigid():
         )
         self.material_id=ret.mid
         self.name = "RIGID"
+        MatAdditional.create(stub,self.material_id)
         logging.info(f"Material {self.name} Created...")
 
 class MatPiecewiseLinearPlasticity():
