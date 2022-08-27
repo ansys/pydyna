@@ -518,3 +518,16 @@ class DynaEM(DynaBase):
         )
         logging.info("EM EOS Permeability Created...")
         return ret
+
+class EMType(Enum):
+    EDDY_CURRENT = 1
+    INDUCTIVE_HEATING = 2
+    RESISTIVE_HEATING = 3
+    ELECTROPHYSIOLOGY = 4
+
+class EMAnalysis():
+    def __init__(self,type=EMType.EDDY_CURRENT):
+        self.type = type.value
+
+    def set_solver_bem(self):
+        pass
