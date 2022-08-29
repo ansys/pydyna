@@ -194,6 +194,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.LoadBodyRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.LoadBodyReply.FromString,
                 )
+        self.CreateMatEM = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateMatEM',
+                request_serializer=kwprocess__pb2.MatEMRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MatEMReply.FromString,
+                )
         self.CreateMatRigid = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateMatRigid',
                 request_serializer=kwprocess__pb2.MatRigidRequest.SerializeToString,
@@ -463,6 +468,16 @@ class kwC2SStub(object):
                 '/kwgrpc.kwC2S/ICFDCreateSolverTolMMOV',
                 request_serializer=kwprocess__pb2.ICFDSolverTolMMOVRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ICFDSolverTolMMOVReply.FromString,
+                )
+        self.SetICFDPartProperty = channel.unary_unary(
+                '/kwgrpc.kwC2S/SetICFDPartProperty',
+                request_serializer=kwprocess__pb2.ICFDPartPropertyRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDPartPropertyReply.FromString,
+                )
+        self.SetICFDVolumePartProperty = channel.unary_unary(
+                '/kwgrpc.kwC2S/SetICFDVolumePartProperty',
+                request_serializer=kwprocess__pb2.ICFDVolumePartPropertyRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDVolumePartPropertyReply.FromString,
                 )
         self.MESHCreateVolume = channel.unary_unary(
                 '/kwgrpc.kwC2S/MESHCreateVolume',
@@ -843,9 +858,15 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CreateMatRigid(self, request, context):
+    def CreateMatEM(self, request, context):
         """---MATERIAL
         """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateMatRigid(self, request, context):
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -1168,6 +1189,18 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ICFDCreateSolverTolMMOV(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetICFDPartProperty(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetICFDVolumePartProperty(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1541,6 +1574,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.LoadBodyRequest.FromString,
                     response_serializer=kwprocess__pb2.LoadBodyReply.SerializeToString,
             ),
+            'CreateMatEM': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateMatEM,
+                    request_deserializer=kwprocess__pb2.MatEMRequest.FromString,
+                    response_serializer=kwprocess__pb2.MatEMReply.SerializeToString,
+            ),
             'CreateMatRigid': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateMatRigid,
                     request_deserializer=kwprocess__pb2.MatRigidRequest.FromString,
@@ -1810,6 +1848,16 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.ICFDCreateSolverTolMMOV,
                     request_deserializer=kwprocess__pb2.ICFDSolverTolMMOVRequest.FromString,
                     response_serializer=kwprocess__pb2.ICFDSolverTolMMOVReply.SerializeToString,
+            ),
+            'SetICFDPartProperty': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetICFDPartProperty,
+                    request_deserializer=kwprocess__pb2.ICFDPartPropertyRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDPartPropertyReply.SerializeToString,
+            ),
+            'SetICFDVolumePartProperty': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetICFDVolumePartProperty,
+                    request_deserializer=kwprocess__pb2.ICFDVolumePartPropertyRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDVolumePartPropertyReply.SerializeToString,
             ),
             'MESHCreateVolume': grpc.unary_unary_rpc_method_handler(
                     servicer.MESHCreateVolume,
@@ -2580,6 +2628,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateLoadBody',
             kwprocess__pb2.LoadBodyRequest.SerializeToString,
             kwprocess__pb2.LoadBodyReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateMatEM(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatEM',
+            kwprocess__pb2.MatEMRequest.SerializeToString,
+            kwprocess__pb2.MatEMReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3498,6 +3563,40 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateSolverTolMMOV',
             kwprocess__pb2.ICFDSolverTolMMOVRequest.SerializeToString,
             kwprocess__pb2.ICFDSolverTolMMOVReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetICFDPartProperty(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/SetICFDPartProperty',
+            kwprocess__pb2.ICFDPartPropertyRequest.SerializeToString,
+            kwprocess__pb2.ICFDPartPropertyReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetICFDVolumePartProperty(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/SetICFDVolumePartProperty',
+            kwprocess__pb2.ICFDVolumePartPropertyRequest.SerializeToString,
+            kwprocess__pb2.ICFDVolumePartPropertyReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

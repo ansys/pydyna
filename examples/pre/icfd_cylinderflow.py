@@ -4,7 +4,8 @@ This example demonstrates how to create a simple ICFD cylinder flow input deck.
 import os
 import sys
 
-from pydyna.dynaicfd import DynaICFD
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
+from pre.dynaicfd import *
 
 if __name__ == "__main__":
     hostname = "localhost"
@@ -18,41 +19,35 @@ if __name__ == "__main__":
     icfd.open_files(fns)
 
     #set time step size
-    icfd.create_control_time(tim=100, dt=0)
+    icfd.set_time(termination_time=100)
 
-    #define material and section for parts
-    icfd.create_section_icfd(sid=1)
-    icfd.create_mat_icfd(mid=1, flg=1, ro=1.0, vis=0.005)
-    icfd.create_part_icfd(pid=1, secid=1, mid=1)
-    icfd.create_part_icfd(pid=2, secid=1, mid=1)
-    icfd.create_part_icfd(pid=3, secid=1, mid=1)
-    icfd.create_part_icfd(pid=4, secid=1, mid=1)
-    spids = [1, 2, 3, 4]
-    icfd.create_part_vol(pid=10, secid=1, mid=1, spids=spids)
+    #define model
+    mat = MatICFD(flow_density=1.0,dynamic_viscosity=0.005)
 
-    #enable the computation of drag forces over part 4
-    icfd.create_db_drag(pid=4)
+    part_inflow = ICFDPart(1)
+    part_inflow.set_material(mat)
+    part_inflow.set_prescribed_velocity(dof=DOF.X,motion=Curve(x=[0, 10000],y=[1, 1]))
+    part_inflow.set_prescribed_velocity(dof=DOF.Y,motion=Curve(x=[0, 10000],y=[0, 0]))
 
-    abs = [0, 10000]
-    ord = [1, 1]
-    icfd.create_definecurve(lcid=1, sfo=1, abscissa=abs, ordinate=ord)
-    abs = [0, 10000]
-    ord = [0, 0]
-    icfd.create_definecurve(lcid=2, sfo=1, abscissa=abs, ordinate=ord)
-    #Set the boundary conditions
-    icfd.create_bdy_prescribed_vel(pid=1, dof=1, vad=1, lcid=1)
-    icfd.create_bdy_prescribed_vel(pid=1, dof=2, vad=1, lcid=2)
-    icfd.create_bdy_prescribed_pre(pid=2, lcid=2)
-    icfd.create_bdy_free_slip(pid=3)
-    icfd.create_bdy_non_slip(pid=4)
+    part_outflow = ICFDPart(2)
+    part_outflow.set_material(mat)
+    part_outflow.set_prescribed_pre(pressure = Curve(x=[0, 10000],y=[0, 0]))
 
+    part_symmetric = ICFDPart(3)
+    part_symmetric.set_material(mat)
+    part_symmetric.set_free_slip()
+
+    part_wall= ICFDPart(4)
+    part_wall.set_material(mat)
+    part_wall.set_non_slip()
+    part_wall.compute_drag_force()
+    part_wall.set_boundary_layer(number=3)
+
+    partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
+    partvol.set_material(mat)  
     # define the volume space that will be meshed,The boundaries 
     #of the volume are the surfaces "spids"
-    icfd.mesh_create_volume(volid=1, pids=spids)
-    #apply boundary layer mesh to the cylinder(part 4),in order to 
-    # better capture the velocity gradient close to the wall
-    icfd.mesh_create_bl(pid=4, nelth=2)
+    meshvol = MeshedVolume(surfaces = [1, 2, 3, 4])
 
     icfd.create_database_binary(dt=1)
-
     icfd.save_file()
