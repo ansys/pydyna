@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     part_outflow = ICFDPart(2)
     part_outflow.set_material(mat)
-    part_outflow.set_prescribed_pre(pressure = Curve(x=[0, 10000],y=[0, 0]))
+    part_outflow.set_prescribed_pressure(pressure = Curve(x=[0, 10000],y=[0, 0]))
 
     part_symmetric = ICFDPart(3)
     part_symmetric.set_material(mat)

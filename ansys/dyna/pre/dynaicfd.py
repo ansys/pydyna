@@ -496,7 +496,7 @@ class ICFDPart:
         )
         logging.info("ICFD boundary prescribed velocity Created...")
 
-    def set_prescribed_pre(self, pressure):
+    def set_prescribed_pressure(self, pressure):
         """ Impose a fluid pressure on the boundary.
 
         Parameters
