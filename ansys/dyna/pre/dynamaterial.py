@@ -217,7 +217,7 @@ class MatElastic(MatAdditional):
         )
         self.material_id=ret.mid
         self.name = "Elastic"
-        MatAdditional.create(stub,self.material_id)
+        MatAdditional.create(self,stub,self.material_id)
         logging.info(f"Material {self.name} Created...")
 
 class MatRigid(MatAdditional):
@@ -239,7 +239,7 @@ class MatRigid(MatAdditional):
         )
         self.material_id=ret.mid
         self.name = "RIGID"
-        MatAdditional.create(stub,self.material_id)
+        MatAdditional.create(self,stub,self.material_id)
         logging.info(f"Material {self.name} Created...")
 
 class MatPiecewiseLinearPlasticity():

@@ -935,7 +935,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.MatRigidReply(mid = mid)  
 
     def CreateMatElastic(self,request,context):
-        mid = request.mid
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
         ro = request.ro
         e = request.e
         pr = request.pr
