@@ -160,6 +160,7 @@ class DynaEM(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
+        segmentset.create(self.stub)
         setid = segmentset.id
         ret = self.stub.CreateEMCircuitRogo(
             EMCircuitRogoRequest(
@@ -524,7 +525,9 @@ class DynaEM(DynaBase):
         """Save keyword files."""
         self.create_em_output(mats=2,matf=2,sols=2,solf=2)
         self.create_em_database_globalenergy(outlv=1)
-        for obj in ICFDVolumePart.partlist:
+        for obj in SolidPart.partlist:
+            obj.set_property()
+        for obj in Circuit.circuitlist:
             obj.create()
         ret = self.stub.SaveFile(SaveFileRequest(name=self.mainname))
         msg = self.mainname + " is outputed..."
@@ -616,11 +619,13 @@ class Circuit():
         loadcurve : Curve
             Load curve for circtyp = 1, 2, 21 or 22
         """
+    circuitlist = []
     def __init__(self,loadcurve,circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME):
         self.stub = DynaBase.get_stub()
         self.circuit_type=circuit_type.value
         loadcurve.create(self.stub)
         self.lcid = loadcurve.id
+        Circuit.circuitlist.append(self)
 
     def set_current(self,current,current_inlet,current_outlet):
         """Define segment set for current.

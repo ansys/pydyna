@@ -4,6 +4,7 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
 from pre.dynaem import *
 from pre.dynamaterial import *
+from em_railgun_data import *
 
 if __name__ == "__main__":
     hostname = "localhost"
@@ -15,7 +16,7 @@ if __name__ == "__main__":
     fns.append(path + "em_railgun.k")
     railgun.open_files(fns)
     
-    railgun.set_termination(endtim=3e-4)
+    railgun.set_termination(termination_time=3e-4)
     railgun.set_timestep()
 
     analysis = EMAnalysis()
@@ -46,13 +47,10 @@ if __name__ == "__main__":
     workpiece2.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
     
     bdy = BoundaryCondition()
-    nodes1 = []
-    nodes2 = []
-    bdy.create_spc(NodeSet(nodes1),tx=False,ty=False,rz=False,death=0)
-    bdy.create_spc(NodeSet(nodes2),tx=False,ty=False,rz=False,death=0)
+    bdy.create_spc(NodeSet(spc1),tx=False,ty=False,rz=False,death=0)
+    bdy.create_spc(NodeSet(spc2),tx=False,ty=False,rz=False,death=0)
 
-    rogoset=[[]]
-    railgun.set_rogowsky_coil_to_output_current(SegmentSet(rogoset))
+    railgun.set_rogowsky_coil_to_output_current(SegmentSet(cur))
     railgun.create_database_binary(dt=5e-6)
 
     railgun.save_file()
