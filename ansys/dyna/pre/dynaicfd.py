@@ -11,24 +11,29 @@ class DynaICFD(DynaBase):
     def __init__(self, hostname = 'localhost'):
         DynaBase.__init__(self, hostname)
         self.create_section_icfd(1)
+        self.timestep = 0
+        self.termination = 1e28
 
-    def set_time(self, termination_time, dt=0):
-        """Create *ICFD_CONTROL_TIME keyword
+
+    def set_timestep(self, timestep=0):
+        """Set time step for the fluid problem.
+
         Parameters
         ----------
-        tim : float
-            Total time of simulation for the fluid problem.
         dt : float
             Time step for the fluid problem.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
         """
-        ret = self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=termination_time, dt=dt))
-        logging.info("ICFD control time Created...")
-        return ret
+        self.timestep = timestep
+
+    def set_termination(self, termination_time):
+        """Set total time of simulation for the fluid problem.
+
+        Parameters
+        ----------
+        termination_time : float
+            Total time of simulation for the fluid problem.
+        """
+        self.termination = termination_time
 
     def create_control_general(self, atype=0, mtype=0, dvcl=0, rdvcl=0):
         """Specify the type of CFD analysis.
@@ -411,6 +416,8 @@ class DynaICFD(DynaBase):
 
     def save_file(self):
         """Save keyword files."""
+        self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=self.termination, dt=self.timestep))
+        logging.info("ICFD control time Created...")
         self.create_section_icfd(1)
         for obj in ICFDPart.partlist:
             obj.set_property()

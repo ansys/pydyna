@@ -1,8 +1,10 @@
 import os
 import sys
 
-from pydyna.dynaem import *
-from pydyna.dynamaterial import *
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
+from pre.dynaem import *
+from pre.dynamaterial import *
+from em_railgun_data import *
 
 if __name__ == "__main__":
     hostname = "localhost"
@@ -14,27 +16,18 @@ if __name__ == "__main__":
     fns.append(path + "em_railgun.k")
     railgun.open_files(fns)
     
-    railgun.create_em_control(emsol=1)
-    railgun.create_em_control_contact(emct=1)
-    railgun.create_em_timestep(tstype=1,dtconst=5e-6)
-    railgun.create_circuit_rogo(rogid=4,setid=4,settype=1,curtyp=1)
-    abs = [0,8e-5,2e-4,4e-4,6e-4,1e-3]
-    ord = [0,350,450,310,230,125]
-    railgun.create_definecurve(lcid=4, sfo=2e6, abscissa=abs, ordinate=ord)
-    railgun.create_circuit(circid=1,circtyp=1,lcid=4,sidcurr=4,sidvin=1,sidvout=2)
+    railgun.set_termination(termination_time=3e-4)
+    railgun.set_timestep()
 
-    railgun.create_em_solver_bemmat(matid=1)
-    railgun.create_em_solver_bemmat(matid=2)
-    railgun.create_em_solver_bem(ncylbem=3)
-    railgun.create_em_solver_fem(reltol=1e-3,stype=1,precon=1,ncylbem=3)
-
-    
-    railgun.create_termination(endtim=3e-4)
-    railgun.create_timestep()
-
-    abs = [0,3e-4]
-    ord = [5e-6,5e-6]
-    railgun.create_definecurve(lcid=5, sfo=1, abscissa=abs, ordinate=ord)
+    analysis = EMAnalysis()
+    analysis.set_timestep(timestep=5e-6)
+    analysis.set_solver_bem(solver=BEMSOLVER.PCG)
+    analysis.set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER,relative_tol=1e-3)
+    analysis.set_bem_matrix_tol(p_matrix_tol=1e-6,q_matrix_tol=1e-6)
+    analysis.set_contact()
+   
+    circuit = Circuit(circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME,loadcurve=Curve(x=[0,8e-5,2e-4,4e-4,6e-4,1e-3],y=[0,350,450,310,230,125],sfo=2e6))
+    circuit.set_current(current=SegmentSet(cur),current_inlet=SegmentSet(inlet),current_outlet=SegmentSet(outlet))
 
     matelastic = MatElastic(mass_density=2.64e-3,young_modulus=9.7e+10,poisson_ratio=0.31)
     matelastic.set_electromagnetic_property(material_type=2,initial_conductivity=25)
@@ -54,13 +47,10 @@ if __name__ == "__main__":
     workpiece2.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
     
     bdy = BoundaryCondition()
-    nodes1 = []
-    nodes2 = []
-    bdy.create_spc(NodeSet(nodes1),tx=False,ty=False,rz=False,death=0)
-    bdy.create_spc(NodeSet(nodes2),tx=False,ty=False,rz=False,death=0)
+    bdy.create_spc(NodeSet(spc1),tx=False,ty=False,rz=False,death=0)
+    bdy.create_spc(NodeSet(spc2),tx=False,ty=False,rz=False,death=0)
 
-    railgun.create_em_output(mats=2,matf=2,sols=2,solf=2)
-    railgun.create_em_database_globalenergy(outlv=1)
+    railgun.set_rogowsky_coil_to_output_current(SegmentSet(cur))
     railgun.create_database_binary(dt=5e-6)
 
     railgun.save_file()

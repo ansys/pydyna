@@ -137,7 +137,7 @@ class DynaEM(DynaBase):
         logging.info("EM Contact Created...")
         return ret
 
-    def create_circuit_rogo(self, rogid=0,setid=0,settype=0,curtyp=0):
+    def set_rogowsky_coil_to_output_current(self,segmentset=SegmentSet([[]]),settype=1,curtyp=1):
         """Define Rogowsky coils to measure a global current vs time through a segment set or a node set.
         Parameters
         ----------
@@ -160,13 +160,15 @@ class DynaEM(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
+        segmentset.create(self.stub)
+        setid = segmentset.id
         ret = self.stub.CreateEMCircuitRogo(
             EMCircuitRogoRequest(
-                rogid=rogid, setid=setid,settype=settype,curtyp=curtyp
+                setid=setid,settype=settype,curtyp=curtyp
             )
         )
         logging.info("EM Circuit Rogo Created...")
-        return ret
+        return ret.id
 
 
     def create_circuit(self, circid,circtyp,lcid,sidcurr,sidvin,sidvout):
@@ -519,15 +521,132 @@ class DynaEM(DynaBase):
         logging.info("EM EOS Permeability Created...")
         return ret
 
+    def save_file(self):
+        """Save keyword files."""
+        self.create_em_output(mats=2,matf=2,sols=2,solf=2)
+        self.create_em_database_globalenergy(outlv=1)
+        for obj in SolidPart.partlist:
+            obj.set_property()
+        for obj in Circuit.circuitlist:
+            obj.create()
+        ret = self.stub.SaveFile(SaveFileRequest(name=self.mainname))
+        msg = self.mainname + " is outputed..."
+        logging.info(msg)
+        return ret
+
 class EMType(Enum):
     EDDY_CURRENT = 1
     INDUCTIVE_HEATING = 2
     RESISTIVE_HEATING = 3
-    ELECTROPHYSIOLOGY = 4
+    ELECTROPHYSIOLOGY = 11
+
+class BEMSOLVER(Enum):
+    DIRECT_SOLVER = 1
+    PCG = 2
+
+class FEMSOLVER(Enum):
+    DIRECT_SOLVER = 1
+    PCG = 2
 
 class EMAnalysis():
     def __init__(self,type=EMType.EDDY_CURRENT):
-        self.type = type.value
+        """Enable the EM solver and set its options.
 
-    def set_solver_bem(self):
-        pass
+        Parameters
+        ----------
+        type : int
+           Electromagnetism solver selector:
+           EQ.1: Eddy current solver. 
+           EQ.2: Induced heating solver. 
+           EQ.3: Resistive heating solver. 
+           EQ.11: Electrophysiology monodomain. 
+        """
+        self.stub = DynaBase.get_stub()
+        self.type = type.value
+        self.stub.CreateEMControl(EMControlRequest(emsol=self.type, numls=100, macrodt=0, ncylfem=5000,ncylbem = 5000))
+
+    def set_timestep(self,timestep):
+        self.stub.CreateEMTimestep(
+            EMTimestepRequest(
+                tstype=1, dtconst=timestep
+            )
+        )
+        logging.info("EM Timestep Created...")
+       
+    def set_solver_bem(self,solver=BEMSOLVER.PCG,relative_tol = 1e-6,max_iteration=1000):
+        self.stub.CreateEMSolverBem(
+            EMSolverBemRequest(
+                reltol=relative_tol,maxite=max_iteration,stype=solver.value,precon=1,uselast=1,ncylbem=3
+            )
+        )
+        logging.info("EM Solver BEM Created...")
+
+    def set_solver_fem(self,solver=FEMSOLVER.DIRECT_SOLVER,relative_tol = 1e-6,max_iteration=1000):
+        self.stub.CreateEMSolverFem(
+            EMSolverFemRequest(
+                reltol=relative_tol,maxite=max_iteration,stype=solver.value,precon=1,uselast=1,ncylbem=3
+            )
+        )
+
+    def set_bem_matrix_tol(self,p_matrix_tol=1e-6,q_matrix_tol=1e-6,w_matrix_tol=1e-6):
+        self.stub.CreateEMSolverBemMat(
+            EMSolverBemMatRequest(matid=1,reltol=p_matrix_tol)
+        )
+        self.stub.CreateEMSolverBemMat(
+            EMSolverBemMatRequest(matid=2,reltol=q_matrix_tol)
+        )
+        logging.info("EM Solver BEMMAT Created...")
+
+    def set_contact(self):
+        """Activates the electromagnetism contact algorithms, which detects contact between conductors."""
+        ret = self.stub.CreateEMControlContact(EMControlContactRequest(emct=1, cconly=0,ctype=0,dtype=0))
+        logging.info("EM Control Contact Created...")
+        return ret
+
+class CircuitType(Enum):
+    IMPOSED_CURRENT_VS_TIME = 1
+    IMPOSED_VOLTAGE_VS_TIME = 2
+
+class Circuit():
+    """Define an electrical circuit.
+
+        Parameters
+        ----------
+        circtyp : int
+            Circuit type:
+            EQ.1: Imposed current vs time defined by a load curve.
+            EQ.2: Imposed voltage vs time defined by a load curve.
+        loadcurve : Curve
+            Load curve for circtyp = 1, 2, 21 or 22
+        """
+    circuitlist = []
+    def __init__(self,loadcurve,circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME):
+        self.stub = DynaBase.get_stub()
+        self.circuit_type=circuit_type.value
+        loadcurve.create(self.stub)
+        self.lcid = loadcurve.id
+        Circuit.circuitlist.append(self)
+
+    def set_current(self,current,current_inlet,current_outlet):
+        """Define segment set for current.
+        Parameters
+        ----------
+        current : SegmentSet
+            Segment set for the current.
+        current_inlet : SegmentSet 
+            Segment set for input voltage or input current when CIRCTYP.EQ.2/3/12/22 and CIRCTYP.EQ 1/11/21 respectively.
+        current_outlet : SegmentSet
+            Segment set for output voltage or output current when CIRCTYP = 2/3/12/22 and CIRCTYP = 1/11/21 respectively.
+        """
+        self.current_id = current.create(self.stub)
+        self.inlet_id = current_inlet.create(self.stub)
+        self.outlet_id = current_outlet.create(self.stub)
+
+    def create(self):
+        ret = self.stub.CreateEMCircuit(
+            EMCircuitRequest(
+                 circtyp=self.circuit_type,lcid=self.lcid,sidcurr=self.current_id,sidvin=self.inlet_id,sidvout=self.outlet_id
+            )
+        )
+        self.id = ret.id
+        logging.info(f"EM Circuit {self.id} Created...")
