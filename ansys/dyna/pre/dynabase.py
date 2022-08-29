@@ -1820,6 +1820,35 @@ class PartSet:
     def pos(self,pos):
         return self.parts[pos]
 
+class SegmentSet:
+    """Define a set of segments with optional identical or unique attributes.
+
+     Parameters
+        ----------
+        segments : list [[point1,point2,point3,point4],[point5,point6,point7,point8]...]
+            Define segments.
+    """
+    def __init__(self,segments=[]):
+        self.segments=segments
+        self.id = 0
+
+    def create(self,stub):
+        if len(self.segments)<=0:
+            return 0
+        n1 = []
+        n2 = []
+        n3 = []
+        n4 = []
+        for i in range(len(self.segments)):
+            n1.append(self.segments[i][0])
+            n2.append(self.segments[i][1])
+            n3.append(self.segments[i][2])
+            n4.append(self.segments[i][3])
+        ret = stub.CreateSegmentSet(SegmentSetRequest(n1=n1, n2=n2, n3=n3, n4=n4))
+        self.id = ret.id
+        logging.info("Segment Set Created...")
+        return self.id
+
 class BoundaryCondition:
     """ provides a way of defining imposed motions on boundary nodes"""
     def __init__(self):

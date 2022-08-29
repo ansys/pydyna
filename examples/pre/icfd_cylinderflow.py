@@ -18,8 +18,8 @@ if __name__ == "__main__":
     fns.append(path + "mesh.k")
     icfd.open_files(fns)
 
-    #set time step size
-    icfd.set_time(termination_time=100)
+    #Set total time of simulation
+    icfd.set_termination(termination_time=100)
 
     #define model
     mat = MatICFD(flow_density=1.0,dynamic_viscosity=0.005)
