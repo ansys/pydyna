@@ -213,7 +213,7 @@ class MatElastic(MatAdditional):
 
     def create(self,stub):
         ret = stub.CreateMatElastic(
-            MatRigidRequest(ro=self.ro,e=self.e,pr=self.pr)
+            MatElasticRequest(ro=self.ro,e=self.e,pr=self.pr)
         )
         self.material_id=ret.mid
         self.name = "Elastic"
