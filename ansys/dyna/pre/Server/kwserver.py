@@ -643,6 +643,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
     def CreateSegmentSet(self,request,context):
         #title = request.title
         sid = request.sid
+        if sid==0:
+            sid = self.kwdproc.get_data(gdt.KWD_SEGMENTSET_LASTID)+1 
         solver = request.solver
         n1 = request.n1
         n2 = request.n2
@@ -664,7 +666,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'SET_SEGMENT '+str(sid)+' Created...'
         print(msg)
-        return kwprocess_pb2.SegmentSetReply(answer = 0) 
+        return kwprocess_pb2.SegmentSetReply(id = sid) 
     
     def CreateRigidWallGeom(self,request,context):
         geomtype = request.geomtype
@@ -1633,7 +1635,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.EMContactReply(answer = 0) 
 
     def CreateEMCircuitRogo(self,request,context):     
-        rogid = request.rogid
+        rogid = self.kwdproc.get_data(gdt.KWD_EM_LASTID)+1
         setid = request.setid
         settype = request.settype
         curtyp = request.curtyp
@@ -1642,10 +1644,10 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = '*EM_CIRCUIT_ROGO Created...'
         print(msg)
-        return kwprocess_pb2.EMCircuitRogoReply(answer = 0) 
+        return kwprocess_pb2.EMCircuitRogoReply(id = rogid) 
 
     def CreateEMCircuit(self,request,context):     
-        circid = request.circid
+        circid = self.kwdproc.get_data(gdt.KWD_CIRCUIT_LASTID)+1
         circtyp = request.circtyp
         lcid = request.lcid
         sidcurr = request.sidcurr
@@ -1657,7 +1659,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = '*EM_CIRCUIT Created...'
         print(msg)
-        return kwprocess_pb2.EMCircuitReply(answer = 0) 
+        return kwprocess_pb2.EMCircuitReply(id = circid) 
 
     def CreateEMMat001(self,request,context):     
         mid = request.mid
@@ -1713,7 +1715,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
 
     def CreateEMSolverBemMat(self,request,context):     
         matid = request.matid
-        card1 = str(matid) + ",,,,,,,1e-6"
+        reltol = request.reltol
+        card1 = str(matid) + ",,,,,,,"+str(reltol)
         newk = "*EM_SOLVER_BEMMAT\n" + card1
         self.kwdproc.newkeyword(newk)
         msg = '*EM_SOLVER_BEMMAT Created...'
