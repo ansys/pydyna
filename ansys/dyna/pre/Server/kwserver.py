@@ -442,7 +442,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
 
     def CreateDefineCurve(self,request,context):
         lcid = request.lcid
-        lcid = self.kwdproc.get_data(gdt.KWD_DEFINE_BOX_LASTID)+1
+        lcid = self.kwdproc.get_data(gdt.KWD_DEFINE_CURVE_LASTID)+1
         sfo = request.sfo
         abscissa = request.abscissa
         ordinate = request.ordinate
@@ -901,6 +901,18 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.LoadBodyReply(answer = 0)    
 
     #MATERIAL
+    def CreateMatEM(self,request,context):
+        mid = request.mid
+        mtype = request.mtype
+        sigma = request.sigma
+        card1 = str(mid)+","+str(mtype)+","+str(sigma)
+        opcode = "*EM_MAT_001"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatEMReply(id = mid)  
+        
     def CreateMatRigid(self,request,context):
         mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
         ro = request.ro
@@ -931,7 +943,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = opcode+" Created..."
         print(msg)
-        return kwprocess_pb2.MatElasticReply(ret = 0) 
+        return kwprocess_pb2.MatElasticReply(mid = mid) 
 
     def CreateMatSpotweld(self,request,context):
         mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
@@ -1247,6 +1259,26 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = 'Set Property for Part '+str(pid)
         print(msg)
         return kwprocess_pb2.PartPropertyReply(answer = 0)
+    
+    def SetICFDPartProperty(self,request,context):
+        pid = request.pid
+        secid = request.secid
+        mid = request.mid
+        self.kwdproc.set_kwd_data1(gdt.KWD_DETAILDATA_EXTERNALID, "*ICFD_PART", pid,3,secid)
+        self.kwdproc.set_kwd_data1(gdt.KWD_DETAILDATA_EXTERNALID, "*ICFD_PART", pid,4,mid)
+        msg = 'Set Property for ICFD Part '+str(pid)
+        print(msg)
+        return kwprocess_pb2.ICFDPartPropertyReply(answer = 0)
+
+    def SetICFDVolumePartProperty(self,request,context):
+        pid = request.pid
+        secid = request.secid
+        mid = request.mid
+        self.kwdproc.set_kwd_data(gdt.KWD_DETAILDATA_EXTERNALID, "ICFD_PART_VOL_KIND", pid,3,mid)
+        self.kwdproc.set_kwd_data(gdt.KWD_DETAILDATA_EXTERNALID, "ICFD_PART_VOL_KIND", pid,4,secid)
+        msg = 'Set Property for ICFD Volume Part '+str(pid)
+        print(msg)
+        return kwprocess_pb2.ICFDVolumePartPropertyReply(answer = 0)
 
     def GetSolidElements(self,request,context):
         coords = self.kwdproc.get_data_nodearray()
@@ -1331,7 +1363,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.ICFDSectionReply(answer = 0)
 
     def ICFDCreateMat(self,request,context):     
-        mid = request.mid
+        mid = self.kwdproc.get_data(gdt.KWD_ICFD_MAT_LASTID)+1
         flg = request.flg
         ro = request.ro
         vis = request.vis
@@ -1340,7 +1372,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'ICFD material '+str(mid)+' Created...'
         print(msg)
-        return kwprocess_pb2.ICFDMatReply(answer = 0)    
+        return kwprocess_pb2.ICFDMatReply(id = mid)    
 
     def ICFDCreatePart(self,request,context):     
         pid = request.pid
@@ -1353,8 +1385,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ICFDPartReply(answer = 0)      
     
-    def ICFDCreatePartVol(self,request,context):     
-        pid = request.pid
+    def ICFDCreatePartVol(self,request,context):   
+        pid = self.kwdproc.get_data(gdt.KWD_ICFD_PART_VOL_LASTID)+1  
         secid = request.secid
         mid = request.mid
         spids = request.spids
@@ -1374,7 +1406,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'ICFD part vol '+str(pid)+' Created...'
         print(msg)
-        return kwprocess_pb2.ICFDPartVolReply(answer = 0) 
+        return kwprocess_pb2.ICFDPartVolReply(id = pid) 
 
     def ICFDCreateDBDrag(self,request,context):     
         pid = request.pid
@@ -1435,8 +1467,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ICFDBdyNonSlipReply(answer = 0)
 
-    def MESHCreateVolume(self,request,context):     
-        volid = request.volid
+    def MESHCreateVolume(self,request,context): 
+        volid = self.kwdproc.get_data(gdt.KWD_MESH_VOLUME_LASTID)+1    
         pids = request.pids
         card1 = str(volid)
         newk =  "*MESH_VOLUME\n" + card1 + "\n";  
@@ -1454,7 +1486,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'MESH volume '+str(volid)+' Created...'
         print(msg)
-        return kwprocess_pb2.MeshVolumeReply(answer = 0)
+        return kwprocess_pb2.MeshVolumeReply(id = volid)
 
     def MESHCreateEmbedShell(self,request,context):     
         volid = request.volid
