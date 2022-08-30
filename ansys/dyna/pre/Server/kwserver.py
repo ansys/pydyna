@@ -1000,7 +1000,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.MatModifiedPiecewiseLinearPlasticityReply(mid = mid)
 
     def CreateMatFabric(self,request,context):
-        mid = request.mid
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
         ro = request.ro
         ea = request.ea
         eb = request.eb
@@ -1014,7 +1014,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = opcode+" Created..."
         print(msg)
-        return kwprocess_pb2.MatFabricReply(ret = 0)   
+        return kwprocess_pb2.MatFabricReply(mid = mid)   
 
     def CreateMatSpringNonlinearElastic(self,request,context):
         mid = request.mid

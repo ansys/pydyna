@@ -314,4 +314,41 @@ class MatSpotweld():
         self.name = "Spotweld"
         logging.info(f"Material {self.name} Created...")
 
-    
+class MatFabric:
+    """This material is especially developed for airbag materials.
+
+        Parameters
+        ----------
+        mass_density : float
+            Mass density.
+        young_modulus_longitudinal_direction : float
+            Young's modulus-longitudinal direction.
+        young_modulus_transverse_direction : float
+            Young's modulus-transverse direction.
+        minor_poisson_ratio : float
+            Minor Poisson's ratio ba direction.
+        major_poisson_ratio : float
+            Major Poisson's ratio ab direction.
+        shear_modulus : float
+            shear modulus in the ab direction.
+        """
+    def __init__(self,mass_density=0,
+        young_modulus_longitudinal_direction=0,
+        young_modulus_transverse_direction=0,
+        minor_poisson_ratio=0.35,
+        major_poisson_ratio=0.35,
+        shear_modulus=0):  
+        self.ro = mass_density
+        self.ea = young_modulus_longitudinal_direction
+        self.eb=young_modulus_transverse_direction
+        self.prba = minor_poisson_ratio
+        self.prab = major_poisson_ratio
+        self.gab = shear_modulus
+
+    def create(self,stub):
+        ret = stub.CreateMatFabric(
+            MatFabricRequest(ro=self.ro, ea=self.ea, eb=self.eb, prba=self.prba, prab=self.prab, gab=self.gab)
+        )
+        self.material_id=ret.mid
+        logging.info("Material Fabric Created...")
+
