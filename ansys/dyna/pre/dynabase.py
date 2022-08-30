@@ -1656,7 +1656,7 @@ class DynaBase:
         logging.info("msg")
         return ret
     
-    def set_output_database(self, matsum=0,glstat=0,elout=0,nodout=0,rbdout=0,rcforc=0,secforc=0):
+    def set_output_database(self, matsum=0,glstat=0,elout=0,nodout=0,rbdout=0,rcforc=0,secforc=0,rwforc=0,abstat=0):
         """obtain output files containing results information.
         Parameters
         ----------
@@ -1696,6 +1696,14 @@ class DynaBase:
         if secforc>0:
             self.stub.CreateDBAscii(
                 DBAsciiRequest(type="SECFORC", dt=glstat, binary=1, lcur=0,ioopt=0)
+            )
+        if rwforc>0:
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="RWFORC", dt=glstat, binary=1, lcur=0,ioopt=0)
+            )
+        if abstat>0:
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="ABSTAT", dt=glstat, binary=1, lcur=0,ioopt=0)
             )
         ret = 1
         logging.info("Output Setting...")
@@ -1950,6 +1958,7 @@ class BeamFormulation(Enum):
 class ShellFormulation(Enum):
     FULLY_INTEGRATED = -16
     BELYTSCHKO_TSAY = 2
+    FULLY_INTEGRATED_BELYTSCHKO_TSAY_MEMBRANE = 9
 
 class IGAFormulation(Enum):
     REISSNER_MINDLIN_FIBERS_AT_CONTROL_POINTS = 0
@@ -2331,8 +2340,10 @@ class ContactCategory(Enum):
     SURFACE_TO_SURFACE_CONTACT = 2
     SINGLE_SURFACE_CONTACT = 3
     SHELL_EDGE_TO_SURFACE_CONTACT = 4
+    NODES_TO_SURFACE = 5
 
 class ContactType(Enum):
+    NULL = 0
     AUTOMATIC = 1
     GENERAL=2
     RIGID = 3
@@ -2366,6 +2377,7 @@ class ContactSurface:
             self.type = 4
         else:
             self.type = 0
+        self.penalty_stiffness = 1.0
 
     def set_contact_region(self,box):
         """Include in contact definition only those SURFA nodes/segments within box
@@ -2388,10 +2400,13 @@ class ContactSurface:
         """
         self.thickness = thickness
 
+    def set_penalty_stiffness_scale_factor(self,scalefactor=1.0):
+        self.penalty_stiffness = scalefactor
+
 class Contact:
     """Provides a way of treating interaction between disjoint parts"""
     contactlist = []
-    def __init__(self,type=ContactType.AUTOMATIC,category=ContactCategory.SINGLE_SURFACE_CONTACT,offset=OffsetType.NULL):
+    def __init__(self,type=ContactType.NULL,category=ContactCategory.SINGLE_SURFACE_CONTACT,offset=OffsetType.NULL):
         self.stub = DynaBase.get_stub()
         self.rigidwall_penalties_scale_factor= 1
         self.max_penetration_check_multiplier = 4
@@ -2494,8 +2509,8 @@ class Contact:
             vdc=0,
             penchk=0,
             birthtime=0,
-            sfsa=1,
-            sfsb=1,
+            sfsa=self.slavesurface.penalty_stiffness,
+            sfsb=self.mastersurface.penalty_stiffness,
             sst=self.slavesurface.thickness,
             mst=mst,
             optionres=0,
