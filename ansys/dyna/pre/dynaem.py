@@ -570,6 +570,7 @@ class EMAnalysis():
         self.stub.CreateEMControl(EMControlRequest(emsol=self.type, numls=100, macrodt=0, ncylfem=5000,ncylbem = 5000))
 
     def set_timestep(self,timestep):
+        """ Controls the EM time step and its evolution."""
         self.stub.CreateEMTimestep(
             EMTimestepRequest(
                 tstype=1, dtconst=timestep
@@ -578,6 +579,7 @@ class EMAnalysis():
         logging.info("EM Timestep Created...")
        
     def set_solver_bem(self,solver=BEMSOLVER.PCG,relative_tol = 1e-6,max_iteration=1000):
+        """Define the type of linear solver and pre-conditioner as well as tolerance for the EM_BEM solve."""
         self.stub.CreateEMSolverBem(
             EMSolverBemRequest(
                 reltol=relative_tol,maxite=max_iteration,stype=solver.value,precon=1,uselast=1,ncylbem=3
@@ -586,6 +588,7 @@ class EMAnalysis():
         logging.info("EM Solver BEM Created...")
 
     def set_solver_fem(self,solver=FEMSOLVER.DIRECT_SOLVER,relative_tol = 1e-6,max_iteration=1000):
+        """Define some parameters for the EM FEM solver."""
         self.stub.CreateEMSolverFem(
             EMSolverFemRequest(
                 reltol=relative_tol,maxite=max_iteration,stype=solver.value,precon=1,uselast=1,ncylbem=3
@@ -593,6 +596,7 @@ class EMAnalysis():
         )
 
     def set_bem_matrix_tol(self,p_matrix_tol=1e-6,q_matrix_tol=1e-6,w_matrix_tol=1e-6):
+        """Define the type of BEM matrices as well as the way they are assembled."""
         EMAnalysis.p_matrix_tol = p_matrix_tol
         EMAnalysis.q_matrix_tol = q_matrix_tol
         EMAnalysis.w_matrix_tol = w_matrix_tol
