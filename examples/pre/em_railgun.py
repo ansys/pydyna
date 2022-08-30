@@ -17,22 +17,19 @@ if __name__ == "__main__":
     railgun.open_files(fns)
     
     railgun.set_termination(termination_time=3e-4)
-    railgun.set_timestep()
 
     analysis = EMAnalysis()
     analysis.set_timestep(timestep=5e-6)
     analysis.set_solver_bem(solver=BEMSOLVER.PCG)
     analysis.set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER,relative_tol=1e-3)
-    analysis.set_bem_matrix_tol(p_matrix_tol=1e-6,q_matrix_tol=1e-6)
-    analysis.set_contact()
    
     circuit = Circuit(circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME,loadcurve=Curve(x=[0,8e-5,2e-4,4e-4,6e-4,1e-3],y=[0,350,450,310,230,125],sfo=2e6))
     circuit.set_current(current=SegmentSet(cur),current_inlet=SegmentSet(inlet),current_outlet=SegmentSet(outlet))
 
     matelastic = MatElastic(mass_density=2.64e-3,young_modulus=9.7e+10,poisson_ratio=0.31)
-    matelastic.set_electromagnetic_property(material_type=2,initial_conductivity=25)
+    matelastic.set_electromagnetic_property(material_type=EMMATTYPE.CONDUCTOR,initial_conductivity=25)
     matrigid = MatRigid(mass_density=2.64e-3,young_modulus=9.7e+10,poisson_ratio=0.31,center_of_mass_constraint=1,translational_constraint=7,rotational_constraint=7)
-    matrigid.set_electromagnetic_property(material_type=2,initial_conductivity=25)
+    matrigid.set_electromagnetic_property(material_type=EMMATTYPE.CONDUCTOR,initial_conductivity=25)
     
     coil = SolidPart(1)
     coil.set_material(matelastic)
@@ -49,6 +46,8 @@ if __name__ == "__main__":
     bdy = BoundaryCondition()
     bdy.create_spc(NodeSet(spc1),tx=False,ty=False,rz=False,death=0)
     bdy.create_spc(NodeSet(spc2),tx=False,ty=False,rz=False,death=0)
+
+    contact = EMContact()
 
     railgun.set_rogowsky_coil_to_output_current(SegmentSet(cur))
     railgun.create_database_binary(dt=5e-6)
