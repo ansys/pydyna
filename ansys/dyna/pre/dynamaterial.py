@@ -3,7 +3,7 @@
 import logging
 
 from .dynabase import *
-
+from enum import Enum
 
 class Air():
     def __init__(self,mass_density=1.280E-03,
@@ -188,14 +188,19 @@ class MatNull():
         self.name = "NULL"
         logging.info(f"Material {self.name} Created...")
 
+class EMMATTYPE(Enum):
+    AIR_OR_VACUUM = 0
+    INSULATOR = 1
+    CONDUCTOR = 2
+
 class MatAdditional:
     """Define additional properties for material"""
     def __init__(self):
         self.em = False
         self.thermal = False
 
-    def set_electromagnetic_property(self,material_type,initial_conductivity):
-        self.em_material_type = material_type
+    def set_electromagnetic_property(self,material_type=EMMATTYPE.CONDUCTOR,initial_conductivity=0):
+        self.em_material_type = material_type.value
         self.em_initial_conductivity = initial_conductivity
 
     def create(self,stub,matid):

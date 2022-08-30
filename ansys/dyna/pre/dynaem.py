@@ -529,6 +529,7 @@ class DynaEM(DynaBase):
             obj.set_property()
         for obj in Circuit.circuitlist:
             obj.create()
+        EMAnalysis.create(self.stub)
         ret = self.stub.SaveFile(SaveFileRequest(name=self.mainname))
         msg = self.mainname + " is outputed..."
         logging.info(msg)
@@ -549,6 +550,9 @@ class FEMSOLVER(Enum):
     PCG = 2
 
 class EMAnalysis():
+    p_matrix_tol = 1e-6
+    q_matrix_tol = 1e-6
+    w_matrix_tol = 1e-6
     def __init__(self,type=EMType.EDDY_CURRENT):
         """Enable the EM solver and set its options.
 
@@ -589,19 +593,23 @@ class EMAnalysis():
         )
 
     def set_bem_matrix_tol(self,p_matrix_tol=1e-6,q_matrix_tol=1e-6,w_matrix_tol=1e-6):
-        self.stub.CreateEMSolverBemMat(
-            EMSolverBemMatRequest(matid=1,reltol=p_matrix_tol)
+        EMAnalysis.p_matrix_tol = p_matrix_tol
+        EMAnalysis.q_matrix_tol = q_matrix_tol
+        EMAnalysis.w_matrix_tol = w_matrix_tol
+    
+    @staticmethod
+    def create(stub):
+        stub.CreateEMSolverBemMat(
+            EMSolverBemMatRequest(matid=1,reltol=EMAnalysis.p_matrix_tol)
         )
-        self.stub.CreateEMSolverBemMat(
-            EMSolverBemMatRequest(matid=2,reltol=q_matrix_tol)
+        stub.CreateEMSolverBemMat(
+            EMSolverBemMatRequest(matid=2,reltol=EMAnalysis.q_matrix_tol)
+        )
+        stub.CreateEMSolverBemMat(
+            EMSolverBemMatRequest(matid=3,reltol=EMAnalysis.w_matrix_tol)
         )
         logging.info("EM Solver BEMMAT Created...")
 
-    def set_contact(self):
-        """Activates the electromagnetism contact algorithms, which detects contact between conductors."""
-        ret = self.stub.CreateEMControlContact(EMControlContactRequest(emct=1, cconly=0,ctype=0,dtype=0))
-        logging.info("EM Control Contact Created...")
-        return ret
 
 class CircuitType(Enum):
     IMPOSED_CURRENT_VS_TIME = 1
@@ -650,3 +658,16 @@ class Circuit():
         )
         self.id = ret.id
         logging.info(f"EM Circuit {self.id} Created...")
+
+class EMContactType(Enum):
+    NODE_TO_NODE_BASED_ON_CONSTRAINTS = -1
+    NODE_TO_NODE_PENALTY_BASED_CONTACT = 0
+    DISCRETE_MORTAR_PENALTY_CONTACT = 1
+
+class EMContact:
+    """Detects contact between conductors.If no contact parts defined,contact detection between all active parts associated 
+    with a conducting material."""
+    def __init__(self,contact_type=EMContactType.NODE_TO_NODE_PENALTY_BASED_CONTACT):
+        self.stub = DynaBase.get_stub()
+        ret = self.stub.CreateEMControlContact(EMControlContactRequest(emct=1, cconly=0,ctype=contact_type.value,dtype=0))
+        logging.info("EM Control Contact Created...")
