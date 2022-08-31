@@ -113,12 +113,34 @@ if __name__ == "__main__":
         sf=-107.57,
         vid=1,
     )
-    icfd.create_mat_rigid(mid=1, ro=2e-6, e=1000, pr=0.34, cmo=1, con1=7, con2=7)
-    icfd.create_mat_rigid(mid=5, ro=2e-6, e=1000, pr=0.34, cmo=1, con1=7, con2=6)
-    icfd.set_partproperty(pid=1, secid=1, mid=1)
-    icfd.set_partproperty(pid=3, secid=1, mid=1)
-    icfd.set_partproperty(pid=5, secid=1, mid=5)
-    icfd.set_partproperty(pid=2, secid=1, mid=1)
+
+    icfd.create_section_shell(secid=1, elform=0, thick=thk, shrf=0.8333, nip=0, propt=1)
+    mat1 = MatRigid(mass_density=2e-6,young_modulus=1000,poisson_ratio=0.34,center_of_mass_constraint=1,translational_constraint=7,rotational_constraint=7)
+    mat5 = MatRigid(mass_density=2e-6,young_modulus=1000,poisson_ratio=0.34,center_of_mass_constraint=1,translational_constraint=7,rotational_constraint=6)
+    
+    foldingboard1 = ShellPart(1)
+    foldingboard1.set_material(mat1)
+    foldingboard1.set_element_formulation(ShellFormulation.BELYTSCHKO_TSAY)
+    foldingboard1.set_thickness(1)
+    foldingboard1.set_shear_factor(0.8333)
+
+    roof = ShellPart(2)
+    roof.set_material(mat1)
+    roof.set_element_formulation(ShellFormulation.BELYTSCHKO_TSAY)
+    roof.set_thickness(1)
+    roof.set_shear_factor(0.8333)
+
+    foldingboard2 = ShellPart(3)
+    foldingboard2.set_material(mat1)
+    foldingboard2.set_element_formulation(ShellFormulation.BELYTSCHKO_TSAY)
+    foldingboard2.set_thickness(1)
+    foldingboard2.set_shear_factor(0.8333)
+
+    roll = ShellPart(3)
+    roll.set_material(mat5)
+    roll.set_element_formulation(ShellFormulation.BELYTSCHKO_TSAY)
+    roll.set_thickness(1)
+    roll.set_shear_factor(0.8333)
 
     # p22a-unts.k
     abs = [0, 1e18]
@@ -252,6 +274,7 @@ if __name__ == "__main__":
     pids = [6, 9, 112, 113]
     icfd.create_partset(sid=5, pids=pids)
     icfd.create_init_vel_bodies(id=5, styp=1, vx=6666, nx=1, phase=1, stime=0.2)
+
 
     thk = [0.72, 0.72, 0.72, 0.72]
     icfd.create_section_shell(
