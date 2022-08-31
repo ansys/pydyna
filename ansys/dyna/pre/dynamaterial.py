@@ -200,18 +200,21 @@ class MatAdditional:
         self.thermal = False
 
     def set_electromagnetic_property(self,material_type=EMMATTYPE.CONDUCTOR,initial_conductivity=0):
+        self.em = True
         self.em_material_type = material_type.value
         self.em_initial_conductivity = initial_conductivity
 
     def create(self,stub,matid):
-        stub.CreateMatEM(
-            MatEMRequest(mid =matid, mtype=self.em_material_type,sigma=self.em_initial_conductivity)
-        )
-        logging.info(f"Material EM Created...")
+        if self.em:
+            stub.CreateMatEM(
+                MatEMRequest(mid =matid, mtype=self.em_material_type,sigma=self.em_initial_conductivity)
+            )
+            logging.info(f"Material EM Created...")
 
 class MatElastic(MatAdditional):
     """This is an isotropic hypoelastic material"""
     def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0.3):  
+        MatAdditional.__init__(self)
         self.ro = mass_density
         self.e = young_modulus
         self.pr=poisson_ratio
@@ -230,7 +233,8 @@ class MatRigid(MatAdditional):
     def __init__(self,mass_density=0,young_modulus=0,poisson_ratio=0.3,
     center_of_mass_constraint=0,
     translational_constraint=0,
-    rotational_constraint=0):  
+    rotational_constraint=0):
+        MatAdditional.__init__(self)  
         self.ro = mass_density
         self.e = young_modulus
         self.pr=poisson_ratio
