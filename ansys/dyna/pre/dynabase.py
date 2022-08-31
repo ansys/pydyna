@@ -1777,6 +1777,7 @@ class Curve:
         )
         self.id = ret.id
         logging.info(f"Curve {self.id} defined...")
+        return self.id
 
 class NodeSet:
     """Define a nodal set with some identical or unique attributes."""
@@ -1839,6 +1840,7 @@ class SegmentSet:
     def __init__(self,segments=[]):
         self.segments=segments
         self.id = 0
+        self.type = "SEGMENTSET"
 
     def create(self,stub):
         if len(self.segments)<=0:
@@ -2456,9 +2458,9 @@ class Contact:
     def create(self):
         opcode = ""
         if self.type==ContactType.AUTOMATIC:
-            opcode += "AUTOMATIC"
+            opcode += "AUTOMATIC_"
         elif self.type == ContactType.TIED:
-            opcode += "TIED"
+            opcode += "TIED_"
         else:
             opcode+=""
         if self.category != ContactCategory.SINGLE_SURFACE_CONTACT:
@@ -2466,14 +2468,16 @@ class Contact:
             mstyp=self.mastersurface.type
             mst=self.mastersurface.thickness
         if self.category == ContactCategory.SURFACE_TO_SURFACE_CONTACT:
-            opcode += "_SURFACE_TO_SURFACE"
+            opcode += "SURFACE_TO_SURFACE"
         elif self.category == ContactCategory.SINGLE_SURFACE_CONTACT:
-            opcode += "_SINGLE_SURFACE"
+            opcode += "SINGLE_SURFACE"
             msid = 0
             mstyp = 0
             mst = 0
         elif self.category == ContactCategory.SHELL_EDGE_TO_SURFACE_CONTACT:
-            opcode += "_SHELL_EDGE_TO_SURFACE"
+            opcode += "SHELL_EDGE_TO_SURFACE"
+        elif self.category == ContactCategory.NODES_TO_SURFACE:
+            opcode += "NODES_TO_SURFACE"
         else:
             opcode +=""
 
@@ -2651,4 +2655,29 @@ class RigidwallCylinder:
         )
         logging.info("Cylinder Rigidwall Created...")
 
-
+class RigidwallPlanar:
+    """Define planar rigid walls with either finite or infinite size.
+    
+    Parameters
+        ----------
+        tail : Point
+            The coordinate of tail of normal vector.
+        head : Point      
+            The coordinate of head of normal vector.
+        radius : float
+            Radius of cylinder.
+        length : float
+            Length of cylinder.
+    """
+    def __init__(self,tail=Point(0,0,0),head=Point(0,0,0),coulomb_friction_coefficient=0.5):
+        self.stub = DynaBase.get_stub()
+        self.tail = tail
+        self.head = head
+        self.fric = coulomb_friction_coefficient
+        normal = [self.tail.x,self.tail.y,self.tail.z,self.head.x,self.head.y,self.head.z]
+        self.stub.CreateRigidWallPlanar(
+            RigidWallPlanarRequest(
+                nsid=0, nsidex=0, boxid=0, fric=self.fric, normal=normal
+            )
+        )
+        logging.info("Rigidwall Planar Created...")
