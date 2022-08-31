@@ -1,8 +1,9 @@
 import os
 import sys
 
-from pydyna.dynaicfd import DynaICFD
-from pydyna.dynadem import DynaDEM
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
+from pre.dynaicfd import *
+from pre.dynadem import *
 
 if __name__ == "__main__":
     hostname = "localhost"
@@ -19,10 +20,9 @@ if __name__ == "__main__":
     icfd.open_files(fns)
 
     icfd.create_damping_global(valdmp=0.1)
-    icfd.create_termination(endtim=0.6)
+    icfd.set_termination(0.6)
     icfd.create_timestep(tssfac=0.9, dt2ms=-1e-5)
     icfd.create_control_contact(rwpnal=0, shlthk=2, ssthk=1, ignore=2)
-    icfd.create_database_binary(dt=0.005, maxint=1, dcomp=2, nintsld=1)
     icfd.create_control_dem_coupling(dt=0)
 
     # ---DEM
@@ -39,12 +39,10 @@ if __name__ == "__main__":
     icfd.create_control_output(msgl=3)
     icfd.create_control_turbulence(tmod=2)
     icfd.create_solver_tol_mmov(atol=1e-12, rtol=1e-12)
-    icfd.create_section_icfd(sid=1)
-    icfd.create_mat_icfd(mid=1, flg=1, ro=1.28e-9, vis=17e-9)
 
-    spids = [125, 126, 127, 128, 129]
-    icfd.create_part_vol(pid=7, secid=1, mid=1, spids=spids)
-    icfd.mesh_create_volume(volid=1, pids=spids)
+    #icfd.create_section_icfd(sid=1)
+    mat = MatICFD(flow_density=1.28e-9,dynamic_viscosity=17e-9)
+
     pids = [1, 2, 3]
     icfd.mesh_embed_shell(volid=1, pids=pids)
     parameter = [-950, -80, -200, -600, 150, 30]
@@ -52,43 +50,52 @@ if __name__ == "__main__":
         "BOX", force=1, method=0, msize=3.2, parameter=parameter
     )
 
-    abs = [0.0001, 0.02, 1e3]
-    ord = [10, 200000, 200000]
-    icfd.create_definecurve(lcid=1, sfo=1, abscissa=abs, ordinate=ord)
 
-    abs = [0, 1e3]
-    ord = [0, 0]
-    icfd.create_definecurve(lcid=2, sfo=1, abscissa=abs, ordinate=ord)
-    icfd.create_bdy_prescribed_vel(pid=129, dof=1, vad=1, lcid=2)
-    icfd.create_bdy_prescribed_vel(pid=129, dof=2, vad=1, lcid=2)
-    icfd.create_bdy_prescribed_vel(pid=129, dof=3, vad=1, lcid=1)
-    icfd.create_bdy_prescribed_pre(pid=127, lcid=2)
-    icfd.create_bdy_free_slip(pid=125)
-    icfd.create_bdy_free_slip(pid=126)
-    icfd.create_bdy_non_slip(pid=128)
-    icfd.create_part_icfd(pid=125, secid=1, mid=1)
-    icfd.create_part_icfd(pid=126, secid=1, mid=1)
-    icfd.create_part_icfd(pid=127, secid=1, mid=1)
-    icfd.create_part_icfd(pid=128, secid=1, mid=1)
-    icfd.create_part_icfd(pid=129, secid=1, mid=1)
-    icfd.create_part_icfd(pid=1, secid=1, mid=1)
-    icfd.create_part_icfd(pid=2, secid=1, mid=1)
-    icfd.create_part_icfd(pid=3, secid=1, mid=1)
-    icfd.create_bdy_non_slip(pid=1)
-    icfd.create_bdy_non_slip(pid=2)
-    icfd.create_bdy_non_slip(pid=3)
+    slot = ICFDPart(129)
+    slot.set_material(mat)
+    slot.set_prescribed_velocity(dof=DOF.X,motion=Curve(x=[0, 1e3],y=[0, 0]))
+    slot.set_prescribed_velocity(dof=DOF.Y,motion=Curve(x=[0, 1e3],y=[0, 0]))
+    slot.set_prescribed_velocity(dof=DOF.Z,motion=Curve(x=[0.0001, 0.02, 1e3],y=[10, 200000, 200000]))
+    
+    exit = ICFDPart(127)
+    exit.set_material(mat)
+    exit.set_prescribed_pressure(pressure = Curve(x=[0, 1e3],y=[0, 0]))
+    
+    bottom = ICFDPart(125)
+    bottom.set_material(mat)
+    bottom.set_free_slip()
+
+    side = ICFDPart(126)
+    side.set_material(mat)
+    side.set_free_slip()
+
+    top= ICFDPart(128)
+    top.set_material(mat)
+    top.set_non_slip()
+
+    msshell1 = ICFDPart(1)
+    msshell1.set_material(mat)
+    msshell1.set_non_slip()
+
+    msshell1 = ICFDPart(2)
+    msshell1.set_material(mat)
+    msshell1.set_non_slip()
+
+    msshell1 = ICFDPart(3)
+    msshell1.set_material(mat)
+    msshell1.set_non_slip()
+
+    partvol = ICFDVolumePart(surfaces=[125, 126, 127, 128, 129])
+    partvol.set_material(mat) 
+
+    meshvol = MeshedVolume(surfaces = [125, 126, 127, 128, 129])
 
     # fe-rig.k
     icfd.create_control_accuracy(osu=1, inn=4)
     icfd.create_control_energy(hgen=2)
     icfd.create_control_shell(wrpang=20, esort=1, irnxx=-1, bwc=1, proj=0, irquad=2)
     icfd.create_control_solid(esort=2)
-    icfd.create_database_ascii(type="BNDOUT", dt=0.001, ioopt=1)
-    icfd.create_database_ascii(type="GLSTAT", dt=0.001, ioopt=1)
-    icfd.create_database_ascii(type="MATSUM", dt=0.001, ioopt=1)
-    icfd.create_database_ascii(type="NODFOR", dt=0.001, ioopt=1)
-    icfd.create_database_ascii(type="RCFORC", dt=0.001, ioopt=1)
-    icfd.create_database_ascii(type="SLEOUT", dt=0.001, ioopt=1)
+    icfd.set_output_database(bndout=0.001,glstat=0.001,matsum=0.001,nodfor=0.001,rcforc=0.001,sleout=0.001)
 
     abs = [0.05, 1e18]
     ord = [1, 1]
@@ -267,36 +274,10 @@ if __name__ == "__main__":
     icfd.create_nodeset(option="GENERAL", sid=1, genoption="SET_SHELL", entities=ents)
     icfd.create_constrained_extra_nodes(option="SET", pid=9, nid=1)
 
-    segs = [
-        [8310, 8317, 8314, 8308],
-        [8317, 8319, 8313, 8314],
-        [8319, 8321, 8312, 8313],
-        [8321, 8316, 8311, 8312],
-        [8309, 8318, 8317, 8310],
-        [8318, 8320, 8319, 8317],
-        [8320, 8322, 8321, 8319],
-        [8322, 8315, 8316, 8321],
-        [8304, 8307, 8318, 8309],
-        [8307, 8306, 8320, 8318],
-        [8306, 8305, 8322, 8320],
-        [8305, 8303, 8315, 8322],
-    ]
+    
     icfd.create_segmentset(sid=1, segments=segs)
 
-    segs = [
-        [8328, 8334, 8337, 8330],
-        [8334, 8333, 8339, 8337],
-        [8333, 8332, 8341, 8339],
-        [8332, 8331, 8336, 8341],
-        [8330, 8337, 8338, 8329],
-        [8337, 8339, 8340, 8338],
-        [8339, 8341, 8342, 8340],
-        [8341, 8336, 8335, 8342],
-        [8329, 8338, 8327, 8324],
-        [8338, 8340, 8326, 8327],
-        [8340, 8342, 8325, 8326],
-        [8342, 8335, 8323, 8325],
-    ]
+    
     icfd.create_segmentset(sid=2, segments=segs)
 
     segs = [
@@ -1697,4 +1678,5 @@ if __name__ == "__main__":
     ]
     icfd.create_shellset(option="LIST", title="ChassisToConveyor", sid=4, eids=eids)
 
+    icfd.create_database_binary(dt=0.005, maxint=1, dcomp=2, nintsld=1)
     icfd.save_file()
