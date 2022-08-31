@@ -1656,7 +1656,7 @@ class DynaBase:
         logging.info("msg")
         return ret
     
-    def set_output_database(self, matsum=0,glstat=0,elout=0,nodout=0,rbdout=0,rcforc=0,secforc=0):
+    def set_output_database(self, matsum=0,glstat=0,elout=0,nodout=0,rbdout=0,rcforc=0,secforc=0,rwforc=0,abstat=0):
         """obtain output files containing results information.
         Parameters
         ----------
@@ -1696,6 +1696,14 @@ class DynaBase:
         if secforc>0:
             self.stub.CreateDBAscii(
                 DBAsciiRequest(type="SECFORC", dt=glstat, binary=1, lcur=0,ioopt=0)
+            )
+        if rwforc>0:
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="RWFORC", dt=glstat, binary=1, lcur=0,ioopt=0)
+            )
+        if abstat>0:
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="ABSTAT", dt=glstat, binary=1, lcur=0,ioopt=0)
             )
         ret = 1
         logging.info("Output Setting...")
@@ -1769,6 +1777,7 @@ class Curve:
         )
         self.id = ret.id
         logging.info(f"Curve {self.id} defined...")
+        return self.id
 
 class NodeSet:
     """Define a nodal set with some identical or unique attributes."""
@@ -1831,6 +1840,7 @@ class SegmentSet:
     def __init__(self,segments=[]):
         self.segments=segments
         self.id = 0
+        self.type = "SEGMENTSET"
 
     def create(self,stub):
         if len(self.segments)<=0:
@@ -1950,6 +1960,7 @@ class BeamFormulation(Enum):
 class ShellFormulation(Enum):
     FULLY_INTEGRATED = -16
     BELYTSCHKO_TSAY = 2
+    FULLY_INTEGRATED_BELYTSCHKO_TSAY_MEMBRANE = 9
 
 class IGAFormulation(Enum):
     REISSNER_MINDLIN_FIBERS_AT_CONTROL_POINTS = 0
@@ -2331,8 +2342,10 @@ class ContactCategory(Enum):
     SURFACE_TO_SURFACE_CONTACT = 2
     SINGLE_SURFACE_CONTACT = 3
     SHELL_EDGE_TO_SURFACE_CONTACT = 4
+    NODES_TO_SURFACE = 5
 
 class ContactType(Enum):
+    NULL = 0
     AUTOMATIC = 1
     GENERAL=2
     RIGID = 3
@@ -2366,6 +2379,7 @@ class ContactSurface:
             self.type = 4
         else:
             self.type = 0
+        self.penalty_stiffness = 1.0
 
     def set_contact_region(self,box):
         """Include in contact definition only those SURFA nodes/segments within box
@@ -2388,10 +2402,13 @@ class ContactSurface:
         """
         self.thickness = thickness
 
+    def set_penalty_stiffness_scale_factor(self,scalefactor=1.0):
+        self.penalty_stiffness = scalefactor
+
 class Contact:
     """Provides a way of treating interaction between disjoint parts"""
     contactlist = []
-    def __init__(self,type=ContactType.AUTOMATIC,category=ContactCategory.SINGLE_SURFACE_CONTACT,offset=OffsetType.NULL):
+    def __init__(self,type=ContactType.NULL,category=ContactCategory.SINGLE_SURFACE_CONTACT,offset=OffsetType.NULL):
         self.stub = DynaBase.get_stub()
         self.rigidwall_penalties_scale_factor= 1
         self.max_penetration_check_multiplier = 4
@@ -2441,9 +2458,9 @@ class Contact:
     def create(self):
         opcode = ""
         if self.type==ContactType.AUTOMATIC:
-            opcode += "AUTOMATIC"
+            opcode += "AUTOMATIC_"
         elif self.type == ContactType.TIED:
-            opcode += "TIED"
+            opcode += "TIED_"
         else:
             opcode+=""
         if self.category != ContactCategory.SINGLE_SURFACE_CONTACT:
@@ -2451,14 +2468,16 @@ class Contact:
             mstyp=self.mastersurface.type
             mst=self.mastersurface.thickness
         if self.category == ContactCategory.SURFACE_TO_SURFACE_CONTACT:
-            opcode += "_SURFACE_TO_SURFACE"
+            opcode += "SURFACE_TO_SURFACE"
         elif self.category == ContactCategory.SINGLE_SURFACE_CONTACT:
-            opcode += "_SINGLE_SURFACE"
+            opcode += "SINGLE_SURFACE"
             msid = 0
             mstyp = 0
             mst = 0
         elif self.category == ContactCategory.SHELL_EDGE_TO_SURFACE_CONTACT:
-            opcode += "_SHELL_EDGE_TO_SURFACE"
+            opcode += "SHELL_EDGE_TO_SURFACE"
+        elif self.category == ContactCategory.NODES_TO_SURFACE:
+            opcode += "NODES_TO_SURFACE"
         else:
             opcode +=""
 
@@ -2494,8 +2513,8 @@ class Contact:
             vdc=0,
             penchk=0,
             birthtime=0,
-            sfsa=1,
-            sfsb=1,
+            sfsa=self.slavesurface.penalty_stiffness,
+            sfsb=self.mastersurface.penalty_stiffness,
             sst=self.slavesurface.thickness,
             mst=mst,
             optionres=0,
@@ -2636,4 +2655,29 @@ class RigidwallCylinder:
         )
         logging.info("Cylinder Rigidwall Created...")
 
-
+class RigidwallPlanar:
+    """Define planar rigid walls with either finite or infinite size.
+    
+    Parameters
+        ----------
+        tail : Point
+            The coordinate of tail of normal vector.
+        head : Point      
+            The coordinate of head of normal vector.
+        radius : float
+            Radius of cylinder.
+        length : float
+            Length of cylinder.
+    """
+    def __init__(self,tail=Point(0,0,0),head=Point(0,0,0),coulomb_friction_coefficient=0.5):
+        self.stub = DynaBase.get_stub()
+        self.tail = tail
+        self.head = head
+        self.fric = coulomb_friction_coefficient
+        normal = [self.tail.x,self.tail.y,self.tail.z,self.head.x,self.head.y,self.head.z]
+        self.stub.CreateRigidWallPlanar(
+            RigidWallPlanarRequest(
+                nsid=0, nsidex=0, boxid=0, fric=self.fric, normal=normal
+            )
+        )
+        logging.info("Rigidwall Planar Created...")
