@@ -48,3 +48,4 @@ test-output.xml
 /client.log
 /examples/pre/client.log
 /ansys/dyna/pre/Server/output/
+/ansys/dyna/pre/doc/build
