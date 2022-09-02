@@ -1969,6 +1969,7 @@ class IGAFormulation(Enum):
     REISSNER_MINDLIN_FIBERS_AT_INTEGRATION_POINTS = 3
 
 class SolidFormulation(Enum):
+    EIGHT_POINT_ENHANCED_STRAIN_SOLID_ELEMENT = -18
     CONSTANT_STRESS_SOLID_ELEMENT  = 1
     EIGHT_POINT_HEXAHEDRON = 2
     FULLY_INTEGRATED_QUADRATIC_EIGHT_NODE_ELEMENT = 3
@@ -1980,6 +1981,7 @@ class HourglassType(Enum):
     FLANAGAN_BELYTSCHKO_STIFFNESS = 4
     FLANAGAN_BELYTSCHKO_STIFFNESS_WITH_EXTRA_VOLUME_INTEGRATION = 5
     BELYTSCHKO_BINDEMAN = 6
+    ACTIVATES_FULL_PROJECTION_WARPING_STIFFNESS = 8
 
 class BeamSection:
     def __init__(self,element_formulation,
@@ -2091,6 +2093,10 @@ class ShellPart(Part):
         self.intpoints = 5
         self.print = 0
         self.thickness = 1
+        self.hourglasstype = -1
+
+    def set_hourglass(self,type = HourglassType.STANDARD_LSDYNA_VISCOUS):
+        self.hourglasstype = type.value
 
     def set_shear_factor(self,factor):
         """Shear correction factor which scales the transverse shear stress."""
@@ -2119,6 +2125,13 @@ class ShellPart(Part):
         thickness4 = self.thickness,
         )
         self.secid = sec.id
+        if self.hourglasstype>0:
+            ret = self.stub.CreateHourglass(
+            HourglassRequest(ihq=self.hourglasstype, qm=1, q1=0, q2=0, qb=0, qw=0)
+            )
+            self.hgid = ret.id
+        else:
+            self.hgid = 0
         self.stub.SetPartProperty(
             PartPropertyRequest(
                 pid=self.id, 
@@ -2193,6 +2206,8 @@ class SolidPart(Part):
             HourglassRequest(ihq=self.hourglasstype, qm=1, q1=0, q2=0, qb=0, qw=0)
             )
             self.hgid = ret.id
+        else:
+            self.hgid = 0
         self.stub.SetPartProperty(
             PartPropertyRequest(
                 pid=self.id, 
@@ -2364,6 +2379,16 @@ class OffsetType(Enum):
     BEAM_OFFSET= "BEAM_OFFSET"
     CONSTRAINED_OFFSET= "CONSTRAINED_OFFSET"
 
+class ContactFormulation(Enum):
+    STANDARD_PENALTY = 0
+    SOFT_CONSTRAINT_PENALTY = 1
+    SEGMENT_BASED_CONTACT_PENALTY= 2
+
+class SBOPT(Enum):
+    ASSUME_PLANER_SEGMENTS =2
+    WRAPED_SEGMENT_CHECKING = 3
+    SLDING_OPTION = 4
+
 class ContactSurface:
     """Define contact interface"""
     def __init__(self,set):
@@ -2421,6 +2446,12 @@ class Contact:
         self.offset = offset.value
         self.static_friction_coeff=0
         self.dynamic_friction_coeff=0
+        self.birth_time = 0
+        self.death_time = 1e20
+        self.option_tiebreak = False
+        self.optionres = 0
+        self.contact_formulation = 0
+        self.segment_based_contact_option = 2
         Contact.contactlist.append(self)
         
     def set_mortar(self):
@@ -2429,6 +2460,10 @@ class Contact:
 
     def set_algorithm(self,algorithm=ContactAlgorithm.PENALTY_BASED):
         self.algorithm = algorithm.value
+
+    def set_tiebreak(self):
+        self.option_tiebreak = True
+        self.optionres = 2
 
     def set_friction_coefficient(self,static=0,dynamic=0):
         """Define the coefficient of friction.
@@ -2442,6 +2477,10 @@ class Contact:
         """
         self.static_friction_coeff = static
         self.dynamic_friction_coeff = dynamic
+
+    def set_active_time(self,birth_time=0,death_time=1e20):
+        self.birth_time = birth_time
+        self.death_time = death_time
     
     def set_initial_penetration(self):
         """Ignore initial penetrations"""
@@ -2454,6 +2493,11 @@ class Contact:
     def set_master_surface(self,surface):
         """specifying the master contact interface"""
         self.mastersurface = surface
+
+    def set_penalty_algorithm(self,formulation=ContactFormulation.STANDARD_PENALTY,
+        segment_based_contact_option = SBOPT.ASSUME_PLANER_SEGMENTS):
+        self.contact_formulation = formulation.value
+        self.segment_based_contact_option = segment_based_contact_option.value
 
     def create(self):
         opcode = ""
@@ -2489,6 +2533,9 @@ class Contact:
             opcode += "_CONSTRAINED_OFFSET"
         else:
             opcode += ""
+
+        if self.option_tiebreak:
+            opcode += "_TIEBREAK"
         
         if self.mortar == True:
             option2 = "MORTAR"
@@ -2512,7 +2559,7 @@ class Contact:
             fd=self.dynamic_friction_coeff,
             vdc=0,
             penchk=0,
-            birthtime=0,
+            birthtime=self.birth_time,
             sfsa=self.slavesurface.penalty_stiffness,
             sfsb=self.mastersurface.penalty_stiffness,
             sst=self.slavesurface.thickness,
@@ -2522,11 +2569,11 @@ class Contact:
             sfls=0,
             param=0,
             ct2cn=1,
-            soft=0,
+            soft=self.contact_formulation,
             sofscl=0.1,
             lcidab=0,
             maxpar=1.025,
-            sbopt=2,
+            sbopt=self.segment_based_contact_option,
             depth=2,
             bsort=100,
             frcfrq=1,
