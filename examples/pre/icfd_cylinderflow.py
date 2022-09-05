@@ -1,43 +1,53 @@
+"""
+This example demonstrates how to create a simple ICFD cylinder flow input deck.
+"""
 import os
+import sys
 
-from pydyna.dynaicfd import DynaICFD
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
+from pre.dynaicfd import *
 
 if __name__ == "__main__":
-    icfd = DynaICFD()
+    hostname = "localhost"
+    if len(sys.argv) > 1:
+        hostname = sys.argv[1]
+    icfd = DynaICFD(hostname=hostname)
+    #Import the initial mesh data(nodes and elements)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep
     fns.append(path + "mesh.k")
     icfd.open_files(fns)
 
-    icfd.create_control_time(tim=100, dt=0)
-    icfd.create_section_icfd(sid=1)
-    icfd.create_mat_icfd(mid=1, flg=1, ro=1.0, vis=0.005)
-    icfd.create_part_icfd(pid=1, secid=1, mid=1)
-    icfd.create_part_icfd(pid=2, secid=1, mid=1)
-    icfd.create_part_icfd(pid=3, secid=1, mid=1)
-    icfd.create_part_icfd(pid=4, secid=1, mid=1)
+    #Set total time of simulation
+    icfd.set_termination(termination_time=100)
 
-    spids = [1, 2, 3, 4]
+    #define model
+    mat = MatICFD(flow_density=1.0,dynamic_viscosity=0.005)
 
-    icfd.create_part_vol(pid=10, secid=1, mid=1, spids=spids)
-    icfd.create_db_drag(pid=4)
+    part_inflow = ICFDPart(1)
+    part_inflow.set_material(mat)
+    part_inflow.set_prescribed_velocity(dof=DOF.X,motion=Curve(x=[0, 10000],y=[1, 1]))
+    part_inflow.set_prescribed_velocity(dof=DOF.Y,motion=Curve(x=[0, 10000],y=[0, 0]))
 
-    abs = [0, 10000]
-    ord = [1, 1]
-    icfd.create_definecurve(lcid=1, sfo=1, abscissa=abs, ordinate=ord)
+    part_outflow = ICFDPart(2)
+    part_outflow.set_material(mat)
+    part_outflow.set_prescribed_pressure(pressure = Curve(x=[0, 10000],y=[0, 0]))
 
-    abs = [0, 10000]
-    ord = [0, 0]
-    icfd.create_definecurve(lcid=2, sfo=1, abscissa=abs, ordinate=ord)
+    part_symmetric = ICFDPart(3)
+    part_symmetric.set_material(mat)
+    part_symmetric.set_free_slip()
 
-    icfd.create_bdy_prescribed_vel(pid=1, dof=1, vad=1, lcid=1)
-    icfd.create_bdy_prescribed_vel(pid=1, dof=2, vad=1, lcid=2)
-    icfd.create_bdy_prescribed_pre(pid=2, lcid=2)
-    icfd.create_bdy_free_slip(pid=3)
-    icfd.create_bdy_non_slip(pid=4)
+    part_wall= ICFDPart(4)
+    part_wall.set_material(mat)
+    part_wall.set_non_slip()
+    part_wall.compute_drag_force()
+    part_wall.set_boundary_layer(number=3)
 
-    icfd.mesh_create_volume(volid=1, pids=spids)
-    icfd.mesh_create_bl(pid=4, nelth=2)
+    partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
+    partvol.set_material(mat)  
+    # define the volume space that will be meshed,The boundaries 
+    #of the volume are the surfaces "spids"
+    meshvol = MeshedVolume(surfaces = [1, 2, 3, 4])
+
     icfd.create_database_binary(dt=1)
-
     icfd.save_file()

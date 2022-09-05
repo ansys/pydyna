@@ -1,9 +1,16 @@
 import os
+import sys
 
-from pydyna.dynaiga import DynaIGA
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
+from pre.dynaiga import *
+from pre.dynamaterial import *
+from iga_sample_data import *
 
 if __name__ == "__main__":
-    iga = DynaIGA()
+    hostname = "localhost"
+    if len(sys.argv) > 1:
+        hostname = sys.argv[1]
+    iga = DynaIGA(hostname=hostname)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep
     fns.append(path + "maino.k")
@@ -11,74 +18,45 @@ if __name__ == "__main__":
     fns.append(path + "27parts.key")
     iga.open_files(fns)
 
-    iga.create_timestep(tssfac=0.9, isdo=3, dt2ms=-0.0004)
-    iga.create_termination(endtim=20)
-    iga.create_control_contact(rwpnal=1.0, ignore=1, igactc=1)
+    iga.set_timestep(timestep_size_for_mass_scaled=-0.0004)
+    iga.set_termination(20)
+    
+    #define material
+    plastic = MatPiecewiseLinearPlasticity(mass_density=7.830e-06,young_modulus=200,yield_stress=1.5,tangent_modulus=0.5)
+    swmatlist = []
+    for mat in materialdata:
+            spotweld = MatSpotweld(mass_density=mat[0],young_modulus=mat[1],poisson_ratio=mat[2],yield_stress=mat[3],plastic_hardening_modulus=mat[4],axial_force_resultant_at_failure=mat[5],force_resultant_nrs_at_failure=mat[6],force_resultant_nrt_at_failure=mat[7])
+            swmatlist.append(spotweld)
+    
+    for id in igaparts:
+        part = IGAPart(id)
+        part.set_material(plastic)
+        part.set_element_formulation(IGAFormulation.REISSNER_MINDLIN_FIBERS_AT_CONTROL_POINTS)
+        part.set_thickness(1.0)
+
+    for index in range(len(spotwelds)):
+        part = SolidPart(spotwelds[index])
+        if index != 1:
+            part.set_hourglass(type = HourglassType.BELYTSCHKO_BINDEMAN)
+        part.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
+        part.set_material(swmatlist[index])
+
+    cylinder1 = RigidwallCylinder(Point(2472.37, -600.000, 1270.98),Point(2472.37, -600.000, 2668.53),100,1000)
+    cylinder2 = RigidwallCylinder(Point(3580.25, -600.000, 1261.37),Point(3580.25, -600.000, 3130.49),100,1000)
+    cylinder3 = RigidwallCylinder(Point(3090.59, -955.35, 1299.42),Point(3090.59, -955.35, 2958.43),100,1000)
+    cylinder3.set_motion(Curve(x=[0,100],y=[20,20]),dir = Direction(0,1,0))
+
+    #define contact
+    selfcontact = Contact(type=ContactType.AUTOMATIC)
+    selfcontact.set_friction_coefficient(static=0.2)
+    surf1=ContactSurface(PartSet(igaparts))
+    selfcontact.set_slave_surface(surf1)
+
+    swcontact = Contact(type=ContactType.TIED,category=ContactCategory.SHELL_EDGE_TO_SURFACE_CONTACT,offset=OffsetType.OFFSET)
+    spotweldsolid=ContactSurface(PartSet(spotwelds))
+    spotweldsurface=ContactSurface(PartSet(igaparts))
+    swcontact.set_slave_surface(spotweldsolid)
+    swcontact.set_master_surface(spotweldsurface)
+
     iga.create_database_binary(dt=0.1)
-
-    cylinder1 = [2472.37, -600.000, 1270.98, 2472.37, -600.000, 2668.53, 100, 1000]
-    iga.create_rigidwall_geom(
-        geomtype=3, motion=0, display=1, parameter=cylinder1, lcid=0, vx=0, vy=0, vz=0
-    )
-
-    cylinder2 = [3580.25, -600.000, 1261.37, 3580.25, -600.000, 3130.49, 100, 1000]
-    iga.create_rigidwall_geom(
-        geomtype=3, motion=0, display=1, parameter=cylinder2, lcid=0, vx=0, vy=0, vz=0
-    )
-
-    abs = [0, 100]
-    ord = [1, 1]
-    iga.create_definecurve(lcid=1, sfo=20, abscissa=abs, ordinate=ord)
-    cylinder3 = [3090.59, -955.35, 1299.42, 3090.59, -955.35, 2958.43, 100, 1000]
-    iga.create_rigidwall_geom(
-        geomtype=3, motion=1, display=1, parameter=cylinder3, lcid=1, vx=0, vy=1, vz=0
-    )
-    iga.create_section_igashell(secid=1, elform=0, shrf=1.0, thickness=1.0)
-
-    pids2 = []
-    for i in range(226, 259):
-        if i == 241 or i == 247:
-            continue
-        iga.set_partproperty(
-            pid=i, secid=1, mid=1, eosid=0, hgid=0, grav=0, adpopt=0, tmid=0
-        )
-        pids2.append(i)
-    iga.create_partset(sid=2, pids=pids2)
-    iga.create_section_solid(secid=2, elform=1, title="secsolid")
-    iga.create_hourglass(ghid=1, ihq=1, qm=1, q1=0, q2=0, qb=0, qw=0)
-
-    pids1 = []
-    for i in range(1, 100):
-        if i == 2:
-            iga.set_partproperty(
-                pid=i, secid=2, mid=i + 1, eosid=0, hgid=0, grav=0, adpopt=0, tmid=0
-            )
-        iga.set_partproperty(
-            pid=i, secid=2, mid=i + 1, eosid=0, hgid=1, grav=0, adpopt=0, tmid=0
-        )
-        pids1.append(i)
-    iga.create_partset(sid=1, pids=pids1)
-    iga.create_contact(
-        cid=1,
-        title="automatic",
-        option1="AUTOMATIC_SINGLE_SURFACE",
-        option3=True,
-        ssid=2,
-        msid=0,
-        sstyp=2,
-        mstyp=0,
-        optionres=1,
-    )
-    iga.create_contact(
-        cid=2,
-        title="tied",
-        option1="TIED_SHELL_EDGE_TO_SURFACE",
-        option3=True,
-        offset="OFFSET",
-        ssid=1,
-        msid=2,
-        sstyp=2,
-        mstyp=2,
-    )
-    elements = iga.get_solid_elements()
     iga.save_file()

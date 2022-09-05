@@ -1,6 +1,18 @@
 $# LS-DYNA Keyword file created by LS-PrePost(R) V4.5 (Beta) - 21Sep2016(21:00)
 $# Created on Sep-27-2016 (06:21:46)
-*KEYWORD  
+*KEYWORD 
+*ICFD_PART
+$#     pid     secid       mid 
+         1         0         0
+*ICFD_PART
+$#     pid     secid       mid 
+         2         0         0
+*ICFD_PART
+$#     pid     secid       mid 
+         3         0         0
+*ICFD_PART
+$#     pid     secid       mid 
+         4         0         0 
 *MESH_SURFACE_ELEMENT
 $#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
        1       1       1       2       0       0       0       0       0       0
