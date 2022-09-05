@@ -1,10 +1,16 @@
-import ansys.dyna.solver as solver
+#import ansys.dyna.solver as solver
+
+
+import os
+import sys
+sys.path.insert(0,os.path.abspath('./../../ansys/dyna/pre'))
+sys.path.insert(0,os.path.abspath('./../../ansys/dyna'))
 
 # Project information
 project = 'pyansys_library_'
 copyright = '(c) 2021 ANSYS, Inc. All rights reserved'
 author = 'ANSYS Inc.'
-release = version = solver.__version__
+#release = version = solver.__version__
 
 # optionally use the default pyansys logo
 html_logo = 'https://docs.pyansys.com/_static/pyansys-logo-black-cropped.png'
