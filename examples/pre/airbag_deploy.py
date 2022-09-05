@@ -1,72 +1,65 @@
 import os
+import sys
 
-from pydyna.dynaairbag import DynaAirbag
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
+from pre.dynaairbag import *
+from pre.dynamaterial import *
 
 if __name__ == "__main__":
-    airbag = DynaAirbag()
+    hostname = "localhost"
+    if len(sys.argv) > 1:
+        hostname = sys.argv[1]
+    airbagdeploy = DynaAirbag(hostname=hostname)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep + "airbag_deploy" + os.sep
     fns.append(path + "airbag_deploy.k")
-    airbag.open_files(fns)
+    airbagdeploy.open_files(fns)
 
-    airbag.create_termination(endtim=0.03)
-    airbag.create_control_energy(hgen=2, rwen=2, slnten=2)
-    airbag.create_control_output(npopt=1, neecho=3)
-    airbag.create_database_binary(dt=5e-4, ieverp=1)
-    airbag.create_database_binary(filetype="D3THDT", dt=999999)
-    airbag.create_database_ascii(type="ABSTAT", dt=2.0e-4, ioopt=1)
-    airbag.create_database_ascii(type="GLSTAT", dt=2.0e-4, ioopt=1)
-    airbag.create_database_ascii(type="MATSUM", dt=2.0e-4, ioopt=1)
-    airbag.create_database_ascii(type="RCFORC", dt=2.0e-4, ioopt=1)
-    airbag.create_database_ascii(type="RBDOUT", dt=2.0e-4, ioopt=1)
-    airbag.create_database_ascii(type="RWFORC", dt=2.0e-4, ioopt=1)
+    airbagdeploy.set_termination(0.03)
+    #airbagdeploy.create_control_output(npopt=1, neecho=3)
 
-    abs = [0, 0.032, 0.045, 0.08]
-    ord = [0, 26, 0.6, 0.1]
-    airbag.create_definecurve(lcid=1, sfo=1, abscissa=abs, ordinate=ord)
 
-    pids = [3]
-    airbag.create_partset(sid=1, pids=pids)
-    airbag.create_simple_airbag_model(
-        modeltype="SIMPLE_AIRBAG_MODEL",
-        sid=1,
-        sidtyp=1,
-        cv=1.736e3,
-        cp=2.43e3,
-        t=1.2e3,
-        lcid=1,
-        mu=0.7,
-        area=0,
-        pe=14.7,
-        ro=3.821e-6,
-    )
-    tail = [0, 0, 0]
-    head = [0, 1, 0]
-    airbag.create_rigidwall_planar(nsid=0, tail=tail, head=head, fric=0.5)
-    airbag.create_contact(
-        cid=1,
-        title="airbag and the cylinder",
-        option1="NODES_TO_SURFACE",
-        option3=False,
-        ssid=3,
-        msid=2,
-        sapr=1,
-        sbpr=1,
-        fs=0.5,
-        fd=0.5,
-        sfsb=0.06667,
-    )
+    airbag = Airbag(set=PartSet([3]),
+        heat_capacity_at_constant_volume=1.736e3,
+        heat_capacity_at_constant_pressure=2.43e3,
+        input_gas_temperature=1.2e3,
+        input_mass_flow_rate = Curve(x=[0, 0.032, 0.045, 0.08],y=[0, 26, 0.6, 0.1]),
+        shape_factor_for_exit_hole=0.7,
+        ambient_pressure=14.7,
+        ambient_density=3.821e-6)
 
-    airbag.create_mat_rigid(mid=1, ro=7.84e-4, e=30e6, pr=0.3, cmo=1, con1=7, con2=7)
-    airbag.create_mat_rigid(mid=2, ro=1.96e-4, e=30e6, pr=0.3)
-    airbag.create_mat_fabric(
-        mid=3, ro=1e-4, ea=2e6, eb=2e6, prba=0.35, prab=0.35, gab=1.53e6
-    )
-    thk = [0.5, 0.5, 0.5, 0.5]
-    airbag.create_section_shell(secid=1, elform=0, thick=thk)
-    thk = [0.015, 0.015, 0.015, 0.015]
-    airbag.create_section_shell(secid=2, elform=9, thick=thk, nip=4)
-    airbag.set_partproperty(pid=1, secid=1, mid=1)
-    airbag.set_partproperty(pid=2, secid=1, mid=2)
-    airbag.set_partproperty(pid=3, secid=2, mid=3)
-    airbag.save_file()
+    rigidwall = RigidwallPlanar(Point(0, 0, 0),Point(0, 1, 0),coulomb_friction_coefficient=0.5)
+
+    contact = Contact(category=ContactCategory.NODES_TO_SURFACE)
+    contact.set_friction_coefficient(static=0.5,dynamic=0.5)
+    surf1=ContactSurface(PartSet([3]))
+    surf2=ContactSurface(PartSet([2]))
+    surf2.set_penalty_stiffness_scale_factor(0.06667)
+    contact.set_slave_surface(surf1)
+    contact.set_master_surface(surf2)
+
+    platemat = MatRigid(mass_density=7.84e-4,young_modulus=30e6,center_of_mass_constraint=1,translational_constraint=7,rotational_constraint=7)
+    cylindermat = MatRigid(mass_density=1.96e-4,young_modulus=30e6)
+    airbagmat = MatFabric(mass_density=1e-4,young_modulus_longitudinal_direction=2e6,young_modulus_transverse_direction=2e6,shear_modulus=1.53e6)
+    
+    plate = ShellPart(1)
+    plate.set_material(platemat)
+    plate.set_element_formulation(ShellFormulation.BELYTSCHKO_TSAY)
+    plate.set_thickness(0.5)
+
+    cylinder = ShellPart(2)
+    cylinder.set_material(cylindermat)
+    cylinder.set_element_formulation(ShellFormulation.BELYTSCHKO_TSAY)
+    cylinder.set_thickness(0.5)
+
+    airbagpart = ShellPart(3)
+    airbagpart.set_material(airbagmat)
+    airbagpart.set_element_formulation(ShellFormulation.FULLY_INTEGRATED_BELYTSCHKO_TSAY_MEMBRANE)
+    airbagpart.set_thickness(0.015)
+    airbagpart.set_integration_points(4)
+
+    airbagdeploy.create_database_binary(dt=5e-4, ieverp=1)
+    #airbagdeploy.create_database_binary(filetype="D3THDT", dt=999999)
+    airbagdeploy.set_output_database(abstat=2.0e-4,glstat=2.0e-4,matsum=2.0e-4,rcforc=2.0e-4,rbdout=2.0e-4,rwforc=2.0e-4)
+
+    airbagdeploy.save_file()

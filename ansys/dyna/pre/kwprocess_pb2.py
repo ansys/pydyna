@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0fkwprocess.proto\x12\x06kwgrpc\"\x1d\n\x0bkwFileReply\x12\x0e\n\x06length\x18\x01 \x01(\x03\"\x17\n\x05\x43hunk\x12\x0e\n\x06\x62uffer\x18\x01 \x01(\x0c\"\'\n\nkwFileName\x12\x0b\n\x03num\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x1e\n\x0f\x44ownloadRequest\x12\x0b\n\x03url\x18\x01 \x01(\t\"\x1e\n\x0fkwFileNameReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\">\n\x0fTimestepRequest\x12\x0e\n\x06tssfac\x18\x01 \x01(\x02\x12\x0c\n\x04isdo\x18\x02 \x01(\x05\x12\r\n\x05\x64t2ms\x18\x03 \x01(\x02\"\x1f\n\rTimestepReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"$\n\x12TerminationRequest\x12\x0e\n\x06\x65ndtim\x18\x01 \x01(\x02\"\"\n\x10TerminationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"5\n\x14\x43ontrolOutputRequest\x12\r\n\x05npopt\x18\x01 \x01(\x05\x12\x0e\n\x06neecho\x18\x02 \x01(\x05\"$\n\x12\x43ontrolOutputReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"u\n\x15\x43ontrolContactRequest\x12\x0e\n\x06rwpnal\x18\x01 \x01(\x02\x12\x0e\n\x06shlthk\x18\x02 \x01(\x05\x12\r\n\x05orien\x18\x03 \x01(\x05\x12\r\n\x05ssthk\x18\x04 \x01(\x05\x12\x0e\n\x06ignore\x18\x05 \x01(\x05\x12\x0e\n\x06igactc\x18\x06 \x01(\x05\"%\n\x13\x43ontrolContactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"u\n\x11\x43ontrolALERequest\x12\x0b\n\x03\x64\x63t\x18\x01 \x01(\x05\x12\x0c\n\x04nadv\x18\x02 \x01(\x05\x12\x0c\n\x04meth\x18\x03 \x01(\x05\x12\x0c\n\x04\x61\x66\x61\x63\x18\x04 \x01(\x02\x12\x0b\n\x03\x65nd\x18\x05 \x01(\x02\x12\r\n\x05\x61\x61\x66\x61\x63\x18\x06 \x01(\x02\x12\r\n\x05vfact\x18\x07 \x01(\x02\"!\n\x0f\x43ontrolALEReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"z\n\x1d\x43ontrolDiscreteElementRequest\x12\r\n\x05ndamp\x18\x01 \x01(\x02\x12\r\n\x05tdamp\x18\x02 \x01(\x02\x12\r\n\x05\x66rics\x18\x03 \x01(\x02\x12\r\n\x05\x66ricr\x18\x04 \x01(\x02\x12\r\n\x05normk\x18\x05 \x01(\x02\x12\x0e\n\x06sheark\x18\x06 \x01(\x02\"-\n\x1b\x43ontrolDiscreteElementReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"_\n\x16\x43ontrolAccuracyRequest\x12\x0b\n\x03osu\x18\x01 \x01(\x05\x12\x0b\n\x03inn\x18\x02 \x01(\x05\x12\x0e\n\x06pidosu\x18\x03 \x01(\x05\x12\x0c\n\x04iacc\x18\x04 \x01(\x05\x12\r\n\x05\x65xacc\x18\x05 \x01(\x02\"&\n\x14\x43ontrolAccuracyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"`\n\x14\x43ontrolEnergyRequest\x12\x0c\n\x04hgen\x18\x01 \x01(\x05\x12\x0c\n\x04rwen\x18\x02 \x01(\x05\x12\x0e\n\x06slnten\x18\x03 \x01(\x05\x12\r\n\x05rylen\x18\x04 \x01(\x05\x12\r\n\x05irgen\x18\x05 \x01(\x05\"$\n\x12\x43ontrolEnergyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x9d\x01\n\x13\x43ontrolShellRequest\x12\x0e\n\x06wrpang\x18\x01 \x01(\x02\x12\r\n\x05\x65sort\x18\x02 \x01(\x05\x12\r\n\x05irnxx\x18\x03 \x01(\x05\x12\x0e\n\x06istupd\x18\x04 \x01(\x05\x12\x0e\n\x06theory\x18\x05 \x01(\x05\x12\x0b\n\x03\x62wc\x18\x06 \x01(\x05\x12\r\n\x05miter\x18\x07 \x01(\x05\x12\x0c\n\x04proj\x18\x08 \x01(\x05\x12\x0e\n\x06irquad\x18\t \x01(\x05\"#\n\x11\x43ontrolShellReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x94\x01\n\x13\x43ontrolSolidRequest\x12\r\n\x05\x65sort\x18\x01 \x01(\x05\x12\x0e\n\x06\x66matrx\x18\x02 \x01(\x05\x12\x0f\n\x07niptets\x18\x03 \x01(\x05\x12\x0e\n\x06swlocl\x18\x04 \x01(\x05\x12\x0e\n\x06psfail\x18\x05 \x01(\x05\x12\x0f\n\x07t10jtol\x18\x06 \x01(\x02\x12\x0c\n\x04icoh\x18\x07 \x01(\x05\x12\x0e\n\x06tet13k\x18\x08 \x01(\x05\"#\n\x11\x43ontrolSolidReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"o\n\x0f\x44\x42\x42inaryRequest\x12\x10\n\x08\x66iletype\x18\x01 \x01(\t\x12\n\n\x02\x64t\x18\x02 \x01(\x02\x12\x0e\n\x06maxint\x18\x03 \x01(\x05\x12\x0e\n\x06ieverp\x18\x04 \x01(\x05\x12\r\n\x05\x64\x63omp\x18\x05 \x01(\x05\x12\x0f\n\x07nintsld\x18\x06 \x01(\x05\"\x1f\n\rDBBinaryReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\" \n\x0f\x44\x42\x41LEMatRequest\x12\r\n\x05\x64tout\x18\x01 \x01(\x02\"\x1f\n\rDBALEMatReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"W\n\x0e\x44\x42\x41sciiRequest\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\n\n\x02\x64t\x18\x02 \x01(\x02\x12\x0e\n\x06\x62inary\x18\x03 \x01(\x05\x12\x0c\n\x04lcur\x18\x04 \x01(\x05\x12\r\n\x05ioopt\x18\x05 \x01(\x05\"\x1e\n\x0c\x44\x42\x41sciiReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"/\n\x0fLoadBodyRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"\x1f\n\rLoadBodyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"0\n\x0eInitVelRequest\x12\x0c\n\x04nsid\x18\x01 \x01(\x05\x12\x10\n\x08velocity\x18\x02 \x03(\x02\"\x1e\n\x0cInitVelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x7f\n\x17InitVelRigidBodyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\n\n\x02vx\x18\x02 \x01(\x02\x12\n\n\x02vy\x18\x03 \x01(\x02\x12\n\n\x02vz\x18\x04 \x01(\x02\x12\x0b\n\x03vxr\x18\x05 \x01(\x02\x12\x0b\n\x03vyr\x18\x06 \x01(\x02\x12\x0b\n\x03vzr\x18\x07 \x01(\x02\x12\x0c\n\x04lcid\x18\x08 \x01(\x05\"\'\n\x15InitVelRigidBodyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xbe\x01\n\x18InitVelGenerationRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04styp\x18\x02 \x01(\x05\x12\r\n\x05omega\x18\x03 \x01(\x02\x12\n\n\x02vx\x18\x04 \x01(\x02\x12\n\n\x02vy\x18\x05 \x01(\x02\x12\n\n\x02vz\x18\x06 \x01(\x02\x12\n\n\x02xc\x18\x07 \x01(\x02\x12\n\n\x02yc\x18\x08 \x01(\x02\x12\n\n\x02zc\x18\t \x01(\x02\x12\n\n\x02nx\x18\n \x01(\x02\x12\n\n\x02ny\x18\x0b \x01(\x02\x12\n\n\x02nz\x18\x0c \x01(\x02\x12\r\n\x05phase\x18\r \x01(\x05\"(\n\x16InitVelGenerationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"2\n!InitVelGenerationStartTimeRequest\x12\r\n\x05stime\x18\x01 \x01(\x02\"1\n\x1fInitVelGenerationStartTimeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x8e\x01\n\x14RigidWallGeomRequest\x12\x10\n\x08geomtype\x18\x01 \x01(\x05\x12\x0e\n\x06motion\x18\x02 \x01(\x08\x12\x0f\n\x07\x64isplay\x18\x03 \x01(\x08\x12\x11\n\tparameter\x18\x04 \x03(\x02\x12\x0c\n\x04lcid\x18\x05 \x01(\x05\x12\n\n\x02vx\x18\x06 \x01(\x02\x12\n\n\x02vy\x18\x07 \x01(\x02\x12\n\n\x02vz\x18\x08 \x01(\x02\"$\n\x12RigidWallGeomReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"c\n\x16RigidWallPlanarRequest\x12\x0c\n\x04nsid\x18\x01 \x01(\x05\x12\x0e\n\x06nsidex\x18\x02 \x01(\x05\x12\r\n\x05\x62oxid\x18\x03 \x01(\x05\x12\x0e\n\x06normal\x18\x04 \x03(\x02\x12\x0c\n\x04\x66ric\x18\x05 \x01(\x02\"&\n\x14RigidWallPlanarReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x99\x04\n\x0e\x43ontactRequest\x12\x0b\n\x03\x63id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0f\n\x07option1\x18\x03 \x01(\t\x12\x0f\n\x07option2\x18\x04 \x01(\t\x12\x0f\n\x07option3\x18\x05 \x01(\x08\x12\x0e\n\x06offset\x18\x06 \x01(\t\x12\x0c\n\x04ssid\x18\x07 \x01(\x05\x12\x0c\n\x04msid\x18\x08 \x01(\x05\x12\r\n\x05sstyp\x18\t \x01(\x05\x12\r\n\x05mstyp\x18\n \x01(\x05\x12\x0c\n\x04sapr\x18\x0b \x01(\x05\x12\x0c\n\x04sbpr\x18\x0c \x01(\x05\x12\x0c\n\x04sfsa\x18\r \x01(\x02\x12\x0c\n\x04sfsb\x18\x0e \x01(\x02\x12\n\n\x02\x66s\x18\x0f \x01(\x02\x12\n\n\x02\x66\x64\x18\x10 \x01(\x02\x12\x0b\n\x03vdc\x18\x11 \x01(\x02\x12\x0e\n\x06penchk\x18\x12 \x01(\x05\x12\x11\n\tbirthtime\x18\x13 \x01(\x02\x12\x0b\n\x03sst\x18\x14 \x01(\x02\x12\x0b\n\x03mst\x18\x15 \x01(\x02\x12\x11\n\toptionres\x18\x16 \x01(\x05\x12\x0c\n\x04nfls\x18\x17 \x01(\x02\x12\x0c\n\x04sfls\x18\x18 \x01(\x02\x12\r\n\x05param\x18\x19 \x01(\x02\x12\r\n\x05\x63t2cn\x18\x1a \x01(\x02\x12\x0c\n\x04soft\x18\x1b \x01(\x05\x12\x0e\n\x06sofscl\x18\x1c \x01(\x02\x12\x0e\n\x06lcidab\x18\x1d \x01(\x05\x12\x0e\n\x06maxpar\x18\x1e \x01(\x02\x12\r\n\x05sbopt\x18\x1f \x01(\x05\x12\r\n\x05\x64\x65pth\x18  \x01(\x05\x12\r\n\x05\x62sort\x18! \x01(\x05\x12\x0e\n\x06\x66rcfrq\x18\" \x01(\x05\x12\x0c\n\x04igap\x18# \x01(\x05\"\x1e\n\x0c\x43ontactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xb8\x01\n\x1a\x42\x64yPrescribedMotionRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07heading\x18\x02 \x01(\t\x12\x0e\n\x06option\x18\x03 \x01(\t\x12\x0e\n\x06typeid\x18\x04 \x01(\x05\x12\x0b\n\x03\x64of\x18\x05 \x01(\x05\x12\x0b\n\x03vad\x18\x06 \x01(\x05\x12\x0c\n\x04lcid\x18\x07 \x01(\x05\x12\n\n\x02sf\x18\x08 \x01(\x02\x12\x0b\n\x03vid\x18\t \x01(\x05\x12\r\n\x05\x62irth\x18\n \x01(\x02\x12\r\n\x05\x64\x65\x61th\x18\x0b \x01(\x02\"*\n\x18\x42\x64yPrescribedMotionReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xc3\x01\n\rBdySpcRequest\x12\x0f\n\x07option1\x18\x01 \x01(\t\x12\x12\n\nbirthdeath\x18\x02 \x01(\x08\x12\x0b\n\x03nid\x18\x03 \x01(\x05\x12\x0b\n\x03\x63id\x18\x04 \x01(\x05\x12\x0c\n\x04\x64ofx\x18\x05 \x01(\x05\x12\x0c\n\x04\x64ofy\x18\x06 \x01(\x05\x12\x0c\n\x04\x64ofz\x18\x07 \x01(\x05\x12\r\n\x05\x64ofrx\x18\x08 \x01(\x05\x12\r\n\x05\x64ofry\x18\t \x01(\x05\x12\r\n\x05\x64ofrz\x18\n \x01(\x05\x12\r\n\x05\x62irth\x18\x0b \x01(\x02\x12\r\n\x05\x64\x65\x61th\x18\x0c \x01(\x02\"\x1d\n\x0b\x42\x64ySpcReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"W\n\x1c\x43onstrainedExtraNodesRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\x0b\n\x03pid\x18\x02 \x01(\x05\x12\x0b\n\x03nid\x18\x03 \x01(\x05\x12\r\n\x05iflag\x18\x04 \x01(\x05\",\n\x1a\x43onstrainedExtraNodesReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"Q\n\x17\x43onstrainedJointRequest\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\r\n\x05nodes\x18\x02 \x03(\x05\x12\x0b\n\x03rps\x18\x03 \x01(\x02\x12\x0c\n\x04\x64\x61mp\x18\x04 \x01(\x02\"\'\n\x15\x43onstrainedJointReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"X\n\x16SectionIGAShellRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x02 \x01(\x05\x12\x0c\n\x04shrf\x18\x03 \x01(\x02\x12\x11\n\tthickness\x18\x04 \x01(\x02\"&\n\x14SectionIGAShellReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x8e\x01\n\x13SectionShellRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x02 \x01(\x05\x12\x0c\n\x04shrf\x18\x03 \x01(\x02\x12\x0b\n\x03nip\x18\x04 \x01(\x05\x12\r\n\x05propt\x18\x05 \x01(\x05\x12\n\n\x02t1\x18\x06 \x01(\x02\x12\n\n\x02t2\x18\x07 \x01(\x02\x12\n\n\x02t3\x18\x08 \x01(\x02\x12\n\n\x02t4\x18\t \x01(\x02\"#\n\x11SectionShellReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"C\n\x13SectionSolidRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x03 \x01(\x05\"#\n\x11SectionSolidReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"~\n\x16SectionDiscreteRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0b\n\x03\x64ro\x18\x02 \x01(\x05\x12\n\n\x02kd\x18\x03 \x01(\x02\x12\n\n\x02v0\x18\x04 \x01(\x02\x12\n\n\x02\x63l\x18\x05 \x01(\x02\x12\n\n\x02\x66\x64\x18\x06 \x01(\x02\x12\x0b\n\x03\x63\x64l\x18\x07 \x01(\x02\x12\x0b\n\x03tdl\x18\x08 \x01(\x02\"&\n\x14SectionDiscreteReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"i\n\x10HourglassRequest\x12\x0c\n\x04ghid\x18\x01 \x01(\x05\x12\x0b\n\x03ihq\x18\x02 \x01(\x05\x12\n\n\x02qm\x18\x03 \x01(\x02\x12\n\n\x02q1\x18\x04 \x01(\x02\x12\n\n\x02q2\x18\x05 \x01(\x02\x12\n\n\x02qb\x18\x06 \x01(\x02\x12\n\n\x02qw\x18\x07 \x01(\x02\" \n\x0eHourglassReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"b\n\x12\x44\x65\x66ineCurveRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\x12\x0b\n\x03sfo\x18\x03 \x01(\x02\x12\x10\n\x08\x61\x62scissa\x18\x04 \x03(\x01\x12\x10\n\x08ordinate\x18\x05 \x03(\x01\"\"\n\x10\x44\x65\x66ineCurveReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"y\n\x13\x44\x65\x66ineVectorRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03vid\x18\x02 \x01(\x05\x12\n\n\x02xt\x18\x03 \x01(\x02\x12\n\n\x02yt\x18\x04 \x01(\x02\x12\n\n\x02zt\x18\x05 \x01(\x02\x12\n\n\x02xh\x18\x06 \x01(\x02\x12\n\n\x02yh\x18\x07 \x01(\x02\x12\n\n\x02zh\x18\x08 \x01(\x02\"#\n\x11\x44\x65\x66ineVectorReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x81\x01\n\x1a\x44\x65\x66ineDEMeshSurfaceRequest\x12\x0b\n\x03sid\x18\x01 \x01(\x05\x12\x0c\n\x04type\x18\x02 \x01(\x05\x12\r\n\x05nquad\x18\x03 \x01(\x05\x12\x0e\n\x06\x64\x65spid\x18\x04 \x01(\x05\x12\x0e\n\x06\x64\x65sxid\x18\x05 \x01(\x05\x12\x0c\n\x04nsid\x18\x06 \x01(\x05\x12\x0b\n\x03rsf\x18\x07 \x01(\x02\"*\n\x18\x44\x65\x66ineDEMeshSurfaceReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"b\n\x18\x44\x65\x66ineOrientationRequest\x12\x0b\n\x03vid\x18\x01 \x01(\x05\x12\x0b\n\x03iop\x18\x02 \x01(\x05\x12\x0e\n\x06vector\x18\x03 \x03(\x02\x12\r\n\x05node1\x18\x04 \x01(\x05\x12\r\n\x05node2\x18\x05 \x01(\x05\"(\n\x16\x44\x65\x66ineOrientationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"J\n\x0ePartSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x0c\n\x04pids\x18\x04 \x03(\x05\"\x1e\n\x0cPartSetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"K\n\x0fShellSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x0c\n\x04\x65ids\x18\x04 \x03(\x05\"\x1f\n\rShellSetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"9\n\x0fSolidSetRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\n\n\x02ki\x18\x03 \x03(\x05\"\x1f\n\rSolidSetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"a\n\x0eNodeSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x11\n\tgenoption\x18\x04 \x01(\t\x12\x10\n\x08\x65ntities\x18\x05 \x03(\x05\"\x1e\n\x0cNodeSetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"o\n\x11SegmentSetRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\x0e\n\x06solver\x18\x03 \x01(\t\x12\n\n\x02n1\x18\x04 \x03(\x05\x12\n\n\x02n2\x18\x05 \x03(\x05\x12\n\n\x02n3\x18\x06 \x03(\x05\x12\n\n\x02n4\x18\x07 \x03(\x05\"!\n\x0fSegmentSetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x87\x01\n\x13PartPropertyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\x12\r\n\x05\x65osid\x18\x04 \x01(\x05\x12\x0c\n\x04hgid\x18\x05 \x01(\x05\x12\x0c\n\x04grav\x18\x06 \x01(\x05\x12\x0e\n\x06\x61\x64popt\x18\x07 \x01(\x05\x12\x0c\n\x04tmid\x18\x08 \x01(\x05\"#\n\x11PartPropertyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x89\x02\n\x0bPartRequest\x12\x0f\n\x07\x63ontact\x18\x01 \x01(\x08\x12\x0f\n\x07heading\x18\x02 \x01(\t\x12\x0b\n\x03pid\x18\x03 \x01(\x05\x12\r\n\x05secid\x18\x04 \x01(\x05\x12\x0b\n\x03mid\x18\x05 \x01(\x05\x12\r\n\x05\x65osid\x18\x06 \x01(\x05\x12\x0c\n\x04hgid\x18\x07 \x01(\x05\x12\x0c\n\x04grav\x18\x08 \x01(\x05\x12\x0e\n\x06\x61\x64popt\x18\t \x01(\x05\x12\x0c\n\x04tmid\x18\n \x01(\x05\x12\n\n\x02\x66\x61\x18\x0b \x01(\x02\x12\n\n\x02\x66\x64\x18\x0c \x01(\x02\x12\n\n\x02\x64\x63\x18\r \x01(\x02\x12\n\n\x02vc\x18\x0e \x01(\x02\x12\x0c\n\x04optt\x18\x0f \x01(\x02\x12\x0b\n\x03sft\x18\x10 \x01(\x02\x12\x0b\n\x03ssf\x18\x11 \x01(\x02\x12\x0e\n\x06\x63parm8\x18\x12 \x01(\x02\"\x1b\n\tPartReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"j\n\x0fMatRigidRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0b\n\x03\x63mo\x18\x05 \x01(\x05\x12\x0c\n\x04\x63on1\x18\x06 \x01(\x05\x12\x0c\n\x04\x63on2\x18\x07 \x01(\x05\"\x1c\n\rMatRigidReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"C\n\x11MatElasticRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\"\x1e\n\x0fMatElasticReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"l\n\x10MatFabricRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\n\n\x02\x65\x61\x18\x03 \x01(\x02\x12\n\n\x02\x65\x62\x18\x04 \x01(\x02\x12\x0c\n\x04prba\x18\x05 \x01(\x02\x12\x0c\n\x04prab\x18\x06 \x01(\x02\x12\x0b\n\x03gab\x18\x07 \x01(\x02\"\x1d\n\x0eMatFabricReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"=\n MatSpringNonlinearElasticRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"-\n\x1eMatSpringNonlinearElasticReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"2\n\x17MatDamperViscousRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02\x64\x63\x18\x02 \x01(\x02\"$\n\x15MatDamperViscousReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"=\n MatDamperNonlinearViscousRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0c\n\x04lcdr\x18\x02 \x01(\x05\"-\n\x1eMatDamperNonlinearViscousReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"\x1f\n\x0fSaveFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1f\n\rSaveFileReply\x12\x0e\n\x06length\x18\x01 \x01(\x03\"\x1f\n\x0fLoadFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1c\n\rLoadFileReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"\x11\n\x0fGetNodesRequest\"\x1f\n\rGetNodesReply\x12\x0e\n\x06\x63oords\x18\x01 \x03(\x01\"\x19\n\x17GetSolidElementsRequest\"(\n\x15GetSolidElementsReply\x12\x0f\n\x07nodeids\x18\x01 \x03(\x03\"1\n\x16ICFDControlTimeRequest\x12\x0b\n\x03tim\x18\x01 \x01(\x02\x12\n\n\x02\x64t\x18\x02 \x01(\x02\"&\n\x14ICFDControlTimeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"V\n\x19ICFDControlGeneralRequest\x12\r\n\x05\x61type\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\x0c\n\x04\x64vcl\x18\x03 \x01(\x05\x12\r\n\x05rdvcl\x18\x04 \x01(\x05\")\n\x17ICFDControlGeneralReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"(\n\x18ICFDControlOutputRequest\x12\x0c\n\x04msgl\x18\x01 \x01(\x05\"(\n\x16ICFDControlOutputReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\",\n\x1cICFDControlTurbulenceRequest\x12\x0c\n\x04tmod\x18\x01 \x01(\x05\",\n\x1aICFDControlTurbulenceReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"R\n\x1dICFDControlDEMCouplingRequest\x12\r\n\x05\x63type\x18\x01 \x01(\x05\x12\n\n\x02\x62t\x18\x02 \x01(\x02\x12\n\n\x02\x64t\x18\x03 \x01(\x02\x12\n\n\x02sf\x18\x04 \x01(\x02\"-\n\x1bICFDControlDEMCouplingReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"!\n\x12ICFDSectionRequest\x12\x0b\n\x03sid\x18\x01 \x01(\x05\"\"\n\x10ICFDSectionReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"C\n\x0eICFDMatRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0b\n\x03\x66lg\x18\x02 \x01(\x05\x12\n\n\x02ro\x18\x03 \x01(\x02\x12\x0b\n\x03vis\x18\x04 \x01(\x02\"\x1e\n\x0cICFDMatReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\":\n\x0fICFDPartRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\"\x1f\n\rICFDPartReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"L\n\x12ICFDPartVolRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\x12\r\n\x05spids\x18\x04 \x03(\x05\"\"\n\x10ICFDPartVolReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\" \n\x11ICFDDBDragRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"!\n\x0fICFDDBDragReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"R\n\x1bICFDBdyPrescribedVelRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\x0b\n\x03\x64of\x18\x02 \x01(\x05\x12\x0b\n\x03vad\x18\x03 \x01(\x05\x12\x0c\n\x04lcid\x18\x04 \x01(\x05\"+\n\x19ICFDBdyPrescribedVelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"8\n\x1bICFDBdyPrescribedPreRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"+\n\x19ICFDBdyPrescribedPreReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"%\n\x16ICFDBdyFreeSlipRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"&\n\x14ICFDBdyFreeSlipReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"$\n\x15ICFDBdyNonSlipRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"%\n\x13ICFDBdyNonSlipReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"6\n\x18ICFDSolverTolMMOVRequest\x12\x0c\n\x04\x61tol\x18\x01 \x01(\x02\x12\x0c\n\x04rtol\x18\x02 \x01(\x02\"(\n\x16ICFDSolverTolMMOVReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"0\n\x11MeshVolumeRequest\x12\r\n\x05volid\x18\x01 \x01(\x05\x12\x0c\n\x04pids\x18\x02 \x03(\x05\"!\n\x0fMeshVolumeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"4\n\x15MeshEmbedShellRequest\x12\r\n\x05volid\x18\x01 \x01(\x05\x12\x0c\n\x04pids\x18\x02 \x03(\x05\"%\n\x13MeshEmbedShellReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"+\n\rMeshBlRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05nelth\x18\x02 \x01(\x05\"\x1d\n\x0bMeshBlReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"f\n\x14MeshSizeShapeRequest\x12\r\n\x05sname\x18\x01 \x01(\t\x12\r\n\x05\x66orce\x18\x02 \x01(\x05\x12\x0e\n\x06method\x18\x03 \x01(\x05\x12\r\n\x05msize\x18\x04 \x01(\x02\x12\x11\n\tparameter\x18\x05 \x03(\x02\"$\n\x12MeshSizeShapeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"z\n\x12\x41LECreateSMRequest\x12\r\n\x05mshid\x18\x01 \x01(\x05\x12\x0c\n\x04\x64pid\x18\x02 \x01(\x05\x12\x0c\n\x04nbid\x18\x03 \x01(\x05\x12\x0c\n\x04\x65\x62id\x18\x04 \x01(\x05\x12\r\n\x05\x63pidx\x18\x05 \x01(\x05\x12\r\n\x05\x63pidy\x18\x06 \x01(\x05\x12\r\n\x05\x63pidz\x18\x07 \x01(\x05\"\"\n\x10\x41LECreateSMReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"P\n\x18\x41LECreateSMRefineRequest\x12\r\n\x05mshid\x18\x01 \x01(\x05\x12\x0b\n\x03ifx\x18\x02 \x01(\x05\x12\x0b\n\x03ify\x18\x03 \x01(\x05\x12\x0b\n\x03ifz\x18\x04 \x01(\x05\"(\n\x16\x41LECreateSMRefineReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"m\n\x1c\x41LECreateSMCtrlPointsRequest\x12\x0c\n\x04\x63pid\x18\x01 \x01(\x05\x12\r\n\x05icase\x18\x02 \x01(\x05\x12\x0b\n\x03sfo\x18\x03 \x01(\x02\x12\t\n\x01n\x18\x04 \x03(\x05\x12\t\n\x01x\x18\x05 \x03(\x05\x12\r\n\x05ratio\x18\x06 \x03(\x02\"/\n\x1d\x41LECreateSMControlPointsReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"U\n\'ALECreateStructuredMultiMatGroupRequest\x12\x0e\n\x06nmmgnm\x18\x01 \x01(\t\x12\x0b\n\x03mid\x18\x02 \x01(\x05\x12\r\n\x05\x65osid\x18\x03 \x01(\x05\"7\n%ALECreateStructuredMultiMatGroupReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"4\n\x14\x44\x61mpingGlobalRequest\x12\x0c\n\x04lcid\x18\x01 \x01(\x05\x12\x0e\n\x06valdmp\x18\x02 \x01(\x02\"$\n\x12\x44\x61mpingGlobalReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"F\n\x1b\x44\x61mpingPartStiffnessRequest\x12\r\n\x05isset\x18\x01 \x01(\x08\x12\n\n\x02id\x18\x02 \x01(\x05\x12\x0c\n\x04\x63oef\x18\x03 \x01(\x02\"+\n\x19\x44\x61mpingPartStiffnessReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xa7\x01\n\x12\x41irbagModelRequest\x12\x11\n\tmodeltype\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\x0e\n\x06sidtyp\x18\x03 \x01(\x05\x12\n\n\x02\x63v\x18\x04 \x01(\x02\x12\n\n\x02\x63p\x18\x05 \x01(\x02\x12\t\n\x01t\x18\x06 \x01(\x02\x12\x0c\n\x04lcid\x18\x07 \x01(\x05\x12\n\n\x02mu\x18\x08 \x01(\x02\x12\x0c\n\x04\x61rea\x18\t \x01(\x02\x12\n\n\x02pe\x18\n \x01(\x02\x12\n\n\x02ro\x18\x0b \x01(\x02\"\"\n\x10\x41irbagModelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\x32\xf8.\n\x05kwC2S\x12>\n\rkwSetFileName\x12\x12.kwgrpc.kwFileName\x1a\x17.kwgrpc.kwFileNameReply\"\x00\x12\x30\n\x06Upload\x12\r.kwgrpc.Chunk\x1a\x13.kwgrpc.kwFileReply\"\x00(\x01\x12\x42\n\x0e\x43reateTimestep\x12\x17.kwgrpc.TimestepRequest\x1a\x15.kwgrpc.TimestepReply\"\x00\x12K\n\x11\x43reateTermination\x12\x1a.kwgrpc.TerminationRequest\x1a\x18.kwgrpc.TerminationReply\"\x00\x12Q\n\x13\x43reateControlOutput\x12\x1c.kwgrpc.ControlOutputRequest\x1a\x1a.kwgrpc.ControlOutputReply\"\x00\x12T\n\x14\x43reateControlContact\x12\x1d.kwgrpc.ControlContactRequest\x1a\x1b.kwgrpc.ControlContactReply\"\x00\x12l\n\x1c\x43reateControlDiscreteElement\x12%.kwgrpc.ControlDiscreteElementRequest\x1a#.kwgrpc.ControlDiscreteElementReply\"\x00\x12W\n\x15\x43reateControlAccuracy\x12\x1e.kwgrpc.ControlAccuracyRequest\x1a\x1c.kwgrpc.ControlAccuracyReply\"\x00\x12Q\n\x13\x43reateControlEnergy\x12\x1c.kwgrpc.ControlEnergyRequest\x1a\x1a.kwgrpc.ControlEnergyReply\"\x00\x12N\n\x12\x43reateControlShell\x12\x1b.kwgrpc.ControlShellRequest\x1a\x19.kwgrpc.ControlShellReply\"\x00\x12N\n\x12\x43reateControlSolid\x12\x1b.kwgrpc.ControlSolidRequest\x1a\x19.kwgrpc.ControlSolidReply\"\x00\x12\x42\n\x0e\x43reateDBBinary\x12\x17.kwgrpc.DBBinaryRequest\x1a\x15.kwgrpc.DBBinaryReply\"\x00\x12?\n\rCreateDBAscii\x12\x16.kwgrpc.DBAsciiRequest\x1a\x14.kwgrpc.DBAsciiReply\"\x00\x12Q\n\x13\x43reateRigidWallGeom\x12\x1c.kwgrpc.RigidWallGeomRequest\x1a\x1a.kwgrpc.RigidWallGeomReply\"\x00\x12W\n\x15\x43reateRigidWallPlanar\x12\x1e.kwgrpc.RigidWallPlanarRequest\x1a\x1c.kwgrpc.RigidWallPlanarReply\"\x00\x12?\n\rCreateInitVel\x12\x16.kwgrpc.InitVelRequest\x1a\x14.kwgrpc.InitVelReply\"\x00\x12Z\n\x16\x43reateInitVelRigidBody\x12\x1f.kwgrpc.InitVelRigidBodyRequest\x1a\x1d.kwgrpc.InitVelRigidBodyReply\"\x00\x12]\n\x17\x43reateInitVelGeneration\x12 .kwgrpc.InitVelGenerationRequest\x1a\x1e.kwgrpc.InitVelGenerationReply\"\x00\x12x\n CreateInitVelGenerationStartTime\x12).kwgrpc.InitVelGenerationStartTimeRequest\x1a\'.kwgrpc.InitVelGenerationStartTimeReply\"\x00\x12?\n\rCreateContact\x12\x16.kwgrpc.ContactRequest\x1a\x14.kwgrpc.ContactReply\"\x00\x12\x63\n\x19\x43reateBdyPrescribedMotion\x12\".kwgrpc.BdyPrescribedMotionRequest\x1a .kwgrpc.BdyPrescribedMotionReply\"\x00\x12<\n\x0c\x43reateBdySpc\x12\x15.kwgrpc.BdySpcRequest\x1a\x13.kwgrpc.BdySpcReply\"\x00\x12Z\n\x16\x43reateConstrainedJoint\x12\x1f.kwgrpc.ConstrainedJointRequest\x1a\x1d.kwgrpc.ConstrainedJointReply\"\x00\x12i\n\x1b\x43reateConstrainedExtraNodes\x12$.kwgrpc.ConstrainedExtraNodesRequest\x1a\".kwgrpc.ConstrainedExtraNodesReply\"\x00\x12\x42\n\x0e\x43reateLoadBody\x12\x17.kwgrpc.LoadBodyRequest\x1a\x15.kwgrpc.LoadBodyReply\"\x00\x12\x42\n\x0e\x43reateMatRigid\x12\x17.kwgrpc.MatRigidRequest\x1a\x15.kwgrpc.MatRigidReply\"\x00\x12H\n\x10\x43reateMatElastic\x12\x19.kwgrpc.MatElasticRequest\x1a\x17.kwgrpc.MatElasticReply\"\x00\x12\x45\n\x0f\x43reateMatFabric\x12\x18.kwgrpc.MatFabricRequest\x1a\x16.kwgrpc.MatFabricReply\"\x00\x12u\n\x1f\x43reateMatSpringNonlinearElastic\x12(.kwgrpc.MatSpringNonlinearElasticRequest\x1a&.kwgrpc.MatSpringNonlinearElasticReply\"\x00\x12Z\n\x16\x43reateMatDamperViscous\x12\x1f.kwgrpc.MatDamperViscousRequest\x1a\x1d.kwgrpc.MatDamperViscousReply\"\x00\x12u\n\x1f\x43reateMatDamperNonlinearViscous\x12(.kwgrpc.MatDamperNonlinearViscousRequest\x1a&.kwgrpc.MatDamperNonlinearViscousReply\"\x00\x12K\n\x11\x43reateDefineCurve\x12\x1a.kwgrpc.DefineCurveRequest\x1a\x18.kwgrpc.DefineCurveReply\"\x00\x12N\n\x12\x43reateDefineVector\x12\x1b.kwgrpc.DefineVectorRequest\x1a\x19.kwgrpc.DefineVectorReply\"\x00\x12\x63\n\x19\x43reateDefineDEMeshSurface\x12\".kwgrpc.DefineDEMeshSurfaceRequest\x1a .kwgrpc.DefineDEMeshSurfaceReply\"\x00\x12]\n\x17\x43reateDefineOrientation\x12 .kwgrpc.DefineOrientationRequest\x1a\x1e.kwgrpc.DefineOrientationReply\"\x00\x12?\n\rCreatePartSet\x12\x16.kwgrpc.PartSetRequest\x1a\x14.kwgrpc.PartSetReply\"\x00\x12\x42\n\x0e\x43reateShellSet\x12\x17.kwgrpc.ShellSetRequest\x1a\x15.kwgrpc.ShellSetReply\"\x00\x12\x42\n\x0e\x43reateSolidSet\x12\x17.kwgrpc.SolidSetRequest\x1a\x15.kwgrpc.SolidSetReply\"\x00\x12?\n\rCreateNodeSet\x12\x16.kwgrpc.NodeSetRequest\x1a\x14.kwgrpc.NodeSetReply\"\x00\x12H\n\x10\x43reateSegmentSet\x12\x19.kwgrpc.SegmentSetRequest\x1a\x17.kwgrpc.SegmentSetReply\"\x00\x12W\n\x15\x43reateSectionIGAShell\x12\x1e.kwgrpc.SectionIGAShellRequest\x1a\x1c.kwgrpc.SectionIGAShellReply\"\x00\x12N\n\x12\x43reateSectionShell\x12\x1b.kwgrpc.SectionShellRequest\x1a\x19.kwgrpc.SectionShellReply\"\x00\x12N\n\x12\x43reateSectionSolid\x12\x1b.kwgrpc.SectionSolidRequest\x1a\x19.kwgrpc.SectionSolidReply\"\x00\x12W\n\x15\x43reateSectionDiscrete\x12\x1e.kwgrpc.SectionDiscreteRequest\x1a\x1c.kwgrpc.SectionDiscreteReply\"\x00\x12\x45\n\x0f\x43reateHourglass\x12\x18.kwgrpc.HourglassRequest\x1a\x16.kwgrpc.HourglassReply\"\x00\x12K\n\x0fSetPartProperty\x12\x1b.kwgrpc.PartPropertyRequest\x1a\x19.kwgrpc.PartPropertyReply\"\x00\x12<\n\x08GetNodes\x12\x17.kwgrpc.GetNodesRequest\x1a\x15.kwgrpc.GetNodesReply\"\x00\x12T\n\x10GetSolidElements\x12\x1f.kwgrpc.GetSolidElementsRequest\x1a\x1d.kwgrpc.GetSolidElementsReply\"\x00\x12<\n\x08SaveFile\x12\x17.kwgrpc.SaveFileRequest\x1a\x15.kwgrpc.SaveFileReply\"\x00\x12<\n\x08LoadFile\x12\x17.kwgrpc.LoadFileRequest\x1a\x15.kwgrpc.LoadFileReply\"\x00\x12\x36\n\x08\x44ownload\x12\x17.kwgrpc.DownloadRequest\x1a\r.kwgrpc.Chunk\"\x00\x30\x01\x12W\n\x15ICFDCreateControlTime\x12\x1e.kwgrpc.ICFDControlTimeRequest\x1a\x1c.kwgrpc.ICFDControlTimeReply\"\x00\x12`\n\x18ICFDCreateControlGeneral\x12!.kwgrpc.ICFDControlGeneralRequest\x1a\x1f.kwgrpc.ICFDControlGeneralReply\"\x00\x12]\n\x17ICFDCreateControlOutput\x12 .kwgrpc.ICFDControlOutputRequest\x1a\x1e.kwgrpc.ICFDControlOutputReply\"\x00\x12i\n\x1bICFDCreateControlTurbulence\x12$.kwgrpc.ICFDControlTurbulenceRequest\x1a\".kwgrpc.ICFDControlTurbulenceReply\"\x00\x12l\n\x1cICFDCreateControlDEMCoupling\x12%.kwgrpc.ICFDControlDEMCouplingRequest\x1a#.kwgrpc.ICFDControlDEMCouplingReply\"\x00\x12K\n\x11ICFDCreateSection\x12\x1a.kwgrpc.ICFDSectionRequest\x1a\x18.kwgrpc.ICFDSectionReply\"\x00\x12?\n\rICFDCreateMat\x12\x16.kwgrpc.ICFDMatRequest\x1a\x14.kwgrpc.ICFDMatReply\"\x00\x12\x42\n\x0eICFDCreatePart\x12\x17.kwgrpc.ICFDPartRequest\x1a\x15.kwgrpc.ICFDPartReply\"\x00\x12K\n\x11ICFDCreatePartVol\x12\x1a.kwgrpc.ICFDPartVolRequest\x1a\x18.kwgrpc.ICFDPartVolReply\"\x00\x12H\n\x10ICFDCreateDBDrag\x12\x19.kwgrpc.ICFDDBDragRequest\x1a\x17.kwgrpc.ICFDDBDragReply\"\x00\x12\x66\n\x1aICFDCreateBdyPrescribedVel\x12#.kwgrpc.ICFDBdyPrescribedVelRequest\x1a!.kwgrpc.ICFDBdyPrescribedVelReply\"\x00\x12\x66\n\x1aICFDCreateBdyPrescribedPre\x12#.kwgrpc.ICFDBdyPrescribedPreRequest\x1a!.kwgrpc.ICFDBdyPrescribedPreReply\"\x00\x12W\n\x15ICFDCreateBdyFreeSlip\x12\x1e.kwgrpc.ICFDBdyFreeSlipRequest\x1a\x1c.kwgrpc.ICFDBdyFreeSlipReply\"\x00\x12T\n\x14ICFDCreateBdyNonSlip\x12\x1d.kwgrpc.ICFDBdyNonSlipRequest\x1a\x1b.kwgrpc.ICFDBdyNonSlipReply\"\x00\x12]\n\x17ICFDCreateSolverTolMMOV\x12 .kwgrpc.ICFDSolverTolMMOVRequest\x1a\x1e.kwgrpc.ICFDSolverTolMMOVReply\"\x00\x12H\n\x10MESHCreateVolume\x12\x19.kwgrpc.MeshVolumeRequest\x1a\x17.kwgrpc.MeshVolumeReply\"\x00\x12T\n\x14MESHCreateEmbedShell\x12\x1d.kwgrpc.MeshEmbedShellRequest\x1a\x1b.kwgrpc.MeshEmbedShellReply\"\x00\x12<\n\x0cMESHCreateBl\x12\x15.kwgrpc.MeshBlRequest\x1a\x13.kwgrpc.MeshBlReply\"\x00\x12Q\n\x13MESHCreateSizeShape\x12\x1c.kwgrpc.MeshSizeShapeRequest\x1a\x1a.kwgrpc.MeshSizeShapeReply\"\x00\x12Q\n\x13\x43reateDampingGlobal\x12\x1c.kwgrpc.DampingGlobalRequest\x1a\x1a.kwgrpc.DampingGlobalReply\"\x00\x12\x66\n\x1a\x43reateDampingPartStiffness\x12#.kwgrpc.DampingPartStiffnessRequest\x1a!.kwgrpc.DampingPartStiffnessReply\"\x00\x12K\n\x11\x43reateAirbagModel\x12\x1a.kwgrpc.AirbagModelRequest\x1a\x18.kwgrpc.AirbagModelReply\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0fkwprocess.proto\x12\x06kwgrpc\"\x1d\n\x0bkwFileReply\x12\x0e\n\x06length\x18\x01 \x01(\x03\"\x17\n\x05\x43hunk\x12\x0e\n\x06\x62uffer\x18\x01 \x01(\x0c\"\'\n\nkwFileName\x12\x0b\n\x03num\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x1e\n\x0f\x44ownloadRequest\x12\x0b\n\x03url\x18\x01 \x01(\t\"\x1e\n\x0fkwFileNameReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\">\n\x0fTimestepRequest\x12\x0e\n\x06tssfac\x18\x01 \x01(\x02\x12\x0c\n\x04isdo\x18\x02 \x01(\x05\x12\r\n\x05\x64t2ms\x18\x03 \x01(\x02\"\x1f\n\rTimestepReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"$\n\x12TerminationRequest\x12\x0e\n\x06\x65ndtim\x18\x01 \x01(\x02\"\"\n\x10TerminationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"5\n\x14\x43ontrolOutputRequest\x12\r\n\x05npopt\x18\x01 \x01(\x05\x12\x0e\n\x06neecho\x18\x02 \x01(\x05\"$\n\x12\x43ontrolOutputReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"u\n\x15\x43ontrolContactRequest\x12\x0e\n\x06rwpnal\x18\x01 \x01(\x02\x12\x0e\n\x06shlthk\x18\x02 \x01(\x05\x12\r\n\x05orien\x18\x03 \x01(\x05\x12\r\n\x05ssthk\x18\x04 \x01(\x05\x12\x0e\n\x06ignore\x18\x05 \x01(\x05\x12\x0e\n\x06igactc\x18\x06 \x01(\x05\"%\n\x13\x43ontrolContactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x83\x01\n\x11\x43ontrolALERequest\x12\x0b\n\x03\x64\x63t\x18\x01 \x01(\x05\x12\x0c\n\x04nadv\x18\x02 \x01(\x05\x12\x0c\n\x04meth\x18\x03 \x01(\x05\x12\x0c\n\x04\x61\x66\x61\x63\x18\x04 \x01(\x02\x12\x0b\n\x03\x65nd\x18\x05 \x01(\x02\x12\r\n\x05\x61\x61\x66\x61\x63\x18\x06 \x01(\x02\x12\r\n\x05vfact\x18\x07 \x01(\x02\x12\x0c\n\x04pref\x18\x08 \x01(\x02\"!\n\x0f\x43ontrolALEReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"z\n\x1d\x43ontrolDiscreteElementRequest\x12\r\n\x05ndamp\x18\x01 \x01(\x02\x12\r\n\x05tdamp\x18\x02 \x01(\x02\x12\r\n\x05\x66rics\x18\x03 \x01(\x02\x12\r\n\x05\x66ricr\x18\x04 \x01(\x02\x12\r\n\x05normk\x18\x05 \x01(\x02\x12\x0e\n\x06sheark\x18\x06 \x01(\x02\"-\n\x1b\x43ontrolDiscreteElementReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"_\n\x16\x43ontrolAccuracyRequest\x12\x0b\n\x03osu\x18\x01 \x01(\x05\x12\x0b\n\x03inn\x18\x02 \x01(\x05\x12\x0e\n\x06pidosu\x18\x03 \x01(\x05\x12\x0c\n\x04iacc\x18\x04 \x01(\x05\x12\r\n\x05\x65xacc\x18\x05 \x01(\x02\"&\n\x14\x43ontrolAccuracyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"`\n\x14\x43ontrolEnergyRequest\x12\x0c\n\x04hgen\x18\x01 \x01(\x05\x12\x0c\n\x04rwen\x18\x02 \x01(\x05\x12\x0e\n\x06slnten\x18\x03 \x01(\x05\x12\r\n\x05rylen\x18\x04 \x01(\x05\x12\r\n\x05irgen\x18\x05 \x01(\x05\"$\n\x12\x43ontrolEnergyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"C\n\x1b\x43ontrolBulkViscosityRequest\x12\n\n\x02q1\x18\x01 \x01(\x02\x12\n\n\x02q2\x18\x02 \x01(\x02\x12\x0c\n\x04type\x18\x03 \x01(\x05\"+\n\x19\x43ontrolBulkViscosityReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"2\n\x17\x43ontrolHourglassRequest\x12\x0b\n\x03ihq\x18\x01 \x01(\x05\x12\n\n\x02qh\x18\x02 \x01(\x02\"\'\n\x15\x43ontrolHourglassReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x9d\x01\n\x13\x43ontrolShellRequest\x12\x0e\n\x06wrpang\x18\x01 \x01(\x02\x12\r\n\x05\x65sort\x18\x02 \x01(\x05\x12\r\n\x05irnxx\x18\x03 \x01(\x05\x12\x0e\n\x06istupd\x18\x04 \x01(\x05\x12\x0e\n\x06theory\x18\x05 \x01(\x05\x12\x0b\n\x03\x62wc\x18\x06 \x01(\x05\x12\r\n\x05miter\x18\x07 \x01(\x05\x12\x0c\n\x04proj\x18\x08 \x01(\x05\x12\x0e\n\x06irquad\x18\t \x01(\x05\"#\n\x11\x43ontrolShellReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x94\x01\n\x13\x43ontrolSolidRequest\x12\r\n\x05\x65sort\x18\x01 \x01(\x05\x12\x0e\n\x06\x66matrx\x18\x02 \x01(\x05\x12\x0f\n\x07niptets\x18\x03 \x01(\x05\x12\x0e\n\x06swlocl\x18\x04 \x01(\x05\x12\x0e\n\x06psfail\x18\x05 \x01(\x05\x12\x0f\n\x07t10jtol\x18\x06 \x01(\x02\x12\x0c\n\x04icoh\x18\x07 \x01(\x05\x12\x0e\n\x06tet13k\x18\x08 \x01(\x05\"#\n\x11\x43ontrolSolidReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"<\n\x1d\x43ontrolImplicitGeneralRequest\x12\x0e\n\x06imflag\x18\x01 \x01(\x05\x12\x0b\n\x03\x64t0\x18\x02 \x01(\x02\"-\n\x1b\x43ontrolImplicitGeneralReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\";\n\x1a\x43ontrolImplicitAutoRequest\x12\r\n\x05iauto\x18\x01 \x01(\x05\x12\x0e\n\x06iteopt\x18\x02 \x01(\x05\"*\n\x18\x43ontrolImplicitAutoReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"K\n\x1d\x43ontrolImplicitDynamicRequest\x12\r\n\x05imass\x18\x01 \x01(\x05\x12\r\n\x05gamma\x18\x02 \x01(\x02\x12\x0c\n\x04\x62\x65ta\x18\x03 \x01(\x02\"-\n\x1b\x43ontrolImplicitDynamicReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"@\n ControlImplicitEigenvalueRequest\x12\x0c\n\x04neig\x18\x01 \x01(\x05\x12\x0e\n\x06shfscl\x18\x02 \x01(\x02\"0\n\x1e\x43ontrolImplicitEigenvalueReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"a\n\x1e\x43ontrolImplicitSolutionRequest\x12\x0f\n\x07nsolver\x18\x01 \x01(\x05\x12\x0e\n\x06ilimit\x18\x02 \x01(\x05\x12\x0e\n\x06maxref\x18\x03 \x01(\x05\x12\x0e\n\x06\x61\x62stol\x18\x04 \x01(\x02\".\n\x1c\x43ontrolImplicitSolutionReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"o\n\x0f\x44\x42\x42inaryRequest\x12\x10\n\x08\x66iletype\x18\x01 \x01(\t\x12\n\n\x02\x64t\x18\x02 \x01(\x02\x12\x0e\n\x06maxint\x18\x03 \x01(\x05\x12\x0e\n\x06ieverp\x18\x04 \x01(\x05\x12\r\n\x05\x64\x63omp\x18\x05 \x01(\x05\x12\x0f\n\x07nintsld\x18\x06 \x01(\x05\"\x1f\n\rDBBinaryReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\" \n\x0f\x44\x42\x41LEMatRequest\x12\r\n\x05\x64tout\x18\x01 \x01(\x02\"\x1f\n\rDBALEMatReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"W\n\x0e\x44\x42\x41sciiRequest\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\n\n\x02\x64t\x18\x02 \x01(\x02\x12\x0e\n\x06\x62inary\x18\x03 \x01(\x05\x12\x0c\n\x04lcur\x18\x04 \x01(\x05\x12\r\n\x05ioopt\x18\x05 \x01(\x05\"\x1e\n\x0c\x44\x42\x41sciiReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x1f\n\rDBSALERequest\x12\x0e\n\x06switch\x18\x01 \x01(\x05\"\x1d\n\x0b\x44\x42SALEReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"/\n\x0fLoadBodyRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"\x1f\n\rLoadBodyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"0\n\x0eInitVelRequest\x12\x0c\n\x04nsid\x18\x01 \x01(\x05\x12\x10\n\x08velocity\x18\x02 \x03(\x02\"\x1e\n\x0cInitVelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x7f\n\x17InitVelRigidBodyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\n\n\x02vx\x18\x02 \x01(\x02\x12\n\n\x02vy\x18\x03 \x01(\x02\x12\n\n\x02vz\x18\x04 \x01(\x02\x12\x0b\n\x03vxr\x18\x05 \x01(\x02\x12\x0b\n\x03vyr\x18\x06 \x01(\x02\x12\x0b\n\x03vzr\x18\x07 \x01(\x02\x12\x0c\n\x04lcid\x18\x08 \x01(\x05\"\'\n\x15InitVelRigidBodyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xbe\x01\n\x18InitVelGenerationRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04styp\x18\x02 \x01(\x05\x12\r\n\x05omega\x18\x03 \x01(\x02\x12\n\n\x02vx\x18\x04 \x01(\x02\x12\n\n\x02vy\x18\x05 \x01(\x02\x12\n\n\x02vz\x18\x06 \x01(\x02\x12\n\n\x02xc\x18\x07 \x01(\x02\x12\n\n\x02yc\x18\x08 \x01(\x02\x12\n\n\x02zc\x18\t \x01(\x02\x12\n\n\x02nx\x18\n \x01(\x02\x12\n\n\x02ny\x18\x0b \x01(\x02\x12\n\n\x02nz\x18\x0c \x01(\x02\x12\r\n\x05phase\x18\r \x01(\x05\"(\n\x16InitVelGenerationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"2\n!InitVelGenerationStartTimeRequest\x12\r\n\x05stime\x18\x01 \x01(\x02\"1\n\x1fInitVelGenerationStartTimeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"?\n\x15InitDetonationRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05\x63oord\x18\x02 \x03(\x02\x12\n\n\x02lt\x18\x03 \x01(\x02\"%\n\x13InitDetonationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x8e\x01\n\x14RigidWallGeomRequest\x12\x10\n\x08geomtype\x18\x01 \x01(\x05\x12\x0e\n\x06motion\x18\x02 \x01(\x05\x12\x0f\n\x07\x64isplay\x18\x03 \x01(\x08\x12\x11\n\tparameter\x18\x04 \x03(\x02\x12\x0c\n\x04lcid\x18\x05 \x01(\x05\x12\n\n\x02vx\x18\x06 \x01(\x02\x12\n\n\x02vy\x18\x07 \x01(\x02\x12\n\n\x02vz\x18\x08 \x01(\x02\"$\n\x12RigidWallGeomReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"c\n\x16RigidWallPlanarRequest\x12\x0c\n\x04nsid\x18\x01 \x01(\x05\x12\x0e\n\x06nsidex\x18\x02 \x01(\x05\x12\r\n\x05\x62oxid\x18\x03 \x01(\x05\x12\x0e\n\x06normal\x18\x04 \x03(\x02\x12\x0c\n\x04\x66ric\x18\x05 \x01(\x02\"&\n\x14RigidWallPlanarReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xa9\x04\n\x0e\x43ontactRequest\x12\x0b\n\x03\x63id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0f\n\x07option1\x18\x03 \x01(\t\x12\x0f\n\x07option2\x18\x04 \x01(\t\x12\x0f\n\x07option3\x18\x05 \x01(\x08\x12\x0e\n\x06offset\x18\x06 \x01(\t\x12\x0c\n\x04ssid\x18\x07 \x01(\x05\x12\x0c\n\x04msid\x18\x08 \x01(\x05\x12\r\n\x05sstyp\x18\t \x01(\x05\x12\r\n\x05mstyp\x18\n \x01(\x05\x12\x0c\n\x04sapr\x18\x0b \x01(\x05\x12\x0c\n\x04sbpr\x18\x0c \x01(\x05\x12\x0c\n\x04sfsa\x18\r \x01(\x02\x12\x0c\n\x04sfsb\x18\x0e \x01(\x02\x12\n\n\x02\x66s\x18\x0f \x01(\x02\x12\n\n\x02\x66\x64\x18\x10 \x01(\x02\x12\x0b\n\x03vdc\x18\x11 \x01(\x02\x12\x0e\n\x06penchk\x18\x12 \x01(\x05\x12\x11\n\tbirthtime\x18\x13 \x01(\x02\x12\x0b\n\x03sst\x18\x14 \x01(\x02\x12\x0b\n\x03mst\x18\x15 \x01(\x02\x12\x11\n\toptionres\x18\x16 \x01(\x05\x12\x0c\n\x04nfls\x18\x17 \x01(\x02\x12\x0c\n\x04sfls\x18\x18 \x01(\x02\x12\r\n\x05param\x18\x19 \x01(\x02\x12\r\n\x05\x63t2cn\x18\x1a \x01(\x02\x12\x0c\n\x04soft\x18\x1b \x01(\x05\x12\x0e\n\x06sofscl\x18\x1c \x01(\x02\x12\x0e\n\x06lcidab\x18\x1d \x01(\x05\x12\x0e\n\x06maxpar\x18\x1e \x01(\x02\x12\r\n\x05sbopt\x18\x1f \x01(\x05\x12\r\n\x05\x64\x65pth\x18  \x01(\x05\x12\r\n\x05\x62sort\x18! \x01(\x05\x12\x0e\n\x06\x66rcfrq\x18\" \x01(\x05\x12\x0c\n\x04igap\x18# \x01(\x05\x12\x0e\n\x06ignore\x18$ \x01(\x05\"\x1e\n\x0c\x43ontactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xb8\x01\n\x1a\x42\x64yPrescribedMotionRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07heading\x18\x02 \x01(\t\x12\x0e\n\x06option\x18\x03 \x01(\t\x12\x0e\n\x06typeid\x18\x04 \x01(\x05\x12\x0b\n\x03\x64of\x18\x05 \x01(\x05\x12\x0b\n\x03vad\x18\x06 \x01(\x05\x12\x0c\n\x04lcid\x18\x07 \x01(\x05\x12\n\n\x02sf\x18\x08 \x01(\x02\x12\x0b\n\x03vid\x18\t \x01(\x05\x12\r\n\x05\x62irth\x18\n \x01(\x02\x12\r\n\x05\x64\x65\x61th\x18\x0b \x01(\x02\"*\n\x18\x42\x64yPrescribedMotionReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xc3\x01\n\rBdySpcRequest\x12\x0f\n\x07option1\x18\x01 \x01(\t\x12\x12\n\nbirthdeath\x18\x02 \x01(\x08\x12\x0b\n\x03nid\x18\x03 \x01(\x05\x12\x0b\n\x03\x63id\x18\x04 \x01(\x05\x12\x0c\n\x04\x64ofx\x18\x05 \x01(\x05\x12\x0c\n\x04\x64ofy\x18\x06 \x01(\x05\x12\x0c\n\x04\x64ofz\x18\x07 \x01(\x05\x12\r\n\x05\x64ofrx\x18\x08 \x01(\x05\x12\r\n\x05\x64ofry\x18\t \x01(\x05\x12\r\n\x05\x64ofrz\x18\n \x01(\x05\x12\r\n\x05\x62irth\x18\x0b \x01(\x02\x12\r\n\x05\x64\x65\x61th\x18\x0c \x01(\x02\"\x1d\n\x0b\x42\x64ySpcReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"W\n\x1c\x43onstrainedExtraNodesRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\x0b\n\x03pid\x18\x02 \x01(\x05\x12\x0b\n\x03nid\x18\x03 \x01(\x05\x12\r\n\x05iflag\x18\x04 \x01(\x05\",\n\x1a\x43onstrainedExtraNodesReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"=\n ConstrainedNodalRigidBodyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\x0c\n\x04nsid\x18\x02 \x01(\x05\"-\n\x1e\x43onstrainedNodalRigidBodyReply\x12\x0b\n\x03pid\x18\x01 \x01(\x05\":\n\x1a\x43onstrainedSpotWeldRequest\x12\r\n\x05node1\x18\x01 \x01(\x05\x12\r\n\x05node2\x18\x02 \x01(\x05\"&\n\x18\x43onstrainedSpotWeldReply\x12\n\n\x02id\x18\x01 \x01(\x05\"Q\n\x17\x43onstrainedJointRequest\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\r\n\x05nodes\x18\x02 \x03(\x05\x12\x0b\n\x03rps\x18\x03 \x01(\x02\x12\x0c\n\x04\x64\x61mp\x18\x04 \x01(\x02\"#\n\x15\x43onstrainedJointReply\x12\n\n\x02id\x18\x01 \x01(\x05\"X\n\x16SectionIGAShellRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x02 \x01(\x05\x12\x0c\n\x04shrf\x18\x03 \x01(\x02\x12\x11\n\tthickness\x18\x04 \x01(\x02\"\"\n\x14SectionIGAShellReply\x12\n\n\x02id\x18\x01 \x01(\x05\"h\n\x12SectionBeamRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x02 \x01(\x05\x12\x0c\n\x04shrf\x18\x03 \x01(\x02\x12\x0b\n\x03\x63st\x18\x04 \x01(\x05\x12\x0b\n\x03ts1\x18\x05 \x01(\x02\x12\x0b\n\x03ts2\x18\x06 \x01(\x02\"\x1e\n\x10SectionBeamReply\x12\n\n\x02id\x18\x01 \x01(\x05\"\x8e\x01\n\x13SectionShellRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x02 \x01(\x05\x12\x0c\n\x04shrf\x18\x03 \x01(\x02\x12\x0b\n\x03nip\x18\x04 \x01(\x05\x12\r\n\x05propt\x18\x05 \x01(\x05\x12\n\n\x02t1\x18\x06 \x01(\x02\x12\n\n\x02t2\x18\x07 \x01(\x02\x12\n\n\x02t3\x18\x08 \x01(\x02\x12\n\n\x02t4\x18\t \x01(\x02\"\x1f\n\x11SectionShellReply\x12\n\n\x02id\x18\x01 \x01(\x05\"C\n\x13SectionSolidRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x03 \x01(\x05\"\x1f\n\x11SectionSolidReply\x12\n\n\x02id\x18\x01 \x01(\x05\"~\n\x16SectionDiscreteRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0b\n\x03\x64ro\x18\x02 \x01(\x05\x12\n\n\x02kd\x18\x03 \x01(\x02\x12\n\n\x02v0\x18\x04 \x01(\x02\x12\n\n\x02\x63l\x18\x05 \x01(\x02\x12\n\n\x02\x66\x64\x18\x06 \x01(\x02\x12\x0b\n\x03\x63\x64l\x18\x07 \x01(\x02\x12\x0b\n\x03tdl\x18\x08 \x01(\x02\"&\n\x14SectionDiscreteReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"i\n\x10HourglassRequest\x12\x0c\n\x04ghid\x18\x01 \x01(\x05\x12\x0b\n\x03ihq\x18\x02 \x01(\x05\x12\n\n\x02qm\x18\x03 \x01(\x02\x12\n\n\x02q1\x18\x04 \x01(\x02\x12\n\n\x02q2\x18\x05 \x01(\x02\x12\n\n\x02qb\x18\x06 \x01(\x02\x12\n\n\x02qw\x18\x07 \x01(\x02\"\x1c\n\x0eHourglassReply\x12\n\n\x02id\x18\x01 \x01(\x05\"b\n\x12\x44\x65\x66ineCurveRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\x12\x0b\n\x03sfo\x18\x03 \x01(\x02\x12\x10\n\x08\x61\x62scissa\x18\x04 \x03(\x01\x12\x10\n\x08ordinate\x18\x05 \x03(\x01\"\x1e\n\x10\x44\x65\x66ineCurveReply\x12\n\n\x02id\x18\x01 \x01(\x05\"y\n\x13\x44\x65\x66ineVectorRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03vid\x18\x02 \x01(\x05\x12\n\n\x02xt\x18\x03 \x01(\x02\x12\n\n\x02yt\x18\x04 \x01(\x02\x12\n\n\x02zt\x18\x05 \x01(\x02\x12\n\n\x02xh\x18\x06 \x01(\x02\x12\n\n\x02yh\x18\x07 \x01(\x02\x12\n\n\x02zh\x18\x08 \x01(\x02\"#\n\x11\x44\x65\x66ineVectorReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"f\n\x10\x44\x65\x66ineBoxRequest\x12\x0c\n\x04xmin\x18\x01 \x01(\x02\x12\x0c\n\x04xmax\x18\x02 \x01(\x02\x12\x0c\n\x04ymin\x18\x03 \x01(\x02\x12\x0c\n\x04ymax\x18\x04 \x01(\x02\x12\x0c\n\x04zmin\x18\x05 \x01(\x02\x12\x0c\n\x04zmax\x18\x06 \x01(\x02\"\x1f\n\x0e\x44\x65\x66ineBoxReply\x12\r\n\x05\x62oxid\x18\x01 \x01(\x05\"\x81\x01\n\x1a\x44\x65\x66ineDEMeshSurfaceRequest\x12\x0b\n\x03sid\x18\x01 \x01(\x05\x12\x0c\n\x04type\x18\x02 \x01(\x05\x12\r\n\x05nquad\x18\x03 \x01(\x05\x12\x0e\n\x06\x64\x65spid\x18\x04 \x01(\x05\x12\x0e\n\x06\x64\x65sxid\x18\x05 \x01(\x05\x12\x0c\n\x04nsid\x18\x06 \x01(\x05\x12\x0b\n\x03rsf\x18\x07 \x01(\x02\"*\n\x18\x44\x65\x66ineDEMeshSurfaceReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"b\n\x18\x44\x65\x66ineOrientationRequest\x12\x0b\n\x03vid\x18\x01 \x01(\x05\x12\x0b\n\x03iop\x18\x02 \x01(\x05\x12\x0e\n\x06vector\x18\x03 \x03(\x02\x12\r\n\x05node1\x18\x04 \x01(\x05\x12\r\n\x05node2\x18\x05 \x01(\x05\"(\n\x16\x44\x65\x66ineOrientationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"J\n\x0ePartSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x0c\n\x04pids\x18\x04 \x03(\x05\"\x1a\n\x0cPartSetReply\x12\n\n\x02id\x18\x01 \x01(\x05\"K\n\x0fShellSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x0c\n\x04\x65ids\x18\x04 \x03(\x05\"\x1f\n\rShellSetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"9\n\x0fSolidSetRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\n\n\x02ki\x18\x03 \x03(\x05\"\x1f\n\rSolidSetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"a\n\x0eNodeSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x11\n\tgenoption\x18\x04 \x01(\t\x12\x10\n\x08\x65ntities\x18\x05 \x03(\x05\"\x1a\n\x0cNodeSetReply\x12\n\n\x02id\x18\x01 \x01(\x05\"o\n\x11SegmentSetRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\x0e\n\x06solver\x18\x03 \x01(\t\x12\n\n\x02n1\x18\x04 \x03(\x05\x12\n\n\x02n2\x18\x05 \x03(\x05\x12\n\n\x02n3\x18\x06 \x03(\x05\x12\n\n\x02n4\x18\x07 \x03(\x05\"\x1d\n\x0fSegmentSetReply\x12\n\n\x02id\x18\x01 \x01(\x05\"\x87\x01\n\x13PartPropertyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\x12\r\n\x05\x65osid\x18\x04 \x01(\x05\x12\x0c\n\x04hgid\x18\x05 \x01(\x05\x12\x0c\n\x04grav\x18\x06 \x01(\x05\x12\x0e\n\x06\x61\x64popt\x18\x07 \x01(\x05\x12\x0c\n\x04tmid\x18\x08 \x01(\x05\"#\n\x11PartPropertyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x89\x02\n\x0bPartRequest\x12\x0f\n\x07\x63ontact\x18\x01 \x01(\x08\x12\x0f\n\x07heading\x18\x02 \x01(\t\x12\x0b\n\x03pid\x18\x03 \x01(\x05\x12\r\n\x05secid\x18\x04 \x01(\x05\x12\x0b\n\x03mid\x18\x05 \x01(\x05\x12\r\n\x05\x65osid\x18\x06 \x01(\x05\x12\x0c\n\x04hgid\x18\x07 \x01(\x05\x12\x0c\n\x04grav\x18\x08 \x01(\x05\x12\x0e\n\x06\x61\x64popt\x18\t \x01(\x05\x12\x0c\n\x04tmid\x18\n \x01(\x05\x12\n\n\x02\x66\x61\x18\x0b \x01(\x02\x12\n\n\x02\x66\x64\x18\x0c \x01(\x02\x12\n\n\x02\x64\x63\x18\r \x01(\x02\x12\n\n\x02vc\x18\x0e \x01(\x02\x12\x0c\n\x04optt\x18\x0f \x01(\x02\x12\x0b\n\x03sft\x18\x10 \x01(\x02\x12\x0b\n\x03ssf\x18\x11 \x01(\x02\x12\x0e\n\x06\x63parm8\x18\x12 \x01(\x02\"\x1b\n\tPartReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"9\n\x0cMatEMRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\r\n\x05sigma\x18\x03 \x01(\x02\"\x18\n\nMatEMReply\x12\n\n\x02id\x18\x01 \x01(\x05\"j\n\x0fMatRigidRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0b\n\x03\x63mo\x18\x05 \x01(\x05\x12\x0c\n\x04\x63on1\x18\x06 \x01(\x05\x12\x0c\n\x04\x63on2\x18\x07 \x01(\x05\"\x1c\n\rMatRigidReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"C\n\x11MatElasticRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\"\x1e\n\x0fMatElasticReply\x12\x0b\n\x03mid\x18\x01 \x01(\x08\"\x85\x01\n\x12MatSpotweldRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0c\n\x04sigy\x18\x05 \x01(\x02\x12\n\n\x02\x65h\x18\x06 \x01(\x02\x12\x0b\n\x03nrr\x18\x07 \x01(\x02\x12\x0b\n\x03nrs\x18\x08 \x01(\x02\x12\x0b\n\x03nrt\x18\t \x01(\x02\"\x1f\n\x10MatSpotweldReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"q\n#MatPiecewiseLinearPlasticityRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0c\n\x04sigy\x18\x05 \x01(\x02\x12\x0c\n\x04\x65tan\x18\x06 \x01(\x02\"0\n!MatPiecewiseLinearPlasticityReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"\x97\x01\n+MatModifiedPiecewiseLinearPlasticityRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0c\n\x04sigy\x18\x05 \x01(\x02\x12\x0c\n\x04\x65tan\x18\x06 \x01(\x02\x12\x0c\n\x04\x66\x61il\x18\x07 \x01(\x02\x12\x0e\n\x06numint\x18\x08 \x01(\x05\"8\n)MatModifiedPiecewiseLinearPlasticityReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"l\n\x10MatFabricRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\n\n\x02\x65\x61\x18\x03 \x01(\x02\x12\n\n\x02\x65\x62\x18\x04 \x01(\x02\x12\x0c\n\x04prba\x18\x05 \x01(\x02\x12\x0c\n\x04prab\x18\x06 \x01(\x02\x12\x0b\n\x03gab\x18\x07 \x01(\x02\"\x1d\n\x0eMatFabricReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"=\n MatSpringNonlinearElasticRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"-\n\x1eMatSpringNonlinearElasticReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"2\n\x17MatDamperViscousRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02\x64\x63\x18\x02 \x01(\x02\"$\n\x15MatDamperViscousReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"=\n MatDamperNonlinearViscousRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0c\n\x04lcdr\x18\x02 \x01(\x05\"-\n\x1eMatDamperNonlinearViscousReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"(\n\x0eMatNullRequest\x12\n\n\x02ro\x18\x01 \x01(\x02\x12\n\n\x02pc\x18\x02 \x01(\x02\"\x1b\n\x0cMatNullReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"\xc2\x01\n\x15MatJohnsonCookRequest\x12\n\n\x02ro\x18\x01 \x01(\x02\x12\t\n\x01g\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x11\n\tconstants\x18\x05 \x03(\x02\x12\n\n\x02tm\x18\x06 \x01(\x02\x12\n\n\x02tr\x18\x07 \x01(\x02\x12\x0c\n\x04\x65ps0\x18\x08 \x01(\x02\x12\n\n\x02\x63p\x18\t \x01(\x02\x12\n\n\x02pc\x18\n \x01(\x02\x12\r\n\x05spall\x18\x0b \x01(\x02\x12\n\n\x02it\x18\x0c \x01(\x02\x12\x0f\n\x07\x66\x61ilure\x18\r \x03(\x02\"\"\n\x13MatJohnsonCookReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"A\n\x1bMatHighExplosiveBurnRequest\x12\n\n\x02ro\x18\x01 \x01(\x02\x12\t\n\x01\x64\x18\x02 \x01(\x02\x12\x0b\n\x03pcj\x18\x03 \x01(\x02\"(\n\x19MatHighExplosiveBurnReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"\x1f\n\x10MatVacuumRequest\x12\x0b\n\x03rho\x18\x01 \x01(\x02\"\x1d\n\x0eMatVacuumReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"B\n\x14MatAddErosionRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0e\n\x06mnpres\x18\x02 \x01(\x02\x12\r\n\x05mxeps\x18\x03 \x01(\x02\"!\n\x12MatAddErosionReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"@\n\x1a\x45OSLinearPolynomialRequest\x12\n\n\x02\x63i\x18\x01 \x03(\x02\x12\n\n\x02\x65\x30\x18\x02 \x01(\x02\x12\n\n\x02v0\x18\x03 \x01(\x02\")\n\x18\x45OSLinearPolynomialReply\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\"%\n\rEOSJWLRequest\x12\x14\n\x0cjwl_equation\x18\x01 \x03(\x02\"\x1c\n\x0b\x45OSJWLReply\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\"?\n\x13\x45OSGruneisenRequest\x12\x11\n\tconstants\x18\x01 \x03(\x02\x12\t\n\x01\x61\x18\x02 \x01(\x02\x12\n\n\x02\x65\x30\x18\x03 \x01(\x02\"\"\n\x11\x45OSGruneisenReply\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\"\x1f\n\x0fSaveFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1f\n\rSaveFileReply\x12\x0e\n\x06length\x18\x01 \x01(\x03\"\x1f\n\x0fLoadFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1c\n\rLoadFileReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"\x11\n\x0fGetNodesRequest\"\x1f\n\rGetNodesReply\x12\x0e\n\x06\x63oords\x18\x01 \x03(\x01\"\x19\n\x17GetSolidElementsRequest\"(\n\x15GetSolidElementsReply\x12\x0f\n\x07nodeids\x18\x01 \x03(\x03\"1\n\x16ICFDControlTimeRequest\x12\x0b\n\x03tim\x18\x01 \x01(\x02\x12\n\n\x02\x64t\x18\x02 \x01(\x02\"&\n\x14ICFDControlTimeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"V\n\x19ICFDControlGeneralRequest\x12\r\n\x05\x61type\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\x0c\n\x04\x64vcl\x18\x03 \x01(\x05\x12\r\n\x05rdvcl\x18\x04 \x01(\x05\")\n\x17ICFDControlGeneralReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"(\n\x18ICFDControlOutputRequest\x12\x0c\n\x04msgl\x18\x01 \x01(\x05\"(\n\x16ICFDControlOutputReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\",\n\x1cICFDControlTurbulenceRequest\x12\x0c\n\x04tmod\x18\x01 \x01(\x05\",\n\x1aICFDControlTurbulenceReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"R\n\x1dICFDControlDEMCouplingRequest\x12\r\n\x05\x63type\x18\x01 \x01(\x05\x12\n\n\x02\x62t\x18\x02 \x01(\x02\x12\n\n\x02\x64t\x18\x03 \x01(\x02\x12\n\n\x02sf\x18\x04 \x01(\x02\"-\n\x1bICFDControlDEMCouplingReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"!\n\x12ICFDSectionRequest\x12\x0b\n\x03sid\x18\x01 \x01(\x05\"\"\n\x10ICFDSectionReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"C\n\x0eICFDMatRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0b\n\x03\x66lg\x18\x02 \x01(\x05\x12\n\n\x02ro\x18\x03 \x01(\x02\x12\x0b\n\x03vis\x18\x04 \x01(\x02\"\x1a\n\x0cICFDMatReply\x12\n\n\x02id\x18\x01 \x01(\x05\":\n\x0fICFDPartRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\"\x1f\n\rICFDPartReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"L\n\x12ICFDPartVolRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\x12\r\n\x05spids\x18\x04 \x03(\x05\"\x1e\n\x10ICFDPartVolReply\x12\n\n\x02id\x18\x01 \x01(\x05\" \n\x11ICFDDBDragRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"!\n\x0fICFDDBDragReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"R\n\x1bICFDBdyPrescribedVelRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\x0b\n\x03\x64of\x18\x02 \x01(\x05\x12\x0b\n\x03vad\x18\x03 \x01(\x05\x12\x0c\n\x04lcid\x18\x04 \x01(\x05\"+\n\x19ICFDBdyPrescribedVelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"8\n\x1bICFDBdyPrescribedPreRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"+\n\x19ICFDBdyPrescribedPreReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"%\n\x16ICFDBdyFreeSlipRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"&\n\x14ICFDBdyFreeSlipReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"$\n\x15ICFDBdyNonSlipRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"%\n\x13ICFDBdyNonSlipReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"6\n\x18ICFDSolverTolMMOVRequest\x12\x0c\n\x04\x61tol\x18\x01 \x01(\x02\x12\x0c\n\x04rtol\x18\x02 \x01(\x02\"(\n\x16ICFDSolverTolMMOVReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"B\n\x17ICFDPartPropertyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\"\'\n\x15ICFDPartPropertyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"H\n\x1dICFDVolumePartPropertyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\"-\n\x1bICFDVolumePartPropertyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"0\n\x11MeshVolumeRequest\x12\r\n\x05volid\x18\x01 \x01(\x05\x12\x0c\n\x04pids\x18\x02 \x03(\x05\"\x1d\n\x0fMeshVolumeReply\x12\n\n\x02id\x18\x01 \x01(\x05\"4\n\x15MeshEmbedShellRequest\x12\r\n\x05volid\x18\x01 \x01(\x05\x12\x0c\n\x04pids\x18\x02 \x03(\x05\"%\n\x13MeshEmbedShellReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"+\n\rMeshBlRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05nelth\x18\x02 \x01(\x05\"\x1d\n\x0bMeshBlReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"f\n\x14MeshSizeShapeRequest\x12\r\n\x05sname\x18\x01 \x01(\t\x12\r\n\x05\x66orce\x18\x02 \x01(\x05\x12\x0e\n\x06method\x18\x03 \x01(\x05\x12\r\n\x05msize\x18\x04 \x01(\x02\x12\x11\n\tparameter\x18\x05 \x03(\x02\"$\n\x12MeshSizeShapeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"i\n\x1e\x41LECreateStructuredMeshRequest\x12\x0c\n\x04nbid\x18\x01 \x01(\x05\x12\x0c\n\x04\x65\x62id\x18\x02 \x01(\x05\x12\r\n\x05\x63pidx\x18\x03 \x01(\x05\x12\r\n\x05\x63pidy\x18\x04 \x01(\x05\x12\r\n\x05\x63pidz\x18\x05 \x01(\x05\">\n\x1c\x41LECreateStructuredMeshReply\x12\x0e\n\x06meshid\x18\x01 \x01(\x05\x12\x0e\n\x06partid\x18\x02 \x01(\x05\"\\\n$ALECreateStructuredMeshRefineRequest\x12\r\n\x05mshid\x18\x01 \x01(\x05\x12\x0b\n\x03ifx\x18\x02 \x01(\x05\x12\x0b\n\x03ify\x18\x03 \x01(\x05\x12\x0b\n\x03ifz\x18\x04 \x01(\x05\"4\n\"ALECreateStructuredMeshRefineReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"n\n+ALECreateStructuredMeshControlPointsRequest\x12\r\n\x05icase\x18\x01 \x01(\x05\x12\x0b\n\x03sfo\x18\x02 \x01(\x02\x12\t\n\x01n\x18\x03 \x03(\x05\x12\t\n\x01x\x18\x04 \x03(\x02\x12\r\n\x05ratio\x18\x05 \x03(\x02\"9\n)ALECreateStructuredMeshControlPointsReply\x12\x0c\n\x04\x63pid\x18\x01 \x01(\x05\"c\n\'ALECreateStructuredMultiMatGroupRequest\x12\x0e\n\x06nmmgnm\x18\x01 \x01(\t\x12\x0b\n\x03mid\x18\x02 \x01(\x05\x12\r\n\x05\x65osid\x18\x03 \x01(\x05\x12\x0c\n\x04pref\x18\x04 \x01(\x02\"7\n%ALECreateStructuredMultiMatGroupReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x92\x01\n+ALECreateStructuredMeshVolumeFillingRequest\x12\r\n\x05mshid\x18\x01 \x01(\x05\x12\x0e\n\x06\x61mmgto\x18\x02 \x01(\t\x12\x0f\n\x07nsample\x18\x03 \x01(\x05\x12\x0b\n\x03vid\x18\x04 \x01(\x05\x12\x0c\n\x04geom\x18\x05 \x01(\t\x12\r\n\x05inout\x18\x06 \x01(\x05\x12\t\n\x01\x65\x18\x07 \x03(\x02\";\n)ALECreateStructuredMeshVolumeFillingReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"4\n\x14\x44\x61mpingGlobalRequest\x12\x0c\n\x04lcid\x18\x01 \x01(\x05\x12\x0e\n\x06valdmp\x18\x02 \x01(\x02\"$\n\x12\x44\x61mpingGlobalReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"F\n\x1b\x44\x61mpingPartStiffnessRequest\x12\r\n\x05isset\x18\x01 \x01(\x08\x12\n\n\x02id\x18\x02 \x01(\x05\x12\x0c\n\x04\x63oef\x18\x03 \x01(\x02\"+\n\x19\x44\x61mpingPartStiffnessReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xa7\x01\n\x12\x41irbagModelRequest\x12\x11\n\tmodeltype\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\x0e\n\x06sidtyp\x18\x03 \x01(\x05\x12\n\n\x02\x63v\x18\x04 \x01(\x02\x12\n\n\x02\x63p\x18\x05 \x01(\x02\x12\t\n\x01t\x18\x06 \x01(\x02\x12\x0c\n\x04lcid\x18\x07 \x01(\x05\x12\n\n\x02mu\x18\x08 \x01(\x02\x12\x0c\n\x04\x61rea\x18\t \x01(\x02\x12\n\n\x02pe\x18\n \x01(\x02\x12\n\n\x02ro\x18\x0b \x01(\x02\"\"\n\x10\x41irbagModelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"c\n\x10\x45MControlRequest\x12\r\n\x05\x65msol\x18\x01 \x01(\x05\x12\r\n\x05numls\x18\x02 \x01(\x05\x12\x0f\n\x07macrodt\x18\x03 \x01(\x02\x12\x0f\n\x07ncylfem\x18\x04 \x01(\x05\x12\x0f\n\x07ncylbem\x18\x05 \x01(\x05\" \n\x0e\x45MControlReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"4\n\x11\x45MTimestepRequest\x12\x0e\n\x06tstype\x18\x01 \x01(\x05\x12\x0f\n\x07\x64tconst\x18\x02 \x01(\x02\"!\n\x0f\x45MTimestepReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"U\n\x17\x45MControlContactRequest\x12\x0c\n\x04\x65mct\x18\x01 \x01(\x05\x12\x0e\n\x06\x63\x63only\x18\x02 \x01(\x05\x12\r\n\x05\x63type\x18\x03 \x01(\x05\x12\r\n\x05\x64type\x18\x04 \x01(\x05\"\'\n\x15\x45MControlContactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x85\x01\n\x10\x45MContactRequest\x12\x0e\n\x06\x63ontid\x18\x01 \x01(\x05\x12\r\n\x05\x64type\x18\x02 \x01(\x05\x12\r\n\x05psidm\x18\x03 \x01(\x05\x12\r\n\x05psids\x18\x04 \x01(\x05\x12\x0c\n\x04\x65ps1\x18\x05 \x01(\x02\x12\x0c\n\x04\x65ps2\x18\x06 \x01(\x02\x12\x0c\n\x04\x65ps3\x18\x07 \x01(\x02\x12\n\n\x02\x64\x30\x18\x08 \x01(\x02\" \n\x0e\x45MContactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"U\n\x14\x45MCircuitRogoRequest\x12\r\n\x05rogid\x18\x01 \x01(\x05\x12\r\n\x05setid\x18\x02 \x01(\x05\x12\x0f\n\x07settype\x18\x03 \x01(\x05\x12\x0e\n\x06\x63urtyp\x18\x04 \x01(\x05\" \n\x12\x45MCircuitRogoReply\x12\n\n\x02id\x18\x01 \x01(\x05\"s\n\x10\x45MCircuitRequest\x12\x0e\n\x06\x63ircid\x18\x01 \x01(\x05\x12\x0f\n\x07\x63irctyp\x18\x02 \x01(\x05\x12\x0c\n\x04lcid\x18\x03 \x01(\x05\x12\x0f\n\x07sidcurr\x18\x04 \x01(\x05\x12\x0e\n\x06sidvin\x18\x05 \x01(\x05\x12\x0f\n\x07sidvout\x18\x06 \x01(\x05\"\x1c\n\x0e\x45MCircuitReply\x12\n\n\x02id\x18\x01 \x01(\x05\"<\n\x0f\x45MMat001Request\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\r\n\x05sigma\x18\x03 \x01(\x02\"\x1f\n\rEMMat001Reply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"Z\n\x0f\x45MMat002Request\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\r\n\x05sigma\x18\x03 \x01(\x02\x12\r\n\x05\x65osid\x18\x04 \x01(\x05\x12\r\n\x05murel\x18\x05 \x01(\x02\"\x1f\n\rEMMat002Reply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"u\n\x12\x45MSolverBemRequest\x12\x0e\n\x06reltol\x18\x01 \x01(\x02\x12\x0e\n\x06maxite\x18\x02 \x01(\x05\x12\r\n\x05stype\x18\x03 \x01(\x05\x12\x0e\n\x06precon\x18\x04 \x01(\x05\x12\x0f\n\x07uselast\x18\x05 \x01(\x05\x12\x0f\n\x07ncylbem\x18\x06 \x01(\x05\"\"\n\x10\x45MSolverBemReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"u\n\x12\x45MSolverFemRequest\x12\x0e\n\x06reltol\x18\x01 \x01(\x02\x12\x0e\n\x06maxite\x18\x02 \x01(\x05\x12\r\n\x05stype\x18\x03 \x01(\x05\x12\x0e\n\x06precon\x18\x04 \x01(\x05\x12\x0f\n\x07uselast\x18\x05 \x01(\x05\x12\x0f\n\x07ncylbem\x18\x06 \x01(\x05\"\"\n\x10\x45MSolverFemReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"6\n\x15\x45MSolverBemMatRequest\x12\r\n\x05matid\x18\x01 \x01(\x05\x12\x0e\n\x06reltol\x18\x02 \x01(\x02\"%\n\x13\x45MSolverBemMatReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"n\n\x1f\x45MSolverFemBemMonolithicRequest\x12\r\n\x05mtype\x18\x01 \x01(\x05\x12\r\n\x05stype\x18\x02 \x01(\x05\x12\x0e\n\x06\x61\x62stol\x18\x03 \x01(\x02\x12\x0e\n\x06reltol\x18\x04 \x01(\x02\x12\r\n\x05maxit\x18\x05 \x01(\x05\"/\n\x1d\x45MSolverFemBemMonolithicReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"I\n\x0f\x45MOutputRequest\x12\x0c\n\x04mats\x18\x01 \x01(\x05\x12\x0c\n\x04matf\x18\x02 \x01(\x05\x12\x0c\n\x04sols\x18\x03 \x01(\x05\x12\x0c\n\x04solf\x18\x04 \x01(\x05\"\x1f\n\rEMOutputReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\".\n\x1d\x45MDatabaseGlobalEnergyRequest\x12\r\n\x05outlv\x18\x01 \x01(\x05\"-\n\x1b\x45MDatabaseGlobalEnergyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"p\n\x18\x45MPermanentMagnetRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0e\n\x06partid\x18\x02 \x01(\x05\x12\r\n\x05mtype\x18\x03 \x01(\x05\x12\r\n\x05north\x18\x04 \x01(\x05\x12\x0e\n\x06sourth\x18\x05 \x01(\x05\x12\n\n\x02hc\x18\x06 \x01(\x05\"(\n\x16\x45MPermanentMagnetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"H\n\x18\x45MEOSPermeabilityRequest\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\x12\x0f\n\x07\x65ostype\x18\x02 \x01(\x05\x12\x0c\n\x04lcid\x18\x03 \x01(\x05\"(\n\x16\x45MEOSPermeabilityReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"8\n\x11GeneralKWDRequest\x12\x0e\n\x06opcode\x18\x01 \x01(\t\x12\x13\n\x0bkeyworddata\x18\x02 \x01(\t\"!\n\x0fGeneralKWDReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\x32\xafS\n\x05kwC2S\x12>\n\rkwSetFileName\x12\x12.kwgrpc.kwFileName\x1a\x17.kwgrpc.kwFileNameReply\"\x00\x12\x30\n\x06Upload\x12\r.kwgrpc.Chunk\x1a\x13.kwgrpc.kwFileReply\"\x00(\x01\x12\x42\n\x0e\x43reateTimestep\x12\x17.kwgrpc.TimestepRequest\x1a\x15.kwgrpc.TimestepReply\"\x00\x12K\n\x11\x43reateTermination\x12\x1a.kwgrpc.TerminationRequest\x1a\x18.kwgrpc.TerminationReply\"\x00\x12Q\n\x13\x43reateControlOutput\x12\x1c.kwgrpc.ControlOutputRequest\x1a\x1a.kwgrpc.ControlOutputReply\"\x00\x12T\n\x14\x43reateControlContact\x12\x1d.kwgrpc.ControlContactRequest\x1a\x1b.kwgrpc.ControlContactReply\"\x00\x12l\n\x1c\x43reateControlDiscreteElement\x12%.kwgrpc.ControlDiscreteElementRequest\x1a#.kwgrpc.ControlDiscreteElementReply\"\x00\x12W\n\x15\x43reateControlAccuracy\x12\x1e.kwgrpc.ControlAccuracyRequest\x1a\x1c.kwgrpc.ControlAccuracyReply\"\x00\x12Q\n\x13\x43reateControlEnergy\x12\x1c.kwgrpc.ControlEnergyRequest\x1a\x1a.kwgrpc.ControlEnergyReply\"\x00\x12\x66\n\x1a\x43reateControlBulkViscosity\x12#.kwgrpc.ControlBulkViscosityRequest\x1a!.kwgrpc.ControlBulkViscosityReply\"\x00\x12Z\n\x16\x43reateControlHourgalss\x12\x1f.kwgrpc.ControlHourglassRequest\x1a\x1d.kwgrpc.ControlHourglassReply\"\x00\x12N\n\x12\x43reateControlShell\x12\x1b.kwgrpc.ControlShellRequest\x1a\x19.kwgrpc.ControlShellReply\"\x00\x12N\n\x12\x43reateControlSolid\x12\x1b.kwgrpc.ControlSolidRequest\x1a\x19.kwgrpc.ControlSolidReply\"\x00\x12l\n\x1c\x43reateControlImplicitGeneral\x12%.kwgrpc.ControlImplicitGeneralRequest\x1a#.kwgrpc.ControlImplicitGeneralReply\"\x00\x12\x63\n\x19\x43reateControlImplicitAuto\x12\".kwgrpc.ControlImplicitAutoRequest\x1a .kwgrpc.ControlImplicitAutoReply\"\x00\x12l\n\x1c\x43reateControlImplicitDynamic\x12%.kwgrpc.ControlImplicitDynamicRequest\x1a#.kwgrpc.ControlImplicitDynamicReply\"\x00\x12u\n\x1f\x43reateControlImplicitEigenvalue\x12(.kwgrpc.ControlImplicitEigenvalueRequest\x1a&.kwgrpc.ControlImplicitEigenvalueReply\"\x00\x12o\n\x1d\x43reateControlImplicitSolution\x12&.kwgrpc.ControlImplicitSolutionRequest\x1a$.kwgrpc.ControlImplicitSolutionReply\"\x00\x12\x42\n\x0e\x43reateDBBinary\x12\x17.kwgrpc.DBBinaryRequest\x1a\x15.kwgrpc.DBBinaryReply\"\x00\x12?\n\rCreateDBAscii\x12\x16.kwgrpc.DBAsciiRequest\x1a\x14.kwgrpc.DBAsciiReply\"\x00\x12<\n\x0c\x43reateDBSALE\x12\x15.kwgrpc.DBSALERequest\x1a\x13.kwgrpc.DBSALEReply\"\x00\x12Q\n\x13\x43reateRigidWallGeom\x12\x1c.kwgrpc.RigidWallGeomRequest\x1a\x1a.kwgrpc.RigidWallGeomReply\"\x00\x12W\n\x15\x43reateRigidWallPlanar\x12\x1e.kwgrpc.RigidWallPlanarRequest\x1a\x1c.kwgrpc.RigidWallPlanarReply\"\x00\x12?\n\rCreateInitVel\x12\x16.kwgrpc.InitVelRequest\x1a\x14.kwgrpc.InitVelReply\"\x00\x12Z\n\x16\x43reateInitVelRigidBody\x12\x1f.kwgrpc.InitVelRigidBodyRequest\x1a\x1d.kwgrpc.InitVelRigidBodyReply\"\x00\x12]\n\x17\x43reateInitVelGeneration\x12 .kwgrpc.InitVelGenerationRequest\x1a\x1e.kwgrpc.InitVelGenerationReply\"\x00\x12x\n CreateInitVelGenerationStartTime\x12).kwgrpc.InitVelGenerationStartTimeRequest\x1a\'.kwgrpc.InitVelGenerationStartTimeReply\"\x00\x12T\n\x14\x43reateInitDetonation\x12\x1d.kwgrpc.InitDetonationRequest\x1a\x1b.kwgrpc.InitDetonationReply\"\x00\x12?\n\rCreateContact\x12\x16.kwgrpc.ContactRequest\x1a\x14.kwgrpc.ContactReply\"\x00\x12\x63\n\x19\x43reateBdyPrescribedMotion\x12\".kwgrpc.BdyPrescribedMotionRequest\x1a .kwgrpc.BdyPrescribedMotionReply\"\x00\x12<\n\x0c\x43reateBdySpc\x12\x15.kwgrpc.BdySpcRequest\x1a\x13.kwgrpc.BdySpcReply\"\x00\x12Z\n\x16\x43reateConstrainedJoint\x12\x1f.kwgrpc.ConstrainedJointRequest\x1a\x1d.kwgrpc.ConstrainedJointReply\"\x00\x12i\n\x1b\x43reateConstrainedExtraNodes\x12$.kwgrpc.ConstrainedExtraNodesRequest\x1a\".kwgrpc.ConstrainedExtraNodesReply\"\x00\x12u\n\x1f\x43reateConstrainedNodalRigidBody\x12(.kwgrpc.ConstrainedNodalRigidBodyRequest\x1a&.kwgrpc.ConstrainedNodalRigidBodyReply\"\x00\x12\x63\n\x19\x43reateConstrainedSpotWeld\x12\".kwgrpc.ConstrainedSpotWeldRequest\x1a .kwgrpc.ConstrainedSpotWeldReply\"\x00\x12\x42\n\x0e\x43reateLoadBody\x12\x17.kwgrpc.LoadBodyRequest\x1a\x15.kwgrpc.LoadBodyReply\"\x00\x12\x39\n\x0b\x43reateMatEM\x12\x14.kwgrpc.MatEMRequest\x1a\x12.kwgrpc.MatEMReply\"\x00\x12\x42\n\x0e\x43reateMatRigid\x12\x17.kwgrpc.MatRigidRequest\x1a\x15.kwgrpc.MatRigidReply\"\x00\x12H\n\x10\x43reateMatElastic\x12\x19.kwgrpc.MatElasticRequest\x1a\x17.kwgrpc.MatElasticReply\"\x00\x12K\n\x11\x43reateMatSpotweld\x12\x1a.kwgrpc.MatSpotweldRequest\x1a\x18.kwgrpc.MatSpotweldReply\"\x00\x12~\n\"CreateMatPiecewiseLinearPlasticity\x12+.kwgrpc.MatPiecewiseLinearPlasticityRequest\x1a).kwgrpc.MatPiecewiseLinearPlasticityReply\"\x00\x12\x96\x01\n*CreateMatModifiedPiecewiseLinearPlasticity\x12\x33.kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest\x1a\x31.kwgrpc.MatModifiedPiecewiseLinearPlasticityReply\"\x00\x12\x45\n\x0f\x43reateMatFabric\x12\x18.kwgrpc.MatFabricRequest\x1a\x16.kwgrpc.MatFabricReply\"\x00\x12u\n\x1f\x43reateMatSpringNonlinearElastic\x12(.kwgrpc.MatSpringNonlinearElasticRequest\x1a&.kwgrpc.MatSpringNonlinearElasticReply\"\x00\x12Z\n\x16\x43reateMatDamperViscous\x12\x1f.kwgrpc.MatDamperViscousRequest\x1a\x1d.kwgrpc.MatDamperViscousReply\"\x00\x12u\n\x1f\x43reateMatDamperNonlinearViscous\x12(.kwgrpc.MatDamperNonlinearViscousRequest\x1a&.kwgrpc.MatDamperNonlinearViscousReply\"\x00\x12?\n\rCreateMatNull\x12\x16.kwgrpc.MatNullRequest\x1a\x14.kwgrpc.MatNullReply\"\x00\x12T\n\x14\x43reateMatJohnsonCook\x12\x1d.kwgrpc.MatJohnsonCookRequest\x1a\x1b.kwgrpc.MatJohnsonCookReply\"\x00\x12\x66\n\x1a\x43reateMatHighExplosiveBurn\x12#.kwgrpc.MatHighExplosiveBurnRequest\x1a!.kwgrpc.MatHighExplosiveBurnReply\"\x00\x12\x45\n\x0f\x43reateMatVacuum\x12\x18.kwgrpc.MatVacuumRequest\x1a\x16.kwgrpc.MatVacuumReply\"\x00\x12Q\n\x13\x43reateMatAddErosion\x12\x1c.kwgrpc.MatAddErosionRequest\x1a\x1a.kwgrpc.MatAddErosionReply\"\x00\x12\x63\n\x19\x43reateEOSLinearPolynomial\x12\".kwgrpc.EOSLinearPolynomialRequest\x1a .kwgrpc.EOSLinearPolynomialReply\"\x00\x12<\n\x0c\x43reateEOSJWL\x12\x15.kwgrpc.EOSJWLRequest\x1a\x13.kwgrpc.EOSJWLReply\"\x00\x12N\n\x12\x43reateEOSGruneisen\x12\x1b.kwgrpc.EOSGruneisenRequest\x1a\x19.kwgrpc.EOSGruneisenReply\"\x00\x12K\n\x11\x43reateDefineCurve\x12\x1a.kwgrpc.DefineCurveRequest\x1a\x18.kwgrpc.DefineCurveReply\"\x00\x12N\n\x12\x43reateDefineVector\x12\x1b.kwgrpc.DefineVectorRequest\x1a\x19.kwgrpc.DefineVectorReply\"\x00\x12\x45\n\x0f\x43reateDefineBox\x12\x18.kwgrpc.DefineBoxRequest\x1a\x16.kwgrpc.DefineBoxReply\"\x00\x12\x63\n\x19\x43reateDefineDEMeshSurface\x12\".kwgrpc.DefineDEMeshSurfaceRequest\x1a .kwgrpc.DefineDEMeshSurfaceReply\"\x00\x12]\n\x17\x43reateDefineOrientation\x12 .kwgrpc.DefineOrientationRequest\x1a\x1e.kwgrpc.DefineOrientationReply\"\x00\x12?\n\rCreatePartSet\x12\x16.kwgrpc.PartSetRequest\x1a\x14.kwgrpc.PartSetReply\"\x00\x12\x42\n\x0e\x43reateShellSet\x12\x17.kwgrpc.ShellSetRequest\x1a\x15.kwgrpc.ShellSetReply\"\x00\x12\x42\n\x0e\x43reateSolidSet\x12\x17.kwgrpc.SolidSetRequest\x1a\x15.kwgrpc.SolidSetReply\"\x00\x12?\n\rCreateNodeSet\x12\x16.kwgrpc.NodeSetRequest\x1a\x14.kwgrpc.NodeSetReply\"\x00\x12H\n\x10\x43reateSegmentSet\x12\x19.kwgrpc.SegmentSetRequest\x1a\x17.kwgrpc.SegmentSetReply\"\x00\x12W\n\x15\x43reateSectionIGAShell\x12\x1e.kwgrpc.SectionIGAShellRequest\x1a\x1c.kwgrpc.SectionIGAShellReply\"\x00\x12K\n\x11\x43reateSectionBeam\x12\x1a.kwgrpc.SectionBeamRequest\x1a\x18.kwgrpc.SectionBeamReply\"\x00\x12N\n\x12\x43reateSectionShell\x12\x1b.kwgrpc.SectionShellRequest\x1a\x19.kwgrpc.SectionShellReply\"\x00\x12N\n\x12\x43reateSectionSolid\x12\x1b.kwgrpc.SectionSolidRequest\x1a\x19.kwgrpc.SectionSolidReply\"\x00\x12W\n\x15\x43reateSectionDiscrete\x12\x1e.kwgrpc.SectionDiscreteRequest\x1a\x1c.kwgrpc.SectionDiscreteReply\"\x00\x12\x45\n\x0f\x43reateHourglass\x12\x18.kwgrpc.HourglassRequest\x1a\x16.kwgrpc.HourglassReply\"\x00\x12K\n\x0fSetPartProperty\x12\x1b.kwgrpc.PartPropertyRequest\x1a\x19.kwgrpc.PartPropertyReply\"\x00\x12<\n\x08GetNodes\x12\x17.kwgrpc.GetNodesRequest\x1a\x15.kwgrpc.GetNodesReply\"\x00\x12T\n\x10GetSolidElements\x12\x1f.kwgrpc.GetSolidElementsRequest\x1a\x1d.kwgrpc.GetSolidElementsReply\"\x00\x12<\n\x08SaveFile\x12\x17.kwgrpc.SaveFileRequest\x1a\x15.kwgrpc.SaveFileReply\"\x00\x12<\n\x08LoadFile\x12\x17.kwgrpc.LoadFileRequest\x1a\x15.kwgrpc.LoadFileReply\"\x00\x12\x36\n\x08\x44ownload\x12\x17.kwgrpc.DownloadRequest\x1a\r.kwgrpc.Chunk\"\x00\x30\x01\x12W\n\x15ICFDCreateControlTime\x12\x1e.kwgrpc.ICFDControlTimeRequest\x1a\x1c.kwgrpc.ICFDControlTimeReply\"\x00\x12`\n\x18ICFDCreateControlGeneral\x12!.kwgrpc.ICFDControlGeneralRequest\x1a\x1f.kwgrpc.ICFDControlGeneralReply\"\x00\x12]\n\x17ICFDCreateControlOutput\x12 .kwgrpc.ICFDControlOutputRequest\x1a\x1e.kwgrpc.ICFDControlOutputReply\"\x00\x12i\n\x1bICFDCreateControlTurbulence\x12$.kwgrpc.ICFDControlTurbulenceRequest\x1a\".kwgrpc.ICFDControlTurbulenceReply\"\x00\x12l\n\x1cICFDCreateControlDEMCoupling\x12%.kwgrpc.ICFDControlDEMCouplingRequest\x1a#.kwgrpc.ICFDControlDEMCouplingReply\"\x00\x12K\n\x11ICFDCreateSection\x12\x1a.kwgrpc.ICFDSectionRequest\x1a\x18.kwgrpc.ICFDSectionReply\"\x00\x12?\n\rICFDCreateMat\x12\x16.kwgrpc.ICFDMatRequest\x1a\x14.kwgrpc.ICFDMatReply\"\x00\x12\x42\n\x0eICFDCreatePart\x12\x17.kwgrpc.ICFDPartRequest\x1a\x15.kwgrpc.ICFDPartReply\"\x00\x12K\n\x11ICFDCreatePartVol\x12\x1a.kwgrpc.ICFDPartVolRequest\x1a\x18.kwgrpc.ICFDPartVolReply\"\x00\x12H\n\x10ICFDCreateDBDrag\x12\x19.kwgrpc.ICFDDBDragRequest\x1a\x17.kwgrpc.ICFDDBDragReply\"\x00\x12\x66\n\x1aICFDCreateBdyPrescribedVel\x12#.kwgrpc.ICFDBdyPrescribedVelRequest\x1a!.kwgrpc.ICFDBdyPrescribedVelReply\"\x00\x12\x66\n\x1aICFDCreateBdyPrescribedPre\x12#.kwgrpc.ICFDBdyPrescribedPreRequest\x1a!.kwgrpc.ICFDBdyPrescribedPreReply\"\x00\x12W\n\x15ICFDCreateBdyFreeSlip\x12\x1e.kwgrpc.ICFDBdyFreeSlipRequest\x1a\x1c.kwgrpc.ICFDBdyFreeSlipReply\"\x00\x12T\n\x14ICFDCreateBdyNonSlip\x12\x1d.kwgrpc.ICFDBdyNonSlipRequest\x1a\x1b.kwgrpc.ICFDBdyNonSlipReply\"\x00\x12]\n\x17ICFDCreateSolverTolMMOV\x12 .kwgrpc.ICFDSolverTolMMOVRequest\x1a\x1e.kwgrpc.ICFDSolverTolMMOVReply\"\x00\x12W\n\x13SetICFDPartProperty\x12\x1f.kwgrpc.ICFDPartPropertyRequest\x1a\x1d.kwgrpc.ICFDPartPropertyReply\"\x00\x12i\n\x19SetICFDVolumePartProperty\x12%.kwgrpc.ICFDVolumePartPropertyRequest\x1a#.kwgrpc.ICFDVolumePartPropertyReply\"\x00\x12H\n\x10MESHCreateVolume\x12\x19.kwgrpc.MeshVolumeRequest\x1a\x17.kwgrpc.MeshVolumeReply\"\x00\x12T\n\x14MESHCreateEmbedShell\x12\x1d.kwgrpc.MeshEmbedShellRequest\x1a\x1b.kwgrpc.MeshEmbedShellReply\"\x00\x12<\n\x0cMESHCreateBl\x12\x15.kwgrpc.MeshBlRequest\x1a\x13.kwgrpc.MeshBlReply\"\x00\x12Q\n\x13MESHCreateSizeShape\x12\x1c.kwgrpc.MeshSizeShapeRequest\x1a\x1a.kwgrpc.MeshSizeShapeReply\"\x00\x12H\n\x10\x41LECreateControl\x12\x19.kwgrpc.ControlALERequest\x1a\x17.kwgrpc.ControlALEReply\"\x00\x12i\n\x17\x41LECreateStructuredMesh\x12&.kwgrpc.ALECreateStructuredMeshRequest\x1a$.kwgrpc.ALECreateStructuredMeshReply\"\x00\x12{\n\x1d\x41LECreateStructuredMeshRefine\x12,.kwgrpc.ALECreateStructuredMeshRefineRequest\x1a*.kwgrpc.ALECreateStructuredMeshRefineReply\"\x00\x12\x8d\x01\n!ALECreateStructuredMeshCtrlPoints\x12\x33.kwgrpc.ALECreateStructuredMeshControlPointsRequest\x1a\x31.kwgrpc.ALECreateStructuredMeshControlPointsReply\"\x00\x12\x89\x01\n%ALECreateStructuredMultiMaterialGroup\x12/.kwgrpc.ALECreateStructuredMultiMatGroupRequest\x1a-.kwgrpc.ALECreateStructuredMultiMatGroupReply\"\x00\x12\x90\x01\n$ALECreateStructuredMeshVolumeFilling\x12\x33.kwgrpc.ALECreateStructuredMeshVolumeFillingRequest\x1a\x31.kwgrpc.ALECreateStructuredMeshVolumeFillingReply\"\x00\x12Q\n\x13\x43reateDampingGlobal\x12\x1c.kwgrpc.DampingGlobalRequest\x1a\x1a.kwgrpc.DampingGlobalReply\"\x00\x12\x66\n\x1a\x43reateDampingPartStiffness\x12#.kwgrpc.DampingPartStiffnessRequest\x1a!.kwgrpc.DampingPartStiffnessReply\"\x00\x12K\n\x11\x43reateAirbagModel\x12\x1a.kwgrpc.AirbagModelRequest\x1a\x18.kwgrpc.AirbagModelReply\"\x00\x12\x45\n\x0f\x43reateEMControl\x12\x18.kwgrpc.EMControlRequest\x1a\x16.kwgrpc.EMControlReply\"\x00\x12H\n\x10\x43reateEMTimestep\x12\x19.kwgrpc.EMTimestepRequest\x1a\x17.kwgrpc.EMTimestepReply\"\x00\x12Z\n\x16\x43reateEMControlContact\x12\x1f.kwgrpc.EMControlContactRequest\x1a\x1d.kwgrpc.EMControlContactReply\"\x00\x12\x45\n\x0f\x43reateEMContact\x12\x18.kwgrpc.EMContactRequest\x1a\x16.kwgrpc.EMContactReply\"\x00\x12Q\n\x13\x43reateEMCircuitRogo\x12\x1c.kwgrpc.EMCircuitRogoRequest\x1a\x1a.kwgrpc.EMCircuitRogoReply\"\x00\x12\x45\n\x0f\x43reateEMCircuit\x12\x18.kwgrpc.EMCircuitRequest\x1a\x16.kwgrpc.EMCircuitReply\"\x00\x12\x42\n\x0e\x43reateEMMat001\x12\x17.kwgrpc.EMMat001Request\x1a\x15.kwgrpc.EMMat001Reply\"\x00\x12\x42\n\x0e\x43reateEMMat002\x12\x17.kwgrpc.EMMat002Request\x1a\x15.kwgrpc.EMMat002Reply\"\x00\x12K\n\x11\x43reateEMSolverBem\x12\x1a.kwgrpc.EMSolverBemRequest\x1a\x18.kwgrpc.EMSolverBemReply\"\x00\x12K\n\x11\x43reateEMSolverFem\x12\x1a.kwgrpc.EMSolverFemRequest\x1a\x18.kwgrpc.EMSolverFemReply\"\x00\x12T\n\x14\x43reateEMSolverBemMat\x12\x1d.kwgrpc.EMSolverBemMatRequest\x1a\x1b.kwgrpc.EMSolverBemMatReply\"\x00\x12r\n\x1e\x43reateEMSolverFemBemMonolithic\x12\'.kwgrpc.EMSolverFemBemMonolithicRequest\x1a%.kwgrpc.EMSolverFemBemMonolithicReply\"\x00\x12\x42\n\x0e\x43reateEMOutput\x12\x17.kwgrpc.EMOutputRequest\x1a\x15.kwgrpc.EMOutputReply\"\x00\x12l\n\x1c\x43reateEMDatabaseGlobalEnergy\x12%.kwgrpc.EMDatabaseGlobalEnergyRequest\x1a#.kwgrpc.EMDatabaseGlobalEnergyReply\"\x00\x12]\n\x17\x43reateEMPermanentMagnet\x12 .kwgrpc.EMPermanentMagnetRequest\x1a\x1e.kwgrpc.EMPermanentMagnetReply\"\x00\x12]\n\x17\x43reateEMEOSPermeability\x12 .kwgrpc.EMEOSPermeabilityRequest\x1a\x1e.kwgrpc.EMEOSPermeabilityReply\"\x00\x12H\n\x10\x43reateGeneralKWD\x12\x19.kwgrpc.GeneralKWDRequest\x1a\x17.kwgrpc.GeneralKWDReply\"\x00\x62\x06proto3'
 )
 
 
@@ -561,6 +561,13 @@ _CONTROLALEREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pref', full_name='kwgrpc.ControlALERequest.pref', index=7,
+      number=8, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -573,8 +580,8 @@ _CONTROLALEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=610,
-  serialized_end=727,
+  serialized_start=611,
+  serialized_end=742,
 )
 
 
@@ -605,8 +612,8 @@ _CONTROLALEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=729,
-  serialized_end=762,
+  serialized_start=744,
+  serialized_end=777,
 )
 
 
@@ -672,8 +679,8 @@ _CONTROLDISCRETEELEMENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=764,
-  serialized_end=886,
+  serialized_start=779,
+  serialized_end=901,
 )
 
 
@@ -704,8 +711,8 @@ _CONTROLDISCRETEELEMENTREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=888,
-  serialized_end=933,
+  serialized_start=903,
+  serialized_end=948,
 )
 
 
@@ -764,8 +771,8 @@ _CONTROLACCURACYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=935,
-  serialized_end=1030,
+  serialized_start=950,
+  serialized_end=1045,
 )
 
 
@@ -796,8 +803,8 @@ _CONTROLACCURACYREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1032,
-  serialized_end=1070,
+  serialized_start=1047,
+  serialized_end=1085,
 )
 
 
@@ -856,8 +863,8 @@ _CONTROLENERGYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1072,
-  serialized_end=1168,
+  serialized_start=1087,
+  serialized_end=1183,
 )
 
 
@@ -888,8 +895,157 @@ _CONTROLENERGYREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1170,
-  serialized_end=1206,
+  serialized_start=1185,
+  serialized_end=1221,
+)
+
+
+_CONTROLBULKVISCOSITYREQUEST = _descriptor.Descriptor(
+  name='ControlBulkViscosityRequest',
+  full_name='kwgrpc.ControlBulkViscosityRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='q1', full_name='kwgrpc.ControlBulkViscosityRequest.q1', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='q2', full_name='kwgrpc.ControlBulkViscosityRequest.q2', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='kwgrpc.ControlBulkViscosityRequest.type', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1223,
+  serialized_end=1290,
+)
+
+
+_CONTROLBULKVISCOSITYREPLY = _descriptor.Descriptor(
+  name='ControlBulkViscosityReply',
+  full_name='kwgrpc.ControlBulkViscosityReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.ControlBulkViscosityReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1292,
+  serialized_end=1335,
+)
+
+
+_CONTROLHOURGLASSREQUEST = _descriptor.Descriptor(
+  name='ControlHourglassRequest',
+  full_name='kwgrpc.ControlHourglassRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ihq', full_name='kwgrpc.ControlHourglassRequest.ihq', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='qh', full_name='kwgrpc.ControlHourglassRequest.qh', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1337,
+  serialized_end=1387,
+)
+
+
+_CONTROLHOURGLASSREPLY = _descriptor.Descriptor(
+  name='ControlHourglassReply',
+  full_name='kwgrpc.ControlHourglassReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.ControlHourglassReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1389,
+  serialized_end=1428,
 )
 
 
@@ -976,8 +1132,8 @@ _CONTROLSHELLREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1209,
-  serialized_end=1366,
+  serialized_start=1431,
+  serialized_end=1588,
 )
 
 
@@ -1008,8 +1164,8 @@ _CONTROLSHELLREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1368,
-  serialized_end=1403,
+  serialized_start=1590,
+  serialized_end=1625,
 )
 
 
@@ -1089,8 +1245,8 @@ _CONTROLSOLIDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1406,
-  serialized_end=1554,
+  serialized_start=1628,
+  serialized_end=1776,
 )
 
 
@@ -1121,8 +1277,384 @@ _CONTROLSOLIDREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1556,
-  serialized_end=1591,
+  serialized_start=1778,
+  serialized_end=1813,
+)
+
+
+_CONTROLIMPLICITGENERALREQUEST = _descriptor.Descriptor(
+  name='ControlImplicitGeneralRequest',
+  full_name='kwgrpc.ControlImplicitGeneralRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='imflag', full_name='kwgrpc.ControlImplicitGeneralRequest.imflag', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='dt0', full_name='kwgrpc.ControlImplicitGeneralRequest.dt0', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1815,
+  serialized_end=1875,
+)
+
+
+_CONTROLIMPLICITGENERALREPLY = _descriptor.Descriptor(
+  name='ControlImplicitGeneralReply',
+  full_name='kwgrpc.ControlImplicitGeneralReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.ControlImplicitGeneralReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1877,
+  serialized_end=1922,
+)
+
+
+_CONTROLIMPLICITAUTOREQUEST = _descriptor.Descriptor(
+  name='ControlImplicitAutoRequest',
+  full_name='kwgrpc.ControlImplicitAutoRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='iauto', full_name='kwgrpc.ControlImplicitAutoRequest.iauto', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='iteopt', full_name='kwgrpc.ControlImplicitAutoRequest.iteopt', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1924,
+  serialized_end=1983,
+)
+
+
+_CONTROLIMPLICITAUTOREPLY = _descriptor.Descriptor(
+  name='ControlImplicitAutoReply',
+  full_name='kwgrpc.ControlImplicitAutoReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.ControlImplicitAutoReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1985,
+  serialized_end=2027,
+)
+
+
+_CONTROLIMPLICITDYNAMICREQUEST = _descriptor.Descriptor(
+  name='ControlImplicitDynamicRequest',
+  full_name='kwgrpc.ControlImplicitDynamicRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='imass', full_name='kwgrpc.ControlImplicitDynamicRequest.imass', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='gamma', full_name='kwgrpc.ControlImplicitDynamicRequest.gamma', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='beta', full_name='kwgrpc.ControlImplicitDynamicRequest.beta', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2029,
+  serialized_end=2104,
+)
+
+
+_CONTROLIMPLICITDYNAMICREPLY = _descriptor.Descriptor(
+  name='ControlImplicitDynamicReply',
+  full_name='kwgrpc.ControlImplicitDynamicReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.ControlImplicitDynamicReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2106,
+  serialized_end=2151,
+)
+
+
+_CONTROLIMPLICITEIGENVALUEREQUEST = _descriptor.Descriptor(
+  name='ControlImplicitEigenvalueRequest',
+  full_name='kwgrpc.ControlImplicitEigenvalueRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='neig', full_name='kwgrpc.ControlImplicitEigenvalueRequest.neig', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='shfscl', full_name='kwgrpc.ControlImplicitEigenvalueRequest.shfscl', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2153,
+  serialized_end=2217,
+)
+
+
+_CONTROLIMPLICITEIGENVALUEREPLY = _descriptor.Descriptor(
+  name='ControlImplicitEigenvalueReply',
+  full_name='kwgrpc.ControlImplicitEigenvalueReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.ControlImplicitEigenvalueReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2219,
+  serialized_end=2267,
+)
+
+
+_CONTROLIMPLICITSOLUTIONREQUEST = _descriptor.Descriptor(
+  name='ControlImplicitSolutionRequest',
+  full_name='kwgrpc.ControlImplicitSolutionRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='nsolver', full_name='kwgrpc.ControlImplicitSolutionRequest.nsolver', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ilimit', full_name='kwgrpc.ControlImplicitSolutionRequest.ilimit', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='maxref', full_name='kwgrpc.ControlImplicitSolutionRequest.maxref', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='abstol', full_name='kwgrpc.ControlImplicitSolutionRequest.abstol', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2269,
+  serialized_end=2366,
+)
+
+
+_CONTROLIMPLICITSOLUTIONREPLY = _descriptor.Descriptor(
+  name='ControlImplicitSolutionReply',
+  full_name='kwgrpc.ControlImplicitSolutionReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.ControlImplicitSolutionReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2368,
+  serialized_end=2414,
 )
 
 
@@ -1188,8 +1720,8 @@ _DBBINARYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1593,
-  serialized_end=1704,
+  serialized_start=2416,
+  serialized_end=2527,
 )
 
 
@@ -1220,8 +1752,8 @@ _DBBINARYREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1706,
-  serialized_end=1737,
+  serialized_start=2529,
+  serialized_end=2560,
 )
 
 
@@ -1252,8 +1784,8 @@ _DBALEMATREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1739,
-  serialized_end=1771,
+  serialized_start=2562,
+  serialized_end=2594,
 )
 
 
@@ -1284,8 +1816,8 @@ _DBALEMATREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1773,
-  serialized_end=1804,
+  serialized_start=2596,
+  serialized_end=2627,
 )
 
 
@@ -1344,8 +1876,8 @@ _DBASCIIREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1806,
-  serialized_end=1893,
+  serialized_start=2629,
+  serialized_end=2716,
 )
 
 
@@ -1376,8 +1908,72 @@ _DBASCIIREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1895,
-  serialized_end=1925,
+  serialized_start=2718,
+  serialized_end=2748,
+)
+
+
+_DBSALEREQUEST = _descriptor.Descriptor(
+  name='DBSALERequest',
+  full_name='kwgrpc.DBSALERequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='switch', full_name='kwgrpc.DBSALERequest.switch', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2750,
+  serialized_end=2781,
+)
+
+
+_DBSALEREPLY = _descriptor.Descriptor(
+  name='DBSALEReply',
+  full_name='kwgrpc.DBSALEReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.DBSALEReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2783,
+  serialized_end=2812,
 )
 
 
@@ -1415,8 +2011,8 @@ _LOADBODYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1927,
-  serialized_end=1974,
+  serialized_start=2814,
+  serialized_end=2861,
 )
 
 
@@ -1447,8 +2043,8 @@ _LOADBODYREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1976,
-  serialized_end=2007,
+  serialized_start=2863,
+  serialized_end=2894,
 )
 
 
@@ -1486,8 +2082,8 @@ _INITVELREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2009,
-  serialized_end=2057,
+  serialized_start=2896,
+  serialized_end=2944,
 )
 
 
@@ -1518,8 +2114,8 @@ _INITVELREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2059,
-  serialized_end=2089,
+  serialized_start=2946,
+  serialized_end=2976,
 )
 
 
@@ -1599,8 +2195,8 @@ _INITVELRIGIDBODYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2091,
-  serialized_end=2218,
+  serialized_start=2978,
+  serialized_end=3105,
 )
 
 
@@ -1631,8 +2227,8 @@ _INITVELRIGIDBODYREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2220,
-  serialized_end=2259,
+  serialized_start=3107,
+  serialized_end=3146,
 )
 
 
@@ -1747,8 +2343,8 @@ _INITVELGENERATIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2262,
-  serialized_end=2452,
+  serialized_start=3149,
+  serialized_end=3339,
 )
 
 
@@ -1779,8 +2375,8 @@ _INITVELGENERATIONREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2454,
-  serialized_end=2494,
+  serialized_start=3341,
+  serialized_end=3381,
 )
 
 
@@ -1811,8 +2407,8 @@ _INITVELGENERATIONSTARTTIMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2496,
-  serialized_end=2546,
+  serialized_start=3383,
+  serialized_end=3433,
 )
 
 
@@ -1843,8 +2439,86 @@ _INITVELGENERATIONSTARTTIMEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2548,
-  serialized_end=2597,
+  serialized_start=3435,
+  serialized_end=3484,
+)
+
+
+_INITDETONATIONREQUEST = _descriptor.Descriptor(
+  name='InitDetonationRequest',
+  full_name='kwgrpc.InitDetonationRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='pid', full_name='kwgrpc.InitDetonationRequest.pid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='coord', full_name='kwgrpc.InitDetonationRequest.coord', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='lt', full_name='kwgrpc.InitDetonationRequest.lt', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3486,
+  serialized_end=3549,
+)
+
+
+_INITDETONATIONREPLY = _descriptor.Descriptor(
+  name='InitDetonationReply',
+  full_name='kwgrpc.InitDetonationReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.InitDetonationReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3551,
+  serialized_end=3588,
 )
 
 
@@ -1865,8 +2539,8 @@ _RIGIDWALLGEOMREQUEST = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='motion', full_name='kwgrpc.RigidWallGeomRequest.motion', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1924,8 +2598,8 @@ _RIGIDWALLGEOMREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2600,
-  serialized_end=2742,
+  serialized_start=3591,
+  serialized_end=3733,
 )
 
 
@@ -1956,8 +2630,8 @@ _RIGIDWALLGEOMREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2744,
-  serialized_end=2780,
+  serialized_start=3735,
+  serialized_end=3771,
 )
 
 
@@ -2016,8 +2690,8 @@ _RIGIDWALLPLANARREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2782,
-  serialized_end=2881,
+  serialized_start=3773,
+  serialized_end=3872,
 )
 
 
@@ -2048,8 +2722,8 @@ _RIGIDWALLPLANARREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2883,
-  serialized_end=2921,
+  serialized_start=3874,
+  serialized_end=3912,
 )
 
 
@@ -2306,6 +2980,13 @@ _CONTACTREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ignore', full_name='kwgrpc.ContactRequest.ignore', index=35,
+      number=36, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -2318,8 +2999,8 @@ _CONTACTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2924,
-  serialized_end=3461,
+  serialized_start=3915,
+  serialized_end=4468,
 )
 
 
@@ -2350,8 +3031,8 @@ _CONTACTREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3463,
-  serialized_end=3493,
+  serialized_start=4470,
+  serialized_end=4500,
 )
 
 
@@ -2452,8 +3133,8 @@ _BDYPRESCRIBEDMOTIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3496,
-  serialized_end=3680,
+  serialized_start=4503,
+  serialized_end=4687,
 )
 
 
@@ -2484,8 +3165,8 @@ _BDYPRESCRIBEDMOTIONREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3682,
-  serialized_end=3724,
+  serialized_start=4689,
+  serialized_end=4731,
 )
 
 
@@ -2593,8 +3274,8 @@ _BDYSPCREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3727,
-  serialized_end=3922,
+  serialized_start=4734,
+  serialized_end=4929,
 )
 
 
@@ -2625,8 +3306,8 @@ _BDYSPCREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3924,
-  serialized_end=3953,
+  serialized_start=4931,
+  serialized_end=4960,
 )
 
 
@@ -2678,8 +3359,8 @@ _CONSTRAINEDEXTRANODESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3955,
-  serialized_end=4042,
+  serialized_start=4962,
+  serialized_end=5049,
 )
 
 
@@ -2710,8 +3391,150 @@ _CONSTRAINEDEXTRANODESREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4044,
-  serialized_end=4088,
+  serialized_start=5051,
+  serialized_end=5095,
+)
+
+
+_CONSTRAINEDNODALRIGIDBODYREQUEST = _descriptor.Descriptor(
+  name='ConstrainedNodalRigidBodyRequest',
+  full_name='kwgrpc.ConstrainedNodalRigidBodyRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='pid', full_name='kwgrpc.ConstrainedNodalRigidBodyRequest.pid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nsid', full_name='kwgrpc.ConstrainedNodalRigidBodyRequest.nsid', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5097,
+  serialized_end=5158,
+)
+
+
+_CONSTRAINEDNODALRIGIDBODYREPLY = _descriptor.Descriptor(
+  name='ConstrainedNodalRigidBodyReply',
+  full_name='kwgrpc.ConstrainedNodalRigidBodyReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='pid', full_name='kwgrpc.ConstrainedNodalRigidBodyReply.pid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5160,
+  serialized_end=5205,
+)
+
+
+_CONSTRAINEDSPOTWELDREQUEST = _descriptor.Descriptor(
+  name='ConstrainedSpotWeldRequest',
+  full_name='kwgrpc.ConstrainedSpotWeldRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='node1', full_name='kwgrpc.ConstrainedSpotWeldRequest.node1', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='node2', full_name='kwgrpc.ConstrainedSpotWeldRequest.node2', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5207,
+  serialized_end=5265,
+)
+
+
+_CONSTRAINEDSPOTWELDREPLY = _descriptor.Descriptor(
+  name='ConstrainedSpotWeldReply',
+  full_name='kwgrpc.ConstrainedSpotWeldReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='kwgrpc.ConstrainedSpotWeldReply.id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5267,
+  serialized_end=5305,
 )
 
 
@@ -2763,8 +3586,8 @@ _CONSTRAINEDJOINTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4090,
-  serialized_end=4171,
+  serialized_start=5307,
+  serialized_end=5388,
 )
 
 
@@ -2777,7 +3600,7 @@ _CONSTRAINEDJOINTREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.ConstrainedJointReply.answer', index=0,
+      name='id', full_name='kwgrpc.ConstrainedJointReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -2795,8 +3618,8 @@ _CONSTRAINEDJOINTREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4173,
-  serialized_end=4212,
+  serialized_start=5390,
+  serialized_end=5425,
 )
 
 
@@ -2848,8 +3671,8 @@ _SECTIONIGASHELLREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4214,
-  serialized_end=4302,
+  serialized_start=5427,
+  serialized_end=5515,
 )
 
 
@@ -2862,7 +3685,7 @@ _SECTIONIGASHELLREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.SectionIGAShellReply.answer', index=0,
+      name='id', full_name='kwgrpc.SectionIGAShellReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -2880,8 +3703,107 @@ _SECTIONIGASHELLREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4304,
-  serialized_end=4342,
+  serialized_start=5517,
+  serialized_end=5551,
+)
+
+
+_SECTIONBEAMREQUEST = _descriptor.Descriptor(
+  name='SectionBeamRequest',
+  full_name='kwgrpc.SectionBeamRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='secid', full_name='kwgrpc.SectionBeamRequest.secid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='elform', full_name='kwgrpc.SectionBeamRequest.elform', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='shrf', full_name='kwgrpc.SectionBeamRequest.shrf', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cst', full_name='kwgrpc.SectionBeamRequest.cst', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ts1', full_name='kwgrpc.SectionBeamRequest.ts1', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ts2', full_name='kwgrpc.SectionBeamRequest.ts2', index=5,
+      number=6, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5553,
+  serialized_end=5657,
+)
+
+
+_SECTIONBEAMREPLY = _descriptor.Descriptor(
+  name='SectionBeamReply',
+  full_name='kwgrpc.SectionBeamReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='kwgrpc.SectionBeamReply.id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5659,
+  serialized_end=5689,
 )
 
 
@@ -2968,8 +3890,8 @@ _SECTIONSHELLREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4345,
-  serialized_end=4487,
+  serialized_start=5692,
+  serialized_end=5834,
 )
 
 
@@ -2982,7 +3904,7 @@ _SECTIONSHELLREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.SectionShellReply.answer', index=0,
+      name='id', full_name='kwgrpc.SectionShellReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -3000,8 +3922,8 @@ _SECTIONSHELLREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4489,
-  serialized_end=4524,
+  serialized_start=5836,
+  serialized_end=5867,
 )
 
 
@@ -3046,8 +3968,8 @@ _SECTIONSOLIDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4526,
-  serialized_end=4593,
+  serialized_start=5869,
+  serialized_end=5936,
 )
 
 
@@ -3060,7 +3982,7 @@ _SECTIONSOLIDREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.SectionSolidReply.answer', index=0,
+      name='id', full_name='kwgrpc.SectionSolidReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -3078,8 +4000,8 @@ _SECTIONSOLIDREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4595,
-  serialized_end=4630,
+  serialized_start=5938,
+  serialized_end=5969,
 )
 
 
@@ -3159,8 +4081,8 @@ _SECTIONDISCRETEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4632,
-  serialized_end=4758,
+  serialized_start=5971,
+  serialized_end=6097,
 )
 
 
@@ -3191,8 +4113,8 @@ _SECTIONDISCRETEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4760,
-  serialized_end=4798,
+  serialized_start=6099,
+  serialized_end=6137,
 )
 
 
@@ -3265,8 +4187,8 @@ _HOURGLASSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4800,
-  serialized_end=4905,
+  serialized_start=6139,
+  serialized_end=6244,
 )
 
 
@@ -3279,7 +4201,7 @@ _HOURGLASSREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.HourglassReply.answer', index=0,
+      name='id', full_name='kwgrpc.HourglassReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -3297,8 +4219,8 @@ _HOURGLASSREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4907,
-  serialized_end=4939,
+  serialized_start=6246,
+  serialized_end=6274,
 )
 
 
@@ -3357,8 +4279,8 @@ _DEFINECURVEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4941,
-  serialized_end=5039,
+  serialized_start=6276,
+  serialized_end=6374,
 )
 
 
@@ -3371,7 +4293,7 @@ _DEFINECURVEREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.DefineCurveReply.answer', index=0,
+      name='id', full_name='kwgrpc.DefineCurveReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -3389,8 +4311,8 @@ _DEFINECURVEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5041,
-  serialized_end=5075,
+  serialized_start=6376,
+  serialized_end=6406,
 )
 
 
@@ -3470,8 +4392,8 @@ _DEFINEVECTORREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5077,
-  serialized_end=5198,
+  serialized_start=6408,
+  serialized_end=6529,
 )
 
 
@@ -3502,8 +4424,107 @@ _DEFINEVECTORREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5200,
-  serialized_end=5235,
+  serialized_start=6531,
+  serialized_end=6566,
+)
+
+
+_DEFINEBOXREQUEST = _descriptor.Descriptor(
+  name='DefineBoxRequest',
+  full_name='kwgrpc.DefineBoxRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='xmin', full_name='kwgrpc.DefineBoxRequest.xmin', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='xmax', full_name='kwgrpc.DefineBoxRequest.xmax', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ymin', full_name='kwgrpc.DefineBoxRequest.ymin', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ymax', full_name='kwgrpc.DefineBoxRequest.ymax', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='zmin', full_name='kwgrpc.DefineBoxRequest.zmin', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='zmax', full_name='kwgrpc.DefineBoxRequest.zmax', index=5,
+      number=6, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6568,
+  serialized_end=6670,
+)
+
+
+_DEFINEBOXREPLY = _descriptor.Descriptor(
+  name='DefineBoxReply',
+  full_name='kwgrpc.DefineBoxReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='boxid', full_name='kwgrpc.DefineBoxReply.boxid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6672,
+  serialized_end=6703,
 )
 
 
@@ -3576,8 +4597,8 @@ _DEFINEDEMESHSURFACEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5238,
-  serialized_end=5367,
+  serialized_start=6706,
+  serialized_end=6835,
 )
 
 
@@ -3608,8 +4629,8 @@ _DEFINEDEMESHSURFACEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5369,
-  serialized_end=5411,
+  serialized_start=6837,
+  serialized_end=6879,
 )
 
 
@@ -3668,8 +4689,8 @@ _DEFINEORIENTATIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5413,
-  serialized_end=5511,
+  serialized_start=6881,
+  serialized_end=6979,
 )
 
 
@@ -3700,8 +4721,8 @@ _DEFINEORIENTATIONREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5513,
-  serialized_end=5553,
+  serialized_start=6981,
+  serialized_end=7021,
 )
 
 
@@ -3753,8 +4774,8 @@ _PARTSETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5555,
-  serialized_end=5629,
+  serialized_start=7023,
+  serialized_end=7097,
 )
 
 
@@ -3767,7 +4788,7 @@ _PARTSETREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.PartSetReply.answer', index=0,
+      name='id', full_name='kwgrpc.PartSetReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -3785,8 +4806,8 @@ _PARTSETREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5631,
-  serialized_end=5661,
+  serialized_start=7099,
+  serialized_end=7125,
 )
 
 
@@ -3838,8 +4859,8 @@ _SHELLSETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5663,
-  serialized_end=5738,
+  serialized_start=7127,
+  serialized_end=7202,
 )
 
 
@@ -3870,8 +4891,8 @@ _SHELLSETREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5740,
-  serialized_end=5771,
+  serialized_start=7204,
+  serialized_end=7235,
 )
 
 
@@ -3916,8 +4937,8 @@ _SOLIDSETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5773,
-  serialized_end=5830,
+  serialized_start=7237,
+  serialized_end=7294,
 )
 
 
@@ -3948,8 +4969,8 @@ _SOLIDSETREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5832,
-  serialized_end=5863,
+  serialized_start=7296,
+  serialized_end=7327,
 )
 
 
@@ -4008,8 +5029,8 @@ _NODESETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5865,
-  serialized_end=5962,
+  serialized_start=7329,
+  serialized_end=7426,
 )
 
 
@@ -4022,7 +5043,7 @@ _NODESETREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.NodeSetReply.answer', index=0,
+      name='id', full_name='kwgrpc.NodeSetReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -4040,8 +5061,8 @@ _NODESETREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5964,
-  serialized_end=5994,
+  serialized_start=7428,
+  serialized_end=7454,
 )
 
 
@@ -4114,8 +5135,8 @@ _SEGMENTSETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5996,
-  serialized_end=6107,
+  serialized_start=7456,
+  serialized_end=7567,
 )
 
 
@@ -4128,7 +5149,7 @@ _SEGMENTSETREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.SegmentSetReply.answer', index=0,
+      name='id', full_name='kwgrpc.SegmentSetReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -4146,8 +5167,8 @@ _SEGMENTSETREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6109,
-  serialized_end=6142,
+  serialized_start=7569,
+  serialized_end=7598,
 )
 
 
@@ -4227,8 +5248,8 @@ _PARTPROPERTYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6145,
-  serialized_end=6280,
+  serialized_start=7601,
+  serialized_end=7736,
 )
 
 
@@ -4259,8 +5280,8 @@ _PARTPROPERTYREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6282,
-  serialized_end=6317,
+  serialized_start=7738,
+  serialized_end=7773,
 )
 
 
@@ -4410,8 +5431,8 @@ _PARTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6320,
-  serialized_end=6585,
+  serialized_start=7776,
+  serialized_end=8041,
 )
 
 
@@ -4442,8 +5463,86 @@ _PARTREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6587,
-  serialized_end=6614,
+  serialized_start=8043,
+  serialized_end=8070,
+)
+
+
+_MATEMREQUEST = _descriptor.Descriptor(
+  name='MatEMRequest',
+  full_name='kwgrpc.MatEMRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatEMRequest.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='mtype', full_name='kwgrpc.MatEMRequest.mtype', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sigma', full_name='kwgrpc.MatEMRequest.sigma', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8072,
+  serialized_end=8129,
+)
+
+
+_MATEMREPLY = _descriptor.Descriptor(
+  name='MatEMReply',
+  full_name='kwgrpc.MatEMReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='kwgrpc.MatEMReply.id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8131,
+  serialized_end=8155,
 )
 
 
@@ -4516,8 +5615,8 @@ _MATRIGIDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6616,
-  serialized_end=6722,
+  serialized_start=8157,
+  serialized_end=8263,
 )
 
 
@@ -4530,9 +5629,9 @@ _MATRIGIDREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ret', full_name='kwgrpc.MatRigidReply.ret', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='mid', full_name='kwgrpc.MatRigidReply.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -4548,8 +5647,8 @@ _MATRIGIDREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6724,
-  serialized_end=6752,
+  serialized_start=8265,
+  serialized_end=8293,
 )
 
 
@@ -4601,8 +5700,8 @@ _MATELASTICREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6754,
-  serialized_end=6821,
+  serialized_start=8295,
+  serialized_end=8362,
 )
 
 
@@ -4615,7 +5714,7 @@ _MATELASTICREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ret', full_name='kwgrpc.MatElasticReply.ret', index=0,
+      name='mid', full_name='kwgrpc.MatElasticReply.mid', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -4633,8 +5732,340 @@ _MATELASTICREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6823,
-  serialized_end=6853,
+  serialized_start=8364,
+  serialized_end=8394,
+)
+
+
+_MATSPOTWELDREQUEST = _descriptor.Descriptor(
+  name='MatSpotweldRequest',
+  full_name='kwgrpc.MatSpotweldRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatSpotweldRequest.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ro', full_name='kwgrpc.MatSpotweldRequest.ro', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='e', full_name='kwgrpc.MatSpotweldRequest.e', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pr', full_name='kwgrpc.MatSpotweldRequest.pr', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sigy', full_name='kwgrpc.MatSpotweldRequest.sigy', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='eh', full_name='kwgrpc.MatSpotweldRequest.eh', index=5,
+      number=6, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nrr', full_name='kwgrpc.MatSpotweldRequest.nrr', index=6,
+      number=7, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nrs', full_name='kwgrpc.MatSpotweldRequest.nrs', index=7,
+      number=8, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nrt', full_name='kwgrpc.MatSpotweldRequest.nrt', index=8,
+      number=9, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8397,
+  serialized_end=8530,
+)
+
+
+_MATSPOTWELDREPLY = _descriptor.Descriptor(
+  name='MatSpotweldReply',
+  full_name='kwgrpc.MatSpotweldReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatSpotweldReply.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8532,
+  serialized_end=8563,
+)
+
+
+_MATPIECEWISELINEARPLASTICITYREQUEST = _descriptor.Descriptor(
+  name='MatPiecewiseLinearPlasticityRequest',
+  full_name='kwgrpc.MatPiecewiseLinearPlasticityRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatPiecewiseLinearPlasticityRequest.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ro', full_name='kwgrpc.MatPiecewiseLinearPlasticityRequest.ro', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='e', full_name='kwgrpc.MatPiecewiseLinearPlasticityRequest.e', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pr', full_name='kwgrpc.MatPiecewiseLinearPlasticityRequest.pr', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sigy', full_name='kwgrpc.MatPiecewiseLinearPlasticityRequest.sigy', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='etan', full_name='kwgrpc.MatPiecewiseLinearPlasticityRequest.etan', index=5,
+      number=6, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8565,
+  serialized_end=8678,
+)
+
+
+_MATPIECEWISELINEARPLASTICITYREPLY = _descriptor.Descriptor(
+  name='MatPiecewiseLinearPlasticityReply',
+  full_name='kwgrpc.MatPiecewiseLinearPlasticityReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatPiecewiseLinearPlasticityReply.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8680,
+  serialized_end=8728,
+)
+
+
+_MATMODIFIEDPIECEWISELINEARPLASTICITYREQUEST = _descriptor.Descriptor(
+  name='MatModifiedPiecewiseLinearPlasticityRequest',
+  full_name='kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ro', full_name='kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest.ro', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='e', full_name='kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest.e', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pr', full_name='kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest.pr', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sigy', full_name='kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest.sigy', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='etan', full_name='kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest.etan', index=5,
+      number=6, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='fail', full_name='kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest.fail', index=6,
+      number=7, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='numint', full_name='kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest.numint', index=7,
+      number=8, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8731,
+  serialized_end=8882,
+)
+
+
+_MATMODIFIEDPIECEWISELINEARPLASTICITYREPLY = _descriptor.Descriptor(
+  name='MatModifiedPiecewiseLinearPlasticityReply',
+  full_name='kwgrpc.MatModifiedPiecewiseLinearPlasticityReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatModifiedPiecewiseLinearPlasticityReply.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8884,
+  serialized_end=8940,
 )
 
 
@@ -4707,8 +6138,8 @@ _MATFABRICREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6855,
-  serialized_end=6963,
+  serialized_start=8942,
+  serialized_end=9050,
 )
 
 
@@ -4721,9 +6152,9 @@ _MATFABRICREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ret', full_name='kwgrpc.MatFabricReply.ret', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='mid', full_name='kwgrpc.MatFabricReply.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -4739,8 +6170,8 @@ _MATFABRICREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6965,
-  serialized_end=6994,
+  serialized_start=9052,
+  serialized_end=9081,
 )
 
 
@@ -4778,8 +6209,8 @@ _MATSPRINGNONLINEARELASTICREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6996,
-  serialized_end=7057,
+  serialized_start=9083,
+  serialized_end=9144,
 )
 
 
@@ -4810,8 +6241,8 @@ _MATSPRINGNONLINEARELASTICREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7059,
-  serialized_end=7104,
+  serialized_start=9146,
+  serialized_end=9191,
 )
 
 
@@ -4849,8 +6280,8 @@ _MATDAMPERVISCOUSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7106,
-  serialized_end=7156,
+  serialized_start=9193,
+  serialized_end=9243,
 )
 
 
@@ -4881,8 +6312,8 @@ _MATDAMPERVISCOUSREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7158,
-  serialized_end=7194,
+  serialized_start=9245,
+  serialized_end=9281,
 )
 
 
@@ -4920,8 +6351,8 @@ _MATDAMPERNONLINEARVISCOUSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7196,
-  serialized_end=7257,
+  serialized_start=9283,
+  serialized_end=9344,
 )
 
 
@@ -4952,8 +6383,667 @@ _MATDAMPERNONLINEARVISCOUSREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7259,
-  serialized_end=7304,
+  serialized_start=9346,
+  serialized_end=9391,
+)
+
+
+_MATNULLREQUEST = _descriptor.Descriptor(
+  name='MatNullRequest',
+  full_name='kwgrpc.MatNullRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ro', full_name='kwgrpc.MatNullRequest.ro', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pc', full_name='kwgrpc.MatNullRequest.pc', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9393,
+  serialized_end=9433,
+)
+
+
+_MATNULLREPLY = _descriptor.Descriptor(
+  name='MatNullReply',
+  full_name='kwgrpc.MatNullReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatNullReply.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9435,
+  serialized_end=9462,
+)
+
+
+_MATJOHNSONCOOKREQUEST = _descriptor.Descriptor(
+  name='MatJohnsonCookRequest',
+  full_name='kwgrpc.MatJohnsonCookRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ro', full_name='kwgrpc.MatJohnsonCookRequest.ro', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='g', full_name='kwgrpc.MatJohnsonCookRequest.g', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='e', full_name='kwgrpc.MatJohnsonCookRequest.e', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pr', full_name='kwgrpc.MatJohnsonCookRequest.pr', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='constants', full_name='kwgrpc.MatJohnsonCookRequest.constants', index=4,
+      number=5, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='tm', full_name='kwgrpc.MatJohnsonCookRequest.tm', index=5,
+      number=6, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='tr', full_name='kwgrpc.MatJohnsonCookRequest.tr', index=6,
+      number=7, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='eps0', full_name='kwgrpc.MatJohnsonCookRequest.eps0', index=7,
+      number=8, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cp', full_name='kwgrpc.MatJohnsonCookRequest.cp', index=8,
+      number=9, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pc', full_name='kwgrpc.MatJohnsonCookRequest.pc', index=9,
+      number=10, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='spall', full_name='kwgrpc.MatJohnsonCookRequest.spall', index=10,
+      number=11, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='it', full_name='kwgrpc.MatJohnsonCookRequest.it', index=11,
+      number=12, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='failure', full_name='kwgrpc.MatJohnsonCookRequest.failure', index=12,
+      number=13, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9465,
+  serialized_end=9659,
+)
+
+
+_MATJOHNSONCOOKREPLY = _descriptor.Descriptor(
+  name='MatJohnsonCookReply',
+  full_name='kwgrpc.MatJohnsonCookReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatJohnsonCookReply.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9661,
+  serialized_end=9695,
+)
+
+
+_MATHIGHEXPLOSIVEBURNREQUEST = _descriptor.Descriptor(
+  name='MatHighExplosiveBurnRequest',
+  full_name='kwgrpc.MatHighExplosiveBurnRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ro', full_name='kwgrpc.MatHighExplosiveBurnRequest.ro', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='d', full_name='kwgrpc.MatHighExplosiveBurnRequest.d', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pcj', full_name='kwgrpc.MatHighExplosiveBurnRequest.pcj', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9697,
+  serialized_end=9762,
+)
+
+
+_MATHIGHEXPLOSIVEBURNREPLY = _descriptor.Descriptor(
+  name='MatHighExplosiveBurnReply',
+  full_name='kwgrpc.MatHighExplosiveBurnReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatHighExplosiveBurnReply.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9764,
+  serialized_end=9804,
+)
+
+
+_MATVACUUMREQUEST = _descriptor.Descriptor(
+  name='MatVacuumRequest',
+  full_name='kwgrpc.MatVacuumRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='rho', full_name='kwgrpc.MatVacuumRequest.rho', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9806,
+  serialized_end=9837,
+)
+
+
+_MATVACUUMREPLY = _descriptor.Descriptor(
+  name='MatVacuumReply',
+  full_name='kwgrpc.MatVacuumReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatVacuumReply.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9839,
+  serialized_end=9868,
+)
+
+
+_MATADDEROSIONREQUEST = _descriptor.Descriptor(
+  name='MatAddErosionRequest',
+  full_name='kwgrpc.MatAddErosionRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatAddErosionRequest.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='mnpres', full_name='kwgrpc.MatAddErosionRequest.mnpres', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='mxeps', full_name='kwgrpc.MatAddErosionRequest.mxeps', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9870,
+  serialized_end=9936,
+)
+
+
+_MATADDEROSIONREPLY = _descriptor.Descriptor(
+  name='MatAddErosionReply',
+  full_name='kwgrpc.MatAddErosionReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.MatAddErosionReply.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9938,
+  serialized_end=9971,
+)
+
+
+_EOSLINEARPOLYNOMIALREQUEST = _descriptor.Descriptor(
+  name='EOSLinearPolynomialRequest',
+  full_name='kwgrpc.EOSLinearPolynomialRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ci', full_name='kwgrpc.EOSLinearPolynomialRequest.ci', index=0,
+      number=1, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='e0', full_name='kwgrpc.EOSLinearPolynomialRequest.e0', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='v0', full_name='kwgrpc.EOSLinearPolynomialRequest.v0', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9973,
+  serialized_end=10037,
+)
+
+
+_EOSLINEARPOLYNOMIALREPLY = _descriptor.Descriptor(
+  name='EOSLinearPolynomialReply',
+  full_name='kwgrpc.EOSLinearPolynomialReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eosid', full_name='kwgrpc.EOSLinearPolynomialReply.eosid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=10039,
+  serialized_end=10080,
+)
+
+
+_EOSJWLREQUEST = _descriptor.Descriptor(
+  name='EOSJWLRequest',
+  full_name='kwgrpc.EOSJWLRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='jwl_equation', full_name='kwgrpc.EOSJWLRequest.jwl_equation', index=0,
+      number=1, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=10082,
+  serialized_end=10119,
+)
+
+
+_EOSJWLREPLY = _descriptor.Descriptor(
+  name='EOSJWLReply',
+  full_name='kwgrpc.EOSJWLReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eosid', full_name='kwgrpc.EOSJWLReply.eosid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=10121,
+  serialized_end=10149,
+)
+
+
+_EOSGRUNEISENREQUEST = _descriptor.Descriptor(
+  name='EOSGruneisenRequest',
+  full_name='kwgrpc.EOSGruneisenRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='constants', full_name='kwgrpc.EOSGruneisenRequest.constants', index=0,
+      number=1, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='a', full_name='kwgrpc.EOSGruneisenRequest.a', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='e0', full_name='kwgrpc.EOSGruneisenRequest.e0', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=10151,
+  serialized_end=10214,
+)
+
+
+_EOSGRUNEISENREPLY = _descriptor.Descriptor(
+  name='EOSGruneisenReply',
+  full_name='kwgrpc.EOSGruneisenReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eosid', full_name='kwgrpc.EOSGruneisenReply.eosid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=10216,
+  serialized_end=10250,
 )
 
 
@@ -4984,8 +7074,8 @@ _SAVEFILEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7306,
-  serialized_end=7337,
+  serialized_start=10252,
+  serialized_end=10283,
 )
 
 
@@ -5016,8 +7106,8 @@ _SAVEFILEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7339,
-  serialized_end=7370,
+  serialized_start=10285,
+  serialized_end=10316,
 )
 
 
@@ -5048,8 +7138,8 @@ _LOADFILEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7372,
-  serialized_end=7403,
+  serialized_start=10318,
+  serialized_end=10349,
 )
 
 
@@ -5080,8 +7170,8 @@ _LOADFILEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7405,
-  serialized_end=7433,
+  serialized_start=10351,
+  serialized_end=10379,
 )
 
 
@@ -5105,8 +7195,8 @@ _GETNODESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7435,
-  serialized_end=7452,
+  serialized_start=10381,
+  serialized_end=10398,
 )
 
 
@@ -5137,8 +7227,8 @@ _GETNODESREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7454,
-  serialized_end=7485,
+  serialized_start=10400,
+  serialized_end=10431,
 )
 
 
@@ -5162,8 +7252,8 @@ _GETSOLIDELEMENTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7487,
-  serialized_end=7512,
+  serialized_start=10433,
+  serialized_end=10458,
 )
 
 
@@ -5194,8 +7284,8 @@ _GETSOLIDELEMENTSREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7514,
-  serialized_end=7554,
+  serialized_start=10460,
+  serialized_end=10500,
 )
 
 
@@ -5233,8 +7323,8 @@ _ICFDCONTROLTIMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7556,
-  serialized_end=7605,
+  serialized_start=10502,
+  serialized_end=10551,
 )
 
 
@@ -5265,8 +7355,8 @@ _ICFDCONTROLTIMEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7607,
-  serialized_end=7645,
+  serialized_start=10553,
+  serialized_end=10591,
 )
 
 
@@ -5318,8 +7408,8 @@ _ICFDCONTROLGENERALREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7647,
-  serialized_end=7733,
+  serialized_start=10593,
+  serialized_end=10679,
 )
 
 
@@ -5350,8 +7440,8 @@ _ICFDCONTROLGENERALREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7735,
-  serialized_end=7776,
+  serialized_start=10681,
+  serialized_end=10722,
 )
 
 
@@ -5382,8 +7472,8 @@ _ICFDCONTROLOUTPUTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7778,
-  serialized_end=7818,
+  serialized_start=10724,
+  serialized_end=10764,
 )
 
 
@@ -5414,8 +7504,8 @@ _ICFDCONTROLOUTPUTREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7820,
-  serialized_end=7860,
+  serialized_start=10766,
+  serialized_end=10806,
 )
 
 
@@ -5446,8 +7536,8 @@ _ICFDCONTROLTURBULENCEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7862,
-  serialized_end=7906,
+  serialized_start=10808,
+  serialized_end=10852,
 )
 
 
@@ -5478,8 +7568,8 @@ _ICFDCONTROLTURBULENCEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7908,
-  serialized_end=7952,
+  serialized_start=10854,
+  serialized_end=10898,
 )
 
 
@@ -5531,8 +7621,8 @@ _ICFDCONTROLDEMCOUPLINGREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7954,
-  serialized_end=8036,
+  serialized_start=10900,
+  serialized_end=10982,
 )
 
 
@@ -5563,8 +7653,8 @@ _ICFDCONTROLDEMCOUPLINGREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8038,
-  serialized_end=8083,
+  serialized_start=10984,
+  serialized_end=11029,
 )
 
 
@@ -5595,8 +7685,8 @@ _ICFDSECTIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8085,
-  serialized_end=8118,
+  serialized_start=11031,
+  serialized_end=11064,
 )
 
 
@@ -5627,8 +7717,8 @@ _ICFDSECTIONREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8120,
-  serialized_end=8154,
+  serialized_start=11066,
+  serialized_end=11100,
 )
 
 
@@ -5680,8 +7770,8 @@ _ICFDMATREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8156,
-  serialized_end=8223,
+  serialized_start=11102,
+  serialized_end=11169,
 )
 
 
@@ -5694,7 +7784,7 @@ _ICFDMATREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.ICFDMatReply.answer', index=0,
+      name='id', full_name='kwgrpc.ICFDMatReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -5712,8 +7802,8 @@ _ICFDMATREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8225,
-  serialized_end=8255,
+  serialized_start=11171,
+  serialized_end=11197,
 )
 
 
@@ -5758,8 +7848,8 @@ _ICFDPARTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8257,
-  serialized_end=8315,
+  serialized_start=11199,
+  serialized_end=11257,
 )
 
 
@@ -5790,8 +7880,8 @@ _ICFDPARTREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8317,
-  serialized_end=8348,
+  serialized_start=11259,
+  serialized_end=11290,
 )
 
 
@@ -5843,8 +7933,8 @@ _ICFDPARTVOLREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8350,
-  serialized_end=8426,
+  serialized_start=11292,
+  serialized_end=11368,
 )
 
 
@@ -5857,7 +7947,7 @@ _ICFDPARTVOLREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.ICFDPartVolReply.answer', index=0,
+      name='id', full_name='kwgrpc.ICFDPartVolReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -5875,8 +7965,8 @@ _ICFDPARTVOLREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8428,
-  serialized_end=8462,
+  serialized_start=11370,
+  serialized_end=11400,
 )
 
 
@@ -5907,8 +7997,8 @@ _ICFDDBDRAGREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8464,
-  serialized_end=8496,
+  serialized_start=11402,
+  serialized_end=11434,
 )
 
 
@@ -5939,8 +8029,8 @@ _ICFDDBDRAGREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8498,
-  serialized_end=8531,
+  serialized_start=11436,
+  serialized_end=11469,
 )
 
 
@@ -5992,8 +8082,8 @@ _ICFDBDYPRESCRIBEDVELREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8533,
-  serialized_end=8615,
+  serialized_start=11471,
+  serialized_end=11553,
 )
 
 
@@ -6024,8 +8114,8 @@ _ICFDBDYPRESCRIBEDVELREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8617,
-  serialized_end=8660,
+  serialized_start=11555,
+  serialized_end=11598,
 )
 
 
@@ -6063,8 +8153,8 @@ _ICFDBDYPRESCRIBEDPREREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8662,
-  serialized_end=8718,
+  serialized_start=11600,
+  serialized_end=11656,
 )
 
 
@@ -6095,8 +8185,8 @@ _ICFDBDYPRESCRIBEDPREREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8720,
-  serialized_end=8763,
+  serialized_start=11658,
+  serialized_end=11701,
 )
 
 
@@ -6127,8 +8217,8 @@ _ICFDBDYFREESLIPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8765,
-  serialized_end=8802,
+  serialized_start=11703,
+  serialized_end=11740,
 )
 
 
@@ -6159,8 +8249,8 @@ _ICFDBDYFREESLIPREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8804,
-  serialized_end=8842,
+  serialized_start=11742,
+  serialized_end=11780,
 )
 
 
@@ -6191,8 +8281,8 @@ _ICFDBDYNONSLIPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8844,
-  serialized_end=8880,
+  serialized_start=11782,
+  serialized_end=11818,
 )
 
 
@@ -6223,8 +8313,8 @@ _ICFDBDYNONSLIPREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8882,
-  serialized_end=8919,
+  serialized_start=11820,
+  serialized_end=11857,
 )
 
 
@@ -6262,8 +8352,8 @@ _ICFDSOLVERTOLMMOVREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8921,
-  serialized_end=8975,
+  serialized_start=11859,
+  serialized_end=11913,
 )
 
 
@@ -6294,8 +8384,164 @@ _ICFDSOLVERTOLMMOVREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8977,
-  serialized_end=9017,
+  serialized_start=11915,
+  serialized_end=11955,
+)
+
+
+_ICFDPARTPROPERTYREQUEST = _descriptor.Descriptor(
+  name='ICFDPartPropertyRequest',
+  full_name='kwgrpc.ICFDPartPropertyRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='pid', full_name='kwgrpc.ICFDPartPropertyRequest.pid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='secid', full_name='kwgrpc.ICFDPartPropertyRequest.secid', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.ICFDPartPropertyRequest.mid', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=11957,
+  serialized_end=12023,
+)
+
+
+_ICFDPARTPROPERTYREPLY = _descriptor.Descriptor(
+  name='ICFDPartPropertyReply',
+  full_name='kwgrpc.ICFDPartPropertyReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.ICFDPartPropertyReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12025,
+  serialized_end=12064,
+)
+
+
+_ICFDVOLUMEPARTPROPERTYREQUEST = _descriptor.Descriptor(
+  name='ICFDVolumePartPropertyRequest',
+  full_name='kwgrpc.ICFDVolumePartPropertyRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='pid', full_name='kwgrpc.ICFDVolumePartPropertyRequest.pid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='secid', full_name='kwgrpc.ICFDVolumePartPropertyRequest.secid', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.ICFDVolumePartPropertyRequest.mid', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12066,
+  serialized_end=12138,
+)
+
+
+_ICFDVOLUMEPARTPROPERTYREPLY = _descriptor.Descriptor(
+  name='ICFDVolumePartPropertyReply',
+  full_name='kwgrpc.ICFDVolumePartPropertyReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.ICFDVolumePartPropertyReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12140,
+  serialized_end=12185,
 )
 
 
@@ -6333,8 +8579,8 @@ _MESHVOLUMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9019,
-  serialized_end=9067,
+  serialized_start=12187,
+  serialized_end=12235,
 )
 
 
@@ -6347,7 +8593,7 @@ _MESHVOLUMEREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.MeshVolumeReply.answer', index=0,
+      name='id', full_name='kwgrpc.MeshVolumeReply.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -6365,8 +8611,8 @@ _MESHVOLUMEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9069,
-  serialized_end=9102,
+  serialized_start=12237,
+  serialized_end=12266,
 )
 
 
@@ -6404,8 +8650,8 @@ _MESHEMBEDSHELLREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9104,
-  serialized_end=9156,
+  serialized_start=12268,
+  serialized_end=12320,
 )
 
 
@@ -6436,8 +8682,8 @@ _MESHEMBEDSHELLREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9158,
-  serialized_end=9195,
+  serialized_start=12322,
+  serialized_end=12359,
 )
 
 
@@ -6475,8 +8721,8 @@ _MESHBLREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9197,
-  serialized_end=9240,
+  serialized_start=12361,
+  serialized_end=12404,
 )
 
 
@@ -6507,8 +8753,8 @@ _MESHBLREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9242,
-  serialized_end=9271,
+  serialized_start=12406,
+  serialized_end=12435,
 )
 
 
@@ -6567,8 +8813,8 @@ _MESHSIZESHAPEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9273,
-  serialized_end=9375,
+  serialized_start=12437,
+  serialized_end=12539,
 )
 
 
@@ -6599,64 +8845,89 @@ _MESHSIZESHAPEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9377,
-  serialized_end=9413,
+  serialized_start=12541,
+  serialized_end=12577,
 )
 
 
-_ALECREATESMREQUEST = _descriptor.Descriptor(
-  name='ALECreateSMRequest',
-  full_name='kwgrpc.ALECreateSMRequest',
+_ALECREATESTRUCTUREDMESHREQUEST = _descriptor.Descriptor(
+  name='ALECreateStructuredMeshRequest',
+  full_name='kwgrpc.ALECreateStructuredMeshRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='mshid', full_name='kwgrpc.ALECreateSMRequest.mshid', index=0,
+      name='nbid', full_name='kwgrpc.ALECreateStructuredMeshRequest.nbid', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='dpid', full_name='kwgrpc.ALECreateSMRequest.dpid', index=1,
+      name='ebid', full_name='kwgrpc.ALECreateStructuredMeshRequest.ebid', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='nbid', full_name='kwgrpc.ALECreateSMRequest.nbid', index=2,
+      name='cpidx', full_name='kwgrpc.ALECreateStructuredMeshRequest.cpidx', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ebid', full_name='kwgrpc.ALECreateSMRequest.ebid', index=3,
+      name='cpidy', full_name='kwgrpc.ALECreateStructuredMeshRequest.cpidy', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='cpidx', full_name='kwgrpc.ALECreateSMRequest.cpidx', index=4,
+      name='cpidz', full_name='kwgrpc.ALECreateStructuredMeshRequest.cpidz', index=4,
       number=5, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12579,
+  serialized_end=12684,
+)
+
+
+_ALECREATESTRUCTUREDMESHREPLY = _descriptor.Descriptor(
+  name='ALECreateStructuredMeshReply',
+  full_name='kwgrpc.ALECreateStructuredMeshReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
     _descriptor.FieldDescriptor(
-      name='cpidy', full_name='kwgrpc.ALECreateSMRequest.cpidy', index=5,
-      number=6, type=5, cpp_type=1, label=1,
+      name='meshid', full_name='kwgrpc.ALECreateStructuredMeshReply.meshid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='cpidz', full_name='kwgrpc.ALECreateSMRequest.cpidz', index=6,
-      number=7, type=5, cpp_type=1, label=1,
+      name='partid', full_name='kwgrpc.ALECreateStructuredMeshReply.partid', index=1,
+      number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -6673,74 +8944,42 @@ _ALECREATESMREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9415,
-  serialized_end=9537,
+  serialized_start=12686,
+  serialized_end=12748,
 )
 
 
-_ALECREATESMREPLY = _descriptor.Descriptor(
-  name='ALECreateSMReply',
-  full_name='kwgrpc.ALECreateSMReply',
+_ALECREATESTRUCTUREDMESHREFINEREQUEST = _descriptor.Descriptor(
+  name='ALECreateStructuredMeshRefineRequest',
+  full_name='kwgrpc.ALECreateStructuredMeshRefineRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.ALECreateSMReply.answer', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9539,
-  serialized_end=9573,
-)
-
-
-_ALECREATESMREFINEREQUEST = _descriptor.Descriptor(
-  name='ALECreateSMRefineRequest',
-  full_name='kwgrpc.ALECreateSMRefineRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mshid', full_name='kwgrpc.ALECreateSMRefineRequest.mshid', index=0,
+      name='mshid', full_name='kwgrpc.ALECreateStructuredMeshRefineRequest.mshid', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ifx', full_name='kwgrpc.ALECreateSMRefineRequest.ifx', index=1,
+      name='ifx', full_name='kwgrpc.ALECreateStructuredMeshRefineRequest.ifx', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ify', full_name='kwgrpc.ALECreateSMRefineRequest.ify', index=2,
+      name='ify', full_name='kwgrpc.ALECreateStructuredMeshRefineRequest.ify', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ifz', full_name='kwgrpc.ALECreateSMRefineRequest.ifz', index=3,
+      name='ifz', full_name='kwgrpc.ALECreateStructuredMeshRefineRequest.ifz', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -6758,21 +8997,21 @@ _ALECREATESMREFINEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9575,
-  serialized_end=9655,
+  serialized_start=12750,
+  serialized_end=12842,
 )
 
 
-_ALECREATESMREFINEREPLY = _descriptor.Descriptor(
-  name='ALECreateSMRefineReply',
-  full_name='kwgrpc.ALECreateSMRefineReply',
+_ALECREATESTRUCTUREDMESHREFINEREPLY = _descriptor.Descriptor(
+  name='ALECreateStructuredMeshRefineReply',
+  full_name='kwgrpc.ALECreateStructuredMeshRefineReply',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.ALECreateSMRefineReply.answer', index=0,
+      name='answer', full_name='kwgrpc.ALECreateStructuredMeshRefineReply.answer', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -6790,57 +9029,50 @@ _ALECREATESMREFINEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9657,
-  serialized_end=9697,
+  serialized_start=12844,
+  serialized_end=12896,
 )
 
 
-_ALECREATESMCTRLPOINTSREQUEST = _descriptor.Descriptor(
-  name='ALECreateSMCtrlPointsRequest',
-  full_name='kwgrpc.ALECreateSMCtrlPointsRequest',
+_ALECREATESTRUCTUREDMESHCONTROLPOINTSREQUEST = _descriptor.Descriptor(
+  name='ALECreateStructuredMeshControlPointsRequest',
+  full_name='kwgrpc.ALECreateStructuredMeshControlPointsRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='cpid', full_name='kwgrpc.ALECreateSMCtrlPointsRequest.cpid', index=0,
+      name='icase', full_name='kwgrpc.ALECreateStructuredMeshControlPointsRequest.icase', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='icase', full_name='kwgrpc.ALECreateSMCtrlPointsRequest.icase', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='sfo', full_name='kwgrpc.ALECreateSMCtrlPointsRequest.sfo', index=2,
-      number=3, type=2, cpp_type=6, label=1,
+      name='sfo', full_name='kwgrpc.ALECreateStructuredMeshControlPointsRequest.sfo', index=1,
+      number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='n', full_name='kwgrpc.ALECreateSMCtrlPointsRequest.n', index=3,
-      number=4, type=5, cpp_type=1, label=3,
+      name='n', full_name='kwgrpc.ALECreateStructuredMeshControlPointsRequest.n', index=2,
+      number=3, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='x', full_name='kwgrpc.ALECreateSMCtrlPointsRequest.x', index=4,
-      number=5, type=5, cpp_type=1, label=3,
+      name='x', full_name='kwgrpc.ALECreateStructuredMeshControlPointsRequest.x', index=3,
+      number=4, type=2, cpp_type=6, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ratio', full_name='kwgrpc.ALECreateSMCtrlPointsRequest.ratio', index=5,
-      number=6, type=2, cpp_type=6, label=3,
+      name='ratio', full_name='kwgrpc.ALECreateStructuredMeshControlPointsRequest.ratio', index=4,
+      number=5, type=2, cpp_type=6, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -6857,21 +9089,21 @@ _ALECREATESMCTRLPOINTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9699,
-  serialized_end=9808,
+  serialized_start=12898,
+  serialized_end=13008,
 )
 
 
-_ALECREATESMCONTROLPOINTSREPLY = _descriptor.Descriptor(
-  name='ALECreateSMControlPointsReply',
-  full_name='kwgrpc.ALECreateSMControlPointsReply',
+_ALECREATESTRUCTUREDMESHCONTROLPOINTSREPLY = _descriptor.Descriptor(
+  name='ALECreateStructuredMeshControlPointsReply',
+  full_name='kwgrpc.ALECreateStructuredMeshControlPointsReply',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='answer', full_name='kwgrpc.ALECreateSMControlPointsReply.answer', index=0,
+      name='cpid', full_name='kwgrpc.ALECreateStructuredMeshControlPointsReply.cpid', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -6889,8 +9121,8 @@ _ALECREATESMCONTROLPOINTSREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9810,
-  serialized_end=9857,
+  serialized_start=13010,
+  serialized_end=13067,
 )
 
 
@@ -6923,6 +9155,13 @@ _ALECREATESTRUCTUREDMULTIMATGROUPREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pref', full_name='kwgrpc.ALECreateStructuredMultiMatGroupRequest.pref', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -6935,8 +9174,8 @@ _ALECREATESTRUCTUREDMULTIMATGROUPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9859,
-  serialized_end=9944,
+  serialized_start=13069,
+  serialized_end=13168,
 )
 
 
@@ -6967,8 +9206,114 @@ _ALECREATESTRUCTUREDMULTIMATGROUPREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9946,
-  serialized_end=10001,
+  serialized_start=13170,
+  serialized_end=13225,
+)
+
+
+_ALECREATESTRUCTUREDMESHVOLUMEFILLINGREQUEST = _descriptor.Descriptor(
+  name='ALECreateStructuredMeshVolumeFillingRequest',
+  full_name='kwgrpc.ALECreateStructuredMeshVolumeFillingRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mshid', full_name='kwgrpc.ALECreateStructuredMeshVolumeFillingRequest.mshid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ammgto', full_name='kwgrpc.ALECreateStructuredMeshVolumeFillingRequest.ammgto', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nsample', full_name='kwgrpc.ALECreateStructuredMeshVolumeFillingRequest.nsample', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='vid', full_name='kwgrpc.ALECreateStructuredMeshVolumeFillingRequest.vid', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='geom', full_name='kwgrpc.ALECreateStructuredMeshVolumeFillingRequest.geom', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='inout', full_name='kwgrpc.ALECreateStructuredMeshVolumeFillingRequest.inout', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='e', full_name='kwgrpc.ALECreateStructuredMeshVolumeFillingRequest.e', index=6,
+      number=7, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=13228,
+  serialized_end=13374,
+)
+
+
+_ALECREATESTRUCTUREDMESHVOLUMEFILLINGREPLY = _descriptor.Descriptor(
+  name='ALECreateStructuredMeshVolumeFillingReply',
+  full_name='kwgrpc.ALECreateStructuredMeshVolumeFillingReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.ALECreateStructuredMeshVolumeFillingReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=13376,
+  serialized_end=13435,
 )
 
 
@@ -7006,8 +9351,8 @@ _DAMPINGGLOBALREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10003,
-  serialized_end=10055,
+  serialized_start=13437,
+  serialized_end=13489,
 )
 
 
@@ -7038,8 +9383,8 @@ _DAMPINGGLOBALREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10057,
-  serialized_end=10093,
+  serialized_start=13491,
+  serialized_end=13527,
 )
 
 
@@ -7084,8 +9429,8 @@ _DAMPINGPARTSTIFFNESSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10095,
-  serialized_end=10165,
+  serialized_start=13529,
+  serialized_end=13599,
 )
 
 
@@ -7116,8 +9461,8 @@ _DAMPINGPARTSTIFFNESSREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10167,
-  serialized_end=10210,
+  serialized_start=13601,
+  serialized_end=13644,
 )
 
 
@@ -7218,8 +9563,8 @@ _AIRBAGMODELREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10213,
-  serialized_end=10380,
+  serialized_start=13647,
+  serialized_end=13814,
 )
 
 
@@ -7250,8 +9595,1481 @@ _AIRBAGMODELREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10382,
-  serialized_end=10416,
+  serialized_start=13816,
+  serialized_end=13850,
+)
+
+
+_EMCONTROLREQUEST = _descriptor.Descriptor(
+  name='EMControlRequest',
+  full_name='kwgrpc.EMControlRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='emsol', full_name='kwgrpc.EMControlRequest.emsol', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='numls', full_name='kwgrpc.EMControlRequest.numls', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='macrodt', full_name='kwgrpc.EMControlRequest.macrodt', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ncylfem', full_name='kwgrpc.EMControlRequest.ncylfem', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ncylbem', full_name='kwgrpc.EMControlRequest.ncylbem', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=13852,
+  serialized_end=13951,
+)
+
+
+_EMCONTROLREPLY = _descriptor.Descriptor(
+  name='EMControlReply',
+  full_name='kwgrpc.EMControlReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMControlReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=13953,
+  serialized_end=13985,
+)
+
+
+_EMTIMESTEPREQUEST = _descriptor.Descriptor(
+  name='EMTimestepRequest',
+  full_name='kwgrpc.EMTimestepRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tstype', full_name='kwgrpc.EMTimestepRequest.tstype', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='dtconst', full_name='kwgrpc.EMTimestepRequest.dtconst', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=13987,
+  serialized_end=14039,
+)
+
+
+_EMTIMESTEPREPLY = _descriptor.Descriptor(
+  name='EMTimestepReply',
+  full_name='kwgrpc.EMTimestepReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMTimestepReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14041,
+  serialized_end=14074,
+)
+
+
+_EMCONTROLCONTACTREQUEST = _descriptor.Descriptor(
+  name='EMControlContactRequest',
+  full_name='kwgrpc.EMControlContactRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='emct', full_name='kwgrpc.EMControlContactRequest.emct', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cconly', full_name='kwgrpc.EMControlContactRequest.cconly', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ctype', full_name='kwgrpc.EMControlContactRequest.ctype', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='dtype', full_name='kwgrpc.EMControlContactRequest.dtype', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14076,
+  serialized_end=14161,
+)
+
+
+_EMCONTROLCONTACTREPLY = _descriptor.Descriptor(
+  name='EMControlContactReply',
+  full_name='kwgrpc.EMControlContactReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMControlContactReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14163,
+  serialized_end=14202,
+)
+
+
+_EMCONTACTREQUEST = _descriptor.Descriptor(
+  name='EMContactRequest',
+  full_name='kwgrpc.EMContactRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='contid', full_name='kwgrpc.EMContactRequest.contid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='dtype', full_name='kwgrpc.EMContactRequest.dtype', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='psidm', full_name='kwgrpc.EMContactRequest.psidm', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='psids', full_name='kwgrpc.EMContactRequest.psids', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='eps1', full_name='kwgrpc.EMContactRequest.eps1', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='eps2', full_name='kwgrpc.EMContactRequest.eps2', index=5,
+      number=6, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='eps3', full_name='kwgrpc.EMContactRequest.eps3', index=6,
+      number=7, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='d0', full_name='kwgrpc.EMContactRequest.d0', index=7,
+      number=8, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14205,
+  serialized_end=14338,
+)
+
+
+_EMCONTACTREPLY = _descriptor.Descriptor(
+  name='EMContactReply',
+  full_name='kwgrpc.EMContactReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMContactReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14340,
+  serialized_end=14372,
+)
+
+
+_EMCIRCUITROGOREQUEST = _descriptor.Descriptor(
+  name='EMCircuitRogoRequest',
+  full_name='kwgrpc.EMCircuitRogoRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='rogid', full_name='kwgrpc.EMCircuitRogoRequest.rogid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='setid', full_name='kwgrpc.EMCircuitRogoRequest.setid', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='settype', full_name='kwgrpc.EMCircuitRogoRequest.settype', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='curtyp', full_name='kwgrpc.EMCircuitRogoRequest.curtyp', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14374,
+  serialized_end=14459,
+)
+
+
+_EMCIRCUITROGOREPLY = _descriptor.Descriptor(
+  name='EMCircuitRogoReply',
+  full_name='kwgrpc.EMCircuitRogoReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='kwgrpc.EMCircuitRogoReply.id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14461,
+  serialized_end=14493,
+)
+
+
+_EMCIRCUITREQUEST = _descriptor.Descriptor(
+  name='EMCircuitRequest',
+  full_name='kwgrpc.EMCircuitRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='circid', full_name='kwgrpc.EMCircuitRequest.circid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='circtyp', full_name='kwgrpc.EMCircuitRequest.circtyp', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='lcid', full_name='kwgrpc.EMCircuitRequest.lcid', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sidcurr', full_name='kwgrpc.EMCircuitRequest.sidcurr', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sidvin', full_name='kwgrpc.EMCircuitRequest.sidvin', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sidvout', full_name='kwgrpc.EMCircuitRequest.sidvout', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14495,
+  serialized_end=14610,
+)
+
+
+_EMCIRCUITREPLY = _descriptor.Descriptor(
+  name='EMCircuitReply',
+  full_name='kwgrpc.EMCircuitReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='kwgrpc.EMCircuitReply.id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14612,
+  serialized_end=14640,
+)
+
+
+_EMMAT001REQUEST = _descriptor.Descriptor(
+  name='EMMat001Request',
+  full_name='kwgrpc.EMMat001Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.EMMat001Request.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='mtype', full_name='kwgrpc.EMMat001Request.mtype', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sigma', full_name='kwgrpc.EMMat001Request.sigma', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14642,
+  serialized_end=14702,
+)
+
+
+_EMMAT001REPLY = _descriptor.Descriptor(
+  name='EMMat001Reply',
+  full_name='kwgrpc.EMMat001Reply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMMat001Reply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14704,
+  serialized_end=14735,
+)
+
+
+_EMMAT002REQUEST = _descriptor.Descriptor(
+  name='EMMat002Request',
+  full_name='kwgrpc.EMMat002Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mid', full_name='kwgrpc.EMMat002Request.mid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='mtype', full_name='kwgrpc.EMMat002Request.mtype', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sigma', full_name='kwgrpc.EMMat002Request.sigma', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='eosid', full_name='kwgrpc.EMMat002Request.eosid', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='murel', full_name='kwgrpc.EMMat002Request.murel', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14737,
+  serialized_end=14827,
+)
+
+
+_EMMAT002REPLY = _descriptor.Descriptor(
+  name='EMMat002Reply',
+  full_name='kwgrpc.EMMat002Reply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMMat002Reply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14829,
+  serialized_end=14860,
+)
+
+
+_EMSOLVERBEMREQUEST = _descriptor.Descriptor(
+  name='EMSolverBemRequest',
+  full_name='kwgrpc.EMSolverBemRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='reltol', full_name='kwgrpc.EMSolverBemRequest.reltol', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='maxite', full_name='kwgrpc.EMSolverBemRequest.maxite', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='stype', full_name='kwgrpc.EMSolverBemRequest.stype', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='precon', full_name='kwgrpc.EMSolverBemRequest.precon', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='uselast', full_name='kwgrpc.EMSolverBemRequest.uselast', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ncylbem', full_name='kwgrpc.EMSolverBemRequest.ncylbem', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14862,
+  serialized_end=14979,
+)
+
+
+_EMSOLVERBEMREPLY = _descriptor.Descriptor(
+  name='EMSolverBemReply',
+  full_name='kwgrpc.EMSolverBemReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMSolverBemReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14981,
+  serialized_end=15015,
+)
+
+
+_EMSOLVERFEMREQUEST = _descriptor.Descriptor(
+  name='EMSolverFemRequest',
+  full_name='kwgrpc.EMSolverFemRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='reltol', full_name='kwgrpc.EMSolverFemRequest.reltol', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='maxite', full_name='kwgrpc.EMSolverFemRequest.maxite', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='stype', full_name='kwgrpc.EMSolverFemRequest.stype', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='precon', full_name='kwgrpc.EMSolverFemRequest.precon', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='uselast', full_name='kwgrpc.EMSolverFemRequest.uselast', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ncylbem', full_name='kwgrpc.EMSolverFemRequest.ncylbem', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15017,
+  serialized_end=15134,
+)
+
+
+_EMSOLVERFEMREPLY = _descriptor.Descriptor(
+  name='EMSolverFemReply',
+  full_name='kwgrpc.EMSolverFemReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMSolverFemReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15136,
+  serialized_end=15170,
+)
+
+
+_EMSOLVERBEMMATREQUEST = _descriptor.Descriptor(
+  name='EMSolverBemMatRequest',
+  full_name='kwgrpc.EMSolverBemMatRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='matid', full_name='kwgrpc.EMSolverBemMatRequest.matid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='reltol', full_name='kwgrpc.EMSolverBemMatRequest.reltol', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15172,
+  serialized_end=15226,
+)
+
+
+_EMSOLVERBEMMATREPLY = _descriptor.Descriptor(
+  name='EMSolverBemMatReply',
+  full_name='kwgrpc.EMSolverBemMatReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMSolverBemMatReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15228,
+  serialized_end=15265,
+)
+
+
+_EMSOLVERFEMBEMMONOLITHICREQUEST = _descriptor.Descriptor(
+  name='EMSolverFemBemMonolithicRequest',
+  full_name='kwgrpc.EMSolverFemBemMonolithicRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mtype', full_name='kwgrpc.EMSolverFemBemMonolithicRequest.mtype', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='stype', full_name='kwgrpc.EMSolverFemBemMonolithicRequest.stype', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='abstol', full_name='kwgrpc.EMSolverFemBemMonolithicRequest.abstol', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='reltol', full_name='kwgrpc.EMSolverFemBemMonolithicRequest.reltol', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='maxit', full_name='kwgrpc.EMSolverFemBemMonolithicRequest.maxit', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15267,
+  serialized_end=15377,
+)
+
+
+_EMSOLVERFEMBEMMONOLITHICREPLY = _descriptor.Descriptor(
+  name='EMSolverFemBemMonolithicReply',
+  full_name='kwgrpc.EMSolverFemBemMonolithicReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMSolverFemBemMonolithicReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15379,
+  serialized_end=15426,
+)
+
+
+_EMOUTPUTREQUEST = _descriptor.Descriptor(
+  name='EMOutputRequest',
+  full_name='kwgrpc.EMOutputRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mats', full_name='kwgrpc.EMOutputRequest.mats', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='matf', full_name='kwgrpc.EMOutputRequest.matf', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sols', full_name='kwgrpc.EMOutputRequest.sols', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='solf', full_name='kwgrpc.EMOutputRequest.solf', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15428,
+  serialized_end=15501,
+)
+
+
+_EMOUTPUTREPLY = _descriptor.Descriptor(
+  name='EMOutputReply',
+  full_name='kwgrpc.EMOutputReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMOutputReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15503,
+  serialized_end=15534,
+)
+
+
+_EMDATABASEGLOBALENERGYREQUEST = _descriptor.Descriptor(
+  name='EMDatabaseGlobalEnergyRequest',
+  full_name='kwgrpc.EMDatabaseGlobalEnergyRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='outlv', full_name='kwgrpc.EMDatabaseGlobalEnergyRequest.outlv', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15536,
+  serialized_end=15582,
+)
+
+
+_EMDATABASEGLOBALENERGYREPLY = _descriptor.Descriptor(
+  name='EMDatabaseGlobalEnergyReply',
+  full_name='kwgrpc.EMDatabaseGlobalEnergyReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMDatabaseGlobalEnergyReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15584,
+  serialized_end=15629,
+)
+
+
+_EMPERMANENTMAGNETREQUEST = _descriptor.Descriptor(
+  name='EMPermanentMagnetRequest',
+  full_name='kwgrpc.EMPermanentMagnetRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='kwgrpc.EMPermanentMagnetRequest.id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='partid', full_name='kwgrpc.EMPermanentMagnetRequest.partid', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='mtype', full_name='kwgrpc.EMPermanentMagnetRequest.mtype', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='north', full_name='kwgrpc.EMPermanentMagnetRequest.north', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sourth', full_name='kwgrpc.EMPermanentMagnetRequest.sourth', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='hc', full_name='kwgrpc.EMPermanentMagnetRequest.hc', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15631,
+  serialized_end=15743,
+)
+
+
+_EMPERMANENTMAGNETREPLY = _descriptor.Descriptor(
+  name='EMPermanentMagnetReply',
+  full_name='kwgrpc.EMPermanentMagnetReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMPermanentMagnetReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15745,
+  serialized_end=15785,
+)
+
+
+_EMEOSPERMEABILITYREQUEST = _descriptor.Descriptor(
+  name='EMEOSPermeabilityRequest',
+  full_name='kwgrpc.EMEOSPermeabilityRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eosid', full_name='kwgrpc.EMEOSPermeabilityRequest.eosid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='eostype', full_name='kwgrpc.EMEOSPermeabilityRequest.eostype', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='lcid', full_name='kwgrpc.EMEOSPermeabilityRequest.lcid', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15787,
+  serialized_end=15859,
+)
+
+
+_EMEOSPERMEABILITYREPLY = _descriptor.Descriptor(
+  name='EMEOSPermeabilityReply',
+  full_name='kwgrpc.EMEOSPermeabilityReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.EMEOSPermeabilityReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15861,
+  serialized_end=15901,
+)
+
+
+_GENERALKWDREQUEST = _descriptor.Descriptor(
+  name='GeneralKWDRequest',
+  full_name='kwgrpc.GeneralKWDRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='opcode', full_name='kwgrpc.GeneralKWDRequest.opcode', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='keyworddata', full_name='kwgrpc.GeneralKWDRequest.keyworddata', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15903,
+  serialized_end=15959,
+)
+
+
+_GENERALKWDREPLY = _descriptor.Descriptor(
+  name='GeneralKWDReply',
+  full_name='kwgrpc.GeneralKWDReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='answer', full_name='kwgrpc.GeneralKWDReply.answer', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15961,
+  serialized_end=15994,
 )
 
 DESCRIPTOR.message_types_by_name['kwFileReply'] = _KWFILEREPLY
@@ -7275,16 +11093,32 @@ DESCRIPTOR.message_types_by_name['ControlAccuracyRequest'] = _CONTROLACCURACYREQ
 DESCRIPTOR.message_types_by_name['ControlAccuracyReply'] = _CONTROLACCURACYREPLY
 DESCRIPTOR.message_types_by_name['ControlEnergyRequest'] = _CONTROLENERGYREQUEST
 DESCRIPTOR.message_types_by_name['ControlEnergyReply'] = _CONTROLENERGYREPLY
+DESCRIPTOR.message_types_by_name['ControlBulkViscosityRequest'] = _CONTROLBULKVISCOSITYREQUEST
+DESCRIPTOR.message_types_by_name['ControlBulkViscosityReply'] = _CONTROLBULKVISCOSITYREPLY
+DESCRIPTOR.message_types_by_name['ControlHourglassRequest'] = _CONTROLHOURGLASSREQUEST
+DESCRIPTOR.message_types_by_name['ControlHourglassReply'] = _CONTROLHOURGLASSREPLY
 DESCRIPTOR.message_types_by_name['ControlShellRequest'] = _CONTROLSHELLREQUEST
 DESCRIPTOR.message_types_by_name['ControlShellReply'] = _CONTROLSHELLREPLY
 DESCRIPTOR.message_types_by_name['ControlSolidRequest'] = _CONTROLSOLIDREQUEST
 DESCRIPTOR.message_types_by_name['ControlSolidReply'] = _CONTROLSOLIDREPLY
+DESCRIPTOR.message_types_by_name['ControlImplicitGeneralRequest'] = _CONTROLIMPLICITGENERALREQUEST
+DESCRIPTOR.message_types_by_name['ControlImplicitGeneralReply'] = _CONTROLIMPLICITGENERALREPLY
+DESCRIPTOR.message_types_by_name['ControlImplicitAutoRequest'] = _CONTROLIMPLICITAUTOREQUEST
+DESCRIPTOR.message_types_by_name['ControlImplicitAutoReply'] = _CONTROLIMPLICITAUTOREPLY
+DESCRIPTOR.message_types_by_name['ControlImplicitDynamicRequest'] = _CONTROLIMPLICITDYNAMICREQUEST
+DESCRIPTOR.message_types_by_name['ControlImplicitDynamicReply'] = _CONTROLIMPLICITDYNAMICREPLY
+DESCRIPTOR.message_types_by_name['ControlImplicitEigenvalueRequest'] = _CONTROLIMPLICITEIGENVALUEREQUEST
+DESCRIPTOR.message_types_by_name['ControlImplicitEigenvalueReply'] = _CONTROLIMPLICITEIGENVALUEREPLY
+DESCRIPTOR.message_types_by_name['ControlImplicitSolutionRequest'] = _CONTROLIMPLICITSOLUTIONREQUEST
+DESCRIPTOR.message_types_by_name['ControlImplicitSolutionReply'] = _CONTROLIMPLICITSOLUTIONREPLY
 DESCRIPTOR.message_types_by_name['DBBinaryRequest'] = _DBBINARYREQUEST
 DESCRIPTOR.message_types_by_name['DBBinaryReply'] = _DBBINARYREPLY
 DESCRIPTOR.message_types_by_name['DBALEMatRequest'] = _DBALEMATREQUEST
 DESCRIPTOR.message_types_by_name['DBALEMatReply'] = _DBALEMATREPLY
 DESCRIPTOR.message_types_by_name['DBAsciiRequest'] = _DBASCIIREQUEST
 DESCRIPTOR.message_types_by_name['DBAsciiReply'] = _DBASCIIREPLY
+DESCRIPTOR.message_types_by_name['DBSALERequest'] = _DBSALEREQUEST
+DESCRIPTOR.message_types_by_name['DBSALEReply'] = _DBSALEREPLY
 DESCRIPTOR.message_types_by_name['LoadBodyRequest'] = _LOADBODYREQUEST
 DESCRIPTOR.message_types_by_name['LoadBodyReply'] = _LOADBODYREPLY
 DESCRIPTOR.message_types_by_name['InitVelRequest'] = _INITVELREQUEST
@@ -7295,6 +11129,8 @@ DESCRIPTOR.message_types_by_name['InitVelGenerationRequest'] = _INITVELGENERATIO
 DESCRIPTOR.message_types_by_name['InitVelGenerationReply'] = _INITVELGENERATIONREPLY
 DESCRIPTOR.message_types_by_name['InitVelGenerationStartTimeRequest'] = _INITVELGENERATIONSTARTTIMEREQUEST
 DESCRIPTOR.message_types_by_name['InitVelGenerationStartTimeReply'] = _INITVELGENERATIONSTARTTIMEREPLY
+DESCRIPTOR.message_types_by_name['InitDetonationRequest'] = _INITDETONATIONREQUEST
+DESCRIPTOR.message_types_by_name['InitDetonationReply'] = _INITDETONATIONREPLY
 DESCRIPTOR.message_types_by_name['RigidWallGeomRequest'] = _RIGIDWALLGEOMREQUEST
 DESCRIPTOR.message_types_by_name['RigidWallGeomReply'] = _RIGIDWALLGEOMREPLY
 DESCRIPTOR.message_types_by_name['RigidWallPlanarRequest'] = _RIGIDWALLPLANARREQUEST
@@ -7307,10 +11143,16 @@ DESCRIPTOR.message_types_by_name['BdySpcRequest'] = _BDYSPCREQUEST
 DESCRIPTOR.message_types_by_name['BdySpcReply'] = _BDYSPCREPLY
 DESCRIPTOR.message_types_by_name['ConstrainedExtraNodesRequest'] = _CONSTRAINEDEXTRANODESREQUEST
 DESCRIPTOR.message_types_by_name['ConstrainedExtraNodesReply'] = _CONSTRAINEDEXTRANODESREPLY
+DESCRIPTOR.message_types_by_name['ConstrainedNodalRigidBodyRequest'] = _CONSTRAINEDNODALRIGIDBODYREQUEST
+DESCRIPTOR.message_types_by_name['ConstrainedNodalRigidBodyReply'] = _CONSTRAINEDNODALRIGIDBODYREPLY
+DESCRIPTOR.message_types_by_name['ConstrainedSpotWeldRequest'] = _CONSTRAINEDSPOTWELDREQUEST
+DESCRIPTOR.message_types_by_name['ConstrainedSpotWeldReply'] = _CONSTRAINEDSPOTWELDREPLY
 DESCRIPTOR.message_types_by_name['ConstrainedJointRequest'] = _CONSTRAINEDJOINTREQUEST
 DESCRIPTOR.message_types_by_name['ConstrainedJointReply'] = _CONSTRAINEDJOINTREPLY
 DESCRIPTOR.message_types_by_name['SectionIGAShellRequest'] = _SECTIONIGASHELLREQUEST
 DESCRIPTOR.message_types_by_name['SectionIGAShellReply'] = _SECTIONIGASHELLREPLY
+DESCRIPTOR.message_types_by_name['SectionBeamRequest'] = _SECTIONBEAMREQUEST
+DESCRIPTOR.message_types_by_name['SectionBeamReply'] = _SECTIONBEAMREPLY
 DESCRIPTOR.message_types_by_name['SectionShellRequest'] = _SECTIONSHELLREQUEST
 DESCRIPTOR.message_types_by_name['SectionShellReply'] = _SECTIONSHELLREPLY
 DESCRIPTOR.message_types_by_name['SectionSolidRequest'] = _SECTIONSOLIDREQUEST
@@ -7323,6 +11165,8 @@ DESCRIPTOR.message_types_by_name['DefineCurveRequest'] = _DEFINECURVEREQUEST
 DESCRIPTOR.message_types_by_name['DefineCurveReply'] = _DEFINECURVEREPLY
 DESCRIPTOR.message_types_by_name['DefineVectorRequest'] = _DEFINEVECTORREQUEST
 DESCRIPTOR.message_types_by_name['DefineVectorReply'] = _DEFINEVECTORREPLY
+DESCRIPTOR.message_types_by_name['DefineBoxRequest'] = _DEFINEBOXREQUEST
+DESCRIPTOR.message_types_by_name['DefineBoxReply'] = _DEFINEBOXREPLY
 DESCRIPTOR.message_types_by_name['DefineDEMeshSurfaceRequest'] = _DEFINEDEMESHSURFACEREQUEST
 DESCRIPTOR.message_types_by_name['DefineDEMeshSurfaceReply'] = _DEFINEDEMESHSURFACEREPLY
 DESCRIPTOR.message_types_by_name['DefineOrientationRequest'] = _DEFINEORIENTATIONREQUEST
@@ -7341,10 +11185,18 @@ DESCRIPTOR.message_types_by_name['PartPropertyRequest'] = _PARTPROPERTYREQUEST
 DESCRIPTOR.message_types_by_name['PartPropertyReply'] = _PARTPROPERTYREPLY
 DESCRIPTOR.message_types_by_name['PartRequest'] = _PARTREQUEST
 DESCRIPTOR.message_types_by_name['PartReply'] = _PARTREPLY
+DESCRIPTOR.message_types_by_name['MatEMRequest'] = _MATEMREQUEST
+DESCRIPTOR.message_types_by_name['MatEMReply'] = _MATEMREPLY
 DESCRIPTOR.message_types_by_name['MatRigidRequest'] = _MATRIGIDREQUEST
 DESCRIPTOR.message_types_by_name['MatRigidReply'] = _MATRIGIDREPLY
 DESCRIPTOR.message_types_by_name['MatElasticRequest'] = _MATELASTICREQUEST
 DESCRIPTOR.message_types_by_name['MatElasticReply'] = _MATELASTICREPLY
+DESCRIPTOR.message_types_by_name['MatSpotweldRequest'] = _MATSPOTWELDREQUEST
+DESCRIPTOR.message_types_by_name['MatSpotweldReply'] = _MATSPOTWELDREPLY
+DESCRIPTOR.message_types_by_name['MatPiecewiseLinearPlasticityRequest'] = _MATPIECEWISELINEARPLASTICITYREQUEST
+DESCRIPTOR.message_types_by_name['MatPiecewiseLinearPlasticityReply'] = _MATPIECEWISELINEARPLASTICITYREPLY
+DESCRIPTOR.message_types_by_name['MatModifiedPiecewiseLinearPlasticityRequest'] = _MATMODIFIEDPIECEWISELINEARPLASTICITYREQUEST
+DESCRIPTOR.message_types_by_name['MatModifiedPiecewiseLinearPlasticityReply'] = _MATMODIFIEDPIECEWISELINEARPLASTICITYREPLY
 DESCRIPTOR.message_types_by_name['MatFabricRequest'] = _MATFABRICREQUEST
 DESCRIPTOR.message_types_by_name['MatFabricReply'] = _MATFABRICREPLY
 DESCRIPTOR.message_types_by_name['MatSpringNonlinearElasticRequest'] = _MATSPRINGNONLINEARELASTICREQUEST
@@ -7353,6 +11205,22 @@ DESCRIPTOR.message_types_by_name['MatDamperViscousRequest'] = _MATDAMPERVISCOUSR
 DESCRIPTOR.message_types_by_name['MatDamperViscousReply'] = _MATDAMPERVISCOUSREPLY
 DESCRIPTOR.message_types_by_name['MatDamperNonlinearViscousRequest'] = _MATDAMPERNONLINEARVISCOUSREQUEST
 DESCRIPTOR.message_types_by_name['MatDamperNonlinearViscousReply'] = _MATDAMPERNONLINEARVISCOUSREPLY
+DESCRIPTOR.message_types_by_name['MatNullRequest'] = _MATNULLREQUEST
+DESCRIPTOR.message_types_by_name['MatNullReply'] = _MATNULLREPLY
+DESCRIPTOR.message_types_by_name['MatJohnsonCookRequest'] = _MATJOHNSONCOOKREQUEST
+DESCRIPTOR.message_types_by_name['MatJohnsonCookReply'] = _MATJOHNSONCOOKREPLY
+DESCRIPTOR.message_types_by_name['MatHighExplosiveBurnRequest'] = _MATHIGHEXPLOSIVEBURNREQUEST
+DESCRIPTOR.message_types_by_name['MatHighExplosiveBurnReply'] = _MATHIGHEXPLOSIVEBURNREPLY
+DESCRIPTOR.message_types_by_name['MatVacuumRequest'] = _MATVACUUMREQUEST
+DESCRIPTOR.message_types_by_name['MatVacuumReply'] = _MATVACUUMREPLY
+DESCRIPTOR.message_types_by_name['MatAddErosionRequest'] = _MATADDEROSIONREQUEST
+DESCRIPTOR.message_types_by_name['MatAddErosionReply'] = _MATADDEROSIONREPLY
+DESCRIPTOR.message_types_by_name['EOSLinearPolynomialRequest'] = _EOSLINEARPOLYNOMIALREQUEST
+DESCRIPTOR.message_types_by_name['EOSLinearPolynomialReply'] = _EOSLINEARPOLYNOMIALREPLY
+DESCRIPTOR.message_types_by_name['EOSJWLRequest'] = _EOSJWLREQUEST
+DESCRIPTOR.message_types_by_name['EOSJWLReply'] = _EOSJWLREPLY
+DESCRIPTOR.message_types_by_name['EOSGruneisenRequest'] = _EOSGRUNEISENREQUEST
+DESCRIPTOR.message_types_by_name['EOSGruneisenReply'] = _EOSGRUNEISENREPLY
 DESCRIPTOR.message_types_by_name['SaveFileRequest'] = _SAVEFILEREQUEST
 DESCRIPTOR.message_types_by_name['SaveFileReply'] = _SAVEFILEREPLY
 DESCRIPTOR.message_types_by_name['LoadFileRequest'] = _LOADFILEREQUEST
@@ -7391,6 +11259,10 @@ DESCRIPTOR.message_types_by_name['ICFDBdyNonSlipRequest'] = _ICFDBDYNONSLIPREQUE
 DESCRIPTOR.message_types_by_name['ICFDBdyNonSlipReply'] = _ICFDBDYNONSLIPREPLY
 DESCRIPTOR.message_types_by_name['ICFDSolverTolMMOVRequest'] = _ICFDSOLVERTOLMMOVREQUEST
 DESCRIPTOR.message_types_by_name['ICFDSolverTolMMOVReply'] = _ICFDSOLVERTOLMMOVREPLY
+DESCRIPTOR.message_types_by_name['ICFDPartPropertyRequest'] = _ICFDPARTPROPERTYREQUEST
+DESCRIPTOR.message_types_by_name['ICFDPartPropertyReply'] = _ICFDPARTPROPERTYREPLY
+DESCRIPTOR.message_types_by_name['ICFDVolumePartPropertyRequest'] = _ICFDVOLUMEPARTPROPERTYREQUEST
+DESCRIPTOR.message_types_by_name['ICFDVolumePartPropertyReply'] = _ICFDVOLUMEPARTPROPERTYREPLY
 DESCRIPTOR.message_types_by_name['MeshVolumeRequest'] = _MESHVOLUMEREQUEST
 DESCRIPTOR.message_types_by_name['MeshVolumeReply'] = _MESHVOLUMEREPLY
 DESCRIPTOR.message_types_by_name['MeshEmbedShellRequest'] = _MESHEMBEDSHELLREQUEST
@@ -7399,20 +11271,56 @@ DESCRIPTOR.message_types_by_name['MeshBlRequest'] = _MESHBLREQUEST
 DESCRIPTOR.message_types_by_name['MeshBlReply'] = _MESHBLREPLY
 DESCRIPTOR.message_types_by_name['MeshSizeShapeRequest'] = _MESHSIZESHAPEREQUEST
 DESCRIPTOR.message_types_by_name['MeshSizeShapeReply'] = _MESHSIZESHAPEREPLY
-DESCRIPTOR.message_types_by_name['ALECreateSMRequest'] = _ALECREATESMREQUEST
-DESCRIPTOR.message_types_by_name['ALECreateSMReply'] = _ALECREATESMREPLY
-DESCRIPTOR.message_types_by_name['ALECreateSMRefineRequest'] = _ALECREATESMREFINEREQUEST
-DESCRIPTOR.message_types_by_name['ALECreateSMRefineReply'] = _ALECREATESMREFINEREPLY
-DESCRIPTOR.message_types_by_name['ALECreateSMCtrlPointsRequest'] = _ALECREATESMCTRLPOINTSREQUEST
-DESCRIPTOR.message_types_by_name['ALECreateSMControlPointsReply'] = _ALECREATESMCONTROLPOINTSREPLY
+DESCRIPTOR.message_types_by_name['ALECreateStructuredMeshRequest'] = _ALECREATESTRUCTUREDMESHREQUEST
+DESCRIPTOR.message_types_by_name['ALECreateStructuredMeshReply'] = _ALECREATESTRUCTUREDMESHREPLY
+DESCRIPTOR.message_types_by_name['ALECreateStructuredMeshRefineRequest'] = _ALECREATESTRUCTUREDMESHREFINEREQUEST
+DESCRIPTOR.message_types_by_name['ALECreateStructuredMeshRefineReply'] = _ALECREATESTRUCTUREDMESHREFINEREPLY
+DESCRIPTOR.message_types_by_name['ALECreateStructuredMeshControlPointsRequest'] = _ALECREATESTRUCTUREDMESHCONTROLPOINTSREQUEST
+DESCRIPTOR.message_types_by_name['ALECreateStructuredMeshControlPointsReply'] = _ALECREATESTRUCTUREDMESHCONTROLPOINTSREPLY
 DESCRIPTOR.message_types_by_name['ALECreateStructuredMultiMatGroupRequest'] = _ALECREATESTRUCTUREDMULTIMATGROUPREQUEST
 DESCRIPTOR.message_types_by_name['ALECreateStructuredMultiMatGroupReply'] = _ALECREATESTRUCTUREDMULTIMATGROUPREPLY
+DESCRIPTOR.message_types_by_name['ALECreateStructuredMeshVolumeFillingRequest'] = _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREQUEST
+DESCRIPTOR.message_types_by_name['ALECreateStructuredMeshVolumeFillingReply'] = _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREPLY
 DESCRIPTOR.message_types_by_name['DampingGlobalRequest'] = _DAMPINGGLOBALREQUEST
 DESCRIPTOR.message_types_by_name['DampingGlobalReply'] = _DAMPINGGLOBALREPLY
 DESCRIPTOR.message_types_by_name['DampingPartStiffnessRequest'] = _DAMPINGPARTSTIFFNESSREQUEST
 DESCRIPTOR.message_types_by_name['DampingPartStiffnessReply'] = _DAMPINGPARTSTIFFNESSREPLY
 DESCRIPTOR.message_types_by_name['AirbagModelRequest'] = _AIRBAGMODELREQUEST
 DESCRIPTOR.message_types_by_name['AirbagModelReply'] = _AIRBAGMODELREPLY
+DESCRIPTOR.message_types_by_name['EMControlRequest'] = _EMCONTROLREQUEST
+DESCRIPTOR.message_types_by_name['EMControlReply'] = _EMCONTROLREPLY
+DESCRIPTOR.message_types_by_name['EMTimestepRequest'] = _EMTIMESTEPREQUEST
+DESCRIPTOR.message_types_by_name['EMTimestepReply'] = _EMTIMESTEPREPLY
+DESCRIPTOR.message_types_by_name['EMControlContactRequest'] = _EMCONTROLCONTACTREQUEST
+DESCRIPTOR.message_types_by_name['EMControlContactReply'] = _EMCONTROLCONTACTREPLY
+DESCRIPTOR.message_types_by_name['EMContactRequest'] = _EMCONTACTREQUEST
+DESCRIPTOR.message_types_by_name['EMContactReply'] = _EMCONTACTREPLY
+DESCRIPTOR.message_types_by_name['EMCircuitRogoRequest'] = _EMCIRCUITROGOREQUEST
+DESCRIPTOR.message_types_by_name['EMCircuitRogoReply'] = _EMCIRCUITROGOREPLY
+DESCRIPTOR.message_types_by_name['EMCircuitRequest'] = _EMCIRCUITREQUEST
+DESCRIPTOR.message_types_by_name['EMCircuitReply'] = _EMCIRCUITREPLY
+DESCRIPTOR.message_types_by_name['EMMat001Request'] = _EMMAT001REQUEST
+DESCRIPTOR.message_types_by_name['EMMat001Reply'] = _EMMAT001REPLY
+DESCRIPTOR.message_types_by_name['EMMat002Request'] = _EMMAT002REQUEST
+DESCRIPTOR.message_types_by_name['EMMat002Reply'] = _EMMAT002REPLY
+DESCRIPTOR.message_types_by_name['EMSolverBemRequest'] = _EMSOLVERBEMREQUEST
+DESCRIPTOR.message_types_by_name['EMSolverBemReply'] = _EMSOLVERBEMREPLY
+DESCRIPTOR.message_types_by_name['EMSolverFemRequest'] = _EMSOLVERFEMREQUEST
+DESCRIPTOR.message_types_by_name['EMSolverFemReply'] = _EMSOLVERFEMREPLY
+DESCRIPTOR.message_types_by_name['EMSolverBemMatRequest'] = _EMSOLVERBEMMATREQUEST
+DESCRIPTOR.message_types_by_name['EMSolverBemMatReply'] = _EMSOLVERBEMMATREPLY
+DESCRIPTOR.message_types_by_name['EMSolverFemBemMonolithicRequest'] = _EMSOLVERFEMBEMMONOLITHICREQUEST
+DESCRIPTOR.message_types_by_name['EMSolverFemBemMonolithicReply'] = _EMSOLVERFEMBEMMONOLITHICREPLY
+DESCRIPTOR.message_types_by_name['EMOutputRequest'] = _EMOUTPUTREQUEST
+DESCRIPTOR.message_types_by_name['EMOutputReply'] = _EMOUTPUTREPLY
+DESCRIPTOR.message_types_by_name['EMDatabaseGlobalEnergyRequest'] = _EMDATABASEGLOBALENERGYREQUEST
+DESCRIPTOR.message_types_by_name['EMDatabaseGlobalEnergyReply'] = _EMDATABASEGLOBALENERGYREPLY
+DESCRIPTOR.message_types_by_name['EMPermanentMagnetRequest'] = _EMPERMANENTMAGNETREQUEST
+DESCRIPTOR.message_types_by_name['EMPermanentMagnetReply'] = _EMPERMANENTMAGNETREPLY
+DESCRIPTOR.message_types_by_name['EMEOSPermeabilityRequest'] = _EMEOSPERMEABILITYREQUEST
+DESCRIPTOR.message_types_by_name['EMEOSPermeabilityReply'] = _EMEOSPERMEABILITYREPLY
+DESCRIPTOR.message_types_by_name['GeneralKWDRequest'] = _GENERALKWDREQUEST
+DESCRIPTOR.message_types_by_name['GeneralKWDReply'] = _GENERALKWDREPLY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 kwFileReply = _reflection.GeneratedProtocolMessageType('kwFileReply', (_message.Message,), {
@@ -7562,6 +11470,34 @@ ControlEnergyReply = _reflection.GeneratedProtocolMessageType('ControlEnergyRepl
   })
 _sym_db.RegisterMessage(ControlEnergyReply)
 
+ControlBulkViscosityRequest = _reflection.GeneratedProtocolMessageType('ControlBulkViscosityRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLBULKVISCOSITYREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlBulkViscosityRequest)
+  })
+_sym_db.RegisterMessage(ControlBulkViscosityRequest)
+
+ControlBulkViscosityReply = _reflection.GeneratedProtocolMessageType('ControlBulkViscosityReply', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLBULKVISCOSITYREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlBulkViscosityReply)
+  })
+_sym_db.RegisterMessage(ControlBulkViscosityReply)
+
+ControlHourglassRequest = _reflection.GeneratedProtocolMessageType('ControlHourglassRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLHOURGLASSREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlHourglassRequest)
+  })
+_sym_db.RegisterMessage(ControlHourglassRequest)
+
+ControlHourglassReply = _reflection.GeneratedProtocolMessageType('ControlHourglassReply', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLHOURGLASSREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlHourglassReply)
+  })
+_sym_db.RegisterMessage(ControlHourglassReply)
+
 ControlShellRequest = _reflection.GeneratedProtocolMessageType('ControlShellRequest', (_message.Message,), {
   'DESCRIPTOR' : _CONTROLSHELLREQUEST,
   '__module__' : 'kwprocess_pb2'
@@ -7589,6 +11525,76 @@ ControlSolidReply = _reflection.GeneratedProtocolMessageType('ControlSolidReply'
   # @@protoc_insertion_point(class_scope:kwgrpc.ControlSolidReply)
   })
 _sym_db.RegisterMessage(ControlSolidReply)
+
+ControlImplicitGeneralRequest = _reflection.GeneratedProtocolMessageType('ControlImplicitGeneralRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLIMPLICITGENERALREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlImplicitGeneralRequest)
+  })
+_sym_db.RegisterMessage(ControlImplicitGeneralRequest)
+
+ControlImplicitGeneralReply = _reflection.GeneratedProtocolMessageType('ControlImplicitGeneralReply', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLIMPLICITGENERALREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlImplicitGeneralReply)
+  })
+_sym_db.RegisterMessage(ControlImplicitGeneralReply)
+
+ControlImplicitAutoRequest = _reflection.GeneratedProtocolMessageType('ControlImplicitAutoRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLIMPLICITAUTOREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlImplicitAutoRequest)
+  })
+_sym_db.RegisterMessage(ControlImplicitAutoRequest)
+
+ControlImplicitAutoReply = _reflection.GeneratedProtocolMessageType('ControlImplicitAutoReply', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLIMPLICITAUTOREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlImplicitAutoReply)
+  })
+_sym_db.RegisterMessage(ControlImplicitAutoReply)
+
+ControlImplicitDynamicRequest = _reflection.GeneratedProtocolMessageType('ControlImplicitDynamicRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLIMPLICITDYNAMICREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlImplicitDynamicRequest)
+  })
+_sym_db.RegisterMessage(ControlImplicitDynamicRequest)
+
+ControlImplicitDynamicReply = _reflection.GeneratedProtocolMessageType('ControlImplicitDynamicReply', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLIMPLICITDYNAMICREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlImplicitDynamicReply)
+  })
+_sym_db.RegisterMessage(ControlImplicitDynamicReply)
+
+ControlImplicitEigenvalueRequest = _reflection.GeneratedProtocolMessageType('ControlImplicitEigenvalueRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLIMPLICITEIGENVALUEREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlImplicitEigenvalueRequest)
+  })
+_sym_db.RegisterMessage(ControlImplicitEigenvalueRequest)
+
+ControlImplicitEigenvalueReply = _reflection.GeneratedProtocolMessageType('ControlImplicitEigenvalueReply', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLIMPLICITEIGENVALUEREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlImplicitEigenvalueReply)
+  })
+_sym_db.RegisterMessage(ControlImplicitEigenvalueReply)
+
+ControlImplicitSolutionRequest = _reflection.GeneratedProtocolMessageType('ControlImplicitSolutionRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLIMPLICITSOLUTIONREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlImplicitSolutionRequest)
+  })
+_sym_db.RegisterMessage(ControlImplicitSolutionRequest)
+
+ControlImplicitSolutionReply = _reflection.GeneratedProtocolMessageType('ControlImplicitSolutionReply', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLIMPLICITSOLUTIONREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlImplicitSolutionReply)
+  })
+_sym_db.RegisterMessage(ControlImplicitSolutionReply)
 
 DBBinaryRequest = _reflection.GeneratedProtocolMessageType('DBBinaryRequest', (_message.Message,), {
   'DESCRIPTOR' : _DBBINARYREQUEST,
@@ -7631,6 +11637,20 @@ DBAsciiReply = _reflection.GeneratedProtocolMessageType('DBAsciiReply', (_messag
   # @@protoc_insertion_point(class_scope:kwgrpc.DBAsciiReply)
   })
 _sym_db.RegisterMessage(DBAsciiReply)
+
+DBSALERequest = _reflection.GeneratedProtocolMessageType('DBSALERequest', (_message.Message,), {
+  'DESCRIPTOR' : _DBSALEREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.DBSALERequest)
+  })
+_sym_db.RegisterMessage(DBSALERequest)
+
+DBSALEReply = _reflection.GeneratedProtocolMessageType('DBSALEReply', (_message.Message,), {
+  'DESCRIPTOR' : _DBSALEREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.DBSALEReply)
+  })
+_sym_db.RegisterMessage(DBSALEReply)
 
 LoadBodyRequest = _reflection.GeneratedProtocolMessageType('LoadBodyRequest', (_message.Message,), {
   'DESCRIPTOR' : _LOADBODYREQUEST,
@@ -7701,6 +11721,20 @@ InitVelGenerationStartTimeReply = _reflection.GeneratedProtocolMessageType('Init
   # @@protoc_insertion_point(class_scope:kwgrpc.InitVelGenerationStartTimeReply)
   })
 _sym_db.RegisterMessage(InitVelGenerationStartTimeReply)
+
+InitDetonationRequest = _reflection.GeneratedProtocolMessageType('InitDetonationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _INITDETONATIONREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.InitDetonationRequest)
+  })
+_sym_db.RegisterMessage(InitDetonationRequest)
+
+InitDetonationReply = _reflection.GeneratedProtocolMessageType('InitDetonationReply', (_message.Message,), {
+  'DESCRIPTOR' : _INITDETONATIONREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.InitDetonationReply)
+  })
+_sym_db.RegisterMessage(InitDetonationReply)
 
 RigidWallGeomRequest = _reflection.GeneratedProtocolMessageType('RigidWallGeomRequest', (_message.Message,), {
   'DESCRIPTOR' : _RIGIDWALLGEOMREQUEST,
@@ -7786,6 +11820,34 @@ ConstrainedExtraNodesReply = _reflection.GeneratedProtocolMessageType('Constrain
   })
 _sym_db.RegisterMessage(ConstrainedExtraNodesReply)
 
+ConstrainedNodalRigidBodyRequest = _reflection.GeneratedProtocolMessageType('ConstrainedNodalRigidBodyRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CONSTRAINEDNODALRIGIDBODYREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ConstrainedNodalRigidBodyRequest)
+  })
+_sym_db.RegisterMessage(ConstrainedNodalRigidBodyRequest)
+
+ConstrainedNodalRigidBodyReply = _reflection.GeneratedProtocolMessageType('ConstrainedNodalRigidBodyReply', (_message.Message,), {
+  'DESCRIPTOR' : _CONSTRAINEDNODALRIGIDBODYREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ConstrainedNodalRigidBodyReply)
+  })
+_sym_db.RegisterMessage(ConstrainedNodalRigidBodyReply)
+
+ConstrainedSpotWeldRequest = _reflection.GeneratedProtocolMessageType('ConstrainedSpotWeldRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CONSTRAINEDSPOTWELDREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ConstrainedSpotWeldRequest)
+  })
+_sym_db.RegisterMessage(ConstrainedSpotWeldRequest)
+
+ConstrainedSpotWeldReply = _reflection.GeneratedProtocolMessageType('ConstrainedSpotWeldReply', (_message.Message,), {
+  'DESCRIPTOR' : _CONSTRAINEDSPOTWELDREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ConstrainedSpotWeldReply)
+  })
+_sym_db.RegisterMessage(ConstrainedSpotWeldReply)
+
 ConstrainedJointRequest = _reflection.GeneratedProtocolMessageType('ConstrainedJointRequest', (_message.Message,), {
   'DESCRIPTOR' : _CONSTRAINEDJOINTREQUEST,
   '__module__' : 'kwprocess_pb2'
@@ -7813,6 +11875,20 @@ SectionIGAShellReply = _reflection.GeneratedProtocolMessageType('SectionIGAShell
   # @@protoc_insertion_point(class_scope:kwgrpc.SectionIGAShellReply)
   })
 _sym_db.RegisterMessage(SectionIGAShellReply)
+
+SectionBeamRequest = _reflection.GeneratedProtocolMessageType('SectionBeamRequest', (_message.Message,), {
+  'DESCRIPTOR' : _SECTIONBEAMREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.SectionBeamRequest)
+  })
+_sym_db.RegisterMessage(SectionBeamRequest)
+
+SectionBeamReply = _reflection.GeneratedProtocolMessageType('SectionBeamReply', (_message.Message,), {
+  'DESCRIPTOR' : _SECTIONBEAMREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.SectionBeamReply)
+  })
+_sym_db.RegisterMessage(SectionBeamReply)
 
 SectionShellRequest = _reflection.GeneratedProtocolMessageType('SectionShellRequest', (_message.Message,), {
   'DESCRIPTOR' : _SECTIONSHELLREQUEST,
@@ -7897,6 +11973,20 @@ DefineVectorReply = _reflection.GeneratedProtocolMessageType('DefineVectorReply'
   # @@protoc_insertion_point(class_scope:kwgrpc.DefineVectorReply)
   })
 _sym_db.RegisterMessage(DefineVectorReply)
+
+DefineBoxRequest = _reflection.GeneratedProtocolMessageType('DefineBoxRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DEFINEBOXREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.DefineBoxRequest)
+  })
+_sym_db.RegisterMessage(DefineBoxRequest)
+
+DefineBoxReply = _reflection.GeneratedProtocolMessageType('DefineBoxReply', (_message.Message,), {
+  'DESCRIPTOR' : _DEFINEBOXREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.DefineBoxReply)
+  })
+_sym_db.RegisterMessage(DefineBoxReply)
 
 DefineDEMeshSurfaceRequest = _reflection.GeneratedProtocolMessageType('DefineDEMeshSurfaceRequest', (_message.Message,), {
   'DESCRIPTOR' : _DEFINEDEMESHSURFACEREQUEST,
@@ -8024,6 +12114,20 @@ PartReply = _reflection.GeneratedProtocolMessageType('PartReply', (_message.Mess
   })
 _sym_db.RegisterMessage(PartReply)
 
+MatEMRequest = _reflection.GeneratedProtocolMessageType('MatEMRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MATEMREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatEMRequest)
+  })
+_sym_db.RegisterMessage(MatEMRequest)
+
+MatEMReply = _reflection.GeneratedProtocolMessageType('MatEMReply', (_message.Message,), {
+  'DESCRIPTOR' : _MATEMREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatEMReply)
+  })
+_sym_db.RegisterMessage(MatEMReply)
+
 MatRigidRequest = _reflection.GeneratedProtocolMessageType('MatRigidRequest', (_message.Message,), {
   'DESCRIPTOR' : _MATRIGIDREQUEST,
   '__module__' : 'kwprocess_pb2'
@@ -8051,6 +12155,48 @@ MatElasticReply = _reflection.GeneratedProtocolMessageType('MatElasticReply', (_
   # @@protoc_insertion_point(class_scope:kwgrpc.MatElasticReply)
   })
 _sym_db.RegisterMessage(MatElasticReply)
+
+MatSpotweldRequest = _reflection.GeneratedProtocolMessageType('MatSpotweldRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MATSPOTWELDREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatSpotweldRequest)
+  })
+_sym_db.RegisterMessage(MatSpotweldRequest)
+
+MatSpotweldReply = _reflection.GeneratedProtocolMessageType('MatSpotweldReply', (_message.Message,), {
+  'DESCRIPTOR' : _MATSPOTWELDREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatSpotweldReply)
+  })
+_sym_db.RegisterMessage(MatSpotweldReply)
+
+MatPiecewiseLinearPlasticityRequest = _reflection.GeneratedProtocolMessageType('MatPiecewiseLinearPlasticityRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MATPIECEWISELINEARPLASTICITYREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatPiecewiseLinearPlasticityRequest)
+  })
+_sym_db.RegisterMessage(MatPiecewiseLinearPlasticityRequest)
+
+MatPiecewiseLinearPlasticityReply = _reflection.GeneratedProtocolMessageType('MatPiecewiseLinearPlasticityReply', (_message.Message,), {
+  'DESCRIPTOR' : _MATPIECEWISELINEARPLASTICITYREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatPiecewiseLinearPlasticityReply)
+  })
+_sym_db.RegisterMessage(MatPiecewiseLinearPlasticityReply)
+
+MatModifiedPiecewiseLinearPlasticityRequest = _reflection.GeneratedProtocolMessageType('MatModifiedPiecewiseLinearPlasticityRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MATMODIFIEDPIECEWISELINEARPLASTICITYREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest)
+  })
+_sym_db.RegisterMessage(MatModifiedPiecewiseLinearPlasticityRequest)
+
+MatModifiedPiecewiseLinearPlasticityReply = _reflection.GeneratedProtocolMessageType('MatModifiedPiecewiseLinearPlasticityReply', (_message.Message,), {
+  'DESCRIPTOR' : _MATMODIFIEDPIECEWISELINEARPLASTICITYREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatModifiedPiecewiseLinearPlasticityReply)
+  })
+_sym_db.RegisterMessage(MatModifiedPiecewiseLinearPlasticityReply)
 
 MatFabricRequest = _reflection.GeneratedProtocolMessageType('MatFabricRequest', (_message.Message,), {
   'DESCRIPTOR' : _MATFABRICREQUEST,
@@ -8107,6 +12253,118 @@ MatDamperNonlinearViscousReply = _reflection.GeneratedProtocolMessageType('MatDa
   # @@protoc_insertion_point(class_scope:kwgrpc.MatDamperNonlinearViscousReply)
   })
 _sym_db.RegisterMessage(MatDamperNonlinearViscousReply)
+
+MatNullRequest = _reflection.GeneratedProtocolMessageType('MatNullRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MATNULLREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatNullRequest)
+  })
+_sym_db.RegisterMessage(MatNullRequest)
+
+MatNullReply = _reflection.GeneratedProtocolMessageType('MatNullReply', (_message.Message,), {
+  'DESCRIPTOR' : _MATNULLREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatNullReply)
+  })
+_sym_db.RegisterMessage(MatNullReply)
+
+MatJohnsonCookRequest = _reflection.GeneratedProtocolMessageType('MatJohnsonCookRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MATJOHNSONCOOKREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatJohnsonCookRequest)
+  })
+_sym_db.RegisterMessage(MatJohnsonCookRequest)
+
+MatJohnsonCookReply = _reflection.GeneratedProtocolMessageType('MatJohnsonCookReply', (_message.Message,), {
+  'DESCRIPTOR' : _MATJOHNSONCOOKREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatJohnsonCookReply)
+  })
+_sym_db.RegisterMessage(MatJohnsonCookReply)
+
+MatHighExplosiveBurnRequest = _reflection.GeneratedProtocolMessageType('MatHighExplosiveBurnRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MATHIGHEXPLOSIVEBURNREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatHighExplosiveBurnRequest)
+  })
+_sym_db.RegisterMessage(MatHighExplosiveBurnRequest)
+
+MatHighExplosiveBurnReply = _reflection.GeneratedProtocolMessageType('MatHighExplosiveBurnReply', (_message.Message,), {
+  'DESCRIPTOR' : _MATHIGHEXPLOSIVEBURNREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatHighExplosiveBurnReply)
+  })
+_sym_db.RegisterMessage(MatHighExplosiveBurnReply)
+
+MatVacuumRequest = _reflection.GeneratedProtocolMessageType('MatVacuumRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MATVACUUMREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatVacuumRequest)
+  })
+_sym_db.RegisterMessage(MatVacuumRequest)
+
+MatVacuumReply = _reflection.GeneratedProtocolMessageType('MatVacuumReply', (_message.Message,), {
+  'DESCRIPTOR' : _MATVACUUMREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatVacuumReply)
+  })
+_sym_db.RegisterMessage(MatVacuumReply)
+
+MatAddErosionRequest = _reflection.GeneratedProtocolMessageType('MatAddErosionRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MATADDEROSIONREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatAddErosionRequest)
+  })
+_sym_db.RegisterMessage(MatAddErosionRequest)
+
+MatAddErosionReply = _reflection.GeneratedProtocolMessageType('MatAddErosionReply', (_message.Message,), {
+  'DESCRIPTOR' : _MATADDEROSIONREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatAddErosionReply)
+  })
+_sym_db.RegisterMessage(MatAddErosionReply)
+
+EOSLinearPolynomialRequest = _reflection.GeneratedProtocolMessageType('EOSLinearPolynomialRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EOSLINEARPOLYNOMIALREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EOSLinearPolynomialRequest)
+  })
+_sym_db.RegisterMessage(EOSLinearPolynomialRequest)
+
+EOSLinearPolynomialReply = _reflection.GeneratedProtocolMessageType('EOSLinearPolynomialReply', (_message.Message,), {
+  'DESCRIPTOR' : _EOSLINEARPOLYNOMIALREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EOSLinearPolynomialReply)
+  })
+_sym_db.RegisterMessage(EOSLinearPolynomialReply)
+
+EOSJWLRequest = _reflection.GeneratedProtocolMessageType('EOSJWLRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EOSJWLREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EOSJWLRequest)
+  })
+_sym_db.RegisterMessage(EOSJWLRequest)
+
+EOSJWLReply = _reflection.GeneratedProtocolMessageType('EOSJWLReply', (_message.Message,), {
+  'DESCRIPTOR' : _EOSJWLREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EOSJWLReply)
+  })
+_sym_db.RegisterMessage(EOSJWLReply)
+
+EOSGruneisenRequest = _reflection.GeneratedProtocolMessageType('EOSGruneisenRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EOSGRUNEISENREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EOSGruneisenRequest)
+  })
+_sym_db.RegisterMessage(EOSGruneisenRequest)
+
+EOSGruneisenReply = _reflection.GeneratedProtocolMessageType('EOSGruneisenReply', (_message.Message,), {
+  'DESCRIPTOR' : _EOSGRUNEISENREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EOSGruneisenReply)
+  })
+_sym_db.RegisterMessage(EOSGruneisenReply)
 
 SaveFileRequest = _reflection.GeneratedProtocolMessageType('SaveFileRequest', (_message.Message,), {
   'DESCRIPTOR' : _SAVEFILEREQUEST,
@@ -8374,6 +12632,34 @@ ICFDSolverTolMMOVReply = _reflection.GeneratedProtocolMessageType('ICFDSolverTol
   })
 _sym_db.RegisterMessage(ICFDSolverTolMMOVReply)
 
+ICFDPartPropertyRequest = _reflection.GeneratedProtocolMessageType('ICFDPartPropertyRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ICFDPARTPROPERTYREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ICFDPartPropertyRequest)
+  })
+_sym_db.RegisterMessage(ICFDPartPropertyRequest)
+
+ICFDPartPropertyReply = _reflection.GeneratedProtocolMessageType('ICFDPartPropertyReply', (_message.Message,), {
+  'DESCRIPTOR' : _ICFDPARTPROPERTYREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ICFDPartPropertyReply)
+  })
+_sym_db.RegisterMessage(ICFDPartPropertyReply)
+
+ICFDVolumePartPropertyRequest = _reflection.GeneratedProtocolMessageType('ICFDVolumePartPropertyRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ICFDVOLUMEPARTPROPERTYREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ICFDVolumePartPropertyRequest)
+  })
+_sym_db.RegisterMessage(ICFDVolumePartPropertyRequest)
+
+ICFDVolumePartPropertyReply = _reflection.GeneratedProtocolMessageType('ICFDVolumePartPropertyReply', (_message.Message,), {
+  'DESCRIPTOR' : _ICFDVOLUMEPARTPROPERTYREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ICFDVolumePartPropertyReply)
+  })
+_sym_db.RegisterMessage(ICFDVolumePartPropertyReply)
+
 MeshVolumeRequest = _reflection.GeneratedProtocolMessageType('MeshVolumeRequest', (_message.Message,), {
   'DESCRIPTOR' : _MESHVOLUMEREQUEST,
   '__module__' : 'kwprocess_pb2'
@@ -8430,47 +12716,47 @@ MeshSizeShapeReply = _reflection.GeneratedProtocolMessageType('MeshSizeShapeRepl
   })
 _sym_db.RegisterMessage(MeshSizeShapeReply)
 
-ALECreateSMRequest = _reflection.GeneratedProtocolMessageType('ALECreateSMRequest', (_message.Message,), {
-  'DESCRIPTOR' : _ALECREATESMREQUEST,
+ALECreateStructuredMeshRequest = _reflection.GeneratedProtocolMessageType('ALECreateStructuredMeshRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ALECREATESTRUCTUREDMESHREQUEST,
   '__module__' : 'kwprocess_pb2'
-  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateSMRequest)
+  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateStructuredMeshRequest)
   })
-_sym_db.RegisterMessage(ALECreateSMRequest)
+_sym_db.RegisterMessage(ALECreateStructuredMeshRequest)
 
-ALECreateSMReply = _reflection.GeneratedProtocolMessageType('ALECreateSMReply', (_message.Message,), {
-  'DESCRIPTOR' : _ALECREATESMREPLY,
+ALECreateStructuredMeshReply = _reflection.GeneratedProtocolMessageType('ALECreateStructuredMeshReply', (_message.Message,), {
+  'DESCRIPTOR' : _ALECREATESTRUCTUREDMESHREPLY,
   '__module__' : 'kwprocess_pb2'
-  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateSMReply)
+  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateStructuredMeshReply)
   })
-_sym_db.RegisterMessage(ALECreateSMReply)
+_sym_db.RegisterMessage(ALECreateStructuredMeshReply)
 
-ALECreateSMRefineRequest = _reflection.GeneratedProtocolMessageType('ALECreateSMRefineRequest', (_message.Message,), {
-  'DESCRIPTOR' : _ALECREATESMREFINEREQUEST,
+ALECreateStructuredMeshRefineRequest = _reflection.GeneratedProtocolMessageType('ALECreateStructuredMeshRefineRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ALECREATESTRUCTUREDMESHREFINEREQUEST,
   '__module__' : 'kwprocess_pb2'
-  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateSMRefineRequest)
+  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateStructuredMeshRefineRequest)
   })
-_sym_db.RegisterMessage(ALECreateSMRefineRequest)
+_sym_db.RegisterMessage(ALECreateStructuredMeshRefineRequest)
 
-ALECreateSMRefineReply = _reflection.GeneratedProtocolMessageType('ALECreateSMRefineReply', (_message.Message,), {
-  'DESCRIPTOR' : _ALECREATESMREFINEREPLY,
+ALECreateStructuredMeshRefineReply = _reflection.GeneratedProtocolMessageType('ALECreateStructuredMeshRefineReply', (_message.Message,), {
+  'DESCRIPTOR' : _ALECREATESTRUCTUREDMESHREFINEREPLY,
   '__module__' : 'kwprocess_pb2'
-  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateSMRefineReply)
+  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateStructuredMeshRefineReply)
   })
-_sym_db.RegisterMessage(ALECreateSMRefineReply)
+_sym_db.RegisterMessage(ALECreateStructuredMeshRefineReply)
 
-ALECreateSMCtrlPointsRequest = _reflection.GeneratedProtocolMessageType('ALECreateSMCtrlPointsRequest', (_message.Message,), {
-  'DESCRIPTOR' : _ALECREATESMCTRLPOINTSREQUEST,
+ALECreateStructuredMeshControlPointsRequest = _reflection.GeneratedProtocolMessageType('ALECreateStructuredMeshControlPointsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ALECREATESTRUCTUREDMESHCONTROLPOINTSREQUEST,
   '__module__' : 'kwprocess_pb2'
-  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateSMCtrlPointsRequest)
+  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateStructuredMeshControlPointsRequest)
   })
-_sym_db.RegisterMessage(ALECreateSMCtrlPointsRequest)
+_sym_db.RegisterMessage(ALECreateStructuredMeshControlPointsRequest)
 
-ALECreateSMControlPointsReply = _reflection.GeneratedProtocolMessageType('ALECreateSMControlPointsReply', (_message.Message,), {
-  'DESCRIPTOR' : _ALECREATESMCONTROLPOINTSREPLY,
+ALECreateStructuredMeshControlPointsReply = _reflection.GeneratedProtocolMessageType('ALECreateStructuredMeshControlPointsReply', (_message.Message,), {
+  'DESCRIPTOR' : _ALECREATESTRUCTUREDMESHCONTROLPOINTSREPLY,
   '__module__' : 'kwprocess_pb2'
-  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateSMControlPointsReply)
+  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateStructuredMeshControlPointsReply)
   })
-_sym_db.RegisterMessage(ALECreateSMControlPointsReply)
+_sym_db.RegisterMessage(ALECreateStructuredMeshControlPointsReply)
 
 ALECreateStructuredMultiMatGroupRequest = _reflection.GeneratedProtocolMessageType('ALECreateStructuredMultiMatGroupRequest', (_message.Message,), {
   'DESCRIPTOR' : _ALECREATESTRUCTUREDMULTIMATGROUPREQUEST,
@@ -8485,6 +12771,20 @@ ALECreateStructuredMultiMatGroupReply = _reflection.GeneratedProtocolMessageType
   # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateStructuredMultiMatGroupReply)
   })
 _sym_db.RegisterMessage(ALECreateStructuredMultiMatGroupReply)
+
+ALECreateStructuredMeshVolumeFillingRequest = _reflection.GeneratedProtocolMessageType('ALECreateStructuredMeshVolumeFillingRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateStructuredMeshVolumeFillingRequest)
+  })
+_sym_db.RegisterMessage(ALECreateStructuredMeshVolumeFillingRequest)
+
+ALECreateStructuredMeshVolumeFillingReply = _reflection.GeneratedProtocolMessageType('ALECreateStructuredMeshVolumeFillingReply', (_message.Message,), {
+  'DESCRIPTOR' : _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ALECreateStructuredMeshVolumeFillingReply)
+  })
+_sym_db.RegisterMessage(ALECreateStructuredMeshVolumeFillingReply)
 
 DampingGlobalRequest = _reflection.GeneratedProtocolMessageType('DampingGlobalRequest', (_message.Message,), {
   'DESCRIPTOR' : _DAMPINGGLOBALREQUEST,
@@ -8528,6 +12828,244 @@ AirbagModelReply = _reflection.GeneratedProtocolMessageType('AirbagModelReply', 
   })
 _sym_db.RegisterMessage(AirbagModelReply)
 
+EMControlRequest = _reflection.GeneratedProtocolMessageType('EMControlRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMCONTROLREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMControlRequest)
+  })
+_sym_db.RegisterMessage(EMControlRequest)
+
+EMControlReply = _reflection.GeneratedProtocolMessageType('EMControlReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMCONTROLREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMControlReply)
+  })
+_sym_db.RegisterMessage(EMControlReply)
+
+EMTimestepRequest = _reflection.GeneratedProtocolMessageType('EMTimestepRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMTIMESTEPREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMTimestepRequest)
+  })
+_sym_db.RegisterMessage(EMTimestepRequest)
+
+EMTimestepReply = _reflection.GeneratedProtocolMessageType('EMTimestepReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMTIMESTEPREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMTimestepReply)
+  })
+_sym_db.RegisterMessage(EMTimestepReply)
+
+EMControlContactRequest = _reflection.GeneratedProtocolMessageType('EMControlContactRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMCONTROLCONTACTREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMControlContactRequest)
+  })
+_sym_db.RegisterMessage(EMControlContactRequest)
+
+EMControlContactReply = _reflection.GeneratedProtocolMessageType('EMControlContactReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMCONTROLCONTACTREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMControlContactReply)
+  })
+_sym_db.RegisterMessage(EMControlContactReply)
+
+EMContactRequest = _reflection.GeneratedProtocolMessageType('EMContactRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMCONTACTREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMContactRequest)
+  })
+_sym_db.RegisterMessage(EMContactRequest)
+
+EMContactReply = _reflection.GeneratedProtocolMessageType('EMContactReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMCONTACTREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMContactReply)
+  })
+_sym_db.RegisterMessage(EMContactReply)
+
+EMCircuitRogoRequest = _reflection.GeneratedProtocolMessageType('EMCircuitRogoRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMCIRCUITROGOREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMCircuitRogoRequest)
+  })
+_sym_db.RegisterMessage(EMCircuitRogoRequest)
+
+EMCircuitRogoReply = _reflection.GeneratedProtocolMessageType('EMCircuitRogoReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMCIRCUITROGOREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMCircuitRogoReply)
+  })
+_sym_db.RegisterMessage(EMCircuitRogoReply)
+
+EMCircuitRequest = _reflection.GeneratedProtocolMessageType('EMCircuitRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMCIRCUITREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMCircuitRequest)
+  })
+_sym_db.RegisterMessage(EMCircuitRequest)
+
+EMCircuitReply = _reflection.GeneratedProtocolMessageType('EMCircuitReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMCIRCUITREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMCircuitReply)
+  })
+_sym_db.RegisterMessage(EMCircuitReply)
+
+EMMat001Request = _reflection.GeneratedProtocolMessageType('EMMat001Request', (_message.Message,), {
+  'DESCRIPTOR' : _EMMAT001REQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMMat001Request)
+  })
+_sym_db.RegisterMessage(EMMat001Request)
+
+EMMat001Reply = _reflection.GeneratedProtocolMessageType('EMMat001Reply', (_message.Message,), {
+  'DESCRIPTOR' : _EMMAT001REPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMMat001Reply)
+  })
+_sym_db.RegisterMessage(EMMat001Reply)
+
+EMMat002Request = _reflection.GeneratedProtocolMessageType('EMMat002Request', (_message.Message,), {
+  'DESCRIPTOR' : _EMMAT002REQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMMat002Request)
+  })
+_sym_db.RegisterMessage(EMMat002Request)
+
+EMMat002Reply = _reflection.GeneratedProtocolMessageType('EMMat002Reply', (_message.Message,), {
+  'DESCRIPTOR' : _EMMAT002REPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMMat002Reply)
+  })
+_sym_db.RegisterMessage(EMMat002Reply)
+
+EMSolverBemRequest = _reflection.GeneratedProtocolMessageType('EMSolverBemRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMSOLVERBEMREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMSolverBemRequest)
+  })
+_sym_db.RegisterMessage(EMSolverBemRequest)
+
+EMSolverBemReply = _reflection.GeneratedProtocolMessageType('EMSolverBemReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMSOLVERBEMREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMSolverBemReply)
+  })
+_sym_db.RegisterMessage(EMSolverBemReply)
+
+EMSolverFemRequest = _reflection.GeneratedProtocolMessageType('EMSolverFemRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMSOLVERFEMREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMSolverFemRequest)
+  })
+_sym_db.RegisterMessage(EMSolverFemRequest)
+
+EMSolverFemReply = _reflection.GeneratedProtocolMessageType('EMSolverFemReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMSOLVERFEMREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMSolverFemReply)
+  })
+_sym_db.RegisterMessage(EMSolverFemReply)
+
+EMSolverBemMatRequest = _reflection.GeneratedProtocolMessageType('EMSolverBemMatRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMSOLVERBEMMATREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMSolverBemMatRequest)
+  })
+_sym_db.RegisterMessage(EMSolverBemMatRequest)
+
+EMSolverBemMatReply = _reflection.GeneratedProtocolMessageType('EMSolverBemMatReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMSOLVERBEMMATREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMSolverBemMatReply)
+  })
+_sym_db.RegisterMessage(EMSolverBemMatReply)
+
+EMSolverFemBemMonolithicRequest = _reflection.GeneratedProtocolMessageType('EMSolverFemBemMonolithicRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMSOLVERFEMBEMMONOLITHICREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMSolverFemBemMonolithicRequest)
+  })
+_sym_db.RegisterMessage(EMSolverFemBemMonolithicRequest)
+
+EMSolverFemBemMonolithicReply = _reflection.GeneratedProtocolMessageType('EMSolverFemBemMonolithicReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMSOLVERFEMBEMMONOLITHICREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMSolverFemBemMonolithicReply)
+  })
+_sym_db.RegisterMessage(EMSolverFemBemMonolithicReply)
+
+EMOutputRequest = _reflection.GeneratedProtocolMessageType('EMOutputRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMOUTPUTREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMOutputRequest)
+  })
+_sym_db.RegisterMessage(EMOutputRequest)
+
+EMOutputReply = _reflection.GeneratedProtocolMessageType('EMOutputReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMOUTPUTREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMOutputReply)
+  })
+_sym_db.RegisterMessage(EMOutputReply)
+
+EMDatabaseGlobalEnergyRequest = _reflection.GeneratedProtocolMessageType('EMDatabaseGlobalEnergyRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMDATABASEGLOBALENERGYREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMDatabaseGlobalEnergyRequest)
+  })
+_sym_db.RegisterMessage(EMDatabaseGlobalEnergyRequest)
+
+EMDatabaseGlobalEnergyReply = _reflection.GeneratedProtocolMessageType('EMDatabaseGlobalEnergyReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMDATABASEGLOBALENERGYREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMDatabaseGlobalEnergyReply)
+  })
+_sym_db.RegisterMessage(EMDatabaseGlobalEnergyReply)
+
+EMPermanentMagnetRequest = _reflection.GeneratedProtocolMessageType('EMPermanentMagnetRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMPERMANENTMAGNETREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMPermanentMagnetRequest)
+  })
+_sym_db.RegisterMessage(EMPermanentMagnetRequest)
+
+EMPermanentMagnetReply = _reflection.GeneratedProtocolMessageType('EMPermanentMagnetReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMPERMANENTMAGNETREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMPermanentMagnetReply)
+  })
+_sym_db.RegisterMessage(EMPermanentMagnetReply)
+
+EMEOSPermeabilityRequest = _reflection.GeneratedProtocolMessageType('EMEOSPermeabilityRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EMEOSPERMEABILITYREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMEOSPermeabilityRequest)
+  })
+_sym_db.RegisterMessage(EMEOSPermeabilityRequest)
+
+EMEOSPermeabilityReply = _reflection.GeneratedProtocolMessageType('EMEOSPermeabilityReply', (_message.Message,), {
+  'DESCRIPTOR' : _EMEOSPERMEABILITYREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.EMEOSPermeabilityReply)
+  })
+_sym_db.RegisterMessage(EMEOSPermeabilityReply)
+
+GeneralKWDRequest = _reflection.GeneratedProtocolMessageType('GeneralKWDRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GENERALKWDREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.GeneralKWDRequest)
+  })
+_sym_db.RegisterMessage(GeneralKWDRequest)
+
+GeneralKWDReply = _reflection.GeneratedProtocolMessageType('GeneralKWDReply', (_message.Message,), {
+  'DESCRIPTOR' : _GENERALKWDREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.GeneralKWDReply)
+  })
+_sym_db.RegisterMessage(GeneralKWDReply)
+
 
 
 _KWC2S = _descriptor.ServiceDescriptor(
@@ -8537,8 +13075,8 @@ _KWC2S = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=10419,
-  serialized_end=16427,
+  serialized_start=15997,
+  serialized_end=26668,
   methods=[
   _descriptor.MethodDescriptor(
     name='kwSetFileName',
@@ -8631,9 +13169,29 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='CreateControlBulkViscosity',
+    full_name='kwgrpc.kwC2S.CreateControlBulkViscosity',
+    index=9,
+    containing_service=None,
+    input_type=_CONTROLBULKVISCOSITYREQUEST,
+    output_type=_CONTROLBULKVISCOSITYREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateControlHourgalss',
+    full_name='kwgrpc.kwC2S.CreateControlHourgalss',
+    index=10,
+    containing_service=None,
+    input_type=_CONTROLHOURGLASSREQUEST,
+    output_type=_CONTROLHOURGLASSREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CreateControlShell',
     full_name='kwgrpc.kwC2S.CreateControlShell',
-    index=9,
+    index=11,
     containing_service=None,
     input_type=_CONTROLSHELLREQUEST,
     output_type=_CONTROLSHELLREPLY,
@@ -8643,7 +13201,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateControlSolid',
     full_name='kwgrpc.kwC2S.CreateControlSolid',
-    index=10,
+    index=12,
     containing_service=None,
     input_type=_CONTROLSOLIDREQUEST,
     output_type=_CONTROLSOLIDREPLY,
@@ -8651,9 +13209,59 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='CreateControlImplicitGeneral',
+    full_name='kwgrpc.kwC2S.CreateControlImplicitGeneral',
+    index=13,
+    containing_service=None,
+    input_type=_CONTROLIMPLICITGENERALREQUEST,
+    output_type=_CONTROLIMPLICITGENERALREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateControlImplicitAuto',
+    full_name='kwgrpc.kwC2S.CreateControlImplicitAuto',
+    index=14,
+    containing_service=None,
+    input_type=_CONTROLIMPLICITAUTOREQUEST,
+    output_type=_CONTROLIMPLICITAUTOREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateControlImplicitDynamic',
+    full_name='kwgrpc.kwC2S.CreateControlImplicitDynamic',
+    index=15,
+    containing_service=None,
+    input_type=_CONTROLIMPLICITDYNAMICREQUEST,
+    output_type=_CONTROLIMPLICITDYNAMICREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateControlImplicitEigenvalue',
+    full_name='kwgrpc.kwC2S.CreateControlImplicitEigenvalue',
+    index=16,
+    containing_service=None,
+    input_type=_CONTROLIMPLICITEIGENVALUEREQUEST,
+    output_type=_CONTROLIMPLICITEIGENVALUEREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateControlImplicitSolution',
+    full_name='kwgrpc.kwC2S.CreateControlImplicitSolution',
+    index=17,
+    containing_service=None,
+    input_type=_CONTROLIMPLICITSOLUTIONREQUEST,
+    output_type=_CONTROLIMPLICITSOLUTIONREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CreateDBBinary',
     full_name='kwgrpc.kwC2S.CreateDBBinary',
-    index=11,
+    index=18,
     containing_service=None,
     input_type=_DBBINARYREQUEST,
     output_type=_DBBINARYREPLY,
@@ -8663,7 +13271,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateDBAscii',
     full_name='kwgrpc.kwC2S.CreateDBAscii',
-    index=12,
+    index=19,
     containing_service=None,
     input_type=_DBASCIIREQUEST,
     output_type=_DBASCIIREPLY,
@@ -8671,9 +13279,19 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='CreateDBSALE',
+    full_name='kwgrpc.kwC2S.CreateDBSALE',
+    index=20,
+    containing_service=None,
+    input_type=_DBSALEREQUEST,
+    output_type=_DBSALEREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CreateRigidWallGeom',
     full_name='kwgrpc.kwC2S.CreateRigidWallGeom',
-    index=13,
+    index=21,
     containing_service=None,
     input_type=_RIGIDWALLGEOMREQUEST,
     output_type=_RIGIDWALLGEOMREPLY,
@@ -8683,7 +13301,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateRigidWallPlanar',
     full_name='kwgrpc.kwC2S.CreateRigidWallPlanar',
-    index=14,
+    index=22,
     containing_service=None,
     input_type=_RIGIDWALLPLANARREQUEST,
     output_type=_RIGIDWALLPLANARREPLY,
@@ -8693,7 +13311,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateInitVel',
     full_name='kwgrpc.kwC2S.CreateInitVel',
-    index=15,
+    index=23,
     containing_service=None,
     input_type=_INITVELREQUEST,
     output_type=_INITVELREPLY,
@@ -8703,7 +13321,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateInitVelRigidBody',
     full_name='kwgrpc.kwC2S.CreateInitVelRigidBody',
-    index=16,
+    index=24,
     containing_service=None,
     input_type=_INITVELRIGIDBODYREQUEST,
     output_type=_INITVELRIGIDBODYREPLY,
@@ -8713,7 +13331,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateInitVelGeneration',
     full_name='kwgrpc.kwC2S.CreateInitVelGeneration',
-    index=17,
+    index=25,
     containing_service=None,
     input_type=_INITVELGENERATIONREQUEST,
     output_type=_INITVELGENERATIONREPLY,
@@ -8723,7 +13341,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateInitVelGenerationStartTime',
     full_name='kwgrpc.kwC2S.CreateInitVelGenerationStartTime',
-    index=18,
+    index=26,
     containing_service=None,
     input_type=_INITVELGENERATIONSTARTTIMEREQUEST,
     output_type=_INITVELGENERATIONSTARTTIMEREPLY,
@@ -8731,9 +13349,19 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='CreateInitDetonation',
+    full_name='kwgrpc.kwC2S.CreateInitDetonation',
+    index=27,
+    containing_service=None,
+    input_type=_INITDETONATIONREQUEST,
+    output_type=_INITDETONATIONREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CreateContact',
     full_name='kwgrpc.kwC2S.CreateContact',
-    index=19,
+    index=28,
     containing_service=None,
     input_type=_CONTACTREQUEST,
     output_type=_CONTACTREPLY,
@@ -8743,7 +13371,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateBdyPrescribedMotion',
     full_name='kwgrpc.kwC2S.CreateBdyPrescribedMotion',
-    index=20,
+    index=29,
     containing_service=None,
     input_type=_BDYPRESCRIBEDMOTIONREQUEST,
     output_type=_BDYPRESCRIBEDMOTIONREPLY,
@@ -8753,7 +13381,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateBdySpc',
     full_name='kwgrpc.kwC2S.CreateBdySpc',
-    index=21,
+    index=30,
     containing_service=None,
     input_type=_BDYSPCREQUEST,
     output_type=_BDYSPCREPLY,
@@ -8763,7 +13391,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateConstrainedJoint',
     full_name='kwgrpc.kwC2S.CreateConstrainedJoint',
-    index=22,
+    index=31,
     containing_service=None,
     input_type=_CONSTRAINEDJOINTREQUEST,
     output_type=_CONSTRAINEDJOINTREPLY,
@@ -8773,7 +13401,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateConstrainedExtraNodes',
     full_name='kwgrpc.kwC2S.CreateConstrainedExtraNodes',
-    index=23,
+    index=32,
     containing_service=None,
     input_type=_CONSTRAINEDEXTRANODESREQUEST,
     output_type=_CONSTRAINEDEXTRANODESREPLY,
@@ -8781,9 +13409,29 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='CreateConstrainedNodalRigidBody',
+    full_name='kwgrpc.kwC2S.CreateConstrainedNodalRigidBody',
+    index=33,
+    containing_service=None,
+    input_type=_CONSTRAINEDNODALRIGIDBODYREQUEST,
+    output_type=_CONSTRAINEDNODALRIGIDBODYREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateConstrainedSpotWeld',
+    full_name='kwgrpc.kwC2S.CreateConstrainedSpotWeld',
+    index=34,
+    containing_service=None,
+    input_type=_CONSTRAINEDSPOTWELDREQUEST,
+    output_type=_CONSTRAINEDSPOTWELDREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CreateLoadBody',
     full_name='kwgrpc.kwC2S.CreateLoadBody',
-    index=24,
+    index=35,
     containing_service=None,
     input_type=_LOADBODYREQUEST,
     output_type=_LOADBODYREPLY,
@@ -8791,9 +13439,19 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='CreateMatEM',
+    full_name='kwgrpc.kwC2S.CreateMatEM',
+    index=36,
+    containing_service=None,
+    input_type=_MATEMREQUEST,
+    output_type=_MATEMREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CreateMatRigid',
     full_name='kwgrpc.kwC2S.CreateMatRigid',
-    index=25,
+    index=37,
     containing_service=None,
     input_type=_MATRIGIDREQUEST,
     output_type=_MATRIGIDREPLY,
@@ -8803,7 +13461,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateMatElastic',
     full_name='kwgrpc.kwC2S.CreateMatElastic',
-    index=26,
+    index=38,
     containing_service=None,
     input_type=_MATELASTICREQUEST,
     output_type=_MATELASTICREPLY,
@@ -8811,9 +13469,39 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='CreateMatSpotweld',
+    full_name='kwgrpc.kwC2S.CreateMatSpotweld',
+    index=39,
+    containing_service=None,
+    input_type=_MATSPOTWELDREQUEST,
+    output_type=_MATSPOTWELDREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateMatPiecewiseLinearPlasticity',
+    full_name='kwgrpc.kwC2S.CreateMatPiecewiseLinearPlasticity',
+    index=40,
+    containing_service=None,
+    input_type=_MATPIECEWISELINEARPLASTICITYREQUEST,
+    output_type=_MATPIECEWISELINEARPLASTICITYREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateMatModifiedPiecewiseLinearPlasticity',
+    full_name='kwgrpc.kwC2S.CreateMatModifiedPiecewiseLinearPlasticity',
+    index=41,
+    containing_service=None,
+    input_type=_MATMODIFIEDPIECEWISELINEARPLASTICITYREQUEST,
+    output_type=_MATMODIFIEDPIECEWISELINEARPLASTICITYREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CreateMatFabric',
     full_name='kwgrpc.kwC2S.CreateMatFabric',
-    index=27,
+    index=42,
     containing_service=None,
     input_type=_MATFABRICREQUEST,
     output_type=_MATFABRICREPLY,
@@ -8823,7 +13511,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateMatSpringNonlinearElastic',
     full_name='kwgrpc.kwC2S.CreateMatSpringNonlinearElastic',
-    index=28,
+    index=43,
     containing_service=None,
     input_type=_MATSPRINGNONLINEARELASTICREQUEST,
     output_type=_MATSPRINGNONLINEARELASTICREPLY,
@@ -8833,7 +13521,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateMatDamperViscous',
     full_name='kwgrpc.kwC2S.CreateMatDamperViscous',
-    index=29,
+    index=44,
     containing_service=None,
     input_type=_MATDAMPERVISCOUSREQUEST,
     output_type=_MATDAMPERVISCOUSREPLY,
@@ -8843,7 +13531,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateMatDamperNonlinearViscous',
     full_name='kwgrpc.kwC2S.CreateMatDamperNonlinearViscous',
-    index=30,
+    index=45,
     containing_service=None,
     input_type=_MATDAMPERNONLINEARVISCOUSREQUEST,
     output_type=_MATDAMPERNONLINEARVISCOUSREPLY,
@@ -8851,9 +13539,89 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='CreateMatNull',
+    full_name='kwgrpc.kwC2S.CreateMatNull',
+    index=46,
+    containing_service=None,
+    input_type=_MATNULLREQUEST,
+    output_type=_MATNULLREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateMatJohnsonCook',
+    full_name='kwgrpc.kwC2S.CreateMatJohnsonCook',
+    index=47,
+    containing_service=None,
+    input_type=_MATJOHNSONCOOKREQUEST,
+    output_type=_MATJOHNSONCOOKREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateMatHighExplosiveBurn',
+    full_name='kwgrpc.kwC2S.CreateMatHighExplosiveBurn',
+    index=48,
+    containing_service=None,
+    input_type=_MATHIGHEXPLOSIVEBURNREQUEST,
+    output_type=_MATHIGHEXPLOSIVEBURNREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateMatVacuum',
+    full_name='kwgrpc.kwC2S.CreateMatVacuum',
+    index=49,
+    containing_service=None,
+    input_type=_MATVACUUMREQUEST,
+    output_type=_MATVACUUMREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateMatAddErosion',
+    full_name='kwgrpc.kwC2S.CreateMatAddErosion',
+    index=50,
+    containing_service=None,
+    input_type=_MATADDEROSIONREQUEST,
+    output_type=_MATADDEROSIONREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEOSLinearPolynomial',
+    full_name='kwgrpc.kwC2S.CreateEOSLinearPolynomial',
+    index=51,
+    containing_service=None,
+    input_type=_EOSLINEARPOLYNOMIALREQUEST,
+    output_type=_EOSLINEARPOLYNOMIALREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEOSJWL',
+    full_name='kwgrpc.kwC2S.CreateEOSJWL',
+    index=52,
+    containing_service=None,
+    input_type=_EOSJWLREQUEST,
+    output_type=_EOSJWLREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEOSGruneisen',
+    full_name='kwgrpc.kwC2S.CreateEOSGruneisen',
+    index=53,
+    containing_service=None,
+    input_type=_EOSGRUNEISENREQUEST,
+    output_type=_EOSGRUNEISENREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CreateDefineCurve',
     full_name='kwgrpc.kwC2S.CreateDefineCurve',
-    index=31,
+    index=54,
     containing_service=None,
     input_type=_DEFINECURVEREQUEST,
     output_type=_DEFINECURVEREPLY,
@@ -8863,7 +13631,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateDefineVector',
     full_name='kwgrpc.kwC2S.CreateDefineVector',
-    index=32,
+    index=55,
     containing_service=None,
     input_type=_DEFINEVECTORREQUEST,
     output_type=_DEFINEVECTORREPLY,
@@ -8871,9 +13639,19 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='CreateDefineBox',
+    full_name='kwgrpc.kwC2S.CreateDefineBox',
+    index=56,
+    containing_service=None,
+    input_type=_DEFINEBOXREQUEST,
+    output_type=_DEFINEBOXREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CreateDefineDEMeshSurface',
     full_name='kwgrpc.kwC2S.CreateDefineDEMeshSurface',
-    index=33,
+    index=57,
     containing_service=None,
     input_type=_DEFINEDEMESHSURFACEREQUEST,
     output_type=_DEFINEDEMESHSURFACEREPLY,
@@ -8883,7 +13661,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateDefineOrientation',
     full_name='kwgrpc.kwC2S.CreateDefineOrientation',
-    index=34,
+    index=58,
     containing_service=None,
     input_type=_DEFINEORIENTATIONREQUEST,
     output_type=_DEFINEORIENTATIONREPLY,
@@ -8893,7 +13671,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreatePartSet',
     full_name='kwgrpc.kwC2S.CreatePartSet',
-    index=35,
+    index=59,
     containing_service=None,
     input_type=_PARTSETREQUEST,
     output_type=_PARTSETREPLY,
@@ -8903,7 +13681,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateShellSet',
     full_name='kwgrpc.kwC2S.CreateShellSet',
-    index=36,
+    index=60,
     containing_service=None,
     input_type=_SHELLSETREQUEST,
     output_type=_SHELLSETREPLY,
@@ -8913,7 +13691,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateSolidSet',
     full_name='kwgrpc.kwC2S.CreateSolidSet',
-    index=37,
+    index=61,
     containing_service=None,
     input_type=_SOLIDSETREQUEST,
     output_type=_SOLIDSETREPLY,
@@ -8923,7 +13701,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateNodeSet',
     full_name='kwgrpc.kwC2S.CreateNodeSet',
-    index=38,
+    index=62,
     containing_service=None,
     input_type=_NODESETREQUEST,
     output_type=_NODESETREPLY,
@@ -8933,7 +13711,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateSegmentSet',
     full_name='kwgrpc.kwC2S.CreateSegmentSet',
-    index=39,
+    index=63,
     containing_service=None,
     input_type=_SEGMENTSETREQUEST,
     output_type=_SEGMENTSETREPLY,
@@ -8943,7 +13721,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateSectionIGAShell',
     full_name='kwgrpc.kwC2S.CreateSectionIGAShell',
-    index=40,
+    index=64,
     containing_service=None,
     input_type=_SECTIONIGASHELLREQUEST,
     output_type=_SECTIONIGASHELLREPLY,
@@ -8951,9 +13729,19 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='CreateSectionBeam',
+    full_name='kwgrpc.kwC2S.CreateSectionBeam',
+    index=65,
+    containing_service=None,
+    input_type=_SECTIONBEAMREQUEST,
+    output_type=_SECTIONBEAMREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CreateSectionShell',
     full_name='kwgrpc.kwC2S.CreateSectionShell',
-    index=41,
+    index=66,
     containing_service=None,
     input_type=_SECTIONSHELLREQUEST,
     output_type=_SECTIONSHELLREPLY,
@@ -8963,7 +13751,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateSectionSolid',
     full_name='kwgrpc.kwC2S.CreateSectionSolid',
-    index=42,
+    index=67,
     containing_service=None,
     input_type=_SECTIONSOLIDREQUEST,
     output_type=_SECTIONSOLIDREPLY,
@@ -8973,7 +13761,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateSectionDiscrete',
     full_name='kwgrpc.kwC2S.CreateSectionDiscrete',
-    index=43,
+    index=68,
     containing_service=None,
     input_type=_SECTIONDISCRETEREQUEST,
     output_type=_SECTIONDISCRETEREPLY,
@@ -8983,7 +13771,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateHourglass',
     full_name='kwgrpc.kwC2S.CreateHourglass',
-    index=44,
+    index=69,
     containing_service=None,
     input_type=_HOURGLASSREQUEST,
     output_type=_HOURGLASSREPLY,
@@ -8993,7 +13781,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='SetPartProperty',
     full_name='kwgrpc.kwC2S.SetPartProperty',
-    index=45,
+    index=70,
     containing_service=None,
     input_type=_PARTPROPERTYREQUEST,
     output_type=_PARTPROPERTYREPLY,
@@ -9003,7 +13791,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetNodes',
     full_name='kwgrpc.kwC2S.GetNodes',
-    index=46,
+    index=71,
     containing_service=None,
     input_type=_GETNODESREQUEST,
     output_type=_GETNODESREPLY,
@@ -9013,7 +13801,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetSolidElements',
     full_name='kwgrpc.kwC2S.GetSolidElements',
-    index=47,
+    index=72,
     containing_service=None,
     input_type=_GETSOLIDELEMENTSREQUEST,
     output_type=_GETSOLIDELEMENTSREPLY,
@@ -9023,7 +13811,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='SaveFile',
     full_name='kwgrpc.kwC2S.SaveFile',
-    index=48,
+    index=73,
     containing_service=None,
     input_type=_SAVEFILEREQUEST,
     output_type=_SAVEFILEREPLY,
@@ -9033,7 +13821,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='LoadFile',
     full_name='kwgrpc.kwC2S.LoadFile',
-    index=49,
+    index=74,
     containing_service=None,
     input_type=_LOADFILEREQUEST,
     output_type=_LOADFILEREPLY,
@@ -9043,7 +13831,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Download',
     full_name='kwgrpc.kwC2S.Download',
-    index=50,
+    index=75,
     containing_service=None,
     input_type=_DOWNLOADREQUEST,
     output_type=_CHUNK,
@@ -9053,7 +13841,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateControlTime',
     full_name='kwgrpc.kwC2S.ICFDCreateControlTime',
-    index=51,
+    index=76,
     containing_service=None,
     input_type=_ICFDCONTROLTIMEREQUEST,
     output_type=_ICFDCONTROLTIMEREPLY,
@@ -9063,7 +13851,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateControlGeneral',
     full_name='kwgrpc.kwC2S.ICFDCreateControlGeneral',
-    index=52,
+    index=77,
     containing_service=None,
     input_type=_ICFDCONTROLGENERALREQUEST,
     output_type=_ICFDCONTROLGENERALREPLY,
@@ -9073,7 +13861,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateControlOutput',
     full_name='kwgrpc.kwC2S.ICFDCreateControlOutput',
-    index=53,
+    index=78,
     containing_service=None,
     input_type=_ICFDCONTROLOUTPUTREQUEST,
     output_type=_ICFDCONTROLOUTPUTREPLY,
@@ -9083,7 +13871,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateControlTurbulence',
     full_name='kwgrpc.kwC2S.ICFDCreateControlTurbulence',
-    index=54,
+    index=79,
     containing_service=None,
     input_type=_ICFDCONTROLTURBULENCEREQUEST,
     output_type=_ICFDCONTROLTURBULENCEREPLY,
@@ -9093,7 +13881,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateControlDEMCoupling',
     full_name='kwgrpc.kwC2S.ICFDCreateControlDEMCoupling',
-    index=55,
+    index=80,
     containing_service=None,
     input_type=_ICFDCONTROLDEMCOUPLINGREQUEST,
     output_type=_ICFDCONTROLDEMCOUPLINGREPLY,
@@ -9103,7 +13891,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateSection',
     full_name='kwgrpc.kwC2S.ICFDCreateSection',
-    index=56,
+    index=81,
     containing_service=None,
     input_type=_ICFDSECTIONREQUEST,
     output_type=_ICFDSECTIONREPLY,
@@ -9113,7 +13901,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateMat',
     full_name='kwgrpc.kwC2S.ICFDCreateMat',
-    index=57,
+    index=82,
     containing_service=None,
     input_type=_ICFDMATREQUEST,
     output_type=_ICFDMATREPLY,
@@ -9123,7 +13911,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreatePart',
     full_name='kwgrpc.kwC2S.ICFDCreatePart',
-    index=58,
+    index=83,
     containing_service=None,
     input_type=_ICFDPARTREQUEST,
     output_type=_ICFDPARTREPLY,
@@ -9133,7 +13921,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreatePartVol',
     full_name='kwgrpc.kwC2S.ICFDCreatePartVol',
-    index=59,
+    index=84,
     containing_service=None,
     input_type=_ICFDPARTVOLREQUEST,
     output_type=_ICFDPARTVOLREPLY,
@@ -9143,7 +13931,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateDBDrag',
     full_name='kwgrpc.kwC2S.ICFDCreateDBDrag',
-    index=60,
+    index=85,
     containing_service=None,
     input_type=_ICFDDBDRAGREQUEST,
     output_type=_ICFDDBDRAGREPLY,
@@ -9153,7 +13941,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateBdyPrescribedVel',
     full_name='kwgrpc.kwC2S.ICFDCreateBdyPrescribedVel',
-    index=61,
+    index=86,
     containing_service=None,
     input_type=_ICFDBDYPRESCRIBEDVELREQUEST,
     output_type=_ICFDBDYPRESCRIBEDVELREPLY,
@@ -9163,7 +13951,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateBdyPrescribedPre',
     full_name='kwgrpc.kwC2S.ICFDCreateBdyPrescribedPre',
-    index=62,
+    index=87,
     containing_service=None,
     input_type=_ICFDBDYPRESCRIBEDPREREQUEST,
     output_type=_ICFDBDYPRESCRIBEDPREREPLY,
@@ -9173,7 +13961,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateBdyFreeSlip',
     full_name='kwgrpc.kwC2S.ICFDCreateBdyFreeSlip',
-    index=63,
+    index=88,
     containing_service=None,
     input_type=_ICFDBDYFREESLIPREQUEST,
     output_type=_ICFDBDYFREESLIPREPLY,
@@ -9183,7 +13971,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateBdyNonSlip',
     full_name='kwgrpc.kwC2S.ICFDCreateBdyNonSlip',
-    index=64,
+    index=89,
     containing_service=None,
     input_type=_ICFDBDYNONSLIPREQUEST,
     output_type=_ICFDBDYNONSLIPREPLY,
@@ -9193,7 +13981,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ICFDCreateSolverTolMMOV',
     full_name='kwgrpc.kwC2S.ICFDCreateSolverTolMMOV',
-    index=65,
+    index=90,
     containing_service=None,
     input_type=_ICFDSOLVERTOLMMOVREQUEST,
     output_type=_ICFDSOLVERTOLMMOVREPLY,
@@ -9201,9 +13989,29 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='SetICFDPartProperty',
+    full_name='kwgrpc.kwC2S.SetICFDPartProperty',
+    index=91,
+    containing_service=None,
+    input_type=_ICFDPARTPROPERTYREQUEST,
+    output_type=_ICFDPARTPROPERTYREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetICFDVolumePartProperty',
+    full_name='kwgrpc.kwC2S.SetICFDVolumePartProperty',
+    index=92,
+    containing_service=None,
+    input_type=_ICFDVOLUMEPARTPROPERTYREQUEST,
+    output_type=_ICFDVOLUMEPARTPROPERTYREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='MESHCreateVolume',
     full_name='kwgrpc.kwC2S.MESHCreateVolume',
-    index=66,
+    index=93,
     containing_service=None,
     input_type=_MESHVOLUMEREQUEST,
     output_type=_MESHVOLUMEREPLY,
@@ -9213,7 +14021,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='MESHCreateEmbedShell',
     full_name='kwgrpc.kwC2S.MESHCreateEmbedShell',
-    index=67,
+    index=94,
     containing_service=None,
     input_type=_MESHEMBEDSHELLREQUEST,
     output_type=_MESHEMBEDSHELLREPLY,
@@ -9223,7 +14031,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='MESHCreateBl',
     full_name='kwgrpc.kwC2S.MESHCreateBl',
-    index=68,
+    index=95,
     containing_service=None,
     input_type=_MESHBLREQUEST,
     output_type=_MESHBLREPLY,
@@ -9233,7 +14041,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='MESHCreateSizeShape',
     full_name='kwgrpc.kwC2S.MESHCreateSizeShape',
-    index=69,
+    index=96,
     containing_service=None,
     input_type=_MESHSIZESHAPEREQUEST,
     output_type=_MESHSIZESHAPEREPLY,
@@ -9241,9 +14049,69 @@ _KWC2S = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='ALECreateControl',
+    full_name='kwgrpc.kwC2S.ALECreateControl',
+    index=97,
+    containing_service=None,
+    input_type=_CONTROLALEREQUEST,
+    output_type=_CONTROLALEREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ALECreateStructuredMesh',
+    full_name='kwgrpc.kwC2S.ALECreateStructuredMesh',
+    index=98,
+    containing_service=None,
+    input_type=_ALECREATESTRUCTUREDMESHREQUEST,
+    output_type=_ALECREATESTRUCTUREDMESHREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ALECreateStructuredMeshRefine',
+    full_name='kwgrpc.kwC2S.ALECreateStructuredMeshRefine',
+    index=99,
+    containing_service=None,
+    input_type=_ALECREATESTRUCTUREDMESHREFINEREQUEST,
+    output_type=_ALECREATESTRUCTUREDMESHREFINEREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ALECreateStructuredMeshCtrlPoints',
+    full_name='kwgrpc.kwC2S.ALECreateStructuredMeshCtrlPoints',
+    index=100,
+    containing_service=None,
+    input_type=_ALECREATESTRUCTUREDMESHCONTROLPOINTSREQUEST,
+    output_type=_ALECREATESTRUCTUREDMESHCONTROLPOINTSREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ALECreateStructuredMultiMaterialGroup',
+    full_name='kwgrpc.kwC2S.ALECreateStructuredMultiMaterialGroup',
+    index=101,
+    containing_service=None,
+    input_type=_ALECREATESTRUCTUREDMULTIMATGROUPREQUEST,
+    output_type=_ALECREATESTRUCTUREDMULTIMATGROUPREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ALECreateStructuredMeshVolumeFilling',
+    full_name='kwgrpc.kwC2S.ALECreateStructuredMeshVolumeFilling',
+    index=102,
+    containing_service=None,
+    input_type=_ALECREATESTRUCTUREDMESHVOLUMEFILLINGREQUEST,
+    output_type=_ALECREATESTRUCTUREDMESHVOLUMEFILLINGREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CreateDampingGlobal',
     full_name='kwgrpc.kwC2S.CreateDampingGlobal',
-    index=70,
+    index=103,
     containing_service=None,
     input_type=_DAMPINGGLOBALREQUEST,
     output_type=_DAMPINGGLOBALREPLY,
@@ -9253,7 +14121,7 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateDampingPartStiffness',
     full_name='kwgrpc.kwC2S.CreateDampingPartStiffness',
-    index=71,
+    index=104,
     containing_service=None,
     input_type=_DAMPINGPARTSTIFFNESSREQUEST,
     output_type=_DAMPINGPARTSTIFFNESSREPLY,
@@ -9263,10 +14131,180 @@ _KWC2S = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateAirbagModel',
     full_name='kwgrpc.kwC2S.CreateAirbagModel',
-    index=72,
+    index=105,
     containing_service=None,
     input_type=_AIRBAGMODELREQUEST,
     output_type=_AIRBAGMODELREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMControl',
+    full_name='kwgrpc.kwC2S.CreateEMControl',
+    index=106,
+    containing_service=None,
+    input_type=_EMCONTROLREQUEST,
+    output_type=_EMCONTROLREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMTimestep',
+    full_name='kwgrpc.kwC2S.CreateEMTimestep',
+    index=107,
+    containing_service=None,
+    input_type=_EMTIMESTEPREQUEST,
+    output_type=_EMTIMESTEPREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMControlContact',
+    full_name='kwgrpc.kwC2S.CreateEMControlContact',
+    index=108,
+    containing_service=None,
+    input_type=_EMCONTROLCONTACTREQUEST,
+    output_type=_EMCONTROLCONTACTREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMContact',
+    full_name='kwgrpc.kwC2S.CreateEMContact',
+    index=109,
+    containing_service=None,
+    input_type=_EMCONTACTREQUEST,
+    output_type=_EMCONTACTREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMCircuitRogo',
+    full_name='kwgrpc.kwC2S.CreateEMCircuitRogo',
+    index=110,
+    containing_service=None,
+    input_type=_EMCIRCUITROGOREQUEST,
+    output_type=_EMCIRCUITROGOREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMCircuit',
+    full_name='kwgrpc.kwC2S.CreateEMCircuit',
+    index=111,
+    containing_service=None,
+    input_type=_EMCIRCUITREQUEST,
+    output_type=_EMCIRCUITREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMMat001',
+    full_name='kwgrpc.kwC2S.CreateEMMat001',
+    index=112,
+    containing_service=None,
+    input_type=_EMMAT001REQUEST,
+    output_type=_EMMAT001REPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMMat002',
+    full_name='kwgrpc.kwC2S.CreateEMMat002',
+    index=113,
+    containing_service=None,
+    input_type=_EMMAT002REQUEST,
+    output_type=_EMMAT002REPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMSolverBem',
+    full_name='kwgrpc.kwC2S.CreateEMSolverBem',
+    index=114,
+    containing_service=None,
+    input_type=_EMSOLVERBEMREQUEST,
+    output_type=_EMSOLVERBEMREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMSolverFem',
+    full_name='kwgrpc.kwC2S.CreateEMSolverFem',
+    index=115,
+    containing_service=None,
+    input_type=_EMSOLVERFEMREQUEST,
+    output_type=_EMSOLVERFEMREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMSolverBemMat',
+    full_name='kwgrpc.kwC2S.CreateEMSolverBemMat',
+    index=116,
+    containing_service=None,
+    input_type=_EMSOLVERBEMMATREQUEST,
+    output_type=_EMSOLVERBEMMATREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMSolverFemBemMonolithic',
+    full_name='kwgrpc.kwC2S.CreateEMSolverFemBemMonolithic',
+    index=117,
+    containing_service=None,
+    input_type=_EMSOLVERFEMBEMMONOLITHICREQUEST,
+    output_type=_EMSOLVERFEMBEMMONOLITHICREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMOutput',
+    full_name='kwgrpc.kwC2S.CreateEMOutput',
+    index=118,
+    containing_service=None,
+    input_type=_EMOUTPUTREQUEST,
+    output_type=_EMOUTPUTREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMDatabaseGlobalEnergy',
+    full_name='kwgrpc.kwC2S.CreateEMDatabaseGlobalEnergy',
+    index=119,
+    containing_service=None,
+    input_type=_EMDATABASEGLOBALENERGYREQUEST,
+    output_type=_EMDATABASEGLOBALENERGYREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMPermanentMagnet',
+    full_name='kwgrpc.kwC2S.CreateEMPermanentMagnet',
+    index=120,
+    containing_service=None,
+    input_type=_EMPERMANENTMAGNETREQUEST,
+    output_type=_EMPERMANENTMAGNETREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateEMEOSPermeability',
+    full_name='kwgrpc.kwC2S.CreateEMEOSPermeability',
+    index=121,
+    containing_service=None,
+    input_type=_EMEOSPERMEABILITYREQUEST,
+    output_type=_EMEOSPERMEABILITYREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateGeneralKWD',
+    full_name='kwgrpc.kwC2S.CreateGeneralKWD',
+    index=122,
+    containing_service=None,
+    input_type=_GENERALKWDREQUEST,
+    output_type=_GENERALKWDREPLY,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
