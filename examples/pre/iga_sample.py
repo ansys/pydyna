@@ -1,3 +1,10 @@
+"""
+IGA example
+=====================
+
+This example demonstrates how to create an IGA input deck.
+"""
+
 import os
 import sys
 

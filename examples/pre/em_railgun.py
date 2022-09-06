@@ -1,3 +1,10 @@
+"""
+Railgun example
+=====================
+
+This example demonstrates how to create an EM Railgun input deck.
+"""
+
 import os
 import sys
 
