@@ -1,7 +1,4 @@
-..
-   Just reuse the root readme to avoid duplicating the documentation.
-   Provide any documetnation specific to your online documentation
-   here.
+PyDyna Documentation  0.0.1
 
 .. include:: ../../README.rst
 
@@ -9,7 +6,12 @@
    :hidden:
    :maxdepth: 3
 
-   class_documentation
+   Resources/Getting_Started
+   Resources/User_Guide
+   API/index
+   examples/index
+   Resources/Code_Guidelines
+   Resources/Contributing
 
 
 Code Examples
