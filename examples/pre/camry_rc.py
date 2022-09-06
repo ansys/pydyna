@@ -1,6 +1,10 @@
 """
+Crash example
+=====================
+
 This example demonstrates how to create a simple crash input deck.
 """
+
 import os
 from re import X
 import sys
