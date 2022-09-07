@@ -1,6 +1,10 @@
 """
+Cylinder flow example
+=====================
+
 This example demonstrates how to create a SALE input deck.
 """
+
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))

@@ -1,6 +1,10 @@
 """
+Cylinder flow example
+=====================
+
 This example demonstrates how to create a simple ICFD cylinder flow input deck.
 """
+
 import os
 import sys
 
