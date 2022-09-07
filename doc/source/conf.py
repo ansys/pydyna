@@ -3,6 +3,9 @@
 
 import os
 import sys
+
+from ansys_sphinx_theme import pyansys_logo_black
+
 sys.path.insert(0,os.path.abspath('./../../ansys/dyna/pre'))
 sys.path.insert(0,os.path.abspath('./../../ansys/dyna'))
 
@@ -60,11 +63,29 @@ sphinx_gallery_conf = {
 # Numpydoc config
 numpydoc_show_class_members = False  # we take care of autosummary on our own
 
+# Favicon
+html_favicon = "favicon.png"
+
 # The suffix(es) of source filenames.
 source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
+
+# -- Options for HTML output -------------------------------------------------
+html_short_title = html_title = "PyAEDT"
+html_show_sourcelink = True
+html_theme = "ansys_sphinx_theme"
+html_logo = pyansys_logo_black
+
+html_theme_options = {
+    "github_url": "https://github.com/pyansys/pyaedt",
+    "show_prev_next": False,
+    "show_breadcrumbs": True,
+    "additional_breadcrumbs": [
+        ("PyAnsys", "https://docs.pyansys.com/"),
+    ],
+}
 
 # static path
 html_static_path = ['_static']
