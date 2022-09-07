@@ -1,3 +1,10 @@
+"""
+Airbag deploy example
+=====================
+
+This example show how to create an Airbag deploy model with Pydyna-pre module
+"""
+
 import os
 import sys
 

@@ -1,3 +1,10 @@
+"""
+Belted dummy example
+=====================
+
+This example show how to create an Belted dummy model with Pydyna-pre module
+"""
+
 import os
 import sys
 
