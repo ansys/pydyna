@@ -10,7 +10,6 @@ PyDyna Documentation  0.0.1
    Resources/User_Guide
    API/index
    examples/index
-   Resources/Code_Guidelines
    Resources/Contributing
 
 
