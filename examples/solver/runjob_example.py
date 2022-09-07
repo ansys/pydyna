@@ -1,8 +1,12 @@
+"""
+DynaSolver example
+===================
+
+Sample use of DynaSolver to run a small job in minikube
+"""
+
 #!/usr/bin/python3
 # import logging
-#
-# Sample use of DynaSolver to run a small job in minikube
-#
 import os
 import time
 import ansys.dyna.solver as solver
