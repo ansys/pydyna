@@ -31,6 +31,7 @@ Activate venv on Windows by running command:
 Activate venv on Linux by running command: 
 
 .. code:: python
+
     cd venv
     source bin/activate
 
@@ -140,7 +141,6 @@ Go to pyDyna/examples/pre,and run sale_efp.py:
     2022-07-05 08:19:43 :  Output Setting...
     2022-07-05 08:19:43 :  efpcase.k is outputed...
 
-
 At the same time, corresponding information will be printed in the server side.
 
 .. code:: python
@@ -182,7 +182,7 @@ After running this file,the result file will be save in pyDyna/ansys/dyna/pre/Se
     (venv) C:\pyDyna\ansys\dyna\pre\Server\output> ls
 
 
-        目录: C:\pyDyna\ansys\dyna\pre\Server\output
+        Directory: C:\pyDyna\ansys\dyna\pre\Server\output
 
 
     Mode                 LastWriteTime         Length Name

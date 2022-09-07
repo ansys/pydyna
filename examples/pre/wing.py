@@ -1,6 +1,6 @@
 """
 Wing example
-===========
+=============
 
 This example demonstrates how to create an Wing input deck.
 
