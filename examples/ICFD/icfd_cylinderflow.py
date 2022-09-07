@@ -19,7 +19,7 @@ if __name__ == "__main__":
     #Import the initial mesh data(nodes and elements)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep
-    fns.append(path + "mesh.k")
+    fns.append(path + os.sep + "icfd_cylinderflow" + os.sep + "mesh.k")
     icfd.open_files(fns)
 
     #Set total time of simulation

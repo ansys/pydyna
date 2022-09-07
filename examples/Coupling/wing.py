@@ -20,7 +20,7 @@ if __name__ == "__main__":
     icfd = DynaICFD(hostname = hostname)
     dem = DynaDEM(hostname = hostname)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep + "icfd_dem" + os.sep
+    path = os.getcwd() + os.sep + "input" + os.sep + "wing" + os.sep
     fns.append(path + "main.k")
     fns.append(path + "fe-rig_mesh2.k")
     fns.append(path + "p22a-unts.k")

@@ -19,7 +19,7 @@ if __name__ == "__main__":
         hostname = sys.argv[1]
     iga = DynaIGA(hostname=hostname)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep
+    path = os.getcwd() + os.sep + "input" + os.sep + "iga_sample" + os.sep
     fns.append(path + "maino.k")
     fns.append(path + "rkrwelds.key")
     fns.append(path + "27parts.key")
