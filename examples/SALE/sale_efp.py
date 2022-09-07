@@ -17,7 +17,7 @@ if __name__ == "__main__":
         hostname = sys.argv[1]
     #Import the initial mesh data(nodes and elements)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep+"sale"+os.sep
+    path = os.getcwd() + os.sep + "input" + os.sep+"sale_efp"+os.sep
     fns.append(path + "efpcase.k")
     efp = DynaSALE(hostname=hostname,filenames=fns)
 

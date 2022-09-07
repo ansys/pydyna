@@ -21,7 +21,7 @@ if __name__ == "__main__":
     camry = DynaBase(hostname=hostname)
     #Import the initial mesh data(nodes and elements)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep+ "implicit" + os.sep+ "camry_rc" + os.sep
+    path = os.getcwd() + os.sep + "input" + os.sep+ "camry_rc" + os.sep
     fns.append(path + "Camry_RC_main.k")
     fns.append(path + "501_RIG_BAR_roof_crush_platen5.key")
     fns.append(path + "Camry_V1_NoSusAndPowerTrain_impl7.k")

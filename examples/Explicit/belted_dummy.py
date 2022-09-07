@@ -8,7 +8,8 @@ This example show how to create an Belted dummy model with Pydyna-pre module
 import os
 import sys
 
-from pydyna.dynabase import DynaBase
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
+from pre.dynabase import DynaBase
 
 if __name__ == "__main__":
     hostname = "localhost"

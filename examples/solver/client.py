@@ -1,9 +1,11 @@
+"""
+Sample interactive client for DynaSolver.
+=========================================
+
+Commands are read from an optional file, or interactively,and sent to DYNA via gRPC
+"""
+
 #!/usr/bin/python3
-#
-# Sample interactive client for DynaSolver.
-# Commands are read from an optional file, or interactively,
-# and sent to DYNA via gRPC
-#
 import os
 import sys
 import ansys.dyna.solver as solver

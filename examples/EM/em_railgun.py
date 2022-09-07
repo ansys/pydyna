@@ -19,7 +19,7 @@ if __name__ == "__main__":
         hostname = sys.argv[1]
     railgun = DynaEM(hostname=hostname)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep + "em" + os.sep
+    path = os.getcwd() + os.sep + "input" + os.sep + "em_railgun" + os.sep
     fns.append(path + "em_railgun.k")
     railgun.open_files(fns)
     
