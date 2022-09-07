@@ -73,13 +73,13 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # -- Options for HTML output -------------------------------------------------
-html_short_title = html_title = "PyAEDT"
+html_short_title = html_title = "PyDyna"
 html_show_sourcelink = True
 html_theme = "ansys_sphinx_theme"
 html_logo = pyansys_logo_black
 
 html_theme_options = {
-    "github_url": "https://github.com/pyansys/pyaedt",
+    "github_url": "https://github.com/pyansys/pydyna",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "additional_breadcrumbs": [
