@@ -1,4 +1,4 @@
-Getting_Started
+Getting Started
 ===============
 
 Installation

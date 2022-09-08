@@ -1,4 +1,9 @@
-"""Module to create IGA dyna input deck"""
+"""
+DEM API
+==========
+
+Module to create DEM dyna input deck
+"""
 
 import logging
 
@@ -8,7 +13,7 @@ from .dynabase import *
 class DynaDEM(DynaBase):
     """Contains methods to create keyword related to discrete element method"""
 
-    def __init__(self, hostname = 'localhost'):
+    def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
 
     def create_control_des(
