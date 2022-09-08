@@ -51,14 +51,6 @@ if __name__ == "__main__":
     #icfd.create_section_icfd(sid=1)
     mat = MatICFD(flow_density=1.28e-9,dynamic_viscosity=17e-9)
 
-    pids = [1, 2, 3]
-    icfd.mesh_embed_shell(volid=1, pids=pids)
-    parameter = [-950, -80, -200, -600, 150, 30]
-    icfd.mesh_create_size_shape(
-        "BOX", force=1, method=0, msize=3.2, parameter=parameter
-    )
-
-
     slot = ICFDPart(129)
     slot.set_material(mat)
     slot.set_prescribed_velocity(dof=DOF.X,motion=Curve(x=[0, 1e3],y=[0, 0]))
@@ -97,6 +89,8 @@ if __name__ == "__main__":
     partvol.set_material(mat) 
 
     meshvol = MeshedVolume(surfaces = [125, 126, 127, 128, 129])
+    meshvol.embed_shell([1, 2, 3])
+    meshvol.meshsize_box(size=3.2,min_point=Point(-950, -80, -200),max_point=Point(-600, 150, 30))
 
     # fe-rig.k
     icfd.create_control_accuracy(osu=1, inn=4)
