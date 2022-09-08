@@ -1,3 +1,10 @@
+"""
+Dyna solver API
+=============
+
+Define Dyna solver API
+"""
+
 #!/usr/bin/python3
 from . import dynasolver_pb2
 from . import dynasolver_pb2_grpc
