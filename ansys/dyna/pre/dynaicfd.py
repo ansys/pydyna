@@ -1,4 +1,9 @@
-"""Module to create ICFD dyna input deck"""
+"""
+ICFD API
+==========
+
+Module to create Incompressible Computational Fluid Dynamics(ICFD) dyna input deck
+"""
 
 import logging
 
@@ -8,12 +13,11 @@ from .dynabase import *
 class DynaICFD(DynaBase):
     """Contains methods to create keyword related to ICFD"""
 
-    def __init__(self, hostname = 'localhost'):
+    def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
         self.create_section_icfd(1)
         self.timestep = 0
         self.termination = 1e28
-
 
     def set_timestep(self, timestep=0):
         """Set time step for the fluid problem.
@@ -416,7 +420,9 @@ class DynaICFD(DynaBase):
 
     def save_file(self):
         """Save keyword files."""
-        self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=self.termination, dt=self.timestep))
+        self.stub.ICFDCreateControlTime(
+            ICFDControlTimeRequest(tim=self.termination, dt=self.timestep)
+        )
         logging.info("ICFD control time Created...")
         self.create_section_icfd(1)
         for obj in ICFDPart.partlist:
@@ -428,15 +434,16 @@ class DynaICFD(DynaBase):
         logging.info(msg)
         return ret
 
-#----second edition---------
+
+# ----second edition---------
 class Compressible(Enum):
     VACUUM = 0
     FULLY_INCOMPRESSIBLE_FLUID = 1
 
-class MatICFD():
-    """ Specify physical properties for the fluid material.
+class MatICFD:
+    """Specify physical properties for the fluid material.
     Parameters
-        ----------
+    --------------
         mid : int
             Material ID.
         flag : int
@@ -448,36 +455,50 @@ class MatICFD():
         dynamic_viscosity : float
             Dynamic viscosity.
     """
-    def __init__(self,flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID,flow_density=0,dynamic_viscosity=0):  
+
+    def __init__(
+        self,
+        flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID,
+        flow_density=0,
+        dynamic_viscosity=0,
+    ):
         self.stub = DynaBase.get_stub()
-        ret = self.stub.ICFDCreateMat(ICFDMatRequest(flg=flag.value, ro=flow_density, vis=dynamic_viscosity))
+        ret = self.stub.ICFDCreateMat(
+            ICFDMatRequest(flg=flag.value, ro=flow_density, vis=dynamic_viscosity)
+        )
         self.material_id = ret.id
         logging.info(f"ICFD material {self.material_id} Created...")
+
 
 class DOF(Enum):
     X = 1
     Y = 2
     Z = 3
 
+
 class Vel(Enum):
     LINEAR_VELOCITY = 1
     ANGULAR_VELOCITY = 2
 
+
 class ICFDPart:
     """Define part for the incompressible flow solver."""
+
     partlist = []
-    def __init__(self,id):
+
+    def __init__(self, id):
         self.stub = DynaBase.get_stub()
-        self.id=id
-        self.secid=1
-        self.mid=0
+        self.id = id
+        self.secid = 1
+        self.mid = 0
         ICFDPart.partlist.append(self)
 
-    def set_material(self,mat):
+    def set_material(self, mat):
         """Set material"""
         self.mid = mat.material_id
 
-    def set_prescribed_velocity(self,motion,dof = DOF.X,velocity_flag = Vel.LINEAR_VELOCITY):
+    def set_prescribed_velocity(
+        self, motion, dof=DOF.X, velocity_flag=Vel.LINEAR_VELOCITY):
         """Impose the fluid velocity on the boundary.
 
         Parameters
@@ -495,16 +516,19 @@ class ICFDPart:
             EQ.3: Parabolic velocity profile.
             EQ.4: Activates synthetic turbulent field on part.
         motion : Curve
-            Load curve used to describe motion value versus time."""
+            Load curve used to describe motion value versus time.
+        """
         motion.create(self.stub)
         lcid = motion.id
         ret = self.stub.ICFDCreateBdyPrescribedVel(
-            ICFDBdyPrescribedVelRequest(pid=self.id, dof=dof.value, vad=velocity_flag.value, lcid=lcid)
+            ICFDBdyPrescribedVelRequest(
+                pid=self.id, dof=dof.value, vad=velocity_flag.value, lcid=lcid
+            )
         )
         logging.info("ICFD boundary prescribed velocity Created...")
 
     def set_prescribed_pre(self, pressure):
-        """ Impose a fluid pressure on the boundary.
+        """Impose a fluid pressure on the boundary.
 
         Parameters
         ----------
@@ -518,7 +542,7 @@ class ICFDPart:
         )
         logging.info("ICFD boundary prescribed pressure Created...")
         return ret
-    
+
     def set_free_slip(self):
         """Specify the fluid boundary with free-slip boundary condition"""
         ret = self.stub.ICFDCreateBdyFreeSlip(ICFDBdyFreeSlipRequest(pid=self.id))
@@ -537,7 +561,7 @@ class ICFDPart:
         logging.info("ICFD database drag Created...")
         return ret
 
-    def set_boundary_layer(self,number=3):
+    def set_boundary_layer(self, number=3):
         """define a boundary-layer mesh as a refinement on volume-mesh"""
         """
         Parameters
@@ -545,33 +569,36 @@ class ICFDPart:
         number : int
             Number of elements normal to the surface (in the boundary layer).
         """
-        ret = self.stub.MESHCreateBl(MeshBlRequest(pid=self.id, nelth=number-1))
+        ret = self.stub.MESHCreateBl(MeshBlRequest(pid=self.id, nelth=number - 1))
         logging.info("MESH boundary-layer Created...")
         return ret
 
     def set_property(self):
         secid = 1
         self.stub.SetICFDPartProperty(
-            ICFDPartPropertyRequest(pid=self.id,secid=secid,mid=self.mid)
+            ICFDPartPropertyRequest(pid=self.id, secid=secid, mid=self.mid)
         )
+
 
 class ICFDVolumePart:
     """Assigns material properties to the nodes enclosed by surface ICFD parts.
     Parameters
-        ----------
+    --------------
     surfaces : list
         List of Part IDs for the surface elements that define the volume mesh.
     """
+
     partlist = []
-    def __init__(self,surfaces):
+
+    def __init__(self, surfaces):
         self.stub = DynaBase.get_stub()
-        self.id=id
-        self.secid=1
-        self.mid=0
+        self.id = id
+        self.secid = 1
+        self.mid = 0
         self.surfaces = surfaces
         ICFDVolumePart.partlist.append(self)
 
-    def set_material(self,mat):
+    def set_material(self, mat):
         """Set material"""
         self.mid = mat.material_id
 
@@ -583,15 +610,17 @@ class ICFDVolumePart:
         logging.info(f"ICFD part volume {self.id} Created...")
         return ret
 
+
 class MeshedVolume:
     """Defines the volume space that will be meshed.
 
     Parameters
-        ----------
+    --------------
     surfaces : list
             list of Part IDs for the surface elements that are used to define the volume.
     """
-    def __init__(self,surfaces):
+
+    def __init__(self, surfaces):
         self.surfaces = surfaces
         self.stub = DynaBase.get_stub()
         ret = self.stub.MESHCreateVolume(MeshVolumeRequest(pids=self.surfaces))

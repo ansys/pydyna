@@ -1,4 +1,9 @@
-"""Module to create IGA dyna input deck"""
+"""
+IGA API
+==========
+
+Module to create IGA dyna input deck
+"""
 
 import logging
 
@@ -8,7 +13,7 @@ from .dynabase import *
 class DynaIGA(DynaBase):
     """Contains methods to create keyword related to IGA"""
 
-    def __init__(self, hostname = 'localhost'):
+    def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
         self.casetype = CaseType.IGA
 
