@@ -1,8 +1,9 @@
-PyDyna-pre apps
+PyDyna-pre APIs
 ================
 The PyDyna-pre API includes classes for apps and modules.
 
 .. autosummary::
+   :template: custom-module-template.rst
    :toctree: _autosummary
    
    pre.dynabase
@@ -12,3 +13,6 @@ The PyDyna-pre API includes classes for apps and modules.
    pre.dynaiga
    pre.dynamaterial
    pre.dynasale
+   
+
+  

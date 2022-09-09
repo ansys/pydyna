@@ -5,7 +5,6 @@ PyDyna Documentation  0.0.1
 
 .. toctree::
    :hidden:
-   :maxdepth: 3
 
    Resources/Getting_Started
    Resources/User_Guide
