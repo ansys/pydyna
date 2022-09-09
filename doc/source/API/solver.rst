@@ -1,4 +1,4 @@
-PyDyna-solver apps
+PyDyna-solver APIs
 ===================
 The PyDyna-solver API includes classes for apps and modules.
 

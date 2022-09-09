@@ -7,7 +7,7 @@ for Dyna apps and modules. Use the search feature or click links
 to view API documentation.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
 
    pre
    solver
