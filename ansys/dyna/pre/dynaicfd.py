@@ -435,7 +435,6 @@ class DynaICFD(DynaBase):
         return ret
 
 
-# ----second edition---------
 class Compressible(Enum):
     VACUUM = 0
     FULLY_INCOMPRESSIBLE_FLUID = 1
@@ -460,8 +459,7 @@ class MatICFD:
         self,
         flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID,
         flow_density=0,
-        dynamic_viscosity=0,
-    ):
+        dynamic_viscosity=0):
         self.stub = DynaBase.get_stub()
         ret = self.stub.ICFDCreateMat(
             ICFDMatRequest(flg=flag.value, ro=flow_density, vis=dynamic_viscosity)
@@ -615,7 +613,7 @@ class MeshedVolume:
     """Defines the volume space that will be meshed.
 
     Parameters
-    --------------
+    ----------
     surfaces : list
             list of Part IDs for the surface elements that are used to define the volume.
     """
@@ -668,3 +666,5 @@ class MeshedVolume:
             )
         )
         logging.info("MESH size shape Created...")
+        
+        

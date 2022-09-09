@@ -34,11 +34,11 @@ class UnexpectedResponse(Exception):
 
 
 class DynaSolver:
-    """Class for the gRPC client side of LSDYNA"""
+    """Class for the gRPC client side of LSDYNA."""
     logger = None
 
     def __init__(self, hostname, port):
-        """Create client instance connected to the hostname (or ip) and port"""
+        """Create client instance connected to the hostname (or ip) and port."""
         self.hostname = hostname
         self.port = port
         self.channel = grpc.insecure_channel(hostname + ":" + port)
@@ -64,7 +64,7 @@ class DynaSolver:
         return 1
 
     def _check_return(self, response):
-        """Internally used routine for checking command response"""
+        """Internally used routine for checking command response."""
         if(response.tag == tag.ACK):
             return
         if(response.tag == tag.NOTRUNNING):
@@ -78,7 +78,7 @@ class DynaSolver:
         return
 
     def _set_client_log_level(self, levelname):
-        """Internally used routine to set logging level on the client"""
+        """Internally used routine to set logging level on the client."""
         if(levelname in ('DEBUG', 'INFO', 'WARNING', 'ERROR')):
             self.logger.setLevel(levelname)
         else:
@@ -87,20 +87,20 @@ class DynaSolver:
                              % levelname)
 
     def _set_server_log_level(self, levelname):
-        """Internally used routine to set logging level on the server"""
+        """Internally used routine to set logging level on the server."""
         request = dynasolver_pb2.LogLevel()
         request.level = bytes(levelname, 'utf-8')
         self.stub.log_level(request)
 
     def _set_log_level(self, levelname):
         """Internally used routine to set logging level of both the
-        server and the client"""
+        server and the client."""
         self._set_client_log_level(levelname)
         self._set_server_log_level(levelname)
 
     def list_files(self, subname=None):
         """Return size information about one or more files in the LSDYNA
-        working directory
+        working directory.
 
         Parameters
         ----------
@@ -110,7 +110,7 @@ class DynaSolver:
 
         Returns
         -------
-        An array is of (filename, size in bytes) pairs
+        An array is of (filename, size in bytes) pairs.
         """
         self.logger.debug("list_files: subname=%s" % subname)
         request = dynasolver_pb2.DynaSolverFileRequest()
@@ -125,7 +125,7 @@ class DynaSolver:
 
     def node(self, n):
         """Return size information about one or more files in the Dyna
-        working directory
+        working directory.
 
         Parameters
         ----------
@@ -152,11 +152,11 @@ class DynaSolver:
         return (None, None)
 
     def pause(self):
-        """Pause LSDYNA execution
+        """Pause LSDYNA execution.
 
         Execution will stop until told to resume or quit.  Most "switch"
         commands will result in 1 cycle being executed so that the switch can
-        be handled, and then LSDYNA will pause again
+        be handled, and then LSDYNA will pause again.
         """
         self.logger.debug("pause")
         request = dynasolver_pb2.DynaSolverRelay()
@@ -166,11 +166,11 @@ class DynaSolver:
         return
 
     def pull(self, fname):
-        """Alias for "download", for backward compatibility"""
+        """Alias for "download", for backward compatibility."""
         return self.download(fname)
 
     def download(self, fname):
-        """Download a file from the gRPC server
+        """Download a file from the gRPC server.
 
         Parameters
         ----------
@@ -199,21 +199,21 @@ class DynaSolver:
         return fsize
 
     def push(self, fname):
-        """Alias for "upload", for backward compatibility"""
+        """Alias for "upload", for backward compatibility."""
         return self.upload(fname)
 
     def upload(self, fname):
-        """Upload a file to the LSDYNA working directory
+        """Upload a file to the LSDYNA working directory.
 
         Parameters
         ----------
         fname, string, required : The local name of the file to be sent.  The
-            contents of this file are copied into the LSDYNA working directory,
-            in a file of the same name, but with any path components removed.
+        contents of this file are copied into the LSDYNA working directory,
+        in a file of the same name, but with any path components removed.
 
         Returns
         -------
-        Returns the number of bytes sent
+        Returns the number of bytes sent.
         """
         #
         # This request sends a stream of data to the server, and
@@ -227,7 +227,7 @@ class DynaSolver:
         def push_packets(fname):
             nonlocal fsize
             request = dynasolver_pb2.DynaSolverFileData()
-# Only send the base file name, not the whole path!
+            # Only send the base file name, not the whole path!
             bfname = os.path.split(fname)[1]
             request.b = bytes(bfname, 'utf-8')
             yield request
@@ -248,19 +248,19 @@ class DynaSolver:
         return fsize
 
     def quit(self):
-        """Terminate the gRPC server program.  This does not terminate LSDYNA
+        """Terminate the gRPC server program.  This does not terminate LSDYNA.
 
         If the server is running inside a container, it will ignore this
         command and continue running.
         """
         self.logger.debug('quit')
         request = dynasolver_pb2.QuitServer()
-# ALWAYS returns ACK, so don't bother checking
+        # ALWAYS returns ACK, so don't bother checking
         self.stub.quit_server(request)
         return
 
     def resume(self, cycle=None, time=None):
-        """ Resume execution
+        """ Resume execution.
 
         Parameters
         ----------
@@ -302,7 +302,7 @@ class DynaSolver:
 
         Parameters
         ----------
-        args, string, required : The command line to pass to LSDYNA
+        args, string, required : The command line to pass to LSDYNA.
         """
         self.logger.debug('run: %s' % args)
         request = dynasolver_pb2.DynaSolverRelay()
@@ -313,12 +313,12 @@ class DynaSolver:
         return
 
     def setlc(self, lc, value):
-        """ Set the given load curve to a constant given value
+        """ Set the given load curve to a constant given value.
 
         Parameters
         ----------
         lc, integer, required : The user ID of the load curve to set
-        value, real, required : The value to set the load curve to
+        value, real, required : The value to set the load curve to.
         """
         self.logger.debug('setlc: %d %f' % (lc, value))
         request = dynasolver_pb2.DynaSolverRelay()
@@ -361,7 +361,7 @@ class DynaSolver:
         return
 
     def switch(self, args):
-        """Send a "sense switch" to LSDYNA
+        """Send a "sense switch" to LSDYNA.
 
         Parameters
         ----------
@@ -384,12 +384,12 @@ class DynaSolver:
         return ""
 
     def tail(self, which=1, how=2, queuesize=0):
-        """Monitor the stdout or stderr of the running job
+        """Monitor the stdout or stderr of the running job.
 
         Parameters
         ----------
         which, integer, default=1 : which stream to monitor.  If which=1,
-            stdout is used, otherwise stderr.
+        stdout is used, otherwise stderr.
 
         how, integer, default=2 : how the file data should be handled.
             0 : the file contents are printed to stdout and this
@@ -430,7 +430,7 @@ class DynaSolver:
             sys.stdout.flush()
 
     def _tail2(self, which, q, how):
-        """Read packets of stdout/stderr data and place them in a queue
+        """Read packets of stdout/stderr data and place them in a queue.
 
         Parameters
         ----------
@@ -442,7 +442,7 @@ class DynaSolver:
         how : how to process the data
             1 : place each received packet into the queue as a string
             2 : convert the received data to individual lines of text
-                and put those in the queue
+                and put those in the queue.
         """
 #
 # This makes a single request, but gets a stream of data back.
@@ -475,7 +475,7 @@ class DynaSolver:
         q.put(None)
 
     def time(self):
-        """ Return the current cycle count and simulation time
+        """ Return the current cycle count and simulation time.
 
         Parameters
         ----------
@@ -483,7 +483,7 @@ class DynaSolver:
 
         Returns
         -------
-        A (cycle_count, simulation_time) pair
+        A (cycle_count, simulation_time) pair.
         """
         self.logger.debug('time')
         request = dynasolver_pb2.DynaSolverRelay()
@@ -521,7 +521,7 @@ class DynaSolver:
         "start" number of processors               start 5
         "switch" then switch text                  switch sw2.
         "tail" then 1 for stdout, 2 for stderr     tail 1
-        "time" (no arguments)                      time
+        "time" (no arguments)                      time.
         """
         self.logger.debug('send: %s' % cmdin)
         try:
@@ -624,14 +624,14 @@ class DynaSolver:
 
     def runfile(self, fname):
         """
-        Read command lines from the file given, and execute them
+        Read command lines from the file given, and execute them.
 
         Each line is read from the file and echoed to the screen.  You
         must hit the "enter" key to trigger execution of the command.
 
         Parameters
         ----------
-        fname, string, required : The file to read commands from
+        fname, string, required : The file to read commands from.
         """
         f = open(fname, "r")
         cmds = [x.strip() for x in f.readlines()]
