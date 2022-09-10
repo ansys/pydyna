@@ -7,9 +7,10 @@ build up ansys-dyna input deck, submit to solver and finally post processing the
 
 Project Overview
 ----------------
-There are 3 related packages here, all under the ansys/dyna/ directory.
+There are 2 related packages here, all under the ansys/dyna/ directory.
 
-pre and post are for code related to pre and post processing support for LS-DYNA.
+pre contains highly abstracted APIs for setting up a LS-DYNA input deck, so far, 
+it includes DynaMech, DynaIGA, DynaICFD, DynaSALE, DynaEM, DynaAirbag and so on.
 
 solver contains code for interfacing with the LS-DYNA solver directly.
 As LS-DYNA is primarily a batch solver with very limited interactive
