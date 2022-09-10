@@ -11,7 +11,7 @@ from .dynabase import *
 
 
 class DynaEM(DynaBase):
-    """Contains methods to create keyword related to EM"""
+    """Contains methods to create keyword related to EM."""
 
     def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
@@ -20,6 +20,7 @@ class DynaEM(DynaBase):
         self, emsol=0, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000
     ):
         """Enable the EM solver and set its options.
+
         Parameters
         ----------
         emsol : int
@@ -59,6 +60,7 @@ class DynaEM(DynaBase):
 
     def create_em_timestep(self, tstype, dtconst):
         """Controls the EM time step and its evolution.
+
         Parameters
         ----------
         tstype : int
@@ -82,6 +84,7 @@ class DynaEM(DynaBase):
 
     def create_em_control_contact(self, emct=0, cconly=0, ctype=0, dtype=0):
         """the electromagnetism contact algorithms, which detects contact between conductors.
+
         Parameters
         ----------
         emct : int
@@ -116,6 +119,7 @@ class DynaEM(DynaBase):
         self, contid=0, dtype=0, psidm=0, psids=0, eps1=0.3, eps2=0.3, eps3=0.3, d0=0
     ):
         """Optional card used for defining and specifying options on electromagnetic contacts between two sets of parts.
+
         Parameters
         ----------
         contid : int
@@ -157,6 +161,7 @@ class DynaEM(DynaBase):
         self, segmentset=SegmentSet([[]]), settype=1, curtyp=1
     ):
         """Define Rogowsky coils to measure a global current vs time through a segment set or a node set.
+
         Parameters
         ----------
         rogid : int
@@ -188,6 +193,7 @@ class DynaEM(DynaBase):
 
     def create_circuit(self, circid, circtyp, lcid, sidcurr, sidvin, sidvout):
         """Define an electrical circuit.
+
         Parameters
         ----------
         circid : int
@@ -230,6 +236,7 @@ class DynaEM(DynaBase):
 
     def create_em_mat001(self, mid, mtype, sigma):
         """Define the electromagnetic material type and properties for a material whose permeability equals the free space permeability.
+
         Parameters
         ----------
         mid : int
@@ -257,6 +264,7 @@ class DynaEM(DynaBase):
 
     def create_em_mat002(self, mid, mtype, sigma, eosid, murel):
         """Define an electromagnetic material type and properties whose permeability is different than the free space permeability.
+
         Parameters
         ----------
         mid : int
@@ -287,6 +295,7 @@ class DynaEM(DynaBase):
 
     def create_em_solver_bemmat(self, matid):
         """Define the type of BEM matrices as well as the way they are assembled.
+
         Parameters
         ----------
         matid : int
@@ -308,6 +317,7 @@ class DynaEM(DynaBase):
         self, reltol=1e-6, maxite=1000, stype=2, precon=2, uselast=1, ncylbem=5000
     ):
         """Define the type of linear solver and pre-conditioner as well as tolerance for the EM_BEM solve.
+
         Parameters
         ----------
         reltol : int
@@ -355,6 +365,7 @@ class DynaEM(DynaBase):
         self, reltol=1e-3, maxite=1000, stype=1, precon=1, uselast=1, ncylbem=5000
     ):
         """Define some parameters for the EM FEM solver.
+
         Parameters
         ----------
         reltol : int
@@ -398,6 +409,7 @@ class DynaEM(DynaBase):
         self, mtype=0, stype=0, abstol=1e-6, reltol=1e-4, maxit=500
     ):
         """Replaces *EM_SOLVER_FEMBEM and turns on the monolithic FEM-BEM solver.
+
         Parameters
         ----------
         mtype : int
@@ -429,6 +441,7 @@ class DynaEM(DynaBase):
 
     def create_em_output(self, mats=0, matf=0, sols=0, solf=0):
         """Define the level of EM related output on the screen and in the messag file.
+
         Parameters
         ----------
         mats : int
@@ -467,6 +480,7 @@ class DynaEM(DynaBase):
 
     def create_em_database_globalenergy(self, outlv=0):
         """enables the output of global EM.
+
         Parameters
         ----------
         outlv : int
@@ -487,6 +501,7 @@ class DynaEM(DynaBase):
 
     def create_Permanent_magnet(self, id, partid, mtype, north, sourth, hc):
         """Defines a permanent magnet.
+
         Parameters
         ----------
         id : int
@@ -521,6 +536,7 @@ class DynaEM(DynaBase):
 
     def create_em_eos_permeability(self, eosid, eostype, lcid):
         """Define the parameters for the behavior of a material's permeability.
+
         Parameters
         ----------
         eosid : int
@@ -687,6 +703,7 @@ class Circuit:
 
     def set_current(self, current, current_inlet, current_outlet):
         """Define segment set for current.
+        
         Parameters
         ----------
         current : SegmentSet

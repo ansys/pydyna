@@ -6,7 +6,7 @@ import sys
 
 from ansys_sphinx_theme import pyansys_logo_black
 
-sys.path.insert(0,os.path.abspath('./../../ansys/dyna/'))
+sys.path.insert(0,os.path.abspath('./../../ansys/dyna'))
 
 # Project information
 project = 'pyansys_library_'
