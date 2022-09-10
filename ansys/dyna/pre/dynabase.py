@@ -396,10 +396,9 @@ class DynaBase:
         psfail=0,
         t10jtol=0.0,
         icoh=0,
-        tet13k=0,
-    ):
+        tet13k=0,):
         """Provides controls for solid element response.
-        Refer to: *CONTROL_SOLID
+
         Parameters
         ----------
         esort : int
@@ -440,7 +439,7 @@ class DynaBase:
 
     def create_control_output(self, npopt=0, neecho=0):
         """Set miscellaneous output parameters.
-        Refer to : *CONTROL_OUTPUT
+       
         Parameters
         ----------
         npopt : int
@@ -465,10 +464,9 @@ class DynaBase:
         return ret
 
     def create_control_contact(
-        self, rwpnal, shlthk=0, orien=1, ssthk=0, ignore=0, igactc=0
-    ):
-        """Change defaults for computation with contact surfaces
-        Refer to : *CONTROL_CONTACT
+        self, rwpnal, shlthk=0, orien=1, ssthk=0, ignore=0, igactc=0):
+        """Change defaults for computation with contact surfaces.
+        
         Parameters
         ----------
         shlthk : int
@@ -503,11 +501,9 @@ class DynaBase:
         return ret
 
     def create_database_binary(
-        self, filetype="D3PLOT", dt=0, maxint=3, ieverp=0, dcomp=1, nintsld=1
-    ):
+        self, filetype="D3PLOT", dt=0, maxint=3, ieverp=0, dcomp=1, nintsld=1):
         """Request binary output.
-        Refer to : *DATABASE_BINARY_*
-                   *DATABASE_EXTENT_BINARY
+        
         Parameters
         ----------
         dt : float
@@ -542,7 +538,8 @@ class DynaBase:
         return ret
 
     def create_database_ascii(self, type, dt=0.0, binary=1, lcur=0, ioopt=0):
-        """Create *DATABASE keyword
+        """Create *DATABASE keyword.
+        
         Parameters
         ----------
         type : string
@@ -567,10 +564,9 @@ class DynaBase:
         return ret
 
     def create_rigidwall_geom(
-        self, geomtype, motion, display, parameter, lcid, vx, vy, vz
-    ):
+        self, geomtype, motion, display, parameter, lcid, vx, vy, vz):
         """Define a rigid wall with an analytically described form.
-        Refer to : *RIGIDWALL_GEOMETRIC
+        
         Parameters
         ----------
         geomtype : int
@@ -608,6 +604,7 @@ class DynaBase:
 
     def create_rigidwall_planar(self, nsid, tail, head, nsidex=0, boxid=0, fric=0):
         """Define planar rigid walls with either finite or infinite size.
+        
         Parameters
         ----------
         nsid : int
@@ -639,7 +636,7 @@ class DynaBase:
 
     def create_init_vel(self, nsid, velocity):
         """Define initial nodal point velocities using nodal set ID.
-        Refer to:*INITIAL_VELOCITY
+
         Parameters
         ----------
         nsid : int
@@ -658,10 +655,9 @@ class DynaBase:
         return ret
 
     def create_init_vel_rigidbody(
-        self, pid, vx=0, vy=0, vz=0, vxr=0, vyr=0, vzr=0, lcid=0
-    ):
+        self, pid, vx=0, vy=0, vz=0, vxr=0, vyr=0, vzr=0, lcid=0):
         """Define the initial translational and rotational velocities at the center of gravity for a rigid body or a nodal rigid body
-        Refer to:*INITIAL_VELOCITY_RIGID_BODY
+
         Parameters
         ----------
         pid : int
@@ -700,11 +696,9 @@ class DynaBase:
         ny=0,
         nz=0,
         phase=0,
-        stime=0,
-    ):
+        stime=0,):
         """Define initial velocities for rotating and/or translating bodies.
-        Refer to:*INITIAL_VELOCITY_GENERATION
-                 *INITIAL_VELOCITY_GENERATION_START_TIME
+        
         Parameters
         ----------
         id : int
@@ -753,7 +747,8 @@ class DynaBase:
         return ret
 
     def create_definecurve(self, lcid, sfo, abscissa, ordinate):
-        """Create *DEFINE_CURVE keyword
+        """Create *DEFINE_CURVE keyword.
+        
         Parameters
         ----------
         lcid : int
@@ -777,7 +772,8 @@ class DynaBase:
         return ret
 
     def create_definevector(self, title, vid, tail, head):
-        """Create *DEFINE_VECTOR keyword
+        """Create *DEFINE_VECTOR keyword.
+        
         Parameters
         ----------
         vid : int
@@ -809,7 +805,7 @@ class DynaBase:
 
     def create_defineorientation(self, vid, iop, vector, node1, node2):
         """Define orientation vectors for discrete springs and dampers.
-        Refer to : *DEFINE_SD_ORIENTATION
+        
         Parameters
         ----------
         vid : int
@@ -841,9 +837,9 @@ class DynaBase:
         return ret
 
     def set_partproperty(
-        self, pid, secid=0, mid=0, eosid=0, hgid=0, grav=0, adpopt=0, tmid=0
-    ):
+        self, pid, secid=0, mid=0, eosid=0, hgid=0, grav=0, adpopt=0, tmid=0):
         """Reset property for *PART keyword
+        
         Parameters
         ----------
         pid : int
@@ -884,7 +880,7 @@ class DynaBase:
 
     def create_partset(self, sid, pids):
         """Define a set of parts with optional attributes.
-        Refer to:*SET_PART
+
         Parameters
         ----------
         sid : int
@@ -903,7 +899,7 @@ class DynaBase:
 
     def create_shellset(self, option, title, sid, eids):
         """Define a set of shell elements with optional identical or unique attributes.
-        Refer to: *SET_SHELL
+     
         Parameters
         ----------
         option : string
@@ -928,7 +924,7 @@ class DynaBase:
 
     def create_solidset(self, title, sid, ki):
         """Define a set of solid elements.
-        Refer to: *SET_SOLID
+        
         Parameters
         ----------
         title : string
@@ -949,7 +945,7 @@ class DynaBase:
 
     def create_nodeset(self, option, sid, entities, genoption=""):
         """Define a nodal set with some identical or unique attributes.
-        Refer to: *SET_NODE
+        
         Parameters
         ----------
         option : string
@@ -975,7 +971,7 @@ class DynaBase:
 
     def create_segmentset(self, sid, segments, solver="MECH"):
         """Define a nodal set with some identical or unique attributes.
-        Refer to: *SET_NODE
+        
         Parameters
         ----------
         sid : int
@@ -1006,7 +1002,7 @@ class DynaBase:
 
     def create_section_shell(self, secid, elform, thick, shrf=1.0, nip=2, propt=0):
         """Define section properties for shell elements.
-        Refer to:*SECTION_SHELL
+        
         Parameters
         ----------
         secid : int
@@ -1037,7 +1033,8 @@ class DynaBase:
         return ret
 
     def create_section_solid(self, title, secid, elform):
-        """Create *SECTION_SOLID keyword
+        """Create *SECTION_SOLID keyword.
+        
         Parameters
         ----------
         title : string
@@ -1059,10 +1056,9 @@ class DynaBase:
         return ret
 
     def create_section_discrete(
-        self, secid, dro=0, kd=0, v0=0, cl=0, fd=0, cdl=0, tdl=0
-    ):
+        self, secid, dro=0, kd=0, v0=0, cl=0, fd=0, cdl=0, tdl=0):
         """Defined spring and damper elements for translation and rotation.
-        Refer to : *SECTION_DISCRETE
+        
         Parameters
         ----------
         secid : int
@@ -1099,7 +1095,7 @@ class DynaBase:
 
     def create_hourglass(self, ghid, ihq, qm=0.1, q1=1.5, q2=0.06, qb=1e-9, qw=1e-9):
         """Create *HOURGLASS keyword
-        Parameters
+        
         ----------
         ghid : int
             Hourglass ID. A unique number or label must be specified.
@@ -1162,9 +1158,9 @@ class DynaBase:
         depth=2,
         bsort=10,
         frcfrq=1,
-        igap=1,
-    ):
+        igap=1,):
         """Define a contact interface in a 3D model.
+        
         Parameters
         ----------
         option1 : string
@@ -1251,10 +1247,9 @@ class DynaBase:
         sf=1.0,
         vid=0,
         birth=0,
-        death=1e28,
-    ):
+        death=1e28,):
         """Define an imposed nodal motion (velocity, acceleration, or displacement) on a node or a set of nodes.
-        Refer to:*BOUNDARY_PRESCRIBED_MOTION
+        
         Parameters
         ----------
         id : int
@@ -1318,7 +1313,7 @@ class DynaBase:
         death=1e20,
     ):
         """Define nodal single point constraints.
-        Refer to:*BOUNDARY_SPC
+       
         Parameters
         ----------
         id : int
@@ -1365,7 +1360,7 @@ class DynaBase:
 
     def create_constrained_extra_nodes(self, option="NODE", pid=0, nid=0, iflag=0):
         """Define extra nodes for rigid body.
-        Refer to:*CONSTRAINED_EXTRA_NODES
+        
         Parameters
         ----------
         option : string
@@ -1389,7 +1384,7 @@ class DynaBase:
 
     def create_constrained_joint(self, type, nodes, rps=1.0, damp=1.0):
         """Define a joint between two rigid bodies.
-        Refer to:*CONSTRAINED_JOINT
+        
         Parameters
         ----------
         type : string
@@ -1414,7 +1409,7 @@ class DynaBase:
 
     def create_load_body(self, option="X", lcid=0):
         """Define body force loads due to a prescribed base acceleration or angular velocity using global axes directions.
-        Refer to:*LOAD_BODY
+        
         Parameters
         ----------
         option : string
@@ -1433,7 +1428,7 @@ class DynaBase:
 
     def create_mat_rigid(self, mid, ro, e, pr, cmo=0, con1=0, con2=0):
         """Parts made from this material are considered to belong to a rigid body.
-        Refer to:*MAT_RIGID
+        
         Parameters
         ----------
         mid : int
@@ -1464,7 +1459,7 @@ class DynaBase:
 
     def create_mat_elastic(self, mid, ro, e, pr):
         """Parts made from this material are considered to belong to a rigid body.
-        Refer to:*MAT_RIGID
+       
         Parameters
         ----------
         mid : int
@@ -1487,7 +1482,7 @@ class DynaBase:
 
     def create_mat_fabric(self, mid, ro, ea, eb, prba, prab, gab):
         """This material is especially developed for airbag materials.
-        Refer to:*MAT_FABRIC
+        
         Parameters
         ----------
         mid : int
@@ -1520,7 +1515,7 @@ class DynaBase:
 
     def create_mat_spring_nonlinear_elastic(self, mid, lcid):
         """This material provides a nonlinear elastic translational and rotational spring with arbitrary force as a function of displacement and moment as a function of rotation.
-        Refer to:*MAT_SPRING_NONLINEAR_ELASTIC
+        
         Parameters
         ----------
         mid : int
@@ -1541,7 +1536,7 @@ class DynaBase:
 
     def create_mat_damper_viscous(self, mid, dc):
         """This material provides a linear translational or rotational damper located between two nodes.
-        Refer to : *MAT_DAMPER_VISCOUS
+        
         Parameters
         ----------
         mid : int
@@ -1560,7 +1555,7 @@ class DynaBase:
 
     def create_mat_damper_nonlinear_viscous(self, mid, lcdr):
         """This material provides a viscous translational damper with an arbitrary force as a function of velocity dependency or a rotational damper with an arbitrary moment as a function of rotational velocity dependency.
-        Refer to : *MAT_DAMPER_NONLINEAR_VISCOUS
+        
         Parameters
         ----------
         mid : int
@@ -1581,7 +1576,7 @@ class DynaBase:
 
     def create_damping_global(self, lcid=0, valdmp=0.0):
         """Define mass weighted nodal damping that applies globally to the nodes of deformable bodies and to the mass center of the rigid bodies.
-        Refer to:*DAMPING_GLOBAL
+  
         Parameters
         ----------
         lcid : int
@@ -1602,7 +1597,7 @@ class DynaBase:
 
     def set_part_damping_stiffness(self, pids, coef=0.0):
         """Assign stiffness damping coefficient by part ID or part set ID.
-        Refer to:*DAMPING_PART_STIFFNESS
+       
         Parameters
         ----------
         pids : list
@@ -1651,7 +1646,7 @@ class DynaBase:
 
     def create_general_keyword(self, opcode, keyworddata):
         """Create general keyword.
-        Parameters
+       
         ----------
         opcode : string
             keyword card name.
@@ -1699,6 +1694,7 @@ class DynaBase:
         abstat=0,
     ):
         """obtain output files containing results information.
+        
         Parameters
         ----------
         matsum : float
@@ -1912,9 +1908,9 @@ class SegmentSet:
     """Define a set of segments with optional identical or unique attributes.
 
     Parameters
-       ----------
-       segments : list [[point1,point2,point3,point4],[point5,point6,point7,point8]...]
-           Define segments.
+    ----------
+    segments : list [[point1,point2,point3,point4],[point5,point6,point7,point8]...]
+       Define segments.
     """
 
     def __init__(self, segments=[]):
@@ -1957,8 +1953,7 @@ class BoundaryCondition:
         rz=True,
         cid=0,
         birth=0,
-        death=1e20,
-    ):
+        death=1e20,):
         """Define nodal single point constraints.
 
         Parameters
@@ -2568,8 +2563,8 @@ class ContactSurface:
     def set_contact_thickness(self, thickness):
         """contact thickness for SURFA surface
 
-         Parameters
-        ----------
+        Parameters
+        -----------
         thickness : float
             Contact thickness.
         """
@@ -2754,6 +2749,7 @@ class Constraint:
 
     def create_spotweld(self, nodeid1, nodeid2):
         """Define massless spot welds between non-contiguous nodal pairs.
+        
         Parameters
         ----------
         nodeid1 : int
@@ -2818,15 +2814,15 @@ class RigidwallCylinder:
     """Define a rigid wall with a cylinder form.
 
     Parameters
-        ----------
-        tail : Point
-            The coordinate of tail of normal vector.
-        head : Point
-            The coordinate of head of normal vector.
-        radius : float
-            Radius of cylinder.
-        length : float
-            Length of cylinder.
+    ----------
+      tail : Point
+        The coordinate of tail of normal vector.
+      head : Point
+        The coordinate of head of normal vector.
+      radius : float
+        Radius of cylinder.
+      length : float
+        Length of cylinder.
     """
 
     rwlist = []
@@ -2881,15 +2877,15 @@ class RigidwallPlanar:
     """Define planar rigid walls with either finite or infinite size.
 
     Parameters
-        ----------
-        tail : Point
-            The coordinate of tail of normal vector.
-        head : Point
-            The coordinate of head of normal vector.
-        radius : float
-            Radius of cylinder.
-        length : float
-            Length of cylinder.
+    ----------
+      tail : Point
+        The coordinate of tail of normal vector.
+      head : Point
+        The coordinate of head of normal vector.
+      radius : float
+        Radius of cylinder.
+      length : float
+        Length of cylinder.
     """
 
     def __init__(
