@@ -6,19 +6,19 @@ Module to create IGA dyna input deck
 """
 
 import logging
-
 from .dynabase import *
 
 
 class DynaIGA(DynaBase):
-    """Contains methods to create keyword related to IGA"""
+    """Contains methods to create keyword related to IGA."""
 
     def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
         self.casetype = CaseType.IGA
 
     def create_section_igashell(self, secid, elform, shrf, thickness):
-        """Create *SECTION_IGA_SHELL keyword
+        """Create *SECTION_IGA_SHELL keyword.
+
         Parameters
         ----------
         secid : int

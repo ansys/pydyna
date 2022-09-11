@@ -1,6 +1,6 @@
 """
 Dyna solver API
-=============
+===============
 
 Define Dyna solver API
 """
@@ -15,6 +15,8 @@ import os
 import queue
 import sys
 import threading
+
+
 #
 # Define our own exceptions
 #
@@ -32,27 +34,26 @@ class UnexpectedResponse(Exception):
     pass
 #
 
-
 class DynaSolver:
     """Class for the gRPC client side of LSDYNA."""
-    logger = None
-
+    #logger = None
     def __init__(self, hostname, port):
         """Create client instance connected to the hostname (or ip) and port."""
         self.hostname = hostname
         self.port = port
         self.channel = grpc.insecure_channel(hostname + ":" + port)
         self.stub = dynasolver_pb2_grpc.DynaSolverCommStub(self.channel)
-        if DynaSolver.logger is None:
-            DynaSolver.logger = logging.getLogger("DynaSolver")
-            DynaSolver.logger.setLevel(logging.INFO)
-            fh = logging.FileHandler('DynaSolver.log')
-            fm = logging.Formatter('%(asctime)s - %(name)s - %(message)s',
-                                   '%m/%d/%Y %H:%M:%S')
-            fh.setFormatter(fm)
-            DynaSolver.logger.addHandler(fh)
-            DynaSolver.logger.propagate = False
-        self.logger = DynaSolver.logger
+        #if DynaSolver.logger is None:
+        #    DynaSolver.logger = logging.getLogger("DynaSolver")
+        #    DynaSolver.logger.setLevel(logging.INFO)
+        #    fh = logging.FileHandler('DynaSolver.log')
+        #    fm = logging.Formatter('%(asctime)s - %(name)s - %(message)s',
+        #                           '%m/%d/%Y %H:%M:%S')
+        #    fh.setFormatter(fm)
+        #    DynaSolver.logger.addHandler(fh)
+        #    DynaSolver.logger.propagate = False
+        #self.logger = DynaSolver.logger
+        self.logger = logging.getLogger("DynaSolver")
 
     def _argcheck(self, cmd, ngiven, nrequired):
         if(ngiven < nrequired):
