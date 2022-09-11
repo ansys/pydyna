@@ -20,9 +20,8 @@ class Air:
         initial_relative_volume=1.0,
         equation_coefficient=[0, 0, 0, 0, 0.4, 0.4, 0],
     ):
-        """Create material of air
-        refer to:*EOS_LINEAR_POLYNOMIAL
-                 *MAT_NULL
+        """Create material of air.
+
         Parameters
         ----------
         name : string
@@ -86,9 +85,7 @@ class Liner:
         volume_correction_coefficient=0.47,
         initial_internal_energy=0,
     ):
-        """Create material of liner
-        refer to:*EOS_GRUNEISEN
-                 *MAT_JOHNSON_COOK
+        """Create material of liner.
 
         Returns
         -------
@@ -151,9 +148,8 @@ class HighExplosive:
         chapman_jouget_pressure=0.37,
         jwl_equation_parameters=[8.261, 0.1724, 4.55, 1.32, 0.38, 0.102, 1.0],
     ):
-        """Create material of high explosive
-        refer to:*EOS_JWL
-                 *MAT_HIGH_EXPLOSIVE_BURN
+        """Create material of high explosive.
+
         Parameters
         ----------
         name : string
@@ -190,7 +186,7 @@ class Vacuum:
     def __init__(self, estimated_material_density=1e-9):
         self.estimated_material_density = estimated_material_density
         """Create material null.
-        refer to:*MAT_VACUUM
+
         Parameters
         ----------
         name : string
@@ -215,7 +211,7 @@ class Vacuum:
 
 
 class MatNull:
-    """The Young's modulus and Poisson's ratio are used only for setting the contact stiffness"""
+    """The Young's modulus and Poisson's ratio are used only for setting the contact stiffness."""
 
     def __init__(self, mass_density=0, pressure_cutoff=0):
         self.ro = mass_density
@@ -235,7 +231,7 @@ class EMMATTYPE(Enum):
 
 
 class MatAdditional:
-    """Define additional properties for material"""
+    """Define additional properties for material."""
 
     def __init__(self):
         self.em = False
@@ -261,7 +257,7 @@ class MatAdditional:
 
 
 class MatElastic(MatAdditional):
-    """This is an isotropic hypoelastic material"""
+    """This is an isotropic hypoelastic material."""
 
     def __init__(self, mass_density=0, young_modulus=0, poisson_ratio=0.3):
         MatAdditional.__init__(self)
@@ -278,7 +274,7 @@ class MatElastic(MatAdditional):
 
 
 class MatRigid(MatAdditional):
-    """Parts made from this material are considered to belong to a rigid body"""
+    """Parts made from this material are considered to belong to a rigid body."""
 
     def __init__(
         self,
@@ -315,7 +311,7 @@ class MatRigid(MatAdditional):
 
 
 class MatPiecewiseLinearPlasticity:
-    """It is an elasto-plastic material with an arbitrary stress as a function of strain curve that can also have an arbitrary strain rate dependency"""
+    """It is an elasto-plastic material with an arbitrary stress as a function of strain curve that can also have an arbitrary strain rate dependency."""
 
     def __init__(
         self,
@@ -381,7 +377,7 @@ class MatModifiedPiecewiseLinearPlasticity:
 
 
 class MatSpotweld:
-    """Define material for spotweld"""
+    """Define material for spotweld."""
 
     def __init__(
         self,
@@ -422,7 +418,7 @@ class MatSpotweld:
 
 
 class MatFabric:
-    """This material is especially developed for airbag materials.
+    """Developed for airbag materials.
 
     Parameters
     ----------

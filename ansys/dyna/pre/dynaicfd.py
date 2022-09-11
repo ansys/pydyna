@@ -11,7 +11,7 @@ from .dynabase import *
 
 
 class DynaICFD(DynaBase):
-    """Contains methods to create keyword related to ICFD"""
+    """Contains methods to create keyword related to ICFD."""
 
     def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
@@ -41,7 +41,7 @@ class DynaICFD(DynaBase):
 
     def create_control_general(self, atype=0, mtype=0, dvcl=0, rdvcl=0):
         """Specify the type of CFD analysis.
-        refer to:*ICFD_CONTROL_GENERAL
+        
         Parameters
         ----------
         atype : int
@@ -65,8 +65,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_control_output(self, msgl):
-        """This keyword modifies default values for screen and file outputs related to this fluid solver only.
-        refer to:*ICFD_CONTROL_OUTPUT
+        """Modifies default values for screen and file outputs related to this fluid solver only.
+     
         Parameters
         ----------
         msgl : int
@@ -83,7 +83,7 @@ class DynaICFD(DynaBase):
 
     def create_control_turbulence(self, tmod):
         """Modify the default values for the turbulence model.
-        refer to:*ICFD_CONTROL_TURBULENCE
+  
         Parameters
         ----------
         tmod : int
@@ -101,8 +101,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_control_dem_coupling(self, ctype=0, bt=0, dt=1e28, sf=1):
-        """to activate coupling between the ICFD and DEM solvers.
-        refer to:*ICFD_CONTROL_DEM_COUPLING
+        """Activate coupling between the ICFD and DEM solvers.
+       
         Parameters
         ----------
         ctype : int
@@ -126,7 +126,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_section_icfd(self, sid):
-        """Create *ICFD_SECTION keyword
+        """Create *ICFD_SECTION keyword.
+        
         Parameters
         ----------
         sid : int
@@ -142,7 +143,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_mat_icfd(self, mid, flg=1, ro=0, vis=0):
-        """Create *ICFD_MAT keyword
+        """Create *ICFD_MAT keyword.
+        
         Parameters
         ----------
         mid : int
@@ -166,7 +168,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_part_icfd(self, pid, secid, mid):
-        """Create *ICFD_PART keyword
+        """Create *ICFD_PART keyword.
+        
         Parameters
         ----------
         pid : int
@@ -186,7 +189,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_part_vol(self, pid, secid, mid, spids):
-        """Create *ICFD_PART_VOL keyword
+        """Create *ICFD_PART_VOL keyword.
+        
         Parameters
         ----------
         pid : int
@@ -210,7 +214,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_db_drag(self, pid):
-        """Create *ICFD_DATABASE_DRAG keyword
+        """Create *ICFD_DATABASE_DRAG keyword.
+        
         Parameters
         ----------
         pid : int
@@ -226,7 +231,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_bdy_prescribed_vel(self, pid, dof, vad, lcid):
-        """Create *ICFD_BOUNDARY_PRESCRIBED_VEL keyword
+        """Create *ICFD_BOUNDARY_PRESCRIBED_VEL keyword.
+        
         Parameters
         ----------
         pid : int
@@ -258,7 +264,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_bdy_prescribed_pre(self, pid, lcid):
-        """Create *ICFD_BOUNDARY_PRESCRIBED_PRE keyword
+        """Create *ICFD_BOUNDARY_PRESCRIBED_PRE keyword.
+        
         Parameters
         ----------
         pid : int
@@ -278,7 +285,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_bdy_free_slip(self, pid):
-        """Create *ICFD_BOUNDARY_FREESLIP keyword
+        """Create *ICFD_BOUNDARY_FREESLIP keyword.
+        
         Parameters
         ----------
         pid : int
@@ -294,7 +302,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_bdy_non_slip(self, pid):
-        """Create *ICFD_BOUNDARY_NONSLIP keyword
+        """Create *ICFD_BOUNDARY_NONSLIP keyword.
+        
         Parameters
         ----------
         pid : int
@@ -310,7 +319,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_solver_tol_mmov(self, atol=1e-8, rtol=1e-8):
-        """This function allows the user to change the default tolerance values for the mesh movement algorithm.
+        """Allows the user to change the default tolerance values for the mesh movement algorithm.
+        
         Parameters
         ----------
         atol : float
@@ -329,7 +339,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def mesh_create_volume(self, volid, pids):
-        """Create *MESH_VOLUME keyword
+        """Create *MESH_VOLUME keyword.
+        
         Parameters
         ----------
         volid : int
@@ -347,7 +358,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def mesh_create_bl(self, pid, nelth):
-        """Create *MESH_BL keyword
+        """Create *MESH_BL keyword.
+        
         Parameters
         ----------
         pid : int
@@ -365,8 +377,8 @@ class DynaICFD(DynaBase):
         return ret
 
     def mesh_create_size_shape(self, sname, force, method, msize, parameter):
-        """Defines a local mesh size in specific zones corresponding to given geometrical shapes
-        Refer to : *MESH_SIZE_SHAPE
+        """Defines a local mesh size in specific zones corresponding to given geometrical shapes.
+
         Parameters
         ----------
         sname : string
@@ -399,7 +411,7 @@ class DynaICFD(DynaBase):
 
     def mesh_embed_shell(self, volid, pids):
         """Define surfaces that the mesher will embed inside the volume mesh.
-        refer to: *MESH_EMBEDSHELL
+        
         Parameters
         ----------
         volid : int
@@ -441,8 +453,9 @@ class Compressible(Enum):
 
 class MatICFD:
     """Specify physical properties for the fluid material.
+    
     Parameters
-    --------------
+    ----------
         mid : int
             Material ID.
         flag : int
@@ -542,7 +555,7 @@ class ICFDPart:
         return ret
 
     def set_free_slip(self):
-        """Specify the fluid boundary with free-slip boundary condition"""
+        """Specify the fluid boundary with free-slip boundary condition."""
         ret = self.stub.ICFDCreateBdyFreeSlip(ICFDBdyFreeSlipRequest(pid=self.id))
         logging.info("ICFD boundary freeslip Created...")
         return ret
@@ -560,8 +573,8 @@ class ICFDPart:
         return ret
 
     def set_boundary_layer(self, number=3):
-        """define a boundary-layer mesh as a refinement on volume-mesh"""
-        """
+        """define a boundary-layer mesh as a refinement on volume-mesh.
+        
         Parameters
         ----------
         number : int
@@ -580,8 +593,9 @@ class ICFDPart:
 
 class ICFDVolumePart:
     """Assigns material properties to the nodes enclosed by surface ICFD parts.
+    
     Parameters
-    --------------
+    ----------
     surfaces : list
         List of Part IDs for the surface elements that define the volume mesh.
     """
@@ -635,8 +649,8 @@ class MeshedVolume:
         self.embeded_surf = embeded
 
     def meshsize_box(self,size,min_point,max_point):
-        """Defines a local mesh size in specific zones corresponding to given geometrical shapes
-        Refer to : *MESH_SIZE_SHAPE
+        """Defines a local mesh size in specific zones corresponding to given geometrical shapes.
+        
         Parameters
         ----------
         size : float

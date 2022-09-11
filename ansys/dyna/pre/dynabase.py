@@ -113,7 +113,7 @@ class CaseType(Enum):
 
 
 class DynaBase:
-    """Contains methods to create general LS-DYNA keyword"""
+    """Contains methods to create general LS-DYNA keyword."""
 
     def __init__(self, hostname="localhost"):
         init_log("client.log")
@@ -133,7 +133,8 @@ class DynaBase:
         return DynaBase.stub
 
     def open_files(self, filenames):
-        """Open IGA model files
+        """Open IGA model files.
+
         Parameters
         ----------
         filenames : list
@@ -158,7 +159,8 @@ class DynaBase:
         return self.stub.LoadFile(LoadFileRequest())
 
     def set_timestep(self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0):
-        """Create *CONTROL_TIMESTEP keyword
+        """Create *CONTROL_TIMESTEP keyword.
+        
         Parameters
         ----------
         tssfac : float
@@ -182,9 +184,8 @@ class DynaBase:
         return ret
 
     def set_termination(self, termination_time):
-        """
-        Setting termination time to stop the job.
-        Refer to: *CONTROL_TERMINATION keyword
+        """Setting termination time to stop the job.
+    
         Parameters
         ----------
         termination_time : float
@@ -208,7 +209,7 @@ class DynaBase:
         explicit_accuracy_flag=Switch.OFF,
     ):
         """Define control parameters that can improve the accuracy of the calculation.
-        Refer to: *CONTROL_ACCURACY
+
         Parameters
         ----------
         objective_stress_updates : int
@@ -221,6 +222,7 @@ class DynaBase:
             Implicit accuracy flag.
         explicit_accuracy_flag : float
              Explicit accuracy parameter.EQ.0.0: Off,GT.0.0: On
+
         Returns
         -------
         bool
@@ -247,7 +249,7 @@ class DynaBase:
         initial_reference_geometry_energy=EnergyFlag.COMPUTED,
     ):
         """Provide controls for energy dissipation options.
-        Refer to: *CONTROL_ENERGY
+
         Parameters
         ----------
         hourglass_energy : enum
@@ -260,6 +262,7 @@ class DynaBase:
             Rayleigh energy dissipation option.EQ.1: Energy dissipation is not computed,EQ.2: Energy dissipation is computed
         initial_reference_geometry_energy : int
              Initial reference geometry energy option.EQ.1: Initial reference geometry energy is not computed,EQ.2: Initial reference geometry energy is computed
+
         Returns
         -------
         bool
@@ -281,7 +284,7 @@ class DynaBase:
         self, controltype=HourglassControl.STANDARD_VISCOSITY_FORM, coefficient=0.1
     ):
         """Redefine the default values of hourglass control type and coefficient.
-        Refer to: *CONTROL_HOURGLASS
+
         Parameters
         ----------
         controltype : enum
@@ -307,7 +310,7 @@ class DynaBase:
         bulk_viscosity_type=BulkViscosity.STANDARD_BULK_VISCOSITY,
     ):
         """Reset the default values of the bulk viscosity coefficients globally.
-        Refer to: *CONTROL_BULK_VISCOSITY
+
         Parameters
         ----------
         quadratic_viscosity_coeff : float
@@ -345,7 +348,7 @@ class DynaBase:
         irquad=0,
     ):
         """Provide controls for computing shell response.
-        Refer to: *CONTROL_SHELL
+
         Parameters
         ----------
         wrpang : float
@@ -366,6 +369,7 @@ class DynaBase:
             Projection method for the warping stiffness in the Belytschko-Tsay shell and the Belytschko-Wong-Chiang elements
         irquad : int
              In plane integration rule for the 8-node quadratic shell element.EQ.2: 2*2 Gauss quadrature,EQ.3: 3*3 Gauss quadrature.
+
         Returns
         -------
         bool
@@ -417,6 +421,7 @@ class DynaBase:
             Breaking LS-DYNA convention ICOH is interpreted digit-wise.
         tet13k : int
             Set to 1 to invoke a consistent tangent stiffness matrix for the pressure averaged tetrahedron.
+
         Returns
         -------
         bool
@@ -452,6 +457,7 @@ class DynaBase:
             EQ.1: Nodal printing is suppressed.
             EQ.2: Element printing is suppressed.
             EQ.3: Both nodal and element printing is suppressed.
+        
         Returns
         -------
         bool
@@ -466,7 +472,7 @@ class DynaBase:
     def create_control_contact(
         self, rwpnal, shlthk=0, orien=1, ssthk=0, ignore=0, igactc=0):
         """Change defaults for computation with contact surfaces.
-        
+
         Parameters
         ----------
         shlthk : int
@@ -539,7 +545,7 @@ class DynaBase:
 
     def create_database_ascii(self, type, dt=0.0, binary=1, lcur=0, ioopt=0):
         """Create *DATABASE keyword.
-        
+
         Parameters
         ----------
         type : string
@@ -552,6 +558,7 @@ class DynaBase:
             Optional curve ID specifying time interval between outputs.
         ioopt : int
             Flag to govern behavior of the output frequency load curve defined by LCUR.
+        
         Returns
         -------
         bool
@@ -566,7 +573,7 @@ class DynaBase:
     def create_rigidwall_geom(
         self, geomtype, motion, display, parameter, lcid, vx, vy, vz):
         """Define a rigid wall with an analytically described form.
-        
+
         Parameters
         ----------
         geomtype : int
@@ -604,7 +611,7 @@ class DynaBase:
 
     def create_rigidwall_planar(self, nsid, tail, head, nsidex=0, boxid=0, fric=0):
         """Define planar rigid walls with either finite or infinite size.
-        
+
         Parameters
         ----------
         nsid : int
@@ -656,7 +663,7 @@ class DynaBase:
 
     def create_init_vel_rigidbody(
         self, pid, vx=0, vy=0, vz=0, vxr=0, vyr=0, vzr=0, lcid=0):
-        """Define the initial translational and rotational velocities at the center of gravity for a rigid body or a nodal rigid body
+        """Define the initial translational and rotational velocities at the center of gravity for a rigid body or a nodal rigid body.
 
         Parameters
         ----------
@@ -668,6 +675,7 @@ class DynaBase:
             Initial rotational velocity at the center of gravity about the global x/y/z-axis.
         lcid : int
             Local coordinate system ID.
+            
         Returns
         -------
         bool
@@ -698,7 +706,7 @@ class DynaBase:
         phase=0,
         stime=0,):
         """Define initial velocities for rotating and/or translating bodies.
-        
+
         Parameters
         ----------
         id : int
@@ -717,6 +725,7 @@ class DynaBase:
             Flag determining basis for initialization of velocity.
         stime : float
             Define a time to initialize velocities after time zero.
+
         Returns
         -------
         bool
@@ -748,7 +757,7 @@ class DynaBase:
 
     def create_definecurve(self, lcid, sfo, abscissa, ordinate):
         """Create *DEFINE_CURVE keyword.
-        
+
         Parameters
         ----------
         lcid : int
@@ -773,7 +782,7 @@ class DynaBase:
 
     def create_definevector(self, title, vid, tail, head):
         """Create *DEFINE_VECTOR keyword.
-        
+
         Parameters
         ----------
         vid : int
@@ -805,7 +814,7 @@ class DynaBase:
 
     def create_defineorientation(self, vid, iop, vector, node1, node2):
         """Define orientation vectors for discrete springs and dampers.
-        
+
         Parameters
         ----------
         vid : int
@@ -834,48 +843,6 @@ class DynaBase:
             )
         )
         logging.info("DefineOrientation Created...")
-        return ret
-
-    def set_partproperty(
-        self, pid, secid=0, mid=0, eosid=0, hgid=0, grav=0, adpopt=0, tmid=0):
-        """Reset property for *PART keyword
-        
-        Parameters
-        ----------
-        pid : int
-            Part identification. A unique number must be specified..
-        secid : int
-            Section identification defined in a *SECTION keyword.
-        mid : int
-            Material identification defined in the *MAT section.
-        eosid : int
-            Equation of state identification defined in the *EOS section.
-        hgid : int
-            Hourglass/bulk viscosity identification defined in the *HOURGLASS Section.
-        grav : int
-            Flag to turn on gravity initialization according to *LOAD_DENSITY_DEPTH.
-        adpopt : int
-            Indicate if this part is adapted or not.
-        tmid : int
-            Thermal material property identification defined in the *MAT_THERMAL Section.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.SetPartProperty(
-            PartPropertyRequest(
-                pid=pid,
-                secid=secid,
-                mid=mid,
-                eosid=eosid,
-                hgid=hgid,
-                grav=grav,
-                adpopt=adpopt,
-                tmid=tmid,
-            )
-        )
         return ret
 
     def create_partset(self, sid, pids):
@@ -924,7 +891,7 @@ class DynaBase:
 
     def create_solidset(self, title, sid, ki):
         """Define a set of solid elements.
-        
+
         Parameters
         ----------
         title : string
@@ -945,7 +912,7 @@ class DynaBase:
 
     def create_nodeset(self, option, sid, entities, genoption=""):
         """Define a nodal set with some identical or unique attributes.
-        
+
         Parameters
         ----------
         option : string
@@ -956,6 +923,7 @@ class DynaBase:
             Option for GENERAL:ALL,NODE,PART
         entities : list
             Specified entity.
+
         Returns
         -------
         bool
@@ -971,7 +939,7 @@ class DynaBase:
 
     def create_segmentset(self, sid, segments, solver="MECH"):
         """Define a nodal set with some identical or unique attributes.
-        
+
         Parameters
         ----------
         sid : int
@@ -980,6 +948,7 @@ class DynaBase:
             Define segments.
         solver : string
             Name of solver using this set:MECH,CESE
+
         Returns
         -------
         bool
@@ -1002,7 +971,7 @@ class DynaBase:
 
     def create_section_shell(self, secid, elform, thick, shrf=1.0, nip=2, propt=0):
         """Define section properties for shell elements.
-        
+
         Parameters
         ----------
         secid : int
@@ -1011,6 +980,7 @@ class DynaBase:
             Element formulation options.
         thick : list [t1,t2,t3,t4]
             Shell thickness at node t1,t2,t3,t4
+
         Returns
         -------
         bool
@@ -1058,7 +1028,7 @@ class DynaBase:
     def create_section_discrete(
         self, secid, dro=0, kd=0, v0=0, cl=0, fd=0, cdl=0, tdl=0):
         """Defined spring and damper elements for translation and rotation.
-        
+
         Parameters
         ----------
         secid : int
@@ -1094,8 +1064,9 @@ class DynaBase:
         return ret
 
     def create_hourglass(self, ghid, ihq, qm=0.1, q1=1.5, q2=0.06, qb=1e-9, qw=1e-9):
-        """Create *HOURGLASS keyword
+        """Create *HOURGLASS keyword.
         
+        Parameters
         ----------
         ghid : int
             Hourglass ID. A unique number or label must be specified.
@@ -1160,7 +1131,7 @@ class DynaBase:
         frcfrq=1,
         igap=1,):
         """Define a contact interface in a 3D model.
-        
+
         Parameters
         ----------
         option1 : string
@@ -1249,7 +1220,7 @@ class DynaBase:
         birth=0,
         death=1e28,):
         """Define an imposed nodal motion (velocity, acceleration, or displacement) on a node or a set of nodes.
-        
+
         Parameters
         ----------
         id : int
@@ -1274,6 +1245,7 @@ class DynaBase:
             Time that the imposed motion/constraint is activated.
         death : float
             Time imposed motion/constraint is removed.
+
         Returns
         -------
         bool
@@ -1334,6 +1306,7 @@ class DynaBase:
             Insert 1 for rotational constraint about local x/y/z-axis.
         birth/death : float
             Activation/Deactivation time for SPC constraint.
+
         Returns
         -------
         bool
@@ -1371,6 +1344,7 @@ class DynaBase:
             Node or node set ID
         iflag : int
             This flag is meaningful if and only if the inertia properties of the Part ID are defined in PART_INERTIA.
+
         Returns
         -------
         bool
@@ -1396,6 +1370,7 @@ class DynaBase:
             Relative penalty stiffness.
         damp : int
             Damping scale factor on default damping value.
+
         Returns
         -------
         bool
@@ -1409,7 +1384,7 @@ class DynaBase:
 
     def create_load_body(self, option="X", lcid=0):
         """Define body force loads due to a prescribed base acceleration or angular velocity using global axes directions.
-        
+
         Parameters
         ----------
         option : string
@@ -1426,63 +1401,9 @@ class DynaBase:
         logging.info("Load body Created...")
         return ret
 
-    def create_mat_rigid(self, mid, ro, e, pr, cmo=0, con1=0, con2=0):
-        """Parts made from this material are considered to belong to a rigid body.
-        
-        Parameters
-        ----------
-        mid : int
-            Material identification.
-        ro : float
-            Mass density.
-        e : float
-            Young's modulus.
-        pr : float
-            Poisson's ratio.
-        com : int
-            Center of mass constraint option.EQ.1: constraints applied in global directions,EQ.0: no constraints,EQ.-1: constraints applied in local directions.
-        con1 : int
-            Global translational constraint.
-        con2 : int
-            Global rotational constraint.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateMatRigid(
-            MatRigidRequest(mid=mid, ro=ro, e=e, pr=pr, cmo=cmo, con1=con1, con2=con2)
-        )
-        logging.info("Material Rigid Created...")
-        return ret
-
-    def create_mat_elastic(self, mid, ro, e, pr):
-        """Parts made from this material are considered to belong to a rigid body.
-       
-        Parameters
-        ----------
-        mid : int
-            Material identification.
-        ro : float
-            Mass density.
-        e : float
-            Young's modulus.
-        pr : float
-            Poisson's ratio.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateMatElastic(MatElasticRequest(mid=mid, ro=ro, e=e, pr=pr))
-        logging.info("Material Elastic Created...")
-        return ret
-
     def create_mat_fabric(self, mid, ro, ea, eb, prba, prab, gab):
-        """This material is especially developed for airbag materials.
-        
+        """Developed for airbag materials.
+
         Parameters
         ----------
         mid : int
@@ -1514,7 +1435,7 @@ class DynaBase:
         return ret
 
     def create_mat_spring_nonlinear_elastic(self, mid, lcid):
-        """This material provides a nonlinear elastic translational and rotational spring with arbitrary force as a function of displacement and moment as a function of rotation.
+        """Provides a nonlinear elastic translational and rotational spring with arbitrary force as a function of displacement and moment as a function of rotation.
         
         Parameters
         ----------
@@ -1535,7 +1456,7 @@ class DynaBase:
         return ret
 
     def create_mat_damper_viscous(self, mid, dc):
-        """This material provides a linear translational or rotational damper located between two nodes.
+        """Provides a linear translational or rotational damper located between two nodes.
         
         Parameters
         ----------
@@ -1554,7 +1475,7 @@ class DynaBase:
         return ret
 
     def create_mat_damper_nonlinear_viscous(self, mid, lcdr):
-        """This material provides a viscous translational damper with an arbitrary force as a function of velocity dependency or a rotational damper with an arbitrary moment as a function of rotational velocity dependency.
+        """Provides a viscous translational damper with an arbitrary force as a function of velocity dependency or a rotational damper with an arbitrary moment as a function of rotational velocity dependency.
         
         Parameters
         ----------
@@ -1646,33 +1567,30 @@ class DynaBase:
 
     def create_general_keyword(self, opcode, keyworddata):
         """Create general keyword.
-       
+
+        Parameters
         ----------
         opcode : string
             keyword card name.
         keyworddata : string
             keyword data.
 
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
+        Examples
+        --------
+        create a *INITIAL_VELOCITY keyword.
 
-        example
-            create a *INITIAL_VELOCITY keyword
+        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        *INITIAL_VELOCITY
+        &     nsid    nsidex     boxid
+                 0
 
-            $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-            *INITIAL_VELOCITY
-            &     nsid    nsidex     boxid
-                     0
+        &       vx        vy        vz       vxr       vyr       vzr
+         1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
+        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-            &       vx        vy        vz       vxr       vyr       vzr
-             1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
-            $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-            opcode = "INITIAL_VELOCITY"
-            keyworddata = "0\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
-            create_general_keyword(opcode = opcode,keyworddata=keyworddata)
+        opcode = "INITIAL_VELOCITY"
+        keyworddata = "0\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
+        create_general_keyword(opcode = opcode,keyworddata=keyworddata)
         """
         ret = self.stub.CreateGeneralKWD(
             GeneralKWDRequest(opcode=opcode, keyworddata=keyworddata)
@@ -1693,7 +1611,7 @@ class DynaBase:
         rwforc=0,
         abstat=0,
     ):
-        """obtain output files containing results information.
+        """Obtain output files containing results information.
         
         Parameters
         ----------
@@ -1701,6 +1619,7 @@ class DynaBase:
             Time interval between outputs of part energies.
         glstat : float
             Time interval between outputs of global statistics and energies.
+
         Returns
         -------
         bool
@@ -1834,7 +1753,7 @@ class Box:
 
 
 class Curve:
-    """Define a curve [for example, load (ordinate value)] as a function of time"""
+    """Define a curve [for example, load (ordinate value)] as a function of time."""
 
     def __init__(self, sfo=1, x=[], y=[]):
         self.sfo = sfo
@@ -1937,7 +1856,7 @@ class SegmentSet:
 
 
 class BoundaryCondition:
-    """provides a way of defining imposed motions on boundary nodes"""
+    """Provides a way of defining imposed motions on boundary nodes."""
 
     def __init__(self):
         self.stub = DynaBase.get_stub()
@@ -2150,7 +2069,7 @@ class Part:
         self.formulation = 0
 
     def set_material(self, mat):
-        """Set material"""
+        """Set material."""
         mat.create(self.stub)
         self.mid = mat.material_id
 
@@ -2376,7 +2295,7 @@ class ImplicitAnalysis:
         control_flag=TimestepCtrol.CONSTANT_TIMESTEP_SIZE,
         Optimum_equilibrium_iteration_count=11,
     ):
-        """Define parameters for automatic time step control during implicit analysis
+        """Define parameters for automatic time step control during implicit analysis.
 
         Parameters
         ----------
@@ -2384,6 +2303,7 @@ class ImplicitAnalysis:
             Automatic time step control flag.
         Optimum_equilibrium_iteration_count : int
             Optimum equilibrium iteration count per time step.
+
         Returns
         -------
         bool
@@ -2402,7 +2322,7 @@ class ImplicitAnalysis:
         gamma=0.5,
         beta=0.25,
     ):
-        """Activate implicit dynamic analysis and define time integration constants
+        """Activate implicit dynamic analysis and define time integration constants.
 
         Parameters
         ----------
@@ -2412,6 +2332,7 @@ class ImplicitAnalysis:
             Newmark time integration constant.
         beta : float
             Newmark time integration constant.
+
         Returns
         -------
         bool
@@ -2428,7 +2349,7 @@ class ImplicitAnalysis:
         return ret
 
     def set_eigenvalue(self, number_eigenvalues=0, shift_scale=0):
-        """Activates implicit eigenvalue analysis and defines associated input parameters
+        """Activates implicit eigenvalue analysis and defines associated input parameters.
 
         Parameters
         ----------
@@ -2456,7 +2377,7 @@ class ImplicitAnalysis:
         stiffness_reformation_limit=55,
         absolute_convergence_tolerance=1e-10,
     ):
-        """specify whether a linear or nonlinear solution is desired.
+        """Specify whether a linear or nonlinear solution is desired.
 
         Parameters
         ----------
@@ -2532,7 +2453,7 @@ class SBOPT(Enum):
 
 
 class ContactSurface:
-    """Define contact interface"""
+    """Define contact interface."""
 
     def __init__(self, set):
         self.stub = DynaBase.get_stub()
@@ -2550,7 +2471,7 @@ class ContactSurface:
         self.penalty_stiffness = 1.0
 
     def set_contact_region(self, box):
-        """Include in contact definition only those SURFA nodes/segments within box
+        """Include in contact definition only those SURFA nodes/segments within box.
 
         Parameters
         ----------
@@ -2561,10 +2482,10 @@ class ContactSurface:
         return self.id
 
     def set_contact_thickness(self, thickness):
-        """contact thickness for SURFA surface
+        """contact thickness for SURFA surface.
 
         Parameters
-        -----------
+        ----------
         thickness : float
             Contact thickness.
         """
@@ -2575,7 +2496,7 @@ class ContactSurface:
 
 
 class Contact:
-    """Provides a way of treating interaction between disjoint parts"""
+    """Provides a way of treating interaction between disjoint parts."""
 
     contactlist = []
 
@@ -2634,15 +2555,15 @@ class Contact:
         self.death_time = death_time
 
     def set_initial_penetration(self):
-        """Ignore initial penetrations"""
+        """Ignore initial penetrations."""
         self.ignore = 1
 
     def set_slave_surface(self, surface):
-        """specifying the slave contact interface"""
+        """Specifying the slave contact interface."""
         self.slavesurface = surface
 
     def set_master_surface(self, surface):
-        """specifying the master contact interface"""
+        """Specifying the master contact interface."""
         self.mastersurface = surface
 
     def set_penalty_algorithm(
@@ -2740,7 +2661,7 @@ class Contact:
 
 
 class Constraint:
-    """provides a way of constraining degrees of freedom to move together in some way."""
+    """Provides a way of constraining degrees of freedom to move together in some way."""
 
     cnrbsetidlist = []
 
@@ -2839,7 +2760,7 @@ class RigidwallCylinder:
         RigidwallCylinder.rwlist.append(self)
 
     def set_motion(self, curve, motion=Motion.VELOCITY, dir=Direction(1, 0, 0)):
-        """set prescribed motion"""
+        """Set prescribed motion."""
         curve.create(self.stub)
         self.lcid = curve.id
         self.motion = motion.value

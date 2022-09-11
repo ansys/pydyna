@@ -38,6 +38,7 @@ class DynaAirbag(DynaBase):
         Ambient pressure.
     ro : float
         Ambient density.
+
     Returns
     -------
     bool
@@ -107,6 +108,7 @@ class Airbag:
         Ambient pressure.
     ro : float
         Ambient density.
+        
     Returns
     -------
     bool
