@@ -230,94 +230,6 @@ class DynaICFD(DynaBase):
         logging.info("ICFD database drag Created...")
         return ret
 
-    def create_bdy_prescribed_vel(self, pid, dof, vad, lcid):
-        """Create *ICFD_BOUNDARY_PRESCRIBED_VEL keyword.
-        
-        Parameters
-        ----------
-        pid : int
-            PID for a fluid surface.
-        dof : int
-            Applicable degrees of freedom:
-            EQ.1: x-degree of freedom.
-            EQ.2: y-degree of freedom.
-            EQ.3: z-degree of freedom.
-            EQ.4: Normal direction degree of freedom.
-        vad : int
-            Velocity flag:
-            EQ.1: Linear velocity.
-            EQ.2: Angular velocity.
-            EQ.3: Parabolic velocity profile.
-            EQ.4: Activates synthetic turbulent field on part.
-        lcid : int
-            Load curve ID used to describe motion value versus time.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.ICFDCreateBdyPrescribedVel(
-            ICFDBdyPrescribedVelRequest(pid=pid, dof=dof, vad=vad, lcid=lcid)
-        )
-        logging.info("ICFD boundary prescribed velocity Created...")
-        return ret
-
-    def create_bdy_prescribed_pre(self, pid, lcid):
-        """Create *ICFD_BOUNDARY_PRESCRIBED_PRE keyword.
-        
-        Parameters
-        ----------
-        pid : int
-            PID for a fluid surface..
-        lcid : int
-            Load curve ID to describe the pressure value versus time.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.ICFDCreateBdyPrescribedPre(
-            ICFDBdyPrescribedPreRequest(pid=pid, lcid=lcid)
-        )
-        logging.info("ICFD boundary prescribed pressure Created...")
-        return ret
-
-    def create_bdy_free_slip(self, pid):
-        """Create *ICFD_BOUNDARY_FREESLIP keyword.
-        
-        Parameters
-        ----------
-        pid : int
-            PID of the fluid surface where a free-slip boundary condition is applied.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.ICFDCreateBdyFreeSlip(ICFDBdyFreeSlipRequest(pid=pid))
-        logging.info("ICFD boundary freeslip Created...")
-        return ret
-
-    def create_bdy_non_slip(self, pid):
-        """Create *ICFD_BOUNDARY_NONSLIP keyword.
-        
-        Parameters
-        ----------
-        pid : int
-            PID of the fluid surface where a non-slip boundary condition is applied.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.ICFDCreateBdyNonSlip(ICFDBdyNonSlipRequest(pid=pid))
-        logging.info("ICFD boundary nonslip Created...")
-        return ret
-
     def create_solver_tol_mmov(self, atol=1e-8, rtol=1e-8):
         """Allows the user to change the default tolerance values for the mesh movement algorithm.
         
@@ -494,9 +406,7 @@ class Vel(Enum):
 
 class ICFDPart:
     """Define part for the incompressible flow solver."""
-
     partlist = []
-
     def __init__(self, id):
         self.stub = DynaBase.get_stub()
         self.id = id
