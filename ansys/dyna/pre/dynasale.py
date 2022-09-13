@@ -151,9 +151,33 @@ class DynaSALE(DynaBase):
         self.stub.CreateDBSALE(DBSALERequest(switch=1))
 
     def set_termination(self, endtime):
+        """Setting termination time to stop the job.
+    
+        Parameters
+        ----------
+        termination_time : float
+            Termination time.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
         self.stub.CreateTermination(TerminationRequest(endtim=endtime))
 
     def set_output_interval(self, database_plot_interval):
+        """Request binary output.
+        
+        Parameters
+        ----------
+        database_plot_interval : float
+            Defines the time interval between output states.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
         self.stub.CreateDBBinary(
             DBBinaryRequest(filetype="D3PLOT", dt=database_plot_interval)
         )
