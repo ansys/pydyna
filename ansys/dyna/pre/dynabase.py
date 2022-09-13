@@ -133,7 +133,7 @@ class DynaBase:
         return DynaBase.stub
 
     def open_files(self, filenames):
-        """Open IGA model files.
+        """Open initial model files.
 
         Parameters
         ----------
@@ -159,7 +159,7 @@ class DynaBase:
         return self.stub.LoadFile(LoadFileRequest())
 
     def set_timestep(self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0):
-        """Create *CONTROL_TIMESTEP keyword.
+        """Set structural time step size control using different options.
         
         Parameters
         ----------
@@ -167,7 +167,7 @@ class DynaBase:
             Scale factor for computed time step.
         isdo : int
             Basis of time size calculation for 4-node shell elements.
-        dt2ms : float
+        timestep_size_for_mass_scaled : float
             Time step size for mass scaled solutions.
 
         Returns
@@ -570,45 +570,6 @@ class DynaBase:
         logging.info("DB Ascii Created...")
         return ret
 
-    def create_rigidwall_geom(
-        self, geomtype, motion, display, parameter, lcid, vx, vy, vz):
-        """Define a rigid wall with an analytically described form.
-
-        Parameters
-        ----------
-        geomtype : int
-            The available shape variants are FLAT, PRISM, CYLINDER and SPHERE.
-        motion : int
-            If prescribed motion is desired an additional option is available.
-        display : int
-            To view the rigid wall, this option is available.
-        parameter : list
-            x,y,z-coordinate of tail of normal vector n,x,y,z-coordinate of head of normal vector n,radius of cylinder and length of cylinder.
-        lcid : int
-            if motion defined,this is Rigidwall motion curve ID.
-        vx vy vz : float
-            if motion defined, these are x,y,z-direction cosine of velocity/displacement vector.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateRigidWallGeom(
-            RigidWallGeomRequest(
-                geomtype=geomtype,
-                motion=motion,
-                display=display,
-                parameter=parameter,
-                lcid=lcid,
-                vx=vx,
-                vy=vy,
-                vz=vz,
-            )
-        )
-        logging.info("Cylinder Rigidwall Geometric Created...")
-        return ret
-
     def create_rigidwall_planar(self, nsid, tail, head, nsidex=0, boxid=0, fric=0):
         """Define planar rigid walls with either finite or infinite size.
 
@@ -755,63 +716,6 @@ class DynaBase:
         logging.info("Initial velocity for bodies Created...")
         return ret
 
-    def create_definecurve(self, lcid, sfo, abscissa, ordinate):
-        """Create *DEFINE_CURVE keyword.
-
-        Parameters
-        ----------
-        lcid : int
-            Load curve identification.
-        sfo : float
-            Scale factor for ordinate value.
-        abscissa : list
-            Abscissa values.
-        ordinate : list
-            Ordinate (function) values.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateDefineCurve(
-            DefineCurveRequest(lcid=lcid, sfo=sfo, abscissa=abscissa, ordinate=ordinate)
-        )
-        logging.info("DefineCurve Created...")
-        return ret
-
-    def create_definevector(self, title, vid, tail, head):
-        """Create *DEFINE_VECTOR keyword.
-
-        Parameters
-        ----------
-        vid : int
-            Vector ID.
-        tail : list [x,y,z]
-            x,y,z-coordinate of tail of vector.
-        head : list [x,y,z]
-            x,y,z-coordinate of head of vector.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateDefineVector(
-            DefineVectorRequest(
-                title=title,
-                vid=vid,
-                xt=tail[0],
-                yt=tail[1],
-                zt=tail[2],
-                xh=head[0],
-                yh=head[1],
-                zh=head[2],
-            )
-        )
-        logging.info("DefineVector Created...")
-        return ret
-
     def create_defineorientation(self, vid, iop, vector, node1, node2):
         """Define orientation vectors for discrete springs and dampers.
 
@@ -843,25 +747,6 @@ class DynaBase:
             )
         )
         logging.info("DefineOrientation Created...")
-        return ret
-
-    def create_partset(self, sid, pids):
-        """Define a set of parts with optional attributes.
-
-        Parameters
-        ----------
-        sid : int
-            Set ID. All part sets should have a unique set ID.
-        pids : list
-            A list of part ID.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreatePartSet(PartSetRequest(sid=sid, pids=pids))
-        logging.info("Part Set Created...")
         return ret
 
     def create_shellset(self, option, title, sid, eids):
@@ -908,98 +793,6 @@ class DynaBase:
         """
         ret = self.stub.CreateSolidSet(SolidSetRequest(title=title, sid=sid, ki=ki))
         logging.info("Solid Set Created...")
-        return ret
-
-    def create_nodeset(self, option, sid, entities, genoption=""):
-        """Define a nodal set with some identical or unique attributes.
-
-        Parameters
-        ----------
-        option : string
-            Available options:<BLANK>,LIST,GENERAL
-        sid : int
-            Set identification.
-        genoption : string
-            Option for GENERAL:ALL,NODE,PART
-        entities : list
-            Specified entity.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateNodeSet(
-            NodeSetRequest(
-                option=option, sid=sid, genoption=genoption, entities=entities
-            )
-        )
-        logging.info("Node Set Created...")
-        return ret
-
-    def create_segmentset(self, sid, segments, solver="MECH"):
-        """Define a nodal set with some identical or unique attributes.
-
-        Parameters
-        ----------
-        sid : int
-            Set ID.
-        segments : list [[point1,point2,point3,point4],[point5,point6,point7,point8]...]
-            Define segments.
-        solver : string
-            Name of solver using this set:MECH,CESE
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        n1 = []
-        n2 = []
-        n3 = []
-        n4 = []
-        for i in range(len(segments)):
-            n1.append(segments[i][0])
-            n2.append(segments[i][1])
-            n3.append(segments[i][2])
-            n4.append(segments[i][3])
-        ret = self.stub.CreateSegmentSet(
-            SegmentSetRequest(sid=sid, solver=solver, n1=n1, n2=n2, n3=n3, n4=n4)
-        )
-        logging.info("Segment Set Created...")
-        return ret
-
-    def create_section_shell(self, secid, elform, thick, shrf=1.0, nip=2, propt=0):
-        """Define section properties for shell elements.
-
-        Parameters
-        ----------
-        secid : int
-            Section ID.
-        elform : int
-            Element formulation options.
-        thick : list [t1,t2,t3,t4]
-            Shell thickness at node t1,t2,t3,t4
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateSectionShell(
-            SectionShellRequest(
-                secid=secid,
-                elform=elform,
-                shrf=shrf,
-                nip=nip,
-                propt=propt,
-                t1=thick[0],
-                t2=thick[1],
-                t3=thick[2],
-                t4=thick[3],
-            )
-        )
-        logging.info("Section Shell Created...")
         return ret
 
     def create_section_solid(self, title, secid, elform):
@@ -1094,118 +887,6 @@ class DynaBase:
         logging.info("Hourglass 1 Created...")
         return ret
 
-    def create_contact(
-        self,
-        cid,
-        title,
-        option1,
-        option3=True,
-        offset="",
-        ssid=0,
-        msid=0,
-        sstyp=3,
-        mstyp=3,
-        sapr=0,
-        sbpr=0,
-        sfsa=1,
-        sfsb=1,
-        fs=0,
-        fd=0,
-        vdc=0,
-        penchk=0,
-        birthtime=0,
-        sst=1,
-        mst=1,
-        optionres=1,
-        nfls=1e32,
-        sfls=1e32,
-        param=0,
-        ct2cn=0,
-        soft=0,
-        sofscl=0.1,
-        lcidab=0,
-        maxpar=1.025,
-        sbopt=2,
-        depth=2,
-        bsort=10,
-        frcfrq=1,
-        igap=1,):
-        """Define a contact interface in a 3D model.
-
-        Parameters
-        ----------
-        option1 : string
-            Specifies contact type.
-            "TIED_SHELL_EDGE_TO_SURFACE"
-            "AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK"
-            "AUTOMATIC_SINGLE_SURFACE_SMOOTH"
-            "AUTOMATIC_SINGLE_SURFACE"
-            "NODES_TO_SURFACE"
-        option3 : bool
-            Flag indicating ID cards follow.
-        offset : string
-            Offset options.
-            NULL
-            OFFSET
-            BEAM_OFFSET
-            CONSTRAINED_OFFSET
-        ssid : int
-            Segment set ID, node set ID, part set ID, part ID, or shell element set ID for specifying the SURFA side of the contact interface.
-        msid : int
-            Segment set ID, node set ID, part set ID, part ID, or shell element set ID for the SURFB side of the contact.
-        sstyp : int
-            The ID type of SURFA.
-        mstyp : int
-            ID type of SURFB.
-        option : int
-            Soft constraint option.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateContact(
-            ContactRequest(
-                cid=cid,
-                title=title,
-                option1=option1,
-                option3=option3,
-                offset=offset,
-                ssid=ssid,
-                msid=msid,
-                sstyp=sstyp,
-                mstyp=mstyp,
-                sapr=sapr,
-                sbpr=sbpr,
-                sfsa=sfsa,
-                sfsb=sfsb,
-                fs=fs,
-                fd=fd,
-                vdc=vdc,
-                penchk=penchk,
-                birthtime=birthtime,
-                sst=sst,
-                mst=mst,
-                optionres=optionres,
-                nfls=nfls,
-                sfls=sfls,
-                param=param,
-                ct2cn=ct2cn,
-                soft=soft,
-                sofscl=sofscl,
-                lcidab=lcidab,
-                maxpar=maxpar,
-                sbopt=sbopt,
-                depth=depth,
-                bsort=bsort,
-                frcfrq=frcfrq,
-                igap=igap,
-            )
-        )
-        logging.info("Contact  Created...")
-        return ret
-
     def create_boundary_prescribed_motion(
         self,
         id,
@@ -1267,68 +948,6 @@ class DynaBase:
             )
         )
         logging.info("Boundary prescribed motion Created...")
-        return ret
-
-    def create_boundary_spc(
-        self,
-        option1,
-        birthdeath=False,
-        nid=0,
-        cid=0,
-        dofx=0,
-        dofy=0,
-        dofz=0,
-        dofrx=0,
-        dofry=0,
-        dofrz=0,
-        birth=0,
-        death=1e20,
-    ):
-        """Define nodal single point constraints.
-       
-        Parameters
-        ----------
-        id : int
-            Optional SPC set ID to which this node or node set belongs.
-        heading : string
-            An optional SPC descriptor that will be written into the d3hsp file and the spcforc file.
-        option : string
-            Available options:(NODE,SET)
-        birthdeath : bool
-            Allows optional birth and death times to be assigned the single node or node set.
-        nid : int
-            Node ID or nodal set ID.
-        cid : int
-            Coordinate system ID.
-        dofx/dofy/dofz : int
-            Insert 1 for translational constraint in local x/y/z-direction.
-        dofrx/dofry/dofrz : int
-            Insert 1 for rotational constraint about local x/y/z-axis.
-        birth/death : float
-            Activation/Deactivation time for SPC constraint.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateBdySpc(
-            BdySpcRequest(
-                option1=option1,
-                birthdeath=birthdeath,
-                nid=nid,
-                cid=cid,
-                dofx=dofx,
-                dofy=dofy,
-                dofz=dofz,
-                dofrx=dofrx,
-                dofry=dofry,
-                dofrz=dofrz,
-                birth=birth,
-                death=death,
-            )
-        )
-        logging.info("Boundary spc Created...")
         return ret
 
     def create_constrained_extra_nodes(self, option="NODE", pid=0, nid=0, iflag=0):
@@ -1399,39 +1018,6 @@ class DynaBase:
         """
         ret = self.stub.CreateLoadBody(LoadBodyRequest(option=option, lcid=lcid))
         logging.info("Load body Created...")
-        return ret
-
-    def create_mat_fabric(self, mid, ro, ea, eb, prba, prab, gab):
-        """Developed for airbag materials.
-
-        Parameters
-        ----------
-        mid : int
-            Material identification.
-        ro : float
-            Mass density.
-        ea : float
-            Young's modulus-longitudinal direction.
-        eb : float
-            Young's modulus-transverse direction.
-        prba : float
-            Minor Poisson's ratio ba direction.
-        prab : float
-            Major Poisson's ratio ab direction.
-        gab : float
-            shear modulus in the ab direction.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateMatFabric(
-            MatFabricRequest(
-                mid=mid, ro=ro, ea=ea, eb=eb, prba=prba, prab=prab, gab=gab
-            )
-        )
-        logging.info("Material Fabric Created...")
         return ret
 
     def create_mat_spring_nonlinear_elastic(self, mid, lcid):
