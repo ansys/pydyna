@@ -339,7 +339,7 @@ class DynaSolver:
         return
 
     def start(self, nproc):
-        """Start LSDYNA
+        """Start LSDYNA.
 
         The program will start and await further input.  To actually begin a
         simulation the "run" command must used to send the command line
@@ -503,7 +503,7 @@ class DynaSolver:
         cmdin, string, required : The command to send
 
         Returns
-        ----------
+        -------
         There is no data returned.  Data that is returned from the underlying
         method call is just printed to the screen.  This method is used to
         support the sample interactive "client.py" program

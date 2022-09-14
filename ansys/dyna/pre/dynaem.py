@@ -11,7 +11,7 @@ from .dynabase import *
 
 
 class DynaEM(DynaBase):
-    """Contains methods to create keyword related to EM."""
+    """Contain methods to create keyword related to EM."""
 
     def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
@@ -59,7 +59,7 @@ class DynaEM(DynaBase):
         return ret
 
     def create_em_timestep(self, tstype, dtconst):
-        """Controls the EM time step and its evolution.
+        """Control the EM time step and its evolution.
 
         Parameters
         ----------
@@ -83,7 +83,7 @@ class DynaEM(DynaBase):
         return ret
 
     def create_em_control_contact(self, emct=0, cconly=0, ctype=0, dtype=0):
-        """the electromagnetism contact algorithms, which detects contact between conductors.
+        """Set electromagnetism contact algorithms, which detects contact between conductors.
 
         Parameters
         ----------
@@ -253,7 +253,7 @@ class DynaEM(DynaBase):
     def create_em_solver_fembem_monolithic(
         self, mtype=0, stype=0, abstol=1e-6, reltol=1e-4, maxit=500
     ):
-        """Replaces *EM_SOLVER_FEMBEM and turns on the monolithic FEM-BEM solver.
+        """Turn on the monolithic FEM-BEM solver.
 
         Parameters
         ----------
@@ -324,7 +324,7 @@ class DynaEM(DynaBase):
         return ret
 
     def create_em_database_globalenergy(self, outlv=0):
-        """enables the output of global EM.
+        """Enable the output of global EM.
 
         Parameters
         ----------
@@ -345,7 +345,7 @@ class DynaEM(DynaBase):
         return ret
 
     def create_Permanent_magnet(self, id, partid, mtype, north, sourth, hc):
-        """Defines a permanent magnet.
+        """Define a permanent magnet.
 
         Parameters
         ----------
@@ -437,12 +437,7 @@ class FEMSOLVER(Enum):
 
 
 class EMAnalysis:
-    p_matrix_tol = 1e-6
-    q_matrix_tol = 1e-6
-    w_matrix_tol = 1e-6
-
-    def __init__(self, type=EMType.EDDY_CURRENT):
-        """Enable the EM solver and set its options.
+    """Enable the EM solver and set its options.
 
         Parameters
         ----------
@@ -453,6 +448,11 @@ class EMAnalysis:
            EQ.3: Resistive heating solver.
            EQ.11: Electrophysiology monodomain.
         """
+    p_matrix_tol = 1e-6
+    q_matrix_tol = 1e-6
+    w_matrix_tol = 1e-6
+
+    def __init__(self, type=EMType.EDDY_CURRENT):
         self.stub = DynaBase.get_stub()
         self.type = type.value
         self.stub.CreateEMControl(
@@ -462,7 +462,7 @@ class EMAnalysis:
         )
 
     def set_timestep(self, timestep):
-        """Controls the EM time step and its evolution."""
+        """Control the EM time step and its evolution."""
         self.stub.CreateEMTimestep(EMTimestepRequest(tstype=1, dtconst=timestep))
         logging.info("EM Timestep Created...")
 
@@ -507,6 +507,7 @@ class EMAnalysis:
 
     @staticmethod
     def create(stub):
+        """Create EMAnalysis."""
         stub.CreateEMSolverBemMat(
             EMSolverBemMatRequest(matid=1, reltol=EMAnalysis.p_matrix_tol)
         )
@@ -536,9 +537,7 @@ class Circuit:
     loadcurve : Curve
         Load curve for circtyp = 1, 2, 21 or 22
     """
-
     circuitlist = []
-
     def __init__(self, loadcurve, circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME):
         self.stub = DynaBase.get_stub()
         self.circuit_type = circuit_type.value
@@ -563,6 +562,7 @@ class Circuit:
         self.outlet_id = current_outlet.create(self.stub)
 
     def create(self):
+        """Create circuit."""
         ret = self.stub.CreateEMCircuit(
             EMCircuitRequest(
                 circtyp=self.circuit_type,
@@ -583,7 +583,7 @@ class EMContactType(Enum):
 
 
 class EMContact:
-    """Detects contact between conductors.If no contact parts defined,contact detection between all active parts associated
+    """Detect contact between conductors.If no contact parts defined,contact detection between all active parts associated
     with a conducting material."""
 
     def __init__(self, contact_type=EMContactType.NODE_TO_NODE_PENALTY_BASED_CONTACT):

@@ -11,7 +11,7 @@ from .dynabase import *
 
 
 class DynaICFD(DynaBase):
-    """Contains methods to create keyword related to ICFD."""
+    """Contain methods to create keyword related to ICFD."""
 
     def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
@@ -65,7 +65,7 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_control_output(self, msgl):
-        """Modifies default values for screen and file outputs related to this fluid solver only.
+        """Modify default values for screen and file outputs related to this fluid solver only.
      
         Parameters
         ----------
@@ -126,7 +126,7 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_section_icfd(self, sid):
-        """Create *ICFD_SECTION keyword.
+        """Define a section for the incompressible flow solver.
         
         Parameters
         ----------
@@ -142,42 +142,17 @@ class DynaICFD(DynaBase):
         logging.info("ICFD Section Created...")
         return ret
 
-    def create_mat_icfd(self, mid, flg=1, ro=0, vis=0):
-        """Create *ICFD_MAT keyword.
-        
-        Parameters
-        ----------
-        mid : int
-            Material ID.
-        flg : int
-            Flag to choose between fully incompressible, slightly compressible, or barotropic flows:
-            EQ.0: Vacuum (free surface problems only)
-            EQ.1: Fully incompressible fluid.
-        ro : float
-            Flow density.
-        vis : float
-            Dynamic viscosity.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.ICFDCreateMat(ICFDMatRequest(mid=mid, flg=flg, ro=ro, vis=vis))
-        logging.info("ICFD material Created...")
-        return ret
-
     def create_part_icfd(self, pid, secid, mid):
-        """Create *ICFD_PART keyword.
+        """Define parts for this incompressible flow solver.
         
         Parameters
         ----------
         pid : int
             Part identifier for fluid surfaces.
         secid : int
-            Section identifier defined with the *ICFD_SECTION card.
+            Section identifier defined with the \*ICFD_SECTION card.
         mid : int
-            Material identifier defined with the *ICFD_MAT card.
+            Material identifier defined with the \*ICFD_MAT card.
 
         Returns
         -------
@@ -188,50 +163,8 @@ class DynaICFD(DynaBase):
         logging.info("ICFD part Created...")
         return ret
 
-    def create_part_vol(self, pid, secid, mid, spids):
-        """Create *ICFD_PART_VOL keyword.
-        
-        Parameters
-        ----------
-        pid : int
-            Part identifier for fluid volumes.
-        secid : int
-            Section identifier defined by the *ICFD_SECTION card.
-        mid : int
-            Material identifier.
-        spids : list
-            List of Part IDs for the surface elements that define the volume mesh.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.ICFDCreatePartVol(
-            ICFDPartVolRequest(pid=pid, secid=secid, mid=mid, spids=spids)
-        )
-        logging.info("ICFD part volume Created...")
-        return ret
-
-    def create_db_drag(self, pid):
-        """Create *ICFD_DATABASE_DRAG keyword.
-        
-        Parameters
-        ----------
-        pid : int
-            Part ID of the surface where the drag force will be computed.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.ICFDCreateDBDrag(ICFDDBDragRequest(pid=pid))
-        logging.info("ICFD database drag Created...")
-        return ret
-
     def create_solver_tol_mmov(self, atol=1e-8, rtol=1e-8):
-        """Allows the user to change the default tolerance values for the mesh movement algorithm.
+        """Allow the user to change the default tolerance values for the mesh movement algorithm.
         
         Parameters
         ----------
@@ -250,46 +183,8 @@ class DynaICFD(DynaBase):
         logging.info("tolerance values for the mesh movement algorithm changed...")
         return ret
 
-    def mesh_create_volume(self, volid, pids):
-        """Create *MESH_VOLUME keyword.
-        
-        Parameters
-        ----------
-        volid : int
-            ID assigned to the new volume.
-        pids : list
-            list of Part IDs for the surface elements that are used to define the volume.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.MESHCreateVolume(MeshVolumeRequest(volid=volid, pids=pids))
-        logging.info("MESH volume Created...")
-        return ret
-
-    def mesh_create_bl(self, pid, nelth):
-        """Create *MESH_BL keyword.
-        
-        Parameters
-        ----------
-        pid : int
-            Part identifier for the surface element.
-        nelth : int
-            Number of elements normal to the surface (in the boundary layer) is NELTH+1.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.MESHCreateBl(MeshBlRequest(pid=pid, nelth=nelth))
-        logging.info("MESH boundary-layer Created...")
-        return ret
-
     def mesh_create_size_shape(self, sname, force, method, msize, parameter):
-        """Defines a local mesh size in specific zones corresponding to given geometrical shapes.
+        """Define a local mesh size in specific zones corresponding to given geometrical shapes.
 
         Parameters
         ----------
@@ -415,7 +310,7 @@ class ICFDPart:
         ICFDPart.partlist.append(self)
 
     def set_material(self, mat):
-        """Set material"""
+        """Set material."""
         self.mid = mat.material_id
 
     def set_prescribed_velocity(
@@ -477,13 +372,13 @@ class ICFDPart:
         return ret
 
     def compute_drag_force(self):
-        """Enables the computation of drag forces over given surface parts of the model."""
+        """Enable the computation of drag forces over given surface parts of the model."""
         ret = self.stub.ICFDCreateDBDrag(ICFDDBDragRequest(pid=self.id))
         logging.info("ICFD database drag Created...")
         return ret
 
     def set_boundary_layer(self, number=3):
-        """define a boundary-layer mesh as a refinement on volume-mesh.
+        """Define a boundary-layer mesh as a refinement on volume-mesh.
         
         Parameters
         ----------
@@ -495,6 +390,7 @@ class ICFDPart:
         return ret
 
     def set_property(self):
+        """Set properties for ICFD part."""
         secid = 1
         self.stub.SetICFDPartProperty(
             ICFDPartPropertyRequest(pid=self.id, secid=secid, mid=self.mid)
@@ -502,7 +398,7 @@ class ICFDPart:
 
 
 class ICFDVolumePart:
-    """Assigns material properties to the nodes enclosed by surface ICFD parts.
+    """Assign material properties to the nodes enclosed by surface ICFD parts.
     
     Parameters
     ----------
@@ -521,10 +417,11 @@ class ICFDVolumePart:
         ICFDVolumePart.partlist.append(self)
 
     def set_material(self, mat):
-        """Set material"""
+        """Set material."""
         self.mid = mat.material_id
 
     def create(self):
+        """Create ICFD volume part."""
         ret = self.stub.ICFDCreatePartVol(
             ICFDPartVolRequest(secid=1, mid=self.mid, spids=self.surfaces)
         )
@@ -534,7 +431,7 @@ class ICFDVolumePart:
 
 
 class MeshedVolume:
-    """Defines the volume space that will be meshed.
+    """Define the volume space that will be meshed.
 
     Parameters
     ----------
@@ -559,7 +456,7 @@ class MeshedVolume:
         self.embeded_surf = embeded
 
     def meshsize_box(self,size,min_point,max_point):
-        """Defines a local mesh size in specific zones corresponding to given geometrical shapes.
+        """Define a local mesh size in specific zones corresponding to given geometrical shapes.
         
         Parameters
         ----------
@@ -572,6 +469,7 @@ class MeshedVolume:
         self.meshsizeshape.append(["BOX",size,parameter])
 
     def create(self):
+        """Create mesh volume."""
         ret = self.stub.MESHCreateVolume(MeshVolumeRequest(pids=self.surfaces))
         self.id = ret.id
         logging.info(f"MESH volume {self.id} Created...")
