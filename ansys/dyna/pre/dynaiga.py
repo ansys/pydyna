@@ -17,7 +17,7 @@ class DynaIGA(DynaBase):
         self.casetype = CaseType.IGA
 
     def create_section_igashell(self, secid, elform, shrf, thickness):
-        """Create *SECTION_IGA_SHELL keyword.
+        """Define section properties for isogeometric shell elements.
 
         Parameters
         ----------
