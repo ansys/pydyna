@@ -26,6 +26,7 @@ CHUNK_SIZE = 1024 * 1024
 
 
 def get_file_chunks(filename):
+    """Get file chunks."""
     with open(filename, "rb") as f:
         while True:
             piece = f.read(CHUNK_SIZE)
@@ -1167,20 +1168,19 @@ class DynaBase:
 
         Examples
         --------
-            Create a \*INITIAL_VELOCITY keyword.
-            \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-            \*INITIAL_VELOCITY
-            \&     nsid    nsidex     boxid
-                    0
-
-            \&       vx        vy        vz       vxr       vyr       vzr
-            1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
-            \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-            opcode = "INITIAL_VELOCITY"
-            keyworddata = "0\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
-            create_general_keyword(opcode = opcode,keyworddata=keyworddata)
+        Create a \*INITIAL_VELOCITY keyword.
         
+        \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        \*INITIAL_VELOCITY
+        
+        
+        &       vx        vy        vz       vxr       vyr       vzr
+        1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
+        \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        
+        opcode = "INITIAL_VELOCITY"
+        keyworddata = "0\\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
+        create_general_keyword(opcode = opcode,keyworddata=keyworddata)
         """
         ret = self.stub.CreateGeneralKWD(
             GeneralKWDRequest(opcode=opcode, keyworddata=keyworddata)
@@ -2315,6 +2315,7 @@ class Constraint:
 
     @staticmethod
     def create(stub):
+        """Create constraint."""
         for i in range(len(Constraint.cnrbsetidlist)):
             stub.CreateConstrainedNodalRigidBody(
                 ConstrainedNodalRigidBodyRequest(

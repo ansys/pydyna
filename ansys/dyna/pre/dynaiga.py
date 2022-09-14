@@ -22,7 +22,7 @@ class DynaIGA(DynaBase):
         Parameters
         ----------
         secid : int
-            Section ID. SECID is referenced on the *PART card. A unique number or label must be specified.
+            Section ID. SECID is referenced on the \*PART card. A unique number or label must be specified.
         elform : int
             Element formulation.
         shrf : float
