@@ -7,7 +7,8 @@ build up ansys-dyna input deck, submit to solver and finally post processing the
 
 Project Overview
 ----------------
-There are 2 related packages here, all under the ansys/dyna/ directory.
+There are 3 related packages here, pre and solver are all under the ansys/dyna/ directory,
+while pyDPF is used for post-processing.
 
 pre contains highly abstracted APIs for setting up a LS-DYNA input deck, so far, 
 it includes DynaMech, DynaIGA, DynaICFD, DynaSALE, DynaEM, DynaAirbag and so on.
@@ -20,6 +21,19 @@ such as Docker or Kubernetes.  The code here then allows for pushing
 input files to the container, starting LS-DYNA and monitoring its
 progress, and retrieving results files.
 
+The Data Processing Framework (DPF) is designed to provide numerical
+simulation users/engineers with a toolbox for accessing and
+transforming simulation data. DPF can access data from solver result
+files as well as several neutral formats (csv, hdf5, vtk,
+etc.). Various operators are available allowing the manipulation and
+the transformation of this data.
+
+The Python `ansys-dpf-post` package provides a simplified Python
+interface to DPF, thus enabling rapid postprocessing without ever
+leaving a Python environment. 
+
+Visit the [DPF-Post Documentation](https://postdocs.pyansys.com) for a
+detailed description of the package.
 
 Installation
 ------------
