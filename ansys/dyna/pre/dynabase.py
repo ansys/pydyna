@@ -26,6 +26,7 @@ CHUNK_SIZE = 1024 * 1024
 
 
 def get_file_chunks(filename):
+    """Get file chunks."""
     with open(filename, "rb") as f:
         while True:
             piece = f.read(CHUNK_SIZE)
@@ -35,11 +36,13 @@ def get_file_chunks(filename):
 
 
 def upload(stub_, filename):
+    """Upload files to server."""
     chunks_generator = get_file_chunks(filename)
     response = stub_.Upload(chunks_generator)
 
 
 def download(stub_, remote_name, local_name):
+    """Download files from server."""
     response = stub_.Download(DownloadRequest(url=remote_name))
     with open(local_name, "wb") as f:
         for chunk in response:
@@ -47,6 +50,7 @@ def download(stub_, remote_name, local_name):
 
 
 def init_log(log_file):
+    """Initial log file."""
     if not logging.getLogger().handlers:
         logging.basicConfig(
             level=logging.DEBUG,
@@ -130,6 +134,7 @@ class DynaBase:
         self.casetype = CaseType.STRUCTURE
 
     def get_stub():
+        """Get the stub of this DynaBase object."""
         return DynaBase.stub
 
     def open_files(self, filenames):
@@ -401,7 +406,7 @@ class DynaBase:
         t10jtol=0.0,
         icoh=0,
         tet13k=0,):
-        """Provides controls for solid element response.
+        """Provide controls for solid element response.
 
         Parameters
         ----------
@@ -412,7 +417,7 @@ class DynaBase:
         niptets : int
             Number of integration points used in the quadratic tetrahedron elements.
         swlocl : int
-            Output option for stresses in solid elements used as spot welds with material *MAT_SPOTWELD.
+            Output option for stresses in solid elements used as spot welds with material \*MAT_SPOTWELD.
         psfail : int
             Solid element erosion from negative volume is limited only to solid elements in the part set indicated by PSFAIL.
         t10jtol : float
@@ -484,7 +489,7 @@ class DynaBase:
         rwpnal : float
             Scale factor for rigid wall penalties, which treat nodal points interacting with rigid walls.
         ignore : int
-            Ignore initial penetrations in the *CONTACT_AUTOMATIC options.
+            Ignore initial penetrations in the \*CONTACT_AUTOMATIC options.
         igactc : int
             Options to use isogeometric shells for contact detection when contact involves isogeometric shells.
 
@@ -544,7 +549,7 @@ class DynaBase:
         return ret
 
     def create_database_ascii(self, type, dt=0.0, binary=1, lcur=0, ioopt=0):
-        """Create *DATABASE keyword.
+        """Obtain output files containing results information.
 
         Parameters
         ----------
@@ -796,14 +801,14 @@ class DynaBase:
         return ret
 
     def create_section_solid(self, title, secid, elform):
-        """Create *SECTION_SOLID keyword.
+        """Define section properties for solid continuum and fluid elements.
         
         Parameters
         ----------
         title : string
             Define title for section solid.
         secid : int
-            Section ID. SECID is referenced on the *PART card. A unique number must be specified.
+            Section ID. SECID is referenced on the \*PART card. A unique number must be specified.
         elform : int
             Element formulation options.
 
@@ -857,7 +862,7 @@ class DynaBase:
         return ret
 
     def create_hourglass(self, ghid, ihq, qm=0.1, q1=1.5, q2=0.06, qb=1e-9, qw=1e-9):
-        """Create *HOURGLASS keyword.
+        """Define hourglass and bulk viscosity properties.
         
         Parameters
         ----------
@@ -1021,14 +1026,14 @@ class DynaBase:
         return ret
 
     def create_mat_spring_nonlinear_elastic(self, mid, lcid):
-        """Provides a nonlinear elastic translational and rotational spring with arbitrary force as a function of displacement and moment as a function of rotation.
+        """Provide a nonlinear elastic translational and rotational spring with arbitrary force as a function of displacement and moment as a function of rotation.
         
         Parameters
         ----------
         mid : int
             Material identification.
         lcid : int
-            Load curve ID (see *DEFINE_CURVE) describing force as a function of displacement or moment as a function of rotation relationship.
+            Load curve ID (see \*DEFINE_CURVE) describing force as a function of displacement or moment as a function of rotation relationship.
 
         Returns
         -------
@@ -1042,7 +1047,7 @@ class DynaBase:
         return ret
 
     def create_mat_damper_viscous(self, mid, dc):
-        """Provides a linear translational or rotational damper located between two nodes.
+        """Provide a linear translational or rotational damper located between two nodes.
         
         Parameters
         ----------
@@ -1061,7 +1066,7 @@ class DynaBase:
         return ret
 
     def create_mat_damper_nonlinear_viscous(self, mid, lcdr):
-        """Provides a viscous translational damper with an arbitrary force as a function of velocity dependency or a rotational damper with an arbitrary moment as a function of rotational velocity dependency.
+        """Provide a viscous translational damper with an arbitrary force as a function of velocity dependency or a rotational damper with an arbitrary moment as a function of rotational velocity dependency.
         
         Parameters
         ----------
@@ -1163,19 +1168,18 @@ class DynaBase:
 
         Examples
         --------
-        create a *INITIAL_VELOCITY keyword.
-
-        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-        *INITIAL_VELOCITY
-        &     nsid    nsidex     boxid
-                 0
-
+        Create a \*INITIAL_VELOCITY keyword.
+        
+        \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        \*INITIAL_VELOCITY
+        
+        
         &       vx        vy        vz       vxr       vyr       vzr
-         1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
-        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
+        1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
+        \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        
         opcode = "INITIAL_VELOCITY"
-        keyworddata = "0\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
+        keyworddata = "0\\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
         create_general_keyword(opcode = opcode,keyworddata=keyworddata)
         """
         ret = self.stub.CreateGeneralKWD(
@@ -1324,6 +1328,7 @@ class Box:
         self.xmax = zmax
 
     def create(self, stub):
+        """Create box."""
         ret = stub.CreateDefineBox(
             DefineBoxRequest(
                 xmin=self.xmin,
@@ -1347,6 +1352,7 @@ class Curve:
         self.ordinate = y
 
     def create(self, stub):
+        """Create curve."""
         ret = stub.CreateDefineCurve(
             DefineCurveRequest(
                 sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate
@@ -1365,6 +1371,7 @@ class NodeSet:
         self.id = 0
 
     def create(self, stub):
+        """Create node set."""
         if len(self.nodes) <= 0:
             return 0
         ret = stub.CreateNodeSet(
@@ -1378,9 +1385,11 @@ class NodeSet:
         return self.id
 
     def num(self):
+        """Get the number of nodes in this set."""
         return len(self.nodes)
 
     def id(self, pos):
+        """Get the node ID by position."""
         return self.nodes[pos]
 
 
@@ -1392,6 +1401,7 @@ class PartSet:
         self.id = 0
 
     def create(self, stub):
+        """Create part set."""
         if len(self.parts) <= 0:
             return 0
         ret = stub.CreatePartSet(PartSetRequest(sid=0, pids=self.parts))
@@ -1403,9 +1413,11 @@ class PartSet:
         return self.id
 
     def num(self):
+        """Get the number of parts in this set."""
         return self.parts.len()
 
     def pos(self, pos):
+        """Get the part ID by position."""
         return self.parts[pos]
 
 
@@ -1424,6 +1436,7 @@ class SegmentSet:
         self.type = "SEGMENTSET"
 
     def create(self, stub):
+        """Create segement set."""
         if len(self.segments) <= 0:
             return 0
         n1 = []
@@ -1581,6 +1594,7 @@ class HourglassType(Enum):
 
 
 class BeamSection:
+    """Define cross sectional properties for beam, truss, discrete beam, and cable elements."""
     def __init__(
         self,
         element_formulation,
@@ -1603,6 +1617,7 @@ class BeamSection:
 
 
 class ShellSection:
+    """Define section properties for shell elements."""
     def __init__(
         self,
         element_formulation,
@@ -1631,6 +1646,7 @@ class ShellSection:
 
 
 class IGASection:
+    """Define section properties for isogeometric shell elements."""
     def __init__(self, element_formulation, shear_factor=1, thickness=1):
         stub = DynaBase.get_stub()
         ret = stub.CreateSectionIGAShell(
@@ -1642,6 +1658,7 @@ class IGASection:
 
 
 class Part:
+    """Define part object."""
     def __init__(self, id):
         self.stub = DynaBase.get_stub()
         self.id = id
@@ -1660,15 +1677,13 @@ class Part:
         self.mid = mat.material_id
 
     def set_element_formulation(self, formulation):
-        """Element formulation options."""
+        """Set Element formulation."""
         self.formulation = formulation.value
 
 
 class BeamPart(Part):
     """Define parts, that is, combine material information, section properties, hourglass type, thermal properties, and a flag for part adaptivity."""
-
     partlist = []
-
     def __init__(self, pid):
         Part.__init__(self, pid)
         self.stub = DynaBase.get_stub()
@@ -1676,12 +1691,15 @@ class BeamPart(Part):
         self.crosstype = 1
 
     def set_cross_type(self, cross):
+        """Set cross section type."""
         self.crosstype = cross
 
     def set_diameter(self, diameter):
+        """Set outer diameter for cross section."""
         self.diameter = diameter
 
     def set_property(self):
+        """Set Properties for beam part object."""
         sec = BeamSection(
             element_formulation=self.formulation,
             cross_section=self.crosstype,
@@ -1705,9 +1723,7 @@ class BeamPart(Part):
 
 class ShellPart(Part):
     """Define parts, that is, combine material information, section properties, hourglass type, thermal properties, and a flag for part adaptivity."""
-
     partlist = []
-
     def __init__(self, pid):
         Part.__init__(self, pid)
         self.stub = DynaBase.get_stub()
@@ -1719,6 +1735,7 @@ class ShellPart(Part):
         self.hourglasstype = -1
 
     def set_hourglass(self, type=HourglassType.STANDARD_LSDYNA_VISCOUS):
+        """Define hourglass/bulk viscosity identification."""
         self.hourglasstype = type.value
 
     def set_shear_factor(self, factor):
@@ -1738,6 +1755,7 @@ class ShellPart(Part):
         self.thickness = thickness
 
     def set_property(self):
+        """Set properties for shell part."""
         sec = ShellSection(
             element_formulation=self.formulation,
             shear_factor=self.shear_factor,
@@ -1772,9 +1790,7 @@ class ShellPart(Part):
 
 class IGAPart(Part):
     """Define parts, that is, combine material information, section properties, hourglass type, thermal properties, and a flag for part adaptivity."""
-
     partlist = []
-
     def __init__(self, pid):
         Part.__init__(self, pid)
         self.stub = DynaBase.get_stub()
@@ -1791,6 +1807,7 @@ class IGAPart(Part):
         self.thickness = thickness
 
     def set_property(self):
+        """Set properties for IGA part."""
         sec = IGASection(
             element_formulation=self.formulation,
             shear_factor=self.shear_factor,
@@ -1813,9 +1830,7 @@ class IGAPart(Part):
 
 class SolidPart(Part):
     """Define parts, that is, combine material information, section properties, hourglass type, thermal properties, and a flag for part adaptivity."""
-
     partlist = []
-
     def __init__(self, pid):
         Part.__init__(self, pid)
         self.stub = DynaBase.get_stub()
@@ -1823,9 +1838,11 @@ class SolidPart(Part):
         self.hourglasstype = -1
 
     def set_hourglass(self, type=HourglassType.STANDARD_LSDYNA_VISCOUS):
+        """Set hourglass/bulk viscosity identification."""
         self.hourglasstype = type.value
 
     def set_property(self):
+        """Set properties for solid part."""
         ret = self.stub.CreateSectionSolid(SectionSolidRequest(elform=self.formulation))
         self.secid = ret.id
         if self.hourglasstype > 0:
@@ -1935,7 +1952,7 @@ class ImplicitAnalysis:
         return ret
 
     def set_eigenvalue(self, number_eigenvalues=0, shift_scale=0):
-        """Activates implicit eigenvalue analysis and defines associated input parameters.
+        """Activate implicit eigenvalue analysis and defines associated input parameters.
 
         Parameters
         ----------
@@ -2014,9 +2031,9 @@ class ContactType(Enum):
     EDGE = 7
 
 
-class ContactAlgorithm(Enum):
-    PENALTY_BASED = 1
-    CONSTRAINT_BASED = 2
+#class ContactAlgorithm(Enum):
+    #PENALTY_BASED = 1
+    #CONSTRAINT_BASED = 2
 
 
 class OffsetType(Enum):
@@ -2068,7 +2085,7 @@ class ContactSurface:
         return self.id
 
     def set_contact_thickness(self, thickness):
-        """contact thickness for SURFA surface.
+        """Set contact thickness for SURFA surface.
 
         Parameters
         ----------
@@ -2078,14 +2095,13 @@ class ContactSurface:
         self.thickness = thickness
 
     def set_penalty_stiffness_scale_factor(self, scalefactor=1.0):
+        """Set scale factor on default surface penalty stiffness."""
         self.penalty_stiffness = scalefactor
 
 
 class Contact:
-    """Provides a way of treating interaction between disjoint parts."""
-
+    """Provide a way of treating interaction between disjoint parts."""
     contactlist = []
-
     def __init__(
         self,
         type=ContactType.NULL,
@@ -2113,13 +2129,14 @@ class Contact:
         Contact.contactlist.append(self)
 
     def set_mortar(self):
-        """The mortar contact,is a segment to segment penalty based contact."""
+        """Set mortar contact,it is a segment to segment penalty based contact."""
         self.mortar = True
 
-    def set_algorithm(self, algorithm=ContactAlgorithm.PENALTY_BASED):
-        self.algorithm = algorithm.value
+    #def set_algorithm(self, algorithm=ContactAlgorithm.PENALTY_BASED):
+    #    self.algorithm = algorithm.value
 
     def set_tiebreak(self):
+        """Define the contact allow for failure, TIEBREAK is a special case of this in which after failure the contact usually becomes a normal one-way, two-way, or single surface version."""
         self.option_tiebreak = True
         self.optionres = 2
 
@@ -2137,6 +2154,7 @@ class Contact:
         self.dynamic_friction_coeff = dynamic
 
     def set_active_time(self, birth_time=0, death_time=1e20):
+        """Set birth and death time to active and deactivate the contact."""
         self.birth_time = birth_time
         self.death_time = death_time
 
@@ -2157,10 +2175,12 @@ class Contact:
         formulation=ContactFormulation.STANDARD_PENALTY,
         segment_based_contact_option=SBOPT.ASSUME_PLANER_SEGMENTS,
     ):
+        """Set contact formulation."""
         self.contact_formulation = formulation.value
         self.segment_based_contact_option = segment_based_contact_option.value
 
     def create(self):
+        """Create contact."""
         opcode = ""
         if self.type == ContactType.AUTOMATIC:
             opcode += "AUTOMATIC_"
@@ -2295,6 +2315,7 @@ class Constraint:
 
     @staticmethod
     def create(stub):
+        """Create constraint."""
         for i in range(len(Constraint.cnrbsetidlist)):
             stub.CreateConstrainedNodalRigidBody(
                 ConstrainedNodalRigidBodyRequest(
@@ -2304,6 +2325,7 @@ class Constraint:
 
 
 class Point:
+    """Define point."""
     def __init__(self, x=0, y=0, z=0):
         self.x = x
         self.y = y
@@ -2311,6 +2333,7 @@ class Point:
 
 
 class Direction:
+    """Define direction."""
     def __init__(self, x=0, y=0, z=0):
         self.x = x
         self.y = y
@@ -2355,6 +2378,7 @@ class RigidwallCylinder:
         self.dir = dir
 
     def create(self):
+        """Create rigidwall cylinder."""
         parameter = [
             self.tail.x,
             self.tail.y,

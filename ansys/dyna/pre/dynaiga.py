@@ -17,12 +17,12 @@ class DynaIGA(DynaBase):
         self.casetype = CaseType.IGA
 
     def create_section_igashell(self, secid, elform, shrf, thickness):
-        """Create *SECTION_IGA_SHELL keyword.
+        """Define section properties for isogeometric shell elements.
 
         Parameters
         ----------
         secid : int
-            Section ID. SECID is referenced on the *PART card. A unique number or label must be specified.
+            Section ID. SECID is referenced on the \*PART card. A unique number or label must be specified.
         elform : int
             Element formulation.
         shrf : float

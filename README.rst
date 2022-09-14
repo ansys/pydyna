@@ -71,7 +71,22 @@ Here is a basic solving example:
    >>> dyna.start(4)                                   # start 4 ranks of mppdyna
    >>> dyna.run("i=input.k memory=10m ncycle=20000")   # begin execution
 
+Here is a basic post-processing example:
 
+lsdyna::d3plot::stress_von_mises
+
+.. code:: python
+
+	 from ansys.dpf import core as dpf
+
+	 ds = dpf.DataSources()
+	 ds.set_result_file_path(r'./d3plot', 'd3plot')
+
+	 resultOp = dpf.Operator("lsdyna::d3plot::stress_von_mises")
+	 resultOp.inputs.data_sources(ds)
+	 # set the time
+	 resultOp.inputs.time_scoping.connect([3])
+	 result = resultOp.outputs.stress_von_mises()
 
 License
 -------
