@@ -416,7 +416,7 @@ class DynaBase:
         niptets : int
             Number of integration points used in the quadratic tetrahedron elements.
         swlocl : int
-            Output option for stresses in solid elements used as spot welds with material *MAT_SPOTWELD.
+            Output option for stresses in solid elements used as spot welds with material \*MAT_SPOTWELD.
         psfail : int
             Solid element erosion from negative volume is limited only to solid elements in the part set indicated by PSFAIL.
         t10jtol : float
@@ -488,7 +488,7 @@ class DynaBase:
         rwpnal : float
             Scale factor for rigid wall penalties, which treat nodal points interacting with rigid walls.
         ignore : int
-            Ignore initial penetrations in the *CONTACT_AUTOMATIC options.
+            Ignore initial penetrations in the \*CONTACT_AUTOMATIC options.
         igactc : int
             Options to use isogeometric shells for contact detection when contact involves isogeometric shells.
 
@@ -548,7 +548,7 @@ class DynaBase:
         return ret
 
     def create_database_ascii(self, type, dt=0.0, binary=1, lcur=0, ioopt=0):
-        """Create *DATABASE keyword.
+        """Obtain output files containing results information.
 
         Parameters
         ----------
@@ -800,14 +800,14 @@ class DynaBase:
         return ret
 
     def create_section_solid(self, title, secid, elform):
-        """Create *SECTION_SOLID keyword.
+        """Define section properties for solid continuum and fluid elements.
         
         Parameters
         ----------
         title : string
             Define title for section solid.
         secid : int
-            Section ID. SECID is referenced on the *PART card. A unique number must be specified.
+            Section ID. SECID is referenced on the \*PART card. A unique number must be specified.
         elform : int
             Element formulation options.
 
@@ -861,7 +861,7 @@ class DynaBase:
         return ret
 
     def create_hourglass(self, ghid, ihq, qm=0.1, q1=1.5, q2=0.06, qb=1e-9, qw=1e-9):
-        """Create *HOURGLASS keyword.
+        """Define hourglass and bulk viscosity properties.
         
         Parameters
         ----------
@@ -1032,7 +1032,7 @@ class DynaBase:
         mid : int
             Material identification.
         lcid : int
-            Load curve ID (see *DEFINE_CURVE) describing force as a function of displacement or moment as a function of rotation relationship.
+            Load curve ID (see \*DEFINE_CURVE) describing force as a function of displacement or moment as a function of rotation relationship.
 
         Returns
         -------
@@ -1167,20 +1167,19 @@ class DynaBase:
 
         Examples
         --------
-        create a *INITIAL_VELOCITY keyword.
+            Create a \*INITIAL_VELOCITY keyword.
+            \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            \*INITIAL_VELOCITY
+            \&     nsid    nsidex     boxid
+                    0
 
-        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-        *INITIAL_VELOCITY
-        &     nsid    nsidex     boxid
-                 0
+            \&       vx        vy        vz       vxr       vyr       vzr
+            1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
+            \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-        &       vx        vy        vz       vxr       vyr       vzr
-         1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
-        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-        opcode = "INITIAL_VELOCITY"
-        keyworddata = "0\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
-        create_general_keyword(opcode = opcode,keyworddata=keyworddata)
+            opcode = "INITIAL_VELOCITY"
+            keyworddata = "0\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
+            create_general_keyword(opcode = opcode,keyworddata=keyworddata)
         
         """
         ret = self.stub.CreateGeneralKWD(

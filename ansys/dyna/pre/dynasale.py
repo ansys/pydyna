@@ -24,6 +24,17 @@ class FillDirection(Enum):
 
 
 class ControlPoint:
+    """Provide spacing information to generate a 3D structured ALE mesh.
+        
+    Parameters
+    ----------
+    number : int
+        Control point node number.
+    position : float
+        Control point position.
+    ratio : float   
+        Ratio for progressive mesh spacing.
+    """
     def __init__(self, number, position, ratio):
         self.number = number
         self.position = position
@@ -31,6 +42,15 @@ class ControlPoint:
 
 
 class StructuredMesh:
+    """Generate a structured 2D or 3D mesh and invoke the Structured ALE (S-ALE) solver.
+        
+    Parameters
+    ----------
+    meshid : int
+        S-ALE Mesh ID.
+    partid : int
+        Default Part ID. The elements generated are assigned to DPID.
+    """
     num_meshpart = 0
 
     def __init__(self, stub, meshid, partid):
