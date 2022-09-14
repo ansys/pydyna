@@ -142,7 +142,7 @@ class StructuredMesh:
         return ret
 
     def initial_detonation(self, detonation_point):
-        """Create *ICFD_DATABASE_DRAG keyword.
+        """Define points to initiate the location of high explosive detonations.
         
         Parameters
         ----------
