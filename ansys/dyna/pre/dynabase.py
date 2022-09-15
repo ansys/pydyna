@@ -1670,6 +1670,7 @@ class Part:
         self.adpopt = 0
         self.tmid = 0
         self.formulation = 0
+        self.stiffness_damping = 0
 
     def set_material(self, mat):
         """Set material."""
@@ -1679,6 +1680,18 @@ class Part:
     def set_element_formulation(self, formulation):
         """Set Element formulation."""
         self.formulation = formulation.value
+
+    def set_stiffness_damping_coefficient(self,coefficient):
+        """Assign stiffness damping coefficient."""
+        self.stiffness_damping = coefficient
+    
+    def set_property(self):
+        """Set Properties for part object."""
+        if self.stiffness_damping>0:
+            self.stub.CreateDampingPartStiffness(
+                DampingPartStiffnessRequest(isset=False, id=self.id, coef=self.stiffness_damping)
+            )
+            logging.info(f"Assign stiffness damping coefficient to part {self.id} ")
 
 
 class BeamPart(Part):
@@ -2192,6 +2205,7 @@ class Contact:
             msid = self.mastersurface.id
             mstyp = self.mastersurface.type
             mst = self.mastersurface.thickness
+            penalty_stiffness = self.mastersurface.penalty_stiffness
         if self.category == ContactCategory.SURFACE_TO_SURFACE_CONTACT:
             opcode += "SURFACE_TO_SURFACE"
         elif self.category == ContactCategory.SINGLE_SURFACE_CONTACT:
@@ -2199,6 +2213,7 @@ class Contact:
             msid = 0
             mstyp = 0
             mst = 0
+            penalty_stiffness = 0
         elif self.category == ContactCategory.SHELL_EDGE_TO_SURFACE_CONTACT:
             opcode += "SHELL_EDGE_TO_SURFACE"
         elif self.category == ContactCategory.NODES_TO_SURFACE:
@@ -2242,7 +2257,7 @@ class Contact:
                 penchk=0,
                 birthtime=self.birth_time,
                 sfsa=self.slavesurface.penalty_stiffness,
-                sfsb=self.mastersurface.penalty_stiffness,
+                sfsb=penalty_stiffness,
                 sst=self.slavesurface.thickness,
                 mst=mst,
                 optionres=0,
