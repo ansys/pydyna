@@ -6,775 +6,773 @@ operators
 
 1. d3plot
 
-   -  lsdyna::d3plot::meshes_provider
+-  lsdyna::d3plot::meshes_provider
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         # for regular mesh
-         meshOP = dpf.Operator("lsdyna::d3plot::meshes_provider")
-         meshOP.inputs.data_sources.connect(ds)
-         meshes = meshOP.outputs.meshes()
-         mesh = meshes.get_mesh({})
+      # for regular mesh
+      meshOP = dpf.Operator("lsdyna::d3plot::meshes_provider")
+      meshOP.inputs.data_sources.connect(ds)
+      meshes = meshOP.outputs.meshes()
+      mesh = meshes.get_mesh({})
 
-         # for adaptive mesh
-         meshOP = dpf.Operator("lsdyna::d3plot::meshes_provider")
-         meshOP.inputs.data_sources.connect(ds)
-         timeScoping = dpf.Scoping()
-         timeScoping.ids = list(range(1, 21))
-         meshOP.inputs.time_scoping.connect(timeScoping)
-         meshes = meshOP.outputs.meshes()
-         mesh = meshes.get_mesh({'time':1})
+      # for adaptive mesh
+      meshOP = dpf.Operator("lsdyna::d3plot::meshes_provider")
+      meshOP.inputs.data_sources.connect(ds)
+      timeScoping = dpf.Scoping()
+      timeScoping.ids = list(range(1, 21))
+      meshOP.inputs.time_scoping.connect(timeScoping)
+      meshes = meshOP.outputs.meshes()
+      mesh = meshes.get_mesh({'time':1})
 
-   -  lsdyna::d3plot::U
+-  lsdyna::d3plot::U
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         coord = dpf.Operator("lsdyna::d3plot::U")
-         coord.inputs.data_sources.connect(ds)
-         # set the time
-         coord.inputs.time_scoping.connect([3])
-         fields = coord.outputs.displacement()
+      coord = dpf.Operator("lsdyna::d3plot::U")
+      coord.inputs.data_sources.connect(ds)
+      # set the time
+      coord.inputs.time_scoping.connect([3])
+      fields = coord.outputs.displacement()
 
-   -  lsdyna::d3plot::TimeFreqSupportProvider
+-  lsdyna::d3plot::TimeFreqSupportProvider
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         time = dpf.Operator("lsdyna::d3plot::TimeFreqSupportProvider")
-         time.inputs.data_sources.connect(ds)
-         result_time_freq_support = time.outputs.time_freq_support()
+      time = dpf.Operator("lsdyna::d3plot::TimeFreqSupportProvider")
+      time.inputs.data_sources.connect(ds)
+      result_time_freq_support = time.outputs.time_freq_support()
 
-   -  lsdyna::d3plot::result_info_provider
+-  lsdyna::d3plot::result_info_provider
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultInfoOp = dpf.Operator("lsdyna::d3plot::result_info_provider")
-         resultInfoOp.inputs.data_sources(ds)
-         result_info = resultInfoOp.outputs.result_info()
+      resultInfoOp = dpf.Operator("lsdyna::d3plot::result_info_provider")
+      resultInfoOp.inputs.data_sources(ds)
+      result_info = resultInfoOp.outputs.result_info()
 
-   -  lsdyna::d3plot::eng_ke
+-  lsdyna::d3plot::eng_ke
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::eng_ke")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.global_kinetic_energy()
+      resultOp = dpf.Operator("lsdyna::d3plot::eng_ke")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.global_kinetic_energy()
 
-   -  lsdyna::d3plot::global_internal_energy
+-  lsdyna::d3plot::global_internal_energy
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::global_internal_energy")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.global_internal_energy()
+      resultOp = dpf.Operator("lsdyna::d3plot::global_internal_energy")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.global_internal_energy()
 
-   -  lsdyna::d3plot::global_total_energy
+-  lsdyna::d3plot::global_total_energy
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::global_total_energy")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.global_total_energy()
+      resultOp = dpf.Operator("lsdyna::d3plot::global_total_energy")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.global_total_energy()
 
-   -  lsdyna::d3plot::global_velocity
+-  lsdyna::d3plot::global_velocity
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::global_velocity")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.global_velocity()
+      resultOp = dpf.Operator("lsdyna::d3plot::global_velocity")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.global_velocity()
 
-   -  lsdyna::d3plot::node_initial_coordinates
+-  lsdyna::d3plot::node_initial_coordinates
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::node_initial_coordinates")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_initial_coordinates()
+      resultOp = dpf.Operator("lsdyna::d3plot::node_initial_coordinates")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_initial_coordinates()
 
-   -  lsdyna::d3plot::node_coordinates
+-  lsdyna::d3plot::node_coordinates
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::node_coordinates")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_coordinates()
+      resultOp = dpf.Operator("lsdyna::d3plot::node_coordinates")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_coordinates()
 
-   -  lsdyna::d3plot::V
+-  lsdyna::d3plot::V
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::V")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_velocities()
+      resultOp = dpf.Operator("lsdyna::d3plot::V")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_velocities()
 
-   -  lsdyna::d3plot::A
+-  lsdyna::d3plot::A
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::A")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_accelerations()
+      resultOp = dpf.Operator("lsdyna::d3plot::A")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_accelerations()
 
-   -  lsdyna::d3plot::node_temperature
+-  lsdyna::d3plot::node_temperature
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::node_temperature")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_temperature()
+      resultOp = dpf.Operator("lsdyna::d3plot::node_temperature")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_temperature()
 
-   -  lsdyna::d3plot::node_heat_flux
+-  lsdyna::d3plot::node_heat_flux
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::node_heat_flux")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_heat_flux()
+      resultOp = dpf.Operator("lsdyna::d3plot::node_heat_flux")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_heat_flux()
 
-   -  lsdyna::d3plot::node_mass_scaling
+-  lsdyna::d3plot::node_mass_scaling
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::node_mass_scaling")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_mass_scaling()
+      resultOp = dpf.Operator("lsdyna::d3plot::node_mass_scaling")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_mass_scaling()
 
-   -  lsdyna::d3plot::node_temperature_divide_time
+-  lsdyna::d3plot::node_temperature_divide_time
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::node_temperature_divide_time")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_temperature_divide_time()
+      resultOp = dpf.Operator("lsdyna::d3plot::node_temperature_divide_time")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_temperature_divide_time()
 
-   -  lsdyna::d3plot::node_residual_force
+-  lsdyna::d3plot::node_residual_force
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::node_residual_force")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_residual_force()
+      resultOp = dpf.Operator("lsdyna::d3plot::node_residual_force")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_residual_force()
 
-   -  lsdyna::d3plot::node_residual_moment
+-  lsdyna::d3plot::node_residual_moment
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::node_residual_moment")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_residual_moment()
+      resultOp = dpf.Operator("lsdyna::d3plot::node_residual_moment")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_residual_moment()
 
-   -  lsdyna::d3plot::node_penetration
+-  lsdyna::d3plot::node_penetration
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::node_penetration")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_penetration()
+      resultOp = dpf.Operator("lsdyna::d3plot::node_penetration")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_penetration()
 
-   -  lsdyna::d3plot::node_relative_penetration
+-  lsdyna::d3plot::node_relative_penetration
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::node_relative_penetration")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_relative_penetration()
+      resultOp = dpf.Operator("lsdyna::d3plot::node_relative_penetration")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_relative_penetration()
 
-   -  lsdyna::d3plot::node_contact_energy_density
+-  lsdyna::d3plot::node_contact_energy_density
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::node_contact_energy_density")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.node_contact_energy_density()
+      resultOp = dpf.Operator("lsdyna::d3plot::node_contact_energy_density")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.node_contact_energy_density()
 
-   -  lsdyna::d3plot::S
+-  lsdyna::d3plot::S
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::S")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.stress()
+      resultOp = dpf.Operator("lsdyna::d3plot::S")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.stress()
 
-   -  lsdyna::d3plot::stress_von_mises
+-  lsdyna::d3plot::stress_von_mises
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::stress_von_mises")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.stress_von_mises()
+      resultOp = dpf.Operator("lsdyna::d3plot::stress_von_mises")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.stress_von_mises()
 
-   -  lsdyna::d3plot::effective_plastic_strain
+-  lsdyna::d3plot::effective_plastic_strain
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::effective_plastic_strain")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.effective_plastic_strain()
+      resultOp = dpf.Operator("lsdyna::d3plot::effective_plastic_strain")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.effective_plastic_strain()
 
-   -  lsdyna::d3plot::EPEL
+-  lsdyna::d3plot::EPEL
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::EPEL")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.strain()
+      resultOp = dpf.Operator("lsdyna::d3plot::EPEL")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.strain()
 
-   -  lsdyna::d3plot::strain_von_mises
+-  lsdyna::d3plot::strain_von_mises
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::strain_von_mises")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.strain_von_mises()
+      resultOp = dpf.Operator("lsdyna::d3plot::strain_von_mises")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.strain_von_mises()
 
-   -  lsdyna::d3plot::history_var
+-  lsdyna::d3plot::history_var
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::history_var")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.history_var()
+      resultOp = dpf.Operator("lsdyna::d3plot::history_var")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.history_var()
 
-   -  lsdyna::d3plot::thickness
+-  lsdyna::d3plot::thickness
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::thickness")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.thickness()
+      resultOp = dpf.Operator("lsdyna::d3plot::thickness")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.thickness()
 
-   -  lsdyna::d3plot::element_dependent_var_1
+-  lsdyna::d3plot::element_dependent_var_1
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::element_dependent_var_1")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.element_dependent_var_1()
+      resultOp = dpf.Operator("lsdyna::d3plot::element_dependent_var_1")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.element_dependent_var_1()
 
-   -  lsdyna::d3plot::element_dependent_var_2
+-  lsdyna::d3plot::element_dependent_var_2
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::element_dependent_var_2")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.element_dependent_var_2()
+      resultOp = dpf.Operator("lsdyna::d3plot::element_dependent_var_2")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.element_dependent_var_2()
 
-   -  lsdyna::d3plot::mx
+-  lsdyna::d3plot::mx
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::mx")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.mx()
+      resultOp = dpf.Operator("lsdyna::d3plot::mx")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.mx()
 
-   -  lsdyna::d3plot::my
+-  lsdyna::d3plot::my
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::my")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.my()
+      resultOp = dpf.Operator("lsdyna::d3plot::my")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.my()
 
-   -  lsdyna::d3plot::mxy
+-  lsdyna::d3plot::mxy
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::mxy")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.mxy()
+      resultOp = dpf.Operator("lsdyna::d3plot::mxy")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.mxy()
 
-   -  lsdyna::d3plot::qx
+-  lsdyna::d3plot::qx
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::qx")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.qx()
+      resultOp = dpf.Operator("lsdyna::d3plot::qx")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.qx()
 
-   -  lsdyna::d3plot::qy
+-  lsdyna::d3plot::qy
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::qy")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.qy()
+      resultOp = dpf.Operator("lsdyna::d3plot::qy")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.qy()
 
-   -  lsdyna::d3plot::nx
+-  lsdyna::d3plot::nx
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::nx")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.nx()
+      resultOp = dpf.Operator("lsdyna::d3plot::nx")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.nx()
 
-   -  lsdyna::d3plot::ny
+-  lsdyna::d3plot::ny
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::ny")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.ny()
+      resultOp = dpf.Operator("lsdyna::d3plot::ny")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.ny()
 
-   -  lsdyna::d3plot::nxy
+-  lsdyna::d3plot::nxy
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::nxy")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.nxy()
+      resultOp = dpf.Operator("lsdyna::d3plot::nxy")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.nxy()
 
-   -  lsdyna::d3plot::axial_force
+-  lsdyna::d3plot::axial_force
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::axial_force")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.axial_force()
+      resultOp = dpf.Operator("lsdyna::d3plot::axial_force")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.axial_force()
 
-   -  lsdyna::d3plot::s_shear_resultant
+-  lsdyna::d3plot::s_shear_resultant
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::s_shear_resultant")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.s_shear_resultant()
+      resultOp = dpf.Operator("lsdyna::d3plot::s_shear_resultant")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.s_shear_resultant()
 
-   -  lsdyna::d3plot::t_shear_resultant
+-  lsdyna::d3plot::t_shear_resultant
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::t_shear_resultant")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.t_shear_resultant()
+      resultOp = dpf.Operator("lsdyna::d3plot::t_shear_resultant")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.t_shear_resultant()
 
-   -  lsdyna::d3plot::s_bending_moment
+-  lsdyna::d3plot::s_bending_moment
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::s_bending_moment")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.s_bending_moment()
+      resultOp = dpf.Operator("lsdyna::d3plot::s_bending_moment")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.s_bending_moment()
 
-   -  lsdyna::d3plot::t_bending_moment
+-  lsdyna::d3plot::t_bending_moment
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::t_bending_moment")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.t_bending_moment()
+      resultOp = dpf.Operator("lsdyna::d3plot::t_bending_moment")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.t_bending_moment()
 
-   -  lsdyna::d3plot::torsional_resultant
+-  lsdyna::d3plot::torsional_resultant
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::torsional_resultant")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.torsional_resultant()
+      resultOp = dpf.Operator("lsdyna::d3plot::torsional_resultant")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.torsional_resultant()
 
-   -  lsdyna::d3plot::axial_stress
+-  lsdyna::d3plot::axial_stress
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::axial_stress")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.axial_stress()
+      resultOp = dpf.Operator("lsdyna::d3plot::axial_stress")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.axial_stress()
 
-   -  lsdyna::d3plot::rs_shear_stress
+-  lsdyna::d3plot::rs_shear_stress
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::rs_shear_stress")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.rs_shear_stress()
+      resultOp = dpf.Operator("lsdyna::d3plot::rs_shear_stress")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.rs_shear_stress()
 
-   -  lsdyna::d3plot::tr_shear_stress
+-  lsdyna::d3plot::tr_shear_stress
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::tr_shear_stress")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.tr_shear_stress()
+      resultOp = dpf.Operator("lsdyna::d3plot::tr_shear_stress")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.tr_shear_stress()
 
-   -  lsdyna::d3plot::axial_plastic_strain
+-  lsdyna::d3plot::axial_plastic_strain
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::axial_plastic_strain")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.axial_plastic_strain()
+      resultOp = dpf.Operator("lsdyna::d3plot::axial_plastic_strain")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.axial_plastic_strain()
 
-   -  lsdyna::d3plot::axial_strain
+-  lsdyna::d3plot::axial_strain
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./d3plot', 'd3plot')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./d3plot', 'd3plot')
 
-         resultOp = dpf.Operator("lsdyna::d3plot::axial_strain")
-         resultOp.inputs.data_sources(ds)
-         # set the time
-         resultOp.inputs.time_scoping.connect([3])
-         result = resultOp.outputs.axial_strain()
+      resultOp = dpf.Operator("lsdyna::d3plot::axial_strain")
+      resultOp.inputs.data_sources(ds)
+      # set the time
+      resultOp.inputs.time_scoping.connect([3])
+      result = resultOp.outputs.axial_strain()
 
 2. binout
 
-   -  lsdyna::binout::meshes_provider
+-  lsdyna::binout::meshes_provider
 
-      \```python from ansys.dpf import core as dpf
+   .. code:: python
 
-ds = dpf.DataSources() ds.set_result_file_path(r’./binout’, ‘binout’)
+      from ansys.dpf import core as dpf
 
-::
+      ds = dpf.DataSources() ds.set_result_file_path(r’./binout’, ‘binout’)
 
-    meshOP = dpf.Operator("lsdyna::binout::meshes_provider")
-
-meshOP.inputs.data_sources.connect(ds) meshes = meshOP.outputs.meshes()
-mesh = meshes.get_mesh({}) \``\`
+      meshOP = dpf.Operator("lsdyna::binout::meshes_provider")
+      meshOP.inputs.data_sources.connect(ds) meshes = meshOP.outputs.meshes()
+      mesh = meshes.get_mesh({})
 
 -  lsdyna::binout::U
 
-   \```python from ansys.dpf import core as dpf
+   .. code:: python
+   
+      python from ansys.dpf import core as dpf
 
-ds = dpf.DataSources() ds.set_result_file_path(r’./binout’, ‘binout’)
+      ds = dpf.DataSources() ds.set_result_file_path(r’./binout’, ‘binout’)
 
-::
-
-    coord = dpf.Operator("lsdyna::binout::U")
-    coord.inputs.data_sources.connect(ds)
-    # set the time
-    coord.inputs.time_scoping.connect([3])
-    fields = coord.outputs.displacement()
-    ```
+      coord = dpf.Operator("lsdyna::binout::U")
+      coord.inputs.data_sources.connect(ds)
+      # set the time
+      coord.inputs.time_scoping.connect([3])
+      fields = coord.outputs.displacement()
 
 -  lsdyna::binout::TimeFreqSupportProvider
 
@@ -923,114 +921,114 @@ ds = dpf.DataSources() ds.set_result_file_path(r’./binout’, ‘binout’)
 
 3. nvh
 
-   -  lsdyna::d3ssd::meshes_provider
+-  lsdyna::d3ssd::meshes_provider
 
-   -  lsdyna::d3spcm::meshes_provider
+-  lsdyna::d3spcm::meshes_provider
 
-   -  lsdyna::d3psd::meshes_provider
+-  lsdyna::d3psd::meshes_provider
 
-   -  lsdyna::d3rms::meshes_provider
+-  lsdyna::d3rms::meshes_provider
 
-   -  lsdyna::d3zcf::meshes_provider
+-  lsdyna::d3zcf::meshes_provider
 
-   -  lsdyna::d3ssd::result_info_provider
+-  lsdyna::d3ssd::result_info_provider
 
-   -  lsdyna::d3ssd::U
+-  lsdyna::d3ssd::U
 
-   -  lsdyna::d3ssd::V
+-  lsdyna::d3ssd::V
 
-   -  lsdyna::d3ssd::A
+-  lsdyna::d3ssd::A
 
-   -  lsdyna::d3ssd::S
+-  lsdyna::d3ssd::S
 
-   -  lsdyna::d3ssd::EPEL
+-  lsdyna::d3ssd::EPEL
 
-   -  lsdyna::d3ssd::TimeFreqSupportProvider
+-  lsdyna::d3ssd::TimeFreqSupportProvider
 
-      same as d3plot
+   same as d3plot
 
-   -  lsdyna::moddynout::TimeFreqSupportProvider
+-  lsdyna::moddynout::TimeFreqSupportProvider
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./moddynout', 'moddynout')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./moddynout', 'moddynout')
 
-         resultOp = dpf.Operator("lsdyna::moddynout::TimeFreqSupportProvider")
-         resultOp.inputs.data_sources(ds)
-         result = resultOp.outputs.time_freq_support()
+      resultOp = dpf.Operator("lsdyna::moddynout::TimeFreqSupportProvider")
+      resultOp.inputs.data_sources(ds)
+      result = resultOp.outputs.time_freq_support()
 
-   -  lsdyna::moddynout::result_info_provider
+-  lsdyna::moddynout::result_info_provider
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./moddynout', 'moddynout')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./moddynout', 'moddynout')
 
-         resultInfoOp = dpf.Operator("lsdyna::moddynout::result_info_provider")
-         resultInfoOp.inputs.data_sources(ds)
-         result_info = resultInfoOp.outputs.result_info()
+      resultInfoOp = dpf.Operator("lsdyna::moddynout::result_info_provider")
+      resultInfoOp.inputs.data_sources(ds)
+      result_info = resultInfoOp.outputs.result_info()
 
-   -  lsdyna::moddynout::F
+-  lsdyna::moddynout::F
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./moddynout', 'moddynout')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./moddynout', 'moddynout')
 
-         times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-         disOp = dpf.Operator("lsdyna::moddynout::F")
-         disOp.inputs.data_sources(ds)
-         disOp.inputs.time_scoping(times)
-         fields = disOp.outputs.moddynout_force()
+      times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      disOp = dpf.Operator("lsdyna::moddynout::F")
+      disOp.inputs.data_sources(ds)
+      disOp.inputs.time_scoping(times)
+      fields = disOp.outputs.moddynout_force()
 
-   -  lsdyna::moddynout::A
+-  lsdyna::moddynout::A
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./moddynout', 'moddynout')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./moddynout', 'moddynout')
 
-         times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-         disOp = dpf.Operator("lsdyna::moddynout::A")
-         disOp.inputs.data_sources(ds)
-         disOp.inputs.time_scoping(times)
-         fields = disOp.outputs.moddynout_acceleration()
+      times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      disOp = dpf.Operator("lsdyna::moddynout::A")
+      disOp.inputs.data_sources(ds)
+      disOp.inputs.time_scoping(times)
+      fields = disOp.outputs.moddynout_acceleration()
 
-   -  lsdyna::moddynout::V
+-  lsdyna::moddynout::V
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./moddynout', 'moddynout')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./moddynout', 'moddynout')
 
-         times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-         disOp = dpf.Operator("lsdyna::moddynout::V")
-         disOp.inputs.data_sources(ds)
-         disOp.inputs.time_scoping(times)
-         fields = disOp.outputs.moddynout_velocity()
+      times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      disOp = dpf.Operator("lsdyna::moddynout::V")
+      disOp.inputs.data_sources(ds)
+      disOp.inputs.time_scoping(times)
+      fields = disOp.outputs.moddynout_velocity()
 
-   -  lsdyna::moddynout::U
+-  lsdyna::moddynout::U
 
-      .. code:: python
+   .. code:: python
 
-         from ansys.dpf import core as dpf
+      from ansys.dpf import core as dpf
 
-         ds = dpf.DataSources()
-         ds.set_result_file_path(r'./moddynout', 'moddynout')
+      ds = dpf.DataSources()
+      ds.set_result_file_path(r'./moddynout', 'moddynout')
 
-         times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-         disOp = dpf.Operator("lsdyna::moddynout::U")
-         disOp.inputs.data_sources(ds)
-         disOp.inputs.time_scoping(times)
-         fields = disOp.outputs.moddynout_disp()
+      times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      disOp = dpf.Operator("lsdyna::moddynout::U")
+      disOp.inputs.data_sources(ds)
+      disOp.inputs.time_scoping(times)
+      fields = disOp.outputs.moddynout_disp()
