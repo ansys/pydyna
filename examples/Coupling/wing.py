@@ -9,7 +9,6 @@ This example demonstrates how to create an Wing input deck.
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
 from pre.dynaicfd import *
 from pre.dynadem import *
 
@@ -20,7 +19,7 @@ if __name__ == "__main__":
     icfd = DynaICFD(hostname = hostname)
     dem = DynaDEM(hostname = hostname)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep + "wing" + os.sep
+    path = os.getcwd() + os.sep + "input" + os.sep + "icfd_dem" + os.sep
     fns.append(path + "main.k")
     fns.append(path + "fe-rig_mesh2.k")
     fns.append(path + "p22a-unts.k")
@@ -77,13 +76,13 @@ if __name__ == "__main__":
     msshell1.set_material(mat)
     msshell1.set_non_slip()
 
-    msshell1 = ICFDPart(2)
-    msshell1.set_material(mat)
-    msshell1.set_non_slip()
+    msshell2 = ICFDPart(2)
+    msshell2.set_material(mat)
+    msshell2.set_non_slip()
 
-    msshell1 = ICFDPart(3)
-    msshell1.set_material(mat)
-    msshell1.set_non_slip()
+    msshell3 = ICFDPart(3)
+    msshell3.set_material(mat)
+    msshell3.set_non_slip()
 
     partvol = ICFDVolumePart(surfaces=[125, 126, 127, 128, 129])
     partvol.set_material(mat) 
@@ -105,16 +104,7 @@ if __name__ == "__main__":
     icfd.create_load_body("Z", lcid=11)
 
     icfd.create_init_vel_rigidbody(pid=5, vyr=107.527)
-    icfd.create_boundary_prescribed_motion(
-        id=5,
-        heading="Roll",
-        option="RIGID",
-        typeid=5,
-        dof=6,
-        lcid=11,
-        sf=-107.57,
-        vid=1,
-    )
+
 
     mat1 = MatRigid(mass_density=2e-6,young_modulus=1000,poisson_ratio=0.34,center_of_mass_constraint=1,translational_constraint=7,rotational_constraint=7)
     mat5 = MatRigid(mass_density=2e-6,young_modulus=1000,poisson_ratio=0.34,center_of_mass_constraint=1,translational_constraint=7,rotational_constraint=6)
@@ -144,24 +134,9 @@ if __name__ == "__main__":
     roll.set_shear_factor(0.8333)
 
     # p22a-unts.k
-    abs = [0, 1e18]
-    ord = [1, 1]
-    icfd.create_definecurve(lcid=111, sfo=1, abscissa=abs, ordinate=ord)
-    tail = [0, 0, 0]
-    head = [1, 0, 0]
-    icfd.create_definevector(vid=1, tail=tail, head=head, title="FirstSpan")
-    icfd.create_boundary_prescribed_motion(
-        id=4,
-        heading="Conveyor-yellow-shell-move-along-x",
-        option="RIGID",
-        typeid=9,
-        dof=1,
-        lcid=111,
-        sf=6666,
-        vid=1,
-        birth=0.2,
-    )
-
+    bdy = BoundaryCondition()
+    bdy.create_imposed_motion(PartSet([5]),Curve(x=[0.05, 1e18],y=[1,1]),dof=DOF.Y_ROTATIONAL,scalefactor=-107.57)
+    bdy.create_imposed_motion(PartSet([9]),Curve(x=[0, 1e18],y=[1,1]),dof=DOF.X_TRANSLATIONAL,scalefactor=6666,birthtime=0.2)
 
     CoreToChassis = Contact(type=ContactType.AUTOMATIC,category=ContactCategory.SURFACE_TO_SURFACE_CONTACT)
     CoreToChassis.set_friction_coefficient(static=0.2,dynamic=0.2)
@@ -216,12 +191,6 @@ if __name__ == "__main__":
     surf1.set_contact_thickness(1.5)
     selfcontact.set_slave_surface(surf1)
 
-
-    pids = [6]
-    icfd.set_part_damping_stiffness(pids=pids, coef=0.1)
-    pids = [113]
-    icfd.set_part_damping_stiffness(pids=pids, coef=0.1)
-
     icfd.create_boundary_spc(
         option1="SET",
         birthdeath=True,
@@ -250,6 +219,7 @@ if __name__ == "__main__":
     chassis.set_thickness(0.72)
     chassis.set_shear_factor(0.8333)
     chassis.set_hourglass(HourglassType.ACTIVATES_FULL_PROJECTION_WARPING_STIFFNESS)
+    chassis.set_stiffness_damping_coefficient(0.1)
 
     conveyor = ShellPart(9)
     conveyor.set_material(matrigid)
@@ -267,6 +237,7 @@ if __name__ == "__main__":
     tape.set_thickness(0.72)
     tape.set_shear_factor(0.8333)
     tape.set_hourglass(HourglassType.ACTIVATES_FULL_PROJECTION_WARPING_STIFFNESS)
+    tape.set_stiffness_damping_coefficient(0.1)
 
     ents = [4]
     icfd.create_nodeset(option="GENERAL", sid=1, genoption="SET_SHELL", entities=ents)
