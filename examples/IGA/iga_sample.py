@@ -32,8 +32,8 @@ if __name__ == "__main__":
     plastic = MatPiecewiseLinearPlasticity(mass_density=7.830e-06,young_modulus=200,yield_stress=1.5,tangent_modulus=0.5)
     swmatlist = []
     for mat in materialdata:
-            spotweld = MatSpotweld(mass_density=mat[0],young_modulus=mat[1],poisson_ratio=mat[2],yield_stress=mat[3],plastic_hardening_modulus=mat[4],axial_force_resultant_at_failure=mat[5],force_resultant_nrs_at_failure=mat[6],force_resultant_nrt_at_failure=mat[7])
-            swmatlist.append(spotweld)
+        spotweld = MatSpotweld(mass_density=mat[0],young_modulus=mat[1],poisson_ratio=mat[2],yield_stress=mat[3],plastic_hardening_modulus=mat[4],axial_force_resultant_at_failure=mat[5],force_resultant_nrs_at_failure=mat[6],force_resultant_nrt_at_failure=mat[7])
+        swmatlist.append(spotweld)
     
     for id in igaparts:
         part = IGAPart(id)
