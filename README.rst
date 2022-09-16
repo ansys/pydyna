@@ -1,7 +1,7 @@
 ﻿PyDyna
 #############
 
-PyDyna is a pythonic dyna package aims to provide user a more convient and complete way to
+PyDyna is a pythonic dyna package that aims to provide user a more convient and complete way to
 build up ansys-dyna input deck, submit to solver and finally post processing their results. 
 
 
