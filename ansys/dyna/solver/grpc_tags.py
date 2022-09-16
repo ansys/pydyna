@@ -17,18 +17,18 @@
 # spaces before the #.
 #
 SWITCH = 1  # sense switch
-RUN = 2     # send command line arguments & begin execution
-CWD = 3     # server sends to DYNA to find its working directory
-PAUSE = 4   # pause until told to resume
-TIME = 5    # return simulation time
+RUN = 2  # send command line arguments & begin execution
+CWD = 3  # server sends to DYNA to find its working directory
+PAUSE = 4  # pause until told to resume
+TIME = 5  # return simulation time
 RESUME = 6  # resume (until optional cycle/time)
 REQUIRES_SYNC = 1000  # values above here require MPP synchorinzation
-NODE = 1001   # return (pos, vel) for a node
+NODE = 1001  # return (pos, vel) for a node
 SETLC = 1002  # set the value of a load curve to a supplied constant
 #
 # Possible return codes:
 #
-ACK = 0         # Success
+ACK = 0  # Success
 NOTRUNNING = 1  # Dyna is not running (used by server, not DYNA)
-RUNNING = 2     # Dyna is already running (used by server, not DYNA)
-NOTFOUND = 3    # requested item not found
+RUNNING = 2  # Dyna is already running (used by server, not DYNA)
+NOTFOUND = 3  # requested item not found

@@ -3,510 +3,684 @@
 # source: dynasolver.proto
 
 import sys
-_b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+
+_b = sys.version_info[0] < 3 and (lambda x: x) or (lambda x: x.encode("latin1"))
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
+
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
 DESCRIPTOR = _descriptor.FileDescriptor(
-  name='dynasolver.proto',
-  package='dynasolver',
-  syntax='proto3',
-  serialized_options=_b('\n\007ex.grpc'),
-  serialized_pb=_b('\n\x10\x64ynasolver.proto\x12\ndynasolver\"Y\n\x0f\x44ynaSolverRelay\x12\x0b\n\x03tag\x18\x01 \x01(\x05\x12\n\n\x02i8\x18\x02 \x03(\x03\x12\n\n\x02r8\x18\x03 \x03(\x01\x12\n\n\x02i4\x18\x04 \x03(\x05\x12\n\n\x02r4\x18\x05 \x03(\x02\x12\t\n\x01\x62\x18\x06 \x01(\x0c\"\x19\n\x08LogLevel\x12\r\n\x05level\x18\x01 \x01(\x0c\"\x0c\n\nQuitServer\"\x1f\n\x12\x44ynaSolverFileData\x12\t\n\x01\x62\x18\x01 \x01(\x0c\"1\n\x0f\x44ynaSolverStart\x12\x0f\n\x07\x65xename\x18\x01 \x01(\x0c\x12\r\n\x05nproc\x18\x02 \x01(\x05\"%\n\x15\x44ynaSolverFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\x0c\"&\n\x15\x44ynaSolverTailRequest\x12\r\n\x05which\x18\x01 \x01(\x05\"\"\n\x10\x44ynaSolverStatus\x12\x0e\n\x06status\x18\x01 \x01(\x05\"0\n\x12\x44ynaSolverFileList\x12\x0c\n\x04name\x18\x01 \x03(\x0c\x12\x0c\n\x04size\x18\x02 \x03(\x03\x32\x83\x05\n\x0e\x44ynaSolverComm\x12J\n\x0csend_request\x12\x1b.dynasolver.DynaSolverRelay\x1a\x1b.dynasolver.DynaSolverRelay\"\x00\x12O\n\x0bupload_file\x12\x1e.dynasolver.DynaSolverFileData\x1a\x1c.dynasolver.DynaSolverStatus\"\x00(\x01\x12V\n\rdownload_file\x12!.dynasolver.DynaSolverFileRequest\x1a\x1e.dynasolver.DynaSolverFileData\"\x00\x30\x01\x12R\n\ttail_file\x12!.dynasolver.DynaSolverTailRequest\x1a\x1e.dynasolver.DynaSolverFileData\"\x00\x30\x01\x12Q\n\nlist_files\x12!.dynasolver.DynaSolverFileRequest\x1a\x1e.dynasolver.DynaSolverFileList\"\x00\x12K\n\x0cstart_solver\x12\x1b.dynasolver.DynaSolverStart\x1a\x1c.dynasolver.DynaSolverStatus\"\x00\x12\x45\n\x0bquit_server\x12\x16.dynasolver.QuitServer\x1a\x1c.dynasolver.DynaSolverStatus\"\x00\x12\x41\n\tlog_level\x12\x14.dynasolver.LogLevel\x1a\x1c.dynasolver.DynaSolverStatus\"\x00\x42\t\n\x07\x65x.grpcb\x06proto3')
+    name="dynasolver.proto",
+    package="dynasolver",
+    syntax="proto3",
+    serialized_options=_b("\n\007ex.grpc"),
+    serialized_pb=_b(
+        '\n\x10\x64ynasolver.proto\x12\ndynasolver"Y\n\x0f\x44ynaSolverRelay\x12\x0b\n\x03tag\x18\x01 \x01(\x05\x12\n\n\x02i8\x18\x02 \x03(\x03\x12\n\n\x02r8\x18\x03 \x03(\x01\x12\n\n\x02i4\x18\x04 \x03(\x05\x12\n\n\x02r4\x18\x05 \x03(\x02\x12\t\n\x01\x62\x18\x06 \x01(\x0c"\x19\n\x08LogLevel\x12\r\n\x05level\x18\x01 \x01(\x0c"\x0c\n\nQuitServer"\x1f\n\x12\x44ynaSolverFileData\x12\t\n\x01\x62\x18\x01 \x01(\x0c"1\n\x0f\x44ynaSolverStart\x12\x0f\n\x07\x65xename\x18\x01 \x01(\x0c\x12\r\n\x05nproc\x18\x02 \x01(\x05"%\n\x15\x44ynaSolverFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\x0c"&\n\x15\x44ynaSolverTailRequest\x12\r\n\x05which\x18\x01 \x01(\x05""\n\x10\x44ynaSolverStatus\x12\x0e\n\x06status\x18\x01 \x01(\x05"0\n\x12\x44ynaSolverFileList\x12\x0c\n\x04name\x18\x01 \x03(\x0c\x12\x0c\n\x04size\x18\x02 \x03(\x03\x32\x83\x05\n\x0e\x44ynaSolverComm\x12J\n\x0csend_request\x12\x1b.dynasolver.DynaSolverRelay\x1a\x1b.dynasolver.DynaSolverRelay"\x00\x12O\n\x0bupload_file\x12\x1e.dynasolver.DynaSolverFileData\x1a\x1c.dynasolver.DynaSolverStatus"\x00(\x01\x12V\n\rdownload_file\x12!.dynasolver.DynaSolverFileRequest\x1a\x1e.dynasolver.DynaSolverFileData"\x00\x30\x01\x12R\n\ttail_file\x12!.dynasolver.DynaSolverTailRequest\x1a\x1e.dynasolver.DynaSolverFileData"\x00\x30\x01\x12Q\n\nlist_files\x12!.dynasolver.DynaSolverFileRequest\x1a\x1e.dynasolver.DynaSolverFileList"\x00\x12K\n\x0cstart_solver\x12\x1b.dynasolver.DynaSolverStart\x1a\x1c.dynasolver.DynaSolverStatus"\x00\x12\x45\n\x0bquit_server\x12\x16.dynasolver.QuitServer\x1a\x1c.dynasolver.DynaSolverStatus"\x00\x12\x41\n\tlog_level\x12\x14.dynasolver.LogLevel\x1a\x1c.dynasolver.DynaSolverStatus"\x00\x42\t\n\x07\x65x.grpcb\x06proto3'  # noqa :E501
+    ),
 )
 
 
-
-
 _DYNASOLVERRELAY = _descriptor.Descriptor(
-  name='DynaSolverRelay',
-  full_name='dynasolver.DynaSolverRelay',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='tag', full_name='dynasolver.DynaSolverRelay.tag', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='i8', full_name='dynasolver.DynaSolverRelay.i8', index=1,
-      number=2, type=3, cpp_type=2, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='r8', full_name='dynasolver.DynaSolverRelay.r8', index=2,
-      number=3, type=1, cpp_type=5, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='i4', full_name='dynasolver.DynaSolverRelay.i4', index=3,
-      number=4, type=5, cpp_type=1, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='r4', full_name='dynasolver.DynaSolverRelay.r4', index=4,
-      number=5, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='b', full_name='dynasolver.DynaSolverRelay.b', index=5,
-      number=6, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=32,
-  serialized_end=121,
+    name="DynaSolverRelay",
+    full_name="dynasolver.DynaSolverRelay",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="tag",
+            full_name="dynasolver.DynaSolverRelay.tag",
+            index=0,
+            number=1,
+            type=5,
+            cpp_type=1,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="i8",
+            full_name="dynasolver.DynaSolverRelay.i8",
+            index=1,
+            number=2,
+            type=3,
+            cpp_type=2,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="r8",
+            full_name="dynasolver.DynaSolverRelay.r8",
+            index=2,
+            number=3,
+            type=1,
+            cpp_type=5,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="i4",
+            full_name="dynasolver.DynaSolverRelay.i4",
+            index=3,
+            number=4,
+            type=5,
+            cpp_type=1,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="r4",
+            full_name="dynasolver.DynaSolverRelay.r4",
+            index=4,
+            number=5,
+            type=2,
+            cpp_type=6,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="b",
+            full_name="dynasolver.DynaSolverRelay.b",
+            index=5,
+            number=6,
+            type=12,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=_b(""),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=32,
+    serialized_end=121,
 )
 
 
 _LOGLEVEL = _descriptor.Descriptor(
-  name='LogLevel',
-  full_name='dynasolver.LogLevel',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='level', full_name='dynasolver.LogLevel.level', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=123,
-  serialized_end=148,
+    name="LogLevel",
+    full_name="dynasolver.LogLevel",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="level",
+            full_name="dynasolver.LogLevel.level",
+            index=0,
+            number=1,
+            type=12,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=_b(""),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=123,
+    serialized_end=148,
 )
 
 
 _QUITSERVER = _descriptor.Descriptor(
-  name='QuitServer',
-  full_name='dynasolver.QuitServer',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=150,
-  serialized_end=162,
+    name="QuitServer",
+    full_name="dynasolver.QuitServer",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=150,
+    serialized_end=162,
 )
 
 
 _DYNASOLVERFILEDATA = _descriptor.Descriptor(
-  name='DynaSolverFileData',
-  full_name='dynasolver.DynaSolverFileData',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='b', full_name='dynasolver.DynaSolverFileData.b', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=164,
-  serialized_end=195,
+    name="DynaSolverFileData",
+    full_name="dynasolver.DynaSolverFileData",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="b",
+            full_name="dynasolver.DynaSolverFileData.b",
+            index=0,
+            number=1,
+            type=12,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=_b(""),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=164,
+    serialized_end=195,
 )
 
 
 _DYNASOLVERSTART = _descriptor.Descriptor(
-  name='DynaSolverStart',
-  full_name='dynasolver.DynaSolverStart',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='exename', full_name='dynasolver.DynaSolverStart.exename', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='nproc', full_name='dynasolver.DynaSolverStart.nproc', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=197,
-  serialized_end=246,
+    name="DynaSolverStart",
+    full_name="dynasolver.DynaSolverStart",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="exename",
+            full_name="dynasolver.DynaSolverStart.exename",
+            index=0,
+            number=1,
+            type=12,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=_b(""),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="nproc",
+            full_name="dynasolver.DynaSolverStart.nproc",
+            index=1,
+            number=2,
+            type=5,
+            cpp_type=1,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=197,
+    serialized_end=246,
 )
 
 
 _DYNASOLVERFILEREQUEST = _descriptor.Descriptor(
-  name='DynaSolverFileRequest',
-  full_name='dynasolver.DynaSolverFileRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='dynasolver.DynaSolverFileRequest.name', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=248,
-  serialized_end=285,
+    name="DynaSolverFileRequest",
+    full_name="dynasolver.DynaSolverFileRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="name",
+            full_name="dynasolver.DynaSolverFileRequest.name",
+            index=0,
+            number=1,
+            type=12,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=_b(""),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=248,
+    serialized_end=285,
 )
 
 
 _DYNASOLVERTAILREQUEST = _descriptor.Descriptor(
-  name='DynaSolverTailRequest',
-  full_name='dynasolver.DynaSolverTailRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='which', full_name='dynasolver.DynaSolverTailRequest.which', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=287,
-  serialized_end=325,
+    name="DynaSolverTailRequest",
+    full_name="dynasolver.DynaSolverTailRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="which",
+            full_name="dynasolver.DynaSolverTailRequest.which",
+            index=0,
+            number=1,
+            type=5,
+            cpp_type=1,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=287,
+    serialized_end=325,
 )
 
 
 _DYNASOLVERSTATUS = _descriptor.Descriptor(
-  name='DynaSolverStatus',
-  full_name='dynasolver.DynaSolverStatus',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='status', full_name='dynasolver.DynaSolverStatus.status', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=327,
-  serialized_end=361,
+    name="DynaSolverStatus",
+    full_name="dynasolver.DynaSolverStatus",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="status",
+            full_name="dynasolver.DynaSolverStatus.status",
+            index=0,
+            number=1,
+            type=5,
+            cpp_type=1,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=327,
+    serialized_end=361,
 )
 
 
 _DYNASOLVERFILELIST = _descriptor.Descriptor(
-  name='DynaSolverFileList',
-  full_name='dynasolver.DynaSolverFileList',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='dynasolver.DynaSolverFileList.name', index=0,
-      number=1, type=12, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='size', full_name='dynasolver.DynaSolverFileList.size', index=1,
-      number=2, type=3, cpp_type=2, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=363,
-  serialized_end=411,
+    name="DynaSolverFileList",
+    full_name="dynasolver.DynaSolverFileList",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="name",
+            full_name="dynasolver.DynaSolverFileList.name",
+            index=0,
+            number=1,
+            type=12,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="size",
+            full_name="dynasolver.DynaSolverFileList.size",
+            index=1,
+            number=2,
+            type=3,
+            cpp_type=2,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=363,
+    serialized_end=411,
 )
 
-DESCRIPTOR.message_types_by_name['DynaSolverRelay'] = _DYNASOLVERRELAY
-DESCRIPTOR.message_types_by_name['LogLevel'] = _LOGLEVEL
-DESCRIPTOR.message_types_by_name['QuitServer'] = _QUITSERVER
-DESCRIPTOR.message_types_by_name['DynaSolverFileData'] = _DYNASOLVERFILEDATA
-DESCRIPTOR.message_types_by_name['DynaSolverStart'] = _DYNASOLVERSTART
-DESCRIPTOR.message_types_by_name['DynaSolverFileRequest'] = _DYNASOLVERFILEREQUEST
-DESCRIPTOR.message_types_by_name['DynaSolverTailRequest'] = _DYNASOLVERTAILREQUEST
-DESCRIPTOR.message_types_by_name['DynaSolverStatus'] = _DYNASOLVERSTATUS
-DESCRIPTOR.message_types_by_name['DynaSolverFileList'] = _DYNASOLVERFILELIST
+DESCRIPTOR.message_types_by_name["DynaSolverRelay"] = _DYNASOLVERRELAY
+DESCRIPTOR.message_types_by_name["LogLevel"] = _LOGLEVEL
+DESCRIPTOR.message_types_by_name["QuitServer"] = _QUITSERVER
+DESCRIPTOR.message_types_by_name["DynaSolverFileData"] = _DYNASOLVERFILEDATA
+DESCRIPTOR.message_types_by_name["DynaSolverStart"] = _DYNASOLVERSTART
+DESCRIPTOR.message_types_by_name["DynaSolverFileRequest"] = _DYNASOLVERFILEREQUEST
+DESCRIPTOR.message_types_by_name["DynaSolverTailRequest"] = _DYNASOLVERTAILREQUEST
+DESCRIPTOR.message_types_by_name["DynaSolverStatus"] = _DYNASOLVERSTATUS
+DESCRIPTOR.message_types_by_name["DynaSolverFileList"] = _DYNASOLVERFILELIST
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-DynaSolverRelay = _reflection.GeneratedProtocolMessageType('DynaSolverRelay', (_message.Message,), {
-  'DESCRIPTOR' : _DYNASOLVERRELAY,
-  '__module__' : 'dynasolver_pb2'
-  # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverRelay)
-  })
+DynaSolverRelay = _reflection.GeneratedProtocolMessageType(
+    "DynaSolverRelay",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DYNASOLVERRELAY,
+        "__module__": "dynasolver_pb2"
+        # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverRelay)
+    },
+)
 _sym_db.RegisterMessage(DynaSolverRelay)
 
-LogLevel = _reflection.GeneratedProtocolMessageType('LogLevel', (_message.Message,), {
-  'DESCRIPTOR' : _LOGLEVEL,
-  '__module__' : 'dynasolver_pb2'
-  # @@protoc_insertion_point(class_scope:dynasolver.LogLevel)
-  })
+LogLevel = _reflection.GeneratedProtocolMessageType(
+    "LogLevel",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _LOGLEVEL,
+        "__module__": "dynasolver_pb2"
+        # @@protoc_insertion_point(class_scope:dynasolver.LogLevel)
+    },
+)
 _sym_db.RegisterMessage(LogLevel)
 
-QuitServer = _reflection.GeneratedProtocolMessageType('QuitServer', (_message.Message,), {
-  'DESCRIPTOR' : _QUITSERVER,
-  '__module__' : 'dynasolver_pb2'
-  # @@protoc_insertion_point(class_scope:dynasolver.QuitServer)
-  })
+QuitServer = _reflection.GeneratedProtocolMessageType(
+    "QuitServer",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _QUITSERVER,
+        "__module__": "dynasolver_pb2"
+        # @@protoc_insertion_point(class_scope:dynasolver.QuitServer)
+    },
+)
 _sym_db.RegisterMessage(QuitServer)
 
-DynaSolverFileData = _reflection.GeneratedProtocolMessageType('DynaSolverFileData', (_message.Message,), {
-  'DESCRIPTOR' : _DYNASOLVERFILEDATA,
-  '__module__' : 'dynasolver_pb2'
-  # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverFileData)
-  })
+DynaSolverFileData = _reflection.GeneratedProtocolMessageType(
+    "DynaSolverFileData",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DYNASOLVERFILEDATA,
+        "__module__": "dynasolver_pb2"
+        # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverFileData)
+    },
+)
 _sym_db.RegisterMessage(DynaSolverFileData)
 
-DynaSolverStart = _reflection.GeneratedProtocolMessageType('DynaSolverStart', (_message.Message,), {
-  'DESCRIPTOR' : _DYNASOLVERSTART,
-  '__module__' : 'dynasolver_pb2'
-  # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverStart)
-  })
+DynaSolverStart = _reflection.GeneratedProtocolMessageType(
+    "DynaSolverStart",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DYNASOLVERSTART,
+        "__module__": "dynasolver_pb2"
+        # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverStart)
+    },
+)
 _sym_db.RegisterMessage(DynaSolverStart)
 
-DynaSolverFileRequest = _reflection.GeneratedProtocolMessageType('DynaSolverFileRequest', (_message.Message,), {
-  'DESCRIPTOR' : _DYNASOLVERFILEREQUEST,
-  '__module__' : 'dynasolver_pb2'
-  # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverFileRequest)
-  })
+DynaSolverFileRequest = _reflection.GeneratedProtocolMessageType(
+    "DynaSolverFileRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DYNASOLVERFILEREQUEST,
+        "__module__": "dynasolver_pb2"
+        # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverFileRequest)
+    },
+)
 _sym_db.RegisterMessage(DynaSolverFileRequest)
 
-DynaSolverTailRequest = _reflection.GeneratedProtocolMessageType('DynaSolverTailRequest', (_message.Message,), {
-  'DESCRIPTOR' : _DYNASOLVERTAILREQUEST,
-  '__module__' : 'dynasolver_pb2'
-  # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverTailRequest)
-  })
+DynaSolverTailRequest = _reflection.GeneratedProtocolMessageType(
+    "DynaSolverTailRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DYNASOLVERTAILREQUEST,
+        "__module__": "dynasolver_pb2"
+        # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverTailRequest)
+    },
+)
 _sym_db.RegisterMessage(DynaSolverTailRequest)
 
-DynaSolverStatus = _reflection.GeneratedProtocolMessageType('DynaSolverStatus', (_message.Message,), {
-  'DESCRIPTOR' : _DYNASOLVERSTATUS,
-  '__module__' : 'dynasolver_pb2'
-  # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverStatus)
-  })
+DynaSolverStatus = _reflection.GeneratedProtocolMessageType(
+    "DynaSolverStatus",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DYNASOLVERSTATUS,
+        "__module__": "dynasolver_pb2"
+        # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverStatus)
+    },
+)
 _sym_db.RegisterMessage(DynaSolverStatus)
 
-DynaSolverFileList = _reflection.GeneratedProtocolMessageType('DynaSolverFileList', (_message.Message,), {
-  'DESCRIPTOR' : _DYNASOLVERFILELIST,
-  '__module__' : 'dynasolver_pb2'
-  # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverFileList)
-  })
+DynaSolverFileList = _reflection.GeneratedProtocolMessageType(
+    "DynaSolverFileList",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DYNASOLVERFILELIST,
+        "__module__": "dynasolver_pb2"
+        # @@protoc_insertion_point(class_scope:dynasolver.DynaSolverFileList)
+    },
+)
 _sym_db.RegisterMessage(DynaSolverFileList)
 
 
 DESCRIPTOR._options = None
 
 _DYNASOLVERCOMM = _descriptor.ServiceDescriptor(
-  name='DynaSolverComm',
-  full_name='dynasolver.DynaSolverComm',
-  file=DESCRIPTOR,
-  index=0,
-  serialized_options=None,
-  serialized_start=414,
-  serialized_end=1057,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='send_request',
-    full_name='dynasolver.DynaSolverComm.send_request',
+    name="DynaSolverComm",
+    full_name="dynasolver.DynaSolverComm",
+    file=DESCRIPTOR,
     index=0,
-    containing_service=None,
-    input_type=_DYNASOLVERRELAY,
-    output_type=_DYNASOLVERRELAY,
     serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='upload_file',
-    full_name='dynasolver.DynaSolverComm.upload_file',
-    index=1,
-    containing_service=None,
-    input_type=_DYNASOLVERFILEDATA,
-    output_type=_DYNASOLVERSTATUS,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='download_file',
-    full_name='dynasolver.DynaSolverComm.download_file',
-    index=2,
-    containing_service=None,
-    input_type=_DYNASOLVERFILEREQUEST,
-    output_type=_DYNASOLVERFILEDATA,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='tail_file',
-    full_name='dynasolver.DynaSolverComm.tail_file',
-    index=3,
-    containing_service=None,
-    input_type=_DYNASOLVERTAILREQUEST,
-    output_type=_DYNASOLVERFILEDATA,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='list_files',
-    full_name='dynasolver.DynaSolverComm.list_files',
-    index=4,
-    containing_service=None,
-    input_type=_DYNASOLVERFILEREQUEST,
-    output_type=_DYNASOLVERFILELIST,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='start_solver',
-    full_name='dynasolver.DynaSolverComm.start_solver',
-    index=5,
-    containing_service=None,
-    input_type=_DYNASOLVERSTART,
-    output_type=_DYNASOLVERSTATUS,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='quit_server',
-    full_name='dynasolver.DynaSolverComm.quit_server',
-    index=6,
-    containing_service=None,
-    input_type=_QUITSERVER,
-    output_type=_DYNASOLVERSTATUS,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='log_level',
-    full_name='dynasolver.DynaSolverComm.log_level',
-    index=7,
-    containing_service=None,
-    input_type=_LOGLEVEL,
-    output_type=_DYNASOLVERSTATUS,
-    serialized_options=None,
-  ),
-])
+    serialized_start=414,
+    serialized_end=1057,
+    methods=[
+        _descriptor.MethodDescriptor(
+            name="send_request",
+            full_name="dynasolver.DynaSolverComm.send_request",
+            index=0,
+            containing_service=None,
+            input_type=_DYNASOLVERRELAY,
+            output_type=_DYNASOLVERRELAY,
+            serialized_options=None,
+        ),
+        _descriptor.MethodDescriptor(
+            name="upload_file",
+            full_name="dynasolver.DynaSolverComm.upload_file",
+            index=1,
+            containing_service=None,
+            input_type=_DYNASOLVERFILEDATA,
+            output_type=_DYNASOLVERSTATUS,
+            serialized_options=None,
+        ),
+        _descriptor.MethodDescriptor(
+            name="download_file",
+            full_name="dynasolver.DynaSolverComm.download_file",
+            index=2,
+            containing_service=None,
+            input_type=_DYNASOLVERFILEREQUEST,
+            output_type=_DYNASOLVERFILEDATA,
+            serialized_options=None,
+        ),
+        _descriptor.MethodDescriptor(
+            name="tail_file",
+            full_name="dynasolver.DynaSolverComm.tail_file",
+            index=3,
+            containing_service=None,
+            input_type=_DYNASOLVERTAILREQUEST,
+            output_type=_DYNASOLVERFILEDATA,
+            serialized_options=None,
+        ),
+        _descriptor.MethodDescriptor(
+            name="list_files",
+            full_name="dynasolver.DynaSolverComm.list_files",
+            index=4,
+            containing_service=None,
+            input_type=_DYNASOLVERFILEREQUEST,
+            output_type=_DYNASOLVERFILELIST,
+            serialized_options=None,
+        ),
+        _descriptor.MethodDescriptor(
+            name="start_solver",
+            full_name="dynasolver.DynaSolverComm.start_solver",
+            index=5,
+            containing_service=None,
+            input_type=_DYNASOLVERSTART,
+            output_type=_DYNASOLVERSTATUS,
+            serialized_options=None,
+        ),
+        _descriptor.MethodDescriptor(
+            name="quit_server",
+            full_name="dynasolver.DynaSolverComm.quit_server",
+            index=6,
+            containing_service=None,
+            input_type=_QUITSERVER,
+            output_type=_DYNASOLVERSTATUS,
+            serialized_options=None,
+        ),
+        _descriptor.MethodDescriptor(
+            name="log_level",
+            full_name="dynasolver.DynaSolverComm.log_level",
+            index=7,
+            containing_service=None,
+            input_type=_LOGLEVEL,
+            output_type=_DYNASOLVERSTATUS,
+            serialized_options=None,
+        ),
+    ],
+)
 _sym_db.RegisterServiceDescriptor(_DYNASOLVERCOMM)
 
-DESCRIPTOR.services_by_name['DynaSolverComm'] = _DYNASOLVERCOMM
+DESCRIPTOR.services_by_name["DynaSolverComm"] = _DYNASOLVERCOMM
 
 # @@protoc_insertion_point(module_scope)
