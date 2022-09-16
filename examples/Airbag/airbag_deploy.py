@@ -8,9 +8,9 @@ This example show how to create an Airbag deploy model with Pydyna-pre module
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
-from pre.dynaairbag import *
-from pre.dynamaterial import *
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+from ansys.dyna.pre.dynaairbag import *
+from ansys.dyna.pre.dynamaterial import *
 
 if __name__ == "__main__":
     hostname = "localhost"
