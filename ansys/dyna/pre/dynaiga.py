@@ -1,23 +1,28 @@
-"""Module to create IGA dyna input deck"""
+"""
+IGA API
+==========
+
+Module to create IGA dyna input deck
+"""
 
 import logging
-
 from .dynabase import *
 
 
 class DynaIGA(DynaBase):
-    """Contains methods to create keyword related to IGA"""
+    """Contains methods to create keyword related to IGA."""
 
-    def __init__(self, hostname = 'localhost'):
+    def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
         self.casetype = CaseType.IGA
 
     def create_section_igashell(self, secid, elform, shrf, thickness):
-        """Create *SECTION_IGA_SHELL keyword
+        """Define section properties for isogeometric shell elements.
+
         Parameters
         ----------
         secid : int
-            Section ID. SECID is referenced on the *PART card. A unique number or label must be specified.
+            Section ID. SECID is referenced on the \*PART card. A unique number or label must be specified.
         elform : int
             Element formulation.
         shrf : float
