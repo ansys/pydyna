@@ -70,7 +70,7 @@ class StructuredMesh:
         reference_pressure=0,
     ):
         """Perform volume filling operations on a structured ALE mesh.
-        
+
         Parameters
         ----------
         material_name : string
@@ -119,7 +119,7 @@ class StructuredMesh:
 
     def refine(self, refine_factor_x=1, refine_factor_y=1, refine_factor_z=1):
         """Refine existing structured ALE (S-ALE) meshes.
-        
+
         Parameters
         ----------
         refine_factor_x/y/y : int
@@ -143,12 +143,12 @@ class StructuredMesh:
 
     def initial_detonation(self, detonation_point):
         """Define points to initiate the location of high explosive detonations.
-        
+
         Parameters
         ----------
         detonation_point : list [x,y,z]
             x,y,z-coordinate of detonation point.
-            
+
         Returns
         -------
         bool
@@ -209,7 +209,7 @@ class DynaSALE(DynaBase):
         background_pressure=0,
     ):
         """Setup analysis type.
-        
+
         Parameters
         ----------
         num_of_cycle : float
@@ -241,13 +241,13 @@ class DynaSALE(DynaBase):
 
     def create_mesh(self, control_points_x, control_points_y, control_points_z):
         """Create mesh.
-        
+
         Parameters
         ----------
         control_points_x/y/z : list [[N1,X1,ratio1],[N2,X2,ratio2],...]
             Defines a one-dimensional mesh using control points. Each control point consists of a node number (N) and a coordinate (X).
             ratio : Ratio for progressive mesh spacing.
-            
+
         Returns
         -------
         bool
@@ -307,14 +307,14 @@ class DynaSALE(DynaBase):
 
     def set_output_database(self, matsum=0, glstat=0):
         """Obtain output files containing results information.
-        
+
         Parameters
         ----------
         matsum : float
             Time interval between outputs of part energies.
         glstat : float
             Time interval between outputs of global statistics and energies.
-            
+
         Returns
         -------
         bool
