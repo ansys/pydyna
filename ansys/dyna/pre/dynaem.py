@@ -7,7 +7,7 @@ Module to create electromagnetism input deck
 
 import logging
 
-from .dynabase import *
+from .dynabase import *  # noqa : F403
 
 
 class DynaEM(DynaBase):
@@ -16,9 +16,7 @@ class DynaEM(DynaBase):
     def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
 
-    def create_em_control(
-        self, emsol=0, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000
-    ):
+    def create_em_control(self, emsol=0, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000):
         """Enable the EM solver and set its options.
 
         Parameters
@@ -67,7 +65,8 @@ class DynaEM(DynaBase):
            Time step type:
            EQ.1: constant time step given in DTCONST
            EQ.2: time step as a function of time given by a load curve specified in LCID
-           EQ.3: automatic time step computation, depending on the solver type. This time step is then multiplied by FACTOR
+           EQ.3: automatic time step computation, depending on the solver type.
+           This time step is then multiplied by FACTOR
         dtconst : float
             Constant value for the time step for TSTYPE = 1.
 
@@ -76,9 +75,7 @@ class DynaEM(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateEMTimestep(
-            EMTimestepRequest(tstype=tstype, dtconst=dtconst)
-        )
+        ret = self.stub.CreateEMTimestep(EMTimestepRequest(tstype=tstype, dtconst=dtconst))
         logging.info("EM Timestep Created...")
         return ret
 
@@ -92,15 +89,19 @@ class DynaEM(DynaBase):
            EQ.0: No contact detection
            EQ.1: Contact detection
         cconly : int
-            Determines on which parts of the model the EM contact should be activated
-            EQ.0: Contact detection between all active parts associated with a conducting material. (Default)
-            EQ.1: Only look for EM contact between parts associated through the EM_CONTACT card. In some cases this option can reduce the calculation time.
+            Determines on which parts of the model the EM contact should be activated.
+
+            * EQ.0: Contact detection between all active parts associated with a conducting material. (Default)
+            * EQ.1: Only look for EM contact between parts associated through the EM_CONTACT card.
+              In some cases this option can reduce the calculation time.
         ctype : int
             Contact type:
-            EQ.-1: Node to node contact based on constraints on the scalar potential. See Remark 1.
-            EQ.0: Node to node penalty based contact on the scalar potential.
-            EQ.1: Discrete mortar penalty contact on the scalar potential.
-            EQ.2: Continuous mortar penalty contact on the scalar potential and the vector potential (when active).
+
+            * EQ.-1: Node to node contact based on constraints on the scalar potential. See Remark 1.
+            * EQ.0: Node to node penalty based contact on the scalar potential.
+            * EQ.1: Discrete mortar penalty contact on the scalar potential.
+            * EQ.2: Continuous mortar penalty contact on the scalar potential and the vector
+              potential (when active).
         dtype : int
             Detection type.
 
@@ -115,9 +116,7 @@ class DynaEM(DynaBase):
         logging.info("EM Control Contact Created...")
         return ret
 
-    def create_em_contact(
-        self, contid=0, dtype=0, psidm=0, psids=0, eps1=0.3, eps2=0.3, eps3=0.3, d0=0
-    ):
+    def create_em_contact(self, contid=0, dtype=0, psidm=0, psids=0, eps1=0.3, eps2=0.3, eps3=0.3, d0=0):
         """Optional card used for defining and specifying options on electromagnetic contacts between two sets of parts.
 
         Parameters
@@ -157,9 +156,7 @@ class DynaEM(DynaBase):
         logging.info("EM Contact Created...")
         return ret
 
-    def set_rogowsky_coil_to_output_current(
-        self, segmentset=SegmentSet([[]]), settype=1, curtyp=1
-    ):
+    def set_rogowsky_coil_to_output_current(self, segmentset=SegmentSet([[]]), settype=1, curtyp=1):
         """Define Rogowsky coils to measure a global current vs time through a segment set or a node set.
 
         Parameters
@@ -185,14 +182,13 @@ class DynaEM(DynaBase):
         """
         segmentset.create(self.stub)
         setid = segmentset.id
-        ret = self.stub.CreateEMCircuitRogo(
-            EMCircuitRogoRequest(setid=setid, settype=settype, curtyp=curtyp)
-        )
+        ret = self.stub.CreateEMCircuitRogo(EMCircuitRogoRequest(setid=setid, settype=settype, curtyp=curtyp))
         logging.info("EM Circuit Rogo Created...")
         return ret.id
 
     def create_em_mat001(self, mid, mtype, sigma):
-        """Define the electromagnetic material type and properties for a material whose permeability equals the free space permeability.
+        """Define the electromagnetic material type and properties
+        for a material whose permeability equals the free space permeability.
 
         Parameters
         ----------
@@ -213,14 +209,13 @@ class DynaEM(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateEMMat001(
-            EMMat001Request(mid=mid, mtype=mtype, sigma=sigma)
-        )
+        ret = self.stub.CreateEMMat001(EMMat001Request(mid=mid, mtype=mtype, sigma=sigma))
         logging.info("EM Material 001 Created...")
         return ret
 
     def create_em_mat002(self, mid, mtype, sigma, eosid, murel):
-        """Define an electromagnetic material type and properties whose permeability is different than the free space permeability.
+        """Define an electromagnetic material type and properties
+        whose permeability is different than the free space permeability.
 
         Parameters
         ----------
@@ -237,22 +232,19 @@ class DynaEM(DynaBase):
         eosid : int
             ID of the EOS to be used for the electrical conductivity.
         murel : float
-            Relative permeability which is the ratio of the permeability of a specific medium to the permeability of free space
+            Relative permeability which is the ratio of the permeability of a specific
+            medium to the permeability of free space
 
         Returns
         -------
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateEMMat002(
-            EMMat002Request(mid=mid, mtype=mtype, sigma=sigma, eosid=eosid, murel=murel)
-        )
+        ret = self.stub.CreateEMMat002(EMMat002Request(mid=mid, mtype=mtype, sigma=sigma, eosid=eosid, murel=murel))
         logging.info("EM Material 002 Created...")
         return ret
 
-    def create_em_solver_fembem_monolithic(
-        self, mtype=0, stype=0, abstol=1e-6, reltol=1e-4, maxit=500
-    ):
+    def create_em_solver_fembem_monolithic(self, mtype=0, stype=0, abstol=1e-6, reltol=1e-4, maxit=500):
         """Turn on the monolithic FEM-BEM solver.
 
         Parameters
@@ -277,9 +269,7 @@ class DynaEM(DynaBase):
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateEMSolverFemBemMonolithic(
-            EMSolverFemBemMonolithicRequest(
-                mtype=mtype, stype=stype, abstol=abstol, reltol=reltol, maxit=maxit
-            )
+            EMSolverFemBemMonolithicRequest(mtype=mtype, stype=stype, abstol=abstol, reltol=reltol, maxit=maxit)
         )
         logging.info("EM Solver FEMBEM Monolithic Created...")
         return ret
@@ -317,9 +307,7 @@ class DynaEM(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateEMOutput(
-            EMOutputRequest(mats=mats, matf=matf, sols=sols, solf=solf)
-        )
+        ret = self.stub.CreateEMOutput(EMOutputRequest(mats=mats, matf=matf, sols=sols, solf=solf))
         logging.info("EM Output Created...")
         return ret
 
@@ -338,9 +326,7 @@ class DynaEM(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateEMDatabaseGlobalEnergy(
-            EMDatabaseGlobalEnergyRequest(outlv=outlv)
-        )
+        ret = self.stub.CreateEMDatabaseGlobalEnergy(EMDatabaseGlobalEnergyRequest(outlv=outlv))
         logging.info("EM Database Global Energy Created...")
         return ret
 
@@ -372,9 +358,7 @@ class DynaEM(DynaBase):
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateEMPermanentMagnet(
-            EMPermanentMagnetRequest(
-                id=id, partid=partid, mtype=mtype, north=north, sourth=sourth, hc=hc
-            )
+            EMPermanentMagnetRequest(id=id, partid=partid, mtype=mtype, north=north, sourth=sourth, hc=hc)
         )
         logging.info("EM Permanent Magnet Created...")
         return ret
@@ -398,9 +382,7 @@ class DynaEM(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateEMEOSPermeability(
-            EMEOSPermeabilityRequest(eosid=eosid, eostype=eostype, lcid=lcid)
-        )
+        ret = self.stub.CreateEMEOSPermeability(EMEOSPermeabilityRequest(eosid=eosid, eostype=eostype, lcid=lcid))
         logging.info("EM EOS Permeability Created...")
         return ret
 
@@ -439,15 +421,16 @@ class FEMSOLVER(Enum):
 class EMAnalysis:
     """Enable the EM solver and set its options.
 
-        Parameters
-        ----------
-        type : int
-           Electromagnetism solver selector:
-           EQ.1: Eddy current solver.
-           EQ.2: Induced heating solver.
-           EQ.3: Resistive heating solver.
-           EQ.11: Electrophysiology monodomain.
-        """
+    Parameters
+    ----------
+    type : int
+       Electromagnetism solver selector:
+       EQ.1: Eddy current solver.
+       EQ.2: Induced heating solver.
+       EQ.3: Resistive heating solver.
+       EQ.11: Electrophysiology monodomain.
+    """
+
     p_matrix_tol = 1e-6
     q_matrix_tol = 1e-6
     w_matrix_tol = 1e-6
@@ -455,20 +438,14 @@ class EMAnalysis:
     def __init__(self, type=EMType.EDDY_CURRENT):
         self.stub = DynaBase.get_stub()
         self.type = type.value
-        self.stub.CreateEMControl(
-            EMControlRequest(
-                emsol=self.type, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000
-            )
-        )
+        self.stub.CreateEMControl(EMControlRequest(emsol=self.type, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000))
 
     def set_timestep(self, timestep):
         """Control the EM time step and its evolution."""
         self.stub.CreateEMTimestep(EMTimestepRequest(tstype=1, dtconst=timestep))
         logging.info("EM Timestep Created...")
 
-    def set_solver_bem(
-        self, solver=BEMSOLVER.PCG, relative_tol=1e-6, max_iteration=1000
-    ):
+    def set_solver_bem(self, solver=BEMSOLVER.PCG, relative_tol=1e-6, max_iteration=1000):
         """Define the type of linear solver and pre-conditioner as well as tolerance for the EM_BEM solve."""
         self.stub.CreateEMSolverBem(
             EMSolverBemRequest(
@@ -482,9 +459,7 @@ class EMAnalysis:
         )
         logging.info("EM Solver BEM Created...")
 
-    def set_solver_fem(
-        self, solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-6, max_iteration=1000
-    ):
+    def set_solver_fem(self, solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-6, max_iteration=1000):
         """Define some parameters for the EM FEM solver."""
         self.stub.CreateEMSolverFem(
             EMSolverFemRequest(
@@ -497,9 +472,7 @@ class EMAnalysis:
             )
         )
 
-    def set_bem_matrix_tol(
-        self, p_matrix_tol=1e-6, q_matrix_tol=1e-6, w_matrix_tol=1e-6
-    ):
+    def set_bem_matrix_tol(self, p_matrix_tol=1e-6, q_matrix_tol=1e-6, w_matrix_tol=1e-6):
         """Define the type of BEM matrices as well as the way they are assembled."""
         EMAnalysis.p_matrix_tol = p_matrix_tol
         EMAnalysis.q_matrix_tol = q_matrix_tol
@@ -508,15 +481,9 @@ class EMAnalysis:
     @staticmethod
     def create(stub):
         """Create EMAnalysis."""
-        stub.CreateEMSolverBemMat(
-            EMSolverBemMatRequest(matid=1, reltol=EMAnalysis.p_matrix_tol)
-        )
-        stub.CreateEMSolverBemMat(
-            EMSolverBemMatRequest(matid=2, reltol=EMAnalysis.q_matrix_tol)
-        )
-        stub.CreateEMSolverBemMat(
-            EMSolverBemMatRequest(matid=3, reltol=EMAnalysis.w_matrix_tol)
-        )
+        stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=1, reltol=EMAnalysis.p_matrix_tol))
+        stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=2, reltol=EMAnalysis.q_matrix_tol))
+        stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=3, reltol=EMAnalysis.w_matrix_tol))
         logging.info("EM Solver BEMMAT Created...")
 
 
@@ -537,7 +504,9 @@ class Circuit:
     loadcurve : Curve
         Load curve for circtyp = 1, 2, 21 or 22
     """
+
     circuitlist = []
+
     def __init__(self, loadcurve, circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME):
         self.stub = DynaBase.get_stub()
         self.circuit_type = circuit_type.value
@@ -547,15 +516,17 @@ class Circuit:
 
     def set_current(self, current, current_inlet, current_outlet):
         """Define segment set for current.
-        
+
         Parameters
         ----------
         current : SegmentSet
             Segment set for the current.
         current_inlet : SegmentSet
-            Segment set for input voltage or input current when CIRCTYP.EQ.2/3/12/22 and CIRCTYP.EQ 1/11/21 respectively.
+            Segment set for input voltage or input current
+            when CIRCTYP.EQ.2/3/12/22 and CIRCTYP.EQ 1/11/21 respectively.
         current_outlet : SegmentSet
-            Segment set for output voltage or output current when CIRCTYP = 2/3/12/22 and CIRCTYP = 1/11/21 respectively.
+            Segment set for output voltage or output current when
+            CIRCTYP = 2/3/12/22 and CIRCTYP = 1/11/21 respectively.
         """
         self.current_id = current.create(self.stub)
         self.inlet_id = current_inlet.create(self.stub)
@@ -583,7 +554,8 @@ class EMContactType(Enum):
 
 
 class EMContact:
-    """Detect contact between conductors.If no contact parts defined,contact detection between all active parts associated
+    """Detect contact between conductors.If no contact parts defined,
+    contact detection between all active parts associated
     with a conducting material."""
 
     def __init__(self, contact_type=EMContactType.NODE_TO_NODE_PENALTY_BASED_CONTACT):

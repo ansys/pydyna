@@ -7,7 +7,7 @@ Module to create Incompressible Computational Fluid Dynamics(ICFD) dyna input de
 
 import logging
 
-from .dynabase import *
+from .dynabase import *  # noqa : F403
 
 
 class DynaICFD(DynaBase):
@@ -41,7 +41,7 @@ class DynaICFD(DynaBase):
 
     def create_control_general(self, atype=0, mtype=0, dvcl=0, rdvcl=0):
         """Specify the type of CFD analysis.
-        
+
         Parameters
         ----------
         atype : int
@@ -66,7 +66,7 @@ class DynaICFD(DynaBase):
 
     def create_control_output(self, msgl):
         """Modify default values for screen and file outputs related to this fluid solver only.
-     
+
         Parameters
         ----------
         msgl : int
@@ -83,7 +83,7 @@ class DynaICFD(DynaBase):
 
     def create_control_turbulence(self, tmod):
         """Modify the default values for the turbulence model.
-  
+
         Parameters
         ----------
         tmod : int
@@ -94,15 +94,13 @@ class DynaICFD(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.ICFDCreateControlTurbulence(
-            ICFDControlTurbulenceRequest(tmod=tmod)
-        )
+        ret = self.stub.ICFDCreateControlTurbulence(ICFDControlTurbulenceRequest(tmod=tmod))
         logging.info("ICFD control turbulence Created...")
         return ret
 
     def create_control_dem_coupling(self, ctype=0, bt=0, dt=1e28, sf=1):
         """Activate coupling between the ICFD and DEM solvers.
-       
+
         Parameters
         ----------
         ctype : int
@@ -119,15 +117,13 @@ class DynaICFD(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.ICFDCreateControlDEMCoupling(
-            ICFDControlDEMCouplingRequest(ctype=ctype, bt=bt, dt=dt, sf=sf)
-        )
+        ret = self.stub.ICFDCreateControlDEMCoupling(ICFDControlDEMCouplingRequest(ctype=ctype, bt=bt, dt=dt, sf=sf))
         logging.info("ICFD control dem coupling Created...")
         return ret
 
     def create_section_icfd(self, sid):
         """Define a section for the incompressible flow solver.
-        
+
         Parameters
         ----------
         sid : int
@@ -144,7 +140,7 @@ class DynaICFD(DynaBase):
 
     def create_part_icfd(self, pid, secid, mid):
         """Define parts for this incompressible flow solver.
-        
+
         Parameters
         ----------
         pid : int
@@ -165,7 +161,7 @@ class DynaICFD(DynaBase):
 
     def create_solver_tol_mmov(self, atol=1e-8, rtol=1e-8):
         """Allow the user to change the default tolerance values for the mesh movement algorithm.
-        
+
         Parameters
         ----------
         atol : float
@@ -177,9 +173,7 @@ class DynaICFD(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.ICFDCreateSolverTolMMOV(
-            ICFDSolverTolMMOVRequest(atol=atol, rtol=rtol)
-        )
+        ret = self.stub.ICFDCreateSolverTolMMOV(ICFDSolverTolMMOVRequest(atol=atol, rtol=rtol))
         logging.info("tolerance values for the mesh movement algorithm changed...")
         return ret
 
@@ -218,7 +212,7 @@ class DynaICFD(DynaBase):
 
     def mesh_embed_shell(self, volid, pids):
         """Define surfaces that the mesher will embed inside the volume mesh.
-        
+
         Parameters
         ----------
         volid : int
@@ -231,17 +225,13 @@ class DynaICFD(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.MESHCreateEmbedShell(
-            MeshEmbedShellRequest(volid=volid, pids=pids)
-        )
+        ret = self.stub.MESHCreateEmbedShell(MeshEmbedShellRequest(volid=volid, pids=pids))
         logging.info("Embed surfaces Created...")
         return ret
 
     def save_file(self):
         """Save keyword files."""
-        self.stub.ICFDCreateControlTime(
-            ICFDControlTimeRequest(tim=self.termination, dt=self.timestep)
-        )
+        self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=self.termination, dt=self.timestep))
         logging.info("ICFD control time Created...")
         self.create_section_icfd(1)
         for obj in ICFDPart.partlist:
@@ -258,9 +248,10 @@ class Compressible(Enum):
     VACUUM = 0
     FULLY_INCOMPRESSIBLE_FLUID = 1
 
+
 class MatICFD:
     """Specify physical properties for the fluid material.
-    
+
     Parameters
     ----------
         mid : int
@@ -275,15 +266,9 @@ class MatICFD:
             Dynamic viscosity.
     """
 
-    def __init__(
-        self,
-        flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID,
-        flow_density=0,
-        dynamic_viscosity=0):
+    def __init__(self, flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID, flow_density=0, dynamic_viscosity=0):
         self.stub = DynaBase.get_stub()
-        ret = self.stub.ICFDCreateMat(
-            ICFDMatRequest(flg=flag.value, ro=flow_density, vis=dynamic_viscosity)
-        )
+        ret = self.stub.ICFDCreateMat(ICFDMatRequest(flg=flag.value, ro=flow_density, vis=dynamic_viscosity))
         self.material_id = ret.id
         logging.info(f"ICFD material {self.material_id} Created...")
 
@@ -301,7 +286,9 @@ class Vel(Enum):
 
 class ICFDPart:
     """Define part for the incompressible flow solver."""
+
     partlist = []
+
     def __init__(self, id):
         self.stub = DynaBase.get_stub()
         self.id = id
@@ -313,8 +300,7 @@ class ICFDPart:
         """Set material."""
         self.mid = mat.material_id
 
-    def set_prescribed_velocity(
-        self, motion, dof=DOF.X, velocity_flag=Vel.LINEAR_VELOCITY):
+    def set_prescribed_velocity(self, motion, dof=DOF.X, velocity_flag=Vel.LINEAR_VELOCITY):
         """Impose the fluid velocity on the boundary.
 
         Parameters
@@ -337,9 +323,7 @@ class ICFDPart:
         motion.create(self.stub)
         lcid = motion.id
         ret = self.stub.ICFDCreateBdyPrescribedVel(
-            ICFDBdyPrescribedVelRequest(
-                pid=self.id, dof=dof.value, vad=velocity_flag.value, lcid=lcid
-            )
+            ICFDBdyPrescribedVelRequest(pid=self.id, dof=dof.value, vad=velocity_flag.value, lcid=lcid)
         )
         logging.info("ICFD boundary prescribed velocity Created...")
 
@@ -353,9 +337,7 @@ class ICFDPart:
         """
         pressure.create(self.stub)
         lcid = pressure.id
-        ret = self.stub.ICFDCreateBdyPrescribedPre(
-            ICFDBdyPrescribedPreRequest(pid=self.id, lcid=lcid)
-        )
+        ret = self.stub.ICFDCreateBdyPrescribedPre(ICFDBdyPrescribedPreRequest(pid=self.id, lcid=lcid))
         logging.info("ICFD boundary prescribed pressure Created...")
         return ret
 
@@ -379,7 +361,7 @@ class ICFDPart:
 
     def set_boundary_layer(self, number=3):
         """Define a boundary-layer mesh as a refinement on volume-mesh.
-        
+
         Parameters
         ----------
         number : int
@@ -392,14 +374,12 @@ class ICFDPart:
     def set_property(self):
         """Set properties for ICFD part."""
         secid = 1
-        self.stub.SetICFDPartProperty(
-            ICFDPartPropertyRequest(pid=self.id, secid=secid, mid=self.mid)
-        )
+        self.stub.SetICFDPartProperty(ICFDPartPropertyRequest(pid=self.id, secid=secid, mid=self.mid))
 
 
 class ICFDVolumePart:
     """Assign material properties to the nodes enclosed by surface ICFD parts.
-    
+
     Parameters
     ----------
     surfaces : list
@@ -422,9 +402,7 @@ class ICFDVolumePart:
 
     def create(self):
         """Create ICFD volume part."""
-        ret = self.stub.ICFDCreatePartVol(
-            ICFDPartVolRequest(secid=1, mid=self.mid, spids=self.surfaces)
-        )
+        ret = self.stub.ICFDCreatePartVol(ICFDPartVolRequest(secid=1, mid=self.mid, spids=self.surfaces))
         self.id = ret.id
         logging.info(f"ICFD part volume {self.id} Created...")
         return ret
@@ -445,7 +423,7 @@ class MeshedVolume:
         self.meshsizeshape = []
         self.embeded_surf = []
 
-    def embed_shell(self,embeded):
+    def embed_shell(self, embeded):
         """Define surfaces that the mesher will embed inside the volume mesh.
 
         Parameters
@@ -455,9 +433,9 @@ class MeshedVolume:
         """
         self.embeded_surf = embeded
 
-    def meshsize_box(self,size,min_point,max_point):
+    def meshsize_box(self, size, min_point, max_point):
         """Define a local mesh size in specific zones corresponding to given geometrical shapes.
-        
+
         Parameters
         ----------
         size : float
@@ -465,28 +443,24 @@ class MeshedVolume:
         parameter : list
             The parameters to define shape.
         """
-        parameter = [min_point.x,min_point.y,min_point.z,max_point.x,max_point.y,max_point.z]
-        self.meshsizeshape.append(["BOX",size,parameter])
+        parameter = [min_point.x, min_point.y, min_point.z, max_point.x, max_point.y, max_point.z]
+        self.meshsizeshape.append(["BOX", size, parameter])
 
     def create(self):
         """Create mesh volume."""
         ret = self.stub.MESHCreateVolume(MeshVolumeRequest(pids=self.surfaces))
         self.id = ret.id
         logging.info(f"MESH volume {self.id} Created...")
-        ret = self.stub.MESHCreateEmbedShell(
-            MeshEmbedShellRequest(volid=self.id, pids=self.embeded_surf)
-        )
+        ret = self.stub.MESHCreateEmbedShell(MeshEmbedShellRequest(volid=self.id, pids=self.embeded_surf))
         logging.info("Embed surfaces Created...")
         for i in range(len(self.meshsizeshape)):
             self.stub.MESHCreateSizeShape(
-            MeshSizeShapeRequest(
-                sname=self.meshsizeshape[i][0],
-                force=1,
-                method=0,
-                msize=self.meshsizeshape[i][1],
-                parameter=self.meshsizeshape[i][2],
+                MeshSizeShapeRequest(
+                    sname=self.meshsizeshape[i][0],
+                    force=1,
+                    method=0,
+                    msize=self.meshsizeshape[i][1],
+                    parameter=self.meshsizeshape[i][2],
+                )
             )
-        )
         logging.info("MESH size shape Created...")
-        
-        

@@ -5,8 +5,11 @@ files: |
 exclude: |
     (?x)^(
         doc/source/|
-        ansys/dyna/pre/
-    )
+        ansys/dyna/pre/Server/|
+        ansys/dyna/pre/doc/|
+        ansys/dyna/pre/DigitalWeaving_BCs.py|
+        ansys/dyna/pre/kwprocess_pb2.py
+        )
 repos:
 
 - repo: https://github.com/psf/black
