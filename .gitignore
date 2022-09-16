@@ -51,3 +51,10 @@ test-output.xml
 /ansys/dyna/pre/doc/build
 /doc/build
 /doc/source/examples
+/examples/Airbag/client.log
+/examples/EM/client.log
+/examples/Explicit/client.log
+/examples/ICFD/client.log
+/examples/IGA/client.log
+/examples/Implicit/client.log
+/examples/SALE/client.log

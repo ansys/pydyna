@@ -8,9 +8,9 @@ This example demonstrates how to create an IGA input deck.
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
-from pre.dynaiga import *
-from pre.dynamaterial import *
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+from ansys.dyna.pre.dynaiga import *
+from ansys.dyna.pre.dynamaterial import *
 from iga_sample_data import *
 
 if __name__ == "__main__":

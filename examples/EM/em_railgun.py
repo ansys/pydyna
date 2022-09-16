@@ -8,9 +8,9 @@ This example demonstrates how to create an EM Railgun input deck.
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
-from pre.dynaem import *
-from pre.dynamaterial import *
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+from ansys.dyna.pre.dynaem import *
+from ansys.dyna.pre.dynamaterial import *
 from em_railgun_data import *
 
 if __name__ == "__main__":
