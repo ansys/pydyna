@@ -1,21 +1,25 @@
-"""Module to create IGA dyna input deck"""
+"""
+DEM API
+==========
+
+Module to create DEM dyna input deck
+"""
 
 import logging
-
 from .dynabase import *
 
 
 class DynaDEM(DynaBase):
-    """Contains methods to create keyword related to discrete element method"""
+    """Contains methods to create keyword related to discrete element method."""
 
-    def __init__(self, hostname = 'localhost'):
+    def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
 
     def create_control_des(
         self, ndamp=0.0, tdamp=0.0, frics=0.0, fricr=0.0, normk=0.01, sheark=0.2857
     ):
         """Define global control parameters for discrete element spheres.
-        Refer to: *CONTROL_DISCRETE_ELEMENT
+
         Parameters
         ----------
         ndamp : float
@@ -30,6 +34,7 @@ class DynaDEM(DynaBase):
              Scale factor of normal spring constant.
         sheark : float
              ratio between sheark/normk.
+             
         Returns
         -------
         bool
@@ -51,8 +56,9 @@ class DynaDEM(DynaBase):
     def create_define_de_mesh_surface(
         self, sid, type, despid, desxid, nquad=1, nsid=0, rsf=1.0
     ):
-        """Generate and place discrete element sphere (DES) elements on the surface of shell elements
-        Refer to:*DEFINE_DE_MESH_SURFACE
+        """Generate and place discrete element sphere (DES) elements on the surface of shell elements.
+
+        Parameters
         ----------
         sid : int
             Part or part set ID for the region of the mesh upon which the DES elements will be placed.
