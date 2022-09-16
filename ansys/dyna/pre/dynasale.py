@@ -202,7 +202,6 @@ class DynaSALE(DynaBase):
             DBBinaryRequest(filetype="D3PLOT", dt=database_plot_interval)
         )
 
-
     def set_analysis_type(
         self,
         num_of_cycle=1,
