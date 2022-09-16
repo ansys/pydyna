@@ -25,7 +25,6 @@ if __name__ == "__main__":
     airbagdeploy.set_termination(0.03)
     #airbagdeploy.create_control_output(npopt=1, neecho=3)
 
-
     airbag = Airbag(set=PartSet([3]),
         heat_capacity_at_constant_volume=1.736e3,
         heat_capacity_at_constant_pressure=2.43e3,
