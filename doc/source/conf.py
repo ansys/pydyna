@@ -4,7 +4,7 @@ import datetime
 import os
 import sys
 
-from ansys_sphinx_theme import pyansys_logo_black
+from ansys_sphinx_theme import pyansys_logo_black, ansys_favicon
 
 sys.path.insert(0,os.path.abspath('./../../ansys/dyna'))
 
@@ -96,7 +96,7 @@ numpydoc_validation_checks = {
 }
 
 # Favicon
-html_favicon = "favicon.png"
+html_favicon = ansys_favicon
 
 # We have our own custom templates
 templates_path = ['_templates']
