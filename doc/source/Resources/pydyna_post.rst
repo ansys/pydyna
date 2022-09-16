@@ -749,11 +749,11 @@ operators
 2. binout
 
 -  lsdyna::binout::meshes_provider
-
+  
    .. code:: python
-      
+
       from ansys.dpf import core as dpf
-      
+
       ds = dpf.DataSources() ds.set_result_file_path(r’./binout’, ‘binout’)
 
       meshOP = dpf.Operator("lsdyna::binout::meshes_provider")
@@ -919,7 +919,7 @@ operators
       field1 = fields.get_field({"component":1})
       ...
 
-3. nvh
+1. nvh
 
 -  lsdyna::d3ssd::meshes_provider
 
