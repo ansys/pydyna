@@ -120,7 +120,6 @@ class StructuredMesh:
     def refine(self, refine_factor_x=1, refine_factor_y=1, refine_factor_z=1):
         """Refine existing structured ALE (S-ALE) meshes.
 
-
         Parameters
         ----------
         refine_factor_x/y/y : int
