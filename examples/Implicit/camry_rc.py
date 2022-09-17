@@ -9,9 +9,9 @@ import os
 from re import X
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
-from pre.dynabase import *
-from pre.dynamaterial import *
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+from ansys.dyna.pre.dynabase import *
+from ansys.dyna.pre.dynamaterial import *
 from camry_rc_data import *
 
 if __name__ == "__main__":

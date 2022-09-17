@@ -8,9 +8,9 @@ This example show how to create an Airbag deploy model with Pydyna-pre module
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
-from pre.dynaairbag import *
-from pre.dynamaterial import *
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+from ansys.dyna.pre.dynaairbag import *
+from ansys.dyna.pre.dynamaterial import *
 
 if __name__ == "__main__":
     hostname = "localhost"
@@ -24,7 +24,6 @@ if __name__ == "__main__":
 
     airbagdeploy.set_termination(0.03)
     #airbagdeploy.create_control_output(npopt=1, neecho=3)
-
 
     airbag = Airbag(set=PartSet([3]),
         heat_capacity_at_constant_volume=1.736e3,

@@ -9,8 +9,8 @@ This example demonstrates how to create an Wing input deck.
 import os
 import sys
 
-from pre.dynaicfd import *
-from pre.dynadem import *
+from ansys.dyna.pre.dynaicfd import *
+from ansys.dyna.pre.dynadem import *
 
 if __name__ == "__main__":
     hostname = "localhost"
