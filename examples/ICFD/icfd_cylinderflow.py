@@ -8,8 +8,8 @@ This example demonstrates how to create a simple ICFD cylinder flow input deck.
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../ansys/dyna'))
-from pre.dynaicfd import *
+sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+from ansys.dyna.pre.dynaicfd import *
 
 if __name__ == "__main__":
     hostname = "localhost"

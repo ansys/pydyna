@@ -23,14 +23,17 @@ from . import grpc_tags as tag
 
 
 class RunningError(Exception):
+    """Documentation missing."""
     pass
 
 
 class NotFound(Exception):
+    """Documentation missing."""
     pass
 
 
 class UnexpectedResponse(Exception):
+    """Documentation missing."""
     pass
 
 
@@ -168,7 +171,7 @@ class DynaSolver:
         return
 
     def pull(self, fname):
-        """Alias for "download", for backward compatibility."""
+        """Provide alias for "download", for backward compatibility."""
         return self.download(fname)
 
     def download(self, fname):
@@ -200,7 +203,7 @@ class DynaSolver:
         return fsize
 
     def push(self, fname):
-        """Alias for "upload", for backward compatibility."""
+        """Provide alias for "upload", for backward compatibility."""
         return self.upload(fname)
 
     def upload(self, fname):
@@ -495,33 +498,52 @@ class DynaSolver:
         return (None, None)
 
     def send(self, cmdin):
-        """Command line interface to send one request to LSDYNA:
-
+        """Command line interface to send one request to LSDYNA.
+        
         Parameters
         ----------
-        cmdin, string, required : The command to send
-
+        cmdin : string, required
+            The command to send.
+        
         Returns
         -------
-        There is no data returned.  Data that is returned from the underlying
-        method call is just printed to the screen.  This method is used to
-        support the sample interactive "client.py" program
+        None
+            There is no data returned. Data that is returned from the underlying
+            method call is just printed to the screen. This method is used to
+            support the sample interactive "client.py" program.
 
-        Description                                Example
+            +-------------------------------------------+-----------------------+
+            | Description                               | Example               |
+            +===========================================+=======================+
+            | "list" then optional file name            | list d3plot           |
+            +-------------------------------------------+-----------------------+
+            | "list" then optional file name            | list d3plot           |
+            +-------------------------------------------+-----------------------+
+            | "node" user node number                   | node 43444            |
+            +-------------------------------------------+-----------------------+
+            | "pause" (no arguments)                    | pause                 |
+            +-------------------------------------------+-----------------------+
+            | "download" then file name                 | download glstat       |
+            +-------------------------------------------+-----------------------+
+            | "upload" then file name                   | upload input.k        |
+            +-------------------------------------------+-----------------------+
+            | "quit" (no arguments)                     | quit                  |
+            +-------------------------------------------+-----------------------+
+            | "resume" optional cycle and/or time       | resume 5000 0.25      |
+            +-------------------------------------------+-----------------------+
+            | "run" then the command line               | run i=input.k jobid=xx|
+            +-------------------------------------------+-----------------------+
+            | "setlc" user load curve number and value  | setlc 1075 0.245      |
+            +-------------------------------------------+-----------------------+
+            | "start" number of processors              | start 5               |
+            +-------------------------------------------+-----------------------+
+            | "switch" then switch text                 | switch sw2            |
+            +-------------------------------------------+-----------------------+
+            | "tail" then 1 for stdout, 2 for stderr    | tail 1                |
+            +-------------------------------------------+-----------------------+
+            | "time" (no arguments)                     | time.                 |
+            +-------------------------------------------+-----------------------+
 
-        "list" then optional file name             list d3plot
-        "node" user node number                    node 43444
-        "pause" (no arguments)                     pause
-        "download" then file name                  download glstat
-        "upload" then file name                    upload input.k
-        "quit" (no arguments)                      quit
-        "resume" optional cycle and/or time        resume 5000 0.25
-        "run" then the command line                run i=input.k jobid=xx
-        "setlc" user load curve number and value   setlc 1075 0.245
-        "start" number of processors               start 5
-        "switch" then switch text                  switch sw2.
-        "tail" then 1 for stdout, 2 for stderr     tail 1
-        "time" (no arguments)                      time.
         """
         self.logger.debug("send: %s" % cmdin)
         try:
