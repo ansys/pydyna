@@ -24,16 +24,19 @@ from . import grpc_tags as tag
 
 class RunningError(Exception):
     """Documentation missing."""
+
     pass
 
 
 class NotFound(Exception):
     """Documentation missing."""
+
     pass
 
 
 class UnexpectedResponse(Exception):
     """Documentation missing."""
+
     pass
 
 
@@ -499,12 +502,12 @@ class DynaSolver:
 
     def send(self, cmdin):
         """Command line interface to send one request to LSDYNA.
-        
+
         Parameters
         ----------
         cmdin : string, required
             The command to send.
-        
+
         Returns
         -------
         None
