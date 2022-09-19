@@ -143,7 +143,7 @@ Go to pyDyna/examples/pre,and run sale_efp.py:
 
 At the same time, corresponding information will be printed in the server side.
 
-.. code:: python
+.. code:: bash
 
     Load model: C:\pyDyna\ansys\dyna\pre\Server\input\efpcase.k
     *DATABASE_SALE Created...
@@ -176,7 +176,7 @@ At the same time, corresponding information will be printed in the server side.
 
 After running this file,the result file will be save in pyDyna/ansys/dyna/pre/Server/output
 
-.. code:: python
+.. code:: bash
 
     (venv) C:\pyDyna\ansys\dyna\pre\Server> cd .\output\
     (venv) C:\pyDyna\ansys\dyna\pre\Server\output> ls
