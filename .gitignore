@@ -58,3 +58,15 @@ test-output.xml
 /examples/IGA/client.log
 /examples/Implicit/client.log
 /examples/SALE/client.log
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# VSCode
+.vscode/

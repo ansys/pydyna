@@ -6,9 +6,9 @@ Module to create Structural ALE dyna input deck
 """
 
 import logging
-
-from .dynabase import *
 from enum import Enum
+
+from .dynabase import *  # noqa : F403
 
 
 class AdvectionMethod(Enum):
@@ -25,16 +25,17 @@ class FillDirection(Enum):
 
 class ControlPoint:
     """Provide spacing information to generate a 3D structured ALE mesh.
-        
+
     Parameters
     ----------
     number : int
         Control point node number.
     position : float
         Control point position.
-    ratio : float   
+    ratio : float
         Ratio for progressive mesh spacing.
     """
+
     def __init__(self, number, position, ratio):
         self.number = number
         self.position = position
@@ -43,7 +44,7 @@ class ControlPoint:
 
 class StructuredMesh:
     """Generate a structured 2D or 3D mesh and invoke the Structured ALE (S-ALE) solver.
-        
+
     Parameters
     ----------
     meshid : int
@@ -51,6 +52,7 @@ class StructuredMesh:
     partid : int
         Default Part ID. The elements generated are assigned to DPID.
     """
+
     num_meshpart = 0
 
     def __init__(self, stub, meshid, partid):
@@ -155,9 +157,7 @@ class StructuredMesh:
             "True" when successful, "False" when failed
         """
         partid = self.partid
-        ret = self.stub.CreateInitDetonation(
-            InitDetonationRequest(pid=partid, coord=detonation_point, lt=0)
-        )
+        ret = self.stub.CreateInitDetonation(InitDetonationRequest(pid=partid, coord=detonation_point, lt=0))
         logging.info("Location of high explosive detonation Defined...")
         return ret
 
@@ -172,7 +172,7 @@ class DynaSALE(DynaBase):
 
     def set_termination(self, endtime):
         """Setting termination time to stop the job.
-    
+
         Parameters
         ----------
         termination_time : float
@@ -187,7 +187,7 @@ class DynaSALE(DynaBase):
 
     def set_output_interval(self, database_plot_interval):
         """Request binary output.
-        
+
         Parameters
         ----------
         database_plot_interval : float
@@ -198,9 +198,7 @@ class DynaSALE(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        self.stub.CreateDBBinary(
-            DBBinaryRequest(filetype="D3PLOT", dt=database_plot_interval)
-        )
+        self.stub.CreateDBBinary(DBBinaryRequest(filetype="D3PLOT", dt=database_plot_interval))
 
     def set_analysis_type(
         self,
@@ -245,7 +243,8 @@ class DynaSALE(DynaBase):
         Parameters
         ----------
         control_points_x/y/z : list [[N1,X1,ratio1],[N2,X2,ratio2],...]
-            Defines a one-dimensional mesh using control points. Each control point consists of a node number (N) and a coordinate (X).
+            Defines a one-dimensional mesh using control points. Each control point
+            consists of a node number (N) and a coordinate (X).
             ratio : Ratio for progressive mesh spacing.
 
         Returns
@@ -276,27 +275,19 @@ class DynaSALE(DynaBase):
             ratioz.append(control_points_z[i].ratio)
 
         ret = self.stub.ALECreateStructuredMeshCtrlPoints(
-            ALECreateStructuredMeshControlPointsRequest(
-                icase=2, sfo=1, n=nx, x=xx, ratio=ratiox
-            )
+            ALECreateStructuredMeshControlPointsRequest(icase=2, sfo=1, n=nx, x=xx, ratio=ratiox)
         )
         cpidx = ret.cpid
         ret = self.stub.ALECreateStructuredMeshCtrlPoints(
-            ALECreateStructuredMeshControlPointsRequest(
-                icase=2, sfo=1, n=ny, x=xy, ratio=ratioy
-            )
+            ALECreateStructuredMeshControlPointsRequest(icase=2, sfo=1, n=ny, x=xy, ratio=ratioy)
         )
         cpidy = ret.cpid
         ret = self.stub.ALECreateStructuredMeshCtrlPoints(
-            ALECreateStructuredMeshControlPointsRequest(
-                icase=2, sfo=1, n=nz, x=xz, ratio=ratioz
-            )
+            ALECreateStructuredMeshControlPointsRequest(icase=2, sfo=1, n=nz, x=xz, ratio=ratioz)
         )
         cpidz = ret.cpid
         ret = self.stub.ALECreateStructuredMesh(
-            ALECreateStructuredMeshRequest(
-                nbid=2000001, ebid=2000001, cpidx=cpidx, cpidy=cpidy, cpidz=cpidz
-            )
+            ALECreateStructuredMeshRequest(nbid=2000001, ebid=2000001, cpidx=cpidx, cpidy=cpidy, cpidz=cpidz)
         )
         meshid = ret.meshid
         partid = ret.partid
@@ -321,13 +312,9 @@ class DynaSALE(DynaBase):
             "True" when successful, "False" when failed
         """
         if matsum > 0:
-            self.stub.CreateDBAscii(
-                DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0)
-            )
+            self.stub.CreateDBAscii(DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0))
         if glstat > 0:
-            self.stub.CreateDBAscii(
-                DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0, ioopt=0)
-            )
+            self.stub.CreateDBAscii(DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0, ioopt=0))
         ret = 1
         logging.info("Output Setting...")
         return ret

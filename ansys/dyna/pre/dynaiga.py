@@ -6,7 +6,8 @@ Module to create IGA dyna input deck
 """
 
 import logging
-from .dynabase import *
+
+from .dynabase import *  # noqa : F403
 
 
 class DynaIGA(DynaBase):
@@ -36,9 +37,7 @@ class DynaIGA(DynaBase):
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateSectionIGAShell(
-            SectionIGAShellRequest(
-                secid=secid, elform=elform, shrf=shrf, thickness=thickness
-            )
+            SectionIGAShellRequest(secid=secid, elform=elform, shrf=shrf, thickness=thickness)
         )
         logging.info("Section IGAShell 1 Created...")
         return ret

@@ -7,7 +7,7 @@ Module to create Airbag dyna input deck
 
 import logging
 
-from .dynabase import *
+from .dynabase import *  # noqa : F403
 
 
 class DynaAirbag(DynaBase):
@@ -108,12 +108,13 @@ class Airbag:
         Ambient pressure.
     ro : float
         Ambient density.
-        
+
     Returns
     -------
     bool
         "True" when successful, "False" when failed.
     """
+
     def __init__(
         self,
         set,
@@ -123,7 +124,8 @@ class Airbag:
         input_mass_flow_rate=Curve(x=[], y=[]),
         shape_factor_for_exit_hole=0,
         ambient_pressure=0,
-        ambient_density=0):
+        ambient_density=0,
+    ):
         self.stub = DynaBase.get_stub()
         self.cv = heat_capacity_at_constant_volume
         self.cp = heat_capacity_at_constant_pressure
