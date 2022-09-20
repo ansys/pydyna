@@ -5,162 +5,152 @@ from . import dynasolver_pb2 as dynasolver__pb2
 
 
 class DynaSolverCommStub(object):
-  """Defines the service
-  """
+    """Defines the service"""
 
-  def __init__(self, channel):
-    """Constructor.
+    def __init__(self, channel):
+        """Constructor.
 
-    Args:
-      channel: A grpc.Channel.
-    """
-    self.send_request = channel.unary_unary(
-        '/dynasolver.DynaSolverComm/send_request',
-        request_serializer=dynasolver__pb2.DynaSolverRelay.SerializeToString,
-        response_deserializer=dynasolver__pb2.DynaSolverRelay.FromString,
+        Args:
+          channel: A grpc.Channel.
+        """
+        self.send_request = channel.unary_unary(
+            "/dynasolver.DynaSolverComm/send_request",
+            request_serializer=dynasolver__pb2.DynaSolverRelay.SerializeToString,
+            response_deserializer=dynasolver__pb2.DynaSolverRelay.FromString,
         )
-    self.upload_file = channel.stream_unary(
-        '/dynasolver.DynaSolverComm/upload_file',
-        request_serializer=dynasolver__pb2.DynaSolverFileData.SerializeToString,
-        response_deserializer=dynasolver__pb2.DynaSolverStatus.FromString,
+        self.upload_file = channel.stream_unary(
+            "/dynasolver.DynaSolverComm/upload_file",
+            request_serializer=dynasolver__pb2.DynaSolverFileData.SerializeToString,
+            response_deserializer=dynasolver__pb2.DynaSolverStatus.FromString,
         )
-    self.download_file = channel.unary_stream(
-        '/dynasolver.DynaSolverComm/download_file',
-        request_serializer=dynasolver__pb2.DynaSolverFileRequest.SerializeToString,
-        response_deserializer=dynasolver__pb2.DynaSolverFileData.FromString,
+        self.download_file = channel.unary_stream(
+            "/dynasolver.DynaSolverComm/download_file",
+            request_serializer=dynasolver__pb2.DynaSolverFileRequest.SerializeToString,
+            response_deserializer=dynasolver__pb2.DynaSolverFileData.FromString,
         )
-    self.tail_file = channel.unary_stream(
-        '/dynasolver.DynaSolverComm/tail_file',
-        request_serializer=dynasolver__pb2.DynaSolverTailRequest.SerializeToString,
-        response_deserializer=dynasolver__pb2.DynaSolverFileData.FromString,
+        self.tail_file = channel.unary_stream(
+            "/dynasolver.DynaSolverComm/tail_file",
+            request_serializer=dynasolver__pb2.DynaSolverTailRequest.SerializeToString,
+            response_deserializer=dynasolver__pb2.DynaSolverFileData.FromString,
         )
-    self.list_files = channel.unary_unary(
-        '/dynasolver.DynaSolverComm/list_files',
-        request_serializer=dynasolver__pb2.DynaSolverFileRequest.SerializeToString,
-        response_deserializer=dynasolver__pb2.DynaSolverFileList.FromString,
+        self.list_files = channel.unary_unary(
+            "/dynasolver.DynaSolverComm/list_files",
+            request_serializer=dynasolver__pb2.DynaSolverFileRequest.SerializeToString,
+            response_deserializer=dynasolver__pb2.DynaSolverFileList.FromString,
         )
-    self.start_solver = channel.unary_unary(
-        '/dynasolver.DynaSolverComm/start_solver',
-        request_serializer=dynasolver__pb2.DynaSolverStart.SerializeToString,
-        response_deserializer=dynasolver__pb2.DynaSolverStatus.FromString,
+        self.start_solver = channel.unary_unary(
+            "/dynasolver.DynaSolverComm/start_solver",
+            request_serializer=dynasolver__pb2.DynaSolverStart.SerializeToString,
+            response_deserializer=dynasolver__pb2.DynaSolverStatus.FromString,
         )
-    self.quit_server = channel.unary_unary(
-        '/dynasolver.DynaSolverComm/quit_server',
-        request_serializer=dynasolver__pb2.QuitServer.SerializeToString,
-        response_deserializer=dynasolver__pb2.DynaSolverStatus.FromString,
+        self.quit_server = channel.unary_unary(
+            "/dynasolver.DynaSolverComm/quit_server",
+            request_serializer=dynasolver__pb2.QuitServer.SerializeToString,
+            response_deserializer=dynasolver__pb2.DynaSolverStatus.FromString,
         )
-    self.log_level = channel.unary_unary(
-        '/dynasolver.DynaSolverComm/log_level',
-        request_serializer=dynasolver__pb2.LogLevel.SerializeToString,
-        response_deserializer=dynasolver__pb2.DynaSolverStatus.FromString,
+        self.log_level = channel.unary_unary(
+            "/dynasolver.DynaSolverComm/log_level",
+            request_serializer=dynasolver__pb2.LogLevel.SerializeToString,
+            response_deserializer=dynasolver__pb2.DynaSolverStatus.FromString,
         )
 
 
 class DynaSolverCommServicer(object):
-  """Defines the service
-  """
+    """Defines the service"""
 
-  def send_request(self, request, context):
-    """Function invoked to send the request to server, which is passed to Dyna
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def send_request(self, request, context):
+        """Function invoked to send the request to server, which is passed to Dyna"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
-  def upload_file(self, request_iterator, context):
-    """upload a local file to the server, who puts in in Dyna's working directory
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def upload_file(self, request_iterator, context):
+        """upload a local file to the server, who puts in in Dyna's working directory"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
-  def download_file(self, request, context):
-    """download a from Dyna's working directory
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def download_file(self, request, context):
+        """download a from Dyna's working directory"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
-  def tail_file(self, request, context):
-    """monitor the standard output or standard error
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def tail_file(self, request, context):
+        """monitor the standard output or standard error"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
-  def list_files(self, request, context):
-    """return file & size info for all files in Dyna's working directory
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def list_files(self, request, context):
+        """return file & size info for all files in Dyna's working directory"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
-  def start_solver(self, request, context):
-    """Start Dyna, which then pauses and waits for command line info
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def start_solver(self, request, context):
+        """Start Dyna, which then pauses and waits for command line info"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
-  def quit_server(self, request, context):
-    """Terminate the server.  The server actually ignores this when running
-    in a container, so there may not be much point here...
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def quit_server(self, request, context):
+        """Terminate the server.  The server actually ignores this when running
+        in a container, so there may not be much point here...
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
-  def log_level(self, request, context):
-    """set logging level for server
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def log_level(self, request, context):
+        """set logging level for server"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
 
 def add_DynaSolverCommServicer_to_server(servicer, server):
-  rpc_method_handlers = {
-      'send_request': grpc.unary_unary_rpc_method_handler(
-          servicer.send_request,
-          request_deserializer=dynasolver__pb2.DynaSolverRelay.FromString,
-          response_serializer=dynasolver__pb2.DynaSolverRelay.SerializeToString,
-      ),
-      'upload_file': grpc.stream_unary_rpc_method_handler(
-          servicer.upload_file,
-          request_deserializer=dynasolver__pb2.DynaSolverFileData.FromString,
-          response_serializer=dynasolver__pb2.DynaSolverStatus.SerializeToString,
-      ),
-      'download_file': grpc.unary_stream_rpc_method_handler(
-          servicer.download_file,
-          request_deserializer=dynasolver__pb2.DynaSolverFileRequest.FromString,
-          response_serializer=dynasolver__pb2.DynaSolverFileData.SerializeToString,
-      ),
-      'tail_file': grpc.unary_stream_rpc_method_handler(
-          servicer.tail_file,
-          request_deserializer=dynasolver__pb2.DynaSolverTailRequest.FromString,
-          response_serializer=dynasolver__pb2.DynaSolverFileData.SerializeToString,
-      ),
-      'list_files': grpc.unary_unary_rpc_method_handler(
-          servicer.list_files,
-          request_deserializer=dynasolver__pb2.DynaSolverFileRequest.FromString,
-          response_serializer=dynasolver__pb2.DynaSolverFileList.SerializeToString,
-      ),
-      'start_solver': grpc.unary_unary_rpc_method_handler(
-          servicer.start_solver,
-          request_deserializer=dynasolver__pb2.DynaSolverStart.FromString,
-          response_serializer=dynasolver__pb2.DynaSolverStatus.SerializeToString,
-      ),
-      'quit_server': grpc.unary_unary_rpc_method_handler(
-          servicer.quit_server,
-          request_deserializer=dynasolver__pb2.QuitServer.FromString,
-          response_serializer=dynasolver__pb2.DynaSolverStatus.SerializeToString,
-      ),
-      'log_level': grpc.unary_unary_rpc_method_handler(
-          servicer.log_level,
-          request_deserializer=dynasolver__pb2.LogLevel.FromString,
-          response_serializer=dynasolver__pb2.DynaSolverStatus.SerializeToString,
-      ),
-  }
-  generic_handler = grpc.method_handlers_generic_handler(
-      'dynasolver.DynaSolverComm', rpc_method_handlers)
-  server.add_generic_rpc_handlers((generic_handler,))
+    rpc_method_handlers = {
+        "send_request": grpc.unary_unary_rpc_method_handler(
+            servicer.send_request,
+            request_deserializer=dynasolver__pb2.DynaSolverRelay.FromString,
+            response_serializer=dynasolver__pb2.DynaSolverRelay.SerializeToString,
+        ),
+        "upload_file": grpc.stream_unary_rpc_method_handler(
+            servicer.upload_file,
+            request_deserializer=dynasolver__pb2.DynaSolverFileData.FromString,
+            response_serializer=dynasolver__pb2.DynaSolverStatus.SerializeToString,
+        ),
+        "download_file": grpc.unary_stream_rpc_method_handler(
+            servicer.download_file,
+            request_deserializer=dynasolver__pb2.DynaSolverFileRequest.FromString,
+            response_serializer=dynasolver__pb2.DynaSolverFileData.SerializeToString,
+        ),
+        "tail_file": grpc.unary_stream_rpc_method_handler(
+            servicer.tail_file,
+            request_deserializer=dynasolver__pb2.DynaSolverTailRequest.FromString,
+            response_serializer=dynasolver__pb2.DynaSolverFileData.SerializeToString,
+        ),
+        "list_files": grpc.unary_unary_rpc_method_handler(
+            servicer.list_files,
+            request_deserializer=dynasolver__pb2.DynaSolverFileRequest.FromString,
+            response_serializer=dynasolver__pb2.DynaSolverFileList.SerializeToString,
+        ),
+        "start_solver": grpc.unary_unary_rpc_method_handler(
+            servicer.start_solver,
+            request_deserializer=dynasolver__pb2.DynaSolverStart.FromString,
+            response_serializer=dynasolver__pb2.DynaSolverStatus.SerializeToString,
+        ),
+        "quit_server": grpc.unary_unary_rpc_method_handler(
+            servicer.quit_server,
+            request_deserializer=dynasolver__pb2.QuitServer.FromString,
+            response_serializer=dynasolver__pb2.DynaSolverStatus.SerializeToString,
+        ),
+        "log_level": grpc.unary_unary_rpc_method_handler(
+            servicer.log_level,
+            request_deserializer=dynasolver__pb2.LogLevel.FromString,
+            response_serializer=dynasolver__pb2.DynaSolverStatus.SerializeToString,
+        ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler("dynasolver.DynaSolverComm", rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))

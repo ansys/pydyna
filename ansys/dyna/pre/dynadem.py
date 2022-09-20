@@ -6,7 +6,8 @@ Module to create DEM dyna input deck
 """
 
 import logging
-from .dynabase import *
+
+from .dynabase import *  # noqa : F403
 
 
 class DynaDEM(DynaBase):
@@ -15,9 +16,7 @@ class DynaDEM(DynaBase):
     def __init__(self, hostname="localhost"):
         DynaBase.__init__(self, hostname)
 
-    def create_control_des(
-        self, ndamp=0.0, tdamp=0.0, frics=0.0, fricr=0.0, normk=0.01, sheark=0.2857
-    ):
+    def create_control_des(self, ndamp=0.0, tdamp=0.0, frics=0.0, fricr=0.0, normk=0.01, sheark=0.2857):
         """Define global control parameters for discrete element spheres.
 
         Parameters
@@ -34,7 +33,7 @@ class DynaDEM(DynaBase):
              Scale factor of normal spring constant.
         sheark : float
              ratio between sheark/normk.
-             
+
         Returns
         -------
         bool
@@ -53,9 +52,7 @@ class DynaDEM(DynaBase):
         logging.info("Control DES Created...")
         return ret
 
-    def create_define_de_mesh_surface(
-        self, sid, type, despid, desxid, nquad=1, nsid=0, rsf=1.0
-    ):
+    def create_define_de_mesh_surface(self, sid, type, despid, desxid, nquad=1, nsid=0, rsf=1.0):
         """Generate and place discrete element sphere (DES) elements on the surface of shell elements.
 
         Parameters
