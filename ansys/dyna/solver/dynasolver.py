@@ -44,8 +44,19 @@ class UnexpectedResponse(Exception):
 
 
 class DynaSolver:
-    """Class for the gRPC client side of LSDYNA."""
+    """Class for the gRPC client side of LSDYNA
 
+        Parameters
+        ----------
+        hostname, string, required : hostname or IP address to connect to
+        port, string, required     : port on which gRPC server is listening
+
+        Returns
+        -------
+        An instance of the client, which can be used to communicate
+        with the gRPC server running at the given hostname and port.
+        The client can then interact with LS-DYNA via gRPC.
+        """
     # logger = None
     def __init__(self, hostname, port):
         """Create client instance connected to the hostname (or ip) and port."""
@@ -66,6 +77,8 @@ class DynaSolver:
         self.logger = logging.getLogger("DynaSolver")
 
     def _argcheck(self, cmd, ngiven, nrequired):
+        """Internally used routine for checking command argument counts
+           when using the generic "send" method."""
         if ngiven < nrequired:
             s = "Bad input for command %s:" % cmd
             s = s + ("At least %d arguments are required, but only %d " "were given" % (nrequired, ngiven))
@@ -118,7 +131,7 @@ class DynaSolver:
 
         Returns
         -------
-        An array is of (filename, size in bytes) pairs.
+        An array of (filename, size in bytes) pairs.
         """
         self.logger.debug("list_files: subname=%s" % subname)
         request = dynasolver_pb2.DynaSolverFileRequest()
@@ -132,7 +145,7 @@ class DynaSolver:
         return ret
 
     def node(self, n):
-        """Return size information about one or more files in the Dyna
+        """Return size information about a node in the model.
         working directory.
 
         Parameters
@@ -637,7 +650,7 @@ class DynaSolver:
         elif cmd == "tail":
             if not self._argcheck("tail", nsargs, 1):
                 return
-            self.tail(int(sargs[0]))
+            self.tail(int(sargs[0]),how=0)
         elif cmd == "time":
             (a, b) = self.time()
             if a:
