@@ -36,8 +36,8 @@ if __name__ == "__main__":
 
     part_inflow = ICFDPart(1)
     part_inflow.set_material(mat)
-    part_inflow.set_prescribed_velocity(dof=DOF.X,motion=Curve(x=[0, 10000],y=[1, 1]))
-    part_inflow.set_prescribed_velocity(dof=DOF.Y,motion=Curve(x=[0, 10000],y=[0, 0]))
+    part_inflow.set_prescribed_velocity(dof=ICFDDOF.X,motion=Curve(x=[0, 10000],y=[1, 1]))
+    part_inflow.set_prescribed_velocity(dof=ICFDDOF.Y,motion=Curve(x=[0, 10000],y=[0, 0]))
 
     part_outflow = ICFDPart(2)
     part_outflow.set_material(mat)

@@ -888,7 +888,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = '*CONSTRAINED_JOINT Created...'
         print(msg)
-        return kwprocess_pb2.ConstrainedJointReply(answer = 0) 
+        return kwprocess_pb2.ConstrainedJointReply(id = 0) 
 
     #LOAD
     def CreateLoadBody(self,request,context):
@@ -1017,7 +1017,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.MatFabricReply(mid = mid)   
 
     def CreateMatSpringNonlinearElastic(self,request,context):
-        mid = request.mid
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
         lcid = request.lcid
         card1 = str(mid)+","+str(lcid)
         opcode = "*MAT_SPRING_NONLINEAR_ELASTIC"
@@ -1025,10 +1025,10 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = opcode+" Created..."
         print(msg)
-        return kwprocess_pb2.MatSpringNonlinearElasticReply(ret = 0)
+        return kwprocess_pb2.MatSpringNonlinearElasticReply(mid = mid)
 
     def CreateMatDamperViscous(self,request,context):
-        mid = request.mid
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
         dc = request.dc
         card1 = str(mid)+","+str(dc)
         opcode = "*MAT_DAMPER_VISCOUS"
@@ -1036,10 +1036,10 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = opcode+" Created..."
         print(msg)
-        return kwprocess_pb2.MatDamperViscousReply(ret = 0)    
+        return kwprocess_pb2.MatDamperViscousReply(mid = mid)    
 
     def CreateMatDamperNonlinearViscous(self,request,context):
-        mid = request.mid
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
         lcdr = request.lcdr
         card1 = str(mid)+","+str(lcdr)
         opcode = "*MAT_DAMPER_NONLINEAR_VISCOUS"
@@ -1047,7 +1047,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = opcode+" Created..."
         print(msg)
-        return kwprocess_pb2.MatDamperNonlinearViscousReply(ret = 0)
+        return kwprocess_pb2.MatDamperNonlinearViscousReply(mid = mid)
 
     def CreateMatNull(self,request,context):
         mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
@@ -1216,7 +1216,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.SectionSolidReply(id = secid)
 
     def CreateSectionDiscrete(self,request,context):
-        secid = request.secid
+        secid = self.kwdproc.get_data(gdt.KWD_SECTION_LASTID)+1
         dro = request.dro
         kd = request.kd
         v0 = request.v0
@@ -1230,7 +1230,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = 'Section Discrete '+str(secid)+' Created...'
         print(msg)
-        return kwprocess_pb2.SectionDiscreteReply(answer = 0)
+        return kwprocess_pb2.SectionDiscreteReply(id = secid)
 
     def CreateHourglass(self,request,context):
         ghid = self.kwdproc.get_data(gdt.KWD_HOURGLASS_LASTID)+1
