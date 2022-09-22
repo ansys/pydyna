@@ -10,7 +10,8 @@ from re import X
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
-from ansys.dyna.pre.dynabase import *
+from ansys.dyna.pre.dynasolution import *
+from ansys.dyna.pre.dynamech import *
 from ansys.dyna.pre.dynamaterial import *
 from camry_rc_data import *
 
@@ -18,7 +19,8 @@ if __name__ == "__main__":
     hostname = "localhost"
     if len(sys.argv) > 1:
         hostname = sys.argv[1]
-    camry = DynaBase(hostname=hostname)
+
+    camry_solution = DynaSolution(hostname)
     #Import the initial mesh data(nodes and elements)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep+ "camry_rc" + os.sep
@@ -29,11 +31,15 @@ if __name__ == "__main__":
     fns.append(path + "roof_welds.k")
     fns.append(path + "weld7.k")
     fns.append(path + "xtra_sw.k")
-    camry.open_files(fns)
+    camry_solution.open_files(fns)
 
     #global setting
-    camry.set_termination(10)
+    camry_solution.set_termination(10)
+    camry_solution.create_database_binary(dt=0.001)
     
+    camry = DynaMech()
+    camry_solution.add(camry)    
+     
     analysis = ImplicitAnalysis(initial_timestep_size=0.1)
     analysis.set_timestep(control_flag=TimestepCtrol.AUTOMATICALLY_ADJUST_TIMESTEP_SIZE,Optimum_equilibrium_iteration_count=511)
     analysis.set_dynamic(gamma=0.6,beta=0.38)
@@ -154,7 +160,6 @@ if __name__ == "__main__":
     bdy.create_imposed_motion(platen,crv,dof=DOF.Y_TRANSLATIONAL,scalefactor=-0.0802216)
     bdy.create_imposed_motion(platen,crv,dof=DOF.Z_TRANSLATIONAL,scalefactor=-0.0802216)
 
-    camry.create_database_binary(dt=0.001)
     camry.set_output_database(elout=0.0001,glstat=0.0001,matsum=0.0001,nodout=0.0001,rbdout=0.0001,rcforc=0.0001,secforc=0.0001)
 
-    camry.save_file()
+    camry_solution.save_file()

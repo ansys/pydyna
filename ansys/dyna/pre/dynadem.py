@@ -13,8 +13,8 @@ from .dynabase import *  # noqa : F403
 class DynaDEM(DynaBase):
     """Contains methods to create keyword related to discrete element method."""
 
-    def __init__(self, hostname="localhost"):
-        DynaBase.__init__(self, hostname)
+    def __init__(self):
+        DynaBase.__init__(self)
 
     def create_control_des(self, ndamp=0.0, tdamp=0.0, frics=0.0, fricr=0.0, normk=0.01, sheark=0.2857):
         """Define global control parameters for discrete element spheres.

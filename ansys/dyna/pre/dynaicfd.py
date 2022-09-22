@@ -13,8 +13,8 @@ from .dynabase import *  # noqa : F403
 class DynaICFD(DynaBase):
     """Contain methods to create keyword related to ICFD."""
 
-    def __init__(self, hostname="localhost"):
-        DynaBase.__init__(self, hostname)
+    def __init__(self):
+        DynaBase.__init__(self)
         self.create_section_icfd(1)
         self.timestep = 0
         self.termination = 1e28
@@ -238,11 +238,6 @@ class DynaICFD(DynaBase):
             obj.set_property()
         for obj in ICFDVolumePart.partlist:
             obj.create()
-        ret = self.stub.SaveFile(SaveFileRequest(name=self.mainname))
-        msg = self.mainname + " is outputed..."
-        logging.info(msg)
-        return ret
-
 
 class Compressible(Enum):
     VACUUM = 0

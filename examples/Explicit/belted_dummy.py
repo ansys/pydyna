@@ -9,22 +9,28 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
-from ansys.dyna.pre.dynabase import DynaBase
+from ansys.dyna.pre.dynasolution import *
+from ansys.dyna.pre.dynamech import *
 
 if __name__ == "__main__":
     hostname = "localhost"
     if len(sys.argv) > 1:
         hostname = sys.argv[1]
-    dummy = DynaBase(hostname=hostname)
+    
+    dummy_solution = DynaSolution(hostname)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep + "belted_dummy" + os.sep
     fns.append(path + "belted_dummy.k")
-    dummy.open_files(fns)
+    dummy_solution.open_files(fns)
+    dummy_solution.set_termination(termination_time=0.12)
+    dummy_solution.create_database_binary(dt=2.5e-3)
 
-    dummy.create_termination(endtim=0.12)
+    dummy = DynaMech()
+    dummy_solution.add(dummy)    
+    
     dummy.create_control_contact(rwpnal=0, orien=2)
-    dummy.create_timestep(tssfac=0.8)
-    dummy.create_database_binary(dt=2.5e-3)
+    #dummy.create_timestep(tssfac=0.8)
+    
     vel = [14.8, 0, 0, 0, 0, 0]
     dummy.create_init_vel(nsid=0, velocity=vel)
 
@@ -410,4 +416,4 @@ if __name__ == "__main__":
     for i in range(1, 16):
         dummy.set_partproperty(pid=i, secid=i, mid=i)
 
-    dummy.save_file()
+    dummy_solution.save_file()
