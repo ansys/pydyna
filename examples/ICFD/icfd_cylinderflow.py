@@ -9,21 +9,27 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynaicfd import *
 
 if __name__ == "__main__":
     hostname = "localhost"
     if len(sys.argv) > 1:
         hostname = sys.argv[1]
-    icfd = DynaICFD(hostname=hostname)
+
+    icfd_solution = DynaSolution(hostname)
     #Import the initial mesh data(nodes and elements)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep
     fns.append(path + os.sep + "icfd_cylinderflow" + os.sep + "mesh.k")
-    icfd.open_files(fns)
+    icfd_solution.open_files(fns)
 
     #Set total time of simulation
-    icfd.set_termination(termination_time=100)
+    icfd_solution.set_termination(termination_time=100)    
+    icfd_solution.create_database_binary(dt=1)
+
+    icfd = DynaICFD()
+    icfd_solution.add(icfd)
 
     #define model
     mat = MatICFD(flow_density=1.0,dynamic_viscosity=0.005)
@@ -53,5 +59,4 @@ if __name__ == "__main__":
     #of the volume are the surfaces "spids"
     meshvol = MeshedVolume(surfaces = [1, 2, 3, 4])
 
-    icfd.create_database_binary(dt=1)
-    icfd.save_file()
+    icfd_solution.save_file()

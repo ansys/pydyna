@@ -9,7 +9,6 @@ import logging
 
 from .dynabase import *  # noqa : F403
 
-
 class DynaAirbag(DynaBase):
     """Define an airbag or control volume.
 
@@ -45,8 +44,8 @@ class DynaAirbag(DynaBase):
         "True" when successful, "False" when failed.
     """
 
-    def __init__(self, hostname="localhost"):
-        DynaBase.__init__(self, hostname)
+    def __init__(self):
+        DynaBase.__init__(self)
 
     def save_file(self):
         """Save keyword files."""
@@ -74,10 +73,6 @@ class DynaAirbag(DynaBase):
         for obj in RigidwallCylinder.rwlist:
             obj.create()
         Constraint.create(self.stub)
-        ret = self.stub.SaveFile(SaveFileRequest(name=self.mainname))
-        msg = self.mainname + " is outputed..."
-        logging.info(msg)
-        return ret
 
 
 class Airbag:

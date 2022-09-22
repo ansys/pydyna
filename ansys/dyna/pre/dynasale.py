@@ -165,9 +165,8 @@ class StructuredMesh:
 class DynaSALE(DynaBase):
     """Setup SALE simulation process."""
 
-    def __init__(self, hostname="localhost", filenames=[]):
-        DynaBase.__init__(self, hostname)
-        DynaBase.open_files(self, filenames=filenames)
+    def __init__(self):
+        DynaBase.__init__(self)
         self.stub.CreateDBSALE(DBSALERequest(switch=1))
 
     def set_termination(self, endtime):

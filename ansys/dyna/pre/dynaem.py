@@ -13,8 +13,8 @@ from .dynabase import *  # noqa : F403
 class DynaEM(DynaBase):
     """Contain methods to create keyword related to EM."""
 
-    def __init__(self, hostname="localhost"):
-        DynaBase.__init__(self, hostname)
+    def __init__(self):
+        DynaBase.__init__(self)
 
     def create_em_control(self, emsol=0, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000):
         """Enable the EM solver and set its options.
@@ -395,10 +395,6 @@ class DynaEM(DynaBase):
         for obj in Circuit.circuitlist:
             obj.create()
         EMAnalysis.create(self.stub)
-        ret = self.stub.SaveFile(SaveFileRequest(name=self.mainname))
-        msg = self.mainname + " is outputed..."
-        logging.info(msg)
-        return ret
 
 
 class EMType(Enum):

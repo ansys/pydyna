@@ -9,6 +9,7 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynaem import *
 from ansys.dyna.pre.dynamaterial import *
 from em_railgun_data import *
@@ -17,13 +18,17 @@ if __name__ == "__main__":
     hostname = "localhost"
     if len(sys.argv) > 1:
         hostname = sys.argv[1]
-    railgun = DynaEM(hostname=hostname)
+
+    em_solution = DynaSolution(hostname)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep + "em_railgun" + os.sep
     fns.append(path + "em_railgun.k")
-    railgun.open_files(fns)
-    
-    railgun.set_termination(termination_time=3e-4)
+    em_solution.open_files(fns)
+    em_solution.set_termination(termination_time=3e-4)
+    em_solution.create_database_binary(dt=5e-6)
+
+    railgun = DynaEM()    
+    em_solution.add(railgun)
 
     analysis = EMAnalysis()
     analysis.set_timestep(timestep=5e-6)
@@ -57,6 +62,5 @@ if __name__ == "__main__":
     contact = EMContact()
 
     railgun.set_rogowsky_coil_to_output_current(SegmentSet(cur))
-    railgun.create_database_binary(dt=5e-6)
-
-    railgun.save_file()
+    
+    em_solution.save_file()
