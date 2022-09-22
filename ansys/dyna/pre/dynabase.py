@@ -29,6 +29,9 @@ class DOF(Enum):
     X_TRANSLATIONAL = 1
     Y_TRANSLATIONAL = 2
     Z_TRANSLATIONAL = 3
+    X_ROTATIONAL = 5
+    Y_ROTATIONAL = 6
+    Z_ROTATIONAL = 7
 
 
 class Switch(Enum):
@@ -67,6 +70,81 @@ class CaseType(Enum):
     IGA = 5
 
 from .dynasolution import DynaSolution # noqa : F403
+class Box:
+    """Define a box-shaped volume."""
+
+    def __init__(self, xmin=0, xmax=0, ymin=0, ymax=0, zmin=0, zmax=0):
+        self.xmin = xmin
+        self.xmax = xmax
+        self.ymin = ymin
+        self.ymax = ymax
+        self.zmin = zmin
+        self.xmax = zmax
+
+    def create(self, stub):
+        """Create box."""
+        ret = stub.CreateDefineBox(
+            DefineBoxRequest(
+                xmin=self.xmin,
+                xmax=self.xmax,
+                ymin=self.ymin,
+                ymax=self.ymax,
+                zmin=self.zmin,
+                zmax=self.zmax,
+            )
+        )
+        self.id = ret.boxid
+        logging.info(f"Box {self.boxid} defined...")
+
+
+class Curve:
+    """Define a curve [for example, load (ordinate value)] as a function of time."""
+
+    def __init__(self, sfo=1, x=[], y=[]):
+        self.sfo = sfo
+        self.abscissa = x
+        self.ordinate = y
+
+    def create(self, stub):
+        """Create curve."""
+        ret = stub.CreateDefineCurve(
+            DefineCurveRequest(
+                sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate
+            )
+        )
+        self.id = ret.id
+        logging.info(f"Curve {self.id} defined...")
+        return self.id
+
+
+class Point:
+    """Define point."""
+    def __init__(self, x=0, y=0, z=0):
+        self.x = x
+        self.y = y
+        self.z = z
+
+
+class Direction:
+    """Define direction."""
+    def __init__(self, x=0, y=0, z=0):
+        self.x = x
+        self.y = y
+        self.z = z
+
+class Velocity:
+    """Define translational velocity."""
+    def __init__(self, x=0, y=0, z=0):
+        self.x = x
+        self.y = y
+        self.z = z
+
+class RotVelocity:
+    """Define rotational velocity."""
+    def __init__(self, x=0, y=0, z=0):
+        self.x = x
+        self.y = y
+        self.z = z
 
 class DynaBase:
     """Contains methods to create general LS-DYNA keyword."""
@@ -450,23 +528,25 @@ class DynaBase:
         logging.info("Rigidwall Planar Created...")
         return ret
 
-    def create_init_vel(self, nsid, velocity):
+    def set_init_velocity(self, translational=Velocity(0,0,0),rotational=RotVelocity(0,0,0)):
         """Define initial nodal point velocities using nodal set ID.
 
         Parameters
         ----------
         nsid : int
             Nodal set ID.
-        velocity : list [vx,vy,vx,vxr,vyr,vzr]
-            vx,vy,vz: Initial translational velocity in x,y,z-direction.
-            vxr,vyr,vzr: Initial rotational velocity about the x,y,z-axis.
+        translational : Velocity
+            Initial translational velocity in x,y,z-direction.
+        rotational : RotVelocity
+            Initial rotational velocity about the x,y,z-axis.
 
         Returns
         -------
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateInitVel(InitVelRequest(nsid=nsid, velocity=velocity))
+        velocity = [translational.x,translational.y,translational.z,rotational.x,rotational.y,rotational.z]
+        ret = self.stub.CreateInitVel(InitVelRequest(nsid=0, velocity=velocity))
         logging.info("Initial velocity Created...")
         return ret
 
@@ -1034,11 +1114,14 @@ class DynaBase:
         glstat=0,
         elout=0,
         nodout=0,
+        nodfor=0,
         rbdout=0,
         rcforc=0,
         secforc=0,
         rwforc=0,
         abstat=0,
+        bndout=0,
+        sleout=0,
     ):
         """Obtain output files containing results information.
 
@@ -1073,6 +1156,12 @@ class DynaBase:
             self.stub.CreateDBAscii(DBAsciiRequest(type="RWFORC", dt=glstat, binary=1, lcur=0, ioopt=0))
         if abstat > 0:
             self.stub.CreateDBAscii(DBAsciiRequest(type="ABSTAT", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if bndout > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="BNDOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if nodfor > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="NODFOR", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if sleout > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="SLEOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
         ret = 1
         logging.info("Output Setting...")
         return ret
@@ -1117,6 +1206,8 @@ class DynaBase:
         self.create_control_contact(rwpnal=1.0, ignore=1, igactc=igactc)
         for obj in Contact.contactlist:
             obj.create()
+        for obj in Gravity.gravitylist:
+            obj.create()
         for obj in BeamPart.partlist:
             obj.set_property()
         for obj in ShellPart.partlist:
@@ -1125,53 +1216,20 @@ class DynaBase:
             obj.set_property()
         for obj in IGAPart.partlist:
             obj.set_property()
+        for obj in DiscretePart.partlist:
+            obj.set_property()
         for obj in RigidwallCylinder.rwlist:
             obj.create()
         Constraint.create(self.stub)
 
 
 # -------------------------------------------------------------------------------------------------
-class Box:
-    """Define a box-shaped volume."""
 
-    def __init__(self, xmin=0, xmax=0, ymin=0, ymax=0, zmin=0, zmax=0):
-        self.xmin = xmin
-        self.xmax = xmax
-        self.ymin = ymin
-        self.ymax = ymax
-        self.zmin = zmin
-        self.xmax = zmax
-
-    def create(self, stub):
-        """Create box."""
-        ret = stub.CreateDefineBox(
-            DefineBoxRequest(
-                xmin=self.xmin,
-                xmax=self.xmax,
-                ymin=self.ymin,
-                ymax=self.ymax,
-                zmin=self.zmin,
-                zmax=self.zmax,
-            )
-        )
-        self.id = ret.boxid
-        logging.info(f"Box {self.boxid} defined...")
-
-
-class Curve:
-    """Define a curve [for example, load (ordinate value)] as a function of time."""
-
-    def __init__(self, sfo=1, x=[], y=[]):
-        self.sfo = sfo
-        self.abscissa = x
-        self.ordinate = y
-
-    def create(self, stub):
-        """Create curve."""
-        ret = stub.CreateDefineCurve(DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate))
-        self.id = ret.id
-        logging.info(f"Curve {self.id} defined...")
-        return self.id
+class BaseSet:
+    """Define the base class for all set classes."""
+    def __init__(self):
+        self.type = "PARTSET"
+        self.id = 0
 
 
 class NodeSet:
@@ -1179,7 +1237,6 @@ class NodeSet:
 
     def __init__(self, nodes=[]):
         self.nodes = nodes
-        self.id = 0
 
     def create(self, stub):
         """Create node set."""
@@ -1202,12 +1259,39 @@ class NodeSet:
         return self.nodes[pos]
 
 
-class PartSet:
+class SetType(Enum):
+    SHELL = "SET_SHELL"
+    SOLID = "SET_SOLID"
+    BEAM = "SET_BEAM"
+    TSHELL = "SET_TSHELL"
+    DISCRETE = "SET_DISCRETE"
+
+
+class NodesetGeneral(BaseSet):
+    """Include nodal points of element sets defined by SET_XXXX_LIST, where XXXX could be SHELL, SOLID, BEAM, TSHELL and DISCRETE."""
+    def __init__(self,settype=SetType.SHELL,setids=[]):
+        self.settype = settype.value
+        self.setids = setids
+
+    def create(self, stub):
+        """Create node set."""
+        if len(self.setids) <= 0:
+            return 0
+        ret = stub.CreateNodeSet(
+            NodeSetRequest(
+                option="GENERAL", sid=0, genoption=self.settype, entities=self.setids
+            )
+        )
+        self.id = ret.id
+        self.type = "NODESET"
+        return self.id
+
+
+class PartSet(BaseSet):
     """Define a set of parts with optional attributes."""
 
     def __init__(self, parts=[]):
         self.parts = parts
-        self.id = 0
 
     def create(self, stub):
         """Create part set."""
@@ -1223,14 +1307,14 @@ class PartSet:
 
     def num(self):
         """Get the number of parts in this set."""
-        return self.parts.len()
+        return len(self.parts)
 
     def pos(self, pos):
         """Get the part ID by position."""
         return self.parts[pos]
 
 
-class SegmentSet:
+class SegmentSet(BaseSet):
     """Define a set of segments with optional identical or unique attributes.
 
     Parameters
@@ -1241,7 +1325,6 @@ class SegmentSet:
 
     def __init__(self, segments=[]):
         self.segments = segments
-        self.id = 0
         self.type = "SEGMENTSET"
 
     def create(self, stub):
@@ -1484,6 +1567,10 @@ class Part:
         self.tmid = 0
         self.formulation = 0
         self.stiffness_damping = 0
+        self.rigidbody_initial_velocity = False
+        self.translation = Velocity(0,0,0)
+        self.rotation = RotVelocity(0,0,0)
+        self.extra_nodes_defined = False
 
     def set_material(self, mat):
         """Set material."""
@@ -1498,14 +1585,42 @@ class Part:
         """Assign stiffness damping coefficient."""
         self.stiffness_damping = coefficient
 
+    def set_extra_nodes(self,nodeset):
+        """Define extra nodes for rigid body.
+
+        Parameters
+        ----------
+        nodeset : NodeSet
+            Extra nodes list.
+        """
+        self.extra_nodes_defined = True
+        self.extra_nodes = nodeset
+
+    def set_rigidbody_initial_velocity(self,translation=Velocity(0,0,0),rotation=RotVelocity(0,0,0)):
+        """Define the initial translational and rotational velocities at the center of gravity for a rigid body or a nodal rigid body."""
+        self.rigidbody_initial_velocity = True
+        self.translation = translation
+        self.rotation = rotation
+    
     def set_property(self):
         """Set Properties for part object."""
         if self.stiffness_damping > 0:
             self.stub.CreateDampingPartStiffness(
                 DampingPartStiffnessRequest(isset=False, id=self.id, coef=self.stiffness_damping)
             )
-            logging.info(f"Assign stiffness damping coefficient to part {self.id} ")
-
+            logging.info(f"Assign stiffness damping coefficient to part {self.id}.")
+        if self.extra_nodes_defined:
+            nid = self.extra_nodes.create(self.stub)
+            option=self.extra_nodes.type
+            self.stub.CreateConstrainedExtraNodes(ConstrainedExtraNodesRequest(option="SET", pid=self.id, nid=nid, iflag=0))
+            logging.info(f"Constrained extra nodes defined for part {self.id}.")
+        if self.rigidbody_initial_velocity:
+            ret = self.stub.CreateInitVelRigidBody(
+            InitVelRigidBodyRequest(
+                pid=self.id, vx=self.translation.x, vy=self.translation.y, vz=self.translation.z, vxr=self.rotation.x, vyr=self.rotation.y, vzr=self.rotation.z, lcid=0
+                )
+            )
+            logging.info(f"Initial velocity for rigidbody {self.id}.")
 
 class BeamPart(Part):
     """Define parts, that is, combine material information, section properties,
@@ -1565,6 +1680,12 @@ class ShellPart(Part):
         self.print = 0
         self.thickness = 1
         self.hourglasstype = -1
+        self.defined_des_surface = False
+        self.despid = 0
+        self.desxid = 0
+        self.des_nquad = 1
+        self.des_nsid = 0
+        self.des_rsf = 1
 
     def set_hourglass(self, type=HourglassType.STANDARD_LSDYNA_VISCOUS):
         """Define hourglass/bulk viscosity identification."""
@@ -1586,8 +1707,46 @@ class ShellPart(Part):
         """Shell thickness."""
         self.thickness = thickness
 
+    def set_des_surface(self, despid=0, desxid=0, nquad=1, nsid=0, rsf=-1):
+        """Generate and place discrete element sphere (DES) elements on the surface of shell elements.
+
+        Parameters
+        ----------
+        despid : int
+            Part ID for generated DES elements.
+        desxid : int
+            Section ID for generated DES elements.
+        nquad : int
+            Number of equally spaced DES elements created on a shell element in each local shell direction.
+        nsid : int
+            If defined, this card creates a node set with ID NSID for the nodes generated by this card.
+        rsf : float
+            Scale factor for determining the DES radius.
+        """
+        self.defined_des_surface = True
+        self.despid = despid
+        self.desxid = desxid
+        self.des_nquad = nquad
+        self.des_nsid = nsid
+        self.des_rsf = rsf
+        
+
     def set_property(self):
         """Set properties for shell part."""
+        if self.defined_des_surface:
+            ret = self.stub.CreateDefineDEMeshSurface(
+                DefineDEMeshSurfaceRequest(
+                    sid=self.id,
+                    type=1,
+                    despid=self.despid,
+                    desxid=self.desxid,
+                    nquad=self.des_nquad,
+                    nsid=self.des_nsid,
+                    rsf=self.des_rsf,
+                )
+            )
+            logging.info("Define discrete element mesh surface Created...")
+        Part.set_property(self)
         sec = ShellSection(
             element_formulation=self.formulation,
             shear_factor=self.shear_factor,
@@ -1686,6 +1845,42 @@ class SolidPart(Part):
             self.hgid = ret.id
         else:
             self.hgid = 0
+        self.stub.SetPartProperty(
+            PartPropertyRequest(
+                pid=self.id,
+                secid=self.secid,
+                mid=self.mid,
+                eosid=self.eosid,
+                hgid=self.hgid,
+                grav=self.grav,
+                adpopt=self.adpopt,
+                tmid=self.tmid,
+            )
+        )
+
+class DRO(Enum):
+    DESCRIBES_TRANSLATIONAL_SPRING = 0
+    DESCRIBES_TORSIONAL_SPRING = 1
+
+class DiscretePart(Part):
+    """Define parts, that is, combine material information, section properties, hourglass type, thermal properties, and a flag for part adaptivity."""
+    partlist = []
+    def __init__(self, pid):
+        Part.__init__(self, pid)
+        self.stub = DynaBase.get_stub()
+        DiscretePart.partlist.append(self)
+        self.displacement_option = 0
+
+    def set_displacement_option(self, displacement_option=DRO.DESCRIBES_TRANSLATIONAL_SPRING):
+        """Set displacement/Rotation Option."""
+        self.displacement_option = displacement_option.value
+
+    def set_property(self):
+        """Set properties for discrete part."""
+        Part.set_property(self)
+        ret = self.stub.CreateSectionDiscrete(SectionDiscreteRequest(dro=self.displacement_option, kd=0, v0=0, cl=0, fd=0, cdl=0, tdl=0))
+        self.secid = ret.id
+        self.hgid = 0
         self.stub.SetPartProperty(
             PartPropertyRequest(
                 pid=self.id,
@@ -2104,7 +2299,7 @@ class Constraint:
     """Provides a way of constraining degrees of freedom to move together in some way."""
 
     cnrbsetidlist = []
-
+    jointsphericallist = []
     def __init__(self):
         self.stub = stub = DynaBase.get_stub()
 
@@ -2145,6 +2340,21 @@ class Constraint:
         Constraint.cnrbsetidlist.append(nsid)
         logging.info("CNRB Created...")
 
+    def create_joint_spherical(self, nodes, relative_penalty_stiffness=1.0, damping_scale_factor=1.0):
+        """Define a joint between two rigid bodies.
+        
+        Parameters
+        ----------
+        nodes : list
+            Define nodes for joint.
+        relative_penalty_stiffness : int
+            Relative penalty stiffness.
+        damping_scale_factor : int
+            Damping scale factor on default damping value.
+        """
+        Constraint.jointsphericallist.append([nodes,relative_penalty_stiffness,damping_scale_factor])
+        logging.info("joint spherical Created...")
+
     @staticmethod
     def create(stub):
         """Create constraint."""
@@ -2152,25 +2362,223 @@ class Constraint:
             stub.CreateConstrainedNodalRigidBody(
                 ConstrainedNodalRigidBodyRequest(pid=i, nsid=Constraint.cnrbsetidlist[i])
             )
+        for i in range(len(Constraint.jointsphericallist)):
+            stub.CreateConstrainedJoint(
+                ConstrainedJointRequest(
+                    type="SPHERICAL", nodes=Constraint.jointsphericallist[i][0],rps=Constraint.jointsphericallist[i][1], damp=Constraint.jointsphericallist[i][2]
+                )
+            )
 
+class BoundaryCondition:
+    """Provide a way of defining imposed motions on boundary nodes."""
 
-class Point:
-    """Define point."""
+    def __init__(self):
+        self.stub = DynaBase.get_stub()
 
-    def __init__(self, x=0, y=0, z=0):
-        self.x = x
-        self.y = y
-        self.z = z
+    def create_spc(
+        self,
+        nodeset,
+        tx=True,
+        ty=True,
+        tz=True,
+        rx=True,
+        ry=True,
+        rz=True,
+        cid=0,
+        birth=0,
+        death=1e20,):
+        """Define nodal single point constraints.
 
+        Parameters
+        ----------
+        nodeset : NodeSet.
+            nodal set.
+        contraint_x/y/z_direction : int
+            translational constraint in local x/y/z-direction.
+        contraint_x/y/zaxis_rotate : int
+            rotational constraint about local x/y/z-axis.
 
-class Direction:
-    """Define direction."""
+        """
+        if birth == 0 and death == 1e20:
+            birthdeath = False
+        else:
+            birthdeath = True
+        if nodeset.num() == 1:
+            nid = nodeset.pos(pos=0)
+            option1 = "NODE"
+        else:
+            nid = nodeset.create(self.stub)
+            option1 = "SET"
+        ret = self.stub.CreateBdySpc(
+            BdySpcRequest(
+                option1=option1,
+                birthdeath=birthdeath,
+                nid=nid,
+                cid=cid,
+                dofx=tx,
+                dofy=ty,
+                dofz=tz,
+                dofrx=rx,
+                dofry=ry,
+                dofrz=rz,
+                birth=birth,
+                death=death,
+            )
+        )
+        logging.info("Boundary spc Created...")
+        return ret
 
-    def __init__(self, x=0, y=0, z=0):
-        self.x = x
-        self.y = y
-        self.z = z
+    def create_imposed_motion(
+        self,
+        set,
+        curve,
+        motion=Motion.DISPLACEMENT,
+        dof=DOF.X_TRANSLATIONAL,
+        scalefactor=1,
+        birthtime = 0,
+    ):
+        """Define an imposed nodal motion (velocity, acceleration, or displacement) on a node or a set of nodes.
 
+        Parameters
+        ----------
+        partset : PartSet.
+            part set.
+        curve : Curve
+            Curve ID or function ID to describe motion value as a function of time.
+        motion : enum
+            Velocity/Acceleration/Displacement flag.
+        dof : enum
+            Applicable degrees-of-freedom.
+        scalefactor : float
+            Load curve scale factor.
+
+        """
+        set.create(self.stub)
+        curve.create(self.stub)
+        if set.type == "PARTSET":
+            for id in set.parts:
+                ret = self.stub.CreateBdyPrescribedMotion(
+                    BdyPrescribedMotionRequest(
+                        id=0,
+                        heading="",
+                        option="RIGID",
+                        typeid=id,
+                        dof=dof.value,
+                        vad=motion.value,
+                        lcid=curve.id,
+                        sf=scalefactor,
+                        vid=0,
+                        birth=birthtime,
+                        death=0,
+                    )
+                )
+        elif set.type == "NODESET":
+            ret = self.stub.CreateBdyPrescribedMotion(
+                BdyPrescribedMotionRequest(
+                    id=0,
+                    heading="",
+                    option="SET",
+                    typeid=set.id,
+                    dof=dof.value,
+                    vad=motion.value,
+                    lcid=curve.id,
+                    sf=scalefactor,
+                    vid=0,
+                    birth=birthtime,
+                    death=0,
+                )
+            )
+        else:
+            pass
+        logging.info("Boundary prescribed motion Created...")
+
+class InitialCondition:
+    """Provide a way of initializing velocities and detonation points."""
+
+    def __init__(self):
+        self.stub = DynaBase.get_stub()
+        self.velocityset = BaseSet()
+        self.angular_velocity = 0
+        self.velocity = Velocity(0,0,0)
+        self.dirction = Direction(0,0,0)
+        self.stime = 0
+    
+    def create_velocity(
+        self,
+        velocityset,
+        angular_velocity=0,
+        velocity = Velocity(0,0,0),
+        direction = Direction(0,0,0),
+        stime=0):
+        """Define initial velocities for rotating and/or translating bodies."""
+        self.velocityset = velocityset
+        self.angular_velocity = angular_velocity
+        self.velocity = velocity
+        self.direction = direction
+        self.stime = stime
+        if self.velocityset.num()>0:
+            id = self.velocityset.create(self.stub)
+            if self.velocityset.type.upper() == "PARTSET":
+                type = 1
+            elif self.velocityset.type.upper() == "PART":
+                type = 2
+            else:
+                type = 3
+            phase = 0
+            if self.stime !=0 :
+                phase = 1
+                self.stub.CreateInitVelGenerationStartTime(InitVelGenerationStartTimeRequest(stime=self.stime))
+            self.stub.CreateInitVelGeneration(
+                InitVelGenerationRequest(
+                    id=id,
+                    styp=type,
+                    omega=self.angular_velocity,
+                    vx=self.velocity.x,
+                    vy=self.velocity.y,
+                    vz=self.velocity.z,
+                    xc=0,
+                    yc=0,
+                    zc=0,
+                    nx=self.direction.x,
+                    ny=self.direction.y,
+                    nz=self.direction.z,
+                    phase=phase,
+                )
+            )
+            logging.info(f"Define initial velocities for {type} {id}.")
+    
+    def create(self):
+        """Create initial condition."""
+        if self.velocityset.num()>0:
+            id = self.velocityset.create(self.stub)
+            if self.velocityset.type.upper() == "PARTSET":
+                type = 1
+            elif self.velocityset.type.upper() == "PART":
+                type = 2
+            else:
+                type = 3
+            phase = 0
+            if self.stime !=0 :
+                phase = 1
+                self.stub.CreateInitVelGenerationStartTime(InitVelGenerationStartTimeRequest(stime=self.stime))
+            self.stub.CreateInitVelGeneration(
+                InitVelGenerationRequest(
+                    id=id,
+                    styp=type,
+                    omega=self.angular_velocity,
+                    vx=self.velocity.x,
+                    vy=self.velocity.y,
+                    vz=self.velocity.z,
+                    xc=0,
+                    yc=0,
+                    zc=0,
+                    nx=self.direction.x,
+                    ny=self.direction.y,
+                    nz=self.direction.z,
+                    phase=phase,
+                )
+            )
+            logging.info(f"Define initial velocities for {type} {id}.")
 
 class RigidwallCylinder:
     """Define a rigid wall with a cylinder form.
@@ -2268,3 +2676,23 @@ class RigidwallPlanar:
             RigidWallPlanarRequest(nsid=0, nsidex=0, boxid=0, fric=self.fric, normal=normal)
         )
         logging.info("Rigidwall Planar Created...")
+
+class GravityOption(Enum):
+    DIR_X = "X"
+    DIR_Y = "Y"
+    DIR_Z = "Z"
+
+class Gravity:
+    """Define body force loads due to a prescribed base acceleration or angular velocity using global axes directions."""
+    gravitylist=[]
+    def __init__(self,dir=GravityOption.DIR_Z,load = Curve(x=[0,0],y=[0,0])):
+        self.stub = DynaBase.get_stub()
+        self.dir = dir.value
+        self.load = load
+        Gravity.gravitylist.append(self)
+
+    def create(self):
+        """Define body force."""
+        id = self.load.create(self.stub)
+        ret = self.stub.CreateLoadBody(LoadBodyRequest(option=self.dir, lcid=id))
+        logging.info("Load body Created...")
