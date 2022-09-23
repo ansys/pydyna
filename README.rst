@@ -56,24 +56,28 @@ Here is a basic pre-processing example:
 
 .. code:: python
 
-   from pre.dynaiga import *
-   hostname = "localhost"
-   iga = DynaIGA(hostname=hostname)
-   fns = []
-   path = os.getcwd() + os.sep + "input" + os.sep + "iga_sample" + os.sep
-   fns.append(path + "maino.k")
-   fns.append(path + "rkrwelds.key")
-   fns.append(path + "27parts.key")
-   iga.open_files(fns)
-   iga.set_timestep(timestep_size_for_mass_scaled=-0.0004)
-   iga.set_termination(20)
-   ...
-   selfcontact = Contact(type=ContactType.AUTOMATIC)
-   selfcontact.set_friction_coefficient(static=0.2)
-   surf1=ContactSurface(PartSet(igaparts))
-   selfcontact.set_slave_surface(surf1)
-   iga.create_database_binary(dt=0.1)
-   iga.save_file()
+    from ansys.dyna.pre.dynasolution import *
+    from ansys.dyna.pre.dynaiga import *
+    from ansys.dyna.pre.dynamaterial import *
+    hostname = "localhost"
+    iga_solution = DynaSolution(hostname)
+    fns = []
+    path = os.getcwd() + os.sep + "input" + os.sep + "iga_sample" + os.sep
+    fns.append(path + "maino.k")
+    fns.append(path + "rkrwelds.key")
+    fns.append(path + "27parts.key")
+    iga_solution.open_files(fns)
+    iga_solution.set_termination(20)
+    iga_solution.create_database_binary(dt=0.1)
+    iga = DynaIGA()
+    iga_solution.add(iga)
+    iga.set_timestep(timestep_size_for_mass_scaled=-0.0004) 
+    ...
+    selfcontact = Contact(type=ContactType.AUTOMATIC)
+    selfcontact.set_friction_coefficient(static=0.2)
+    surf1=ContactSurface(PartSet(igaparts))
+    selfcontact.set_slave_surface(surf1)
+    iga_solution.save_file()
 
 Here is a basic solving example:
 
