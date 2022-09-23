@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     em_solution = DynaSolution(hostname)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep + "em_railgun" + os.sep
+    path = os.path.dirname(__file__) + os.sep + "input" + os.sep + "em_railgun" + os.sep
     fns.append(path + "em_railgun.k")
     em_solution.open_files(fns)
     em_solution.set_termination(termination_time=3e-4)

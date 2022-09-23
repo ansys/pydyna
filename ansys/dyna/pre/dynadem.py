@@ -8,9 +8,10 @@ Module to create DEM dyna input deck
 import logging
 
 from .dynabase import *  # noqa : F403
+from .dynamech import DynaMech
 
 
-class DynaDEM(DynaBase):
+class DynaDEM(DynaMech):
     """Contains methods to create keyword related to discrete element method."""
 
     def __init__(self):

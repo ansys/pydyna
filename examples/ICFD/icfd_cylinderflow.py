@@ -20,7 +20,7 @@ if __name__ == "__main__":
     icfd_solution = DynaSolution(hostname)
     #Import the initial mesh data(nodes and elements)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep
+    path = os.path.dirname(__file__) + os.sep + "input" + os.sep
     fns.append(path + os.sep + "icfd_cylinderflow" + os.sep + "mesh.k")
     icfd_solution.open_files(fns)
 

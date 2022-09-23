@@ -9,6 +9,7 @@ import logging
 from enum import Enum
 
 from .dynabase import *  # noqa : F403
+from .dynamech import DynaMech
 
 
 class AdvectionMethod(Enum):
@@ -162,7 +163,7 @@ class StructuredMesh:
         return ret
 
 
-class DynaSALE(DynaBase):
+class DynaSALE(DynaMech):
     """Setup SALE simulation process."""
 
     def __init__(self):

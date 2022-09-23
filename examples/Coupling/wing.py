@@ -25,7 +25,7 @@ if __name__ == "__main__":
     wing_solution = DynaSolution(hostname)  
     
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep + "wing" + os.sep
+    path = os.path.dirname(__file__) + os.sep + "input" + os.sep + "wing" + os.sep
     fns.append(path + "main.k")
     fns.append(path + "fe-rig_mesh2.k")
     fns.append(path + "p22a-unts.k")
@@ -229,7 +229,7 @@ if __name__ == "__main__":
     #Load
     g = Gravity(dir=GravityOption.DIR_Z,load = Curve(x=[0.05, 1e18],y=[1, 1]))
 
-    dem.set_output_database(bndout=0.001,glstat=0.001,matsum=0.001,nodfor=0.001,rcforc=0.001,sleout=0.001)
+    wing_solution.set_output_database(bndout=0.001,glstat=0.001,matsum=0.001,nodfor=0.001,rcforc=0.001,sleout=0.001)
     wing_solution.create_database_binary(dt=0.005, maxint=1, dcomp=2, nintsld=1)
 
     wing_solution.save_file()
