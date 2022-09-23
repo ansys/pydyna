@@ -8,6 +8,7 @@ This example demonstrates how to create a SALE input deck.
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynasale import *
 from ansys.dyna.pre import dynamaterial as matDB
 
@@ -15,14 +16,19 @@ if __name__ == "__main__":
     hostname = "localhost"
     if len(sys.argv) > 1:
         hostname = sys.argv[1]
+
+    efp_solution = DynaSolution(hostname)
     #Import the initial mesh data(nodes and elements)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep+"sale_efp"+os.sep
     fns.append(path + "efpcase.k")
-    efp = DynaSALE(hostname=hostname,filenames=fns)
+    efp_solution.open_files(fns)
 
     #set termination
-    efp.set_termination(280)
+    efp_solution.set_termination(280)
+
+    efp = DynaSALE()
+    efp_solution.add(efp)  
 
     #set post result ouput interval
     efp.set_output_interval(5.0)
@@ -65,4 +71,4 @@ if __name__ == "__main__":
     efp.set_output_database(matsum=0.2,glstat=0.2)
 
     #save file on server end
-    efp.save_file()
+    efp_solution.save_file()

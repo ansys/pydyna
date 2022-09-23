@@ -70,3 +70,4 @@ venv.bak/
 
 # VSCode
 .vscode/
+client.log

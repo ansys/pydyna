@@ -9,21 +9,26 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
-from ansys.dyna.pre.dynaairbag import *
+from ansys.dyna.pre.dynasolution import *
+from ansys.dyna.pre.dynamech import *
 from ansys.dyna.pre.dynamaterial import *
 
 if __name__ == "__main__":
     hostname = "localhost"
     if len(sys.argv) > 1:
         hostname = sys.argv[1]
-    airbagdeploy = DynaAirbag(hostname=hostname)
+
+    airbag_solution = DynaSolution(hostname)
     fns = []
     path = os.getcwd() + os.sep + "input" + os.sep + "airbag_deploy" + os.sep
     fns.append(path + "airbag_deploy.k")
-    airbagdeploy.open_files(fns)
+    airbag_solution.open_files(fns)
 
-    airbagdeploy.set_termination(0.03)
-    #airbagdeploy.create_control_output(npopt=1, neecho=3)
+    airbag_solution.set_termination(0.03)
+    airbag_solution.create_database_binary(dt=5e-4, ieverp=1)
+    
+    airbagdeploy = DynaMech()
+    airbag_solution.add(airbagdeploy)
 
     airbag = Airbag(set=PartSet([3]),
         heat_capacity_at_constant_volume=1.736e3,
@@ -63,9 +68,7 @@ if __name__ == "__main__":
     airbagpart.set_element_formulation(ShellFormulation.FULLY_INTEGRATED_BELYTSCHKO_TSAY_MEMBRANE)
     airbagpart.set_thickness(0.015)
     airbagpart.set_integration_points(4)
-
-    airbagdeploy.create_database_binary(dt=5e-4, ieverp=1)
-    #airbagdeploy.create_database_binary(filetype="D3THDT", dt=999999)
+    
     airbagdeploy.set_output_database(abstat=2.0e-4,glstat=2.0e-4,matsum=2.0e-4,rcforc=2.0e-4,rbdout=2.0e-4,rwforc=2.0e-4)
 
-    airbagdeploy.save_file()
+    airbag_solution.save_file()

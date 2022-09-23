@@ -13,8 +13,8 @@ from .dynabase import *  # noqa : F403
 class DynaIGA(DynaBase):
     """Contains methods to create keyword related to IGA."""
 
-    def __init__(self, hostname="localhost"):
-        DynaBase.__init__(self, hostname)
+    def __init__(self):
+        DynaBase.__init__(self)
         self.casetype = CaseType.IGA
 
     def create_section_igashell(self, secid, elform, shrf, thickness):

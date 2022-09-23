@@ -13,8 +13,8 @@ from .dynabase import *  # noqa : F403
 class DynaICFD(DynaBase):
     """Contain methods to create keyword related to ICFD."""
 
-    def __init__(self, hostname="localhost"):
-        DynaBase.__init__(self, hostname)
+    def __init__(self):
+        DynaBase.__init__(self)
         self.create_section_icfd(1)
         self.timestep = 0
         self.termination = 1e28
@@ -238,11 +238,6 @@ class DynaICFD(DynaBase):
             obj.set_property()
         for obj in ICFDVolumePart.partlist:
             obj.create()
-        ret = self.stub.SaveFile(SaveFileRequest(name=self.mainname))
-        msg = self.mainname + " is outputed..."
-        logging.info(msg)
-        return ret
-
 
 class Compressible(Enum):
     VACUUM = 0
@@ -254,8 +249,6 @@ class MatICFD:
 
     Parameters
     ----------
-        mid : int
-            Material ID.
         flag : int
             Flag to choose between fully incompressible, slightly compressible, or barotropic flows:
             EQ.0: Vacuum (free surface problems only)
@@ -268,12 +261,17 @@ class MatICFD:
 
     def __init__(self, flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID, flow_density=0, dynamic_viscosity=0):
         self.stub = DynaBase.get_stub()
-        ret = self.stub.ICFDCreateMat(ICFDMatRequest(flg=flag.value, ro=flow_density, vis=dynamic_viscosity))
+        self.flag = flag.value
+        self.flow_density = flow_density
+        self.dynamic_viscosity = dynamic_viscosity
+
+    def create(self, stub):
+        """Create ICFD material."""
+        ret = self.stub.ICFDCreateMat(ICFDMatRequest(flg=self.flag, ro=self.flow_density, vis=self.dynamic_viscosity))
         self.material_id = ret.id
         logging.info(f"ICFD material {self.material_id} Created...")
 
-
-class DOF(Enum):
+class ICFDDOF(Enum):
     X = 1
     Y = 2
     Z = 3
@@ -298,9 +296,10 @@ class ICFDPart:
 
     def set_material(self, mat):
         """Set material."""
+        mat.create(self.stub)
         self.mid = mat.material_id
 
-    def set_prescribed_velocity(self, motion, dof=DOF.X, velocity_flag=Vel.LINEAR_VELOCITY):
+    def set_prescribed_velocity(self, motion, dof=ICFDDOF.X, velocity_flag=Vel.LINEAR_VELOCITY):
         """Impose the fluid velocity on the boundary.
 
         Parameters
