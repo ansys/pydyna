@@ -21,7 +21,7 @@ if __name__ == "__main__":
     
     dummy_solution = DynaSolution(hostname)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep + "belted_dummy" + os.sep
+    path = os.path.dirname(__file__) + os.sep + "input" + os.sep + "belted_dummy" + os.sep
     fns.append(path + "belted_dummy.k")
     dummy_solution.open_files(fns)
     dummy_solution.set_termination(termination_time=0.12)

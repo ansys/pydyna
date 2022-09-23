@@ -23,7 +23,7 @@ if __name__ == "__main__":
     camry_solution = DynaSolution(hostname)
     #Import the initial mesh data(nodes and elements)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep+ "camry_rc" + os.sep
+    path = os.path.dirname(__file__) + os.sep + "input" + os.sep+ "camry_rc" + os.sep
     fns.append(path + "Camry_RC_main.k")
     fns.append(path + "501_RIG_BAR_roof_crush_platen5.key")
     fns.append(path + "Camry_V1_NoSusAndPowerTrain_impl7.k")
@@ -160,6 +160,6 @@ if __name__ == "__main__":
     bdy.create_imposed_motion(platen,crv,dof=DOF.Y_TRANSLATIONAL,scalefactor=-0.0802216)
     bdy.create_imposed_motion(platen,crv,dof=DOF.Z_TRANSLATIONAL,scalefactor=-0.0802216)
 
-    camry.set_output_database(elout=0.0001,glstat=0.0001,matsum=0.0001,nodout=0.0001,rbdout=0.0001,rcforc=0.0001,secforc=0.0001)
+    camry_solution.set_output_database(elout=0.0001,glstat=0.0001,matsum=0.0001,nodout=0.0001,rbdout=0.0001,rcforc=0.0001,secforc=0.0001)
 
     camry_solution.save_file()

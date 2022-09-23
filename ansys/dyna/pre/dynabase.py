@@ -70,6 +70,7 @@ class CaseType(Enum):
     IGA = 5
 
 from .dynasolution import DynaSolution # noqa : F403
+
 class Box:
     """Define a box-shaped volume."""
 
@@ -148,16 +149,10 @@ class RotVelocity:
 
 class DynaBase:
     """Contains methods to create general LS-DYNA keyword."""
-
     def __init__(self):
         self.stub = DynaSolution.get_stub()
         self.mainname = ""
         DynaBase.stub = self.stub
-        self.casetype = CaseType.STRUCTURE
-
-    def get_stub():
-        """Get the stub of this DynaBase object."""
-        return DynaBase.stub
 
     def set_timestep(self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0):
         """Set structural time step size control using different options.
@@ -178,883 +173,6 @@ class DynaBase:
         """
         ret = self.stub.CreateTimestep(TimestepRequest(tssfac=tssfac, isdo=isdo, dt2ms=timestep_size_for_mass_scaled))
         logging.info("Timestep Created...")
-        return ret
-
-    def set_accuracy(
-        self,
-        objective_stress_updates=Switch.OFF,
-        invariant_node_number=InvariantNode.OFF,
-        partsetid_for_objective_stress_updates=0,
-        implicit_accuracy_flag=Switch.OFF,
-        explicit_accuracy_flag=Switch.OFF,
-    ):
-        """Define control parameters that can improve the accuracy of the calculation.
-
-        Parameters
-        ----------
-        objective_stress_updates : int
-            Global flag for 2nd order objective stress updates.
-        invariant_node_number : int
-            Invariant node numbering for shell and solid elements.
-        partsetid_for_objective_stress_updates : int
-            Part set ID for objective stress updates.
-        implicit_accuracy_flag : int
-            Implicit accuracy flag.
-        explicit_accuracy_flag : float
-             Explicit accuracy parameter.EQ.0.0: Off,GT.0.0: On
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateControlAccuracy(
-            ControlAccuracyRequest(
-                osu=objective_stress_updates.value,
-                inn=invariant_node_number.value,
-                pidosu=partsetid_for_objective_stress_updates,
-                iacc=implicit_accuracy_flag.value,
-                exacc=explicit_accuracy_flag.value,
-            )
-        )
-        logging.info("Control Accuracy Created...")
-        return ret
-
-    def set_energy(
-        self,
-        hourglass_energy=EnergyFlag.NOT_COMPUTED,
-        rigidwall_energy=EnergyFlag.COMPUTED,
-        sliding_interface_energy=EnergyFlag.NOT_COMPUTED,
-        rayleigh_energy=EnergyFlag.NOT_COMPUTED,
-        initial_reference_geometry_energy=EnergyFlag.COMPUTED,
-    ):
-        """Provide controls for energy dissipation options.
-
-        Parameters
-        ----------
-        hourglass_energy : enum
-            Hourglass energy calculation option.
-        rigidwall_energy : int
-            Rigidwall energy dissipation option.EQ.1: Energy dissipation is not computed,
-            EQ.2: Energy dissipation is computed
-        sliding_interface_energy : int
-            Sliding interface energy dissipation option.EQ.1: Energy dissipation is not computed,
-            EQ.2: Energy dissipation is computed
-        rayleigh_energy : int
-            Rayleigh energy dissipation option.EQ.1: Energy dissipation is not computed,
-            EQ.2: Energy dissipation is computed
-        initial_reference_geometry_energy : int
-            Initial reference geometry energy option.EQ.1: Initial reference
-            geometry energy is not computed,EQ.2: Initial reference geometry energy is computed
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateControlEnergy(
-            ControlEnergyRequest(
-                hgen=hourglass_energy.value,
-                rwen=rigidwall_energy.value,
-                slnten=sliding_interface_energy.value,
-                rylen=rayleigh_energy.value,
-                irgen=initial_reference_geometry_energy.value,
-            )
-        )
-        logging.info("Control Energy Created...")
-        return ret
-
-    def set_hourglass(self, controltype=HourglassControl.STANDARD_VISCOSITY_FORM, coefficient=0.1):
-        """Redefine the default values of hourglass control type and coefficient.
-
-        Parameters
-        ----------
-        controltype : enum
-            Default hourglass control type.
-        coefficient : float
-            Default hourglass coefficient.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateControlHourgalss(ControlHourglassRequest(ihq=controltype.value, qh=coefficient))
-        logging.info("Control Hourglass Created...")
-        return ret
-
-    def set_bulk_viscosity(
-        self,
-        quadratic_viscosity_coeff=1.5,
-        linear_viscosity_coeff=0.06,
-        bulk_viscosity_type=BulkViscosity.STANDARD_BULK_VISCOSITY,
-    ):
-        """Reset the default values of the bulk viscosity coefficients globally.
-
-        Parameters
-        ----------
-        quadratic_viscosity_coeff : float
-            Default quadratic viscosity coefficient.
-        linear_viscosity_coeff : float
-            Default linear viscosity coefficient.
-        bulk_viscosity_type : enum
-            Default bulk viscosity type.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateControlBulkViscosity(
-            ControlBulkViscosityRequest(
-                q1=quadratic_viscosity_coeff,
-                q2=linear_viscosity_coeff,
-                type=bulk_viscosity_type.value,
-            )
-        )
-        logging.info("Control Bulk Viscosity Created...")
-        return ret
-
-    def create_control_shell(
-        self,
-        wrpang=20,
-        esort=0,
-        irnxx=-1,
-        istupd=0,
-        theory=2,
-        bwc=2,
-        miter=1,
-        proj=0,
-        irquad=0,
-    ):
-        """Provide controls for computing shell response.
-
-        Parameters
-        ----------
-        wrpang : float
-            Shell element warpage angle in degrees.
-        esort : int
-            Sorting of triangular shell elements to automatically switch
-            degenerate quadrilateral shell formulations to more suitable
-            triangular shell formulations.
-        irnxx : int
-            Shell normal update option.
-        istupd : int
-            Shell thickness change option for deformable shells.
-        theory : int
-            Default shell formulation.
-        bwc : int
-            Warping stiffness for Belytschko-Tsay shells.
-        miter : int
-            Plane stress plasticity option.
-        proj : int
-            Projection method for the warping stiffness in the Belytschko-Tsay
-            shell and the Belytschko-Wong-Chiang elements
-        irquad : int
-             In plane integration rule for the 8-node quadratic shell element.
-             EQ.2: 2*2 Gauss quadrature,EQ.3: 3*3 Gauss quadrature.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateControlShell(
-            ControlShellRequest(
-                wrpang=wrpang,
-                esort=esort,
-                irnxx=irnxx,
-                istupd=istupd,
-                theory=theory,
-                bwc=bwc,
-                miter=miter,
-                proj=proj,
-                irquad=irquad,
-            )
-        )
-        logging.info("Control Shell Created...")
-        return ret
-
-    def create_control_solid(
-        self,
-        esort=0,
-        fmatrx=0,
-        niptets=4,
-        swlocl=1,
-        psfail=0,
-        t10jtol=0.0,
-        icoh=0,
-        tet13k=0,
-    ):
-        """Provide controls for solid element response.
-
-        Parameters
-        ----------
-        esort : int
-            Automatic sorting of tetrahedral and pentahedral elements to avoid
-            use of degenerate formulations for these shapes.EQ.0: No sorting,EQ.1: Sort.
-        fmatrx : int
-            Default method used in the calculation of the deformation gradient matrix.
-        niptets : int
-            Number of integration points used in the quadratic tetrahedron elements.
-        swlocl : int
-            Output option for stresses in solid elements used as spot welds with
-            material \*MAT_SPOTWELD.
-        psfail : int
-            Solid element erosion from negative volume is limited only to solid elements in
-            the part set indicated by PSFAIL.
-        t10jtol : float
-            Tolerance for Jacobian in 4-point 10-noded quadratic tetrahedra.
-        icoh : int
-            Breaking LS-DYNA convention ICOH is interpreted digit-wise.
-        tet13k : int
-            Set to 1 to invoke a consistent tangent stiffness matrix for the
-            pressure averaged tetrahedron.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateControlSolid(
-            ControlSolidRequest(
-                esort=esort,
-                fmatrx=fmatrx,
-                niptets=niptets,
-                swlocl=swlocl,
-                psfail=psfail,
-                t10jtol=t10jtol,
-                icoh=icoh,
-                tet13k=tet13k,
-            )
-        )
-        logging.info("Control Solid Created...")
-        return ret
-
-    def create_control_output(self, npopt=0, neecho=0):
-        """Set miscellaneous output parameters.
-
-        Parameters
-        ----------
-        npopt : int
-            Print suppression during input phase flag for the d3hsp file:
-            EQ.0: No suppression.
-            EQ.1: Nodal coordinates, element connectivities, rigid wall definitions,
-            nodal SPCs, initial velocities, initial strains, adaptive constraints, and
-            SPR2/SPR3 constraints are not printed.
-        neecho : int
-            Print suppression during input phase flag for echo file:
-            EQ.0: All data printed.
-            EQ.1: Nodal printing is suppressed.
-            EQ.2: Element printing is suppressed.
-            EQ.3: Both nodal and element printing is suppressed.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateControlOutput(ControlOutputRequest(npopt=npopt, neecho=neecho))
-        logging.info("Control Output Created...")
-        return ret
-
-    def create_control_contact(self, rwpnal, shlthk=0, orien=1, ssthk=0, ignore=0, igactc=0):
-        """Change defaults for computation with contact surfaces.
-
-        Parameters
-        ----------
-        shlthk : int
-            Flag for consideration of shell thickness offsets in non-automatic
-            surface-to-surface and non-automatic nodes-to-surface type contacts.
-        ssthk : int
-            Flag for determining default contact thickness for shells in single
-            surface contact types.
-        orien : int
-            Optional automatic reorientation of contact interface segments during initialization.
-        rwpnal : float
-            Scale factor for rigid wall penalties, which treat nodal points interacting
-            with rigid walls.
-        ignore : int
-            Ignore initial penetrations in the \*CONTACT_AUTOMATIC options.
-        igactc : int
-            Options to use isogeometric shells for contact detection when contact involves
-            isogeometric shells.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateControlContact(
-            ControlContactRequest(
-                rwpnal=rwpnal,
-                shlthk=shlthk,
-                orien=orien,
-                ssthk=ssthk,
-                ignore=ignore,
-                igactc=igactc,
-            )
-        )
-        logging.info("Control Contact Created...")
-        return ret
-
-    def create_rigidwall_planar(self, nsid, tail, head, nsidex=0, boxid=0, fric=0):
-        """Define planar rigid walls with either finite or infinite size.
-
-        Parameters
-        ----------
-        nsid : int
-            Nodal set ID containing tracked nodes.
-        tail : list [xt,yt,zt]
-            xt,yt,zt : x,y,z-coordinate of tail of normal vector n.
-        head : list [xh,yh,zh]
-            xh,yh,zh : x,y,z-coordinate of head of normal vector n.
-        nsidex : int
-            Nodal set ID containing nodes that are exempted as tracked nodes.
-        boxid : int
-            All nodes in box are included as tracked nodes for interacting with the rigid wall.
-        fric : float
-            Coulomb friction coefficient.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        normal = [tail[0], tail[1], tail[2], head[0], head[1], head[2]]
-        ret = self.stub.CreateRigidWallPlanar(
-            RigidWallPlanarRequest(nsid=nsid, nsidex=nsidex, boxid=boxid, fric=fric, normal=normal)
-        )
-        logging.info("Rigidwall Planar Created...")
-        return ret
-
-    def set_init_velocity(self, translational=Velocity(0,0,0),rotational=RotVelocity(0,0,0)):
-        """Define initial nodal point velocities using nodal set ID.
-
-        Parameters
-        ----------
-        nsid : int
-            Nodal set ID.
-        translational : Velocity
-            Initial translational velocity in x,y,z-direction.
-        rotational : RotVelocity
-            Initial rotational velocity about the x,y,z-axis.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        velocity = [translational.x,translational.y,translational.z,rotational.x,rotational.y,rotational.z]
-        ret = self.stub.CreateInitVel(InitVelRequest(nsid=0, velocity=velocity))
-        logging.info("Initial velocity Created...")
-        return ret
-
-    def create_init_vel_rigidbody(self, pid, vx=0, vy=0, vz=0, vxr=0, vyr=0, vzr=0, lcid=0):
-        """Define the initial translational and rotational velocities at the center
-        of gravity for a rigid body or a nodal rigid body.
-
-        Parameters
-        ----------
-        pid : int
-            Part ID of the rigid body or the nodal rigid body.
-        vx/vy/vz : float
-            Initial translational velocity at the center of gravity in global x/y/z-direction.
-        vxr/vyr/vzr : float
-            Initial rotational velocity at the center of gravity about the global x/y/z-axis.
-        lcid : int
-            Local coordinate system ID.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateInitVelRigidBody(
-            InitVelRigidBodyRequest(pid=pid, vx=vx, vy=vy, vz=vz, vxr=vxr, vyr=vyr, vzr=vzr, lcid=lcid)
-        )
-        logging.info("Initial velocity rigid body Created...")
-        return ret
-
-    def create_init_vel_bodies(
-        self,
-        id,
-        styp=2,
-        omega=0,
-        vx=0,
-        vy=0,
-        vz=0,
-        xc=0,
-        yc=0,
-        zc=0,
-        nx=0,
-        ny=0,
-        nz=0,
-        phase=0,
-        stime=0,
-    ):
-        """Define initial velocities for rotating and/or translating bodies.
-
-        Parameters
-        ----------
-        id : int
-            Part ID, part set ID, or node set ID.
-        styp : int
-            Set type.EQ.1: Part set ID,EQ.2: Part ID,EQ.3: Node set ID
-        omega : float
-            Angular velocity about the rotational axis.
-        vx/vy/vz : float
-            Initial translational velocity in x/y/z-direction.
-        xc/yc/zc : float
-            Global x/y/z-coordinate on rotational axis.
-        nx/ny/nz : float
-            x/y/z-direction cosine.
-        phase : int
-            Flag determining basis for initialization of velocity.
-        stime : float
-            Define a time to initialize velocities after time zero.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateInitVelGeneration(
-            InitVelGenerationRequest(
-                id=id,
-                styp=styp,
-                omega=omega,
-                vx=vx,
-                vy=vy,
-                vz=vz,
-                xc=xc,
-                yc=yc,
-                zc=zc,
-                nx=nx,
-                ny=ny,
-                nz=nz,
-                phase=phase,
-            )
-        )
-        if stime > 0:
-            self.stub.CreateInitVelGenerationStartTime(InitVelGenerationStartTimeRequest(stime=stime))
-        logging.info("Initial velocity for bodies Created...")
-        return ret
-
-    def create_defineorientation(self, vid, iop, vector, node1, node2):
-        """Define orientation vectors for discrete springs and dampers.
-
-        Parameters
-        ----------
-        vid : int
-            Orientation vector ID.
-        iop : int
-            Option:
-
-            * EQ.0: deflections/rotations are measured and forces/moments applied
-              along the following orientation vector.
-            * EQ.1: deflections/rotations are measured and forces/moments applied
-              along the axis between the two spring/damper nodes projected onto the plane normal
-              to the following orientation vector.
-            * EQ.2: deflections/rotations are measured and forces/moments applied
-              along a vector defined by the following two nodes.
-            * EQ.3: deflections/rotations are measured and forces/moments applied
-              along the axis between the two spring/damper nodes projected onto the
-              plane normal to the a vector defined by the following two nodes.
-        vector : list [x,y,z]
-            x,y,z : x,y,z-value of orientation vector.
-        node1 : int
-            Node 1 ID.
-        node2 : int
-            Node 2 ID.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateDefineOrientation(
-            DefineOrientationRequest(vid=vid, iop=iop, vector=vector, node1=node1, node2=node2)
-        )
-        logging.info("DefineOrientation Created...")
-        return ret
-
-    def create_shellset(self, option, title, sid, eids):
-        """Define a set of shell elements with optional identical or unique attributes.
-
-        Parameters
-        ----------
-        option : string
-            Available options:<BLANK>,LIST,GENERAL
-        title : string
-            Define title for shell set.
-        sid : int
-            Set ID.
-        eids : list
-            Shell element IDs.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateShellSet(ShellSetRequest(option=option, title=title, sid=sid, eids=eids))
-        logging.info("Shell Set Created...")
-        return ret
-
-    def create_solidset(self, title, sid, ki):
-        """Define a set of solid elements.
-
-        Parameters
-        ----------
-        title : string
-            Define title for solid set.
-        sid : int
-            Set ID.
-        ki : list
-            Solid element IDs.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateSolidSet(SolidSetRequest(title=title, sid=sid, ki=ki))
-        logging.info("Solid Set Created...")
-        return ret
-
-    def create_section_solid(self, title, secid, elform):
-        """Define section properties for solid continuum and fluid elements.
-
-        Parameters
-        ----------
-        title : string
-            Define title for section solid.
-        secid : int
-            Section ID. SECID is referenced on the \*PART card.
-            A unique number must be specified.
-        elform : int
-            Element formulation options.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateSectionSolid(SectionSolidRequest(title=title, secid=secid, elform=elform))
-        logging.info("Section Solid Created...")
-        return ret
-
-    def create_section_discrete(self, secid, dro=0, kd=0, v0=0, cl=0, fd=0, cdl=0, tdl=0):
-        """Defined spring and damper elements for translation and rotation.
-
-        Parameters
-        ----------
-        secid : int
-            Section ID.
-        dro : int
-            Displacement/Rotation Option:
-            EQ.0: the material describes a translational spring/damper,
-            EQ.1: the material describes a torsional spring/damper.
-        kd : float
-            Dynamic magnification factor.
-        v0 : float
-            Test velocity.
-        cl : float
-            Clearance.
-        fd : float
-            Failure deflection.
-        cdl : float
-            Deflection limit in compression.
-        cd1 : float
-            Deflection limit in tension.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateSectionDiscrete(
-            SectionDiscreteRequest(secid=secid, dro=dro, kd=kd, v0=v0, cl=cl, fd=fd, cdl=cdl, tdl=tdl)
-        )
-        logging.info("Section Discrete Created...")
-        return ret
-
-    def create_hourglass(self, ghid, ihq, qm=0.1, q1=1.5, q2=0.06, qb=1e-9, qw=1e-9):
-        """Define hourglass and bulk viscosity properties.
-
-        Parameters
-        ----------
-        ghid : int
-            Hourglass ID. A unique number or label must be specified.
-        ihq : int
-            Hourglass control type.
-        qm : float
-            Hourglass coefficient.
-        q1 : float
-            Quadratic bulk viscosity coefficient.
-        q2 : float
-            Linear bulk viscosity coefficient.
-        qb : float
-            Hourglass coefficient for shell bending.
-        qw : float
-            Hourglass coefficient for shell warping.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateHourglass(HourglassRequest(ghid=ghid, ihq=ihq, qm=qm, q1=q1, q2=q2, qb=qb, qw=qw))
-        logging.info("Hourglass 1 Created...")
-        return ret
-
-    def create_boundary_prescribed_motion(
-        self,
-        id,
-        heading,
-        option,
-        typeid,
-        dof,
-        vad=0,
-        lcid=0,
-        sf=1.0,
-        vid=0,
-        birth=0,
-        death=1e28,
-    ):
-        """Define an imposed nodal motion (velocity, acceleration, or displacement) on a
-        node or a set of nodes.
-
-        Parameters
-        ----------
-        id : int
-            PRESCRIBED MOTION set ID to which this node, node set,
-            segment set, or rigid body belongs.
-        heading : string
-            An optional descriptor for the given ID that will be written
-            into the d3hsp file and the bndout file.
-        option : string
-            Available options:(NODE,SET,RIGID)
-        typeid : int
-            Node ID, nodal set ID,segment set ID , part ID for a rigid body.
-        dof : int
-            Applicable degrees-of-freedom.
-        vad : int
-            Velocity/Acceleration/Displacement flag:EQ.0:Velocity,
-            EQ.1: Acceleration,EQ.2: Displacement,
-            EQ.3: Velocity as a function of displacement,
-            EQ.4: Relative displacement
-        lcid : int
-            Curve ID or function ID to describe motion value as a function of time.
-        sf :float
-            Load curve scale factor.
-        vid : int
-            Vector ID for DOF values of 4 or 8.
-        birth : float
-            Time that the imposed motion/constraint is activated.
-        death : float
-            Time imposed motion/constraint is removed.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateBdyPrescribedMotion(
-            BdyPrescribedMotionRequest(
-                id=id,
-                heading=heading,
-                option=option,
-                typeid=typeid,
-                dof=dof,
-                vad=vad,
-                lcid=lcid,
-                sf=sf,
-                vid=vid,
-                birth=birth,
-                death=death,
-            )
-        )
-        logging.info("Boundary prescribed motion Created...")
-        return ret
-
-    def create_constrained_extra_nodes(self, option="NODE", pid=0, nid=0, iflag=0):
-        """Define extra nodes for rigid body.
-
-        Parameters
-        ----------
-        option : string
-            Available options include:NODE,SET
-        pid : int
-            Part ID of rigid body to which the nodes will be added.
-        nid : int
-            Node or node set ID
-        iflag : int
-            This flag is meaningful if and only if the inertia properties of
-            the Part ID are defined in PART_INERTIA.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateConstrainedExtraNodes(
-            ConstrainedExtraNodesRequest(option=option, pid=pid, nid=nid, iflag=iflag)
-        )
-        logging.info("Constrained extra nodes Created...")
-        return ret
-
-    def create_constrained_joint(self, type, nodes, rps=1.0, damp=1.0):
-        """Define a joint between two rigid bodies.
-
-        Parameters
-        ----------
-        type : string
-            The available joint variants are:
-            "SPHERICAL"
-        nodes : list
-            Define nodes for joint.
-        rps : int
-            Relative penalty stiffness.
-        damp : int
-            Damping scale factor on default damping value.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateConstrainedJoint(ConstrainedJointRequest(type=type, nodes=nodes, rps=rps, damp=damp))
-        logging.info("Constrained joint Created...")
-        return ret
-
-    def create_load_body(self, option="X", lcid=0):
-        """Define body force loads due to a prescribed base acceleration or
-        angular velocity using global axes directions.
-
-        Parameters
-        ----------
-        option : string
-            Available options include:X,Y,Z,RX,RY,RZ
-        lcid : int
-            Load curve ID specifying loading.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateLoadBody(LoadBodyRequest(option=option, lcid=lcid))
-        logging.info("Load body Created...")
-        return ret
-
-    def create_mat_spring_nonlinear_elastic(self, mid, lcid):
-        """Provide a nonlinear elastic translational and rotational
-        spring with arbitrary force as a function of displacement and
-        moment as a function of rotation.
-
-        Parameters
-        ----------
-        mid : int
-            Material identification.
-        lcid : int
-            Load curve ID (see \*DEFINE_CURVE) describing force as a function
-            of displacement or moment as a function of rotation relationship.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateMatSpringNonlinearElastic(MatSpringNonlinearElasticRequest(mid=mid, lcid=lcid))
-        logging.info("Material Spring Nonlinear Elastic Created...")
-        return ret
-
-    def create_mat_damper_viscous(self, mid, dc):
-        """Provide a linear translational or rotational damper located between two nodes.
-
-        Parameters
-        ----------
-        mid : int
-            Material identification.
-        dc : float
-            Damping constant.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateMatDamperViscous(MatDamperViscousRequest(mid=mid, dc=dc))
-        logging.info("Material Damper Viscous Created...")
-        return ret
-
-    def create_mat_damper_nonlinear_viscous(self, mid, lcdr):
-        """Provide a viscous translational damper with an arbitrary force
-         a function of velocity dependency or a rotational damper with an
-         arbitrary moment as a function of rotational velocity dependency.
-
-        Parameters
-        ----------
-        mid : int
-            Material identification.
-        lcdr : int
-            Load curve ID defining force as a function of rate-of-displacement
-            relationship or a moment as a function of rate-of-rotation relationship.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateMatDamperNonlinearViscous(MatDamperNonlinearViscousRequest(mid=mid, lcdr=lcdr))
-        logging.info("Material Damper Nonlinear Viscous Created...")
-        return ret
-
-    def create_damping_global(self, lcid=0, valdmp=0.0):
-        """Define mass weighted nodal damping that applies globally to the
-        nodes of deformable bodies and to the mass center of the rigid bodies.
-
-        Parameters
-        ----------
-        lcid : int
-            Load curve ID which specifies the system damping constant vs. time.
-        valdmp : float
-            System damping constant.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateDampingGlobal(DampingGlobalRequest(lcid=lcid, valdmp=valdmp))
-        logging.info("Damping global Created...")
-        return ret
-
-    def set_part_damping_stiffness(self, pids, coef=0.0):
-        """Assign stiffness damping coefficient by part ID or part set ID.
-
-        Parameters
-        ----------
-        pids : list
-            Part IDs.
-        coef : float
-            Rayleigh damping coefficient.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        if len(pids) > 1:
-            sid = self.create_partset(0, pids)
-            ret = self.stub.CreateDampingPartStiffness(DampingPartStiffnessRequest(isset=True, id=sid, coef=coef))
-        else:
-            id = pids[0]
-            ret = self.stub.CreateDampingPartStiffness(DampingPartStiffnessRequest(isset=False, id=id, coef=coef))
-
-        logging.info("Damping global Created...")
         return ret
 
     def get_solid_elements(self):
@@ -1107,121 +225,6 @@ class DynaBase:
         msg = opcode + " Created..."
         logging.info("msg")
         return ret
-
-    def set_output_database(
-        self,
-        matsum=0,
-        glstat=0,
-        elout=0,
-        nodout=0,
-        nodfor=0,
-        rbdout=0,
-        rcforc=0,
-        secforc=0,
-        rwforc=0,
-        abstat=0,
-        bndout=0,
-        sleout=0,
-    ):
-        """Obtain output files containing results information.
-
-        Parameters
-        ----------
-        matsum : float
-            Time interval between outputs of part energies.
-        glstat : float
-            Time interval between outputs of global statistics
-            and energies.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        if matsum > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0))
-        if glstat > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0, ioopt=0))
-        if elout > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="ELOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
-        if nodout > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="NODOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
-        if rbdout > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="RBDOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
-        if rcforc > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="RCFORC", dt=glstat, binary=1, lcur=0, ioopt=0))
-        if secforc > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="SECFORC", dt=glstat, binary=1, lcur=0, ioopt=0))
-        if rwforc > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="RWFORC", dt=glstat, binary=1, lcur=0, ioopt=0))
-        if abstat > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="ABSTAT", dt=glstat, binary=1, lcur=0, ioopt=0))
-        if bndout > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="BNDOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
-        if nodfor > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="NODFOR", dt=glstat, binary=1, lcur=0, ioopt=0))
-        if sleout > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="SLEOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
-        ret = 1
-        logging.info("Output Setting...")
-        return ret
-
-    def save_file(self):
-        """Save keyword files.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        self.set_accuracy(
-            objective_stress_updates=Switch.ON,
-            invariant_node_number=InvariantNode.ON_FOR_SHELL_TSHELL_SOLID,
-            implicit_accuracy_flag=Switch.ON,
-        )
-        self.set_bulk_viscosity(bulk_viscosity_type=BulkViscosity.COMPUTE_INTERNAL_ENERGY_DISSIPATED)
-        self.set_energy(
-            hourglass_energy=EnergyFlag.COMPUTED,
-            sliding_interface_energy=EnergyFlag.COMPUTED,
-        )
-        self.set_hourglass(
-            controltype=HourglassControl.FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID,
-            coefficient=0,
-        )
-        self.create_control_shell(
-            wrpang=0,
-            esort=1,
-            irnxx=0,
-            istupd=4,
-            theory=0,
-            bwc=1,
-            miter=1,
-            proj=1,
-            irquad=0,
-        )
-        if self.casetype == CaseType.IGA:
-            igactc = 1
-        else:
-            igactc = 0
-        self.create_control_contact(rwpnal=1.0, ignore=1, igactc=igactc)
-        for obj in Contact.contactlist:
-            obj.create()
-        for obj in Gravity.gravitylist:
-            obj.create()
-        for obj in BeamPart.partlist:
-            obj.set_property()
-        for obj in ShellPart.partlist:
-            obj.set_property()
-        for obj in SolidPart.partlist:
-            obj.set_property()
-        for obj in IGAPart.partlist:
-            obj.set_property()
-        for obj in DiscretePart.partlist:
-            obj.set_property()
-        for obj in RigidwallCylinder.rwlist:
-            obj.create()
-        Constraint.create(self.stub)
-
 
 # -------------------------------------------------------------------------------------------------
 
@@ -1350,7 +353,7 @@ class BoundaryCondition:
     """Provides a way of defining imposed motions on boundary nodes."""
 
     def __init__(self):
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
 
     def create_spc(
         self,
@@ -1498,7 +501,7 @@ class BeamSection:
         thickness_n1=0,
         thickness_n2=0,
     ):
-        stub = DynaBase.get_stub()
+        stub = DynaSolution.get_stub()
         ret = stub.CreateSectionBeam(
             SectionBeamRequest(
                 elform=element_formulation,
@@ -1525,7 +528,7 @@ class ShellSection:
         thickness3=0,
         thickness4=0,
     ):
-        stub = DynaBase.get_stub()
+        stub = DynaSolution.get_stub()
         ret = stub.CreateSectionShell(
             SectionShellRequest(
                 elform=element_formulation,
@@ -1545,7 +548,7 @@ class IGASection:
     """Define section properties for isogeometric shell elements."""
 
     def __init__(self, element_formulation, shear_factor=1, thickness=1):
-        stub = DynaBase.get_stub()
+        stub = DynaSolution.get_stub()
         ret = stub.CreateSectionIGAShell(
             SectionIGAShellRequest(elform=element_formulation, shrf=shear_factor, thickness=thickness)
         )
@@ -1556,7 +559,7 @@ class Part:
     """Define part object."""
 
     def __init__(self, id):
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         self.id = id
         self.secid = 0
         self.mid = 0
@@ -1630,7 +633,7 @@ class BeamPart(Part):
 
     def __init__(self, pid):
         Part.__init__(self, pid)
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         BeamPart.partlist.append(self)
         self.crosstype = 1
 
@@ -1673,7 +676,7 @@ class ShellPart(Part):
 
     def __init__(self, pid):
         Part.__init__(self, pid)
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         ShellPart.partlist.append(self)
         self.shear_factor = 1
         self.intpoints = 5
@@ -1785,7 +788,7 @@ class IGAPart(Part):
 
     def __init__(self, pid):
         Part.__init__(self, pid)
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         IGAPart.partlist.append(self)
         self.shear_factor = 1
         self.thickness = 1
@@ -1828,7 +831,7 @@ class SolidPart(Part):
 
     def __init__(self, pid):
         Part.__init__(self, pid)
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         SolidPart.partlist.append(self)
         self.hourglasstype = -1
 
@@ -1867,7 +870,7 @@ class DiscretePart(Part):
     partlist = []
     def __init__(self, pid):
         Part.__init__(self, pid)
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         DiscretePart.partlist.append(self)
         self.displacement_option = 0
 
@@ -1917,7 +920,7 @@ class ImplicitAnalysis:
     def __init__(self, analysis_type=AnalysisType.IMPLICIT, initial_timestep_size=0):
         self.imflag = analysis_type.value
         self.dt0 = initial_timestep_size
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         ret = self.stub.CreateControlImplicitGeneral(ControlImplicitGeneralRequest(imflag=self.imflag, dt0=self.dt0))
 
     def set_timestep(
@@ -2082,7 +1085,7 @@ class ContactSurface:
     """Define contact interface."""
 
     def __init__(self, set):
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         self.id = set.create(self.stub)
         self.thickness = 0
         if set.type.upper() == "PART":
@@ -2133,7 +1136,7 @@ class Contact:
         category=ContactCategory.SINGLE_SURFACE_CONTACT,
         offset=OffsetType.NULL,
     ):
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         self.rigidwall_penalties_scale_factor = 1
         self.max_penetration_check_multiplier = 4
         self.initial_penetrations = 0
@@ -2301,7 +1304,7 @@ class Constraint:
     cnrbsetidlist = []
     jointsphericallist = []
     def __init__(self):
-        self.stub = stub = DynaBase.get_stub()
+        self.stub = stub = DynaSolution.get_stub()
 
     def create_spotweld(self, nodeid1, nodeid2):
         """Define massless spot welds between non-contiguous nodal pairs.
@@ -2373,7 +1376,7 @@ class BoundaryCondition:
     """Provide a way of defining imposed motions on boundary nodes."""
 
     def __init__(self):
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
 
     def create_spc(
         self,
@@ -2496,7 +1499,7 @@ class InitialCondition:
     """Provide a way of initializing velocities and detonation points."""
 
     def __init__(self):
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         self.velocityset = BaseSet()
         self.angular_velocity = 0
         self.velocity = Velocity(0,0,0)
@@ -2598,7 +1601,7 @@ class RigidwallCylinder:
     rwlist = []
 
     def __init__(self, tail=Point(0, 0, 0), head=Point(0, 0, 0), radius=1, length=10):
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         self.tail = tail
         self.head = head
         self.radius = radius
@@ -2660,7 +1663,7 @@ class RigidwallPlanar:
     """
 
     def __init__(self, tail=Point(0, 0, 0), head=Point(0, 0, 0), coulomb_friction_coefficient=0.5):
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         self.tail = tail
         self.head = head
         self.fric = coulomb_friction_coefficient
@@ -2686,7 +1689,7 @@ class Gravity:
     """Define body force loads due to a prescribed base acceleration or angular velocity using global axes directions."""
     gravitylist=[]
     def __init__(self,dir=GravityOption.DIR_Z,load = Curve(x=[0,0],y=[0,0])):
-        self.stub = DynaBase.get_stub()
+        self.stub = DynaSolution.get_stub()
         self.dir = dir.value
         self.load = load
         Gravity.gravitylist.append(self)

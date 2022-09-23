@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     iga_solution = DynaSolution(hostname)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep + "iga_sample" + os.sep
+    path = os.path.dirname(__file__) + os.sep + "input" + os.sep + "iga_sample" + os.sep
     fns.append(path + "maino.k")
     fns.append(path + "rkrwelds.key")
     fns.append(path + "27parts.key")

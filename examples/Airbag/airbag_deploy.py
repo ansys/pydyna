@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     airbag_solution = DynaSolution(hostname)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep + "airbag_deploy" + os.sep
+    path = os.path.dirname(__file__) + os.sep + "input" + os.sep + "airbag_deploy" + os.sep
     fns.append(path + "airbag_deploy.k")
     airbag_solution.open_files(fns)
 
@@ -69,6 +69,6 @@ if __name__ == "__main__":
     airbagpart.set_thickness(0.015)
     airbagpart.set_integration_points(4)
     
-    airbagdeploy.set_output_database(abstat=2.0e-4,glstat=2.0e-4,matsum=2.0e-4,rcforc=2.0e-4,rbdout=2.0e-4,rwforc=2.0e-4)
+    airbag_solution.set_output_database(abstat=2.0e-4,glstat=2.0e-4,matsum=2.0e-4,rcforc=2.0e-4,rbdout=2.0e-4,rwforc=2.0e-4)
 
     airbag_solution.save_file()
