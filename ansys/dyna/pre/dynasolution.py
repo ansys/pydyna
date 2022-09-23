@@ -87,6 +87,7 @@ class DynaSolution:
         return DynaSolution.stub
 
     def add(self, obj):
+        """Add case in the solution."""
         self.object_list.append(obj)
 
     def open_files(self, filenames):

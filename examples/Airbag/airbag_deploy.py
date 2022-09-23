@@ -10,7 +10,7 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
 from ansys.dyna.pre.dynasolution import *
-from ansys.dyna.pre.dynaairbag import *
+from ansys.dyna.pre.dynamech import *
 from ansys.dyna.pre.dynamaterial import *
 
 if __name__ == "__main__":
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     airbag_solution.set_termination(0.03)
     airbag_solution.create_database_binary(dt=5e-4, ieverp=1)
     
-    airbagdeploy = DynaAirbag()
+    airbagdeploy = DynaMech()
     airbag_solution.add(airbagdeploy)
 
     airbag = Airbag(set=PartSet([3]),
@@ -69,7 +69,6 @@ if __name__ == "__main__":
     airbagpart.set_thickness(0.015)
     airbagpart.set_integration_points(4)
     
-    #airbagdeploy.create_database_binary(filetype="D3THDT", dt=999999)
     airbagdeploy.set_output_database(abstat=2.0e-4,glstat=2.0e-4,matsum=2.0e-4,rcforc=2.0e-4,rbdout=2.0e-4,rwforc=2.0e-4)
 
     airbag_solution.save_file()

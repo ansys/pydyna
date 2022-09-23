@@ -7,12 +7,14 @@ The PyDyna-pre API includes classes for apps and modules.
    :toctree: _autosummary
    
    pre.dynabase
-   pre.dynaairbag
+   pre.dynasolution
+   pre.dynamech
    pre.dynaem
    pre.dynaicfd
    pre.dynaiga
    pre.dynamaterial
    pre.dynasale
+   pre.dynadem
    
 
   
