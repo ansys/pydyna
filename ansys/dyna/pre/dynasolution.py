@@ -83,7 +83,7 @@ class DynaSolution:
         DynaSolution.stub = self.stub
 
     def get_stub():
-        """Get the stub of this DynaBase object."""
+        """Get the stub of this Solution object."""
         return DynaSolution.stub
 
     def add(self, obj):

@@ -154,6 +154,10 @@ class DynaBase:
         self.mainname = ""
         DynaBase.stub = self.stub
 
+    def get_stub():
+        """Get the stub of this DynaBase object."""
+        return DynaBase.stub
+
     def set_timestep(self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0):
         """Set structural time step size control using different options.
 
@@ -173,6 +177,317 @@ class DynaBase:
         """
         ret = self.stub.CreateTimestep(TimestepRequest(tssfac=tssfac, isdo=isdo, dt2ms=timestep_size_for_mass_scaled))
         logging.info("Timestep Created...")
+        return ret
+
+    def set_accuracy(
+        self,
+        objective_stress_updates=Switch.OFF,
+        invariant_node_number=InvariantNode.OFF,
+        partsetid_for_objective_stress_updates=0,
+        implicit_accuracy_flag=Switch.OFF,
+        explicit_accuracy_flag=Switch.OFF,
+    ):
+        """Define control parameters that can improve the accuracy of the calculation.
+
+        Parameters
+        ----------
+        objective_stress_updates : int
+            Global flag for 2nd order objective stress updates.
+        invariant_node_number : int
+            Invariant node numbering for shell and solid elements.
+        partsetid_for_objective_stress_updates : int
+            Part set ID for objective stress updates.
+        implicit_accuracy_flag : int
+            Implicit accuracy flag.
+        explicit_accuracy_flag : float
+             Explicit accuracy parameter.EQ.0.0: Off,GT.0.0: On
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        ret = self.stub.CreateControlAccuracy(
+            ControlAccuracyRequest(
+                osu=objective_stress_updates.value,
+                inn=invariant_node_number.value,
+                pidosu=partsetid_for_objective_stress_updates,
+                iacc=implicit_accuracy_flag.value,
+                exacc=explicit_accuracy_flag.value,
+            )
+        )
+        logging.info("Control Accuracy Created...")
+        return ret
+
+    def set_energy(
+        self,
+        hourglass_energy=EnergyFlag.NOT_COMPUTED,
+        rigidwall_energy=EnergyFlag.COMPUTED,
+        sliding_interface_energy=EnergyFlag.NOT_COMPUTED,
+        rayleigh_energy=EnergyFlag.NOT_COMPUTED,
+        initial_reference_geometry_energy=EnergyFlag.COMPUTED,
+    ):
+        """Provide controls for energy dissipation options.
+
+        Parameters
+        ----------
+        hourglass_energy : enum
+            Hourglass energy calculation option.
+        rigidwall_energy : int
+            Rigidwall energy dissipation option.EQ.1: Energy dissipation is not computed,
+            EQ.2: Energy dissipation is computed
+        sliding_interface_energy : int
+            Sliding interface energy dissipation option.EQ.1: Energy dissipation is not computed,
+            EQ.2: Energy dissipation is computed
+        rayleigh_energy : int
+            Rayleigh energy dissipation option.EQ.1: Energy dissipation is not computed,
+            EQ.2: Energy dissipation is computed
+        initial_reference_geometry_energy : int
+            Initial reference geometry energy option.EQ.1: Initial reference
+            geometry energy is not computed,EQ.2: Initial reference geometry energy is computed
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        ret = self.stub.CreateControlEnergy(
+            ControlEnergyRequest(
+                hgen=hourglass_energy.value,
+                rwen=rigidwall_energy.value,
+                slnten=sliding_interface_energy.value,
+                rylen=rayleigh_energy.value,
+                irgen=initial_reference_geometry_energy.value,
+            )
+        )
+        logging.info("Control Energy Created...")
+        return ret
+
+    def set_hourglass(self, controltype=HourglassControl.STANDARD_VISCOSITY_FORM, coefficient=0.1):
+        """Redefine the default values of hourglass control type and coefficient.
+
+        Parameters
+        ----------
+        controltype : enum
+            Default hourglass control type.
+        coefficient : float
+            Default hourglass coefficient.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        ret = self.stub.CreateControlHourgalss(ControlHourglassRequest(ihq=controltype.value, qh=coefficient))
+        logging.info("Control Hourglass Created...")
+        return ret
+
+    def set_bulk_viscosity(
+        self,
+        quadratic_viscosity_coeff=1.5,
+        linear_viscosity_coeff=0.06,
+        bulk_viscosity_type=BulkViscosity.STANDARD_BULK_VISCOSITY,
+    ):
+        """Reset the default values of the bulk viscosity coefficients globally.
+
+        Parameters
+        ----------
+        quadratic_viscosity_coeff : float
+            Default quadratic viscosity coefficient.
+        linear_viscosity_coeff : float
+            Default linear viscosity coefficient.
+        bulk_viscosity_type : enum
+            Default bulk viscosity type.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        ret = self.stub.CreateControlBulkViscosity(
+            ControlBulkViscosityRequest(
+                q1=quadratic_viscosity_coeff,
+                q2=linear_viscosity_coeff,
+                type=bulk_viscosity_type.value,
+            )
+        )
+        logging.info("Control Bulk Viscosity Created...")
+        return ret
+
+    def create_control_shell(
+        self,
+        wrpang=20,
+        esort=0,
+        irnxx=-1,
+        istupd=0,
+        theory=2,
+        bwc=2,
+        miter=1,
+        proj=0,
+        irquad=0,
+    ):
+        """Provide controls for computing shell response.
+
+        Parameters
+        ----------
+        wrpang : float
+            Shell element warpage angle in degrees.
+        esort : int
+            Sorting of triangular shell elements to automatically switch
+            degenerate quadrilateral shell formulations to more suitable
+            triangular shell formulations.
+        irnxx : int
+            Shell normal update option.
+        istupd : int
+            Shell thickness change option for deformable shells.
+        theory : int
+            Default shell formulation.
+        bwc : int
+            Warping stiffness for Belytschko-Tsay shells.
+        miter : int
+            Plane stress plasticity option.
+        proj : int
+            Projection method for the warping stiffness in the Belytschko-Tsay
+            shell and the Belytschko-Wong-Chiang elements
+        irquad : int
+             In plane integration rule for the 8-node quadratic shell element.
+             EQ.2: 2*2 Gauss quadrature,EQ.3: 3*3 Gauss quadrature.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        ret = self.stub.CreateControlShell(
+            ControlShellRequest(
+                wrpang=wrpang,
+                esort=esort,
+                irnxx=irnxx,
+                istupd=istupd,
+                theory=theory,
+                bwc=bwc,
+                miter=miter,
+                proj=proj,
+                irquad=irquad,
+            )
+        )
+        logging.info("Control Shell Created...")
+        return ret
+
+    def create_control_solid(
+        self,
+        esort=0,
+        fmatrx=0,
+        niptets=4,
+        swlocl=1,
+        psfail=0,
+        t10jtol=0.0,
+        icoh=0,
+        tet13k=0,
+    ):
+        """Provide controls for solid element response.
+
+        Parameters
+        ----------
+        esort : int
+            Automatic sorting of tetrahedral and pentahedral elements to avoid
+            use of degenerate formulations for these shapes.EQ.0: No sorting,EQ.1: Sort.
+        fmatrx : int
+            Default method used in the calculation of the deformation gradient matrix.
+        niptets : int
+            Number of integration points used in the quadratic tetrahedron elements.
+        swlocl : int
+            Output option for stresses in solid elements used as spot welds with
+            material \*MAT_SPOTWELD.
+        psfail : int
+            Solid element erosion from negative volume is limited only to solid elements in
+            the part set indicated by PSFAIL.
+        t10jtol : float
+            Tolerance for Jacobian in 4-point 10-noded quadratic tetrahedra.
+        icoh : int
+            Breaking LS-DYNA convention ICOH is interpreted digit-wise.
+        tet13k : int
+            Set to 1 to invoke a consistent tangent stiffness matrix for the
+            pressure averaged tetrahedron.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        ret = self.stub.CreateControlSolid(
+            ControlSolidRequest(
+                esort=esort,
+                fmatrx=fmatrx,
+                niptets=niptets,
+                swlocl=swlocl,
+                psfail=psfail,
+                t10jtol=t10jtol,
+                icoh=icoh,
+                tet13k=tet13k,
+            )
+        )
+        logging.info("Control Solid Created...")
+        return ret
+    
+    def create_control_contact(self, rwpnal, shlthk=0, orien=1, ssthk=0, ignore=0, igactc=0):
+        """Change defaults for computation with contact surfaces.
+
+        Parameters
+        ----------
+        shlthk : int
+            Flag for consideration of shell thickness offsets in non-automatic
+            surface-to-surface and non-automatic nodes-to-surface type contacts.
+        ssthk : int
+            Flag for determining default contact thickness for shells in single
+            surface contact types.
+        orien : int
+            Optional automatic reorientation of contact interface segments during initialization.
+        rwpnal : float
+            Scale factor for rigid wall penalties, which treat nodal points interacting
+            with rigid walls.
+        ignore : int
+            Ignore initial penetrations in the \*CONTACT_AUTOMATIC options.
+        igactc : int
+            Options to use isogeometric shells for contact detection when contact involves
+            isogeometric shells.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        ret = self.stub.CreateControlContact(
+            ControlContactRequest(
+                rwpnal=rwpnal,
+                shlthk=shlthk,
+                orien=orien,
+                ssthk=ssthk,
+                ignore=ignore,
+                igactc=igactc,
+            )
+        )
+        logging.info("Control Contact Created...")
+        return ret
+
+    def create_damping_global(self, lcid=0, valdmp=0.0):
+        """Define mass weighted nodal damping that applies globally to the
+        nodes of deformable bodies and to the mass center of the rigid bodies.
+
+        Parameters
+        ----------
+        lcid : int
+            Load curve ID which specifies the system damping constant vs. time.
+        valdmp : float
+            System damping constant.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        ret = self.stub.CreateDampingGlobal(DampingGlobalRequest(lcid=lcid, valdmp=valdmp))
+        logging.info("Damping global Created...")
         return ret
 
     def get_solid_elements(self):

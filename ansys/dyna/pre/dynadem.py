@@ -8,10 +8,9 @@ Module to create DEM dyna input deck
 import logging
 
 from .dynabase import *  # noqa : F403
-from .dynamech import DynaMech
 
 
-class DynaDEM(DynaMech):
+class DynaDEM(DynaBase):
     """Contains methods to create keyword related to discrete element method."""
 
     def __init__(self):
@@ -92,3 +91,55 @@ class DynaDEM(DynaMech):
         )
         logging.info("Define discrete element mesh surface Created...")
         return ret
+
+    def save_file(self):
+        """Save keyword files.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        self.set_accuracy(
+            objective_stress_updates=Switch.ON,
+            invariant_node_number=InvariantNode.ON_FOR_SHELL_TSHELL_SOLID,
+            implicit_accuracy_flag=Switch.ON,
+        )
+        self.set_bulk_viscosity(bulk_viscosity_type=BulkViscosity.COMPUTE_INTERNAL_ENERGY_DISSIPATED)
+        self.set_energy(
+            hourglass_energy=EnergyFlag.COMPUTED,
+            sliding_interface_energy=EnergyFlag.COMPUTED,
+        )
+        self.set_hourglass(
+            controltype=HourglassControl.FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID,
+            coefficient=0,
+        )
+        self.create_control_shell(
+            wrpang=0,
+            esort=1,
+            irnxx=0,
+            istupd=4,
+            theory=0,
+            bwc=1,
+            miter=1,
+            proj=1,
+            irquad=0,
+        )
+        self.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
+        for obj in Contact.contactlist:
+            obj.create()
+        for obj in Gravity.gravitylist:
+            obj.create()
+        for obj in BeamPart.partlist:
+            obj.set_property()
+        for obj in ShellPart.partlist:
+            obj.set_property()
+        for obj in SolidPart.partlist:
+            obj.set_property()
+        for obj in IGAPart.partlist:
+            obj.set_property()
+        for obj in DiscretePart.partlist:
+            obj.set_property()
+        for obj in RigidwallCylinder.rwlist:
+            obj.create()
+        Constraint.create(self.stub)
