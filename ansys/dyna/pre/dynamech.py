@@ -11,9 +11,7 @@ class DynaMech(DynaBase):
     """Define an Mechanical analysis."""
 
     def __init__(self):
-        self.stub = DynaSolution.get_stub()
-        self.mainname = ""
-        DynaBase.stub = self.stub
+        DynaBase.__init__(self)
         self.casetype = CaseType.STRUCTURE
 
     def create_control_output(self, npopt=0, neecho=0):
@@ -494,28 +492,6 @@ class DynaMech(DynaBase):
         logging.info("Load body Created...")
         return ret
 
-    
-        """Provide a viscous translational damper with an arbitrary force
-         a function of velocity dependency or a rotational damper with an
-         arbitrary moment as a function of rotational velocity dependency.
-
-        Parameters
-        ----------
-        mid : int
-            Material identification.
-        lcdr : int
-            Load curve ID defining force as a function of rate-of-displacement
-            relationship or a moment as a function of rate-of-rotation relationship.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateMatDamperNonlinearViscous(MatDamperNonlinearViscousRequest(mid=mid, lcdr=lcdr))
-        logging.info("Material Damper Nonlinear Viscous Created...")
-        return ret
-
     def set_part_damping_stiffness(self, pids, coef=0.0):
         """Assign stiffness damping coefficient by part ID or part set ID.
 
@@ -636,7 +612,7 @@ class Airbag:
         ambient_pressure=0,
         ambient_density=0,
     ):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.cv = heat_capacity_at_constant_volume
         self.cp = heat_capacity_at_constant_pressure
         self.t = input_gas_temperature

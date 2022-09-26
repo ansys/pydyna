@@ -260,7 +260,7 @@ class MatICFD:
     """
 
     def __init__(self, flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID, flow_density=0, dynamic_viscosity=0):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.flag = flag.value
         self.flow_density = flow_density
         self.dynamic_viscosity = dynamic_viscosity
@@ -288,7 +288,7 @@ class ICFDPart:
     partlist = []
 
     def __init__(self, id):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.id = id
         self.secid = 1
         self.mid = 0
@@ -388,7 +388,7 @@ class ICFDVolumePart:
     partlist = []
 
     def __init__(self, surfaces):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.id = id
         self.secid = 1
         self.mid = 0
@@ -418,7 +418,7 @@ class MeshedVolume:
 
     def __init__(self, surfaces):
         self.surfaces = surfaces
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.meshsizeshape = []
         self.embeded_surf = []
 

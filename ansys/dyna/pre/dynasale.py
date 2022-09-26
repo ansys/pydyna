@@ -9,7 +9,6 @@ import logging
 from enum import Enum
 
 from .dynabase import *  # noqa : F403
-from .dynamech import DynaMech
 
 
 class AdvectionMethod(Enum):
