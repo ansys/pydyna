@@ -668,7 +668,7 @@ class BoundaryCondition:
     """Provides a way of defining imposed motions on boundary nodes."""
 
     def __init__(self):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
 
     def create_spc(
         self,
@@ -816,7 +816,7 @@ class BeamSection:
         thickness_n1=0,
         thickness_n2=0,
     ):
-        stub = DynaSolution.get_stub()
+        stub = DynaBase.get_stub()
         ret = stub.CreateSectionBeam(
             SectionBeamRequest(
                 elform=element_formulation,
@@ -843,7 +843,7 @@ class ShellSection:
         thickness3=0,
         thickness4=0,
     ):
-        stub = DynaSolution.get_stub()
+        stub = DynaBase.get_stub()
         ret = stub.CreateSectionShell(
             SectionShellRequest(
                 elform=element_formulation,
@@ -863,7 +863,7 @@ class IGASection:
     """Define section properties for isogeometric shell elements."""
 
     def __init__(self, element_formulation, shear_factor=1, thickness=1):
-        stub = DynaSolution.get_stub()
+        stub = DynaBase.get_stub()
         ret = stub.CreateSectionIGAShell(
             SectionIGAShellRequest(elform=element_formulation, shrf=shear_factor, thickness=thickness)
         )
@@ -874,7 +874,7 @@ class Part:
     """Define part object."""
 
     def __init__(self, id):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.id = id
         self.secid = 0
         self.mid = 0
@@ -948,7 +948,7 @@ class BeamPart(Part):
 
     def __init__(self, pid):
         Part.__init__(self, pid)
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         BeamPart.partlist.append(self)
         self.crosstype = 1
 
@@ -991,7 +991,7 @@ class ShellPart(Part):
 
     def __init__(self, pid):
         Part.__init__(self, pid)
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         ShellPart.partlist.append(self)
         self.shear_factor = 1
         self.intpoints = 5
@@ -1103,7 +1103,7 @@ class IGAPart(Part):
 
     def __init__(self, pid):
         Part.__init__(self, pid)
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         IGAPart.partlist.append(self)
         self.shear_factor = 1
         self.thickness = 1
@@ -1146,7 +1146,7 @@ class SolidPart(Part):
 
     def __init__(self, pid):
         Part.__init__(self, pid)
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         SolidPart.partlist.append(self)
         self.hourglasstype = -1
 
@@ -1185,7 +1185,7 @@ class DiscretePart(Part):
     partlist = []
     def __init__(self, pid):
         Part.__init__(self, pid)
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         DiscretePart.partlist.append(self)
         self.displacement_option = 0
 
@@ -1235,7 +1235,7 @@ class ImplicitAnalysis:
     def __init__(self, analysis_type=AnalysisType.IMPLICIT, initial_timestep_size=0):
         self.imflag = analysis_type.value
         self.dt0 = initial_timestep_size
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         ret = self.stub.CreateControlImplicitGeneral(ControlImplicitGeneralRequest(imflag=self.imflag, dt0=self.dt0))
 
     def set_timestep(
@@ -1400,7 +1400,7 @@ class ContactSurface:
     """Define contact interface."""
 
     def __init__(self, set):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.id = set.create(self.stub)
         self.thickness = 0
         if set.type.upper() == "PART":
@@ -1451,7 +1451,7 @@ class Contact:
         category=ContactCategory.SINGLE_SURFACE_CONTACT,
         offset=OffsetType.NULL,
     ):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.rigidwall_penalties_scale_factor = 1
         self.max_penetration_check_multiplier = 4
         self.initial_penetrations = 0
@@ -1619,7 +1619,7 @@ class Constraint:
     cnrbsetidlist = []
     jointsphericallist = []
     def __init__(self):
-        self.stub = stub = DynaSolution.get_stub()
+        self.stub = stub = DynaBase.get_stub()
 
     def create_spotweld(self, nodeid1, nodeid2):
         """Define massless spot welds between non-contiguous nodal pairs.
@@ -1691,7 +1691,7 @@ class BoundaryCondition:
     """Provide a way of defining imposed motions on boundary nodes."""
 
     def __init__(self):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
 
     def create_spc(
         self,
@@ -1814,7 +1814,7 @@ class InitialCondition:
     """Provide a way of initializing velocities and detonation points."""
 
     def __init__(self):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.velocityset = BaseSet()
         self.angular_velocity = 0
         self.velocity = Velocity(0,0,0)
@@ -1916,7 +1916,7 @@ class RigidwallCylinder:
     rwlist = []
 
     def __init__(self, tail=Point(0, 0, 0), head=Point(0, 0, 0), radius=1, length=10):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.tail = tail
         self.head = head
         self.radius = radius
@@ -1978,7 +1978,7 @@ class RigidwallPlanar:
     """
 
     def __init__(self, tail=Point(0, 0, 0), head=Point(0, 0, 0), coulomb_friction_coefficient=0.5):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.tail = tail
         self.head = head
         self.fric = coulomb_friction_coefficient
@@ -2004,7 +2004,7 @@ class Gravity:
     """Define body force loads due to a prescribed base acceleration or angular velocity using global axes directions."""
     gravitylist=[]
     def __init__(self,dir=GravityOption.DIR_Z,load = Curve(x=[0,0],y=[0,0])):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.dir = dir.value
         self.load = load
         Gravity.gravitylist.append(self)

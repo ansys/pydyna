@@ -504,7 +504,7 @@ class Circuit:
     circuitlist = []
 
     def __init__(self, loadcurve, circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         self.circuit_type = circuit_type.value
         loadcurve.create(self.stub)
         self.lcid = loadcurve.id
@@ -555,7 +555,7 @@ class EMContact:
     with a conducting material."""
 
     def __init__(self, contact_type=EMContactType.NODE_TO_NODE_PENALTY_BASED_CONTACT):
-        self.stub = DynaSolution.get_stub()
+        self.stub = DynaBase.get_stub()
         ret = self.stub.CreateEMControlContact(
             EMControlContactRequest(emct=1, cconly=0, ctype=contact_type.value, dtype=0)
         )
