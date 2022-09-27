@@ -51,20 +51,5 @@ class DynaIGA(DynaBase):
             "True" when successful, "False" when failed
         """
         self.create_control_contact(rwpnal=1.0, ignore=1, igactc=1)
-        for obj in Contact.contactlist:
-            obj.create()
-        for obj in Gravity.gravitylist:
-            obj.create()
-        for obj in BeamPart.partlist:
-            obj.set_property()
-        for obj in ShellPart.partlist:
-            obj.set_property()
-        for obj in SolidPart.partlist:
-            obj.set_property()
         for obj in IGAPart.partlist:
             obj.set_property()
-        for obj in DiscretePart.partlist:
-            obj.set_property()
-        for obj in RigidwallCylinder.rwlist:
-            obj.create()
-        Constraint.create(self.stub)

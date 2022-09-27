@@ -58,5 +58,6 @@ if __name__ == "__main__":
     # define the volume space that will be meshed,The boundaries 
     #of the volume are the surfaces "spids"
     meshvol = MeshedVolume(surfaces = [1, 2, 3, 4])
+    icfd.MeshedVolume.add(meshvol)
 
     icfd_solution.save_file()

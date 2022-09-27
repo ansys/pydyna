@@ -11,6 +11,7 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
 from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynaiga import *
+from ansys.dyna.pre.dynamech import *
 from ansys.dyna.pre.dynamaterial import *
 from iga_sample_data import *
 
@@ -31,9 +32,11 @@ if __name__ == "__main__":
     iga_solution.create_database_binary(dt=0.1)
 
     iga = DynaIGA()
+    mech = DynaMech()
+    iga_solution.add(mech)
     iga_solution.add(iga)
 
-    iga.set_timestep(timestep_size_for_mass_scaled=-0.0004)
+    mech.set_timestep(timestep_size_for_mass_scaled=-0.0004)
         
     #define material
     plastic = MatPiecewiseLinearPlasticity(mass_density=7.830e-06,young_modulus=200,yield_stress=1.5,tangent_modulus=0.5)

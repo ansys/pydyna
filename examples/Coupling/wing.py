@@ -32,9 +32,11 @@ if __name__ == "__main__":
     fns.append(path + "tunnel-rig_cfd.K")
     wing_solution.open_files(fns)
     wing_solution.set_termination(0.6)
-
+    
+    mech = DynaMech()
     icfd = DynaICFD()
     dem = DynaDEM()
+    wing_solution.add(mech)
     wing_solution.add(icfd)
     wing_solution.add(dem)
     
@@ -53,7 +55,7 @@ if __name__ == "__main__":
     slot = ICFDPart(129)
     slot.set_material(mat)
     slot.set_prescribed_velocity(dof=ICFDDOF.X,motion=Curve(x=[0, 1e3],y=[0, 0]))
-    slot.set_prescribed_velocity(dof=ICFDDOF.X,motion=Curve(x=[0, 1e3],y=[0, 0]))
+    slot.set_prescribed_velocity(dof=ICFDDOF.Y,motion=Curve(x=[0, 1e3],y=[0, 0]))
     slot.set_prescribed_velocity(dof=ICFDDOF.Z,motion=Curve(x=[0.0001, 0.02, 1e3],y=[10, 200000, 200000]))
     
     exit = ICFDPart(127)
@@ -90,14 +92,15 @@ if __name__ == "__main__":
     meshvol = MeshedVolume(surfaces = [125, 126, 127, 128, 129])
     meshvol.embed_shell([1, 2, 3])
     meshvol.meshsize_box(size=3.2,min_point=Point(-950, -80, -200),max_point=Point(-600, 150, 30))
+    icfd.MeshedVolume.add(meshvol)
     
     # ---DEM
-    dem.create_control_shell(wrpang=20, esort=1, irnxx=-1, bwc=1, proj=0, irquad=2)
-    dem.create_control_solid(esort=2)
+    mech.create_control_shell(wrpang=20, esort=1, irnxx=-1, bwc=1, proj=0, irquad=2)
+    mech.create_control_solid(esort=2)
+    mech.set_timestep(timestep_size_for_mass_scaled=-1e-5)
+    mech.create_control_contact(rwpnal=0, shlthk=2, ssthk=1, ignore=2)
+    mech.create_damping_global(valdmp=0.1)
     dem.set_des(ndamp=0.99, tdamp=0.99, frics=0.9, fricr=0.9)
-    dem.set_timestep(timestep_size_for_mass_scaled=-1e-5)
-    dem.create_control_contact(rwpnal=0, shlthk=2, ssthk=1, ignore=2)
-    dem.create_damping_global(valdmp=0.1)
 
     #Set properties for parts
     mat1 = MatRigid(mass_density=2e-6,young_modulus=1000,poisson_ratio=0.34,center_of_mass_constraint=1,translational_constraint=7,rotational_constraint=7)
@@ -163,7 +166,6 @@ if __name__ == "__main__":
     
     #Define contact
     CoreToChassis = Contact(type=ContactType.AUTOMATIC,category=ContactCategory.SURFACE_TO_SURFACE_CONTACT)
-    CoreToChassis.set_friction_coefficient(static=0.2,dynamic=0.2)
     CoreToChassis.set_penalty_algorithm(ContactFormulation.SEGMENT_BASED_CONTACT_PENALTY,SBOPT.WRAPED_SEGMENT_CHECKING)
     CoreToChassis.set_tiebreak()
     surf1=ContactSurface(PartSet([6]))
@@ -219,8 +221,8 @@ if __name__ == "__main__":
     
     # Define boundary conddition
     bdy = BoundaryCondition()
-    bdy.create_imposed_motion(PartSet([5]),Curve(x=[0.05, 1e18],y=[1,1]),dof=DOF.Y_ROTATIONAL,scalefactor=-107.57)
-    bdy.create_imposed_motion(PartSet([9]),Curve(x=[0, 1e18],y=[1,1]),dof=DOF.X_TRANSLATIONAL,scalefactor=6666,birthtime=0.2)
+    bdy.create_imposed_motion(PartSet([5]),Curve(x=[0.05, 1e18],y=[1,1]),dof=DOF.Y_ROTATIONAL,motion=Motion.VELOCITY,scalefactor=-107.57)
+    bdy.create_imposed_motion(PartSet([9]),Curve(x=[0, 1e18],y=[1,1]),dof=DOF.X_TRANSLATIONAL,motion=Motion.VELOCITY,scalefactor=6666,birthtime=0.2)
     
     # Define initial conddition
     init = InitialCondition()
