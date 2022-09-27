@@ -561,10 +561,6 @@ class DynaMech(DynaBase):
             obj.set_property()
         for obj in SolidPart.partlist:
             obj.set_property()
-        for obj in IGAPart.partlist:
-            obj.set_property()
-        for obj in DiscretePart.partlist:
-            obj.set_property()
         for obj in RigidwallCylinder.rwlist:
             obj.create()
         Constraint.create(self.stub)

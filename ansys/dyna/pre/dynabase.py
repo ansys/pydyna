@@ -664,113 +664,6 @@ class SegmentSet(BaseSet):
         return self.id
 
 
-class BoundaryCondition:
-    """Provides a way of defining imposed motions on boundary nodes."""
-
-    def __init__(self):
-        self.stub = DynaBase.get_stub()
-
-    def create_spc(
-        self,
-        nodeset,
-        tx=True,
-        ty=True,
-        tz=True,
-        rx=True,
-        ry=True,
-        rz=True,
-        cid=0,
-        birth=0,
-        death=1e20,
-    ):
-        """Define nodal single point constraints.
-
-        Parameters
-        ----------
-        nodeset : NodeSet.
-            nodal set.
-        contraint_x/y/z_direction : int
-            translational constraint in local x/y/z-direction.
-        contraint_x/y/zaxis_rotate : int
-            rotational constraint about local x/y/z-axis.
-
-        """
-        if birth == 0 and death == 1e20:
-            birthdeath = False
-        else:
-            birthdeath = True
-        if nodeset.num() == 1:
-            nid = nodeset.pos(pos=0)
-            option1 = "NODE"
-        else:
-            nid = nodeset.create(self.stub)
-            option1 = "SET"
-        ret = self.stub.CreateBdySpc(
-            BdySpcRequest(
-                option1=option1,
-                birthdeath=birthdeath,
-                nid=nid,
-                cid=cid,
-                dofx=tx,
-                dofy=ty,
-                dofz=tz,
-                dofrx=rx,
-                dofry=ry,
-                dofrz=rz,
-                birth=birth,
-                death=death,
-            )
-        )
-        logging.info("Boundary spc Created...")
-        return ret
-
-    def create_imposed_motion(
-        self,
-        partset,
-        curve,
-        motion=Motion.DISPLACEMENT,
-        dof=DOF.X_TRANSLATIONAL,
-        scalefactor=1,
-    ):
-        """Define an imposed nodal motion (velocity, acceleration, or displacement)
-        on a node or a set of nodes.
-
-        Parameters
-        ----------
-        partset : PartSet.
-            part set.
-        curve : Curve
-            Curve ID or function ID to describe motion value as a function of time.
-        motion : enum
-            Velocity/Acceleration/Displacement flag.
-        dof : enum
-            Applicable degrees-of-freedom.
-        scalefactor : float
-            Load curve scale factor.
-
-        """
-        partset.create(self.stub)
-        curve.create(self.stub)
-        for id in partset.parts:
-            ret = self.stub.CreateBdyPrescribedMotion(
-                BdyPrescribedMotionRequest(
-                    id=0,
-                    heading="",
-                    option="RIGID",
-                    typeid=id,
-                    dof=dof.value,
-                    vad=motion.value,
-                    lcid=curve.id,
-                    sf=scalefactor,
-                    vid=0,
-                    birth=0,
-                    death=0,
-                )
-            )
-        logging.info("Boundary prescribed motion Created...")
-        return ret
-
-
 class BeamFormulation(Enum):
     SPOTWELD = 9
 
@@ -1773,7 +1666,7 @@ class BoundaryCondition:
         """
         set.create(self.stub)
         curve.create(self.stub)
-        if set.type == "PARTSET":
+        if set.type == "PARTSET" or set.type == "PART":
             for id in set.parts:
                 ret = self.stub.CreateBdyPrescribedMotion(
                     BdyPrescribedMotionRequest(

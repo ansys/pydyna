@@ -11,6 +11,7 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
 from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynaem import *
+from ansys.dyna.pre.dynamech import *
 from ansys.dyna.pre.dynamaterial import *
 from em_railgun_data import *
 
@@ -27,7 +28,9 @@ if __name__ == "__main__":
     em_solution.set_termination(termination_time=3e-4)
     em_solution.create_database_binary(dt=5e-6)
 
-    railgun = DynaEM()    
+    railgun = DynaEM() 
+    mech = DynaMech()   
+    em_solution.add(mech)
     em_solution.add(railgun)
 
     analysis = EMAnalysis()

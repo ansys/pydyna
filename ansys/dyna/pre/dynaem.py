@@ -390,8 +390,6 @@ class DynaEM(DynaBase):
         """Save keyword files."""
         self.create_em_output(mats=2, matf=2, sols=2, solf=2)
         self.create_em_database_globalenergy(outlv=1)
-        for obj in SolidPart.partlist:
-            obj.set_property()
         for obj in Circuit.circuitlist:
             obj.create()
         EMAnalysis.create(self.stub)

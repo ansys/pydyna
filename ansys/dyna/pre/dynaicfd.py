@@ -18,6 +18,7 @@ class DynaICFD(DynaBase):
         self.create_section_icfd(1)
         self.timestep = 0
         self.termination = 1e28
+        self.MeshedVolume = set()
 
     def set_timestep(self, timestep=0):
         """Set time step for the fluid problem.
@@ -237,6 +238,8 @@ class DynaICFD(DynaBase):
         for obj in ICFDPart.partlist:
             obj.set_property()
         for obj in ICFDVolumePart.partlist:
+            obj.create()
+        for obj in self.MeshedVolume:
             obj.create()
 
 class Compressible(Enum):

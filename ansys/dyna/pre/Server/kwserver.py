@@ -779,7 +779,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
             if option2 == "MORTAR":
                 newk = "*CONTACT_"+option1+"_"+option2+"\n" +card1+"\n"+card2+"\n"+card3+"\n"+carda+"\n"+cardb+"\n"+cardc
             else:
-                newk = opcode+"\n" + card1+"\n\n\n"+card4
+                newk = opcode+"\n" + card1+"\n"+card2+"\n"+card3+"\n"+card4
         self.kwdproc.newkeyword(newk)
         print('Contact  Created...')
         return kwprocess_pb2.ContactReply(answer = 0)
