@@ -551,29 +551,13 @@ class DynaMech(DynaBase):
             irquad=0,
         )
         self.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
-        for obj in Contact.contactlist:
-            obj.create()
-        for obj in Gravity.gravitylist:
-            obj.create()
-        for obj in BeamPart.partlist:
-            obj.set_property()
-        for obj in ShellPart.partlist:
-            obj.set_property()
-        for obj in SolidPart.partlist:
-            obj.set_property()
-        for obj in RigidwallCylinder.rwlist:
-            obj.create()
-        Constraint.create(self.stub)
+        DynaBase.save_file(self)
 
 class Airbag:
     """Define an airbag or control volume.
 
     Parameters
     ----------
-    modeltype : string
-        specifies one of the following thermodynamic models for modeling airbags using a control volume (CV) approach.
-        "SIMPLE_AIRBAG_MODEL"
-
     Set : SegmentSet/PartSet
         Set : EQ.0:segment EQ.1: part set ID.
     heat_capacity_at_constant_volume : float
@@ -621,7 +605,10 @@ class Airbag:
             self.sidtyp = 0
         else:
             self.sidtyp = 1
-        ret = self.stub.CreateAirbagModel(
+        
+    def create(self):
+        """Create airbag."""
+        self.stub.CreateAirbagModel(
             AirbagModelRequest(
                 modeltype="SIMPLE_AIRBAG_MODEL",
                 sid=self.sid,

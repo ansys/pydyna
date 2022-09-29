@@ -39,12 +39,11 @@ if __name__ == "__main__":
     
     camry = DynaMech()
     camry_solution.add(camry)    
-     
-    analysis = ImplicitAnalysis(initial_timestep_size=0.1)
-    analysis.set_timestep(control_flag=TimestepCtrol.AUTOMATICALLY_ADJUST_TIMESTEP_SIZE,Optimum_equilibrium_iteration_count=511)
-    analysis.set_dynamic(gamma=0.6,beta=0.38)
-    analysis.set_eigenvalue()
-    analysis.set_solution(stiffness_reformation_limit=55,absolute_convergence_tolerance=-100)
+    
+    camry.implicitanalysis.set_timestep(control_flag=TimestepCtrol.AUTOMATICALLY_ADJUST_TIMESTEP_SIZE,Optimum_equilibrium_iteration_count=511)
+    camry.implicitanalysis.set_dynamic(gamma=0.6,beta=0.38)
+    camry.implicitanalysis.set_eigenvalue()
+    camry.implicitanalysis.set_solution(stiffness_reformation_limit=55,absolute_convergence_tolerance=-100)
     
     #create material
     matnull = MatNull(mass_density=6e-11)
@@ -76,6 +75,7 @@ if __name__ == "__main__":
             part.set_material(spotweldharden2100)
         part.set_element_formulation(bpart[1])
         part.set_diameter(bpart[2])
+        camry.parts.add(part)
 
     for spart in shellparts:
         part = ShellPart(spart[0])
@@ -117,14 +117,14 @@ if __name__ == "__main__":
             pass
         part.set_element_formulation(spart[1])
         part.set_thickness(spart[2])
+        camry.parts.add(part)
     
     #define constrained
-    cons = Constraint()
     for sw in spotweld:
-        cons.create_spotweld(nodeid1=sw[0],nodeid2=sw[1])
+        camry.constraints.create_spotweld(nodeid1=sw[0],nodeid2=sw[1])
 
     for cnrb in cnrbs:
-        cons.create_cnrb(nodeset=NodeSet(cnrb))
+        camry.constraints.create_cnrb(nodeset=NodeSet(cnrb))
 
     #define contact
     selfcontact = Contact(type=ContactType.AUTOMATIC)
@@ -132,6 +132,7 @@ if __name__ == "__main__":
     selfcontact.set_friction_coefficient(static=0.2)
     surf1=ContactSurface(PartSet(vehicle))
     selfcontact.set_slave_surface(surf1)
+    camry.contacts.add(selfcontact)
 
     platebiw = Contact(type=ContactType.AUTOMATIC,category=ContactCategory.SURFACE_TO_SURFACE_CONTACT)
     platebiw.set_mortar()
@@ -140,6 +141,7 @@ if __name__ == "__main__":
     surf2=ContactSurface(PartSet(platen))
     platebiw.set_slave_surface(surf1)
     platebiw.set_master_surface(surf2)
+    camry.contacts.add(platebiw)
 
     swcontact = Contact(type=ContactType.TIED,category=ContactCategory.SHELL_EDGE_TO_SURFACE_CONTACT,offset=OffsetType.CONSTRAINED_OFFSET)
     spotweldbeam=ContactSurface(PartSet(spotweldbeams))
@@ -148,17 +150,17 @@ if __name__ == "__main__":
     spotweldsurface.set_contact_thickness(thickness=-0.9)
     swcontact.set_slave_surface(spotweldbeam)
     swcontact.set_master_surface(spotweldsurface)
+    camry.contacts.add(swcontact)
 
     #define boundary
-    bdy = BoundaryCondition()
-    bdy.create_spc(NodeSet(spc))
+    camry.boundaryconditions.create_spc(NodeSet(spc))
     
     crv = Curve(x=[0,1,2,3,4,5,6,7,8,9,9.77,100],
                 y=[0,13,26,39,52,65,78,91,104,117,127,127])
     platen=PartSet([50000001])
-    bdy.create_imposed_motion(platen,crv,dof=DOF.X_TRANSLATIONAL,scalefactor=-0.0802216)
-    bdy.create_imposed_motion(platen,crv,dof=DOF.Y_TRANSLATIONAL,scalefactor=-0.0802216)
-    bdy.create_imposed_motion(platen,crv,dof=DOF.Z_TRANSLATIONAL,scalefactor=-0.0802216)
+    camry.boundaryconditions.create_imposed_motion(platen,crv,dof=DOF.X_TRANSLATIONAL,scalefactor=-0.0802216)
+    camry.boundaryconditions.create_imposed_motion(platen,crv,dof=DOF.Y_TRANSLATIONAL,scalefactor=-0.0802216)
+    camry.boundaryconditions.create_imposed_motion(platen,crv,dof=DOF.Z_TRANSLATIONAL,scalefactor=-0.0802216)
 
     camry_solution.set_output_database(elout=0.0001,glstat=0.0001,matsum=0.0001,nodout=0.0001,rbdout=0.0001,rcforc=0.0001,secforc=0.0001)
 
