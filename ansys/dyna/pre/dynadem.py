@@ -100,5 +100,4 @@ class DynaDEM(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        for obj in DiscretePart.partlist:
-            obj.set_property()
+        DynaBase.save_file(self)
