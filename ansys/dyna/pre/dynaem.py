@@ -15,6 +15,7 @@ class DynaEM(DynaBase):
 
     def __init__(self):
         DynaBase.__init__(self)
+        self.analysis = EMAnalysis()
 
     def create_em_control(self, emsol=0, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000):
         """Enable the EM solver and set its options.
@@ -390,11 +391,8 @@ class DynaEM(DynaBase):
         """Save keyword files."""
         self.create_em_output(mats=2, matf=2, sols=2, solf=2)
         self.create_em_database_globalenergy(outlv=1)
-        for obj in SolidPart.partlist:
-            obj.set_property()
-        for obj in Circuit.circuitlist:
-            obj.create()
-        EMAnalysis.create(self.stub)
+        self.analysis.create()
+        DynaBase.save_file(self)
 
 
 class EMType(Enum):
@@ -432,54 +430,50 @@ class EMAnalysis:
     w_matrix_tol = 1e-6
 
     def __init__(self, type=EMType.EDDY_CURRENT):
+        self.defined = False
         self.stub = DynaBase.get_stub()
         self.type = type.value
-        self.stub.CreateEMControl(EMControlRequest(emsol=self.type, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000))
-
+        
     def set_timestep(self, timestep):
         """Control the EM time step and its evolution."""
-        self.stub.CreateEMTimestep(EMTimestepRequest(tstype=1, dtconst=timestep))
-        logging.info("EM Timestep Created...")
+        self.defined = True
+        self.timestep = timestep
 
     def set_solver_bem(self, solver=BEMSOLVER.PCG, relative_tol=1e-6, max_iteration=1000):
         """Define the type of linear solver and pre-conditioner as well as tolerance for the EM_BEM solve."""
-        self.stub.CreateEMSolverBem(
-            EMSolverBemRequest(
-                reltol=relative_tol,
-                maxite=max_iteration,
-                stype=solver.value,
-                precon=1,
-                uselast=1,
-                ncylbem=3,
-            )
-        )
-        logging.info("EM Solver BEM Created...")
+        self.defined = True
+        self.relative_tol = relative_tol
+        self.max_iteration = max_iteration
+        self.bemsolver = solver.value
 
     def set_solver_fem(self, solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-6, max_iteration=1000):
         """Define some parameters for the EM FEM solver."""
-        self.stub.CreateEMSolverFem(
-            EMSolverFemRequest(
-                reltol=relative_tol,
-                maxite=max_iteration,
-                stype=solver.value,
-                precon=1,
-                uselast=1,
-                ncylbem=3,
-            )
-        )
+        self.defined = True
+        self.femsolver = solver.value
+        self.relative_tol = relative_tol
+        self.max_iteration = max_iteration
 
     def set_bem_matrix_tol(self, p_matrix_tol=1e-6, q_matrix_tol=1e-6, w_matrix_tol=1e-6):
         """Define the type of BEM matrices as well as the way they are assembled."""
+        self.defined = True
         EMAnalysis.p_matrix_tol = p_matrix_tol
         EMAnalysis.q_matrix_tol = q_matrix_tol
         EMAnalysis.w_matrix_tol = w_matrix_tol
 
-    @staticmethod
-    def create(stub):
+    def create(self):
         """Create EMAnalysis."""
-        stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=1, reltol=EMAnalysis.p_matrix_tol))
-        stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=2, reltol=EMAnalysis.q_matrix_tol))
-        stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=3, reltol=EMAnalysis.w_matrix_tol))
+        if self.defined==False:
+            return
+        self.stub.CreateEMControl(EMControlRequest(emsol=self.type, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000))
+        self.stub.CreateEMTimestep(EMTimestepRequest(tstype=1, dtconst=self.timestep))
+        logging.info("EM Timestep Created...")
+        self.stub.CreateEMSolverBem(EMSolverBemRequest(reltol=self.relative_tol,maxite=self.max_iteration,stype=self.bemsolver,precon=1,uselast=1,ncylbem=3))
+        logging.info("EM Solver BEM Created...")
+        self.stub.CreateEMSolverFem(EMSolverFemRequest(reltol=self.relative_tol,maxite=self.max_iteration,stype=self.femsolver,precon=1,uselast=1,ncylbem=3))
+        logging.info("EM Solver FEM Created...")
+        self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=1, reltol=EMAnalysis.p_matrix_tol))
+        self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=2, reltol=EMAnalysis.q_matrix_tol))
+        self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=3, reltol=EMAnalysis.w_matrix_tol))
         logging.info("EM Solver BEMMAT Created...")
 
 
@@ -501,14 +495,11 @@ class Circuit:
         Load curve for circtyp = 1, 2, 21 or 22
     """
 
-    circuitlist = []
-
     def __init__(self, loadcurve, circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME):
         self.stub = DynaBase.get_stub()
         self.circuit_type = circuit_type.value
         loadcurve.create(self.stub)
         self.lcid = loadcurve.id
-        Circuit.circuitlist.append(self)
 
     def set_current(self, current, current_inlet, current_outlet):
         """Define segment set for current.
@@ -556,7 +547,11 @@ class EMContact:
 
     def __init__(self, contact_type=EMContactType.NODE_TO_NODE_PENALTY_BASED_CONTACT):
         self.stub = DynaBase.get_stub()
-        ret = self.stub.CreateEMControlContact(
-            EMControlContactRequest(emct=1, cconly=0, ctype=contact_type.value, dtype=0)
+        self.contacttype = contact_type.value
+
+    def create(self):
+        """Create EM contact."""
+        self.stub.CreateEMControlContact(
+            EMControlContactRequest(emct=1, cconly=0, ctype=self.contacttype, dtype=0)
         )
-        logging.info("EM Control Contact Created...")
+        logging.info("EM Contact Created...")

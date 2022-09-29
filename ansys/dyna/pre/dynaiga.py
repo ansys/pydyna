@@ -41,3 +41,14 @@ class DynaIGA(DynaBase):
         )
         logging.info("Section IGAShell 1 Created...")
         return ret
+
+    def save_file(self):
+        """Save keyword files.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        self.create_control_contact(rwpnal=1.0, ignore=1, igactc=1)
+        DynaBase.save_file(self)

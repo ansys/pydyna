@@ -21,7 +21,7 @@ if __name__ == "__main__":
     
     dummy_solution = DynaSolution(hostname)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep + "belted_dummy" + os.sep
+    path = os.path.dirname(__file__) + os.sep + "input" + os.sep + "belted_dummy" + os.sep
     fns.append(path + "belted_dummy.k")
     dummy_solution.open_files(fns)
     dummy_solution.set_termination(termination_time=0.12)
@@ -68,13 +68,15 @@ if __name__ == "__main__":
         part.set_integration_points(shellsec[i-1][1])
         if i in range(1,16):
             part.set_extra_nodes(NodeSet(extra_nodes[i-1]))
+        dummy.parts.add(part)
 
     for i in range(101, 209):
         index = i-101
         part = DiscretePart(i)
         part.set_material(discmatlist[index])
         part.set_displacement_option(displacement_option=DRO.DESCRIBES_TORSIONAL_SPRING)
-    
+        dummy.parts.add(part)
+
     #Contact
     fslist = [0.62, 0.62, 0.62, 0.8, 1, 0.8, 0.88, 0.88, 0.16, 0.88, 0]
     for i in range(11):
@@ -84,17 +86,18 @@ if __name__ == "__main__":
         surf2=ContactSurface(SegmentSet(segments[2*i+1]))
         contact.set_slave_surface(surf1)
         contact.set_master_surface(surf2)
+        dummy.contacts.add(contact)
     
     #Constraint
-    cons = Constraint()
     for i in range(14):
-        cons.create_joint_spherical(nodes=jointlist[i])
+        dummy.constraints.create_joint_spherical(nodes=jointlist[i])
 
     #Boundary condition
-    bdy = BoundaryCondition()
-    bdy.create_imposed_motion(NodeSet(motion_nodes),Curve(x=motion_curve_x,y=motion_curve_y),motion=Motion.ACCELERATION,scalefactor=-1)
+    dummy.boundaryconditions.create_imposed_motion(NodeSet(motion_nodes),Curve(x=motion_curve_x,y=motion_curve_y),motion=Motion.ACCELERATION,scalefactor=-1)
+    
     #Load
     g = Gravity(dir=GravityOption.DIR_Z,load = Curve(x=[0, 0.152],y=[9.81, 9.81]))
+    dummy.add(g)
 
     dummy_solution.create_database_binary(dt=2.5e-3) 
     dummy_solution.save_file()

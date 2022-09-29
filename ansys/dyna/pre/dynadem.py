@@ -91,3 +91,13 @@ class DynaDEM(DynaBase):
         )
         logging.info("Define discrete element mesh surface Created...")
         return ret
+
+    def save_file(self):
+        """Save keyword files.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        DynaBase.save_file(self)

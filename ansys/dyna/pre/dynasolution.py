@@ -83,7 +83,7 @@ class DynaSolution:
         DynaSolution.stub = self.stub
 
     def get_stub():
-        """Get the stub of this DynaBase object."""
+        """Get the stub of this Solution object."""
         return DynaSolution.stub
 
     def add(self, obj):
@@ -191,6 +191,64 @@ class DynaSolution:
         """
         ret = self.stub.CreateDBAscii(DBAsciiRequest(type=type, dt=dt, binary=binary, lcur=lcur, ioopt=ioopt))
         logging.info("DB Ascii Created...")
+        return ret
+
+    def set_output_database(
+        self,
+        matsum=0,
+        glstat=0,
+        elout=0,
+        nodout=0,
+        nodfor=0,
+        rbdout=0,
+        rcforc=0,
+        secforc=0,
+        rwforc=0,
+        abstat=0,
+        bndout=0,
+        sleout=0,
+    ):
+        """Obtain output files containing results information.
+
+        Parameters
+        ----------
+        matsum : float
+            Time interval between outputs of part energies.
+        glstat : float
+            Time interval between outputs of global statistics
+            and energies.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        if matsum > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0))
+        if glstat > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if elout > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="ELOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if nodout > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="NODOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if rbdout > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="RBDOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if rcforc > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="RCFORC", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if secforc > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="SECFORC", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if rwforc > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="RWFORC", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if abstat > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="ABSTAT", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if bndout > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="BNDOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if nodfor > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="NODFOR", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if sleout > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="SLEOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+        ret = 1
+        logging.info("Output Setting...")
         return ret
 
     def save_file(self):

@@ -20,7 +20,7 @@ if __name__ == "__main__":
     efp_solution = DynaSolution(hostname)
     #Import the initial mesh data(nodes and elements)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep+"sale_efp"+os.sep
+    path = os.path.dirname(__file__) + os.sep + "input" + os.sep+"sale_efp"+os.sep
     fns.append(path + "efpcase.k")
     efp_solution.open_files(fns)
 
@@ -52,7 +52,8 @@ if __name__ == "__main__":
                       ControlPoint(number=309,position=21,ratio=0.25),
                       ControlPoint(number=339,position=0,ratio=5)]
     
-    mesh = efp.create_mesh(control_points_x,control_points_y,control_points_z)
+    mesh = StructuredMesh(control_points_x,control_points_y,control_points_z)
+    efp.add(mesh)
     
     #fill material  
     vacuum = matDB.Vacuum()    
@@ -65,10 +66,10 @@ if __name__ == "__main__":
     mesh.fill(liner,geometry_type="PART",define_geometry_parameters = [22],inout=FillDirection.OUTSIDE_THE_GEOMETRY)
 
     #Set the initial conditions
-    mesh.initial_detonation(detonation_point=[0,0,19.33])
-
+    mesh.initial_detonation(Point(0,0,19.33))
+    
     #set outut datebase
-    efp.set_output_database(matsum=0.2,glstat=0.2)
+    efp_solution.set_output_database(matsum=0.2,glstat=0.2)
 
     #save file on server end
     efp_solution.save_file()
