@@ -17,11 +17,9 @@ class AdvectionMethod(Enum):
     DONOR_CELL_WITH_HIS = 3
     FINITE_VOLUME_METHOD = 6
 
-
 class FillDirection(Enum):
     INSIDE_THE_GEOMETRY = 0
     OUTSIDE_THE_GEOMETRY = 1
-
 
 class ControlPoint:
     """Provide spacing information to generate a 3D structured ALE mesh.
@@ -41,25 +39,18 @@ class ControlPoint:
         self.position = position
         self.ratio = ratio
 
-
 class StructuredMesh:
-    """Generate a structured 2D or 3D mesh and invoke the Structured ALE (S-ALE) solver.
+    """Generate a structured 2D or 3D mesh and invoke the Structured ALE (S-ALE) solver."""
 
-    Parameters
-    ----------
-    meshid : int
-        S-ALE Mesh ID.
-    partid : int
-        Default Part ID. The elements generated are assigned to DPID.
-    """
-
-    num_meshpart = 0
-
-    def __init__(self, stub, meshid, partid):
-        self.meshid = meshid
-        self.partid = partid
-        self.stub = stub
-        StructuredMesh.num_meshpart += 1
+    def __init__(self, control_points_x, control_points_y, control_points_z):
+        self.stub = DynaBase.get_stub()
+        self.control_points_x = control_points_x
+        self.control_points_y = control_points_y
+        self.control_points_z = control_points_z
+        self.refine_factor_x = 1
+        self.refine_factor_y = 1
+        self.refine_factor_z = 1
+        self.fillings = []
 
     def fill(
         self,
@@ -93,31 +84,7 @@ class StructuredMesh:
         bool
             "True" when successful, "False" when failed
         """
-        material.create(self.stub)
-        ret = self.stub.ALECreateStructuredMultiMaterialGroup(
-            ALECreateStructuredMultiMatGroupRequest(
-                nmmgnm=material.name,
-                mid=material.material_id,
-                eosid=material.eos_id,
-                pref=reference_pressure,
-            )
-        )
-
-        logging.info(f"Material {material.name} Created...")
-        if geometry_type.upper() != "NULL":
-            ret = self.stub.ALECreateStructuredMeshVolumeFilling(
-                ALECreateStructuredMeshVolumeFillingRequest(
-                    mshid=self.meshid,
-                    ammgto=material.name,
-                    nsample=nsample,
-                    geom=geometry_type.upper(),
-                    vid=vid,
-                    inout=inout.value,
-                    e=define_geometry_parameters,
-                )
-            )
-            logging.info(f"Material {material.name} filled in Mesh {self.meshid}...")
-        return ret
+        self.fillings.append([material,geometry_type,nsample,define_geometry_parameters,inout,vid,reference_pressure])
 
     def refine(self, refine_factor_x=1, refine_factor_y=1, refine_factor_z=1):
         """Refine existing structured ALE (S-ALE) meshes.
@@ -126,41 +93,107 @@ class StructuredMesh:
         ----------
         refine_factor_x/y/y : int
             Refinement factor for each local direction.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
         """
-        ret = self.stub.ALECreateStructuredMeshRefine(
-            ALECreateStructuredMeshRefineRequest(
-                mshid=self.meshid,
-                ifx=refine_factor_x,
-                ify=refine_factor_y,
-                ifz=refine_factor_z,
-            )
-        )
-        logging.info(f"Mesh {self.meshid} Refined...")
-        return ret
+        self.refine_factor_x = refine_factor_x
+        self.refine_factor_y = refine_factor_y
+        self.refine_factor_z = refine_factor_z
 
     def initial_detonation(self, detonation_point):
         """Define points to initiate the location of high explosive detonations.
 
         Parameters
         ----------
-        detonation_point : list [x,y,z]
+        detonation_point : Point
             x,y,z-coordinate of detonation point.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
         """
-        partid = self.partid
-        ret = self.stub.CreateInitDetonation(InitDetonationRequest(pid=partid, coord=detonation_point, lt=0))
-        logging.info("Location of high explosive detonation Defined...")
-        return ret
+        self.detonation_point = detonation_point
 
+    def create(self):
+        """Create mesh."""
+        nx = []
+        xx = []
+        ratiox = []
+        for i in range(len(self.control_points_x)):
+            nx.append(self.control_points_x[i].number)
+            xx.append(self.control_points_x[i].position)
+            ratiox.append(self.control_points_x[i].ratio)
+        ny = []
+        xy = []
+        ratioy = []
+        for i in range(len(self.control_points_y)):
+            ny.append(self.control_points_y[i].number)
+            xy.append(self.control_points_y[i].position)
+            ratioy.append(self.control_points_y[i].ratio)
+        nz = []
+        xz = []
+        ratioz = []
+        for i in range(len(self.control_points_z)):
+            nz.append(self.control_points_z[i].number)
+            xz.append(self.control_points_z[i].position)
+            ratioz.append(self.control_points_z[i].ratio)
+
+        ret = self.stub.ALECreateStructuredMeshCtrlPoints(
+            ALECreateStructuredMeshControlPointsRequest(icase=2, sfo=1, n=nx, x=xx, ratio=ratiox)
+        )
+        cpidx = ret.cpid
+        ret = self.stub.ALECreateStructuredMeshCtrlPoints(
+            ALECreateStructuredMeshControlPointsRequest(icase=2, sfo=1, n=ny, x=xy, ratio=ratioy)
+        )
+        cpidy = ret.cpid
+        ret = self.stub.ALECreateStructuredMeshCtrlPoints(
+            ALECreateStructuredMeshControlPointsRequest(icase=2, sfo=1, n=nz, x=xz, ratio=ratioz)
+        )
+        cpidz = ret.cpid
+        ret = self.stub.ALECreateStructuredMesh(
+            ALECreateStructuredMeshRequest(nbid=2000001, ebid=2000001, cpidx=cpidx, cpidy=cpidy, cpidz=cpidz)
+        )
+        meshid = ret.meshid
+        partid = ret.partid
+        logging.info(f"ALE Structured mesh {meshid} Created...")
+
+        for obj in self.fillings:
+            material = obj[0]
+            geometry_type = obj[1]
+            nsample = obj[2]
+            define_geometry_parameters = obj[3]
+            inout = obj[4]
+            vid = obj[5]
+            reference_pressure = obj[6]
+            material.create(self.stub)
+        ret = self.stub.ALECreateStructuredMultiMaterialGroup(
+            ALECreateStructuredMultiMatGroupRequest(
+                nmmgnm=material.name,
+                mid=material.material_id,
+                eosid=material.eos_id,
+                pref=reference_pressure,
+            )
+        )
+        logging.info(f"Material {material.name} Created...")
+        if geometry_type.upper() != "NULL":
+            self.stub.ALECreateStructuredMeshVolumeFilling(
+                ALECreateStructuredMeshVolumeFillingRequest(
+                    mshid=meshid,
+                    ammgto=material.name,
+                    nsample=nsample,
+                    geom=geometry_type.upper(),
+                    vid=vid,
+                    inout=inout.value,
+                    e=define_geometry_parameters,
+                )
+            )
+            logging.info(f"Material {material.name} filled in Mesh {meshid}...")
+        self.stub.ALECreateStructuredMeshRefine(
+            ALECreateStructuredMeshRefineRequest(
+                mshid=meshid,
+                ifx=self.refine_factor_x,
+                ify=self.refine_factor_y,
+                ifz=self.refine_factor_z
+            )
+        )
+        logging.info(f"Mesh {meshid} Refined...")
+        dpoint = [self.detonation_point.x,self.detonation_point.y,self.detonation_point.z]
+        self.stub.CreateInitDetonation(InitDetonationRequest(pid=partid, coord=dpoint, lt=0))
+        logging.info("Location of high explosive detonation Defined...")
 
 class DynaSALE(DynaBase):
     """Setup SALE simulation process."""
@@ -236,65 +269,6 @@ class DynaSALE(DynaBase):
         logging.info("Setup Analysis...")
         return ret
 
-    def create_mesh(self, control_points_x, control_points_y, control_points_z):
-        """Create mesh.
-
-        Parameters
-        ----------
-        control_points_x/y/z : list [[N1,X1,ratio1],[N2,X2,ratio2],...]
-            Defines a one-dimensional mesh using control points. Each control point
-            consists of a node number (N) and a coordinate (X).
-            ratio : Ratio for progressive mesh spacing.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        nx = []
-        xx = []
-        ratiox = []
-        for i in range(len(control_points_x)):
-            nx.append(control_points_x[i].number)
-            xx.append(control_points_x[i].position)
-            ratiox.append(control_points_x[i].ratio)
-        ny = []
-        xy = []
-        ratioy = []
-        for i in range(len(control_points_y)):
-            ny.append(control_points_y[i].number)
-            xy.append(control_points_y[i].position)
-            ratioy.append(control_points_y[i].ratio)
-        nz = []
-        xz = []
-        ratioz = []
-        for i in range(len(control_points_z)):
-            nz.append(control_points_z[i].number)
-            xz.append(control_points_z[i].position)
-            ratioz.append(control_points_z[i].ratio)
-
-        ret = self.stub.ALECreateStructuredMeshCtrlPoints(
-            ALECreateStructuredMeshControlPointsRequest(icase=2, sfo=1, n=nx, x=xx, ratio=ratiox)
-        )
-        cpidx = ret.cpid
-        ret = self.stub.ALECreateStructuredMeshCtrlPoints(
-            ALECreateStructuredMeshControlPointsRequest(icase=2, sfo=1, n=ny, x=xy, ratio=ratioy)
-        )
-        cpidy = ret.cpid
-        ret = self.stub.ALECreateStructuredMeshCtrlPoints(
-            ALECreateStructuredMeshControlPointsRequest(icase=2, sfo=1, n=nz, x=xz, ratio=ratioz)
-        )
-        cpidz = ret.cpid
-        ret = self.stub.ALECreateStructuredMesh(
-            ALECreateStructuredMeshRequest(nbid=2000001, ebid=2000001, cpidx=cpidx, cpidy=cpidy, cpidz=cpidz)
-        )
-        meshid = ret.meshid
-        partid = ret.partid
-        mesh = StructuredMesh(stub=self.stub, meshid=meshid, partid=partid)
-
-        logging.info(f"ALE Structured mesh {meshid} Created...")
-        return mesh
-
     def set_output_database(self, matsum=0, glstat=0):
         """Obtain output files containing results information.
 
@@ -317,3 +291,17 @@ class DynaSALE(DynaBase):
         ret = 1
         logging.info("Output Setting...")
         return ret
+
+    def save_file(self):
+        """Save keyword files.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        self.set_energy(
+            hourglass_energy=EnergyFlag.COMPUTED,
+            sliding_interface_energy=EnergyFlag.COMPUTED,
+        )
+        DynaBase.save_file(self)

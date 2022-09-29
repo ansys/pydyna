@@ -234,10 +234,7 @@ class DynaICFD(DynaBase):
         self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=self.termination, dt=self.timestep))
         logging.info("ICFD control time Created...")
         self.create_section_icfd(1)
-        for obj in ICFDPart.partlist:
-            obj.set_property()
-        for obj in ICFDVolumePart.partlist:
-            obj.create()
+        DynaBase.save_file(self)
 
 class Compressible(Enum):
     VACUUM = 0
@@ -285,14 +282,12 @@ class Vel(Enum):
 class ICFDPart:
     """Define part for the incompressible flow solver."""
 
-    partlist = []
-
     def __init__(self, id):
         self.stub = DynaBase.get_stub()
+        self.type = "ICFD"
         self.id = id
         self.secid = 1
         self.mid = 0
-        ICFDPart.partlist.append(self)
 
     def set_material(self, mat):
         """Set material."""
@@ -385,15 +380,13 @@ class ICFDVolumePart:
         List of Part IDs for the surface elements that define the volume mesh.
     """
 
-    partlist = []
-
     def __init__(self, surfaces):
         self.stub = DynaBase.get_stub()
+        self.type = "ICFDVOLUME"
         self.id = id
         self.secid = 1
         self.mid = 0
         self.surfaces = surfaces
-        ICFDVolumePart.partlist.append(self)
 
     def set_material(self, mat):
         """Set material."""

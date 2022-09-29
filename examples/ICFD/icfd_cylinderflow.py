@@ -20,7 +20,7 @@ if __name__ == "__main__":
     icfd_solution = DynaSolution(hostname)
     #Import the initial mesh data(nodes and elements)
     fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep
+    path = os.path.dirname(__file__) + os.sep + "input" + os.sep
     fns.append(path + os.sep + "icfd_cylinderflow" + os.sep + "mesh.k")
     icfd_solution.open_files(fns)
 
@@ -38,25 +38,31 @@ if __name__ == "__main__":
     part_inflow.set_material(mat)
     part_inflow.set_prescribed_velocity(dof=ICFDDOF.X,motion=Curve(x=[0, 10000],y=[1, 1]))
     part_inflow.set_prescribed_velocity(dof=ICFDDOF.Y,motion=Curve(x=[0, 10000],y=[0, 0]))
+    icfd.parts.add(part_inflow)
 
     part_outflow = ICFDPart(2)
     part_outflow.set_material(mat)
     part_outflow.set_prescribed_pressure(pressure = Curve(x=[0, 10000],y=[0, 0]))
+    icfd.parts.add(part_outflow)
 
     part_symmetric = ICFDPart(3)
     part_symmetric.set_material(mat)
     part_symmetric.set_free_slip()
+    icfd.parts.add(part_symmetric)
 
     part_wall= ICFDPart(4)
     part_wall.set_material(mat)
     part_wall.set_non_slip()
     part_wall.compute_drag_force()
     part_wall.set_boundary_layer(number=3)
+    icfd.parts.add(part_wall)
 
     partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
     partvol.set_material(mat)  
+    icfd.parts.add(partvol)
     # define the volume space that will be meshed,The boundaries 
     #of the volume are the surfaces "spids"
     meshvol = MeshedVolume(surfaces = [1, 2, 3, 4])
+    icfd.add(meshvol)
 
     icfd_solution.save_file()
