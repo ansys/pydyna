@@ -132,10 +132,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
             filename = os.path.basename(subsystems[iter])
             subsystems[iter] = fn + os.sep+filename
         self.kwdproc.set(sdt.KWD_SET_OUTVERSION,15)
-        if len(subsystems) == 1:
-           self.kwdproc.write( subsystems)
-        else:
-           self.kwdproc.write(subsystems)
+        self.kwdproc.write(subsystems)
         self.fns.clear()
         print('Saved Successfully!')
         return kwprocess_pb2.SaveFileReply(length = 1)
