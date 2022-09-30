@@ -160,28 +160,28 @@ class StructuredMesh:
             vid = obj[5]
             reference_pressure = obj[6]
             material.create(self.stub)
-        ret = self.stub.ALECreateStructuredMultiMaterialGroup(
-            ALECreateStructuredMultiMatGroupRequest(
-                nmmgnm=material.name,
-                mid=material.material_id,
-                eosid=material.eos_id,
-                pref=reference_pressure,
-            )
-        )
-        logging.info(f"Material {material.name} Created...")
-        if geometry_type.upper() != "NULL":
-            self.stub.ALECreateStructuredMeshVolumeFilling(
-                ALECreateStructuredMeshVolumeFillingRequest(
-                    mshid=meshid,
-                    ammgto=material.name,
-                    nsample=nsample,
-                    geom=geometry_type.upper(),
-                    vid=vid,
-                    inout=inout.value,
-                    e=define_geometry_parameters,
+            self.stub.ALECreateStructuredMultiMaterialGroup(
+                ALECreateStructuredMultiMatGroupRequest(
+                    nmmgnm=material.name,
+                    mid=material.material_id,
+                    eosid=material.eos_id,
+                    pref=reference_pressure,
                 )
             )
-            logging.info(f"Material {material.name} filled in Mesh {meshid}...")
+            logging.info(f"Material {material.name} Created...")
+            if geometry_type.upper() != "NULL":
+                self.stub.ALECreateStructuredMeshVolumeFilling(
+                    ALECreateStructuredMeshVolumeFillingRequest(
+                        mshid=meshid,
+                        ammgto=material.name,
+                        nsample=nsample,
+                        geom=geometry_type.upper(),
+                        vid=vid,
+                        inout=inout.value,
+                        e=define_geometry_parameters,
+                    )
+                )
+                logging.info(f"Material {material.name} filled in Mesh {meshid}...")
         self.stub.ALECreateStructuredMeshRefine(
             ALECreateStructuredMeshRefineRequest(
                 mshid=meshid,

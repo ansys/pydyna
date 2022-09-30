@@ -23,10 +23,8 @@ if __name__ == "__main__":
     path = os.path.dirname(__file__) + os.sep + "input" + os.sep
     fns.append(path + os.sep + "icfd_cylinderflow" + os.sep + "mesh.k")
     icfd_solution.open_files(fns)
-
-    #Set total time of simulation
-    icfd_solution.set_termination(termination_time=100)    
-    icfd_solution.create_database_binary(dt=1)
+    #Set total time of simulation  
+    icfd_solution.set_termination(termination_time=100) 
 
     icfd = DynaICFD()
     icfd_solution.add(icfd)
@@ -64,5 +62,6 @@ if __name__ == "__main__":
     #of the volume are the surfaces "spids"
     meshvol = MeshedVolume(surfaces = [1, 2, 3, 4])
     icfd.add(meshvol)
-
+    
+    icfd_solution.create_database_binary(dt=1)
     icfd_solution.save_file()
