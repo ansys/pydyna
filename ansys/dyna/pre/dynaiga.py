@@ -50,5 +50,5 @@ class DynaIGA(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        self.create_control_contact(rwpnal=1.0, ignore=1, igactc=1)
         DynaBase.save_file(self)
+        self.create_control_contact(rwpnal=1.0, ignore=1, igactc=1)

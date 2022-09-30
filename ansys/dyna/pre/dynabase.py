@@ -561,7 +561,7 @@ class DynaBase:
             "True" when successful, "False" when failed
         """
         self.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
-
+        self.implicitanalysis.create()
         self.parts.set_property()
         self.initialconditions.create()
         self.constraints.create()

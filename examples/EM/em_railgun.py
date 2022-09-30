@@ -31,7 +31,6 @@ if __name__ == "__main__":
     railgun = DynaEM()   
     em_solution.add(railgun)
 
-
     railgun.analysis.set_timestep(timestep=5e-6)
     railgun.analysis.set_solver_bem(solver=BEMSOLVER.PCG)
     railgun.analysis.set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER,relative_tol=1e-3)

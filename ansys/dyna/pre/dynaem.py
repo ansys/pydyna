@@ -442,7 +442,7 @@ class EMAnalysis:
     def set_solver_bem(self, solver=BEMSOLVER.PCG, relative_tol=1e-6, max_iteration=1000):
         """Define the type of linear solver and pre-conditioner as well as tolerance for the EM_BEM solve."""
         self.defined = True
-        self.relative_tol = relative_tol
+        self.bem_relative_tol = relative_tol
         self.max_iteration = max_iteration
         self.bemsolver = solver.value
 
@@ -450,7 +450,7 @@ class EMAnalysis:
         """Define some parameters for the EM FEM solver."""
         self.defined = True
         self.femsolver = solver.value
-        self.relative_tol = relative_tol
+        self.fem_relative_tol = relative_tol
         self.max_iteration = max_iteration
 
     def set_bem_matrix_tol(self, p_matrix_tol=1e-6, q_matrix_tol=1e-6, w_matrix_tol=1e-6):
@@ -467,9 +467,9 @@ class EMAnalysis:
         self.stub.CreateEMControl(EMControlRequest(emsol=self.type, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000))
         self.stub.CreateEMTimestep(EMTimestepRequest(tstype=1, dtconst=self.timestep))
         logging.info("EM Timestep Created...")
-        self.stub.CreateEMSolverBem(EMSolverBemRequest(reltol=self.relative_tol,maxite=self.max_iteration,stype=self.bemsolver,precon=1,uselast=1,ncylbem=3))
+        self.stub.CreateEMSolverBem(EMSolverBemRequest(reltol=self.bem_relative_tol,maxite=self.max_iteration,stype=self.bemsolver,precon=1,uselast=1,ncylbem=3))
         logging.info("EM Solver BEM Created...")
-        self.stub.CreateEMSolverFem(EMSolverFemRequest(reltol=self.relative_tol,maxite=self.max_iteration,stype=self.femsolver,precon=1,uselast=1,ncylbem=3))
+        self.stub.CreateEMSolverFem(EMSolverFemRequest(reltol=self.fem_relative_tol,maxite=self.max_iteration,stype=self.femsolver,precon=1,uselast=1,ncylbem=3))
         logging.info("EM Solver FEM Created...")
         self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=1, reltol=EMAnalysis.p_matrix_tol))
         self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=2, reltol=EMAnalysis.q_matrix_tol))

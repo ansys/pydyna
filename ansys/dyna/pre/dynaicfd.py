@@ -443,8 +443,9 @@ class MeshedVolume:
         ret = self.stub.MESHCreateVolume(MeshVolumeRequest(pids=self.surfaces))
         self.id = ret.id
         logging.info(f"MESH volume {self.id} Created...")
-        ret = self.stub.MESHCreateEmbedShell(MeshEmbedShellRequest(volid=self.id, pids=self.embeded_surf))
-        logging.info("Embed surfaces Created...")
+        if len(self.embeded_surf)>0:
+            self.stub.MESHCreateEmbedShell(MeshEmbedShellRequest(volid=self.id, pids=self.embeded_surf))
+            logging.info("Embed surfaces Created...")
         for i in range(len(self.meshsizeshape)):
             self.stub.MESHCreateSizeShape(
                 MeshSizeShapeRequest(
