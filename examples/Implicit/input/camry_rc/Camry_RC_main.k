@@ -9,6 +9,8 @@ $#                                                                         title
 *INCLUDE
 Camry_V1_NoSusAndPowerTrain_impl7.k
 *INCLUDE
+Camry_V1_NoSusAndPowerTrain_impl7_nodes.k
+*INCLUDE
 xtra_sw.k
 *INCLUDE
 weld7.k
