@@ -231,7 +231,7 @@ class DynaICFD(DynaBase):
 
     def save_file(self):
         """Save keyword files."""
-        self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=self.termination, dt=self.timestep))
+        self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=DynaSolution.termination_time, dt=self.timestep))
         logging.info("ICFD control time Created...")
         self.create_section_icfd(1)
         DynaBase.save_file(self)

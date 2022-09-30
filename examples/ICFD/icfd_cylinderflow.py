@@ -23,12 +23,11 @@ if __name__ == "__main__":
     path = os.path.dirname(__file__) + os.sep + "input" + os.sep
     fns.append(path + os.sep + "icfd_cylinderflow" + os.sep + "mesh.k")
     icfd_solution.open_files(fns)
+    #Set total time of simulation  
+    icfd_solution.set_termination(termination_time=100) 
 
     icfd = DynaICFD()
     icfd_solution.add(icfd)
-
-    #Set total time of simulation  
-    icfd.set_termination(termination_time=100) 
 
     #define model
     mat = MatICFD(flow_density=1.0,dynamic_viscosity=0.005)

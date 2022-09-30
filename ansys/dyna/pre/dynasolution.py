@@ -81,6 +81,7 @@ class DynaSolution:
         self.stub = kwC2SStub(channel)
         self.mainname = ""
         DynaSolution.stub = self.stub
+        DynaSolution.terminationtime = 0
 
     def get_stub():
         """Get the stub of this Solution object."""
@@ -127,6 +128,7 @@ class DynaSolution:
         bool
             "True" when successful, "False" when failed
         """
+        DynaSolution.termination_time = termination_time
         ret = self.stub.CreateTermination(TerminationRequest(endtim=termination_time))
         logging.info("Setting termination time ...")
         return ret
