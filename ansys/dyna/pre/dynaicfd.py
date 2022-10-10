@@ -177,58 +177,6 @@ class DynaICFD(DynaBase):
         logging.info("tolerance values for the mesh movement algorithm changed...")
         return ret
 
-    def mesh_create_size_shape(self, sname, force, method, msize, parameter):
-        """Define a local mesh size in specific zones corresponding to given geometrical shapes.
-
-        Parameters
-        ----------
-        sname : string
-            Shape name. Possibilities include "box", "cylinder", "pol" and "sphere"
-        force : int
-            Force to keep the mesh size criteria even after a remeshing is done.
-        method : int
-            Specifies which method to use when defining the second card.
-        msize : float
-            Mesh size that needs to be applied in the zone of the shape defined by SNAME
-        parameter : list
-            The parameters to define shape.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.MESHCreateSizeShape(
-            MeshSizeShapeRequest(
-                sname=sname,
-                force=force,
-                method=method,
-                msize=msize,
-                parameter=parameter,
-            )
-        )
-        logging.info("MESH size shape Created...")
-        return ret
-
-    def mesh_embed_shell(self, volid, pids):
-        """Define surfaces that the mesher will embed inside the volume mesh.
-
-        Parameters
-        ----------
-        volid : int
-            Volume mesh ID.
-        pids : list
-            Part IDs for the surface elements that will be embedded in the volume mesh.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.MESHCreateEmbedShell(MeshEmbedShellRequest(volid=volid, pids=pids))
-        logging.info("Embed surfaces Created...")
-        return ret
-
     def save_file(self):
         """Save keyword files."""
         self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=DynaSolution.termination_time, dt=self.timestep))
