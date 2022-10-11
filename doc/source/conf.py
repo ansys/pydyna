@@ -54,7 +54,7 @@ sphinx_gallery_conf = {
             # path where to save gallery generated examples
             "gallery_dirs": ["examples"],
             # Patter to search for examples files
-            "filename_pattern": r"/pre/.py",
+            "filename_pattern": r"\.py",
             # Patter to omit some files
             "ignore_pattern": r"/*_data.py",
             # Remove the "Download all examples" button from the top level gallery

@@ -8,11 +8,12 @@ This example show how to create an Belted dummy model with Pydyna-pre module
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+sys.path.append(os.path.join(sys.path[0],'../../'))
 from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynamech import *
 from ansys.dyna.pre.dynamaterial import *
 from belted_dummy_data import *
+from ansys.dyna.pre import examples
 
 if __name__ == "__main__":
     hostname = "localhost"
@@ -21,7 +22,7 @@ if __name__ == "__main__":
     
     dummy_solution = DynaSolution(hostname)
     fns = []
-    path = os.path.dirname(__file__) + os.sep + "input" + os.sep + "belted_dummy" + os.sep
+    path = examples.belted_dummy+ os.sep
     fns.append(path + "belted_dummy.k")
     dummy_solution.open_files(fns)
     dummy_solution.set_termination(termination_time=0.12)

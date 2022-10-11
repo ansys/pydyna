@@ -8,12 +8,13 @@ This example demonstrates how to create an IGA input deck.
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+sys.path.append(os.path.join(sys.path[0],'../../'))
 from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynaiga import *
 from ansys.dyna.pre.dynamech import *
 from ansys.dyna.pre.dynamaterial import *
 from iga_sample_data import *
+from ansys.dyna.pre import examples
 
 if __name__ == "__main__":
     hostname = "localhost"
@@ -22,7 +23,7 @@ if __name__ == "__main__":
 
     iga_solution = DynaSolution(hostname)
     fns = []
-    path = os.path.dirname(__file__) + os.sep + "input" + os.sep + "iga_sample" + os.sep
+    path = examples.iga_sample+ os.sep
     fns.append(path + "maino.k")
     fns.append(path + "rkrwelds.key")
     fns.append(path + "27parts.key")
