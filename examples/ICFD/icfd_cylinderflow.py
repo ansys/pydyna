@@ -8,9 +8,10 @@ This example demonstrates how to create a simple ICFD cylinder flow input deck.
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+sys.path.append(os.path.join(sys.path[0],'../../'))
 from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynaicfd import *
+from ansys.dyna.pre import examples
 
 if __name__ == "__main__":
     hostname = "localhost"
@@ -20,8 +21,8 @@ if __name__ == "__main__":
     icfd_solution = DynaSolution(hostname)
     #Import the initial mesh data(nodes and elements)
     fns = []
-    path = os.path.dirname(__file__) + os.sep + "input" + os.sep
-    fns.append(path + os.sep + "icfd_cylinderflow" + os.sep + "mesh.k")
+    path = examples.icfd_cylinderflow+ os.sep
+    fns.append(path + "mesh.k")
     icfd_solution.open_files(fns)
     #Set total time of simulation  
     icfd_solution.set_termination(termination_time=100) 

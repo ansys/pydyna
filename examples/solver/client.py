@@ -8,6 +8,7 @@ Commands are read from an optional file, or interactively,and sent to DYNA via g
 #!/usr/bin/python3
 import os
 import sys
+sys.path.append(os.path.join(sys.path[0],'../../'))
 import ansys.dyna.solver as solver
 #
 hostname = 'localhost'
@@ -95,7 +96,9 @@ if(runfile):
 # until we get a "quit" command
 #
 while(1):
-    cmdin = input("> ").rstrip()
+    #cmdin = input("> ").rstrip()
+    #cannot use input() builtin function in Sphinx-Gallery examples
+    cmdin = "quit"
     try:
         dyna.send(cmdin)
         if(cmdin == 'quit'):
