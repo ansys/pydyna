@@ -48,7 +48,12 @@ and copy the required files
 
 Documentation
 -------------
+For comprehesive information on PyDyna, see the latest release
+`documentation <https://wenhuiuy.github.io/pydyna-dev-docs/>`_.
 
+On the `PyDyna Issues <https://github.com.mcas.ms/pyansys/pyDyna/issues>`_ page, you can create
+issues to submit questions, report bugs, and request new features. To reach
+the PyAnsys support team, email `pyansys.support@ansys.com <pyansys.support@ansys.com>`_.
 
 Usage
 -----
