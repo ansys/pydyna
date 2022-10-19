@@ -4,6 +4,7 @@ import pytest
 
 sys.path.append(os.path.join(sys.path[0],os.pardir))
 from ansys.dyna.pre.dynasolution import *
+from ansys.dyna.pre.dynaicfd import *
 
 def comparefile(outputf,standardf):
     with open(outputf,'r') as fp1,open (standardf,'r') as fp2:
@@ -15,21 +16,27 @@ def comparefile(outputf,standardf):
             if line1=='' or line2 == '':
                 break
             if line1 != line2:
+                print(line1)
+                print(line2)
                 return False
     return True
 
 
-def test_solution(solution_initialfile,resolve_server_path,resolve_standard_path):
+def test_icfd(icfd_initialfile,resolve_server_path,resolve_standard_path):
     solution = DynaSolution("localhost")
     fns = []
-    fns.append(solution_initialfile)
+    fns.append(icfd_initialfile)
     solution.open_files(fns)
-    solution.set_termination(0.03)
-    solution.set_output_database(abstat=2.0e-4,glstat=2.0e-4,matsum=2.0e-4,rcforc=2.0e-4,rbdout=2.0e-4,rwforc=2.0e-4)
-    solution.create_database_binary(dt=5e-4, ieverp=1)
+    icfd = DynaICFD()
+    solution.add(icfd)
+    solution.set_termination(termination_time=100) 
+    partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
+    icfd.parts.add(partvol)
+    meshvol = MeshedVolume(surfaces = [1, 2, 3, 4])
+    icfd.add(meshvol)
+    solution.create_database_binary(dt=1)
     solution.save_file()
-    outputfile = os.path.join(resolve_server_path,"output","test_solution.k")
-    standardfile = os.path.join(resolve_standard_path,"solution.k")
+    outputfile = os.path.join(resolve_server_path,"output","test_icfd.k")
+    standardfile = os.path.join(resolve_standard_path,"icfd.k")
     assert comparefile(outputfile,standardfile)
-
     
