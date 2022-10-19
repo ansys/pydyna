@@ -39,10 +39,44 @@ def resolve_standard_path():
     return standard_files_path
 
 @pytest.fixture()
-def initialfile():
-    """Resolve the path of the "initial.k" file."""
-    return resolve_test_file("initial.k")
+def base_initialfile():
+    """Resolve the path for base initial file."""
+    return resolve_test_file("test_base.k","initial")
 
-
-
+@pytest.fixture()
+def dem_initialfile():
+    """Resolve the path for dem initial file."""
+    return resolve_test_file("test_dem.k","initial")
+    
+@pytest.fixture()
+def em_initialfile():
+    """Resolve the path for em initial file."""
+    return resolve_test_file("test_em.k","initial")
+    
+@pytest.fixture()
+def icfd_initialfile():
+    """Resolve the path for icfd initial file."""
+    return resolve_test_file("test_icfd.k","initial")    
+    
+@pytest.fixture()
+def iga_initialfile():
+    """Resolve the path for iga initial file."""
+    return resolve_test_file("test_iga.k","initial")       
+    
+@pytest.fixture()
+def mech_initialfile():
+    """Resolve the path for mech initial file."""
+    return resolve_test_file("test_mech.k","initial")       
+    
+@pytest.fixture()
+def sale_initialfile():
+    """Resolve the path for sale initial file."""
+    return resolve_test_file("test_sale.k","initial")       
+    
+@pytest.fixture()
+def solution_initialfile():
+    """Resolve the path for solution initial file."""
+    return resolve_test_file("test_solution.k","initial")      
+    
+    
     

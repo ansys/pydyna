@@ -4,6 +4,7 @@ import pytest
 
 sys.path.append(os.path.join(sys.path[0],os.pardir))
 from ansys.dyna.pre.dynasolution import *
+from ansys.dyna.pre.dynaem import *
 
 def comparefile(outputf,standardf):
     with open(outputf,'r') as fp1,open (standardf,'r') as fp2:
@@ -19,17 +20,22 @@ def comparefile(outputf,standardf):
     return True
 
 
-def test_solution(solution_initialfile,resolve_server_path,resolve_standard_path):
+def test_em(em_initialfile,resolve_server_path,resolve_standard_path):
     solution = DynaSolution("localhost")
     fns = []
-    fns.append(solution_initialfile)
+    fns.append(em_initialfile)
     solution.open_files(fns)
-    solution.set_termination(0.03)
-    solution.set_output_database(abstat=2.0e-4,glstat=2.0e-4,matsum=2.0e-4,rcforc=2.0e-4,rbdout=2.0e-4,rwforc=2.0e-4)
-    solution.create_database_binary(dt=5e-4, ieverp=1)
+    em = DynaEM()
+    solution.add(em)
+    em.analysis.set_timestep(timestep=5e-6)
+    em.analysis.set_solver_bem(solver=BEMSOLVER.PCG)
+    em.analysis.set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER,relative_tol=1e-3)
+    contact = EMContact()
+    em.contacts.add(contact)
+    em.create_em_output(mats=2, matf=2, sols=2, solf=2)
+    em.create_em_database_globalenergy(outlv=1)
     solution.save_file()
-    outputfile = os.path.join(resolve_server_path,"output","test_solution.k")
-    standardfile = os.path.join(resolve_standard_path,"solution.k")
+    outputfile = os.path.join(resolve_server_path,"output","test_em.k")
+    standardfile = os.path.join(resolve_standard_path,"em.k")
     assert comparefile(outputfile,standardfile)
-
     
