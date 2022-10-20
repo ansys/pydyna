@@ -67,8 +67,6 @@ def init_log(log_file):
 class DynaSolution:
     """Contains methods to create general LS-DYNA keyword."""
 
-    object_list = []
-
     def __init__(self, hostname="localhost"):
         init_log("client.log")
         channel = grpc.insecure_channel(hostname + ":50051")
@@ -79,6 +77,7 @@ class DynaSolution:
             sys.exit()
         logging.info("Connected to kwServer...")
         self.stub = kwC2SStub(channel)
+        self.object_list = []
         self.mainname = ""
         DynaSolution.stub = self.stub
         DynaSolution.terminationtime = 0
