@@ -8,12 +8,13 @@ This example demonstrates how to create an EM Railgun input deck.
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+sys.path.append(os.path.join(sys.path[0],'../../'))
 from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynaem import *
 from ansys.dyna.pre.dynamech import *
 from ansys.dyna.pre.dynamaterial import *
 from em_railgun_data import *
+from ansys.dyna.pre import examples
 
 if __name__ == "__main__":
     hostname = "localhost"
@@ -22,7 +23,7 @@ if __name__ == "__main__":
 
     em_solution = DynaSolution(hostname)
     fns = []
-    path = os.path.dirname(__file__) + os.sep + "input" + os.sep + "em_railgun" + os.sep
+    path = examples.em_railgun+ os.sep
     fns.append(path + "em_railgun.k")
     em_solution.open_files(fns)
     em_solution.set_termination(termination_time=3e-4)

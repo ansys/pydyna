@@ -110,7 +110,7 @@ class DynaSolution:
             fn = os.path.basename(filename)
             self.stub.kwSetFileName(kwFileName(name=fn, num=filenames.index(filename)))
             upload(self.stub, path + os.sep + fn)
-            logging.info(path + os.sep + "input" + os.sep + fn + " uploaded to server...")
+            logging.info(path + os.sep + fn + " uploaded to server...")
 
         self.mainname = os.path.basename(filenames[0])
         return self.stub.LoadFile(LoadFileRequest())

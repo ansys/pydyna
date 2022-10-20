@@ -80,43 +80,6 @@ class DynaEM(DynaBase):
         logging.info("EM Timestep Created...")
         return ret
 
-    def create_em_control_contact(self, emct=0, cconly=0, ctype=0, dtype=0):
-        """Set electromagnetism contact algorithms, which detects contact between conductors.
-
-        Parameters
-        ----------
-        emct : int
-           EM contact activation flag:
-           EQ.0: No contact detection
-           EQ.1: Contact detection
-        cconly : int
-            Determines on which parts of the model the EM contact should be activated.
-
-            * EQ.0: Contact detection between all active parts associated with a conducting material. (Default)
-            * EQ.1: Only look for EM contact between parts associated through the EM_CONTACT card.
-              In some cases this option can reduce the calculation time.
-        ctype : int
-            Contact type:
-
-            * EQ.-1: Node to node contact based on constraints on the scalar potential. See Remark 1.
-            * EQ.0: Node to node penalty based contact on the scalar potential.
-            * EQ.1: Discrete mortar penalty contact on the scalar potential.
-            * EQ.2: Continuous mortar penalty contact on the scalar potential and the vector
-              potential (when active).
-        dtype : int
-            Detection type.
-
-        Returns
-        -------
-        bool
-            "True" when successful, "False" when failed
-        """
-        ret = self.stub.CreateEMControlContact(
-            EMControlContactRequest(emct=emct, cconly=cconly, ctype=ctype, dtype=dtype)
-        )
-        logging.info("EM Control Contact Created...")
-        return ret
-
     def create_em_contact(self, contid=0, dtype=0, psidm=0, psids=0, eps1=0.3, eps2=0.3, eps3=0.3, d0=0):
         """Optional card used for defining and specifying options on electromagnetic contacts between two sets of parts.
 

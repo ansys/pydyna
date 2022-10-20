@@ -9,11 +9,12 @@ import os
 from re import X
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+sys.path.append(os.path.join(sys.path[0],'../../'))
 from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynamech import *
 from ansys.dyna.pre.dynamaterial import *
 from camry_rc_data import *
+from ansys.dyna.pre import examples
 
 if __name__ == "__main__":
     hostname = "localhost"
@@ -23,7 +24,7 @@ if __name__ == "__main__":
     camry_solution = DynaSolution(hostname)
     #Import the initial mesh data(nodes and elements)
     fns = []
-    path = os.path.dirname(__file__) + os.sep + "input" + os.sep+ "camry_rc" + os.sep
+    path = examples.camry_rc+ os.sep
     fns.append(path + "Camry_RC_main.k")
     fns.append(path + "501_RIG_BAR_roof_crush_platen5.key")
     fns.append(path + "Camry_V1_NoSusAndPowerTrain_impl7.k")

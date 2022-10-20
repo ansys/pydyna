@@ -8,19 +8,21 @@ This example show how to create an Airbag deploy model with Pydyna-pre module
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+sys.path.append(os.path.join(sys.path[0],'../../'))
 from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynamech import *
 from ansys.dyna.pre.dynamaterial import *
+from ansys.dyna.pre import examples
+
 
 if __name__ == "__main__":
     hostname = "localhost"
     if len(sys.argv) > 1:
         hostname = sys.argv[1]
-
     airbag_solution = DynaSolution(hostname)
     fns = []
-    path = os.path.dirname(__file__) + os.sep + "input" + os.sep + "airbag_deploy" + os.sep
+    #path = sys.path[0] + os.sep + "input" + os.sep + "airbag_deploy" + os.sep
+    path = examples.airbag_deploy+ os.sep
     fns.append(path + "airbag_deploy.k")
     airbag_solution.open_files(fns)
 
