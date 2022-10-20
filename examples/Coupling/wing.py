@@ -9,12 +9,13 @@ This example demonstrates how to create an Wing input deck.
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
+sys.path.append(os.path.join(sys.path[0],'../../'))
 from ansys.dyna.pre.dynasolution import *
 from ansys.dyna.pre.dynamaterial import *
 from ansys.dyna.pre.dynaicfd import *
 from ansys.dyna.pre.dynadem import *
 from wing_data import *
+from ansys.dyna.pre import examples
 
 if __name__ == "__main__":
     hostname = "localhost"
@@ -24,7 +25,7 @@ if __name__ == "__main__":
     wing_solution = DynaSolution(hostname)  
     
     fns = []
-    path = os.path.dirname(__file__) + os.sep + "input" + os.sep + "wing" + os.sep
+    path = examples.wing+ os.sep
     fns.append(path + "main.k")
     fns.append(path + "fe-rig_mesh2.k")
     fns.append(path + "p22a-unts.k")
