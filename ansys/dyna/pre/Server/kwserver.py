@@ -318,6 +318,20 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print('Control Implicit Solution Created...')
         return kwprocess_pb2.ControlImplicitSolutionReply(answer = 0)
 
+    def CreateControlSPH(self,request,context):
+        ncbs = request.ncbs
+        boxid = request.boxid
+        idim = request.idim
+        nmneigh = request.nmneigh
+        form = request.form
+        maxv = request.maxv
+        card1 = str(ncbs)+','+str(boxid)+','+str(1e20)+str(idim)+','+str(nmneigh)+','+str(form)+','+str(0.0)+','+str(maxv)
+        card2 = "0,0,0,1,0,0,0,100"
+        newk = '*CONTROL_SPH\n'+card1 +'\n' +card2
+        self.kwdproc.newkeyword(newk)
+        print('Control SPH Created...')
+        return kwprocess_pb2.ControlSPHReply(answer = 0)
+
     def CreateDBBinary(self,request,context):
         filetype = request.filetype
         dt = request.dt
@@ -519,6 +533,42 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = 'Define Orientation '+str(vid)+'Created...'
         print(msg)
         return kwprocess_pb2.DefineOrientationReply(answer = 0)
+
+    def CreateDefineSPHMassflowPlane(self,request,context):
+        prtclsid = request.prtclsid
+        surfsid = request.surfsid
+        ptype = request.ptype
+        stype = request.stype
+        card1 = str(prtclsid)+","+str(surfsid)+","+str(ptype)+","+str(stype)
+        opcode = "*DEFINE_SPH_MASSFLOW_PLANE"
+        newk = opcode + "\n" + card1
+        self.kwdproc.newkeyword(newk)
+        print('*DEFINE_SPH_MASSFLOW_PLANE Created...')
+        return kwprocess_pb2.DefineOrientationReply(answer = 0)
+
+    def CreateDefineSPHMeshBox(self,request,context):
+        coords = request.coords
+        ipid = request.ipid
+        numparticles = request.numparticles
+        card1 = str(coords[0])+","+str(coords[1])+","+str(coords[2])+","+str(coords[3])+","+str(coords[4])+","+str(coords[5])
+        card2 = str(ipid)+","+str(numparticles[1])+","+str(numparticles[2])+","+str(numparticles[3])
+        opcode = "*DEFINE_SPH_MESH_BOX"
+        newk = opcode + "\n" + card1 + "\n" + card2
+        self.kwdproc.newkeyword(newk)
+        print('*DEFINE_SPH_MESH_BOX Created...')
+        return kwprocess_pb2.DefineSPHMeshBoxReply(answer = 0)
+
+    def CreateDefineSPHMeshSurface(self,request,context):
+        sid = request.sid
+        type = request.type
+        sphpid = request.sphpid
+        space = request.space
+        card1 = str(sid)+","+str(type)+","+str(sphpid)+",,,"+str(space)
+        opcode = "*DEFINE_SPH_MESH_SURFACE"
+        newk = opcode + "\n" + card1
+        self.kwdproc.newkeyword(newk)
+        print('*DEFINE_SPH_MESH_SURFACE Created...')
+        return kwprocess_pb2.DefineSPHMeshSurfaceReply(answer = 0)
 
     def CreatePartSet(self,request,context):
         sid = request.sid
@@ -1121,6 +1171,32 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.MatAddErosionReply(ret = 0)
 
+    def CreateMatSPHIncompressibleFluid(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        mu = request.mu
+        gamma1 = request.gamma1
+        gamma2 = request.gamma2
+        card1 = str(mid)+","+str(ro)+","+str(mu)+","+str(gamma1)+","+str(gamma2)
+        opcode = "*MAT_SPH_INCOMPRESSIBLE_FLUID"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        print(f'MAT_SPH_INCOMPRESSIBLE_FLUID {mid} Created...')
+        return kwprocess_pb2.MatSPHIncompressibleFluidReply(mid = mid)
+
+    def CreateMatSPHIncompressibleStructure(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        beta = request.beta
+        rough = request.rough
+        adh = request.adh
+        card1 = str(mid)+","+str(ro)+","+str(beta)+","+str(rough)+","+str(adh)
+        opcode = "*MAT_SPH_INCOMPRESSIBLE_STRUCTURE"
+        newk = opcode +"\n"+card1
+        self.kwdproc.newkeyword(newk)
+        print(f'MAT_SPH_INCOMPRESSIBLE_STRUCTURE {mid} Created...')
+        return kwprocess_pb2.MatSPHIncompressibleStructureReply(mid = mid)
+
     def CreateEOSLinearPolynomial(self,request,context):
         eosid = self.kwdproc.get_data(gdt.KWD_EOS_LASTID)+1
         ci = request.ci
@@ -1228,6 +1304,18 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = 'Section Discrete '+str(secid)+' Created...'
         print(msg)
         return kwprocess_pb2.SectionDiscreteReply(id = secid)
+
+    def CreateSectionSPH(self,request,context):
+        secid = self.kwdproc.get_data(gdt.KWD_SECTION_LASTID)+1
+        cslh = request.cslh
+        hmin = request.hmin
+        hmax = request.hmax
+        sphini = request.sphini
+        card1 = str(secid) + "," + str(cslh)+ "," + str(hmin)+ "," + str(hmax)+ "," + str(sphini)
+        newk = "*SECTION_SPH\n" + card1
+        self.kwdproc.newkeyword(newk)
+        print(f'SECTION_SPH {secid} + Created...')
+        return kwprocess_pb2.SectionSPHReply(id = secid)
 
     def CreateHourglass(self,request,context):
         ghid = self.kwdproc.get_data(gdt.KWD_HOURGLASS_LASTID)+1
@@ -1850,7 +1938,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         mid = request.mid
         eosid = request.eosid
         pref = request.pref
-        card1 = str(nmmgnm)+","+str(mid)+","+str(eosid)+",,,,,"+str(pref)+",0,0,0,0"
+        card1 = str(nmmgnm)+","+str(mid)+","+str(eosid)+",,,,,"+str(pref)
         newk = "*ALE_STRUCTURED_MULTI-MATERIAL_GROUP\n" + card1
         self.kwdproc.newkeyword(newk)
         msg = '*ALE_STRUCTURED_MULTI-MATERIAL_GROUP Created...'
@@ -1886,7 +1974,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = opcode + ' Created...'
         print(msg)
         return kwprocess_pb2.GeneralKWDReply(answer = 0) 
-
+    
 if __name__ == '__main__':
     server = IGAServer()
     server.run()
+    server.shutdown()
