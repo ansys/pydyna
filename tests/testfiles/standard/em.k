@@ -4,8 +4,8 @@ $#  slsfac    rwpnal    islchk    shlthk    penopt    thkchg     orien    enmass
        0.0       1.0         0         0         0         0         1         0
 $#  usrstr    usrfrc     nsbcs    interm     xpene     ssthk      ecdt   tiedprj
          0         0         0         0       0.0         0         0         0
-$#   sfric     dfric       edc       vfc        th     th_sf    pen_sf      
-                                                                      
+$#   sfric     dfric       edc       vfc        th     th_sf    pen_sf     ptscl
+                                                                                
 $#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin       
          1                                                            
 $#    isym    nserod    rwgaps    rwgdth     rwksf      icov    swradf    ithoff

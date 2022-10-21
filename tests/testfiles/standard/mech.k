@@ -10,8 +10,8 @@ $#  slsfac    rwpnal    islchk    shlthk    penopt    thkchg     orien    enmass
        0.0       1.0         0         0         0         0         1         0
 $#  usrstr    usrfrc     nsbcs    interm     xpene     ssthk      ecdt   tiedprj
          0         0         0         0       0.0         0         0         0
-$#   sfric     dfric       edc       vfc        th     th_sf    pen_sf      
-                                                                      
+$#   sfric     dfric       edc       vfc        th     th_sf    pen_sf     ptscl
+                                                                                
 $#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin       
          1                                                            
 $#    isym    nserod    rwgaps    rwgdth     rwksf      icov    swradf    ithoff
@@ -77,7 +77,7 @@ $#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
          1         0         0         0         0         0         0         0
 *RIGIDWALL_PLANAR_ID
 $#      id                                                                 title
-         1                                                                     
+         1                                                                      
 $#    nsid    nsidex     boxid    offset     birth     death     rwksf     
          0         0         0       0.0       0.0       0.0       0.0
 $#      xt        yt        zt        xh        yh        zh      fric      wvel

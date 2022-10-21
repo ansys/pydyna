@@ -13,8 +13,8 @@ $#  slsfac    rwpnal    islchk    shlthk    penopt    thkchg     orien    enmass
        0.0       1.0         0         0         0         0         1         0
 $#  usrstr    usrfrc     nsbcs    interm     xpene     ssthk      ecdt   tiedprj
          0         0         0         0       0.0         0         0         0
-$#   sfric     dfric       edc       vfc        th     th_sf    pen_sf      
-                                                                      
+$#   sfric     dfric       edc       vfc        th     th_sf    pen_sf     ptscl
+                                                                                
 $#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin       
          1                                                            
 $#    isym    nserod    rwgaps    rwgdth     rwksf      icov    swradf    ithoff
@@ -99,13 +99,13 @@ $#                 n                   x            ratio/xl
                  309                21.0                0.25
                  339                                     5.0
 *ALE_STRUCTURED_MULTI-MATERIAL_GROUP
-$#ammg_name       mid     eosid    unused    unused    unused    unused      prefÎ¯
+$#  ammgnm       mid     eosid    unused    unused    unused    unused      pref
 vacuum             1         0                                               0.0
-$#ammg_name       mid     eosid    unused    unused    unused    unused      prefÎ¯
+$#  ammgnm       mid     eosid    unused    unused    unused    unused      pref
 air                2         1                                        1.01325E-6
-$#ammg_name       mid     eosid    unused    unused    unused    unused      prefÎ¯
+$#  ammgnm       mid     eosid    unused    unused    unused    unused      pref
 HE                 3         2                                               0.0
-$#ammg_name       mid     eosid    unused    unused    unused    unused      prefÎ¯
+$#  ammgnm       mid     eosid    unused    unused    unused    unused      pref
 liner              4         3                                               0.0
 *ALE_STRUCTURED_MESH_VOLUME_FILLING
 $#   mshid    unused    ammgto    unused   nsample    unused   unused-       vid
@@ -134,7 +134,7 @@ $#      e0        v0
 $#   eosid         a         b        r1        r2      omeg        e0        vo
          2     8.261    0.1724      4.55      1.32      0.38     0.102       1.0
 *EOS_GRUNEISEN
-$#   eosid         c        s1        s2        s3     gamao         a        e0
+$#   eosid         c        s1        s2        s3    gamma0         a        e0
          3     0.394     1.489       0.0       0.0      2.02      0.47       0.0
 $#      v0    unused      lcid    
        0.0                   0

@@ -60,6 +60,6 @@ def test_sale(sale_initialfile,resolve_server_path,resolve_standard_path):
     solution.save_file()
     outputfile = os.path.join(resolve_server_path,"output","test_sale.k")
     standardfile = os.path.join(resolve_standard_path,"sale.k")
-    #assert comparefile(outputfile,standardfile)
+    assert comparefile(outputfile,standardfile)
     
     
