@@ -1978,4 +1978,3 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
 if __name__ == '__main__':
     server = IGAServer()
     server.run()
-    server.shutdown()
