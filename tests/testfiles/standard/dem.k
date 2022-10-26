@@ -6,7 +6,7 @@ $#  usrstr    usrfrc     nsbcs    interm     xpene     ssthk      ecdt   tiedprj
          0         0         0         0       0.0         0         0         0
 $#   sfric     dfric       edc       vfc        th     th_sf    pen_sf     ptscl
                                                                                 
-$#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin       
+$#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin
          1                                                            
 $#    isym    nserod    rwgaps    rwgdth     rwksf      icov    swradf    ithoff
                                                                                 
@@ -19,9 +19,9 @@ $#   gamma       vol       ang       gap    unused    ignore      nbuf  parallel
 
 $#   lnorm    lshear    unused     fricd        dc      ncrb        bt        dt
          0         0                 0.0       0.0         0       0.01.00000E20
-$#      cp        tc      tfac    
+$#      cp        tc      tfac
        0.0       0.0       0.0
-$# idesoft    sofscl    unused     iskip    maxnei      
+$# idesoft    sofscl    unused     iskip    maxnei
          0       0.1                   0        20
 *PART
 $#                                                                         title
@@ -32,7 +32,7 @@ $#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
 $#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
        1       1       1       3       4       2       0       0       0       0
 *NODE
-$#   nid               x               y               z      tc      rc  
+$#   nid               x               y               z      tc      rc
        1             0.0             0.0             0.0       0       0
        2            16.0             0.0             0.0       0       0
        3             0.0            16.0             0.0       0       0
