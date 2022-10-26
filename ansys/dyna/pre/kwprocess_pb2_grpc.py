@@ -104,6 +104,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.ControlImplicitSolutionRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ControlImplicitSolutionReply.FromString,
                 )
+        self.CreateControlSPH = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateControlSPH',
+                request_serializer=kwprocess__pb2.ControlSPHRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ControlSPHReply.FromString,
+                )
         self.CreateDBBinary = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateDBBinary',
                 request_serializer=kwprocess__pb2.DBBinaryRequest.SerializeToString,
@@ -269,6 +274,16 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.MatAddErosionRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.MatAddErosionReply.FromString,
                 )
+        self.CreateMatSPHIncompressibleFluid = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateMatSPHIncompressibleFluid',
+                request_serializer=kwprocess__pb2.MatSPHIncompressibleFluidRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MatSPHIncompressibleFluidReply.FromString,
+                )
+        self.CreateMatSPHIncompressibleStructure = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateMatSPHIncompressibleStructure',
+                request_serializer=kwprocess__pb2.MatSPHIncompressibleStructureRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MatSPHIncompressibleStructureReply.FromString,
+                )
         self.CreateEOSLinearPolynomial = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateEOSLinearPolynomial',
                 request_serializer=kwprocess__pb2.EOSLinearPolynomialRequest.SerializeToString,
@@ -308,6 +323,21 @@ class kwC2SStub(object):
                 '/kwgrpc.kwC2S/CreateDefineOrientation',
                 request_serializer=kwprocess__pb2.DefineOrientationRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.DefineOrientationReply.FromString,
+                )
+        self.CreateDefineSPHMassflowPlane = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateDefineSPHMassflowPlane',
+                request_serializer=kwprocess__pb2.DefineSPHMassflowPlaneRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.DefineSPHMassflowPlaneReply.FromString,
+                )
+        self.CreateDefineSPHMeshBox = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateDefineSPHMeshBox',
+                request_serializer=kwprocess__pb2.DefineSPHMeshBoxRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.DefineSPHMeshBoxReply.FromString,
+                )
+        self.CreateDefineSPHMeshSurface = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateDefineSPHMeshSurface',
+                request_serializer=kwprocess__pb2.DefineSPHMeshSurfaceRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.DefineSPHMeshSurfaceReply.FromString,
                 )
         self.CreatePartSet = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreatePartSet',
@@ -358,6 +388,11 @@ class kwC2SStub(object):
                 '/kwgrpc.kwC2S/CreateSectionDiscrete',
                 request_serializer=kwprocess__pb2.SectionDiscreteRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.SectionDiscreteReply.FromString,
+                )
+        self.CreateSectionSPH = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateSectionSPH',
+                request_serializer=kwprocess__pb2.SectionSPHRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.SectionSPHReply.FromString,
                 )
         self.CreateHourglass = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateHourglass',
@@ -743,6 +778,12 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateControlSPH(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateDBBinary(self, request, context):
         """---DATABASE
         """
@@ -949,6 +990,18 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateMatSPHIncompressibleFluid(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateMatSPHIncompressibleStructure(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateEOSLinearPolynomial(self, request, context):
         """---EOS
         """
@@ -994,6 +1047,24 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateDefineOrientation(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateDefineSPHMassflowPlane(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateDefineSPHMeshBox(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateDefineSPHMeshSurface(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1055,6 +1126,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateSectionDiscrete(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateSectionSPH(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1484,6 +1561,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.ControlImplicitSolutionRequest.FromString,
                     response_serializer=kwprocess__pb2.ControlImplicitSolutionReply.SerializeToString,
             ),
+            'CreateControlSPH': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateControlSPH,
+                    request_deserializer=kwprocess__pb2.ControlSPHRequest.FromString,
+                    response_serializer=kwprocess__pb2.ControlSPHReply.SerializeToString,
+            ),
             'CreateDBBinary': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateDBBinary,
                     request_deserializer=kwprocess__pb2.DBBinaryRequest.FromString,
@@ -1649,6 +1731,16 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.MatAddErosionRequest.FromString,
                     response_serializer=kwprocess__pb2.MatAddErosionReply.SerializeToString,
             ),
+            'CreateMatSPHIncompressibleFluid': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateMatSPHIncompressibleFluid,
+                    request_deserializer=kwprocess__pb2.MatSPHIncompressibleFluidRequest.FromString,
+                    response_serializer=kwprocess__pb2.MatSPHIncompressibleFluidReply.SerializeToString,
+            ),
+            'CreateMatSPHIncompressibleStructure': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateMatSPHIncompressibleStructure,
+                    request_deserializer=kwprocess__pb2.MatSPHIncompressibleStructureRequest.FromString,
+                    response_serializer=kwprocess__pb2.MatSPHIncompressibleStructureReply.SerializeToString,
+            ),
             'CreateEOSLinearPolynomial': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateEOSLinearPolynomial,
                     request_deserializer=kwprocess__pb2.EOSLinearPolynomialRequest.FromString,
@@ -1688,6 +1780,21 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateDefineOrientation,
                     request_deserializer=kwprocess__pb2.DefineOrientationRequest.FromString,
                     response_serializer=kwprocess__pb2.DefineOrientationReply.SerializeToString,
+            ),
+            'CreateDefineSPHMassflowPlane': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateDefineSPHMassflowPlane,
+                    request_deserializer=kwprocess__pb2.DefineSPHMassflowPlaneRequest.FromString,
+                    response_serializer=kwprocess__pb2.DefineSPHMassflowPlaneReply.SerializeToString,
+            ),
+            'CreateDefineSPHMeshBox': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateDefineSPHMeshBox,
+                    request_deserializer=kwprocess__pb2.DefineSPHMeshBoxRequest.FromString,
+                    response_serializer=kwprocess__pb2.DefineSPHMeshBoxReply.SerializeToString,
+            ),
+            'CreateDefineSPHMeshSurface': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateDefineSPHMeshSurface,
+                    request_deserializer=kwprocess__pb2.DefineSPHMeshSurfaceRequest.FromString,
+                    response_serializer=kwprocess__pb2.DefineSPHMeshSurfaceReply.SerializeToString,
             ),
             'CreatePartSet': grpc.unary_unary_rpc_method_handler(
                     servicer.CreatePartSet,
@@ -1738,6 +1845,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateSectionDiscrete,
                     request_deserializer=kwprocess__pb2.SectionDiscreteRequest.FromString,
                     response_serializer=kwprocess__pb2.SectionDiscreteReply.SerializeToString,
+            ),
+            'CreateSectionSPH': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateSectionSPH,
+                    request_deserializer=kwprocess__pb2.SectionSPHRequest.FromString,
+                    response_serializer=kwprocess__pb2.SectionSPHReply.SerializeToString,
             ),
             'CreateHourglass': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateHourglass,
@@ -2326,6 +2438,23 @@ class kwC2S(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def CreateControlSPH(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateControlSPH',
+            kwprocess__pb2.ControlSPHRequest.SerializeToString,
+            kwprocess__pb2.ControlSPHReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def CreateDBBinary(request,
             target,
             options=(),
@@ -2887,6 +3016,40 @@ class kwC2S(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def CreateMatSPHIncompressibleFluid(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatSPHIncompressibleFluid',
+            kwprocess__pb2.MatSPHIncompressibleFluidRequest.SerializeToString,
+            kwprocess__pb2.MatSPHIncompressibleFluidReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateMatSPHIncompressibleStructure(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatSPHIncompressibleStructure',
+            kwprocess__pb2.MatSPHIncompressibleStructureRequest.SerializeToString,
+            kwprocess__pb2.MatSPHIncompressibleStructureReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def CreateEOSLinearPolynomial(request,
             target,
             options=(),
@@ -3019,6 +3182,57 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDefineOrientation',
             kwprocess__pb2.DefineOrientationRequest.SerializeToString,
             kwprocess__pb2.DefineOrientationReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateDefineSPHMassflowPlane(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDefineSPHMassflowPlane',
+            kwprocess__pb2.DefineSPHMassflowPlaneRequest.SerializeToString,
+            kwprocess__pb2.DefineSPHMassflowPlaneReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateDefineSPHMeshBox(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDefineSPHMeshBox',
+            kwprocess__pb2.DefineSPHMeshBoxRequest.SerializeToString,
+            kwprocess__pb2.DefineSPHMeshBoxReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateDefineSPHMeshSurface(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDefineSPHMeshSurface',
+            kwprocess__pb2.DefineSPHMeshSurfaceRequest.SerializeToString,
+            kwprocess__pb2.DefineSPHMeshSurfaceReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3189,6 +3403,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateSectionDiscrete',
             kwprocess__pb2.SectionDiscreteRequest.SerializeToString,
             kwprocess__pb2.SectionDiscreteReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateSectionSPH(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateSectionSPH',
+            kwprocess__pb2.SectionSPHRequest.SerializeToString,
+            kwprocess__pb2.SectionSPHReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

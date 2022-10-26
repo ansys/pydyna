@@ -4,9 +4,9 @@ $#  slsfac    rwpnal    islchk    shlthk    penopt    thkchg     orien    enmass
        0.0       1.0         0         0         0         0         1         0
 $#  usrstr    usrfrc     nsbcs    interm     xpene     ssthk      ecdt   tiedprj
          0         0         0         0       0.0         0         0         0
-$#   sfric     dfric       edc       vfc        th     th_sf    pen_sf      
-                                                                      
-$#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin       
+$#   sfric     dfric       edc       vfc        th     th_sf    pen_sf     ptscl
+                                                                                
+$#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin
          1                                                            
 $#    isym    nserod    rwgaps    rwgdth     rwksf      icov    swradf    ithoff
                                                                                 
@@ -21,13 +21,13 @@ $#                                                                         title
 $#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
          1         0         0         0         0         0         0         0
 *RIGIDWALL_GEOMETRIC_CYLINDER_DISPLAY
-$#    nsid    nsidex     boxid     birth     death     
+$#    nsid    nsidex     boxid     birth     death
          0         0         0       0.0       0.0
-$#      xt        yt        zt        xh        yh        zh      fric    
+$#      xt        yt        zt        xh        yh        zh      fric
    2472.37    -600.0   1270.98   2472.37    -600.0   2668.53       0.0
-$#  radcyl    lencyl     nsegs     
+$#  radcyl    lencyl     nsegs
      100.0    1000.0         0
-$#     pid        ro         e        pr  
+$#     pid        ro         e        pr
          01.00000E-91.00000E-4       0.3
          0         0         0       0.0       0.0
    3580.25    -600.0   1261.37   3580.25    -600.0   3130.49       0.0
@@ -42,14 +42,14 @@ $#     pid        ro         e        pr
 *DEFINE_CURVE
 $#    lcid      sidr       sfa       sfo      offa      offo    dattyp     lcint
          1         0       1.0       1.0       0.0       0.0         0         0
-$#                a1                  o1  
+$#                a1                  o1
                  0.0                20.0
                100.0                20.0
 *ELEMENT_SHELL
 $#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
        1       1       1       3       4       2       0       0       0       0
 *NODE
-$#   nid               x               y               z      tc      rc  
+$#   nid               x               y               z      tc      rc
        1             0.0             0.0             0.0       0       0
        2            16.0             0.0             0.0       0       0
        3             0.0            16.0             0.0       0       0
