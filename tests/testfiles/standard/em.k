@@ -4,9 +4,9 @@ $#  slsfac    rwpnal    islchk    shlthk    penopt    thkchg     orien    enmass
        0.0       1.0         0         0         0         0         1         0
 $#  usrstr    usrfrc     nsbcs    interm     xpene     ssthk      ecdt   tiedprj
          0         0         0         0       0.0         0         0         0
-$#   sfric     dfric       edc       vfc        th     th_sf    pen_sf      
-                                                                      
-$#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin       
+$#   sfric     dfric       edc       vfc        th     th_sf    pen_sf     ptscl
+                                                                                
+$#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin
          1                                                            
 $#    isym    nserod    rwgaps    rwgdth     rwksf      icov    swradf    ithoff
                                                                                 
@@ -21,22 +21,22 @@ $#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
 $#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
        1       1       1       3       4       2       0       0       0       0
 *NODE
-$#   nid               x               y               z      tc      rc  
+$#   nid               x               y               z      tc      rc
        1             0.0             0.0             0.0       0       0
        2            16.0             0.0             0.0       0       0
        3             0.0            16.0             0.0       0       0
        4            16.0            16.0             0.0       0       0
 *EM_OUTPUT
-$#    mats      matf      sols      solf      mesh       mem    timing      
+$#    mats      matf      sols      solf      mesh       mem    timing
          2         2         2         2         0         0         0
 *EM_DATABASE_GLOBALENERGY
-$#   outlv     dtout     
+$#   outlv     dtout
          1       0.0
 *EM_OUTPUT
-$#    mats      matf      sols      solf      mesh       mem    timing      
+$#    mats      matf      sols      solf      mesh       mem    timing
          2         2         2         2         0         0         0
 *EM_DATABASE_GLOBALENERGY
-$#   outlv     dtout     
+$#   outlv     dtout
          1       0.0
 *EM_CONTROL
 $#   emsol     numls   macrodt   dimtype    nperio         -   ncylfem   ncylbem
@@ -45,10 +45,10 @@ $#   emsol     numls   macrodt   dimtype    nperio         -   ncylfem   ncylbem
 $#  tstype    dtcons      lcid    factor     tsmin     tsmas     rlcsf    mecats
          15.00000E-6         0       1.0       0.0       0.0        25         0
 *EM_SOLVER_BEM
-$#  reltol    maxite     stype    precon   uselast  ncyclbem        
+$#  reltol    maxite     stype    precon   uselast  ncyclbem
 1.00000E-6      1000         2         1         1         3
 *EM_SOLVER_FEM
-$#  reltol    maxite     stype    precon   uselast  ncyclfem        
+$#  reltol    maxite     stype    precon   uselast  ncyclfem
      0.001      1000         1         1         1         3
 *EM_SOLVER_BEMMAT
 $#   matid    unused    unused    unused    unused    unused    unused    reltol

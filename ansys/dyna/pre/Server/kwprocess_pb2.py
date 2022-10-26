@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fkwprocess.proto\x12\x06kwgrpc\"\x1d\n\x0bkwFileReply\x12\x0e\n\x06length\x18\x01 \x01(\x03\"\x17\n\x05\x43hunk\x12\x0e\n\x06\x62uffer\x18\x01 \x01(\x0c\"\'\n\nkwFileName\x12\x0b\n\x03num\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x1e\n\x0f\x44ownloadRequest\x12\x0b\n\x03url\x18\x01 \x01(\t\"\x1e\n\x0fkwFileNameReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\">\n\x0fTimestepRequest\x12\x0e\n\x06tssfac\x18\x01 \x01(\x02\x12\x0c\n\x04isdo\x18\x02 \x01(\x05\x12\r\n\x05\x64t2ms\x18\x03 \x01(\x02\"\x1f\n\rTimestepReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"$\n\x12TerminationRequest\x12\x0e\n\x06\x65ndtim\x18\x01 \x01(\x02\"\"\n\x10TerminationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"5\n\x14\x43ontrolOutputRequest\x12\r\n\x05npopt\x18\x01 \x01(\x05\x12\x0e\n\x06neecho\x18\x02 \x01(\x05\"$\n\x12\x43ontrolOutputReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"u\n\x15\x43ontrolContactRequest\x12\x0e\n\x06rwpnal\x18\x01 \x01(\x02\x12\x0e\n\x06shlthk\x18\x02 \x01(\x05\x12\r\n\x05orien\x18\x03 \x01(\x05\x12\r\n\x05ssthk\x18\x04 \x01(\x05\x12\x0e\n\x06ignore\x18\x05 \x01(\x05\x12\x0e\n\x06igactc\x18\x06 \x01(\x05\"%\n\x13\x43ontrolContactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x83\x01\n\x11\x43ontrolALERequest\x12\x0b\n\x03\x64\x63t\x18\x01 \x01(\x05\x12\x0c\n\x04nadv\x18\x02 \x01(\x05\x12\x0c\n\x04meth\x18\x03 \x01(\x05\x12\x0c\n\x04\x61\x66\x61\x63\x18\x04 \x01(\x02\x12\x0b\n\x03\x65nd\x18\x05 \x01(\x02\x12\r\n\x05\x61\x61\x66\x61\x63\x18\x06 \x01(\x02\x12\r\n\x05vfact\x18\x07 \x01(\x02\x12\x0c\n\x04pref\x18\x08 \x01(\x02\"!\n\x0f\x43ontrolALEReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"z\n\x1d\x43ontrolDiscreteElementRequest\x12\r\n\x05ndamp\x18\x01 \x01(\x02\x12\r\n\x05tdamp\x18\x02 \x01(\x02\x12\r\n\x05\x66rics\x18\x03 \x01(\x02\x12\r\n\x05\x66ricr\x18\x04 \x01(\x02\x12\r\n\x05normk\x18\x05 \x01(\x02\x12\x0e\n\x06sheark\x18\x06 \x01(\x02\"-\n\x1b\x43ontrolDiscreteElementReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"_\n\x16\x43ontrolAccuracyRequest\x12\x0b\n\x03osu\x18\x01 \x01(\x05\x12\x0b\n\x03inn\x18\x02 \x01(\x05\x12\x0e\n\x06pidosu\x18\x03 \x01(\x05\x12\x0c\n\x04iacc\x18\x04 \x01(\x05\x12\r\n\x05\x65xacc\x18\x05 \x01(\x02\"&\n\x14\x43ontrolAccuracyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"`\n\x14\x43ontrolEnergyRequest\x12\x0c\n\x04hgen\x18\x01 \x01(\x05\x12\x0c\n\x04rwen\x18\x02 \x01(\x05\x12\x0e\n\x06slnten\x18\x03 \x01(\x05\x12\r\n\x05rylen\x18\x04 \x01(\x05\x12\r\n\x05irgen\x18\x05 \x01(\x05\"$\n\x12\x43ontrolEnergyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"C\n\x1b\x43ontrolBulkViscosityRequest\x12\n\n\x02q1\x18\x01 \x01(\x02\x12\n\n\x02q2\x18\x02 \x01(\x02\x12\x0c\n\x04type\x18\x03 \x01(\x05\"+\n\x19\x43ontrolBulkViscosityReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"2\n\x17\x43ontrolHourglassRequest\x12\x0b\n\x03ihq\x18\x01 \x01(\x05\x12\n\n\x02qh\x18\x02 \x01(\x02\"\'\n\x15\x43ontrolHourglassReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x9d\x01\n\x13\x43ontrolShellRequest\x12\x0e\n\x06wrpang\x18\x01 \x01(\x02\x12\r\n\x05\x65sort\x18\x02 \x01(\x05\x12\r\n\x05irnxx\x18\x03 \x01(\x05\x12\x0e\n\x06istupd\x18\x04 \x01(\x05\x12\x0e\n\x06theory\x18\x05 \x01(\x05\x12\x0b\n\x03\x62wc\x18\x06 \x01(\x05\x12\r\n\x05miter\x18\x07 \x01(\x05\x12\x0c\n\x04proj\x18\x08 \x01(\x05\x12\x0e\n\x06irquad\x18\t \x01(\x05\"#\n\x11\x43ontrolShellReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x94\x01\n\x13\x43ontrolSolidRequest\x12\r\n\x05\x65sort\x18\x01 \x01(\x05\x12\x0e\n\x06\x66matrx\x18\x02 \x01(\x05\x12\x0f\n\x07niptets\x18\x03 \x01(\x05\x12\x0e\n\x06swlocl\x18\x04 \x01(\x05\x12\x0e\n\x06psfail\x18\x05 \x01(\x05\x12\x0f\n\x07t10jtol\x18\x06 \x01(\x02\x12\x0c\n\x04icoh\x18\x07 \x01(\x05\x12\x0e\n\x06tet13k\x18\x08 \x01(\x05\"#\n\x11\x43ontrolSolidReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"<\n\x1d\x43ontrolImplicitGeneralRequest\x12\x0e\n\x06imflag\x18\x01 \x01(\x05\x12\x0b\n\x03\x64t0\x18\x02 \x01(\x02\"-\n\x1b\x43ontrolImplicitGeneralReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\";\n\x1a\x43ontrolImplicitAutoRequest\x12\r\n\x05iauto\x18\x01 \x01(\x05\x12\x0e\n\x06iteopt\x18\x02 \x01(\x05\"*\n\x18\x43ontrolImplicitAutoReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"K\n\x1d\x43ontrolImplicitDynamicRequest\x12\r\n\x05imass\x18\x01 \x01(\x05\x12\r\n\x05gamma\x18\x02 \x01(\x02\x12\x0c\n\x04\x62\x65ta\x18\x03 \x01(\x02\"-\n\x1b\x43ontrolImplicitDynamicReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"@\n ControlImplicitEigenvalueRequest\x12\x0c\n\x04neig\x18\x01 \x01(\x05\x12\x0e\n\x06shfscl\x18\x02 \x01(\x02\"0\n\x1e\x43ontrolImplicitEigenvalueReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"a\n\x1e\x43ontrolImplicitSolutionRequest\x12\x0f\n\x07nsolver\x18\x01 \x01(\x05\x12\x0e\n\x06ilimit\x18\x02 \x01(\x05\x12\x0e\n\x06maxref\x18\x03 \x01(\x05\x12\x0e\n\x06\x61\x62stol\x18\x04 \x01(\x02\".\n\x1c\x43ontrolImplicitSolutionReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"o\n\x0f\x44\x42\x42inaryRequest\x12\x10\n\x08\x66iletype\x18\x01 \x01(\t\x12\n\n\x02\x64t\x18\x02 \x01(\x02\x12\x0e\n\x06maxint\x18\x03 \x01(\x05\x12\x0e\n\x06ieverp\x18\x04 \x01(\x05\x12\r\n\x05\x64\x63omp\x18\x05 \x01(\x05\x12\x0f\n\x07nintsld\x18\x06 \x01(\x05\"\x1f\n\rDBBinaryReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\" \n\x0f\x44\x42\x41LEMatRequest\x12\r\n\x05\x64tout\x18\x01 \x01(\x02\"\x1f\n\rDBALEMatReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"W\n\x0e\x44\x42\x41sciiRequest\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\n\n\x02\x64t\x18\x02 \x01(\x02\x12\x0e\n\x06\x62inary\x18\x03 \x01(\x05\x12\x0c\n\x04lcur\x18\x04 \x01(\x05\x12\r\n\x05ioopt\x18\x05 \x01(\x05\"\x1e\n\x0c\x44\x42\x41sciiReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x1f\n\rDBSALERequest\x12\x0e\n\x06switch\x18\x01 \x01(\x05\"\x1d\n\x0b\x44\x42SALEReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"/\n\x0fLoadBodyRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"\x1f\n\rLoadBodyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"0\n\x0eInitVelRequest\x12\x0c\n\x04nsid\x18\x01 \x01(\x05\x12\x10\n\x08velocity\x18\x02 \x03(\x02\"\x1e\n\x0cInitVelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x7f\n\x17InitVelRigidBodyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\n\n\x02vx\x18\x02 \x01(\x02\x12\n\n\x02vy\x18\x03 \x01(\x02\x12\n\n\x02vz\x18\x04 \x01(\x02\x12\x0b\n\x03vxr\x18\x05 \x01(\x02\x12\x0b\n\x03vyr\x18\x06 \x01(\x02\x12\x0b\n\x03vzr\x18\x07 \x01(\x02\x12\x0c\n\x04lcid\x18\x08 \x01(\x05\"\'\n\x15InitVelRigidBodyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xbe\x01\n\x18InitVelGenerationRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04styp\x18\x02 \x01(\x05\x12\r\n\x05omega\x18\x03 \x01(\x02\x12\n\n\x02vx\x18\x04 \x01(\x02\x12\n\n\x02vy\x18\x05 \x01(\x02\x12\n\n\x02vz\x18\x06 \x01(\x02\x12\n\n\x02xc\x18\x07 \x01(\x02\x12\n\n\x02yc\x18\x08 \x01(\x02\x12\n\n\x02zc\x18\t \x01(\x02\x12\n\n\x02nx\x18\n \x01(\x02\x12\n\n\x02ny\x18\x0b \x01(\x02\x12\n\n\x02nz\x18\x0c \x01(\x02\x12\r\n\x05phase\x18\r \x01(\x05\"(\n\x16InitVelGenerationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"2\n!InitVelGenerationStartTimeRequest\x12\r\n\x05stime\x18\x01 \x01(\x02\"1\n\x1fInitVelGenerationStartTimeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"?\n\x15InitDetonationRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05\x63oord\x18\x02 \x03(\x02\x12\n\n\x02lt\x18\x03 \x01(\x02\"%\n\x13InitDetonationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x8e\x01\n\x14RigidWallGeomRequest\x12\x10\n\x08geomtype\x18\x01 \x01(\x05\x12\x0e\n\x06motion\x18\x02 \x01(\x05\x12\x0f\n\x07\x64isplay\x18\x03 \x01(\x08\x12\x11\n\tparameter\x18\x04 \x03(\x02\x12\x0c\n\x04lcid\x18\x05 \x01(\x05\x12\n\n\x02vx\x18\x06 \x01(\x02\x12\n\n\x02vy\x18\x07 \x01(\x02\x12\n\n\x02vz\x18\x08 \x01(\x02\"$\n\x12RigidWallGeomReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"c\n\x16RigidWallPlanarRequest\x12\x0c\n\x04nsid\x18\x01 \x01(\x05\x12\x0e\n\x06nsidex\x18\x02 \x01(\x05\x12\r\n\x05\x62oxid\x18\x03 \x01(\x05\x12\x0e\n\x06normal\x18\x04 \x03(\x02\x12\x0c\n\x04\x66ric\x18\x05 \x01(\x02\"&\n\x14RigidWallPlanarReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xa9\x04\n\x0e\x43ontactRequest\x12\x0b\n\x03\x63id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0f\n\x07option1\x18\x03 \x01(\t\x12\x0f\n\x07option2\x18\x04 \x01(\t\x12\x0f\n\x07option3\x18\x05 \x01(\x08\x12\x0e\n\x06offset\x18\x06 \x01(\t\x12\x0c\n\x04ssid\x18\x07 \x01(\x05\x12\x0c\n\x04msid\x18\x08 \x01(\x05\x12\r\n\x05sstyp\x18\t \x01(\x05\x12\r\n\x05mstyp\x18\n \x01(\x05\x12\x0c\n\x04sapr\x18\x0b \x01(\x05\x12\x0c\n\x04sbpr\x18\x0c \x01(\x05\x12\x0c\n\x04sfsa\x18\r \x01(\x02\x12\x0c\n\x04sfsb\x18\x0e \x01(\x02\x12\n\n\x02\x66s\x18\x0f \x01(\x02\x12\n\n\x02\x66\x64\x18\x10 \x01(\x02\x12\x0b\n\x03vdc\x18\x11 \x01(\x02\x12\x0e\n\x06penchk\x18\x12 \x01(\x05\x12\x11\n\tbirthtime\x18\x13 \x01(\x02\x12\x0b\n\x03sst\x18\x14 \x01(\x02\x12\x0b\n\x03mst\x18\x15 \x01(\x02\x12\x11\n\toptionres\x18\x16 \x01(\x05\x12\x0c\n\x04nfls\x18\x17 \x01(\x02\x12\x0c\n\x04sfls\x18\x18 \x01(\x02\x12\r\n\x05param\x18\x19 \x01(\x02\x12\r\n\x05\x63t2cn\x18\x1a \x01(\x02\x12\x0c\n\x04soft\x18\x1b \x01(\x05\x12\x0e\n\x06sofscl\x18\x1c \x01(\x02\x12\x0e\n\x06lcidab\x18\x1d \x01(\x05\x12\x0e\n\x06maxpar\x18\x1e \x01(\x02\x12\r\n\x05sbopt\x18\x1f \x01(\x05\x12\r\n\x05\x64\x65pth\x18  \x01(\x05\x12\r\n\x05\x62sort\x18! \x01(\x05\x12\x0e\n\x06\x66rcfrq\x18\" \x01(\x05\x12\x0c\n\x04igap\x18# \x01(\x05\x12\x0e\n\x06ignore\x18$ \x01(\x05\"\x1e\n\x0c\x43ontactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xb8\x01\n\x1a\x42\x64yPrescribedMotionRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07heading\x18\x02 \x01(\t\x12\x0e\n\x06option\x18\x03 \x01(\t\x12\x0e\n\x06typeid\x18\x04 \x01(\x05\x12\x0b\n\x03\x64of\x18\x05 \x01(\x05\x12\x0b\n\x03vad\x18\x06 \x01(\x05\x12\x0c\n\x04lcid\x18\x07 \x01(\x05\x12\n\n\x02sf\x18\x08 \x01(\x02\x12\x0b\n\x03vid\x18\t \x01(\x05\x12\r\n\x05\x62irth\x18\n \x01(\x02\x12\r\n\x05\x64\x65\x61th\x18\x0b \x01(\x02\"*\n\x18\x42\x64yPrescribedMotionReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xc3\x01\n\rBdySpcRequest\x12\x0f\n\x07option1\x18\x01 \x01(\t\x12\x12\n\nbirthdeath\x18\x02 \x01(\x08\x12\x0b\n\x03nid\x18\x03 \x01(\x05\x12\x0b\n\x03\x63id\x18\x04 \x01(\x05\x12\x0c\n\x04\x64ofx\x18\x05 \x01(\x05\x12\x0c\n\x04\x64ofy\x18\x06 \x01(\x05\x12\x0c\n\x04\x64ofz\x18\x07 \x01(\x05\x12\r\n\x05\x64ofrx\x18\x08 \x01(\x05\x12\r\n\x05\x64ofry\x18\t \x01(\x05\x12\r\n\x05\x64ofrz\x18\n \x01(\x05\x12\r\n\x05\x62irth\x18\x0b \x01(\x02\x12\r\n\x05\x64\x65\x61th\x18\x0c \x01(\x02\"\x1d\n\x0b\x42\x64ySpcReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"W\n\x1c\x43onstrainedExtraNodesRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\x0b\n\x03pid\x18\x02 \x01(\x05\x12\x0b\n\x03nid\x18\x03 \x01(\x05\x12\r\n\x05iflag\x18\x04 \x01(\x05\",\n\x1a\x43onstrainedExtraNodesReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"=\n ConstrainedNodalRigidBodyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\x0c\n\x04nsid\x18\x02 \x01(\x05\"-\n\x1e\x43onstrainedNodalRigidBodyReply\x12\x0b\n\x03pid\x18\x01 \x01(\x05\":\n\x1a\x43onstrainedSpotWeldRequest\x12\r\n\x05node1\x18\x01 \x01(\x05\x12\r\n\x05node2\x18\x02 \x01(\x05\"&\n\x18\x43onstrainedSpotWeldReply\x12\n\n\x02id\x18\x01 \x01(\x05\"Q\n\x17\x43onstrainedJointRequest\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\r\n\x05nodes\x18\x02 \x03(\x05\x12\x0b\n\x03rps\x18\x03 \x01(\x02\x12\x0c\n\x04\x64\x61mp\x18\x04 \x01(\x02\"#\n\x15\x43onstrainedJointReply\x12\n\n\x02id\x18\x01 \x01(\x05\"X\n\x16SectionIGAShellRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x02 \x01(\x05\x12\x0c\n\x04shrf\x18\x03 \x01(\x02\x12\x11\n\tthickness\x18\x04 \x01(\x02\"\"\n\x14SectionIGAShellReply\x12\n\n\x02id\x18\x01 \x01(\x05\"h\n\x12SectionBeamRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x02 \x01(\x05\x12\x0c\n\x04shrf\x18\x03 \x01(\x02\x12\x0b\n\x03\x63st\x18\x04 \x01(\x05\x12\x0b\n\x03ts1\x18\x05 \x01(\x02\x12\x0b\n\x03ts2\x18\x06 \x01(\x02\"\x1e\n\x10SectionBeamReply\x12\n\n\x02id\x18\x01 \x01(\x05\"\x8e\x01\n\x13SectionShellRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x02 \x01(\x05\x12\x0c\n\x04shrf\x18\x03 \x01(\x02\x12\x0b\n\x03nip\x18\x04 \x01(\x05\x12\r\n\x05propt\x18\x05 \x01(\x05\x12\n\n\x02t1\x18\x06 \x01(\x02\x12\n\n\x02t2\x18\x07 \x01(\x02\x12\n\n\x02t3\x18\x08 \x01(\x02\x12\n\n\x02t4\x18\t \x01(\x02\"\x1f\n\x11SectionShellReply\x12\n\n\x02id\x18\x01 \x01(\x05\"C\n\x13SectionSolidRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x03 \x01(\x05\"\x1f\n\x11SectionSolidReply\x12\n\n\x02id\x18\x01 \x01(\x05\"~\n\x16SectionDiscreteRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0b\n\x03\x64ro\x18\x02 \x01(\x05\x12\n\n\x02kd\x18\x03 \x01(\x02\x12\n\n\x02v0\x18\x04 \x01(\x02\x12\n\n\x02\x63l\x18\x05 \x01(\x02\x12\n\n\x02\x66\x64\x18\x06 \x01(\x02\x12\x0b\n\x03\x63\x64l\x18\x07 \x01(\x02\x12\x0b\n\x03tdl\x18\x08 \x01(\x02\"\"\n\x14SectionDiscreteReply\x12\n\n\x02id\x18\x01 \x01(\x05\"i\n\x10HourglassRequest\x12\x0c\n\x04ghid\x18\x01 \x01(\x05\x12\x0b\n\x03ihq\x18\x02 \x01(\x05\x12\n\n\x02qm\x18\x03 \x01(\x02\x12\n\n\x02q1\x18\x04 \x01(\x02\x12\n\n\x02q2\x18\x05 \x01(\x02\x12\n\n\x02qb\x18\x06 \x01(\x02\x12\n\n\x02qw\x18\x07 \x01(\x02\"\x1c\n\x0eHourglassReply\x12\n\n\x02id\x18\x01 \x01(\x05\"b\n\x12\x44\x65\x66ineCurveRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\x12\x0b\n\x03sfo\x18\x03 \x01(\x02\x12\x10\n\x08\x61\x62scissa\x18\x04 \x03(\x01\x12\x10\n\x08ordinate\x18\x05 \x03(\x01\"\x1e\n\x10\x44\x65\x66ineCurveReply\x12\n\n\x02id\x18\x01 \x01(\x05\"y\n\x13\x44\x65\x66ineVectorRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03vid\x18\x02 \x01(\x05\x12\n\n\x02xt\x18\x03 \x01(\x02\x12\n\n\x02yt\x18\x04 \x01(\x02\x12\n\n\x02zt\x18\x05 \x01(\x02\x12\n\n\x02xh\x18\x06 \x01(\x02\x12\n\n\x02yh\x18\x07 \x01(\x02\x12\n\n\x02zh\x18\x08 \x01(\x02\"#\n\x11\x44\x65\x66ineVectorReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"f\n\x10\x44\x65\x66ineBoxRequest\x12\x0c\n\x04xmin\x18\x01 \x01(\x02\x12\x0c\n\x04xmax\x18\x02 \x01(\x02\x12\x0c\n\x04ymin\x18\x03 \x01(\x02\x12\x0c\n\x04ymax\x18\x04 \x01(\x02\x12\x0c\n\x04zmin\x18\x05 \x01(\x02\x12\x0c\n\x04zmax\x18\x06 \x01(\x02\"\x1f\n\x0e\x44\x65\x66ineBoxReply\x12\r\n\x05\x62oxid\x18\x01 \x01(\x05\"\x81\x01\n\x1a\x44\x65\x66ineDEMeshSurfaceRequest\x12\x0b\n\x03sid\x18\x01 \x01(\x05\x12\x0c\n\x04type\x18\x02 \x01(\x05\x12\r\n\x05nquad\x18\x03 \x01(\x05\x12\x0e\n\x06\x64\x65spid\x18\x04 \x01(\x05\x12\x0e\n\x06\x64\x65sxid\x18\x05 \x01(\x05\x12\x0c\n\x04nsid\x18\x06 \x01(\x05\x12\x0b\n\x03rsf\x18\x07 \x01(\x02\"*\n\x18\x44\x65\x66ineDEMeshSurfaceReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"b\n\x18\x44\x65\x66ineOrientationRequest\x12\x0b\n\x03vid\x18\x01 \x01(\x05\x12\x0b\n\x03iop\x18\x02 \x01(\x05\x12\x0e\n\x06vector\x18\x03 \x03(\x02\x12\r\n\x05node1\x18\x04 \x01(\x05\x12\r\n\x05node2\x18\x05 \x01(\x05\"(\n\x16\x44\x65\x66ineOrientationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"J\n\x0ePartSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x0c\n\x04pids\x18\x04 \x03(\x05\"\x1a\n\x0cPartSetReply\x12\n\n\x02id\x18\x01 \x01(\x05\"K\n\x0fShellSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x0c\n\x04\x65ids\x18\x04 \x03(\x05\"\x1f\n\rShellSetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"9\n\x0fSolidSetRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\n\n\x02ki\x18\x03 \x03(\x05\"\x1f\n\rSolidSetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"a\n\x0eNodeSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x11\n\tgenoption\x18\x04 \x01(\t\x12\x10\n\x08\x65ntities\x18\x05 \x03(\x05\"\x1a\n\x0cNodeSetReply\x12\n\n\x02id\x18\x01 \x01(\x05\"o\n\x11SegmentSetRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\x0e\n\x06solver\x18\x03 \x01(\t\x12\n\n\x02n1\x18\x04 \x03(\x05\x12\n\n\x02n2\x18\x05 \x03(\x05\x12\n\n\x02n3\x18\x06 \x03(\x05\x12\n\n\x02n4\x18\x07 \x03(\x05\"\x1d\n\x0fSegmentSetReply\x12\n\n\x02id\x18\x01 \x01(\x05\"\x87\x01\n\x13PartPropertyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\x12\r\n\x05\x65osid\x18\x04 \x01(\x05\x12\x0c\n\x04hgid\x18\x05 \x01(\x05\x12\x0c\n\x04grav\x18\x06 \x01(\x05\x12\x0e\n\x06\x61\x64popt\x18\x07 \x01(\x05\x12\x0c\n\x04tmid\x18\x08 \x01(\x05\"#\n\x11PartPropertyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x89\x02\n\x0bPartRequest\x12\x0f\n\x07\x63ontact\x18\x01 \x01(\x08\x12\x0f\n\x07heading\x18\x02 \x01(\t\x12\x0b\n\x03pid\x18\x03 \x01(\x05\x12\r\n\x05secid\x18\x04 \x01(\x05\x12\x0b\n\x03mid\x18\x05 \x01(\x05\x12\r\n\x05\x65osid\x18\x06 \x01(\x05\x12\x0c\n\x04hgid\x18\x07 \x01(\x05\x12\x0c\n\x04grav\x18\x08 \x01(\x05\x12\x0e\n\x06\x61\x64popt\x18\t \x01(\x05\x12\x0c\n\x04tmid\x18\n \x01(\x05\x12\n\n\x02\x66\x61\x18\x0b \x01(\x02\x12\n\n\x02\x66\x64\x18\x0c \x01(\x02\x12\n\n\x02\x64\x63\x18\r \x01(\x02\x12\n\n\x02vc\x18\x0e \x01(\x02\x12\x0c\n\x04optt\x18\x0f \x01(\x02\x12\x0b\n\x03sft\x18\x10 \x01(\x02\x12\x0b\n\x03ssf\x18\x11 \x01(\x02\x12\x0e\n\x06\x63parm8\x18\x12 \x01(\x02\"\x1b\n\tPartReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"9\n\x0cMatEMRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\r\n\x05sigma\x18\x03 \x01(\x02\"\x18\n\nMatEMReply\x12\n\n\x02id\x18\x01 \x01(\x05\"j\n\x0fMatRigidRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0b\n\x03\x63mo\x18\x05 \x01(\x05\x12\x0c\n\x04\x63on1\x18\x06 \x01(\x05\x12\x0c\n\x04\x63on2\x18\x07 \x01(\x05\"\x1c\n\rMatRigidReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"C\n\x11MatElasticRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\"\x1e\n\x0fMatElasticReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"\x85\x01\n\x12MatSpotweldRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0c\n\x04sigy\x18\x05 \x01(\x02\x12\n\n\x02\x65h\x18\x06 \x01(\x02\x12\x0b\n\x03nrr\x18\x07 \x01(\x02\x12\x0b\n\x03nrs\x18\x08 \x01(\x02\x12\x0b\n\x03nrt\x18\t \x01(\x02\"\x1f\n\x10MatSpotweldReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"q\n#MatPiecewiseLinearPlasticityRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0c\n\x04sigy\x18\x05 \x01(\x02\x12\x0c\n\x04\x65tan\x18\x06 \x01(\x02\"0\n!MatPiecewiseLinearPlasticityReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"\x97\x01\n+MatModifiedPiecewiseLinearPlasticityRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0c\n\x04sigy\x18\x05 \x01(\x02\x12\x0c\n\x04\x65tan\x18\x06 \x01(\x02\x12\x0c\n\x04\x66\x61il\x18\x07 \x01(\x02\x12\x0e\n\x06numint\x18\x08 \x01(\x05\"8\n)MatModifiedPiecewiseLinearPlasticityReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"l\n\x10MatFabricRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\n\n\x02\x65\x61\x18\x03 \x01(\x02\x12\n\n\x02\x65\x62\x18\x04 \x01(\x02\x12\x0c\n\x04prba\x18\x05 \x01(\x02\x12\x0c\n\x04prab\x18\x06 \x01(\x02\x12\x0b\n\x03gab\x18\x07 \x01(\x02\"\x1d\n\x0eMatFabricReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"=\n MatSpringNonlinearElasticRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"-\n\x1eMatSpringNonlinearElasticReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"2\n\x17MatDamperViscousRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02\x64\x63\x18\x02 \x01(\x02\"$\n\x15MatDamperViscousReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"=\n MatDamperNonlinearViscousRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0c\n\x04lcdr\x18\x02 \x01(\x05\"-\n\x1eMatDamperNonlinearViscousReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"(\n\x0eMatNullRequest\x12\n\n\x02ro\x18\x01 \x01(\x02\x12\n\n\x02pc\x18\x02 \x01(\x02\"\x1b\n\x0cMatNullReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"\xc2\x01\n\x15MatJohnsonCookRequest\x12\n\n\x02ro\x18\x01 \x01(\x02\x12\t\n\x01g\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x11\n\tconstants\x18\x05 \x03(\x02\x12\n\n\x02tm\x18\x06 \x01(\x02\x12\n\n\x02tr\x18\x07 \x01(\x02\x12\x0c\n\x04\x65ps0\x18\x08 \x01(\x02\x12\n\n\x02\x63p\x18\t \x01(\x02\x12\n\n\x02pc\x18\n \x01(\x02\x12\r\n\x05spall\x18\x0b \x01(\x02\x12\n\n\x02it\x18\x0c \x01(\x02\x12\x0f\n\x07\x66\x61ilure\x18\r \x03(\x02\"\"\n\x13MatJohnsonCookReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"A\n\x1bMatHighExplosiveBurnRequest\x12\n\n\x02ro\x18\x01 \x01(\x02\x12\t\n\x01\x64\x18\x02 \x01(\x02\x12\x0b\n\x03pcj\x18\x03 \x01(\x02\"(\n\x19MatHighExplosiveBurnReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"\x1f\n\x10MatVacuumRequest\x12\x0b\n\x03rho\x18\x01 \x01(\x02\"\x1d\n\x0eMatVacuumReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"B\n\x14MatAddErosionRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0e\n\x06mnpres\x18\x02 \x01(\x02\x12\r\n\x05mxeps\x18\x03 \x01(\x02\"!\n\x12MatAddErosionReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"@\n\x1a\x45OSLinearPolynomialRequest\x12\n\n\x02\x63i\x18\x01 \x03(\x02\x12\n\n\x02\x65\x30\x18\x02 \x01(\x02\x12\n\n\x02v0\x18\x03 \x01(\x02\")\n\x18\x45OSLinearPolynomialReply\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\"%\n\rEOSJWLRequest\x12\x14\n\x0cjwl_equation\x18\x01 \x03(\x02\"\x1c\n\x0b\x45OSJWLReply\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\"?\n\x13\x45OSGruneisenRequest\x12\x11\n\tconstants\x18\x01 \x03(\x02\x12\t\n\x01\x61\x18\x02 \x01(\x02\x12\n\n\x02\x65\x30\x18\x03 \x01(\x02\"\"\n\x11\x45OSGruneisenReply\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\"\x1f\n\x0fSaveFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1f\n\rSaveFileReply\x12\x0e\n\x06length\x18\x01 \x01(\x03\"\x1f\n\x0fLoadFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1c\n\rLoadFileReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"\x11\n\x0fGetNodesRequest\"\x1f\n\rGetNodesReply\x12\x0e\n\x06\x63oords\x18\x01 \x03(\x01\"\x19\n\x17GetSolidElementsRequest\"(\n\x15GetSolidElementsReply\x12\x0f\n\x07nodeids\x18\x01 \x03(\x03\"1\n\x16ICFDControlTimeRequest\x12\x0b\n\x03tim\x18\x01 \x01(\x02\x12\n\n\x02\x64t\x18\x02 \x01(\x02\"&\n\x14ICFDControlTimeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"V\n\x19ICFDControlGeneralRequest\x12\r\n\x05\x61type\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\x0c\n\x04\x64vcl\x18\x03 \x01(\x05\x12\r\n\x05rdvcl\x18\x04 \x01(\x05\")\n\x17ICFDControlGeneralReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"(\n\x18ICFDControlOutputRequest\x12\x0c\n\x04msgl\x18\x01 \x01(\x05\"(\n\x16ICFDControlOutputReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\",\n\x1cICFDControlTurbulenceRequest\x12\x0c\n\x04tmod\x18\x01 \x01(\x05\",\n\x1aICFDControlTurbulenceReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"R\n\x1dICFDControlDEMCouplingRequest\x12\r\n\x05\x63type\x18\x01 \x01(\x05\x12\n\n\x02\x62t\x18\x02 \x01(\x02\x12\n\n\x02\x64t\x18\x03 \x01(\x02\x12\n\n\x02sf\x18\x04 \x01(\x02\"-\n\x1bICFDControlDEMCouplingReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"!\n\x12ICFDSectionRequest\x12\x0b\n\x03sid\x18\x01 \x01(\x05\"\"\n\x10ICFDSectionReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"C\n\x0eICFDMatRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0b\n\x03\x66lg\x18\x02 \x01(\x05\x12\n\n\x02ro\x18\x03 \x01(\x02\x12\x0b\n\x03vis\x18\x04 \x01(\x02\"\x1a\n\x0cICFDMatReply\x12\n\n\x02id\x18\x01 \x01(\x05\":\n\x0fICFDPartRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\"\x1f\n\rICFDPartReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"L\n\x12ICFDPartVolRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\x12\r\n\x05spids\x18\x04 \x03(\x05\"\x1e\n\x10ICFDPartVolReply\x12\n\n\x02id\x18\x01 \x01(\x05\" \n\x11ICFDDBDragRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"!\n\x0fICFDDBDragReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"R\n\x1bICFDBdyPrescribedVelRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\x0b\n\x03\x64of\x18\x02 \x01(\x05\x12\x0b\n\x03vad\x18\x03 \x01(\x05\x12\x0c\n\x04lcid\x18\x04 \x01(\x05\"+\n\x19ICFDBdyPrescribedVelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"8\n\x1bICFDBdyPrescribedPreRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"+\n\x19ICFDBdyPrescribedPreReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"%\n\x16ICFDBdyFreeSlipRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"&\n\x14ICFDBdyFreeSlipReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"$\n\x15ICFDBdyNonSlipRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"%\n\x13ICFDBdyNonSlipReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"6\n\x18ICFDSolverTolMMOVRequest\x12\x0c\n\x04\x61tol\x18\x01 \x01(\x02\x12\x0c\n\x04rtol\x18\x02 \x01(\x02\"(\n\x16ICFDSolverTolMMOVReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"B\n\x17ICFDPartPropertyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\"\'\n\x15ICFDPartPropertyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"H\n\x1dICFDVolumePartPropertyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\"-\n\x1bICFDVolumePartPropertyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"0\n\x11MeshVolumeRequest\x12\r\n\x05volid\x18\x01 \x01(\x05\x12\x0c\n\x04pids\x18\x02 \x03(\x05\"\x1d\n\x0fMeshVolumeReply\x12\n\n\x02id\x18\x01 \x01(\x05\"4\n\x15MeshEmbedShellRequest\x12\r\n\x05volid\x18\x01 \x01(\x05\x12\x0c\n\x04pids\x18\x02 \x03(\x05\"%\n\x13MeshEmbedShellReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"+\n\rMeshBlRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05nelth\x18\x02 \x01(\x05\"\x1d\n\x0bMeshBlReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"f\n\x14MeshSizeShapeRequest\x12\r\n\x05sname\x18\x01 \x01(\t\x12\r\n\x05\x66orce\x18\x02 \x01(\x05\x12\x0e\n\x06method\x18\x03 \x01(\x05\x12\r\n\x05msize\x18\x04 \x01(\x02\x12\x11\n\tparameter\x18\x05 \x03(\x02\"$\n\x12MeshSizeShapeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"i\n\x1e\x41LECreateStructuredMeshRequest\x12\x0c\n\x04nbid\x18\x01 \x01(\x05\x12\x0c\n\x04\x65\x62id\x18\x02 \x01(\x05\x12\r\n\x05\x63pidx\x18\x03 \x01(\x05\x12\r\n\x05\x63pidy\x18\x04 \x01(\x05\x12\r\n\x05\x63pidz\x18\x05 \x01(\x05\">\n\x1c\x41LECreateStructuredMeshReply\x12\x0e\n\x06meshid\x18\x01 \x01(\x05\x12\x0e\n\x06partid\x18\x02 \x01(\x05\"\\\n$ALECreateStructuredMeshRefineRequest\x12\r\n\x05mshid\x18\x01 \x01(\x05\x12\x0b\n\x03ifx\x18\x02 \x01(\x05\x12\x0b\n\x03ify\x18\x03 \x01(\x05\x12\x0b\n\x03ifz\x18\x04 \x01(\x05\"4\n\"ALECreateStructuredMeshRefineReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"n\n+ALECreateStructuredMeshControlPointsRequest\x12\r\n\x05icase\x18\x01 \x01(\x05\x12\x0b\n\x03sfo\x18\x02 \x01(\x02\x12\t\n\x01n\x18\x03 \x03(\x05\x12\t\n\x01x\x18\x04 \x03(\x02\x12\r\n\x05ratio\x18\x05 \x03(\x02\"9\n)ALECreateStructuredMeshControlPointsReply\x12\x0c\n\x04\x63pid\x18\x01 \x01(\x05\"c\n\'ALECreateStructuredMultiMatGroupRequest\x12\x0e\n\x06nmmgnm\x18\x01 \x01(\t\x12\x0b\n\x03mid\x18\x02 \x01(\x05\x12\r\n\x05\x65osid\x18\x03 \x01(\x05\x12\x0c\n\x04pref\x18\x04 \x01(\x02\"7\n%ALECreateStructuredMultiMatGroupReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x92\x01\n+ALECreateStructuredMeshVolumeFillingRequest\x12\r\n\x05mshid\x18\x01 \x01(\x05\x12\x0e\n\x06\x61mmgto\x18\x02 \x01(\t\x12\x0f\n\x07nsample\x18\x03 \x01(\x05\x12\x0b\n\x03vid\x18\x04 \x01(\x05\x12\x0c\n\x04geom\x18\x05 \x01(\t\x12\r\n\x05inout\x18\x06 \x01(\x05\x12\t\n\x01\x65\x18\x07 \x03(\x02\";\n)ALECreateStructuredMeshVolumeFillingReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"4\n\x14\x44\x61mpingGlobalRequest\x12\x0c\n\x04lcid\x18\x01 \x01(\x05\x12\x0e\n\x06valdmp\x18\x02 \x01(\x02\"$\n\x12\x44\x61mpingGlobalReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"F\n\x1b\x44\x61mpingPartStiffnessRequest\x12\r\n\x05isset\x18\x01 \x01(\x08\x12\n\n\x02id\x18\x02 \x01(\x05\x12\x0c\n\x04\x63oef\x18\x03 \x01(\x02\"+\n\x19\x44\x61mpingPartStiffnessReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xa7\x01\n\x12\x41irbagModelRequest\x12\x11\n\tmodeltype\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\x0e\n\x06sidtyp\x18\x03 \x01(\x05\x12\n\n\x02\x63v\x18\x04 \x01(\x02\x12\n\n\x02\x63p\x18\x05 \x01(\x02\x12\t\n\x01t\x18\x06 \x01(\x02\x12\x0c\n\x04lcid\x18\x07 \x01(\x05\x12\n\n\x02mu\x18\x08 \x01(\x02\x12\x0c\n\x04\x61rea\x18\t \x01(\x02\x12\n\n\x02pe\x18\n \x01(\x02\x12\n\n\x02ro\x18\x0b \x01(\x02\"\"\n\x10\x41irbagModelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"c\n\x10\x45MControlRequest\x12\r\n\x05\x65msol\x18\x01 \x01(\x05\x12\r\n\x05numls\x18\x02 \x01(\x05\x12\x0f\n\x07macrodt\x18\x03 \x01(\x02\x12\x0f\n\x07ncylfem\x18\x04 \x01(\x05\x12\x0f\n\x07ncylbem\x18\x05 \x01(\x05\" \n\x0e\x45MControlReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"4\n\x11\x45MTimestepRequest\x12\x0e\n\x06tstype\x18\x01 \x01(\x05\x12\x0f\n\x07\x64tconst\x18\x02 \x01(\x02\"!\n\x0f\x45MTimestepReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"U\n\x17\x45MControlContactRequest\x12\x0c\n\x04\x65mct\x18\x01 \x01(\x05\x12\x0e\n\x06\x63\x63only\x18\x02 \x01(\x05\x12\r\n\x05\x63type\x18\x03 \x01(\x05\x12\r\n\x05\x64type\x18\x04 \x01(\x05\"\'\n\x15\x45MControlContactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x85\x01\n\x10\x45MContactRequest\x12\x0e\n\x06\x63ontid\x18\x01 \x01(\x05\x12\r\n\x05\x64type\x18\x02 \x01(\x05\x12\r\n\x05psidm\x18\x03 \x01(\x05\x12\r\n\x05psids\x18\x04 \x01(\x05\x12\x0c\n\x04\x65ps1\x18\x05 \x01(\x02\x12\x0c\n\x04\x65ps2\x18\x06 \x01(\x02\x12\x0c\n\x04\x65ps3\x18\x07 \x01(\x02\x12\n\n\x02\x64\x30\x18\x08 \x01(\x02\" \n\x0e\x45MContactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"U\n\x14\x45MCircuitRogoRequest\x12\r\n\x05rogid\x18\x01 \x01(\x05\x12\r\n\x05setid\x18\x02 \x01(\x05\x12\x0f\n\x07settype\x18\x03 \x01(\x05\x12\x0e\n\x06\x63urtyp\x18\x04 \x01(\x05\" \n\x12\x45MCircuitRogoReply\x12\n\n\x02id\x18\x01 \x01(\x05\"s\n\x10\x45MCircuitRequest\x12\x0e\n\x06\x63ircid\x18\x01 \x01(\x05\x12\x0f\n\x07\x63irctyp\x18\x02 \x01(\x05\x12\x0c\n\x04lcid\x18\x03 \x01(\x05\x12\x0f\n\x07sidcurr\x18\x04 \x01(\x05\x12\x0e\n\x06sidvin\x18\x05 \x01(\x05\x12\x0f\n\x07sidvout\x18\x06 \x01(\x05\"\x1c\n\x0e\x45MCircuitReply\x12\n\n\x02id\x18\x01 \x01(\x05\"<\n\x0f\x45MMat001Request\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\r\n\x05sigma\x18\x03 \x01(\x02\"\x1f\n\rEMMat001Reply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"Z\n\x0f\x45MMat002Request\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\r\n\x05sigma\x18\x03 \x01(\x02\x12\r\n\x05\x65osid\x18\x04 \x01(\x05\x12\r\n\x05murel\x18\x05 \x01(\x02\"\x1f\n\rEMMat002Reply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"u\n\x12\x45MSolverBemRequest\x12\x0e\n\x06reltol\x18\x01 \x01(\x02\x12\x0e\n\x06maxite\x18\x02 \x01(\x05\x12\r\n\x05stype\x18\x03 \x01(\x05\x12\x0e\n\x06precon\x18\x04 \x01(\x05\x12\x0f\n\x07uselast\x18\x05 \x01(\x05\x12\x0f\n\x07ncylbem\x18\x06 \x01(\x05\"\"\n\x10\x45MSolverBemReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"u\n\x12\x45MSolverFemRequest\x12\x0e\n\x06reltol\x18\x01 \x01(\x02\x12\x0e\n\x06maxite\x18\x02 \x01(\x05\x12\r\n\x05stype\x18\x03 \x01(\x05\x12\x0e\n\x06precon\x18\x04 \x01(\x05\x12\x0f\n\x07uselast\x18\x05 \x01(\x05\x12\x0f\n\x07ncylbem\x18\x06 \x01(\x05\"\"\n\x10\x45MSolverFemReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"6\n\x15\x45MSolverBemMatRequest\x12\r\n\x05matid\x18\x01 \x01(\x05\x12\x0e\n\x06reltol\x18\x02 \x01(\x02\"%\n\x13\x45MSolverBemMatReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"n\n\x1f\x45MSolverFemBemMonolithicRequest\x12\r\n\x05mtype\x18\x01 \x01(\x05\x12\r\n\x05stype\x18\x02 \x01(\x05\x12\x0e\n\x06\x61\x62stol\x18\x03 \x01(\x02\x12\x0e\n\x06reltol\x18\x04 \x01(\x02\x12\r\n\x05maxit\x18\x05 \x01(\x05\"/\n\x1d\x45MSolverFemBemMonolithicReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"I\n\x0f\x45MOutputRequest\x12\x0c\n\x04mats\x18\x01 \x01(\x05\x12\x0c\n\x04matf\x18\x02 \x01(\x05\x12\x0c\n\x04sols\x18\x03 \x01(\x05\x12\x0c\n\x04solf\x18\x04 \x01(\x05\"\x1f\n\rEMOutputReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\".\n\x1d\x45MDatabaseGlobalEnergyRequest\x12\r\n\x05outlv\x18\x01 \x01(\x05\"-\n\x1b\x45MDatabaseGlobalEnergyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"p\n\x18\x45MPermanentMagnetRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0e\n\x06partid\x18\x02 \x01(\x05\x12\r\n\x05mtype\x18\x03 \x01(\x05\x12\r\n\x05north\x18\x04 \x01(\x05\x12\x0e\n\x06sourth\x18\x05 \x01(\x05\x12\n\n\x02hc\x18\x06 \x01(\x05\"(\n\x16\x45MPermanentMagnetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"H\n\x18\x45MEOSPermeabilityRequest\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\x12\x0f\n\x07\x65ostype\x18\x02 \x01(\x05\x12\x0c\n\x04lcid\x18\x03 \x01(\x05\"(\n\x16\x45MEOSPermeabilityReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"8\n\x11GeneralKWDRequest\x12\x0e\n\x06opcode\x18\x01 \x01(\t\x12\x13\n\x0bkeyworddata\x18\x02 \x01(\t\"!\n\x0fGeneralKWDReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\x32\xafS\n\x05kwC2S\x12>\n\rkwSetFileName\x12\x12.kwgrpc.kwFileName\x1a\x17.kwgrpc.kwFileNameReply\"\x00\x12\x30\n\x06Upload\x12\r.kwgrpc.Chunk\x1a\x13.kwgrpc.kwFileReply\"\x00(\x01\x12\x42\n\x0e\x43reateTimestep\x12\x17.kwgrpc.TimestepRequest\x1a\x15.kwgrpc.TimestepReply\"\x00\x12K\n\x11\x43reateTermination\x12\x1a.kwgrpc.TerminationRequest\x1a\x18.kwgrpc.TerminationReply\"\x00\x12Q\n\x13\x43reateControlOutput\x12\x1c.kwgrpc.ControlOutputRequest\x1a\x1a.kwgrpc.ControlOutputReply\"\x00\x12T\n\x14\x43reateControlContact\x12\x1d.kwgrpc.ControlContactRequest\x1a\x1b.kwgrpc.ControlContactReply\"\x00\x12l\n\x1c\x43reateControlDiscreteElement\x12%.kwgrpc.ControlDiscreteElementRequest\x1a#.kwgrpc.ControlDiscreteElementReply\"\x00\x12W\n\x15\x43reateControlAccuracy\x12\x1e.kwgrpc.ControlAccuracyRequest\x1a\x1c.kwgrpc.ControlAccuracyReply\"\x00\x12Q\n\x13\x43reateControlEnergy\x12\x1c.kwgrpc.ControlEnergyRequest\x1a\x1a.kwgrpc.ControlEnergyReply\"\x00\x12\x66\n\x1a\x43reateControlBulkViscosity\x12#.kwgrpc.ControlBulkViscosityRequest\x1a!.kwgrpc.ControlBulkViscosityReply\"\x00\x12Z\n\x16\x43reateControlHourgalss\x12\x1f.kwgrpc.ControlHourglassRequest\x1a\x1d.kwgrpc.ControlHourglassReply\"\x00\x12N\n\x12\x43reateControlShell\x12\x1b.kwgrpc.ControlShellRequest\x1a\x19.kwgrpc.ControlShellReply\"\x00\x12N\n\x12\x43reateControlSolid\x12\x1b.kwgrpc.ControlSolidRequest\x1a\x19.kwgrpc.ControlSolidReply\"\x00\x12l\n\x1c\x43reateControlImplicitGeneral\x12%.kwgrpc.ControlImplicitGeneralRequest\x1a#.kwgrpc.ControlImplicitGeneralReply\"\x00\x12\x63\n\x19\x43reateControlImplicitAuto\x12\".kwgrpc.ControlImplicitAutoRequest\x1a .kwgrpc.ControlImplicitAutoReply\"\x00\x12l\n\x1c\x43reateControlImplicitDynamic\x12%.kwgrpc.ControlImplicitDynamicRequest\x1a#.kwgrpc.ControlImplicitDynamicReply\"\x00\x12u\n\x1f\x43reateControlImplicitEigenvalue\x12(.kwgrpc.ControlImplicitEigenvalueRequest\x1a&.kwgrpc.ControlImplicitEigenvalueReply\"\x00\x12o\n\x1d\x43reateControlImplicitSolution\x12&.kwgrpc.ControlImplicitSolutionRequest\x1a$.kwgrpc.ControlImplicitSolutionReply\"\x00\x12\x42\n\x0e\x43reateDBBinary\x12\x17.kwgrpc.DBBinaryRequest\x1a\x15.kwgrpc.DBBinaryReply\"\x00\x12?\n\rCreateDBAscii\x12\x16.kwgrpc.DBAsciiRequest\x1a\x14.kwgrpc.DBAsciiReply\"\x00\x12<\n\x0c\x43reateDBSALE\x12\x15.kwgrpc.DBSALERequest\x1a\x13.kwgrpc.DBSALEReply\"\x00\x12Q\n\x13\x43reateRigidWallGeom\x12\x1c.kwgrpc.RigidWallGeomRequest\x1a\x1a.kwgrpc.RigidWallGeomReply\"\x00\x12W\n\x15\x43reateRigidWallPlanar\x12\x1e.kwgrpc.RigidWallPlanarRequest\x1a\x1c.kwgrpc.RigidWallPlanarReply\"\x00\x12?\n\rCreateInitVel\x12\x16.kwgrpc.InitVelRequest\x1a\x14.kwgrpc.InitVelReply\"\x00\x12Z\n\x16\x43reateInitVelRigidBody\x12\x1f.kwgrpc.InitVelRigidBodyRequest\x1a\x1d.kwgrpc.InitVelRigidBodyReply\"\x00\x12]\n\x17\x43reateInitVelGeneration\x12 .kwgrpc.InitVelGenerationRequest\x1a\x1e.kwgrpc.InitVelGenerationReply\"\x00\x12x\n CreateInitVelGenerationStartTime\x12).kwgrpc.InitVelGenerationStartTimeRequest\x1a\'.kwgrpc.InitVelGenerationStartTimeReply\"\x00\x12T\n\x14\x43reateInitDetonation\x12\x1d.kwgrpc.InitDetonationRequest\x1a\x1b.kwgrpc.InitDetonationReply\"\x00\x12?\n\rCreateContact\x12\x16.kwgrpc.ContactRequest\x1a\x14.kwgrpc.ContactReply\"\x00\x12\x63\n\x19\x43reateBdyPrescribedMotion\x12\".kwgrpc.BdyPrescribedMotionRequest\x1a .kwgrpc.BdyPrescribedMotionReply\"\x00\x12<\n\x0c\x43reateBdySpc\x12\x15.kwgrpc.BdySpcRequest\x1a\x13.kwgrpc.BdySpcReply\"\x00\x12Z\n\x16\x43reateConstrainedJoint\x12\x1f.kwgrpc.ConstrainedJointRequest\x1a\x1d.kwgrpc.ConstrainedJointReply\"\x00\x12i\n\x1b\x43reateConstrainedExtraNodes\x12$.kwgrpc.ConstrainedExtraNodesRequest\x1a\".kwgrpc.ConstrainedExtraNodesReply\"\x00\x12u\n\x1f\x43reateConstrainedNodalRigidBody\x12(.kwgrpc.ConstrainedNodalRigidBodyRequest\x1a&.kwgrpc.ConstrainedNodalRigidBodyReply\"\x00\x12\x63\n\x19\x43reateConstrainedSpotWeld\x12\".kwgrpc.ConstrainedSpotWeldRequest\x1a .kwgrpc.ConstrainedSpotWeldReply\"\x00\x12\x42\n\x0e\x43reateLoadBody\x12\x17.kwgrpc.LoadBodyRequest\x1a\x15.kwgrpc.LoadBodyReply\"\x00\x12\x39\n\x0b\x43reateMatEM\x12\x14.kwgrpc.MatEMRequest\x1a\x12.kwgrpc.MatEMReply\"\x00\x12\x42\n\x0e\x43reateMatRigid\x12\x17.kwgrpc.MatRigidRequest\x1a\x15.kwgrpc.MatRigidReply\"\x00\x12H\n\x10\x43reateMatElastic\x12\x19.kwgrpc.MatElasticRequest\x1a\x17.kwgrpc.MatElasticReply\"\x00\x12K\n\x11\x43reateMatSpotweld\x12\x1a.kwgrpc.MatSpotweldRequest\x1a\x18.kwgrpc.MatSpotweldReply\"\x00\x12~\n\"CreateMatPiecewiseLinearPlasticity\x12+.kwgrpc.MatPiecewiseLinearPlasticityRequest\x1a).kwgrpc.MatPiecewiseLinearPlasticityReply\"\x00\x12\x96\x01\n*CreateMatModifiedPiecewiseLinearPlasticity\x12\x33.kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest\x1a\x31.kwgrpc.MatModifiedPiecewiseLinearPlasticityReply\"\x00\x12\x45\n\x0f\x43reateMatFabric\x12\x18.kwgrpc.MatFabricRequest\x1a\x16.kwgrpc.MatFabricReply\"\x00\x12u\n\x1f\x43reateMatSpringNonlinearElastic\x12(.kwgrpc.MatSpringNonlinearElasticRequest\x1a&.kwgrpc.MatSpringNonlinearElasticReply\"\x00\x12Z\n\x16\x43reateMatDamperViscous\x12\x1f.kwgrpc.MatDamperViscousRequest\x1a\x1d.kwgrpc.MatDamperViscousReply\"\x00\x12u\n\x1f\x43reateMatDamperNonlinearViscous\x12(.kwgrpc.MatDamperNonlinearViscousRequest\x1a&.kwgrpc.MatDamperNonlinearViscousReply\"\x00\x12?\n\rCreateMatNull\x12\x16.kwgrpc.MatNullRequest\x1a\x14.kwgrpc.MatNullReply\"\x00\x12T\n\x14\x43reateMatJohnsonCook\x12\x1d.kwgrpc.MatJohnsonCookRequest\x1a\x1b.kwgrpc.MatJohnsonCookReply\"\x00\x12\x66\n\x1a\x43reateMatHighExplosiveBurn\x12#.kwgrpc.MatHighExplosiveBurnRequest\x1a!.kwgrpc.MatHighExplosiveBurnReply\"\x00\x12\x45\n\x0f\x43reateMatVacuum\x12\x18.kwgrpc.MatVacuumRequest\x1a\x16.kwgrpc.MatVacuumReply\"\x00\x12Q\n\x13\x43reateMatAddErosion\x12\x1c.kwgrpc.MatAddErosionRequest\x1a\x1a.kwgrpc.MatAddErosionReply\"\x00\x12\x63\n\x19\x43reateEOSLinearPolynomial\x12\".kwgrpc.EOSLinearPolynomialRequest\x1a .kwgrpc.EOSLinearPolynomialReply\"\x00\x12<\n\x0c\x43reateEOSJWL\x12\x15.kwgrpc.EOSJWLRequest\x1a\x13.kwgrpc.EOSJWLReply\"\x00\x12N\n\x12\x43reateEOSGruneisen\x12\x1b.kwgrpc.EOSGruneisenRequest\x1a\x19.kwgrpc.EOSGruneisenReply\"\x00\x12K\n\x11\x43reateDefineCurve\x12\x1a.kwgrpc.DefineCurveRequest\x1a\x18.kwgrpc.DefineCurveReply\"\x00\x12N\n\x12\x43reateDefineVector\x12\x1b.kwgrpc.DefineVectorRequest\x1a\x19.kwgrpc.DefineVectorReply\"\x00\x12\x45\n\x0f\x43reateDefineBox\x12\x18.kwgrpc.DefineBoxRequest\x1a\x16.kwgrpc.DefineBoxReply\"\x00\x12\x63\n\x19\x43reateDefineDEMeshSurface\x12\".kwgrpc.DefineDEMeshSurfaceRequest\x1a .kwgrpc.DefineDEMeshSurfaceReply\"\x00\x12]\n\x17\x43reateDefineOrientation\x12 .kwgrpc.DefineOrientationRequest\x1a\x1e.kwgrpc.DefineOrientationReply\"\x00\x12?\n\rCreatePartSet\x12\x16.kwgrpc.PartSetRequest\x1a\x14.kwgrpc.PartSetReply\"\x00\x12\x42\n\x0e\x43reateShellSet\x12\x17.kwgrpc.ShellSetRequest\x1a\x15.kwgrpc.ShellSetReply\"\x00\x12\x42\n\x0e\x43reateSolidSet\x12\x17.kwgrpc.SolidSetRequest\x1a\x15.kwgrpc.SolidSetReply\"\x00\x12?\n\rCreateNodeSet\x12\x16.kwgrpc.NodeSetRequest\x1a\x14.kwgrpc.NodeSetReply\"\x00\x12H\n\x10\x43reateSegmentSet\x12\x19.kwgrpc.SegmentSetRequest\x1a\x17.kwgrpc.SegmentSetReply\"\x00\x12W\n\x15\x43reateSectionIGAShell\x12\x1e.kwgrpc.SectionIGAShellRequest\x1a\x1c.kwgrpc.SectionIGAShellReply\"\x00\x12K\n\x11\x43reateSectionBeam\x12\x1a.kwgrpc.SectionBeamRequest\x1a\x18.kwgrpc.SectionBeamReply\"\x00\x12N\n\x12\x43reateSectionShell\x12\x1b.kwgrpc.SectionShellRequest\x1a\x19.kwgrpc.SectionShellReply\"\x00\x12N\n\x12\x43reateSectionSolid\x12\x1b.kwgrpc.SectionSolidRequest\x1a\x19.kwgrpc.SectionSolidReply\"\x00\x12W\n\x15\x43reateSectionDiscrete\x12\x1e.kwgrpc.SectionDiscreteRequest\x1a\x1c.kwgrpc.SectionDiscreteReply\"\x00\x12\x45\n\x0f\x43reateHourglass\x12\x18.kwgrpc.HourglassRequest\x1a\x16.kwgrpc.HourglassReply\"\x00\x12K\n\x0fSetPartProperty\x12\x1b.kwgrpc.PartPropertyRequest\x1a\x19.kwgrpc.PartPropertyReply\"\x00\x12<\n\x08GetNodes\x12\x17.kwgrpc.GetNodesRequest\x1a\x15.kwgrpc.GetNodesReply\"\x00\x12T\n\x10GetSolidElements\x12\x1f.kwgrpc.GetSolidElementsRequest\x1a\x1d.kwgrpc.GetSolidElementsReply\"\x00\x12<\n\x08SaveFile\x12\x17.kwgrpc.SaveFileRequest\x1a\x15.kwgrpc.SaveFileReply\"\x00\x12<\n\x08LoadFile\x12\x17.kwgrpc.LoadFileRequest\x1a\x15.kwgrpc.LoadFileReply\"\x00\x12\x36\n\x08\x44ownload\x12\x17.kwgrpc.DownloadRequest\x1a\r.kwgrpc.Chunk\"\x00\x30\x01\x12W\n\x15ICFDCreateControlTime\x12\x1e.kwgrpc.ICFDControlTimeRequest\x1a\x1c.kwgrpc.ICFDControlTimeReply\"\x00\x12`\n\x18ICFDCreateControlGeneral\x12!.kwgrpc.ICFDControlGeneralRequest\x1a\x1f.kwgrpc.ICFDControlGeneralReply\"\x00\x12]\n\x17ICFDCreateControlOutput\x12 .kwgrpc.ICFDControlOutputRequest\x1a\x1e.kwgrpc.ICFDControlOutputReply\"\x00\x12i\n\x1bICFDCreateControlTurbulence\x12$.kwgrpc.ICFDControlTurbulenceRequest\x1a\".kwgrpc.ICFDControlTurbulenceReply\"\x00\x12l\n\x1cICFDCreateControlDEMCoupling\x12%.kwgrpc.ICFDControlDEMCouplingRequest\x1a#.kwgrpc.ICFDControlDEMCouplingReply\"\x00\x12K\n\x11ICFDCreateSection\x12\x1a.kwgrpc.ICFDSectionRequest\x1a\x18.kwgrpc.ICFDSectionReply\"\x00\x12?\n\rICFDCreateMat\x12\x16.kwgrpc.ICFDMatRequest\x1a\x14.kwgrpc.ICFDMatReply\"\x00\x12\x42\n\x0eICFDCreatePart\x12\x17.kwgrpc.ICFDPartRequest\x1a\x15.kwgrpc.ICFDPartReply\"\x00\x12K\n\x11ICFDCreatePartVol\x12\x1a.kwgrpc.ICFDPartVolRequest\x1a\x18.kwgrpc.ICFDPartVolReply\"\x00\x12H\n\x10ICFDCreateDBDrag\x12\x19.kwgrpc.ICFDDBDragRequest\x1a\x17.kwgrpc.ICFDDBDragReply\"\x00\x12\x66\n\x1aICFDCreateBdyPrescribedVel\x12#.kwgrpc.ICFDBdyPrescribedVelRequest\x1a!.kwgrpc.ICFDBdyPrescribedVelReply\"\x00\x12\x66\n\x1aICFDCreateBdyPrescribedPre\x12#.kwgrpc.ICFDBdyPrescribedPreRequest\x1a!.kwgrpc.ICFDBdyPrescribedPreReply\"\x00\x12W\n\x15ICFDCreateBdyFreeSlip\x12\x1e.kwgrpc.ICFDBdyFreeSlipRequest\x1a\x1c.kwgrpc.ICFDBdyFreeSlipReply\"\x00\x12T\n\x14ICFDCreateBdyNonSlip\x12\x1d.kwgrpc.ICFDBdyNonSlipRequest\x1a\x1b.kwgrpc.ICFDBdyNonSlipReply\"\x00\x12]\n\x17ICFDCreateSolverTolMMOV\x12 .kwgrpc.ICFDSolverTolMMOVRequest\x1a\x1e.kwgrpc.ICFDSolverTolMMOVReply\"\x00\x12W\n\x13SetICFDPartProperty\x12\x1f.kwgrpc.ICFDPartPropertyRequest\x1a\x1d.kwgrpc.ICFDPartPropertyReply\"\x00\x12i\n\x19SetICFDVolumePartProperty\x12%.kwgrpc.ICFDVolumePartPropertyRequest\x1a#.kwgrpc.ICFDVolumePartPropertyReply\"\x00\x12H\n\x10MESHCreateVolume\x12\x19.kwgrpc.MeshVolumeRequest\x1a\x17.kwgrpc.MeshVolumeReply\"\x00\x12T\n\x14MESHCreateEmbedShell\x12\x1d.kwgrpc.MeshEmbedShellRequest\x1a\x1b.kwgrpc.MeshEmbedShellReply\"\x00\x12<\n\x0cMESHCreateBl\x12\x15.kwgrpc.MeshBlRequest\x1a\x13.kwgrpc.MeshBlReply\"\x00\x12Q\n\x13MESHCreateSizeShape\x12\x1c.kwgrpc.MeshSizeShapeRequest\x1a\x1a.kwgrpc.MeshSizeShapeReply\"\x00\x12H\n\x10\x41LECreateControl\x12\x19.kwgrpc.ControlALERequest\x1a\x17.kwgrpc.ControlALEReply\"\x00\x12i\n\x17\x41LECreateStructuredMesh\x12&.kwgrpc.ALECreateStructuredMeshRequest\x1a$.kwgrpc.ALECreateStructuredMeshReply\"\x00\x12{\n\x1d\x41LECreateStructuredMeshRefine\x12,.kwgrpc.ALECreateStructuredMeshRefineRequest\x1a*.kwgrpc.ALECreateStructuredMeshRefineReply\"\x00\x12\x8d\x01\n!ALECreateStructuredMeshCtrlPoints\x12\x33.kwgrpc.ALECreateStructuredMeshControlPointsRequest\x1a\x31.kwgrpc.ALECreateStructuredMeshControlPointsReply\"\x00\x12\x89\x01\n%ALECreateStructuredMultiMaterialGroup\x12/.kwgrpc.ALECreateStructuredMultiMatGroupRequest\x1a-.kwgrpc.ALECreateStructuredMultiMatGroupReply\"\x00\x12\x90\x01\n$ALECreateStructuredMeshVolumeFilling\x12\x33.kwgrpc.ALECreateStructuredMeshVolumeFillingRequest\x1a\x31.kwgrpc.ALECreateStructuredMeshVolumeFillingReply\"\x00\x12Q\n\x13\x43reateDampingGlobal\x12\x1c.kwgrpc.DampingGlobalRequest\x1a\x1a.kwgrpc.DampingGlobalReply\"\x00\x12\x66\n\x1a\x43reateDampingPartStiffness\x12#.kwgrpc.DampingPartStiffnessRequest\x1a!.kwgrpc.DampingPartStiffnessReply\"\x00\x12K\n\x11\x43reateAirbagModel\x12\x1a.kwgrpc.AirbagModelRequest\x1a\x18.kwgrpc.AirbagModelReply\"\x00\x12\x45\n\x0f\x43reateEMControl\x12\x18.kwgrpc.EMControlRequest\x1a\x16.kwgrpc.EMControlReply\"\x00\x12H\n\x10\x43reateEMTimestep\x12\x19.kwgrpc.EMTimestepRequest\x1a\x17.kwgrpc.EMTimestepReply\"\x00\x12Z\n\x16\x43reateEMControlContact\x12\x1f.kwgrpc.EMControlContactRequest\x1a\x1d.kwgrpc.EMControlContactReply\"\x00\x12\x45\n\x0f\x43reateEMContact\x12\x18.kwgrpc.EMContactRequest\x1a\x16.kwgrpc.EMContactReply\"\x00\x12Q\n\x13\x43reateEMCircuitRogo\x12\x1c.kwgrpc.EMCircuitRogoRequest\x1a\x1a.kwgrpc.EMCircuitRogoReply\"\x00\x12\x45\n\x0f\x43reateEMCircuit\x12\x18.kwgrpc.EMCircuitRequest\x1a\x16.kwgrpc.EMCircuitReply\"\x00\x12\x42\n\x0e\x43reateEMMat001\x12\x17.kwgrpc.EMMat001Request\x1a\x15.kwgrpc.EMMat001Reply\"\x00\x12\x42\n\x0e\x43reateEMMat002\x12\x17.kwgrpc.EMMat002Request\x1a\x15.kwgrpc.EMMat002Reply\"\x00\x12K\n\x11\x43reateEMSolverBem\x12\x1a.kwgrpc.EMSolverBemRequest\x1a\x18.kwgrpc.EMSolverBemReply\"\x00\x12K\n\x11\x43reateEMSolverFem\x12\x1a.kwgrpc.EMSolverFemRequest\x1a\x18.kwgrpc.EMSolverFemReply\"\x00\x12T\n\x14\x43reateEMSolverBemMat\x12\x1d.kwgrpc.EMSolverBemMatRequest\x1a\x1b.kwgrpc.EMSolverBemMatReply\"\x00\x12r\n\x1e\x43reateEMSolverFemBemMonolithic\x12\'.kwgrpc.EMSolverFemBemMonolithicRequest\x1a%.kwgrpc.EMSolverFemBemMonolithicReply\"\x00\x12\x42\n\x0e\x43reateEMOutput\x12\x17.kwgrpc.EMOutputRequest\x1a\x15.kwgrpc.EMOutputReply\"\x00\x12l\n\x1c\x43reateEMDatabaseGlobalEnergy\x12%.kwgrpc.EMDatabaseGlobalEnergyRequest\x1a#.kwgrpc.EMDatabaseGlobalEnergyReply\"\x00\x12]\n\x17\x43reateEMPermanentMagnet\x12 .kwgrpc.EMPermanentMagnetRequest\x1a\x1e.kwgrpc.EMPermanentMagnetReply\"\x00\x12]\n\x17\x43reateEMEOSPermeability\x12 .kwgrpc.EMEOSPermeabilityRequest\x1a\x1e.kwgrpc.EMEOSPermeabilityReply\"\x00\x12H\n\x10\x43reateGeneralKWD\x12\x19.kwgrpc.GeneralKWDRequest\x1a\x17.kwgrpc.GeneralKWDReply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fkwprocess.proto\x12\x06kwgrpc\"\x1d\n\x0bkwFileReply\x12\x0e\n\x06length\x18\x01 \x01(\x03\"\x17\n\x05\x43hunk\x12\x0e\n\x06\x62uffer\x18\x01 \x01(\x0c\"\'\n\nkwFileName\x12\x0b\n\x03num\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x1e\n\x0f\x44ownloadRequest\x12\x0b\n\x03url\x18\x01 \x01(\t\"\x1e\n\x0fkwFileNameReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\">\n\x0fTimestepRequest\x12\x0e\n\x06tssfac\x18\x01 \x01(\x02\x12\x0c\n\x04isdo\x18\x02 \x01(\x05\x12\r\n\x05\x64t2ms\x18\x03 \x01(\x02\"\x1f\n\rTimestepReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"$\n\x12TerminationRequest\x12\x0e\n\x06\x65ndtim\x18\x01 \x01(\x02\"\"\n\x10TerminationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"5\n\x14\x43ontrolOutputRequest\x12\r\n\x05npopt\x18\x01 \x01(\x05\x12\x0e\n\x06neecho\x18\x02 \x01(\x05\"$\n\x12\x43ontrolOutputReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"u\n\x15\x43ontrolContactRequest\x12\x0e\n\x06rwpnal\x18\x01 \x01(\x02\x12\x0e\n\x06shlthk\x18\x02 \x01(\x05\x12\r\n\x05orien\x18\x03 \x01(\x05\x12\r\n\x05ssthk\x18\x04 \x01(\x05\x12\x0e\n\x06ignore\x18\x05 \x01(\x05\x12\x0e\n\x06igactc\x18\x06 \x01(\x05\"%\n\x13\x43ontrolContactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x83\x01\n\x11\x43ontrolALERequest\x12\x0b\n\x03\x64\x63t\x18\x01 \x01(\x05\x12\x0c\n\x04nadv\x18\x02 \x01(\x05\x12\x0c\n\x04meth\x18\x03 \x01(\x05\x12\x0c\n\x04\x61\x66\x61\x63\x18\x04 \x01(\x02\x12\x0b\n\x03\x65nd\x18\x05 \x01(\x02\x12\r\n\x05\x61\x61\x66\x61\x63\x18\x06 \x01(\x02\x12\r\n\x05vfact\x18\x07 \x01(\x02\x12\x0c\n\x04pref\x18\x08 \x01(\x02\"!\n\x0f\x43ontrolALEReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"z\n\x1d\x43ontrolDiscreteElementRequest\x12\r\n\x05ndamp\x18\x01 \x01(\x02\x12\r\n\x05tdamp\x18\x02 \x01(\x02\x12\r\n\x05\x66rics\x18\x03 \x01(\x02\x12\r\n\x05\x66ricr\x18\x04 \x01(\x02\x12\r\n\x05normk\x18\x05 \x01(\x02\x12\x0e\n\x06sheark\x18\x06 \x01(\x02\"-\n\x1b\x43ontrolDiscreteElementReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"_\n\x16\x43ontrolAccuracyRequest\x12\x0b\n\x03osu\x18\x01 \x01(\x05\x12\x0b\n\x03inn\x18\x02 \x01(\x05\x12\x0e\n\x06pidosu\x18\x03 \x01(\x05\x12\x0c\n\x04iacc\x18\x04 \x01(\x05\x12\r\n\x05\x65xacc\x18\x05 \x01(\x02\"&\n\x14\x43ontrolAccuracyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"`\n\x14\x43ontrolEnergyRequest\x12\x0c\n\x04hgen\x18\x01 \x01(\x05\x12\x0c\n\x04rwen\x18\x02 \x01(\x05\x12\x0e\n\x06slnten\x18\x03 \x01(\x05\x12\r\n\x05rylen\x18\x04 \x01(\x05\x12\r\n\x05irgen\x18\x05 \x01(\x05\"$\n\x12\x43ontrolEnergyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"C\n\x1b\x43ontrolBulkViscosityRequest\x12\n\n\x02q1\x18\x01 \x01(\x02\x12\n\n\x02q2\x18\x02 \x01(\x02\x12\x0c\n\x04type\x18\x03 \x01(\x05\"+\n\x19\x43ontrolBulkViscosityReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"2\n\x17\x43ontrolHourglassRequest\x12\x0b\n\x03ihq\x18\x01 \x01(\x05\x12\n\n\x02qh\x18\x02 \x01(\x02\"\'\n\x15\x43ontrolHourglassReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x9d\x01\n\x13\x43ontrolShellRequest\x12\x0e\n\x06wrpang\x18\x01 \x01(\x02\x12\r\n\x05\x65sort\x18\x02 \x01(\x05\x12\r\n\x05irnxx\x18\x03 \x01(\x05\x12\x0e\n\x06istupd\x18\x04 \x01(\x05\x12\x0e\n\x06theory\x18\x05 \x01(\x05\x12\x0b\n\x03\x62wc\x18\x06 \x01(\x05\x12\r\n\x05miter\x18\x07 \x01(\x05\x12\x0c\n\x04proj\x18\x08 \x01(\x05\x12\x0e\n\x06irquad\x18\t \x01(\x05\"#\n\x11\x43ontrolShellReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x94\x01\n\x13\x43ontrolSolidRequest\x12\r\n\x05\x65sort\x18\x01 \x01(\x05\x12\x0e\n\x06\x66matrx\x18\x02 \x01(\x05\x12\x0f\n\x07niptets\x18\x03 \x01(\x05\x12\x0e\n\x06swlocl\x18\x04 \x01(\x05\x12\x0e\n\x06psfail\x18\x05 \x01(\x05\x12\x0f\n\x07t10jtol\x18\x06 \x01(\x02\x12\x0c\n\x04icoh\x18\x07 \x01(\x05\x12\x0e\n\x06tet13k\x18\x08 \x01(\x05\"#\n\x11\x43ontrolSolidReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"<\n\x1d\x43ontrolImplicitGeneralRequest\x12\x0e\n\x06imflag\x18\x01 \x01(\x05\x12\x0b\n\x03\x64t0\x18\x02 \x01(\x02\"-\n\x1b\x43ontrolImplicitGeneralReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\";\n\x1a\x43ontrolImplicitAutoRequest\x12\r\n\x05iauto\x18\x01 \x01(\x05\x12\x0e\n\x06iteopt\x18\x02 \x01(\x05\"*\n\x18\x43ontrolImplicitAutoReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"K\n\x1d\x43ontrolImplicitDynamicRequest\x12\r\n\x05imass\x18\x01 \x01(\x05\x12\r\n\x05gamma\x18\x02 \x01(\x02\x12\x0c\n\x04\x62\x65ta\x18\x03 \x01(\x02\"-\n\x1b\x43ontrolImplicitDynamicReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"@\n ControlImplicitEigenvalueRequest\x12\x0c\n\x04neig\x18\x01 \x01(\x05\x12\x0e\n\x06shfscl\x18\x02 \x01(\x02\"0\n\x1e\x43ontrolImplicitEigenvalueReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"a\n\x1e\x43ontrolImplicitSolutionRequest\x12\x0f\n\x07nsolver\x18\x01 \x01(\x05\x12\x0e\n\x06ilimit\x18\x02 \x01(\x05\x12\x0e\n\x06maxref\x18\x03 \x01(\x05\x12\x0e\n\x06\x61\x62stol\x18\x04 \x01(\x02\".\n\x1c\x43ontrolImplicitSolutionReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"k\n\x11\x43ontrolSPHRequest\x12\x0c\n\x04ncbs\x18\x01 \x01(\x05\x12\r\n\x05\x62oxid\x18\x02 \x01(\x05\x12\x0c\n\x04idim\x18\x03 \x01(\x05\x12\x0f\n\x07nmneigh\x18\x04 \x01(\x05\x12\x0c\n\x04\x66orm\x18\x05 \x01(\x05\x12\x0c\n\x04maxv\x18\x06 \x01(\x02\"!\n\x0f\x43ontrolSPHReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"o\n\x0f\x44\x42\x42inaryRequest\x12\x10\n\x08\x66iletype\x18\x01 \x01(\t\x12\n\n\x02\x64t\x18\x02 \x01(\x02\x12\x0e\n\x06maxint\x18\x03 \x01(\x05\x12\x0e\n\x06ieverp\x18\x04 \x01(\x05\x12\r\n\x05\x64\x63omp\x18\x05 \x01(\x05\x12\x0f\n\x07nintsld\x18\x06 \x01(\x05\"\x1f\n\rDBBinaryReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\" \n\x0f\x44\x42\x41LEMatRequest\x12\r\n\x05\x64tout\x18\x01 \x01(\x02\"\x1f\n\rDBALEMatReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"W\n\x0e\x44\x42\x41sciiRequest\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\n\n\x02\x64t\x18\x02 \x01(\x02\x12\x0e\n\x06\x62inary\x18\x03 \x01(\x05\x12\x0c\n\x04lcur\x18\x04 \x01(\x05\x12\r\n\x05ioopt\x18\x05 \x01(\x05\"\x1e\n\x0c\x44\x42\x41sciiReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x1f\n\rDBSALERequest\x12\x0e\n\x06switch\x18\x01 \x01(\x05\"\x1d\n\x0b\x44\x42SALEReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"/\n\x0fLoadBodyRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"\x1f\n\rLoadBodyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"0\n\x0eInitVelRequest\x12\x0c\n\x04nsid\x18\x01 \x01(\x05\x12\x10\n\x08velocity\x18\x02 \x03(\x02\"\x1e\n\x0cInitVelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x7f\n\x17InitVelRigidBodyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\n\n\x02vx\x18\x02 \x01(\x02\x12\n\n\x02vy\x18\x03 \x01(\x02\x12\n\n\x02vz\x18\x04 \x01(\x02\x12\x0b\n\x03vxr\x18\x05 \x01(\x02\x12\x0b\n\x03vyr\x18\x06 \x01(\x02\x12\x0b\n\x03vzr\x18\x07 \x01(\x02\x12\x0c\n\x04lcid\x18\x08 \x01(\x05\"\'\n\x15InitVelRigidBodyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xbe\x01\n\x18InitVelGenerationRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04styp\x18\x02 \x01(\x05\x12\r\n\x05omega\x18\x03 \x01(\x02\x12\n\n\x02vx\x18\x04 \x01(\x02\x12\n\n\x02vy\x18\x05 \x01(\x02\x12\n\n\x02vz\x18\x06 \x01(\x02\x12\n\n\x02xc\x18\x07 \x01(\x02\x12\n\n\x02yc\x18\x08 \x01(\x02\x12\n\n\x02zc\x18\t \x01(\x02\x12\n\n\x02nx\x18\n \x01(\x02\x12\n\n\x02ny\x18\x0b \x01(\x02\x12\n\n\x02nz\x18\x0c \x01(\x02\x12\r\n\x05phase\x18\r \x01(\x05\"(\n\x16InitVelGenerationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"2\n!InitVelGenerationStartTimeRequest\x12\r\n\x05stime\x18\x01 \x01(\x02\"1\n\x1fInitVelGenerationStartTimeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"?\n\x15InitDetonationRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05\x63oord\x18\x02 \x03(\x02\x12\n\n\x02lt\x18\x03 \x01(\x02\"%\n\x13InitDetonationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x8e\x01\n\x14RigidWallGeomRequest\x12\x10\n\x08geomtype\x18\x01 \x01(\x05\x12\x0e\n\x06motion\x18\x02 \x01(\x05\x12\x0f\n\x07\x64isplay\x18\x03 \x01(\x08\x12\x11\n\tparameter\x18\x04 \x03(\x02\x12\x0c\n\x04lcid\x18\x05 \x01(\x05\x12\n\n\x02vx\x18\x06 \x01(\x02\x12\n\n\x02vy\x18\x07 \x01(\x02\x12\n\n\x02vz\x18\x08 \x01(\x02\"$\n\x12RigidWallGeomReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"c\n\x16RigidWallPlanarRequest\x12\x0c\n\x04nsid\x18\x01 \x01(\x05\x12\x0e\n\x06nsidex\x18\x02 \x01(\x05\x12\r\n\x05\x62oxid\x18\x03 \x01(\x05\x12\x0e\n\x06normal\x18\x04 \x03(\x02\x12\x0c\n\x04\x66ric\x18\x05 \x01(\x02\"&\n\x14RigidWallPlanarReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xa9\x04\n\x0e\x43ontactRequest\x12\x0b\n\x03\x63id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0f\n\x07option1\x18\x03 \x01(\t\x12\x0f\n\x07option2\x18\x04 \x01(\t\x12\x0f\n\x07option3\x18\x05 \x01(\x08\x12\x0e\n\x06offset\x18\x06 \x01(\t\x12\x0c\n\x04ssid\x18\x07 \x01(\x05\x12\x0c\n\x04msid\x18\x08 \x01(\x05\x12\r\n\x05sstyp\x18\t \x01(\x05\x12\r\n\x05mstyp\x18\n \x01(\x05\x12\x0c\n\x04sapr\x18\x0b \x01(\x05\x12\x0c\n\x04sbpr\x18\x0c \x01(\x05\x12\x0c\n\x04sfsa\x18\r \x01(\x02\x12\x0c\n\x04sfsb\x18\x0e \x01(\x02\x12\n\n\x02\x66s\x18\x0f \x01(\x02\x12\n\n\x02\x66\x64\x18\x10 \x01(\x02\x12\x0b\n\x03vdc\x18\x11 \x01(\x02\x12\x0e\n\x06penchk\x18\x12 \x01(\x05\x12\x11\n\tbirthtime\x18\x13 \x01(\x02\x12\x0b\n\x03sst\x18\x14 \x01(\x02\x12\x0b\n\x03mst\x18\x15 \x01(\x02\x12\x11\n\toptionres\x18\x16 \x01(\x05\x12\x0c\n\x04nfls\x18\x17 \x01(\x02\x12\x0c\n\x04sfls\x18\x18 \x01(\x02\x12\r\n\x05param\x18\x19 \x01(\x02\x12\r\n\x05\x63t2cn\x18\x1a \x01(\x02\x12\x0c\n\x04soft\x18\x1b \x01(\x05\x12\x0e\n\x06sofscl\x18\x1c \x01(\x02\x12\x0e\n\x06lcidab\x18\x1d \x01(\x05\x12\x0e\n\x06maxpar\x18\x1e \x01(\x02\x12\r\n\x05sbopt\x18\x1f \x01(\x05\x12\r\n\x05\x64\x65pth\x18  \x01(\x05\x12\r\n\x05\x62sort\x18! \x01(\x05\x12\x0e\n\x06\x66rcfrq\x18\" \x01(\x05\x12\x0c\n\x04igap\x18# \x01(\x05\x12\x0e\n\x06ignore\x18$ \x01(\x05\"\x1e\n\x0c\x43ontactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xb8\x01\n\x1a\x42\x64yPrescribedMotionRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07heading\x18\x02 \x01(\t\x12\x0e\n\x06option\x18\x03 \x01(\t\x12\x0e\n\x06typeid\x18\x04 \x01(\x05\x12\x0b\n\x03\x64of\x18\x05 \x01(\x05\x12\x0b\n\x03vad\x18\x06 \x01(\x05\x12\x0c\n\x04lcid\x18\x07 \x01(\x05\x12\n\n\x02sf\x18\x08 \x01(\x02\x12\x0b\n\x03vid\x18\t \x01(\x05\x12\r\n\x05\x62irth\x18\n \x01(\x02\x12\r\n\x05\x64\x65\x61th\x18\x0b \x01(\x02\"*\n\x18\x42\x64yPrescribedMotionReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xc3\x01\n\rBdySpcRequest\x12\x0f\n\x07option1\x18\x01 \x01(\t\x12\x12\n\nbirthdeath\x18\x02 \x01(\x08\x12\x0b\n\x03nid\x18\x03 \x01(\x05\x12\x0b\n\x03\x63id\x18\x04 \x01(\x05\x12\x0c\n\x04\x64ofx\x18\x05 \x01(\x05\x12\x0c\n\x04\x64ofy\x18\x06 \x01(\x05\x12\x0c\n\x04\x64ofz\x18\x07 \x01(\x05\x12\r\n\x05\x64ofrx\x18\x08 \x01(\x05\x12\r\n\x05\x64ofry\x18\t \x01(\x05\x12\r\n\x05\x64ofrz\x18\n \x01(\x05\x12\r\n\x05\x62irth\x18\x0b \x01(\x02\x12\r\n\x05\x64\x65\x61th\x18\x0c \x01(\x02\"\x1d\n\x0b\x42\x64ySpcReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"W\n\x1c\x43onstrainedExtraNodesRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\x0b\n\x03pid\x18\x02 \x01(\x05\x12\x0b\n\x03nid\x18\x03 \x01(\x05\x12\r\n\x05iflag\x18\x04 \x01(\x05\",\n\x1a\x43onstrainedExtraNodesReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"=\n ConstrainedNodalRigidBodyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\x0c\n\x04nsid\x18\x02 \x01(\x05\"-\n\x1e\x43onstrainedNodalRigidBodyReply\x12\x0b\n\x03pid\x18\x01 \x01(\x05\":\n\x1a\x43onstrainedSpotWeldRequest\x12\r\n\x05node1\x18\x01 \x01(\x05\x12\r\n\x05node2\x18\x02 \x01(\x05\"&\n\x18\x43onstrainedSpotWeldReply\x12\n\n\x02id\x18\x01 \x01(\x05\"Q\n\x17\x43onstrainedJointRequest\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\r\n\x05nodes\x18\x02 \x03(\x05\x12\x0b\n\x03rps\x18\x03 \x01(\x02\x12\x0c\n\x04\x64\x61mp\x18\x04 \x01(\x02\"#\n\x15\x43onstrainedJointReply\x12\n\n\x02id\x18\x01 \x01(\x05\"X\n\x16SectionIGAShellRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x02 \x01(\x05\x12\x0c\n\x04shrf\x18\x03 \x01(\x02\x12\x11\n\tthickness\x18\x04 \x01(\x02\"\"\n\x14SectionIGAShellReply\x12\n\n\x02id\x18\x01 \x01(\x05\"h\n\x12SectionBeamRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x02 \x01(\x05\x12\x0c\n\x04shrf\x18\x03 \x01(\x02\x12\x0b\n\x03\x63st\x18\x04 \x01(\x05\x12\x0b\n\x03ts1\x18\x05 \x01(\x02\x12\x0b\n\x03ts2\x18\x06 \x01(\x02\"\x1e\n\x10SectionBeamReply\x12\n\n\x02id\x18\x01 \x01(\x05\"\x8e\x01\n\x13SectionShellRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x02 \x01(\x05\x12\x0c\n\x04shrf\x18\x03 \x01(\x02\x12\x0b\n\x03nip\x18\x04 \x01(\x05\x12\r\n\x05propt\x18\x05 \x01(\x05\x12\n\n\x02t1\x18\x06 \x01(\x02\x12\n\n\x02t2\x18\x07 \x01(\x02\x12\n\n\x02t3\x18\x08 \x01(\x02\x12\n\n\x02t4\x18\t \x01(\x02\"\x1f\n\x11SectionShellReply\x12\n\n\x02id\x18\x01 \x01(\x05\"C\n\x13SectionSolidRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0e\n\x06\x65lform\x18\x03 \x01(\x05\"\x1f\n\x11SectionSolidReply\x12\n\n\x02id\x18\x01 \x01(\x05\"~\n\x16SectionDiscreteRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0b\n\x03\x64ro\x18\x02 \x01(\x05\x12\n\n\x02kd\x18\x03 \x01(\x02\x12\n\n\x02v0\x18\x04 \x01(\x02\x12\n\n\x02\x63l\x18\x05 \x01(\x02\x12\n\n\x02\x66\x64\x18\x06 \x01(\x02\x12\x0b\n\x03\x63\x64l\x18\x07 \x01(\x02\x12\x0b\n\x03tdl\x18\x08 \x01(\x02\"\"\n\x14SectionDiscreteReply\x12\n\n\x02id\x18\x01 \x01(\x05\"\\\n\x11SectionSPHRequest\x12\r\n\x05secid\x18\x01 \x01(\x05\x12\x0c\n\x04\x63slh\x18\x02 \x01(\x02\x12\x0c\n\x04hmin\x18\x03 \x01(\x02\x12\x0c\n\x04hmax\x18\x04 \x01(\x02\x12\x0e\n\x06sphini\x18\x05 \x01(\x02\"\x1d\n\x0fSectionSPHReply\x12\n\n\x02id\x18\x01 \x01(\x05\"i\n\x10HourglassRequest\x12\x0c\n\x04ghid\x18\x01 \x01(\x05\x12\x0b\n\x03ihq\x18\x02 \x01(\x05\x12\n\n\x02qm\x18\x03 \x01(\x02\x12\n\n\x02q1\x18\x04 \x01(\x02\x12\n\n\x02q2\x18\x05 \x01(\x02\x12\n\n\x02qb\x18\x06 \x01(\x02\x12\n\n\x02qw\x18\x07 \x01(\x02\"\x1c\n\x0eHourglassReply\x12\n\n\x02id\x18\x01 \x01(\x05\"b\n\x12\x44\x65\x66ineCurveRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\x12\x0b\n\x03sfo\x18\x03 \x01(\x02\x12\x10\n\x08\x61\x62scissa\x18\x04 \x03(\x01\x12\x10\n\x08ordinate\x18\x05 \x03(\x01\"\x1e\n\x10\x44\x65\x66ineCurveReply\x12\n\n\x02id\x18\x01 \x01(\x05\"y\n\x13\x44\x65\x66ineVectorRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03vid\x18\x02 \x01(\x05\x12\n\n\x02xt\x18\x03 \x01(\x02\x12\n\n\x02yt\x18\x04 \x01(\x02\x12\n\n\x02zt\x18\x05 \x01(\x02\x12\n\n\x02xh\x18\x06 \x01(\x02\x12\n\n\x02yh\x18\x07 \x01(\x02\x12\n\n\x02zh\x18\x08 \x01(\x02\"#\n\x11\x44\x65\x66ineVectorReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"f\n\x10\x44\x65\x66ineBoxRequest\x12\x0c\n\x04xmin\x18\x01 \x01(\x02\x12\x0c\n\x04xmax\x18\x02 \x01(\x02\x12\x0c\n\x04ymin\x18\x03 \x01(\x02\x12\x0c\n\x04ymax\x18\x04 \x01(\x02\x12\x0c\n\x04zmin\x18\x05 \x01(\x02\x12\x0c\n\x04zmax\x18\x06 \x01(\x02\"\x1f\n\x0e\x44\x65\x66ineBoxReply\x12\r\n\x05\x62oxid\x18\x01 \x01(\x05\"\x81\x01\n\x1a\x44\x65\x66ineDEMeshSurfaceRequest\x12\x0b\n\x03sid\x18\x01 \x01(\x05\x12\x0c\n\x04type\x18\x02 \x01(\x05\x12\r\n\x05nquad\x18\x03 \x01(\x05\x12\x0e\n\x06\x64\x65spid\x18\x04 \x01(\x05\x12\x0e\n\x06\x64\x65sxid\x18\x05 \x01(\x05\x12\x0c\n\x04nsid\x18\x06 \x01(\x05\x12\x0b\n\x03rsf\x18\x07 \x01(\x02\"*\n\x18\x44\x65\x66ineDEMeshSurfaceReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"b\n\x18\x44\x65\x66ineOrientationRequest\x12\x0b\n\x03vid\x18\x01 \x01(\x05\x12\x0b\n\x03iop\x18\x02 \x01(\x05\x12\x0e\n\x06vector\x18\x03 \x03(\x02\x12\r\n\x05node1\x18\x04 \x01(\x05\x12\r\n\x05node2\x18\x05 \x01(\x05\"(\n\x16\x44\x65\x66ineOrientationReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"`\n\x1d\x44\x65\x66ineSPHMassflowPlaneRequest\x12\x10\n\x08prtclsid\x18\x01 \x01(\x05\x12\x0f\n\x07surfsid\x18\x02 \x01(\x05\x12\r\n\x05ptype\x18\x03 \x01(\x05\x12\r\n\x05stype\x18\x04 \x01(\x05\"-\n\x1b\x44\x65\x66ineSPHMassflowPlaneReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"M\n\x17\x44\x65\x66ineSPHMeshBoxRequest\x12\x0e\n\x06\x63oords\x18\x01 \x03(\x02\x12\x0c\n\x04ipid\x18\x02 \x01(\x05\x12\x14\n\x0cnumparticles\x18\x03 \x03(\x05\"\'\n\x15\x44\x65\x66ineSPHMeshBoxReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"W\n\x1b\x44\x65\x66ineSPHMeshSurfaceRequest\x12\x0b\n\x03sid\x18\x01 \x01(\x05\x12\x0c\n\x04type\x18\x02 \x01(\x05\x12\x0e\n\x06sphpid\x18\x03 \x01(\x05\x12\r\n\x05space\x18\x04 \x01(\x02\"+\n\x19\x44\x65\x66ineSPHMeshSurfaceReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"J\n\x0ePartSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x0c\n\x04pids\x18\x04 \x03(\x05\"\x1a\n\x0cPartSetReply\x12\n\n\x02id\x18\x01 \x01(\x05\"K\n\x0fShellSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x0c\n\x04\x65ids\x18\x04 \x03(\x05\"\x1f\n\rShellSetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"9\n\x0fSolidSetRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\n\n\x02ki\x18\x03 \x03(\x05\"\x1f\n\rSolidSetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"a\n\x0eNodeSetRequest\x12\x0e\n\x06option\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0b\n\x03sid\x18\x03 \x01(\x05\x12\x11\n\tgenoption\x18\x04 \x01(\t\x12\x10\n\x08\x65ntities\x18\x05 \x03(\x05\"\x1a\n\x0cNodeSetReply\x12\n\n\x02id\x18\x01 \x01(\x05\"o\n\x11SegmentSetRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\x0e\n\x06solver\x18\x03 \x01(\t\x12\n\n\x02n1\x18\x04 \x03(\x05\x12\n\n\x02n2\x18\x05 \x03(\x05\x12\n\n\x02n3\x18\x06 \x03(\x05\x12\n\n\x02n4\x18\x07 \x03(\x05\"\x1d\n\x0fSegmentSetReply\x12\n\n\x02id\x18\x01 \x01(\x05\"\x87\x01\n\x13PartPropertyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\x12\r\n\x05\x65osid\x18\x04 \x01(\x05\x12\x0c\n\x04hgid\x18\x05 \x01(\x05\x12\x0c\n\x04grav\x18\x06 \x01(\x05\x12\x0e\n\x06\x61\x64popt\x18\x07 \x01(\x05\x12\x0c\n\x04tmid\x18\x08 \x01(\x05\"#\n\x11PartPropertyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x89\x02\n\x0bPartRequest\x12\x0f\n\x07\x63ontact\x18\x01 \x01(\x08\x12\x0f\n\x07heading\x18\x02 \x01(\t\x12\x0b\n\x03pid\x18\x03 \x01(\x05\x12\r\n\x05secid\x18\x04 \x01(\x05\x12\x0b\n\x03mid\x18\x05 \x01(\x05\x12\r\n\x05\x65osid\x18\x06 \x01(\x05\x12\x0c\n\x04hgid\x18\x07 \x01(\x05\x12\x0c\n\x04grav\x18\x08 \x01(\x05\x12\x0e\n\x06\x61\x64popt\x18\t \x01(\x05\x12\x0c\n\x04tmid\x18\n \x01(\x05\x12\n\n\x02\x66\x61\x18\x0b \x01(\x02\x12\n\n\x02\x66\x64\x18\x0c \x01(\x02\x12\n\n\x02\x64\x63\x18\r \x01(\x02\x12\n\n\x02vc\x18\x0e \x01(\x02\x12\x0c\n\x04optt\x18\x0f \x01(\x02\x12\x0b\n\x03sft\x18\x10 \x01(\x02\x12\x0b\n\x03ssf\x18\x11 \x01(\x02\x12\x0e\n\x06\x63parm8\x18\x12 \x01(\x02\"\x1b\n\tPartReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"9\n\x0cMatEMRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\r\n\x05sigma\x18\x03 \x01(\x02\"\x18\n\nMatEMReply\x12\n\n\x02id\x18\x01 \x01(\x05\"j\n\x0fMatRigidRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0b\n\x03\x63mo\x18\x05 \x01(\x05\x12\x0c\n\x04\x63on1\x18\x06 \x01(\x05\x12\x0c\n\x04\x63on2\x18\x07 \x01(\x05\"\x1c\n\rMatRigidReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"C\n\x11MatElasticRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\"\x1e\n\x0fMatElasticReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"\x85\x01\n\x12MatSpotweldRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0c\n\x04sigy\x18\x05 \x01(\x02\x12\n\n\x02\x65h\x18\x06 \x01(\x02\x12\x0b\n\x03nrr\x18\x07 \x01(\x02\x12\x0b\n\x03nrs\x18\x08 \x01(\x02\x12\x0b\n\x03nrt\x18\t \x01(\x02\"\x1f\n\x10MatSpotweldReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"q\n#MatPiecewiseLinearPlasticityRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0c\n\x04sigy\x18\x05 \x01(\x02\x12\x0c\n\x04\x65tan\x18\x06 \x01(\x02\"0\n!MatPiecewiseLinearPlasticityReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"\x97\x01\n+MatModifiedPiecewiseLinearPlasticityRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x0c\n\x04sigy\x18\x05 \x01(\x02\x12\x0c\n\x04\x65tan\x18\x06 \x01(\x02\x12\x0c\n\x04\x66\x61il\x18\x07 \x01(\x02\x12\x0e\n\x06numint\x18\x08 \x01(\x05\"8\n)MatModifiedPiecewiseLinearPlasticityReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"l\n\x10MatFabricRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\n\n\x02\x65\x61\x18\x03 \x01(\x02\x12\n\n\x02\x65\x62\x18\x04 \x01(\x02\x12\x0c\n\x04prba\x18\x05 \x01(\x02\x12\x0c\n\x04prab\x18\x06 \x01(\x02\x12\x0b\n\x03gab\x18\x07 \x01(\x02\"\x1d\n\x0eMatFabricReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"=\n MatSpringNonlinearElasticRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"-\n\x1eMatSpringNonlinearElasticReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"2\n\x17MatDamperViscousRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02\x64\x63\x18\x02 \x01(\x02\"$\n\x15MatDamperViscousReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"=\n MatDamperNonlinearViscousRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0c\n\x04lcdr\x18\x02 \x01(\x05\"-\n\x1eMatDamperNonlinearViscousReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"(\n\x0eMatNullRequest\x12\n\n\x02ro\x18\x01 \x01(\x02\x12\n\n\x02pc\x18\x02 \x01(\x02\"\x1b\n\x0cMatNullReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"\xc2\x01\n\x15MatJohnsonCookRequest\x12\n\n\x02ro\x18\x01 \x01(\x02\x12\t\n\x01g\x18\x02 \x01(\x02\x12\t\n\x01\x65\x18\x03 \x01(\x02\x12\n\n\x02pr\x18\x04 \x01(\x02\x12\x11\n\tconstants\x18\x05 \x03(\x02\x12\n\n\x02tm\x18\x06 \x01(\x02\x12\n\n\x02tr\x18\x07 \x01(\x02\x12\x0c\n\x04\x65ps0\x18\x08 \x01(\x02\x12\n\n\x02\x63p\x18\t \x01(\x02\x12\n\n\x02pc\x18\n \x01(\x02\x12\r\n\x05spall\x18\x0b \x01(\x02\x12\n\n\x02it\x18\x0c \x01(\x02\x12\x0f\n\x07\x66\x61ilure\x18\r \x03(\x02\"\"\n\x13MatJohnsonCookReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"A\n\x1bMatHighExplosiveBurnRequest\x12\n\n\x02ro\x18\x01 \x01(\x02\x12\t\n\x01\x64\x18\x02 \x01(\x02\x12\x0b\n\x03pcj\x18\x03 \x01(\x02\"(\n\x19MatHighExplosiveBurnReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"\x1f\n\x10MatVacuumRequest\x12\x0b\n\x03rho\x18\x01 \x01(\x02\"\x1d\n\x0eMatVacuumReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"B\n\x14MatAddErosionRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0e\n\x06mnpres\x18\x02 \x01(\x02\x12\r\n\x05mxeps\x18\x03 \x01(\x02\"!\n\x12MatAddErosionReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"g\n MatSPHIncompressibleFluidRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\n\n\x02mu\x18\x03 \x01(\x02\x12\x0e\n\x06gamma1\x18\x04 \x01(\x02\x12\x0e\n\x06gamma2\x18\x05 \x01(\x02\"-\n\x1eMatSPHIncompressibleFluidReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"i\n$MatSPHIncompressibleStructureRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\n\n\x02ro\x18\x02 \x01(\x02\x12\x0c\n\x04\x62\x65ta\x18\x03 \x01(\x02\x12\r\n\x05rough\x18\x04 \x01(\x02\x12\x0b\n\x03\x61\x64h\x18\x05 \x01(\x02\"1\n\"MatSPHIncompressibleStructureReply\x12\x0b\n\x03mid\x18\x01 \x01(\x05\"@\n\x1a\x45OSLinearPolynomialRequest\x12\n\n\x02\x63i\x18\x01 \x03(\x02\x12\n\n\x02\x65\x30\x18\x02 \x01(\x02\x12\n\n\x02v0\x18\x03 \x01(\x02\")\n\x18\x45OSLinearPolynomialReply\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\"%\n\rEOSJWLRequest\x12\x14\n\x0cjwl_equation\x18\x01 \x03(\x02\"\x1c\n\x0b\x45OSJWLReply\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\"?\n\x13\x45OSGruneisenRequest\x12\x11\n\tconstants\x18\x01 \x03(\x02\x12\t\n\x01\x61\x18\x02 \x01(\x02\x12\n\n\x02\x65\x30\x18\x03 \x01(\x02\"\"\n\x11\x45OSGruneisenReply\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\"\x1f\n\x0fSaveFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1f\n\rSaveFileReply\x12\x0e\n\x06length\x18\x01 \x01(\x03\"\x1f\n\x0fLoadFileRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1c\n\rLoadFileReply\x12\x0b\n\x03ret\x18\x01 \x01(\x08\"\x11\n\x0fGetNodesRequest\"\x1f\n\rGetNodesReply\x12\x0e\n\x06\x63oords\x18\x01 \x03(\x01\"\x19\n\x17GetSolidElementsRequest\"(\n\x15GetSolidElementsReply\x12\x0f\n\x07nodeids\x18\x01 \x03(\x03\"1\n\x16ICFDControlTimeRequest\x12\x0b\n\x03tim\x18\x01 \x01(\x02\x12\n\n\x02\x64t\x18\x02 \x01(\x02\"&\n\x14ICFDControlTimeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"V\n\x19ICFDControlGeneralRequest\x12\r\n\x05\x61type\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\x0c\n\x04\x64vcl\x18\x03 \x01(\x05\x12\r\n\x05rdvcl\x18\x04 \x01(\x05\")\n\x17ICFDControlGeneralReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"(\n\x18ICFDControlOutputRequest\x12\x0c\n\x04msgl\x18\x01 \x01(\x05\"(\n\x16ICFDControlOutputReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\",\n\x1cICFDControlTurbulenceRequest\x12\x0c\n\x04tmod\x18\x01 \x01(\x05\",\n\x1aICFDControlTurbulenceReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"R\n\x1dICFDControlDEMCouplingRequest\x12\r\n\x05\x63type\x18\x01 \x01(\x05\x12\n\n\x02\x62t\x18\x02 \x01(\x02\x12\n\n\x02\x64t\x18\x03 \x01(\x02\x12\n\n\x02sf\x18\x04 \x01(\x02\"-\n\x1bICFDControlDEMCouplingReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"!\n\x12ICFDSectionRequest\x12\x0b\n\x03sid\x18\x01 \x01(\x05\"\"\n\x10ICFDSectionReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"C\n\x0eICFDMatRequest\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\x0b\n\x03\x66lg\x18\x02 \x01(\x05\x12\n\n\x02ro\x18\x03 \x01(\x02\x12\x0b\n\x03vis\x18\x04 \x01(\x02\"\x1a\n\x0cICFDMatReply\x12\n\n\x02id\x18\x01 \x01(\x05\":\n\x0fICFDPartRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\"\x1f\n\rICFDPartReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"L\n\x12ICFDPartVolRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\x12\r\n\x05spids\x18\x04 \x03(\x05\"\x1e\n\x10ICFDPartVolReply\x12\n\n\x02id\x18\x01 \x01(\x05\" \n\x11ICFDDBDragRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"!\n\x0fICFDDBDragReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"R\n\x1bICFDBdyPrescribedVelRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\x0b\n\x03\x64of\x18\x02 \x01(\x05\x12\x0b\n\x03vad\x18\x03 \x01(\x05\x12\x0c\n\x04lcid\x18\x04 \x01(\x05\"+\n\x19ICFDBdyPrescribedVelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"8\n\x1bICFDBdyPrescribedPreRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\x0c\n\x04lcid\x18\x02 \x01(\x05\"+\n\x19ICFDBdyPrescribedPreReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"%\n\x16ICFDBdyFreeSlipRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"&\n\x14ICFDBdyFreeSlipReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"$\n\x15ICFDBdyNonSlipRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\"%\n\x13ICFDBdyNonSlipReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"6\n\x18ICFDSolverTolMMOVRequest\x12\x0c\n\x04\x61tol\x18\x01 \x01(\x02\x12\x0c\n\x04rtol\x18\x02 \x01(\x02\"(\n\x16ICFDSolverTolMMOVReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"B\n\x17ICFDPartPropertyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\"\'\n\x15ICFDPartPropertyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"H\n\x1dICFDVolumePartPropertyRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05secid\x18\x02 \x01(\x05\x12\x0b\n\x03mid\x18\x03 \x01(\x05\"-\n\x1bICFDVolumePartPropertyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"0\n\x11MeshVolumeRequest\x12\r\n\x05volid\x18\x01 \x01(\x05\x12\x0c\n\x04pids\x18\x02 \x03(\x05\"\x1d\n\x0fMeshVolumeReply\x12\n\n\x02id\x18\x01 \x01(\x05\"4\n\x15MeshEmbedShellRequest\x12\r\n\x05volid\x18\x01 \x01(\x05\x12\x0c\n\x04pids\x18\x02 \x03(\x05\"%\n\x13MeshEmbedShellReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"+\n\rMeshBlRequest\x12\x0b\n\x03pid\x18\x01 \x01(\x05\x12\r\n\x05nelth\x18\x02 \x01(\x05\"\x1d\n\x0bMeshBlReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"f\n\x14MeshSizeShapeRequest\x12\r\n\x05sname\x18\x01 \x01(\t\x12\r\n\x05\x66orce\x18\x02 \x01(\x05\x12\x0e\n\x06method\x18\x03 \x01(\x05\x12\r\n\x05msize\x18\x04 \x01(\x02\x12\x11\n\tparameter\x18\x05 \x03(\x02\"$\n\x12MeshSizeShapeReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"i\n\x1e\x41LECreateStructuredMeshRequest\x12\x0c\n\x04nbid\x18\x01 \x01(\x05\x12\x0c\n\x04\x65\x62id\x18\x02 \x01(\x05\x12\r\n\x05\x63pidx\x18\x03 \x01(\x05\x12\r\n\x05\x63pidy\x18\x04 \x01(\x05\x12\r\n\x05\x63pidz\x18\x05 \x01(\x05\">\n\x1c\x41LECreateStructuredMeshReply\x12\x0e\n\x06meshid\x18\x01 \x01(\x05\x12\x0e\n\x06partid\x18\x02 \x01(\x05\"\\\n$ALECreateStructuredMeshRefineRequest\x12\r\n\x05mshid\x18\x01 \x01(\x05\x12\x0b\n\x03ifx\x18\x02 \x01(\x05\x12\x0b\n\x03ify\x18\x03 \x01(\x05\x12\x0b\n\x03ifz\x18\x04 \x01(\x05\"4\n\"ALECreateStructuredMeshRefineReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"n\n+ALECreateStructuredMeshControlPointsRequest\x12\r\n\x05icase\x18\x01 \x01(\x05\x12\x0b\n\x03sfo\x18\x02 \x01(\x02\x12\t\n\x01n\x18\x03 \x03(\x05\x12\t\n\x01x\x18\x04 \x03(\x02\x12\r\n\x05ratio\x18\x05 \x03(\x02\"9\n)ALECreateStructuredMeshControlPointsReply\x12\x0c\n\x04\x63pid\x18\x01 \x01(\x05\"c\n\'ALECreateStructuredMultiMatGroupRequest\x12\x0e\n\x06nmmgnm\x18\x01 \x01(\t\x12\x0b\n\x03mid\x18\x02 \x01(\x05\x12\r\n\x05\x65osid\x18\x03 \x01(\x05\x12\x0c\n\x04pref\x18\x04 \x01(\x02\"7\n%ALECreateStructuredMultiMatGroupReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x92\x01\n+ALECreateStructuredMeshVolumeFillingRequest\x12\r\n\x05mshid\x18\x01 \x01(\x05\x12\x0e\n\x06\x61mmgto\x18\x02 \x01(\t\x12\x0f\n\x07nsample\x18\x03 \x01(\x05\x12\x0b\n\x03vid\x18\x04 \x01(\x05\x12\x0c\n\x04geom\x18\x05 \x01(\t\x12\r\n\x05inout\x18\x06 \x01(\x05\x12\t\n\x01\x65\x18\x07 \x03(\x02\";\n)ALECreateStructuredMeshVolumeFillingReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"4\n\x14\x44\x61mpingGlobalRequest\x12\x0c\n\x04lcid\x18\x01 \x01(\x05\x12\x0e\n\x06valdmp\x18\x02 \x01(\x02\"$\n\x12\x44\x61mpingGlobalReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"F\n\x1b\x44\x61mpingPartStiffnessRequest\x12\r\n\x05isset\x18\x01 \x01(\x08\x12\n\n\x02id\x18\x02 \x01(\x05\x12\x0c\n\x04\x63oef\x18\x03 \x01(\x02\"+\n\x19\x44\x61mpingPartStiffnessReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\xa7\x01\n\x12\x41irbagModelRequest\x12\x11\n\tmodeltype\x18\x01 \x01(\t\x12\x0b\n\x03sid\x18\x02 \x01(\x05\x12\x0e\n\x06sidtyp\x18\x03 \x01(\x05\x12\n\n\x02\x63v\x18\x04 \x01(\x02\x12\n\n\x02\x63p\x18\x05 \x01(\x02\x12\t\n\x01t\x18\x06 \x01(\x02\x12\x0c\n\x04lcid\x18\x07 \x01(\x05\x12\n\n\x02mu\x18\x08 \x01(\x02\x12\x0c\n\x04\x61rea\x18\t \x01(\x02\x12\n\n\x02pe\x18\n \x01(\x02\x12\n\n\x02ro\x18\x0b \x01(\x02\"\"\n\x10\x41irbagModelReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"c\n\x10\x45MControlRequest\x12\r\n\x05\x65msol\x18\x01 \x01(\x05\x12\r\n\x05numls\x18\x02 \x01(\x05\x12\x0f\n\x07macrodt\x18\x03 \x01(\x02\x12\x0f\n\x07ncylfem\x18\x04 \x01(\x05\x12\x0f\n\x07ncylbem\x18\x05 \x01(\x05\" \n\x0e\x45MControlReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"4\n\x11\x45MTimestepRequest\x12\x0e\n\x06tstype\x18\x01 \x01(\x05\x12\x0f\n\x07\x64tconst\x18\x02 \x01(\x02\"!\n\x0f\x45MTimestepReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"U\n\x17\x45MControlContactRequest\x12\x0c\n\x04\x65mct\x18\x01 \x01(\x05\x12\x0e\n\x06\x63\x63only\x18\x02 \x01(\x05\x12\r\n\x05\x63type\x18\x03 \x01(\x05\x12\r\n\x05\x64type\x18\x04 \x01(\x05\"\'\n\x15\x45MControlContactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"\x85\x01\n\x10\x45MContactRequest\x12\x0e\n\x06\x63ontid\x18\x01 \x01(\x05\x12\r\n\x05\x64type\x18\x02 \x01(\x05\x12\r\n\x05psidm\x18\x03 \x01(\x05\x12\r\n\x05psids\x18\x04 \x01(\x05\x12\x0c\n\x04\x65ps1\x18\x05 \x01(\x02\x12\x0c\n\x04\x65ps2\x18\x06 \x01(\x02\x12\x0c\n\x04\x65ps3\x18\x07 \x01(\x02\x12\n\n\x02\x64\x30\x18\x08 \x01(\x02\" \n\x0e\x45MContactReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"U\n\x14\x45MCircuitRogoRequest\x12\r\n\x05rogid\x18\x01 \x01(\x05\x12\r\n\x05setid\x18\x02 \x01(\x05\x12\x0f\n\x07settype\x18\x03 \x01(\x05\x12\x0e\n\x06\x63urtyp\x18\x04 \x01(\x05\" \n\x12\x45MCircuitRogoReply\x12\n\n\x02id\x18\x01 \x01(\x05\"s\n\x10\x45MCircuitRequest\x12\x0e\n\x06\x63ircid\x18\x01 \x01(\x05\x12\x0f\n\x07\x63irctyp\x18\x02 \x01(\x05\x12\x0c\n\x04lcid\x18\x03 \x01(\x05\x12\x0f\n\x07sidcurr\x18\x04 \x01(\x05\x12\x0e\n\x06sidvin\x18\x05 \x01(\x05\x12\x0f\n\x07sidvout\x18\x06 \x01(\x05\"\x1c\n\x0e\x45MCircuitReply\x12\n\n\x02id\x18\x01 \x01(\x05\"<\n\x0f\x45MMat001Request\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\r\n\x05sigma\x18\x03 \x01(\x02\"\x1f\n\rEMMat001Reply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"Z\n\x0f\x45MMat002Request\x12\x0b\n\x03mid\x18\x01 \x01(\x05\x12\r\n\x05mtype\x18\x02 \x01(\x05\x12\r\n\x05sigma\x18\x03 \x01(\x02\x12\r\n\x05\x65osid\x18\x04 \x01(\x05\x12\r\n\x05murel\x18\x05 \x01(\x02\"\x1f\n\rEMMat002Reply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"u\n\x12\x45MSolverBemRequest\x12\x0e\n\x06reltol\x18\x01 \x01(\x02\x12\x0e\n\x06maxite\x18\x02 \x01(\x05\x12\r\n\x05stype\x18\x03 \x01(\x05\x12\x0e\n\x06precon\x18\x04 \x01(\x05\x12\x0f\n\x07uselast\x18\x05 \x01(\x05\x12\x0f\n\x07ncylbem\x18\x06 \x01(\x05\"\"\n\x10\x45MSolverBemReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"u\n\x12\x45MSolverFemRequest\x12\x0e\n\x06reltol\x18\x01 \x01(\x02\x12\x0e\n\x06maxite\x18\x02 \x01(\x05\x12\r\n\x05stype\x18\x03 \x01(\x05\x12\x0e\n\x06precon\x18\x04 \x01(\x05\x12\x0f\n\x07uselast\x18\x05 \x01(\x05\x12\x0f\n\x07ncylbem\x18\x06 \x01(\x05\"\"\n\x10\x45MSolverFemReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"6\n\x15\x45MSolverBemMatRequest\x12\r\n\x05matid\x18\x01 \x01(\x05\x12\x0e\n\x06reltol\x18\x02 \x01(\x02\"%\n\x13\x45MSolverBemMatReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"n\n\x1f\x45MSolverFemBemMonolithicRequest\x12\r\n\x05mtype\x18\x01 \x01(\x05\x12\r\n\x05stype\x18\x02 \x01(\x05\x12\x0e\n\x06\x61\x62stol\x18\x03 \x01(\x02\x12\x0e\n\x06reltol\x18\x04 \x01(\x02\x12\r\n\x05maxit\x18\x05 \x01(\x05\"/\n\x1d\x45MSolverFemBemMonolithicReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"I\n\x0f\x45MOutputRequest\x12\x0c\n\x04mats\x18\x01 \x01(\x05\x12\x0c\n\x04matf\x18\x02 \x01(\x05\x12\x0c\n\x04sols\x18\x03 \x01(\x05\x12\x0c\n\x04solf\x18\x04 \x01(\x05\"\x1f\n\rEMOutputReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\".\n\x1d\x45MDatabaseGlobalEnergyRequest\x12\r\n\x05outlv\x18\x01 \x01(\x05\"-\n\x1b\x45MDatabaseGlobalEnergyReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"p\n\x18\x45MPermanentMagnetRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0e\n\x06partid\x18\x02 \x01(\x05\x12\r\n\x05mtype\x18\x03 \x01(\x05\x12\r\n\x05north\x18\x04 \x01(\x05\x12\x0e\n\x06sourth\x18\x05 \x01(\x05\x12\n\n\x02hc\x18\x06 \x01(\x05\"(\n\x16\x45MPermanentMagnetReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"H\n\x18\x45MEOSPermeabilityRequest\x12\r\n\x05\x65osid\x18\x01 \x01(\x05\x12\x0f\n\x07\x65ostype\x18\x02 \x01(\x05\x12\x0c\n\x04lcid\x18\x03 \x01(\x05\"(\n\x16\x45MEOSPermeabilityReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\"8\n\x11GeneralKWDRequest\x12\x0e\n\x06opcode\x18\x01 \x01(\t\x12\x13\n\x0bkeyworddata\x18\x02 \x01(\t\"!\n\x0fGeneralKWDReply\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\x05\x32\xf0X\n\x05kwC2S\x12>\n\rkwSetFileName\x12\x12.kwgrpc.kwFileName\x1a\x17.kwgrpc.kwFileNameReply\"\x00\x12\x30\n\x06Upload\x12\r.kwgrpc.Chunk\x1a\x13.kwgrpc.kwFileReply\"\x00(\x01\x12\x42\n\x0e\x43reateTimestep\x12\x17.kwgrpc.TimestepRequest\x1a\x15.kwgrpc.TimestepReply\"\x00\x12K\n\x11\x43reateTermination\x12\x1a.kwgrpc.TerminationRequest\x1a\x18.kwgrpc.TerminationReply\"\x00\x12Q\n\x13\x43reateControlOutput\x12\x1c.kwgrpc.ControlOutputRequest\x1a\x1a.kwgrpc.ControlOutputReply\"\x00\x12T\n\x14\x43reateControlContact\x12\x1d.kwgrpc.ControlContactRequest\x1a\x1b.kwgrpc.ControlContactReply\"\x00\x12l\n\x1c\x43reateControlDiscreteElement\x12%.kwgrpc.ControlDiscreteElementRequest\x1a#.kwgrpc.ControlDiscreteElementReply\"\x00\x12W\n\x15\x43reateControlAccuracy\x12\x1e.kwgrpc.ControlAccuracyRequest\x1a\x1c.kwgrpc.ControlAccuracyReply\"\x00\x12Q\n\x13\x43reateControlEnergy\x12\x1c.kwgrpc.ControlEnergyRequest\x1a\x1a.kwgrpc.ControlEnergyReply\"\x00\x12\x66\n\x1a\x43reateControlBulkViscosity\x12#.kwgrpc.ControlBulkViscosityRequest\x1a!.kwgrpc.ControlBulkViscosityReply\"\x00\x12Z\n\x16\x43reateControlHourgalss\x12\x1f.kwgrpc.ControlHourglassRequest\x1a\x1d.kwgrpc.ControlHourglassReply\"\x00\x12N\n\x12\x43reateControlShell\x12\x1b.kwgrpc.ControlShellRequest\x1a\x19.kwgrpc.ControlShellReply\"\x00\x12N\n\x12\x43reateControlSolid\x12\x1b.kwgrpc.ControlSolidRequest\x1a\x19.kwgrpc.ControlSolidReply\"\x00\x12l\n\x1c\x43reateControlImplicitGeneral\x12%.kwgrpc.ControlImplicitGeneralRequest\x1a#.kwgrpc.ControlImplicitGeneralReply\"\x00\x12\x63\n\x19\x43reateControlImplicitAuto\x12\".kwgrpc.ControlImplicitAutoRequest\x1a .kwgrpc.ControlImplicitAutoReply\"\x00\x12l\n\x1c\x43reateControlImplicitDynamic\x12%.kwgrpc.ControlImplicitDynamicRequest\x1a#.kwgrpc.ControlImplicitDynamicReply\"\x00\x12u\n\x1f\x43reateControlImplicitEigenvalue\x12(.kwgrpc.ControlImplicitEigenvalueRequest\x1a&.kwgrpc.ControlImplicitEigenvalueReply\"\x00\x12o\n\x1d\x43reateControlImplicitSolution\x12&.kwgrpc.ControlImplicitSolutionRequest\x1a$.kwgrpc.ControlImplicitSolutionReply\"\x00\x12H\n\x10\x43reateControlSPH\x12\x19.kwgrpc.ControlSPHRequest\x1a\x17.kwgrpc.ControlSPHReply\"\x00\x12\x42\n\x0e\x43reateDBBinary\x12\x17.kwgrpc.DBBinaryRequest\x1a\x15.kwgrpc.DBBinaryReply\"\x00\x12?\n\rCreateDBAscii\x12\x16.kwgrpc.DBAsciiRequest\x1a\x14.kwgrpc.DBAsciiReply\"\x00\x12<\n\x0c\x43reateDBSALE\x12\x15.kwgrpc.DBSALERequest\x1a\x13.kwgrpc.DBSALEReply\"\x00\x12Q\n\x13\x43reateRigidWallGeom\x12\x1c.kwgrpc.RigidWallGeomRequest\x1a\x1a.kwgrpc.RigidWallGeomReply\"\x00\x12W\n\x15\x43reateRigidWallPlanar\x12\x1e.kwgrpc.RigidWallPlanarRequest\x1a\x1c.kwgrpc.RigidWallPlanarReply\"\x00\x12?\n\rCreateInitVel\x12\x16.kwgrpc.InitVelRequest\x1a\x14.kwgrpc.InitVelReply\"\x00\x12Z\n\x16\x43reateInitVelRigidBody\x12\x1f.kwgrpc.InitVelRigidBodyRequest\x1a\x1d.kwgrpc.InitVelRigidBodyReply\"\x00\x12]\n\x17\x43reateInitVelGeneration\x12 .kwgrpc.InitVelGenerationRequest\x1a\x1e.kwgrpc.InitVelGenerationReply\"\x00\x12x\n CreateInitVelGenerationStartTime\x12).kwgrpc.InitVelGenerationStartTimeRequest\x1a\'.kwgrpc.InitVelGenerationStartTimeReply\"\x00\x12T\n\x14\x43reateInitDetonation\x12\x1d.kwgrpc.InitDetonationRequest\x1a\x1b.kwgrpc.InitDetonationReply\"\x00\x12?\n\rCreateContact\x12\x16.kwgrpc.ContactRequest\x1a\x14.kwgrpc.ContactReply\"\x00\x12\x63\n\x19\x43reateBdyPrescribedMotion\x12\".kwgrpc.BdyPrescribedMotionRequest\x1a .kwgrpc.BdyPrescribedMotionReply\"\x00\x12<\n\x0c\x43reateBdySpc\x12\x15.kwgrpc.BdySpcRequest\x1a\x13.kwgrpc.BdySpcReply\"\x00\x12Z\n\x16\x43reateConstrainedJoint\x12\x1f.kwgrpc.ConstrainedJointRequest\x1a\x1d.kwgrpc.ConstrainedJointReply\"\x00\x12i\n\x1b\x43reateConstrainedExtraNodes\x12$.kwgrpc.ConstrainedExtraNodesRequest\x1a\".kwgrpc.ConstrainedExtraNodesReply\"\x00\x12u\n\x1f\x43reateConstrainedNodalRigidBody\x12(.kwgrpc.ConstrainedNodalRigidBodyRequest\x1a&.kwgrpc.ConstrainedNodalRigidBodyReply\"\x00\x12\x63\n\x19\x43reateConstrainedSpotWeld\x12\".kwgrpc.ConstrainedSpotWeldRequest\x1a .kwgrpc.ConstrainedSpotWeldReply\"\x00\x12\x42\n\x0e\x43reateLoadBody\x12\x17.kwgrpc.LoadBodyRequest\x1a\x15.kwgrpc.LoadBodyReply\"\x00\x12\x39\n\x0b\x43reateMatEM\x12\x14.kwgrpc.MatEMRequest\x1a\x12.kwgrpc.MatEMReply\"\x00\x12\x42\n\x0e\x43reateMatRigid\x12\x17.kwgrpc.MatRigidRequest\x1a\x15.kwgrpc.MatRigidReply\"\x00\x12H\n\x10\x43reateMatElastic\x12\x19.kwgrpc.MatElasticRequest\x1a\x17.kwgrpc.MatElasticReply\"\x00\x12K\n\x11\x43reateMatSpotweld\x12\x1a.kwgrpc.MatSpotweldRequest\x1a\x18.kwgrpc.MatSpotweldReply\"\x00\x12~\n\"CreateMatPiecewiseLinearPlasticity\x12+.kwgrpc.MatPiecewiseLinearPlasticityRequest\x1a).kwgrpc.MatPiecewiseLinearPlasticityReply\"\x00\x12\x96\x01\n*CreateMatModifiedPiecewiseLinearPlasticity\x12\x33.kwgrpc.MatModifiedPiecewiseLinearPlasticityRequest\x1a\x31.kwgrpc.MatModifiedPiecewiseLinearPlasticityReply\"\x00\x12\x45\n\x0f\x43reateMatFabric\x12\x18.kwgrpc.MatFabricRequest\x1a\x16.kwgrpc.MatFabricReply\"\x00\x12u\n\x1f\x43reateMatSpringNonlinearElastic\x12(.kwgrpc.MatSpringNonlinearElasticRequest\x1a&.kwgrpc.MatSpringNonlinearElasticReply\"\x00\x12Z\n\x16\x43reateMatDamperViscous\x12\x1f.kwgrpc.MatDamperViscousRequest\x1a\x1d.kwgrpc.MatDamperViscousReply\"\x00\x12u\n\x1f\x43reateMatDamperNonlinearViscous\x12(.kwgrpc.MatDamperNonlinearViscousRequest\x1a&.kwgrpc.MatDamperNonlinearViscousReply\"\x00\x12?\n\rCreateMatNull\x12\x16.kwgrpc.MatNullRequest\x1a\x14.kwgrpc.MatNullReply\"\x00\x12T\n\x14\x43reateMatJohnsonCook\x12\x1d.kwgrpc.MatJohnsonCookRequest\x1a\x1b.kwgrpc.MatJohnsonCookReply\"\x00\x12\x66\n\x1a\x43reateMatHighExplosiveBurn\x12#.kwgrpc.MatHighExplosiveBurnRequest\x1a!.kwgrpc.MatHighExplosiveBurnReply\"\x00\x12\x45\n\x0f\x43reateMatVacuum\x12\x18.kwgrpc.MatVacuumRequest\x1a\x16.kwgrpc.MatVacuumReply\"\x00\x12Q\n\x13\x43reateMatAddErosion\x12\x1c.kwgrpc.MatAddErosionRequest\x1a\x1a.kwgrpc.MatAddErosionReply\"\x00\x12u\n\x1f\x43reateMatSPHIncompressibleFluid\x12(.kwgrpc.MatSPHIncompressibleFluidRequest\x1a&.kwgrpc.MatSPHIncompressibleFluidReply\"\x00\x12\x81\x01\n#CreateMatSPHIncompressibleStructure\x12,.kwgrpc.MatSPHIncompressibleStructureRequest\x1a*.kwgrpc.MatSPHIncompressibleStructureReply\"\x00\x12\x63\n\x19\x43reateEOSLinearPolynomial\x12\".kwgrpc.EOSLinearPolynomialRequest\x1a .kwgrpc.EOSLinearPolynomialReply\"\x00\x12<\n\x0c\x43reateEOSJWL\x12\x15.kwgrpc.EOSJWLRequest\x1a\x13.kwgrpc.EOSJWLReply\"\x00\x12N\n\x12\x43reateEOSGruneisen\x12\x1b.kwgrpc.EOSGruneisenRequest\x1a\x19.kwgrpc.EOSGruneisenReply\"\x00\x12K\n\x11\x43reateDefineCurve\x12\x1a.kwgrpc.DefineCurveRequest\x1a\x18.kwgrpc.DefineCurveReply\"\x00\x12N\n\x12\x43reateDefineVector\x12\x1b.kwgrpc.DefineVectorRequest\x1a\x19.kwgrpc.DefineVectorReply\"\x00\x12\x45\n\x0f\x43reateDefineBox\x12\x18.kwgrpc.DefineBoxRequest\x1a\x16.kwgrpc.DefineBoxReply\"\x00\x12\x63\n\x19\x43reateDefineDEMeshSurface\x12\".kwgrpc.DefineDEMeshSurfaceRequest\x1a .kwgrpc.DefineDEMeshSurfaceReply\"\x00\x12]\n\x17\x43reateDefineOrientation\x12 .kwgrpc.DefineOrientationRequest\x1a\x1e.kwgrpc.DefineOrientationReply\"\x00\x12l\n\x1c\x43reateDefineSPHMassflowPlane\x12%.kwgrpc.DefineSPHMassflowPlaneRequest\x1a#.kwgrpc.DefineSPHMassflowPlaneReply\"\x00\x12Z\n\x16\x43reateDefineSPHMeshBox\x12\x1f.kwgrpc.DefineSPHMeshBoxRequest\x1a\x1d.kwgrpc.DefineSPHMeshBoxReply\"\x00\x12\x66\n\x1a\x43reateDefineSPHMeshSurface\x12#.kwgrpc.DefineSPHMeshSurfaceRequest\x1a!.kwgrpc.DefineSPHMeshSurfaceReply\"\x00\x12?\n\rCreatePartSet\x12\x16.kwgrpc.PartSetRequest\x1a\x14.kwgrpc.PartSetReply\"\x00\x12\x42\n\x0e\x43reateShellSet\x12\x17.kwgrpc.ShellSetRequest\x1a\x15.kwgrpc.ShellSetReply\"\x00\x12\x42\n\x0e\x43reateSolidSet\x12\x17.kwgrpc.SolidSetRequest\x1a\x15.kwgrpc.SolidSetReply\"\x00\x12?\n\rCreateNodeSet\x12\x16.kwgrpc.NodeSetRequest\x1a\x14.kwgrpc.NodeSetReply\"\x00\x12H\n\x10\x43reateSegmentSet\x12\x19.kwgrpc.SegmentSetRequest\x1a\x17.kwgrpc.SegmentSetReply\"\x00\x12W\n\x15\x43reateSectionIGAShell\x12\x1e.kwgrpc.SectionIGAShellRequest\x1a\x1c.kwgrpc.SectionIGAShellReply\"\x00\x12K\n\x11\x43reateSectionBeam\x12\x1a.kwgrpc.SectionBeamRequest\x1a\x18.kwgrpc.SectionBeamReply\"\x00\x12N\n\x12\x43reateSectionShell\x12\x1b.kwgrpc.SectionShellRequest\x1a\x19.kwgrpc.SectionShellReply\"\x00\x12N\n\x12\x43reateSectionSolid\x12\x1b.kwgrpc.SectionSolidRequest\x1a\x19.kwgrpc.SectionSolidReply\"\x00\x12W\n\x15\x43reateSectionDiscrete\x12\x1e.kwgrpc.SectionDiscreteRequest\x1a\x1c.kwgrpc.SectionDiscreteReply\"\x00\x12H\n\x10\x43reateSectionSPH\x12\x19.kwgrpc.SectionSPHRequest\x1a\x17.kwgrpc.SectionSPHReply\"\x00\x12\x45\n\x0f\x43reateHourglass\x12\x18.kwgrpc.HourglassRequest\x1a\x16.kwgrpc.HourglassReply\"\x00\x12K\n\x0fSetPartProperty\x12\x1b.kwgrpc.PartPropertyRequest\x1a\x19.kwgrpc.PartPropertyReply\"\x00\x12<\n\x08GetNodes\x12\x17.kwgrpc.GetNodesRequest\x1a\x15.kwgrpc.GetNodesReply\"\x00\x12T\n\x10GetSolidElements\x12\x1f.kwgrpc.GetSolidElementsRequest\x1a\x1d.kwgrpc.GetSolidElementsReply\"\x00\x12<\n\x08SaveFile\x12\x17.kwgrpc.SaveFileRequest\x1a\x15.kwgrpc.SaveFileReply\"\x00\x12<\n\x08LoadFile\x12\x17.kwgrpc.LoadFileRequest\x1a\x15.kwgrpc.LoadFileReply\"\x00\x12\x36\n\x08\x44ownload\x12\x17.kwgrpc.DownloadRequest\x1a\r.kwgrpc.Chunk\"\x00\x30\x01\x12W\n\x15ICFDCreateControlTime\x12\x1e.kwgrpc.ICFDControlTimeRequest\x1a\x1c.kwgrpc.ICFDControlTimeReply\"\x00\x12`\n\x18ICFDCreateControlGeneral\x12!.kwgrpc.ICFDControlGeneralRequest\x1a\x1f.kwgrpc.ICFDControlGeneralReply\"\x00\x12]\n\x17ICFDCreateControlOutput\x12 .kwgrpc.ICFDControlOutputRequest\x1a\x1e.kwgrpc.ICFDControlOutputReply\"\x00\x12i\n\x1bICFDCreateControlTurbulence\x12$.kwgrpc.ICFDControlTurbulenceRequest\x1a\".kwgrpc.ICFDControlTurbulenceReply\"\x00\x12l\n\x1cICFDCreateControlDEMCoupling\x12%.kwgrpc.ICFDControlDEMCouplingRequest\x1a#.kwgrpc.ICFDControlDEMCouplingReply\"\x00\x12K\n\x11ICFDCreateSection\x12\x1a.kwgrpc.ICFDSectionRequest\x1a\x18.kwgrpc.ICFDSectionReply\"\x00\x12?\n\rICFDCreateMat\x12\x16.kwgrpc.ICFDMatRequest\x1a\x14.kwgrpc.ICFDMatReply\"\x00\x12\x42\n\x0eICFDCreatePart\x12\x17.kwgrpc.ICFDPartRequest\x1a\x15.kwgrpc.ICFDPartReply\"\x00\x12K\n\x11ICFDCreatePartVol\x12\x1a.kwgrpc.ICFDPartVolRequest\x1a\x18.kwgrpc.ICFDPartVolReply\"\x00\x12H\n\x10ICFDCreateDBDrag\x12\x19.kwgrpc.ICFDDBDragRequest\x1a\x17.kwgrpc.ICFDDBDragReply\"\x00\x12\x66\n\x1aICFDCreateBdyPrescribedVel\x12#.kwgrpc.ICFDBdyPrescribedVelRequest\x1a!.kwgrpc.ICFDBdyPrescribedVelReply\"\x00\x12\x66\n\x1aICFDCreateBdyPrescribedPre\x12#.kwgrpc.ICFDBdyPrescribedPreRequest\x1a!.kwgrpc.ICFDBdyPrescribedPreReply\"\x00\x12W\n\x15ICFDCreateBdyFreeSlip\x12\x1e.kwgrpc.ICFDBdyFreeSlipRequest\x1a\x1c.kwgrpc.ICFDBdyFreeSlipReply\"\x00\x12T\n\x14ICFDCreateBdyNonSlip\x12\x1d.kwgrpc.ICFDBdyNonSlipRequest\x1a\x1b.kwgrpc.ICFDBdyNonSlipReply\"\x00\x12]\n\x17ICFDCreateSolverTolMMOV\x12 .kwgrpc.ICFDSolverTolMMOVRequest\x1a\x1e.kwgrpc.ICFDSolverTolMMOVReply\"\x00\x12W\n\x13SetICFDPartProperty\x12\x1f.kwgrpc.ICFDPartPropertyRequest\x1a\x1d.kwgrpc.ICFDPartPropertyReply\"\x00\x12i\n\x19SetICFDVolumePartProperty\x12%.kwgrpc.ICFDVolumePartPropertyRequest\x1a#.kwgrpc.ICFDVolumePartPropertyReply\"\x00\x12H\n\x10MESHCreateVolume\x12\x19.kwgrpc.MeshVolumeRequest\x1a\x17.kwgrpc.MeshVolumeReply\"\x00\x12T\n\x14MESHCreateEmbedShell\x12\x1d.kwgrpc.MeshEmbedShellRequest\x1a\x1b.kwgrpc.MeshEmbedShellReply\"\x00\x12<\n\x0cMESHCreateBl\x12\x15.kwgrpc.MeshBlRequest\x1a\x13.kwgrpc.MeshBlReply\"\x00\x12Q\n\x13MESHCreateSizeShape\x12\x1c.kwgrpc.MeshSizeShapeRequest\x1a\x1a.kwgrpc.MeshSizeShapeReply\"\x00\x12H\n\x10\x41LECreateControl\x12\x19.kwgrpc.ControlALERequest\x1a\x17.kwgrpc.ControlALEReply\"\x00\x12i\n\x17\x41LECreateStructuredMesh\x12&.kwgrpc.ALECreateStructuredMeshRequest\x1a$.kwgrpc.ALECreateStructuredMeshReply\"\x00\x12{\n\x1d\x41LECreateStructuredMeshRefine\x12,.kwgrpc.ALECreateStructuredMeshRefineRequest\x1a*.kwgrpc.ALECreateStructuredMeshRefineReply\"\x00\x12\x8d\x01\n!ALECreateStructuredMeshCtrlPoints\x12\x33.kwgrpc.ALECreateStructuredMeshControlPointsRequest\x1a\x31.kwgrpc.ALECreateStructuredMeshControlPointsReply\"\x00\x12\x89\x01\n%ALECreateStructuredMultiMaterialGroup\x12/.kwgrpc.ALECreateStructuredMultiMatGroupRequest\x1a-.kwgrpc.ALECreateStructuredMultiMatGroupReply\"\x00\x12\x90\x01\n$ALECreateStructuredMeshVolumeFilling\x12\x33.kwgrpc.ALECreateStructuredMeshVolumeFillingRequest\x1a\x31.kwgrpc.ALECreateStructuredMeshVolumeFillingReply\"\x00\x12Q\n\x13\x43reateDampingGlobal\x12\x1c.kwgrpc.DampingGlobalRequest\x1a\x1a.kwgrpc.DampingGlobalReply\"\x00\x12\x66\n\x1a\x43reateDampingPartStiffness\x12#.kwgrpc.DampingPartStiffnessRequest\x1a!.kwgrpc.DampingPartStiffnessReply\"\x00\x12K\n\x11\x43reateAirbagModel\x12\x1a.kwgrpc.AirbagModelRequest\x1a\x18.kwgrpc.AirbagModelReply\"\x00\x12\x45\n\x0f\x43reateEMControl\x12\x18.kwgrpc.EMControlRequest\x1a\x16.kwgrpc.EMControlReply\"\x00\x12H\n\x10\x43reateEMTimestep\x12\x19.kwgrpc.EMTimestepRequest\x1a\x17.kwgrpc.EMTimestepReply\"\x00\x12Z\n\x16\x43reateEMControlContact\x12\x1f.kwgrpc.EMControlContactRequest\x1a\x1d.kwgrpc.EMControlContactReply\"\x00\x12\x45\n\x0f\x43reateEMContact\x12\x18.kwgrpc.EMContactRequest\x1a\x16.kwgrpc.EMContactReply\"\x00\x12Q\n\x13\x43reateEMCircuitRogo\x12\x1c.kwgrpc.EMCircuitRogoRequest\x1a\x1a.kwgrpc.EMCircuitRogoReply\"\x00\x12\x45\n\x0f\x43reateEMCircuit\x12\x18.kwgrpc.EMCircuitRequest\x1a\x16.kwgrpc.EMCircuitReply\"\x00\x12\x42\n\x0e\x43reateEMMat001\x12\x17.kwgrpc.EMMat001Request\x1a\x15.kwgrpc.EMMat001Reply\"\x00\x12\x42\n\x0e\x43reateEMMat002\x12\x17.kwgrpc.EMMat002Request\x1a\x15.kwgrpc.EMMat002Reply\"\x00\x12K\n\x11\x43reateEMSolverBem\x12\x1a.kwgrpc.EMSolverBemRequest\x1a\x18.kwgrpc.EMSolverBemReply\"\x00\x12K\n\x11\x43reateEMSolverFem\x12\x1a.kwgrpc.EMSolverFemRequest\x1a\x18.kwgrpc.EMSolverFemReply\"\x00\x12T\n\x14\x43reateEMSolverBemMat\x12\x1d.kwgrpc.EMSolverBemMatRequest\x1a\x1b.kwgrpc.EMSolverBemMatReply\"\x00\x12r\n\x1e\x43reateEMSolverFemBemMonolithic\x12\'.kwgrpc.EMSolverFemBemMonolithicRequest\x1a%.kwgrpc.EMSolverFemBemMonolithicReply\"\x00\x12\x42\n\x0e\x43reateEMOutput\x12\x17.kwgrpc.EMOutputRequest\x1a\x15.kwgrpc.EMOutputReply\"\x00\x12l\n\x1c\x43reateEMDatabaseGlobalEnergy\x12%.kwgrpc.EMDatabaseGlobalEnergyRequest\x1a#.kwgrpc.EMDatabaseGlobalEnergyReply\"\x00\x12]\n\x17\x43reateEMPermanentMagnet\x12 .kwgrpc.EMPermanentMagnetRequest\x1a\x1e.kwgrpc.EMPermanentMagnetReply\"\x00\x12]\n\x17\x43reateEMEOSPermeability\x12 .kwgrpc.EMEOSPermeabilityRequest\x1a\x1e.kwgrpc.EMEOSPermeabilityReply\"\x00\x12H\n\x10\x43reateGeneralKWD\x12\x19.kwgrpc.GeneralKWDRequest\x1a\x17.kwgrpc.GeneralKWDReply\"\x00\x62\x06proto3')
 
 
 
@@ -57,6 +57,8 @@ _CONTROLIMPLICITEIGENVALUEREQUEST = DESCRIPTOR.message_types_by_name['ControlImp
 _CONTROLIMPLICITEIGENVALUEREPLY = DESCRIPTOR.message_types_by_name['ControlImplicitEigenvalueReply']
 _CONTROLIMPLICITSOLUTIONREQUEST = DESCRIPTOR.message_types_by_name['ControlImplicitSolutionRequest']
 _CONTROLIMPLICITSOLUTIONREPLY = DESCRIPTOR.message_types_by_name['ControlImplicitSolutionReply']
+_CONTROLSPHREQUEST = DESCRIPTOR.message_types_by_name['ControlSPHRequest']
+_CONTROLSPHREPLY = DESCRIPTOR.message_types_by_name['ControlSPHReply']
 _DBBINARYREQUEST = DESCRIPTOR.message_types_by_name['DBBinaryRequest']
 _DBBINARYREPLY = DESCRIPTOR.message_types_by_name['DBBinaryReply']
 _DBALEMATREQUEST = DESCRIPTOR.message_types_by_name['DBALEMatRequest']
@@ -105,6 +107,8 @@ _SECTIONSOLIDREQUEST = DESCRIPTOR.message_types_by_name['SectionSolidRequest']
 _SECTIONSOLIDREPLY = DESCRIPTOR.message_types_by_name['SectionSolidReply']
 _SECTIONDISCRETEREQUEST = DESCRIPTOR.message_types_by_name['SectionDiscreteRequest']
 _SECTIONDISCRETEREPLY = DESCRIPTOR.message_types_by_name['SectionDiscreteReply']
+_SECTIONSPHREQUEST = DESCRIPTOR.message_types_by_name['SectionSPHRequest']
+_SECTIONSPHREPLY = DESCRIPTOR.message_types_by_name['SectionSPHReply']
 _HOURGLASSREQUEST = DESCRIPTOR.message_types_by_name['HourglassRequest']
 _HOURGLASSREPLY = DESCRIPTOR.message_types_by_name['HourglassReply']
 _DEFINECURVEREQUEST = DESCRIPTOR.message_types_by_name['DefineCurveRequest']
@@ -117,6 +121,12 @@ _DEFINEDEMESHSURFACEREQUEST = DESCRIPTOR.message_types_by_name['DefineDEMeshSurf
 _DEFINEDEMESHSURFACEREPLY = DESCRIPTOR.message_types_by_name['DefineDEMeshSurfaceReply']
 _DEFINEORIENTATIONREQUEST = DESCRIPTOR.message_types_by_name['DefineOrientationRequest']
 _DEFINEORIENTATIONREPLY = DESCRIPTOR.message_types_by_name['DefineOrientationReply']
+_DEFINESPHMASSFLOWPLANEREQUEST = DESCRIPTOR.message_types_by_name['DefineSPHMassflowPlaneRequest']
+_DEFINESPHMASSFLOWPLANEREPLY = DESCRIPTOR.message_types_by_name['DefineSPHMassflowPlaneReply']
+_DEFINESPHMESHBOXREQUEST = DESCRIPTOR.message_types_by_name['DefineSPHMeshBoxRequest']
+_DEFINESPHMESHBOXREPLY = DESCRIPTOR.message_types_by_name['DefineSPHMeshBoxReply']
+_DEFINESPHMESHSURFACEREQUEST = DESCRIPTOR.message_types_by_name['DefineSPHMeshSurfaceRequest']
+_DEFINESPHMESHSURFACEREPLY = DESCRIPTOR.message_types_by_name['DefineSPHMeshSurfaceReply']
 _PARTSETREQUEST = DESCRIPTOR.message_types_by_name['PartSetRequest']
 _PARTSETREPLY = DESCRIPTOR.message_types_by_name['PartSetReply']
 _SHELLSETREQUEST = DESCRIPTOR.message_types_by_name['ShellSetRequest']
@@ -161,6 +171,10 @@ _MATVACUUMREQUEST = DESCRIPTOR.message_types_by_name['MatVacuumRequest']
 _MATVACUUMREPLY = DESCRIPTOR.message_types_by_name['MatVacuumReply']
 _MATADDEROSIONREQUEST = DESCRIPTOR.message_types_by_name['MatAddErosionRequest']
 _MATADDEROSIONREPLY = DESCRIPTOR.message_types_by_name['MatAddErosionReply']
+_MATSPHINCOMPRESSIBLEFLUIDREQUEST = DESCRIPTOR.message_types_by_name['MatSPHIncompressibleFluidRequest']
+_MATSPHINCOMPRESSIBLEFLUIDREPLY = DESCRIPTOR.message_types_by_name['MatSPHIncompressibleFluidReply']
+_MATSPHINCOMPRESSIBLESTRUCTUREREQUEST = DESCRIPTOR.message_types_by_name['MatSPHIncompressibleStructureRequest']
+_MATSPHINCOMPRESSIBLESTRUCTUREREPLY = DESCRIPTOR.message_types_by_name['MatSPHIncompressibleStructureReply']
 _EOSLINEARPOLYNOMIALREQUEST = DESCRIPTOR.message_types_by_name['EOSLinearPolynomialRequest']
 _EOSLINEARPOLYNOMIALREPLY = DESCRIPTOR.message_types_by_name['EOSLinearPolynomialReply']
 _EOSJWLREQUEST = DESCRIPTOR.message_types_by_name['EOSJWLRequest']
@@ -540,6 +554,20 @@ ControlImplicitSolutionReply = _reflection.GeneratedProtocolMessageType('Control
   })
 _sym_db.RegisterMessage(ControlImplicitSolutionReply)
 
+ControlSPHRequest = _reflection.GeneratedProtocolMessageType('ControlSPHRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLSPHREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlSPHRequest)
+  })
+_sym_db.RegisterMessage(ControlSPHRequest)
+
+ControlSPHReply = _reflection.GeneratedProtocolMessageType('ControlSPHReply', (_message.Message,), {
+  'DESCRIPTOR' : _CONTROLSPHREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.ControlSPHReply)
+  })
+_sym_db.RegisterMessage(ControlSPHReply)
+
 DBBinaryRequest = _reflection.GeneratedProtocolMessageType('DBBinaryRequest', (_message.Message,), {
   'DESCRIPTOR' : _DBBINARYREQUEST,
   '__module__' : 'kwprocess_pb2'
@@ -876,6 +904,20 @@ SectionDiscreteReply = _reflection.GeneratedProtocolMessageType('SectionDiscrete
   })
 _sym_db.RegisterMessage(SectionDiscreteReply)
 
+SectionSPHRequest = _reflection.GeneratedProtocolMessageType('SectionSPHRequest', (_message.Message,), {
+  'DESCRIPTOR' : _SECTIONSPHREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.SectionSPHRequest)
+  })
+_sym_db.RegisterMessage(SectionSPHRequest)
+
+SectionSPHReply = _reflection.GeneratedProtocolMessageType('SectionSPHReply', (_message.Message,), {
+  'DESCRIPTOR' : _SECTIONSPHREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.SectionSPHReply)
+  })
+_sym_db.RegisterMessage(SectionSPHReply)
+
 HourglassRequest = _reflection.GeneratedProtocolMessageType('HourglassRequest', (_message.Message,), {
   'DESCRIPTOR' : _HOURGLASSREQUEST,
   '__module__' : 'kwprocess_pb2'
@@ -959,6 +1001,48 @@ DefineOrientationReply = _reflection.GeneratedProtocolMessageType('DefineOrienta
   # @@protoc_insertion_point(class_scope:kwgrpc.DefineOrientationReply)
   })
 _sym_db.RegisterMessage(DefineOrientationReply)
+
+DefineSPHMassflowPlaneRequest = _reflection.GeneratedProtocolMessageType('DefineSPHMassflowPlaneRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DEFINESPHMASSFLOWPLANEREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.DefineSPHMassflowPlaneRequest)
+  })
+_sym_db.RegisterMessage(DefineSPHMassflowPlaneRequest)
+
+DefineSPHMassflowPlaneReply = _reflection.GeneratedProtocolMessageType('DefineSPHMassflowPlaneReply', (_message.Message,), {
+  'DESCRIPTOR' : _DEFINESPHMASSFLOWPLANEREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.DefineSPHMassflowPlaneReply)
+  })
+_sym_db.RegisterMessage(DefineSPHMassflowPlaneReply)
+
+DefineSPHMeshBoxRequest = _reflection.GeneratedProtocolMessageType('DefineSPHMeshBoxRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DEFINESPHMESHBOXREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.DefineSPHMeshBoxRequest)
+  })
+_sym_db.RegisterMessage(DefineSPHMeshBoxRequest)
+
+DefineSPHMeshBoxReply = _reflection.GeneratedProtocolMessageType('DefineSPHMeshBoxReply', (_message.Message,), {
+  'DESCRIPTOR' : _DEFINESPHMESHBOXREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.DefineSPHMeshBoxReply)
+  })
+_sym_db.RegisterMessage(DefineSPHMeshBoxReply)
+
+DefineSPHMeshSurfaceRequest = _reflection.GeneratedProtocolMessageType('DefineSPHMeshSurfaceRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DEFINESPHMESHSURFACEREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.DefineSPHMeshSurfaceRequest)
+  })
+_sym_db.RegisterMessage(DefineSPHMeshSurfaceRequest)
+
+DefineSPHMeshSurfaceReply = _reflection.GeneratedProtocolMessageType('DefineSPHMeshSurfaceReply', (_message.Message,), {
+  'DESCRIPTOR' : _DEFINESPHMESHSURFACEREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.DefineSPHMeshSurfaceReply)
+  })
+_sym_db.RegisterMessage(DefineSPHMeshSurfaceReply)
 
 PartSetRequest = _reflection.GeneratedProtocolMessageType('PartSetRequest', (_message.Message,), {
   'DESCRIPTOR' : _PARTSETREQUEST,
@@ -1267,6 +1351,34 @@ MatAddErosionReply = _reflection.GeneratedProtocolMessageType('MatAddErosionRepl
   # @@protoc_insertion_point(class_scope:kwgrpc.MatAddErosionReply)
   })
 _sym_db.RegisterMessage(MatAddErosionReply)
+
+MatSPHIncompressibleFluidRequest = _reflection.GeneratedProtocolMessageType('MatSPHIncompressibleFluidRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MATSPHINCOMPRESSIBLEFLUIDREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatSPHIncompressibleFluidRequest)
+  })
+_sym_db.RegisterMessage(MatSPHIncompressibleFluidRequest)
+
+MatSPHIncompressibleFluidReply = _reflection.GeneratedProtocolMessageType('MatSPHIncompressibleFluidReply', (_message.Message,), {
+  'DESCRIPTOR' : _MATSPHINCOMPRESSIBLEFLUIDREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatSPHIncompressibleFluidReply)
+  })
+_sym_db.RegisterMessage(MatSPHIncompressibleFluidReply)
+
+MatSPHIncompressibleStructureRequest = _reflection.GeneratedProtocolMessageType('MatSPHIncompressibleStructureRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MATSPHINCOMPRESSIBLESTRUCTUREREQUEST,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatSPHIncompressibleStructureRequest)
+  })
+_sym_db.RegisterMessage(MatSPHIncompressibleStructureRequest)
+
+MatSPHIncompressibleStructureReply = _reflection.GeneratedProtocolMessageType('MatSPHIncompressibleStructureReply', (_message.Message,), {
+  'DESCRIPTOR' : _MATSPHINCOMPRESSIBLESTRUCTUREREPLY,
+  '__module__' : 'kwprocess_pb2'
+  # @@protoc_insertion_point(class_scope:kwgrpc.MatSPHIncompressibleStructureReply)
+  })
+_sym_db.RegisterMessage(MatSPHIncompressibleStructureReply)
 
 EOSLinearPolynomialRequest = _reflection.GeneratedProtocolMessageType('EOSLinearPolynomialRequest', (_message.Message,), {
   'DESCRIPTOR' : _EOSLINEARPOLYNOMIALREQUEST,
@@ -2092,426 +2204,454 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _CONTROLIMPLICITSOLUTIONREQUEST._serialized_end=2366
   _CONTROLIMPLICITSOLUTIONREPLY._serialized_start=2368
   _CONTROLIMPLICITSOLUTIONREPLY._serialized_end=2414
-  _DBBINARYREQUEST._serialized_start=2416
-  _DBBINARYREQUEST._serialized_end=2527
-  _DBBINARYREPLY._serialized_start=2529
-  _DBBINARYREPLY._serialized_end=2560
-  _DBALEMATREQUEST._serialized_start=2562
-  _DBALEMATREQUEST._serialized_end=2594
-  _DBALEMATREPLY._serialized_start=2596
-  _DBALEMATREPLY._serialized_end=2627
-  _DBASCIIREQUEST._serialized_start=2629
-  _DBASCIIREQUEST._serialized_end=2716
-  _DBASCIIREPLY._serialized_start=2718
-  _DBASCIIREPLY._serialized_end=2748
-  _DBSALEREQUEST._serialized_start=2750
-  _DBSALEREQUEST._serialized_end=2781
-  _DBSALEREPLY._serialized_start=2783
-  _DBSALEREPLY._serialized_end=2812
-  _LOADBODYREQUEST._serialized_start=2814
-  _LOADBODYREQUEST._serialized_end=2861
-  _LOADBODYREPLY._serialized_start=2863
-  _LOADBODYREPLY._serialized_end=2894
-  _INITVELREQUEST._serialized_start=2896
-  _INITVELREQUEST._serialized_end=2944
-  _INITVELREPLY._serialized_start=2946
-  _INITVELREPLY._serialized_end=2976
-  _INITVELRIGIDBODYREQUEST._serialized_start=2978
-  _INITVELRIGIDBODYREQUEST._serialized_end=3105
-  _INITVELRIGIDBODYREPLY._serialized_start=3107
-  _INITVELRIGIDBODYREPLY._serialized_end=3146
-  _INITVELGENERATIONREQUEST._serialized_start=3149
-  _INITVELGENERATIONREQUEST._serialized_end=3339
-  _INITVELGENERATIONREPLY._serialized_start=3341
-  _INITVELGENERATIONREPLY._serialized_end=3381
-  _INITVELGENERATIONSTARTTIMEREQUEST._serialized_start=3383
-  _INITVELGENERATIONSTARTTIMEREQUEST._serialized_end=3433
-  _INITVELGENERATIONSTARTTIMEREPLY._serialized_start=3435
-  _INITVELGENERATIONSTARTTIMEREPLY._serialized_end=3484
-  _INITDETONATIONREQUEST._serialized_start=3486
-  _INITDETONATIONREQUEST._serialized_end=3549
-  _INITDETONATIONREPLY._serialized_start=3551
-  _INITDETONATIONREPLY._serialized_end=3588
-  _RIGIDWALLGEOMREQUEST._serialized_start=3591
-  _RIGIDWALLGEOMREQUEST._serialized_end=3733
-  _RIGIDWALLGEOMREPLY._serialized_start=3735
-  _RIGIDWALLGEOMREPLY._serialized_end=3771
-  _RIGIDWALLPLANARREQUEST._serialized_start=3773
-  _RIGIDWALLPLANARREQUEST._serialized_end=3872
-  _RIGIDWALLPLANARREPLY._serialized_start=3874
-  _RIGIDWALLPLANARREPLY._serialized_end=3912
-  _CONTACTREQUEST._serialized_start=3915
-  _CONTACTREQUEST._serialized_end=4468
-  _CONTACTREPLY._serialized_start=4470
-  _CONTACTREPLY._serialized_end=4500
-  _BDYPRESCRIBEDMOTIONREQUEST._serialized_start=4503
-  _BDYPRESCRIBEDMOTIONREQUEST._serialized_end=4687
-  _BDYPRESCRIBEDMOTIONREPLY._serialized_start=4689
-  _BDYPRESCRIBEDMOTIONREPLY._serialized_end=4731
-  _BDYSPCREQUEST._serialized_start=4734
-  _BDYSPCREQUEST._serialized_end=4929
-  _BDYSPCREPLY._serialized_start=4931
-  _BDYSPCREPLY._serialized_end=4960
-  _CONSTRAINEDEXTRANODESREQUEST._serialized_start=4962
-  _CONSTRAINEDEXTRANODESREQUEST._serialized_end=5049
-  _CONSTRAINEDEXTRANODESREPLY._serialized_start=5051
-  _CONSTRAINEDEXTRANODESREPLY._serialized_end=5095
-  _CONSTRAINEDNODALRIGIDBODYREQUEST._serialized_start=5097
-  _CONSTRAINEDNODALRIGIDBODYREQUEST._serialized_end=5158
-  _CONSTRAINEDNODALRIGIDBODYREPLY._serialized_start=5160
-  _CONSTRAINEDNODALRIGIDBODYREPLY._serialized_end=5205
-  _CONSTRAINEDSPOTWELDREQUEST._serialized_start=5207
-  _CONSTRAINEDSPOTWELDREQUEST._serialized_end=5265
-  _CONSTRAINEDSPOTWELDREPLY._serialized_start=5267
-  _CONSTRAINEDSPOTWELDREPLY._serialized_end=5305
-  _CONSTRAINEDJOINTREQUEST._serialized_start=5307
-  _CONSTRAINEDJOINTREQUEST._serialized_end=5388
-  _CONSTRAINEDJOINTREPLY._serialized_start=5390
-  _CONSTRAINEDJOINTREPLY._serialized_end=5425
-  _SECTIONIGASHELLREQUEST._serialized_start=5427
-  _SECTIONIGASHELLREQUEST._serialized_end=5515
-  _SECTIONIGASHELLREPLY._serialized_start=5517
-  _SECTIONIGASHELLREPLY._serialized_end=5551
-  _SECTIONBEAMREQUEST._serialized_start=5553
-  _SECTIONBEAMREQUEST._serialized_end=5657
-  _SECTIONBEAMREPLY._serialized_start=5659
-  _SECTIONBEAMREPLY._serialized_end=5689
-  _SECTIONSHELLREQUEST._serialized_start=5692
-  _SECTIONSHELLREQUEST._serialized_end=5834
-  _SECTIONSHELLREPLY._serialized_start=5836
-  _SECTIONSHELLREPLY._serialized_end=5867
-  _SECTIONSOLIDREQUEST._serialized_start=5869
-  _SECTIONSOLIDREQUEST._serialized_end=5936
-  _SECTIONSOLIDREPLY._serialized_start=5938
-  _SECTIONSOLIDREPLY._serialized_end=5969
-  _SECTIONDISCRETEREQUEST._serialized_start=5971
-  _SECTIONDISCRETEREQUEST._serialized_end=6097
-  _SECTIONDISCRETEREPLY._serialized_start=6099
-  _SECTIONDISCRETEREPLY._serialized_end=6133
-  _HOURGLASSREQUEST._serialized_start=6135
-  _HOURGLASSREQUEST._serialized_end=6240
-  _HOURGLASSREPLY._serialized_start=6242
-  _HOURGLASSREPLY._serialized_end=6270
-  _DEFINECURVEREQUEST._serialized_start=6272
-  _DEFINECURVEREQUEST._serialized_end=6370
-  _DEFINECURVEREPLY._serialized_start=6372
-  _DEFINECURVEREPLY._serialized_end=6402
-  _DEFINEVECTORREQUEST._serialized_start=6404
-  _DEFINEVECTORREQUEST._serialized_end=6525
-  _DEFINEVECTORREPLY._serialized_start=6527
-  _DEFINEVECTORREPLY._serialized_end=6562
-  _DEFINEBOXREQUEST._serialized_start=6564
-  _DEFINEBOXREQUEST._serialized_end=6666
-  _DEFINEBOXREPLY._serialized_start=6668
-  _DEFINEBOXREPLY._serialized_end=6699
-  _DEFINEDEMESHSURFACEREQUEST._serialized_start=6702
-  _DEFINEDEMESHSURFACEREQUEST._serialized_end=6831
-  _DEFINEDEMESHSURFACEREPLY._serialized_start=6833
-  _DEFINEDEMESHSURFACEREPLY._serialized_end=6875
-  _DEFINEORIENTATIONREQUEST._serialized_start=6877
-  _DEFINEORIENTATIONREQUEST._serialized_end=6975
-  _DEFINEORIENTATIONREPLY._serialized_start=6977
-  _DEFINEORIENTATIONREPLY._serialized_end=7017
-  _PARTSETREQUEST._serialized_start=7019
-  _PARTSETREQUEST._serialized_end=7093
-  _PARTSETREPLY._serialized_start=7095
-  _PARTSETREPLY._serialized_end=7121
-  _SHELLSETREQUEST._serialized_start=7123
-  _SHELLSETREQUEST._serialized_end=7198
-  _SHELLSETREPLY._serialized_start=7200
-  _SHELLSETREPLY._serialized_end=7231
-  _SOLIDSETREQUEST._serialized_start=7233
-  _SOLIDSETREQUEST._serialized_end=7290
-  _SOLIDSETREPLY._serialized_start=7292
-  _SOLIDSETREPLY._serialized_end=7323
-  _NODESETREQUEST._serialized_start=7325
-  _NODESETREQUEST._serialized_end=7422
-  _NODESETREPLY._serialized_start=7424
-  _NODESETREPLY._serialized_end=7450
-  _SEGMENTSETREQUEST._serialized_start=7452
-  _SEGMENTSETREQUEST._serialized_end=7563
-  _SEGMENTSETREPLY._serialized_start=7565
-  _SEGMENTSETREPLY._serialized_end=7594
-  _PARTPROPERTYREQUEST._serialized_start=7597
-  _PARTPROPERTYREQUEST._serialized_end=7732
-  _PARTPROPERTYREPLY._serialized_start=7734
-  _PARTPROPERTYREPLY._serialized_end=7769
-  _PARTREQUEST._serialized_start=7772
-  _PARTREQUEST._serialized_end=8037
-  _PARTREPLY._serialized_start=8039
-  _PARTREPLY._serialized_end=8066
-  _MATEMREQUEST._serialized_start=8068
-  _MATEMREQUEST._serialized_end=8125
-  _MATEMREPLY._serialized_start=8127
-  _MATEMREPLY._serialized_end=8151
-  _MATRIGIDREQUEST._serialized_start=8153
-  _MATRIGIDREQUEST._serialized_end=8259
-  _MATRIGIDREPLY._serialized_start=8261
-  _MATRIGIDREPLY._serialized_end=8289
-  _MATELASTICREQUEST._serialized_start=8291
-  _MATELASTICREQUEST._serialized_end=8358
-  _MATELASTICREPLY._serialized_start=8360
-  _MATELASTICREPLY._serialized_end=8390
-  _MATSPOTWELDREQUEST._serialized_start=8393
-  _MATSPOTWELDREQUEST._serialized_end=8526
-  _MATSPOTWELDREPLY._serialized_start=8528
-  _MATSPOTWELDREPLY._serialized_end=8559
-  _MATPIECEWISELINEARPLASTICITYREQUEST._serialized_start=8561
-  _MATPIECEWISELINEARPLASTICITYREQUEST._serialized_end=8674
-  _MATPIECEWISELINEARPLASTICITYREPLY._serialized_start=8676
-  _MATPIECEWISELINEARPLASTICITYREPLY._serialized_end=8724
-  _MATMODIFIEDPIECEWISELINEARPLASTICITYREQUEST._serialized_start=8727
-  _MATMODIFIEDPIECEWISELINEARPLASTICITYREQUEST._serialized_end=8878
-  _MATMODIFIEDPIECEWISELINEARPLASTICITYREPLY._serialized_start=8880
-  _MATMODIFIEDPIECEWISELINEARPLASTICITYREPLY._serialized_end=8936
-  _MATFABRICREQUEST._serialized_start=8938
-  _MATFABRICREQUEST._serialized_end=9046
-  _MATFABRICREPLY._serialized_start=9048
-  _MATFABRICREPLY._serialized_end=9077
-  _MATSPRINGNONLINEARELASTICREQUEST._serialized_start=9079
-  _MATSPRINGNONLINEARELASTICREQUEST._serialized_end=9140
-  _MATSPRINGNONLINEARELASTICREPLY._serialized_start=9142
-  _MATSPRINGNONLINEARELASTICREPLY._serialized_end=9187
-  _MATDAMPERVISCOUSREQUEST._serialized_start=9189
-  _MATDAMPERVISCOUSREQUEST._serialized_end=9239
-  _MATDAMPERVISCOUSREPLY._serialized_start=9241
-  _MATDAMPERVISCOUSREPLY._serialized_end=9277
-  _MATDAMPERNONLINEARVISCOUSREQUEST._serialized_start=9279
-  _MATDAMPERNONLINEARVISCOUSREQUEST._serialized_end=9340
-  _MATDAMPERNONLINEARVISCOUSREPLY._serialized_start=9342
-  _MATDAMPERNONLINEARVISCOUSREPLY._serialized_end=9387
-  _MATNULLREQUEST._serialized_start=9389
-  _MATNULLREQUEST._serialized_end=9429
-  _MATNULLREPLY._serialized_start=9431
-  _MATNULLREPLY._serialized_end=9458
-  _MATJOHNSONCOOKREQUEST._serialized_start=9461
-  _MATJOHNSONCOOKREQUEST._serialized_end=9655
-  _MATJOHNSONCOOKREPLY._serialized_start=9657
-  _MATJOHNSONCOOKREPLY._serialized_end=9691
-  _MATHIGHEXPLOSIVEBURNREQUEST._serialized_start=9693
-  _MATHIGHEXPLOSIVEBURNREQUEST._serialized_end=9758
-  _MATHIGHEXPLOSIVEBURNREPLY._serialized_start=9760
-  _MATHIGHEXPLOSIVEBURNREPLY._serialized_end=9800
-  _MATVACUUMREQUEST._serialized_start=9802
-  _MATVACUUMREQUEST._serialized_end=9833
-  _MATVACUUMREPLY._serialized_start=9835
-  _MATVACUUMREPLY._serialized_end=9864
-  _MATADDEROSIONREQUEST._serialized_start=9866
-  _MATADDEROSIONREQUEST._serialized_end=9932
-  _MATADDEROSIONREPLY._serialized_start=9934
-  _MATADDEROSIONREPLY._serialized_end=9967
-  _EOSLINEARPOLYNOMIALREQUEST._serialized_start=9969
-  _EOSLINEARPOLYNOMIALREQUEST._serialized_end=10033
-  _EOSLINEARPOLYNOMIALREPLY._serialized_start=10035
-  _EOSLINEARPOLYNOMIALREPLY._serialized_end=10076
-  _EOSJWLREQUEST._serialized_start=10078
-  _EOSJWLREQUEST._serialized_end=10115
-  _EOSJWLREPLY._serialized_start=10117
-  _EOSJWLREPLY._serialized_end=10145
-  _EOSGRUNEISENREQUEST._serialized_start=10147
-  _EOSGRUNEISENREQUEST._serialized_end=10210
-  _EOSGRUNEISENREPLY._serialized_start=10212
-  _EOSGRUNEISENREPLY._serialized_end=10246
-  _SAVEFILEREQUEST._serialized_start=10248
-  _SAVEFILEREQUEST._serialized_end=10279
-  _SAVEFILEREPLY._serialized_start=10281
-  _SAVEFILEREPLY._serialized_end=10312
-  _LOADFILEREQUEST._serialized_start=10314
-  _LOADFILEREQUEST._serialized_end=10345
-  _LOADFILEREPLY._serialized_start=10347
-  _LOADFILEREPLY._serialized_end=10375
-  _GETNODESREQUEST._serialized_start=10377
-  _GETNODESREQUEST._serialized_end=10394
-  _GETNODESREPLY._serialized_start=10396
-  _GETNODESREPLY._serialized_end=10427
-  _GETSOLIDELEMENTSREQUEST._serialized_start=10429
-  _GETSOLIDELEMENTSREQUEST._serialized_end=10454
-  _GETSOLIDELEMENTSREPLY._serialized_start=10456
-  _GETSOLIDELEMENTSREPLY._serialized_end=10496
-  _ICFDCONTROLTIMEREQUEST._serialized_start=10498
-  _ICFDCONTROLTIMEREQUEST._serialized_end=10547
-  _ICFDCONTROLTIMEREPLY._serialized_start=10549
-  _ICFDCONTROLTIMEREPLY._serialized_end=10587
-  _ICFDCONTROLGENERALREQUEST._serialized_start=10589
-  _ICFDCONTROLGENERALREQUEST._serialized_end=10675
-  _ICFDCONTROLGENERALREPLY._serialized_start=10677
-  _ICFDCONTROLGENERALREPLY._serialized_end=10718
-  _ICFDCONTROLOUTPUTREQUEST._serialized_start=10720
-  _ICFDCONTROLOUTPUTREQUEST._serialized_end=10760
-  _ICFDCONTROLOUTPUTREPLY._serialized_start=10762
-  _ICFDCONTROLOUTPUTREPLY._serialized_end=10802
-  _ICFDCONTROLTURBULENCEREQUEST._serialized_start=10804
-  _ICFDCONTROLTURBULENCEREQUEST._serialized_end=10848
-  _ICFDCONTROLTURBULENCEREPLY._serialized_start=10850
-  _ICFDCONTROLTURBULENCEREPLY._serialized_end=10894
-  _ICFDCONTROLDEMCOUPLINGREQUEST._serialized_start=10896
-  _ICFDCONTROLDEMCOUPLINGREQUEST._serialized_end=10978
-  _ICFDCONTROLDEMCOUPLINGREPLY._serialized_start=10980
-  _ICFDCONTROLDEMCOUPLINGREPLY._serialized_end=11025
-  _ICFDSECTIONREQUEST._serialized_start=11027
-  _ICFDSECTIONREQUEST._serialized_end=11060
-  _ICFDSECTIONREPLY._serialized_start=11062
-  _ICFDSECTIONREPLY._serialized_end=11096
-  _ICFDMATREQUEST._serialized_start=11098
-  _ICFDMATREQUEST._serialized_end=11165
-  _ICFDMATREPLY._serialized_start=11167
-  _ICFDMATREPLY._serialized_end=11193
-  _ICFDPARTREQUEST._serialized_start=11195
-  _ICFDPARTREQUEST._serialized_end=11253
-  _ICFDPARTREPLY._serialized_start=11255
-  _ICFDPARTREPLY._serialized_end=11286
-  _ICFDPARTVOLREQUEST._serialized_start=11288
-  _ICFDPARTVOLREQUEST._serialized_end=11364
-  _ICFDPARTVOLREPLY._serialized_start=11366
-  _ICFDPARTVOLREPLY._serialized_end=11396
-  _ICFDDBDRAGREQUEST._serialized_start=11398
-  _ICFDDBDRAGREQUEST._serialized_end=11430
-  _ICFDDBDRAGREPLY._serialized_start=11432
-  _ICFDDBDRAGREPLY._serialized_end=11465
-  _ICFDBDYPRESCRIBEDVELREQUEST._serialized_start=11467
-  _ICFDBDYPRESCRIBEDVELREQUEST._serialized_end=11549
-  _ICFDBDYPRESCRIBEDVELREPLY._serialized_start=11551
-  _ICFDBDYPRESCRIBEDVELREPLY._serialized_end=11594
-  _ICFDBDYPRESCRIBEDPREREQUEST._serialized_start=11596
-  _ICFDBDYPRESCRIBEDPREREQUEST._serialized_end=11652
-  _ICFDBDYPRESCRIBEDPREREPLY._serialized_start=11654
-  _ICFDBDYPRESCRIBEDPREREPLY._serialized_end=11697
-  _ICFDBDYFREESLIPREQUEST._serialized_start=11699
-  _ICFDBDYFREESLIPREQUEST._serialized_end=11736
-  _ICFDBDYFREESLIPREPLY._serialized_start=11738
-  _ICFDBDYFREESLIPREPLY._serialized_end=11776
-  _ICFDBDYNONSLIPREQUEST._serialized_start=11778
-  _ICFDBDYNONSLIPREQUEST._serialized_end=11814
-  _ICFDBDYNONSLIPREPLY._serialized_start=11816
-  _ICFDBDYNONSLIPREPLY._serialized_end=11853
-  _ICFDSOLVERTOLMMOVREQUEST._serialized_start=11855
-  _ICFDSOLVERTOLMMOVREQUEST._serialized_end=11909
-  _ICFDSOLVERTOLMMOVREPLY._serialized_start=11911
-  _ICFDSOLVERTOLMMOVREPLY._serialized_end=11951
-  _ICFDPARTPROPERTYREQUEST._serialized_start=11953
-  _ICFDPARTPROPERTYREQUEST._serialized_end=12019
-  _ICFDPARTPROPERTYREPLY._serialized_start=12021
-  _ICFDPARTPROPERTYREPLY._serialized_end=12060
-  _ICFDVOLUMEPARTPROPERTYREQUEST._serialized_start=12062
-  _ICFDVOLUMEPARTPROPERTYREQUEST._serialized_end=12134
-  _ICFDVOLUMEPARTPROPERTYREPLY._serialized_start=12136
-  _ICFDVOLUMEPARTPROPERTYREPLY._serialized_end=12181
-  _MESHVOLUMEREQUEST._serialized_start=12183
-  _MESHVOLUMEREQUEST._serialized_end=12231
-  _MESHVOLUMEREPLY._serialized_start=12233
-  _MESHVOLUMEREPLY._serialized_end=12262
-  _MESHEMBEDSHELLREQUEST._serialized_start=12264
-  _MESHEMBEDSHELLREQUEST._serialized_end=12316
-  _MESHEMBEDSHELLREPLY._serialized_start=12318
-  _MESHEMBEDSHELLREPLY._serialized_end=12355
-  _MESHBLREQUEST._serialized_start=12357
-  _MESHBLREQUEST._serialized_end=12400
-  _MESHBLREPLY._serialized_start=12402
-  _MESHBLREPLY._serialized_end=12431
-  _MESHSIZESHAPEREQUEST._serialized_start=12433
-  _MESHSIZESHAPEREQUEST._serialized_end=12535
-  _MESHSIZESHAPEREPLY._serialized_start=12537
-  _MESHSIZESHAPEREPLY._serialized_end=12573
-  _ALECREATESTRUCTUREDMESHREQUEST._serialized_start=12575
-  _ALECREATESTRUCTUREDMESHREQUEST._serialized_end=12680
-  _ALECREATESTRUCTUREDMESHREPLY._serialized_start=12682
-  _ALECREATESTRUCTUREDMESHREPLY._serialized_end=12744
-  _ALECREATESTRUCTUREDMESHREFINEREQUEST._serialized_start=12746
-  _ALECREATESTRUCTUREDMESHREFINEREQUEST._serialized_end=12838
-  _ALECREATESTRUCTUREDMESHREFINEREPLY._serialized_start=12840
-  _ALECREATESTRUCTUREDMESHREFINEREPLY._serialized_end=12892
-  _ALECREATESTRUCTUREDMESHCONTROLPOINTSREQUEST._serialized_start=12894
-  _ALECREATESTRUCTUREDMESHCONTROLPOINTSREQUEST._serialized_end=13004
-  _ALECREATESTRUCTUREDMESHCONTROLPOINTSREPLY._serialized_start=13006
-  _ALECREATESTRUCTUREDMESHCONTROLPOINTSREPLY._serialized_end=13063
-  _ALECREATESTRUCTUREDMULTIMATGROUPREQUEST._serialized_start=13065
-  _ALECREATESTRUCTUREDMULTIMATGROUPREQUEST._serialized_end=13164
-  _ALECREATESTRUCTUREDMULTIMATGROUPREPLY._serialized_start=13166
-  _ALECREATESTRUCTUREDMULTIMATGROUPREPLY._serialized_end=13221
-  _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREQUEST._serialized_start=13224
-  _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREQUEST._serialized_end=13370
-  _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREPLY._serialized_start=13372
-  _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREPLY._serialized_end=13431
-  _DAMPINGGLOBALREQUEST._serialized_start=13433
-  _DAMPINGGLOBALREQUEST._serialized_end=13485
-  _DAMPINGGLOBALREPLY._serialized_start=13487
-  _DAMPINGGLOBALREPLY._serialized_end=13523
-  _DAMPINGPARTSTIFFNESSREQUEST._serialized_start=13525
-  _DAMPINGPARTSTIFFNESSREQUEST._serialized_end=13595
-  _DAMPINGPARTSTIFFNESSREPLY._serialized_start=13597
-  _DAMPINGPARTSTIFFNESSREPLY._serialized_end=13640
-  _AIRBAGMODELREQUEST._serialized_start=13643
-  _AIRBAGMODELREQUEST._serialized_end=13810
-  _AIRBAGMODELREPLY._serialized_start=13812
-  _AIRBAGMODELREPLY._serialized_end=13846
-  _EMCONTROLREQUEST._serialized_start=13848
-  _EMCONTROLREQUEST._serialized_end=13947
-  _EMCONTROLREPLY._serialized_start=13949
-  _EMCONTROLREPLY._serialized_end=13981
-  _EMTIMESTEPREQUEST._serialized_start=13983
-  _EMTIMESTEPREQUEST._serialized_end=14035
-  _EMTIMESTEPREPLY._serialized_start=14037
-  _EMTIMESTEPREPLY._serialized_end=14070
-  _EMCONTROLCONTACTREQUEST._serialized_start=14072
-  _EMCONTROLCONTACTREQUEST._serialized_end=14157
-  _EMCONTROLCONTACTREPLY._serialized_start=14159
-  _EMCONTROLCONTACTREPLY._serialized_end=14198
-  _EMCONTACTREQUEST._serialized_start=14201
-  _EMCONTACTREQUEST._serialized_end=14334
-  _EMCONTACTREPLY._serialized_start=14336
-  _EMCONTACTREPLY._serialized_end=14368
-  _EMCIRCUITROGOREQUEST._serialized_start=14370
-  _EMCIRCUITROGOREQUEST._serialized_end=14455
-  _EMCIRCUITROGOREPLY._serialized_start=14457
-  _EMCIRCUITROGOREPLY._serialized_end=14489
-  _EMCIRCUITREQUEST._serialized_start=14491
-  _EMCIRCUITREQUEST._serialized_end=14606
-  _EMCIRCUITREPLY._serialized_start=14608
-  _EMCIRCUITREPLY._serialized_end=14636
-  _EMMAT001REQUEST._serialized_start=14638
-  _EMMAT001REQUEST._serialized_end=14698
-  _EMMAT001REPLY._serialized_start=14700
-  _EMMAT001REPLY._serialized_end=14731
-  _EMMAT002REQUEST._serialized_start=14733
-  _EMMAT002REQUEST._serialized_end=14823
-  _EMMAT002REPLY._serialized_start=14825
-  _EMMAT002REPLY._serialized_end=14856
-  _EMSOLVERBEMREQUEST._serialized_start=14858
-  _EMSOLVERBEMREQUEST._serialized_end=14975
-  _EMSOLVERBEMREPLY._serialized_start=14977
-  _EMSOLVERBEMREPLY._serialized_end=15011
-  _EMSOLVERFEMREQUEST._serialized_start=15013
-  _EMSOLVERFEMREQUEST._serialized_end=15130
-  _EMSOLVERFEMREPLY._serialized_start=15132
-  _EMSOLVERFEMREPLY._serialized_end=15166
-  _EMSOLVERBEMMATREQUEST._serialized_start=15168
-  _EMSOLVERBEMMATREQUEST._serialized_end=15222
-  _EMSOLVERBEMMATREPLY._serialized_start=15224
-  _EMSOLVERBEMMATREPLY._serialized_end=15261
-  _EMSOLVERFEMBEMMONOLITHICREQUEST._serialized_start=15263
-  _EMSOLVERFEMBEMMONOLITHICREQUEST._serialized_end=15373
-  _EMSOLVERFEMBEMMONOLITHICREPLY._serialized_start=15375
-  _EMSOLVERFEMBEMMONOLITHICREPLY._serialized_end=15422
-  _EMOUTPUTREQUEST._serialized_start=15424
-  _EMOUTPUTREQUEST._serialized_end=15497
-  _EMOUTPUTREPLY._serialized_start=15499
-  _EMOUTPUTREPLY._serialized_end=15530
-  _EMDATABASEGLOBALENERGYREQUEST._serialized_start=15532
-  _EMDATABASEGLOBALENERGYREQUEST._serialized_end=15578
-  _EMDATABASEGLOBALENERGYREPLY._serialized_start=15580
-  _EMDATABASEGLOBALENERGYREPLY._serialized_end=15625
-  _EMPERMANENTMAGNETREQUEST._serialized_start=15627
-  _EMPERMANENTMAGNETREQUEST._serialized_end=15739
-  _EMPERMANENTMAGNETREPLY._serialized_start=15741
-  _EMPERMANENTMAGNETREPLY._serialized_end=15781
-  _EMEOSPERMEABILITYREQUEST._serialized_start=15783
-  _EMEOSPERMEABILITYREQUEST._serialized_end=15855
-  _EMEOSPERMEABILITYREPLY._serialized_start=15857
-  _EMEOSPERMEABILITYREPLY._serialized_end=15897
-  _GENERALKWDREQUEST._serialized_start=15899
-  _GENERALKWDREQUEST._serialized_end=15955
-  _GENERALKWDREPLY._serialized_start=15957
-  _GENERALKWDREPLY._serialized_end=15990
-  _KWC2S._serialized_start=15993
-  _KWC2S._serialized_end=26664
+  _CONTROLSPHREQUEST._serialized_start=2416
+  _CONTROLSPHREQUEST._serialized_end=2523
+  _CONTROLSPHREPLY._serialized_start=2525
+  _CONTROLSPHREPLY._serialized_end=2558
+  _DBBINARYREQUEST._serialized_start=2560
+  _DBBINARYREQUEST._serialized_end=2671
+  _DBBINARYREPLY._serialized_start=2673
+  _DBBINARYREPLY._serialized_end=2704
+  _DBALEMATREQUEST._serialized_start=2706
+  _DBALEMATREQUEST._serialized_end=2738
+  _DBALEMATREPLY._serialized_start=2740
+  _DBALEMATREPLY._serialized_end=2771
+  _DBASCIIREQUEST._serialized_start=2773
+  _DBASCIIREQUEST._serialized_end=2860
+  _DBASCIIREPLY._serialized_start=2862
+  _DBASCIIREPLY._serialized_end=2892
+  _DBSALEREQUEST._serialized_start=2894
+  _DBSALEREQUEST._serialized_end=2925
+  _DBSALEREPLY._serialized_start=2927
+  _DBSALEREPLY._serialized_end=2956
+  _LOADBODYREQUEST._serialized_start=2958
+  _LOADBODYREQUEST._serialized_end=3005
+  _LOADBODYREPLY._serialized_start=3007
+  _LOADBODYREPLY._serialized_end=3038
+  _INITVELREQUEST._serialized_start=3040
+  _INITVELREQUEST._serialized_end=3088
+  _INITVELREPLY._serialized_start=3090
+  _INITVELREPLY._serialized_end=3120
+  _INITVELRIGIDBODYREQUEST._serialized_start=3122
+  _INITVELRIGIDBODYREQUEST._serialized_end=3249
+  _INITVELRIGIDBODYREPLY._serialized_start=3251
+  _INITVELRIGIDBODYREPLY._serialized_end=3290
+  _INITVELGENERATIONREQUEST._serialized_start=3293
+  _INITVELGENERATIONREQUEST._serialized_end=3483
+  _INITVELGENERATIONREPLY._serialized_start=3485
+  _INITVELGENERATIONREPLY._serialized_end=3525
+  _INITVELGENERATIONSTARTTIMEREQUEST._serialized_start=3527
+  _INITVELGENERATIONSTARTTIMEREQUEST._serialized_end=3577
+  _INITVELGENERATIONSTARTTIMEREPLY._serialized_start=3579
+  _INITVELGENERATIONSTARTTIMEREPLY._serialized_end=3628
+  _INITDETONATIONREQUEST._serialized_start=3630
+  _INITDETONATIONREQUEST._serialized_end=3693
+  _INITDETONATIONREPLY._serialized_start=3695
+  _INITDETONATIONREPLY._serialized_end=3732
+  _RIGIDWALLGEOMREQUEST._serialized_start=3735
+  _RIGIDWALLGEOMREQUEST._serialized_end=3877
+  _RIGIDWALLGEOMREPLY._serialized_start=3879
+  _RIGIDWALLGEOMREPLY._serialized_end=3915
+  _RIGIDWALLPLANARREQUEST._serialized_start=3917
+  _RIGIDWALLPLANARREQUEST._serialized_end=4016
+  _RIGIDWALLPLANARREPLY._serialized_start=4018
+  _RIGIDWALLPLANARREPLY._serialized_end=4056
+  _CONTACTREQUEST._serialized_start=4059
+  _CONTACTREQUEST._serialized_end=4612
+  _CONTACTREPLY._serialized_start=4614
+  _CONTACTREPLY._serialized_end=4644
+  _BDYPRESCRIBEDMOTIONREQUEST._serialized_start=4647
+  _BDYPRESCRIBEDMOTIONREQUEST._serialized_end=4831
+  _BDYPRESCRIBEDMOTIONREPLY._serialized_start=4833
+  _BDYPRESCRIBEDMOTIONREPLY._serialized_end=4875
+  _BDYSPCREQUEST._serialized_start=4878
+  _BDYSPCREQUEST._serialized_end=5073
+  _BDYSPCREPLY._serialized_start=5075
+  _BDYSPCREPLY._serialized_end=5104
+  _CONSTRAINEDEXTRANODESREQUEST._serialized_start=5106
+  _CONSTRAINEDEXTRANODESREQUEST._serialized_end=5193
+  _CONSTRAINEDEXTRANODESREPLY._serialized_start=5195
+  _CONSTRAINEDEXTRANODESREPLY._serialized_end=5239
+  _CONSTRAINEDNODALRIGIDBODYREQUEST._serialized_start=5241
+  _CONSTRAINEDNODALRIGIDBODYREQUEST._serialized_end=5302
+  _CONSTRAINEDNODALRIGIDBODYREPLY._serialized_start=5304
+  _CONSTRAINEDNODALRIGIDBODYREPLY._serialized_end=5349
+  _CONSTRAINEDSPOTWELDREQUEST._serialized_start=5351
+  _CONSTRAINEDSPOTWELDREQUEST._serialized_end=5409
+  _CONSTRAINEDSPOTWELDREPLY._serialized_start=5411
+  _CONSTRAINEDSPOTWELDREPLY._serialized_end=5449
+  _CONSTRAINEDJOINTREQUEST._serialized_start=5451
+  _CONSTRAINEDJOINTREQUEST._serialized_end=5532
+  _CONSTRAINEDJOINTREPLY._serialized_start=5534
+  _CONSTRAINEDJOINTREPLY._serialized_end=5569
+  _SECTIONIGASHELLREQUEST._serialized_start=5571
+  _SECTIONIGASHELLREQUEST._serialized_end=5659
+  _SECTIONIGASHELLREPLY._serialized_start=5661
+  _SECTIONIGASHELLREPLY._serialized_end=5695
+  _SECTIONBEAMREQUEST._serialized_start=5697
+  _SECTIONBEAMREQUEST._serialized_end=5801
+  _SECTIONBEAMREPLY._serialized_start=5803
+  _SECTIONBEAMREPLY._serialized_end=5833
+  _SECTIONSHELLREQUEST._serialized_start=5836
+  _SECTIONSHELLREQUEST._serialized_end=5978
+  _SECTIONSHELLREPLY._serialized_start=5980
+  _SECTIONSHELLREPLY._serialized_end=6011
+  _SECTIONSOLIDREQUEST._serialized_start=6013
+  _SECTIONSOLIDREQUEST._serialized_end=6080
+  _SECTIONSOLIDREPLY._serialized_start=6082
+  _SECTIONSOLIDREPLY._serialized_end=6113
+  _SECTIONDISCRETEREQUEST._serialized_start=6115
+  _SECTIONDISCRETEREQUEST._serialized_end=6241
+  _SECTIONDISCRETEREPLY._serialized_start=6243
+  _SECTIONDISCRETEREPLY._serialized_end=6277
+  _SECTIONSPHREQUEST._serialized_start=6279
+  _SECTIONSPHREQUEST._serialized_end=6371
+  _SECTIONSPHREPLY._serialized_start=6373
+  _SECTIONSPHREPLY._serialized_end=6402
+  _HOURGLASSREQUEST._serialized_start=6404
+  _HOURGLASSREQUEST._serialized_end=6509
+  _HOURGLASSREPLY._serialized_start=6511
+  _HOURGLASSREPLY._serialized_end=6539
+  _DEFINECURVEREQUEST._serialized_start=6541
+  _DEFINECURVEREQUEST._serialized_end=6639
+  _DEFINECURVEREPLY._serialized_start=6641
+  _DEFINECURVEREPLY._serialized_end=6671
+  _DEFINEVECTORREQUEST._serialized_start=6673
+  _DEFINEVECTORREQUEST._serialized_end=6794
+  _DEFINEVECTORREPLY._serialized_start=6796
+  _DEFINEVECTORREPLY._serialized_end=6831
+  _DEFINEBOXREQUEST._serialized_start=6833
+  _DEFINEBOXREQUEST._serialized_end=6935
+  _DEFINEBOXREPLY._serialized_start=6937
+  _DEFINEBOXREPLY._serialized_end=6968
+  _DEFINEDEMESHSURFACEREQUEST._serialized_start=6971
+  _DEFINEDEMESHSURFACEREQUEST._serialized_end=7100
+  _DEFINEDEMESHSURFACEREPLY._serialized_start=7102
+  _DEFINEDEMESHSURFACEREPLY._serialized_end=7144
+  _DEFINEORIENTATIONREQUEST._serialized_start=7146
+  _DEFINEORIENTATIONREQUEST._serialized_end=7244
+  _DEFINEORIENTATIONREPLY._serialized_start=7246
+  _DEFINEORIENTATIONREPLY._serialized_end=7286
+  _DEFINESPHMASSFLOWPLANEREQUEST._serialized_start=7288
+  _DEFINESPHMASSFLOWPLANEREQUEST._serialized_end=7384
+  _DEFINESPHMASSFLOWPLANEREPLY._serialized_start=7386
+  _DEFINESPHMASSFLOWPLANEREPLY._serialized_end=7431
+  _DEFINESPHMESHBOXREQUEST._serialized_start=7433
+  _DEFINESPHMESHBOXREQUEST._serialized_end=7510
+  _DEFINESPHMESHBOXREPLY._serialized_start=7512
+  _DEFINESPHMESHBOXREPLY._serialized_end=7551
+  _DEFINESPHMESHSURFACEREQUEST._serialized_start=7553
+  _DEFINESPHMESHSURFACEREQUEST._serialized_end=7640
+  _DEFINESPHMESHSURFACEREPLY._serialized_start=7642
+  _DEFINESPHMESHSURFACEREPLY._serialized_end=7685
+  _PARTSETREQUEST._serialized_start=7687
+  _PARTSETREQUEST._serialized_end=7761
+  _PARTSETREPLY._serialized_start=7763
+  _PARTSETREPLY._serialized_end=7789
+  _SHELLSETREQUEST._serialized_start=7791
+  _SHELLSETREQUEST._serialized_end=7866
+  _SHELLSETREPLY._serialized_start=7868
+  _SHELLSETREPLY._serialized_end=7899
+  _SOLIDSETREQUEST._serialized_start=7901
+  _SOLIDSETREQUEST._serialized_end=7958
+  _SOLIDSETREPLY._serialized_start=7960
+  _SOLIDSETREPLY._serialized_end=7991
+  _NODESETREQUEST._serialized_start=7993
+  _NODESETREQUEST._serialized_end=8090
+  _NODESETREPLY._serialized_start=8092
+  _NODESETREPLY._serialized_end=8118
+  _SEGMENTSETREQUEST._serialized_start=8120
+  _SEGMENTSETREQUEST._serialized_end=8231
+  _SEGMENTSETREPLY._serialized_start=8233
+  _SEGMENTSETREPLY._serialized_end=8262
+  _PARTPROPERTYREQUEST._serialized_start=8265
+  _PARTPROPERTYREQUEST._serialized_end=8400
+  _PARTPROPERTYREPLY._serialized_start=8402
+  _PARTPROPERTYREPLY._serialized_end=8437
+  _PARTREQUEST._serialized_start=8440
+  _PARTREQUEST._serialized_end=8705
+  _PARTREPLY._serialized_start=8707
+  _PARTREPLY._serialized_end=8734
+  _MATEMREQUEST._serialized_start=8736
+  _MATEMREQUEST._serialized_end=8793
+  _MATEMREPLY._serialized_start=8795
+  _MATEMREPLY._serialized_end=8819
+  _MATRIGIDREQUEST._serialized_start=8821
+  _MATRIGIDREQUEST._serialized_end=8927
+  _MATRIGIDREPLY._serialized_start=8929
+  _MATRIGIDREPLY._serialized_end=8957
+  _MATELASTICREQUEST._serialized_start=8959
+  _MATELASTICREQUEST._serialized_end=9026
+  _MATELASTICREPLY._serialized_start=9028
+  _MATELASTICREPLY._serialized_end=9058
+  _MATSPOTWELDREQUEST._serialized_start=9061
+  _MATSPOTWELDREQUEST._serialized_end=9194
+  _MATSPOTWELDREPLY._serialized_start=9196
+  _MATSPOTWELDREPLY._serialized_end=9227
+  _MATPIECEWISELINEARPLASTICITYREQUEST._serialized_start=9229
+  _MATPIECEWISELINEARPLASTICITYREQUEST._serialized_end=9342
+  _MATPIECEWISELINEARPLASTICITYREPLY._serialized_start=9344
+  _MATPIECEWISELINEARPLASTICITYREPLY._serialized_end=9392
+  _MATMODIFIEDPIECEWISELINEARPLASTICITYREQUEST._serialized_start=9395
+  _MATMODIFIEDPIECEWISELINEARPLASTICITYREQUEST._serialized_end=9546
+  _MATMODIFIEDPIECEWISELINEARPLASTICITYREPLY._serialized_start=9548
+  _MATMODIFIEDPIECEWISELINEARPLASTICITYREPLY._serialized_end=9604
+  _MATFABRICREQUEST._serialized_start=9606
+  _MATFABRICREQUEST._serialized_end=9714
+  _MATFABRICREPLY._serialized_start=9716
+  _MATFABRICREPLY._serialized_end=9745
+  _MATSPRINGNONLINEARELASTICREQUEST._serialized_start=9747
+  _MATSPRINGNONLINEARELASTICREQUEST._serialized_end=9808
+  _MATSPRINGNONLINEARELASTICREPLY._serialized_start=9810
+  _MATSPRINGNONLINEARELASTICREPLY._serialized_end=9855
+  _MATDAMPERVISCOUSREQUEST._serialized_start=9857
+  _MATDAMPERVISCOUSREQUEST._serialized_end=9907
+  _MATDAMPERVISCOUSREPLY._serialized_start=9909
+  _MATDAMPERVISCOUSREPLY._serialized_end=9945
+  _MATDAMPERNONLINEARVISCOUSREQUEST._serialized_start=9947
+  _MATDAMPERNONLINEARVISCOUSREQUEST._serialized_end=10008
+  _MATDAMPERNONLINEARVISCOUSREPLY._serialized_start=10010
+  _MATDAMPERNONLINEARVISCOUSREPLY._serialized_end=10055
+  _MATNULLREQUEST._serialized_start=10057
+  _MATNULLREQUEST._serialized_end=10097
+  _MATNULLREPLY._serialized_start=10099
+  _MATNULLREPLY._serialized_end=10126
+  _MATJOHNSONCOOKREQUEST._serialized_start=10129
+  _MATJOHNSONCOOKREQUEST._serialized_end=10323
+  _MATJOHNSONCOOKREPLY._serialized_start=10325
+  _MATJOHNSONCOOKREPLY._serialized_end=10359
+  _MATHIGHEXPLOSIVEBURNREQUEST._serialized_start=10361
+  _MATHIGHEXPLOSIVEBURNREQUEST._serialized_end=10426
+  _MATHIGHEXPLOSIVEBURNREPLY._serialized_start=10428
+  _MATHIGHEXPLOSIVEBURNREPLY._serialized_end=10468
+  _MATVACUUMREQUEST._serialized_start=10470
+  _MATVACUUMREQUEST._serialized_end=10501
+  _MATVACUUMREPLY._serialized_start=10503
+  _MATVACUUMREPLY._serialized_end=10532
+  _MATADDEROSIONREQUEST._serialized_start=10534
+  _MATADDEROSIONREQUEST._serialized_end=10600
+  _MATADDEROSIONREPLY._serialized_start=10602
+  _MATADDEROSIONREPLY._serialized_end=10635
+  _MATSPHINCOMPRESSIBLEFLUIDREQUEST._serialized_start=10637
+  _MATSPHINCOMPRESSIBLEFLUIDREQUEST._serialized_end=10740
+  _MATSPHINCOMPRESSIBLEFLUIDREPLY._serialized_start=10742
+  _MATSPHINCOMPRESSIBLEFLUIDREPLY._serialized_end=10787
+  _MATSPHINCOMPRESSIBLESTRUCTUREREQUEST._serialized_start=10789
+  _MATSPHINCOMPRESSIBLESTRUCTUREREQUEST._serialized_end=10894
+  _MATSPHINCOMPRESSIBLESTRUCTUREREPLY._serialized_start=10896
+  _MATSPHINCOMPRESSIBLESTRUCTUREREPLY._serialized_end=10945
+  _EOSLINEARPOLYNOMIALREQUEST._serialized_start=10947
+  _EOSLINEARPOLYNOMIALREQUEST._serialized_end=11011
+  _EOSLINEARPOLYNOMIALREPLY._serialized_start=11013
+  _EOSLINEARPOLYNOMIALREPLY._serialized_end=11054
+  _EOSJWLREQUEST._serialized_start=11056
+  _EOSJWLREQUEST._serialized_end=11093
+  _EOSJWLREPLY._serialized_start=11095
+  _EOSJWLREPLY._serialized_end=11123
+  _EOSGRUNEISENREQUEST._serialized_start=11125
+  _EOSGRUNEISENREQUEST._serialized_end=11188
+  _EOSGRUNEISENREPLY._serialized_start=11190
+  _EOSGRUNEISENREPLY._serialized_end=11224
+  _SAVEFILEREQUEST._serialized_start=11226
+  _SAVEFILEREQUEST._serialized_end=11257
+  _SAVEFILEREPLY._serialized_start=11259
+  _SAVEFILEREPLY._serialized_end=11290
+  _LOADFILEREQUEST._serialized_start=11292
+  _LOADFILEREQUEST._serialized_end=11323
+  _LOADFILEREPLY._serialized_start=11325
+  _LOADFILEREPLY._serialized_end=11353
+  _GETNODESREQUEST._serialized_start=11355
+  _GETNODESREQUEST._serialized_end=11372
+  _GETNODESREPLY._serialized_start=11374
+  _GETNODESREPLY._serialized_end=11405
+  _GETSOLIDELEMENTSREQUEST._serialized_start=11407
+  _GETSOLIDELEMENTSREQUEST._serialized_end=11432
+  _GETSOLIDELEMENTSREPLY._serialized_start=11434
+  _GETSOLIDELEMENTSREPLY._serialized_end=11474
+  _ICFDCONTROLTIMEREQUEST._serialized_start=11476
+  _ICFDCONTROLTIMEREQUEST._serialized_end=11525
+  _ICFDCONTROLTIMEREPLY._serialized_start=11527
+  _ICFDCONTROLTIMEREPLY._serialized_end=11565
+  _ICFDCONTROLGENERALREQUEST._serialized_start=11567
+  _ICFDCONTROLGENERALREQUEST._serialized_end=11653
+  _ICFDCONTROLGENERALREPLY._serialized_start=11655
+  _ICFDCONTROLGENERALREPLY._serialized_end=11696
+  _ICFDCONTROLOUTPUTREQUEST._serialized_start=11698
+  _ICFDCONTROLOUTPUTREQUEST._serialized_end=11738
+  _ICFDCONTROLOUTPUTREPLY._serialized_start=11740
+  _ICFDCONTROLOUTPUTREPLY._serialized_end=11780
+  _ICFDCONTROLTURBULENCEREQUEST._serialized_start=11782
+  _ICFDCONTROLTURBULENCEREQUEST._serialized_end=11826
+  _ICFDCONTROLTURBULENCEREPLY._serialized_start=11828
+  _ICFDCONTROLTURBULENCEREPLY._serialized_end=11872
+  _ICFDCONTROLDEMCOUPLINGREQUEST._serialized_start=11874
+  _ICFDCONTROLDEMCOUPLINGREQUEST._serialized_end=11956
+  _ICFDCONTROLDEMCOUPLINGREPLY._serialized_start=11958
+  _ICFDCONTROLDEMCOUPLINGREPLY._serialized_end=12003
+  _ICFDSECTIONREQUEST._serialized_start=12005
+  _ICFDSECTIONREQUEST._serialized_end=12038
+  _ICFDSECTIONREPLY._serialized_start=12040
+  _ICFDSECTIONREPLY._serialized_end=12074
+  _ICFDMATREQUEST._serialized_start=12076
+  _ICFDMATREQUEST._serialized_end=12143
+  _ICFDMATREPLY._serialized_start=12145
+  _ICFDMATREPLY._serialized_end=12171
+  _ICFDPARTREQUEST._serialized_start=12173
+  _ICFDPARTREQUEST._serialized_end=12231
+  _ICFDPARTREPLY._serialized_start=12233
+  _ICFDPARTREPLY._serialized_end=12264
+  _ICFDPARTVOLREQUEST._serialized_start=12266
+  _ICFDPARTVOLREQUEST._serialized_end=12342
+  _ICFDPARTVOLREPLY._serialized_start=12344
+  _ICFDPARTVOLREPLY._serialized_end=12374
+  _ICFDDBDRAGREQUEST._serialized_start=12376
+  _ICFDDBDRAGREQUEST._serialized_end=12408
+  _ICFDDBDRAGREPLY._serialized_start=12410
+  _ICFDDBDRAGREPLY._serialized_end=12443
+  _ICFDBDYPRESCRIBEDVELREQUEST._serialized_start=12445
+  _ICFDBDYPRESCRIBEDVELREQUEST._serialized_end=12527
+  _ICFDBDYPRESCRIBEDVELREPLY._serialized_start=12529
+  _ICFDBDYPRESCRIBEDVELREPLY._serialized_end=12572
+  _ICFDBDYPRESCRIBEDPREREQUEST._serialized_start=12574
+  _ICFDBDYPRESCRIBEDPREREQUEST._serialized_end=12630
+  _ICFDBDYPRESCRIBEDPREREPLY._serialized_start=12632
+  _ICFDBDYPRESCRIBEDPREREPLY._serialized_end=12675
+  _ICFDBDYFREESLIPREQUEST._serialized_start=12677
+  _ICFDBDYFREESLIPREQUEST._serialized_end=12714
+  _ICFDBDYFREESLIPREPLY._serialized_start=12716
+  _ICFDBDYFREESLIPREPLY._serialized_end=12754
+  _ICFDBDYNONSLIPREQUEST._serialized_start=12756
+  _ICFDBDYNONSLIPREQUEST._serialized_end=12792
+  _ICFDBDYNONSLIPREPLY._serialized_start=12794
+  _ICFDBDYNONSLIPREPLY._serialized_end=12831
+  _ICFDSOLVERTOLMMOVREQUEST._serialized_start=12833
+  _ICFDSOLVERTOLMMOVREQUEST._serialized_end=12887
+  _ICFDSOLVERTOLMMOVREPLY._serialized_start=12889
+  _ICFDSOLVERTOLMMOVREPLY._serialized_end=12929
+  _ICFDPARTPROPERTYREQUEST._serialized_start=12931
+  _ICFDPARTPROPERTYREQUEST._serialized_end=12997
+  _ICFDPARTPROPERTYREPLY._serialized_start=12999
+  _ICFDPARTPROPERTYREPLY._serialized_end=13038
+  _ICFDVOLUMEPARTPROPERTYREQUEST._serialized_start=13040
+  _ICFDVOLUMEPARTPROPERTYREQUEST._serialized_end=13112
+  _ICFDVOLUMEPARTPROPERTYREPLY._serialized_start=13114
+  _ICFDVOLUMEPARTPROPERTYREPLY._serialized_end=13159
+  _MESHVOLUMEREQUEST._serialized_start=13161
+  _MESHVOLUMEREQUEST._serialized_end=13209
+  _MESHVOLUMEREPLY._serialized_start=13211
+  _MESHVOLUMEREPLY._serialized_end=13240
+  _MESHEMBEDSHELLREQUEST._serialized_start=13242
+  _MESHEMBEDSHELLREQUEST._serialized_end=13294
+  _MESHEMBEDSHELLREPLY._serialized_start=13296
+  _MESHEMBEDSHELLREPLY._serialized_end=13333
+  _MESHBLREQUEST._serialized_start=13335
+  _MESHBLREQUEST._serialized_end=13378
+  _MESHBLREPLY._serialized_start=13380
+  _MESHBLREPLY._serialized_end=13409
+  _MESHSIZESHAPEREQUEST._serialized_start=13411
+  _MESHSIZESHAPEREQUEST._serialized_end=13513
+  _MESHSIZESHAPEREPLY._serialized_start=13515
+  _MESHSIZESHAPEREPLY._serialized_end=13551
+  _ALECREATESTRUCTUREDMESHREQUEST._serialized_start=13553
+  _ALECREATESTRUCTUREDMESHREQUEST._serialized_end=13658
+  _ALECREATESTRUCTUREDMESHREPLY._serialized_start=13660
+  _ALECREATESTRUCTUREDMESHREPLY._serialized_end=13722
+  _ALECREATESTRUCTUREDMESHREFINEREQUEST._serialized_start=13724
+  _ALECREATESTRUCTUREDMESHREFINEREQUEST._serialized_end=13816
+  _ALECREATESTRUCTUREDMESHREFINEREPLY._serialized_start=13818
+  _ALECREATESTRUCTUREDMESHREFINEREPLY._serialized_end=13870
+  _ALECREATESTRUCTUREDMESHCONTROLPOINTSREQUEST._serialized_start=13872
+  _ALECREATESTRUCTUREDMESHCONTROLPOINTSREQUEST._serialized_end=13982
+  _ALECREATESTRUCTUREDMESHCONTROLPOINTSREPLY._serialized_start=13984
+  _ALECREATESTRUCTUREDMESHCONTROLPOINTSREPLY._serialized_end=14041
+  _ALECREATESTRUCTUREDMULTIMATGROUPREQUEST._serialized_start=14043
+  _ALECREATESTRUCTUREDMULTIMATGROUPREQUEST._serialized_end=14142
+  _ALECREATESTRUCTUREDMULTIMATGROUPREPLY._serialized_start=14144
+  _ALECREATESTRUCTUREDMULTIMATGROUPREPLY._serialized_end=14199
+  _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREQUEST._serialized_start=14202
+  _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREQUEST._serialized_end=14348
+  _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREPLY._serialized_start=14350
+  _ALECREATESTRUCTUREDMESHVOLUMEFILLINGREPLY._serialized_end=14409
+  _DAMPINGGLOBALREQUEST._serialized_start=14411
+  _DAMPINGGLOBALREQUEST._serialized_end=14463
+  _DAMPINGGLOBALREPLY._serialized_start=14465
+  _DAMPINGGLOBALREPLY._serialized_end=14501
+  _DAMPINGPARTSTIFFNESSREQUEST._serialized_start=14503
+  _DAMPINGPARTSTIFFNESSREQUEST._serialized_end=14573
+  _DAMPINGPARTSTIFFNESSREPLY._serialized_start=14575
+  _DAMPINGPARTSTIFFNESSREPLY._serialized_end=14618
+  _AIRBAGMODELREQUEST._serialized_start=14621
+  _AIRBAGMODELREQUEST._serialized_end=14788
+  _AIRBAGMODELREPLY._serialized_start=14790
+  _AIRBAGMODELREPLY._serialized_end=14824
+  _EMCONTROLREQUEST._serialized_start=14826
+  _EMCONTROLREQUEST._serialized_end=14925
+  _EMCONTROLREPLY._serialized_start=14927
+  _EMCONTROLREPLY._serialized_end=14959
+  _EMTIMESTEPREQUEST._serialized_start=14961
+  _EMTIMESTEPREQUEST._serialized_end=15013
+  _EMTIMESTEPREPLY._serialized_start=15015
+  _EMTIMESTEPREPLY._serialized_end=15048
+  _EMCONTROLCONTACTREQUEST._serialized_start=15050
+  _EMCONTROLCONTACTREQUEST._serialized_end=15135
+  _EMCONTROLCONTACTREPLY._serialized_start=15137
+  _EMCONTROLCONTACTREPLY._serialized_end=15176
+  _EMCONTACTREQUEST._serialized_start=15179
+  _EMCONTACTREQUEST._serialized_end=15312
+  _EMCONTACTREPLY._serialized_start=15314
+  _EMCONTACTREPLY._serialized_end=15346
+  _EMCIRCUITROGOREQUEST._serialized_start=15348
+  _EMCIRCUITROGOREQUEST._serialized_end=15433
+  _EMCIRCUITROGOREPLY._serialized_start=15435
+  _EMCIRCUITROGOREPLY._serialized_end=15467
+  _EMCIRCUITREQUEST._serialized_start=15469
+  _EMCIRCUITREQUEST._serialized_end=15584
+  _EMCIRCUITREPLY._serialized_start=15586
+  _EMCIRCUITREPLY._serialized_end=15614
+  _EMMAT001REQUEST._serialized_start=15616
+  _EMMAT001REQUEST._serialized_end=15676
+  _EMMAT001REPLY._serialized_start=15678
+  _EMMAT001REPLY._serialized_end=15709
+  _EMMAT002REQUEST._serialized_start=15711
+  _EMMAT002REQUEST._serialized_end=15801
+  _EMMAT002REPLY._serialized_start=15803
+  _EMMAT002REPLY._serialized_end=15834
+  _EMSOLVERBEMREQUEST._serialized_start=15836
+  _EMSOLVERBEMREQUEST._serialized_end=15953
+  _EMSOLVERBEMREPLY._serialized_start=15955
+  _EMSOLVERBEMREPLY._serialized_end=15989
+  _EMSOLVERFEMREQUEST._serialized_start=15991
+  _EMSOLVERFEMREQUEST._serialized_end=16108
+  _EMSOLVERFEMREPLY._serialized_start=16110
+  _EMSOLVERFEMREPLY._serialized_end=16144
+  _EMSOLVERBEMMATREQUEST._serialized_start=16146
+  _EMSOLVERBEMMATREQUEST._serialized_end=16200
+  _EMSOLVERBEMMATREPLY._serialized_start=16202
+  _EMSOLVERBEMMATREPLY._serialized_end=16239
+  _EMSOLVERFEMBEMMONOLITHICREQUEST._serialized_start=16241
+  _EMSOLVERFEMBEMMONOLITHICREQUEST._serialized_end=16351
+  _EMSOLVERFEMBEMMONOLITHICREPLY._serialized_start=16353
+  _EMSOLVERFEMBEMMONOLITHICREPLY._serialized_end=16400
+  _EMOUTPUTREQUEST._serialized_start=16402
+  _EMOUTPUTREQUEST._serialized_end=16475
+  _EMOUTPUTREPLY._serialized_start=16477
+  _EMOUTPUTREPLY._serialized_end=16508
+  _EMDATABASEGLOBALENERGYREQUEST._serialized_start=16510
+  _EMDATABASEGLOBALENERGYREQUEST._serialized_end=16556
+  _EMDATABASEGLOBALENERGYREPLY._serialized_start=16558
+  _EMDATABASEGLOBALENERGYREPLY._serialized_end=16603
+  _EMPERMANENTMAGNETREQUEST._serialized_start=16605
+  _EMPERMANENTMAGNETREQUEST._serialized_end=16717
+  _EMPERMANENTMAGNETREPLY._serialized_start=16719
+  _EMPERMANENTMAGNETREPLY._serialized_end=16759
+  _EMEOSPERMEABILITYREQUEST._serialized_start=16761
+  _EMEOSPERMEABILITYREQUEST._serialized_end=16833
+  _EMEOSPERMEABILITYREPLY._serialized_start=16835
+  _EMEOSPERMEABILITYREPLY._serialized_end=16875
+  _GENERALKWDREQUEST._serialized_start=16877
+  _GENERALKWDREQUEST._serialized_end=16933
+  _GENERALKWDREPLY._serialized_start=16935
+  _GENERALKWDREPLY._serialized_end=16968
+  _KWC2S._serialized_start=16971
+  _KWC2S._serialized_end=28347
 # @@protoc_insertion_point(module_scope)
