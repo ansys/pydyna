@@ -527,3 +527,35 @@ class MatDamperNonlinearViscous:
         )
         self.material_id = ret.mid
         logging.info("Material damper viscous Created...") 
+
+class MatSPHIncompressibleFluid:
+    """Define an SPH incompressible fluid material."""
+
+    def __init__(self, mass_density=0, dynamic_viscosity=0, tension_coefficient1=0,tension_coefficient2=0):
+        self.ro = mass_density
+        self.mu = dynamic_viscosity
+        self.gamma1 = tension_coefficient1
+        self.gamma2 = tension_coefficient2
+
+    def create(self, stub):
+        """Create SPH incompressible fluid material."""
+        ret = stub.CreateMatSPHIncompressibleFluid(SPHIncompressibleFluidRequest(ro=self.ro, mu=self.mu, gamma1=self.gamma1,gamma2 = self.gamma2))
+        self.material_id = ret.mid
+        self.name = "SPH incompressible fluid"
+        logging.info(f"Material {self.name} Created...")
+
+class MatSPHIncompressibleStructure:
+    """Define an SPH incompressible structure material."""
+
+    def __init__(self, mass_density=0, adhesion_coefficient=0, roughness_coefficient=0,adhesion_scaling_coefficient=0):
+        self.ro = mass_density
+        self.beta = adhesion_coefficient
+        self.rough = roughness_coefficient
+        self.adh = adhesion_scaling_coefficient
+
+    def create(self, stub):
+        """Create SPH incompressible structure material."""
+        ret = stub.CreateMatSPHIncompressibleStructure(SPHIncompressibleStructureRequest(ro=self.ro, beta=self.beta, rough=self.rough,adh = self.adh))
+        self.material_id = ret.mid
+        self.name = "SPH incompressible structure"
+        logging.info(f"Material {self.name} Created...")
