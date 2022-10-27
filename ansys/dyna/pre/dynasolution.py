@@ -23,31 +23,6 @@ from .kwprocess_pb2_grpc import *  # noqa : F403
 
 CHUNK_SIZE = 1024 * 1024
 
-
-def get_file_chunks(filename):
-    """Get file chunks."""
-    with open(filename, "rb") as f:
-        while True:
-            piece = f.read(CHUNK_SIZE)
-            if len(piece) == 0:
-                return
-            yield Chunk(buffer=piece)
-
-
-def upload(stub_, filename):
-    """Upload files to server."""
-    chunks_generator = get_file_chunks(filename)
-    response = stub_.Upload(chunks_generator)
-
-
-def download(stub_, remote_name, local_name):
-    """Download files from server."""
-    response = stub_.Download(DownloadRequest(url=remote_name))
-    with open(local_name, "wb") as f:
-        for chunk in response:
-            f.write(chunk.buffer)
-
-
 def init_log(log_file):
     """Initial log file."""
     if not logging.getLogger().handlers:
@@ -90,6 +65,27 @@ class DynaSolution:
         """Add case in the solution."""
         self.object_list.append(obj)
 
+    def get_file_chunks(self,filename):
+        """Get file chunks."""
+        with open(filename, "rb") as f:
+            while True:
+                piece = f.read(CHUNK_SIZE)
+                if len(piece) == 0:
+                    return
+                yield Chunk(buffer=piece)
+
+    def upload(self,stub_, filename):
+        """Upload files to server."""
+        chunks_generator = self.get_file_chunks(filename)
+        response = stub_.Upload(chunks_generator)
+
+    def download(self,stub_, remote_name, local_name):
+        """Download files from server."""
+        response = stub_.Download(DownloadRequest(url=remote_name))
+        with open(local_name, "wb") as f:
+            for chunk in response:
+                f.write(chunk.buffer)
+
     def open_files(self, filenames):
         """Open initial model files.
 
@@ -108,7 +104,7 @@ class DynaSolution:
         for filename in filenames:
             fn = os.path.basename(filename)
             self.stub.kwSetFileName(kwFileName(name=fn, num=filenames.index(filename)))
-            upload(self.stub, path + os.sep + fn)
+            self.upload(self.stub, path + os.sep + fn)
             logging.info(path + os.sep + fn + " uploaded to server...")
 
         self.mainname = os.path.basename(filenames[0])
