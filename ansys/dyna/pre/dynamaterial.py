@@ -539,7 +539,7 @@ class MatSPHIncompressibleFluid:
 
     def create(self, stub):
         """Create SPH incompressible fluid material."""
-        ret = stub.CreateMatSPHIncompressibleFluid(SPHIncompressibleFluidRequest(ro=self.ro, mu=self.mu, gamma1=self.gamma1,gamma2 = self.gamma2))
+        ret = stub.CreateMatSPHIncompressibleFluid(MatSPHIncompressibleFluidRequest(ro=self.ro, mu=self.mu, gamma1=self.gamma1,gamma2 = self.gamma2))
         self.material_id = ret.mid
         self.name = "SPH incompressible fluid"
         logging.info(f"Material {self.name} Created...")
@@ -555,7 +555,7 @@ class MatSPHIncompressibleStructure:
 
     def create(self, stub):
         """Create SPH incompressible structure material."""
-        ret = stub.CreateMatSPHIncompressibleStructure(SPHIncompressibleStructureRequest(ro=self.ro, beta=self.beta, rough=self.rough,adh = self.adh))
+        ret = stub.CreateMatSPHIncompressibleStructure(MatSPHIncompressibleStructureRequest(ro=self.ro, beta=self.beta, rough=self.rough,adh = self.adh))
         self.material_id = ret.mid
         self.name = "SPH incompressible structure"
         logging.info(f"Material {self.name} Created...")

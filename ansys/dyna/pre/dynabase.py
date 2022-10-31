@@ -1591,6 +1591,7 @@ class Constraint:
         self.spotweldlist = []
         self.cnrbsetidlist = []
         self.jointsphericallist = []
+        self.mergerigidlist = []
 
     def create_spotweld(self, nodeid1, nodeid2):
         """Define massless spot welds between non-contiguous nodal pairs.
@@ -1641,6 +1642,18 @@ class Constraint:
         """
         self.jointsphericallist.append([nodes,relative_penalty_stiffness,damping_scale_factor])
 
+    def merge_two_rigid_bodies(self,lead_rigidbody=0,constrained_rigidbody=0):
+        """Merge two rigid bodies.One rigid body, called the constrained rigid body, is merged into another one, called the lead rigid body.
+        
+        Parameters
+        ----------
+        lead_rigidbody : int
+            Lead rigid body part ID
+        constrained_rigidbody : int
+            Constrained rigid body part ID.
+        """
+        self.mergerigidlist.append([lead_rigidbody,constrained_rigidbody])
+
     def create(self):
         """Create constraint."""
         for obj in self.spotweldlist:
@@ -1659,6 +1672,13 @@ class Constraint:
                 )
             )
             logging.info("joint spherical Created...")
+        for i in range(len(self.mergerigidlist)):
+            self.stub.CreateConstrainedRigidBodies(
+                ConstrainedRigidBodiesRequest(
+                    pidl=self.mergerigidlist[i][0],pidc=self.mergerigidlist[i][1]
+                )
+            )
+            logging.info("constrained rigid bodies Created...")
 
 class BoundaryCondition:
     """Provide a way of defining imposed motions on boundary nodes."""
