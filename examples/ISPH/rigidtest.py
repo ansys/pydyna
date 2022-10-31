@@ -56,6 +56,25 @@ if __name__ == "__main__":
     wallsmesh.set_thickness(0.1)
     isphobj.parts.add(wallsmesh)
 
+    sphwall = ISPHStructPart(4,PartSet([8]),12)
+    sphwall.set_material(matsphstruct)
+    sphwall.set_smoothing_length(1,1,1,12)
+    isphobj.parts.add(sphwall)
+
+    sphcube = ISPHStructPart(5,PartSet([7]),12)
+    sphcube.set_material(matsphstruct)
+    sphcube.set_smoothing_length(1,1,1,12)
+    isphobj.parts.add(sphcube)
+
+    sphwater = ISPHFluidPart(6,Point(-588,-588,9),Point(1176,1176,204),98,98,17)
+    sphwater.set_material(matsphfluid)
+    sphwater.set_smoothing_length(1,1,1,12)
+    sphwater.create_massflow_plane(PartSet([1]))
+    isphobj.parts.add(sphwater)
+
+     #Constraint
+    isphobj.constraints.merge_two_rigid_bodies(7,1)
+
     # Define boundary conddition
     isphobj.boundaryconditions.create_imposed_motion(PartSet([7]),Curve(x=[0,0.1,0.11,20],y=[3000,3000,0,0]),dof=DOF.X_TRANSLATIONAL,motion=Motion.VELOCITY)
     isphobj.boundaryconditions.create_imposed_motion(PartSet([7]),Curve(x=[0,0.1,0.11,20],y=[500,500,500,500]),dof=DOF.Z_ROTATIONAL,motion=Motion.VELOCITY,scalefactor=0.01)
@@ -64,6 +83,6 @@ if __name__ == "__main__":
     g = Gravity(dir=GravityOption.DIR_Z,load = Curve(x=[0, 100],y=[9810, 9810]))
     isphobj.add(g)
     
-    isphsolution.set_output_database(abstat=2.0e-4,glstat=2.0e-4,matsum=2.0e-4,rcforc=2.0e-4,rbdout=2.0e-4,rwforc=2.0e-4)
-    isphsolution.create_database_binary(dt=5e-4, ieverp=1)
+    isphsolution.set_output_database(glstat=0.001,sphmassflow=0.001)
+    isphsolution.create_database_binary(dt=0.01)
     isphsolution.save_file()

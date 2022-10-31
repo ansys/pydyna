@@ -544,7 +544,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         newk = opcode + "\n" + card1
         self.kwdproc.newkeyword(newk)
         print('*DEFINE_SPH_MASSFLOW_PLANE Created...')
-        return kwprocess_pb2.DefineOrientationReply(answer = 0)
+        return kwprocess_pb2.DefineSPHMassflowPlaneReply(answer = 0)
 
     def CreateDefineSPHMeshBox(self,request,context):
         coords = request.coords
@@ -936,6 +936,16 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = '*CONSTRAINED_JOINT Created...'
         print(msg)
         return kwprocess_pb2.ConstrainedJointReply(id = 0) 
+
+    def CreateConstrainedRigidBodies(self,request,context):
+        pidl = request.pidl
+        pidc = request.pidc
+        opcode = "*CONSTRAINED_RIGID_BODIES"
+        card1 = str(pidl)+","+str(pidc)
+        newk = opcode+"\n" + card1
+        self.kwdproc.newkeyword(newk)
+        print('*CONSTRAINED_RIGID_BODIES Created...')
+        return kwprocess_pb2.ConstrainedRigidBodiesReply(id = 0) 
 
     #LOAD
     def CreateLoadBody(self,request,context):

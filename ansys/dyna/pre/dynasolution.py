@@ -204,6 +204,7 @@ class DynaSolution:
         abstat=0,
         bndout=0,
         sleout=0,
+        sphmassflow=0
     ):
         """Obtain output files containing results information.
 
@@ -244,6 +245,8 @@ class DynaSolution:
             self.stub.CreateDBAscii(DBAsciiRequest(type="NODFOR", dt=glstat, binary=1, lcur=0, ioopt=0))
         if sleout > 0:
             self.stub.CreateDBAscii(DBAsciiRequest(type="SLEOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+        if sphmassflow > 0:
+            self.stub.CreateDBAscii(DBAsciiRequest(type="SPHMASSFLOW", dt=glstat, binary=1, lcur=0, ioopt=0))
         ret = 1
         logging.info("Output Setting...")
         return ret
