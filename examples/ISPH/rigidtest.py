@@ -30,13 +30,15 @@ if __name__ == "__main__":
     isphobj = DynaISPH()
     isphsolution.add(isphobj)
 
+    isphobj.set_timestep(tssfac=1,max_timestep = Curve(x=[0,0.04,0.05,0.1,100],y=[0.5,0.5,1,1,1]))
+    isphobj.isphanalysis.set_box(Box(-750,800,-800,800,-100,3000))
+
     platemat1 = MatRigid(mass_density=1e-9,young_modulus=10,center_of_mass_constraint=1,translational_constraint=5,rotational_constraint=4)
     platemat2 = MatRigid(mass_density=1e-9,young_modulus=10,center_of_mass_constraint=1,translational_constraint=7,rotational_constraint=7)
     #platemat3 = MatRigid(mass_density=1e-9,young_modulus=10)
-    matelastic = MatElastic(mass_density=1e-9,young_modulus=1)
+    #matelastic = MatElastic(mass_density=1e-9,young_modulus=1)
     matsphfluid = MatSPHIncompressibleFluid(mass_density=1e-9, dynamic_viscosity=1e-9, tension_coefficient1=1e6,tension_coefficient2=1000)
     matsphstruct = MatSPHIncompressibleStructure(mass_density=1e-9)
-
 
     sensorplane = ShellPart(1)
     sensorplane.set_material(platemat2)

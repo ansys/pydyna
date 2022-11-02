@@ -80,7 +80,7 @@ class Box:
         self.ymin = ymin
         self.ymax = ymax
         self.zmin = zmin
-        self.xmax = zmax
+        self.zmax = zmax
 
     def create(self, stub):
         """Create box."""
@@ -95,7 +95,8 @@ class Box:
             )
         )
         self.id = ret.boxid
-        logging.info(f"Box {self.boxid} defined...")
+        logging.info(f"Box {self.id} defined...")
+        return self.id
 
 
 class Curve:
@@ -165,7 +166,7 @@ class DynaBase:
         """Get the stub of this DynaBase object."""
         return DynaBase.stub
 
-    def set_timestep(self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0):
+    def set_timestep(self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0,max_timestep=None):
         """Set structural time step size control using different options.
 
         Parameters
@@ -176,13 +177,19 @@ class DynaBase:
             Basis of time size calculation for 4-node shell elements.
         timestep_size_for_mass_scaled : float
             Time step size for mass scaled solutions.
+        max_timestep : Curve
+            Load curve that limits the maximum time step size.
 
         Returns
         -------
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateTimestep(TimestepRequest(tssfac=tssfac, isdo=isdo, dt2ms=timestep_size_for_mass_scaled))
+        if max_timestep == None:
+            cid = 0
+        else:
+            cid = max_timestep.create(self.stub)
+        ret = self.stub.CreateTimestep(TimestepRequest(tssfac=tssfac, isdo=isdo, dt2ms=timestep_size_for_mass_scaled,lctm=cid))
         logging.info("Timestep Created...")
         return ret
 
@@ -660,6 +667,12 @@ class PartSet(BaseSet):
         """Get the part ID by position."""
         return self.parts[pos]
 
+    def get_pid(self):
+        """Get the part ID."""
+        if self.type == "PART":
+            return self.parts[0]
+        else:
+            return 0
 
 class SegmentSet(BaseSet):
     """Define a set of segments with optional identical or unique attributes.
@@ -1138,6 +1151,8 @@ class Parts():
         self.icfdlist = []
         self.icfdvolumelist = []
         self.discretelist = []
+        self.isphstructlist = []
+        self.isphfluidlist = []
     
     def add(self,part):
         """Add part in part list."""
@@ -1155,6 +1170,10 @@ class Parts():
             self.icfdvolumelist.append(part)
         elif part.type == "DISCRETE":
             self.discretelist.append(part)
+        elif part.type == "ISPHSTRUCT":
+            self.isphstructlist.append(part)
+        elif part.type == "ISPHFLUID":
+            self.isphfluidlist.append(part)
         else:
             logging.info("Warning: Invalid part type!")
 
@@ -1173,6 +1192,10 @@ class Parts():
         for obj in self.icfdvolumelist:
             obj.create()
         for obj in self.discretelist:
+            obj.set_property()
+        for obj in self.isphstructlist:
+            obj.set_property()
+        for obj in self.isphfluidlist:
             obj.set_property()
 
 class AnalysisType(Enum):
