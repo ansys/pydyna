@@ -15,7 +15,7 @@ class DynaISPH(DynaBase):
 
     def __init__(self):
         DynaBase.__init__(self)
-        massflowplanelist = []
+        self.isphanalysis = ISPHAnalysis()
 
     def set_des(self, num_timestep=1, boxid=0, space_dimension=3, neighbors=150, approximation_theory=0, max_velocty=1e15):
         """Provide controls related to SPH.
@@ -62,7 +62,69 @@ class DynaISPH(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
+        self.isphanalysis.create()
         DynaBase.save_file(self)
+
+class ISPHAnalysis:
+    """Provide controls related to SPH (Smooth Particle Hydrodynamics)."""
+
+    def __init__(self, num_timestep=1):
+        self.stub = DynaBase.get_stub()
+        self.num_timestep = num_timestep 
+        self.box = None
+        self.space_dimension = 3
+        self.neighbors = 150
+        self.approximation_theory = 0
+        self.particle_deactivation = 1e15
+        self.velocity_scaling = 0
+        
+    def set_num_timestep(self, num_timestep):
+        """Set number of time steps between particle sorting."""
+        self.num_timestep = num_timestep
+
+    def set_box(self, box):
+        """Define box,SPH approximations are computed inside a specified box.
+        
+        Parameters
+        ----------
+        box : Box
+            When a particle has gone outside the BOX, it is deactivated. This will save computational time by eliminating particles that no longer interact with the structure.
+        """
+        self.box = box
+
+    def set_neighbors(self, neighbors):
+        """Define the initial number of neighbors per particle."""
+        self.neighbors = neighbors
+
+    def set_particle_deactivation(self,deactivation) :
+        """Define the type of BEM matrices as well as the way they are assembled."""
+        self.particle_deactivation = deactivation
+
+    def set_velocity_scaling(self,scaling) :
+        """Define the type of BEM matrices as well as the way they are assembled."""
+        self.velocity_scaling = scaling    
+
+    def create(self):
+        """Create ISPHAnalysis."""
+        if self.box==None:
+            boxid = 0
+        else:
+            boxid = self.box.create(self.stub)
+        if self.velocity_scaling != 0:
+            maxv = -self.velocity_scaling
+        else:
+            maxv = self.particle_deactivation
+        ret = self.stub.CreateControlSPH(
+            ControlSPHRequest(
+                ncbs=self.num_timestep,
+                boxid=boxid,
+                idim=self.space_dimension,
+                nmneigh=self.neighbors,
+                form=self.approximation_theory,
+                maxv=maxv
+            )
+        )
+        logging.info("Control SPH Created...")
 
 class SPHSection:
     """Define section properties for SPH particles."""
@@ -114,12 +176,14 @@ class MassflowPlane:
             ptype = 2
         elif self.particles.type == "PART":
             ptype = 3
+            pid = self.particles.get_pid()
         else:
             print('invalid set type.')
         if self.surface.type == "PARTSET":
             stype = 0
         elif self.surface.type == "PART":
             stype = 1
+            sid = self.surface.get_pid()
         stub.CreateDefineSPHMassflowPlane(DefineSPHMassflowPlaneRequest(prtclsid=pid, surfsid=sid,ptype=ptype,stype=stype))
 
 class ISPHFluidPart(Part):
@@ -145,9 +209,9 @@ class ISPHFluidPart(Part):
         self.type = "ISPHFLUID"
         self.minpoint = minpoint
         self.length = length
-        self.numxdir = numdirx
-        self.numydir = numdiry
-        self.numzdir = numdirz
+        self.numdirx = numdirx
+        self.numdiry = numdiry
+        self.numdirz = numdirz
         #section
         self.cslh = 1.2
         self.hmin=0.2
@@ -177,9 +241,9 @@ class ISPHFluidPart(Part):
 
     def create_particles(self):
         """Create SPH particles inside a given box."""
-        coords = (self.minpoint[0],self.minpoint[1],self.minpoint[2],self.length[0],self.length[1],self.length[2])
+        coords = (self.minpoint.x,self.minpoint.y,self.minpoint.z,self.length.x,self.length.y,self.length.z)
         numparticles = (self.numdirx,self.numdiry,self.numdirz)
-        self.stub.CreateDefineSPHMeshBox(DefineSPHMeshBoxRequest(ipid=self.pid, coords=coords,numparticles=numparticles))  
+        self.stub.CreateDefineSPHMeshBox(DefineSPHMeshBoxRequest(ipid=self.id, coords=coords,numparticles=numparticles))  
     
     def create_massflow_plane(self,surfaces):
         self.massflowplane = MassflowPlane(PartSet([self.id]),surfaces)
@@ -187,7 +251,7 @@ class ISPHFluidPart(Part):
     def set_property(self):
         """Set properties for SPH fluid part."""
         self.create_particles()
-        self.massflowplane.create()
+        self.massflowplane.create(self.stub)
         sec = SPHSection(cslh=self.cslh,hmin=self.hmin,hmax=self.hmax,sphini=self.sphini)
         self.secid = sec.id
         self.stub.SetPartProperty(
@@ -217,7 +281,7 @@ class ISPHStructPart(Part):
     def __init__(self,pid,couple_partset,space):
         Part.__init__(self, pid)
         self.stub = DynaBase.get_stub()
-        self.type = "ISPHStruct"
+        self.type = "ISPHSTRUCT"
         self.couple_partset = couple_partset
         self.space = space
         #section
@@ -252,7 +316,8 @@ class ISPHStructPart(Part):
             type = 0
         else:
             type = 1
-        self.stub.CreateDefineSPHMeshSurface(DefineSPHMeshSurfaceRequest(sid=sid, type=type,sphpid=self.pid,space=self.space))  
+            sid = self.couple_partset.get_pid()
+        self.stub.CreateDefineSPHMeshSurface(DefineSPHMeshSurfaceRequest(sid=sid, type=type,sphpid=self.id,space=self.space))  
 
     def set_property(self):
         """Set properties for SPH structural part."""
