@@ -194,6 +194,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.ConstrainedSpotWeldRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ConstrainedSpotWeldReply.FromString,
                 )
+        self.CreateConstrainedRigidBodies = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateConstrainedRigidBodies',
+                request_serializer=kwprocess__pb2.ConstrainedRigidBodiesRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ConstrainedRigidBodiesReply.FromString,
+                )
         self.CreateLoadBody = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateLoadBody',
                 request_serializer=kwprocess__pb2.LoadBodyRequest.SerializeToString,
@@ -887,6 +892,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateConstrainedSpotWeld(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateConstrainedRigidBodies(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1650,6 +1661,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateConstrainedSpotWeld,
                     request_deserializer=kwprocess__pb2.ConstrainedSpotWeldRequest.FromString,
                     response_serializer=kwprocess__pb2.ConstrainedSpotWeldReply.SerializeToString,
+            ),
+            'CreateConstrainedRigidBodies': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateConstrainedRigidBodies,
+                    request_deserializer=kwprocess__pb2.ConstrainedRigidBodiesRequest.FromString,
+                    response_serializer=kwprocess__pb2.ConstrainedRigidBodiesReply.SerializeToString,
             ),
             'CreateLoadBody': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateLoadBody,
@@ -2740,6 +2756,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateConstrainedSpotWeld',
             kwprocess__pb2.ConstrainedSpotWeldRequest.SerializeToString,
             kwprocess__pb2.ConstrainedSpotWeldReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateConstrainedRigidBodies(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateConstrainedRigidBodies',
+            kwprocess__pb2.ConstrainedRigidBodiesRequest.SerializeToString,
+            kwprocess__pb2.ConstrainedRigidBodiesReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

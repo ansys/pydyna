@@ -141,7 +141,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         tssfac = request.tssfac
         isdo=request.isdo
         dt2ms=request.dt2ms
-        firstcard = '0.0,'+str(tssfac)+','+  str(isdo) + ",0.0," + str(dt2ms)+",0,0,0"
+        lctm = request.lctm
+        firstcard = '0.0,'+str(tssfac)+','+  str(isdo) + ",0.0," + str(dt2ms)+','+ str(lctm)+",0,0"
         newk = "*CONTROL_TIMESTEP\n"+ firstcard
         self.kwdproc.newkeyword(newk)
         print('Timestep Created...')
@@ -325,7 +326,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         nmneigh = request.nmneigh
         form = request.form
         maxv = request.maxv
-        card1 = str(ncbs)+','+str(boxid)+','+str(1e20)+str(idim)+','+str(nmneigh)+','+str(form)+','+str(0.0)+','+str(maxv)
+        card1 = str(ncbs)+','+str(boxid)+','+str(1e20)+','+str(idim)+','+str(nmneigh)+','+str(form)+','+str(0.0)+','+str(maxv)
         card2 = "0,0,0,1,0,0,0,100"
         newk = '*CONTROL_SPH\n'+card1 +'\n' +card2
         self.kwdproc.newkeyword(newk)
@@ -544,14 +545,14 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         newk = opcode + "\n" + card1
         self.kwdproc.newkeyword(newk)
         print('*DEFINE_SPH_MASSFLOW_PLANE Created...')
-        return kwprocess_pb2.DefineOrientationReply(answer = 0)
+        return kwprocess_pb2.DefineSPHMassflowPlaneReply(answer = 0)
 
     def CreateDefineSPHMeshBox(self,request,context):
         coords = request.coords
         ipid = request.ipid
         numparticles = request.numparticles
         card1 = str(coords[0])+","+str(coords[1])+","+str(coords[2])+","+str(coords[3])+","+str(coords[4])+","+str(coords[5])
-        card2 = str(ipid)+","+str(numparticles[1])+","+str(numparticles[2])+","+str(numparticles[3])
+        card2 = str(ipid)+","+str(numparticles[0])+","+str(numparticles[1])+","+str(numparticles[2])
         opcode = "*DEFINE_SPH_MESH_BOX"
         newk = opcode + "\n" + card1 + "\n" + card2
         self.kwdproc.newkeyword(newk)
@@ -936,6 +937,16 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = '*CONSTRAINED_JOINT Created...'
         print(msg)
         return kwprocess_pb2.ConstrainedJointReply(id = 0) 
+
+    def CreateConstrainedRigidBodies(self,request,context):
+        pidl = request.pidl
+        pidc = request.pidc
+        opcode = "*CONSTRAINED_RIGID_BODIES"
+        card1 = str(pidl)+","+str(pidc)
+        newk = opcode+"\n" + card1
+        self.kwdproc.newkeyword(newk)
+        print('*CONSTRAINED_RIGID_BODIES Created...')
+        return kwprocess_pb2.ConstrainedRigidBodiesReply(id = 0) 
 
     #LOAD
     def CreateLoadBody(self,request,context):
