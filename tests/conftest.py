@@ -78,5 +78,10 @@ def solution_initialfile():
     """Resolve the path for solution initial file."""
     return resolve_test_file("test_solution.k","initial")      
     
+@pytest.fixture()
+def isph_initialfile():
+    """Resolve the path for isph initial file."""
+    return resolve_test_file("test_isph.k","initial") 
+    
     
     
