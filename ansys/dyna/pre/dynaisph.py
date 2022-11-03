@@ -74,7 +74,7 @@ class ISPHAnalysis:
         self.box = None
         self.space_dimension = 3
         self.neighbors = 150
-        self.approximation_theory = 0
+        self.approximation_theory = 13
         self.particle_deactivation = 1e15
         self.velocity_scaling = 0
         
@@ -246,6 +246,7 @@ class ISPHFluidPart(Part):
         self.stub.CreateDefineSPHMeshBox(DefineSPHMeshBoxRequest(ipid=self.id, coords=coords,numparticles=numparticles))  
     
     def create_massflow_plane(self,surfaces):
+        """Measure SPH mass flow rate across a defined plane."""
         self.massflowplane = MassflowPlane(PartSet([self.id]),surfaces)
 
     def set_property(self):
