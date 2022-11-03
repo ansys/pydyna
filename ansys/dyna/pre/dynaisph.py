@@ -74,7 +74,7 @@ class ISPHAnalysis:
         self.box = None
         self.space_dimension = 3
         self.neighbors = 150
-        self.approximation_theory = 0
+        self.approximation_theory = 13
         self.particle_deactivation = 1e15
         self.velocity_scaling = 0
         
