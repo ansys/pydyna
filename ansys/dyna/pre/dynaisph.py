@@ -246,6 +246,7 @@ class ISPHFluidPart(Part):
         self.stub.CreateDefineSPHMeshBox(DefineSPHMeshBoxRequest(ipid=self.id, coords=coords,numparticles=numparticles))  
     
     def create_massflow_plane(self,surfaces):
+        """Measure SPH mass flow rate across a defined plane."""
         self.massflowplane = MassflowPlane(PartSet([self.id]),surfaces)
 
     def set_property(self):
