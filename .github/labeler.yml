@@ -1,0 +1,13 @@
+documentation:
+- doc/source/**/*
+- README.rst
+maintenance:
+- .github/**/*
+- .flake8
+- setup.py
+dependencies:
+- requirements/**/*
+- requirements_docs.txt
+- requirements_test.txt
+testing:
+- _unittest/conftest.py
