@@ -1,0 +1,15 @@
+ANSYS
+Ansys
+ansys
+CPython
+docstring
+Docstrings
+docstrings
+getters
+globals
+numpy
+numpydoc
+PyPI
+Python
+pyvista
+setters
