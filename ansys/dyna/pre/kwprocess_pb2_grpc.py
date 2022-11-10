@@ -664,6 +664,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.EMEOSPermeabilityRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.EMEOSPermeabilityReply.FromString,
                 )
+        self.CreateFrequencyDomainFRF = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateFrequencyDomainFRF',
+                request_serializer=kwprocess__pb2.FrequencyDomainFRFRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.FrequencyDomainFRFReply.FromString,
+                )
         self.CreateGeneralKWD = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateGeneralKWD',
                 request_serializer=kwprocess__pb2.GeneralKWDRequest.SerializeToString,
@@ -1473,6 +1478,13 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateFrequencyDomainFRF(self, request, context):
+        """---Frequency
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateGeneralKWD(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -2131,6 +2143,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateEMEOSPermeability,
                     request_deserializer=kwprocess__pb2.EMEOSPermeabilityRequest.FromString,
                     response_serializer=kwprocess__pb2.EMEOSPermeabilityReply.SerializeToString,
+            ),
+            'CreateFrequencyDomainFRF': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateFrequencyDomainFRF,
+                    request_deserializer=kwprocess__pb2.FrequencyDomainFRFRequest.FromString,
+                    response_serializer=kwprocess__pb2.FrequencyDomainFRFReply.SerializeToString,
             ),
             'CreateGeneralKWD': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateGeneralKWD,
@@ -4354,6 +4371,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMEOSPermeability',
             kwprocess__pb2.EMEOSPermeabilityRequest.SerializeToString,
             kwprocess__pb2.EMEOSPermeabilityReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateFrequencyDomainFRF(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateFrequencyDomainFRF',
+            kwprocess__pb2.FrequencyDomainFRFRequest.SerializeToString,
+            kwprocess__pb2.FrequencyDomainFRFReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

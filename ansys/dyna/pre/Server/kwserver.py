@@ -1975,6 +1975,36 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ALECreateStructuredMeshVolumeFillingReply(answer = 0)
 
+    def CreateFrequencyDomainFRF(self,request,context):     
+        n1 = request.n1
+        n1typ = request.n1typ
+        dof1 = request.dof1
+        vad1 = request.vad1
+        fnmax = request.fnmax
+        #card2
+        dampf = request.dampf
+        lcdam = request.lcdam
+        lctyp = request.lctyp
+        #card3
+        n2 = request.n2
+        n2typ = request.n2typ
+        dof2 = request.dof2
+        vad2 = request.vad2
+        #card4
+        fmin = request.fmin
+        fmax = request.fmax
+        nfreq = request.nfreq
+
+        card1 = str(n1)+","+str(n1typ)+","+str(dof1)+","+str(vad1)+",0,"+str(fnmax)
+        card2 = str(dampf)+","+str(lcdam)+","+str(lctyp)
+        card3 = str(n2)+","+str(n2typ)+","+str(dof2)+","+str(vad2)
+        card4 = str(fmin)+","+str(fmax)+","+str(nfreq)
+        newk = "*FREQUENCY_DOMAIN_FRF\n" + card1 +"\n"+card2+"\n"+card3+"\n"+card4
+        self.kwdproc.newkeyword(newk)
+        msg = '*FREQUENCY_DOMAIN_FRF Created...'
+        print(msg)
+        return kwprocess_pb2.FrequencyDomainFRFReply(answer = 0)
+
     def CreateGeneralKWD(self,request,context): 
         opcode = request.opcode    
         keyworddata = request.keyworddata
