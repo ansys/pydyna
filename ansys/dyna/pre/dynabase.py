@@ -612,6 +612,13 @@ class NodeSet:
         """Get the node ID by position."""
         return self.nodes[pos]
 
+    def get_nid(self):
+        """Get the node ID."""
+        if self.type == "NODE":
+            return self.nodes[0]
+        else:
+            return 0
+
 
 class SetType(Enum):
     SHELL = "SET_SHELL"
@@ -1222,6 +1229,9 @@ class ImplicitAnalysis:
         self.imflag = analysis_type.value
         self.dt0 = initial_timestep_size
         self.stub = DynaBase.get_stub()
+
+    def set_initial_timestep_size(self,size=0):
+        self.dt0 = size
 
     def set_timestep(
         self,
