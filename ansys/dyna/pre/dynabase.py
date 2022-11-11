@@ -1226,11 +1226,17 @@ class ImplicitAnalysis:
 
     def __init__(self, analysis_type=AnalysisType.IMPLICIT, initial_timestep_size=0):
         self.defined = False
+        self.defined_auto = False
+        self.defined_dynamic = False
+        self.defined_eigenvalue = False
+        self.defined_solution = False
         self.imflag = analysis_type.value
         self.dt0 = initial_timestep_size
         self.stub = DynaBase.get_stub()
 
     def set_initial_timestep_size(self,size=0):
+        """Define initial time step size."""
+        self.defined = True
         self.dt0 = size
 
     def set_timestep(
@@ -1252,7 +1258,7 @@ class ImplicitAnalysis:
         bool
             "True" when successful, "False" when failed
         """
-        self.defined = True
+        self.defined_auto = True
         self.iauto = control_flag.value
         self.iteopt = Optimum_equilibrium_iteration_count
 
@@ -1278,7 +1284,7 @@ class ImplicitAnalysis:
         bool
             "True" when successful, "False" when failed
         """
-        self.defined = True
+        self.defined_dynamic = True
         self.imass = integration_method.value
         self.gamma = gamma
         self.beta = beta
@@ -1298,7 +1304,7 @@ class ImplicitAnalysis:
         bool
             "True" when successful, "False" when failed
         """
-        self.defined = True
+        self.defined_eigenvalue = True
         self.neig = number_eigenvalues
         self.shfscl = shift_scale
 
@@ -1327,7 +1333,7 @@ class ImplicitAnalysis:
         bool
             "True" when successful, "False" when failed
         """
-        self.defined = True
+        self.defined_solution = True
         self.nsolver = solution_method
         self.ilimit = iteration_limit
         self.maxref = stiffness_reformation_limit
@@ -1337,11 +1343,16 @@ class ImplicitAnalysis:
         """Create implicit analysis."""
         if self.defined==False:
             return
-        self.stub.CreateControlImplicitGeneral(ControlImplicitGeneralRequest(imflag=self.imflag, dt0=self.dt0))
-        self.stub.CreateControlImplicitAuto(ControlImplicitAutoRequest(iauto=self.iauto, iteopt=self.iteopt))
-        self.stub.CreateControlImplicitDynamic(ControlImplicitDynamicRequest(imass=self.imass, gamma=self.gamma, beta=self.beta))
-        self.stub.CreateControlImplicitEigenvalue(ControlImplicitEigenvalueRequest(neig=self.neig, shfscl=self.shfscl))
-        self.stub.CreateControlImplicitSolution(ControlImplicitSolutionRequest(nsolver=self.nsolver,ilimit=self.ilimit,maxref=self.maxref,abstol=self.abstol))
+        if self.defined:
+            self.stub.CreateControlImplicitGeneral(ControlImplicitGeneralRequest(imflag=self.imflag, dt0=self.dt0))
+        if self.defined_auto:
+            self.stub.CreateControlImplicitAuto(ControlImplicitAutoRequest(iauto=self.iauto, iteopt=self.iteopt))
+        if self.defined_dynamic:
+            self.stub.CreateControlImplicitDynamic(ControlImplicitDynamicRequest(imass=self.imass, gamma=self.gamma, beta=self.beta))
+        if self.defined_eigenvalue:
+            self.stub.CreateControlImplicitEigenvalue(ControlImplicitEigenvalueRequest(neig=self.neig, shfscl=self.shfscl))
+        if self.defined_solution:
+            self.stub.CreateControlImplicitSolution(ControlImplicitSolutionRequest(nsolver=self.nsolver,ilimit=self.ilimit,maxref=self.maxref,abstol=self.abstol))
         
 
 class ContactCategory(Enum):
