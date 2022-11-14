@@ -4,6 +4,7 @@ import datetime
 import os
 import sys
 
+import pyvista
 from ansys_sphinx_theme import pyansys_logo_black, ansys_favicon
 
 sys.path.insert(0,os.path.abspath('./../../ansys/dyna'))
@@ -143,3 +144,5 @@ html_theme_options = {
 # static path
 html_static_path = ['_static']
 
+# necessary for pyvista when building the sphinx gallery
+pyvista.BUILDING_GALLERY = True
