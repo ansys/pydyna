@@ -17,8 +17,10 @@ with io_open(version_file, mode="r") as fd:
 
 install_requires = [
     "grpcio>=1.30.0",
-    "grpcio-tools>= 1.39.0"
+    "grpcio-tools>= 1.39.0",
     "protobuf>=3.12.2",
+    "google-api-python-client>=1.7.11",
+    "googleapis-common-protos>=1.52.0",
 ]
 
 
