@@ -17,6 +17,7 @@ with io_open(version_file, mode="r") as fd:
 
 install_requires = [
     "grpcio>=1.30.0",
+    "grpcio-tools>= 1.39.0"
     "protobuf>=3.12.2",
 ]
 
