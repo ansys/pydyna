@@ -121,7 +121,7 @@ jobs:
   release:
     name: Release project
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-    needs: [package]
+    # needs: [package]
     runs-on: ubuntu-latest
     steps:
       - name: Set up Python
@@ -148,7 +148,7 @@ jobs:
     name: Upload dev documentation
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    needs: [package]
+    # needs: [package]
     steps:
       - uses: actions/checkout@v3
 
