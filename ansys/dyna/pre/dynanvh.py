@@ -27,6 +27,30 @@ class DynaNVH(DynaBase):
         """
         DynaBase.save_file(self)
 
+class ExcitationDOF(Enum):
+    VECTOR = 0
+    X = 1
+    Y = 2
+    Z = 3
+
+class ExcitationType(Enum):
+    BASE_VELOCITY = 0
+    BASE_ACCELERATION = 1
+    BASE_DISPLACEMENT = 2
+    NODAL_FORCE = 3
+
+class ResponseDOF(Enum):
+    VECTOR = 0
+    X = 1
+    Y = 2
+    Z = 3
+
+class ResponseType(Enum):
+    BASE_VELOCITY = 0
+    BASE_ACCELERATION = 1
+    BASE_DISPLACEMENT = 2
+    NODAL_FORCE = 3
+
 class FrequencyDomain:
     """Provide a way of defining and solving frequency domain vibration and acoustic problems."""
 
@@ -36,15 +60,15 @@ class FrequencyDomain:
 
     def set_frequency_response_function(self, 
     excitation_input_set=None,
-    excitation_input_dof=0,
-    excitation_input_type=3,
+    excitation_input_dof=ExcitationDOF.VECTOR,
+    excitation_input_type=ExcitationType.NODAL_FORCE,
     max_natural_frequency=0,
     modal_damping_coefficient = 0,
-    modal_damping_coefficient_curve = 0,
+    modal_damping_coefficient_curve = None,
     modal_damping_coefficient_curve_type = 0,
     response_output_set=None,
-    response_output_dof=2,
-    response_output_type=0,
+    response_output_dof=ResponseDOF.Y,
+    response_output_type=ResponseType.BASE_VELOCITY,
     frf_output_min_frequency =0,
     frf_output_max_frequency = 0,
     frf_output_num_frequency = 0
@@ -58,15 +82,15 @@ class FrequencyDomain:
         """
         self.defined_frf = True
         self.n1 = excitation_input_set 
-        self.dof1 = excitation_input_dof
-        self.vad1 = excitation_input_type
+        self.dof1 = excitation_input_dof.value
+        self.vad1 = excitation_input_type.value
         self.fnmax = max_natural_frequency
         self.dampf = modal_damping_coefficient
         self.lcdam = modal_damping_coefficient_curve
         self.lctyp = modal_damping_coefficient_curve_type
         self.n2 = response_output_set
-        self.dof2 = response_output_dof
-        self.vad2 = response_output_type
+        self.dof2 = response_output_dof.value
+        self.vad2 = response_output_type.value
         self.fmin = frf_output_min_frequency
         self.fmax = frf_output_max_frequency
         self.nfreq = frf_output_num_frequency
@@ -74,6 +98,7 @@ class FrequencyDomain:
     def create(self):
         """Define frequency domain vibration and acoustic problems."""
         if self.defined_frf:
+            cid = self.lcdam.create(self.stub)
             self.n1.create(self.stub)
             self.n2.create(self.stub)
             if self.n1.type.upper() == "NODE":
@@ -107,7 +132,7 @@ class FrequencyDomain:
                     vad1 = self.vad1,
                     fnmax=self.fnmax,
                     dampf=self.dampf,
-                    lcdam=self.lcdam,
+                    lcdam=cid,
                     lctyp=self.lctyp,
                     n2=n2id,
                     n2typ = n2typ,

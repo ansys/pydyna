@@ -720,6 +720,7 @@ class BeamFormulation(Enum):
 class ShellFormulation(Enum):
     FULLY_INTEGRATED = -16
     BELYTSCHKO_TSAY = 2
+    SR_HUGHES_LIU = 6
     FULLY_INTEGRATED_BELYTSCHKO_TSAY_MEMBRANE = 9
 
 
