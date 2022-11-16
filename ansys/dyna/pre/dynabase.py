@@ -567,7 +567,8 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        self.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
+        if self.contacts.num()>0:
+            self.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
         self.implicitanalysis.create()
         self.parts.set_property()
         self.initialconditions.create()
@@ -1626,6 +1627,10 @@ class ContactGroup:
         """Create contacts.""" 
         for obj in self.contactlist:
             obj.create()
+
+    def num(self):
+        """Get the number of contact objects."""
+        return len(self.contactlist)
 
 
 class Constraint:
