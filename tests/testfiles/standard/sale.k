@@ -8,19 +8,6 @@ $#    ncpl      nbkt    imascl    checkr    beamin   mmgpref    pdifmx   dtmufac
          1        50         0       0.0       0.0         0       0.0       0.0
 $# optimpp    ialedr    bndflx    minmas
          0         0         01.00000E-5
-*CONTROL_CONTACT
-$#  slsfac    rwpnal    islchk    shlthk    penopt    thkchg     orien    enmass
-       0.0       1.0         0         0         0         0         1         0
-$#  usrstr    usrfrc     nsbcs    interm     xpene     ssthk      ecdt   tiedprj
-         0         0         0         0       0.0         0         0         0
-$#   sfric     dfric       edc       vfc        th     th_sf    pen_sf     ptscl
-                                                                                
-$#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin
-         1                                                            
-$#    isym    nserod    rwgaps    rwgdth     rwksf      icov    swradf    ithoff
-                                                                                
-$#  shledg    pstiff    ithcnt    tdcnof     ftall    unused    shltrw    igactc
-         0         0         0         0         0                 0.0         0
 *CONTROL_ENERGY
 $#    hgen      rwen    slnten     rylen     irgen     maten     drlen     disen
          2         2         2         1         2         1         1         1
