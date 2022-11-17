@@ -79,6 +79,21 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.ControlSolidRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ControlSolidReply.FromString,
                 )
+        self.CreateControlSolution = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateControlSolution',
+                request_serializer=kwprocess__pb2.ControlSolutionRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ControlSolutionReply.FromString,
+                )
+        self.CreateControlThermalSolver = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateControlThermalSolver',
+                request_serializer=kwprocess__pb2.ControlThermalSolverRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ControlThermalSolverReply.FromString,
+                )
+        self.CreateControlThermalTimestep = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateControlThermalTimestep',
+                request_serializer=kwprocess__pb2.ControlThermalTimestepRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ControlThermalTimestepReply.FromString,
+                )
         self.CreateControlImplicitGeneral = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateControlImplicitGeneral',
                 request_serializer=kwprocess__pb2.ControlImplicitGeneralRequest.SerializeToString,
@@ -158,6 +173,11 @@ class kwC2SStub(object):
                 '/kwgrpc.kwC2S/CreateInitDetonation',
                 request_serializer=kwprocess__pb2.InitDetonationRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.InitDetonationReply.FromString,
+                )
+        self.CreateInitTemperature = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateInitTemperature',
+                request_serializer=kwprocess__pb2.InitTemperatureRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.InitTemperatureReply.FromString,
                 )
         self.CreateContact = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateContact',
@@ -758,6 +778,24 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateControlSolution(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateControlThermalSolver(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateControlThermalTimestep(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateControlImplicitGeneral(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -852,6 +890,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateInitDetonation(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateInitTemperature(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1559,6 +1603,21 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.ControlSolidRequest.FromString,
                     response_serializer=kwprocess__pb2.ControlSolidReply.SerializeToString,
             ),
+            'CreateControlSolution': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateControlSolution,
+                    request_deserializer=kwprocess__pb2.ControlSolutionRequest.FromString,
+                    response_serializer=kwprocess__pb2.ControlSolutionReply.SerializeToString,
+            ),
+            'CreateControlThermalSolver': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateControlThermalSolver,
+                    request_deserializer=kwprocess__pb2.ControlThermalSolverRequest.FromString,
+                    response_serializer=kwprocess__pb2.ControlThermalSolverReply.SerializeToString,
+            ),
+            'CreateControlThermalTimestep': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateControlThermalTimestep,
+                    request_deserializer=kwprocess__pb2.ControlThermalTimestepRequest.FromString,
+                    response_serializer=kwprocess__pb2.ControlThermalTimestepReply.SerializeToString,
+            ),
             'CreateControlImplicitGeneral': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateControlImplicitGeneral,
                     request_deserializer=kwprocess__pb2.ControlImplicitGeneralRequest.FromString,
@@ -1638,6 +1697,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateInitDetonation,
                     request_deserializer=kwprocess__pb2.InitDetonationRequest.FromString,
                     response_serializer=kwprocess__pb2.InitDetonationReply.SerializeToString,
+            ),
+            'CreateInitTemperature': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateInitTemperature,
+                    request_deserializer=kwprocess__pb2.InitTemperatureRequest.FromString,
+                    response_serializer=kwprocess__pb2.InitTemperatureReply.SerializeToString,
             ),
             'CreateContact': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateContact,
@@ -2386,6 +2450,57 @@ class kwC2S(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def CreateControlSolution(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateControlSolution',
+            kwprocess__pb2.ControlSolutionRequest.SerializeToString,
+            kwprocess__pb2.ControlSolutionReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateControlThermalSolver(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateControlThermalSolver',
+            kwprocess__pb2.ControlThermalSolverRequest.SerializeToString,
+            kwprocess__pb2.ControlThermalSolverReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateControlThermalTimestep(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateControlThermalTimestep',
+            kwprocess__pb2.ControlThermalTimestepRequest.SerializeToString,
+            kwprocess__pb2.ControlThermalTimestepReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def CreateControlImplicitGeneral(request,
             target,
             options=(),
@@ -2654,6 +2769,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateInitDetonation',
             kwprocess__pb2.InitDetonationRequest.SerializeToString,
             kwprocess__pb2.InitDetonationReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateInitTemperature(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateInitTemperature',
+            kwprocess__pb2.InitTemperatureRequest.SerializeToString,
+            kwprocess__pb2.InitTemperatureReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
