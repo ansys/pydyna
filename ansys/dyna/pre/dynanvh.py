@@ -73,7 +73,7 @@ class FrequencyDomain:
     frf_output_max_frequency = 0,
     frf_output_num_frequency = 0
     ):
-        """Computes frequency response functions due to nodal excitations.
+        """Compute frequency response functions due to nodal excitations.
 
         Parameters
         ----------
