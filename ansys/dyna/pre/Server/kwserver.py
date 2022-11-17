@@ -269,6 +269,30 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print('Control Solid Created...')
         return kwprocess_pb2.ControlSolidReply(answer = 0)
 
+    def CreateControlSolution(self,request,context):
+        soln = request.soln
+        card1 = str(soln)
+        newk = '*CONTROL_SOLUTION\n'+card1
+        self.kwdproc.newkeyword(newk)
+        print('Control Solution Created...')
+        return kwprocess_pb2.ControlSolutionReply(answer = 0)
+
+    def CreateControlThermalSolver(self,request,context):
+        atype = request.atype
+        card1 = str(atype)
+        newk = '*CONTROL_THERMAL_SOLVER\n'+card1
+        self.kwdproc.newkeyword(newk)
+        print('Control thermal solver Created...')
+        return kwprocess_pb2.ControlThermalSolverReply(answer = 0)
+
+    def CreateControlThermalTimestep(self,request,context):
+        its = request.its
+        card1 = "0,1.0,"+str(its)
+        newk = '*CONTROL_THERMAL_TIMESTEP\n'+card1
+        self.kwdproc.newkeyword(newk)
+        print('Control thermal timestep Created...')
+        return kwprocess_pb2.ControlThermalTimestepReply(answer = 0)
+
     def CreateControlImplicitGeneral(self,request,context):
         imflag = request.imflag
         dt0 = request.dt0
