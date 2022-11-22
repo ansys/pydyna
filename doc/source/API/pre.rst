@@ -14,6 +14,7 @@ The PyDyna-pre API includes classes for apps and modules.
    pre.dynaiga
    pre.dynaisph
    pre.dynamaterial
+   pre.dynanvh
    pre.dynasale
    pre.dynadem
    
