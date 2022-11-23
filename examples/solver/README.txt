@@ -1,2 +1,0 @@
-PyDyna-slover examples
-~~~~~~~~~~~~~~~~~~~~~~~
