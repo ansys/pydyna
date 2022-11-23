@@ -55,39 +55,39 @@ jobs:
   #         fail_on_error: true
   #         vale_flags: "--config=doc/.vale.ini"
 
-  smoke-tests:
-    name: Build and Smoke tests
-    runs-on: ${{ matrix.os }}
-    # needs: [style]
-    strategy:
-      matrix:
-        os: [windows-latest, ubuntu-latest]
-        python-version: ['3.6']
-        # python-version: ['3.6', '3.8', '3.9']
-      fail-fast: false
+  # smoke-tests:
+  #   name: Build and Smoke tests
+  #   runs-on: ${{ matrix.os }}
+  #   # needs: [style]
+  #   strategy:
+  #     matrix:
+  #       os: [windows-latest, ubuntu-latest]
+  #       python-version: ['3.6']
+  #       # python-version: ['3.6', '3.8', '3.9']
+  #     fail-fast: false
 
-    steps:
-      - uses: actions/checkout@v3
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: 'pip'
-          cache-dependency-path: 'setup.py'
+  #     - name: Set up Python ${{ matrix.python-version }}
+  #       uses: actions/setup-python@v4
+  #       with:
+  #         python-version: ${{ matrix.python-version }}
+  #         cache: 'pip'
+  #         cache-dependency-path: 'setup.py'
 
-      - name: Install packages for building
-        run: |
-          pip install --upgrade build wheel
-          pip install .
+  #     - name: Install packages for building
+  #       run: |
+  #         pip install --upgrade build wheel
+  #         pip install .
 
-      - name: Smoke test
-        run: python -c "from ansys.dyna.solver._version import __version__; print(__version__)"
+  #     - name: Smoke test
+  #       run: python -c "from ansys.dyna.solver._version import __version__; print(__version__)"
 
-      - name: Store version
-        run: |
-          echo "::set-output name=PYDYNA_VERSION::$(python -c "from ansys.dyna.solver._version import __version__; print(__version__)")"
-        id: version
+  #     - name: Store version
+  #       run: |
+  #         echo "::set-output name=PYDYNA_VERSION::$(python -c "from ansys.dyna.solver._version import __version__; print(__version__)")"
+  #       id: version
 
   docs:
     name: Documentation
