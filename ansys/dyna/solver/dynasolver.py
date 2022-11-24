@@ -44,12 +44,14 @@ class UnexpectedResponse(Exception):
 
 
 class DynaSolver:
-    """Class for the gRPC client side of LSDYNA
+    """Class for the gRPC client side of LSDYNA.
 
     Parameters
     ----------
-    hostname, string, required : hostname or IP address to connect to
-    port, string, required     : port on which gRPC server is listening
+    hostname : string, required
+        Hostname or IP address to connect to.
+    port : string, required
+        Port on which gRPC server is listening.
 
     Returns
     -------
@@ -126,9 +128,9 @@ class DynaSolver:
 
         Parameters
         ----------
-        subname, string, optional, default=None :  If given, only files whose
-            names contain subname as a substring are returned.  This check is
-            case insensitive.
+        subname : string, default : None
+            If given, only files whose names contain subname as a substring are
+            returned. This check is case insensitive.
 
         Returns
         -------
