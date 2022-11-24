@@ -10,5 +10,5 @@ sklearn==0.0
 pandas==1.4.4
 openpyxl==3.0.10
 scikit-learn==1.1.2
-pytest-xdist==2.5.0
+pytest-xdist==3.0.2
 ipython==8.4.0
