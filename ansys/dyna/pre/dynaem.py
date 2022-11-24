@@ -396,7 +396,7 @@ class EMAnalysis:
         self.defined = False
         self.stub = DynaBase.get_stub()
         self.type = type.value
-        
+
     def set_timestep(self, timestep):
         """Control the EM time step and its evolution."""
         self.defined = True
@@ -425,14 +425,32 @@ class EMAnalysis:
 
     def create(self):
         """Create EMAnalysis."""
-        if self.defined==False:
+        if self.defined == False:
             return
         self.stub.CreateEMControl(EMControlRequest(emsol=self.type, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000))
         self.stub.CreateEMTimestep(EMTimestepRequest(tstype=1, dtconst=self.timestep))
         logging.info("EM Timestep Created...")
-        self.stub.CreateEMSolverBem(EMSolverBemRequest(reltol=self.bem_relative_tol,maxite=self.max_iteration,stype=self.bemsolver,precon=1,uselast=1,ncylbem=3))
+        self.stub.CreateEMSolverBem(
+            EMSolverBemRequest(
+                reltol=self.bem_relative_tol,
+                maxite=self.max_iteration,
+                stype=self.bemsolver,
+                precon=1,
+                uselast=1,
+                ncylbem=3,
+            )
+        )
         logging.info("EM Solver BEM Created...")
-        self.stub.CreateEMSolverFem(EMSolverFemRequest(reltol=self.fem_relative_tol,maxite=self.max_iteration,stype=self.femsolver,precon=1,uselast=1,ncylbem=3))
+        self.stub.CreateEMSolverFem(
+            EMSolverFemRequest(
+                reltol=self.fem_relative_tol,
+                maxite=self.max_iteration,
+                stype=self.femsolver,
+                precon=1,
+                uselast=1,
+                ncylbem=3,
+            )
+        )
         logging.info("EM Solver FEM Created...")
         self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=1, reltol=EMAnalysis.p_matrix_tol))
         self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=2, reltol=EMAnalysis.q_matrix_tol))
@@ -514,7 +532,5 @@ class EMContact:
 
     def create(self):
         """Create EM contact."""
-        self.stub.CreateEMControlContact(
-            EMControlContactRequest(emct=1, cconly=0, ctype=self.contacttype, dtype=0)
-        )
+        self.stub.CreateEMControlContact(EMControlContactRequest(emct=1, cconly=0, ctype=self.contacttype, dtype=0))
         logging.info("EM Contact Created...")

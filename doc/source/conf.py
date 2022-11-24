@@ -6,25 +6,32 @@ import sys
 
 import pyvista
 from ansys_sphinx_theme import pyansys_logo_black, ansys_favicon
+from sphinx.builders.latex import LaTeXBuilder
+
+from ansys.dyna.solver import __version__
+
+LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
 sys.path.insert(0,os.path.abspath('./../../ansys/dyna'))
 
+def get_version_match(semver):
+    """Evaluate the version match for the multi-documentation."""
+    if semver.endswith("dev0"):
+        return "dev"
+    major, minor, _ = semver.split(".")
+    return ".".join([major, minor])
+
+
 # Project information
-project = 'pyansys_library_'
+project = 'ansys-dyna-solver'
 copyright = f"(c) {datetime.datetime.now().year} ANSYS, Inc. All rights reserved"
 author = 'ANSYS Inc.'
-#release = version = solver.__version__
+release = version = __version__
+cname = os.getenv("DOCUMENTATION_CNAME", default="nocname.com")
 
 # optionally use the default pyansys logo
-html_logo = 'https://docs.pyansys.com/_static/pyansys-logo-black-cropped.png'
-
+html_logo = pyansys_logo_black
 html_theme = 'pyansys_sphinx_theme'
-
-# specify the location of your github repo
-html_theme_options = {
-    "github_url": "https://github.com/pyansys/pyDynaSolver",
-    "show_prev_next": False
-}
 
 # Sphinx extensions
 extensions = [
@@ -51,7 +58,8 @@ sphinx_gallery_conf = {
             # convert rst to md for ipynb
             "pypandoc": True,
             # path to your examples scripts
-            "examples_dirs": ["../../examples/"],
+            # "examples_dirs": ["../../examples/"],
+            "examples_dirs": [],
             # path where to save gallery generated examples
             "gallery_dirs": ["examples"],
             # Patter to search for examples files
@@ -131,14 +139,26 @@ html_short_title = html_title = "PyDyna"
 html_show_sourcelink = True
 html_theme = "ansys_sphinx_theme"
 html_logo = pyansys_logo_black
-
+html_context = {
+    "github_user": "pyansys",
+    "github_repo": "pydyna",
+    "github_version": "main",
+    "doc_path": "doc/source",
+}
 html_theme_options = {
+    "switcher": {
+        "json_url": f"https://{cname}/release/versions.json",
+        "version_match": get_version_match(__version__),
+    },
+    "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
     "github_url": "https://github.com/pyansys/pydyna",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
     ],
+    "collapse_navigation": True,
+    "use_edit_page_button": True,
 }
 
 # static path
