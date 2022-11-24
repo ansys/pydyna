@@ -14,7 +14,7 @@ sphinx-gallery==0.11.1
 sphinx-autodoc-typehints==1.19.2
 ansys-sphinx-theme==0.7.1
 pypandoc==1.10
-nbsphinx==0.8.9
+nbsphinx==0.8.10
 ipywidgets==8.0.2
 joblib==1.2.0
 scikit-learn==1.1.2
