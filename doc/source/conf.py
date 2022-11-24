@@ -2,6 +2,7 @@
 
 import datetime
 import os
+import sys
 
 import pyvista
 from ansys_sphinx_theme import pyansys_logo_black, ansys_favicon
@@ -10,6 +11,8 @@ from sphinx.builders.latex import LaTeXBuilder
 from ansys.dyna.solver import __version__
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
+
+sys.path.insert(0,os.path.abspath('./../../ansys/dyna'))
 
 def get_version_match(semver):
     """Evaluate the version match for the multi-documentation."""
@@ -138,7 +141,7 @@ html_theme = "ansys_sphinx_theme"
 html_logo = pyansys_logo_black
 html_context = {
     "github_user": "pyansys",
-    "github_repo": "pydynay",
+    "github_repo": "pydyna",
     "github_version": "main",
     "doc_path": "doc/source",
 }
