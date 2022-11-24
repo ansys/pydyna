@@ -29,10 +29,6 @@ author = 'ANSYS Inc.'
 release = version = __version__
 cname = os.getenv("DOCUMENTATION_CNAME", default="nocname.com")
 
-# optionally use the default pyansys logo
-html_logo = pyansys_logo_black
-html_theme = 'pyansys_sphinx_theme'
-
 # Sphinx extensions
 extensions = [
     'sphinx.ext.intersphinx',
