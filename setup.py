@@ -24,7 +24,7 @@ install_requires = [
 
 packages = []
 for package in find_namespace_packages(include="ansys*"):
-    if package.startswith("ansys.dyna.solver"):
+    if package.startswith("ansys.dyna"):
         packages.append(package)
 
 
