@@ -60,10 +60,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     # needs: [style]
     strategy:
+      fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest]
         python-version: ['3.7', '3.8', '3.9', '3.10']
-      fail-fast: false
 
     steps:
       - uses: actions/checkout@v3
@@ -88,22 +88,22 @@ jobs:
           echo "library_version=$(python -c "from ansys.dyna.solver._version import __version__; print(__version__)")" >> $GITHUB_ENV
         id: version
 
-    - name: "Generate wheelhouse"
-      shell: bash
-      run: python -m pip wheel . -w wheelhouse
+      - name: "Generate wheelhouse"
+        shell: bash
+        run: python -m pip wheel . -w wheelhouse
 
-    - name: "Zip wheelhouse"
-      uses: vimtor/action-zip@v1.1
-      with:
-        files: wheelhouse
-        dest: ansys-dyna-solver-v${{ env.library_version }}-wheelhouse-${{ matrix.os }}-${{ matrix.python-version }}.zip
+      - name: "Zip wheelhouse"
+        uses: vimtor/action-zip@v1.1
+        with:
+          files: wheelhouse
+          dest: ansys-dyna-solver-v${{ env.library_version }}-wheelhouse-${{ matrix.os }}-${{ matrix.python-version }}.zip
 
-    - name: "Upload wheelhouse"
-      uses: actions/upload-artifact@v3
-      with:
-        name: ansys-dyna-solver-v${{ env.library_version }}-wheelhouse-${{ matrix.os }}-${{ matrix.python-version }}
-        path: '*.zip'
-        retention-days: 7
+      - name: "Upload wheelhouse"
+        uses: actions/upload-artifact@v3
+        with:
+          name: ansys-dyna-solver-v${{ env.library_version }}-wheelhouse-${{ matrix.os }}-${{ matrix.python-version }}
+          path: '*.zip'
+          retention-days: 7
 
   docs:
     name: Documentation
