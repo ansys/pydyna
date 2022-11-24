@@ -8,7 +8,8 @@ exclude: |
         ansys/dyna/pre/Server/|
         ansys/dyna/pre/doc/|
         ansys/dyna/pre/DigitalWeaving_BCs.py|
-        ansys/dyna/pre/kwprocess_pb2.py
+        ansys/dyna/pre/kwprocess_pb2.py|
+        ansys/dyna/pre/kwprocess_pb2_grpc.py
         )
 repos:
 

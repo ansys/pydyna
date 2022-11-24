@@ -754,7 +754,7 @@ operators
 
       from ansys.dpf import core as dpf
 
-      ds = dpf.DataSources() ds.set_result_file_path(r’./binout’, ‘binout’)
+      ds = dpf.DataSources() ds.set_result_file_path(r'./binout', 'binout')
 
       meshOP = dpf.Operator("lsdyna::binout::meshes_provider")
       meshOP.inputs.data_sources.connect(ds) meshes = meshOP.outputs.meshes()
@@ -766,7 +766,7 @@ operators
 
       from ansys.dpf import core as dpf
 
-      ds = dpf.DataSources() ds.set_result_file_path(r’./binout’, ‘binout’)
+      ds = dpf.DataSources() ds.set_result_file_path(r'./binout', 'binout')
 
       coord = dpf.Operator("lsdyna::binout::U")
       coord.inputs.data_sources.connect(ds)
@@ -781,7 +781,7 @@ operators
       from ansys.dpf import core as dpf
 
       ds = dpf.DataSources()
-      ds.set_result_file_path(r'./binout', 'binout')
+      ds.set_result_file_path(r"./binout", "binout")
 
       op = dpf.Operator("lsdyna::binout::TimeFreqSupportProvider")
       op.inputs.data_sources(ds)

@@ -49,7 +49,7 @@ test-output.xml
 /examples/pre/client.log
 /ansys/dyna/pre/Server/output/
 /ansys/dyna/pre/doc/build
-/doc/build
+/doc/_build
 /doc/source/examples
 /examples/Airbag/client.log
 /examples/EM/client.log

@@ -8,7 +8,6 @@ Top object to setup a Dyna Solution
 import logging
 import os
 import sys
-from enum import Enum
 
 # from subprocess import DETACHED_PROCESS
 import grpc
@@ -22,6 +21,7 @@ from .kwprocess_pb2 import *  # noqa : F403
 from .kwprocess_pb2_grpc import *  # noqa : F403
 
 CHUNK_SIZE = 1024 * 1024
+
 
 def init_log(log_file):
     """Initial log file."""
@@ -38,6 +38,7 @@ def init_log(log_file):
         formatter = logging.Formatter("%(asctime)s :  %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
         console.setFormatter(formatter)
         logging.getLogger().addHandler(console)
+
 
 class DynaSolution:
     """Contains methods to create general LS-DYNA keyword."""
@@ -65,7 +66,7 @@ class DynaSolution:
         """Add case in the solution."""
         self.object_list.append(obj)
 
-    def get_file_chunks(self,filename):
+    def get_file_chunks(self, filename):
         """Get file chunks."""
         with open(filename, "rb") as f:
             while True:
@@ -74,12 +75,12 @@ class DynaSolution:
                     return
                 yield Chunk(buffer=piece)
 
-    def upload(self,stub_, filename):
+    def upload(self, stub_, filename):
         """Upload files to server."""
         chunks_generator = self.get_file_chunks(filename)
         response = stub_.Upload(chunks_generator)
 
-    def download(self,stub_, remote_name, local_name):
+    def download(self, stub_, remote_name, local_name):
         """Download files from server."""
         response = stub_.Download(DownloadRequest(url=remote_name))
         with open(local_name, "wb") as f:
@@ -204,7 +205,7 @@ class DynaSolution:
         abstat=0,
         bndout=0,
         sleout=0,
-        sphmassflow=0
+        sphmassflow=0,
     ):
         """Obtain output files containing results information.
 
@@ -259,7 +260,7 @@ class DynaSolution:
         bool
             "True" when successful, "False" when failed
         """
-        
+
         for obj in self.object_list:
             obj.save_file()
 

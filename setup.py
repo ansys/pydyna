@@ -1,6 +1,4 @@
 """Installation file for ansys.dyna.solver"""
-import sys
-import struct
 import os
 from io import open as io_open
 
@@ -18,7 +16,7 @@ with io_open(version_file, mode="r") as fd:
 install_requires = [
     "grpcio>=1.30.0",
     "grpcio-tools>= 1.39.0",
-    "protobuf>=3.12.2",
+    "protobuf~=3.19",
     "google-api-python-client>=1.7.11",
     "googleapis-common-protos>=1.52.0",
 ]
@@ -26,7 +24,7 @@ install_requires = [
 
 packages = []
 for package in find_namespace_packages(include="ansys*"):
-    if package.startswith("ansys.dyna.solver"):
+    if package.startswith("ansys.dyna"):
         packages.append(package)
 
 
@@ -45,14 +43,14 @@ setup(
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX",
         "Operating System :: MacOS",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ],
-    url="https://github.com/pyansys/pyDynaSolver",
-    python_requires=">=3.6.*",
-    keywords="ANSYS DYNA gRPC",
+    url="https://github.com/pyansys/pyDyna",
+    python_requires=">=3.7",
+    keywords=["ANSYS", "LS-DYNA", "gRPC"],
 #    package_data={
 #       "":["*.proto","Makefile","client.py","runjob_example.py"],
 #    },

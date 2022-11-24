@@ -477,61 +477,68 @@ class MatFabric:
         self.material_id = ret.mid
         logging.info("Material Fabric Created...")
 
+
 class MatSpringNonlinearElastic:
-    """Provide a nonlinear elastic translational and rotational spring with arbitrary force as a function of displacement and moment as a function of rotation.
-        
-        Parameters
-        ----------
-        curve : Curve
-            Load curve describing force as a function of displacement or moment as a function of rotation relationship.
-        """
-    def __init__(self,curve):
+    """Provide a nonlinear elastic translational and rotational spring with
+    arbitrary force as a function of displacement and moment as a function of rotation.
+
+    Parameters
+    ----------
+    curve : Curve
+        Load curve describing force as a function of displacement or moment as a function of rotation relationship.
+    """
+
+    def __init__(self, curve):
         self.curve = curve
 
     def create(self, stub):
         """Create material spring nonlinear elastic."""
         lcid = self.curve.create(stub)
-        ret = stub.CreateMatSpringNonlinearElastic(
-            MatSpringNonlinearElasticRequest(lcid=lcid)
-        )
+        ret = stub.CreateMatSpringNonlinearElastic(MatSpringNonlinearElasticRequest(lcid=lcid))
         self.material_id = ret.mid
-        logging.info("Material Spring Nonlinear Elastic Created...") 
+        logging.info("Material Spring Nonlinear Elastic Created...")
+
 
 class MatDamperViscous:
     """Provide a linear translational or rotational damper located between two nodes."""
-    def __init__(self,damping_constant=0):
+
+    def __init__(self, damping_constant=0):
         self.dc = damping_constant
 
     def create(self, stub):
         """Create material damper viscous."""
-        ret = stub.CreateMatDamperViscous(MatDamperViscousRequest( dc=self.dc))
+        ret = stub.CreateMatDamperViscous(MatDamperViscousRequest(dc=self.dc))
         self.material_id = ret.mid
         logging.info("Material damper viscous Created...")
 
+
 class MatDamperNonlinearViscous:
-    """Provide a viscous translational damper with an arbitrary force as a function of velocity dependency or a rotational damper with an arbitrary moment as a function of rotational velocity dependency.
-    
+    """Provide a viscous translational damper with an arbitrary force as a
+    function of velocity dependency or a rotational damper with an arbitrary
+    moment as a function of rotational velocity dependency.
+
     Parameters
     ----------
     curve : Curve
-        Load curve defining force as a function of rate-of-displacement relationship or a moment as a function of rate-of-rotation relationship.
+        Load curve defining force as a function of rate-of-displacement
+        relationship or a moment as a function of rate-of-rotation relationship.
     """
-    def __init__(self,curve):
+
+    def __init__(self, curve):
         self.curve = curve
 
     def create(self, stub):
         """Create material damper nonlinear viscous."""
         lcdr = self.curve.create(stub)
-        ret = stub.CreateMatDamperNonlinearViscous(
-            MatDamperNonlinearViscousRequest( lcdr=lcdr)
-        )
+        ret = stub.CreateMatDamperNonlinearViscous(MatDamperNonlinearViscousRequest(lcdr=lcdr))
         self.material_id = ret.mid
-        logging.info("Material damper viscous Created...") 
+        logging.info("Material damper viscous Created...")
+
 
 class MatSPHIncompressibleFluid:
     """Define an SPH incompressible fluid material."""
 
-    def __init__(self, mass_density=0, dynamic_viscosity=0, tension_coefficient1=0,tension_coefficient2=0):
+    def __init__(self, mass_density=0, dynamic_viscosity=0, tension_coefficient1=0, tension_coefficient2=0):
         self.ro = mass_density
         self.mu = dynamic_viscosity
         self.gamma1 = tension_coefficient1
@@ -539,15 +546,18 @@ class MatSPHIncompressibleFluid:
 
     def create(self, stub):
         """Create SPH incompressible fluid material."""
-        ret = stub.CreateMatSPHIncompressibleFluid(MatSPHIncompressibleFluidRequest(ro=self.ro, mu=self.mu, gamma1=self.gamma1,gamma2 = self.gamma2))
+        ret = stub.CreateMatSPHIncompressibleFluid(
+            MatSPHIncompressibleFluidRequest(ro=self.ro, mu=self.mu, gamma1=self.gamma1, gamma2=self.gamma2)
+        )
         self.material_id = ret.mid
         self.name = "SPH incompressible fluid"
         logging.info(f"Material {self.name} Created...")
 
+
 class MatSPHIncompressibleStructure:
     """Define an SPH incompressible structure material."""
 
-    def __init__(self, mass_density=0, adhesion_coefficient=0, roughness_coefficient=0,adhesion_scaling_coefficient=0):
+    def __init__(self, mass_density=0, adhesion_coefficient=0, roughness_coefficient=0, adhesion_scaling_coefficient=0):
         self.ro = mass_density
         self.beta = adhesion_coefficient
         self.rough = roughness_coefficient
@@ -555,7 +565,9 @@ class MatSPHIncompressibleStructure:
 
     def create(self, stub):
         """Create SPH incompressible structure material."""
-        ret = stub.CreateMatSPHIncompressibleStructure(MatSPHIncompressibleStructureRequest(ro=self.ro, beta=self.beta, rough=self.rough,adh = self.adh))
+        ret = stub.CreateMatSPHIncompressibleStructure(
+            MatSPHIncompressibleStructureRequest(ro=self.ro, beta=self.beta, rough=self.rough, adh=self.adh)
+        )
         self.material_id = ret.mid
         self.name = "SPH incompressible structure"
         logging.info(f"Material {self.name} Created...")
