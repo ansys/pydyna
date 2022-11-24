@@ -575,7 +575,7 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        if self.contacts.num()>0:
+        if self.contacts.num() > 0:
             self.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
         self.implicitanalysis.create()
         self.parts.set_property()
@@ -1263,7 +1263,7 @@ class ImplicitAnalysis:
         self.dt0 = initial_timestep_size
         self.stub = DynaBase.get_stub()
 
-    def set_initial_timestep_size(self,size=0):
+    def set_initial_timestep_size(self, size=0):
         """Define initial time step size."""
         self.defined = True
         self.dt0 = size
@@ -1377,12 +1377,20 @@ class ImplicitAnalysis:
         if self.defined_auto:
             self.stub.CreateControlImplicitAuto(ControlImplicitAutoRequest(iauto=self.iauto, iteopt=self.iteopt))
         if self.defined_dynamic:
-            self.stub.CreateControlImplicitDynamic(ControlImplicitDynamicRequest(imass=self.imass, gamma=self.gamma, beta=self.beta))
+            self.stub.CreateControlImplicitDynamic(
+                ControlImplicitDynamicRequest(imass=self.imass, gamma=self.gamma, beta=self.beta)
+            )
         if self.defined_eigenvalue:
-            self.stub.CreateControlImplicitEigenvalue(ControlImplicitEigenvalueRequest(neig=self.neig, shfscl=self.shfscl))
+            self.stub.CreateControlImplicitEigenvalue(
+                ControlImplicitEigenvalueRequest(neig=self.neig, shfscl=self.shfscl)
+            )
         if self.defined_solution:
-            self.stub.CreateControlImplicitSolution(ControlImplicitSolutionRequest(nsolver=self.nsolver,ilimit=self.ilimit,maxref=self.maxref,abstol=self.abstol))
-        
+            self.stub.CreateControlImplicitSolution(
+                ControlImplicitSolutionRequest(
+                    nsolver=self.nsolver, ilimit=self.ilimit, maxref=self.maxref, abstol=self.abstol
+                )
+            )
+
 
 class ContactCategory(Enum):
     SURFACE_TO_SURFACE_CONTACT = 2
