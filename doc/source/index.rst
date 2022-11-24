@@ -9,5 +9,4 @@ PyDyna Documentation  0.0.1
    Resources/Getting_Started
    Resources/User_Guide
    API/index
-   examples/index
    Resources/Contributing
