@@ -17,9 +17,11 @@ class AdvectionMethod(Enum):
     DONOR_CELL_WITH_HIS = 3
     FINITE_VOLUME_METHOD = 6
 
+
 class FillDirection(Enum):
     INSIDE_THE_GEOMETRY = 0
     OUTSIDE_THE_GEOMETRY = 1
+
 
 class ControlPoint:
     """Provide spacing information to generate a 3D structured ALE mesh.
@@ -38,6 +40,7 @@ class ControlPoint:
         self.number = number
         self.position = position
         self.ratio = ratio
+
 
 class StructuredMesh:
     """Generate a structured 2D or 3D mesh and invoke the Structured ALE (S-ALE) solver."""
@@ -84,7 +87,9 @@ class StructuredMesh:
         bool
             "True" when successful, "False" when failed
         """
-        self.fillings.append([material,geometry_type,nsample,define_geometry_parameters,inout,vid,reference_pressure])
+        self.fillings.append(
+            [material, geometry_type, nsample, define_geometry_parameters, inout, vid, reference_pressure]
+        )
 
     def refine(self, refine_factor_x=1, refine_factor_y=1, refine_factor_z=1):
         """Refine existing structured ALE (S-ALE) meshes.
@@ -184,16 +189,14 @@ class StructuredMesh:
                 logging.info(f"Material {material.name} filled in Mesh {meshid}...")
         self.stub.ALECreateStructuredMeshRefine(
             ALECreateStructuredMeshRefineRequest(
-                mshid=meshid,
-                ifx=self.refine_factor_x,
-                ify=self.refine_factor_y,
-                ifz=self.refine_factor_z
+                mshid=meshid, ifx=self.refine_factor_x, ify=self.refine_factor_y, ifz=self.refine_factor_z
             )
         )
         logging.info(f"Mesh {meshid} Refined...")
-        dpoint = [self.detonation_point.x,self.detonation_point.y,self.detonation_point.z]
+        dpoint = [self.detonation_point.x, self.detonation_point.y, self.detonation_point.z]
         self.stub.CreateInitDetonation(InitDetonationRequest(pid=partid, coord=dpoint, lt=0))
         logging.info("Location of high explosive detonation Defined...")
+
 
 class DynaSALE(DynaBase):
     """Setup SALE simulation process."""

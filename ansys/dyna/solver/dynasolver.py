@@ -46,17 +46,18 @@ class UnexpectedResponse(Exception):
 class DynaSolver:
     """Class for the gRPC client side of LSDYNA
 
-        Parameters
-        ----------
-        hostname, string, required : hostname or IP address to connect to
-        port, string, required     : port on which gRPC server is listening
+    Parameters
+    ----------
+    hostname, string, required : hostname or IP address to connect to
+    port, string, required     : port on which gRPC server is listening
 
-        Returns
-        -------
-        An instance of the client, which can be used to communicate
-        with the gRPC server running at the given hostname and port.
-        The client can then interact with LS-DYNA via gRPC.
-        """
+    Returns
+    -------
+    An instance of the client, which can be used to communicate
+    with the gRPC server running at the given hostname and port.
+    The client can then interact with LS-DYNA via gRPC.
+    """
+
     # logger = None
     def __init__(self, hostname, port):
         """Create client instance connected to the hostname (or ip) and port."""
@@ -78,7 +79,7 @@ class DynaSolver:
 
     def _argcheck(self, cmd, ngiven, nrequired):
         """Internally used routine for checking command argument counts
-           when using the generic "send" method."""
+        when using the generic "send" method."""
         if ngiven < nrequired:
             s = "Bad input for command %s:" % cmd
             s = s + ("At least %d arguments are required, but only %d " "were given" % (nrequired, ngiven))
@@ -650,7 +651,7 @@ class DynaSolver:
         elif cmd == "tail":
             if not self._argcheck("tail", nsargs, 1):
                 return
-            self.tail(int(sargs[0]),how=0)
+            self.tail(int(sargs[0]), how=0)
         elif cmd == "time":
             (a, b) = self.time()
             if a:

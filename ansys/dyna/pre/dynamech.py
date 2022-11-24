@@ -7,6 +7,7 @@ Module to setup Explicit or Implicit analysis
 
 from .dynabase import *  # noqa : F403
 
+
 class DynaMech(DynaBase):
     """Define an Mechanical analysis."""
 
@@ -41,7 +42,7 @@ class DynaMech(DynaBase):
         logging.info("Control Output Created...")
         return ret
 
-    def set_init_velocity(self, translational=Velocity(0,0,0),rotational=RotVelocity(0,0,0)):
+    def set_init_velocity(self, translational=Velocity(0, 0, 0), rotational=RotVelocity(0, 0, 0)):
         """Define initial nodal point velocities using nodal set ID.
 
         Parameters
@@ -58,7 +59,7 @@ class DynaMech(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        velocity = [translational.x,translational.y,translational.z,rotational.x,rotational.y,rotational.z]
+        velocity = [translational.x, translational.y, translational.z, rotational.x, rotational.y, rotational.z]
         ret = self.stub.CreateInitVel(InitVelRequest(nsid=0, velocity=velocity))
         logging.info("Initial velocity Created...")
         return ret
@@ -267,6 +268,7 @@ class DynaMech(DynaBase):
         self.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
         DynaBase.save_file(self)
 
+
 class Airbag:
     """Define an airbag or control volume.
 
@@ -319,7 +321,7 @@ class Airbag:
             self.sidtyp = 0
         else:
             self.sidtyp = 1
-        
+
     def create(self):
         """Create airbag."""
         self.stub.CreateAirbagModel(

@@ -184,6 +184,7 @@ class DynaICFD(DynaBase):
         self.create_section_icfd(1)
         DynaBase.save_file(self)
 
+
 class Compressible(Enum):
     VACUUM = 0
     FULLY_INCOMPRESSIBLE_FLUID = 1
@@ -215,6 +216,7 @@ class MatICFD:
         ret = self.stub.ICFDCreateMat(ICFDMatRequest(flg=self.flag, ro=self.flow_density, vis=self.dynamic_viscosity))
         self.material_id = ret.id
         logging.info(f"ICFD material {self.material_id} Created...")
+
 
 class ICFDDOF(Enum):
     X = 1
@@ -391,7 +393,7 @@ class MeshedVolume:
         ret = self.stub.MESHCreateVolume(MeshVolumeRequest(pids=self.surfaces))
         self.id = ret.id
         logging.info(f"MESH volume {self.id} Created...")
-        if len(self.embeded_surf)>0:
+        if len(self.embeded_surf) > 0:
             self.stub.MESHCreateEmbedShell(MeshEmbedShellRequest(volid=self.id, pids=self.embeded_surf))
             logging.info("Embed surfaces Created...")
         for i in range(len(self.meshsizeshape)):

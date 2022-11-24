@@ -17,24 +17,24 @@ concurrency:
 
 jobs:
 
-  # style:
-  #   name: Code style
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
+  style:
+    name: Code style
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v4
-  #       with:
-  #         python-version: ${{ env.MAIN_PYTHON_VERSION }}
-  #         cache: 'pip'
-  #         cache-dependency-path: 'pyproject.toml'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: 'pyproject.toml'
 
-  #     - name: Install pre-commit
-  #       run: pip install pre-commit
+      - name: Install pre-commit
+        run: pip install pre-commit
 
-  #     - name: Run pre-commit
-  #       run: pre-commit run --all-files --show-diff-on-failure
+      - name: Run pre-commit
+        run: pre-commit run --all-files --show-diff-on-failure
 
 
   # docs-style:
@@ -58,7 +58,7 @@ jobs:
   smoke-tests:
     name: Build and Smoke tests
     runs-on: ${{ matrix.os }}
-    # needs: [style]
+    needs: [style]
     strategy:
       fail-fast: false
       matrix:
@@ -88,17 +88,17 @@ jobs:
           echo "library_version=$(python -c "from ansys.dyna.solver._version import __version__; print(__version__)")" >> $GITHUB_ENV
         id: version
 
-      - name: "Generate wheelhouse"
+      - name: Generate wheelhouse
         shell: bash
         run: python -m pip wheel . -w wheelhouse
 
-      - name: "Zip wheelhouse"
+      - name: Zip wheelhouse
         uses: vimtor/action-zip@v1.1
         with:
           files: wheelhouse
           dest: ansys-dyna-solver-v${{ env.library_version }}-wheelhouse-${{ matrix.os }}-${{ matrix.python-version }}.zip
 
-      - name: "Upload wheelhouse"
+      - name: Upload wheelhouse
         uses: actions/upload-artifact@v3
         with:
           name: ansys-dyna-solver-v${{ env.library_version }}-wheelhouse-${{ matrix.os }}-${{ matrix.python-version }}
