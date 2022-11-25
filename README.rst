@@ -32,7 +32,7 @@ The Python `ansys-dpf-post` package provides a simplified Python
 interface to DPF, thus enabling rapid postprocessing without ever
 leaving a Python environment. 
 
-Visit the [DPF-Post Documentation](https://postdocs.pyansys.com) for a
+Visit the `DPF-Post Documentation <https://postdocs.pyansys.com>`_ for a
 detailed description of the package.
 
 Installation
