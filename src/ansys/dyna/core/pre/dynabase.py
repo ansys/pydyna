@@ -12,8 +12,8 @@ import kwprocess_pb2
 import kwprocess_pb2_grpc
 """
 
-import logging
 from enum import Enum
+import logging
 
 from .kwprocess_pb2 import *  # noqa : F403
 from .kwprocess_pb2_grpc import *  # noqa : F403

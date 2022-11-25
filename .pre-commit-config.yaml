@@ -1,33 +1,33 @@
 files: |
     (?x)(
-        ^ansys/
+        ^src/ansys/
     )
 exclude: |
     (?x)^(
         doc/source/|
-        ansys/dyna/pre/Server/|
-        ansys/dyna/pre/doc/|
-        ansys/dyna/pre/DigitalWeaving_BCs.py|
-        ansys/dyna/pre/kwprocess_pb2.py|
-        ansys/dyna/pre/kwprocess_pb2_grpc.py
+        src/ansys/dyna/core/pre/Server/|
+        src/ansys/dyna/core/pre/doc/|
+        src/ansys/dyna/core/pre/DigitalWeaving_BCs.py|
+        src/ansys/dyna/core/pre/kwprocess_pb2.py|
+        src/ansys/dyna/core/pre/kwprocess_pb2_grpc.py
         )
 repos:
 
 - repo: https://github.com/psf/black
-  rev: 22.3.0
+  rev: 22.10.0
   hooks:
   - id: black
     args:
       - --line-length=120 
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.1.0
+  rev: v2.2.2
   hooks:
   - id: codespell
     args: ["--ignore-words=ignore_words.txt"]
 
 - repo: https://github.com/PyCQA/flake8
-  rev: 5.0.4
+  rev: 6.0.0
   hooks:
   - id: flake8
     args:

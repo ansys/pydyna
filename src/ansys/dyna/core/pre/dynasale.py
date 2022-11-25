@@ -5,8 +5,8 @@ Airbag API
 Module to create Structural ALE dyna input deck
 """
 
-import logging
 from enum import Enum
+import logging
 
 from .dynabase import *  # noqa : F403
 
