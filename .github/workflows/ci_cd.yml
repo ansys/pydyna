@@ -28,7 +28,6 @@ jobs:
         uses: pyansys/actions/code-style@v1
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          use-python-cache: false
 
   # docs-style:
   #   name: Documentation Style Check
@@ -66,7 +65,6 @@ jobs:
           library-namespace: ${{ env.PACKAGE_NAMESPACE }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
-          use-python-cache: false
 
   docs:
     name: Documentation
@@ -85,8 +83,7 @@ jobs:
         run: |
           sudo apt-get install xvfb pandoc
           pip install --upgrade build
-          pip install -r requirements_docs.txt
-          pip install .
+          pip install .[doc]
 
       - name: Build the documentation
         run: |
@@ -109,7 +106,6 @@ jobs:
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          use-python-cache: false
 
   release:
     name: Release project
