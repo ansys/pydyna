@@ -10,8 +10,8 @@ on:
 
 env:
   MAIN_PYTHON_VERSION: '3.9'
-  PACKAGE_NAME: 'ansys-dyna-solver'
-  PACKAGE_NAMESPACE: 'ansys.dyna.solver'
+  PACKAGE_NAME: 'ansys-dyna-core'
+  PACKAGE_NAMESPACE: 'ansys.dyna.core'
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
 
 concurrency:

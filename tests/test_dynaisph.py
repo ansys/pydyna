@@ -2,10 +2,10 @@ import os
 import sys
 import pytest
 
-sys.path.append(os.path.join(sys.path[0],os.pardir))
-from ansys.dyna.pre.dynasolution import *
-from ansys.dyna.pre.dynaisph import *
-from ansys.dyna.pre.dynamaterial import *
+
+from ansys.dyna.core.pre.dynasolution import *
+from ansys.dyna.core.pre.dynaisph import *
+from ansys.dyna.core.pre.dynamaterial import *
 
 def comparefile(outputf,standardf):
     with open(outputf,'r') as fp1,open (standardf,'r') as fp2:

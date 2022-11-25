@@ -61,9 +61,9 @@ Here is a basic pre-processing example:
 
 .. code:: python
 
-    from ansys.dyna.pre.dynasolution import *
-    from ansys.dyna.pre.dynaiga import *
-    from ansys.dyna.pre.dynamaterial import *
+    from ansys.dyna.core.pre.dynasolution import *
+    from ansys.dyna.core.pre.dynaiga import *
+    from ansys.dyna.core.pre.dynamaterial import *
     hostname = "localhost"
     iga_solution = DynaSolution(hostname)
     fns = []
@@ -88,7 +88,7 @@ Here is a basic solving example:
 
 .. code:: python
 
-   >>> import ansys.dyna.solver as solver
+   >>> import ansys.dyna.core.solver as solver
    >>> dyna=solver.DynaSovler(hostname,port)           # connect to the container
    >>> dyna.push("input.k")                            # push an input file
    >>> dyna.start(4)                                   # start 4 ranks of mppdyna
