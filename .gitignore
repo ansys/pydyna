@@ -35,6 +35,7 @@ _autosummary
 
 
 # Testing
+.cov
 .coverage
 *,cover
 test-output.xml
