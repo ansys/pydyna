@@ -476,6 +476,24 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.InitDetonationReply(answer = 0)
 
+    def CreateInitTemperature(self,request,context):
+        option = request.option
+        nsid = request.nsid
+        temp = request.temp
+        loc = request.loc
+        if option.upper() == "NODE":
+            opcode ="*INITIAL_TEMPERATURE_NODE"
+        elif option.upper() == "SET":
+            opcode ="*INITIAL_TEMPERATURE_SET"
+        else:
+            print("ERROR:Invalid option.")
+        card1 = str(nsid)+","+str(temp)+","+str(loc)
+        newk = opcode +"\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "*INITIAL_TEMPERATURE Created..."
+        print(msg)
+        return kwprocess_pb2.InitTemperatureReply(answer = 0)
+
     def CreateDefineCurve(self,request,context):
         lcid = request.lcid
         lcid = self.kwdproc.get_data(gdt.KWD_DEFINE_CURVE_LASTID)+1
@@ -1029,6 +1047,44 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.MatElasticReply(mid = mid) 
 
+    def CreateMatElasticPlasticThermal(self,request,context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
+        ro = request.ro
+        ti = request.ti
+        ei = request.ei
+        pri = request.pri
+        alphai = request.alphai
+        sigyi = request.sigyi
+        card1 = str(mid)+","+str(ro)
+        card2=""
+        if len(ti):
+            card2=str(ti[0])
+            for i in range(1,min(len(ti),8)+1):
+                card2+= ","+str(ti[i])
+        card3=""
+        if len(ei):
+            card3=str(ei[0])
+            for i in range(1,min(len(ei),8)+1):
+                card3+= ","+str(ei[i])
+        if len(pri):
+            card4=str(pri[0])
+            for i in range(1,min(len(pri),8)+1):
+                card4+= ","+str(pri[i])
+        if len(alphai):
+            card5=str(alphai[0])
+            for i in range(1,min(len(alphai),8)+1):
+                card5+= ","+str(alphai[i])
+        if len(sigyi):
+            card6=str(sigyi[0])
+            for i in range(1,min(len(sigyi),8)+1):
+                card6+= ","+str(sigyi[i])
+        opcode = "*MAT_ELASTIC_PLASTIC_THERMAL"
+        newk = opcode +"\n"+card1+","+card2+","+card3+","+card4+","+card5+","+card6
+        self.kwdproc.newkeyword(newk)
+        msg = opcode+" Created..."
+        print(msg)
+        return kwprocess_pb2.MatElasticPlasticThermalReply(mid = mid) 
+
     def CreateMatSpotweld(self,request,context):
         mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID)+1
         ro = request.ro
@@ -1231,6 +1287,21 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         print(f'MAT_SPH_INCOMPRESSIBLE_STRUCTURE {mid} Created...')
         return kwprocess_pb2.MatSPHIncompressibleStructureReply(mid = mid)
+
+    def CreateMatThermalIsotropic(self,request,context):
+        mid = request.mid
+        tro = request.tro
+        tgrlc = request.tgrlc
+        tgmult = request.tgmult
+        hc = request.hc
+        tc = request.tc
+        card1 = str(mid)+","+str(tro)+","+str(tgrlc)+","+str(tgmult)
+        card1 = str(hc)+","+str(tc)
+        opcode = "*MAT_THERMAL_ISOTROPIC"
+        newk = opcode +"\n"+card1+"\n"+card2
+        self.kwdproc.newkeyword(newk)
+        print(f'MAT_THERMAL_ISOTROPIC {mid} Created...')
+        return kwprocess_pb2.MatThermalIsotropicReply(mid = mid)
 
     def CreateEOSLinearPolynomial(self,request,context):
         eosid = self.kwdproc.get_data(gdt.KWD_EOS_LASTID)+1
