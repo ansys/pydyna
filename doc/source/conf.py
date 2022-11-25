@@ -98,8 +98,6 @@ numpydoc_validation_checks = {
     # separating the parameter name and type",
 }
 
-# Autodoc config
-add_module_names = False
 
 # Favicon
 html_favicon = ansys_favicon
