@@ -78,6 +78,7 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           cache: 'pip'
+          cache-dependency-path: 'pyproject.toml'
 
       - name: Install packages for documentation build
         run: |
