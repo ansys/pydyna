@@ -6,4 +6,4 @@ The PyDyna-solver API includes classes for apps and modules.
    :template: custom-module-template.rst
    :toctree: _autosummary
    
-   solver.dynasolver
+   ansys.dyna.core.solver.dynasolver
