@@ -6,17 +6,17 @@ The PyDyna-pre API includes classes for apps and modules.
    :template: custom-module-template.rst
    :toctree: _autosummary
    
-   pre.dynabase
-   pre.dynasolution
-   pre.dynamech
-   pre.dynaem
-   pre.dynaicfd
-   pre.dynaiga
-   pre.dynaisph
-   pre.dynamaterial
-   pre.dynanvh
-   pre.dynasale
-   pre.dynadem
+   ansys.dyna.core.pre.dynabase
+   ansys.dyna.core.pre.dynasolution
+   ansys.dyna.core.pre.dynamech
+   ansys.dyna.core.pre.dynaem
+   ansys.dyna.core.pre.dynaicfd
+   ansys.dyna.core.pre.dynaiga
+   ansys.dyna.core.pre.dynaisph
+   ansys.dyna.core.pre.dynamaterial
+   ansys.dyna.core.pre.dynanvh
+   ansys.dyna.core.pre.dynasale
+   ansys.dyna.core.pre.dynadem
    
 
   
