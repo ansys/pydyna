@@ -9,7 +9,7 @@ import pytest
 
 
 
-from ansys.dyna import pre
+from ansys.dyna.core import pre
 from ansys.dyna.core.pre import examples
 #from ansys.dyna.core.pre.Server.kwserver import *
 
