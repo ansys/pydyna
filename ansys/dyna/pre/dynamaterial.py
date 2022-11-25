@@ -277,10 +277,19 @@ class MatElastic(MatAdditional):
         MatAdditional.create(self, stub, self.material_id)
         logging.info(f"Material {self.name} Created...")
 
+
 class MatElasticPlasticThermal:
     """Define temperature dependent material coefficients."""
 
-    def __init__(self, mass_density=0, temperatures=None,young_modulus=None, poisson_ratio=None, thermal_expansion=None, yield_stress=None):
+    def __init__(
+        self,
+        mass_density=0,
+        temperatures=None,
+        young_modulus=None,
+        poisson_ratio=None,
+        thermal_expansion=None,
+        yield_stress=None,
+    ):
         MatAdditional.__init__(self)
         self.ro = mass_density
         self.ti = temperatures
@@ -291,10 +300,15 @@ class MatElasticPlasticThermal:
 
     def create(self, stub):
         """Create elastic plastic thermal material."""
-        ret = stub.CreateMatElasticPlasticThermal(MatElasticPlasticThermalRequest(ro=self.ro, ti=self.ti, ei=self.ei,pri=self.pri,alphai=self.alphai,sigyi=self.sigyi))
+        ret = stub.CreateMatElasticPlasticThermal(
+            MatElasticPlasticThermalRequest(
+                ro=self.ro, ti=self.ti, ei=self.ei, pri=self.pri, alphai=self.alphai, sigyi=self.sigyi
+            )
+        )
         self.material_id = ret.mid
         self.name = "ElasticPlasticThermal"
         logging.info(f"Material {self.name} Created...")
+
 
 class MatRigid(MatAdditional):
     """Define rigid material,Parts made from this material are considered to belong to a rigid body."""
