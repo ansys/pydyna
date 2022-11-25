@@ -4,8 +4,8 @@ import traceback as tb
 import platform
 from concurrent import futures
 import grpc
-import kwprocess_pb2_grpc
-import kwprocess_pb2
+from . import kwprocess_pb2_grpc
+from . import kwprocess_pb2
 
 cwd = os.getcwd()
 if(platform.system() == 'Windows'):
