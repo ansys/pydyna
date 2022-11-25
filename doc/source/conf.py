@@ -12,8 +12,6 @@ from ansys.dyna.core import __version__
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
-sys.path.insert(0,os.path.abspath('./../../ansys/dyna'))
-
 def get_version_match(semver):
     """Evaluate the version match for the multi-documentation."""
     if semver.endswith("dev0"):
