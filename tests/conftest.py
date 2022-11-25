@@ -7,11 +7,11 @@ import os
 import sys
 import pytest
 
-sys.path.append(os.path.join(sys.path[0],os.pardir))
-sys.path.append(os.path.join(sys.path[0],os.pardir,"ansys","dyna","pre","Server"))
+
+
 from ansys.dyna import pre
-from ansys.dyna.pre import examples
-#from ansys.dyna.pre.Server.kwserver import *
+from ansys.dyna.core.pre import examples
+#from ansys.dyna.core.pre.Server.kwserver import *
 
 def resolve_test_file(basename, additional_path=""):
     """Resolves a test file's full path based on the base name and the

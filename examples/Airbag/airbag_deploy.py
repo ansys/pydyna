@@ -8,11 +8,11 @@ This example show how to create an Airbag deploy model with Pydyna-pre module
 import os
 import sys
 
-sys.path.append(os.path.join(sys.path[0],'../../'))
-from ansys.dyna.pre.dynasolution import *
-from ansys.dyna.pre.dynamech import *
-from ansys.dyna.pre.dynamaterial import *
-from ansys.dyna.pre import examples
+
+from ansys.dyna.core.pre.dynasolution import *
+from ansys.dyna.core.pre.dynamech import *
+from ansys.dyna.core.pre.dynamaterial import *
+from ansys.dyna.core.pre import examples
 
 
 if __name__ == "__main__":

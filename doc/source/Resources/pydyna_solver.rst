@@ -11,7 +11,7 @@ Rendered Python Code
 
 .. code:: python
 
-   >>> import ansys.dyna.solver as solver
+   >>> import ansys.dyna.core.solver as solver
    >>> hostname="localhost"
    >>> port="5000"
    >>> dyna=solver.DynaSolver(hostname,port)
@@ -26,7 +26,7 @@ Here is a basic example:
 
 .. code:: python
 
-   >>> import ansys.dyna.solver as solver
+   >>> import ansys.dyna.core.solver as solver
    >>> dyna=solver.DynaSovler(hostname,port)           # connect to the container
    >>> dyna.push("input.k")                            # push an input file
    >>> dyna.start(4)                                   # start 4 ranks of mppdyna

@@ -1,4 +1,4 @@
-"""Installation file for ansys.dyna.solver"""
+"""Installation file for ansys.dyna.core.solver"""
 import os
 from io import open as io_open
 

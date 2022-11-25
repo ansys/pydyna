@@ -10,8 +10,8 @@ Sample use of DynaSolver to run a small job in minikube
 import os
 import sys
 import time
-sys.path.append(os.path.join(sys.path[0],'../../'))
-import ansys.dyna.solver as solver
+
+import ansys.dyna.core.solver as solver
 
 
 def get_from_minikube():
