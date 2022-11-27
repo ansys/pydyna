@@ -7,11 +7,11 @@ This example demonstrates how to create a SALE input deck.
 
 import os
 import sys
-sys.path.append(os.path.join(sys.path[0],'../../'))
-from ansys.dyna.pre.dynasolution import *
-from ansys.dyna.pre.dynasale import *
-from ansys.dyna.pre import dynamaterial as matDB
-from ansys.dyna.pre import examples
+
+from ansys.dyna.core.pre.dynasolution import *
+from ansys.dyna.core.pre.dynasale import *
+from ansys.dyna.core.pre import dynamaterial as matDB
+from ansys.dyna.core.pre import examples
 
 if __name__ == "__main__":
     hostname = "localhost"

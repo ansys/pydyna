@@ -5,8 +5,8 @@ Material API
 Module to create material
 """
 
-import logging
 from enum import Enum
+import logging
 
 from .dynabase import *  # noqa : F403
 

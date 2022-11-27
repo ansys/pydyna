@@ -8,11 +8,9 @@ import pyvista
 from ansys_sphinx_theme import pyansys_logo_black, ansys_favicon
 from sphinx.builders.latex import LaTeXBuilder
 
-from ansys.dyna.solver import __version__
+from ansys.dyna.core import __version__
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
-
-sys.path.insert(0,os.path.abspath('./../../ansys/dyna'))
 
 def get_version_match(semver):
     """Evaluate the version match for the multi-documentation."""
@@ -23,7 +21,7 @@ def get_version_match(semver):
 
 
 # Project information
-project = 'ansys-dyna-solver'
+project = 'ansys-dyna-core'
 copyright = f"(c) {datetime.datetime.now().year} ANSYS, Inc. All rights reserved"
 author = 'ANSYS Inc.'
 release = version = __version__
@@ -99,6 +97,7 @@ numpydoc_validation_checks = {
     "PR10",  # Parameter "{param_name}" requires a space before the colon '
     # separating the parameter name and type",
 }
+
 
 # Favicon
 html_favicon = ansys_favicon

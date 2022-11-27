@@ -8,8 +8,8 @@ Commands are read from an optional file, or interactively,and sent to DYNA via g
 #!/usr/bin/python3
 import os
 import sys
-sys.path.append(os.path.join(sys.path[0],'../../'))
-import ansys.dyna.solver as solver
+
+import ansys.dyna.core.solver as solver
 #
 hostname = 'localhost'
 port = '5000'
