@@ -35,6 +35,7 @@ _autosummary
 
 
 # Testing
+.cov
 .coverage
 *,cover
 test-output.xml
@@ -71,3 +72,5 @@ venv.bak/
 # VSCode
 .vscode/
 client.log
+/src/ansys/dyna/core/pre/Server/input
+/src/ansys/dyna/core/pre/Server/output

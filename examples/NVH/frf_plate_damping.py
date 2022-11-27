@@ -8,11 +8,11 @@ This example shows how to setup the keywords for FRF computation.
 import os
 import sys
 
-sys.path.append(os.path.join(sys.path[0],'../../'))
-from ansys.dyna.pre.dynasolution import *
-from ansys.dyna.pre.dynamaterial import *
-from ansys.dyna.pre.dynanvh import *
-from ansys.dyna.pre import examples
+
+from ansys.dyna.core.pre.dynasolution import *
+from ansys.dyna.core.pre.dynamaterial import *
+from ansys.dyna.core.pre.dynanvh import *
+from ansys.dyna.core.pre import examples
 
 
 if __name__ == "__main__":
