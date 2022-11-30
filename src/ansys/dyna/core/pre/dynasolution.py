@@ -129,7 +129,9 @@ class DynaSolution:
         logging.info("Setting termination time ...")
         return ret
 
-    def create_database_binary(self, filetype="D3PLOT", dt=0, maxint=3, ieverp=0, dcomp=1, nintsld=1):
+    def create_database_binary(
+        self, filetype="D3PLOT", dt=0, maxint=3, ieverp=0, dcomp=1, nintsld=1
+    ):
         """Request binary output.
 
         Parameters
@@ -187,7 +189,9 @@ class DynaSolution:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateDBAscii(DBAsciiRequest(type=type, dt=dt, binary=binary, lcur=lcur, ioopt=ioopt))
+        ret = self.stub.CreateDBAscii(
+            DBAsciiRequest(type=type, dt=dt, binary=binary, lcur=lcur, ioopt=ioopt)
+        )
         logging.info("DB Ascii Created...")
         return ret
 
@@ -223,31 +227,57 @@ class DynaSolution:
             "True" when successful, "False" when failed
         """
         if matsum > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0)
+            )
         if glstat > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         if elout > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="ELOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="ELOUT", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         if nodout > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="NODOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="NODOUT", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         if rbdout > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="RBDOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="RBDOUT", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         if rcforc > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="RCFORC", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="RCFORC", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         if secforc > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="SECFORC", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="SECFORC", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         if rwforc > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="RWFORC", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="RWFORC", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         if abstat > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="ABSTAT", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="ABSTAT", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         if bndout > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="BNDOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="BNDOUT", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         if nodfor > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="NODFOR", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="NODFOR", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         if sleout > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="SLEOUT", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="SLEOUT", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         if sphmassflow > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="SPHMASSFLOW", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="SPHMASSFLOW", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         ret = 1
         logging.info("Output Setting...")
         return ret

@@ -111,7 +111,9 @@ class Curve:
 
     def create(self, stub):
         """Create curve."""
-        ret = stub.CreateDefineCurve(DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate))
+        ret = stub.CreateDefineCurve(
+            DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate)
+        )
         self.id = ret.id
         logging.info(f"Curve {self.id} defined...")
         return self.id
@@ -172,7 +174,9 @@ class DynaBase:
         """Get the stub of this DynaBase object."""
         return DynaBase.stub
 
-    def set_timestep(self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0, max_timestep=None):
+    def set_timestep(
+        self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0, max_timestep=None
+    ):
         """Set structural time step size control using different options.
 
         Parameters
@@ -300,7 +304,9 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateControlHourgalss(ControlHourglassRequest(ihq=controltype.value, qh=coefficient))
+        ret = self.stub.CreateControlHourgalss(
+            ControlHourglassRequest(ihq=controltype.value, qh=coefficient)
+        )
         logging.info("Control Hourglass Created...")
         return ret
 
@@ -608,7 +614,9 @@ class NodeSet:
         """Create node set."""
         if len(self.nodes) <= 0:
             return 0
-        ret = stub.CreateNodeSet(NodeSetRequest(option="LIST", sid=0, genoption="NODE", entities=self.nodes))
+        ret = stub.CreateNodeSet(
+            NodeSetRequest(option="LIST", sid=0, genoption="NODE", entities=self.nodes)
+        )
         self.id = ret.id
         if len(self.nodes) > 1:
             self.type = "NODESET"
@@ -652,7 +660,9 @@ class NodesetGeneral(BaseSet):
         """Create node set."""
         if len(self.setids) <= 0:
             return 0
-        ret = stub.CreateNodeSet(NodeSetRequest(option="GENERAL", sid=0, genoption=self.settype, entities=self.setids))
+        ret = stub.CreateNodeSet(
+            NodeSetRequest(option="GENERAL", sid=0, genoption=self.settype, entities=self.setids)
+        )
         self.id = ret.id
         self.type = "NODESET"
         return self.id
@@ -819,7 +829,9 @@ class IGASection:
     def __init__(self, element_formulation, shear_factor=1, thickness=1):
         stub = DynaBase.get_stub()
         ret = stub.CreateSectionIGAShell(
-            SectionIGAShellRequest(elform=element_formulation, shrf=shear_factor, thickness=thickness)
+            SectionIGAShellRequest(
+                elform=element_formulation, shrf=shear_factor, thickness=thickness
+            )
         )
         self.id = ret.id
 
@@ -869,7 +881,9 @@ class Part:
         self.extra_nodes_defined = True
         self.extra_nodes = nodeset
 
-    def set_rigidbody_initial_velocity(self, translation=Velocity(0, 0, 0), rotation=RotVelocity(0, 0, 0)):
+    def set_rigidbody_initial_velocity(
+        self, translation=Velocity(0, 0, 0), rotation=RotVelocity(0, 0, 0)
+    ):
         """Define the initial translational and rotational velocities
         at the center of gravity for a rigid body or a nodal rigid body."""
         self.rigidbody_initial_velocity = True
@@ -1038,7 +1052,9 @@ class ShellPart(Part):
         )
         self.secid = sec.id
         if self.hourglasstype > 0:
-            ret = self.stub.CreateHourglass(HourglassRequest(ihq=self.hourglasstype, qm=1, q1=0, q2=0, qb=0, qw=0))
+            ret = self.stub.CreateHourglass(
+                HourglassRequest(ihq=self.hourglasstype, qm=1, q1=0, q2=0, qb=0, qw=0)
+            )
             self.hgid = ret.id
         else:
             self.hgid = 0
@@ -1116,7 +1132,9 @@ class SolidPart(Part):
         ret = self.stub.CreateSectionSolid(SectionSolidRequest(elform=self.formulation))
         self.secid = ret.id
         if self.hourglasstype > 0:
-            ret = self.stub.CreateHourglass(HourglassRequest(ihq=self.hourglasstype, qm=1, q1=0, q2=0, qb=0, qw=0))
+            ret = self.stub.CreateHourglass(
+                HourglassRequest(ihq=self.hourglasstype, qm=1, q1=0, q2=0, qb=0, qw=0)
+            )
             self.hgid = ret.id
         else:
             self.hgid = 0
@@ -1157,7 +1175,9 @@ class DiscretePart(Part):
         """Set properties for discrete part."""
         Part.set_property(self)
         ret = self.stub.CreateSectionDiscrete(
-            SectionDiscreteRequest(dro=self.displacement_option, kd=0, v0=0, cl=0, fd=0, cdl=0, tdl=0)
+            SectionDiscreteRequest(
+                dro=self.displacement_option, kd=0, v0=0, cl=0, fd=0, cdl=0, tdl=0
+            )
         )
         self.secid = ret.id
         self.hgid = 0
@@ -1373,9 +1393,13 @@ class ImplicitAnalysis:
         if self.defined == False:
             return
         if self.defined:
-            self.stub.CreateControlImplicitGeneral(ControlImplicitGeneralRequest(imflag=self.imflag, dt0=self.dt0))
+            self.stub.CreateControlImplicitGeneral(
+                ControlImplicitGeneralRequest(imflag=self.imflag, dt0=self.dt0)
+            )
         if self.defined_auto:
-            self.stub.CreateControlImplicitAuto(ControlImplicitAutoRequest(iauto=self.iauto, iteopt=self.iteopt))
+            self.stub.CreateControlImplicitAuto(
+                ControlImplicitAutoRequest(iauto=self.iauto, iteopt=self.iteopt)
+            )
         if self.defined_dynamic:
             self.stub.CreateControlImplicitDynamic(
                 ControlImplicitDynamicRequest(imass=self.imass, gamma=self.gamma, beta=self.beta)
@@ -1714,7 +1738,9 @@ class Constraint:
         nsid = nodeset.id
         self.cnrbsetidlist.append(nsid)
 
-    def create_joint_spherical(self, nodes, relative_penalty_stiffness=1.0, damping_scale_factor=1.0):
+    def create_joint_spherical(
+        self, nodes, relative_penalty_stiffness=1.0, damping_scale_factor=1.0
+    ):
         """Define a joint between two rigid bodies.
 
         Parameters
@@ -1744,7 +1770,9 @@ class Constraint:
     def create(self):
         """Create constraint."""
         for obj in self.spotweldlist:
-            self.stub.CreateConstrainedSpotWeld(ConstrainedSpotWeldRequest(node1=obj[0], node2=obj[1]))
+            self.stub.CreateConstrainedSpotWeld(
+                ConstrainedSpotWeldRequest(node1=obj[0], node2=obj[1])
+            )
             logging.info("Spotweld Created...")
 
         for i in range(len(self.cnrbsetidlist)):
@@ -1764,7 +1792,9 @@ class Constraint:
             logging.info("joint spherical Created...")
         for i in range(len(self.mergerigidlist)):
             self.stub.CreateConstrainedRigidBodies(
-                ConstrainedRigidBodiesRequest(pidl=self.mergerigidlist[i][0], pidc=self.mergerigidlist[i][1])
+                ConstrainedRigidBodiesRequest(
+                    pidl=self.mergerigidlist[i][0], pidc=self.mergerigidlist[i][1]
+                )
             )
             logging.info("constrained rigid bodies Created...")
 
@@ -1928,7 +1958,12 @@ class InitialCondition:
         self.velocitylist = []
 
     def create_velocity(
-        self, velocityset, angular_velocity=0, velocity=Velocity(0, 0, 0), direction=Direction(0, 0, 0), stime=0
+        self,
+        velocityset,
+        angular_velocity=0,
+        velocity=Velocity(0, 0, 0),
+        direction=Direction(0, 0, 0),
+        stime=0,
     ):
         """Define initial velocities for rotating and/or translating bodies."""
         self.velocitylist.append([velocityset, angular_velocity, velocity, direction, stime])
@@ -1951,7 +1986,9 @@ class InitialCondition:
             phase = 0
             if stime != 0:
                 phase = 1
-                self.stub.CreateInitVelGenerationStartTime(InitVelGenerationStartTimeRequest(stime=stime))
+                self.stub.CreateInitVelGenerationStartTime(
+                    InitVelGenerationStartTimeRequest(stime=stime)
+                )
             self.stub.CreateInitVelGeneration(
                 InitVelGenerationRequest(
                     id=id,
