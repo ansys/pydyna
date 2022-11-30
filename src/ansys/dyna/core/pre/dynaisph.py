@@ -18,7 +18,13 @@ class DynaISPH(DynaBase):
         self.isphanalysis = ISPHAnalysis()
 
     def set_des(
-        self, num_timestep=1, boxid=0, space_dimension=3, neighbors=150, approximation_theory=0, max_velocty=1e15
+        self,
+        num_timestep=1,
+        boxid=0,
+        space_dimension=3,
+        neighbors=150,
+        approximation_theory=0,
+        max_velocty=1e15,
     ):
         """Provide controls related to SPH.
 
@@ -138,7 +144,9 @@ class SPHSection:
 
     def __init__(self, cslh=1.2, hmin=0.2, hmax=2.0, sphini=0):
         stub = DynaBase.get_stub()
-        ret = stub.CreateSectionSPH(SectionSPHRequest(cslh=cslh, hmin=hmin, hmax=hmax, sphini=sphini))
+        ret = stub.CreateSectionSPH(
+            SectionSPHRequest(cslh=cslh, hmin=hmin, hmax=hmax, sphini=sphini)
+        )
         self.id = ret.id
 
 
@@ -239,7 +247,14 @@ class ISPHFluidPart(Part):
 
     def create_particles(self):
         """Create SPH particles inside a given box."""
-        coords = (self.minpoint.x, self.minpoint.y, self.minpoint.z, self.length.x, self.length.y, self.length.z)
+        coords = (
+            self.minpoint.x,
+            self.minpoint.y,
+            self.minpoint.z,
+            self.length.x,
+            self.length.y,
+            self.length.z,
+        )
         numparticles = (self.numdirx, self.numdiry, self.numdirz)
         self.stub.CreateDefineSPHMeshBox(
             DefineSPHMeshBoxRequest(ipid=self.id, coords=coords, numparticles=numparticles)

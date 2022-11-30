@@ -88,7 +88,15 @@ class StructuredMesh:
             "True" when successful, "False" when failed
         """
         self.fillings.append(
-            [material, geometry_type, nsample, define_geometry_parameters, inout, vid, reference_pressure]
+            [
+                material,
+                geometry_type,
+                nsample,
+                define_geometry_parameters,
+                inout,
+                vid,
+                reference_pressure,
+            ]
         )
 
     def refine(self, refine_factor_x=1, refine_factor_y=1, refine_factor_z=1):
@@ -150,7 +158,9 @@ class StructuredMesh:
         )
         cpidz = ret.cpid
         ret = self.stub.ALECreateStructuredMesh(
-            ALECreateStructuredMeshRequest(nbid=2000001, ebid=2000001, cpidx=cpidx, cpidy=cpidy, cpidz=cpidz)
+            ALECreateStructuredMeshRequest(
+                nbid=2000001, ebid=2000001, cpidx=cpidx, cpidy=cpidy, cpidz=cpidz
+            )
         )
         meshid = ret.meshid
         partid = ret.partid
@@ -189,7 +199,10 @@ class StructuredMesh:
                 logging.info(f"Material {material.name} filled in Mesh {meshid}...")
         self.stub.ALECreateStructuredMeshRefine(
             ALECreateStructuredMeshRefineRequest(
-                mshid=meshid, ifx=self.refine_factor_x, ify=self.refine_factor_y, ifz=self.refine_factor_z
+                mshid=meshid,
+                ifx=self.refine_factor_x,
+                ify=self.refine_factor_y,
+                ifz=self.refine_factor_z,
             )
         )
         logging.info(f"Mesh {meshid} Refined...")
@@ -288,9 +301,13 @@ class DynaSALE(DynaBase):
             "True" when successful, "False" when failed
         """
         if matsum > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0)
+            )
         if glstat > 0:
-            self.stub.CreateDBAscii(DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0, ioopt=0))
+            self.stub.CreateDBAscii(
+                DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0, ioopt=0)
+            )
         ret = 1
         logging.info("Output Setting...")
         return ret

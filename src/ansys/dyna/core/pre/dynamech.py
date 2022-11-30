@@ -59,7 +59,14 @@ class DynaMech(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        velocity = [translational.x, translational.y, translational.z, rotational.x, rotational.y, rotational.z]
+        velocity = [
+            translational.x,
+            translational.y,
+            translational.z,
+            rotational.x,
+            rotational.y,
+            rotational.z,
+        ]
         ret = self.stub.CreateInitVel(InitVelRequest(nsid=0, velocity=velocity))
         logging.info("Initial velocity Created...")
         return ret
@@ -121,7 +128,9 @@ class DynaMech(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateShellSet(ShellSetRequest(option=option, title=title, sid=sid, eids=eids))
+        ret = self.stub.CreateShellSet(
+            ShellSetRequest(option=option, title=title, sid=sid, eids=eids)
+        )
         logging.info("Shell Set Created...")
         return ret
 
@@ -164,7 +173,9 @@ class DynaMech(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateSectionSolid(SectionSolidRequest(title=title, secid=secid, elform=elform))
+        ret = self.stub.CreateSectionSolid(
+            SectionSolidRequest(title=title, secid=secid, elform=elform)
+        )
         logging.info("Section Solid Created...")
         return ret
 
@@ -198,7 +209,9 @@ class DynaMech(DynaBase):
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateSectionDiscrete(
-            SectionDiscreteRequest(secid=secid, dro=dro, kd=kd, v0=v0, cl=cl, fd=fd, cdl=cdl, tdl=tdl)
+            SectionDiscreteRequest(
+                secid=secid, dro=dro, kd=kd, v0=v0, cl=cl, fd=fd, cdl=cdl, tdl=tdl
+            )
         )
         logging.info("Section Discrete Created...")
         return ret
@@ -228,7 +241,9 @@ class DynaMech(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateHourglass(HourglassRequest(ghid=ghid, ihq=ihq, qm=qm, q1=q1, q2=q2, qb=qb, qw=qw))
+        ret = self.stub.CreateHourglass(
+            HourglassRequest(ghid=ghid, ihq=ihq, qm=qm, q1=q1, q2=q2, qb=qb, qw=qw)
+        )
         logging.info("Hourglass 1 Created...")
         return ret
 
@@ -245,7 +260,9 @@ class DynaMech(DynaBase):
             invariant_node_number=InvariantNode.ON_FOR_SHELL_TSHELL_SOLID,
             implicit_accuracy_flag=Switch.ON,
         )
-        self.set_bulk_viscosity(bulk_viscosity_type=BulkViscosity.COMPUTE_INTERNAL_ENERGY_DISSIPATED)
+        self.set_bulk_viscosity(
+            bulk_viscosity_type=BulkViscosity.COMPUTE_INTERNAL_ENERGY_DISSIPATED
+        )
         self.set_energy(
             hourglass_energy=EnergyFlag.COMPUTED,
             sliding_interface_energy=EnergyFlag.COMPUTED,
