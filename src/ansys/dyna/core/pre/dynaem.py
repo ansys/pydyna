@@ -80,7 +80,9 @@ class DynaEM(DynaBase):
         logging.info("EM Timestep Created...")
         return ret
 
-    def create_em_contact(self, contid=0, dtype=0, psidm=0, psids=0, eps1=0.3, eps2=0.3, eps3=0.3, d0=0):
+    def create_em_contact(
+        self, contid=0, dtype=0, psidm=0, psids=0, eps1=0.3, eps2=0.3, eps3=0.3, d0=0
+    ):
         """Optional card used for defining and specifying options on electromagnetic contacts between two sets of parts.
 
         Parameters
@@ -146,7 +148,9 @@ class DynaEM(DynaBase):
         """
         segmentset.create(self.stub)
         setid = segmentset.id
-        ret = self.stub.CreateEMCircuitRogo(EMCircuitRogoRequest(setid=setid, settype=settype, curtyp=curtyp))
+        ret = self.stub.CreateEMCircuitRogo(
+            EMCircuitRogoRequest(setid=setid, settype=settype, curtyp=curtyp)
+        )
         logging.info("EM Circuit Rogo Created...")
         return ret.id
 
@@ -204,11 +208,15 @@ class DynaEM(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateEMMat002(EMMat002Request(mid=mid, mtype=mtype, sigma=sigma, eosid=eosid, murel=murel))
+        ret = self.stub.CreateEMMat002(
+            EMMat002Request(mid=mid, mtype=mtype, sigma=sigma, eosid=eosid, murel=murel)
+        )
         logging.info("EM Material 002 Created...")
         return ret
 
-    def create_em_solver_fembem_monolithic(self, mtype=0, stype=0, abstol=1e-6, reltol=1e-4, maxit=500):
+    def create_em_solver_fembem_monolithic(
+        self, mtype=0, stype=0, abstol=1e-6, reltol=1e-4, maxit=500
+    ):
         """Turn on the monolithic FEM-BEM solver.
 
         Parameters
@@ -233,7 +241,9 @@ class DynaEM(DynaBase):
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateEMSolverFemBemMonolithic(
-            EMSolverFemBemMonolithicRequest(mtype=mtype, stype=stype, abstol=abstol, reltol=reltol, maxit=maxit)
+            EMSolverFemBemMonolithicRequest(
+                mtype=mtype, stype=stype, abstol=abstol, reltol=reltol, maxit=maxit
+            )
         )
         logging.info("EM Solver FEMBEM Monolithic Created...")
         return ret
@@ -322,7 +332,9 @@ class DynaEM(DynaBase):
             "True" when successful, "False" when failed
         """
         ret = self.stub.CreateEMPermanentMagnet(
-            EMPermanentMagnetRequest(id=id, partid=partid, mtype=mtype, north=north, sourth=sourth, hc=hc)
+            EMPermanentMagnetRequest(
+                id=id, partid=partid, mtype=mtype, north=north, sourth=sourth, hc=hc
+            )
         )
         logging.info("EM Permanent Magnet Created...")
         return ret
@@ -346,7 +358,9 @@ class DynaEM(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateEMEOSPermeability(EMEOSPermeabilityRequest(eosid=eosid, eostype=eostype, lcid=lcid))
+        ret = self.stub.CreateEMEOSPermeability(
+            EMEOSPermeabilityRequest(eosid=eosid, eostype=eostype, lcid=lcid)
+        )
         logging.info("EM EOS Permeability Created...")
         return ret
 
@@ -427,7 +441,9 @@ class EMAnalysis:
         """Create EMAnalysis."""
         if self.defined == False:
             return
-        self.stub.CreateEMControl(EMControlRequest(emsol=self.type, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000))
+        self.stub.CreateEMControl(
+            EMControlRequest(emsol=self.type, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000)
+        )
         self.stub.CreateEMTimestep(EMTimestepRequest(tstype=1, dtconst=self.timestep))
         logging.info("EM Timestep Created...")
         self.stub.CreateEMSolverBem(
@@ -452,9 +468,15 @@ class EMAnalysis:
             )
         )
         logging.info("EM Solver FEM Created...")
-        self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=1, reltol=EMAnalysis.p_matrix_tol))
-        self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=2, reltol=EMAnalysis.q_matrix_tol))
-        self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=3, reltol=EMAnalysis.w_matrix_tol))
+        self.stub.CreateEMSolverBemMat(
+            EMSolverBemMatRequest(matid=1, reltol=EMAnalysis.p_matrix_tol)
+        )
+        self.stub.CreateEMSolverBemMat(
+            EMSolverBemMatRequest(matid=2, reltol=EMAnalysis.q_matrix_tol)
+        )
+        self.stub.CreateEMSolverBemMat(
+            EMSolverBemMatRequest(matid=3, reltol=EMAnalysis.w_matrix_tol)
+        )
         logging.info("EM Solver BEMMAT Created...")
 
 
@@ -532,5 +554,7 @@ class EMContact:
 
     def create(self):
         """Create EM contact."""
-        self.stub.CreateEMControlContact(EMControlContactRequest(emct=1, cconly=0, ctype=self.contacttype, dtype=0))
+        self.stub.CreateEMControlContact(
+            EMControlContactRequest(emct=1, cconly=0, ctype=self.contacttype, dtype=0)
+        )
         logging.info("EM Contact Created...")

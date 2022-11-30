@@ -240,7 +240,9 @@ class MatAdditional:
         self.em = False
         self.thermal = False
 
-    def set_electromagnetic_property(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0):
+    def set_electromagnetic_property(
+        self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0
+    ):
         """Define the electromagnetic material type and properties
         for a material whose permeability equals the free space permeability."""
         self.em = True
@@ -302,7 +304,12 @@ class MatElasticPlasticThermal:
         """Create elastic plastic thermal material."""
         ret = stub.CreateMatElasticPlasticThermal(
             MatElasticPlasticThermalRequest(
-                ro=self.ro, ti=self.ti, ei=self.ei, pri=self.pri, alphai=self.alphai, sigyi=self.sigyi
+                ro=self.ro,
+                ti=self.ti,
+                ei=self.ei,
+                pri=self.pri,
+                alphai=self.alphai,
+                sigyi=self.sigyi,
             )
         )
         self.material_id = ret.mid
@@ -370,7 +377,9 @@ class MatPiecewiseLinearPlasticity:
     def create(self, stub):
         """Create piecewise linear plasticity material."""
         ret = stub.CreateMatPiecewiseLinearPlasticity(
-            MatPiecewiseLinearPlasticityRequest(ro=self.ro, e=self.e, pr=self.pr, sigy=self.sigy, etan=self.etan)
+            MatPiecewiseLinearPlasticityRequest(
+                ro=self.ro, e=self.e, pr=self.pr, sigy=self.sigy, etan=self.etan
+            )
         )
         self.material_id = ret.mid
         self.name = "Piecewise Linear Plasticity"
@@ -570,7 +579,9 @@ class MatDamperNonlinearViscous:
 class MatSPHIncompressibleFluid:
     """Define an SPH incompressible fluid material."""
 
-    def __init__(self, mass_density=0, dynamic_viscosity=0, tension_coefficient1=0, tension_coefficient2=0):
+    def __init__(
+        self, mass_density=0, dynamic_viscosity=0, tension_coefficient1=0, tension_coefficient2=0
+    ):
         self.ro = mass_density
         self.mu = dynamic_viscosity
         self.gamma1 = tension_coefficient1
@@ -579,7 +590,9 @@ class MatSPHIncompressibleFluid:
     def create(self, stub):
         """Create SPH incompressible fluid material."""
         ret = stub.CreateMatSPHIncompressibleFluid(
-            MatSPHIncompressibleFluidRequest(ro=self.ro, mu=self.mu, gamma1=self.gamma1, gamma2=self.gamma2)
+            MatSPHIncompressibleFluidRequest(
+                ro=self.ro, mu=self.mu, gamma1=self.gamma1, gamma2=self.gamma2
+            )
         )
         self.material_id = ret.mid
         self.name = "SPH incompressible fluid"
@@ -589,7 +602,13 @@ class MatSPHIncompressibleFluid:
 class MatSPHIncompressibleStructure:
     """Define an SPH incompressible structure material."""
 
-    def __init__(self, mass_density=0, adhesion_coefficient=0, roughness_coefficient=0, adhesion_scaling_coefficient=0):
+    def __init__(
+        self,
+        mass_density=0,
+        adhesion_coefficient=0,
+        roughness_coefficient=0,
+        adhesion_scaling_coefficient=0,
+    ):
         self.ro = mass_density
         self.beta = adhesion_coefficient
         self.rough = roughness_coefficient
@@ -598,7 +617,9 @@ class MatSPHIncompressibleStructure:
     def create(self, stub):
         """Create SPH incompressible structure material."""
         ret = stub.CreateMatSPHIncompressibleStructure(
-            MatSPHIncompressibleStructureRequest(ro=self.ro, beta=self.beta, rough=self.rough, adh=self.adh)
+            MatSPHIncompressibleStructureRequest(
+                ro=self.ro, beta=self.beta, rough=self.rough, adh=self.adh
+            )
         )
         self.material_id = ret.mid
         self.name = "SPH incompressible structure"
