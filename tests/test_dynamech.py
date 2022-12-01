@@ -1,11 +1,18 @@
 import os
-import sys
-import pytest
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre import dynamaterial as matDB
-from ansys.dyna.core.pre.dynamech import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynamech import (
+    DynaMech,
+    Airbag,
+    PartSet,
+    RigidwallPlanar,
+    Contact,
+    ContactSurface,
+    ContactCategory,
+    Curve,
+    Point,
+)
 
 
 def comparefile(outputf, standardf):

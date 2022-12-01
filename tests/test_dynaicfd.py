@@ -1,10 +1,8 @@
 import os
-import sys
-import pytest
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynaicfd import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynaicfd import DynaICFD, ICFDVolumePart, MeshedVolume
 
 
 def comparefile(outputf, standardf):

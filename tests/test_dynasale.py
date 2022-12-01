@@ -1,11 +1,16 @@
 import os
-import sys
-import pytest
 
 
-from ansys.dyna.core.pre.dynasolution import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
 from ansys.dyna.core.pre import dynamaterial as matDB
-from ansys.dyna.core.pre.dynasale import *
+from ansys.dyna.core.pre.dynasale import (
+    DynaSALE,
+    ControlPoint,
+    StructuredMesh,
+    FillDirection,
+    Point,
+    AdvectionMethod,
+)
 
 
 def comparefile(outputf, standardf):

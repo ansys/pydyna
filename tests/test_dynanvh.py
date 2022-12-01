@@ -1,11 +1,18 @@
 import os
-import sys
-import pytest
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynanvh import *
-from ansys.dyna.core.pre.dynamaterial import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynanvh import (
+    DynaNVH,
+    FrequencyDomain,
+    Curve,
+    NodeSet,
+    ResponseDOF,
+    ResponseType,
+    ShellPart,
+    ShellFormulation,
+)
+from ansys.dyna.core.pre.dynamaterial import MatElastic
 
 
 def comparefile(outputf, standardf):

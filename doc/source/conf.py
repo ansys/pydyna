@@ -2,7 +2,6 @@
 
 import datetime
 import os
-import sys
 
 import pyvista
 from ansys_sphinx_theme import pyansys_logo_black, ansys_favicon

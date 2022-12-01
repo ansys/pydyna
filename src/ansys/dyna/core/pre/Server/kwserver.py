@@ -22,32 +22,12 @@ try:
     from keywordreader import KeywordReader as kp
     from keywordreader import KWD_GetDataType as gdt
     from keywordreader import KWD_SetDataType as sdt
-    from keywordreader import KWD_OutType as ot
-    from keywordreader import KWD_OutVersion as ver
-    from keywordreader import KWD_PartProp as partprop
 except ImportError as error:
     print(tb.print_exc())
     print("\033[1;31m" "keywordreader cannot be found!\n" "Please check the libs path" "\033[0m")
     sys.exit(0)
 
-"""
-class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
-    def kwSetFileName(self, request, context):
-        print (request.name)
-        return kwprocess_pb2.kwFileNameReply(ret = True)
-        
-
-class Server():
-    def run(self):
-        server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-        kwprocess_pb2_grpc.add_kwC2SServicer_to_server(IGAServer(), server)
-        server.add_insecure_port('[::]:50051')
-        server.start()
-        print ("kwgrpc Server listening on: localhost:50051")
-        server.wait_for_termination()
-"""
 CHUNK_SIZE = 1024 * 1024
-
 
 class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
     def __init__(self):

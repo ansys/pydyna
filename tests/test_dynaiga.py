@@ -1,10 +1,8 @@
 import os
-import sys
-import pytest
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynaiga import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynaiga import DynaIGA, RigidwallCylinder, Direction, Point, Curve
 
 
 def comparefile(outputf, standardf):

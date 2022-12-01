@@ -1,11 +1,26 @@
 import os
-import sys
-import pytest
 
-
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynaisph import *
-from ansys.dyna.core.pre.dynamaterial import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynaisph import (
+    DynaISPH,
+    ShellPart,
+    ISPHStructPart,
+    ISPHFluidPart,
+    Point,
+    PartSet,
+    ShellFormulation,
+    Curve,
+    Gravity,
+    DOF,
+    Motion,
+    Box,
+    GravityOption,
+)
+from ansys.dyna.core.pre.dynamaterial import (
+    MatRigid,
+    MatSPHIncompressibleFluid,
+    MatSPHIncompressibleStructure,
+)
 
 
 def comparefile(outputf, standardf):
@@ -22,7 +37,7 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_em(isph_initialfile, resolve_server_path, resolve_standard_path):
+def test_isph(isph_initialfile, resolve_server_path, resolve_standard_path):
     solution = DynaSolution("localhost")
     fns = []
     fns.append(isph_initialfile)
