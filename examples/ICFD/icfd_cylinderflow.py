@@ -9,8 +9,16 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynaicfd import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynaicfd import (
+    DynaICFD,
+    MatICFD,
+    ICFDPart,
+    ICFDDOF,
+    Curve,
+    ICFDVolumePart,
+    MeshedVolume,
+)
 from ansys.dyna.core.pre import examples
 
 

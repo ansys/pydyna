@@ -158,9 +158,7 @@ class StructuredMesh:
         )
         cpidz = ret.cpid
         ret = self.stub.ALECreateStructuredMesh(
-            ALECreateStructuredMeshRequest(
-                nbid=2000001, ebid=2000001, cpidx=cpidx, cpidy=cpidy, cpidz=cpidz
-            )
+            ALECreateStructuredMeshRequest(nbid=2000001, ebid=2000001, cpidx=cpidx, cpidy=cpidy, cpidz=cpidz)
         )
         meshid = ret.meshid
         partid = ret.partid
@@ -301,13 +299,9 @@ class DynaSALE(DynaBase):
             "True" when successful, "False" when failed
         """
         if matsum > 0:
-            self.stub.CreateDBAscii(
-                DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0)
-            )
+            self.stub.CreateDBAscii(DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0))
         if glstat > 0:
-            self.stub.CreateDBAscii(
-                DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0, ioopt=0)
-            )
+            self.stub.CreateDBAscii(DBAsciiRequest(type="GLSTAT", dt=glstat, binary=1, lcur=0, ioopt=0))
         ret = 1
         logging.info("Output Setting...")
         return ret

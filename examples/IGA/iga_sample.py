@@ -9,10 +9,25 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynaiga import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynaiga import (
+    DynaIGA,
+    IGAPart,
+    PartSet,
+    IGAFormulation,
+    SolidPart,
+    HourglassType,
+    SolidFormulation,
+    RigidwallCylinder,
+    Point,
+    Curve,
+    Direction,
+    ContactType,
+    ContactCategory,
+    OffsetType,
+)
 from ansys.dyna.core.pre.dynamech import *
-from ansys.dyna.core.pre.dynamaterial import *
+from ansys.dyna.core.pre.dynamaterial import MatPiecewiseLinearPlasticity, MatSpotweld
 from iga_sample_data import *
 from ansys.dyna.core.pre import examples
 

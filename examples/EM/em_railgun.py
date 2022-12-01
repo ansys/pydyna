@@ -8,11 +8,21 @@ This example demonstrates how to create an EM Railgun input deck.
 import os
 import sys
 
-
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynaem import *
-from ansys.dyna.core.pre.dynamech import *
-from ansys.dyna.core.pre.dynamaterial import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynaem import (
+    DynaEM,
+    Circuit,
+    CircuitType,
+    SegmentSet,
+    NodeSet,
+    Curve,
+    SolidPart,
+    SolidFormulation,
+    EMContact,
+    BEMSOLVER,
+    FEMSOLVER,
+)
+from ansys.dyna.core.pre.dynamaterial import MatElastic, MatRigid, EMMATTYPE
 from em_railgun_data import *
 from ansys.dyna.core.pre import examples
 

@@ -9,9 +9,18 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynamaterial import *
-from ansys.dyna.core.pre.dynanvh import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynamaterial import MatElastic
+from ansys.dyna.core.pre.dynanvh import (
+    DynaNVH,
+    FrequencyDomain,
+    Curve,
+    NodeSet,
+    ShellPart,
+    ShellFormulation,
+    ResponseDOF,
+    ResponseType,
+)
 from ansys.dyna.core.pre import examples
 
 hostname = "localhost"
