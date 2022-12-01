@@ -1,10 +1,8 @@
 import os
-import sys
-import pytest
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynadem import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynadem import DynaDEM
 
 
 def comparefile(outputf, standardf):

@@ -4,12 +4,8 @@ Launch or connect to a persistent local DPF service to be shared in
 pytest as a sesson fixture
 """
 import os
-import sys
 import pytest
 
-
-from ansys.dyna.core import pre
-from ansys.dyna.core.pre import examples
 
 # from ansys.dyna.core.pre.Server.kwserver import *
 

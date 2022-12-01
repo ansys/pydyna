@@ -1,10 +1,8 @@
 import os
-import sys
-import pytest
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynaem import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynaem import DynaEM, BEMSOLVER, FEMSOLVER, EMContact
 
 
 def comparefile(outputf, standardf):

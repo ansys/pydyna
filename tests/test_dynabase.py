@@ -1,10 +1,15 @@
 import os
-import sys
-import pytest
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynabase import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynabase import (
+    DynaBase,
+    Switch,
+    InvariantNode,
+    EnergyFlag,
+    HourglassControl,
+    BulkViscosity,
+)
 
 
 def comparefile(outputf, standardf):
