@@ -144,9 +144,7 @@ class SPHSection:
 
     def __init__(self, cslh=1.2, hmin=0.2, hmax=2.0, sphini=0):
         stub = DynaBase.get_stub()
-        ret = stub.CreateSectionSPH(
-            SectionSPHRequest(cslh=cslh, hmin=hmin, hmax=hmax, sphini=sphini)
-        )
+        ret = stub.CreateSectionSPH(SectionSPHRequest(cslh=cslh, hmin=hmin, hmax=hmax, sphini=sphini))
         self.id = ret.id
 
 

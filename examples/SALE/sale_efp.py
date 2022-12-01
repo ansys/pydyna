@@ -8,8 +8,15 @@ This example demonstrates how to create a SALE input deck.
 import os
 import sys
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynasale import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynasale import (
+    DynaSALE,
+    ControlPoint,
+    AdvectionMethod,
+    StructuredMesh,
+    FillDirection,
+    Point,
+)
 from ansys.dyna.core.pre import dynamaterial as matDB
 from ansys.dyna.core.pre import examples
 

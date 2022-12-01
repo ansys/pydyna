@@ -10,10 +10,43 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynamaterial import *
-from ansys.dyna.core.pre.dynaicfd import *
-from ansys.dyna.core.pre.dynadem import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynamaterial import MatRigid, MatElastic
+from ansys.dyna.core.pre.dynaicfd import (
+    DynaICFD,
+    MatICFD,
+    Point,
+    Curve,
+    ICFDDOF,
+    ICFDPart,
+    ICFDVolumePart,
+    MeshedVolume,
+    ShellPart,
+    ShellFormulation,
+    RotVelocity,
+    HourglassType,
+    PartSet,
+    Gravity,
+    GravityOption,
+    Contact,
+    ContactType,
+    ContactCategory,
+    ContactFormulation,
+    SBOPT,
+    ContactSurface,
+)
+from ansys.dyna.core.pre.dynadem import (
+    DynaDEM,
+    NodesetGeneral,
+    SetType,
+    SolidPart,
+    SolidFormulation,
+    SegmentSet,
+    DOF,
+    Motion,
+    Direction,
+    Velocity,
+)
 from wing_data import *
 from ansys.dyna.core.pre import examples
 

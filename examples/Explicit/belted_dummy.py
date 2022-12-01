@@ -9,9 +9,30 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynamech import *
-from ansys.dyna.core.pre.dynamaterial import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynamech import (
+    DynaMech,
+    Velocity,
+    Curve,
+    ShellPart,
+    DiscretePart,
+    NodeSet,
+    SegmentSet,
+    DRO,
+    Contact,
+    ContactSurface,
+    ContactCategory,
+    Motion,
+    Gravity,
+    GravityOption,
+)
+from ansys.dyna.core.pre.dynamaterial import (
+    MatRigid,
+    MatElastic,
+    MatSpringNonlinearElastic,
+    MatDamperViscous,
+    MatDamperNonlinearViscous,
+)
 from belted_dummy_data import *
 from ansys.dyna.core.pre import examples
 

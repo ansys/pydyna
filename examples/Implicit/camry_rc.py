@@ -6,13 +6,32 @@ This example demonstrates how to create a simple crash input deck.
 """
 
 import os
-from re import X
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynamech import *
-from ansys.dyna.core.pre.dynamaterial import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynamech import (
+    DynaMech,
+    Curve,
+    BeamPart,
+    ShellPart,
+    NodeSet,
+    PartSet,
+    TimestepCtrol,
+    Contact,
+    ContactType,
+    ContactCategory,
+    ContactSurface,
+    DOF,
+    OffsetType,
+)
+from ansys.dyna.core.pre.dynamaterial import (
+    MatNull,
+    MatRigid,
+    MatSpotweld,
+    MatModifiedPiecewiseLinearPlasticity,
+    MatPiecewiseLinearPlasticity,
+)
 from camry_rc_data import *
 from ansys.dyna.core.pre import examples
 

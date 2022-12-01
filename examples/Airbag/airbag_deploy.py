@@ -9,9 +9,21 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynamech import *
-from ansys.dyna.core.pre.dynamaterial import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynamech import (
+    DynaMech,
+    Airbag,
+    PartSet,
+    Curve,
+    Point,
+    RigidwallPlanar,
+    Contact,
+    ContactSurface,
+    ContactCategory,
+    ShellPart,
+    ShellFormulation,
+)
+from ansys.dyna.core.pre.dynamaterial import MatRigid, MatFabric
 from ansys.dyna.core.pre import examples
 
 hostname = "localhost"

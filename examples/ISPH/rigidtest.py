@@ -9,9 +9,27 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import *
-from ansys.dyna.core.pre.dynamaterial import *
-from ansys.dyna.core.pre.dynaisph import *
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynamaterial import (
+    MatRigid,
+    MatSPHIncompressibleFluid,
+    MatSPHIncompressibleStructure,
+)
+from ansys.dyna.core.pre.dynaisph import (
+    DynaISPH,
+    Box,
+    Point,
+    Curve,
+    PartSet,
+    ShellPart,
+    ShellFormulation,
+    ISPHStructPart,
+    ISPHFluidPart,
+    DOF,
+    Motion,
+    Gravity,
+    GravityOption,
+)
 from ansys.dyna.core.pre import examples
 
 hostname = "localhost"
