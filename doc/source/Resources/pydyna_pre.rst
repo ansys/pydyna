@@ -65,12 +65,12 @@ Then running command:
 Starting the Server
 -------------------
 
-So far, Python 3.6/3.8/3.9 is used to start server, make sure this like below:
+So far, Python 3.8/3.9 is used to start server, make sure this like below:
 
 .. code:: python
 
-    (venv) C:\pyDyna\examples\pre> C:\python36\python.exe --version
-    Python 3.6.8
+    (venv) C:\pyDyna\examples\pre> C:\python38\python.exe --version
+    Python 3.8.10
 
 Here is the minimal content in Server folder 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,10 +83,9 @@ Here is the minimal content in Server folder
 	      lib/
 	         linux/
 		           keywordreader.so
-             windows/
-                   	cp36/keywordreader.pyd	
-                    cp38/keywordreader.pyd
-                    cp39/keywordreader.pyd				
+             windows/	
+                   cp38/keywordreader.pyd
+                   cp39/keywordreader.pyd				
 
 
 Starting the Server on Windows:
