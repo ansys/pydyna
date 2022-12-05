@@ -1378,39 +1378,39 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         card2 = ""
         if len(ti):
             card2 = str(ti[0])
-            for i in range(1, min(len(ti), 8) + 1):
+            for i in range(1, min(len(ti), 8)):
                 card2 += "," + str(ti[i])
         card3 = ""
         if len(ei):
             card3 = str(ei[0])
-            for i in range(1, min(len(ei), 8) + 1):
+            for i in range(1, min(len(ei), 8)):
                 card3 += "," + str(ei[i])
         if len(pri):
             card4 = str(pri[0])
-            for i in range(1, min(len(pri), 8) + 1):
+            for i in range(1, min(len(pri), 8)):
                 card4 += "," + str(pri[i])
         if len(alphai):
             card5 = str(alphai[0])
-            for i in range(1, min(len(alphai), 8) + 1):
+            for i in range(1, min(len(alphai), 8)):
                 card5 += "," + str(alphai[i])
         if len(sigyi):
             card6 = str(sigyi[0])
-            for i in range(1, min(len(sigyi), 8) + 1):
+            for i in range(1, min(len(sigyi), 8)):
                 card6 += "," + str(sigyi[i])
         opcode = "*MAT_ELASTIC_PLASTIC_THERMAL"
         newk = (
             opcode
             + "\n"
             + card1
-            + ","
+            + "\n"
             + card2
-            + ","
+            + "\n"
             + card3
-            + ","
+            + "\n"
             + card4
-            + ","
+            + "\n"
             + card5
-            + ","
+            + "\n"
             + card6
         )
         self.kwdproc.newkeyword(newk)
@@ -1711,7 +1711,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         hc = request.hc
         tc = request.tc
         card1 = str(mid) + "," + str(tro) + "," + str(tgrlc) + "," + str(tgmult)
-        card1 = str(hc) + "," + str(tc)
+        card2 = str(hc) + "," + str(tc)
         opcode = "*MAT_THERMAL_ISOTROPIC"
         newk = opcode + "\n" + card1 + "\n" + card2
         self.kwdproc.newkeyword(newk)
