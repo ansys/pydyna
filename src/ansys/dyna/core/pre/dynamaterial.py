@@ -238,7 +238,7 @@ class MatAdditional:
 
     def __init__(self):
         self.em = False
-        self.thermal = False
+        self.thermal_isotropic = False
 
     def set_electromagnetic_property(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0):
         """Define the electromagnetic material type and properties
@@ -246,6 +246,17 @@ class MatAdditional:
         self.em = True
         self.em_material_type = material_type.value
         self.em_initial_conductivity = initial_conductivity
+
+    def set_thermal_isotropic(
+        self, density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0
+    ):
+        """Define isotropic thermal properties."""
+        self.thermal_isotropic = True
+        self.tro = density
+        self.tgrlc = generation_rate
+        self.tgmult = generation_rate_multiplier
+        self.hc = specific_heat
+        self.tc = conductivity
 
     def create(self, stub, matid):
         """Define additional properties for material."""
@@ -258,6 +269,18 @@ class MatAdditional:
                 )
             )
             logging.info(f"Material EM Created...")
+        if self.thermal_isotropic:
+            stub.CreateMatThermalIsotropic(
+                MatThermalIsotropicRequest(
+                    mid=matid,
+                    tro=self.tro,
+                    tgrlc=self.tgrlc,
+                    tgmult=self.tgmult,
+                    hc=self.hc,
+                    tc=self.tc,
+                )
+            )
+            logging.info(f"Material thermal isotropic Created...")
 
 
 class MatElastic(MatAdditional):
@@ -278,7 +301,7 @@ class MatElastic(MatAdditional):
         logging.info(f"Material {self.name} Created...")
 
 
-class MatElasticPlasticThermal:
+class MatElasticPlasticThermal(MatAdditional):
     """Define temperature dependent material coefficients."""
 
     def __init__(
@@ -312,6 +335,7 @@ class MatElasticPlasticThermal:
         )
         self.material_id = ret.mid
         self.name = "ElasticPlasticThermal"
+        MatAdditional.create(self, stub, self.material_id)
         logging.info(f"Material {self.name} Created...")
 
 

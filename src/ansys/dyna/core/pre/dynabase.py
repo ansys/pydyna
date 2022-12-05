@@ -1212,6 +1212,10 @@ class Parts:
         else:
             logging.info("Warning: Invalid part type!")
 
+    def get_num_shellpart(self):
+        """Get the number of shell part."""
+        return len(self.shelllist)
+
     def set_property(self):
         """Set properties for added parts."""
         for obj in self.beamlist:
@@ -1390,6 +1394,59 @@ class ImplicitAnalysis:
                     nsolver=self.nsolver, ilimit=self.ilimit, maxref=self.maxref, abstol=self.abstol
                 )
             )
+
+
+class ThermalAnalysisType(Enum):
+    STEADY_STATE = 0
+    TRANSIENT = 1
+
+
+class ThermalAnalysisTimestep(Enum):
+    FIXED = 0
+    VARIABLE = 1
+
+
+class ThermalAnalysis:
+    """Activate thermal analysis and define associated control parameters."""
+
+    def __init__(self):
+        self.defined_solver = False
+        self.defined_timestep = False
+        self.stub = DynaBase.get_stub()
+
+    def set_timestep(self, timestep_control=ThermalAnalysisTimestep.FIXED, initial_timestep=0):
+        """Set time step controls for the thermal solution in a thermal only or coupled structural/thermal analysis.
+
+        Parameters
+        ----------
+        timestep_control : ThermalAnalysisTimestep
+            Time step control.
+        initial_timestep : float
+            Initial thermal time step.
+        """
+        self.defined_timestep = True
+        self.ts = timestep_control.value
+        self.its = initial_timestep
+
+    def set_solver(self, analysis_type=ThermalAnalysisType.STEADY_STATE):
+        """Set options for the thermal solution in a thermal only or coupled structural-thermal analysis.
+
+        Parameters
+        ----------
+        analysis_type : ImplicitAnalysis
+            Thermal analysis type.
+        """
+        self.defined_solver = True
+        self.atype = analysis_type.value
+
+    def create(self):
+        """Create thermal analysis."""
+        if self.defined_timestep:
+            self.stub.CreateControlThermalTimestep(ControlThermalTimestepRequest(its=self.its))
+        if self.defined_solver:
+            self.stub.CreateControlThermalSolver(ControlThermalSolverRequest(atype=self.atype))
+        if self.defined_timestep or self.defined_solver:
+            self.stub.CreateControlSolution(ControlSolutionRequest(soln=2))
 
 
 class ContactCategory(Enum):
@@ -1926,6 +1983,7 @@ class InitialCondition:
     def __init__(self):
         self.stub = DynaBase.get_stub()
         self.velocitylist = []
+        self.temperaturelist = []
 
     def create_velocity(
         self,
@@ -1937,6 +1995,10 @@ class InitialCondition:
     ):
         """Define initial velocities for rotating and/or translating bodies."""
         self.velocitylist.append([velocityset, angular_velocity, velocity, direction, stime])
+
+    def create_temperature(self, nodeset=None, temperature=0):
+        """Define initial nodal point temperatures."""
+        self.temperaturelist.append((nodeset, temperature))
 
     def create(self):
         """Create initial condition."""
@@ -1975,6 +2037,20 @@ class InitialCondition:
                 )
             )
             logging.info(f"Define initial velocities for {type} {id}.")
+        for obj in self.temperaturelist:
+            nset = obj[0]
+            temp = obj[1]
+            id = nset.create(self.stub)
+            type = nset.type.upper()
+            if type == "NODESET":
+                option = "SET"
+            elif type == "NODE":
+                option = "NODE"
+                id = nset.get_nid()
+            else:
+                print("Error:Invalid set type!")
+            self.stub.CreateInitTemperature(InitTemperatureRequest(option=option, nsid=id, temp=temp))
+            logging.info(f"Define temperature at {type} {id}.")
 
 
 class RigidwallCylinder:

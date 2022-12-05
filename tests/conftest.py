@@ -96,3 +96,8 @@ def isph_initialfile():
 def nvh_initialfile():
     """Resolve the path for nvh initial file."""
     return resolve_test_file("test_nvh.k", "initial")
+    
+@pytest.fixture()
+def thermal_initialfile():
+    """Resolve the path for thermal initial file."""
+    return resolve_test_file("test_thermal_stress.k", "initial")

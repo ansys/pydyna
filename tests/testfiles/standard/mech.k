@@ -24,13 +24,6 @@ $#    hgen      rwen    slnten     rylen     irgen     maten     drlen     disen
 *CONTROL_HOURGLASS
 $#     ihq        qh
          2       0.0
-*CONTROL_SHELL
-$#  wrpang     esort     irnxx    istupd    theory       bwc     miter      proj
-       0.0         1         0         4         0         1         1         1
-$# rotascl    intgrd    lamsht    cstyp6    thshel
-                                                  
-$# psstupd   sidt4tu     cntco    itsflg    irquad    w-mode   stretch      icrq
-         0         0         0         0         3       0.0       0.0         0
 *CONTROL_TERMINATION
 $#  endtim    endcyc     dtmin    endeng    endmas     nosol
       0.03         0       0.0       0.01.000000E8         0
