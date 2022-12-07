@@ -179,11 +179,63 @@ class DynaICFD(DynaBase):
 
     def save_file(self):
         """Save keyword files."""
-        self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=DynaSolution.termination_time, dt=self.timestep))
-        logging.info("ICFD control time Created...")
         self.create_section_icfd(1)
         DynaBase.save_file(self)
 
+class ICFD_SurfRemeshMethod(Enum):
+    LAPLACIAN_SMOOTHING = 1
+    CURVATURE_PRESERVING = 2
+
+class ICFDAnalysis:
+    """Activate ICFD analysis and define associated control parameters."""
+
+    def __init__(self):
+        self.defined_timestep = False
+        self.defined_volumemesh = False
+        self.defined_surfmesh = False
+        self.stub = DynaBase.get_stub()
+
+    def set_timestep(self, timestep=0):
+        """Set time step for the fluid problem.
+
+        Parameters
+        ----------
+        dt : float
+            Time step for the fluid problem.
+        """
+        self.defined_timestep = True
+        self.timestep = timestep
+
+    def set_volume_mesh(self, mesh_growth_scale_factor = 1.41):
+        """Modify default values for the automatic volume mesh generation.
+
+        Parameters
+        ----------
+        mesh_growth_scale_factor : float
+            Specifies the maximum mesh size that the volume mesher is allowed to use when generating the volume mesh.
+        """
+        self.defined_volumemesh = True
+        self.mgsf = mesh_growth_scale_factor
+    
+    def set_surface_mesh(self,remesh_method = ICFD_SurfRemeshMethod.LAPLACIAN_SMOOTHING):
+        """Enable automatic surface re-meshing.
+
+        Parameters
+        ----------
+        remesh_method : ICFD_SurfRemeshMethod
+            Indicates whether or not to perform a surface re-meshing.
+        """
+        self.defined_surfmesh = True
+        self.rsrf = remesh_method.value
+
+    def create(self):
+        """Create ICFD analysis."""
+        if self.defined_timestep:
+            self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=DynaSolution.termination_time, dt=self.timestep))
+        if self.defined_volumemesh:
+            self.stub.ICFDCreateControlMesh(ICFDControlMeshRequest(mgsf=self.mgsf))
+        if self.defined_surfmesh:
+            self.stub.ICFDCreateControlSurfMesh(ICFDControlSurfMeshRequest(rsrf=self.rsrf))
 
 class Compressible(Enum):
     VACUUM = 0
@@ -303,6 +355,12 @@ class ICFDPart:
         logging.info("ICFD database drag Created...")
         return ret
 
+    def compute_flux(self):
+        """Enable the computation of the flow rate and average pressure over given parts of the model."""
+        ret = self.stub.ICFDCreateDBFlux(ICFDDBFluxRequest(pid=self.id))
+        logging.info("ICFD database flux Created...")
+        return ret
+
     def set_boundary_layer(self, number=3):
         """Define a boundary-layer mesh as a refinement on volume-mesh.
 
@@ -315,6 +373,11 @@ class ICFDPart:
         logging.info("MESH boundary-layer Created...")
         return ret
 
+    def set_boundary_layer_symmetry_condition(self):
+        """Specify the part that will have symmetry conditions for the boundary layer."""
+        ret = self.stub.MESHCreateBlSym(MeshBlSymRequest(pid=self.id))
+        return ret
+    
     def set_property(self):
         """Set properties for ICFD part."""
         secid = 1

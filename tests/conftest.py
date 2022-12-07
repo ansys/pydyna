@@ -55,6 +55,12 @@ def em_initialfile():
     """Resolve the path for em initial file."""
     return resolve_test_file("test_em.k", "initial")
 
+@pytest.fixture()
+def resolve_icfd_path():
+    """Get the filepath of icfd files."""
+    path = os.path.dirname(os.path.abspath(__file__))
+    icfd_path = os.path.join(path, "testfiles", "initial", "icfd")
+    return icfd_path
 
 @pytest.fixture()
 def icfd_initialfile():

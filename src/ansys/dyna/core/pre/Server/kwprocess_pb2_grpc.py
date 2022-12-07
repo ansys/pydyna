@@ -489,6 +489,16 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.ICFDControlDEMCouplingRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ICFDControlDEMCouplingReply.FromString,
                 )
+        self.ICFDCreateControlMesh = channel.unary_unary(
+                '/kwgrpc.kwC2S/ICFDCreateControlMesh',
+                request_serializer=kwprocess__pb2.ICFDControlMeshRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDControlMeshReply.FromString,
+                )
+        self.ICFDCreateControlSurfMesh = channel.unary_unary(
+                '/kwgrpc.kwC2S/ICFDCreateControlSurfMesh',
+                request_serializer=kwprocess__pb2.ICFDControlSurfMeshRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDControlSurfMeshReply.FromString,
+                )
         self.ICFDCreateSection = channel.unary_unary(
                 '/kwgrpc.kwC2S/ICFDCreateSection',
                 request_serializer=kwprocess__pb2.ICFDSectionRequest.SerializeToString,
@@ -513,6 +523,11 @@ class kwC2SStub(object):
                 '/kwgrpc.kwC2S/ICFDCreateDBDrag',
                 request_serializer=kwprocess__pb2.ICFDDBDragRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ICFDDBDragReply.FromString,
+                )
+        self.ICFDCreateDBFlux = channel.unary_unary(
+                '/kwgrpc.kwC2S/ICFDCreateDBFlux',
+                request_serializer=kwprocess__pb2.ICFDDBFluxRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDDBFluxReply.FromString,
                 )
         self.ICFDCreateBdyPrescribedVel = channel.unary_unary(
                 '/kwgrpc.kwC2S/ICFDCreateBdyPrescribedVel',
@@ -563,6 +578,11 @@ class kwC2SStub(object):
                 '/kwgrpc.kwC2S/MESHCreateBl',
                 request_serializer=kwprocess__pb2.MeshBlRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.MeshBlReply.FromString,
+                )
+        self.MESHCreateBlSym = channel.unary_unary(
+                '/kwgrpc.kwC2S/MESHCreateBlSym',
+                request_serializer=kwprocess__pb2.MeshBlSymRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MeshBlSymReply.FromString,
                 )
         self.MESHCreateSizeShape = channel.unary_unary(
                 '/kwgrpc.kwC2S/MESHCreateSizeShape',
@@ -1293,6 +1313,18 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ICFDCreateControlMesh(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ICFDCreateControlSurfMesh(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ICFDCreateSection(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1318,6 +1350,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ICFDCreateDBDrag(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ICFDCreateDBFlux(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1379,6 +1417,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def MESHCreateBl(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def MESHCreateBlSym(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2035,6 +2079,16 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.ICFDControlDEMCouplingRequest.FromString,
                     response_serializer=kwprocess__pb2.ICFDControlDEMCouplingReply.SerializeToString,
             ),
+            'ICFDCreateControlMesh': grpc.unary_unary_rpc_method_handler(
+                    servicer.ICFDCreateControlMesh,
+                    request_deserializer=kwprocess__pb2.ICFDControlMeshRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDControlMeshReply.SerializeToString,
+            ),
+            'ICFDCreateControlSurfMesh': grpc.unary_unary_rpc_method_handler(
+                    servicer.ICFDCreateControlSurfMesh,
+                    request_deserializer=kwprocess__pb2.ICFDControlSurfMeshRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDControlSurfMeshReply.SerializeToString,
+            ),
             'ICFDCreateSection': grpc.unary_unary_rpc_method_handler(
                     servicer.ICFDCreateSection,
                     request_deserializer=kwprocess__pb2.ICFDSectionRequest.FromString,
@@ -2059,6 +2113,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.ICFDCreateDBDrag,
                     request_deserializer=kwprocess__pb2.ICFDDBDragRequest.FromString,
                     response_serializer=kwprocess__pb2.ICFDDBDragReply.SerializeToString,
+            ),
+            'ICFDCreateDBFlux': grpc.unary_unary_rpc_method_handler(
+                    servicer.ICFDCreateDBFlux,
+                    request_deserializer=kwprocess__pb2.ICFDDBFluxRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDDBFluxReply.SerializeToString,
             ),
             'ICFDCreateBdyPrescribedVel': grpc.unary_unary_rpc_method_handler(
                     servicer.ICFDCreateBdyPrescribedVel,
@@ -2109,6 +2168,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.MESHCreateBl,
                     request_deserializer=kwprocess__pb2.MeshBlRequest.FromString,
                     response_serializer=kwprocess__pb2.MeshBlReply.SerializeToString,
+            ),
+            'MESHCreateBlSym': grpc.unary_unary_rpc_method_handler(
+                    servicer.MESHCreateBlSym,
+                    request_deserializer=kwprocess__pb2.MeshBlSymRequest.FromString,
+                    response_serializer=kwprocess__pb2.MeshBlSymReply.SerializeToString,
             ),
             'MESHCreateSizeShape': grpc.unary_unary_rpc_method_handler(
                     servicer.MESHCreateSizeShape,
@@ -3876,6 +3940,40 @@ class kwC2S(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def ICFDCreateControlMesh(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateControlMesh',
+            kwprocess__pb2.ICFDControlMeshRequest.SerializeToString,
+            kwprocess__pb2.ICFDControlMeshReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ICFDCreateControlSurfMesh(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateControlSurfMesh',
+            kwprocess__pb2.ICFDControlSurfMeshRequest.SerializeToString,
+            kwprocess__pb2.ICFDControlSurfMeshReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ICFDCreateSection(request,
             target,
             options=(),
@@ -3957,6 +4055,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateDBDrag',
             kwprocess__pb2.ICFDDBDragRequest.SerializeToString,
             kwprocess__pb2.ICFDDBDragReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ICFDCreateDBFlux(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateDBFlux',
+            kwprocess__pb2.ICFDDBFluxRequest.SerializeToString,
+            kwprocess__pb2.ICFDDBFluxReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -4127,6 +4242,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/MESHCreateBl',
             kwprocess__pb2.MeshBlRequest.SerializeToString,
             kwprocess__pb2.MeshBlReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MESHCreateBlSym(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/MESHCreateBlSym',
+            kwprocess__pb2.MeshBlSymRequest.SerializeToString,
+            kwprocess__pb2.MeshBlSymReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
