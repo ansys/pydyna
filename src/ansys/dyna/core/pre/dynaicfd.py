@@ -182,9 +182,11 @@ class DynaICFD(DynaBase):
         self.create_section_icfd(1)
         DynaBase.save_file(self)
 
+
 class ICFD_SurfRemeshMethod(Enum):
     LAPLACIAN_SMOOTHING = 1
     CURVATURE_PRESERVING = 2
+
 
 class ICFDAnalysis:
     """Activate ICFD analysis and define associated control parameters."""
@@ -206,7 +208,7 @@ class ICFDAnalysis:
         self.defined_timestep = True
         self.timestep = timestep
 
-    def set_volume_mesh(self, mesh_growth_scale_factor = 1.41):
+    def set_volume_mesh(self, mesh_growth_scale_factor=1.41):
         """Modify default values for the automatic volume mesh generation.
 
         Parameters
@@ -216,8 +218,8 @@ class ICFDAnalysis:
         """
         self.defined_volumemesh = True
         self.mgsf = mesh_growth_scale_factor
-    
-    def set_surface_mesh(self,remesh_method = ICFD_SurfRemeshMethod.LAPLACIAN_SMOOTHING):
+
+    def set_surface_mesh(self, remesh_method=ICFD_SurfRemeshMethod.LAPLACIAN_SMOOTHING):
         """Enable automatic surface re-meshing.
 
         Parameters
@@ -236,6 +238,7 @@ class ICFDAnalysis:
             self.stub.ICFDCreateControlMesh(ICFDControlMeshRequest(mgsf=self.mgsf))
         if self.defined_surfmesh:
             self.stub.ICFDCreateControlSurfMesh(ICFDControlSurfMeshRequest(rsrf=self.rsrf))
+
 
 class Compressible(Enum):
     VACUUM = 0
@@ -377,7 +380,7 @@ class ICFDPart:
         """Specify the part that will have symmetry conditions for the boundary layer."""
         ret = self.stub.MESHCreateBlSym(MeshBlSymRequest(pid=self.id))
         return ret
-    
+
     def set_property(self):
         """Set properties for ICFD part."""
         secid = 1
