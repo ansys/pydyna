@@ -14,6 +14,7 @@ from ansys.dyna.core.pre.dynasolution import DynaSolution
 from ansys.dyna.core.pre.dynamaterial import MatRigid, MatElastic
 from ansys.dyna.core.pre.dynaicfd import (
     DynaICFD,
+    ICFDAnalysis,
     MatICFD,
     Point,
     Curve,
@@ -71,9 +72,12 @@ wing_solution.add(icfd)
 wing_solution.add(dem)
 
 # ICFD Control
+icfdanalysis = ICFDAnalysis()
+icfdanalysis.set_timestep(0.25e-3)
+icfd.add(icfdanalysis)
+
 icfd.create_control_dem_coupling(dt=0)
 icfd.create_control_general(dvcl=1)
-icfd.set_timestep(timestep=0.25e-3)
 icfd.set_termination(termination_time=20)
 icfd.create_control_output(msgl=3)
 icfd.create_control_turbulence(tmod=2)

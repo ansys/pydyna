@@ -2037,6 +2037,24 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ICFDControlDEMCouplingReply(answer=0)
 
+    def ICFDCreateControlMesh(self, request, context):
+        mgsf = request.mgsf
+        card1 = str(mgsf)
+        newk = "*ICFD_CONTROL_MESH\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD_CONTROL_MESH Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDControlMeshReply(answer=0)
+
+    def ICFDCreateControlSurfMesh(self, request, context):
+        rsrf = request.rsrf
+        card1 = str(rsrf)
+        newk = "*ICFD_CONTROL_SURFMESH\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD_CONTROL_SURFMESH Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDControlSurfMeshReply(answer=0)
+
     def ICFDCreateSection(self, request, context):
         sid = request.sid
         card1 = str(sid)
@@ -2097,9 +2115,18 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         card1 = str(pid)
         newk = "*ICFD_DATABASE_DRAG\n" + card1
         self.kwdproc.newkeyword(newk)
-        msg = "ICFD database drag " + str(pid) + " Created..."
+        msg = "ICFD_DATABASE_DRAG " + str(pid) + " Created..."
         print(msg)
         return kwprocess_pb2.ICFDDBDragReply(answer=0)
+
+    def ICFDCreateDBFlux(self, request, context):
+        pid = request.pid
+        card1 = str(pid)
+        newk = "*ICFD_DATABASE_FLUX\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD_DATABASE_FLUX " + str(pid) + " Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDDBFluxReply(answer=0)
 
     def ICFDCreateBdyPrescribedVel(self, request, context):
         pid = request.pid
@@ -2219,6 +2246,15 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = "MESH bl " + str(pid) + " Created..."
         print(msg)
         return kwprocess_pb2.MeshBlReply(answer=0)
+    
+    def MESHCreateBlSym(self, request, context):
+        pid = request.pid
+        card1 = str(pid)
+        newk = "*MESH_BL_SYM\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "MESH_BL_SYM " + str(pid) + " Created..."
+        print(msg)
+        return kwprocess_pb2.MeshBlSymReply(answer=0)
 
     def CreateDampingGlobal(self, request, context):
         lcid = request.lcid
