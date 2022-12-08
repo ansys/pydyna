@@ -1,5 +1,5 @@
 """
-Plate flow
+Mesh size
 ==========
 
 This example shows a simple ICFD input deck with a coarse mesh.
@@ -30,10 +30,10 @@ if len(sys.argv) > 1:
 solution = DynaSolution(hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
-path = examples.plate_flow + os.sep
-fns.append(path + "plate_flow.k")
+path = examples.mesh_size + os.sep
+fns.append(path + "mesh_size.k")
 solution.open_files(fns)
-solution.set_termination(termination_time=100)
+solution.set_termination(termination_time=50)
 icfd = DynaICFD()
 solution.add(icfd)
 
@@ -67,13 +67,17 @@ part_wall.compute_drag_force()
 part_wall.set_boundary_layer(number=2)
 icfd.parts.add(part_wall)
 
+part_meshsize = ICFDPart(5)
+part_meshsize.set_material(mat)
+icfd.parts.add(part_meshsize)
+
 partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
 partvol.set_material(mat)
 icfd.parts.add(partvol)
 # define the volume space that will be meshed,The boundaries
 # of the volume are the surfaces "spids"
-meshvol = MeshedVolume(surfaces=[1, 2, 3])
-meshvol.embed_shell([4])
+meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
+meshvol.set_meshsize([5])
 icfd.add(meshvol)
 
 solution.create_database_binary(dt=1)
