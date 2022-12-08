@@ -430,6 +430,7 @@ class MeshedVolume:
         self.stub = DynaBase.get_stub()
         self.meshsizeshape = []
         self.embeded_surf = []
+        self.meshsize_surf = []
 
     def embed_shell(self, embeded):
         """Define surfaces that the mesher will embed inside the volume mesh.
@@ -454,6 +455,16 @@ class MeshedVolume:
         parameter = [min_point.x, min_point.y, min_point.z, max_point.x, max_point.y, max_point.z]
         self.meshsizeshape.append(["BOX", size, parameter])
 
+    def set_meshsize(self, surfaces):
+        """Define the surfaces that will be used by the mesher to specify a local mesh size inside the volume..
+
+        Parameters
+        ----------
+        surfaces : list
+            Part IDs for the surface elements that are used to define the mesh size next to the surface mesh.
+        """
+        self.meshsize_surf = surfaces
+
     def create(self):
         """Create mesh volume."""
         ret = self.stub.MESHCreateVolume(MeshVolumeRequest(pids=self.surfaces))
@@ -462,6 +473,9 @@ class MeshedVolume:
         if len(self.embeded_surf) > 0:
             self.stub.MESHCreateEmbedShell(MeshEmbedShellRequest(volid=self.id, pids=self.embeded_surf))
             logging.info("Embed surfaces Created...")
+        if len(self.meshsize_surf) > 0:
+            self.stub.MESHCreateSize(MeshSizeRequest(volid=self.id, pids=self.meshsize_surf))
+            logging.info("Mesh size surfaces Created...")
         for i in range(len(self.meshsizeshape)):
             self.stub.MESHCreateSizeShape(
                 MeshSizeShapeRequest(

@@ -2128,6 +2128,15 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ICFDDBFluxReply(answer=0)
 
+    def ICFDCreateDBTemp(self, request, context):
+        pid = request.pid
+        card1 = str(pid)
+        newk = "*ICFD_DATABASE_TEMP\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD_DATABASE_TEMP " + str(pid) + " Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDDBTempReply(answer=0)
+
     def ICFDCreateBdyPrescribedVel(self, request, context):
         pid = request.pid
         dof = request.dof
@@ -2136,7 +2145,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         card1 = str(pid) + "," + str(dof) + "," + str(vad) + "," + str(lcid) + ",1"
         newk = "*ICFD_BOUNDARY_PRESCRIBED_VEL\n" + card1
         self.kwdproc.newkeyword(newk)
-        msg = "ICFD boundary prescribed vel " + str(pid) + " Created..."
+        msg = "ICFD_BOUNDARY_PRESCRIBED_VEL on part " + str(pid) + " Created..."
         print(msg)
         return kwprocess_pb2.ICFDBdyPrescribedVelReply(answer=0)
 
@@ -2146,7 +2155,17 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         card1 = str(pid) + "," + str(lcid)
         newk = "*ICFD_BOUNDARY_PRESCRIBED_PRE\n" + card1
         self.kwdproc.newkeyword(newk)
-        msg = "ICFD boundary prescribed pre " + str(pid) + " Created..."
+        msg = "ICFD_BOUNDARY_PRESCRIBED_PRE on part " + str(pid) + " Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDBdyPrescribedPreReply(answer=0)
+
+    def ICFDCreateBdyPrescribedTemp(self, request, context):
+        pid = request.pid
+        lcid = request.lcid
+        card1 = str(pid) + "," + str(lcid)
+        newk = "*ICFD_BOUNDARY_PRESCRIBED_TEMP\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD_BOUNDARY_PRESCRIBED_TEMP on part " + str(pid) + " Created..."
         print(msg)
         return kwprocess_pb2.ICFDBdyPrescribedPreReply(answer=0)
 
@@ -2177,6 +2196,20 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = "ICFD boundary nonslip " + str(pid) + " Created..."
         print(msg)
         return kwprocess_pb2.ICFDBdyNonSlipReply(answer=0)
+
+    def ICFDCreateInit(self, request, context):
+        pid = request.pid
+        vx = request.vx
+        vy = request.vy
+        vz = request.vz
+        t = request.t
+        p = request.p
+        card1 = str(pid)+ "," + str(vx)+ "," + str(vy)+ "," + str(vz)+ "," + str(t)+ "," + str(p)
+        newk = "*ICFD_INIT\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD_INIT on part "+ str(pid) +"  Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDInitReply(answer=0)
 
     def MESHCreateVolume(self, request, context):
         volid = self.kwdproc.get_data(gdt.KWD_MESH_VOLUME_LASTID) + 1
@@ -2236,6 +2269,48 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = "MESH_SIZE_SHAPE Created..."
         print(msg)
         return kwprocess_pb2.MeshSizeShapeReply(answer=0)
+
+    def MESHCreateSize(self, request, context):
+        volid = request.volid
+        pids = request.pids
+        card1 = str(volid)
+        newk = "*MESH_SIZE\n" + card1 + "\n"
+        repeatcard = ""
+        count = 0
+        for pid in pids:
+            repeatcard += str(pid)
+            count += 1
+            if count % 8 == 0 or count >= len(pids):
+                repeatcard += "\n"
+                newk += repeatcard
+                repeatcard = ""
+                continue
+            repeatcard += ","
+        self.kwdproc.newkeyword(newk)
+        msg = "MESH_SIZE for volume " + str(volid) + " Created..."
+        print(msg)
+        return kwprocess_pb2.MeshSizeReply(id=volid)
+
+    def MESHCreateInterf(self, request, context):
+        volid = request.volid
+        pids = request.pids
+        card1 = str(volid)
+        newk = "*MESH_INTERF\n" + card1 + "\n"
+        repeatcard = ""
+        count = 0
+        for pid in pids:
+            repeatcard += str(pid)
+            count += 1
+            if count % 8 == 0 or count >= len(pids):
+                repeatcard += "\n"
+                newk += repeatcard
+                repeatcard = ""
+                continue
+            repeatcard += ","
+        self.kwdproc.newkeyword(newk)
+        msg = "MESH_INTERF for volume " + str(volid) + " Created..."
+        print(msg)
+        return kwprocess_pb2.MeshInterfReply(id=volid)
 
     def MESHCreateBl(self, request, context):
         pid = request.pid
