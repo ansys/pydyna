@@ -2069,8 +2069,14 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         flg = request.flg
         ro = request.ro
         vis = request.vis
+        hc = request.hc
+        tc = request.tc
         card1 = str(mid) + "," + str(flg) + "," + str(ro) + "," + str(vis)
-        newk = "*ICFD_MAT\n" + card1
+        card2 = str(hc) + "," + str(tc)
+        if hc!=0 or tc!=0:
+            newk = "*ICFD_MAT\n" + card1 + "\n" + card2
+        else:
+            newk = "*ICFD_MAT\n" + card1
         self.kwdproc.newkeyword(newk)
         msg = "ICFD material " + str(mid) + " Created..."
         print(msg)
@@ -2205,9 +2211,9 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         t = request.t
         p = request.p
         card1 = str(pid)+ "," + str(vx)+ "," + str(vy)+ "," + str(vz)+ "," + str(t)+ "," + str(p)
-        newk = "*ICFD_INIT\n" + card1
+        newk = "*ICFD_INITIAL\n" + card1
         self.kwdproc.newkeyword(newk)
-        msg = "ICFD_INIT on part "+ str(pid) +"  Created..."
+        msg = "ICFD_INITIAL on part "+ str(pid) +"  Created..."
         print(msg)
         return kwprocess_pb2.ICFDInitReply(answer=0)
 

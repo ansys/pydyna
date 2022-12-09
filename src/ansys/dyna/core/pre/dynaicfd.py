@@ -177,6 +177,25 @@ class DynaICFD(DynaBase):
         logging.info("tolerance values for the mesh movement algorithm changed...")
         return ret
 
+    def set_initial(self, velocity=Velocity(0, 0, 0), temperature=0, pressure=0):
+        """Assign the initial condition to all nodes at once.
+
+        Parameters
+        ----------
+        velocity : Velocity
+            Initial velocity.
+        temperature : float
+            Initial temperature.
+        pressure : float
+            Initial pressure.
+
+        """
+        ret = self.stub.ICFDCreateInit(
+            ICFDInitRequest(pid=0, vx=velocity.x, vy=velocity.y, vz=velocity.z, t=temperature, p=pressure)
+        )
+        logging.info("ICFD_INIT Created...")
+        return ret
+
     def save_file(self):
         """Save keyword files."""
         self.create_section_icfd(1)
@@ -260,15 +279,26 @@ class MatICFD:
             Dynamic viscosity.
     """
 
-    def __init__(self, flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID, flow_density=0, dynamic_viscosity=0):
+    def __init__(
+        self,
+        flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID,
+        flow_density=0,
+        dynamic_viscosity=0,
+        heat_capacity=0,
+        thermal_conductivity=0,
+    ):
         self.stub = DynaBase.get_stub()
         self.flag = flag.value
         self.flow_density = flow_density
         self.dynamic_viscosity = dynamic_viscosity
+        self.hc = heat_capacity
+        self.tc = thermal_conductivity
 
     def create(self, stub):
         """Create ICFD material."""
-        ret = self.stub.ICFDCreateMat(ICFDMatRequest(flg=self.flag, ro=self.flow_density, vis=self.dynamic_viscosity))
+        ret = self.stub.ICFDCreateMat(
+            ICFDMatRequest(flg=self.flag, ro=self.flow_density, vis=self.dynamic_viscosity, hc=self.hc, tc=self.tc)
+        )
         self.material_id = ret.id
         logging.info(f"ICFD material {self.material_id} Created...")
 
@@ -338,6 +368,20 @@ class ICFDPart:
         lcid = pressure.id
         ret = self.stub.ICFDCreateBdyPrescribedPre(ICFDBdyPrescribedPreRequest(pid=self.id, lcid=lcid))
         logging.info("ICFD boundary prescribed pressure Created...")
+        return ret
+
+    def set_prescribed_temperature(self, temperature):
+        """Impose a fluid temperature on the boundary.
+
+        Parameters
+        ----------
+        temperature : Curve
+            Load curve to describe the temperature value versus time.
+        """
+        temperature.create(self.stub)
+        lcid = temperature.id
+        ret = self.stub.ICFDCreateBdyPrescribedTemp(ICFDBdyPrescribedTempRequest(pid=self.id, lcid=lcid))
+        logging.info("ICFD boundary prescribed temperature Created...")
         return ret
 
     def set_free_slip(self):
