@@ -20,6 +20,7 @@ icfd_cylinderflow = os.path.join(_module_path, "icfd", "icfd_cylinderflow")
 internal_3d_flow = os.path.join(_module_path, "icfd", "internal_3d_flow")
 plate_flow = os.path.join(_module_path, "icfd", "plate_flow")
 mesh_size = os.path.join(_module_path, "icfd", "mesh_size")
+thermal_flow = os.path.join(_module_path, "icfd", "thermal_flow")
 
 iga_sample = os.path.join(_module_path, "iga", "iga_sample")
 camry_rc = os.path.join(_module_path, "implicit", "camry_rc")
