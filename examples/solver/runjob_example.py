@@ -8,7 +8,6 @@ Sample use of DynaSolver to run a small job in minikube
 #!/usr/bin/python3
 # import logging
 import os
-import sys
 import time
 
 import ansys.dyna.core.solver as solver

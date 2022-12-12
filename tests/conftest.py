@@ -4,14 +4,11 @@ Launch or connect to a persistent local DPF service to be shared in
 pytest as a sesson fixture
 """
 import os
-import sys
 import pytest
 
 
+# from ansys.dyna.core.pre.Server.kwserver import *
 
-from ansys.dyna.core import pre
-from ansys.dyna.core.pre import examples
-#from ansys.dyna.core.pre.Server.kwserver import *
 
 def resolve_test_file(basename, additional_path=""):
     """Resolves a test file's full path based on the base name and the
@@ -24,69 +21,89 @@ def resolve_test_file(basename, additional_path=""):
         raise FileNotFoundError(f"Unable to locate {basename} at {test_files_path}")
     return filename
 
-@pytest.fixture()   
+
+@pytest.fixture()
 def resolve_server_path():
     """Get the filepath of outputted files."""
     path = os.path.dirname(os.path.abspath(__file__))
-    server_path = os.path.join(path, os.pardir,"src","ansys","dyna","core","pre","Server")
+    server_path = os.path.join(path, os.pardir, "src", "ansys", "dyna", "core", "pre", "Server")
     return server_path
 
-@pytest.fixture()   
+
+@pytest.fixture()
 def resolve_standard_path():
     """Get the filepath of standard files."""
     local_path = os.path.dirname(os.path.abspath(__file__))
-    standard_files_path = os.path.join(local_path, "testfiles","standard")
+    standard_files_path = os.path.join(local_path, "testfiles", "standard")
     return standard_files_path
+
 
 @pytest.fixture()
 def base_initialfile():
     """Resolve the path for base initial file."""
-    return resolve_test_file("test_base.k","initial")
+    return resolve_test_file("test_base.k", "initial")
+
 
 @pytest.fixture()
 def dem_initialfile():
     """Resolve the path for dem initial file."""
-    return resolve_test_file("test_dem.k","initial")
-    
+    return resolve_test_file("test_dem.k", "initial")
+
+
 @pytest.fixture()
 def em_initialfile():
     """Resolve the path for em initial file."""
-    return resolve_test_file("test_em.k","initial")
-    
+    return resolve_test_file("test_em.k", "initial")
+
+@pytest.fixture()
+def resolve_icfd_path():
+    """Get the filepath of icfd files."""
+    path = os.path.dirname(os.path.abspath(__file__))
+    icfd_path = os.path.join(path, "testfiles", "initial", "icfd")
+    return icfd_path
+
 @pytest.fixture()
 def icfd_initialfile():
     """Resolve the path for icfd initial file."""
-    return resolve_test_file("test_icfd.k","initial")    
-    
+    return resolve_test_file("test_icfd.k", "initial")
+
+
 @pytest.fixture()
 def iga_initialfile():
     """Resolve the path for iga initial file."""
-    return resolve_test_file("test_iga.k","initial")       
-    
+    return resolve_test_file("test_iga.k", "initial")
+
+
 @pytest.fixture()
 def mech_initialfile():
     """Resolve the path for mech initial file."""
-    return resolve_test_file("test_mech.k","initial")       
-    
+    return resolve_test_file("test_mech.k", "initial")
+
+
 @pytest.fixture()
 def sale_initialfile():
     """Resolve the path for sale initial file."""
-    return resolve_test_file("test_sale.k","initial")       
-    
+    return resolve_test_file("test_sale.k", "initial")
+
+
 @pytest.fixture()
 def solution_initialfile():
     """Resolve the path for solution initial file."""
-    return resolve_test_file("test_solution.k","initial")      
-    
+    return resolve_test_file("test_solution.k", "initial")
+
+
 @pytest.fixture()
 def isph_initialfile():
     """Resolve the path for isph initial file."""
-    return resolve_test_file("test_isph.k","initial") 
-    
+    return resolve_test_file("test_isph.k", "initial")
+
+
 @pytest.fixture()
 def nvh_initialfile():
     """Resolve the path for nvh initial file."""
-    return resolve_test_file("test_nvh.k","initial") 
+    return resolve_test_file("test_nvh.k", "initial")
     
-    
-    
+@pytest.fixture()
+def thermal_initialfile():
+    """Resolve the path for thermal initial file."""
+    return resolve_test_file("test_thermal_stress.k", "initial")
