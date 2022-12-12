@@ -12,6 +12,8 @@ from ansys.dyna.core.pre.dynaicfd import (
     MeshedVolume,
     ICFDAnalysis,
     ICFD_SurfRemeshMethod,
+    Gravity,
+    GravityOption
 )
 
 
@@ -279,4 +281,65 @@ def test_icfd_thermal_flow(resolve_icfd_path, resolve_server_path, resolve_stand
     solution.save_file()
     outputfile = os.path.join(resolve_server_path, "output", "test_thermal_flow.k")
     standardfile = os.path.join(resolve_standard_path, "icfd", "thermal_flow.k")
+    assert comparefile(outputfile, standardfile)
+
+def test_icfd_free_convection_flow(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+    solution = DynaSolution("localhost")
+    icfd_initialfile = os.path.join(resolve_icfd_path, "test_free_convection_flow.k")
+    fns = []
+    fns.append(icfd_initialfile)
+    solution.open_files(fns)
+
+    solution.set_termination(termination_time=30)
+    icfd = DynaICFD()
+    solution.add(icfd)
+
+    icfdanalysis = ICFDAnalysis()
+    icfdanalysis.set_timestep(0.01)
+    icfd.add(icfdanalysis)
+
+    # define model
+    mat = MatICFD(flow_density=37.799999, dynamic_viscosity=1,heat_capacity = 0.7,thermal_conductivity=1.0,thermal_expansion_coefficient=1)
+
+    part_inflow = ICFDPart(1)
+    part_inflow.set_material(mat)
+    part_inflow.set_non_slip()
+    part_inflow.set_prescribed_temperature(temperature=Curve(x=[0, 10000], y=[1, 1]))
+    icfd.parts.add(part_inflow)
+
+    part_outflow = ICFDPart(2)
+    part_outflow.set_material(mat)
+    part_outflow.set_non_slip()
+    part_outflow.set_prescribed_temperature(temperature=Curve(x=[0, 10000], y=[0, 0]))
+    icfd.parts.add(part_outflow)
+
+    part_symmetric = ICFDPart(3)
+    part_symmetric.set_material(mat)
+    part_symmetric.set_non_slip()
+    part_symmetric.compute_temperature()
+    icfd.parts.add(part_symmetric)
+
+    part_wall = ICFDPart(4)
+    part_wall.set_material(mat)
+    part_wall.set_non_slip()
+    part_wall.compute_temperature()
+    icfd.parts.add(part_wall)
+
+    icfd.set_initial()
+
+    g = Gravity(dir=GravityOption.DIR_Y, load=Curve(x=[0, 10000], y=[1, 1]))
+    icfd.add(g)
+
+    partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
+    partvol.set_material(mat)
+    icfd.parts.add(partvol)
+    # define the volume space that will be meshed,The boundaries
+    # of the volume are the surfaces "spids"
+    meshvol = MeshedVolume(surfaces=[1, 2, 3,4])
+    icfd.add(meshvol)
+
+    solution.create_database_binary(dt=1)
+    solution.save_file()
+    outputfile = os.path.join(resolve_server_path, "output", "test_free_convection_flow.k")
+    standardfile = os.path.join(resolve_standard_path, "icfd", "free_convection_flow.k")
     assert comparefile(outputfile, standardfile)
