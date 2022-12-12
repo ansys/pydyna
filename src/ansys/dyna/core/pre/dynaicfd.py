@@ -207,6 +207,17 @@ class ICFD_SurfRemeshMethod(Enum):
     CURVATURE_PRESERVING = 2
 
 
+class ICFD_AnalysisType(Enum):
+    TURNOFF_ICFD_SOLVER = -1
+    TRANSIENT_ANALYSIS = 0
+    STEADY_STATE_ANALYSIS = 1
+
+
+class ICFD_MessageLevel(Enum):
+    TIMESTEP_INFORMATION = 0
+    FULL_OUTPUT_INFORMATION = 4
+
+
 class ICFDAnalysis:
     """Activate ICFD analysis and define associated control parameters."""
 
@@ -214,7 +225,69 @@ class ICFDAnalysis:
         self.defined_timestep = False
         self.defined_volumemesh = False
         self.defined_surfmesh = False
+        self.defined_type = False
+        self.defined_output = False
+        self.defined_steady_state = False
         self.stub = DynaBase.get_stub()
+
+    def set_type(self, analysis_type=ICFD_AnalysisType.TRANSIENT_ANALYSIS):
+        """Specify the type of CFD analysis.
+
+        Parameters
+        ----------
+        analysis_type : ICFD_AnalysisType
+            Analysis type.
+        """
+        self.defined_type = True
+        self.atype = analysis_type.value
+
+    def set_output(self, messagelevel=ICFD_MessageLevel.TIMESTEP_INFORMATION, iteration_interval=0):
+        """Modify default values for screen and file outputs related to this fluid solver only.
+
+        Parameters
+        ----------
+        messagelevel : ICFD_MessageLevel
+            Message level.
+        iteration_interval : int
+            Iteration interval to print the output.
+        """
+        self.defined_output = True
+        self.msgl = messagelevel.value
+        self.itout = iteration_interval
+
+    def set_steady_state(
+        self,
+        max_iteration=1e6,
+        momentum_tol_limit=1e-3,
+        pressure_tol_limit=1e-3,
+        temperature_tol_limit=1e-3,
+        velocity_relax_param=0.3,
+        pressure_relax_param=0.7,
+    ):
+        """Specify convergence options for the steady state solver.
+
+        Parameters
+        ----------
+        max_iteration : int
+            Maximum number of iterations to reach convergence.
+        momentum_tol_limit : float
+            Tolerance limits for the momentum equations.
+        pressure_tol_limit : float
+            Tolerance limits for the pressure equations.
+        temperature_tol_limit : float
+            Tolerance limits for the temperature equations.
+        velocity_relax_param : float
+            Relaxation parameters for the velocity.
+        pressure_relax_param : float
+            Relaxation parameters for the pressure.
+        """
+        self.defined_steady_state = True
+        self.its = max_iteration
+        self.tol1 = momentum_tol_limit
+        self.tol2 = pressure_tol_limit
+        self.tol3 = temperature_tol_limit
+        self.rel1 = velocity_relax_param
+        self.rel2 = pressure_relax_param
 
     def set_timestep(self, timestep=0):
         """Set time step for the fluid problem.
@@ -257,6 +330,16 @@ class ICFDAnalysis:
             self.stub.ICFDCreateControlMesh(ICFDControlMeshRequest(mgsf=self.mgsf))
         if self.defined_surfmesh:
             self.stub.ICFDCreateControlSurfMesh(ICFDControlSurfMeshRequest(rsrf=self.rsrf))
+        if self.defined_type:
+            self.stub.ICFDCreateControlGeneral(ICFDControlGeneralRequest(atype=self.atype, mtype=0, dvcl=0, rdvcl=0))
+        if self.defined_output:
+            self.stub.ICFDCreateControlOutput(ICFDControlOutputRequest(msgl=self.msgl, itout=self.itout))
+        if self.defined_steady_state:
+            self.stub.ICFDCreateControlSteady(
+                ICFDControlSteadyRequest(
+                    its=self.its, tol1=self.tol1, tol2=self.tol2, tol3=self.tol3, rel1=self.rel1, rel2=self.rel2
+                )
+            )
 
 
 class Compressible(Enum):

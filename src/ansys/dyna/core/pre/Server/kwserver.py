@@ -2009,12 +2009,36 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
 
     def ICFDCreateControlOutput(self, request, context):
         msgl = request.msgl
-        card1 = str(msgl)
+        itout = request.itout
+        card1 = str(msgl) + ",0,0,0,," + str(itout)
         newk = "*ICFD_CONTROL_OUTPUT\n" + card1
         self.kwdproc.newkeyword(newk)
         msg = "ICFD Control Output Created..."
         print(msg)
         return kwprocess_pb2.ICFDControlOutputReply(answer=0)
+
+    def ICFDCreateControlSteady(self, request, context):
+        its = request.its
+        tol1 = request.tol1
+        tol2 = request.tol2
+        tol3 = request.tol3
+        rel1 = request.rel1
+        rel2 = request.rel2
+        card1 = str(its) + "," + str(tol1) + "," + str(tol2) + "," + str(tol3) + "," + str(rel1) + "," + str(rel2) + ",1.0"
+        newk = "*ICFD_CONTROL_STEADY\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD Control Steady Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDControlSteadyReply(answer=0)
+
+    def ICFDCreateControlFSI(self, request, context):
+        owc = request.owc
+        card1 = str(owc)
+        newk = "*ICFD_CONTROL_FSI\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD Control FSI Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDControlFSIReply(answer=0)
 
     def ICFDCreateControlTurbulence(self, request, context):
         tmod = request.tmod
@@ -2203,6 +2227,15 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = "ICFD boundary nonslip " + str(pid) + " Created..."
         print(msg)
         return kwprocess_pb2.ICFDBdyNonSlipReply(answer=0)
+
+    def ICFDCreateBdyFSI(self, request, context):
+        pid = request.pid
+        card1 = str(pid)
+        newk = "*ICFD_BOUNDARY_FSI\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD boundary FSI " + str(pid) + " Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDBdyFSIReply(answer=0)
 
     def ICFDCreateInit(self, request, context):
         pid = request.pid
