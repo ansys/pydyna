@@ -22,6 +22,7 @@ plate_flow = os.path.join(_module_path, "icfd", "plate_flow")
 mesh_size = os.path.join(_module_path, "icfd", "mesh_size")
 thermal_flow = os.path.join(_module_path, "icfd", "thermal_flow")
 free_convection_flow = os.path.join(_module_path, "icfd", "free_convection_flow")
+dam_break = os.path.join(_module_path, "icfd", "dam_break")
 
 iga_sample = os.path.join(_module_path, "iga", "iga_sample")
 camry_rc = os.path.join(_module_path, "implicit", "camry_rc")
