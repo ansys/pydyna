@@ -2071,9 +2071,10 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         vis = request.vis
         hc = request.hc
         tc = request.tc
+        beta = request.beta
         card1 = str(mid) + "," + str(flg) + "," + str(ro) + "," + str(vis)
-        card2 = str(hc) + "," + str(tc)
-        if hc!=0 or tc!=0:
+        card2 = str(hc) + "," + str(tc) + "," + str(beta)
+        if hc!=0 or tc!=0 or beta!=0:
             newk = "*ICFD_MAT\n" + card1 + "\n" + card2
         else:
             newk = "*ICFD_MAT\n" + card1

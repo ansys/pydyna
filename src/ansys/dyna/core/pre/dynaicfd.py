@@ -286,6 +286,7 @@ class MatICFD:
         dynamic_viscosity=0,
         heat_capacity=0,
         thermal_conductivity=0,
+        thermal_expansion_coefficient=0,
     ):
         self.stub = DynaBase.get_stub()
         self.flag = flag.value
@@ -293,11 +294,14 @@ class MatICFD:
         self.dynamic_viscosity = dynamic_viscosity
         self.hc = heat_capacity
         self.tc = thermal_conductivity
+        self.beta = thermal_expansion_coefficient
 
     def create(self, stub):
         """Create ICFD material."""
         ret = self.stub.ICFDCreateMat(
-            ICFDMatRequest(flg=self.flag, ro=self.flow_density, vis=self.dynamic_viscosity, hc=self.hc, tc=self.tc)
+            ICFDMatRequest(
+                flg=self.flag, ro=self.flow_density, vis=self.dynamic_viscosity, hc=self.hc, tc=self.tc, beta=self.beta
+            )
         )
         self.material_id = ret.id
         logging.info(f"ICFD material {self.material_id} Created...")
@@ -406,6 +410,12 @@ class ICFDPart:
         """Enable the computation of the flow rate and average pressure over given parts of the model."""
         ret = self.stub.ICFDCreateDBFlux(ICFDDBFluxRequest(pid=self.id))
         logging.info("ICFD database flux Created...")
+        return ret
+
+    def compute_temperature(self):
+        """Enable the computation of the average temperature and the heat flux over given parts of the model."""
+        ret = self.stub.ICFDCreateDBTemp(ICFDDBTempRequest(pid=self.id))
+        logging.info("ICFD database temperature Created...")
         return ret
 
     def set_boundary_layer(self, number=3):
