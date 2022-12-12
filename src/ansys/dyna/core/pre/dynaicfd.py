@@ -485,6 +485,7 @@ class MeshedVolume:
         self.meshsizeshape = []
         self.embeded_surf = []
         self.meshsize_surf = []
+        self.fluid_interfaces = []
 
     def embed_shell(self, embeded):
         """Define surfaces that the mesher will embed inside the volume mesh.
@@ -510,7 +511,7 @@ class MeshedVolume:
         self.meshsizeshape.append(["BOX", size, parameter])
 
     def set_meshsize(self, surfaces):
-        """Define the surfaces that will be used by the mesher to specify a local mesh size inside the volume..
+        """Define the surfaces that will be used by the mesher to specify a local mesh size inside the volume.
 
         Parameters
         ----------
@@ -518,6 +519,16 @@ class MeshedVolume:
             Part IDs for the surface elements that are used to define the mesh size next to the surface mesh.
         """
         self.meshsize_surf = surfaces
+
+    def set_fluid_interfaces(self, surfaces):
+        """Define the surfaces that will be used by the mesher to specify fluid interfaces in multi-fluid simulations.
+
+        Parameters
+        ----------
+        surfaces : list
+            Part IDs for the surface elements.
+        """
+        self.fluid_interfaces = surfaces
 
     def create(self):
         """Create mesh volume."""
@@ -530,6 +541,9 @@ class MeshedVolume:
         if len(self.meshsize_surf) > 0:
             self.stub.MESHCreateSize(MeshSizeRequest(volid=self.id, pids=self.meshsize_surf))
             logging.info("Mesh size surfaces Created...")
+        if len(self.fluid_interfaces) > 0:
+            self.stub.MESHCreateInterf(MeshInterfRequest(volid=self.id, pids=self.fluid_interfaces))
+            logging.info("Mesh fluid interfaces Created...")
         for i in range(len(self.meshsizeshape)):
             self.stub.MESHCreateSizeShape(
                 MeshSizeShapeRequest(

@@ -13,7 +13,8 @@ from ansys.dyna.core.pre.dynaicfd import (
     ICFDAnalysis,
     ICFD_SurfRemeshMethod,
     Gravity,
-    GravityOption
+    GravityOption,
+    Compressible
 )
 
 
@@ -342,4 +343,56 @@ def test_icfd_free_convection_flow(resolve_icfd_path, resolve_server_path, resol
     solution.save_file()
     outputfile = os.path.join(resolve_server_path, "output", "test_free_convection_flow.k")
     standardfile = os.path.join(resolve_standard_path, "icfd", "free_convection_flow.k")
+    assert comparefile(outputfile, standardfile)
+
+def test_icfd_dam_break(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+    solution = DynaSolution("localhost")
+    icfd_initialfile = os.path.join(resolve_icfd_path, "test_dam_break.k")
+    fns = []
+    fns.append(icfd_initialfile)
+    solution.open_files(fns)
+    solution.set_termination(termination_time=50)
+    icfd = DynaICFD()
+    solution.add(icfd)
+    icfdanalysis = ICFDAnalysis()
+    icfdanalysis.set_timestep()
+    icfd.add(icfdanalysis)
+    # define model
+    mat1 = MatICFD(flow_density=1000, dynamic_viscosity=0.001)
+    mat2 = MatICFD(flag=Compressible.VACUUM)
+
+    part1 = ICFDPart(1)
+    part1.set_material(mat1)
+    part1.set_free_slip()
+    icfd.parts.add(part1)
+
+    part2 = ICFDPart(2)
+    part2.set_material(mat2)
+    part2.set_free_slip()
+    icfd.parts.add(part2)
+
+    part3 = ICFDPart(3)
+    part3.set_material(mat1)
+    icfd.parts.add(part3)
+
+    g = Gravity(dir=GravityOption.DIR_Y, load=Curve(x=[0, 10000], y=[9.81, 9.81]))
+    icfd.add(g)
+
+    partvol1 = ICFDVolumePart(surfaces=[1, 3])
+    partvol1.set_material(mat1)
+    icfd.parts.add(partvol1)
+
+    partvol2 = ICFDVolumePart(surfaces=[2, 3])
+    partvol2.set_material(mat2)
+    icfd.parts.add(partvol2)
+    # define the volume space that will be meshed,The boundaries
+    # of the volume are the surfaces "spids"
+    meshvol = MeshedVolume(surfaces=[1, 2])
+    meshvol.set_fluid_interfaces([3])
+    icfd.add(meshvol)
+
+    solution.create_database_binary(dt=0.2)
+    solution.save_file()
+    outputfile = os.path.join(resolve_server_path, "output", "test_dam_break.k")
+    standardfile = os.path.join(resolve_standard_path, "icfd", "dam_break.k")
     assert comparefile(outputfile, standardfile)
