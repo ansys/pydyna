@@ -59,7 +59,14 @@ class DynaMech(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        velocity = [translational.x, translational.y, translational.z, rotational.x, rotational.y, rotational.z]
+        velocity = [
+            translational.x,
+            translational.y,
+            translational.z,
+            rotational.x,
+            rotational.y,
+            rotational.z,
+        ]
         ret = self.stub.CreateInitVel(InitVelRequest(nsid=0, velocity=velocity))
         logging.info("Initial velocity Created...")
         return ret
@@ -254,18 +261,18 @@ class DynaMech(DynaBase):
             controltype=HourglassControl.FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID,
             coefficient=0,
         )
-        self.create_control_shell(
-            wrpang=0,
-            esort=1,
-            irnxx=0,
-            istupd=4,
-            theory=0,
-            bwc=1,
-            miter=1,
-            proj=1,
-            irquad=0,
-        )
-        self.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
+        if self.parts.get_num_shellpart() > 0:
+            self.create_control_shell(
+                wrpang=0,
+                esort=1,
+                irnxx=0,
+                istupd=4,
+                theory=0,
+                bwc=1,
+                miter=1,
+                proj=1,
+                irquad=0,
+            )
         DynaBase.save_file(self)
 
 

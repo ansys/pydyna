@@ -177,12 +177,86 @@ class DynaICFD(DynaBase):
         logging.info("tolerance values for the mesh movement algorithm changed...")
         return ret
 
+    def set_initial(self, velocity=Velocity(0, 0, 0), temperature=0, pressure=0):
+        """Assign the initial condition to all nodes at once.
+
+        Parameters
+        ----------
+        velocity : Velocity
+            Initial velocity.
+        temperature : float
+            Initial temperature.
+        pressure : float
+            Initial pressure.
+
+        """
+        ret = self.stub.ICFDCreateInit(
+            ICFDInitRequest(pid=0, vx=velocity.x, vy=velocity.y, vz=velocity.z, t=temperature, p=pressure)
+        )
+        logging.info("ICFD_INIT Created...")
+        return ret
+
     def save_file(self):
         """Save keyword files."""
-        self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=DynaSolution.termination_time, dt=self.timestep))
-        logging.info("ICFD control time Created...")
         self.create_section_icfd(1)
         DynaBase.save_file(self)
+
+
+class ICFD_SurfRemeshMethod(Enum):
+    LAPLACIAN_SMOOTHING = 1
+    CURVATURE_PRESERVING = 2
+
+
+class ICFDAnalysis:
+    """Activate ICFD analysis and define associated control parameters."""
+
+    def __init__(self):
+        self.defined_timestep = False
+        self.defined_volumemesh = False
+        self.defined_surfmesh = False
+        self.stub = DynaBase.get_stub()
+
+    def set_timestep(self, timestep=0):
+        """Set time step for the fluid problem.
+
+        Parameters
+        ----------
+        dt : float
+            Time step for the fluid problem.
+        """
+        self.defined_timestep = True
+        self.timestep = timestep
+
+    def set_volume_mesh(self, mesh_growth_scale_factor=1.41):
+        """Modify default values for the automatic volume mesh generation.
+
+        Parameters
+        ----------
+        mesh_growth_scale_factor : float
+            Specifies the maximum mesh size that the volume mesher is allowed to use when generating the volume mesh.
+        """
+        self.defined_volumemesh = True
+        self.mgsf = mesh_growth_scale_factor
+
+    def set_surface_mesh(self, remesh_method=ICFD_SurfRemeshMethod.LAPLACIAN_SMOOTHING):
+        """Enable automatic surface re-meshing.
+
+        Parameters
+        ----------
+        remesh_method : ICFD_SurfRemeshMethod
+            Indicates whether or not to perform a surface re-meshing.
+        """
+        self.defined_surfmesh = True
+        self.rsrf = remesh_method.value
+
+    def create(self):
+        """Create ICFD analysis."""
+        if self.defined_timestep:
+            self.stub.ICFDCreateControlTime(ICFDControlTimeRequest(tim=DynaSolution.termination_time, dt=self.timestep))
+        if self.defined_volumemesh:
+            self.stub.ICFDCreateControlMesh(ICFDControlMeshRequest(mgsf=self.mgsf))
+        if self.defined_surfmesh:
+            self.stub.ICFDCreateControlSurfMesh(ICFDControlSurfMeshRequest(rsrf=self.rsrf))
 
 
 class Compressible(Enum):
@@ -205,15 +279,30 @@ class MatICFD:
             Dynamic viscosity.
     """
 
-    def __init__(self, flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID, flow_density=0, dynamic_viscosity=0):
+    def __init__(
+        self,
+        flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID,
+        flow_density=0,
+        dynamic_viscosity=0,
+        heat_capacity=0,
+        thermal_conductivity=0,
+        thermal_expansion_coefficient=0,
+    ):
         self.stub = DynaBase.get_stub()
         self.flag = flag.value
         self.flow_density = flow_density
         self.dynamic_viscosity = dynamic_viscosity
+        self.hc = heat_capacity
+        self.tc = thermal_conductivity
+        self.beta = thermal_expansion_coefficient
 
     def create(self, stub):
         """Create ICFD material."""
-        ret = self.stub.ICFDCreateMat(ICFDMatRequest(flg=self.flag, ro=self.flow_density, vis=self.dynamic_viscosity))
+        ret = self.stub.ICFDCreateMat(
+            ICFDMatRequest(
+                flg=self.flag, ro=self.flow_density, vis=self.dynamic_viscosity, hc=self.hc, tc=self.tc, beta=self.beta
+            )
+        )
         self.material_id = ret.id
         logging.info(f"ICFD material {self.material_id} Created...")
 
@@ -285,6 +374,20 @@ class ICFDPart:
         logging.info("ICFD boundary prescribed pressure Created...")
         return ret
 
+    def set_prescribed_temperature(self, temperature):
+        """Impose a fluid temperature on the boundary.
+
+        Parameters
+        ----------
+        temperature : Curve
+            Load curve to describe the temperature value versus time.
+        """
+        temperature.create(self.stub)
+        lcid = temperature.id
+        ret = self.stub.ICFDCreateBdyPrescribedTemp(ICFDBdyPrescribedTempRequest(pid=self.id, lcid=lcid))
+        logging.info("ICFD boundary prescribed temperature Created...")
+        return ret
+
     def set_free_slip(self):
         """Specify the fluid boundary with free-slip boundary condition."""
         ret = self.stub.ICFDCreateBdyFreeSlip(ICFDBdyFreeSlipRequest(pid=self.id))
@@ -303,6 +406,18 @@ class ICFDPart:
         logging.info("ICFD database drag Created...")
         return ret
 
+    def compute_flux(self):
+        """Enable the computation of the flow rate and average pressure over given parts of the model."""
+        ret = self.stub.ICFDCreateDBFlux(ICFDDBFluxRequest(pid=self.id))
+        logging.info("ICFD database flux Created...")
+        return ret
+
+    def compute_temperature(self):
+        """Enable the computation of the average temperature and the heat flux over given parts of the model."""
+        ret = self.stub.ICFDCreateDBTemp(ICFDDBTempRequest(pid=self.id))
+        logging.info("ICFD database temperature Created...")
+        return ret
+
     def set_boundary_layer(self, number=3):
         """Define a boundary-layer mesh as a refinement on volume-mesh.
 
@@ -313,6 +428,11 @@ class ICFDPart:
         """
         ret = self.stub.MESHCreateBl(MeshBlRequest(pid=self.id, nelth=number - 1))
         logging.info("MESH boundary-layer Created...")
+        return ret
+
+    def set_boundary_layer_symmetry_condition(self):
+        """Specify the part that will have symmetry conditions for the boundary layer."""
+        ret = self.stub.MESHCreateBlSym(MeshBlSymRequest(pid=self.id))
         return ret
 
     def set_property(self):
@@ -364,6 +484,7 @@ class MeshedVolume:
         self.stub = DynaBase.get_stub()
         self.meshsizeshape = []
         self.embeded_surf = []
+        self.meshsize_surf = []
 
     def embed_shell(self, embeded):
         """Define surfaces that the mesher will embed inside the volume mesh.
@@ -388,6 +509,16 @@ class MeshedVolume:
         parameter = [min_point.x, min_point.y, min_point.z, max_point.x, max_point.y, max_point.z]
         self.meshsizeshape.append(["BOX", size, parameter])
 
+    def set_meshsize(self, surfaces):
+        """Define the surfaces that will be used by the mesher to specify a local mesh size inside the volume..
+
+        Parameters
+        ----------
+        surfaces : list
+            Part IDs for the surface elements that are used to define the mesh size next to the surface mesh.
+        """
+        self.meshsize_surf = surfaces
+
     def create(self):
         """Create mesh volume."""
         ret = self.stub.MESHCreateVolume(MeshVolumeRequest(pids=self.surfaces))
@@ -396,6 +527,9 @@ class MeshedVolume:
         if len(self.embeded_surf) > 0:
             self.stub.MESHCreateEmbedShell(MeshEmbedShellRequest(volid=self.id, pids=self.embeded_surf))
             logging.info("Embed surfaces Created...")
+        if len(self.meshsize_surf) > 0:
+            self.stub.MESHCreateSize(MeshSizeRequest(volid=self.id, pids=self.meshsize_surf))
+            logging.info("Mesh size surfaces Created...")
         for i in range(len(self.meshsizeshape)):
             self.stub.MESHCreateSizeShape(
                 MeshSizeShapeRequest(

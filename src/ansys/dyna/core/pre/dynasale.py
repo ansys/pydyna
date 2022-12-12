@@ -88,7 +88,15 @@ class StructuredMesh:
             "True" when successful, "False" when failed
         """
         self.fillings.append(
-            [material, geometry_type, nsample, define_geometry_parameters, inout, vid, reference_pressure]
+            [
+                material,
+                geometry_type,
+                nsample,
+                define_geometry_parameters,
+                inout,
+                vid,
+                reference_pressure,
+            ]
         )
 
     def refine(self, refine_factor_x=1, refine_factor_y=1, refine_factor_z=1):
@@ -189,7 +197,10 @@ class StructuredMesh:
                 logging.info(f"Material {material.name} filled in Mesh {meshid}...")
         self.stub.ALECreateStructuredMeshRefine(
             ALECreateStructuredMeshRefineRequest(
-                mshid=meshid, ifx=self.refine_factor_x, ify=self.refine_factor_y, ifz=self.refine_factor_z
+                mshid=meshid,
+                ifx=self.refine_factor_x,
+                ify=self.refine_factor_y,
+                ifz=self.refine_factor_z,
             )
         )
         logging.info(f"Mesh {meshid} Refined...")
