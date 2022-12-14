@@ -479,6 +479,16 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.ICFDControlOutputRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ICFDControlOutputReply.FromString,
                 )
+        self.ICFDCreateControlSteady = channel.unary_unary(
+                '/kwgrpc.kwC2S/ICFDCreateControlSteady',
+                request_serializer=kwprocess__pb2.ICFDControlSteadyRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDControlSteadyReply.FromString,
+                )
+        self.ICFDCreateControlFSI = channel.unary_unary(
+                '/kwgrpc.kwC2S/ICFDCreateControlFSI',
+                request_serializer=kwprocess__pb2.ICFDControlFSIRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDControlFSIReply.FromString,
+                )
         self.ICFDCreateControlTurbulence = channel.unary_unary(
                 '/kwgrpc.kwC2S/ICFDCreateControlTurbulence',
                 request_serializer=kwprocess__pb2.ICFDControlTurbulenceRequest.SerializeToString,
@@ -558,6 +568,11 @@ class kwC2SStub(object):
                 '/kwgrpc.kwC2S/ICFDCreateBdyNonSlip',
                 request_serializer=kwprocess__pb2.ICFDBdyNonSlipRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ICFDBdyNonSlipReply.FromString,
+                )
+        self.ICFDCreateBdyFSI = channel.unary_unary(
+                '/kwgrpc.kwC2S/ICFDCreateBdyFSI',
+                request_serializer=kwprocess__pb2.ICFDBdyFSIRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDBdyFSIReply.FromString,
                 )
         self.ICFDCreateInit = channel.unary_unary(
                 '/kwgrpc.kwC2S/ICFDCreateInit',
@@ -1326,6 +1341,18 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ICFDCreateControlSteady(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ICFDCreateControlFSI(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ICFDCreateControlTurbulence(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1417,6 +1444,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ICFDCreateBdyNonSlip(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ICFDCreateBdyFSI(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2124,6 +2157,16 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.ICFDControlOutputRequest.FromString,
                     response_serializer=kwprocess__pb2.ICFDControlOutputReply.SerializeToString,
             ),
+            'ICFDCreateControlSteady': grpc.unary_unary_rpc_method_handler(
+                    servicer.ICFDCreateControlSteady,
+                    request_deserializer=kwprocess__pb2.ICFDControlSteadyRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDControlSteadyReply.SerializeToString,
+            ),
+            'ICFDCreateControlFSI': grpc.unary_unary_rpc_method_handler(
+                    servicer.ICFDCreateControlFSI,
+                    request_deserializer=kwprocess__pb2.ICFDControlFSIRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDControlFSIReply.SerializeToString,
+            ),
             'ICFDCreateControlTurbulence': grpc.unary_unary_rpc_method_handler(
                     servicer.ICFDCreateControlTurbulence,
                     request_deserializer=kwprocess__pb2.ICFDControlTurbulenceRequest.FromString,
@@ -2203,6 +2246,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.ICFDCreateBdyNonSlip,
                     request_deserializer=kwprocess__pb2.ICFDBdyNonSlipRequest.FromString,
                     response_serializer=kwprocess__pb2.ICFDBdyNonSlipReply.SerializeToString,
+            ),
+            'ICFDCreateBdyFSI': grpc.unary_unary_rpc_method_handler(
+                    servicer.ICFDCreateBdyFSI,
+                    request_deserializer=kwprocess__pb2.ICFDBdyFSIRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDBdyFSIReply.SerializeToString,
             ),
             'ICFDCreateInit': grpc.unary_unary_rpc_method_handler(
                     servicer.ICFDCreateInit,
@@ -3986,6 +4034,40 @@ class kwC2S(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def ICFDCreateControlSteady(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateControlSteady',
+            kwprocess__pb2.ICFDControlSteadyRequest.SerializeToString,
+            kwprocess__pb2.ICFDControlSteadyReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ICFDCreateControlFSI(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateControlFSI',
+            kwprocess__pb2.ICFDControlFSIRequest.SerializeToString,
+            kwprocess__pb2.ICFDControlFSIReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ICFDCreateControlTurbulence(request,
             target,
             options=(),
@@ -4254,6 +4336,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateBdyNonSlip',
             kwprocess__pb2.ICFDBdyNonSlipRequest.SerializeToString,
             kwprocess__pb2.ICFDBdyNonSlipReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ICFDCreateBdyFSI(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateBdyFSI',
+            kwprocess__pb2.ICFDBdyFSIRequest.SerializeToString,
+            kwprocess__pb2.ICFDBdyFSIReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
