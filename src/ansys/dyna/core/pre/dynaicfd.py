@@ -19,16 +19,6 @@ class DynaICFD(DynaBase):
         self.timestep = 0
         self.termination = 1e28
 
-    def set_timestep(self, timestep=0):
-        """Set time step for the fluid problem.
-
-        Parameters
-        ----------
-        dt : float
-            Time step for the fluid problem.
-        """
-        self.timestep = timestep
-
     def set_termination(self, termination_time):
         """Set total time of simulation for the fluid problem.
 
@@ -481,6 +471,12 @@ class ICFDPart:
         """Specify the fluid boundary with a non-slip boundary condition."""
         ret = self.stub.ICFDCreateBdyNonSlip(ICFDBdyNonSlipRequest(pid=self.id))
         logging.info("ICFD boundary nonslip Created...")
+        return ret
+
+    def set_fsi(self):
+        """Define fluid surface will be considered in contact with the solid surfaces for fluid-structure interaction (FSI) analysis."""
+        ret = self.stub.ICFDCreateBdyFSI(ICFDBdyFSIRequest(pid=self.id))
+        logging.info("ICFD boundary FSI Created...")
         return ret
 
     def compute_drag_force(self):

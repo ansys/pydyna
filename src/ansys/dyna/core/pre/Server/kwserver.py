@@ -604,6 +604,18 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.DefineCurveReply(id=lcid)
 
+    def CreateDefineCurveFunction(self, request, context):
+        lcid = request.lcid
+        lcid = self.kwdproc.get_data(gdt.KWD_DEFINE_CURVE_LASTID) + 1
+        function = request.function
+        card1 = str(lcid)
+        card2 = function
+        newk = "*DEFINE_CURVE_FUNCTION\n" + card1 + "\n" + card2
+        self.kwdproc.newkeyword(newk)
+        msg = "DefineCurveFunction " + str(lcid) + "Created..."
+        print(msg)
+        return kwprocess_pb2.DefineCurveFunctionReply(id=lcid)
+
     def CreateDefineVector(self, request, context):
         title = request.title
         vid = request.vid
