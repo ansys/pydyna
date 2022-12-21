@@ -104,14 +104,18 @@ class Box:
 class Curve:
     """Define a curve [for example, load (ordinate value)] as a function of time."""
 
-    def __init__(self, sfo=1, x=[], y=[]):
+    def __init__(self, sfo=1, x=[], y=[],func=None):
         self.sfo = sfo
         self.abscissa = x
         self.ordinate = y
+        self.func = func
 
     def create(self, stub):
         """Create curve."""
-        ret = stub.CreateDefineCurve(DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate))
+        if self.func!=None:
+            ret = stub.CreateDefineCurveFunction(DefineCurveFunctionRequest( function=self.func))
+        else:
+            ret = stub.CreateDefineCurve(DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate))
         self.id = ret.id
         logging.info(f"Curve {self.id} defined...")
         return self.id
@@ -733,6 +737,7 @@ class ShellFormulation(Enum):
     BELYTSCHKO_TSAY = 2
     SR_HUGHES_LIU = 6
     FULLY_INTEGRATED_BELYTSCHKO_TSAY_MEMBRANE = 9
+    PLANE_STRESS = 12
 
 
 class IGAFormulation(Enum):
