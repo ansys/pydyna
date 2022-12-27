@@ -18,14 +18,19 @@ from ansys.dyna.core.pre.dynaicfd import (
     ICFD_AnalysisType,
     ICFD_MessageLevel,
     ShellPart,
+    SolidPart,
     ShellFormulation,
+    SolidFormulation,
     PartSet,
     Curve,
+    Velocity,
+    Point,
     DOF,
-    Motion
-
+    Motion,
+    ICFD_CouplingForm
 )
-from ansys.dyna.core.pre.dynamaterial import MatRigid
+from ansys.dyna.core.pre.dynadem import DEMAnalysis
+from ansys.dyna.core.pre.dynamaterial import MatRigid,MatRigidDiscrete
 
 
 def comparefile(outputf, standardf):
@@ -513,4 +518,67 @@ def test_icfd_weak_fsi(resolve_icfd_path, resolve_server_path, resolve_standard_
     solution.save_file()
     outputfile = os.path.join(resolve_server_path, "output", "test_weak_fsi.k")
     standardfile = os.path.join(resolve_standard_path, "icfd", "weak_fsi.k")
+    assert comparefile(outputfile, standardfile)
+
+def test_icfd_dem_coupling(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+    solution = DynaSolution("localhost")
+    icfd_initialfile = os.path.join(resolve_icfd_path, "test_dem_coupling.k")
+    fns = []
+    fns.append(icfd_initialfile)
+    solution.open_files(fns)
+    solution.set_termination(termination_time=100)
+    icfd = DynaICFD()
+    solution.add(icfd)
+
+    icfd.set_timestep(tssfac=0.8)
+
+    icfdanalysis = ICFDAnalysis()
+    icfdanalysis.set_timestep(0.05)
+    icfdanalysis.set_coupling_dem(formulation=ICFD_CouplingForm.FORCE_USING_FLUID_PRESSURE_GRADIENT)
+    icfd.add(icfdanalysis)
+
+    demanalysis = DEMAnalysis()
+    demanalysis.set_des(normal_damping_coeff=0.9, tangential_damping_coeff=0.9, static_friction_coeff=0.3, rolling_friction_coeff=0.001)
+    icfd.add(demanalysis)
+
+    # define model
+    mat = MatICFD(flow_density=2.0, dynamic_viscosity=0.01)
+
+    part_inflow = ICFDPart(1)
+    part_inflow.set_material(mat)
+    part_inflow.set_prescribed_velocity(dof=ICFDDOF.X, motion=Curve(x=[0, 10000], y=[1, 1]))
+    icfd.parts.add(part_inflow)
+
+    part_outflow = ICFDPart(2)
+    part_outflow.set_material(mat)
+    part_outflow.set_prescribed_pressure(pressure=Curve(x=[0, 10000], y=[0, 0]))
+    icfd.parts.add(part_outflow)
+
+    part_symmetric = ICFDPart(3)
+    part_symmetric.set_material(mat)
+    part_symmetric.set_free_slip()
+    icfd.parts.add(part_symmetric)
+
+    icfd.set_initial(velocity=Velocity(1, 0, 0))
+
+    partvol = ICFDVolumePart(surfaces=[1, 2, 3])
+    partvol.set_material(mat)
+    icfd.parts.add(partvol)
+    # define the volume space that will be meshed,The boundaries
+    # of the volume are the surfaces "spids"
+    meshvol = MeshedVolume(surfaces=[1, 2, 3])
+    meshvol.meshsize_box(size=0.05,min_point=Point(-1, -1, -1),max_point=Point(1, 1, 1))
+    icfd.add(meshvol)
+
+    #define rigid cylinder
+    matrigid = MatRigidDiscrete(mass_density=1000,young_modulus=1e4)
+    disc = SolidPart(101)
+    disc.set_material(matrigid)
+    disc.set_element_formulation(SolidFormulation.ONE_POINT_COROTATIONAL)
+    icfd.parts.add(disc)
+
+    solution.create_database_binary(dt=1.0)
+    solution.save_file()
+    outputfile = os.path.join(resolve_server_path, "output", "test_dem_coupling.k")
+    standardfile = os.path.join(resolve_standard_path, "icfd", "dem_coupling.k")
     assert comparefile(outputfile, standardfile)

@@ -104,7 +104,7 @@ class Box:
 class Curve:
     """Define a curve [for example, load (ordinate value)] as a function of time."""
 
-    def __init__(self, sfo=1, x=[], y=[],func=None):
+    def __init__(self, sfo=1, x=[], y=[], func=None):
         self.sfo = sfo
         self.abscissa = x
         self.ordinate = y
@@ -112,10 +112,12 @@ class Curve:
 
     def create(self, stub):
         """Create curve."""
-        if self.func!=None:
-            ret = stub.CreateDefineCurveFunction(DefineCurveFunctionRequest( function=self.func))
+        if self.func != None:
+            ret = stub.CreateDefineCurveFunction(DefineCurveFunctionRequest(function=self.func))
         else:
-            ret = stub.CreateDefineCurve(DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate))
+            ret = stub.CreateDefineCurve(
+                DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate)
+            )
         self.id = ret.id
         logging.info(f"Curve {self.id} defined...")
         return self.id
@@ -752,6 +754,7 @@ class SolidFormulation(Enum):
     CONSTANT_STRESS_SOLID_ELEMENT = 1
     EIGHT_POINT_HEXAHEDRON = 2
     FULLY_INTEGRATED_QUADRATIC_EIGHT_NODE_ELEMENT = 3
+    ONE_POINT_COROTATIONAL = 0
 
 
 class HourglassType(Enum):

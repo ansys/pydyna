@@ -208,6 +208,11 @@ class ICFD_MessageLevel(Enum):
     FULL_OUTPUT_INFORMATION = 4
 
 
+class ICFD_CouplingForm(Enum):
+    FORCE_BASED_ON_VELOCITY_DRAG_VALUE = 0
+    FORCE_USING_FLUID_PRESSURE_GRADIENT = 1
+
+
 class ICFDAnalysis:
     """Activate ICFD analysis and define associated control parameters."""
 
@@ -218,6 +223,7 @@ class ICFDAnalysis:
         self.defined_type = False
         self.defined_output = False
         self.defined_steady_state = False
+        self.defined_coupling_dem = False
         self.stub = DynaBase.get_stub()
 
     def set_type(self, analysis_type=ICFD_AnalysisType.TRANSIENT_ANALYSIS):
@@ -312,6 +318,36 @@ class ICFDAnalysis:
         self.defined_surfmesh = True
         self.rsrf = remesh_method.value
 
+    def set_coupling_dem(
+        self,
+        coupling_type=0,
+        birth_time=0,
+        death_time=1e28,
+        scale_factor=1,
+        formulation=ICFD_CouplingForm.FORCE_BASED_ON_VELOCITY_DRAG_VALUE,
+    ):
+        """Activate coupling between the ICFD and DEM solvers.
+
+        Parameters
+        ----------
+        coupling_type : int
+            Indicates the coupling direction to the solver.
+        birth_time : float
+            Birth time for the DEM coupling.
+        death_time : float
+            Death time for the DEM coupling.
+        scale_factor : float
+            Scale factor applied to the force transmitted by the fluid to the structure.
+        formulation : int
+            Type of formulation used in the coupling.
+        """
+        self.defined_coupling_dem = True
+        self.ctype = coupling_type
+        self.bt = birth_time
+        self.dt = death_time
+        self.sf = scale_factor
+        self.form = formulation.value
+
     def create(self):
         """Create ICFD analysis."""
         if self.defined_timestep:
@@ -329,6 +365,10 @@ class ICFDAnalysis:
                 ICFDControlSteadyRequest(
                     its=self.its, tol1=self.tol1, tol2=self.tol2, tol3=self.tol3, rel1=self.rel1, rel2=self.rel2
                 )
+            )
+        if self.defined_coupling_dem:
+            self.stub.ICFDCreateControlDEMCoupling(
+                ICFDControlDEMCouplingRequest(ctype=self.ctype, bt=self.bt, dt=self.dt, sf=self.sf, form=self.form)
             )
 
 
@@ -474,7 +514,8 @@ class ICFDPart:
         return ret
 
     def set_fsi(self):
-        """Define fluid surface will be considered in contact with the solid surfaces for fluid-structure interaction (FSI) analysis."""
+        """Define fluid surface will be considered in contact with the solid surfaces
+        for fluid-structure interaction (FSI) analysis."""
         ret = self.stub.ICFDCreateBdyFSI(ICFDBdyFSIRequest(pid=self.id))
         logging.info("ICFD boundary FSI Created...")
         return ret
