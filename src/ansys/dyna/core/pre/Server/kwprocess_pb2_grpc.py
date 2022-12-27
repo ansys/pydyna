@@ -234,6 +234,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.MatRigidRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.MatRigidReply.FromString,
                 )
+        self.CreateMatRigidDiscrete = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateMatRigidDiscrete',
+                request_serializer=kwprocess__pb2.MatRigidDiscreteRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MatRigidDiscreteReply.FromString,
+                )
         self.CreateMatElastic = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateMatElastic',
                 request_serializer=kwprocess__pb2.MatElasticRequest.SerializeToString,
@@ -1042,6 +1047,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateMatRigid(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateMatRigidDiscrete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1922,6 +1933,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateMatRigid,
                     request_deserializer=kwprocess__pb2.MatRigidRequest.FromString,
                     response_serializer=kwprocess__pb2.MatRigidReply.SerializeToString,
+            ),
+            'CreateMatRigidDiscrete': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateMatRigidDiscrete,
+                    request_deserializer=kwprocess__pb2.MatRigidDiscreteRequest.FromString,
+                    response_serializer=kwprocess__pb2.MatRigidDiscreteReply.SerializeToString,
             ),
             'CreateMatElastic': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateMatElastic,
@@ -3213,6 +3229,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatRigid',
             kwprocess__pb2.MatRigidRequest.SerializeToString,
             kwprocess__pb2.MatRigidReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateMatRigidDiscrete(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatRigidDiscrete',
+            kwprocess__pb2.MatRigidDiscreteRequest.SerializeToString,
+            kwprocess__pb2.MatRigidDiscreteReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
