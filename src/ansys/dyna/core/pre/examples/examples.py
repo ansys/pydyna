@@ -24,6 +24,7 @@ free_convection_flow = os.path.join(_module_path, "icfd", "free_convection_flow"
 dam_break = os.path.join(_module_path, "icfd", "dam_break")
 driven_cavity = os.path.join(_module_path, "icfd", "driven_cavity")
 weak_fsi = os.path.join(_module_path, "icfd", "weak_fsi")
+strong_fsi = os.path.join(_module_path, "icfd", "strong_fsi")
 dem_coupling = os.path.join(_module_path, "icfd", "dem_coupling")
 
 iga_sample = os.path.join(_module_path, "iga", "iga_sample")
