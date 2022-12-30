@@ -555,6 +555,23 @@ class ICFDPart:
         ret = self.stub.MESHCreateBlSym(MeshBlSymRequest(pid=self.id))
         return ret
 
+    def set_imposed_move(self, vx=None, vy=None, vz=None):
+        """Impose a velocity on specific ICFD part."""
+        lcvx, lcvy, lcvz = 0, 0, 0
+        if vx != None:
+            vx.create(self.stub)
+            lcvx = vx.id
+        if vy != None:
+            vy.create(self.stub)
+            lcvy = vy.id
+        if vz != None:
+            vz.create(self.stub)
+            lcvz = vz.id
+        ret = self.stub.ICFDCreateControlImposedMove(
+            ICFDControlImposedMoveRequest(pid=self.id, lcvx=lcvx, lcvy=lcvy, lcvz=lcvz)
+        )
+        return ret
+
     def set_property(self):
         """Set properties for ICFD part."""
         secid = 1
