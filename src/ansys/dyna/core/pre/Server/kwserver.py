@@ -2105,6 +2105,18 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ICFDControlSurfMeshReply(answer=0)
 
+    def ICFDCreateControlImposedMove(self, request, context):
+        pid = request.pid
+        lcvx = request.lcvx
+        lcvy = request.lcvy
+        lcvz = request.lcvz
+        card1 = str(pid) + "," + str(lcvx) + "," + str(lcvy) + "," + str(lcvz)
+        newk = "*ICFD_CONTROL_IMPOSED_MOVE\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD_CONTROL_IMPOSED_MOVE Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDControlImposedMoveReply(answer=0)
+
     def ICFDCreateSection(self, request, context):
         sid = request.sid
         card1 = str(sid)
