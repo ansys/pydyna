@@ -514,6 +514,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.ICFDControlMeshRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ICFDControlMeshReply.FromString,
                 )
+        self.ICFDCreateControlAdapt = channel.unary_unary(
+                '/kwgrpc.kwC2S/ICFDCreateControlAdapt',
+                request_serializer=kwprocess__pb2.ICFDControlAdaptRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDControlAdaptReply.FromString,
+                )
         self.ICFDCreateControlSurfMesh = channel.unary_unary(
                 '/kwgrpc.kwC2S/ICFDCreateControlSurfMesh',
                 request_serializer=kwprocess__pb2.ICFDControlSurfMeshRequest.SerializeToString,
@@ -1398,6 +1403,12 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ICFDCreateControlAdapt(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ICFDCreateControlSurfMesh(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -2224,6 +2235,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.ICFDCreateControlMesh,
                     request_deserializer=kwprocess__pb2.ICFDControlMeshRequest.FromString,
                     response_serializer=kwprocess__pb2.ICFDControlMeshReply.SerializeToString,
+            ),
+            'ICFDCreateControlAdapt': grpc.unary_unary_rpc_method_handler(
+                    servicer.ICFDCreateControlAdapt,
+                    request_deserializer=kwprocess__pb2.ICFDControlAdaptRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDControlAdaptReply.SerializeToString,
             ),
             'ICFDCreateControlSurfMesh': grpc.unary_unary_rpc_method_handler(
                     servicer.ICFDCreateControlSurfMesh,
@@ -4197,6 +4213,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateControlMesh',
             kwprocess__pb2.ICFDControlMeshRequest.SerializeToString,
             kwprocess__pb2.ICFDControlMeshReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ICFDCreateControlAdapt(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateControlAdapt',
+            kwprocess__pb2.ICFDControlAdaptRequest.SerializeToString,
+            kwprocess__pb2.ICFDControlAdaptReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

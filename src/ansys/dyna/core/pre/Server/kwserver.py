@@ -2096,6 +2096,18 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ICFDControlMeshReply(answer=0)
 
+    def ICFDCreateControlAdapt(self, request, context):
+        minh = request.minh
+        maxh = request.maxh
+        err = request.err
+        nit = request.nit
+        card1 = str(minh) + "," + str(maxh) + "," + str(err) + ",0," + str(nit)
+        newk = "*ICFD_CONTROL_ADAPT\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD_CONTROL_ADAPT Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDControlAdaptReply(answer=0)
+
     def ICFDCreateControlSurfMesh(self, request, context):
         rsrf = request.rsrf
         card1 = str(rsrf)

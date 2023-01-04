@@ -26,6 +26,7 @@ driven_cavity = os.path.join(_module_path, "icfd", "driven_cavity")
 weak_fsi = os.path.join(_module_path, "icfd", "weak_fsi")
 strong_fsi = os.path.join(_module_path, "icfd", "strong_fsi")
 imposed_move = os.path.join(_module_path, "icfd", "imposed_move")
+mesh_adaptivity = os.path.join(_module_path, "icfd", "mesh_adaptivity")
 dem_coupling = os.path.join(_module_path, "icfd", "dem_coupling")
 
 iga_sample = os.path.join(_module_path, "iga", "iga_sample")
