@@ -224,6 +224,7 @@ class ICFDAnalysis:
         self.defined_output = False
         self.defined_steady_state = False
         self.defined_coupling_dem = False
+        self.defined_mesh_adapt = False
         self.stub = DynaBase.get_stub()
 
     def set_type(self, analysis_type=ICFD_AnalysisType.TRANSIENT_ANALYSIS):
@@ -307,6 +308,26 @@ class ICFDAnalysis:
         self.defined_volumemesh = True
         self.mgsf = mesh_growth_scale_factor
 
+    def set_mesh_adaptivity(self, min_mesh_size=0, max_mesh_size=0, max_perceptual_error=0, num_iteration=0):
+        """Activate the adaptive mesh refinement feature..
+
+        Parameters
+        ----------
+        min_mesh_size : float
+            Minimum mesh size allowed to the mesh generator.
+        max_mesh_size : float
+            Maximum mesh size.
+        max_perceptual_error : float
+            Maximum perceptual error allowed in the whole domain.
+        num_iteration : int
+            Number of iterations before a forced remeshing.
+        """
+        self.defined_mesh_adapt = True
+        self.minh = min_mesh_size
+        self.maxh = max_mesh_size
+        self.err = max_perceptual_error
+        self.nit = num_iteration
+
     def set_surface_mesh(self, remesh_method=ICFD_SurfRemeshMethod.LAPLACIAN_SMOOTHING):
         """Enable automatic surface re-meshing.
 
@@ -369,6 +390,10 @@ class ICFDAnalysis:
         if self.defined_coupling_dem:
             self.stub.ICFDCreateControlDEMCoupling(
                 ICFDControlDEMCouplingRequest(ctype=self.ctype, bt=self.bt, dt=self.dt, sf=self.sf, form=self.form)
+            )
+        if self.defined_mesh_adapt:
+            self.stub.ICFDCreateControlAdapt(
+                ICFDControlAdaptRequest(minh=self.minh, maxh=self.maxh, err=self.err, nit=self.nit)
             )
 
 
