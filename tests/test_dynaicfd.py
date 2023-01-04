@@ -49,8 +49,9 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_icfd(icfd_initialfile, resolve_server_path, resolve_standard_path):
+def test_icfd_cylinder_flow(resolve_icfd_path, resolve_server_path, resolve_standard_path):
     solution = DynaSolution("localhost")
+    icfd_initialfile = os.path.join(resolve_icfd_path, "test_cylinder_flow.k")
     fns = []
     fns.append(icfd_initialfile)
     solution.open_files(fns)
@@ -66,8 +67,8 @@ def test_icfd(icfd_initialfile, resolve_server_path, resolve_standard_path):
     icfd.add(meshvol)
     solution.create_database_binary(dt=1)
     solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_icfd.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd.k")
+    outputfile = os.path.join(resolve_server_path, "output", "test_cylinder_flow.k")
+    standardfile = os.path.join(resolve_standard_path, "icfd", "cylinder_flow.k")
     assert comparefile(outputfile, standardfile)
 
 
