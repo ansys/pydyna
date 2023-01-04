@@ -49,7 +49,7 @@ and copy the required files
 Documentation
 -------------
 For comprehesive information on PyDyna, see the latest release
-`documentation <https://wenhuiuy.github.io/pydyna-dev-docs/>`_.
+`documentation <https://dyna.docs.pyansys.com/>`_.
 
 On the `PyDyna Issues <https://github.com.mcas.ms/pyansys/pyDyna/issues>`_ page, you can create
 issues to submit questions, report bugs, and request new features. To reach
