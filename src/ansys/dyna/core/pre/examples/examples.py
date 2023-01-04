@@ -15,7 +15,7 @@ airbag_deploy = os.path.join(_module_path, "airbag", "airbag_deploy")
 em_railgun = os.path.join(_module_path, "em", "em_railgun")
 belted_dummy = os.path.join(_module_path, "explicit", "belted_dummy")
 # ICFD
-icfd_cylinderflow = os.path.join(_module_path, "icfd", "icfd_cylinderflow")
+cylinder_flow = os.path.join(_module_path, "icfd", "cylinder_flow")
 internal_3d_flow = os.path.join(_module_path, "icfd", "internal_3d_flow")
 plate_flow = os.path.join(_module_path, "icfd", "plate_flow")
 mesh_size = os.path.join(_module_path, "icfd", "mesh_size")
