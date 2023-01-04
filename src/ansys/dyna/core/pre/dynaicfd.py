@@ -619,15 +619,37 @@ class ICFDVolumePart:
         self.secid = 1
         self.mid = 0
         self.surfaces = surfaces
+        self.defined_imposed_move = False
 
     def set_material(self, mat):
         """Set material."""
         self.mid = mat.material_id
 
+    def set_imposed_move(self, vx=None, vy=None, vz=None):
+        """Impose a velocity on specific ICFD part."""
+        self.defined_imposed_move = True
+        self.vx = vx
+        self.vy = vy
+        self.vz = vz
+
     def create(self):
         """Create ICFD volume part."""
         ret = self.stub.ICFDCreatePartVol(ICFDPartVolRequest(secid=1, mid=self.mid, spids=self.surfaces))
         self.id = ret.id
+        if self.defined_imposed_move:
+            lcvx, lcvy, lcvz = 0, 0, 0
+            if self.vx != None:
+                self.vx.create(self.stub)
+                lcvx = self.vx.id
+            if self.vy != None:
+                self.vy.create(self.stub)
+                lcvy = self.vy.id
+            if self.vz != None:
+                self.vz.create(self.stub)
+                lcvz = self.vz.id
+            ret = self.stub.ICFDCreateControlImposedMove(
+                ICFDControlImposedMoveRequest(pid=self.id, lcvx=lcvx, lcvy=lcvy, lcvz=lcvz)
+            )
         logging.info(f"ICFD part volume {self.id} Created...")
         return ret
 
