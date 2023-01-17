@@ -186,6 +186,23 @@ class DynaICFD(DynaBase):
         logging.info("ICFD_INIT Created...")
         return ret
 
+    def set_imposed_move(self, vx=None, vy=None, vz=None):
+        """Impose a velocity on the whole volume mesh."""
+        lcvx, lcvy, lcvz = 0, 0, 0
+        if vx != None:
+            vx.create(self.stub)
+            lcvx = vx.id
+        if vy != None:
+            vy.create(self.stub)
+            lcvy = vy.id
+        if vz != None:
+            vz.create(self.stub)
+            lcvz = vz.id
+        ret = self.stub.ICFDCreateControlImposedMove(
+            ICFDControlImposedMoveRequest(pid=0, lcvx=lcvx, lcvy=lcvy, lcvz=lcvz)
+        )
+        return ret
+
     def save_file(self):
         """Save keyword files."""
         self.create_section_icfd(1)

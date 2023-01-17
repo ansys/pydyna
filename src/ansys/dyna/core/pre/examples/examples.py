@@ -29,6 +29,7 @@ imposed_move = os.path.join(_module_path, "icfd", "imposed_move")
 mesh_adaptivity = os.path.join(_module_path, "icfd", "mesh_adaptivity")
 mesh_morphing = os.path.join(_module_path, "icfd", "mesh_morphing")
 dem_coupling = os.path.join(_module_path, "icfd", "dem_coupling")
+sloshing = os.path.join(_module_path, "icfd", "sloshing")
 
 iga_sample = os.path.join(_module_path, "iga", "iga_sample")
 camry_rc = os.path.join(_module_path, "implicit", "camry_rc")
