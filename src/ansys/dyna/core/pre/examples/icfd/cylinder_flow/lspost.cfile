@@ -1,0 +1,4 @@
+$# LS-PrePost command file created by LS-PrePost(R) V4.10 (Beta)-30Dec2022 -64bit-Window
+$# Created on Jan-9-2023 (09:30:19)
+open keyword "D:\pyDynavenv\pyDyna\src\ansys\dyna\core\pre\examples\icfd\cylinder_flow\cylinder_flow.k"
+open keyword "D:\!WORK\ICFD\ICFDPRE_EXAMPLE\Basics\7_User_defined_mesh\i.k"
