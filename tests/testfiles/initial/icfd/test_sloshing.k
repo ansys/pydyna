@@ -1,6 +1,6 @@
 *KEYWORD
 *TITLE
-LS-DYNA keyword deck by LS-PrePost
+ICFD Sloshing with global imposed move
 *ICFD_PART
 $#     pid     secid       mid 
          1         0         0

@@ -1,7 +1,7 @@
 *KEYWORD
 *TITLE
 $#                                                                         title
-LS-DYNA keyword deck by LS-PrePost
+ICFD Sloshing with global imposed move
 *CONTROL_TERMINATION
 $#  endtim    endcyc     dtmin    endeng    endmas     nosol
        1.0         0       0.0       0.01.000000E8         0
