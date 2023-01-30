@@ -1,4 +1,7 @@
 *KEYWORD
+*TITLE
+$#                                                                         title
+ICFD Dam break
 *CONTROL_TERMINATION
 $#  endtim    endcyc     dtmin    endeng    endmas     nosol
       50.0         0       0.0       0.01.000000E8         0

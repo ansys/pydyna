@@ -1,7 +1,7 @@
 *KEYWORD
 *TITLE
 $#                                                                         title
-LS-DYNA keyword deck by LS-PrePost
+ICFD Plate flow
 *CONTROL_TERMINATION
 $#  endtim    endcyc     dtmin    endeng    endmas     nosol
      100.0         0       0.0       0.01.000000E8         0

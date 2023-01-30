@@ -1,4 +1,7 @@
 *KEYWORD
+*TITLE
+$#                                                                         title
+ICFD DEM Coupling
 *CONTROL_DISCRETE_ELEMENT
 $#   ndamp     tdamp     frics     fricr     normk    sheark       cap       vtk
        0.9       0.9       0.3     0.001      0.01    0.2857         0         0
