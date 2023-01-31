@@ -234,6 +234,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.MatRigidRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.MatRigidReply.FromString,
                 )
+        self.CreateMatRigidDiscrete = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateMatRigidDiscrete',
+                request_serializer=kwprocess__pb2.MatRigidDiscreteRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.MatRigidDiscreteReply.FromString,
+                )
         self.CreateMatElastic = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateMatElastic',
                 request_serializer=kwprocess__pb2.MatElasticRequest.SerializeToString,
@@ -509,10 +514,20 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.ICFDControlMeshRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ICFDControlMeshReply.FromString,
                 )
+        self.ICFDCreateControlAdapt = channel.unary_unary(
+                '/kwgrpc.kwC2S/ICFDCreateControlAdapt',
+                request_serializer=kwprocess__pb2.ICFDControlAdaptRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDControlAdaptReply.FromString,
+                )
         self.ICFDCreateControlSurfMesh = channel.unary_unary(
                 '/kwgrpc.kwC2S/ICFDCreateControlSurfMesh',
                 request_serializer=kwprocess__pb2.ICFDControlSurfMeshRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.ICFDControlSurfMeshReply.FromString,
+                )
+        self.ICFDCreateControlImposedMove = channel.unary_unary(
+                '/kwgrpc.kwC2S/ICFDCreateControlImposedMove',
+                request_serializer=kwprocess__pb2.ICFDControlImposedMoveRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.ICFDControlImposedMoveReply.FromString,
                 )
         self.ICFDCreateSection = channel.unary_unary(
                 '/kwgrpc.kwC2S/ICFDCreateSection',
@@ -1047,6 +1062,12 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateMatRigidDiscrete(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateMatElastic(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1382,7 +1403,19 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ICFDCreateControlAdapt(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ICFDCreateControlSurfMesh(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ICFDCreateControlImposedMove(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1923,6 +1956,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.MatRigidRequest.FromString,
                     response_serializer=kwprocess__pb2.MatRigidReply.SerializeToString,
             ),
+            'CreateMatRigidDiscrete': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateMatRigidDiscrete,
+                    request_deserializer=kwprocess__pb2.MatRigidDiscreteRequest.FromString,
+                    response_serializer=kwprocess__pb2.MatRigidDiscreteReply.SerializeToString,
+            ),
             'CreateMatElastic': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateMatElastic,
                     request_deserializer=kwprocess__pb2.MatElasticRequest.FromString,
@@ -2198,10 +2236,20 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.ICFDControlMeshRequest.FromString,
                     response_serializer=kwprocess__pb2.ICFDControlMeshReply.SerializeToString,
             ),
+            'ICFDCreateControlAdapt': grpc.unary_unary_rpc_method_handler(
+                    servicer.ICFDCreateControlAdapt,
+                    request_deserializer=kwprocess__pb2.ICFDControlAdaptRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDControlAdaptReply.SerializeToString,
+            ),
             'ICFDCreateControlSurfMesh': grpc.unary_unary_rpc_method_handler(
                     servicer.ICFDCreateControlSurfMesh,
                     request_deserializer=kwprocess__pb2.ICFDControlSurfMeshRequest.FromString,
                     response_serializer=kwprocess__pb2.ICFDControlSurfMeshReply.SerializeToString,
+            ),
+            'ICFDCreateControlImposedMove': grpc.unary_unary_rpc_method_handler(
+                    servicer.ICFDCreateControlImposedMove,
+                    request_deserializer=kwprocess__pb2.ICFDControlImposedMoveRequest.FromString,
+                    response_serializer=kwprocess__pb2.ICFDControlImposedMoveReply.SerializeToString,
             ),
             'ICFDCreateSection': grpc.unary_unary_rpc_method_handler(
                     servicer.ICFDCreateSection,
@@ -3217,6 +3265,23 @@ class kwC2S(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def CreateMatRigidDiscrete(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateMatRigidDiscrete',
+            kwprocess__pb2.MatRigidDiscreteRequest.SerializeToString,
+            kwprocess__pb2.MatRigidDiscreteReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def CreateMatElastic(request,
             target,
             options=(),
@@ -4152,6 +4217,23 @@ class kwC2S(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def ICFDCreateControlAdapt(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateControlAdapt',
+            kwprocess__pb2.ICFDControlAdaptRequest.SerializeToString,
+            kwprocess__pb2.ICFDControlAdaptReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ICFDCreateControlSurfMesh(request,
             target,
             options=(),
@@ -4165,6 +4247,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateControlSurfMesh',
             kwprocess__pb2.ICFDControlSurfMeshRequest.SerializeToString,
             kwprocess__pb2.ICFDControlSurfMeshReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ICFDCreateControlImposedMove(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/ICFDCreateControlImposedMove',
+            kwprocess__pb2.ICFDControlImposedMoveRequest.SerializeToString,
+            kwprocess__pb2.ICFDControlImposedMoveReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

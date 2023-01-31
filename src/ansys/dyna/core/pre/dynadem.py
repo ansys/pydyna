@@ -101,3 +101,49 @@ class DynaDEM(DynaBase):
             "True" when successful, "False" when failed
         """
         DynaBase.save_file(self)
+
+
+class DEMAnalysis:
+    """Activate DEM analysis and define associated control parameters."""
+
+    def __init__(self):
+        self.defined_des = False
+        self.stub = DynaBase.get_stub()
+
+    def set_des(
+        self,
+        normal_damping_coeff=0.0,
+        tangential_damping_coeff=0.0,
+        static_friction_coeff=0.0,
+        rolling_friction_coeff=0.0,
+        normal_spring_constant_sf=0.01,
+        ratio=0.2857,
+    ):
+        """Define global control parameters for discrete element spheres.
+
+        Parameters
+        ----------
+        analysis_type : ICFD_AnalysisType
+            Analysis type.
+        """
+        self.defined_des = True
+        self.ndamp = normal_damping_coeff
+        self.tdamp = tangential_damping_coeff
+        self.frics = static_friction_coeff
+        self.fricr = rolling_friction_coeff
+        self.normk = normal_spring_constant_sf
+        self.sheark = ratio
+
+    def create(self):
+        """Create DEM analysis."""
+        if self.defined_des:
+            self.stub.CreateControlDiscreteElement(
+                ControlDiscreteElementRequest(
+                    ndamp=self.ndamp,
+                    tdamp=self.tdamp,
+                    frics=self.frics,
+                    fricr=self.fricr,
+                    normk=self.normk,
+                    sheark=self.sheark,
+                )
+            )

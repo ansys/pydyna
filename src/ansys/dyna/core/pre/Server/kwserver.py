@@ -1365,6 +1365,19 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.MatRigidReply(mid=mid)
 
+    def CreateMatRigidDiscrete(self, request, context):
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID) + 1
+        ro = request.ro
+        e = request.e
+        pr = request.pr
+        card1 = str(mid) + "," + str(ro) + "," + str(e) + "," + str(pr)
+        opcode = "*MAT_RIGID_DISCRETE"
+        newk = opcode + "\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = opcode + " Created..."
+        print(msg)
+        return kwprocess_pb2.MatRigidDiscreteReply(mid=mid)
+
     def CreateMatElastic(self, request, context):
         mid = self.kwdproc.get_data(gdt.KWD_MAT_LASTID) + 1
         ro = request.ro
@@ -2066,7 +2079,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         bt = request.bt
         dt = request.dt
         sf = request.sf
-        card1 = str(ctype) + "," + str(bt) + "," + str(dt) + "," + str(sf)
+        form = request.form
+        card1 = str(ctype) + "," + str(bt) + "," + str(dt) + "," + str(sf) + ",,0,1," + str(form)
         newk = "*ICFD_CONTROL_DEM_COUPLING\n" + card1
         self.kwdproc.newkeyword(newk)
         msg = "ICFD Control DEM Coupling Created..."
@@ -2082,6 +2096,18 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.ICFDControlMeshReply(answer=0)
 
+    def ICFDCreateControlAdapt(self, request, context):
+        minh = request.minh
+        maxh = request.maxh
+        err = request.err
+        nit = request.nit
+        card1 = str(minh) + "," + str(maxh) + "," + str(err) + ",0," + str(nit)
+        newk = "*ICFD_CONTROL_ADAPT\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD_CONTROL_ADAPT Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDControlAdaptReply(answer=0)
+
     def ICFDCreateControlSurfMesh(self, request, context):
         rsrf = request.rsrf
         card1 = str(rsrf)
@@ -2090,6 +2116,18 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = "ICFD_CONTROL_SURFMESH Created..."
         print(msg)
         return kwprocess_pb2.ICFDControlSurfMeshReply(answer=0)
+
+    def ICFDCreateControlImposedMove(self, request, context):
+        pid = request.pid
+        lcvx = request.lcvx
+        lcvy = request.lcvy
+        lcvz = request.lcvz
+        card1 = str(pid) + "," + str(lcvx) + "," + str(lcvy) + "," + str(lcvz)
+        newk = "*ICFD_CONTROL_IMPOSED_MOVE\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "ICFD_CONTROL_IMPOSED_MOVE Created..."
+        print(msg)
+        return kwprocess_pb2.ICFDControlImposedMoveReply(answer=0)
 
     def ICFDCreateSection(self, request, context):
         sid = request.sid
