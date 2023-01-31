@@ -12,11 +12,10 @@ _module_path = os.path.dirname(inspect.getfile(inspect.currentframe()))
 
 # this files can be imported with from `ansys.dpf.core import examples`:
 airbag_deploy = os.path.join(_module_path, "airbag", "airbag_deploy")
-wing = os.path.join(_module_path, "coupling", "wing")
 em_railgun = os.path.join(_module_path, "em", "em_railgun")
 belted_dummy = os.path.join(_module_path, "explicit", "belted_dummy")
 # ICFD
-icfd_cylinderflow = os.path.join(_module_path, "icfd", "icfd_cylinderflow")
+cylinder_flow = os.path.join(_module_path, "icfd", "cylinder_flow")
 internal_3d_flow = os.path.join(_module_path, "icfd", "internal_3d_flow")
 plate_flow = os.path.join(_module_path, "icfd", "plate_flow")
 mesh_size = os.path.join(_module_path, "icfd", "mesh_size")
@@ -25,6 +24,12 @@ free_convection_flow = os.path.join(_module_path, "icfd", "free_convection_flow"
 dam_break = os.path.join(_module_path, "icfd", "dam_break")
 driven_cavity = os.path.join(_module_path, "icfd", "driven_cavity")
 weak_fsi = os.path.join(_module_path, "icfd", "weak_fsi")
+strong_fsi = os.path.join(_module_path, "icfd", "strong_fsi")
+imposed_move = os.path.join(_module_path, "icfd", "imposed_move")
+mesh_adaptivity = os.path.join(_module_path, "icfd", "mesh_adaptivity")
+mesh_morphing = os.path.join(_module_path, "icfd", "mesh_morphing")
+dem_coupling = os.path.join(_module_path, "icfd", "dem_coupling")
+sloshing = os.path.join(_module_path, "icfd", "sloshing")
 
 iga_sample = os.path.join(_module_path, "iga", "iga_sample")
 camry_rc = os.path.join(_module_path, "implicit", "camry_rc")

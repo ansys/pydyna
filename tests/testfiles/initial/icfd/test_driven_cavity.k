@@ -2,8 +2,7 @@ $# LS-DYNA Keyword file created by LS-PrePost(R) V4.3 - 26Nov2016(09:00)
 $# Created on Feb-20-2017 (11:37:57)
 *KEYWORD
 *TITLE
-$#                                                                         title
-LS-DYNA keyword deck by LS-PrePost
+ICFD Driven Cavity
 *ICFD_PART
 $#     pid     secid       mid
          1         0         0

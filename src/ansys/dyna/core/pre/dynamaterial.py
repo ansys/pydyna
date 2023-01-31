@@ -377,6 +377,22 @@ class MatRigid(MatAdditional):
         logging.info(f"Material {self.name} Created...")
 
 
+class MatRigidDiscrete:
+    """Define a rigid material for shells or solids."""
+
+    def __init__(self, mass_density=0, young_modulus=0, poisson_ratio=0.3):
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr = poisson_ratio
+
+    def create(self, stub):
+        """Create rigid material."""
+        ret = stub.CreateMatRigidDiscrete(MatRigidDiscreteRequest(ro=self.ro, e=self.e, pr=self.pr))
+        self.material_id = ret.mid
+        self.name = "RIGID Discrete"
+        logging.info(f"Material {self.name} Created...")
+
+
 class MatPiecewiseLinearPlasticity:
     """Define an elasto-plastic material with an arbitrary stress
     as a function of strain curve that can also have an arbitrary

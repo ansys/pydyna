@@ -30,8 +30,8 @@ if len(sys.argv) > 1:
 icfd_solution = DynaSolution(hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
-path = examples.icfd_cylinderflow + os.sep
-fns.append(path + "mesh.k")
+path = examples.cylinder_flow + os.sep
+fns.append(path + "cylinder_flow.k")
 icfd_solution.open_files(fns)
 # Set total time of simulation
 icfd_solution.set_termination(termination_time=100)

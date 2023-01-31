@@ -186,6 +186,23 @@ class DynaICFD(DynaBase):
         logging.info("ICFD_INIT Created...")
         return ret
 
+    def set_imposed_move(self, vx=None, vy=None, vz=None):
+        """Impose a velocity on the whole volume mesh."""
+        lcvx, lcvy, lcvz = 0, 0, 0
+        if vx != None:
+            vx.create(self.stub)
+            lcvx = vx.id
+        if vy != None:
+            vy.create(self.stub)
+            lcvy = vy.id
+        if vz != None:
+            vz.create(self.stub)
+            lcvz = vz.id
+        ret = self.stub.ICFDCreateControlImposedMove(
+            ICFDControlImposedMoveRequest(pid=0, lcvx=lcvx, lcvy=lcvy, lcvz=lcvz)
+        )
+        return ret
+
     def save_file(self):
         """Save keyword files."""
         self.create_section_icfd(1)
@@ -208,6 +225,11 @@ class ICFD_MessageLevel(Enum):
     FULL_OUTPUT_INFORMATION = 4
 
 
+class ICFD_CouplingForm(Enum):
+    FORCE_BASED_ON_VELOCITY_DRAG_VALUE = 0
+    FORCE_USING_FLUID_PRESSURE_GRADIENT = 1
+
+
 class ICFDAnalysis:
     """Activate ICFD analysis and define associated control parameters."""
 
@@ -218,6 +240,8 @@ class ICFDAnalysis:
         self.defined_type = False
         self.defined_output = False
         self.defined_steady_state = False
+        self.defined_coupling_dem = False
+        self.defined_mesh_adapt = False
         self.stub = DynaBase.get_stub()
 
     def set_type(self, analysis_type=ICFD_AnalysisType.TRANSIENT_ANALYSIS):
@@ -301,6 +325,26 @@ class ICFDAnalysis:
         self.defined_volumemesh = True
         self.mgsf = mesh_growth_scale_factor
 
+    def set_mesh_adaptivity(self, min_mesh_size=0, max_mesh_size=0, max_perceptual_error=0, num_iteration=0):
+        """Activate the adaptive mesh refinement feature..
+
+        Parameters
+        ----------
+        min_mesh_size : float
+            Minimum mesh size allowed to the mesh generator.
+        max_mesh_size : float
+            Maximum mesh size.
+        max_perceptual_error : float
+            Maximum perceptual error allowed in the whole domain.
+        num_iteration : int
+            Number of iterations before a forced remeshing.
+        """
+        self.defined_mesh_adapt = True
+        self.minh = min_mesh_size
+        self.maxh = max_mesh_size
+        self.err = max_perceptual_error
+        self.nit = num_iteration
+
     def set_surface_mesh(self, remesh_method=ICFD_SurfRemeshMethod.LAPLACIAN_SMOOTHING):
         """Enable automatic surface re-meshing.
 
@@ -311,6 +355,36 @@ class ICFDAnalysis:
         """
         self.defined_surfmesh = True
         self.rsrf = remesh_method.value
+
+    def set_coupling_dem(
+        self,
+        coupling_type=0,
+        birth_time=0,
+        death_time=1e28,
+        scale_factor=1,
+        formulation=ICFD_CouplingForm.FORCE_BASED_ON_VELOCITY_DRAG_VALUE,
+    ):
+        """Activate coupling between the ICFD and DEM solvers.
+
+        Parameters
+        ----------
+        coupling_type : int
+            Indicates the coupling direction to the solver.
+        birth_time : float
+            Birth time for the DEM coupling.
+        death_time : float
+            Death time for the DEM coupling.
+        scale_factor : float
+            Scale factor applied to the force transmitted by the fluid to the structure.
+        formulation : int
+            Type of formulation used in the coupling.
+        """
+        self.defined_coupling_dem = True
+        self.ctype = coupling_type
+        self.bt = birth_time
+        self.dt = death_time
+        self.sf = scale_factor
+        self.form = formulation.value
 
     def create(self):
         """Create ICFD analysis."""
@@ -329,6 +403,14 @@ class ICFDAnalysis:
                 ICFDControlSteadyRequest(
                     its=self.its, tol1=self.tol1, tol2=self.tol2, tol3=self.tol3, rel1=self.rel1, rel2=self.rel2
                 )
+            )
+        if self.defined_coupling_dem:
+            self.stub.ICFDCreateControlDEMCoupling(
+                ICFDControlDEMCouplingRequest(ctype=self.ctype, bt=self.bt, dt=self.dt, sf=self.sf, form=self.form)
+            )
+        if self.defined_mesh_adapt:
+            self.stub.ICFDCreateControlAdapt(
+                ICFDControlAdaptRequest(minh=self.minh, maxh=self.maxh, err=self.err, nit=self.nit)
             )
 
 
@@ -474,7 +556,8 @@ class ICFDPart:
         return ret
 
     def set_fsi(self):
-        """Define fluid surface will be considered in contact with the solid surfaces for fluid-structure interaction (FSI) analysis."""
+        """Define fluid surface will be considered in contact with the solid surfaces
+        for fluid-structure interaction (FSI) analysis."""
         ret = self.stub.ICFDCreateBdyFSI(ICFDBdyFSIRequest(pid=self.id))
         logging.info("ICFD boundary FSI Created...")
         return ret
@@ -514,6 +597,23 @@ class ICFDPart:
         ret = self.stub.MESHCreateBlSym(MeshBlSymRequest(pid=self.id))
         return ret
 
+    def set_imposed_move(self, vx=None, vy=None, vz=None):
+        """Impose a velocity on specific ICFD part."""
+        lcvx, lcvy, lcvz = 0, 0, 0
+        if vx != None:
+            vx.create(self.stub)
+            lcvx = vx.id
+        if vy != None:
+            vy.create(self.stub)
+            lcvy = vy.id
+        if vz != None:
+            vz.create(self.stub)
+            lcvz = vz.id
+        ret = self.stub.ICFDCreateControlImposedMove(
+            ICFDControlImposedMoveRequest(pid=self.id, lcvx=lcvx, lcvy=lcvy, lcvz=lcvz)
+        )
+        return ret
+
     def set_property(self):
         """Set properties for ICFD part."""
         secid = 1
@@ -536,15 +636,37 @@ class ICFDVolumePart:
         self.secid = 1
         self.mid = 0
         self.surfaces = surfaces
+        self.defined_imposed_move = False
 
     def set_material(self, mat):
         """Set material."""
         self.mid = mat.material_id
 
+    def set_imposed_move(self, vx=None, vy=None, vz=None):
+        """Impose a velocity on specific ICFD part."""
+        self.defined_imposed_move = True
+        self.vx = vx
+        self.vy = vy
+        self.vz = vz
+
     def create(self):
         """Create ICFD volume part."""
         ret = self.stub.ICFDCreatePartVol(ICFDPartVolRequest(secid=1, mid=self.mid, spids=self.surfaces))
         self.id = ret.id
+        if self.defined_imposed_move:
+            lcvx, lcvy, lcvz = 0, 0, 0
+            if self.vx != None:
+                self.vx.create(self.stub)
+                lcvx = self.vx.id
+            if self.vy != None:
+                self.vy.create(self.stub)
+                lcvy = self.vy.id
+            if self.vz != None:
+                self.vz.create(self.stub)
+                lcvz = self.vz.id
+            ret = self.stub.ICFDCreateControlImposedMove(
+                ICFDControlImposedMoveRequest(pid=self.id, lcvx=lcvx, lcvy=lcvy, lcvz=lcvz)
+            )
         logging.info(f"ICFD part volume {self.id} Created...")
         return ret
 
