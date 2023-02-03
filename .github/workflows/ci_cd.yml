@@ -124,6 +124,7 @@ jobs:
         run: pytest
 
       - name: Upload the server logs
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: server-logs
