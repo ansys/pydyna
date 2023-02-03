@@ -20,15 +20,6 @@ concurrency:
 
 jobs:
 
-  style:
-    name: Code style
-    runs-on: ubuntu-latest
-    steps:
-      - name: PyAnsys code style checks
-        uses: pyansys/actions/code-style@v3
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-
   docs-style:
     name: Documentation Style Check
     runs-on: ubuntu-latest
@@ -37,25 +28,6 @@ jobs:
         uses: pyansys/actions/doc-style@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-
-  smoke-tests:
-    name: Build and Smoke tests
-    runs-on: ${{ matrix.os }}
-    needs: [style]
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest, ubuntu-latest]
-        python-version: ['3.7', '3.8', '3.9', '3.10'] #, '3.11'] # --> At some point we should include Py3.11
-
-    steps:
-      - name: Build wheelhouse and perform smoke test
-        uses: pyansys/actions/build-wheelhouse@v3
-        with:
-          library-name: ${{ env.PACKAGE_NAME }}
-          library-namespace: ${{ env.PACKAGE_NAMESPACE }}
-          operating-system: ${{ matrix.os }}
-          python-version: ${{ matrix.python-version }}
 
   docs:
     name: Documentation
@@ -87,6 +59,81 @@ jobs:
           name: documentation-html
           path: doc/_build/html
           retention-days: 7
+
+  style:
+    name: Code style
+    runs-on: ubuntu-latest
+    steps:
+      - name: PyAnsys code style checks
+        uses: pyansys/actions/code-style@v3
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+  smoke-tests:
+    name: Build and Smoke tests
+    runs-on: ${{ matrix.os }}
+    needs: [style]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python-version: ['3.7', '3.8', '3.9', '3.10'] #, '3.11'] # --> At some point we should include Py3.11
+
+    steps:
+      - name: Build wheelhouse and perform smoke test
+        uses: pyansys/actions/build-wheelhouse@v3
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          library-namespace: ${{ env.PACKAGE_NAMESPACE }}
+          operating-system: ${{ matrix.os }}
+          python-version: ${{ matrix.python-version }}
+
+  tests:
+    name: Testing
+    runs-on: ${{ matrix.os }}
+    needs: [smoke-tests]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+    - name: Install ansys-dyna-core (with test requirements)
+      run: |
+        pip install -e .[tests]
+    
+    - name: Run the server on background (Windows)
+      if: runner.os == 'Windows'
+      working-directory: src\ansys\dyna\core\pre\Server
+      run: START /B "server" "python kwserver.py" >> server_output.txt
+
+    - name: Run the server on background (Linux)
+      if: runner.os == 'Linux'
+      working-directory: src/ansys/dyna/core/pre/Server
+      run: python kwserver.py > server_output.txt &
+
+    - name: Run the tests
+      run: pytest
+
+    - name: Upload the server logs
+      uses: actions/upload-artifact@v3
+      with:
+        name: server-logs
+        path: src/ansys/dyna/core/pre/Server/server_output.txt
+
+    - name: Upload coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-html
+        path: .cov/html
+        retention-days: 7
 
   package:
     name: Package library
