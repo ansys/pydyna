@@ -138,7 +138,7 @@ jobs:
 
   package:
     name: Package library
-    needs: [docs]
+    needs: [docs, tests]
     runs-on: ubuntu-latest
     steps:
       - name: Build library source and wheel artifacts
@@ -162,7 +162,7 @@ jobs:
     name: Upload dev documentation
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    needs: [docs]
+    needs: [package]
     steps:
       - name: Deploy the latest documentation
         uses: pyansys/actions/doc-deploy-dev@v3
