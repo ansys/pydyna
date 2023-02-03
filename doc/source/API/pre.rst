@@ -1,5 +1,6 @@
 PyDyna-pre APIs
-================
+===============
+
 The PyDyna-pre API includes classes for apps and modules.
 
 .. currentmodule:: ansys.dyna.core

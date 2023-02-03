@@ -13,3 +13,12 @@ PyPI
 Python
 pyvista
 setters
+PyDyna
+pyDyna
+PyDyna-pre
+pyDyna-pre
+PyDyna-solver
+pyDyna-solver
+LS-Dyna
+API
+APIs
