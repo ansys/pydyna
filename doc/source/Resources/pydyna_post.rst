@@ -1,7 +1,7 @@
-PyDPF-post-for-DYNA
-===================
+PyDPF-post for LS-DYNA
+======================
 
-operators
+Operators
 ~~~~~~~~~
 
 1. ``d3plot``
