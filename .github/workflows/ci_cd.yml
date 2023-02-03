@@ -117,6 +117,7 @@ jobs:
         run: |
           Start-Job -ScriptBlock {cd ${{ github.workspace }}\src\ansys\dyna\core\pre\Server\;python kwserver.py >> server_output.txt}
           Start-Sleep -Seconds 10
+          pytest
 
       - name: Run the server on background (Linux)
         if: runner.os == 'Linux'
@@ -124,6 +125,7 @@ jobs:
         run: python kwserver.py > server_output.txt &
 
       - name: Run the tests
+        if: runner.os == 'Linux'
         run: pytest
 
       - name: Upload the server logs
