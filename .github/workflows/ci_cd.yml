@@ -115,7 +115,7 @@ jobs:
       - name: Run the server on background (Windows)
         if: runner.os == 'Windows'
         run: |
-          Start-Job -ScriptBlock {cd .\src\ansys\dyna\core\pre\Server\;python kwserver.py >> server_output.txt}
+          Start-Job -ScriptBlock {cd ${{ github.workspace }}\src\ansys\dyna\core\pre\Server\;python kwserver.py >> server_output.txt}
           Start-Sleep -Seconds 10
 
       - name: Run the server on background (Linux)
