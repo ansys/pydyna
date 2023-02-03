@@ -97,43 +97,44 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest]
     
-    - name: Checkout repository
-      uses: actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ env.MAIN_PYTHON_VERSION }}
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
-    - name: Install ansys-dyna-core (with test requirements)
-      run: |
-        pip install -e .[tests]
-    
-    - name: Run the server on background (Windows)
-      if: runner.os == 'Windows'
-      working-directory: src\ansys\dyna\core\pre\Server
-      run: START /B "server" "python kwserver.py" >> server_output.txt
+      - name: Install ansys-dyna-core (with test requirements)
+        run: |
+          pip install -e .[tests]
 
-    - name: Run the server on background (Linux)
-      if: runner.os == 'Linux'
-      working-directory: src/ansys/dyna/core/pre/Server
-      run: python kwserver.py > server_output.txt &
+      - name: Run the server on background (Windows)
+        if: runner.os == 'Windows'
+        working-directory: src\ansys\dyna\core\pre\Server
+        run: START /B "server" "python kwserver.py" >> server_output.txt
 
-    - name: Run the tests
-      run: pytest
+      - name: Run the server on background (Linux)
+        if: runner.os == 'Linux'
+        working-directory: src/ansys/dyna/core/pre/Server
+        run: python kwserver.py > server_output.txt &
 
-    - name: Upload the server logs
-      uses: actions/upload-artifact@v3
-      with:
-        name: server-logs
-        path: src/ansys/dyna/core/pre/Server/server_output.txt
+      - name: Run the tests
+        run: pytest
 
-    - name: Upload coverage results
-      uses: actions/upload-artifact@v3
-      with:
-        name: coverage-html
-        path: .cov/html
-        retention-days: 7
+      - name: Upload the server logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: server-logs
+          path: src/ansys/dyna/core/pre/Server/server_output.txt
+
+      - name: Upload coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-html
+          path: .cov/html
+          retention-days: 7
 
   package:
     name: Package library
