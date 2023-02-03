@@ -1,3 +1,5 @@
+..vale off
+
 {{ fullname | escape | underline}}
 
 .. automodule:: {{ fullname }}
@@ -64,3 +66,5 @@
 {%- endfor %}
 {% endif %}
 {% endblock %}
+
+..vale on

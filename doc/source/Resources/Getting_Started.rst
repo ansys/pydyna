@@ -10,4 +10,4 @@ option is for you to download the code from GitHub:
 
    git clone https://github.com/pyansys/pyDyna
 
-and copy the required files
+and copy the required files.
