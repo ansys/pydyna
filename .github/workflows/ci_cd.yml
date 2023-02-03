@@ -114,7 +114,6 @@ jobs:
 
       - name: Run the server on background (Windows)
         if: runner.os == 'Windows'
-        working-directory: 
         run: |
           $env:Path += ";${GITHUB_WORKSPACE}\.ci"
           cd src\ansys\dyna\core\pre\Server
