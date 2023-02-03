@@ -1,6 +1,7 @@
 files: |
     (?x)(
-        ^src/ansys/
+        ^src/ansys/ |
+        ^.github/
     )
 exclude: |
     (?x)^(
