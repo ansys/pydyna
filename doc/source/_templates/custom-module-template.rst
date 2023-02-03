@@ -1,4 +1,4 @@
-..vale off
+.. vale off
 
 {{ fullname | escape | underline}}
 
@@ -67,4 +67,4 @@
 {% endif %}
 {% endblock %}
 
-..vale on
+.. vale on
