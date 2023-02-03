@@ -25,27 +25,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys code style checks
-        uses: pyansys/actions/code-style@v2
+        uses: pyansys/actions/code-style@v3
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
-  # docs-style:
-  #   name: Documentation Style Check
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - name: Running Vale
-  #       uses: errata-ai/vale-action@reviewdog
-  #       env:
-  #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-  #       with:
-  #         files: doc
-  #         reporter: github-pr-check
-  #         level: error
-  #         filter_mode: nofilter
-  #         fail_on_error: true
-  #         vale_flags: "--config=doc/.vale.ini"
+  docs-style:
+    name: Documentation Style Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: PyAnsys documentation style checks
+        uses: pyansys/actions/doc-style@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   smoke-tests:
     name: Build and Smoke tests
@@ -55,11 +46,11 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest]
-        python-version: ['3.7', '3.8', '3.9', '3.10']
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
 
     steps:
       - name: Build wheelhouse and perform smoke test
-        uses: pyansys/actions/build-wheelhouse@v2
+        uses: pyansys/actions/build-wheelhouse@v3
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           library-namespace: ${{ env.PACKAGE_NAMESPACE }}
@@ -69,7 +60,7 @@ jobs:
   docs:
     name: Documentation
     runs-on: ubuntu-latest
-    # needs: [docs-style]
+    needs: [docs-style]
     steps:
       - uses: actions/checkout@v3
 
@@ -103,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build library source and wheel artifacts
-        uses: pyansys/actions/build-library@v2
+        uses: pyansys/actions/build-library@v3
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -115,7 +106,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Release to GitHub
-        uses: pyansys/actions/release-github@v2
+        uses: pyansys/actions/release-github@v3
         with:
           library-name: ${{ env.PACKAGE_NAME }}
 
@@ -126,7 +117,7 @@ jobs:
     needs: [docs]
     steps:
       - name: Deploy the latest documentation
-        uses: pyansys/actions/doc-deploy-dev@v2
+        uses: pyansys/actions/doc-deploy-dev@v3
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -138,7 +129,7 @@ jobs:
     needs: [release]
     steps:
       - name: Deploy the stable documentation
-        uses: pyansys/actions/doc-deploy-stable@v2
+        uses: pyansys/actions/doc-deploy-stable@v3
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
