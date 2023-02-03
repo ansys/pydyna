@@ -127,10 +127,11 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: server-logs
+          name: server-logs-${{ runner.os }}
           path: src/ansys/dyna/core/pre/Server/server_output.txt
 
       - name: Upload coverage results
+        if: runner.os == 'Linux'
         uses: actions/upload-artifact@v3
         with:
           name: coverage-html
