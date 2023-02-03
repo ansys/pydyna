@@ -114,8 +114,11 @@ jobs:
 
       - name: Run the server on background (Windows)
         if: runner.os == 'Windows'
-        working-directory: src\ansys\dyna\core\pre\Server
-        run: python kwserver.py
+        working-directory: 
+        run: |
+          $env:Path += ";${GITHUB_WORKSPACE}\.ci"
+          cd src\ansys\dyna\core\pre\Server
+          nohup "python kwserver.py >> server_output.txt"
 
       - name: Run the server on background (Linux)
         if: runner.os == 'Linux'
