@@ -113,7 +113,7 @@ jobs:
       - name: Run the server on background (Windows)
         if: runner.os == 'Windows'
         working-directory: src\ansys\dyna\core\pre\Server
-        run: START "server" /B "python" "kwserver.py" >> server_output.txt
+        run: pythonw kwserver.py >> server_output.txt
 
       - name: Run the server on background (Linux)
         if: runner.os == 'Linux'
