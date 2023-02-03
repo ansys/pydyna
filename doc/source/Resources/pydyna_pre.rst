@@ -1,7 +1,7 @@
 PyDyna-pre
 ==========
 
-The PyDyna-pre provide the ability to create keyword inputdeck through gRPC framework. 
+The PyDyna-pre provide the ability to create keyword ``inputdeck`` through gRPC framework. 
 
 Running pyDyna-pre in ``virtualenv``
 ------------------------------------
