@@ -7,13 +7,13 @@ $#  endtim    endcyc     dtmin    endeng    endmas     nosol
       40.0         0       0.0       0.01.000000E8         0
 *CONTROL_TIMESTEP
 $#  dtinit    tssfac      isdo    tslimt     dt2ms      lctm     erode     ms1st
-       0.0       0.9         0       0.0       0.0         0         0         0
+       0.0       0.9         0       0.0       0.0         1         0         0
 *DATABASE_BINARY_D3PLOT
 $#      dt      lcdt      beam     npltc    psetid
        0.2         0         0         0         0
 *BOUNDARY_PRESCRIBED_MOTION_RIGID
 $#     pid       dof       vad      lcid        sf       vid     death     birth
-         1         2         0         4       1.0         0       0.0       0.0
+         1         2         0         5       1.0         0       0.0       0.0
 *PART
 $#                                                                         title
 
@@ -35,25 +35,31 @@ $#lco or a1        a2        a3        v1        v2        v3
 $#    lcid      sidr       sfa       sfo      offa      offo    dattyp     lcint
          1         0       1.0       1.0       0.0       0.0         0         0
 $#                a1                  o1
+                 0.0                0.05
+             10000.0                0.05
+*DEFINE_CURVE
+$#    lcid      sidr       sfa       sfo      offa      offo    dattyp     lcint
+         2         0       1.0       1.0       0.0       0.0         0         0
+$#                a1                  o1
                  0.0                 0.0
                  5.0                 0.0
                  6.0                 1.0
              10000.0                 1.0
 *DEFINE_CURVE
 $#    lcid      sidr       sfa       sfo      offa      offo    dattyp     lcint
-         2         0       1.0       1.0       0.0       0.0         0         0
+         3         0       1.0       1.0       0.0       0.0         0         0
 $#                a1                  o1
                  0.0                 0.0
              10000.0                 0.0
 *DEFINE_CURVE
 $#    lcid      sidr       sfa       sfo      offa      offo    dattyp     lcint
-         3         0       1.0       1.0       0.0       0.0         0         0
+         4         0       1.0       1.0       0.0       0.0         0         0
 $#                a1                  o1
                  0.0                 0.0
              10000.0                 0.0
 *DEFINE_CURVE_FUNCTION
 $#    lcid      sidr       sfa       sfo      offa      offo    dattyp
-         4                                                            
+         5                                                            
 $#                                                                      function
 2*3.14/10*sin(2*3.14/10*TIME+3.14/2)
 *SET_PART_LIST
@@ -325,16 +331,21 @@ $#     pid
          4
 *ICFD_BOUNDARY_PRESCRIBED_VEL
 $#     pid       dof       vad      lcid        sf       vid     death     birth
-         1         1         1         1       1.0         0       0.0       0.0
+         1         1         1         2       1.0         0       0.0       0.0
 *ICFD_BOUNDARY_PRESCRIBED_VEL
 $#     pid       dof       vad      lcid        sf       vid     death     birth
-         1         2         1         2       1.0         0       0.0       0.0
+         1         2         1         3       1.0         0       0.0       0.0
 *ICFD_BOUNDARY_PRESCRIBED_PRE
 $#     pid      lcid        sf     death     birth
-         2         3       0.0       0.0       0.0
+         2         4       0.0       0.0       0.0
 *ICFD_CONTROL_TIME
 $#     ttm        dt       cfl    lcidsf     dtmin     dtmax    dtinit    tdeath
       40.0      0.05       1.0         0       0.0       0.0       0.0       0.0
+*ICFD_CONTROL_FSI
+$#     owc        bt        dt       idc    lcidsf     xproj
+         0                                                  
+$#    nsub
+         0
 *ICFD_DATABASE_DRAG
 $#     pid      cpid     dtout    perout      divi     elout     ssout
          4                                                            

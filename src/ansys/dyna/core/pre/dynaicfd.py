@@ -229,6 +229,12 @@ class ICFD_CouplingForm(Enum):
     FORCE_BASED_ON_VELOCITY_DRAG_VALUE = 0
     FORCE_USING_FLUID_PRESSURE_GRADIENT = 1
 
+class ICFD_CouplingDirection(Enum):
+    TWO_WAY_COUPLING = 0
+    ONE_WAY_COUPLING_MECHANICS_TRANS_DISPLACEMENT_TO_FLUID = 1
+    ONE_WAY_COUPLING_FLUID_TRANS_STRESS_TO_SOLID = 2
+    TWO_WAY_WEAK_COUPLING = 3
+
 
 class ICFDAnalysis:
     """Activate ICFD analysis and define associated control parameters."""
@@ -239,6 +245,7 @@ class ICFDAnalysis:
         self.defined_surfmesh = False
         self.defined_type = False
         self.defined_output = False
+        self.defined_fsi = False
         self.defined_steady_state = False
         self.defined_coupling_dem = False
         self.defined_mesh_adapt = False
@@ -268,6 +275,18 @@ class ICFDAnalysis:
         self.defined_output = True
         self.msgl = messagelevel.value
         self.itout = iteration_interval
+
+    def set_fsi(self,couplingdir=ICFD_CouplingDirection.TWO_WAY_COUPLING):
+        """Modify default values for the fluid-structure interaction coupling algorithm.
+
+        Parameters
+        ----------
+        couplingdir : ICFD_CouplingDirection
+            Indicates the coupling direction to the solver.
+        """
+        self.defined_fsi = True
+        self.owc = couplingdir.value
+
 
     def set_steady_state(
         self,
@@ -398,6 +417,8 @@ class ICFDAnalysis:
             self.stub.ICFDCreateControlGeneral(ICFDControlGeneralRequest(atype=self.atype, mtype=0, dvcl=0, rdvcl=0))
         if self.defined_output:
             self.stub.ICFDCreateControlOutput(ICFDControlOutputRequest(msgl=self.msgl, itout=self.itout))
+        if self.defined_fsi:
+            self.stub.ICFDCreateControlFSI(ICFDControlFSIRequest(owc=self.owc))
         if self.defined_steady_state:
             self.stub.ICFDCreateControlSteady(
                 ICFDControlSteadyRequest(

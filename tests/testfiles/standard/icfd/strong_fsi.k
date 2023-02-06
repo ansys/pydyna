@@ -347,6 +347,11 @@ $#     pid      lcid        sf     death     birth
 *ICFD_CONTROL_TIME
 $#     ttm        dt       cfl    lcidsf     dtmin     dtmax    dtinit    tdeath
       40.0      0.05       1.0         0       0.0       0.0       0.0       0.0
+*ICFD_CONTROL_FSI
+$#     owc        bt        dt       idc    lcidsf     xproj
+         0                                                  
+$#    nsub
+         0
 *ICFD_DATABASE_DRAG
 $#     pid      cpid     dtout    perout      divi     elout     ssout
          4                                                            
