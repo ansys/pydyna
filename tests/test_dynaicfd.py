@@ -465,10 +465,11 @@ def test_icfd_weak_fsi(resolve_icfd_path, resolve_server_path, resolve_standard_
     icfd = DynaICFD()
     solution.add(icfd)
 
-    icfd.set_timestep(tssfac=0.9)
+    icfd.set_timestep(tssfac=0.9,max_timestep=Curve(x=[0,10000],y=[0.05,0.05]))
 
     icfdanalysis = ICFDAnalysis()
     icfdanalysis.set_timestep(0.05)
+    icfdanalysis.set_fsi()
     icfd.add(icfdanalysis)
 
     # define model
@@ -533,6 +534,7 @@ def test_icfd_strong_fsi(resolve_icfd_path, resolve_server_path, resolve_standar
 
     icfdanalysis = ICFDAnalysis()
     icfdanalysis.set_timestep(0.05)
+    icfdanalysis.set_fsi()
     icfd.add(icfdanalysis)
 
     icfd.implicitanalysis.set_initial_timestep_size(

@@ -46,6 +46,7 @@ solution.add(icfd)
 
 icfdanalysis = ICFDAnalysis()
 icfdanalysis.set_timestep(0.05)
+icfdanalysis.set_fsi()
 icfd.add(icfdanalysis)
 
 icfd.implicitanalysis.set_initial_timestep_size(

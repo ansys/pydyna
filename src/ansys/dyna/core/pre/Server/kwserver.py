@@ -2059,7 +2059,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
     def ICFDCreateControlFSI(self, request, context):
         owc = request.owc
         card1 = str(owc)
-        newk = "*ICFD_CONTROL_FSI\n" + card1
+        card2 = "0"
+        newk = "*ICFD_CONTROL_FSI\n" + card1 + "\n" + card2
         self.kwdproc.newkeyword(newk)
         msg = "ICFD Control FSI Created..."
         print(msg)

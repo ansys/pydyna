@@ -44,10 +44,11 @@ solution.set_termination(termination_time=40)
 icfd = DynaICFD()
 solution.add(icfd)
 
-icfd.set_timestep(tssfac=0.9)
+icfd.set_timestep(tssfac=0.9,max_timestep=Curve(x=[0,10000],y=[0.05,0.05]))
 
 icfdanalysis = ICFDAnalysis()
 icfdanalysis.set_timestep(0.05)
+icfdanalysis.set_fsi()
 icfd.add(icfdanalysis)
 
 # define model
