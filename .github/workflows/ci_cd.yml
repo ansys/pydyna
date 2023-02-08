@@ -67,6 +67,13 @@ jobs:
           path: doc/_build/html
           retention-days: 7
 
+      - name: Upload the server logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: server-logs-docs
+          path: src/ansys/dyna/core/pre/Server/server_output_docs.txt
+
   style:
     name: Code style
     runs-on: ubuntu-latest
