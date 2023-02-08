@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "ansys-dyna-core"
 version = "0.2.dev0"
-description = "Python interface to LSDYNA Service"
+description = "Python interface to LS-DYNA Service"
 readme = "README.rst"
 requires-python = ">=3.7,<4"
 license = {file = "LICENSE"}
@@ -41,7 +41,6 @@ tests = [
     "pytest-cov==4.0.0",
     "codecov==2.1.12",
     "joblib==1.2.0",
-    "sklearn==0.0.post1",
     "pandas==1.5.2",
     "openpyxl==3.0.10",
     "scikit-learn==1.2.1",

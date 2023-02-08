@@ -1,5 +1,5 @@
-PyDPF-post for LS-DYNA
-======================
+Using PyDPF-post for LS-DYNA
+============================
 
 Operators
 ~~~~~~~~~
