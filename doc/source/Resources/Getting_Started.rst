@@ -12,7 +12,7 @@ This package is not yet available on the public PyPI, but you can still install 
 
 You'll need to be logged into GitHub locally and a member of the `PyAnsys Organization <https://github.com/pyansys>`_.
 
-Alternatively, if you need to modify the respository locally (or want to do local development), you can clone it and install it in "development" mode with:
+Alternatively, if you need to modify the repository locally (or want to do local development), you can clone it and install it in "development" mode with:
 
 .. code::
 
