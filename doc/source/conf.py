@@ -6,6 +6,7 @@ import os
 import pyvista
 from ansys_sphinx_theme import pyansys_logo_black, ansys_favicon
 from sphinx.builders.latex import LaTeXBuilder
+from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.dyna.core import __version__
 
@@ -51,8 +52,7 @@ sphinx_gallery_conf = {
             # convert rst to md for ipynb
             "pypandoc": True,
             # path to your examples scripts
-            # "examples_dirs": ["../../examples/"],
-            "examples_dirs": [],
+            "examples_dirs": ["../../examples/"],
             # path where to save gallery generated examples
             "gallery_dirs": ["examples"],
             # Patter to search for examples files
@@ -62,11 +62,11 @@ sphinx_gallery_conf = {
             # Remove the "Download all examples" button from the top level gallery
             "download_all_examples": False,
             # Sort gallery examples by file name instead of number of lines (default)
-            #"within_subsection_order": FileNameSortKey,
+            "within_subsection_order": FileNameSortKey,
             # directory where function granular galleries are stored
             "backreferences_dir": None,
             # Modules for which function level galleries are created.  In
-            "doc_module": "ansys-mapdl-core",
+            "doc_module": "ansys-dyna-core",
             "image_scrapers": ("pyvista", "matplotlib"),
             "thumbnail_size": (350, 350),
             # 'first_notebook_cell': ("%matplotlib inline\n"
