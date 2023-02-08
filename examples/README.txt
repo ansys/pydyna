@@ -1,3 +1,8 @@
+.. _ref_examples:
+
+========
 Examples
 ========
-These examples show how you can use PyDyna. 
+
+
+Here are a series of examples using LS-DYNA with the ``ansys-dyna-core`` library.

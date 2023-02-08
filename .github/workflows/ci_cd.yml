@@ -49,6 +49,13 @@ jobs:
           pip install --upgrade build
           pip install .[doc]
 
+      - name: Run server
+        run: |
+          cd src/ansys/dyna/core/pre/Server
+          python kwserver.py > server_output_docs.txt &
+          sleep 10
+          cd -
+
       - name: Build the documentation
         run: |
           xvfb-run make -C doc html
@@ -59,6 +66,13 @@ jobs:
           name: documentation-html
           path: doc/_build/html
           retention-days: 7
+
+      - name: Upload the server logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: server-logs-docs
+          path: src/ansys/dyna/core/pre/Server/server_output_docs.txt
 
   style:
     name: Code style
