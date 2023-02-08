@@ -20,4 +20,4 @@ Alternatively, if you need to modify the respository locally (or want to do loca
    cd pyDyna
    pip install -e .
 
-Note the ``-e`` flag, which denotes that you're in development mode. You can make changes in the local ``pyDyna`` directory and those will be reflected within your Python kernel after you restart it.
+Note the ``-e`` flag, which denotes that you're in development mode. You can make changes in the local ``pyDyna`` and have them reflected in your local install of PyDyna.
