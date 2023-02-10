@@ -25,8 +25,8 @@ $#                a1                  o1
 $#    lcid      sidr       sfa       sfo      offa      offo    dattyp     lcint
          2         0       1.0       1.0       0.0       0.0         0         0
 $#                a1                  o1
-                 0.0                 1.0
-             10000.0                 1.0
+                 0.0                9.81
+             10000.0                9.81
 *ICFD_BOUNDARY_NONSLIP
 $#     pid
          1
