@@ -45,7 +45,7 @@ tests = [
     "openpyxl==3.0.10",
     "scikit-learn==1.2.1",
     "pytest-xdist==3.2.0",
-    "ipython==8.9.0",
+    "ipython==8.10.0",
 ]
 doc = [
     "recommonmark==0.7.1",
@@ -68,7 +68,7 @@ doc = [
     "ipywidgets==8.0.4",
     "joblib==1.2.0",
     "scikit-learn==1.2.1",
-    "ipython==8.9.0",
+    "ipython==8.10.0",
     "jupyterlab==3.6.1",
 ]
 
