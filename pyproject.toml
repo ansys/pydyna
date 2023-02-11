@@ -41,7 +41,7 @@ tests = [
     "pytest-cov==4.0.0",
     "codecov==2.1.12",
     "joblib==1.2.0",
-    "pandas==1.5.2",
+    "pandas==1.5.3",
     "openpyxl==3.0.10",
     "scikit-learn==1.2.1",
     "pytest-xdist==3.2.0",
