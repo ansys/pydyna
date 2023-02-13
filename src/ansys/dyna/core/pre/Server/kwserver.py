@@ -2170,7 +2170,12 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.ICFDPartReply(answer=0)
 
     def ICFDCreatePartVol(self, request, context):
-        pid = self.kwdproc.get_data(gdt.KWD_ICFD_PART_VOL_LASTID) + 1
+        icfdpid = self.kwdproc.get_data(gdt.KWD_ICFD_PART_LASTID)
+        icfdvolpid = self.kwdproc.get_data(gdt.KWD_ICFD_PART_VOL_LASTID)
+        if icfdvolpid>icfdpid:
+            pid = icfdvolpid + 1
+        else:
+            pid = icfdpid + 1
         secid = request.secid
         mid = request.mid
         spids = request.spids

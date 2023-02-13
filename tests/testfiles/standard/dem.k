@@ -3,13 +3,6 @@
 $#   ndamp     tdamp     frics     fricr     normk    sheark       cap       vtk
       0.99      0.99       0.9       0.9      0.01    0.2857         0         0
 $#   gamma       vol       ang       gap    unused    ignore      nbuf  parallel
-
-$#   lnorm    lshear    unused     fricd        dc      ncrb        bt        dt
-         0         0                 0.0       0.0         0       0.01.00000E20
-$#      cp        tc      tfac
-       0.0       0.0       0.0
-$# idesoft    sofscl    unused     iskip    maxnei
-         0       0.1                   0        20
 *PART
 $#                                                                         title
 
