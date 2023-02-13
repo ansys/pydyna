@@ -1,12 +1,12 @@
-PyDPF-post-for-DYNA
-===================
+Using PyDPF-post for LS-DYNA
+============================
 
-operators
+Operators
 ~~~~~~~~~
 
-1. d3plot
+1. ``d3plot``
 
--  lsdyna::d3plot::meshes_provider
+-  ``lsdyna::d3plot::meshes_provider``
 
    .. code:: python
 
@@ -30,7 +30,7 @@ operators
       meshes = meshOP.outputs.meshes()
       mesh = meshes.get_mesh({'time':1})
 
--  lsdyna::d3plot::U
+-  ``lsdyna::d3plot::U``
 
    .. code:: python
 
@@ -45,7 +45,7 @@ operators
       coord.inputs.time_scoping.connect([3])
       fields = coord.outputs.displacement()
 
--  lsdyna::d3plot::TimeFreqSupportProvider
+-  ``lsdyna::d3plot::TimeFreqSupportProvider``
 
    .. code:: python
 
@@ -58,7 +58,7 @@ operators
       time.inputs.data_sources.connect(ds)
       result_time_freq_support = time.outputs.time_freq_support()
 
--  lsdyna::d3plot::result_info_provider
+-  ``lsdyna::d3plot::result_info_provider``
 
    .. code:: python
 
@@ -71,7 +71,7 @@ operators
       resultInfoOp.inputs.data_sources(ds)
       result_info = resultInfoOp.outputs.result_info()
 
--  lsdyna::d3plot::eng_ke
+-  ``lsdyna::d3plot::eng_ke``
 
    .. code:: python
 
@@ -86,7 +86,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.global_kinetic_energy()
 
--  lsdyna::d3plot::global_internal_energy
+-  ``lsdyna::d3plot::global_internal_energy``
 
    .. code:: python
 
@@ -101,7 +101,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.global_internal_energy()
 
--  lsdyna::d3plot::global_total_energy
+-  ``lsdyna::d3plot::global_total_energy``
 
    .. code:: python
 
@@ -116,7 +116,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.global_total_energy()
 
--  lsdyna::d3plot::global_velocity
+-  ``lsdyna::d3plot::global_velocity``
 
    .. code:: python
 
@@ -131,7 +131,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.global_velocity()
 
--  lsdyna::d3plot::node_initial_coordinates
+-  ``lsdyna::d3plot::node_initial_coordinates``
 
    .. code:: python
 
@@ -146,7 +146,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_initial_coordinates()
 
--  lsdyna::d3plot::node_coordinates
+-  ``lsdyna::d3plot::node_coordinates``
 
    .. code:: python
 
@@ -161,7 +161,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_coordinates()
 
--  lsdyna::d3plot::V
+-  ``lsdyna::d3plot::V``
 
    .. code:: python
 
@@ -176,7 +176,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_velocities()
 
--  lsdyna::d3plot::A
+-  ``lsdyna::d3plot::A``
 
    .. code:: python
 
@@ -191,7 +191,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_accelerations()
 
--  lsdyna::d3plot::node_temperature
+-  ``lsdyna::d3plot::node_temperature``
 
    .. code:: python
 
@@ -206,7 +206,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_temperature()
 
--  lsdyna::d3plot::node_heat_flux
+-  ``lsdyna::d3plot::node_heat_flux``
 
    .. code:: python
 
@@ -221,7 +221,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_heat_flux()
 
--  lsdyna::d3plot::node_mass_scaling
+-  ``lsdyna::d3plot::node_mass_scaling``
 
    .. code:: python
 
@@ -236,7 +236,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_mass_scaling()
 
--  lsdyna::d3plot::node_temperature_divide_time
+-  ``lsdyna::d3plot::node_temperature_divide_time``
 
    .. code:: python
 
@@ -251,7 +251,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_temperature_divide_time()
 
--  lsdyna::d3plot::node_residual_force
+-  ``lsdyna::d3plot::node_residual_force``
 
    .. code:: python
 
@@ -266,7 +266,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_residual_force()
 
--  lsdyna::d3plot::node_residual_moment
+-  ``lsdyna::d3plot::node_residual_moment``
 
    .. code:: python
 
@@ -281,7 +281,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_residual_moment()
 
--  lsdyna::d3plot::node_penetration
+-  ``lsdyna::d3plot::node_penetration``
 
    .. code:: python
 
@@ -296,7 +296,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_penetration()
 
--  lsdyna::d3plot::node_relative_penetration
+-  ``lsdyna::d3plot::node_relative_penetration``
 
    .. code:: python
 
@@ -311,7 +311,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_relative_penetration()
 
--  lsdyna::d3plot::node_contact_energy_density
+-  ``lsdyna::d3plot::node_contact_energy_density``
 
    .. code:: python
 
@@ -326,7 +326,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.node_contact_energy_density()
 
--  lsdyna::d3plot::S
+-  ``lsdyna::d3plot::S``
 
    .. code:: python
 
@@ -341,7 +341,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.stress()
 
--  lsdyna::d3plot::stress_von_mises
+-  ``lsdyna::d3plot::stress_von_mises``
 
    .. code:: python
 
@@ -356,7 +356,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.stress_von_mises()
 
--  lsdyna::d3plot::effective_plastic_strain
+-  ``lsdyna::d3plot::effective_plastic_strain``
 
    .. code:: python
 
@@ -371,7 +371,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.effective_plastic_strain()
 
--  lsdyna::d3plot::EPEL
+-  ``lsdyna::d3plot::EPEL``
 
    .. code:: python
 
@@ -386,7 +386,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.strain()
 
--  lsdyna::d3plot::strain_von_mises
+-  ``lsdyna::d3plot::strain_von_mises``
 
    .. code:: python
 
@@ -401,7 +401,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.strain_von_mises()
 
--  lsdyna::d3plot::history_var
+-  ``lsdyna::d3plot::history_var``
 
    .. code:: python
 
@@ -416,7 +416,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.history_var()
 
--  lsdyna::d3plot::thickness
+-  ``lsdyna::d3plot::thickness``
 
    .. code:: python
 
@@ -431,7 +431,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.thickness()
 
--  lsdyna::d3plot::element_dependent_var_1
+-  ``lsdyna::d3plot::element_dependent_var_1``
 
    .. code:: python
 
@@ -446,7 +446,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.element_dependent_var_1()
 
--  lsdyna::d3plot::element_dependent_var_2
+-  ``lsdyna::d3plot::element_dependent_var_2``
 
    .. code:: python
 
@@ -461,7 +461,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.element_dependent_var_2()
 
--  lsdyna::d3plot::mx
+-  ``lsdyna::d3plot::mx``
 
    .. code:: python
 
@@ -476,7 +476,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.mx()
 
--  lsdyna::d3plot::my
+-  ``lsdyna::d3plot::my``
 
    .. code:: python
 
@@ -491,7 +491,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.my()
 
--  lsdyna::d3plot::mxy
+-  ``lsdyna::d3plot::mxy``
 
    .. code:: python
 
@@ -506,7 +506,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.mxy()
 
--  lsdyna::d3plot::qx
+-  ``lsdyna::d3plot::qx``
 
    .. code:: python
 
@@ -521,7 +521,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.qx()
 
--  lsdyna::d3plot::qy
+-  ``lsdyna::d3plot::qy``
 
    .. code:: python
 
@@ -536,7 +536,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.qy()
 
--  lsdyna::d3plot::nx
+-  ``lsdyna::d3plot::nx``
 
    .. code:: python
 
@@ -551,7 +551,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.nx()
 
--  lsdyna::d3plot::ny
+-  ``lsdyna::d3plot::ny``
 
    .. code:: python
 
@@ -566,7 +566,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.ny()
 
--  lsdyna::d3plot::nxy
+-  ``lsdyna::d3plot::nxy``
 
    .. code:: python
 
@@ -581,7 +581,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.nxy()
 
--  lsdyna::d3plot::axial_force
+-  ``lsdyna::d3plot::axial_force``
 
    .. code:: python
 
@@ -596,7 +596,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.axial_force()
 
--  lsdyna::d3plot::s_shear_resultant
+-  ``lsdyna::d3plot::s_shear_resultant``
 
    .. code:: python
 
@@ -611,7 +611,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.s_shear_resultant()
 
--  lsdyna::d3plot::t_shear_resultant
+-  ``lsdyna::d3plot::t_shear_resultant``
 
    .. code:: python
 
@@ -626,7 +626,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.t_shear_resultant()
 
--  lsdyna::d3plot::s_bending_moment
+-  ``lsdyna::d3plot::s_bending_moment``
 
    .. code:: python
 
@@ -641,7 +641,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.s_bending_moment()
 
--  lsdyna::d3plot::t_bending_moment
+-  ``lsdyna::d3plot::t_bending_moment``
 
    .. code:: python
 
@@ -656,7 +656,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.t_bending_moment()
 
--  lsdyna::d3plot::torsional_resultant
+-  ``lsdyna::d3plot::torsional_resultant``
 
    .. code:: python
 
@@ -671,7 +671,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.torsional_resultant()
 
--  lsdyna::d3plot::axial_stress
+-  ``lsdyna::d3plot::axial_stress``
 
    .. code:: python
 
@@ -686,7 +686,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.axial_stress()
 
--  lsdyna::d3plot::rs_shear_stress
+-  ``lsdyna::d3plot::rs_shear_stress``
 
    .. code:: python
 
@@ -701,7 +701,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.rs_shear_stress()
 
--  lsdyna::d3plot::tr_shear_stress
+-  ``lsdyna::d3plot::tr_shear_stress``
 
    .. code:: python
 
@@ -716,7 +716,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.tr_shear_stress()
 
--  lsdyna::d3plot::axial_plastic_strain
+-  ``lsdyna::d3plot::axial_plastic_strain``
 
    .. code:: python
 
@@ -731,7 +731,7 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.axial_plastic_strain()
 
--  lsdyna::d3plot::axial_strain
+-  ``lsdyna::d3plot::axial_strain``
 
    .. code:: python
 
@@ -746,9 +746,9 @@ operators
       resultOp.inputs.time_scoping.connect([3])
       result = resultOp.outputs.axial_strain()
 
-2. binout
+2. ``binout``
 
--  lsdyna::binout::meshes_provider
+-  ``lsdyna::binout::meshes_provider``
   
    .. code:: python
 
@@ -760,7 +760,7 @@ operators
       meshOP.inputs.data_sources.connect(ds) meshes = meshOP.outputs.meshes()
       mesh = meshes.get_mesh({})
 
--  lsdyna::binout::U
+-  ``lsdyna::binout::U``
 
    .. code:: python
 
@@ -774,7 +774,7 @@ operators
       coord.inputs.time_scoping.connect([3])
       fields = coord.outputs.displacement()
 
--  lsdyna::binout::TimeFreqSupportProvider
+-  ``lsdyna::binout::TimeFreqSupportProvider``
 
    .. code:: python
 
@@ -787,7 +787,7 @@ operators
       op.inputs.data_sources(ds)
       result_time_freq_support = op.outputs.time_freq_support()
 
--  lsdyna::binout::glstat::TimeFreqSupportProvider
+-  ``lsdyna::binout::glstat::TimeFreqSupportProvider``
 
    .. code:: python
 
@@ -800,7 +800,7 @@ operators
       op.inputs.data_sources(ds)
       result_time_freq_support = op.outputs.time_freq_support()
 
--  lsdyna::binout::matsum::TimeFreqSupportProvider
+-  ``lsdyna::binout::matsum::TimeFreqSupportProvider``
 
    .. code:: python
 
@@ -813,7 +813,7 @@ operators
       op.inputs.data_sources(ds)
       result_time_freq_support = op.outputs.time_freq_support()
 
--  lsdyna::binout::rcforc::TimeFreqSupportProvider
+-  ``lsdyna::binout::rcforc::TimeFreqSupportProvider``
 
    .. code:: python
 
@@ -826,7 +826,7 @@ operators
       op.inputs.data_sources(ds)
       result_time_freq_support = op.outputs.time_freq_support()
 
--  lsdyna::binout::result_info_provider
+-  ``lsdyna::binout::result_info_provider``
 
    .. code:: python
 
@@ -839,7 +839,7 @@ operators
       resultInfoOp.inputs.data_sources(ds)
       result_info = resultInfoOp.outputs.result_info()
 
--  lsdyna::binout::S
+-  ``lsdyna::binout::S``
 
    .. code:: python
 
@@ -852,7 +852,7 @@ operators
       stressOp.inputs.data_sources(ds)
       fields = stressOp.outputs.stress()
 
--  lsdyna::binout::EPEL
+-  ``lsdyna::binout::EPEL``
 
    .. code:: python
 
@@ -865,7 +865,7 @@ operators
       resultOp.inputs.data_sources(ds)
       result = resultOp.outputs.strain()
 
--  lsdyna::binout::glstat
+-  ``lsdyna::binout::glstat``
 
    .. code:: python
 
@@ -883,7 +883,7 @@ operators
       field1 = fields.get_field({"component":1})
       ...
 
--  lsdyna::binout::matsum
+-  ``lsdyna::binout::matsum``
 
    .. code:: python
 
@@ -901,7 +901,7 @@ operators
       field1 = fields.get_field({"component":1})
       ...
 
--  lsdyna::binout::rcforc
+-  ``lsdyna::binout::rcforc``
 
    .. code:: python
 
@@ -919,35 +919,35 @@ operators
       field1 = fields.get_field({"component":1})
       ...
 
-1. nvh
+1. ``nvh``
 
--  lsdyna::d3ssd::meshes_provider
+-  ``lsdyna::d3ssd::meshes_provider``
 
--  lsdyna::d3spcm::meshes_provider
+-  ``lsdyna::d3spcm::meshes_provider``
 
--  lsdyna::d3psd::meshes_provider
+-  ``lsdyna::d3psd::meshes_provider``
 
--  lsdyna::d3rms::meshes_provider
+-  ``lsdyna::d3rms::meshes_provider``
 
--  lsdyna::d3zcf::meshes_provider
+-  ``lsdyna::d3zcf::meshes_provider``
 
--  lsdyna::d3ssd::result_info_provider
+-  ``lsdyna::d3ssd::result_info_provider``
 
--  lsdyna::d3ssd::U
+-  ``lsdyna::d3ssd::U``
 
--  lsdyna::d3ssd::V
+-  ``lsdyna::d3ssd::V``
 
--  lsdyna::d3ssd::A
+-  ``lsdyna::d3ssd::A``
 
--  lsdyna::d3ssd::S
+-  ``lsdyna::d3ssd::S``
 
--  lsdyna::d3ssd::EPEL
+-  ``lsdyna::d3ssd::EPEL``
 
--  lsdyna::d3ssd::TimeFreqSupportProvider
+-  ``lsdyna::d3ssd::TimeFreqSupportProvider``
 
    same as d3plot
 
--  lsdyna::moddynout::TimeFreqSupportProvider
+-  ``lsdyna::moddynout::TimeFreqSupportProvider``
 
    .. code:: python
 
@@ -960,7 +960,7 @@ operators
       resultOp.inputs.data_sources(ds)
       result = resultOp.outputs.time_freq_support()
 
--  lsdyna::moddynout::result_info_provider
+-  ``lsdyna::moddynout::result_info_provider``
 
    .. code:: python
 
@@ -973,7 +973,7 @@ operators
       resultInfoOp.inputs.data_sources(ds)
       result_info = resultInfoOp.outputs.result_info()
 
--  lsdyna::moddynout::F
+-  ``lsdyna::moddynout::F``
 
    .. code:: python
 
@@ -988,7 +988,7 @@ operators
       disOp.inputs.time_scoping(times)
       fields = disOp.outputs.moddynout_force()
 
--  lsdyna::moddynout::A
+-  ``lsdyna::moddynout::A``
 
    .. code:: python
 
@@ -1003,7 +1003,7 @@ operators
       disOp.inputs.time_scoping(times)
       fields = disOp.outputs.moddynout_acceleration()
 
--  lsdyna::moddynout::V
+-  ``lsdyna::moddynout::V``
 
    .. code:: python
 
@@ -1018,7 +1018,7 @@ operators
       disOp.inputs.time_scoping(times)
       fields = disOp.outputs.moddynout_velocity()
 
--  lsdyna::moddynout::U
+-  ``lsdyna::moddynout::U``
 
    .. code:: python
 

@@ -43,7 +43,6 @@ class Air:
         initial_relative_volume=1.0,
         equation_coefficient=[0, 0, 0, 0, 0.4, 0.4, 0],
     ):
-
         self.mass_density = mass_density
         self.pressure_cutoff = pressure_cutoff
         self.initial_internal_energy = initial_internal_energy
@@ -94,7 +93,6 @@ class Liner:
         volume_correction_coefficient=0.47,
         initial_internal_energy=0,
     ):
-
         self.mass_density = mass_density
         self.shear_modulus = shear_modulus
         self.youngs_modulus = youngs_modulus
