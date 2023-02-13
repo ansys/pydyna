@@ -229,6 +229,7 @@ class ICFD_CouplingForm(Enum):
     FORCE_BASED_ON_VELOCITY_DRAG_VALUE = 0
     FORCE_USING_FLUID_PRESSURE_GRADIENT = 1
 
+
 class ICFD_CouplingDirection(Enum):
     TWO_WAY_COUPLING = 0
     ONE_WAY_COUPLING_MECHANICS_TRANS_DISPLACEMENT_TO_FLUID = 1
@@ -276,7 +277,7 @@ class ICFDAnalysis:
         self.msgl = messagelevel.value
         self.itout = iteration_interval
 
-    def set_fsi(self,couplingdir=ICFD_CouplingDirection.TWO_WAY_COUPLING):
+    def set_fsi(self, couplingdir=ICFD_CouplingDirection.TWO_WAY_COUPLING):
         """Modify default values for the fluid-structure interaction coupling algorithm.
 
         Parameters
@@ -286,7 +287,6 @@ class ICFDAnalysis:
         """
         self.defined_fsi = True
         self.owc = couplingdir.value
-
 
     def set_steady_state(
         self,
