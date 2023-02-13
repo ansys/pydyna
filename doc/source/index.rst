@@ -1,4 +1,4 @@
-PyDyna Documentation  0.0.1
+PyDyna documentation  0.0.1
 ===========================
 
 .. include:: ../../README.rst
@@ -10,3 +10,4 @@ PyDyna Documentation  0.0.1
    Resources/User_Guide
    API/index
    Resources/Contributing
+   examples/index

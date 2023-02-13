@@ -1,42 +1,42 @@
 PyDyna-pre
 ==========
 
-The PyDyna-pre provide the ability to create keyword inputdeck through gRPC framework. 
+The PyDyna-pre provide the ability to create keyword ``inputdeck`` through gRPC framework. 
 
-Running pyDyna-pre in virtualenv
---------------------------------
+Running pyDyna-pre in ``virtualenv``
+------------------------------------
 
-virtualenv is a CLI tool that needs a Python interpreter to run.
+``virtualenv`` is a CLI tool that needs a Python interpreter to run.
 
-Install virtualenv
-~~~~~~~~~~~~~~~~~~
+Install ``virtualenv``
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
     pip install virtualenv
 
-Create a python virtual environment of the same version as virtualenv,installed into the subdirectory "venv"
+Create a Python virtual environment of the same version as ``virtualenv``, installed into the subdirectory ``venv``.
 
 .. code:: python
 
     virtualenv venv
 
-Activate venv on Windows by running command: 
+Activate ``venv`` on Windows by running command: 
 
 .. code:: python
 
     cd venv
     ./Scripts/activate
 
-Activate venv on Linux by running command: 
+Activate ``venv`` on Linux by running command: 
 
 .. code:: python
 
     cd venv
     source bin/activate
 
-Copy pyDyna package in venv folder
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Copy pyDyna package in ``venv`` folder
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -54,7 +54,7 @@ Copy pyDyna package in venv folder
 Requirements
 ------------
 
-Go to pyDyna/requirements/pythonxx according to your Python version.
+Go to ``pyDyna/requirements/pythonxx`` according to your Python version.
 Then running command:
 
 .. code:: python
@@ -62,7 +62,7 @@ Then running command:
     cd pyDyna/requirement/pythonxx
     pip install -r requirements.txt
 
-Starting the Server
+Starting the server
 -------------------
 
 So far, Python 3.8/3.9 is used to start server, make sure this like below:
@@ -72,8 +72,9 @@ So far, Python 3.8/3.9 is used to start server, make sure this like below:
     (venv) C:\pyDyna\examples\pre> C:\python38\python.exe --version
     Python 3.8.10
 
-Here is the minimal content in Server folder 
+Here is the minimal content in server folder 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code:: python
 
     Server/
@@ -88,8 +89,8 @@ Here is the minimal content in Server folder
                    cp39/keywordreader.pyd				
 
 
-Starting the Server on Windows:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Starting the server on Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Start server by running command:
 
@@ -99,8 +100,8 @@ Start server by running command:
     (venv) C:\pyDyna\ansys\dyna\pre\Server> python .\kwserver.py
     kwgrpc Server listening on: localhost:50051
 
-Starting the server on Linux:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Starting the server on Linux
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Start server by running command:
 
@@ -111,12 +112,12 @@ Start server by running command:
 Running pyDyna-pre client
 -------------------------
 
-See the examples in the examples folder for some basic example.  More will be added later.
+See the examples in the examples folder for some basic example. More to be added later.
 
 Structure ALE demo
 ~~~~~~~~~~~~~~~~~~
 
-Go to pyDyna/examples/pre,and run sale_efp.py:
+Go to ``pyDyna/examples/pre``,and run ``sale_efp.py``:
 
 .. code:: python
 
@@ -140,7 +141,7 @@ Go to pyDyna/examples/pre,and run sale_efp.py:
     2022-07-05 08:19:43 :  Output Setting...
     2022-07-05 08:19:43 :  efpcase.k is outputed...
 
-At the same time, corresponding information will be printed in the server side.
+At the same time, corresponding information is printed in the server side.
 
 .. code:: bash
 
@@ -173,7 +174,7 @@ At the same time, corresponding information will be printed in the server side.
     Saved Successfully!
 
 
-After running this file,the result file will be save in pyDyna/ansys/dyna/pre/Server/output
+After running this file, the result file is saved in ``pyDyna/ansys/dyna/pre/Server/output``.
 
 .. code:: bash
 
@@ -189,4 +190,4 @@ After running this file,the result file will be save in pyDyna/ansys/dyna/pre/Se
     -a----          2022/7/5      8:19        2436058 efpcase.k
 
 
-Submit the result file, efpcase.k, to LS-Dyna for simulation results.
+Submit the result file, ``efpcase.k``, to LS-Dyna for simulation results.
