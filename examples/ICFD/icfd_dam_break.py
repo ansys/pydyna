@@ -23,7 +23,7 @@ from ansys.dyna.core.pre.dynaicfd import (
     Compressible
 )
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/dam_break.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

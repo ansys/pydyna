@@ -30,6 +30,7 @@ from ansys.dyna.core.pre.dynamech import *
 from ansys.dyna.core.pre.dynamaterial import MatPiecewiseLinearPlasticity, MatSpotweld
 from iga_sample_data import *
 from ansys.dyna.core.pre import examples
+# sphinx_gallery_thumbnail_path = '_static/pre/iga/rkrweld.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

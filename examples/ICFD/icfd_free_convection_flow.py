@@ -23,7 +23,7 @@ from ansys.dyna.core.pre.dynaicfd import (
 
 )
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/free_convection_flow.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

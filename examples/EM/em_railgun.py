@@ -25,6 +25,7 @@ from ansys.dyna.core.pre.dynaem import (
 from ansys.dyna.core.pre.dynamaterial import MatElastic, MatRigid, EMMATTYPE
 from em_railgun_data import *
 from ansys.dyna.core.pre import examples
+# sphinx_gallery_thumbnail_path = '_static/pre/em/railgun.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

@@ -28,7 +28,7 @@ from ansys.dyna.core.pre.dynaicfd import (
 )
 from ansys.dyna.core.pre.dynamaterial import MatRigid
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/strong_fsi.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

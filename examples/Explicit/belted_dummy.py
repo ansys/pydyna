@@ -35,6 +35,7 @@ from ansys.dyna.core.pre.dynamaterial import (
 )
 from belted_dummy_data import *
 from ansys.dyna.core.pre import examples
+# sphinx_gallery_thumbnail_path = '_static/pre/explicit/belted_dummy.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

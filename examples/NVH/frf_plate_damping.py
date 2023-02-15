@@ -14,6 +14,7 @@ from ansys.dyna.core.pre.dynamaterial import MatElastic
 from ansys.dyna.core.pre.dynanvh import (
     DynaNVH,
     FrequencyDomain,
+    ExcitationDOF,
     Curve,
     NodeSet,
     ShellPart,
@@ -22,6 +23,7 @@ from ansys.dyna.core.pre.dynanvh import (
     ResponseType,
 )
 from ansys.dyna.core.pre import examples
+# sphinx_gallery_thumbnail_path = '_static/pre/nvh/frf_plate_damping.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:
@@ -46,6 +48,7 @@ crv = Curve(
 )
 fd.set_frequency_response_function(
     excitation_input_set=NodeSet([131]),
+    excitation_input_dof=ExcitationDOF.Z,
     max_natural_frequency=2000,
     modal_damping_coefficient_curve_type=1,
     modal_damping_coefficient_curve=crv,

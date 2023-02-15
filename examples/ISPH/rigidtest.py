@@ -31,6 +31,7 @@ from ansys.dyna.core.pre.dynaisph import (
     GravityOption,
 )
 from ansys.dyna.core.pre import examples
+# sphinx_gallery_thumbnail_path = '_static/pre/isph/rigidtest.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

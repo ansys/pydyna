@@ -22,7 +22,7 @@ from ansys.dyna.core.pre.dynaicfd import (
     ICFD_SurfRemeshMethod
 )
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/internal_3d_flow.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:
