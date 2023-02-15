@@ -21,7 +21,7 @@ from ansys.dyna.core.pre.dynaicfd import (
     ICFDAnalysis
 )
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/mesh_morphing.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

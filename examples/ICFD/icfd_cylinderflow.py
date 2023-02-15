@@ -21,7 +21,7 @@ from ansys.dyna.core.pre.dynaicfd import (
     MeshedVolume,
 )
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/cylinderflow.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

@@ -22,7 +22,7 @@ from ansys.dyna.core.pre.dynaicfd import (
     Curve
     )
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/imposed_move.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

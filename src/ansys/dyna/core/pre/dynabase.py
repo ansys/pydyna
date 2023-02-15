@@ -70,6 +70,7 @@ class CaseType(Enum):
     IGA = 5
 
 
+from .dynamaterial import MatAdditional
 from .dynasolution import DynaSolution  # noqa : F403
 
 
@@ -857,6 +858,9 @@ class Part:
         """Set material."""
         mat.create(self.stub)
         self.mid = mat.material_id
+        if isinstance(mat, MatAdditional):
+            if mat.thermal_isotropic:
+                self.tmid = self.mid
 
     def set_element_formulation(self, formulation):
         """Set Element formulation."""

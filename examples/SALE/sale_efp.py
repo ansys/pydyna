@@ -19,6 +19,7 @@ from ansys.dyna.core.pre.dynasale import (
 )
 from ansys.dyna.core.pre import dynamaterial as matDB
 from ansys.dyna.core.pre import examples
+# sphinx_gallery_thumbnail_path = '_static/pre/sale/efpcase.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

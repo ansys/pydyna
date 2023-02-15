@@ -72,6 +72,7 @@ sphinx_gallery_conf = {
             # 'first_notebook_cell': ("%matplotlib inline\n"
             #                         "from pyvista import set_plot_theme\n"
             #                         "set_plot_theme('document')"),
+            'remove_config_comments': True,
         }
 
 # Numpydoc config
