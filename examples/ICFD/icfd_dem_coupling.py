@@ -29,6 +29,7 @@ from ansys.dyna.core.pre.dynaicfd import (
 from ansys.dyna.core.pre.dynadem import DEMAnalysis
 from ansys.dyna.core.pre.dynamaterial import MatRigidDiscrete
 from ansys.dyna.core.pre import examples
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/dem_coupling.png'
 
 
 hostname = "localhost"
