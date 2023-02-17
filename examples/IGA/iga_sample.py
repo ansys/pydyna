@@ -2,7 +2,8 @@
 IGA example
 =====================
 
-This example demonstrates how to create an IGA input deck.
+This example demonstrates how to create an IGA input deck. \n
+LS-DYNA version : ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
 """
 
 import os

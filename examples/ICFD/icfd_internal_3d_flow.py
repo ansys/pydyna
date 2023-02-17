@@ -2,7 +2,8 @@
 Internal 3D flow
 ================
 
-This example shows a simple 3D ICFD problem.
+This example shows a simple 3D ICFD problem. \n
+LS-DYNA version : ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe
 """
 
 import os

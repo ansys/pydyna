@@ -2,7 +2,8 @@
 Imposed move
 ============
 
-This example shows how to impose the displacements on the fluid nodes through the use of the ICFD_CONTROL_IMPOSED_MOVE keyword.
+This example shows how to impose the displacements on the fluid nodes through the use of the ICFD_CONTROL_IMPOSED_MOVE keyword. \n
+LS-DYNA version : ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe
 """
 
 import os
