@@ -2,7 +2,8 @@
 Weak FSI
 ========
 
-This example shows a simple FSI coupling problem using weak/loose/explicit FSI.
+This example shows a simple FSI coupling problem using weak/loose/explicit FSI. \n
+LS-DYNA version : ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe
 """
 
 import os

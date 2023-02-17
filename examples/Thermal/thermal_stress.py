@@ -2,7 +2,8 @@
 Thermal stress example
 ======================
 
-This example show how to create a thermal stress model with Pydyna-pre module
+This example show how to create a thermal stress model with Pydyna-pre module. \n
+LS-DYNA version : ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
 """
 
 import os
