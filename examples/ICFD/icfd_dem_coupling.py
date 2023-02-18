@@ -2,7 +2,7 @@
 DEM Coupling
 ============
 
-This example shows how to couple the ICFD fluid solver with DEM particles.
+This example shows how to couple the ICFD fluid solver with DEM particles. \n
 LS-DYNA version : ls-dyna_smp_d_R101_winx64_ifort131.exe
 """
 
