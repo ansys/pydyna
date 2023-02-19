@@ -2,7 +2,8 @@
 Weak FSI
 ========
 
-This example shows a simple FSI coupling problem using weak/loose/explicit FSI.
+This example shows a simple FSI coupling problem using weak/loose/explicit FSI. \n
+LS-DYNA version : ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe
 """
 
 import os
@@ -28,7 +29,7 @@ from ansys.dyna.core.pre.dynaicfd import (
 )
 from ansys.dyna.core.pre.dynamaterial import MatRigid
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/weak_fsi.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:
@@ -44,10 +45,11 @@ solution.set_termination(termination_time=40)
 icfd = DynaICFD()
 solution.add(icfd)
 
-icfd.set_timestep(tssfac=0.9)
+icfd.set_timestep(tssfac=0.9,max_timestep=Curve(x=[0,10000],y=[0.05,0.05]))
 
 icfdanalysis = ICFDAnalysis()
 icfdanalysis.set_timestep(0.05)
+icfdanalysis.set_fsi()
 icfd.add(icfdanalysis)
 
 # define model

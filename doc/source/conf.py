@@ -68,10 +68,11 @@ sphinx_gallery_conf = {
             # Modules for which function level galleries are created.  In
             "doc_module": "ansys-dyna-core",
             "image_scrapers": ("pyvista", "matplotlib"),
-            "thumbnail_size": (350, 350),
+            "thumbnail_size": (600, 300),
             # 'first_notebook_cell': ("%matplotlib inline\n"
             #                         "from pyvista import set_plot_theme\n"
             #                         "set_plot_theme('document')"),
+            'remove_config_comments': True,
         }
 
 # Numpydoc config

@@ -2,7 +2,8 @@
 Strong FSI
 ==========
 
-This example shows a simple FSI coupling problem using strong FSI.
+This example shows a simple FSI coupling problem using strong FSI. \n
+LS-DYNA version : ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe
 """
 
 import os
@@ -28,7 +29,7 @@ from ansys.dyna.core.pre.dynaicfd import (
 )
 from ansys.dyna.core.pre.dynamaterial import MatRigid
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/strong_fsi.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:
@@ -46,6 +47,7 @@ solution.add(icfd)
 
 icfdanalysis = ICFDAnalysis()
 icfdanalysis.set_timestep(0.05)
+icfdanalysis.set_fsi()
 icfd.add(icfdanalysis)
 
 icfd.implicitanalysis.set_initial_timestep_size(

@@ -1,8 +1,9 @@
 """
-Cylinder flow example
-=====================
+EFP Concrete Target
+===================
 
-This example demonstrates how to create a SALE input deck.
+This example demonstrates how to create a SALE input deck. \n
+LS-DYNA version : ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
 """
 
 import os
@@ -19,6 +20,7 @@ from ansys.dyna.core.pre.dynasale import (
 )
 from ansys.dyna.core.pre import dynamaterial as matDB
 from ansys.dyna.core.pre import examples
+# sphinx_gallery_thumbnail_path = '_static/pre/sale/efpcase.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

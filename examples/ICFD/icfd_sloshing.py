@@ -2,7 +2,8 @@
 Sloshing
 ========
 
-This example shows how to directly impose a displacement of the entire volume mesh through the use of the keyword ICFD_CONTROL_IMPOSED_MOVE.
+This example shows how to directly impose a displacement of the entire volume mesh through the use of the keyword ICFD_CONTROL_IMPOSED_MOVE.\n
+LS-DYNA version : ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
 """
 
 import os
@@ -25,7 +26,7 @@ from ansys.dyna.core.pre.dynaicfd import (
     Compressible
     )
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/sloshing.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:
@@ -63,7 +64,7 @@ part_mid = ICFDPart(3)
 part_mid.set_material(mat1)
 icfd.parts.add(part_mid)
 
-g = Gravity(dir=GravityOption.DIR_Z, load=Curve(x=[0, 10000], y=[1, 1]))
+g = Gravity(dir=GravityOption.DIR_Z, load=Curve(x=[0, 10000], y=[9.81, 9.81]))
 icfd.add(g)
 
 icfd.set_imposed_move(vx=Curve(x=[0, 0.5, 0.52, 0.8, 0.82, 2.0], y=[1, 1, -1, -1, 0, 0]))
