@@ -2,7 +2,8 @@
 Airbag deploy example
 =====================
 
-This example show how to create an Airbag deploy model with Pydyna-pre module
+This example show how to create an Airbag deploy model with Pydyna-pre module. \n
+LS-DYNA version : ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
 """
 
 import os
@@ -25,6 +26,7 @@ from ansys.dyna.core.pre.dynamech import (
 )
 from ansys.dyna.core.pre.dynamaterial import MatRigid, MatFabric
 from ansys.dyna.core.pre import examples
+# sphinx_gallery_thumbnail_path = '_static/pre/airbag/airbag.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

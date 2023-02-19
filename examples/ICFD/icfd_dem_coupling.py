@@ -2,7 +2,8 @@
 DEM Coupling
 ============
 
-This example shows how to couple the ICFD fluid solver with DEM particles.
+This example shows how to couple the ICFD fluid solver with DEM particles. \n
+LS-DYNA version : ls-dyna_smp_d_R101_winx64_ifort131.exe
 """
 
 import os
@@ -29,6 +30,7 @@ from ansys.dyna.core.pre.dynaicfd import (
 from ansys.dyna.core.pre.dynadem import DEMAnalysis
 from ansys.dyna.core.pre.dynamaterial import MatRigidDiscrete
 from ansys.dyna.core.pre import examples
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/dem_coupling.png'
 
 
 hostname = "localhost"

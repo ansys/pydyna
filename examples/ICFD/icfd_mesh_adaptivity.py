@@ -2,7 +2,8 @@
 Mesh Adaptivity
 ===============
 
-This example shows a simple ICFD problem with adaptivity.
+This example shows a simple ICFD problem with adaptivity. \n
+LS-DYNA version : ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe
 """
 
 import os
@@ -21,7 +22,7 @@ from ansys.dyna.core.pre.dynaicfd import (
     ICFDAnalysis
 )
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/mesh_adaptivity.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:

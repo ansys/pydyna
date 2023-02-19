@@ -2,7 +2,8 @@
 Internal 3D flow
 ================
 
-This example shows a simple 3D ICFD problem.
+This example shows a simple 3D ICFD problem. \n
+LS-DYNA version : ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe
 """
 
 import os
@@ -22,7 +23,7 @@ from ansys.dyna.core.pre.dynaicfd import (
     ICFD_SurfRemeshMethod
 )
 from ansys.dyna.core.pre import examples
-
+# sphinx_gallery_thumbnail_path = '_static/pre/icfd/internal_3d_flow.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:
