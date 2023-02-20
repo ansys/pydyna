@@ -45,7 +45,7 @@ jobs:
 
       - name: Install packages for documentation build
         run: |
-          sudo apt-get install xvfb pandoc
+          sudo apt-get install xvfb pandoc texlive-latex-extra latexmk
           pip install --upgrade build
           pip install .[doc]
 
