@@ -108,7 +108,7 @@ For example, on Linux with Python 3.7, unzip the wheelhouse archive and install 
     unzip ansys-dyna-core-v0.2.dev0-wheelhouse-Linux-3.7.zip wheelhouse
     pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
 
-If you're on Windows with Python 3.9, unzip the corresponding wheelhouse to a wheelhouse directory
+If you are on Windows with Python 3.9, unzip the corresponding wheelhouse to a wheelhouse directory
 and install using the preceding command.
 
 Consider installing using a `virtual environment <https://docs.python.org/3/library/venv.html>`_.
@@ -186,3 +186,4 @@ of the repository for details.
 
 .. LINKS AND REFERENCES
 .. _pip: https://pypi.org/project/pip/
+.. _PyAnsys Developer's Guide: https://dev.docs.pyansys.com/
