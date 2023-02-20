@@ -1,5 +1,5 @@
-PyDyna documentation  0.0.1
-===========================
+PyDyna documentation  |version|
+===============================
 
 .. include:: ../../README.rst
 
