@@ -45,7 +45,7 @@ jobs:
 
       - name: Install packages for documentation build
         run: |
-          sudo apt-get install xvfb pandoc
+          sudo apt-get install xvfb pandoc texlive-latex-extra latexmk
           pip install --upgrade build
           pip install .[doc]
 
@@ -56,15 +56,26 @@ jobs:
           sleep 10
           cd -
 
-      - name: Build the documentation
+      - name: Build the documentation (HTML)
         run: |
           xvfb-run make -C doc html
+
+      - name: Build the documentation (PDF)
+        run: |
+          xvfb-run make -C doc pdf
 
       - name: Upload HTML documentation
         uses: actions/upload-artifact@v3
         with:
           name: documentation-html
           path: doc/_build/html
+          retention-days: 7
+
+      - name: Upload PDF documentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: documentation-pdf
+          path: doc/_build/latex/*.pdf
           retention-days: 7
 
       - name: Upload the server logs
