@@ -103,31 +103,38 @@ class FrequencyDomain:
     def create(self):
         """Define frequency domain vibration and acoustic problems."""
         if self.defined_frf:
-            cid = self.lcdam.create(self.stub)
-            self.n1.create(self.stub)
-            self.n2.create(self.stub)
-            if self.n1.type.upper() == "NODE":
-                n1typ = 0
-                n1id = self.n1.get_nid()
-            elif self.n1.type.upper() == "NODESET":
-                n1typ = 1
-                n1id = self.n1.id
-            elif self.n1.typ.upper() == "SEGMENTSET":
-                n1typ = 2
-                n1id = self.n1.id
+            if self.lcdam is not None:
+                cid = self.lcdam.create(self.stub)
             else:
-                print("Invalid set type.")
-            if self.n2.type.upper() == "NODE":
-                n2typ = 0
-                n2id = self.n2.get_nid()
-            elif self.n2.type.upper() == "NODESET":
-                n2typ = 1
-                n2id = self.n2.id
-            elif self.n2.typ.upper() == "SEGMENTSET":
-                n2typ = 2
-                n2id = self.n2.id
-            else:
-                print("Invalid set type.")
+                cid = 0
+            n1typ, n1id = 0, 0
+            if self.n1 is not None:
+                self.n1.create(self.stub)
+                if self.n1.type.upper() == "NODE":
+                    n1typ = 0
+                    n1id = self.n1.get_nid()
+                elif self.n1.type.upper() == "NODESET":
+                    n1typ = 1
+                    n1id = self.n1.id
+                elif self.n1.typ.upper() == "SEGMENTSET":
+                    n1typ = 2
+                    n1id = self.n1.id
+                else:
+                    print("Invalid set type.")
+            n2typ, n2id = 0, 0
+            if self.n2 is not None:
+                self.n2.create(self.stub)
+                if self.n2.type.upper() == "NODE":
+                    n2typ = 0
+                    n2id = self.n2.get_nid()
+                elif self.n2.type.upper() == "NODESET":
+                    n2typ = 1
+                    n2id = self.n2.id
+                elif self.n2.typ.upper() == "SEGMENTSET":
+                    n2typ = 2
+                    n2id = self.n2.id
+                else:
+                    print("Invalid set type.")
 
             self.stub.CreateFrequencyDomainFRF(
                 FrequencyDomainFRFRequest(
