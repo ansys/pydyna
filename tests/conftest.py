@@ -61,6 +61,13 @@ def resolve_icfd_path():
     path = os.path.dirname(os.path.abspath(__file__))
     icfd_path = os.path.join(path, "testfiles", "initial", "icfd")
     return icfd_path
+    
+@pytest.fixture()
+def resolve_nvh_path():
+    """Get the filepath of nvh files."""
+    path = os.path.dirname(os.path.abspath(__file__))
+    nvh_path = os.path.join(path, "testfiles", "initial", "nvh")
+    return nvh_path
 
 @pytest.fixture()
 def icfd_initialfile():
