@@ -198,16 +198,18 @@ jobs:
           library-name: ${{ env.PACKAGE_NAME }}
 
   upload_dev_docs:
-    name: Upload dev documentation
+    name: Upload stable documentation (no release)
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: [package]
     steps:
-      - name: Deploy the latest documentation
-        uses: pyansys/actions/doc-deploy-dev@v3
+      # Allowing also to deploy stable docs without releasing - ONLY ON THIS BRANCH
+      - name: Deploy the stable documentation
+        uses: pyansys/actions/doc-deploy-stable@v3
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
   upload_docs_release:
     name: Upload release documentation
