@@ -4,20 +4,13 @@ import datetime
 import os
 
 import pyvista
-from ansys_sphinx_theme import pyansys_logo_black, ansys_favicon
+from ansys_sphinx_theme import get_version_match, pyansys_logo_black, ansys_favicon
 from sphinx.builders.latex import LaTeXBuilder
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.dyna.core import __version__
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
-
-def get_version_match(semver):
-    """Evaluate the version match for the multi-documentation."""
-    if semver.endswith("dev0"):
-        return "dev"
-    major, minor, _ = semver.split(".")
-    return ".".join([major, minor])
 
 
 # Project information
@@ -102,9 +95,6 @@ numpydoc_validation_checks = {
 # Favicon
 html_favicon = ansys_favicon
 
-# We have our own custom templates
-templates_path = ['_templates']
-
 # The suffix(es) of source filenames.
 source_suffix = '.rst'
 
@@ -145,6 +135,7 @@ html_theme_options = {
         "json_url": f"https://{cname}/release/versions.json",
         "version_match": get_version_match(__version__),
     },
+    "check_switcher": False,
     "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
     "github_url": "https://github.com/pyansys/pydyna",
     "show_prev_next": False,
