@@ -70,6 +70,14 @@ class CaseType(Enum):
     IGA = 5
 
 
+# set_output() argument
+class OutputEcho(Enum):
+    ALL_DATA_PRINTED = 0
+    SUPPRESSED_NODAL_PRINTING = 1
+    SUPPRESSED_ELEMENT_PRINTING = 2
+    SUPPRESSED_NODAL_AND_ELEMENT_PRINTING = 3
+
+
 from .dynamaterial import MatAdditional
 from .dynasolution import DynaSolution  # noqa : F403
 
@@ -290,6 +298,40 @@ class DynaBase:
             )
         )
         logging.info("Control Energy Created...")
+        return ret
+
+    def set_output(
+        self,
+        print_suppression_d3hsp=False,
+        print_suppression_echo=OutputEcho.ALL_DATA_PRINTED,
+    ):
+        """Set miscellaneous output parameters.
+
+        Parameters
+        ----------
+        print_suppression_d3hsp : Boolean
+            Print suppression during input phase flag for the d3hsp file:
+            True :  Nodal coordinates, element connectivities, rigid wall definitions, nodal SPCs,
+            initial velocities, initial strains, adaptive constraints, and SPR2/SPR3 constraints are not printed.
+            False : No suppression
+        print_suppression_echo : OutputEcho
+            Print suppression during input phase flag for echo file:
+            ALL_DATA_PRINTED:  All data printed
+            SUPPRESSED_NODAL_PRINTING : Nodal printing is suppressed
+            SUPPRESSED_ELEMENT_PRINTING : Element printing is suppressed
+            SUPPRESSED_NODAL_AND_ELEMENT_PRINTING : Both nodal and element printing is suppressed
+        """
+        if print_suppression_d3hsp:
+            npopt = 1
+        else:
+            npopt = 0
+        ret = self.stub.CreateControlOutput(
+            ControlOutputRequest(
+                npopt=npopt,
+                neecho=print_suppression_echo.value,
+            )
+        )
+        logging.info("Control Output Created...")
         return ret
 
     def set_hourglass(self, controltype=HourglassControl.STANDARD_VISCOSITY_FORM, coefficient=0.1):
@@ -756,6 +798,7 @@ class SolidFormulation(Enum):
     EIGHT_POINT_HEXAHEDRON = 2
     FULLY_INTEGRATED_QUADRATIC_EIGHT_NODE_ELEMENT = 3
     ONE_POINT_COROTATIONAL = 0
+    IMPLICIT_9_POINT_ENHANCED_STRAIN = 18
 
 
 class HourglassType(Enum):

@@ -59,14 +59,15 @@ camry_solution.create_database_binary(dt=0.001)
 camry = DynaMech()
 camry_solution.add(camry)
 
+camry.implicitanalysis.set_initial_timestep_size(0.1)
 camry.implicitanalysis.set_timestep(
     control_flag=TimestepCtrol.AUTOMATICALLY_ADJUST_TIMESTEP_SIZE,
     Optimum_equilibrium_iteration_count=511,
 )
 camry.implicitanalysis.set_dynamic(gamma=0.6, beta=0.38)
 camry.implicitanalysis.set_eigenvalue()
-camry.implicitanalysis.set_solution(
-    stiffness_reformation_limit=55, absolute_convergence_tolerance=-100
+camry.implicitanalysis.set_solution(iteration_limit=1,
+    stiffness_reformation_limit=50, absolute_convergence_tolerance=-100
 )
 
 # create material
