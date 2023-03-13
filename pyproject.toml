@@ -60,7 +60,7 @@ doc = [
     "pytest-sphinx==0.5.0",
     "sphinx-notfound-page==0.8.3",
     "sphinx-copybutton==0.5.1",
-    "sphinx-gallery==0.12.0",
+    "sphinx-gallery==0.12.2",
     "sphinx-autodoc-typehints==1.22",
     "ansys-sphinx-theme==0.9.5",
     "pypandoc==1.11",
