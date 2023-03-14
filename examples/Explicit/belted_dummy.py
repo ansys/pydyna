@@ -117,6 +117,12 @@ for i in range(11):
     contact.set_master_surface(surf2)
     dummy.contacts.add(contact)
 
+for i in range(42):
+    id = i + 1
+    dummy.create_defineorientation(
+        vid=id, iop=2, vector=vector, node1=nlist[i][0], node2=nlist[i][1]
+    )
+
 # Constraint
 for i in range(14):
     dummy.constraints.create_joint_spherical(nodes=jointlist[i])
