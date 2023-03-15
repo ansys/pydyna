@@ -1,4 +1,5 @@
 """
+.. _ref_frf:
 FRF for a rectangular plate
 ===========================
 
@@ -25,23 +26,52 @@ from ansys.dyna.core.pre.dynanvh import (
 )
 from ansys.dyna.core.pre import examples
 # sphinx_gallery_thumbnail_path = '_static/pre/nvh/frf_plate_damping.png'
-
+###############################################################################
+# Manually start the dyna.core.pre server
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Copy the folder pyDyna/src/ansys/dyna/core/pre/Server to a desired location
+# Start the dyna.core.pre server at this location as shown below
+#
+# python kwserver.py
+#
+# Now the pre server is up and running and is waiting to be connected to the client
+# Connect to the server using the hostname and the port. In this example, default
+# "localhost" and port "50051" are used
 hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
 solution = DynaSolution(hostname)
+###############################################################################
+# Import the initial mesh data(nodes and elements)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Mesh data is imported which includes the *NODE, *ELEMENT_ and *PART cards predefined
 fns = []
 path = examples.nvh_frf_plate_damping + os.sep
 fns.append(path + "frf_plate_damping.k")
 solution.open_files(fns)
 
+###############################################################################
+# Global Control Cards
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 nvhobj = DynaNVH()
 solution.add(nvhobj)
-
+###############################################################################
+# Below we are setting the initial timestep size in CONTROL_IMPLICIT_GENERAL
 nvhobj.implicitanalysis.set_initial_timestep_size(1.0)
+###############################################################################
+# Number of eigen modes requested is 100
 nvhobj.implicitanalysis.set_eigenvalue(number_eigenvalues=100)
+###############################################################################
+# Linear solver is defined by setting NSOLVR to 1 in CONTROL_IMPLICIT_SOLUTION
 nvhobj.implicitanalysis.set_solution(solution_method=1)
 
+###############################################################################
+# Frequency Domain Cards
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# *FREQUENCY_DOMAIN_FRF is used to compute the frequency response function due to nodal excitations.
+# In this case a base velocity is define as an input at node 131. The base acceleration response is measured at
+# nodes 131 and 651. The max natural frequency employed in FRF is limited to 2000Hz.
 fd = FrequencyDomain()
 crv = Curve(
     x=[1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 200],
@@ -62,6 +92,11 @@ fd.set_frequency_response_function(
 )
 nvhobj.add(fd)
 
+###############################################################################
+# Material and Section
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Linear MAT_ELASTIC is defined. S/R Hughes-Lui Elform 6 is chosen for the shell formulation.
+# PROPT is set to 3 using set_printout() method. Finally save the input deck.
 matelastic = MatElastic(mass_density=7870, young_modulus=2.07e11, poisson_ratio=0.292)
 
 boxshell = ShellPart(1)

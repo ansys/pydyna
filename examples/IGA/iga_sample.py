@@ -33,11 +33,18 @@ from iga_sample_data import *
 from ansys.dyna.core.pre import examples
 # sphinx_gallery_thumbnail_path = '_static/pre/iga/rkrweld.png'
 
+###############################################################################
+# Start the Solution workflow
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# IGA patches were generated using PrimeApp. FE spotweld HEX elements are defined to join the different parts
+# *PART defined in it but the section and material fields are empty to begin with
+
 hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
-
 iga_solution = DynaSolution(hostname)
+
+
 fns = []
 path = examples.iga_sample + os.sep
 fns.append(path + "maino.k")
