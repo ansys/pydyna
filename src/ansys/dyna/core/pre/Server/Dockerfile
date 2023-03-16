@@ -1,4 +1,6 @@
-FROM python:3.6
-RUN pip install grpcio protobuf
-COPY . /server
-CMD ["python", "/server/kwserver.py"]
+ARG PYTHON_VERSION
+FROM python:${PYTHON_VERSION}
+WORKDIR /server
+COPY . .
+RUN pip3 install grpcio protobuf
+CMD ["python3", "kwserver.py"]
