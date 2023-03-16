@@ -34,7 +34,7 @@ dependencies = [
 
 [project.optional-dependencies]
 tests = [
-    "pyvista==0.38.3",
+    "pyvista==0.38.4",
     "matplotlib==3.7.1",
     "numpy==1.24.2",
     "pytest==7.2.2",
@@ -52,7 +52,7 @@ doc = [
     "matplotlib==3.7.1",
     "imageio==2.26.0",
     "imageio-ffmpeg==0.4.8",
-    "pyvista==0.38.3",
+    "pyvista==0.38.4",
     "numpydoc==1.5.0",
     "Sphinx==5.3.0",
     "sphinx-autobuild==2021.3.14",
