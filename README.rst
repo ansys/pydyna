@@ -1,5 +1,5 @@
-﻿PyDyna
-#############
+PyDyna
+######
 
 PyDyna is a pythonic dyna package that aims to provide user a more convenient and complete way to
 build up ansys-dyna input deck, submit to solver and finally post processing their results. 
@@ -37,14 +37,82 @@ detailed description of the package.
 
 Installation
 ------------
-This package is not yet available on PyPI, so for now the only real
-option is for you to download the code from GitHub:
+
+PyDyna has three installation modes: user, developer, and offline.
+
+Install in user mode
+^^^^^^^^^^^^^^^^^^^^
+
+Before installing PyDyna in user mode, make sure you have the latest version of
+`pip`_ with:
+
+.. code:: bash
+
+   python -m pip install -U pip
+
+Then, install PyDyna with:
+
+.. code:: bash
+
+   python -m pip install ansys-dyna-core
+
+.. caution::
+
+    PyDyna is currently hosted in a private PyPI repository. You must provide the index
+    URL to the private PyPI repository:
+
+    * Index URL: ``https://pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/``
+
+    If access to this package registry is needed, email `pyansys.support@ansys.com <mailto:pyansys.support@ansys.com>`_
+    to request access. The PyAnsys team can provide you a read-only token to be inserted in ``${PRIVATE_PYPI_ACCESS_TOKEN}``.
+    Once you have it, run the following command:
+
+    .. code:: bash
+
+        pip install ansys-dyna-core --index-url=https://${PRIVATE_PYPI_ACCESS_TOKEN}@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/
+
+Install in developer mode
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Installing PyDyna in developer mode allows you to modify the source and enhance it.
+
+.. note::
+   
+    Before contributing to the project, ensure that you are thoroughly familiar
+    with the `PyAnsys Developer's Guide`_.
+
+Start by cloning the repository
 
 .. code::
 
    git clone https://github.com/pyansys/pyDyna
 
-and copy the required files
+and copy the required files.
+
+Install in offline mode
+^^^^^^^^^^^^^^^^^^^^^^^
+
+If you lack an internet connection on your installation machine (or you do not have access to the
+private Ansys PyPI packages repository), you should install PyDyna by downloading the wheelhouse
+archive from the `Releases Page <https://github.com/pyansys/pydyna/releases>`_ for your
+corresponding machine architecture.
+
+Each wheelhouse archive contains all the Python wheels necessary to install PyDyna from scratch on Windows
+and Linux, from Python 3.7 to 3.10. You can install this on an isolated system with a fresh Python
+installation or on a virtual environment.
+
+For example, on Linux with Python 3.7, unzip the wheelhouse archive and install it with:
+
+.. code:: bash
+
+    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.7.zip wheelhouse
+    pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
+
+If you are on Windows with Python 3.9, unzip the corresponding wheelhouse to a wheelhouse directory
+and install using the preceding command.
+
+Consider installing using a `virtual environment <https://docs.python.org/3/library/venv.html>`_.
+
 
 Documentation
 -------------
@@ -115,3 +183,7 @@ License
 -------
 Distributed under the MIT license.  See LICENSE in the root directory
 of the repository for details.
+
+.. LINKS AND REFERENCES
+.. _pip: https://pypi.org/project/pip/
+.. _PyAnsys Developer's Guide: https://dev.docs.pyansys.com/
