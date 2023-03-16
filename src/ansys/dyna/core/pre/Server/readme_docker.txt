@@ -1,7 +1,8 @@
 ***How to build docker image***
 1. Create a empty folder
 2. Copy Dockerfile kwserver.py kwprocess_pb2.py kwprocess_pb2_grpc.py keywordreader.so to the folder
-3. Enter the folder, run 'docker build -t ls-pre .'
+3. Enter the folder, run 'docker build --build-arg PYTHON_VERSION=3.8-slim-buster -t ls-pre .'
+   note:set PYTHON_VERSION as the python version you used
 
 ***Check the image***
 1. Run 'docker images'
