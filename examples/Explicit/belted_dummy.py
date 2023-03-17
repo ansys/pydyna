@@ -166,6 +166,13 @@ for i in range(11):
 # Spherical joint is one of the simpler joint types which needs just a coincident
 # node pair to be defined. We read the node pairs from the jointlist array defined in
 # belted_dummy_data.py file
+
+for i in range(42):
+    id = i + 1
+    dummy.create_defineorientation(
+        vid=id, iop=2, vector=vector, node1=nlist[i][0], node2=nlist[i][1]
+    )
+
 for i in range(14):
     dummy.constraints.create_joint_spherical(nodes=jointlist[i])
 
@@ -176,7 +183,7 @@ for i in range(14):
 # Finally the gravity loading is defined using the Gravity() method in dynabase class.
 dummy.boundaryconditions.create_imposed_motion(
     NodeSet(motion_nodes),
-    Curve(x=motion_curve_x, y=motion_curve_y),
+    Curve(x=motion_curve_x, y=motion_curve_y,sfo=0.1),
     motion=Motion.ACCELERATION,
     scalefactor=-1,
 )

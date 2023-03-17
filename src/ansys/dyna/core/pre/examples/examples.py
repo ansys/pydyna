@@ -31,9 +31,11 @@ mesh_morphing = os.path.join(_module_path, "icfd", "mesh_morphing")
 dem_coupling = os.path.join(_module_path, "icfd", "dem_coupling")
 sloshing = os.path.join(_module_path, "icfd", "sloshing")
 
-iga_sample = os.path.join(_module_path, "iga", "iga_sample")
 camry_rc = os.path.join(_module_path, "implicit", "camry_rc")
 sale_efp = os.path.join(_module_path, "sale", "sale_efp")
 isph_rigidtest = os.path.join(_module_path, "isph", "rigidtest")
+# NVH
 nvh_frf_plate_damping = os.path.join(_module_path, "nvh", "frf_plate_damping")
+nvh_frf_solid = os.path.join(_module_path, "nvh", "frf_solid")
+
 thermal_stress = os.path.join(_module_path, "thermal", "thermal_stress")

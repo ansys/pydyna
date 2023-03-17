@@ -11,8 +11,14 @@ from ansys.dyna.core.pre.dynanvh import (
     ResponseType,
     ShellPart,
     ShellFormulation,
+    EnergyFlag,
+    OutputEcho,
+    ExcitationDOF,
+    ExcitationType,
+    SolidPart,
+    SolidFormulation,
 )
-from ansys.dyna.core.pre.dynamaterial import MatElastic
+from ansys.dyna.core.pre.dynamaterial import (MatElastic,MatPiecewiseLinearPlasticity)
 
 
 def comparefile(outputf, standardf):
@@ -29,8 +35,9 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_nvh(nvh_initialfile, resolve_server_path, resolve_standard_path):
+def test_nvh_frf_plate_damping(resolve_nvh_path, resolve_server_path, resolve_standard_path):
     solution = DynaSolution("localhost")
+    nvh_initialfile = os.path.join(resolve_nvh_path, "test_frf_plate_damping.k")
     fns = []
     fns.append(nvh_initialfile)
     solution.open_files(fns)
@@ -71,6 +78,71 @@ def test_nvh(nvh_initialfile, resolve_server_path, resolve_standard_path):
     nvhobj.parts.add(boxshell)
 
     solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_nvh.k")
-    standardfile = os.path.join(resolve_standard_path, "nvh.k")
+    outputfile = os.path.join(resolve_server_path, "output", "test_frf_plate_damping.k")
+    standardfile = os.path.join(resolve_standard_path, "nvh", "frf_plate_damping.k")
+    assert comparefile(outputfile, standardfile)
+    
+def test_nvh_frf_solid(resolve_nvh_path, resolve_server_path, resolve_standard_path):
+    solution = DynaSolution("localhost")
+    nvh_initialfile = os.path.join(resolve_nvh_path, "test_frf_solid.k")
+    fns = []
+    fns.append(nvh_initialfile)
+    solution.open_files(fns)
+    solution.set_termination(termination_time=1)
+
+    nvhobj = DynaNVH()
+    solution.add(nvhobj)
+
+    nvhobj.set_energy(hourglass_energy=EnergyFlag.COMPUTED)
+    nvhobj.set_output(print_suppression_d3hsp=True,print_suppression_echo=OutputEcho.SUPPRESSED_NODAL_AND_ELEMENT_PRINTING)
+
+    nvhobj.implicitanalysis.set_initial_timestep_size(1.0)
+    nvhobj.implicitanalysis.set_eigenvalue(number_eigenvalues=100)
+    nvhobj.implicitanalysis.set_solution(solution_method=1)
+
+    fd = FrequencyDomain()
+
+    outputset = [290,292,294,296,298,300,302,304,306,380,382,384,386,388,390,482,484,486,488,490,492,578,580,582,638,640,706,708]
+    fd.set_frequency_response_function(
+        excitation_input_dof=ExcitationDOF.X,
+        excitation_input_type=ExcitationType.BASE_ACCELERATION,
+        max_natural_frequency=20,
+        modal_damping_coefficient=0.01,
+        response_output_set=NodeSet(outputset),
+        response_output_dof=ResponseDOF.X,
+        response_output_type=ResponseType.BASE_ACCELERATION,
+        frf_output_min_frequency=0.01,
+        frf_output_max_frequency=10,
+        frf_output_num_frequency=1000,
+    )
+    nvhobj.add(fd)
+
+    plastic1 = MatPiecewiseLinearPlasticity(
+        mass_density=4.99e-07, young_modulus=11.37,poisson_ratio=0.32, yield_stress=0.0468
+    )
+    plastic2 = MatPiecewiseLinearPlasticity(
+        mass_density=4.99e-07, young_modulus=110.37,poisson_ratio=0.32, yield_stress=0.0468
+    )
+
+    lower = SolidPart(4)
+    lower.set_material(plastic1)
+    lower.set_element_formulation(SolidFormulation.IMPLICIT_9_POINT_ENHANCED_STRAIN)
+    nvhobj.parts.add(lower)
+
+    upper = SolidPart(5)
+    upper.set_material(plastic2)
+    upper.set_element_formulation(SolidFormulation.IMPLICIT_9_POINT_ENHANCED_STRAIN)
+    nvhobj.parts.add(upper)
+
+    spc = [163,166,169,172,175,178,181,184,187,307,310,313,316,319,322,391,394,397,400,403,406,493,496,499,589,592,645,648]
+    nvhobj.boundaryconditions.create_spc(NodeSet(spc))
+
+    solution.create_database_binary(dt=0.1)
+    solution.set_output_database(
+        glstat=0.1,
+        matsum=0.1,
+    )
+    solution.save_file()
+    outputfile = os.path.join(resolve_server_path, "output", "test_frf_solid.k")
+    standardfile = os.path.join(resolve_standard_path, "nvh", "frf_solid.k")
     assert comparefile(outputfile, standardfile)
