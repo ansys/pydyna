@@ -65,7 +65,7 @@ doc = [
     "ansys-sphinx-theme==0.9.5",
     "pypandoc==1.11",
     "nbsphinx==0.9.1",
-    "ipywidgets==8.0.4",
+    "ipywidgets==8.0.5",
     "joblib==1.2.0",
     "scikit-learn==1.2.2",
     "ipython==8.11.0",
