@@ -1,5 +1,4 @@
 """Module for miscellaneous functions and methods"""
-from functools import wraps
 import inspect
 import os
 import random
@@ -7,12 +6,10 @@ import socket
 import string
 import sys
 import tempfile
-from warnings import warn
-
-from ansys.dyna.core.pre import LOG
 
 # path of this module
 MODULE_PATH = os.path.dirname(inspect.getfile(inspect.currentframe()))
+
 
 class Plain_Report:
     def __init__(self, core, optional=None, additional=None, **kwargs):
@@ -54,8 +51,8 @@ class Plain_Report:
             except RuntimeError as e:  # pragma: no cover
                 self.kwargs["extra_meta"] = ("GPU Details", f"Error: {str(e)}")
         else:
-            self.kwargs["extra_meta"] = ("GPU Details", "None")  
-            
+            self.kwargs["extra_meta"] = ("GPU Details", "None")
+
     def get_version(self, package):
         try:
             import importlib.metadata as importlib_metadata
@@ -78,22 +75,12 @@ class Plain_Report:
         ]
 
         core = ["\nCore packages", "-------------"]
-        core.extend(
-            [
-                f"{each.ljust(20)}: {self.get_version(each)}"
-                for each in self.core
-                if self.get_version(each)
-            ]
-        )
+        core.extend([f"{each.ljust(20)}: {self.get_version(each)}" for each in self.core if self.get_version(each)])
 
         if self.optional:
             optional = ["\nOptional packages", "-----------------"]
             optional.extend(
-                [
-                    f"{each.ljust(20)}: {self.get_version(each)}"
-                    for each in self.optional
-                    if self.get_version(each)
-                ]
+                [f"{each.ljust(20)}: {self.get_version(each)}" for each in self.optional if self.get_version(each)]
             )
         else:
             optional = [""]
@@ -101,11 +88,7 @@ class Plain_Report:
         if self.additional:
             additional = ["\nAdditional packages", "-----------------"]
             additional.extend(
-                [
-                    f"{each.ljust(20)}: {self.get_version(each)}"
-                    for each in self.additional
-                    if self.get_version(each)
-                ]
+                [f"{each.ljust(20)}: {self.get_version(each)}" for each in self.additional if self.get_version(each)]
             )
         else:
             additional = [""]
@@ -125,6 +108,7 @@ def is_float(input_string):
         return True
     except ValueError:
         return False
+
 
 def random_string(stringLength=10, letters=string.ascii_lowercase):
     """Generate a random string of fixed length"""
@@ -151,8 +135,7 @@ def create_temp_dir(tmpdir=None):
         os.mkdir(path)
     except:
         raise RuntimeError(
-            "Unable to create temporary working "
-            "directory %s\n" % path + "Please specify run_location="
+            "Unable to create temporary working " "directory %s\n" % path + "Please specify run_location="
         )
 
     return path
@@ -172,6 +155,4 @@ def check_valid_port(port, lower_bound=1000, high_bound=60000):
     if lower_bound < port < high_bound:
         return
     else:
-        raise ValueError(
-            f"'port' values should be between {lower_bound} and {high_bound}."
-        )
+        raise ValueError(f"'port' values should be between {lower_bound} and {high_bound}.")

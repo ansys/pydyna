@@ -35,16 +35,16 @@ To change this and output lower level messages you can use the next snippet:
 
 .. code:: python
 
-   LOG.logger.setLevel('DEBUG')
-   LOG.file_handler.setLevel('DEBUG')  # If present.
-   LOG.stdout_handler.setLevel('DEBUG')  # If present.
+   LOG.logger.setLevel("DEBUG")
+   LOG.file_handler.setLevel("DEBUG")  # If present.
+   LOG.stdout_handler.setLevel("DEBUG")  # If present.
 
 
 Alternatively:
 
 .. code:: python
 
-   LOG.setLevel('DEBUG')
+   LOG.setLevel("DEBUG")
 
 This way ensures all the handlers are set to the input log level.
 
@@ -54,7 +54,8 @@ you can add a file handler using:
 .. code:: python
 
    import os
-   file_path = os.path.join(os.getcwd(), 'pydyna.log')
+
+   file_path = os.path.join(os.getcwd(), "pydyna.log")
    LOG.log_to_file(file_path)
 
 This sets the logger to be redirected also to that file.  If you wish
@@ -63,15 +64,6 @@ of the execution, you must edit the file ``__init__`` in the directory
 ``ansys.dyna.core.pre``.
 
 To log using this logger, just call the desired method as a normal logger.
-
-.. code:: python
-
-    >>> import logging
-    >>> from ansys.dyna.core.pre.logging import Logger
-    >>> LOG = Logger(level=logging.DEBUG, to_file=False, to_stdout=True)
-    >>> LOG.debug('This is LOG debug message.')
-
-    DEBUG -  -  <ipython-input-24-80df150fe31f> - <module> - This is LOG debug message.
 
 
 Instance Logger
@@ -88,17 +80,6 @@ logging level unless otherwise specified.  The way this logger works is very
 similar to the global logger.  You can add a file handler if you wish using
 :func:`log_to_file() <PymapdlCustomAdapter.log_to_file>` or change the log level
 using :func:`logger.Logging.setLevel`.
-
-You can use this logger like this:
-
-.. code:: python
-    >>> from ansys.dyna.core.pre import launch_mapdl
-    >>> mapdl = launch_mapdl()
-    >>> mapdl._log.info('This is a useful message')
-
-    INFO - GRPC_127.0.0.1:50056 -  <ipython-input-19-f09bb2d8785c> - <module> - This is a useful message
-
-
 
 Other loggers
 ~~~~~~~~~~~~~
@@ -127,9 +108,7 @@ CRITICAL = logging.CRITICAL
 
 ## Formatting
 
-STDOUT_MSG_FORMAT = (
-    "%(levelname)s - %(instance_name)s -  %(module)s - %(funcName)s - %(message)s"
-)
+STDOUT_MSG_FORMAT = "%(levelname)s - %(instance_name)s -  %(module)s - %(funcName)s - %(message)s"
 
 FILE_MSG_FORMAT = STDOUT_MSG_FORMAT
 
@@ -180,9 +159,7 @@ class PymapdlCustomAdapter(logging.LoggerAdapter):
     def process(self, msg, kwargs):
         kwargs["extra"] = {}
         # This are the extra parameters sent to log
-        kwargs["extra"][
-            "instance_name"
-        ] = self.extra.name  # here self.extra is the argument pass to the log records.
+        kwargs["extra"]["instance_name"] = self.extra.name  # here self.extra is the argument pass to the log records.
         return msg, kwargs
 
     def log_to_file(self, filename=FILE_NAME, level=LOG_LEVEL):
@@ -196,9 +173,7 @@ class PymapdlCustomAdapter(logging.LoggerAdapter):
             Level of logging. E.x. 'DEBUG'. By default LOG_LEVEL
         """
 
-        self.logger = addfile_handler(
-            self.logger, filename=filename, level=level, write_headers=True
-        )
+        self.logger = addfile_handler(self.logger, filename=filename, level=level, write_headers=True)
         self.file_handler = self.logger.file_handler
 
     def log_to_stdout(self, level=LOG_LEVEL):
@@ -320,9 +295,7 @@ class Logger:
     _level = logging.DEBUG
     _instances = {}
 
-    def __init__(
-        self, level=logging.DEBUG, to_file=False, to_stdout=True, filename=FILE_NAME
-    ):
+    def __init__(self, level=logging.DEBUG, to_file=False, to_stdout=True, filename=FILE_NAME):
         """Customized logger class for PyDyna-Pre.
 
         Parameters
@@ -471,13 +444,9 @@ class Logger:
 
     def _add_mapdl_instance_logger(self, name, mapdl_instance, level):
         if isinstance(name, str):
-            instance_logger = PymapdlCustomAdapter(
-                self._make_child_logger(name, level), mapdl_instance
-            )
+            instance_logger = PymapdlCustomAdapter(self._make_child_logger(name, level), mapdl_instance)
         elif not name:  # pragma: no cover
-            instance_logger = PymapdlCustomAdapter(
-                self._make_child_logger("NO_NAMED_YET", level), mapdl_instance
-            )
+            instance_logger = PymapdlCustomAdapter(self._make_child_logger("NO_NAMED_YET", level), mapdl_instance)
         else:
             raise ValueError("You can only input 'str' classes to this method.")
 
@@ -516,9 +485,7 @@ class Logger:
             count_ += 1
             new_name = name + "_" + str(count_)
 
-        self._instances[new_name] = self._add_mapdl_instance_logger(
-            new_name, mapdl_instance, level
-        )
+        self._instances[new_name] = self._add_mapdl_instance_logger(new_name, mapdl_instance, level)
         return self._instances[new_name]
 
     def __getitem__(self, key):
@@ -534,9 +501,7 @@ class Logger:
             if issubclass(exc_type, KeyboardInterrupt):
                 sys.__excepthook__(exc_type, exc_value, exc_traceback)
                 return
-            logger.critical(
-                "Uncaught exception", exc_info=(exc_type, exc_value, exc_traceback)
-            )
+            logger.critical("Uncaught exception", exc_info=(exc_type, exc_value, exc_traceback))
 
         sys.excepthook = handle_exception
 

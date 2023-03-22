@@ -1,10 +1,5 @@
 """pydyna specific errors"""
 
-from functools import wraps
-
-from grpc._channel import _InactiveRpcError, _MultiThreadedRendezvous
-
-from ansys.dyna.core.pre import LOG as logger
 
 SIGINT_TRACKER = []
 
@@ -51,4 +46,3 @@ class KwserverDidNotStart(RuntimeError):
 
     def __init__(self, msg=""):
         RuntimeError.__init__(self, msg)
-
