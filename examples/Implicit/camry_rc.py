@@ -55,7 +55,7 @@ camry_solution = DynaSolution(hostname)
 
 ###############################################################################
 # Import the initial mesh data(nodes and elements)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Mesh data is imported which includes the vehicle data, weld data and the platen data
 fns = []
 path = examples.camry_rc + os.sep
@@ -70,7 +70,7 @@ camry_solution.open_files(fns)
 
 ###############################################################################
 # Define global Control Cards
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Roof crush being a quasi-static loading case, we need to run this as an implicit
 # dynamic solution. The following few lines are used to define these cards.
 # Termination time and the frequency for the database ascii options are set from
@@ -106,7 +106,7 @@ camry.implicitanalysis.set_solution(iteration_limit=1,
 
 ###############################################################################
 # Material definitions
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~
 # This model has 4 classes of material used . MAT_NULL, MAT_RIGID, MAT_SPOTWELD and
 # MAT_PIECEWISE_LINEAR_PLASTICITY. The dynamaterial class is used for these material
 # definitions
@@ -190,7 +190,7 @@ plastic220_410 = MatPiecewiseLinearPlasticity(
 
 ###############################################################################
 # Assining Section and Material Properties
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Once all the materials are explicitly defined, these material IDs needs to be cross-referenced
 # in the *PART card. set_material() method is used for this. Since many parts share common materials
 # the assignment happens within a loop. While within the loop, set_element_formulation() method
@@ -251,7 +251,7 @@ for spart in shellparts:
 
 ###############################################################################
 # Spotwelds and Nodal Rigid Bodies
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Again, camry_rc_data.py contains the predefined node pairs and node sets required for
 # *CONSTRAINED_SPOTWELD and *CONSTRAINED_NODAL_RIGID_BODY definitions. We are looping through
 # these lists to generate the appropriate keywords.
@@ -263,7 +263,7 @@ for cnrb in cnrbs:
 
 ###############################################################################
 # Define Contacts
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~
 # There are three Contacts defined in this model.
 # 1. Automatic Single surface contact for the BIW self contact
 # 2. Surface to Surface Contact between the platen and the BIW
@@ -303,7 +303,7 @@ camry.contacts.add(swcontact)
 
 ###############################################################################
 # Define SPC
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~
 # boundaryconditions class can be used to defind both SPCs and prescribed motions
 # The bottom of the BIW is SPCed by selecting a few nodes. The prescribed motion is
 # assigned to the platen.
@@ -326,7 +326,7 @@ camry.boundaryconditions.create_imposed_motion(
 
 ###############################################################################
 # Define Database cards
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~
 # Finally define the fequency of output for the Binary and ASCII database outputs
 # and save the input file
 camry_solution.create_database_binary(dt=0.001)

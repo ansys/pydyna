@@ -11,7 +11,7 @@ from ansys.dpf.core import examples
 
 ###############################################################################
 # Load the model
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~
 # Load the model and print the contents of the model. Since this is a multiphysics problem
 # the default results returned is the structural results.
 ds = dpf.DataSources()
@@ -20,7 +20,7 @@ model=dpf.Model(ds)
 print(model)
 ###############################################################################
 # Get MS mesh
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~
 # We now define an operator to extract the mesh from the EM solver.
 # "lsdyna::ms::meshs_provider" is the operator we can connect to get the mesh.
 # Since the meshes container contains the mesh for all time states, we need to scope it to the
@@ -35,7 +35,7 @@ mesh = meshes.get_mesh({'time':1})
 
 ###############################################################################
 # MS Result Info
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~
 # "result_info_provider" lets us list all the variables available in the container.
 
 resultInfoOp = dpf.Operator("lsdyna::ms::result_info_provider")
@@ -45,7 +45,7 @@ print(result_info)
 
 ###############################################################################
 # Get Field Variable from the available results
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # The actual field variable of interest is extracted from the "lsdyna::ms::results" operator.
 # The fileds extracted from this operator is first associated with a mesh. The variable of interest is
 # the electric field in this case. This can be retrieved from specifying the right Domain ID and the Variable ID
@@ -61,7 +61,7 @@ field0 = fields.get_field({"domain_id":0, "variable_id":1014})
 print(field0)
 ###############################################################################
 # Plot the Electric Field
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~
 # Now that we have the field of interest, we can plot it at any given state. In order to display the mesh at that
 # state, we need to extract the displacement and deform the field by the displacement field which is shown below.
 disp = model.results.displacement(time_scoping=[44]).eval()

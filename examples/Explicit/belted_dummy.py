@@ -59,7 +59,7 @@ dummy_solution = DynaSolution(hostname)
 
 ###############################################################################
 # Start the Solution workflow
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # NODES and ELEMENTS are read in from the "belted_dummy.k" file. This file also has the
 # *PART defined in it but the section and material fields are empty to begin with
 
@@ -70,7 +70,7 @@ dummy_solution.open_files(fns)
 
 ###############################################################################
 # Create Database and Control Cards
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Setting simulation termination time, simulation timestep and output frequency for the D3PLOTS
 # dynamech class also has the set_init_velocity method that is used here to initialize the
 # velocity components in the desired direction
@@ -85,7 +85,7 @@ dummy.set_init_velocity(Velocity(14.8, 0, 0))
 
 ###############################################################################
 # Define Materials for the model
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Since many parts share common material types in this model, we generate these materials
 # in a loop and create a list of these materials that can later be assigned to parts.
 # MAT_RIGID, MAT_ELASTIC, MAT_SPRING_NONLINEAR_ELASTIC, MAT_DAMPER_VISCOUS and MAT_DAMPER_NONLINEAR_VISCOUS are
@@ -124,7 +124,7 @@ for i in range(185, 209):
 
 ###############################################################################
 # Define Section properties and assign appropriate materials
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Now that we have a list of materials with MAT ID corresponding to the PART ID,
 # we can loop through the list and assign these to the parts. While in the loop,
 # the section properties, element formulations and constraints are also defined.
@@ -147,7 +147,7 @@ for i in range(101, 209):
 
 ###############################################################################
 # Define SURFACE_TO_SURFACE contacts
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # We intend to define several surface to surface contacts between predefined segment set pairs
 # such that each contact has a specific friction defined between the master and slave
 fslist = [0.62, 0.62, 0.62, 0.8, 1, 0.8, 0.88, 0.88, 0.16, 0.88, 0]
@@ -162,7 +162,7 @@ for i in range(11):
 
 ###############################################################################
 # Define Spherical Joints
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~
 # Spherical joint is one of the simpler joint types which needs just a coincident
 # node pair to be defined. We read the node pairs from the jointlist array defined in
 # belted_dummy_data.py file
@@ -178,7 +178,7 @@ for i in range(14):
 
 ###############################################################################
 # Define BOUNDARY_PRESCRIBED_MOTION_SET
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Prescribed motion can be defined on a nodeset using the "create_imposed_motion" function.
 # Finally the gravity loading is defined using the Gravity() method in dynabase class.
 dummy.boundaryconditions.create_imposed_motion(
