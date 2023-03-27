@@ -34,7 +34,7 @@ dependencies = [
 
 [project.optional-dependencies]
 tests = [
-    "pyvista==0.38.3",
+    "pyvista==0.38.5",
     "matplotlib==3.7.1",
     "numpy==1.24.2",
     "pytest==7.2.2",
@@ -42,17 +42,17 @@ tests = [
     "codecov==2.1.12",
     "joblib==1.2.0",
     "pandas==1.5.3",
-    "openpyxl==3.1.1",
+    "openpyxl==3.1.2",
     "scikit-learn==1.2.2",
-    "pytest-xdist==3.2.0",
+    "pytest-xdist==3.2.1",
     "ipython==8.11.0",
 ]
 doc = [
     "recommonmark==0.7.1",
     "matplotlib==3.7.1",
-    "imageio==2.26.0",
+    "imageio==2.26.1",
     "imageio-ffmpeg==0.4.8",
-    "pyvista==0.38.3",
+    "pyvista==0.38.5",
     "numpydoc==1.5.0",
     "Sphinx==5.3.0",
     "sphinx-autobuild==2021.3.14",
@@ -64,12 +64,12 @@ doc = [
     "sphinx-autodoc-typehints==1.22",
     "ansys-sphinx-theme==0.9.5",
     "pypandoc==1.11",
-    "nbsphinx==0.8.12",
+    "nbsphinx==0.9.1",
     "ipywidgets==8.0.4",
     "joblib==1.2.0",
     "scikit-learn==1.2.2",
     "ipython==8.11.0",
-    "jupyterlab==3.6.1",
+    "jupyterlab==3.6.2",
 ]
 
 [project.urls]
