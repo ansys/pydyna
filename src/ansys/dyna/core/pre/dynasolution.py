@@ -19,6 +19,7 @@ import kwprocess_pb2_grpc
 
 from .kwprocess_pb2 import *  # noqa : F403
 from .kwprocess_pb2_grpc import *  # noqa : F403
+from .launcher import *  # noqa : F403
 
 CHUNK_SIZE = 1024 * 1024
 
@@ -43,9 +44,24 @@ def init_log(log_file):
 class DynaSolution:
     """Contains methods to create general LS-DYNA keyword."""
 
-    def __init__(self, hostname="localhost"):
+    def __init__(self, hostname="localhost", port="50051"):
+        # launch server
+        check_valid_ip(hostname)  # double check
+        if port is None:
+            port = int(os.environ.get("PYDYNAPRE_PORT", DYNAPRE_DEFAULT_PORT))
+            check_valid_port(port)
+            LOG.debug(f"Using default port {port}")
+
+        if (hostname.lower() == "localhost" or hostname == LOCALHOST) and not DynaSolution.grpc_local_server_on():
+            LOG.debug("Starting kwserver")
+            server_path = os.path.join(os.getcwd(), "../../src/ansys/dyna/core/pre/Server")
+            threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
+            threadserver.setDaemon(True)
+            threadserver.start()
+
         init_log("client.log")
-        channel = grpc.insecure_channel(hostname + ":50051")
+        temp = hostname + ":" + str(port)
+        channel = grpc.insecure_channel(temp)
         try:
             grpc.channel_ready_future(channel).result(timeout=5)
         except grpc.FutureTimeoutError:
@@ -55,8 +71,19 @@ class DynaSolution:
         self.stub = kwC2SStub(channel)
         self.object_list = []
         self.mainname = ""
+        self._path = None
         DynaSolution.stub = self.stub
         DynaSolution.terminationtime = 0
+
+    @staticmethod
+    def grpc_local_server_on() -> bool:
+        """Check if the server is launched locally."""
+        channel = grpc.insecure_channel("localhost:50051")
+        try:
+            grpc.channel_ready_future(channel).result(timeout=5)
+        except:
+            return False
+        return True
 
     def get_stub():
         """Get the stub of this Solution object."""
