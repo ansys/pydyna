@@ -43,7 +43,7 @@ if len(sys.argv) > 1:
 solution = DynaSolution(hostname)
 ###############################################################################
 # Import the initial mesh data(nodes and elements)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Mesh data is imported which includes the *NODE, *ELEMENT_ and *PART cards predefined
 fns = []
 path = examples.nvh_frf_plate_damping + os.sep
@@ -52,7 +52,7 @@ solution.open_files(fns)
 
 ###############################################################################
 # Global Control Cards
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~
 
 nvhobj = DynaNVH()
 solution.add(nvhobj)
@@ -68,7 +68,7 @@ nvhobj.implicitanalysis.set_solution(solution_method=1)
 
 ###############################################################################
 # Frequency Domain Cards
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~
 # *FREQUENCY_DOMAIN_FRF is used to compute the frequency response function due to nodal excitations.
 # In this case a base velocity is define as an input at node 131. The base acceleration response is measured at
 # nodes 131 and 651. The max natural frequency employed in FRF is limited to 2000Hz.
@@ -94,7 +94,7 @@ nvhobj.add(fd)
 
 ###############################################################################
 # Material and Section
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~
 # Linear MAT_ELASTIC is defined. S/R Hughes-Lui Elform 6 is chosen for the shell formulation.
 # PROPT is set to 3 using set_printout() method. Finally save the input deck.
 matelastic = MatElastic(mass_density=7870, young_modulus=2.07e11, poisson_ratio=0.292)

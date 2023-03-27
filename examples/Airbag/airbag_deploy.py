@@ -1,7 +1,7 @@
 """
 .. _ref_airbag_deploy:
 Airbag deploy example
---------------------------------------------
+---------------------
 
 This example show how to create an Airbag deploy model with Pydyna-pre module.
 LS-DYNA version : ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
