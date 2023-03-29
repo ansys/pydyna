@@ -52,7 +52,7 @@ tests = [
 doc = [
     "recommonmark==0.7.1",
     "matplotlib==3.7.1",
-    "imageio==2.26.1",
+    "imageio==2.27.0",
     "imageio-ffmpeg==0.4.8",
     "pyvista==0.38.5",
     "numpydoc==1.5.0",
@@ -67,7 +67,7 @@ doc = [
     "ansys-sphinx-theme==0.9.5",
     "pypandoc==1.11",
     "nbsphinx==0.9.1",
-    "ipywidgets==8.0.4",
+    "ipywidgets==8.0.6",
     "joblib==1.2.0",
     "scikit-learn==1.2.2",
     "ipython==8.11.0",
