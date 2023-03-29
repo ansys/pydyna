@@ -5,10 +5,10 @@ pytest as a sesson fixture
 """
 import os
 import pytest
+from ansys.dyna.core.pre.launcher import ServerThread
 
 
 # from ansys.dyna.core.pre.Server.kwserver import *
-
 
 def resolve_test_file(basename, additional_path=""):
     """Resolves a test file's full path based on the base name and the
@@ -21,13 +21,17 @@ def resolve_test_file(basename, additional_path=""):
         raise FileNotFoundError(f"Unable to locate {basename} at {test_files_path}")
     return filename
 
+def get_server_path():
+    """Get the filepath of server."""
+    path = os.path.dirname(os.path.abspath(__file__))
+    server_path = os.path.join(path, os.pardir, "src", "ansys", "dyna", "core", "pre", "Server")
+    return server_path
+
 
 @pytest.fixture()
 def resolve_server_path():
     """Get the filepath of outputted files."""
-    path = os.path.dirname(os.path.abspath(__file__))
-    server_path = os.path.join(path, os.pardir, "src", "ansys", "dyna", "core", "pre", "Server")
-    return server_path
+    return get_server_path()
 
 
 @pytest.fixture()
@@ -114,3 +118,11 @@ def nvh_initialfile():
 def thermal_initialfile():
     """Resolve the path for thermal initial file."""
     return resolve_test_file("test_thermal_stress.k", "initial")
+    
+@pytest.fixture(scope = "session",autouse=True)
+def Connect_Server():
+    """Connect to the kwserver."""
+    path = get_server_path()
+    threadserver = ServerThread(1,port=50051,ip="127.0.0.1",server_path = path)
+    threadserver.setDaemon(True)
+    threadserver.start()

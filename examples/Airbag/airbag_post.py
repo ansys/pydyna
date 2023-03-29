@@ -1,7 +1,7 @@
 """
 .. _ref_airbag_deploy_post:
 Airbag deploy post processing example
---------------------------------------------
+-------------------------------------
 
 This example show how to animate the d3plot and display the stress on the airbag.
 
@@ -10,7 +10,7 @@ from ansys.dpf import core as dpf
 from ansys.dpf.core import examples
 ###############################################################################
 # Load the model
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~
 # Load the model and print the contents of the model. All parts in the model are shell parts.
 # Model info lists the result components as well as the number of states available in the d3plot
 ds = dpf.DataSources()

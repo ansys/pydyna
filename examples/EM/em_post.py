@@ -1,7 +1,7 @@
 """
 .. _ref_em_railgun_post:
 EM multi physics post processing example
---------------------------------------------
+----------------------------------------
 
 This example show how to animate the d3plot and display the electric field in the railgun.
 

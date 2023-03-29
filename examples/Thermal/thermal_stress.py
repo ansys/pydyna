@@ -40,7 +40,7 @@ if len(sys.argv) > 1:
 solution = DynaSolution(hostname)
 ###############################################################################
 # Start the Solution workflow
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # NODES and ELEMENTS are read in from the "thermal_stress.k" file. This file also has the
 # *PART defined in it but the section and material fields are empty to begin with
 fns = []
@@ -64,7 +64,7 @@ ts.add(tanalysis)
 ts.set_timestep(timestep_size_for_mass_scaled=0.01)
 ###############################################################################
 # Material and Section
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~
 # MAT_4 is defined here which can have temperature dependent material properties. Specific heat, thermal conductivity and
 # the thermal generation rate are defined in MAT_THERMAL_ISOTROPIC and associated with the same part.
 mat = MatElasticPlasticThermal(
@@ -84,7 +84,7 @@ ts.parts.add(slab)
 
 ###############################################################################
 # Initial Condition
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~
 # Nodes 1 through 8 are initialized with a temperature of 10 deg
 for i in range(1,9):
     ts.initialconditions.create_temperature(NodeSet([i]),temperature=10)

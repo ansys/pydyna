@@ -1,7 +1,7 @@
 """
 .. _ref_belted_dummy:
 Belted dummy example
-=====================
+====================
 
 This example show how to create an Belted dummy model with Pydyna-pre module. \n
 LS-DYNA version : LS-DYNA version : ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
