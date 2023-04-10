@@ -225,6 +225,26 @@ class MatNull:
         logging.info(f"Material {self.name} Created...")
 
 
+class EMEOSTabulated1:
+    """Define the electrical conductivity or permeability."""
+
+    def __init__(self, curve=None):
+        self.curve = curve
+
+    def create(self, stub):
+        """Create EM EOS tabulated1."""
+        lcid = self.curve.create(stub)
+        ret = stub.CreateEMEOSTabulated1(
+            EMEOSTabulated1Request(
+                lcid=lcid,
+            )
+        )
+        self.id = ret.id
+        self.name = "tabulated1"
+        logging.info(f"EOS {self.name} Created...")
+        return self.id
+
+
 class EMMATTYPE(Enum):
     AIR_OR_VACUUM = 0
     INSULATOR = 1
@@ -238,12 +258,13 @@ class MatAdditional:
         self.em = False
         self.thermal_isotropic = False
 
-    def set_electromagnetic_property(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0):
+    def set_electromagnetic_property(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None):
         """Define the electromagnetic material type and properties
         for a material whose permeability equals the free space permeability."""
         self.em = True
         self.em_material_type = material_type.value
         self.em_initial_conductivity = initial_conductivity
+        self.em_eos = eos
 
     def set_thermal_isotropic(
         self, density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0
@@ -259,12 +280,12 @@ class MatAdditional:
     def create(self, stub, matid):
         """Define additional properties for material."""
         if self.em:
+            if self.em_eos is not None:
+                eosid = self.em_eos.create(stub)
+            else:
+                eosid = 0
             stub.CreateMatEM(
-                MatEMRequest(
-                    mid=matid,
-                    mtype=self.em_material_type,
-                    sigma=self.em_initial_conductivity,
-                )
+                MatEMRequest(mid=matid, mtype=self.em_material_type, sigma=self.em_initial_conductivity, eosid=eosid)
             )
             logging.info(f"Material EM Created...")
         if self.thermal_isotropic:
@@ -372,6 +393,32 @@ class MatRigid(MatAdditional):
         self.material_id = ret.mid
         self.name = "RIGID"
         MatAdditional.create(self, stub, self.material_id)
+        logging.info(f"Material {self.name} Created...")
+
+
+class MatThermalIsotropic:
+    """Define isotropic thermal properties."""
+
+    def __init__(self, density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0):
+        self.tro = density
+        self.tgrlc = generation_rate
+        self.tgmult = generation_rate_multiplier
+        self.hc = specific_heat
+        self.tc = conductivity
+
+    def create(self, stub):
+        """Create isotropic thermal material."""
+        ret = stub.CreateMatThermalIsotropic(
+            MatThermalIsotropicRequest(
+                tro=self.tro,
+                tgrlc=self.tgrlc,
+                tgmult=self.tgmult,
+                hc=self.hc,
+                tc=self.tc,
+            )
+        )
+        self.material_id = ret.mid
+        self.name = "Isotropic thermal"
         logging.info(f"Material {self.name} Created...")
 
 
