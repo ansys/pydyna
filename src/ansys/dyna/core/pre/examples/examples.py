@@ -12,7 +12,10 @@ _module_path = os.path.dirname(inspect.getfile(inspect.currentframe()))
 
 # this files can be imported with from `ansys.dpf.core import examples`:
 airbag_deploy = os.path.join(_module_path, "airbag", "airbag_deploy")
+# EM
 em_railgun = os.path.join(_module_path, "em", "em_railgun")
+em_resistive_heating = os.path.join(_module_path, "em", "em_resistive_heating")
+
 belted_dummy = os.path.join(_module_path, "explicit", "belted_dummy")
 # ICFD
 cylinder_flow = os.path.join(_module_path, "icfd", "cylinder_flow")

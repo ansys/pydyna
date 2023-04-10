@@ -385,6 +385,23 @@ class DynaBase:
         logging.info("Control Bulk Viscosity Created...")
         return ret
 
+    def set_init_temperature(self, temp=0):
+        """Define initial nodal point temperatures on all nodes.
+
+        Parameters
+        ----------
+        temp : float
+            Temperature at node.
+
+        Returns
+        -------
+        bool
+            "True" when successful, "False" when failed
+        """
+        ret = self.stub.CreateInitTemperature(InitTemperatureRequest(option="SET", nsid=0, temp=temp))
+        logging.info("Initial Temperature Created...")
+        return ret
+
     def create_control_shell(
         self,
         wrpang=20,
@@ -897,10 +914,15 @@ class Part:
         self.rotation = RotVelocity(0, 0, 0)
         self.extra_nodes_defined = False
 
-    def set_material(self, mat):
+    def set_material(self, mat, mat_thermal=None):
         """Set material."""
         mat.create(self.stub)
         self.mid = mat.material_id
+        if mat_thermal is not None:
+            mat_thermal.create(self.stub)
+            self.tmid = mat_thermal.material_id
+        else:
+            self.tmid = 0
         if isinstance(mat, MatAdditional):
             if mat.thermal_isotropic:
                 self.tmid = self.mid
@@ -1888,6 +1910,7 @@ class BoundaryCondition:
         self.stub = DynaBase.get_stub()
         self.spclist = []
         self.imposedmotionlist = []
+        self.templist = []
 
     def create_spc(
         self,
@@ -1944,6 +1967,27 @@ class BoundaryCondition:
         """
         param = [set, curve, motion, dof, scalefactor, birthtime]
         self.imposedmotionlist.append(param)
+
+    def create_temperature(
+        self,
+        nodeset,
+        curve=None,
+        scalefactor=1,
+    ):
+        """Define temperature boundary conditions for a thermal or coupled thermal/structural analysis.
+
+        Parameters
+        ----------
+        nodeset : NodeSet.
+            node set.
+        curve : Curve
+            Temperature, T, specification.
+        scalefactor : float
+            Temperature, T, curve multiplier.
+
+        """
+        param = [nodeset, curve, scalefactor]
+        self.templist.append(param)
 
     def create(self):
         """Create boundary condition."""
@@ -2030,6 +2074,27 @@ class BoundaryCondition:
                 )
             )
             logging.info("Boundary spc Created...")
+        for obj in self.templist:
+            nodeset, curve, scalefactor = obj[0], obj[1], obj[2]
+            if nodeset.num() == 1:
+                nid = nodeset.pos(pos=0)
+                option = "NODE"
+            else:
+                nid = nodeset.create(self.stub)
+                option = "SET"
+            if curve is not None:
+                cid = curve.id
+            else:
+                cid = 0
+            self.stub.CreateBdyTemp(
+                BdyTempRequest(
+                    option=option,
+                    nid=nid,
+                    tlcid=cid,
+                    tmult=scalefactor,
+                )
+            )
+            logging.info("Boundary Temperature Created...")
 
 
 class InitialCondition:

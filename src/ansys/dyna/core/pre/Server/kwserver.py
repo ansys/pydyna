@@ -1225,23 +1225,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         birth = request.birth
         death = request.death
         # card0 = str(id)+","+heading
-        card1 = (
-            str(nid)
-            + ","
-            + str(cid)
-            + ","
-            + str(dofx)
-            + ","
-            + str(dofy)
-            + ","
-            + str(dofz)
-            + ","
-            + str(dofrx)
-            + ","
-            + str(dofry)
-            + ","
-            + str(dofrz)
-        )
+        card1 = str(nid)+ ","+ str(cid)+ ","+ str(dofx)+ ","+ str(dofy)+ ","+ str(dofz)+ ","+ str(dofrx)+ ","+ str(dofry)+ ","+ str(dofrz)
         card2 = str(birth) + "," + str(death)
         opcode = "*BOUNDARY_SPC_" + option1.upper()
         if birthdeath:
@@ -1258,6 +1242,20 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         msg = "*BOUNDARY_SPC Created..."
         print(msg)
         return kwprocess_pb2.BdySpcReply(answer=0)
+    
+    def CreateBdyTemp(self, request, context):
+        option = request.option
+        nid = request.nid
+        tlcid = request.tlcid
+        tmult = request.tmult
+        card1 = str(nid)+ ","+ str(tlcid)+ ","+ str(tmult)
+        opcode = "*BOUNDARY_TEMPERATURE_" + option.upper()
+        newk = opcode + "\n"
+        newk += card1 + "\n"
+        self.kwdproc.newkeyword(newk)
+        msg = "*BOUNDARY_TEMPERATURE Created..."
+        print(msg)
+        return kwprocess_pb2.BdyTempReply(answer=0)
 
     # CONSTRAINED
     def CreateConstrainedExtraNodes(self, request, context):
@@ -1338,7 +1336,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         mid = request.mid
         mtype = request.mtype
         sigma = request.sigma
-        card1 = str(mid) + "," + str(mtype) + "," + str(sigma)
+        eosid = request.eosid
+        card1 = str(mid) + "," + str(mtype) + "," + str(sigma)+ "," + str(eosid)
         opcode = "*EM_MAT_001"
         newk = opcode + "\n" + card1
         self.kwdproc.newkeyword(newk)
@@ -1729,7 +1728,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         return kwprocess_pb2.MatSPHIncompressibleStructureReply(mid=mid)
 
     def CreateMatThermalIsotropic(self, request, context):
-        mid = request.mid
+        mid = self.kwdproc.get_data(gdt.KWD_MAT_THERMAL_LASTID) + 1
         tro = request.tro
         tgrlc = request.tgrlc
         tgmult = request.tgmult
@@ -2762,7 +2761,17 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         msg = "*EM_EOS_PERMEABILITY Created..."
         print(msg)
-        return kwprocess_pb2.EMEOSPermeabilityReply(answer=0)
+        return kwprocess_pb2.EMEOSPermeabilityReply(id=0)
+
+    def CreateEMEOSTabulated1(self, request, context):
+        eosid = self.kwdproc.get_data(gdt.KWD_EM_EOS_LASTID) + 1
+        lcid = request.lcid
+        card1 = str(eosid) + "," + str(lcid)
+        newk = "*EM_EOS_TABULATED1\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "*EM_EOS_TABULATED1 Created..."
+        print(msg)
+        return kwprocess_pb2.EMEOSTabulated1Reply(id=eosid)
 
     def ALECreateStructuredMesh(self, request, context):
         nbid = request.nbid

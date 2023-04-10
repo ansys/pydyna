@@ -194,6 +194,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.BdySpcRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.BdySpcReply.FromString,
                 )
+        self.CreateBdyTemp = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateBdyTemp',
+                request_serializer=kwprocess__pb2.BdyTempRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.BdyTempReply.FromString,
+                )
         self.CreateConstrainedJoint = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateConstrainedJoint',
                 request_serializer=kwprocess__pb2.ConstrainedJointRequest.SerializeToString,
@@ -774,6 +779,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.EMEOSPermeabilityRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.EMEOSPermeabilityReply.FromString,
                 )
+        self.CreateEMEOSTabulated1 = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEMEOSTabulated1',
+                request_serializer=kwprocess__pb2.EMEOSTabulated1Request.SerializeToString,
+                response_deserializer=kwprocess__pb2.EMEOSTabulated1Reply.FromString,
+                )
         self.CreateFrequencyDomainFRF = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateFrequencyDomainFRF',
                 request_serializer=kwprocess__pb2.FrequencyDomainFRFRequest.SerializeToString,
@@ -1006,6 +1016,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateBdySpc(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateBdyTemp(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1720,6 +1736,12 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateEMEOSTabulated1(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateFrequencyDomainFRF(self, request, context):
         """---Frequency
         """
@@ -1915,6 +1937,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateBdySpc,
                     request_deserializer=kwprocess__pb2.BdySpcRequest.FromString,
                     response_serializer=kwprocess__pb2.BdySpcReply.SerializeToString,
+            ),
+            'CreateBdyTemp': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateBdyTemp,
+                    request_deserializer=kwprocess__pb2.BdyTempRequest.FromString,
+                    response_serializer=kwprocess__pb2.BdyTempReply.SerializeToString,
             ),
             'CreateConstrainedJoint': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateConstrainedJoint,
@@ -2495,6 +2522,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateEMEOSPermeability,
                     request_deserializer=kwprocess__pb2.EMEOSPermeabilityRequest.FromString,
                     response_serializer=kwprocess__pb2.EMEOSPermeabilityReply.SerializeToString,
+            ),
+            'CreateEMEOSTabulated1': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEMEOSTabulated1,
+                    request_deserializer=kwprocess__pb2.EMEOSTabulated1Request.FromString,
+                    response_serializer=kwprocess__pb2.EMEOSTabulated1Reply.SerializeToString,
             ),
             'CreateFrequencyDomainFRF': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateFrequencyDomainFRF,
@@ -3125,6 +3157,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateBdySpc',
             kwprocess__pb2.BdySpcRequest.SerializeToString,
             kwprocess__pb2.BdySpcReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateBdyTemp(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateBdyTemp',
+            kwprocess__pb2.BdyTempRequest.SerializeToString,
+            kwprocess__pb2.BdyTempReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -5097,6 +5146,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMEOSPermeability',
             kwprocess__pb2.EMEOSPermeabilityRequest.SerializeToString,
             kwprocess__pb2.EMEOSPermeabilityReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEMEOSTabulated1(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMEOSTabulated1',
+            kwprocess__pb2.EMEOSTabulated1Request.SerializeToString,
+            kwprocess__pb2.EMEOSTabulated1Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
