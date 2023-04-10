@@ -32,16 +32,16 @@ hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
 
-em_solution = DynaSolution(hostname)
+solution = DynaSolution(hostname)
 fns = []
 path = examples.em_railgun + os.sep
 fns.append(path + "em_railgun.k")
-em_solution.open_files(fns)
-em_solution.set_termination(termination_time=3e-4)
-em_solution.create_database_binary(dt=5e-6)
+solution.open_files(fns)
+solution.set_termination(termination_time=3e-4)
+solution.create_database_binary(dt=5e-6)
 
 railgun = DynaEM()
-em_solution.add(railgun)
+solution.add(railgun)
 
 railgun.analysis.set_timestep(timestep=5e-6)
 railgun.analysis.set_solver_bem(solver=BEMSOLVER.PCG)
@@ -90,5 +90,8 @@ contact = EMContact()
 railgun.contacts.add(contact)
 
 railgun.set_rogowsky_coil_to_output_current(SegmentSet(cur))
+railgun.create_em_database_globalenergy(outlv=1)
 
-em_solution.save_file()
+railgun.create_em_output(mats=2, matf=2, sols=2, solf=2)
+
+solution.save_file()
