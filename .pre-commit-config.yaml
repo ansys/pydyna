@@ -15,7 +15,7 @@ exclude: |
 repos:
 
 - repo: https://github.com/psf/black
-  rev: 23.1.0  # IF VERSION CHANGES --> MODIFY "blacken-docs" MANUALLY AS WELL!!
+  rev: 23.3.0  # IF VERSION CHANGES --> MODIFY "blacken-docs" MANUALLY AS WELL!!
   hooks:
   - id: black
     args:
@@ -28,7 +28,7 @@ repos:
     additional_dependencies: [black==23.1.0]
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.2.2
+  rev: v2.2.4
   hooks:
   - id: codespell
     args: ["--ignore-words=ignore_words.txt"]
@@ -55,6 +55,6 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.21.0
+  rev: 0.22.0
   hooks:
     - id: check-github-workflows
