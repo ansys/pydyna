@@ -1,0 +1,40 @@
+﻿.. vale off
+
+ansys.dyna.core.pre.dynasale
+============================
+
+.. automodule:: ansys.dyna.core.pre.dynasale
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class-template.rst
+   
+      AdvectionMethod
+      ControlPoint
+      DynaSALE
+      FillDirection
+      StructuredMesh
+   
+   
+
+   
+   
+   
+
+
+
+
+
+.. vale on

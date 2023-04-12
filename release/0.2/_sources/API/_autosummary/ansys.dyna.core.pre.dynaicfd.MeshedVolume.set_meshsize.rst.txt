@@ -1,0 +1,6 @@
+set\_meshsize
+=============
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. automethod:: MeshedVolume.set_meshsize

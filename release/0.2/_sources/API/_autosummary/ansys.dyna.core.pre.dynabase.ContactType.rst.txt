@@ -1,0 +1,33 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.ContactType
+========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: ContactType
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+.. vale on

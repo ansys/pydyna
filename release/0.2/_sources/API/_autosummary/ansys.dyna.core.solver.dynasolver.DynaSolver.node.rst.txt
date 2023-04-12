@@ -1,0 +1,6 @@
+node
+====
+
+.. currentmodule:: ansys.dyna.core.solver.dynasolver
+
+.. automethod:: DynaSolver.node

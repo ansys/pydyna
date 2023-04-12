@@ -1,0 +1,6 @@
+add
+===
+
+.. currentmodule:: ansys.dyna.core.pre.dynanvh
+
+.. automethod:: DynaNVH.add

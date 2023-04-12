@@ -1,0 +1,26 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.BeamFormulation
+============================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: BeamFormulation
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+   
+   
+
+.. vale on

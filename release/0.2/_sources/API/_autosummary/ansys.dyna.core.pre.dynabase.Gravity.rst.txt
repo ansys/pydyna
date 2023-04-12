@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.Gravity
+====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: Gravity
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      Gravity.create
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

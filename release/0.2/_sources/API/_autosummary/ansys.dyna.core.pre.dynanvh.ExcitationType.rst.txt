@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynanvh.ExcitationType
+==========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynanvh
+
+.. autoclass:: ExcitationType
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+   
+   
+
+.. vale on

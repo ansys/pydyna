@@ -1,0 +1,6 @@
+set\_electromagnetic\_property
+==============================
+
+.. currentmodule:: ansys.dyna.core.pre.dynamaterial
+
+.. automethod:: MatAdditional.set_electromagnetic_property

@@ -1,0 +1,6 @@
+set\_rogowsky\_coil\_to\_output\_current
+========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. automethod:: DynaEM.set_rogowsky_coil_to_output_current

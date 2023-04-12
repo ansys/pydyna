@@ -1,0 +1,27 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaicfd.Vel
+================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. autoclass:: Vel
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+   
+   
+
+.. vale on

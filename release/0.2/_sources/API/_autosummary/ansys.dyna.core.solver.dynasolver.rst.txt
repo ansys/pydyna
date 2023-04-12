@@ -1,0 +1,45 @@
+﻿.. vale off
+
+ansys.dyna.core.solver.dynasolver
+=================================
+
+.. automodule:: ansys.dyna.core.solver.dynasolver
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class-template.rst
+   
+      DynaSolver
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:
+   
+      NotFound
+      RunningError
+      UnexpectedResponse
+   
+   
+
+
+
+
+
+.. vale on

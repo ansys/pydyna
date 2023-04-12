@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynamaterial.Vacuum
+=======================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynamaterial
+
+.. autoclass:: Vacuum
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      Vacuum.create
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

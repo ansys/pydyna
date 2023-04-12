@@ -1,0 +1,28 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaicfd.ICFD\_AnalysisType
+===============================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. autoclass:: ICFD_AnalysisType
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+   
+   
+
+.. vale on

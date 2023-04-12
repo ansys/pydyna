@@ -1,0 +1,32 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.HourglassType
+==========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: HourglassType
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+.. vale on

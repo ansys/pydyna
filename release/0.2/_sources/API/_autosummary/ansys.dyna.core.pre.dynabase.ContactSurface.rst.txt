@@ -1,0 +1,35 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.ContactSurface
+===========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: ContactSurface
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      ContactSurface.set_contact_region
+      
+      
+      ContactSurface.set_contact_thickness
+      
+      
+      ContactSurface.set_penalty_stiffness_scale_factor
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

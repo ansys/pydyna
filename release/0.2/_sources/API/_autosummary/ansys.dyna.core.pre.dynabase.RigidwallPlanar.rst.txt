@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.RigidwallPlanar
+============================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: RigidwallPlanar
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      RigidwallPlanar.create
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

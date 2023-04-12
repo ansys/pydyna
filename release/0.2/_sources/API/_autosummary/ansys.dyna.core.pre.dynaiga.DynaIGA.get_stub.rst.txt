@@ -1,0 +1,6 @@
+get\_stub
+=========
+
+.. currentmodule:: ansys.dyna.core.pre.dynaiga
+
+.. automethod:: DynaIGA.get_stub

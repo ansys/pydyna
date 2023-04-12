@@ -1,0 +1,6 @@
+create\_damping\_global
+=======================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: DynaBase.create_damping_global

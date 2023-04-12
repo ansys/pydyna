@@ -1,0 +1,6 @@
+set\_bulk\_viscosity
+====================
+
+.. currentmodule:: ansys.dyna.core.pre.dynadem
+
+.. automethod:: DynaDEM.set_bulk_viscosity

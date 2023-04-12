@@ -1,0 +1,6 @@
+create\_section\_igashell
+=========================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaiga
+
+.. automethod:: DynaIGA.create_section_igashell

@@ -1,0 +1,6 @@
+set\_rigidbody\_initial\_velocity
+=================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: IGAPart.set_rigidbody_initial_velocity

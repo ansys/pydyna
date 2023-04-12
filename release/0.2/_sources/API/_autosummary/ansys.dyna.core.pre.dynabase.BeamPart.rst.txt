@@ -1,0 +1,50 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.BeamPart
+=====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: BeamPart
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      BeamPart.set_cross_type
+      
+      
+      BeamPart.set_diameter
+      
+      
+      BeamPart.set_element_formulation
+      
+      
+      BeamPart.set_extra_nodes
+      
+      
+      BeamPart.set_material
+      
+      
+      BeamPart.set_property
+      
+      
+      BeamPart.set_rigidbody_initial_velocity
+      
+      
+      BeamPart.set_stiffness_damping_coefficient
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

@@ -1,0 +1,77 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.DynaBase
+=====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: DynaBase
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      DynaBase.add
+      
+      
+      DynaBase.create_control_contact
+      
+      
+      DynaBase.create_control_shell
+      
+      
+      DynaBase.create_control_solid
+      
+      
+      DynaBase.create_damping_global
+      
+      
+      DynaBase.create_general_keyword
+      
+      
+      DynaBase.get_solid_elements
+      
+      
+      DynaBase.get_stub
+      
+      
+      DynaBase.save_file
+      
+      
+      DynaBase.set_accuracy
+      
+      
+      DynaBase.set_bulk_viscosity
+      
+      
+      DynaBase.set_energy
+      
+      
+      DynaBase.set_hourglass
+      
+      
+      DynaBase.set_timestep
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DynaBase.stub
+      
+   
+   
+
+.. vale on

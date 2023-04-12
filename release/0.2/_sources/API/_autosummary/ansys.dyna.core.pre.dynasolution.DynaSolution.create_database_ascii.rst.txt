@@ -1,0 +1,6 @@
+create\_database\_ascii
+=======================
+
+.. currentmodule:: ansys.dyna.core.pre.dynasolution
+
+.. automethod:: DynaSolution.create_database_ascii

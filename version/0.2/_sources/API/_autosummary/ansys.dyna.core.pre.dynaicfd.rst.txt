@@ -1,0 +1,6 @@
+﻿dynaicfd
+========
+
+.. currentmodule:: ansys.dyna.core.pre
+
+.. automodule:: dynaicfd

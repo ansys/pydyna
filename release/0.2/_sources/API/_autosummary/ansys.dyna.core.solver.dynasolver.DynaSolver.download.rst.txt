@@ -1,0 +1,6 @@
+download
+========
+
+.. currentmodule:: ansys.dyna.core.solver.dynasolver
+
+.. automethod:: DynaSolver.download

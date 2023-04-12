@@ -1,0 +1,6 @@
+create\_Permanent\_magnet
+=========================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. automethod:: DynaEM.create_Permanent_magnet

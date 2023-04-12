@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.SegmentSet
+=======================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: SegmentSet
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      SegmentSet.create
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

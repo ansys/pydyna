@@ -1,0 +1,32 @@
+.. vale off
+
+ansys.dyna.core.pre.dynanvh.FrequencyDomain
+===========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynanvh
+
+.. autoclass:: FrequencyDomain
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      FrequencyDomain.create
+      
+      
+      FrequencyDomain.set_frequency_response_function
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

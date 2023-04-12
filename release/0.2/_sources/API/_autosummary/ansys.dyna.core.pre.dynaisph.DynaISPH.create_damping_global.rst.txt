@@ -1,0 +1,6 @@
+create\_damping\_global
+=======================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaisph
+
+.. automethod:: DynaISPH.create_damping_global

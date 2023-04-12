@@ -1,0 +1,6 @@
+create\_control\_solid
+======================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. automethod:: DynaEM.create_control_solid

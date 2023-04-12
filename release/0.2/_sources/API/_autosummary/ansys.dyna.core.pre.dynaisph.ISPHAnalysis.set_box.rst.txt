@@ -1,0 +1,6 @@
+set\_box
+========
+
+.. currentmodule:: ansys.dyna.core.pre.dynaisph
+
+.. automethod:: ISPHAnalysis.set_box

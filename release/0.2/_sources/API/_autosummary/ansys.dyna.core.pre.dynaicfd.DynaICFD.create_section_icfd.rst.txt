@@ -1,0 +1,6 @@
+create\_section\_icfd
+=====================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. automethod:: DynaICFD.create_section_icfd

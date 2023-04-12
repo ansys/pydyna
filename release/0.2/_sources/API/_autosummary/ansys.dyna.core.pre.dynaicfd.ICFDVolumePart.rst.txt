@@ -1,0 +1,35 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaicfd.ICFDVolumePart
+===========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. autoclass:: ICFDVolumePart
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      ICFDVolumePart.create
+      
+      
+      ICFDVolumePart.set_imposed_move
+      
+      
+      ICFDVolumePart.set_material
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

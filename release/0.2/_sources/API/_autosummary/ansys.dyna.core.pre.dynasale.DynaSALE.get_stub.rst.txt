@@ -1,0 +1,6 @@
+get\_stub
+=========
+
+.. currentmodule:: ansys.dyna.core.pre.dynasale
+
+.. automethod:: DynaSALE.get_stub

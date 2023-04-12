@@ -1,0 +1,6 @@
+upload
+======
+
+.. currentmodule:: ansys.dyna.core.solver.dynasolver
+
+.. automethod:: DynaSolver.upload

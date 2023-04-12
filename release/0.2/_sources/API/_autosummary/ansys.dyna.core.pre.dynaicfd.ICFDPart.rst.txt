@@ -1,0 +1,68 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaicfd.ICFDPart
+=====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. autoclass:: ICFDPart
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      ICFDPart.compute_drag_force
+      
+      
+      ICFDPart.compute_flux
+      
+      
+      ICFDPart.compute_temperature
+      
+      
+      ICFDPart.set_boundary_layer
+      
+      
+      ICFDPart.set_boundary_layer_symmetry_condition
+      
+      
+      ICFDPart.set_free_slip
+      
+      
+      ICFDPart.set_fsi
+      
+      
+      ICFDPart.set_imposed_move
+      
+      
+      ICFDPart.set_material
+      
+      
+      ICFDPart.set_non_slip
+      
+      
+      ICFDPart.set_prescribed_pressure
+      
+      
+      ICFDPart.set_prescribed_temperature
+      
+      
+      ICFDPart.set_prescribed_velocity
+      
+      
+      ICFDPart.set_property
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

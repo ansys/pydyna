@@ -1,0 +1,6 @@
+save\_file
+==========
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: DynaBase.save_file

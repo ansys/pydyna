@@ -1,0 +1,6 @@
+stub
+====
+
+.. currentmodule:: ansys.dyna.core.pre.dynanvh
+
+.. autoattribute:: DynaNVH.stub

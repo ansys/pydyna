@@ -1,0 +1,3758 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>save_file &#8212; PyDyna</title>
+    
+<script>
+  document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+  document.documentElement.dataset.theme = localStorage.getItem("theme") || "light"
+</script>
+
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=92025949c220c2e29695" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=92025949c220c2e29695" rel="stylesheet">
+
+
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/ansys_sphinx_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
+
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695">
+
+    
+        <link href="../../_static/css/breadcrumbs.css" rel="stylesheet">
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <link rel="shortcut icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="set_accuracy" href="ansys.dyna.core.pre.dynasale.DynaSALE.set_accuracy.html" />
+    <link rel="prev" title="get_stub" href="ansys.dyna.core.pre.dynasale.DynaSALE.get_stub.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+    <div class="bd-header-announcement container-fluid" id="banner">
+      
+
+    </div>
+
+    
+    
+    <nav class="bd-header navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    <img src="../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="fas fa-bars"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../Resources/Getting_Started.html">
+  Getting started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../Resources/User_Guide.html">
+  User guide
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  API reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../Resources/Contributing.html">
+  Contributing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../examples/index.html">
+  Examples
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <div class="dropdown" id="version_switcher">
+    <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
+        0.2  <!-- this text may get changed later by javascript -->
+        <span class="caret"></span>
+    </button>
+    <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+</div>
+
+<!-- NOTE: this JS must live here (not in our global JS file) because it relies
+     on being processed by Jinja before it is run (specifically for replacing
+     variables API/_autosummary/ansys.dyna.core.pre.dynasale.DynaSALE.save_file and {'json_url': 'https://dyna.docs.pyansys.com/release/versions.json', 'version_match': '0.2'}.
+-->
+
+<script type="text/javascript">
+// Check if corresponding page path exists in other version of docs
+// and, if so, go there instead of the homepage of the other docs version
+function checkPageExistsAndRedirect(event) {
+    const currentFilePath = "API/_autosummary/ansys.dyna.core.pre.dynasale.DynaSALE.save_file.html",
+          tryUrl = event.target.getAttribute("href");
+    let otherDocsHomepage = tryUrl.replace(currentFilePath, "");
+    $.ajax({
+        type: 'HEAD',
+        url: tryUrl,
+        // if the page exists, go there
+        success: function() {
+            location.href = tryUrl;
+        }
+    }).fail(function() {
+        location.href = otherDocsHomepage;
+    });
+    // this prevents the browser from following the href of the clicked node
+    // (which is fine because this function takes care of redirecting)
+    return false;
+}
+
+// Populate the version switcher from the JSON config file
+(function () {
+    $.getJSON("https://dyna.docs.pyansys.com/release/versions.json", function(data, textStatus, jqXHR) {
+        const currentFilePath = "API/_autosummary/ansys.dyna.core.pre.dynasale.DynaSALE.save_file.html";
+        let btn = document.getElementById("version_switcher_button");
+        // Set empty strings by default so that these attributes exist and can be used in CSS selectors
+        btn.dataset["activeVersionName"] = "";
+        btn.dataset["activeVersion"] = "";
+        // create links to the corresponding page in the other docs versions
+        $.each(data, function(index, entry) {
+            // if no custom name specified (e.g., "latest"), use version string
+            if (!("name" in entry)) {
+                entry.name = entry.version;
+            }
+            // create the node
+            const node = document.createElement("a");
+            node.setAttribute("class", "list-group-item list-group-item-action py-1");
+            node.textContent = `${entry.name}`;
+            node.setAttribute("href", `${entry.url}${currentFilePath}`);
+            // on click, AJAX calls will check if the linked page exists before
+            // trying to redirect, and if not, will redirect to the homepage
+            // for that version of the docs.
+            node.onclick = checkPageExistsAndRedirect;
+            // Add dataset values for the version and name in case people want
+            // to apply CSS styling based on this information.
+            node.dataset["versionName"] = entry.name;
+            node.dataset["version"] = entry.version;
+
+            $("#version_switcher_menu").append(node);
+            // replace dropdown button text with the preferred display name of
+            // this version, rather than using sphinx's 0.2.1 variable.
+            // also highlight the dropdown entry for the currently-viewed
+            // version's entry
+            if (entry.version == "0.2") {
+                node.classList.add("active");
+                btn.innerText = btn.dataset["activeVersionName"] = entry.name;
+                btn.dataset["activeVersion"] = entry.version;
+            }
+        });
+    });
+})();
+</script>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span id="theme-switch" class="btn btn-sm btn-outline-primary navbar-btn rounded-circle">
+    <a class="theme-switch" data-mode="light"><i class="fas fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="far fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fas fa-adjust"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/pyansys/pydyna" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+     
+<div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(text => document.getElementById("announcement_msg").innerHTML = text)
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+
+    
+        <div class="container-xl">
+    <div class="row">
+        <div class="col-12 col-md-3" id="breadcrumbs-spacer"></div>
+        <div class="col-12 col-md-11 col-xl-9" id="breadcrumbs">
+          
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+    
+        <li class="nav-item nav-item-additional-breadcrumb"><a href="https://docs.pyansys.com/">PyAnsys</a> » </li>
+    
+    
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyDyna</a> » </li>
+    
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >API reference</a> » </li>
+          <li class="nav-item nav-item-2"><a href="../pre.html" >PyDyna-pre APIs</a> » </li>
+          <li class="nav-item nav-item-3"><a href="ansys.dyna.core.pre.dynasale.html" >ansys.dyna.core.pre.dynasale</a> » </li>
+          <li class="nav-item nav-item-4"><a href="ansys.dyna.core.pre.dynasale.DynaSALE.html" accesskey="U">ansys.dyna.core.pre.dynasale.DynaSALE</a> » </li>
+        <li class="nav-item nav-item-this"><a href="">save_file</a></li> 
+      </ul>
+    </div>
+        </div>
+  </div>
+</div>
+    
+
+
+    <div class="bd-container container-xl">
+      <div class="bd-container__inner row">
+          
+
+<!-- Only show if we have sidebars configured, else just a small margin  -->
+<div class="bd-sidebar-primary col-12 col-md-3 bd-sidebar">
+  <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../pre.html">
+   PyDyna-pre APIs
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="ansys.dyna.core.pre.dynabase.html">
+     ansys.dyna.core.pre.dynabase
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.AnalysisType.html">
+       ansys.dyna.core.pre.dynabase.AnalysisType
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BaseSet.html">
+       ansys.dyna.core.pre.dynabase.BaseSet
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BeamFormulation.html">
+       ansys.dyna.core.pre.dynabase.BeamFormulation
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BeamPart.html">
+       ansys.dyna.core.pre.dynabase.BeamPart
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+      <label for="toctree-checkbox-3">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BeamPart.set_cross_type.html">
+         set_cross_type
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BeamPart.set_diameter.html">
+         set_diameter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BeamPart.set_element_formulation.html">
+         set_element_formulation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BeamPart.set_extra_nodes.html">
+         set_extra_nodes
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BeamPart.set_material.html">
+         set_material
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BeamPart.set_property.html">
+         set_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BeamPart.set_rigidbody_initial_velocity.html">
+         set_rigidbody_initial_velocity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BeamPart.set_stiffness_damping_coefficient.html">
+         set_stiffness_damping_coefficient
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BeamSection.html">
+       ansys.dyna.core.pre.dynabase.BeamSection
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BoundaryCondition.html">
+       ansys.dyna.core.pre.dynabase.BoundaryCondition
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+      <label for="toctree-checkbox-4">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BoundaryCondition.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BoundaryCondition.create_imposed_motion.html">
+         create_imposed_motion
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BoundaryCondition.create_spc.html">
+         create_spc
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Box.html">
+       ansys.dyna.core.pre.dynabase.Box
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+      <label for="toctree-checkbox-5">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Box.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.BulkViscosity.html">
+       ansys.dyna.core.pre.dynabase.BulkViscosity
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.CaseType.html">
+       ansys.dyna.core.pre.dynabase.CaseType
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Constraint.html">
+       ansys.dyna.core.pre.dynabase.Constraint
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+      <label for="toctree-checkbox-6">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Constraint.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Constraint.create_cnrb.html">
+         create_cnrb
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Constraint.create_joint_spherical.html">
+         create_joint_spherical
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Constraint.create_spotweld.html">
+         create_spotweld
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Constraint.merge_two_rigid_bodies.html">
+         merge_two_rigid_bodies
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Contact.html">
+       ansys.dyna.core.pre.dynabase.Contact
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+      <label for="toctree-checkbox-7">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Contact.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Contact.set_active_time.html">
+         set_active_time
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Contact.set_friction_coefficient.html">
+         set_friction_coefficient
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Contact.set_initial_penetration.html">
+         set_initial_penetration
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Contact.set_master_surface.html">
+         set_master_surface
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Contact.set_mortar.html">
+         set_mortar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Contact.set_penalty_algorithm.html">
+         set_penalty_algorithm
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Contact.set_slave_surface.html">
+         set_slave_surface
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Contact.set_tiebreak.html">
+         set_tiebreak
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ContactCategory.html">
+       ansys.dyna.core.pre.dynabase.ContactCategory
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ContactFormulation.html">
+       ansys.dyna.core.pre.dynabase.ContactFormulation
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ContactGroup.html">
+       ansys.dyna.core.pre.dynabase.ContactGroup
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+      <label for="toctree-checkbox-8">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ContactGroup.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ContactGroup.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ContactGroup.num.html">
+         num
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ContactSurface.html">
+       ansys.dyna.core.pre.dynabase.ContactSurface
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <label for="toctree-checkbox-9">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ContactSurface.set_contact_region.html">
+         set_contact_region
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ContactSurface.set_contact_thickness.html">
+         set_contact_thickness
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ContactSurface.set_penalty_stiffness_scale_factor.html">
+         set_penalty_stiffness_scale_factor
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ContactType.html">
+       ansys.dyna.core.pre.dynabase.ContactType
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Curve.html">
+       ansys.dyna.core.pre.dynabase.Curve
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+      <label for="toctree-checkbox-10">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Curve.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DOF.html">
+       ansys.dyna.core.pre.dynabase.DOF
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DRO.html">
+       ansys.dyna.core.pre.dynabase.DRO
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Direction.html">
+       ansys.dyna.core.pre.dynabase.Direction
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DiscretePart.html">
+       ansys.dyna.core.pre.dynabase.DiscretePart
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+      <label for="toctree-checkbox-11">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DiscretePart.set_displacement_option.html">
+         set_displacement_option
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DiscretePart.set_element_formulation.html">
+         set_element_formulation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DiscretePart.set_extra_nodes.html">
+         set_extra_nodes
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DiscretePart.set_material.html">
+         set_material
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DiscretePart.set_property.html">
+         set_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DiscretePart.set_rigidbody_initial_velocity.html">
+         set_rigidbody_initial_velocity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DiscretePart.set_stiffness_damping_coefficient.html">
+         set_stiffness_damping_coefficient
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.html">
+       ansys.dyna.core.pre.dynabase.DynaBase
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+      <label for="toctree-checkbox-12">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.create_control_contact.html">
+         create_control_contact
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.create_control_shell.html">
+         create_control_shell
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.create_control_solid.html">
+         create_control_solid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.create_damping_global.html">
+         create_damping_global
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.create_general_keyword.html">
+         create_general_keyword
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.get_solid_elements.html">
+         get_solid_elements
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.get_stub.html">
+         get_stub
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.save_file.html">
+         save_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.set_accuracy.html">
+         set_accuracy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.set_bulk_viscosity.html">
+         set_bulk_viscosity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.set_energy.html">
+         set_energy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.set_hourglass.html">
+         set_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.DynaBase.stub.html">
+         stub
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.EnergyFlag.html">
+       ansys.dyna.core.pre.dynabase.EnergyFlag
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Gravity.html">
+       ansys.dyna.core.pre.dynabase.Gravity
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+      <label for="toctree-checkbox-13">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Gravity.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.GravityOption.html">
+       ansys.dyna.core.pre.dynabase.GravityOption
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.HourglassControl.html">
+       ansys.dyna.core.pre.dynabase.HourglassControl
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.HourglassType.html">
+       ansys.dyna.core.pre.dynabase.HourglassType
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.IGAFormulation.html">
+       ansys.dyna.core.pre.dynabase.IGAFormulation
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.IGAPart.html">
+       ansys.dyna.core.pre.dynabase.IGAPart
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+      <label for="toctree-checkbox-14">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.IGAPart.set_element_formulation.html">
+         set_element_formulation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.IGAPart.set_extra_nodes.html">
+         set_extra_nodes
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.IGAPart.set_material.html">
+         set_material
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.IGAPart.set_property.html">
+         set_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.IGAPart.set_rigidbody_initial_velocity.html">
+         set_rigidbody_initial_velocity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.IGAPart.set_shear_factor.html">
+         set_shear_factor
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.IGAPart.set_stiffness_damping_coefficient.html">
+         set_stiffness_damping_coefficient
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.IGAPart.set_thickness.html">
+         set_thickness
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.IGASection.html">
+       ansys.dyna.core.pre.dynabase.IGASection
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ImplicitAnalysis.html">
+       ansys.dyna.core.pre.dynabase.ImplicitAnalysis
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+      <label for="toctree-checkbox-15">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ImplicitAnalysis.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ImplicitAnalysis.set_dynamic.html">
+         set_dynamic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ImplicitAnalysis.set_eigenvalue.html">
+         set_eigenvalue
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ImplicitAnalysis.set_initial_timestep_size.html">
+         set_initial_timestep_size
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ImplicitAnalysis.set_solution.html">
+         set_solution
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ImplicitAnalysis.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.InitialCondition.html">
+       ansys.dyna.core.pre.dynabase.InitialCondition
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+      <label for="toctree-checkbox-16">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.InitialCondition.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.InitialCondition.create_temperature.html">
+         create_temperature
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.InitialCondition.create_velocity.html">
+         create_velocity
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Integration.html">
+       ansys.dyna.core.pre.dynabase.Integration
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.InvariantNode.html">
+       ansys.dyna.core.pre.dynabase.InvariantNode
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Motion.html">
+       ansys.dyna.core.pre.dynabase.Motion
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.NodeSet.html">
+       ansys.dyna.core.pre.dynabase.NodeSet
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+      <label for="toctree-checkbox-17">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.NodeSet.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.NodeSet.get_nid.html">
+         get_nid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.NodeSet.id.html">
+         id
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.NodeSet.num.html">
+         num
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.NodesetGeneral.html">
+       ansys.dyna.core.pre.dynabase.NodesetGeneral
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+      <label for="toctree-checkbox-18">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.NodesetGeneral.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.OffsetType.html">
+       ansys.dyna.core.pre.dynabase.OffsetType
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Part.html">
+       ansys.dyna.core.pre.dynabase.Part
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+      <label for="toctree-checkbox-19">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Part.set_element_formulation.html">
+         set_element_formulation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Part.set_extra_nodes.html">
+         set_extra_nodes
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Part.set_material.html">
+         set_material
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Part.set_property.html">
+         set_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Part.set_rigidbody_initial_velocity.html">
+         set_rigidbody_initial_velocity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Part.set_stiffness_damping_coefficient.html">
+         set_stiffness_damping_coefficient
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.PartSet.html">
+       ansys.dyna.core.pre.dynabase.PartSet
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+      <label for="toctree-checkbox-20">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.PartSet.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.PartSet.get_pid.html">
+         get_pid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.PartSet.num.html">
+         num
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.PartSet.pos.html">
+         pos
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Parts.html">
+       ansys.dyna.core.pre.dynabase.Parts
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+      <label for="toctree-checkbox-21">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Parts.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Parts.get_num_shellpart.html">
+         get_num_shellpart
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Parts.set_property.html">
+         set_property
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Point.html">
+       ansys.dyna.core.pre.dynabase.Point
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.RigidwallCylinder.html">
+       ansys.dyna.core.pre.dynabase.RigidwallCylinder
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+      <label for="toctree-checkbox-22">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.RigidwallCylinder.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.RigidwallCylinder.set_motion.html">
+         set_motion
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.RigidwallPlanar.html">
+       ansys.dyna.core.pre.dynabase.RigidwallPlanar
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+      <label for="toctree-checkbox-23">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.RigidwallPlanar.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.RotVelocity.html">
+       ansys.dyna.core.pre.dynabase.RotVelocity
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SBOPT.html">
+       ansys.dyna.core.pre.dynabase.SBOPT
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SegmentSet.html">
+       ansys.dyna.core.pre.dynabase.SegmentSet
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+      <label for="toctree-checkbox-24">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SegmentSet.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SetType.html">
+       ansys.dyna.core.pre.dynabase.SetType
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellFormulation.html">
+       ansys.dyna.core.pre.dynabase.ShellFormulation
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.html">
+       ansys.dyna.core.pre.dynabase.ShellPart
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+      <label for="toctree-checkbox-25">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_des_surface.html">
+         set_des_surface
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_element_formulation.html">
+         set_element_formulation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_extra_nodes.html">
+         set_extra_nodes
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_hourglass.html">
+         set_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_integration_points.html">
+         set_integration_points
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_material.html">
+         set_material
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_printout.html">
+         set_printout
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_property.html">
+         set_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_rigidbody_initial_velocity.html">
+         set_rigidbody_initial_velocity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_shear_factor.html">
+         set_shear_factor
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_stiffness_damping_coefficient.html">
+         set_stiffness_damping_coefficient
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellPart.set_thickness.html">
+         set_thickness
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ShellSection.html">
+       ansys.dyna.core.pre.dynabase.ShellSection
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SolidFormulation.html">
+       ansys.dyna.core.pre.dynabase.SolidFormulation
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SolidPart.html">
+       ansys.dyna.core.pre.dynabase.SolidPart
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
+      <label for="toctree-checkbox-26">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SolidPart.set_element_formulation.html">
+         set_element_formulation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SolidPart.set_extra_nodes.html">
+         set_extra_nodes
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SolidPart.set_hourglass.html">
+         set_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SolidPart.set_material.html">
+         set_material
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SolidPart.set_property.html">
+         set_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SolidPart.set_rigidbody_initial_velocity.html">
+         set_rigidbody_initial_velocity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.SolidPart.set_stiffness_damping_coefficient.html">
+         set_stiffness_damping_coefficient
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Switch.html">
+       ansys.dyna.core.pre.dynabase.Switch
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ThermalAnalysis.html">
+       ansys.dyna.core.pre.dynabase.ThermalAnalysis
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
+      <label for="toctree-checkbox-27">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ThermalAnalysis.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ThermalAnalysis.set_solver.html">
+         set_solver
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ThermalAnalysis.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ThermalAnalysisTimestep.html">
+       ansys.dyna.core.pre.dynabase.ThermalAnalysisTimestep
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.ThermalAnalysisType.html">
+       ansys.dyna.core.pre.dynabase.ThermalAnalysisType
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.TimestepCtrol.html">
+       ansys.dyna.core.pre.dynabase.TimestepCtrol
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynabase.Velocity.html">
+       ansys.dyna.core.pre.dynabase.Velocity
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.html">
+     ansys.dyna.core.pre.dynasolution
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
+    <label for="toctree-checkbox-28">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.init_log.html">
+       init_log
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.html">
+       ansys.dyna.core.pre.dynasolution.DynaSolution
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/>
+      <label for="toctree-checkbox-29">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.create_database_ascii.html">
+         create_database_ascii
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.create_database_binary.html">
+         create_database_binary
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.download.html">
+         download
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.get_file_chunks.html">
+         get_file_chunks
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.get_stub.html">
+         get_stub
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.open_files.html">
+         open_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.save_file.html">
+         save_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.set_output_database.html">
+         set_output_database
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.set_termination.html">
+         set_termination
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.upload.html">
+         upload
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.stub.html">
+         stub
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.termination_time.html">
+         termination_time
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasolution.DynaSolution.terminationtime.html">
+         terminationtime
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="ansys.dyna.core.pre.dynamech.html">
+     ansys.dyna.core.pre.dynamech
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" type="checkbox"/>
+    <label for="toctree-checkbox-30">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamech.Airbag.html">
+       ansys.dyna.core.pre.dynamech.Airbag
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/>
+      <label for="toctree-checkbox-31">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.Airbag.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.html">
+       ansys.dyna.core.pre.dynamech.DynaMech
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/>
+      <label for="toctree-checkbox-32">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_control_contact.html">
+         create_control_contact
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_control_output.html">
+         create_control_output
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_control_shell.html">
+         create_control_shell
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_control_solid.html">
+         create_control_solid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_damping_global.html">
+         create_damping_global
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_defineorientation.html">
+         create_defineorientation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_general_keyword.html">
+         create_general_keyword
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_hourglass.html">
+         create_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_section_discrete.html">
+         create_section_discrete
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_section_solid.html">
+         create_section_solid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_shellset.html">
+         create_shellset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.create_solidset.html">
+         create_solidset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.get_solid_elements.html">
+         get_solid_elements
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.get_stub.html">
+         get_stub
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.save_file.html">
+         save_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.set_accuracy.html">
+         set_accuracy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.set_bulk_viscosity.html">
+         set_bulk_viscosity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.set_energy.html">
+         set_energy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.set_hourglass.html">
+         set_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.set_init_velocity.html">
+         set_init_velocity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamech.DynaMech.stub.html">
+         stub
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="ansys.dyna.core.pre.dynaem.html">
+     ansys.dyna.core.pre.dynaem
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" type="checkbox"/>
+    <label for="toctree-checkbox-33">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaem.BEMSOLVER.html">
+       ansys.dyna.core.pre.dynaem.BEMSOLVER
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaem.Circuit.html">
+       ansys.dyna.core.pre.dynaem.Circuit
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" type="checkbox"/>
+      <label for="toctree-checkbox-34">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.Circuit.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.Circuit.set_current.html">
+         set_current
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaem.CircuitType.html">
+       ansys.dyna.core.pre.dynaem.CircuitType
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.html">
+       ansys.dyna.core.pre.dynaem.DynaEM
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" type="checkbox"/>
+      <label for="toctree-checkbox-35">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_Permanent_magnet.html">
+         create_Permanent_magnet
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_control_contact.html">
+         create_control_contact
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_control_shell.html">
+         create_control_shell
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_control_solid.html">
+         create_control_solid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_damping_global.html">
+         create_damping_global
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_em_contact.html">
+         create_em_contact
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_em_control.html">
+         create_em_control
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_em_database_globalenergy.html">
+         create_em_database_globalenergy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_em_eos_permeability.html">
+         create_em_eos_permeability
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat001.html">
+         create_em_mat001
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat002.html">
+         create_em_mat002
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_em_output.html">
+         create_em_output
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_em_solver_fembem_monolithic.html">
+         create_em_solver_fembem_monolithic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_em_timestep.html">
+         create_em_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.create_general_keyword.html">
+         create_general_keyword
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.get_solid_elements.html">
+         get_solid_elements
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.get_stub.html">
+         get_stub
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.save_file.html">
+         save_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.set_accuracy.html">
+         set_accuracy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.set_bulk_viscosity.html">
+         set_bulk_viscosity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.set_energy.html">
+         set_energy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.set_hourglass.html">
+         set_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.set_rogowsky_coil_to_output_current.html">
+         set_rogowsky_coil_to_output_current
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.DynaEM.stub.html">
+         stub
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMAnalysis.html">
+       ansys.dyna.core.pre.dynaem.EMAnalysis
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" type="checkbox"/>
+      <label for="toctree-checkbox-36">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMAnalysis.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMAnalysis.set_bem_matrix_tol.html">
+         set_bem_matrix_tol
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMAnalysis.set_solver_bem.html">
+         set_solver_bem
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMAnalysis.set_solver_fem.html">
+         set_solver_fem
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMAnalysis.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMAnalysis.p_matrix_tol.html">
+         p_matrix_tol
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMAnalysis.q_matrix_tol.html">
+         q_matrix_tol
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMAnalysis.w_matrix_tol.html">
+         w_matrix_tol
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMContact.html">
+       ansys.dyna.core.pre.dynaem.EMContact
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-37" name="toctree-checkbox-37" type="checkbox"/>
+      <label for="toctree-checkbox-37">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMContact.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMContactType.html">
+       ansys.dyna.core.pre.dynaem.EMContactType
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaem.EMType.html">
+       ansys.dyna.core.pre.dynaem.EMType
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaem.FEMSOLVER.html">
+       ansys.dyna.core.pre.dynaem.FEMSOLVER
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.html">
+     ansys.dyna.core.pre.dynaicfd
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-38" name="toctree-checkbox-38" type="checkbox"/>
+    <label for="toctree-checkbox-38">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.Compressible.html">
+       ansys.dyna.core.pre.dynaicfd.Compressible
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.html">
+       ansys.dyna.core.pre.dynaicfd.DynaICFD
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-39" name="toctree-checkbox-39" type="checkbox"/>
+      <label for="toctree-checkbox-39">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_control_contact.html">
+         create_control_contact
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_control_dem_coupling.html">
+         create_control_dem_coupling
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_control_general.html">
+         create_control_general
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_control_output.html">
+         create_control_output
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_control_shell.html">
+         create_control_shell
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_control_solid.html">
+         create_control_solid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_control_turbulence.html">
+         create_control_turbulence
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_damping_global.html">
+         create_damping_global
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_general_keyword.html">
+         create_general_keyword
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_part_icfd.html">
+         create_part_icfd
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_section_icfd.html">
+         create_section_icfd
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.create_solver_tol_mmov.html">
+         create_solver_tol_mmov
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.get_solid_elements.html">
+         get_solid_elements
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.get_stub.html">
+         get_stub
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.save_file.html">
+         save_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.set_accuracy.html">
+         set_accuracy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.set_bulk_viscosity.html">
+         set_bulk_viscosity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.set_energy.html">
+         set_energy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.set_hourglass.html">
+         set_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.set_imposed_move.html">
+         set_imposed_move
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.set_initial.html">
+         set_initial
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.set_termination.html">
+         set_termination
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.DynaICFD.stub.html">
+         stub
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.html">
+       ansys.dyna.core.pre.dynaicfd.ICFDAnalysis
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-40" name="toctree-checkbox-40" type="checkbox"/>
+      <label for="toctree-checkbox-40">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_coupling_dem.html">
+         set_coupling_dem
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_fsi.html">
+         set_fsi
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_mesh_adaptivity.html">
+         set_mesh_adaptivity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_output.html">
+         set_output
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_steady_state.html">
+         set_steady_state
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_surface_mesh.html">
+         set_surface_mesh
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_type.html">
+         set_type
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_volume_mesh.html">
+         set_volume_mesh
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDDOF.html">
+       ansys.dyna.core.pre.dynaicfd.ICFDDOF
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.html">
+       ansys.dyna.core.pre.dynaicfd.ICFDPart
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-41" name="toctree-checkbox-41" type="checkbox"/>
+      <label for="toctree-checkbox-41">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.compute_drag_force.html">
+         compute_drag_force
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.compute_flux.html">
+         compute_flux
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.compute_temperature.html">
+         compute_temperature
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.set_boundary_layer.html">
+         set_boundary_layer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.set_boundary_layer_symmetry_condition.html">
+         set_boundary_layer_symmetry_condition
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.set_free_slip.html">
+         set_free_slip
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.set_fsi.html">
+         set_fsi
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.set_imposed_move.html">
+         set_imposed_move
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.set_material.html">
+         set_material
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.set_non_slip.html">
+         set_non_slip
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.set_prescribed_pressure.html">
+         set_prescribed_pressure
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.set_prescribed_temperature.html">
+         set_prescribed_temperature
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.set_prescribed_velocity.html">
+         set_prescribed_velocity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDPart.set_property.html">
+         set_property
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDVolumePart.html">
+       ansys.dyna.core.pre.dynaicfd.ICFDVolumePart
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-42" name="toctree-checkbox-42" type="checkbox"/>
+      <label for="toctree-checkbox-42">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDVolumePart.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDVolumePart.set_imposed_move.html">
+         set_imposed_move
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFDVolumePart.set_material.html">
+         set_material
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFD_AnalysisType.html">
+       ansys.dyna.core.pre.dynaicfd.ICFD_AnalysisType
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFD_CouplingDirection.html">
+       ansys.dyna.core.pre.dynaicfd.ICFD_CouplingDirection
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFD_CouplingForm.html">
+       ansys.dyna.core.pre.dynaicfd.ICFD_CouplingForm
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFD_MessageLevel.html">
+       ansys.dyna.core.pre.dynaicfd.ICFD_MessageLevel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.ICFD_SurfRemeshMethod.html">
+       ansys.dyna.core.pre.dynaicfd.ICFD_SurfRemeshMethod
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.MatICFD.html">
+       ansys.dyna.core.pre.dynaicfd.MatICFD
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-43" name="toctree-checkbox-43" type="checkbox"/>
+      <label for="toctree-checkbox-43">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.MatICFD.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.MeshedVolume.html">
+       ansys.dyna.core.pre.dynaicfd.MeshedVolume
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-44" name="toctree-checkbox-44" type="checkbox"/>
+      <label for="toctree-checkbox-44">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.MeshedVolume.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.MeshedVolume.embed_shell.html">
+         embed_shell
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.MeshedVolume.meshsize_box.html">
+         meshsize_box
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.MeshedVolume.set_fluid_interfaces.html">
+         set_fluid_interfaces
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.MeshedVolume.set_meshsize.html">
+         set_meshsize
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaicfd.Vel.html">
+       ansys.dyna.core.pre.dynaicfd.Vel
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.html">
+     ansys.dyna.core.pre.dynaiga
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-45" name="toctree-checkbox-45" type="checkbox"/>
+    <label for="toctree-checkbox-45">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.html">
+       ansys.dyna.core.pre.dynaiga.DynaIGA
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-46" name="toctree-checkbox-46" type="checkbox"/>
+      <label for="toctree-checkbox-46">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.create_control_contact.html">
+         create_control_contact
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.create_control_shell.html">
+         create_control_shell
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.create_control_solid.html">
+         create_control_solid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.create_damping_global.html">
+         create_damping_global
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.create_general_keyword.html">
+         create_general_keyword
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.create_section_igashell.html">
+         create_section_igashell
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.get_solid_elements.html">
+         get_solid_elements
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.get_stub.html">
+         get_stub
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.save_file.html">
+         save_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.set_accuracy.html">
+         set_accuracy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.set_bulk_viscosity.html">
+         set_bulk_viscosity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.set_energy.html">
+         set_energy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.set_hourglass.html">
+         set_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaiga.DynaIGA.stub.html">
+         stub
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.html">
+     ansys.dyna.core.pre.dynaisph
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-47" name="toctree-checkbox-47" type="checkbox"/>
+    <label for="toctree-checkbox-47">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.html">
+       ansys.dyna.core.pre.dynaisph.DynaISPH
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-48" name="toctree-checkbox-48" type="checkbox"/>
+      <label for="toctree-checkbox-48">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.create_control_contact.html">
+         create_control_contact
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.create_control_shell.html">
+         create_control_shell
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.create_control_solid.html">
+         create_control_solid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.create_damping_global.html">
+         create_damping_global
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.create_general_keyword.html">
+         create_general_keyword
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.get_solid_elements.html">
+         get_solid_elements
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.get_stub.html">
+         get_stub
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.save_file.html">
+         save_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.set_accuracy.html">
+         set_accuracy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.set_bulk_viscosity.html">
+         set_bulk_viscosity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.set_des.html">
+         set_des
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.set_energy.html">
+         set_energy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.set_hourglass.html">
+         set_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.DynaISPH.stub.html">
+         stub
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHAnalysis.html">
+       ansys.dyna.core.pre.dynaisph.ISPHAnalysis
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-49" name="toctree-checkbox-49" type="checkbox"/>
+      <label for="toctree-checkbox-49">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHAnalysis.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHAnalysis.set_box.html">
+         set_box
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHAnalysis.set_neighbors.html">
+         set_neighbors
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHAnalysis.set_num_timestep.html">
+         set_num_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHAnalysis.set_particle_deactivation.html">
+         set_particle_deactivation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHAnalysis.set_velocity_scaling.html">
+         set_velocity_scaling
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHFluidPart.html">
+       ansys.dyna.core.pre.dynaisph.ISPHFluidPart
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-50" name="toctree-checkbox-50" type="checkbox"/>
+      <label for="toctree-checkbox-50">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHFluidPart.create_massflow_plane.html">
+         create_massflow_plane
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHFluidPart.create_particles.html">
+         create_particles
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHFluidPart.set_element_formulation.html">
+         set_element_formulation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHFluidPart.set_extra_nodes.html">
+         set_extra_nodes
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHFluidPart.set_material.html">
+         set_material
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHFluidPart.set_property.html">
+         set_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHFluidPart.set_rigidbody_initial_velocity.html">
+         set_rigidbody_initial_velocity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHFluidPart.set_smoothing_length.html">
+         set_smoothing_length
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHFluidPart.set_stiffness_damping_coefficient.html">
+         set_stiffness_damping_coefficient
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHStructPart.html">
+       ansys.dyna.core.pre.dynaisph.ISPHStructPart
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-51" name="toctree-checkbox-51" type="checkbox"/>
+      <label for="toctree-checkbox-51">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHStructPart.create_particles.html">
+         create_particles
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHStructPart.set_element_formulation.html">
+         set_element_formulation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHStructPart.set_extra_nodes.html">
+         set_extra_nodes
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHStructPart.set_material.html">
+         set_material
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHStructPart.set_property.html">
+         set_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHStructPart.set_rigidbody_initial_velocity.html">
+         set_rigidbody_initial_velocity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHStructPart.set_smoothing_length.html">
+         set_smoothing_length
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.ISPHStructPart.set_stiffness_damping_coefficient.html">
+         set_stiffness_damping_coefficient
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.MassflowPlane.html">
+       ansys.dyna.core.pre.dynaisph.MassflowPlane
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-52" name="toctree-checkbox-52" type="checkbox"/>
+      <label for="toctree-checkbox-52">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.MassflowPlane.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynaisph.SPHSection.html">
+       ansys.dyna.core.pre.dynaisph.SPHSection
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.html">
+     ansys.dyna.core.pre.dynamaterial
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-53" name="toctree-checkbox-53" type="checkbox"/>
+    <label for="toctree-checkbox-53">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.Air.html">
+       ansys.dyna.core.pre.dynamaterial.Air
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-54" name="toctree-checkbox-54" type="checkbox"/>
+      <label for="toctree-checkbox-54">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.Air.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.EMMATTYPE.html">
+       ansys.dyna.core.pre.dynamaterial.EMMATTYPE
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.HighExplosive.html">
+       ansys.dyna.core.pre.dynamaterial.HighExplosive
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-55" name="toctree-checkbox-55" type="checkbox"/>
+      <label for="toctree-checkbox-55">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.HighExplosive.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.Liner.html">
+       ansys.dyna.core.pre.dynamaterial.Liner
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-56" name="toctree-checkbox-56" type="checkbox"/>
+      <label for="toctree-checkbox-56">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.Liner.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatAdditional.html">
+       ansys.dyna.core.pre.dynamaterial.MatAdditional
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-57" name="toctree-checkbox-57" type="checkbox"/>
+      <label for="toctree-checkbox-57">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatAdditional.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatAdditional.set_electromagnetic_property.html">
+         set_electromagnetic_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatAdditional.set_thermal_isotropic.html">
+         set_thermal_isotropic
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous.html">
+       ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-58" name="toctree-checkbox-58" type="checkbox"/>
+      <label for="toctree-checkbox-58">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatDamperViscous.html">
+       ansys.dyna.core.pre.dynamaterial.MatDamperViscous
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-59" name="toctree-checkbox-59" type="checkbox"/>
+      <label for="toctree-checkbox-59">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatDamperViscous.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatElastic.html">
+       ansys.dyna.core.pre.dynamaterial.MatElastic
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-60" name="toctree-checkbox-60" type="checkbox"/>
+      <label for="toctree-checkbox-60">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatElastic.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatElastic.set_electromagnetic_property.html">
+         set_electromagnetic_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatElastic.set_thermal_isotropic.html">
+         set_thermal_isotropic
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal.html">
+       ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-61" name="toctree-checkbox-61" type="checkbox"/>
+      <label for="toctree-checkbox-61">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal.set_electromagnetic_property.html">
+         set_electromagnetic_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal.set_thermal_isotropic.html">
+         set_thermal_isotropic
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatFabric.html">
+       ansys.dyna.core.pre.dynamaterial.MatFabric
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-62" name="toctree-checkbox-62" type="checkbox"/>
+      <label for="toctree-checkbox-62">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatFabric.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity.html">
+       ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-63" name="toctree-checkbox-63" type="checkbox"/>
+      <label for="toctree-checkbox-63">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatNull.html">
+       ansys.dyna.core.pre.dynamaterial.MatNull
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-64" name="toctree-checkbox-64" type="checkbox"/>
+      <label for="toctree-checkbox-64">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatNull.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity.html">
+       ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-65" name="toctree-checkbox-65" type="checkbox"/>
+      <label for="toctree-checkbox-65">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatRigid.html">
+       ansys.dyna.core.pre.dynamaterial.MatRigid
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-66" name="toctree-checkbox-66" type="checkbox"/>
+      <label for="toctree-checkbox-66">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatRigid.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatRigid.set_electromagnetic_property.html">
+         set_electromagnetic_property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatRigid.set_thermal_isotropic.html">
+         set_thermal_isotropic
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete.html">
+       ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-67" name="toctree-checkbox-67" type="checkbox"/>
+      <label for="toctree-checkbox-67">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid.html">
+       ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-68" name="toctree-checkbox-68" type="checkbox"/>
+      <label for="toctree-checkbox-68">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure.html">
+       ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-69" name="toctree-checkbox-69" type="checkbox"/>
+      <label for="toctree-checkbox-69">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatSpotweld.html">
+       ansys.dyna.core.pre.dynamaterial.MatSpotweld
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-70" name="toctree-checkbox-70" type="checkbox"/>
+      <label for="toctree-checkbox-70">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatSpotweld.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic.html">
+       ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-71" name="toctree-checkbox-71" type="checkbox"/>
+      <label for="toctree-checkbox-71">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.Vacuum.html">
+       ansys.dyna.core.pre.dynamaterial.Vacuum
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-72" name="toctree-checkbox-72" type="checkbox"/>
+      <label for="toctree-checkbox-72">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynamaterial.Vacuum.create.html">
+         create
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.html">
+     ansys.dyna.core.pre.dynanvh
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-73" name="toctree-checkbox-73" type="checkbox"/>
+    <label for="toctree-checkbox-73">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.html">
+       ansys.dyna.core.pre.dynanvh.DynaNVH
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-74" name="toctree-checkbox-74" type="checkbox"/>
+      <label for="toctree-checkbox-74">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.create_control_contact.html">
+         create_control_contact
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.create_control_shell.html">
+         create_control_shell
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.create_control_solid.html">
+         create_control_solid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.create_damping_global.html">
+         create_damping_global
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.create_general_keyword.html">
+         create_general_keyword
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.get_solid_elements.html">
+         get_solid_elements
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.get_stub.html">
+         get_stub
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.save_file.html">
+         save_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.set_accuracy.html">
+         set_accuracy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.set_bulk_viscosity.html">
+         set_bulk_viscosity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.set_energy.html">
+         set_energy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.set_hourglass.html">
+         set_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.DynaNVH.stub.html">
+         stub
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.ExcitationDOF.html">
+       ansys.dyna.core.pre.dynanvh.ExcitationDOF
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.ExcitationType.html">
+       ansys.dyna.core.pre.dynanvh.ExcitationType
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.FrequencyDomain.html">
+       ansys.dyna.core.pre.dynanvh.FrequencyDomain
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-75" name="toctree-checkbox-75" type="checkbox"/>
+      <label for="toctree-checkbox-75">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.FrequencyDomain.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.FrequencyDomain.set_frequency_response_function.html">
+         set_frequency_response_function
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.ResponseDOF.html">
+       ansys.dyna.core.pre.dynanvh.ResponseDOF
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynanvh.ResponseType.html">
+       ansys.dyna.core.pre.dynanvh.ResponseType
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="ansys.dyna.core.pre.dynasale.html">
+     ansys.dyna.core.pre.dynasale
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-76" name="toctree-checkbox-76" type="checkbox"/>
+    <label for="toctree-checkbox-76">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynasale.AdvectionMethod.html">
+       ansys.dyna.core.pre.dynasale.AdvectionMethod
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynasale.ControlPoint.html">
+       ansys.dyna.core.pre.dynasale.ControlPoint
+      </a>
+     </li>
+     <li class="toctree-l3 current active has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.html">
+       ansys.dyna.core.pre.dynasale.DynaSALE
+      </a>
+      <input checked="" class="toctree-checkbox" id="toctree-checkbox-77" name="toctree-checkbox-77" type="checkbox"/>
+      <label for="toctree-checkbox-77">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul class="current">
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.create_control_contact.html">
+         create_control_contact
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.create_control_shell.html">
+         create_control_shell
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.create_control_solid.html">
+         create_control_solid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.create_damping_global.html">
+         create_damping_global
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.create_general_keyword.html">
+         create_general_keyword
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.get_solid_elements.html">
+         get_solid_elements
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.get_stub.html">
+         get_stub
+        </a>
+       </li>
+       <li class="toctree-l4 current active">
+        <a class="current reference internal" href="#">
+         save_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.set_accuracy.html">
+         set_accuracy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.set_analysis_type.html">
+         set_analysis_type
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.set_bulk_viscosity.html">
+         set_bulk_viscosity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.set_energy.html">
+         set_energy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.set_hourglass.html">
+         set_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.set_output_database.html">
+         set_output_database
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.set_output_interval.html">
+         set_output_interval
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.set_termination.html">
+         set_termination
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.DynaSALE.stub.html">
+         stub
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynasale.FillDirection.html">
+       ansys.dyna.core.pre.dynasale.FillDirection
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynasale.StructuredMesh.html">
+       ansys.dyna.core.pre.dynasale.StructuredMesh
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-78" name="toctree-checkbox-78" type="checkbox"/>
+      <label for="toctree-checkbox-78">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.StructuredMesh.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.StructuredMesh.fill.html">
+         fill
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.StructuredMesh.initial_detonation.html">
+         initial_detonation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynasale.StructuredMesh.refine.html">
+         refine
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="ansys.dyna.core.pre.dynadem.html">
+     ansys.dyna.core.pre.dynadem
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-79" name="toctree-checkbox-79" type="checkbox"/>
+    <label for="toctree-checkbox-79">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DEMAnalysis.html">
+       ansys.dyna.core.pre.dynadem.DEMAnalysis
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-80" name="toctree-checkbox-80" type="checkbox"/>
+      <label for="toctree-checkbox-80">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DEMAnalysis.create.html">
+         create
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DEMAnalysis.set_des.html">
+         set_des
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.html">
+       ansys.dyna.core.pre.dynadem.DynaDEM
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-81" name="toctree-checkbox-81" type="checkbox"/>
+      <label for="toctree-checkbox-81">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.add.html">
+         add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.create_control_contact.html">
+         create_control_contact
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.create_control_shell.html">
+         create_control_shell
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.create_control_solid.html">
+         create_control_solid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.create_damping_global.html">
+         create_damping_global
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.create_define_de_mesh_surface.html">
+         create_define_de_mesh_surface
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.create_general_keyword.html">
+         create_general_keyword
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.get_solid_elements.html">
+         get_solid_elements
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.get_stub.html">
+         get_stub
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.save_file.html">
+         save_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.set_accuracy.html">
+         set_accuracy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.set_bulk_viscosity.html">
+         set_bulk_viscosity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.set_des.html">
+         set_des
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.set_energy.html">
+         set_energy
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.set_hourglass.html">
+         set_hourglass
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.set_timestep.html">
+         set_timestep
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.pre.dynadem.DynaDEM.stub.html">
+         stub
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../solver.html">
+   PyDyna-solver APIs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-82" name="toctree-checkbox-82" type="checkbox"/>
+  <label for="toctree-checkbox-82">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.html">
+     ansys.dyna.core.solver.dynasolver
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-83" name="toctree-checkbox-83" type="checkbox"/>
+    <label for="toctree-checkbox-83">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.html">
+       ansys.dyna.core.solver.dynasolver.DynaSolver
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-84" name="toctree-checkbox-84" type="checkbox"/>
+      <label for="toctree-checkbox-84">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.download.html">
+         download
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.list_files.html">
+         list_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.node.html">
+         node
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.pause.html">
+         pause
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.pull.html">
+         pull
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.push.html">
+         push
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.quit.html">
+         quit
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.resume.html">
+         resume
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.run.html">
+         run
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.runfile.html">
+         runfile
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.send.html">
+         send
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.setlc.html">
+         setlc
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.start.html">
+         start
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.switch.html">
+         switch
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.tail.html">
+         tail
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.time.html">
+         time
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.DynaSolver.upload.html">
+         upload
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.NotFound.html">
+       NotFound
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.RunningError.html">
+       RunningError
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ansys.dyna.core.solver.dynasolver.UnexpectedResponse.html">
+       UnexpectedResponse
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    
+  </div>
+</nav>
+  </div>
+  <div class="sidebar-end-items">
+  </div>
+</div>
+
+
+          
+
+
+<div class="bd-sidebar-secondary d-none d-xl-block col-xl-2 bd-toc">
+  
+    
+    <div class="toc-item">
+      
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynasale.DynaSALE.save_file">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     DynaSALE.save_file()
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+</nav>
+    </div>
+    
+    <div class="toc-item">
+      
+
+<div class="tocsection editthispage">
+    <a href="https://github.com/pyansys/pydyna/edit/main/doc/source/API/_autosummary/ansys.dyna.core.pre.dynasale.DynaSALE.save_file.rst">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+    </div>
+    
+  
+</div>
+
+
+          
+          
+          <div class="bd-content col-12 col-md-9 col-xl-7">
+              
+              <article class="bd-article" role="main">
+                
+  <section id="save-file">
+<h1>save_file<a class="headerlink" href="#save-file" title="Permalink to this heading">#</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynasale.DynaSALE.save_file">
+<span class="sig-prename descclassname"><span class="pre">DynaSALE.</span></span><span class="sig-name descname"><span class="pre">save_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ansys/dyna/core/pre/dynasale.html#DynaSALE.save_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynasale.DynaSALE.save_file" title="Permalink to this definition">#</a></dt>
+<dd><p>Save keyword files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.12)"><span class="xref std std-ref">bool</span></a></dt><dd><p>“True” when successful, “False” when failed</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+              </article>
+              
+
+              
+          </div>
+          
+      </div>
+    </div>
+
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695"></script>
+
+<footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    <p class="copyright">
+    &copy; Copyright (c) 2023 ANSYS, Inc. All rights reserved.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.3.0.<br>
+</p>
+  </div>
+  
+</div>
+</footer>
+  </body>
+</html>

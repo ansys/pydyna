@@ -1,0 +1,6 @@
+create\_control\_contact
+========================
+
+.. currentmodule:: ansys.dyna.core.pre.dynanvh
+
+.. automethod:: DynaNVH.create_control_contact

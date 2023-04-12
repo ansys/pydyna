@@ -1,0 +1,6 @@
+create\_general\_keyword
+========================
+
+.. currentmodule:: ansys.dyna.core.pre.dynadem
+
+.. automethod:: DynaDEM.create_general_keyword

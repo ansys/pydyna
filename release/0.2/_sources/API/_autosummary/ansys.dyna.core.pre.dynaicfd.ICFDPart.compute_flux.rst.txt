@@ -1,0 +1,6 @@
+compute\_flux
+=============
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. automethod:: ICFDPart.compute_flux

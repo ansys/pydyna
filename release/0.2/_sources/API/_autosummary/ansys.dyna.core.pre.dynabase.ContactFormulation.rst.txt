@@ -1,0 +1,28 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.ContactFormulation
+===============================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: ContactFormulation
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+   
+   
+
+.. vale on

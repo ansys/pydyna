@@ -1,0 +1,26 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.Direction
+======================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: Direction
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

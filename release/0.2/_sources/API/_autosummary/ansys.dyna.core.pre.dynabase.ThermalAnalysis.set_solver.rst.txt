@@ -1,0 +1,6 @@
+set\_solver
+===========
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: ThermalAnalysis.set_solver

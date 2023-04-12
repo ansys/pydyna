@@ -1,0 +1,6 @@
+pause
+=====
+
+.. currentmodule:: ansys.dyna.core.solver.dynasolver
+
+.. automethod:: DynaSolver.pause

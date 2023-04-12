@@ -1,0 +1,41 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.Constraint
+=======================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: Constraint
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      Constraint.create
+      
+      
+      Constraint.create_cnrb
+      
+      
+      Constraint.create_joint_spherical
+      
+      
+      Constraint.create_spotweld
+      
+      
+      Constraint.merge_two_rigid_bodies
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

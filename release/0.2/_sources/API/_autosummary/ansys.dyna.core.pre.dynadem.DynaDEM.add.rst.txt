@@ -1,0 +1,6 @@
+add
+===
+
+.. currentmodule:: ansys.dyna.core.pre.dynadem
+
+.. automethod:: DynaDEM.add

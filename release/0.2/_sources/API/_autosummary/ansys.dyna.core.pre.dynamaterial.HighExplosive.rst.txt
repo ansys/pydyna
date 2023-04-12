@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynamaterial.HighExplosive
+==============================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynamaterial
+
+.. autoclass:: HighExplosive
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      HighExplosive.create
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

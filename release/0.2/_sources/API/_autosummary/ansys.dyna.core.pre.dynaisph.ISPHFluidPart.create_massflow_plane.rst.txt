@@ -1,0 +1,6 @@
+create\_massflow\_plane
+=======================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaisph
+
+.. automethod:: ISPHFluidPart.create_massflow_plane

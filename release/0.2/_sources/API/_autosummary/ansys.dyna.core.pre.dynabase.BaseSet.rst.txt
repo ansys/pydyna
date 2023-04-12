@@ -1,0 +1,26 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.BaseSet
+====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: BaseSet
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

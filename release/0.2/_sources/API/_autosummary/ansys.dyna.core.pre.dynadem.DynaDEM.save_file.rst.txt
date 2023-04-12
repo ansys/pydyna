@@ -1,0 +1,6 @@
+save\_file
+==========
+
+.. currentmodule:: ansys.dyna.core.pre.dynadem
+
+.. automethod:: DynaDEM.save_file

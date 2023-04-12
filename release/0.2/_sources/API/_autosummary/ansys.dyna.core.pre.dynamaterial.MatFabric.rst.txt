@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynamaterial.MatFabric
+==========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynamaterial
+
+.. autoclass:: MatFabric
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      MatFabric.create
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynamaterial.Air
+====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynamaterial
+
+.. autoclass:: Air
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      Air.create
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

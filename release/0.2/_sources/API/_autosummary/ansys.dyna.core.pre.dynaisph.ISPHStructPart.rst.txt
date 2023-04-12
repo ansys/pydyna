@@ -1,0 +1,50 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaisph.ISPHStructPart
+===========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaisph
+
+.. autoclass:: ISPHStructPart
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      ISPHStructPart.create_particles
+      
+      
+      ISPHStructPart.set_element_formulation
+      
+      
+      ISPHStructPart.set_extra_nodes
+      
+      
+      ISPHStructPart.set_material
+      
+      
+      ISPHStructPart.set_property
+      
+      
+      ISPHStructPart.set_rigidbody_initial_velocity
+      
+      
+      ISPHStructPart.set_smoothing_length
+      
+      
+      ISPHStructPart.set_stiffness_damping_coefficient
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

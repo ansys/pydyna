@@ -1,0 +1,6 @@
+create\_general\_keyword
+========================
+
+.. currentmodule:: ansys.dyna.core.pre.dynamech
+
+.. automethod:: DynaMech.create_general_keyword

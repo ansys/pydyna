@@ -1,0 +1,27 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaicfd.ICFD\_SurfRemeshMethod
+===================================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. autoclass:: ICFD_SurfRemeshMethod
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+   
+   
+
+.. vale on

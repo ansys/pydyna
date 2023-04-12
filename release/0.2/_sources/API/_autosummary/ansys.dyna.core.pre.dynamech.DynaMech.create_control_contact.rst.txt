@@ -1,0 +1,6 @@
+create\_control\_contact
+========================
+
+.. currentmodule:: ansys.dyna.core.pre.dynamech
+
+.. automethod:: DynaMech.create_control_contact

@@ -1,0 +1,6 @@
+set\_property
+=============
+
+.. currentmodule:: ansys.dyna.core.pre.dynaisph
+
+.. automethod:: ISPHStructPart.set_property

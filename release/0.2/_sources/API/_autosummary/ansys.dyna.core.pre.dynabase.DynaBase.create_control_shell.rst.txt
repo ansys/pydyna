@@ -1,0 +1,6 @@
+create\_control\_shell
+======================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: DynaBase.create_control_shell

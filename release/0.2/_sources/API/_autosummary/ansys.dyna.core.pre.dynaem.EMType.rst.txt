@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaem.EMType
+=================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. autoclass:: EMType
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+   
+   
+
+.. vale on

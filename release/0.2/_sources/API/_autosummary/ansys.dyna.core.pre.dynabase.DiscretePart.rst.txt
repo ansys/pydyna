@@ -1,0 +1,47 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.DiscretePart
+=========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: DiscretePart
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      DiscretePart.set_displacement_option
+      
+      
+      DiscretePart.set_element_formulation
+      
+      
+      DiscretePart.set_extra_nodes
+      
+      
+      DiscretePart.set_material
+      
+      
+      DiscretePart.set_property
+      
+      
+      DiscretePart.set_rigidbody_initial_velocity
+      
+      
+      DiscretePart.set_stiffness_damping_coefficient
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

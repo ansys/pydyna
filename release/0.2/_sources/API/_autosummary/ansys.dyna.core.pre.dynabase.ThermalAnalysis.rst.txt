@@ -1,0 +1,35 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.ThermalAnalysis
+============================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: ThermalAnalysis
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      ThermalAnalysis.create
+      
+      
+      ThermalAnalysis.set_solver
+      
+      
+      ThermalAnalysis.set_timestep
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

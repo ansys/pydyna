@@ -1,0 +1,6 @@
+save\_file
+==========
+
+.. currentmodule:: ansys.dyna.core.pre.dynamech
+
+.. automethod:: DynaMech.save_file

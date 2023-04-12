@@ -1,0 +1,6 @@
+set\_timestep
+=============
+
+.. currentmodule:: ansys.dyna.core.pre.dynamech
+
+.. automethod:: DynaMech.set_timestep

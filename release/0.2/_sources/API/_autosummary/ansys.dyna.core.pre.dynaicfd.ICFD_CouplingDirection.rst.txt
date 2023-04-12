@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaicfd.ICFD\_CouplingDirection
+====================================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. autoclass:: ICFD_CouplingDirection
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+   
+   
+
+.. vale on

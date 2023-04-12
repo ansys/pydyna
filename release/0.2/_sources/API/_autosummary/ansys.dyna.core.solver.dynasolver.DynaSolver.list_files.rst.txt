@@ -1,0 +1,6 @@
+list\_files
+===========
+
+.. currentmodule:: ansys.dyna.core.solver.dynasolver
+
+.. automethod:: DynaSolver.list_files

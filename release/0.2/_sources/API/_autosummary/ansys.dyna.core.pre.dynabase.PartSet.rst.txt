@@ -1,0 +1,38 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.PartSet
+====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: PartSet
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      PartSet.create
+      
+      
+      PartSet.get_pid
+      
+      
+      PartSet.num
+      
+      
+      PartSet.pos
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

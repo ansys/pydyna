@@ -1,0 +1,6 @@
+create\_control\_dem\_coupling
+==============================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. automethod:: DynaICFD.create_control_dem_coupling

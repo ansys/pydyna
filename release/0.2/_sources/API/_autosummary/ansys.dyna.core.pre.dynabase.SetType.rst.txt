@@ -1,0 +1,30 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.SetType
+====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: SetType
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+   
+   
+
+.. vale on

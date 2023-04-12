@@ -1,0 +1,6 @@
+create\_control\_solid
+======================
+
+.. currentmodule:: ansys.dyna.core.pre.dynanvh
+
+.. automethod:: DynaNVH.create_control_solid

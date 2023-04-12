@@ -1,0 +1,6 @@
+create\_velocity
+================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: InitialCondition.create_velocity

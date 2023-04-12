@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaicfd.MatICFD
+====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. autoclass:: MatICFD
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      MatICFD.create
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

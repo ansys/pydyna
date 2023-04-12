@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.OffsetType
+=======================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: OffsetType
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+   
+   
+
+.. vale on

@@ -1,0 +1,27 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaicfd.ICFD\_MessageLevel
+===============================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. autoclass:: ICFD_MessageLevel
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+   
+   
+
+.. vale on

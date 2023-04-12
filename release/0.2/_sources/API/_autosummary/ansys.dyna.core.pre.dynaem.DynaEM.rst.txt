@@ -1,0 +1,110 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaem.DynaEM
+=================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. autoclass:: DynaEM
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      DynaEM.add
+      
+      
+      DynaEM.create_Permanent_magnet
+      
+      
+      DynaEM.create_control_contact
+      
+      
+      DynaEM.create_control_shell
+      
+      
+      DynaEM.create_control_solid
+      
+      
+      DynaEM.create_damping_global
+      
+      
+      DynaEM.create_em_contact
+      
+      
+      DynaEM.create_em_control
+      
+      
+      DynaEM.create_em_database_globalenergy
+      
+      
+      DynaEM.create_em_eos_permeability
+      
+      
+      DynaEM.create_em_mat001
+      
+      
+      DynaEM.create_em_mat002
+      
+      
+      DynaEM.create_em_output
+      
+      
+      DynaEM.create_em_solver_fembem_monolithic
+      
+      
+      DynaEM.create_em_timestep
+      
+      
+      DynaEM.create_general_keyword
+      
+      
+      DynaEM.get_solid_elements
+      
+      
+      DynaEM.get_stub
+      
+      
+      DynaEM.save_file
+      
+      
+      DynaEM.set_accuracy
+      
+      
+      DynaEM.set_bulk_viscosity
+      
+      
+      DynaEM.set_energy
+      
+      
+      DynaEM.set_hourglass
+      
+      
+      DynaEM.set_rogowsky_coil_to_output_current
+      
+      
+      DynaEM.set_timestep
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DynaEM.stub
+      
+   
+   
+
+.. vale on

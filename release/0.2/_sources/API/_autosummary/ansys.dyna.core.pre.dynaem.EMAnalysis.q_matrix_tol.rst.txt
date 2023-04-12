@@ -1,0 +1,6 @@
+q\_matrix\_tol
+==============
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. autoattribute:: EMAnalysis.q_matrix_tol

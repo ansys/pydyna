@@ -1,0 +1,6 @@
+save\_file
+==========
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. automethod:: DynaICFD.save_file

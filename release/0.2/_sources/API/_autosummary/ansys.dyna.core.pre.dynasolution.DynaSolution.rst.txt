@@ -1,0 +1,74 @@
+.. vale off
+
+ansys.dyna.core.pre.dynasolution.DynaSolution
+=============================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynasolution
+
+.. autoclass:: DynaSolution
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      DynaSolution.add
+      
+      
+      DynaSolution.create_database_ascii
+      
+      
+      DynaSolution.create_database_binary
+      
+      
+      DynaSolution.download
+      
+      
+      DynaSolution.get_file_chunks
+      
+      
+      DynaSolution.get_stub
+      
+      
+      DynaSolution.open_files
+      
+      
+      DynaSolution.save_file
+      
+      
+      DynaSolution.set_output_database
+      
+      
+      DynaSolution.set_termination
+      
+      
+      DynaSolution.upload
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DynaSolution.stub
+      
+      
+      DynaSolution.termination_time
+      
+      
+      DynaSolution.terminationtime
+      
+   
+   
+
+.. vale on

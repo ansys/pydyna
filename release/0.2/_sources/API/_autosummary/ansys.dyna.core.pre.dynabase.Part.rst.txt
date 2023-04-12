@@ -1,0 +1,44 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.Part
+=================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: Part
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      Part.set_element_formulation
+      
+      
+      Part.set_extra_nodes
+      
+      
+      Part.set_material
+      
+      
+      Part.set_property
+      
+      
+      Part.set_rigidbody_initial_velocity
+      
+      
+      Part.set_stiffness_damping_coefficient
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

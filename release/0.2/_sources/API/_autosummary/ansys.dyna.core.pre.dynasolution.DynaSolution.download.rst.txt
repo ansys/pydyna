@@ -1,0 +1,6 @@
+download
+========
+
+.. currentmodule:: ansys.dyna.core.pre.dynasolution
+
+.. automethod:: DynaSolution.download

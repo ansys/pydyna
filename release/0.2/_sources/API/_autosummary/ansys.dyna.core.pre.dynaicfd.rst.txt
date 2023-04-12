@@ -1,0 +1,49 @@
+﻿.. vale off
+
+ansys.dyna.core.pre.dynaicfd
+============================
+
+.. automodule:: ansys.dyna.core.pre.dynaicfd
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class-template.rst
+   
+      Compressible
+      DynaICFD
+      ICFDAnalysis
+      ICFDDOF
+      ICFDPart
+      ICFDVolumePart
+      ICFD_AnalysisType
+      ICFD_CouplingDirection
+      ICFD_CouplingForm
+      ICFD_MessageLevel
+      ICFD_SurfRemeshMethod
+      MatICFD
+      MeshedVolume
+      Vel
+   
+   
+
+   
+   
+   
+
+
+
+
+
+.. vale on

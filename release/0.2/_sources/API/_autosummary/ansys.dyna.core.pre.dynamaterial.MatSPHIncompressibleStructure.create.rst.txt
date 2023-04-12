@@ -1,0 +1,6 @@
+create
+======
+
+.. currentmodule:: ansys.dyna.core.pre.dynamaterial
+
+.. automethod:: MatSPHIncompressibleStructure.create

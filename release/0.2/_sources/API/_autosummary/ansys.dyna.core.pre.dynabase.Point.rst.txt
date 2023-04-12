@@ -1,0 +1,26 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.Point
+==================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: Point
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

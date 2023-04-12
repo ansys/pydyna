@@ -1,0 +1,28 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaicfd.ICFDDOF
+====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. autoclass:: ICFDDOF
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+   
+   
+
+.. vale on

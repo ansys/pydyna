@@ -1,0 +1,6 @@
+create\_general\_keyword
+========================
+
+.. currentmodule:: ansys.dyna.core.pre.dynanvh
+
+.. automethod:: DynaNVH.create_general_keyword

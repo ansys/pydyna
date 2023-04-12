@@ -1,0 +1,27 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaem.CircuitType
+======================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. autoclass:: CircuitType
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+   
+   
+
+.. vale on

@@ -1,0 +1,41 @@
+﻿.. vale off
+
+ansys.dyna.core.pre.dynanvh
+===========================
+
+.. automodule:: ansys.dyna.core.pre.dynanvh
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class-template.rst
+   
+      DynaNVH
+      ExcitationDOF
+      ExcitationType
+      FrequencyDomain
+      ResponseDOF
+      ResponseType
+   
+   
+
+   
+   
+   
+
+
+
+
+
+.. vale on

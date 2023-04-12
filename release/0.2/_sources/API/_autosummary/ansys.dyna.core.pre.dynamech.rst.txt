@@ -1,0 +1,37 @@
+﻿.. vale off
+
+ansys.dyna.core.pre.dynamech
+============================
+
+.. automodule:: ansys.dyna.core.pre.dynamech
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class-template.rst
+   
+      Airbag
+      DynaMech
+   
+   
+
+   
+   
+   
+
+
+
+
+
+.. vale on

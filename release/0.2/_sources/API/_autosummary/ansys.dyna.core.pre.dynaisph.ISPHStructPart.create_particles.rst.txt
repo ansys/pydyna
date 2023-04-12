@@ -1,0 +1,6 @@
+create\_particles
+=================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaisph
+
+.. automethod:: ISPHStructPart.create_particles

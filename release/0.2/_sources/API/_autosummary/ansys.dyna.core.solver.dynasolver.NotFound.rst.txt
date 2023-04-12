@@ -1,0 +1,6 @@
+NotFound
+========
+
+.. currentmodule:: ansys.dyna.core.solver.dynasolver
+
+.. autoexception:: NotFound

@@ -1,0 +1,80 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaiga.DynaIGA
+===================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaiga
+
+.. autoclass:: DynaIGA
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      DynaIGA.add
+      
+      
+      DynaIGA.create_control_contact
+      
+      
+      DynaIGA.create_control_shell
+      
+      
+      DynaIGA.create_control_solid
+      
+      
+      DynaIGA.create_damping_global
+      
+      
+      DynaIGA.create_general_keyword
+      
+      
+      DynaIGA.create_section_igashell
+      
+      
+      DynaIGA.get_solid_elements
+      
+      
+      DynaIGA.get_stub
+      
+      
+      DynaIGA.save_file
+      
+      
+      DynaIGA.set_accuracy
+      
+      
+      DynaIGA.set_bulk_viscosity
+      
+      
+      DynaIGA.set_energy
+      
+      
+      DynaIGA.set_hourglass
+      
+      
+      DynaIGA.set_timestep
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DynaIGA.stub
+      
+   
+   
+
+.. vale on

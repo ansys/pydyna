@@ -1,0 +1,6 @@
+set\_active\_time
+=================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: Contact.set_active_time

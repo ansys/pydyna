@@ -1,0 +1,35 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.InitialCondition
+=============================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: InitialCondition
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      InitialCondition.create
+      
+      
+      InitialCondition.create_temperature
+      
+      
+      InitialCondition.create_velocity
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

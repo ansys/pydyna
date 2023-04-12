@@ -1,0 +1,6 @@
+get\_solid\_elements
+====================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: DynaBase.get_solid_elements

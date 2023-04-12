@@ -1,0 +1,6 @@
+set\_bulk\_viscosity
+====================
+
+.. currentmodule:: ansys.dyna.core.pre.dynanvh
+
+.. automethod:: DynaNVH.set_bulk_viscosity

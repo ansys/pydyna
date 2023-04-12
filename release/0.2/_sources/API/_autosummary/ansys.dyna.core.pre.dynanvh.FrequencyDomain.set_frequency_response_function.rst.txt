@@ -1,0 +1,6 @@
+set\_frequency\_response\_function
+==================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynanvh
+
+.. automethod:: FrequencyDomain.set_frequency_response_function

@@ -1,0 +1,32 @@
+.. vale off
+
+ansys.dyna.core.pre.dynadem.DEMAnalysis
+=======================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynadem
+
+.. autoclass:: DEMAnalysis
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      DEMAnalysis.create
+      
+      
+      DEMAnalysis.set_des
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

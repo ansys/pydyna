@@ -1,0 +1,6 @@
+save\_file
+==========
+
+.. currentmodule:: ansys.dyna.core.pre.dynanvh
+
+.. automethod:: DynaNVH.save_file

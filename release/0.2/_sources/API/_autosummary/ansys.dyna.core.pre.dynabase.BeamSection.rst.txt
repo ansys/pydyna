@@ -1,0 +1,26 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.BeamSection
+========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: BeamSection
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

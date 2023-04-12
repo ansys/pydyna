@@ -1,0 +1,27 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaem.BEMSOLVER
+====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. autoclass:: BEMSOLVER
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+   
+   
+
+.. vale on

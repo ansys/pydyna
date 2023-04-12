@@ -1,0 +1,30 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.ShellFormulation
+=============================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: ShellFormulation
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+      
+   
+   
+
+.. vale on

@@ -1,0 +1,6 @@
+set\_energy
+===========
+
+.. currentmodule:: ansys.dyna.core.pre.dynadem
+
+.. automethod:: DynaDEM.set_energy

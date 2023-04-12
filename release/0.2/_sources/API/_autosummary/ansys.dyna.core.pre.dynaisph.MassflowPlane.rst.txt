@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaisph.MassflowPlane
+==========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaisph
+
+.. autoclass:: MassflowPlane
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      MassflowPlane.create
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

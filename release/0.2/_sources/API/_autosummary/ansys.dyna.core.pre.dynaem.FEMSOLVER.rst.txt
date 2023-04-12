@@ -1,0 +1,27 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaem.FEMSOLVER
+====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. autoclass:: FEMSOLVER
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+   
+   
+
+.. vale on

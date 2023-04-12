@@ -1,0 +1,6 @@
+init\_log
+=========
+
+.. currentmodule:: ansys.dyna.core.pre.dynasolution
+
+.. autofunction:: init_log

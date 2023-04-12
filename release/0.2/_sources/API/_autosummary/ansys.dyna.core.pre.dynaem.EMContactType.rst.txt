@@ -1,0 +1,28 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaem.EMContactType
+========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. autoclass:: EMContactType
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+   
+   
+
+.. vale on

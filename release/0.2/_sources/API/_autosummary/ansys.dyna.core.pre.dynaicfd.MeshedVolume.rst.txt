@@ -1,0 +1,41 @@
+.. vale off
+
+ansys.dyna.core.pre.dynaicfd.MeshedVolume
+=========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. autoclass:: MeshedVolume
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      MeshedVolume.create
+      
+      
+      MeshedVolume.embed_shell
+      
+      
+      MeshedVolume.meshsize_box
+      
+      
+      MeshedVolume.set_fluid_interfaces
+      
+      
+      MeshedVolume.set_meshsize
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

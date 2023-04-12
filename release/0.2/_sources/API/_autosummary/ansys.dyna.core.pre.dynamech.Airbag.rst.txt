@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynamech.Airbag
+===================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynamech
+
+.. autoclass:: Airbag
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      Airbag.create
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

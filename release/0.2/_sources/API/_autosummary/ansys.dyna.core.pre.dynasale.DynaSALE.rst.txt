@@ -1,0 +1,89 @@
+.. vale off
+
+ansys.dyna.core.pre.dynasale.DynaSALE
+=====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynasale
+
+.. autoclass:: DynaSALE
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      DynaSALE.add
+      
+      
+      DynaSALE.create_control_contact
+      
+      
+      DynaSALE.create_control_shell
+      
+      
+      DynaSALE.create_control_solid
+      
+      
+      DynaSALE.create_damping_global
+      
+      
+      DynaSALE.create_general_keyword
+      
+      
+      DynaSALE.get_solid_elements
+      
+      
+      DynaSALE.get_stub
+      
+      
+      DynaSALE.save_file
+      
+      
+      DynaSALE.set_accuracy
+      
+      
+      DynaSALE.set_analysis_type
+      
+      
+      DynaSALE.set_bulk_viscosity
+      
+      
+      DynaSALE.set_energy
+      
+      
+      DynaSALE.set_hourglass
+      
+      
+      DynaSALE.set_output_database
+      
+      
+      DynaSALE.set_output_interval
+      
+      
+      DynaSALE.set_termination
+      
+      
+      DynaSALE.set_timestep
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DynaSALE.stub
+      
+   
+   
+
+.. vale on

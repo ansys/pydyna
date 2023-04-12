@@ -1,0 +1,6 @@
+create\_em\_eos\_permeability
+=============================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. automethod:: DynaEM.create_em_eos_permeability

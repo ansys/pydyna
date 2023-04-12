@@ -1,0 +1,6 @@
+set\_displacement\_option
+=========================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: DiscretePart.set_displacement_option

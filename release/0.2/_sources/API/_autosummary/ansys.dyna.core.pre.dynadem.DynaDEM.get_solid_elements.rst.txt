@@ -1,0 +1,6 @@
+get\_solid\_elements
+====================
+
+.. currentmodule:: ansys.dyna.core.pre.dynadem
+
+.. automethod:: DynaDEM.get_solid_elements

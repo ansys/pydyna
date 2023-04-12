@@ -1,0 +1,6 @@
+save\_file
+==========
+
+.. currentmodule:: ansys.dyna.core.pre.dynaiga
+
+.. automethod:: DynaIGA.save_file

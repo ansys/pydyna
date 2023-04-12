@@ -1,0 +1,6 @@
+create\_database\_binary
+========================
+
+.. currentmodule:: ansys.dyna.core.pre.dynasolution
+
+.. automethod:: DynaSolution.create_database_binary

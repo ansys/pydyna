@@ -1,0 +1,6 @@
+terminationtime
+===============
+
+.. currentmodule:: ansys.dyna.core.pre.dynasolution
+
+.. autoattribute:: DynaSolution.terminationtime

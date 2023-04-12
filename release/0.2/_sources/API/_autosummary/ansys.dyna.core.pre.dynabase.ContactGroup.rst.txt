@@ -1,0 +1,35 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.ContactGroup
+=========================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: ContactGroup
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      ContactGroup.add
+      
+      
+      ContactGroup.create
+      
+      
+      ContactGroup.num
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

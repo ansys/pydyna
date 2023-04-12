@@ -1,0 +1,101 @@
+.. vale off
+
+ansys.dyna.core.pre.dynamech.DynaMech
+=====================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynamech
+
+.. autoclass:: DynaMech
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      DynaMech.add
+      
+      
+      DynaMech.create_control_contact
+      
+      
+      DynaMech.create_control_output
+      
+      
+      DynaMech.create_control_shell
+      
+      
+      DynaMech.create_control_solid
+      
+      
+      DynaMech.create_damping_global
+      
+      
+      DynaMech.create_defineorientation
+      
+      
+      DynaMech.create_general_keyword
+      
+      
+      DynaMech.create_hourglass
+      
+      
+      DynaMech.create_section_discrete
+      
+      
+      DynaMech.create_section_solid
+      
+      
+      DynaMech.create_shellset
+      
+      
+      DynaMech.create_solidset
+      
+      
+      DynaMech.get_solid_elements
+      
+      
+      DynaMech.get_stub
+      
+      
+      DynaMech.save_file
+      
+      
+      DynaMech.set_accuracy
+      
+      
+      DynaMech.set_bulk_viscosity
+      
+      
+      DynaMech.set_energy
+      
+      
+      DynaMech.set_hourglass
+      
+      
+      DynaMech.set_init_velocity
+      
+      
+      DynaMech.set_timestep
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DynaMech.stub
+      
+   
+   
+
+.. vale on

@@ -1,0 +1,6 @@
+set\_non\_slip
+==============
+
+.. currentmodule:: ansys.dyna.core.pre.dynaicfd
+
+.. automethod:: ICFDPart.set_non_slip

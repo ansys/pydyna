@@ -1,0 +1,6 @@
+create\_temperature
+===================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: InitialCondition.create_temperature

@@ -1,0 +1,6 @@
+set\_current
+============
+
+.. currentmodule:: ansys.dyna.core.pre.dynaem
+
+.. automethod:: Circuit.set_current

@@ -1,0 +1,6 @@
+set\_slave\_surface
+===================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: Contact.set_slave_surface

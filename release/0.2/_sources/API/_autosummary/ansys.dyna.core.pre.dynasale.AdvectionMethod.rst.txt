@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynasale.AdvectionMethod
+============================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynasale
+
+.. autoclass:: AdvectionMethod
+
+   
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      
+      
+   
+   
+
+.. vale on

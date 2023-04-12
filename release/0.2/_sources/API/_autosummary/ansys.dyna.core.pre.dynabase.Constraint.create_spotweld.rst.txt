@@ -1,0 +1,6 @@
+create\_spotweld
+================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: Constraint.create_spotweld

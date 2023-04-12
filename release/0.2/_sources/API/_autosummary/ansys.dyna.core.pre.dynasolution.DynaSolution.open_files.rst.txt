@@ -1,0 +1,6 @@
+open\_files
+===========
+
+.. currentmodule:: ansys.dyna.core.pre.dynasolution
+
+.. automethod:: DynaSolution.open_files

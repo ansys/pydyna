@@ -1,0 +1,29 @@
+.. vale off
+
+ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity
+=====================================================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynamaterial
+
+.. autoclass:: MatModifiedPiecewiseLinearPlasticity
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      MatModifiedPiecewiseLinearPlasticity.create
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

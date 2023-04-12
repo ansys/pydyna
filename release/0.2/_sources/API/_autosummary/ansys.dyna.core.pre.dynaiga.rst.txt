@@ -1,0 +1,36 @@
+﻿.. vale off
+
+ansys.dyna.core.pre.dynaiga
+===========================
+
+.. automodule:: ansys.dyna.core.pre.dynaiga
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class-template.rst
+   
+      DynaIGA
+   
+   
+
+   
+   
+   
+
+
+
+
+
+.. vale on

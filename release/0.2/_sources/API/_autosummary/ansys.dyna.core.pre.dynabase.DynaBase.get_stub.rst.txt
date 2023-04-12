@@ -1,0 +1,6 @@
+get\_stub
+=========
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. automethod:: DynaBase.get_stub

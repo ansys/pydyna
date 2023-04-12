@@ -1,0 +1,6 @@
+get\_solid\_elements
+====================
+
+.. currentmodule:: ansys.dyna.core.pre.dynaisph
+
+.. automethod:: DynaISPH.get_solid_elements

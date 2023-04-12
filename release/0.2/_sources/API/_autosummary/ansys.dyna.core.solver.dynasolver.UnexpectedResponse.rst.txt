@@ -1,0 +1,6 @@
+UnexpectedResponse
+==================
+
+.. currentmodule:: ansys.dyna.core.solver.dynasolver
+
+.. autoexception:: UnexpectedResponse

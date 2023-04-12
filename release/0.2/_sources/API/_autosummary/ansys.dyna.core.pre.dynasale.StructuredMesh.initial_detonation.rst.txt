@@ -1,0 +1,6 @@
+initial\_detonation
+===================
+
+.. currentmodule:: ansys.dyna.core.pre.dynasale
+
+.. automethod:: StructuredMesh.initial_detonation

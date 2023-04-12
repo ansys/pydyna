@@ -1,0 +1,62 @@
+.. vale off
+
+ansys.dyna.core.pre.dynabase.ShellPart
+======================================
+
+.. currentmodule:: ansys.dyna.core.pre.dynabase
+
+.. autoclass:: ShellPart
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      
+      ShellPart.set_des_surface
+      
+      
+      ShellPart.set_element_formulation
+      
+      
+      ShellPart.set_extra_nodes
+      
+      
+      ShellPart.set_hourglass
+      
+      
+      ShellPart.set_integration_points
+      
+      
+      ShellPart.set_material
+      
+      
+      ShellPart.set_printout
+      
+      
+      ShellPart.set_property
+      
+      
+      ShellPart.set_rigidbody_initial_velocity
+      
+      
+      ShellPart.set_shear_factor
+      
+      
+      ShellPart.set_stiffness_damping_coefficient
+      
+      
+      ShellPart.set_thickness
+      
+   
+   
+
+   
+   
+   
+
+.. vale on

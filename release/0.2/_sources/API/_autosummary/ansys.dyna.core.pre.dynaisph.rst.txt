@@ -1,0 +1,41 @@
+﻿.. vale off
+
+ansys.dyna.core.pre.dynaisph
+============================
+
+.. automodule:: ansys.dyna.core.pre.dynaisph
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class-template.rst
+   
+      DynaISPH
+      ISPHAnalysis
+      ISPHFluidPart
+      ISPHStructPart
+      MassflowPlane
+      SPHSection
+   
+   
+
+   
+   
+   
+
+
+
+
+
+.. vale on
