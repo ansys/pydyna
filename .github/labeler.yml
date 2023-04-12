@@ -6,7 +6,6 @@ maintenance:
 - .flake8
 - pyproject.toml
 dependencies:
-- requirements/*
 testing:
 - _unittest/conftest.py
 - tests/*
