@@ -1,7 +1,5 @@
-<!-- vale off -->
 Using PyDPF-post for LS-DYNA
 ============================
-<!-- vale on -->
 
 Operators
 ~~~~~~~~~
