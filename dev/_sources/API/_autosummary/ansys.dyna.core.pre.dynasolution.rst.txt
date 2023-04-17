@@ -1,6 +1,0 @@
-﻿dynasolution
-============
-
-.. currentmodule:: ansys.dyna.core.pre
-
-.. automodule:: dynasolution

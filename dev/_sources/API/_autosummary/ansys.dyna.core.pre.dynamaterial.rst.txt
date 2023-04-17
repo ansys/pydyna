@@ -1,6 +1,0 @@
-﻿dynamaterial
-============
-
-.. currentmodule:: ansys.dyna.core.pre
-
-.. automodule:: dynamaterial
