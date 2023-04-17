@@ -1,6 +1,0 @@
-create\_control\_solid
-======================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: DynaICFD.create_control_solid

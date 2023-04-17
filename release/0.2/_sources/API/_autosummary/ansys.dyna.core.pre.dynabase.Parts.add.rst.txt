@@ -1,6 +1,0 @@
-add
-===
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Parts.add

@@ -1,6 +1,0 @@
-set\_extra\_nodes
-=================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Part.set_extra_nodes

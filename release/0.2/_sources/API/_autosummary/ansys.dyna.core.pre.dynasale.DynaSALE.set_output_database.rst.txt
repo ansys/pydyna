@@ -1,6 +1,0 @@
-set\_output\_database
-=====================
-
-.. currentmodule:: ansys.dyna.core.pre.dynasale
-
-.. automethod:: DynaSALE.set_output_database

@@ -1,6 +1,0 @@
-set\_timestep
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynadem
-
-.. automethod:: DynaDEM.set_timestep

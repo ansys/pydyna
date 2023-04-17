@@ -1,6 +1,0 @@
-runfile
-=======
-
-.. currentmodule:: ansys.dyna.core.solver.dynasolver
-
-.. automethod:: DynaSolver.runfile

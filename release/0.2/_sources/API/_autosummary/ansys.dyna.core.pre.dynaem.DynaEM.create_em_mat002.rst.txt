@@ -1,6 +1,0 @@
-create\_em\_mat002
-==================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaem
-
-.. automethod:: DynaEM.create_em_mat002

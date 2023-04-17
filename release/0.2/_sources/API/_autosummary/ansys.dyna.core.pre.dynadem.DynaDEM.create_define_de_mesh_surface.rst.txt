@@ -1,6 +1,0 @@
-create\_define\_de\_mesh\_surface
-=================================
-
-.. currentmodule:: ansys.dyna.core.pre.dynadem
-
-.. automethod:: DynaDEM.create_define_de_mesh_surface

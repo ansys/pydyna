@@ -1,6 +1,0 @@
-set\_solution
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: ImplicitAnalysis.set_solution

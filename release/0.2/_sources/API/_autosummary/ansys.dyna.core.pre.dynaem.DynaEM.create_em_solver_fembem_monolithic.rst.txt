@@ -1,6 +1,0 @@
-create\_em\_solver\_fembem\_monolithic
-======================================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaem
-
-.. automethod:: DynaEM.create_em_solver_fembem_monolithic

@@ -1,6 +1,0 @@
-merge\_two\_rigid\_bodies
-=========================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Constraint.merge_two_rigid_bodies

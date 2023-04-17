@@ -1,6 +1,0 @@
-get\_pid
-========
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: PartSet.get_pid

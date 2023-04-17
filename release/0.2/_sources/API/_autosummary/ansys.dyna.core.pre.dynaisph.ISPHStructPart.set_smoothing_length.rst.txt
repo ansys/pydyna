@@ -1,6 +1,0 @@
-set\_smoothing\_length
-======================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaisph
-
-.. automethod:: ISPHStructPart.set_smoothing_length

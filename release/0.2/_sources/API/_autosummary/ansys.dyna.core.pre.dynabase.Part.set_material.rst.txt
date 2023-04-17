@@ -1,6 +1,0 @@
-set\_material
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Part.set_material

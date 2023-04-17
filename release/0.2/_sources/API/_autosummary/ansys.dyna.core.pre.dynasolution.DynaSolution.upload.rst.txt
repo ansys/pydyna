@@ -1,6 +1,0 @@
-upload
-======
-
-.. currentmodule:: ansys.dyna.core.pre.dynasolution
-
-.. automethod:: DynaSolution.upload

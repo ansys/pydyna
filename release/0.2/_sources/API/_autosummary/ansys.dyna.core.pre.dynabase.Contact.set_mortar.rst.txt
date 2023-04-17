@@ -1,6 +1,0 @@
-set\_mortar
-===========
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Contact.set_mortar

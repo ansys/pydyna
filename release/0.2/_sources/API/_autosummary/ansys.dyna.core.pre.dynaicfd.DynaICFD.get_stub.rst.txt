@@ -1,6 +1,0 @@
-get\_stub
-=========
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: DynaICFD.get_stub

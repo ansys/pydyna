@@ -1,6 +1,0 @@
-set\_printout
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: ShellPart.set_printout

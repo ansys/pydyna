@@ -1,6 +1,0 @@
-p\_matrix\_tol
-==============
-
-.. currentmodule:: ansys.dyna.core.pre.dynaem
-
-.. autoattribute:: EMAnalysis.p_matrix_tol

@@ -1,6 +1,0 @@
-set\_contact\_region
-====================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: ContactSurface.set_contact_region

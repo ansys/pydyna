@@ -1,6 +1,0 @@
-set\_penalty\_algorithm
-=======================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Contact.set_penalty_algorithm

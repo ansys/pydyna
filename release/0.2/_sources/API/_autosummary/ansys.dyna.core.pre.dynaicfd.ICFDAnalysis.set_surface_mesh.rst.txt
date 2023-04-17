@@ -1,6 +1,0 @@
-set\_surface\_mesh
-==================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: ICFDAnalysis.set_surface_mesh

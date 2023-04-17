@@ -1,6 +1,0 @@
-set\_accuracy
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynaiga
-
-.. automethod:: DynaIGA.set_accuracy

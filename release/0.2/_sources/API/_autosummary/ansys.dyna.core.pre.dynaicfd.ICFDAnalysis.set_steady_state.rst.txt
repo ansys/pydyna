@@ -1,6 +1,0 @@
-set\_steady\_state
-==================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: ICFDAnalysis.set_steady_state

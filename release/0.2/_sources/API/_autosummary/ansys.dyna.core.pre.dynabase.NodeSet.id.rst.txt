@@ -1,6 +1,0 @@
-id
-==
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: NodeSet.id

@@ -1,6 +1,0 @@
-set\_termination
-================
-
-.. currentmodule:: ansys.dyna.core.pre.dynasolution
-
-.. automethod:: DynaSolution.set_termination

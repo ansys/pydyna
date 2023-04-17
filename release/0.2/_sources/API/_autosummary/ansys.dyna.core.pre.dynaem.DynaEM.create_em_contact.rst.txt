@@ -1,6 +1,0 @@
-create\_em\_contact
-===================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaem
-
-.. automethod:: DynaEM.create_em_contact

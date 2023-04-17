@@ -1,6 +1,0 @@
-create\_general\_keyword
-========================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaisph
-
-.. automethod:: DynaISPH.create_general_keyword

@@ -1,6 +1,0 @@
-set\_integration\_points
-========================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: ShellPart.set_integration_points

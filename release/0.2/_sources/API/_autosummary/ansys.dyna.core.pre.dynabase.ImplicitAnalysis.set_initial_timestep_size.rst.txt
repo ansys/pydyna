@@ -1,6 +1,0 @@
-set\_initial\_timestep\_size
-============================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: ImplicitAnalysis.set_initial_timestep_size

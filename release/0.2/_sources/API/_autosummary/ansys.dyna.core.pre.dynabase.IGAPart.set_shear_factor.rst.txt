@@ -1,6 +1,0 @@
-set\_shear\_factor
-==================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: IGAPart.set_shear_factor

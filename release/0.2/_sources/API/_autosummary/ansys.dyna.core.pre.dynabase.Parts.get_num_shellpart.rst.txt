@@ -1,6 +1,0 @@
-get\_num\_shellpart
-===================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Parts.get_num_shellpart

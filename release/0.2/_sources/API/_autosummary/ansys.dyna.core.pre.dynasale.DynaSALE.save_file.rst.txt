@@ -1,6 +1,0 @@
-save\_file
-==========
-
-.. currentmodule:: ansys.dyna.core.pre.dynasale
-
-.. automethod:: DynaSALE.save_file

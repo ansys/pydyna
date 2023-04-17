@@ -1,6 +1,0 @@
-fill
-====
-
-.. currentmodule:: ansys.dyna.core.pre.dynasale
-
-.. automethod:: StructuredMesh.fill

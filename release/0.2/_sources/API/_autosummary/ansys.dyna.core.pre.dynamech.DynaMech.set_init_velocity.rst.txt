@@ -1,6 +1,0 @@
-set\_init\_velocity
-===================
-
-.. currentmodule:: ansys.dyna.core.pre.dynamech
-
-.. automethod:: DynaMech.set_init_velocity

@@ -1,6 +1,0 @@
-set\_element\_formulation
-=========================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaisph
-
-.. automethod:: ISPHStructPart.set_element_formulation

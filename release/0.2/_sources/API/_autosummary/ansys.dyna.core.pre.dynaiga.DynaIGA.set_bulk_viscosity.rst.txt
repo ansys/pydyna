@@ -1,6 +1,0 @@
-set\_bulk\_viscosity
-====================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaiga
-
-.. automethod:: DynaIGA.set_bulk_viscosity

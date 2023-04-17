@@ -1,6 +1,0 @@
-pos
-===
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: PartSet.pos

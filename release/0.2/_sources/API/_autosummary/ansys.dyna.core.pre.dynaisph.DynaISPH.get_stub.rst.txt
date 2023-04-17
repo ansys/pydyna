@@ -1,6 +1,0 @@
-get\_stub
-=========
-
-.. currentmodule:: ansys.dyna.core.pre.dynaisph
-
-.. automethod:: DynaISPH.get_stub

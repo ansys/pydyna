@@ -1,6 +1,0 @@
-set\_imposed\_move
-==================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: DynaICFD.set_imposed_move

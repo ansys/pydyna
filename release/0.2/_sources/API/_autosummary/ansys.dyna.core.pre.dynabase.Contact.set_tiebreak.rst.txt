@@ -1,6 +1,0 @@
-set\_tiebreak
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Contact.set_tiebreak

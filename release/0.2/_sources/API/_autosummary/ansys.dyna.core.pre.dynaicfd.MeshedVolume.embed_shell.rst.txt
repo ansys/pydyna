@@ -1,6 +1,0 @@
-embed\_shell
-============
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: MeshedVolume.embed_shell

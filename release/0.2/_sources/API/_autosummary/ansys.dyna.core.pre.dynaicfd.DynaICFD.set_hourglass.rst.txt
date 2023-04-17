@@ -1,6 +1,0 @@
-set\_hourglass
-==============
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: DynaICFD.set_hourglass

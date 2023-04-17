@@ -1,6 +1,0 @@
-set\_num\_timestep
-==================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaisph
-
-.. automethod:: ISPHAnalysis.set_num_timestep

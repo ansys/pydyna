@@ -1,6 +1,0 @@
-create
-======
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Box.create

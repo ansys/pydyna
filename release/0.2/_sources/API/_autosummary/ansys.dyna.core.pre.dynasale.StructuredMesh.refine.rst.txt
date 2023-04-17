@@ -1,6 +1,0 @@
-refine
-======
-
-.. currentmodule:: ansys.dyna.core.pre.dynasale
-
-.. automethod:: StructuredMesh.refine

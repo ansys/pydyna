@@ -1,6 +1,0 @@
-set\_stiffness\_damping\_coefficient
-====================================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: DiscretePart.set_stiffness_damping_coefficient

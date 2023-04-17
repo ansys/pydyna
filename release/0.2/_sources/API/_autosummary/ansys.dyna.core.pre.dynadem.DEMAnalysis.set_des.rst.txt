@@ -1,6 +1,0 @@
-set\_des
-========
-
-.. currentmodule:: ansys.dyna.core.pre.dynadem
-
-.. automethod:: DEMAnalysis.set_des

@@ -1,6 +1,0 @@
-set\_accuracy
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynaem
-
-.. automethod:: DynaEM.set_accuracy

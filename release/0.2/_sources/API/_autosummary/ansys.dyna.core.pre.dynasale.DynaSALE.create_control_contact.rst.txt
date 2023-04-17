@@ -1,6 +1,0 @@
-create\_control\_contact
-========================
-
-.. currentmodule:: ansys.dyna.core.pre.dynasale
-
-.. automethod:: DynaSALE.create_control_contact

@@ -1,6 +1,0 @@
-set\_material
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: ICFDVolumePart.set_material

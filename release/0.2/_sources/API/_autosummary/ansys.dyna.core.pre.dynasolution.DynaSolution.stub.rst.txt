@@ -1,6 +1,0 @@
-stub
-====
-
-.. currentmodule:: ansys.dyna.core.pre.dynasolution
-
-.. autoattribute:: DynaSolution.stub

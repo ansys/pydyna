@@ -1,6 +1,0 @@
-set\_eigenvalue
-===============
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: ImplicitAnalysis.set_eigenvalue

@@ -1,6 +1,0 @@
-create\_control\_solid
-======================
-
-.. currentmodule:: ansys.dyna.core.pre.dynamech
-
-.. automethod:: DynaMech.create_control_solid

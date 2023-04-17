@@ -1,6 +1,0 @@
-set\_thickness
-==============
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: IGAPart.set_thickness

@@ -1,6 +1,0 @@
-get\_file\_chunks
-=================
-
-.. currentmodule:: ansys.dyna.core.pre.dynasolution
-
-.. automethod:: DynaSolution.get_file_chunks

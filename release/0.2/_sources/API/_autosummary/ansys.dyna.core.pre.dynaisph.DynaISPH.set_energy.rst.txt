@@ -1,6 +1,0 @@
-set\_energy
-===========
-
-.. currentmodule:: ansys.dyna.core.pre.dynaisph
-
-.. automethod:: DynaISPH.set_energy

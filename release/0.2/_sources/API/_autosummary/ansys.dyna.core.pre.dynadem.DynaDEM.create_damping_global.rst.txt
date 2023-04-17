@@ -1,6 +1,0 @@
-create\_damping\_global
-=======================
-
-.. currentmodule:: ansys.dyna.core.pre.dynadem
-
-.. automethod:: DynaDEM.create_damping_global

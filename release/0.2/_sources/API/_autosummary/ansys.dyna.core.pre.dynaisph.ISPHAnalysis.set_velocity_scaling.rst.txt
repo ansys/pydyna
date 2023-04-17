@@ -1,6 +1,0 @@
-set\_velocity\_scaling
-======================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaisph
-
-.. automethod:: ISPHAnalysis.set_velocity_scaling

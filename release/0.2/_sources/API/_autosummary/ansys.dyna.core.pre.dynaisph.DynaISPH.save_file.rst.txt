@@ -1,6 +1,0 @@
-save\_file
-==========
-
-.. currentmodule:: ansys.dyna.core.pre.dynaisph
-
-.. automethod:: DynaISPH.save_file

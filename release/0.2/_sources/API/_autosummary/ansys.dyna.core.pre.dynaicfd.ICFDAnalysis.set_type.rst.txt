@@ -1,6 +1,0 @@
-set\_type
-=========
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: ICFDAnalysis.set_type

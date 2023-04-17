@@ -1,6 +1,0 @@
-set\_neighbors
-==============
-
-.. currentmodule:: ansys.dyna.core.pre.dynaisph
-
-.. automethod:: ISPHAnalysis.set_neighbors

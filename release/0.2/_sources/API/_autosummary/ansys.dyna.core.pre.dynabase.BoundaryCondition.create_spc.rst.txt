@@ -1,6 +1,0 @@
-create\_spc
-===========
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: BoundaryCondition.create_spc

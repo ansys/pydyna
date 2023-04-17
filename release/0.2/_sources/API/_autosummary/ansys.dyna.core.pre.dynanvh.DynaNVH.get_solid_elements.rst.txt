@@ -1,6 +1,0 @@
-get\_solid\_elements
-====================
-
-.. currentmodule:: ansys.dyna.core.pre.dynanvh
-
-.. automethod:: DynaNVH.get_solid_elements

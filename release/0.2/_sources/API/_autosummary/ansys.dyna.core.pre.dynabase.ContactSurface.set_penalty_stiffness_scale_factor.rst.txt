@@ -1,6 +1,0 @@
-set\_penalty\_stiffness\_scale\_factor
-======================================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: ContactSurface.set_penalty_stiffness_scale_factor

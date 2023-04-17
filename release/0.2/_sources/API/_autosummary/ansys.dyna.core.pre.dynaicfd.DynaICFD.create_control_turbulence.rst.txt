@@ -1,6 +1,0 @@
-create\_control\_turbulence
-===========================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: DynaICFD.create_control_turbulence

@@ -1,6 +1,0 @@
-set\_property
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: BeamPart.set_property

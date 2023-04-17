@@ -1,6 +1,0 @@
-create\_joint\_spherical
-========================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Constraint.create_joint_spherical

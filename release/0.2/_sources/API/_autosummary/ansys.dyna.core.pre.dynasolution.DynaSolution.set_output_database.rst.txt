@@ -1,6 +1,0 @@
-set\_output\_database
-=====================
-
-.. currentmodule:: ansys.dyna.core.pre.dynasolution
-
-.. automethod:: DynaSolution.set_output_database

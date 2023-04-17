@@ -1,6 +1,0 @@
-num
-===
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: ContactGroup.num

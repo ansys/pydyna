@@ -1,6 +1,0 @@
-set\_initial
-============
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: DynaICFD.set_initial

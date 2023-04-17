@@ -1,6 +1,0 @@
-set\_cross\_type
-================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: BeamPart.set_cross_type

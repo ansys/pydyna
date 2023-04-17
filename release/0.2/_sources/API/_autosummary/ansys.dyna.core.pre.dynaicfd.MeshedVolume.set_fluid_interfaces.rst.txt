@@ -1,6 +1,0 @@
-set\_fluid\_interfaces
-======================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: MeshedVolume.set_fluid_interfaces

@@ -1,6 +1,0 @@
-create\_cnrb
-============
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Constraint.create_cnrb

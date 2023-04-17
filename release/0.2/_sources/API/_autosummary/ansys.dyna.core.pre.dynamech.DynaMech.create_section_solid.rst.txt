@@ -1,6 +1,0 @@
-create\_section\_solid
-======================
-
-.. currentmodule:: ansys.dyna.core.pre.dynamech
-
-.. automethod:: DynaMech.create_section_solid

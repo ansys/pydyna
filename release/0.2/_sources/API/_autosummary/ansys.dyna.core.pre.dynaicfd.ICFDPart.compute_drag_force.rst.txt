@@ -1,6 +1,0 @@
-compute\_drag\_force
-====================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: ICFDPart.compute_drag_force

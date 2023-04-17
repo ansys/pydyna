@@ -1,6 +1,0 @@
-set\_friction\_coefficient
-==========================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Contact.set_friction_coefficient

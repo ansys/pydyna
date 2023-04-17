@@ -1,6 +1,0 @@
-create\_control\_shell
-======================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaiga
-
-.. automethod:: DynaIGA.create_control_shell

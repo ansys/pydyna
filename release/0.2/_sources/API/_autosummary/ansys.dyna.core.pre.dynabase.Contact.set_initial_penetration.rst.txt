@@ -1,6 +1,0 @@
-set\_initial\_penetration
-=========================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: Contact.set_initial_penetration

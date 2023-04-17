@@ -1,6 +1,0 @@
-set\_material
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynaisph
-
-.. automethod:: ISPHStructPart.set_material

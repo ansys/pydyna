@@ -1,6 +1,0 @@
-setlc
-=====
-
-.. currentmodule:: ansys.dyna.core.solver.dynasolver
-
-.. automethod:: DynaSolver.setlc

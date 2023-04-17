@@ -1,6 +1,0 @@
-stub
-====
-
-.. currentmodule:: ansys.dyna.core.pre.dynasale
-
-.. autoattribute:: DynaSALE.stub

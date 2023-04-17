@@ -1,6 +1,0 @@
-create\_control\_general
-========================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: DynaICFD.create_control_general

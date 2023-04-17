@@ -1,6 +1,0 @@
-get\_nid
-========
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: NodeSet.get_nid

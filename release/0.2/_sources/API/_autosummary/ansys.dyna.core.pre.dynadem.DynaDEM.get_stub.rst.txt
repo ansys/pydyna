@@ -1,6 +1,0 @@
-get\_stub
-=========
-
-.. currentmodule:: ansys.dyna.core.pre.dynadem
-
-.. automethod:: DynaDEM.get_stub

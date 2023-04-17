@@ -1,6 +1,0 @@
-set\_termination
-================
-
-.. currentmodule:: ansys.dyna.core.pre.dynasale
-
-.. automethod:: DynaSALE.set_termination

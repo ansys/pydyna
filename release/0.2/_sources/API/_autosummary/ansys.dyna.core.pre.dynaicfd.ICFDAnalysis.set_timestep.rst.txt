@@ -1,6 +1,0 @@
-set\_timestep
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: ICFDAnalysis.set_timestep

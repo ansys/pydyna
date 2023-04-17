@@ -1,6 +1,0 @@
-set\_boundary\_layer
-====================
-
-.. currentmodule:: ansys.dyna.core.pre.dynaicfd
-
-.. automethod:: ICFDPart.set_boundary_layer

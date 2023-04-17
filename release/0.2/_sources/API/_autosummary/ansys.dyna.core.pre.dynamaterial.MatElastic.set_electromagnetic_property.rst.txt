@@ -1,6 +1,0 @@
-set\_electromagnetic\_property
-==============================
-
-.. currentmodule:: ansys.dyna.core.pre.dynamaterial
-
-.. automethod:: MatElastic.set_electromagnetic_property

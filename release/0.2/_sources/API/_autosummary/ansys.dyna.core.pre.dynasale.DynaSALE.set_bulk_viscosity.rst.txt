@@ -1,6 +1,0 @@
-set\_bulk\_viscosity
-====================
-
-.. currentmodule:: ansys.dyna.core.pre.dynasale
-
-.. automethod:: DynaSALE.set_bulk_viscosity

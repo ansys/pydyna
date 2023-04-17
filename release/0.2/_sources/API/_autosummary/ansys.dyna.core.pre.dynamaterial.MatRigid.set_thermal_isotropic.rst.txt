@@ -1,6 +1,0 @@
-set\_thermal\_isotropic
-=======================
-
-.. currentmodule:: ansys.dyna.core.pre.dynamaterial
-
-.. automethod:: MatRigid.set_thermal_isotropic

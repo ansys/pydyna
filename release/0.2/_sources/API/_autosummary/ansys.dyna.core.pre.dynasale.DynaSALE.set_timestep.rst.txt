@@ -1,6 +1,0 @@
-set\_timestep
-=============
-
-.. currentmodule:: ansys.dyna.core.pre.dynasale
-
-.. automethod:: DynaSALE.set_timestep

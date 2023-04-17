@@ -1,6 +1,0 @@
-create\_imposed\_motion
-=======================
-
-.. currentmodule:: ansys.dyna.core.pre.dynabase
-
-.. automethod:: BoundaryCondition.create_imposed_motion
