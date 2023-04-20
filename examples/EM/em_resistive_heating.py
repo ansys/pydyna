@@ -54,8 +54,8 @@ emobj.add(tanalysis)
 
 matelastic1 = MatElastic(mass_density=8000, young_modulus=1e11, poisson_ratio=0.33)
 matelastic2 = MatElastic(mass_density=7000, young_modulus=1e11, poisson_ratio=0.33)
-matelastic1.set_electromagnetic_property(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=6e7)
-matelastic2.set_electromagnetic_property(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=4e6,eos=EMEOSTabulated1(Curve(x=[0, 25, 50, 100], y=[4e6, 4e6, 4e5, 4e5])))
+matelastic1.set_em_permeability_equal(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=6e7)
+matelastic2.set_em_permeability_equal(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=4e6,eos=EMEOSTabulated1(Curve(x=[0, 25, 50, 100], y=[4e6, 4e6, 4e5, 4e5])))
 
 matthermaliso1 = MatThermalIsotropic(density=8000,specific_heat=400, conductivity=400)
 matthermaliso2 = MatThermalIsotropic(density=7000,specific_heat=450, conductivity=40)

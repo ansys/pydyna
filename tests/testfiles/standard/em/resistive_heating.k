@@ -13733,11 +13733,11 @@ $#   eosid      lcid
          1         2
 *EM_MAT_001
 $#     mid     mtype     sigma     eosid    unused  eplambda    deatht   rdltype
-         1         26.000000E7         0                 0.0       0.0         0
+         1         26.000000E7         0                 0.01.00000E28         0
 *EM_MAT_001
 $#     mid     mtype     sigma     eosid    unused  eplambda    deatht   rdltype
-         2         26.000000E7         0                 0.0       0.0         0
+         2         26.000000E7         0                 0.01.00000E28         0
 *EM_MAT_001
 $#     mid     mtype     sigma     eosid    unused  eplambda    deatht   rdltype
-         3         2   4000000         1                 0.0       0.0         0
+         3         2   4000000         1                 0.01.00000E28         0
 *END
