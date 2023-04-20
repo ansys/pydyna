@@ -2597,7 +2597,8 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         mid = request.mid
         mtype = request.mtype
         sigma = request.sigma
-        card1 = str(mid) + "," + str(mtype) + "," + str(sigma) + ",,,,1e28"
+        eosid = request.eosid
+        card1 = str(mid) + "," + str(mtype) + "," + str(sigma)+ ","+ str(eosid) + ",,,1e28"
         newk = "*EM_MAT_001\n" + card1
         self.kwdproc.newkeyword(newk)
         msg = "*EM_MAT_001 Created..."
@@ -2610,24 +2611,59 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         sigma = request.sigma
         eosid = request.eosid
         murel = request.murel
-        card1 = (
-            str(mid)
-            + ","
-            + str(mtype)
-            + ","
-            + str(sigma)
-            + ","
-            + str(eosid)
-            + ","
-            + str(murel)
-            + ",0,1e28"
-        )
+        card1 = str(mid)+ ","+ str(mtype)+ ","+ str(sigma)+ ","+ str(eosid)+ ","+ str(murel)+ ",0,1e28"
         newk = "*EM_MAT_002\n" + card1
         self.kwdproc.newkeyword(newk)
         msg = "*EM_MAT_002 Created..."
         print(msg)
         return kwprocess_pb2.EMMat002Reply(answer=0)
+    
+    def CreateEMMat004(self, request, context):
+        mid = request.mid
+        mtype = request.mtype
+        sigma = request.sigma
+        card1 = str(mid)+ ","+ str(mtype)+ ","+ str(sigma)
+        newk = "*EM_MAT_004\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "*EM_MAT_004 Created..."
+        print(msg)
+        return kwprocess_pb2.EMMat004Reply(answer=0)
 
+    def CreateEMIsopotential(self, request, context):
+        isoid = self.kwdproc.get_data(gdt.KWD_EM_ISOPOTENTIAL_LASTID) + 1
+        settype = request.settype
+        setid = request.setid
+        card1 = str(isoid)+ ","+ str(settype)+ ","+ str(setid)
+        newk = "*EM_ISOPOTENTIAL\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "*EM_ISOPOTENTIAL Created..."
+        print(msg)
+        return kwprocess_pb2.EMIsopotentialReply(id=isoid)
+    
+    def CreateEMIsopotentialConnect(self, request, context):
+        conid = self.kwdproc.get_data(gdt.KWD_EM_ISOPOTCONNECT_LASTID) + 1
+        contype = request.contype
+        isoid1 = request.isoid1
+        isoid2 = request.isoid2
+        val = request.val
+        card1 = str(conid)+ ","+ str(contype)+ ","+ str(isoid1)+ ","+ str(isoid2)+ ","+ str(val)
+        newk = "*EM_ISOPOTENTIAL_CONNECT\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "*EM_ISOPOTENTIAL_CONNECT Created..."
+        print(msg)
+        return kwprocess_pb2.EMIsopotentialConnectReply(id=conid)
+    
+    def CreateEMIsopotentialRogo(self, request, context):
+        isoid = request.isoid
+        settype = request.settype
+        setid = request.setid
+        card1 = str(isoid)+ ","+ str(settype)+ ","+ str(setid)
+        newk = "*EM_ISOPOTENTIAL_ROGO\n" + card1
+        self.kwdproc.newkeyword(newk)
+        msg = "*EM_ISOPOTENTIAL_ROGO Created..."
+        print(msg)
+        return kwprocess_pb2.EMIsopotentialRogoReply(id=isoid)
+    
     def CreateEMSolverBem(self, request, context):
         reltol = request.reltol
         maxite = request.maxite

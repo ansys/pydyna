@@ -739,6 +739,26 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.EMMat002Request.SerializeToString,
                 response_deserializer=kwprocess__pb2.EMMat002Reply.FromString,
                 )
+        self.CreateEMMat004 = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEMMat004',
+                request_serializer=kwprocess__pb2.EMMat004Request.SerializeToString,
+                response_deserializer=kwprocess__pb2.EMMat004Reply.FromString,
+                )
+        self.CreateEMIsopotential = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEMIsopotential',
+                request_serializer=kwprocess__pb2.EMIsopotentialRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.EMIsopotentialReply.FromString,
+                )
+        self.CreateEMIsopotentialConnect = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEMIsopotentialConnect',
+                request_serializer=kwprocess__pb2.EMIsopotentialConnectRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.EMIsopotentialConnectReply.FromString,
+                )
+        self.CreateEMIsopotentialRogo = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEMIsopotentialRogo',
+                request_serializer=kwprocess__pb2.EMIsopotentialRogoRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.EMIsopotentialRogoReply.FromString,
+                )
         self.CreateEMSolverBem = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateEMSolverBem',
                 request_serializer=kwprocess__pb2.EMSolverBemRequest.SerializeToString,
@@ -1688,6 +1708,30 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateEMMat004(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateEMIsopotential(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateEMIsopotentialConnect(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateEMIsopotentialRogo(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateEMSolverBem(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -2482,6 +2526,26 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateEMMat002,
                     request_deserializer=kwprocess__pb2.EMMat002Request.FromString,
                     response_serializer=kwprocess__pb2.EMMat002Reply.SerializeToString,
+            ),
+            'CreateEMMat004': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEMMat004,
+                    request_deserializer=kwprocess__pb2.EMMat004Request.FromString,
+                    response_serializer=kwprocess__pb2.EMMat004Reply.SerializeToString,
+            ),
+            'CreateEMIsopotential': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEMIsopotential,
+                    request_deserializer=kwprocess__pb2.EMIsopotentialRequest.FromString,
+                    response_serializer=kwprocess__pb2.EMIsopotentialReply.SerializeToString,
+            ),
+            'CreateEMIsopotentialConnect': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEMIsopotentialConnect,
+                    request_deserializer=kwprocess__pb2.EMIsopotentialConnectRequest.FromString,
+                    response_serializer=kwprocess__pb2.EMIsopotentialConnectReply.SerializeToString,
+            ),
+            'CreateEMIsopotentialRogo': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEMIsopotentialRogo,
+                    request_deserializer=kwprocess__pb2.EMIsopotentialRogoRequest.FromString,
+                    response_serializer=kwprocess__pb2.EMIsopotentialRogoReply.SerializeToString,
             ),
             'CreateEMSolverBem': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateEMSolverBem,
@@ -5010,6 +5074,74 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMMat002',
             kwprocess__pb2.EMMat002Request.SerializeToString,
             kwprocess__pb2.EMMat002Reply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEMMat004(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMMat004',
+            kwprocess__pb2.EMMat004Request.SerializeToString,
+            kwprocess__pb2.EMMat004Reply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEMIsopotential(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMIsopotential',
+            kwprocess__pb2.EMIsopotentialRequest.SerializeToString,
+            kwprocess__pb2.EMIsopotentialReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEMIsopotentialConnect(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMIsopotentialConnect',
+            kwprocess__pb2.EMIsopotentialConnectRequest.SerializeToString,
+            kwprocess__pb2.EMIsopotentialConnectReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEMIsopotentialRogo(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMIsopotentialRogo',
+            kwprocess__pb2.EMIsopotentialRogoRequest.SerializeToString,
+            kwprocess__pb2.EMIsopotentialRogoReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

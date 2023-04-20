@@ -256,6 +256,8 @@ class MatAdditional:
 
     def __init__(self):
         self.em = False
+        self.em_mat_type = 0
+        self.em_eos = None
         self.thermal_isotropic = False
 
     def set_electromagnetic_property(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None):
@@ -265,6 +267,39 @@ class MatAdditional:
         self.em_material_type = material_type.value
         self.em_initial_conductivity = initial_conductivity
         self.em_eos = eos
+
+    def set_em_permeability_equal(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None):
+        """Define the electromagnetic material type and properties
+        for a material whose permeability equals the free space permeability."""
+        self.em_mat_type = 1
+        self.em_material_type = material_type.value
+        self.em_initial_conductivity = initial_conductivity
+        self.em_eos = eos
+
+    def set_em_permeability_different(
+        self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None, murel=0
+    ):
+        """Define the electromagnetic material type and properties
+        for a material whose permeability equals the free space permeability."""
+        self.em_mat_type = 2
+        self.em_material_type = material_type.value
+        self.em_initial_conductivity = initial_conductivity
+        self.em_eos = eos
+        self.murel = murel
+
+    def set_em_conducting_shells_3d(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0):
+        """Define the electromagnetic material type and properties
+        for a material whose permeability equals the free space permeability."""
+        self.em_mat_type = 4
+        self.em_material_type = material_type.value
+        self.em_initial_conductivity = initial_conductivity
+
+    def set_em_resistive_heating_2d(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0):
+        """Define the electromagnetic material type and properties
+        for a material whose permeability equals the free space permeability."""
+        self.em_mat_type = 4
+        self.em_material_type = material_type.value
+        self.em_initial_conductivity = initial_conductivity
 
     def set_thermal_isotropic(
         self, density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0
@@ -279,11 +314,32 @@ class MatAdditional:
 
     def create(self, stub, matid):
         """Define additional properties for material."""
-        if self.em:
+        if self.em_mat_type:
             if self.em_eos is not None:
                 eosid = self.em_eos.create(stub)
             else:
                 eosid = 0
+            if self.em_mat_type == 1:
+                stub.CreateEMMat001(
+                    EMMat001Request(
+                        mid=matid, mtype=self.em_material_type, sigma=self.em_initial_conductivity, eosid=eosid
+                    )
+                )
+            elif self.em_mat_type == 2:
+                stub.CreateEMMat002(
+                    EMMat002Request(
+                        mid=matid,
+                        mtype=self.em_material_type,
+                        sigma=self.em_initial_conductivity,
+                        eosid=eosid,
+                        murel=self.murel,
+                    )
+                )
+            elif self.em_mat_type == 4:
+                stub.CreateEMMat004(
+                    EMMat004Request(mid=matid, mtype=self.em_material_type, sigma=self.em_initial_conductivity)
+                )
+        if self.em:
             stub.CreateMatEM(
                 MatEMRequest(mid=matid, mtype=self.em_material_type, sigma=self.em_initial_conductivity, eosid=eosid)
             )
