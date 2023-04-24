@@ -31,7 +31,7 @@ repos:
   rev: v2.2.4
   hooks:
   - id: codespell
-    args: ["--ignore-words=ignore_words.txt"]
+    args: ["--ignore-words", "doc/styles/Vocab/ANSYS/accept.txt"]
 
 - repo: https://github.com/PyCQA/flake8
   rev: 6.0.0
