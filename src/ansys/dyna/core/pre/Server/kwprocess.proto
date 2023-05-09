@@ -1,0 +1,2045 @@
+syntax = "proto3";
+package kwgrpc;
+
+message kwFileReply {
+	int64 length = 1;
+}
+
+message Chunk {
+	bytes buffer = 1;
+}
+
+message kwFileName {
+    int32 num = 1;
+	string name = 2;
+}
+
+message DownloadRequest {
+	string url = 1;
+}
+
+message kwFileNameReply {
+	bool ret = 1;
+}
+
+//---control_* card
+message TimestepRequest {
+	float tssfac = 1;
+    int32 isdo = 2;
+	float dt2ms = 3;
+	int32 lctm = 4;
+}
+
+message TimestepReply {
+	int32 answer = 1;
+}
+
+message TerminationRequest {
+	float endtim = 1;
+}
+
+message TerminationReply {
+	int32 answer = 1;
+}
+
+message ControlOutputRequest {
+	int32 npopt = 1;
+	int32 neecho = 2;
+}
+
+message ControlOutputReply {
+	int32 answer = 1;
+}
+
+message ControlContactRequest {
+	float rwpnal = 1;
+	int32 shlthk = 2;
+	int32 orien = 3;
+	//card 2
+	int32 ssthk = 4;
+	//card 4
+	int32 ignore = 5;
+	//card 6
+	int32 igactc = 6;
+}
+
+message ControlContactReply {
+	int32 answer = 1;
+}
+
+message ControlALERequest {
+    int32 dct = 1;
+	int32 nadv = 2;
+	int32 meth = 3;
+	float afac = 4;
+	float end = 5;
+	float aafac = 6;
+	float vfact = 7;
+	float pref = 8;
+}
+
+message ControlALEReply {
+	int32 answer = 1;
+}
+
+message ControlDiscreteElementRequest {
+    float ndamp = 1;
+	float tdamp = 2;
+	float frics = 3;
+	float fricr = 4;
+	float normk = 5;
+	float sheark = 6;
+}
+
+message ControlDiscreteElementReply {
+	int32 answer = 1;
+}
+
+message ControlAccuracyRequest {
+    int32 osu = 1;
+	int32 inn = 2;
+	int32 pidosu = 3;
+	int32 iacc = 4;
+	float exacc = 5;
+}
+
+message ControlAccuracyReply {
+	int32 answer = 1;
+}
+
+message ControlEnergyRequest {
+    int32 hgen = 1;
+	int32 rwen = 2;
+	int32 slnten = 3;
+	int32 rylen = 4;
+	int32 irgen = 5;
+}
+
+message ControlEnergyReply {
+	int32 answer = 1;
+}
+
+message ControlBulkViscosityRequest {
+    float q1 = 1;
+	float q2 = 2;
+	int32 type = 3;
+}
+
+message ControlBulkViscosityReply {
+	int32 answer = 1;
+}
+
+message ControlHourglassRequest {
+    int32 ihq = 1;
+	float qh = 2;
+}
+
+message ControlHourglassReply {
+	int32 answer = 1;
+}
+
+message ControlShellRequest {
+    float wrpang = 1;
+	int32 esort = 2;
+	int32 irnxx = 3;
+	int32 istupd = 4;
+	int32 theory = 5;
+	int32 bwc = 6;
+	int32 miter = 7;
+	int32 proj = 8;
+	//card3
+	int32 irquad = 9;
+}
+
+message ControlShellReply {
+	int32 answer = 1;
+}
+
+message ControlSolidRequest {
+    int32 esort = 1;
+	int32 fmatrx = 2;
+	int32 niptets = 3;
+	int32 swlocl = 4;
+	int32 psfail = 5;
+	float t10jtol = 6;
+	int32 icoh = 7;
+	int32 tet13k = 8;
+}
+
+message ControlSolidReply {
+	int32 answer = 1;
+}
+
+message ControlSolutionRequest {
+    int32 soln = 1;
+}
+
+message ControlSolutionReply {
+	int32 answer = 1;
+}
+
+message ControlThermalSolverRequest {
+    int32 atype = 1;
+}
+
+message ControlThermalSolverReply {
+	int32 answer = 1;
+}
+
+message ControlThermalTimestepRequest {
+    float its = 1;
+}
+
+message ControlThermalTimestepReply {
+	int32 answer = 1;
+}
+
+message ControlImplicitGeneralRequest {
+    int32 imflag = 1;
+	float dt0 = 2;
+}
+
+message ControlImplicitGeneralReply {
+	int32 answer = 1;
+}
+
+message ControlImplicitAutoRequest {
+    int32 iauto = 1;
+	int32 iteopt = 2;
+}
+
+message ControlImplicitAutoReply {
+	int32 answer = 1;
+}
+
+message ControlImplicitDynamicRequest {
+    int32 imass = 1;
+	float gamma = 2;
+	float beta = 3;
+}
+
+message ControlImplicitDynamicReply {
+	int32 answer = 1;
+}
+
+message ControlImplicitEigenvalueRequest {
+    int32 neig = 1;
+	float shfscl = 2;
+}
+
+message ControlImplicitEigenvalueReply {
+	int32 answer = 1;
+}
+
+message ControlImplicitSolutionRequest {
+    int32 nsolver = 1;
+	int32 ilimit = 2;
+	int32 maxref = 3;
+	float abstol = 4;
+}
+
+message ControlImplicitSolutionReply {
+	int32 answer = 1;
+}
+
+message ControlSPHRequest {
+    int32 ncbs = 1;
+	int32 boxid = 2;
+	int32 idim = 3;
+	int32 nmneigh = 4;
+	int32 form = 5;
+	float maxv = 6;
+}
+
+message ControlSPHReply {
+	int32 answer = 1;
+}
+
+//---DATABASE
+message DBBinaryRequest {
+	string filetype = 1;
+	float dt = 2;
+	//binary extend
+	int32 maxint = 3;
+	int32 ieverp = 4;
+	int32 dcomp = 5;
+	int32 nintsld = 6;
+}
+
+message DBBinaryReply {
+	int32 answer = 1;
+}
+
+message DBALEMatRequest {
+	float dtout = 1;
+}
+
+message DBALEMatReply {
+	int32 answer = 1;
+}
+
+message DBAsciiRequest {
+    string type = 1;
+	float dt = 2;
+	int32 binary = 3;
+	int32 lcur = 4;
+	int32 ioopt = 5;
+}
+
+message DBAsciiReply {
+	int32 answer = 1;
+}
+
+message DBSALERequest {
+    int32 switch = 1;
+}
+
+message DBSALEReply {
+	int32 answer = 1;
+}
+
+//---Load
+message LoadBodyRequest {
+    string option = 1;
+	int32 lcid = 2;
+}
+
+message LoadBodyReply {
+	int32 answer = 1;
+}
+
+//---INITIAL
+message InitVelRequest {
+	int32 nsid = 1;
+    repeated float velocity = 2;
+}
+
+message InitVelReply {
+	int32 answer = 1;
+}
+
+message InitVelRigidBodyRequest {
+	int32 pid = 1;
+	float vx = 2;
+	float vy = 3;
+	float vz = 4;
+	float vxr = 5;
+	float vyr = 6;
+	float vzr = 7;
+	int32 lcid = 8;
+}
+
+message InitVelRigidBodyReply {
+	int32 answer = 1;
+}
+
+message InitVelGenerationRequest {
+	int32 id = 1;
+	int32 styp = 2;
+	float omega = 3;
+	float vx = 4;
+	float vy = 5;
+	float vz = 6;
+	//---card2
+	float xc = 7;
+	float yc = 8;
+	float zc = 9;
+	float nx = 10;
+	float ny = 11;
+	float nz = 12;
+	int32 phase = 13;
+}
+
+message InitVelGenerationReply {
+	int32 answer = 1;
+}
+
+message InitVelGenerationStartTimeRequest {
+	float stime = 1;
+}
+
+message InitVelGenerationStartTimeReply {
+	int32 answer = 1;
+}
+
+message InitDetonationRequest {
+	int32 pid = 1;
+	repeated float coord = 2;
+	float lt = 3;
+}
+
+message InitDetonationReply {
+	int32 answer = 1;
+}
+
+message InitTemperatureRequest {
+	string option = 1;
+	int32 nsid = 2;
+	float temp = 3;
+	int32 loc = 4;
+}
+
+message InitTemperatureReply {
+	int32 answer = 1;
+}
+
+//---RIGIDWALL
+message RigidWallGeomRequest {
+    //---geomtype 1-flat,2-prism,3-cylinder,4-sphere
+	int32 geomtype = 1;
+	int32 motion = 2;
+	bool display = 3;
+	repeated float parameter = 4;
+	//---motion
+	int32 lcid = 5;
+	float vx = 6;
+	float vy = 7;
+	float vz = 8;
+}
+
+message RigidWallGeomReply {
+	int32 answer = 1;
+}
+
+message RigidWallPlanarRequest {
+	int32 nsid = 1;
+	int32 nsidex = 2;
+	int32 boxid = 3;
+	repeated float normal = 4;
+	float fric = 5;
+}
+
+message RigidWallPlanarReply {
+	int32 answer = 1;
+}
+
+//---CONTACT
+message ContactRequest { 
+    int32 cid = 1;
+	string title = 2;
+    string option1 = 3;
+	string option2 = 4;
+	bool option3 = 5;
+	string offset = 6;
+	int32 ssid = 7;
+	int32 msid = 8;
+	int32 sstyp = 9;
+	int32 mstyp = 10;
+	int32 sapr = 11;
+	int32 sbpr = 12;
+	//---card2
+	float sfsa = 13;
+	float sfsb = 14;
+	float fs = 15;
+	float fd = 16;
+	float vdc = 17;
+	int32 penchk = 18;
+	float birthtime = 19;
+	//---card3
+	float sst = 20;
+	float mst = 21;
+	//---card4
+	int32 optionres = 22;
+	float nfls = 23;
+	float sfls = 24;
+	float param = 25;
+	float ct2cn = 26;
+	//---optiona
+	int32 soft = 27;
+	float sofscl = 28;
+	int32 lcidab = 29;
+	float maxpar = 30;
+	int32 sbopt = 31;
+	int32 depth = 32;
+	int32 bsort = 33;
+	int32 frcfrq = 34;
+	//---optionc
+	int32 igap = 35;
+	int32 ignore = 36;
+}
+
+message ContactReply {
+	int32 answer = 1;
+}
+
+//---BOUNDARY
+message BdyPrescribedMotionRequest {
+    int32 id = 1;
+	string heading = 2;
+	string option = 3;
+	int32 typeid = 4;
+	int32 dof = 5;
+	int32 vad = 6;
+	int32 lcid = 7;
+	float sf = 8;
+	int32 vid = 9;
+	float birth = 10;
+	float death = 11;
+}
+
+message BdyPrescribedMotionReply {
+	int32 answer = 1;
+}
+
+message BdySpcRequest {
+    //int32 id = 1;
+	//string heading = 2;
+    string option1 = 1;
+	bool birthdeath = 2;
+    int32 nid = 3;
+	int32 cid = 4;
+	int32 dofx = 5;
+	int32 dofy = 6;
+	int32 dofz = 7;
+	int32 dofrx = 8;
+	int32 dofry = 9;
+	int32 dofrz = 10;
+	float birth = 11;
+	float death = 12;
+}
+
+message BdySpcReply {
+	int32 answer = 1;
+}
+
+message BdyTempRequest {
+	string option = 1;
+    int32 nid = 2;
+	int32 tlcid = 3;
+	float tmult = 4;
+}
+
+message BdyTempReply {
+	int32 answer = 1;
+}
+
+//---CONSTRAINED
+message ConstrainedExtraNodesRequest {
+    string option = 1;//NODE,SET
+    int32 pid = 2;
+	int32 nid = 3;
+	int32 iflag = 4;
+}
+
+message ConstrainedExtraNodesReply {
+	int32 answer = 1;
+}
+
+message ConstrainedNodalRigidBodyRequest {
+    int32 pid = 1;
+    int32 nsid = 2;
+}
+
+message ConstrainedNodalRigidBodyReply {
+	int32 pid = 1;
+}
+
+message ConstrainedSpotWeldRequest {
+    int32 node1 = 1;
+	int32 node2 = 2;
+}
+
+message ConstrainedSpotWeldReply {
+	int32 id = 1;
+}
+
+message ConstrainedJointRequest {
+    string type = 1;
+    repeated int32 nodes = 2;
+	float rps = 3;
+	float damp = 4;
+}
+
+message ConstrainedJointReply {
+	int32 id = 1;
+}
+
+message ConstrainedRigidBodiesRequest {
+    int32 pidl = 1;
+    int32 pidc = 2;
+}
+
+message ConstrainedRigidBodiesReply {
+	int32 id = 1;
+}
+
+//---SECTION
+message SectionIGAShellRequest {
+	int32 secid = 1;
+	int32 elform = 2;
+	float shrf = 3;
+	float thickness = 4;
+}
+
+message SectionIGAShellReply {
+	int32 id = 1;
+}
+
+message SectionBeamRequest {
+	int32 secid = 1;
+	int32 elform = 2;
+	float shrf = 3;
+	int32 cst = 4;
+	//---card 2
+	float ts1 = 5;
+	float ts2 = 6;
+}
+
+message SectionBeamReply {
+	int32 id = 1;
+}
+
+message SectionShellRequest {
+	int32 secid = 1;
+	int32 elform = 2;
+	float shrf = 3;
+	int32 nip = 4;
+	int32 propt = 5;
+	//---card 2
+	float t1 = 6;
+	float t2 = 7;
+	float t3 = 8;
+	float t4 = 9;
+}
+
+message SectionShellReply {
+	int32 id = 1;
+}
+
+message SectionSolidRequest {
+    string title = 1;
+	int32 secid = 2;
+	int32 elform = 3;
+}
+
+message SectionSolidReply {
+	int32 id = 1;
+}
+
+message SectionDiscreteRequest {
+	int32 secid = 1;
+	int32 dro = 2;
+    float kd = 3;
+	float v0 = 4;
+	float cl = 5;
+	float fd = 6;
+	float cdl = 7;
+	float tdl = 8;
+}
+
+message SectionDiscreteReply {
+	int32 id = 1;
+}
+
+message SectionSPHRequest {
+	int32 secid = 1;
+	float cslh = 2;
+    float hmin = 3;
+	float hmax = 4;
+	float sphini = 5;
+}
+
+message SectionSPHReply {
+	int32 id = 1;
+}
+
+message HourglassRequest {
+	int32 ghid = 1;
+	int32 ihq = 2;
+	float qm = 3;
+	float q1 = 4;
+	float q2 = 5;
+	float qb = 6;
+	float qw = 7;
+}
+
+message HourglassReply {
+	int32 id = 1;
+}
+
+//---DEFINE
+message DefineCurveRequest {
+    string title = 1;
+    int32 lcid = 2;
+	float sfo = 3;
+	repeated double abscissa = 4;
+	repeated double ordinate = 5;
+}
+
+message DefineCurveReply {
+	int32 id = 1;
+}
+
+message DefineCurveFunctionRequest {
+    int32 lcid = 1;
+	string function = 2;
+}
+
+message DefineCurveFunctionReply {
+	int32 id = 1;
+}
+
+message DefineVectorRequest {
+    string title = 1;
+    int32 vid = 2;
+	float xt = 3;
+	float yt = 4;
+	float zt = 5;
+	float xh = 6;
+	float yh = 7;
+	float zh = 8;
+}
+
+message DefineVectorReply {
+	int32 answer = 1;
+}
+
+message DefineBoxRequest {
+	float xmin = 1;
+	float xmax = 2;
+	float ymin = 3;
+	float ymax = 4;
+	float zmin = 5;
+	float zmax = 6;
+}
+
+message DefineBoxReply {
+	int32 boxid = 1;
+}
+
+message DefineDEMeshSurfaceRequest {
+    int32 sid = 1;
+	int32 type = 2;
+	int32 nquad = 3;
+	int32 despid = 4;
+	int32 desxid = 5;
+	int32 nsid = 6;
+	float rsf = 7;
+}
+
+message DefineDEMeshSurfaceReply {
+	int32 answer = 1;
+}
+
+message DefineOrientationRequest {
+    int32 vid = 1;
+	int32 iop = 2;
+	repeated float vector = 3;
+	int32 node1 = 4;
+	int32 node2 = 5;
+}
+
+message DefineOrientationReply {
+	int32 answer = 1;
+}
+
+message DefineSPHMassflowPlaneRequest {
+    int32 prtclsid = 1;
+	int32 surfsid = 2;
+	int32 ptype = 3;
+	int32 stype = 4;
+}
+
+message DefineSPHMassflowPlaneReply {
+	int32 answer = 1;
+}
+
+message DefineSPHMeshBoxRequest {
+    repeated float coords = 1;
+	int32 ipid = 2;
+	repeated int32 numparticles = 3;
+}
+
+message DefineSPHMeshBoxReply {
+	int32 answer = 1;
+}
+
+message DefineSPHMeshSurfaceRequest {
+    int32 sid = 1;
+	int32 type = 2;
+	int32 sphpid = 3;
+	float space = 4;
+}
+
+message DefineSPHMeshSurfaceReply {
+	int32 answer = 1;
+}
+
+message PartSetRequest {
+    string option = 1;
+	string title = 2;
+    int32 sid = 3;
+	repeated int32 pids = 4;
+}
+
+message PartSetReply {
+	int32 id = 1;
+}
+
+message ShellSetRequest {
+    string option = 1;
+    string title = 2;
+    int32 sid = 3;
+	repeated int32 eids = 4;
+}
+
+message ShellSetReply {
+	int32 answer = 1;
+}
+
+message SolidSetRequest {
+    string title = 1;
+    int32 sid = 2;
+	repeated int32 ki = 3;
+}
+
+message SolidSetReply {
+	int32 answer = 1;
+}
+
+message NodeSetRequest {
+    string option = 1;
+    string title = 2;
+    int32 sid = 3;
+	string genoption = 4;
+	repeated int32 entities = 5;
+}
+
+message NodeSetReply {
+	int32 id = 1;
+}
+
+message SegmentSetRequest {
+    string title = 1;
+    int32 sid = 2;
+	string solver = 3;
+	repeated int32 n1 = 4;
+	repeated int32 n2 = 5;
+	repeated int32 n3 = 6;
+	repeated int32 n4 = 7;
+}
+
+message SegmentSetReply {
+	int32 id = 1;
+}
+
+message PartPropertyRequest {
+    int32 pid = 1;
+	int32 secid = 2;
+	int32 mid = 3;
+	int32 eosid = 4;
+	int32 hgid = 5;
+	int32 grav = 6;
+	int32 adpopt = 7;
+	int32 tmid = 8;
+}
+
+message PartPropertyReply {
+	int32 answer = 1;
+}
+
+message PartRequest {
+    bool contact = 1;
+	string heading = 2;
+	int32 pid = 3;
+	int32 secid = 4;
+	int32 mid = 5;
+	int32 eosid = 6;
+	int32 hgid = 7;
+	int32 grav = 8;
+	int32 adpopt = 9;
+	int32 tmid = 10;
+	//---contact option
+	float fa = 11;
+	float fd = 12;
+	float dc = 13;
+	float vc = 14;
+	float optt = 15;
+	float sft = 16;
+	float ssf = 17;
+	float cparm8 = 18;
+}
+
+message PartReply {
+	int32 answer = 1;
+}
+
+//---MATERIAL
+message MatEMRequest {
+	int32 mid = 1;
+	int32 mtype = 2;
+	float sigma = 3;
+	int32 eosid = 4;
+}
+
+message MatEMReply {
+	int32 id = 1;
+}
+
+message MatRigidRequest {
+	int32 mid = 1;
+	float ro = 2;
+	float e = 3;
+	float pr = 4;
+	//---card 2
+	int32 cmo = 5;
+	int32 con1 = 6;
+	int32 con2 = 7;
+}
+
+message MatRigidReply {
+	int32 mid = 1;
+}
+
+message MatRigidDiscreteRequest {
+	int32 mid = 1;
+	float ro = 2;
+	float e = 3;
+	float pr = 4;
+}
+
+message MatRigidDiscreteReply {
+	int32 mid = 1;
+}
+
+message MatElasticRequest {
+	int32 mid = 1;
+	float ro = 2;
+	float e = 3;
+	float pr = 4;
+}
+
+message MatElasticReply {
+	int32 mid = 1;
+}
+
+message MatElasticPlasticThermalRequest {
+	int32 mid = 1;
+	float ro = 2;
+	repeated float ti = 3;
+	repeated float ei = 4;
+	repeated float pri = 5;
+	repeated float alphai = 6;
+	repeated float sigyi = 7;
+}
+
+message MatElasticPlasticThermalReply {
+	int32 mid = 1;
+}
+
+message MatSpotweldRequest {
+	int32 mid = 1;
+	float ro = 2;
+	float e = 3;
+	float pr = 4;
+	float sigy = 5;
+	float eh = 6;
+	float nrr = 7;
+	float nrs = 8;
+	float nrt = 9;
+}
+
+message MatSpotweldReply {
+	int32 mid = 1;
+}
+
+message MatPiecewiseLinearPlasticityRequest {
+	int32 mid = 1;
+	float ro = 2;
+	float e = 3;
+	float pr = 4;
+	float sigy = 5;
+	float etan = 6;
+}
+
+message MatPiecewiseLinearPlasticityReply {
+	int32 mid = 1;
+}
+
+message MatModifiedPiecewiseLinearPlasticityRequest {
+	int32 mid = 1;
+	float ro = 2;
+	float e = 3;
+	float pr = 4;
+	float sigy = 5;
+	float etan = 6;
+	float fail = 7;
+	int32 numint = 8;
+}
+
+message MatModifiedPiecewiseLinearPlasticityReply {
+	int32 mid = 1;
+}
+
+message MatFabricRequest {
+	int32 mid = 1;
+	float ro = 2;
+	float ea = 3;
+	float eb = 4;
+	float prba = 5;
+	float prab = 6;
+	float gab = 7;
+}
+
+message MatFabricReply {
+	int32 mid = 1;
+}
+
+message MatSpringNonlinearElasticRequest {
+	int32 mid = 1;
+	int32 lcid = 2;
+}
+
+message MatSpringNonlinearElasticReply {
+	int32 mid = 1;
+}
+
+message MatDamperViscousRequest {
+	int32 mid = 1;
+	float dc = 2;
+}
+
+message MatDamperViscousReply {
+	int32 mid = 1;
+}
+
+message MatDamperNonlinearViscousRequest {
+	int32 mid = 1;
+	int32 lcdr = 2;
+}
+
+message MatDamperNonlinearViscousReply {
+	int32 mid = 1;
+}
+
+message MatNullRequest {
+	float ro = 1;
+	float pc = 2;
+}
+
+message MatNullReply {
+	int32 mid = 1;
+}
+
+message MatJohnsonCookRequest {
+	float ro = 1;
+	float g = 2;
+	float e = 3;
+	float pr = 4;
+	//card2
+	repeated float constants = 5;
+	float tm = 6;
+	float tr = 7;
+	float eps0 = 8;
+	//card3
+	float cp = 9;
+	float pc = 10;
+	float spall = 11;
+	float it = 12;
+	repeated float failure = 13;
+}
+
+message MatJohnsonCookReply {
+	int32 mid = 1;
+}
+
+message MatHighExplosiveBurnRequest {
+	float ro = 1;
+	float d = 2;
+	float pcj = 3;
+}
+
+message MatHighExplosiveBurnReply {
+	int32 mid = 1;
+}
+
+message MatVacuumRequest {
+	float rho = 1;
+}
+
+message MatVacuumReply {
+	int32 mid = 1;
+}
+
+message MatAddErosionRequest {
+	int32 mid = 1;
+	float mnpres = 2;
+	float mxeps = 3;
+}
+
+message MatAddErosionReply {
+	int32 mid = 1;
+}
+
+message MatSPHIncompressibleFluidRequest {
+	int32 mid = 1;
+	float ro = 2;
+	float mu = 3;
+	float gamma1 = 4;
+	float gamma2 = 5;
+}
+
+message MatSPHIncompressibleFluidReply {
+	int32 mid = 1;
+}
+
+message MatSPHIncompressibleStructureRequest {
+	int32 mid = 1;
+	float ro = 2;
+	float beta = 3;
+	float rough = 4;
+	float adh = 5;
+}
+
+message MatSPHIncompressibleStructureReply {
+	int32 mid = 1;
+}
+
+//MATERIAL THERMAL
+message MatThermalIsotropicRequest {
+	int32 mid = 1;
+	float tro = 2;
+	float tgrlc = 3;
+	float tgmult = 4;
+	//card2
+	float hc = 5;
+	float tc = 6;
+}
+
+message MatThermalIsotropicReply {
+	int32 mid = 1;
+}
+
+//EOS
+message EOSLinearPolynomialRequest {
+	repeated float ci = 1;
+	float e0 = 2;
+	float v0 = 3;
+}
+
+message EOSLinearPolynomialReply {
+	int32 eosid = 1;
+}
+
+message EOSJWLRequest {
+	//[a,b,r1,r2,omeg,e0,v0]
+	repeated float jwl_equation=1;
+}
+
+message EOSJWLReply {
+	int32 eosid = 1;
+}
+
+message EOSGruneisenRequest {
+	repeated float constants = 1;
+	float a = 2;
+	float e0 = 3;
+}
+
+message EOSGruneisenReply {
+	int32 eosid = 1;
+}
+
+
+message SaveFileRequest {
+	string name = 1;
+}
+
+message SaveFileReply {
+	int64 length = 1;
+}
+
+message LoadFileRequest {
+	string name = 1;
+}
+
+message LoadFileReply {
+	bool ret = 1;
+}
+
+message GetNodesRequest {
+	
+}
+
+message GetNodesReply {
+	repeated double coords = 1;
+}
+
+message GetSolidElementsRequest {
+	
+}
+
+message GetSolidElementsReply {
+	repeated int64 nodeids = 1;
+}
+
+//ICFD
+message ICFDControlTimeRequest {
+	float tim = 1;
+	float dt = 2;
+}
+
+message ICFDControlTimeReply {
+	int32 answer = 1;
+}
+
+message ICFDControlMeshRequest {
+	float mgsf = 1;
+}
+
+message ICFDControlMeshReply {
+	int32 answer = 1;
+}
+
+message ICFDControlAdaptRequest {
+	float minh = 1;
+	float maxh = 2;
+	float err = 3;
+	int32 nit = 4;
+}
+
+message ICFDControlAdaptReply {
+	int32 answer = 1;
+}
+
+message ICFDControlSurfMeshRequest {
+	int32 rsrf = 1;
+}
+
+message ICFDControlSurfMeshReply {
+	int32 answer = 1;
+}
+
+message ICFDControlImposedMoveRequest {
+	int32 pid = 1;
+	int32 lcvx = 2;
+	int32 lcvy = 3;
+	int32 lcvz = 4;
+}
+
+message ICFDControlImposedMoveReply {
+	int32 answer = 1;
+}
+
+message ICFDControlGeneralRequest {
+	int32 atype = 1;
+	int32 mtype = 2;
+	int32 dvcl = 3;
+	int32 rdvcl = 4;
+}
+
+message ICFDControlGeneralReply {
+	int32 answer = 1;
+}
+
+message ICFDControlOutputRequest {
+	int32 msgl = 1;
+	int32 itout = 2;
+}
+
+message ICFDControlOutputReply {
+	int32 answer = 1;
+}
+
+message ICFDControlSteadyRequest {
+	int32 its = 1;
+	float tol1 = 2;
+	float tol2 = 3;
+	float tol3 = 4;
+	float rel1 = 5;
+	float rel2 = 6;
+}
+
+message ICFDControlSteadyReply {
+	int32 answer = 1;
+}
+
+message ICFDControlFSIRequest {
+	int32 owc = 1;
+}
+
+message ICFDControlFSIReply {
+	int32 answer = 1;
+}
+
+message ICFDControlTurbulenceRequest {
+	int32 tmod = 1;
+}
+
+message ICFDControlTurbulenceReply {
+	int32 answer = 1;
+}
+
+message ICFDControlDEMCouplingRequest {
+	int32 ctype = 1;
+	float bt = 2;
+	float dt = 3;
+	float sf = 4;
+	int32 form = 5;
+}
+
+message ICFDControlDEMCouplingReply {
+	int32 answer = 1;
+}
+
+message ICFDSectionRequest {
+	int32 sid = 1;
+}
+
+message ICFDSectionReply {
+	int32 answer = 1;
+}
+
+message ICFDMatRequest {
+	int32 mid = 1;
+	int32 flg = 2;
+	float ro = 3;
+	float vis = 4;
+	//card2
+	float hc = 5;
+	float tc = 6;
+	float beta = 7;
+}
+
+message ICFDMatReply {
+	int32 id = 1;
+}
+
+message ICFDPartRequest {
+	int32 pid = 1;
+	int32 secid = 2;
+	int32 mid = 3;
+}
+
+message ICFDPartReply {
+	int32 answer = 1;
+}
+
+message ICFDPartVolRequest {
+	int32 pid = 1;
+	int32 secid = 2;
+	int32 mid = 3;
+	repeated int32 spids = 4;
+}
+
+message ICFDPartVolReply {
+	int32 id = 1;
+}
+
+message ICFDDBDragRequest {
+	int32 pid = 1;
+}
+
+message ICFDDBDragReply {
+	int32 answer = 1;
+}
+
+message ICFDDBFluxRequest {
+	int32 pid = 1;
+}
+
+message ICFDDBFluxReply {
+	int32 answer = 1;
+}
+
+message ICFDDBTempRequest {
+	int32 pid = 1;
+}
+
+message ICFDDBTempReply {
+	int32 answer = 1;
+}
+
+message ICFDBdyPrescribedVelRequest {
+	int32 pid = 1;
+	int32 dof = 2;
+	int32 vad = 3;
+	int32 lcid = 4;
+}
+
+message ICFDBdyPrescribedVelReply {
+	int32 answer = 1;
+}
+
+message ICFDBdyPrescribedPreRequest {
+	int32 pid = 1;
+	int32 lcid = 2;
+}
+
+message ICFDBdyPrescribedPreReply {
+	int32 answer = 1;
+}
+
+message ICFDBdyPrescribedTempRequest {
+	int32 pid = 1;
+	int32 lcid = 2;
+}
+
+message ICFDBdyPrescribedTempReply {
+	int32 answer = 1;
+}
+
+message ICFDBdyFreeSlipRequest {
+	int32 pid = 1;
+}
+
+message ICFDBdyFreeSlipReply {
+	int32 answer = 1;
+}
+
+message ICFDBdyNonSlipRequest {
+	int32 pid = 1;
+}
+
+message ICFDBdyNonSlipReply {
+	int32 answer = 1;
+}
+
+message ICFDBdyFSIRequest {
+	int32 pid = 1;
+}
+
+message ICFDBdyFSIReply {
+	int32 answer = 1;
+}
+
+message ICFDInitRequest {
+	int32 pid = 1;
+	float vx = 2;
+	float vy = 3;
+	float vz = 4;
+	float t = 5;
+	float p = 6;
+}
+
+message ICFDInitReply {
+	int32 answer = 1;
+}
+
+message ICFDSolverTolMMOVRequest {
+	float atol = 1;
+	float rtol = 2;
+}
+
+message ICFDSolverTolMMOVReply {
+	int32 answer = 1;
+}
+
+message ICFDPartPropertyRequest {
+    int32 pid = 1;
+	int32 secid = 2;
+	int32 mid = 3;
+}
+
+message ICFDPartPropertyReply {
+	int32 answer = 1;
+}
+
+message ICFDVolumePartPropertyRequest {
+    int32 pid = 1;
+	int32 secid = 2;
+	int32 mid = 3;
+}
+
+message ICFDVolumePartPropertyReply {
+	int32 answer = 1;
+}
+
+//---MESH
+message MeshVolumeRequest {
+	int32 volid = 1;
+	repeated int32 pids = 2;
+}
+
+message MeshVolumeReply {
+	int32 id = 1;
+}
+
+message MeshEmbedShellRequest {
+	int32 volid = 1;
+	repeated int32 pids = 2;
+}
+
+message MeshEmbedShellReply {
+	int32 answer = 1;
+}
+
+message MeshBlRequest {
+	int32 pid = 1;
+	int32 nelth = 2;
+}
+
+message MeshBlReply {
+	int32 answer = 1;
+}
+
+message MeshBlSymRequest {
+	int32 pid = 1;
+}
+
+message MeshBlSymReply {
+	int32 answer = 1;
+}
+
+message MeshSizeShapeRequest {
+	string sname = 1;
+	int32 force = 2;
+	int32 method = 3;
+	float msize = 4;
+	repeated float parameter = 5;
+}
+
+message MeshSizeShapeReply {
+	int32 answer = 1;
+}
+
+message MeshSizeRequest {
+	int32 volid = 1;
+	repeated int32 pids = 2;
+}
+
+message MeshSizeReply {
+	int32 id = 1;
+}
+
+message MeshInterfRequest {
+	int32 volid = 1;
+	repeated int32 pids = 2;
+}
+
+message MeshInterfReply {
+	int32 id = 1;
+}
+
+//S-ALE
+message ALECreateStructuredMeshRequest {
+	int32 nbid = 1;
+	int32 ebid = 2;
+	//card2
+	int32 cpidx = 3;
+	int32 cpidy = 4;
+	int32 cpidz = 5;
+}
+
+message ALECreateStructuredMeshReply {
+	int32 meshid = 1;
+	int32 partid = 2;
+}
+
+message ALECreateStructuredMeshRefineRequest {
+	int32 mshid = 1;
+	int32 ifx = 2;
+	int32 ify = 3;
+	int32 ifz = 4;
+}
+
+message ALECreateStructuredMeshRefineReply {
+	int32 answer = 1;
+}
+
+message ALECreateStructuredMeshControlPointsRequest {
+	int32 icase = 1;
+	float sfo = 2;
+	repeated int32 n = 3;
+	repeated float x = 4;
+	repeated float ratio = 5;
+}
+
+message ALECreateStructuredMeshControlPointsReply {
+	int32 cpid = 1;
+}
+
+message ALECreateStructuredMultiMatGroupRequest {
+	string nmmgnm = 1;
+	int32 mid = 2;
+	int32 eosid = 3;
+	float pref = 4;
+}
+
+message ALECreateStructuredMultiMatGroupReply {
+	int32 answer = 1;
+}
+
+message ALECreateStructuredMeshVolumeFillingRequest {
+	int32 mshid = 1;
+	string ammgto = 2;
+	int32 nsample = 3;
+	int32 vid = 4;
+	//card2
+	string geom=5;
+	int32 inout = 6;
+	repeated float e = 7;
+}
+
+message ALECreateStructuredMeshVolumeFillingReply {
+	int32 answer = 1;
+}
+
+
+
+
+
+
+//---DAMPING
+message DampingGlobalRequest {
+    int32 lcid = 1;
+	float valdmp = 2;
+}
+
+message DampingGlobalReply {
+	int32 answer = 1;
+}
+
+message DampingPartStiffnessRequest {
+    bool isset = 1;
+    int32 id = 2;
+	float coef = 3;
+}
+
+message DampingPartStiffnessReply {
+	int32 answer = 1;
+}
+
+message AirbagModelRequest {
+    string modeltype = 1;
+    int32 sid = 2;
+	int32 sidtyp = 3;
+	float cv = 4;
+	float cp = 5;
+	float t = 6;
+	int32 lcid = 7;
+	float mu = 8;
+	float area = 9;
+	float pe = 10;
+	float ro = 11;
+}
+
+message AirbagModelReply {
+	int32 answer = 1;
+}
+
+//---EM
+message EMControlRequest {
+    int32 emsol = 1;
+	int32 numls = 2;
+	float macrodt = 3;
+	int32 ncylfem = 4;
+	int32 ncylbem = 5;
+}
+
+message EMControlReply {
+	int32 answer = 1;
+}
+
+message EMTimestepRequest {
+    int32 tstype = 1;
+	float dtconst = 2;
+}
+
+message EMTimestepReply {
+	int32 answer = 1;
+}
+
+message EMControlContactRequest {
+    int32 emct = 1;
+	int32 cconly = 2;
+	int32 ctype = 3;
+	int32 dtype = 4;
+}
+
+message EMControlContactReply {
+	int32 answer = 1;
+}
+
+message EMContactRequest {
+    int32 contid = 1;
+	int32 dtype = 2;
+	int32 psidm = 3;
+	int32 psids = 4;
+	float eps1 = 5;
+	float eps2 = 6;
+	float eps3 = 7;
+	float d0 = 8;
+}
+
+message EMContactReply {
+	int32 answer = 1;
+}
+
+message EMCircuitRogoRequest {
+    int32 rogid = 1;
+	int32 setid = 2;
+	int32 settype = 3;
+	int32 curtyp = 4;
+}
+
+message EMCircuitRogoReply {
+	int32 id = 1;
+}
+
+message EMCircuitRequest {
+    int32 circid = 1;
+	int32 circtyp = 2;
+	int32 lcid = 3;
+	//card2
+	int32 sidcurr = 4;
+	int32 sidvin = 5;
+	int32 sidvout = 6;
+}
+
+message EMCircuitReply {
+	int32 id = 1;
+}
+
+message EMMat001Request {
+    int32 mid = 1;
+	int32 mtype = 2;
+	float sigma = 3;
+}
+
+message EMMat001Reply {
+	int32 answer = 1;
+}
+
+message EMMat002Request {
+    int32 mid = 1;
+	int32 mtype = 2;
+	float sigma = 3;
+	int32 eosid = 4;
+	float murel = 5;
+}
+
+message EMMat002Reply {
+	int32 answer = 1;
+}
+
+message EMSolverBemRequest {
+    float reltol = 1;
+	int32 maxite = 2;
+	int32 stype = 3;
+	int32 precon = 4;
+	int32 uselast = 5;
+	int32 ncylbem = 6;
+}
+
+message EMSolverBemReply {
+	int32 answer = 1;
+}
+
+message EMSolverFemRequest {
+    float reltol = 1;
+	int32 maxite = 2;
+	int32 stype = 3;
+	int32 precon = 4;
+	int32 uselast = 5;
+	int32 ncylbem = 6;
+}
+
+message EMSolverFemReply {
+	int32 answer = 1;
+}
+
+message EMSolverBemMatRequest {
+    int32 matid = 1;
+	float reltol = 2;
+}
+
+message EMSolverBemMatReply {
+	int32 answer = 1;
+}
+
+message EMSolverFemBemMonolithicRequest {
+    int32 mtype = 1;
+	int32 stype = 2;
+	float abstol = 3;
+	float reltol = 4;
+	int32 maxit = 5;
+}
+
+message EMSolverFemBemMonolithicReply {
+	int32 answer = 1;
+}
+
+message EMOutputRequest {
+    int32 mats = 1;
+	int32 matf = 2;
+	int32 sols = 3;
+	int32 solf = 4;
+}
+
+message EMOutputReply {
+	int32 answer = 1;
+}
+
+message EMDatabaseGlobalEnergyRequest {
+    int32 outlv = 1;
+}
+
+message EMDatabaseGlobalEnergyReply {
+	int32 answer = 1;
+}
+
+message EMPermanentMagnetRequest {
+    int32 id = 1;
+	int32 partid = 2;
+	int32 mtype = 3;
+	int32 north = 4;
+	int32 sourth = 5;
+	int32 hc = 6;
+}
+
+message EMPermanentMagnetReply {
+	int32 answer = 1;
+}
+
+message EMEOSPermeabilityRequest {
+    int32 eosid = 1;
+	int32 eostype = 2;
+	int32 lcid = 3;
+}
+
+message EMEOSPermeabilityReply {
+	int32 id = 1;
+}
+
+message EMEOSTabulated1Request {
+    int32 eosid = 1;
+	int32 lcid = 2;
+}
+
+message EMEOSTabulated1Reply {
+	int32 id = 1;
+}
+
+message FrequencyDomainFRFRequest {
+	//card 1
+    int32 n1 = 1;
+	int32 n1typ = 2;
+	int32 dof1 = 3;
+	int32 vad1 = 4;
+	float fnmax = 5;
+	//card 2
+	float dampf = 6;
+	int32 lcdam = 7;
+	int32 lctyp = 8;
+	//card 3
+	int32 n2 = 9;
+	int32 n2typ = 10;
+	int32 dof2 = 11;
+	int32 vad2 = 12;
+	//card 4
+	float fmin = 13;
+	float fmax = 14;
+	int32 nfreq = 15;
+}
+
+message FrequencyDomainFRFReply {
+	int32 answer = 1;
+}
+
+message GeneralKWDRequest {
+	string opcode = 1;
+    string keyworddata = 2;
+}
+
+message GeneralKWDReply {
+	int32 answer = 1;
+}
+
+service kwC2S {
+	rpc kwSetFileName(kwFileName) returns(kwFileNameReply) {}
+	rpc Upload(stream Chunk) returns (kwFileReply) {}
+	//---CONTROL
+	rpc CreateTimestep(TimestepRequest) returns (TimestepReply) {}
+	rpc CreateTermination(TerminationRequest) returns (TerminationReply) {}
+	rpc CreateControlOutput(ControlOutputRequest) returns (ControlOutputReply) {}
+	rpc CreateControlContact(ControlContactRequest) returns (ControlContactReply) {}
+	rpc CreateControlDiscreteElement(ControlDiscreteElementRequest) returns (ControlDiscreteElementReply) {}
+	rpc CreateControlAccuracy(ControlAccuracyRequest) returns (ControlAccuracyReply) {}
+	rpc CreateControlEnergy(ControlEnergyRequest) returns (ControlEnergyReply) {}
+	rpc CreateControlBulkViscosity(ControlBulkViscosityRequest) returns (ControlBulkViscosityReply) {}
+	rpc CreateControlHourgalss(ControlHourglassRequest) returns (ControlHourglassReply) {}
+	rpc CreateControlShell(ControlShellRequest) returns (ControlShellReply) {}
+	rpc CreateControlSolid(ControlSolidRequest) returns (ControlSolidReply) {}
+	rpc CreateControlSolution(ControlSolutionRequest) returns (ControlSolutionReply) {}
+	rpc CreateControlThermalSolver(ControlThermalSolverRequest) returns (ControlThermalSolverReply) {}
+    rpc CreateControlThermalTimestep(ControlThermalTimestepRequest) returns (ControlThermalTimestepReply) {}
+	rpc CreateControlImplicitGeneral(ControlImplicitGeneralRequest) returns (ControlImplicitGeneralReply) {}
+	rpc CreateControlImplicitAuto(ControlImplicitAutoRequest) returns (ControlImplicitAutoReply) {}
+	rpc CreateControlImplicitDynamic(ControlImplicitDynamicRequest) returns (ControlImplicitDynamicReply) {}
+	rpc CreateControlImplicitEigenvalue(ControlImplicitEigenvalueRequest) returns (ControlImplicitEigenvalueReply) {}
+	rpc CreateControlImplicitSolution(ControlImplicitSolutionRequest) returns (ControlImplicitSolutionReply) {}
+	rpc CreateControlSPH(ControlSPHRequest) returns (ControlSPHReply) {}
+	
+	
+	//---DATABASE
+	rpc CreateDBBinary(DBBinaryRequest) returns (DBBinaryReply) {}
+	rpc CreateDBAscii(DBAsciiRequest) returns (DBAsciiReply) {}
+	rpc CreateDBSALE(DBSALERequest) returns (DBSALEReply) {}
+	//---RIGIDWALL
+	rpc CreateRigidWallGeom(RigidWallGeomRequest) returns (RigidWallGeomReply) {}
+	rpc CreateRigidWallPlanar(RigidWallPlanarRequest) returns (RigidWallPlanarReply) {}
+	//---INITIAL
+	rpc CreateInitVel(InitVelRequest) returns (InitVelReply) {}
+	rpc CreateInitVelRigidBody(InitVelRigidBodyRequest) returns (InitVelRigidBodyReply) {}
+	rpc CreateInitVelGeneration(InitVelGenerationRequest) returns (InitVelGenerationReply) {}
+	rpc CreateInitVelGenerationStartTime(InitVelGenerationStartTimeRequest) returns (InitVelGenerationStartTimeReply) {}
+	rpc CreateInitDetonation(InitDetonationRequest) returns (InitDetonationReply) {}
+	rpc CreateInitTemperature(InitTemperatureRequest) returns (InitTemperatureReply) {}
+
+	//---CONTACT
+	rpc CreateContact(ContactRequest) returns (ContactReply) {}
+	//---BOUNDARY
+	rpc CreateBdyPrescribedMotion(BdyPrescribedMotionRequest) returns (BdyPrescribedMotionReply) {}
+	rpc CreateBdySpc(BdySpcRequest) returns (BdySpcReply) {}
+	rpc CreateBdyTemp(BdyTempRequest) returns (BdyTempReply) {}
+	//---CONSTRAINED
+	rpc CreateConstrainedJoint(ConstrainedJointRequest) returns (ConstrainedJointReply) {}
+    rpc CreateConstrainedExtraNodes(ConstrainedExtraNodesRequest) returns (ConstrainedExtraNodesReply) {}
+    rpc CreateConstrainedNodalRigidBody(ConstrainedNodalRigidBodyRequest) returns (ConstrainedNodalRigidBodyReply) {}
+	rpc CreateConstrainedSpotWeld(ConstrainedSpotWeldRequest) returns (ConstrainedSpotWeldReply) {}
+    rpc CreateConstrainedRigidBodies(ConstrainedRigidBodiesRequest) returns (ConstrainedRigidBodiesReply) {}
+	
+	//---LOAD
+	rpc CreateLoadBody(LoadBodyRequest) returns (LoadBodyReply) {}
+
+	//---MATERIAL
+	rpc CreateMatEM(MatEMRequest) returns (MatEMReply) {}
+	rpc CreateMatRigid(MatRigidRequest) returns (MatRigidReply) {}
+	rpc CreateMatRigidDiscrete(MatRigidDiscreteRequest) returns (MatRigidDiscreteReply) {}
+	rpc CreateMatElastic(MatElasticRequest) returns (MatElasticReply) {}
+	rpc CreateMatElasticPlasticThermal(MatElasticPlasticThermalRequest) returns (MatElasticPlasticThermalReply) {}
+	rpc CreateMatSpotweld(MatSpotweldRequest) returns (MatSpotweldReply) {}
+    rpc CreateMatPiecewiseLinearPlasticity(MatPiecewiseLinearPlasticityRequest) returns (MatPiecewiseLinearPlasticityReply) {}
+	rpc CreateMatModifiedPiecewiseLinearPlasticity(MatModifiedPiecewiseLinearPlasticityRequest) returns (MatModifiedPiecewiseLinearPlasticityReply) {}
+	rpc CreateMatFabric(MatFabricRequest) returns (MatFabricReply) {}
+	rpc CreateMatSpringNonlinearElastic(MatSpringNonlinearElasticRequest) returns (MatSpringNonlinearElasticReply) {}
+	rpc CreateMatDamperViscous(MatDamperViscousRequest) returns (MatDamperViscousReply) {}
+	rpc CreateMatDamperNonlinearViscous(MatDamperNonlinearViscousRequest) returns (MatDamperNonlinearViscousReply) {}
+	rpc CreateMatNull(MatNullRequest) returns (MatNullReply) {}
+	rpc CreateMatJohnsonCook(MatJohnsonCookRequest) returns (MatJohnsonCookReply) {}
+	rpc CreateMatHighExplosiveBurn(MatHighExplosiveBurnRequest) returns (MatHighExplosiveBurnReply) {}
+	rpc CreateMatVacuum(MatVacuumRequest) returns (MatVacuumReply) {}
+	rpc CreateMatAddErosion(MatAddErosionRequest) returns (MatAddErosionReply) {}
+ 	rpc CreateMatSPHIncompressibleFluid(MatSPHIncompressibleFluidRequest) returns (MatSPHIncompressibleFluidReply) {}
+	rpc CreateMatSPHIncompressibleStructure(MatSPHIncompressibleStructureRequest) returns (MatSPHIncompressibleStructureReply) {}
+	rpc CreateMatThermalIsotropic(MatThermalIsotropicRequest) returns (MatThermalIsotropicReply) {}
+	
+	//---EOS
+    rpc CreateEOSLinearPolynomial(EOSLinearPolynomialRequest) returns (EOSLinearPolynomialReply) {}
+    rpc CreateEOSJWL(EOSJWLRequest) returns (EOSJWLReply) {}
+	rpc CreateEOSGruneisen(EOSGruneisenRequest) returns (EOSGruneisenReply) {}
+
+	
+	//---DEFINE
+	rpc CreateDefineCurve(DefineCurveRequest) returns (DefineCurveReply) {}
+	rpc CreateDefineCurveFunction(DefineCurveFunctionRequest) returns (DefineCurveFunctionReply) {}
+	rpc CreateDefineVector(DefineVectorRequest) returns (DefineVectorReply) {}
+	rpc CreateDefineBox(DefineBoxRequest) returns (DefineBoxReply) {}
+	rpc CreateDefineDEMeshSurface(DefineDEMeshSurfaceRequest) returns (DefineDEMeshSurfaceReply) {}
+	rpc CreateDefineOrientation(DefineOrientationRequest) returns (DefineOrientationReply) {}
+	rpc CreateDefineSPHMassflowPlane(DefineSPHMassflowPlaneRequest) returns (DefineSPHMassflowPlaneReply) {}
+    rpc CreateDefineSPHMeshBox(DefineSPHMeshBoxRequest) returns (DefineSPHMeshBoxReply) {}
+    rpc CreateDefineSPHMeshSurface(DefineSPHMeshSurfaceRequest) returns (DefineSPHMeshSurfaceReply) {}
+
+	rpc CreatePartSet(PartSetRequest) returns (PartSetReply) {}
+	rpc CreateShellSet(ShellSetRequest) returns (ShellSetReply) {}
+	rpc CreateSolidSet(SolidSetRequest) returns (SolidSetReply) {}
+	rpc CreateNodeSet(NodeSetRequest) returns (NodeSetReply) {}
+	rpc CreateSegmentSet(SegmentSetRequest) returns (SegmentSetReply) {}
+	//---SECTION
+	rpc CreateSectionIGAShell(SectionIGAShellRequest) returns (SectionIGAShellReply) {}
+	rpc CreateSectionBeam(SectionBeamRequest) returns (SectionBeamReply) {}
+	rpc CreateSectionShell(SectionShellRequest) returns (SectionShellReply) {}
+	rpc CreateSectionSolid(SectionSolidRequest) returns (SectionSolidReply) {}
+	rpc CreateSectionDiscrete(SectionDiscreteRequest) returns (SectionDiscreteReply) {}
+    rpc CreateSectionSPH(SectionSPHRequest) returns (SectionSPHReply) {}
+
+	rpc CreateHourglass(HourglassRequest) returns (HourglassReply) {}
+	rpc SetPartProperty(PartPropertyRequest) returns (PartPropertyReply) {}
+	//rpc CreatePart(PartRequest) returns (PartReply) {}
+	rpc GetNodes(GetNodesRequest) returns (GetNodesReply) {}
+	rpc GetSolidElements(GetSolidElementsRequest) returns (GetSolidElementsReply) {}
+	rpc SaveFile(SaveFileRequest) returns(SaveFileReply) {}
+	rpc LoadFile(LoadFileRequest) returns(LoadFileReply) {}
+	rpc Download(DownloadRequest) returns (stream Chunk){}
+	//---ICFD
+	rpc ICFDCreateControlTime(ICFDControlTimeRequest) returns (ICFDControlTimeReply) {}
+	rpc ICFDCreateControlGeneral(ICFDControlGeneralRequest) returns (ICFDControlGeneralReply) {}
+	rpc ICFDCreateControlOutput(ICFDControlOutputRequest) returns (ICFDControlOutputReply) {}
+	rpc ICFDCreateControlSteady(ICFDControlSteadyRequest) returns (ICFDControlSteadyReply) {}
+	rpc ICFDCreateControlFSI(ICFDControlFSIRequest) returns (ICFDControlFSIReply) {}
+	
+	rpc ICFDCreateControlTurbulence(ICFDControlTurbulenceRequest) returns (ICFDControlTurbulenceReply) {}
+	rpc ICFDCreateControlDEMCoupling(ICFDControlDEMCouplingRequest) returns (ICFDControlDEMCouplingReply) {}
+    rpc ICFDCreateControlMesh(ICFDControlMeshRequest) returns (ICFDControlMeshReply) {}
+	rpc ICFDCreateControlAdapt(ICFDControlAdaptRequest) returns (ICFDControlAdaptReply) {}
+	rpc ICFDCreateControlSurfMesh(ICFDControlSurfMeshRequest) returns (ICFDControlSurfMeshReply) {}
+	rpc ICFDCreateControlImposedMove(ICFDControlImposedMoveRequest) returns (ICFDControlImposedMoveReply) {}
+	
+
+	rpc ICFDCreateSection(ICFDSectionRequest) returns (ICFDSectionReply) {}
+	rpc ICFDCreateMat(ICFDMatRequest) returns (ICFDMatReply) {}
+	rpc ICFDCreatePart(ICFDPartRequest) returns (ICFDPartReply) {}
+	rpc ICFDCreatePartVol(ICFDPartVolRequest) returns (ICFDPartVolReply) {}
+	rpc ICFDCreateDBDrag(ICFDDBDragRequest) returns (ICFDDBDragReply) {}
+	rpc ICFDCreateDBFlux(ICFDDBFluxRequest) returns (ICFDDBFluxReply) {}
+	rpc ICFDCreateDBTemp(ICFDDBTempRequest) returns (ICFDDBTempReply) {}
+	rpc ICFDCreateBdyPrescribedVel(ICFDBdyPrescribedVelRequest) returns (ICFDBdyPrescribedVelReply) {}
+	rpc ICFDCreateBdyPrescribedPre(ICFDBdyPrescribedPreRequest) returns (ICFDBdyPrescribedPreReply) {}
+	rpc ICFDCreateBdyPrescribedTemp(ICFDBdyPrescribedTempRequest) returns (ICFDBdyPrescribedTempReply) {}
+	rpc ICFDCreateBdyFreeSlip(ICFDBdyFreeSlipRequest) returns (ICFDBdyFreeSlipReply) {}
+	rpc ICFDCreateBdyNonSlip(ICFDBdyNonSlipRequest) returns (ICFDBdyNonSlipReply) {}
+	rpc ICFDCreateBdyFSI(ICFDBdyFSIRequest) returns (ICFDBdyFSIReply) {}
+	rpc ICFDCreateInit(ICFDInitRequest) returns (ICFDInitReply) {}
+
+	rpc ICFDCreateSolverTolMMOV(ICFDSolverTolMMOVRequest) returns (ICFDSolverTolMMOVReply) {}
+	rpc SetICFDPartProperty(ICFDPartPropertyRequest) returns (ICFDPartPropertyReply) {}
+	rpc SetICFDVolumePartProperty(ICFDVolumePartPropertyRequest) returns (ICFDVolumePartPropertyReply) {}
+	//----MESH
+	rpc MESHCreateVolume(MeshVolumeRequest) returns (MeshVolumeReply) {}
+	rpc MESHCreateEmbedShell(MeshEmbedShellRequest) returns (MeshEmbedShellReply) {}
+	rpc MESHCreateBl(MeshBlRequest) returns (MeshBlReply) {}
+	rpc MESHCreateBlSym(MeshBlSymRequest) returns (MeshBlSymReply) {}
+	rpc MESHCreateSizeShape(MeshSizeShapeRequest) returns (MeshSizeShapeReply) {}
+	rpc MESHCreateSize(MeshSizeRequest) returns (MeshSizeReply) {}
+	rpc MESHCreateInterf(MeshInterfRequest) returns (MeshInterfReply) {}
+	//---S-ALE
+	rpc ALECreateControl(ControlALERequest) returns (ControlALEReply) {}
+	//rpc ALECreateDBALEMat(DBALEMatRequest) returns (DBALEMatReply) {}
+	rpc ALECreateStructuredMesh(ALECreateStructuredMeshRequest) returns (ALECreateStructuredMeshReply) {}
+	rpc ALECreateStructuredMeshRefine(ALECreateStructuredMeshRefineRequest) returns (ALECreateStructuredMeshRefineReply) {}
+	rpc ALECreateStructuredMeshCtrlPoints(ALECreateStructuredMeshControlPointsRequest) returns (ALECreateStructuredMeshControlPointsReply) {}
+	rpc ALECreateStructuredMultiMaterialGroup(ALECreateStructuredMultiMatGroupRequest) returns (ALECreateStructuredMultiMatGroupReply) {}
+	rpc ALECreateStructuredMeshVolumeFilling(ALECreateStructuredMeshVolumeFillingRequest) returns (ALECreateStructuredMeshVolumeFillingReply) {}
+	//---DAMPING
+	rpc CreateDampingGlobal(DampingGlobalRequest) returns (DampingGlobalReply) {}
+	rpc CreateDampingPartStiffness(DampingPartStiffnessRequest) returns (DampingPartStiffnessReply) {}
+	rpc CreateAirbagModel(AirbagModelRequest) returns (AirbagModelReply) {}
+    //---EM
+	rpc CreateEMControl(EMControlRequest) returns (EMControlReply) {}
+    rpc CreateEMTimestep(EMTimestepRequest) returns (EMTimestepReply) {}
+	rpc CreateEMControlContact(EMControlContactRequest) returns (EMControlContactReply) {}
+	rpc CreateEMContact(EMContactRequest) returns (EMContactReply) {}
+	rpc CreateEMCircuitRogo(EMCircuitRogoRequest) returns (EMCircuitRogoReply) {}
+	rpc CreateEMCircuit(EMCircuitRequest) returns (EMCircuitReply) {}
+	rpc CreateEMMat001(EMMat001Request) returns (EMMat001Reply) {}
+	rpc CreateEMMat002(EMMat002Request) returns (EMMat002Reply) {}
+	rpc CreateEMSolverBem(EMSolverBemRequest) returns (EMSolverBemReply) {}
+	rpc CreateEMSolverFem(EMSolverFemRequest) returns (EMSolverFemReply) {}
+	rpc CreateEMSolverBemMat(EMSolverBemMatRequest) returns (EMSolverBemMatReply) {}
+	rpc CreateEMSolverFemBemMonolithic(EMSolverFemBemMonolithicRequest) returns (EMSolverFemBemMonolithicReply) {}
+	rpc CreateEMOutput(EMOutputRequest) returns (EMOutputReply) {}
+	rpc CreateEMDatabaseGlobalEnergy(EMDatabaseGlobalEnergyRequest) returns (EMDatabaseGlobalEnergyReply) {}
+	rpc CreateEMPermanentMagnet(EMPermanentMagnetRequest) returns (EMPermanentMagnetReply) {}
+	rpc CreateEMEOSPermeability(EMEOSPermeabilityRequest) returns (EMEOSPermeabilityReply) {}
+	rpc CreateEMEOSTabulated1(EMEOSTabulated1Request) returns (EMEOSTabulated1Reply) {}
+    
+    //---Frequency
+	rpc CreateFrequencyDomainFRF(FrequencyDomainFRFRequest) returns (FrequencyDomainFRFReply) {}
+
+	rpc CreateGeneralKWD(GeneralKWDRequest) returns (GeneralKWDReply) {}
+
+
+
+}

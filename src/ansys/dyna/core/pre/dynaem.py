@@ -352,8 +352,6 @@ class DynaEM(DynaBase):
 
     def save_file(self):
         """Save keyword files."""
-        self.create_em_output(mats=2, matf=2, sols=2, solf=2)
-        self.create_em_database_globalenergy(outlv=1)
         self.analysis.create()
         DynaBase.save_file(self)
 
@@ -396,29 +394,34 @@ class EMAnalysis:
         self.defined = False
         self.stub = DynaBase.get_stub()
         self.type = type.value
+        self.defined_bem = False
+        self.defined_fem = False
 
     def set_timestep(self, timestep):
         """Control the EM time step and its evolution."""
         self.defined = True
         self.timestep = timestep
 
+    def set_em_solver(self, type=EMType.EDDY_CURRENT):
+        """Select Electromagnetism solver."""
+        self.type = type.value
+
     def set_solver_bem(self, solver=BEMSOLVER.PCG, relative_tol=1e-6, max_iteration=1000):
         """Define the type of linear solver and pre-conditioner as well as tolerance for the EM_BEM solve."""
-        self.defined = True
+        self.defined_bem = True
         self.bem_relative_tol = relative_tol
         self.max_iteration = max_iteration
         self.bemsolver = solver.value
 
     def set_solver_fem(self, solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-6, max_iteration=1000):
         """Define some parameters for the EM FEM solver."""
-        self.defined = True
+        self.defined_fem = True
         self.femsolver = solver.value
         self.fem_relative_tol = relative_tol
         self.max_iteration = max_iteration
 
     def set_bem_matrix_tol(self, p_matrix_tol=1e-6, q_matrix_tol=1e-6, w_matrix_tol=1e-6):
         """Define the type of BEM matrices as well as the way they are assembled."""
-        self.defined = True
         EMAnalysis.p_matrix_tol = p_matrix_tol
         EMAnalysis.q_matrix_tol = q_matrix_tol
         EMAnalysis.w_matrix_tol = w_matrix_tol
@@ -430,32 +433,35 @@ class EMAnalysis:
         self.stub.CreateEMControl(EMControlRequest(emsol=self.type, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000))
         self.stub.CreateEMTimestep(EMTimestepRequest(tstype=1, dtconst=self.timestep))
         logging.info("EM Timestep Created...")
-        self.stub.CreateEMSolverBem(
-            EMSolverBemRequest(
-                reltol=self.bem_relative_tol,
-                maxite=self.max_iteration,
-                stype=self.bemsolver,
-                precon=1,
-                uselast=1,
-                ncylbem=3,
+        if self.defined_bem:
+            self.stub.CreateEMSolverBem(
+                EMSolverBemRequest(
+                    reltol=self.bem_relative_tol,
+                    maxite=self.max_iteration,
+                    stype=self.bemsolver,
+                    precon=1,
+                    uselast=1,
+                    ncylbem=3,
+                )
             )
-        )
-        logging.info("EM Solver BEM Created...")
-        self.stub.CreateEMSolverFem(
-            EMSolverFemRequest(
-                reltol=self.fem_relative_tol,
-                maxite=self.max_iteration,
-                stype=self.femsolver,
-                precon=1,
-                uselast=1,
-                ncylbem=3,
+            logging.info("EM Solver BEM Created...")
+        if self.defined_fem:
+            self.stub.CreateEMSolverFem(
+                EMSolverFemRequest(
+                    reltol=self.fem_relative_tol,
+                    maxite=self.max_iteration,
+                    stype=self.femsolver,
+                    precon=1,
+                    uselast=1,
+                    ncylbem=3,
+                )
             )
-        )
-        logging.info("EM Solver FEM Created...")
-        self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=1, reltol=EMAnalysis.p_matrix_tol))
-        self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=2, reltol=EMAnalysis.q_matrix_tol))
-        self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=3, reltol=EMAnalysis.w_matrix_tol))
-        logging.info("EM Solver BEMMAT Created...")
+            logging.info("EM Solver FEM Created...")
+        if self.defined_bem:
+            self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=1, reltol=EMAnalysis.p_matrix_tol))
+            self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=2, reltol=EMAnalysis.q_matrix_tol))
+            self.stub.CreateEMSolverBemMat(EMSolverBemMatRequest(matid=3, reltol=EMAnalysis.w_matrix_tol))
+            logging.info("EM Solver BEMMAT Created...")
 
 
 class CircuitType(Enum):

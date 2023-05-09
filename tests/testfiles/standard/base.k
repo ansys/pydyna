@@ -12,8 +12,8 @@ $#  usrstr    usrfrc     nsbcs    interm     xpene     ssthk      ecdt   tiedprj
          0         0         0         0       0.0         0         0         0
 $#   sfric     dfric       edc       vfc        th     th_sf    pen_sf     ptscl
                                                                                 
-$#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin
-         1                                                            
+$#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin   dir_tie
+         1                                                                            
 $#    isym    nserod    rwgaps    rwgdth     rwksf      icov    swradf    ithoff
                                                                                 
 $#  shledg    pstiff    ithcnt    tdcnof     ftall    unused    shltrw    igactc
