@@ -31,7 +31,6 @@ dependencies = [
     "google-api-python-client>=1.7.11",
     "googleapis-common-protos>=1.52.0",
     "ansys-dpf-core>=0.7.2",
-
 ]
 
 [project.optional-dependencies]
