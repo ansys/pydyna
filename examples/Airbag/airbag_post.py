@@ -9,10 +9,16 @@ This example show how to animate the d3plot and display the stress on the airbag
 from ansys.dpf import core as dpf
 from ansys.dpf.core import examples
 ###############################################################################
+# Connect to DPF
+# ~~~~~~~~~~~~~~
+dpf.connect_to_server()
+
+###############################################################################
 # Load the model
 # ~~~~~~~~~~~~~~
 # Load the model and print the contents of the model. All parts in the model are shell parts.
 # Model info lists the result components as well as the number of states available in the d3plot
+
 ds = dpf.DataSources()
 ds.set_result_file_path(r'D:\PYDYNA_BETA_V.0.1\example-data\pydyna\Airbag\d3plot', 'd3plot')
 model = dpf.Model(ds)

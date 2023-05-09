@@ -10,6 +10,11 @@ from ansys.dpf import core as dpf
 from ansys.dpf.core import examples
 
 ###############################################################################
+# Connect to DPF
+# ~~~~~~~~~~~~~~
+dpf.connect_to_server()
+
+###############################################################################
 # Load the model
 # ~~~~~~~~~~~~~~
 # Load the model and print the contents of the model. Since this is a multiphysics problem
