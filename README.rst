@@ -113,6 +113,15 @@ and install using the preceding command.
 
 Consider installing using a `virtual environment <https://docs.python.org/3/library/venv.html>`_.
 
+Install Solver Docker
+^^^^^^^^^^^^^^^^^^^^^
+
+Once pydyna is installed, the docker-compose.yml file to build and launch the dyna solver docker can be located
+under /src/ansys/dyna/core/solver/. The yml file can be copied locally. To run the docker the following command can be used
+
+.. code:: bash
+    
+	docker-compose up
 
 Documentation
 -------------

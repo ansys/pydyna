@@ -15,6 +15,8 @@ if platform.system() == "Windows":
         sys.path.insert(0, os.path.normpath(os.path.join(cwd, "lib", "windows", "cp38")))
     elif sys.version_info[0] == 3 and sys.version_info[1] == 9:
         sys.path.insert(0, os.path.normpath(os.path.join(cwd, "lib", "windows", "cp39")))
+    elif sys.version_info[0] == 3 and sys.version_info[1] == 10:
+        sys.path.insert(0, os.path.normpath(os.path.join(cwd, "lib", "windows", "cp310")))
 else:
     sys.path.insert(0, os.path.normpath(os.path.join(cwd, "lib", "linux")))
 
