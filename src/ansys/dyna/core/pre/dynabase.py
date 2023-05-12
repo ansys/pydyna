@@ -132,6 +132,20 @@ class Curve:
         return self.id
 
 
+class Function:
+    """Define a function that can be referenced by a limited number of keyword options."""
+
+    def __init__(self, Function=None):
+        self.function = Function
+
+    def create(self, stub):
+        """Create function."""
+        ret = stub.CreateDefineFunction(DefineFunctionRequest(function=self.function))
+        self.id = ret.id
+        logging.info(f"Function {self.id} defined...")
+        return self.id
+
+
 class Point:
     """Define point."""
 
@@ -669,6 +683,7 @@ class NodeSet:
 
     def __init__(self, nodes=[]):
         self.nodes = nodes
+        self.type = "NODESET"
 
     def create(self, stub):
         """Create node set."""

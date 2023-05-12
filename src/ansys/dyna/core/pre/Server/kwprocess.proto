@@ -694,6 +694,14 @@ message DefineVectorReply {
 	int32 answer = 1;
 }
 
+message DefineFunctionRequest {
+	string function = 1;
+}
+
+message DefineFunctionReply {
+	int32 id = 1;
+}
+
 message DefineBoxRequest {
 	float xmin = 1;
 	float xmax = 2;
@@ -1623,8 +1631,9 @@ message EMControlRequest {
     int32 emsol = 1;
 	int32 numls = 2;
 	float macrodt = 3;
-	int32 ncylfem = 4;
-	int32 ncylbem = 5;
+	int32 dimtype = 4;
+	int32 ncylfem = 5;
+	int32 ncylbem = 6;
 }
 
 message EMControlReply {
@@ -1740,6 +1749,11 @@ message EMIsopotentialConnectRequest {
 	int32 isoid1 = 3;
 	int32 isoid2 = 4;
 	float val = 5;
+	int32 lcid = 6;
+	//contype==6
+	float l = 7;
+	float c = 8;
+    float v0 = 9;
 }
 
 message EMIsopotentialConnectReply {
@@ -1978,6 +1992,7 @@ service kwC2S {
 	rpc CreateDefineCurve(DefineCurveRequest) returns (DefineCurveReply) {}
 	rpc CreateDefineCurveFunction(DefineCurveFunctionRequest) returns (DefineCurveFunctionReply) {}
 	rpc CreateDefineVector(DefineVectorRequest) returns (DefineVectorReply) {}
+	rpc CreateDefineFunction(DefineFunctionRequest) returns (DefineFunctionReply) {}
 	rpc CreateDefineBox(DefineBoxRequest) returns (DefineBoxReply) {}
 	rpc CreateDefineDEMeshSurface(DefineDEMeshSurfaceRequest) returns (DefineDEMeshSurfaceReply) {}
 	rpc CreateDefineOrientation(DefineOrientationRequest) returns (DefineOrientationReply) {}

@@ -359,6 +359,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.DefineVectorRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.DefineVectorReply.FromString,
                 )
+        self.CreateDefineFunction = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateDefineFunction',
+                request_serializer=kwprocess__pb2.DefineFunctionRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.DefineFunctionReply.FromString,
+                )
         self.CreateDefineBox = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateDefineBox',
                 request_serializer=kwprocess__pb2.DefineBoxRequest.SerializeToString,
@@ -1239,6 +1244,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateDefineVector(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateDefineFunction(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2146,6 +2157,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateDefineVector,
                     request_deserializer=kwprocess__pb2.DefineVectorRequest.FromString,
                     response_serializer=kwprocess__pb2.DefineVectorReply.SerializeToString,
+            ),
+            'CreateDefineFunction': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateDefineFunction,
+                    request_deserializer=kwprocess__pb2.DefineFunctionRequest.FromString,
+                    response_serializer=kwprocess__pb2.DefineFunctionReply.SerializeToString,
             ),
             'CreateDefineBox': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateDefineBox,
@@ -3782,6 +3798,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDefineVector',
             kwprocess__pb2.DefineVectorRequest.SerializeToString,
             kwprocess__pb2.DefineVectorReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateDefineFunction(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDefineFunction',
+            kwprocess__pb2.DefineFunctionRequest.SerializeToString,
+            kwprocess__pb2.DefineFunctionReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
