@@ -652,6 +652,16 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         print(msg)
         return kwprocess_pb2.DefineVectorReply(answer=0)
 
+    def CreateDefineFunction(self, request, context):
+        funcid = self.kwdproc.get_data(gdt.KWD_DEFINE_FUNCTION_LASTID) + 1
+        function = request.function
+        card1 = str(funcid)
+        card2 = str(function)
+        newk = "*DEFINE_FUNCTION\n" + card1 + "\n" +card2
+        self.kwdproc.newkeyword(newk)
+        print(f"DEFINE_FUNCTION {funcid} Created...")
+        return kwprocess_pb2.DefineFunctionReply(id=funcid)
+    
     def CreateDefineBox(self, request, context):
         boxid = self.kwdproc.get_data(gdt.KWD_DEFINE_BOX_LASTID) + 1
         xmin = request.xmin
@@ -2491,19 +2501,10 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         emsol = request.emsol
         numls = request.numls
         macrodt = request.macrodt
+        dimtype = request.dimtype
         ncylfem = request.ncylfem
         ncylbem = request.ncylbem
-        card1 = (
-            str(emsol)
-            + ","
-            + str(numls)
-            + ","
-            + str(macrodt)
-            + ",0,2,,"
-            + str(ncylfem)
-            + ","
-            + str(ncylbem)
-        )
+        card1 = str(emsol)+ ","+ str(numls)+ ","+ str(macrodt)+ ","+ str(dimtype)+ ",2,,"+ str(ncylfem)+ ","+ str(ncylbem)
         newk = "*EM_CONTROL\n" + card1
         self.kwdproc.newkeyword(newk)
         msg = "*EM_CONTROL Created..."
@@ -2646,15 +2647,21 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         isoid1 = request.isoid1
         isoid2 = request.isoid2
         val = request.val
-        card1 = str(conid)+ ","+ str(contype)+ ","+ str(isoid1)+ ","+ str(isoid2)+ ","+ str(val)
-        newk = "*EM_ISOPOTENTIAL_CONNECT\n" + card1
+        lcid = request.lcid
+        l,c,v0 = request.l,request.c,request.v0
+        card1 = str(conid)+ ","+ str(contype)+ ","+ str(isoid1)+ ","+ str(isoid2)+ ","+ str(val)+ ","+ str(lcid)
+        if contype==6:
+            card2 = str(l)+ ","+ str(c)+ ","+ str(v0)
+            newk = "*EM_ISOPOTENTIAL_CONNECT\n" + card1 + "\n" + card2
+        else:
+            newk = "*EM_ISOPOTENTIAL_CONNECT\n" + card1
         self.kwdproc.newkeyword(newk)
         msg = "*EM_ISOPOTENTIAL_CONNECT Created..."
         print(msg)
         return kwprocess_pb2.EMIsopotentialConnectReply(id=conid)
     
     def CreateEMIsopotentialRogo(self, request, context):
-        isoid = request.isoid
+        isoid = self.kwdproc.get_data(gdt.KWD_EM_ISOPOT_ROGO_LASTID) + 1
         settype = request.settype
         setid = request.setid
         card1 = str(isoid)+ ","+ str(settype)+ ","+ str(setid)
