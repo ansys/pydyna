@@ -164,6 +164,33 @@ class Direction:
         self.z = z
 
 
+class Transform:
+    """Define a transformation."""
+
+    def __init__(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0):
+        param = [option, param1, param2, param3, param4, param5, param6, param7]
+        self.paramlist = []
+        self.paramlist.append(param)
+
+    def add_transform(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0):
+        """Define a transformation matrix."""
+        param = [option, param1, param2, param3, param4, param5, param6, param7]
+        self.paramlist.append(param)
+
+    def create(self, stub):
+        """Create transformation."""
+        options = []
+        params = []
+        for obj in self.paramlist:
+            options.append(obj[0])
+            for i in range(1, 8):
+                params.append(obj[i])
+        ret = stub.CreateDefineTransformation(DefineTransformationRequest(option=options, param=params))
+        self.id = ret.id
+        logging.info(f"Transformation {self.id} defined...")
+        return self.id
+
+
 class Velocity:
     """Define translational velocity."""
 
@@ -646,6 +673,45 @@ class DynaBase:
     def add(self, obj):
         """Add entities in this object."""
         self.entities.append(obj)
+
+    def set_transform(self, filename=None, idnoff=0, ideoff=0, idpoff=0, idmoff=0, idsoff=0, idfoff=0, transform=None):
+        """Include independent input files containing model data,allow for node, element, and set
+        IDs to be offset and for coordinates and constitutive parameters to be transformed andnscaled.
+
+        Parameters
+        ----------
+        filename : string
+            File name of file to be included in this keyword file.
+        idnoff : int
+            Offset to node ID.
+        ideoff : int
+            Offset to element ID.
+        idpoff : int
+            Offset to part ID.
+        idmoff : int
+            Offset to material ID.
+        idsoff : int
+            Offset to set ID.
+        idfoff : int
+            Offset to function ID, table ID, and curve ID.
+        transform : Transform
+            Define a transformation.
+        """
+        tranid = transform.create(self.stub)
+        ret = self.stub.CreateIncludeTransform(
+            IncludeTransformRequest(
+                filename=filename,
+                idnoff=idnoff,
+                ideoff=ideoff,
+                idpoff=idpoff,
+                idmoff=idmoff,
+                idsoff=idsoff,
+                idfoff=idfoff,
+                tranid=tranid,
+            )
+        )
+        logging.info("Include transform Created...")
+        return ret
 
     def save_file(self):
         """Save keyword files.

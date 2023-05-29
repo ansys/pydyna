@@ -340,6 +340,10 @@ class MatAdditional:
                     EMMat004Request(mid=matid, mtype=self.em_material_type, sigma=self.em_initial_conductivity)
                 )
         if self.em:
+            if self.em_eos is not None:
+                eosid = self.em_eos.create(stub)
+            else:
+                eosid = 0
             stub.CreateMatEM(
                 MatEMRequest(mid=matid, mtype=self.em_material_type, sigma=self.em_initial_conductivity, eosid=eosid)
             )

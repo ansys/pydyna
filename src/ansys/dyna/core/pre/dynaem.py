@@ -624,7 +624,9 @@ class Isopotential:
     set : Set
         Segment Set or Node Set.
     """
+
     isopotlist = []
+
     def __init__(self, set=None):
         self.stub = DynaBase.get_stub()
         self.set = set
@@ -632,7 +634,7 @@ class Isopotential:
 
     def create(self):
         """Create Isopotential."""
-        isoinfo = [self.set.type,self.set.nodes]
+        isoinfo = [self.set.type, self.set.nodes]
         if isoinfo in Isopotential.isopotlist:
             pass
         id, settype = 0, 1
