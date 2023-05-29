@@ -24,6 +24,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.Chunk.SerializeToString,
                 response_deserializer=kwprocess__pb2.kwFileReply.FromString,
                 )
+        self.CreateIncludeTransform = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateIncludeTransform',
+                request_serializer=kwprocess__pb2.IncludeTransformRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.IncludeTransformReply.FromString,
+                )
         self.CreateTimestep = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateTimestep',
                 request_serializer=kwprocess__pb2.TimestepRequest.SerializeToString,
@@ -368,6 +373,11 @@ class kwC2SStub(object):
                 '/kwgrpc.kwC2S/CreateDefineBox',
                 request_serializer=kwprocess__pb2.DefineBoxRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.DefineBoxReply.FromString,
+                )
+        self.CreateDefineTransformation = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateDefineTransformation',
+                request_serializer=kwprocess__pb2.DefineTransformationRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.DefineTransformationReply.FromString,
                 )
         self.CreateDefineDEMeshSurface = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateDefineDEMeshSurface',
@@ -836,6 +846,12 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateIncludeTransform(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateTimestep(self, request, context):
         """---CONTROL
         """
@@ -1256,6 +1272,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateDefineBox(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateDefineTransformation(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1823,6 +1845,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.Chunk.FromString,
                     response_serializer=kwprocess__pb2.kwFileReply.SerializeToString,
             ),
+            'CreateIncludeTransform': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateIncludeTransform,
+                    request_deserializer=kwprocess__pb2.IncludeTransformRequest.FromString,
+                    response_serializer=kwprocess__pb2.IncludeTransformReply.SerializeToString,
+            ),
             'CreateTimestep': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateTimestep,
                     request_deserializer=kwprocess__pb2.TimestepRequest.FromString,
@@ -2167,6 +2194,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.CreateDefineBox,
                     request_deserializer=kwprocess__pb2.DefineBoxRequest.FromString,
                     response_serializer=kwprocess__pb2.DefineBoxReply.SerializeToString,
+            ),
+            'CreateDefineTransformation': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateDefineTransformation,
+                    request_deserializer=kwprocess__pb2.DefineTransformationRequest.FromString,
+                    response_serializer=kwprocess__pb2.DefineTransformationReply.SerializeToString,
             ),
             'CreateDefineDEMeshSurface': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateDefineDEMeshSurface,
@@ -2659,6 +2691,23 @@ class kwC2S(object):
         return grpc.experimental.stream_unary(request_iterator, target, '/kwgrpc.kwC2S/Upload',
             kwprocess__pb2.Chunk.SerializeToString,
             kwprocess__pb2.kwFileReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateIncludeTransform(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateIncludeTransform',
+            kwprocess__pb2.IncludeTransformRequest.SerializeToString,
+            kwprocess__pb2.IncludeTransformReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3832,6 +3881,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDefineBox',
             kwprocess__pb2.DefineBoxRequest.SerializeToString,
             kwprocess__pb2.DefineBoxReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateDefineTransformation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDefineTransformation',
+            kwprocess__pb2.DefineTransformationRequest.SerializeToString,
+            kwprocess__pb2.DefineTransformationReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

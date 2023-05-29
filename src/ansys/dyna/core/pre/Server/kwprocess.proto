@@ -22,6 +22,21 @@ message kwFileNameReply {
 	bool ret = 1;
 }
 
+message IncludeTransformRequest {
+	string filename = 1;
+	int32 idnoff = 2;
+	int32 ideoff = 3;
+	int32 idpoff = 4;
+	int32 idmoff = 5;
+	int32 idsoff = 6;
+	int32 idfoff = 7;
+	int32 tranid = 8;
+}
+
+message IncludeTransformReply {
+	int32 answer = 1;
+}
+
 //---control_* card
 message TimestepRequest {
 	float tssfac = 1;
@@ -713,6 +728,16 @@ message DefineBoxRequest {
 
 message DefineBoxReply {
 	int32 boxid = 1;
+}
+
+message DefineTransformationRequest {
+    int32 tranid = 1;
+	repeated string option = 2;
+	repeated float param = 3;
+}
+
+message DefineTransformationReply {
+	int32 id = 1;
 }
 
 message DefineDEMeshSurfaceRequest {
@@ -1906,6 +1931,7 @@ message GeneralKWDReply {
 service kwC2S {
 	rpc kwSetFileName(kwFileName) returns(kwFileNameReply) {}
 	rpc Upload(stream Chunk) returns (kwFileReply) {}
+	rpc CreateIncludeTransform(IncludeTransformRequest) returns (IncludeTransformReply) {}
 	//---CONTROL
 	rpc CreateTimestep(TimestepRequest) returns (TimestepReply) {}
 	rpc CreateTermination(TerminationRequest) returns (TerminationReply) {}
@@ -1994,6 +2020,7 @@ service kwC2S {
 	rpc CreateDefineVector(DefineVectorRequest) returns (DefineVectorReply) {}
 	rpc CreateDefineFunction(DefineFunctionRequest) returns (DefineFunctionReply) {}
 	rpc CreateDefineBox(DefineBoxRequest) returns (DefineBoxReply) {}
+	rpc CreateDefineTransformation(DefineTransformationRequest) returns (DefineTransformationReply) {}
 	rpc CreateDefineDEMeshSurface(DefineDEMeshSurfaceRequest) returns (DefineDEMeshSurfaceReply) {}
 	rpc CreateDefineOrientation(DefineOrientationRequest) returns (DefineOrientationReply) {}
 	rpc CreateDefineSPHMassflowPlane(DefineSPHMassflowPlaneRequest) returns (DefineSPHMassflowPlaneReply) {}

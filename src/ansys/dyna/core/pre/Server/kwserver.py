@@ -124,6 +124,23 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         print("Termination Created...")
         return kwprocess_pb2.TerminationReply(answer=0)
+    
+    def CreateIncludeTransform(self, request, context):
+        filename = request.filename
+        idnoff = request.idnoff
+        ideoff = request.ideoff
+        idpoff = request.idpoff
+        idmoff = request.idmoff
+        idsoff = request.idsoff
+        idfoff = request.idfoff
+        tranid = request.tranid
+        card1 = filename
+        card2 = str(idnoff) + "," + str(ideoff) + "," + str(idpoff) + "," + str(idmoff)+ "," + str(idsoff) + "," + str(idfoff)
+        card5 = str(tranid)
+        newk = "*INCLUDE_TRANSFORM\n" + card1 + "\n" + card2 + "\n\n\n" + card5
+        self.kwdproc.newkeyword(newk)
+        print("Include Transform Created...")
+        return kwprocess_pb2.IncludeTransformReply(answer=0)
 
     def CreateControlOutput(self, request, context):
         npopt = request.npopt
@@ -691,6 +708,21 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.newkeyword(newk)
         print(f"DefineBox {boxid} Created...")
         return kwprocess_pb2.DefineBoxReply(boxid=boxid)
+    
+    def CreateDefineTransformation(self, request, context):
+        tranid = self.kwdproc.get_data(gdt.KWD_DEFINE_TRANSFORMATION_LASTID) + 1
+        option = request.option
+        param = request.param
+        card1 = str(tranid)
+        newk = "*DEFINE_TRANSFORMATION\n" + card1
+        i=0
+        for op in option:
+            subcard = str(op)+ ","+str(param[i])+ "," + str(param[i+1])+ ","+str(param[i+2])+ "," + str(param[i+3])+ ","+str(param[i+4])+ "," + str(param[i+5])+ ","+str(param[i+6])
+            newk += "\n" + subcard
+            i+=7
+        self.kwdproc.newkeyword(newk)
+        print(f"Define Transformation {tranid} Created...")
+        return kwprocess_pb2.DefineTransformationReply(id=tranid)
 
     def CreateDefineDEMeshSurface(self, request, context):
         sid = request.sid

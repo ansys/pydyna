@@ -60,6 +60,13 @@ def em_initialfile():
     return resolve_test_file("test_em.k", "initial")
 
 @pytest.fixture()
+def resolve_solution_path():
+    """Get the filepath of solution files."""
+    path = os.path.dirname(os.path.abspath(__file__))
+    solution_path = os.path.join(path, "testfiles", "initial", "solution")
+    return solution_path
+
+@pytest.fixture()
 def resolve_icfd_path():
     """Get the filepath of icfd files."""
     path = os.path.dirname(os.path.abspath(__file__))
@@ -102,12 +109,6 @@ def mech_initialfile():
 def sale_initialfile():
     """Resolve the path for sale initial file."""
     return resolve_test_file("test_sale.k", "initial")
-
-
-@pytest.fixture()
-def solution_initialfile():
-    """Resolve the path for solution initial file."""
-    return resolve_test_file("test_solution.k", "initial")
 
 
 @pytest.fixture()
