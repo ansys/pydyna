@@ -69,7 +69,7 @@ doc = [
     "joblib==1.2.0",
     "scikit-learn==1.2.2",
     "ipython==8.13.2",
-    "jupyterlab==4.0.0",
+    "jupyterlab==4.0.1",
 ]
 
 [project.urls]
