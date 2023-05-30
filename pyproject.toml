@@ -50,7 +50,7 @@ tests = [
 doc = [
     "recommonmark==0.7.1",
     "matplotlib==3.7.1",
-    "imageio==2.29.0",
+    "imageio==2.30.0",
     "imageio-ffmpeg==0.4.8",
     "pyvista==0.39.1",
     "numpydoc==1.5.0",
