@@ -24,6 +24,11 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.Chunk.SerializeToString,
                 response_deserializer=kwprocess__pb2.kwFileReply.FromString,
                 )
+        self.CreateIncludeTransform = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateIncludeTransform',
+                request_serializer=kwprocess__pb2.IncludeTransformRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.IncludeTransformReply.FromString,
+                )
         self.CreateTimestep = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateTimestep',
                 request_serializer=kwprocess__pb2.TimestepRequest.SerializeToString,
@@ -359,10 +364,20 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.DefineVectorRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.DefineVectorReply.FromString,
                 )
+        self.CreateDefineFunction = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateDefineFunction',
+                request_serializer=kwprocess__pb2.DefineFunctionRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.DefineFunctionReply.FromString,
+                )
         self.CreateDefineBox = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateDefineBox',
                 request_serializer=kwprocess__pb2.DefineBoxRequest.SerializeToString,
                 response_deserializer=kwprocess__pb2.DefineBoxReply.FromString,
+                )
+        self.CreateDefineTransformation = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateDefineTransformation',
+                request_serializer=kwprocess__pb2.DefineTransformationRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.DefineTransformationReply.FromString,
                 )
         self.CreateDefineDEMeshSurface = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateDefineDEMeshSurface',
@@ -739,6 +754,26 @@ class kwC2SStub(object):
                 request_serializer=kwprocess__pb2.EMMat002Request.SerializeToString,
                 response_deserializer=kwprocess__pb2.EMMat002Reply.FromString,
                 )
+        self.CreateEMMat004 = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEMMat004',
+                request_serializer=kwprocess__pb2.EMMat004Request.SerializeToString,
+                response_deserializer=kwprocess__pb2.EMMat004Reply.FromString,
+                )
+        self.CreateEMIsopotential = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEMIsopotential',
+                request_serializer=kwprocess__pb2.EMIsopotentialRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.EMIsopotentialReply.FromString,
+                )
+        self.CreateEMIsopotentialConnect = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEMIsopotentialConnect',
+                request_serializer=kwprocess__pb2.EMIsopotentialConnectRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.EMIsopotentialConnectReply.FromString,
+                )
+        self.CreateEMIsopotentialRogo = channel.unary_unary(
+                '/kwgrpc.kwC2S/CreateEMIsopotentialRogo',
+                request_serializer=kwprocess__pb2.EMIsopotentialRogoRequest.SerializeToString,
+                response_deserializer=kwprocess__pb2.EMIsopotentialRogoReply.FromString,
+                )
         self.CreateEMSolverBem = channel.unary_unary(
                 '/kwgrpc.kwC2S/CreateEMSolverBem',
                 request_serializer=kwprocess__pb2.EMSolverBemRequest.SerializeToString,
@@ -806,6 +841,12 @@ class kwC2SServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def Upload(self, request_iterator, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateIncludeTransform(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1224,7 +1265,19 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateDefineFunction(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateDefineBox(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateDefineTransformation(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1688,6 +1741,30 @@ class kwC2SServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateEMMat004(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateEMIsopotential(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateEMIsopotentialConnect(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateEMIsopotentialRogo(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateEMSolverBem(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1767,6 +1844,11 @@ def add_kwC2SServicer_to_server(servicer, server):
                     servicer.Upload,
                     request_deserializer=kwprocess__pb2.Chunk.FromString,
                     response_serializer=kwprocess__pb2.kwFileReply.SerializeToString,
+            ),
+            'CreateIncludeTransform': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateIncludeTransform,
+                    request_deserializer=kwprocess__pb2.IncludeTransformRequest.FromString,
+                    response_serializer=kwprocess__pb2.IncludeTransformReply.SerializeToString,
             ),
             'CreateTimestep': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateTimestep,
@@ -2103,10 +2185,20 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.DefineVectorRequest.FromString,
                     response_serializer=kwprocess__pb2.DefineVectorReply.SerializeToString,
             ),
+            'CreateDefineFunction': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateDefineFunction,
+                    request_deserializer=kwprocess__pb2.DefineFunctionRequest.FromString,
+                    response_serializer=kwprocess__pb2.DefineFunctionReply.SerializeToString,
+            ),
             'CreateDefineBox': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateDefineBox,
                     request_deserializer=kwprocess__pb2.DefineBoxRequest.FromString,
                     response_serializer=kwprocess__pb2.DefineBoxReply.SerializeToString,
+            ),
+            'CreateDefineTransformation': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateDefineTransformation,
+                    request_deserializer=kwprocess__pb2.DefineTransformationRequest.FromString,
+                    response_serializer=kwprocess__pb2.DefineTransformationReply.SerializeToString,
             ),
             'CreateDefineDEMeshSurface': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateDefineDEMeshSurface,
@@ -2483,6 +2575,26 @@ def add_kwC2SServicer_to_server(servicer, server):
                     request_deserializer=kwprocess__pb2.EMMat002Request.FromString,
                     response_serializer=kwprocess__pb2.EMMat002Reply.SerializeToString,
             ),
+            'CreateEMMat004': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEMMat004,
+                    request_deserializer=kwprocess__pb2.EMMat004Request.FromString,
+                    response_serializer=kwprocess__pb2.EMMat004Reply.SerializeToString,
+            ),
+            'CreateEMIsopotential': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEMIsopotential,
+                    request_deserializer=kwprocess__pb2.EMIsopotentialRequest.FromString,
+                    response_serializer=kwprocess__pb2.EMIsopotentialReply.SerializeToString,
+            ),
+            'CreateEMIsopotentialConnect': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEMIsopotentialConnect,
+                    request_deserializer=kwprocess__pb2.EMIsopotentialConnectRequest.FromString,
+                    response_serializer=kwprocess__pb2.EMIsopotentialConnectReply.SerializeToString,
+            ),
+            'CreateEMIsopotentialRogo': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateEMIsopotentialRogo,
+                    request_deserializer=kwprocess__pb2.EMIsopotentialRogoRequest.FromString,
+                    response_serializer=kwprocess__pb2.EMIsopotentialRogoReply.SerializeToString,
+            ),
             'CreateEMSolverBem': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateEMSolverBem,
                     request_deserializer=kwprocess__pb2.EMSolverBemRequest.FromString,
@@ -2579,6 +2691,23 @@ class kwC2S(object):
         return grpc.experimental.stream_unary(request_iterator, target, '/kwgrpc.kwC2S/Upload',
             kwprocess__pb2.Chunk.SerializeToString,
             kwprocess__pb2.kwFileReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateIncludeTransform(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateIncludeTransform',
+            kwprocess__pb2.IncludeTransformRequest.SerializeToString,
+            kwprocess__pb2.IncludeTransformReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3722,6 +3851,23 @@ class kwC2S(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def CreateDefineFunction(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDefineFunction',
+            kwprocess__pb2.DefineFunctionRequest.SerializeToString,
+            kwprocess__pb2.DefineFunctionReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def CreateDefineBox(request,
             target,
             options=(),
@@ -3735,6 +3881,23 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDefineBox',
             kwprocess__pb2.DefineBoxRequest.SerializeToString,
             kwprocess__pb2.DefineBoxReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateDefineTransformation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateDefineTransformation',
+            kwprocess__pb2.DefineTransformationRequest.SerializeToString,
+            kwprocess__pb2.DefineTransformationReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -5010,6 +5173,74 @@ class kwC2S(object):
         return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMMat002',
             kwprocess__pb2.EMMat002Request.SerializeToString,
             kwprocess__pb2.EMMat002Reply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEMMat004(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMMat004',
+            kwprocess__pb2.EMMat004Request.SerializeToString,
+            kwprocess__pb2.EMMat004Reply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEMIsopotential(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMIsopotential',
+            kwprocess__pb2.EMIsopotentialRequest.SerializeToString,
+            kwprocess__pb2.EMIsopotentialReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEMIsopotentialConnect(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMIsopotentialConnect',
+            kwprocess__pb2.EMIsopotentialConnectRequest.SerializeToString,
+            kwprocess__pb2.EMIsopotentialConnectReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateEMIsopotentialRogo(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kwgrpc.kwC2S/CreateEMIsopotentialRogo',
+            kwprocess__pb2.EMIsopotentialRogoRequest.SerializeToString,
+            kwprocess__pb2.EMIsopotentialRogoReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
