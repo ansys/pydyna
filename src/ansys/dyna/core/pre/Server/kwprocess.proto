@@ -22,6 +22,21 @@ message kwFileNameReply {
 	bool ret = 1;
 }
 
+message IncludeTransformRequest {
+	string filename = 1;
+	int32 idnoff = 2;
+	int32 ideoff = 3;
+	int32 idpoff = 4;
+	int32 idmoff = 5;
+	int32 idsoff = 6;
+	int32 idfoff = 7;
+	int32 tranid = 8;
+}
+
+message IncludeTransformReply {
+	int32 answer = 1;
+}
+
 //---control_* card
 message TimestepRequest {
 	float tssfac = 1;
@@ -694,6 +709,14 @@ message DefineVectorReply {
 	int32 answer = 1;
 }
 
+message DefineFunctionRequest {
+	string function = 1;
+}
+
+message DefineFunctionReply {
+	int32 id = 1;
+}
+
 message DefineBoxRequest {
 	float xmin = 1;
 	float xmax = 2;
@@ -705,6 +728,16 @@ message DefineBoxRequest {
 
 message DefineBoxReply {
 	int32 boxid = 1;
+}
+
+message DefineTransformationRequest {
+    int32 tranid = 1;
+	repeated string option = 2;
+	repeated float param = 3;
+}
+
+message DefineTransformationReply {
+	int32 id = 1;
 }
 
 message DefineDEMeshSurfaceRequest {
@@ -1623,8 +1656,9 @@ message EMControlRequest {
     int32 emsol = 1;
 	int32 numls = 2;
 	float macrodt = 3;
-	int32 ncylfem = 4;
-	int32 ncylbem = 5;
+	int32 dimtype = 4;
+	int32 ncylfem = 5;
+	int32 ncylbem = 6;
 }
 
 message EMControlReply {
@@ -1695,6 +1729,7 @@ message EMMat001Request {
     int32 mid = 1;
 	int32 mtype = 2;
 	float sigma = 3;
+	int32 eosid = 4;
 }
 
 message EMMat001Reply {
@@ -1711,6 +1746,53 @@ message EMMat002Request {
 
 message EMMat002Reply {
 	int32 answer = 1;
+}
+
+message EMMat004Request {
+    int32 mid = 1;
+	int32 mtype = 2;
+	float sigma = 3;
+}
+
+message EMMat004Reply {
+	int32 answer = 1;
+}
+
+message EMIsopotentialRequest {
+    int32 isoid = 1;
+	int32 settype = 2;
+	int32 setid = 3;
+}
+
+message EMIsopotentialReply {
+	int32 id = 1;
+}
+
+message EMIsopotentialConnectRequest {
+    int32 conid = 1;
+	int32 contype = 2;
+	int32 isoid1 = 3;
+	int32 isoid2 = 4;
+	float val = 5;
+	int32 lcid = 6;
+	//contype==6
+	float l = 7;
+	float c = 8;
+    float v0 = 9;
+}
+
+message EMIsopotentialConnectReply {
+	int32 id = 1;
+}
+
+message EMIsopotentialRogoRequest {
+    int32 isoid = 1;
+	int32 settype = 2;
+	int32 setid = 3;
+}
+
+message EMIsopotentialRogoReply {
+	int32 id = 1;
 }
 
 message EMSolverBemRequest {
@@ -1849,6 +1931,7 @@ message GeneralKWDReply {
 service kwC2S {
 	rpc kwSetFileName(kwFileName) returns(kwFileNameReply) {}
 	rpc Upload(stream Chunk) returns (kwFileReply) {}
+	rpc CreateIncludeTransform(IncludeTransformRequest) returns (IncludeTransformReply) {}
 	//---CONTROL
 	rpc CreateTimestep(TimestepRequest) returns (TimestepReply) {}
 	rpc CreateTermination(TerminationRequest) returns (TerminationReply) {}
@@ -1935,7 +2018,9 @@ service kwC2S {
 	rpc CreateDefineCurve(DefineCurveRequest) returns (DefineCurveReply) {}
 	rpc CreateDefineCurveFunction(DefineCurveFunctionRequest) returns (DefineCurveFunctionReply) {}
 	rpc CreateDefineVector(DefineVectorRequest) returns (DefineVectorReply) {}
+	rpc CreateDefineFunction(DefineFunctionRequest) returns (DefineFunctionReply) {}
 	rpc CreateDefineBox(DefineBoxRequest) returns (DefineBoxReply) {}
+	rpc CreateDefineTransformation(DefineTransformationRequest) returns (DefineTransformationReply) {}
 	rpc CreateDefineDEMeshSurface(DefineDEMeshSurfaceRequest) returns (DefineDEMeshSurfaceReply) {}
 	rpc CreateDefineOrientation(DefineOrientationRequest) returns (DefineOrientationReply) {}
 	rpc CreateDefineSPHMassflowPlane(DefineSPHMassflowPlaneRequest) returns (DefineSPHMassflowPlaneReply) {}
@@ -2025,6 +2110,10 @@ service kwC2S {
 	rpc CreateEMCircuit(EMCircuitRequest) returns (EMCircuitReply) {}
 	rpc CreateEMMat001(EMMat001Request) returns (EMMat001Reply) {}
 	rpc CreateEMMat002(EMMat002Request) returns (EMMat002Reply) {}
+	rpc CreateEMMat004(EMMat004Request) returns (EMMat004Reply) {}
+	rpc CreateEMIsopotential(EMIsopotentialRequest) returns (EMIsopotentialReply) {}
+	rpc CreateEMIsopotentialConnect(EMIsopotentialConnectRequest) returns (EMIsopotentialConnectReply) {}
+	rpc CreateEMIsopotentialRogo(EMIsopotentialRogoRequest) returns (EMIsopotentialRogoReply) {}
 	rpc CreateEMSolverBem(EMSolverBemRequest) returns (EMSolverBemReply) {}
 	rpc CreateEMSolverFem(EMSolverFemRequest) returns (EMSolverFemReply) {}
 	rpc CreateEMSolverBemMat(EMSolverBemMatRequest) returns (EMSolverBemMatReply) {}

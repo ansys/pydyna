@@ -15,6 +15,11 @@ airbag_deploy = os.path.join(_module_path, "airbag", "airbag_deploy")
 # EM
 em_railgun = os.path.join(_module_path, "em", "em_railgun")
 em_resistive_heating = os.path.join(_module_path, "em", "em_resistive_heating")
+em_resistive_heating_2d = os.path.join(_module_path, "em", "em_resistive_heating_2d")
+em_resistive_heating_2d_isopots = os.path.join(_module_path, "em", "em_resistive_heating_2d_isopots")
+em_resistive_heating_2d_multi_isopots = os.path.join(_module_path, "em", "em_resistive_heating_2d_multi_isopots")
+em_rlc_isopotential = os.path.join(_module_path, "em", "em_rlc_isopotential")
+em_rlc_define_func = os.path.join(_module_path, "em", "em_rlc_define_func")
 
 belted_dummy = os.path.join(_module_path, "explicit", "belted_dummy")
 # ICFD
