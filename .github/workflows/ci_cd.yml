@@ -134,13 +134,8 @@ jobs:
 
   tests:
     name: Testing
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     needs: [smoke-tests]
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest, ubuntu-latest]
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -152,35 +147,39 @@ jobs:
           cache: 'pip'
           cache-dependency-path: 'pyproject.toml'
 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: LS-DYNA Keyword server activation
+        run: |
+          docker pull ghcr.io/ansys/ls-pre:latest
+          docker run -d --name kw_server -p 50051:50051 ghcr.io/ansys/ls-pre:latest && echo "Keyword server active on port 50051."
+
       - name: Install ansys-dyna-core (with test requirements)
         run: |
           pip install -e .[tests]
 
-      - name: Run tests (Windows)
-        if: runner.os == 'Windows'
+      - name: Run tests
         run: |
-          Start-Job -ScriptBlock {cd ${{ github.workspace }}\src\ansys\dyna\core\pre\Server\;python kwserver.py >> server_output.txt}
-          Start-Sleep -Seconds 10
           pytest
 
-      - name: Run tests (Linux)
-        if: runner.os == 'Linux'
+      - name: Extract the server logs
+        if: always()
         run: |
-          cd src/ansys/dyna/core/pre/Server
-          python kwserver.py > server_output.txt &
-          sleep 10
-          cd -
-          pytest
+          docker logs kw_server > server_output.txt
 
       - name: Upload the server logs
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: server-logs-${{ runner.os }}
-          path: src/ansys/dyna/core/pre/Server/server_output.txt
+          name: server_output.txt
+          path: server_output.txt
 
       - name: Upload coverage results
-        if: runner.os == 'Linux'
         uses: actions/upload-artifact@v3
         with:
           name: coverage-html
