@@ -29,7 +29,7 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_mech(mech_initialfile, resolve_server_path, resolve_standard_path):
+def test_mech(mech_initialfile, resolve_output_path, resolve_standard_path):
     solution = DynaSolution("localhost")
     fns = []
     fns.append(mech_initialfile)
@@ -63,7 +63,9 @@ def test_mech(mech_initialfile, resolve_server_path, resolve_standard_path):
         abstat=2.0e-4, glstat=2.0e-4, matsum=2.0e-4, rcforc=2.0e-4, rbdout=2.0e-4, rwforc=2.0e-4
     )
     solution.create_database_binary(dt=5e-4, ieverp=1)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_mech.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_mech.k")
+    outputfile = os.path.join(resolve_output_path, "test_mech.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "mech.k")
     assert comparefile(outputfile, standardfile)
