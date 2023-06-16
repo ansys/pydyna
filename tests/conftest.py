@@ -41,6 +41,13 @@ def resolve_standard_path():
     standard_files_path = os.path.join(local_path, "testfiles", "standard")
     return standard_files_path
 
+@pytest.fixture()
+def resolve_output_path():
+    """Get the filepath of output files."""
+    local_path = os.path.dirname(os.path.abspath(__file__))
+    output_files_path = os.path.join(local_path, "testfiles", "output")
+    return output_files_path
+
 
 @pytest.fixture()
 def base_initialfile():

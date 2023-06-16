@@ -104,7 +104,7 @@ class IGAServer(kwprocess_pb2_grpc.kwC2SServicer):
         self.kwdproc.write(subsystems)
         self.fns.clear()
         print("Saved Successfully!")
-        return kwprocess_pb2.SaveFileReply(length=1)
+        return kwprocess_pb2.SaveFileReply(length=1,outpath=fn)
 
     def CreateTimestep(self, request, context):
         tssfac = request.tssfac
