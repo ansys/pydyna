@@ -38,19 +38,19 @@ tests = [
     "pyvista==0.39.1",
     "matplotlib==3.7.1",
     "numpy==1.24.3",
-    "pytest==7.3.1",
+    "pytest==7.3.2",
     "pytest-cov==4.1.0",
     "joblib==1.2.0",
     "pandas==2.0.2",
     "openpyxl==3.1.2",
     "scikit-learn==1.2.2",
     "pytest-xdist==3.3.1",
-    "ipython==8.13.2",
+    "ipython==8.14.0",
 ]
 doc = [
     "recommonmark==0.7.1",
     "matplotlib==3.7.1",
-    "imageio==2.30.0",
+    "imageio==2.31.1",
     "imageio-ffmpeg==0.4.8",
     "pyvista==0.39.1",
     "numpydoc==1.5.0",
@@ -68,8 +68,8 @@ doc = [
     "ipywidgets==8.0.6",
     "joblib==1.2.0",
     "scikit-learn==1.2.2",
-    "ipython==8.13.2",
-    "jupyterlab==4.0.1",
+    "ipython==8.14.0",
+    "jupyterlab==4.0.2",
 ]
 
 [project.urls]
