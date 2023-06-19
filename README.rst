@@ -38,7 +38,7 @@ detailed description of the package.
 Install PyDyna-Pre Docker
 -------------------------
 
-Launching the PyDyna-Pre service locally,the only requirement are that:
+Launching the PyDyna-Pre service locally, the only requirement is that:
 
 * Docker is installed on your machine.
 
@@ -47,13 +47,13 @@ Launching the PyDyna-Pre service locally,the only requirement are that:
    The PyDyna-Pre service is currently available only as a Linux Docker image. 
    make sure that your Docker engine is configured to run Linux Docker images.
 
-Please refer to /docker/README.rst to install PyDyna-Pre service docker container
+Please refer to ``docker/README.rst`` to install PyDyna-Pre service docker container
 
 Install PyDyna-Solver Docker
 ----------------------------
 
 Once pydyna is installed, the docker-compose.yml file to build and launch the dyna solver docker can be located
-under /docker . The yml file can be copied locally. To run the docker the following command can be used
+under ``docker``. The yml file can be copied locally. To run the docker the following command can be used
 
 .. code:: bash
     
