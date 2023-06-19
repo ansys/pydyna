@@ -226,7 +226,7 @@ Here is a basic pre-processing example:
 	icfd_solution.create_database_binary(dt=1)
 	icfd_solution.save_file()
 	
-For more: https://dyna.docs.pyansys.com/version/stable/examples/index.html
+For more examples, visit https://dyna.docs.pyansys.com/version/stable/examples/index.html
 
 Here is a basic solving example:
 
