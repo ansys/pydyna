@@ -7,7 +7,7 @@ build up ansys-dyna input deck, submit to solver and finally post processing the
 
 Project Overview
 ----------------
-There are 3 related packages here, pre and solver are all under the ansys/dyna/ directory,
+There are 3 related packages here, pre and solver are all under the ansys/pydyna/ directory,
 while pyDPF is used for post-processing.
 
 pre contains highly abstracted APIs for setting up a LS-DYNA input deck, so far, 
@@ -35,8 +35,41 @@ leaving a Python environment.
 Visit the `DPF-Post Documentation <https://postdocs.pyansys.com>`_ for a
 detailed description of the package.
 
-Installation
-------------
+Install PyDyna-Pre Docker
+-------------------------
+
+Launching the PyDyna-Pre service locally,the only requirements are that:
+
+* Docker is installed on your machine.
+* You have access to the PyAnsys GitHub container registry, where the Geometry service image is hosted.
+
+.. caution::
+
+   The PyDyna-Pre service is currently available only as a Linux Docker image. 
+   make sure that your Docker engine is configured to run Linux Docker images.
+
+First, bear in mind that you have to be `authenticated to ghcr.io
+<https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry>`_.
+Once authenticated, please proceed to download the PyDyna-Pre service Docker image:
+
+.. code:: bash
+
+   docker pull ghcr.io/ansys/ls-pre:latest
+   docker run -d -p 50051:50051 ghcr.io/ansys/ls-pre .
+
+Install PyDyna-Solver Docker
+----------------------------
+
+Once pydyna is installed, the docker-compose.yml file to build and launch the dyna solver docker can be located
+under /docker . The yml file can be copied locally. To run the docker the following command can be used
+
+.. code:: bash
+    
+	docker-compose up
+
+
+Install the package
+-------------------
 
 PyDyna has three installation modes: user, developer, and offline.
 
@@ -98,30 +131,20 @@ archive from the `Releases Page <https://github.com/pyansys/pydyna/releases>`_ f
 corresponding machine architecture.
 
 Each wheelhouse archive contains all the Python wheels necessary to install PyDyna from scratch on Windows
-and Linux, from Python 3.7 to 3.10. You can install this on an isolated system with a fresh Python
+and Linux, from Python 3.6,3.8 and 3.9. You can install this on an isolated system with a fresh Python
 installation or on a virtual environment.
 
-For example, on Linux with Python 3.7, unzip the wheelhouse archive and install it with:
+For example, on Linux with Python 3.8, unzip the wheelhouse archive and install it with:
 
 .. code:: bash
 
-    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.7.zip wheelhouse
+    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.8.zip wheelhouse
     pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
 
 If you are on Windows with Python 3.9, unzip the corresponding wheelhouse to a wheelhouse directory
 and install using the preceding command.
 
 Consider installing using a `virtual environment <https://docs.python.org/3/library/venv.html>`_.
-
-Install Solver Docker
-^^^^^^^^^^^^^^^^^^^^^
-
-Once pydyna is installed, the docker-compose.yml file to build and launch the dyna solver docker can be located
-under /src/ansys/dyna/core/solver/. The yml file can be copied locally. To run the docker the following command can be used
-
-.. code:: bash
-    
-	docker-compose up
 
 Documentation
 -------------
