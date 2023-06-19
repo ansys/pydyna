@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   dyna:
-    image: ghcr.io/pyansys/dynasolver:0.3
+    image: ghcr.io/ansys/dynasolver:0.3
     networks:
       - dyna_internal
     deploy:
