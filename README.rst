@@ -38,24 +38,16 @@ detailed description of the package.
 Install PyDyna-Pre Docker
 -------------------------
 
-Launching the PyDyna-Pre service locally,the only requirements are that:
+Launching the PyDyna-Pre service locally,the only requirement are that:
 
 * Docker is installed on your machine.
-* You have access to the PyAnsys GitHub container registry, where the Geometry service image is hosted.
 
 .. caution::
 
    The PyDyna-Pre service is currently available only as a Linux Docker image. 
    make sure that your Docker engine is configured to run Linux Docker images.
 
-First, bear in mind that you have to be `authenticated to ghcr.io
-<https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry>`_.
-Once authenticated, please proceed to download the PyDyna-Pre service Docker image:
-
-.. code:: bash
-
-   docker pull ghcr.io/ansys/ls-pre:latest
-   docker run -d -p 50051:50051 ghcr.io/ansys/ls-pre .
+Please refer to /docker/README.rst to install PyDyna-Pre service docker container
 
 Install PyDyna-Solver Docker
 ----------------------------
