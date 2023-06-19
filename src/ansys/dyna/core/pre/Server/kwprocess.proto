@@ -1180,6 +1180,7 @@ message SaveFileRequest {
 
 message SaveFileReply {
 	int64 length = 1;
+	string outpath = 2;
 }
 
 message LoadFileRequest {

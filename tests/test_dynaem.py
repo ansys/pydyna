@@ -61,7 +61,7 @@ rlc_rogoseg = [[248,252,272,268],
                 [296,300,320,316],
                 [300,304,324,320]]
 
-def test_em_railgun(resolve_em_path, resolve_server_path, resolve_standard_path):
+def test_em_railgun(resolve_em_path, resolve_server_path, resolve_standard_path,resolve_output_path):
     solution = DynaSolution("localhost")
     em_initialfile = os.path.join(resolve_em_path, "test_railgun.k")
     fns = []
@@ -76,12 +76,14 @@ def test_em_railgun(resolve_em_path, resolve_server_path, resolve_standard_path)
     em.contacts.add(contact)
     em.create_em_output(mats=2, matf=2, sols=2, solf=2)
     em.create_em_database_globalenergy(outlv=1)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_railgun.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_railgun.k")
+    outputfile = os.path.join(resolve_output_path, "test_railgun.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path,"em", "railgun.k")
     assert comparefile(outputfile, standardfile)
 
-def test_em_resistive_heating(resolve_em_path, resolve_server_path, resolve_standard_path):
+def test_em_resistive_heating(resolve_em_path, resolve_server_path, resolve_standard_path,resolve_output_path):
     solution = DynaSolution("localhost")
     em_initialfile = os.path.join(resolve_em_path, "test_resistive_heating.k")
     fns = []
@@ -127,13 +129,14 @@ def test_em_resistive_heating(resolve_em_path, resolve_server_path, resolve_stan
     emobj.boundaryconditions.create_temperature(NodeSet(resistive_heating_tmp), scalefactor=50)
     emobj.set_init_temperature(temp=25)
     emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
-    solution.save_file()
-
-    outputfile = os.path.join(resolve_server_path, "output", "test_resistive_heating.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_resistive_heating.k")
+    outputfile = os.path.join(resolve_output_path, "test_resistive_heating.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path,"em", "resistive_heating.k")
     assert comparefile(outputfile, standardfile)
 
-def test_em_resistive_heating_2d(resolve_em_path, resolve_server_path, resolve_standard_path):
+def test_em_resistive_heating_2d(resolve_em_path, resolve_server_path, resolve_standard_path,resolve_output_path):
     solution = DynaSolution("localhost")
     em_initialfile = os.path.join(resolve_em_path, "test_resistive_heating_2d.k")
     fns = []
@@ -173,13 +176,14 @@ def test_em_resistive_heating_2d(resolve_em_path, resolve_server_path, resolve_s
 
     emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
 
-    solution.save_file()
-
-    outputfile = os.path.join(resolve_server_path, "output", "test_resistive_heating_2d.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_resistive_heating_2d.k")
+    outputfile = os.path.join(resolve_output_path, "test_resistive_heating_2d.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path,"em", "resistive_heating_2d.k")
     assert comparefile(outputfile, standardfile)
 
-def test_em_resistive_heating_2d_isopots(resolve_em_path, resolve_server_path, resolve_standard_path):
+def test_em_resistive_heating_2d_isopots(resolve_em_path, resolve_server_path, resolve_standard_path,resolve_output_path):
     solution = DynaSolution("localhost")
     em_initialfile = os.path.join(resolve_em_path, "test_resistive_heating_2d_isopots.k")
     fns = []
@@ -222,13 +226,14 @@ def test_em_resistive_heating_2d_isopots(resolve_em_path, resolve_server_path, r
 
     emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
 
-    solution.save_file()
-
-    outputfile = os.path.join(resolve_server_path, "output", "test_resistive_heating_2d_isopots.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_resistive_heating_2d_isopots.k")
+    outputfile = os.path.join(resolve_output_path, "test_resistive_heating_2d_isopots.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path,"em", "resistive_heating_2d_isopots.k")
     assert comparefile(outputfile, standardfile)
 
-def test_em_rlc_isopotential(resolve_em_path, resolve_server_path, resolve_standard_path):
+def test_em_rlc_isopotential(resolve_em_path, resolve_server_path, resolve_standard_path,resolve_output_path):
     solution = DynaSolution("localhost")
     em_initialfile = os.path.join(resolve_em_path, "test_rlc_isopotential.k")
     fns = []
@@ -263,13 +268,14 @@ def test_em_rlc_isopotential(resolve_em_path, resolve_server_path, resolve_stand
 
     emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
 
-    solution.save_file()
-
-    outputfile = os.path.join(resolve_server_path, "output", "test_rlc_isopotential.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_rlc_isopotential.k")
+    outputfile = os.path.join(resolve_output_path, "test_rlc_isopotential.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path,"em", "rlc_isopotential.k")
     assert comparefile(outputfile, standardfile)
 
-def test_em_rlc_define_func(resolve_em_path, resolve_server_path, resolve_standard_path):
+def test_em_rlc_define_func(resolve_em_path, resolve_server_path, resolve_standard_path,resolve_output_path):
     solution = DynaSolution("localhost")
     em_initialfile = os.path.join(resolve_em_path, "test_rlc_define_func.k")
     fns = []
@@ -316,13 +322,14 @@ def test_em_rlc_define_func(resolve_em_path, resolve_server_path, resolve_standa
 
     emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
 
-    solution.save_file()
-
-    outputfile = os.path.join(resolve_server_path, "output", "test_rlc_define_func.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_rlc_define_func.k")
+    outputfile = os.path.join(resolve_output_path, "test_rlc_define_func.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path,"em", "rlc_define_func.k")
     assert comparefile(outputfile, standardfile)
 
-def test_em_resistive_heating_2d_multi_isopots(resolve_em_path, resolve_server_path, resolve_standard_path):
+def test_em_resistive_heating_2d_multi_isopots(resolve_em_path, resolve_server_path, resolve_standard_path,resolve_output_path):
     solution = DynaSolution("localhost")
     em_initialfile = os.path.join(resolve_em_path, "test_resistive_heating_2d_multi_isopots.k")
     fns = []
@@ -369,8 +376,9 @@ def test_em_resistive_heating_2d_multi_isopots(resolve_em_path, resolve_server_p
 
     emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
 
-    solution.save_file()
-
-    outputfile = os.path.join(resolve_server_path, "output", "test_resistive_heating_2d_multi_isopots.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_resistive_heating_2d_multi_isopots.k")
+    outputfile = os.path.join(resolve_output_path, "test_resistive_heating_2d_multi_isopots.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path,"em", "resistive_heating_2d_multi_isopots.k")
     assert comparefile(outputfile, standardfile)

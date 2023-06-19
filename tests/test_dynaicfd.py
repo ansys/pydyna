@@ -48,8 +48,15 @@ def comparefile(outputf, standardf):
                 return False
     return True
 
+def check(solution,server_output_path,resolve_output_path,resolve_standard_path,filename):
+    testfilename = "test_" + filename
+    serveroutfile = os.path.join(server_output_path,testfilename)
+    outputfile = os.path.join(resolve_output_path, testfilename)
+    solution.download(serveroutfile,outputfile)
+    standardfile = os.path.join(resolve_standard_path, filename)
+    assert comparefile(outputfile, standardfile)
 
-def test_icfd_cylinder_flow(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_cylinder_flow(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_cylinder_flow.k")
     fns = []
@@ -66,13 +73,16 @@ def test_icfd_cylinder_flow(resolve_icfd_path, resolve_server_path, resolve_stan
     meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
     icfd.add(meshvol)
     solution.create_database_binary(dt=1)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_cylinder_flow.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "cylinder_flow.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"cylinder_flow.k")
+
+    #outputfile = os.path.join(resolve_server_path, "output", "test_cylinder_flow.k")
+    #standardfile = os.path.join(resolve_standard_path, "icfd", "cylinder_flow.k")
+    #assert comparefile(outputfile, standardfile)
 
 
-def test_icfd_internal_3d_flow(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_internal_3d_flow(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_internal_3d_flow.k")
     fns = []
@@ -119,13 +129,12 @@ def test_icfd_internal_3d_flow(resolve_icfd_path, resolve_server_path, resolve_s
     icfd.add(meshvol)
 
     solution.create_database_binary(dt=1)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_internal_3d_flow.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "internal_3d_flow.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"internal_3d_flow.k")
 
 
-def test_icfd_plate_flow(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_plate_flow(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_plate_flow.k")
     fns = []
@@ -176,12 +185,10 @@ def test_icfd_plate_flow(resolve_icfd_path, resolve_server_path, resolve_standar
     icfd.add(meshvol)
 
     solution.create_database_binary(dt=1)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_plate_flow.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "plate_flow.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"plate_flow.k")
 
-def test_icfd_meshsize(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_meshsize(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_mesh_size.k")
     fns = []
@@ -236,12 +243,10 @@ def test_icfd_meshsize(resolve_icfd_path, resolve_server_path, resolve_standard_
     icfd.add(meshvol)
 
     solution.create_database_binary(dt=1)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_mesh_size.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "mesh_size.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"mesh_size.k")
 
-def test_icfd_thermal_flow(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_thermal_flow(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_thermal_flow.k")
     fns = []
@@ -295,12 +300,10 @@ def test_icfd_thermal_flow(resolve_icfd_path, resolve_server_path, resolve_stand
     icfd.add(meshvol)
 
     solution.create_database_binary(dt=1)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_thermal_flow.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "thermal_flow.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"thermal_flow.k")
 
-def test_icfd_free_convection_flow(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_free_convection_flow(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_free_convection_flow.k")
     fns = []
@@ -356,12 +359,10 @@ def test_icfd_free_convection_flow(resolve_icfd_path, resolve_server_path, resol
     icfd.add(meshvol)
 
     solution.create_database_binary(dt=1)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_free_convection_flow.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "free_convection_flow.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"free_convection_flow.k")
 
-def test_icfd_dam_break(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_dam_break(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_dam_break.k")
     fns = []
@@ -408,12 +409,10 @@ def test_icfd_dam_break(resolve_icfd_path, resolve_server_path, resolve_standard
     icfd.add(meshvol)
 
     solution.create_database_binary(dt=0.2)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_dam_break.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "dam_break.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"dam_break.k")
 
-def test_icfd_driven_cavity(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_driven_cavity(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_driven_cavity.k")
     fns = []
@@ -450,12 +449,10 @@ def test_icfd_driven_cavity(resolve_icfd_path, resolve_server_path, resolve_stan
     icfd.add(meshvol)
 
     solution.create_database_binary(dt=250)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_driven_cavity.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "driven_cavity.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"driven_cavity.k")
 
-def test_icfd_weak_fsi(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_weak_fsi(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_weak_fsi.k")
     fns = []
@@ -517,12 +514,10 @@ def test_icfd_weak_fsi(resolve_icfd_path, resolve_server_path, resolve_standard_
     icfd.boundaryconditions.create_imposed_motion(PartSet([1]),Curve(func="2*3.14/10*sin(2*3.14/10*TIME+3.14/2)"),dof=DOF.Y_TRANSLATIONAL,motion=Motion.VELOCITY)
 
     solution.create_database_binary(dt=0.2)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_weak_fsi.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "weak_fsi.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"weak_fsi.k")
 
-def test_icfd_strong_fsi(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_strong_fsi(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_strong_fsi.k")
     fns = []
@@ -585,12 +580,10 @@ def test_icfd_strong_fsi(resolve_icfd_path, resolve_server_path, resolve_standar
     # Define boundary conddition
     icfd.boundaryconditions.create_imposed_motion(PartSet([1]),Curve(func="2*3.14/10*sin(2*3.14/10*TIME+3.14/2)"),dof=DOF.Y_TRANSLATIONAL,motion=Motion.VELOCITY)
     solution.create_database_binary(dt=0.1)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_strong_fsi.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "strong_fsi.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"strong_fsi.k")
 
-def test_icfd_imposed_move(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_imposed_move(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_imposed_move.k")
     fns = []
@@ -640,12 +633,10 @@ def test_icfd_imposed_move(resolve_icfd_path, resolve_server_path, resolve_stand
     icfd.add(meshvol)
 
     solution.create_database_binary(dt=0.5)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_imposed_move.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "imposed_move.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"imposed_move.k")
 
-def test_icfd_mesh_adaptivity(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_mesh_adaptivity(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_mesh_adaptivity.k")
     fns = []
@@ -699,12 +690,10 @@ def test_icfd_mesh_adaptivity(resolve_icfd_path, resolve_server_path, resolve_st
     icfd.add(meshvol)
 
     solution.create_database_binary(dt=0.5)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_mesh_adaptivity.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "mesh_adaptivity.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"mesh_adaptivity.k")
 
-def test_icfd_mesh_morphing(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_mesh_morphing(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_mesh_morphing.k")
     fns = []
@@ -763,12 +752,10 @@ def test_icfd_mesh_morphing(resolve_icfd_path, resolve_server_path, resolve_stan
     icfd.add(meshvol)
 
     solution.create_database_binary(dt=0.5)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_mesh_morphing.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "mesh_morphing.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"mesh_morphing.k")
 
-def test_icfd_dem_coupling(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_dem_coupling(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_dem_coupling.k")
     fns = []
@@ -826,12 +813,10 @@ def test_icfd_dem_coupling(resolve_icfd_path, resolve_server_path, resolve_stand
     icfd.parts.add(disc)
 
     solution.create_database_binary(dt=1.0)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_dem_coupling.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "dem_coupling.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"dem_coupling.k")
 
-def test_icfd_sloshing(resolve_icfd_path, resolve_server_path, resolve_standard_path):
+def test_icfd_sloshing(resolve_icfd_path, resolve_output_path, resolve_standard_path_icfd):
     solution = DynaSolution("localhost")
     icfd_initialfile = os.path.join(resolve_icfd_path, "test_sloshing.k")
     fns = []
@@ -882,8 +867,5 @@ def test_icfd_sloshing(resolve_icfd_path, resolve_server_path, resolve_standard_
     icfd.add(meshvol)
 
     solution.create_database_binary(dt=0.02)
-    solution.save_file()
-
-    outputfile = os.path.join(resolve_server_path, "output", "test_sloshing.k")
-    standardfile = os.path.join(resolve_standard_path, "icfd", "sloshing.k")
-    assert comparefile(outputfile, standardfile)
+    outpath=solution.save_file()
+    check(solution,outpath,resolve_output_path,resolve_standard_path_icfd,"sloshing.k")

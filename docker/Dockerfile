@@ -16,4 +16,6 @@ RUN pip3 install grpcio grpcio-tools protobuf
 
 RUN python -m grpc_tools.protoc --python_out=./linux-binaries --grpc_python_out=./linux-binaries -I./linux-binaries ./linux-binaries/kwprocess.proto
 
+EXPOSE 50051
+
 CMD ["python3", "./linux-binaries/kwserver.py"]
