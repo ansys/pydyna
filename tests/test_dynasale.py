@@ -27,7 +27,7 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_sale(sale_initialfile, resolve_server_path, resolve_standard_path):
+def test_sale(sale_initialfile, resolve_output_path, resolve_standard_path):
     solution = DynaSolution("localhost")
     fns = []
     fns.append(sale_initialfile)
@@ -79,7 +79,9 @@ def test_sale(sale_initialfile, resolve_server_path, resolve_standard_path):
     mesh.initial_detonation(Point(0, 0, 19.33))
     sale.add(mesh)
     solution.set_output_database(matsum=0.2, glstat=0.2)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_sale.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_sale.k")
+    outputfile = os.path.join(resolve_output_path, "test_sale.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "sale.k")
     assert comparefile(outputfile, standardfile)

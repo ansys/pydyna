@@ -41,6 +41,20 @@ def resolve_standard_path():
     standard_files_path = os.path.join(local_path, "testfiles", "standard")
     return standard_files_path
 
+@pytest.fixture()
+def resolve_standard_path_icfd():
+    """Get the filepath of standard files."""
+    local_path = os.path.dirname(os.path.abspath(__file__))
+    standard_files_path_icfd = os.path.join(local_path, "testfiles", "standard","icfd")
+    return standard_files_path_icfd
+
+@pytest.fixture()
+def resolve_output_path():
+    """Get the filepath of output files."""
+    local_path = os.path.dirname(os.path.abspath(__file__))
+    output_files_path = os.path.join(local_path, "testfiles", "output")
+    return output_files_path
+
 
 @pytest.fixture()
 def base_initialfile():
@@ -134,3 +148,4 @@ def Connect_Server():
     threadserver = ServerThread(1,port=50051,ip="127.0.0.1",server_path = path)
     threadserver.setDaemon(True)
     threadserver.start()
+    

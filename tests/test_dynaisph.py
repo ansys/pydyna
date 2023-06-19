@@ -37,7 +37,7 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_isph(isph_initialfile, resolve_server_path, resolve_standard_path):
+def test_isph(isph_initialfile, resolve_output_path, resolve_standard_path):
     solution = DynaSolution("localhost")
     fns = []
     fns.append(isph_initialfile)
@@ -130,7 +130,9 @@ def test_isph(isph_initialfile, resolve_server_path, resolve_standard_path):
 
     solution.set_output_database(glstat=0.001, sphmassflow=0.001)
     solution.create_database_binary(dt=0.01)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_isph.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_isph.k")
+    outputfile = os.path.join(resolve_output_path, "test_isph.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "isph.k")
     assert comparefile(outputfile, standardfile)

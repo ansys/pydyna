@@ -35,7 +35,7 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_nvh_frf_plate_damping(resolve_nvh_path, resolve_server_path, resolve_standard_path):
+def test_nvh_frf_plate_damping(resolve_nvh_path, resolve_output_path, resolve_standard_path):
     solution = DynaSolution("localhost")
     nvh_initialfile = os.path.join(resolve_nvh_path, "test_frf_plate_damping.k")
     fns = []
@@ -77,12 +77,14 @@ def test_nvh_frf_plate_damping(resolve_nvh_path, resolve_server_path, resolve_st
     boxshell.set_printout(3)
     nvhobj.parts.add(boxshell)
 
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_frf_plate_damping.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_frf_plate_damping.k")
+    outputfile = os.path.join(resolve_output_path, "test_frf_plate_damping.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "nvh", "frf_plate_damping.k")
     assert comparefile(outputfile, standardfile)
     
-def test_nvh_frf_solid(resolve_nvh_path, resolve_server_path, resolve_standard_path):
+def test_nvh_frf_solid(resolve_nvh_path, resolve_output_path, resolve_standard_path):
     solution = DynaSolution("localhost")
     nvh_initialfile = os.path.join(resolve_nvh_path, "test_frf_solid.k")
     fns = []
@@ -142,7 +144,9 @@ def test_nvh_frf_solid(resolve_nvh_path, resolve_server_path, resolve_standard_p
         glstat=0.1,
         matsum=0.1,
     )
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_frf_solid.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_frf_solid.k")
+    outputfile = os.path.join(resolve_output_path, "test_frf_solid.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "nvh", "frf_solid.k")
     assert comparefile(outputfile, standardfile)

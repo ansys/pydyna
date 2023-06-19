@@ -26,7 +26,7 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_thermal(thermal_initialfile, resolve_server_path, resolve_standard_path):
+def test_thermal(thermal_initialfile, resolve_output_path, resolve_standard_path):
     solution = DynaSolution("localhost")
     fns = []
     fns.append(thermal_initialfile)
@@ -66,7 +66,9 @@ def test_thermal(thermal_initialfile, resolve_server_path, resolve_standard_path
     solution.set_output_database(glstat=0.03)
     solution.create_database_binary(dt=0.01)
 
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_thermal_stress.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_thermal_stress.k")
+    outputfile = os.path.join(resolve_output_path, "test_thermal_stress.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "thermal_stress.k")
     assert comparefile(outputfile, standardfile)

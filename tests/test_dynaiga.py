@@ -19,7 +19,7 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_iga(iga_initialfile, resolve_server_path, resolve_standard_path):
+def test_iga(iga_initialfile, resolve_output_path, resolve_standard_path):
     solution = DynaSolution("localhost")
     fns = []
     fns.append(iga_initialfile)
@@ -40,7 +40,9 @@ def test_iga(iga_initialfile, resolve_server_path, resolve_standard_path):
     )
     cylinder3.set_motion(Curve(x=[0, 100], y=[20, 20]), dir=Direction(0, 1, 0))
     iga.add(cylinder3)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_iga.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_iga.k")
+    outputfile = os.path.join(resolve_output_path, "test_iga.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "iga.k")
     assert comparefile(outputfile, standardfile)
