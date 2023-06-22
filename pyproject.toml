@@ -72,6 +72,7 @@ doc = [
     "scikit-learn==1.2.2",
     "ipython==8.14.0",
     "jupyterlab==4.0.2",
+    "sphinx-jinja==2.0.2",
 ]
 
 [tool.flit.module]
