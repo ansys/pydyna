@@ -12,7 +12,7 @@ PyDyna documentation  |version|
        Resources/Getting_Started
        Resources/User_Guide
        {% if build_api %}
-       API/index
+       autoapi/index
        {% endif %}
        Resources/Contributing
        {% if build_examples %}
