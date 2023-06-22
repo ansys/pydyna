@@ -10,6 +10,14 @@ import logging
 from .dynabase import *  # noqa : F403
 
 
+class Isopotential_ConnType(Enum):
+    SHORT_CIRCUIT = 1
+    RESISTANCE = 2
+    VOLTAGE_SOURCE = 3
+    CURRENT_SOURCE = 4
+    RLC_CIRCUIT = 6
+
+
 class DynaEM(DynaBase):
     """Contain methods to create keyword related to EM."""
 
@@ -275,6 +283,62 @@ class DynaEM(DynaBase):
         logging.info("EM Output Created...")
         return ret
 
+    def connect_isopotential(
+        self,
+        contype=Isopotential_ConnType.SHORT_CIRCUIT,
+        isopotential1=None,
+        isopotential2=None,
+        value=0,
+        func=None,
+        curve=None,
+        inductance=0,
+        capacity=0,
+        initial_voltage=0,
+    ):
+        """Define a connection between two isopotentials or between an isopotential and the ground.
+
+        Parameters
+        ----------
+        contype : Isopotential_ConnType
+            See Isopotential_ConnType.
+        isopotential1 : Isopotential
+            First isopotential to be connected
+        isopotential2 : Isopotential
+            Second isopotential to be connected
+        value : float
+            Value of the resistance, voltage or current depending on contype
+        Returns
+        -------
+        int
+            Connection ID.
+        """
+        contype = contype.value
+        if contype == 6:
+            l, c, v0 = inductance, capacity, initial_voltage
+        else:
+            l, c, v0 = 0, 0, 0
+        if func is not None:
+            lcid = -func.create(self.stub)
+        elif curve is not None:
+            lcid = curve.create(self.stub)
+        else:
+            lcid = 0
+        if isopotential1 is not None:
+            isoid1 = isopotential1.create()
+        else:
+            isoid1 = 0
+        if isopotential2 is not None:
+            isoid2 = isopotential2.create()
+        else:
+            isoid2 = 0
+        ret = self.stub.CreateEMIsopotentialConnect(
+            EMIsopotentialConnectRequest(
+                contype=contype, isoid1=isoid1, isoid2=isoid2, val=value, lcid=lcid, l=l, c=c, v0=v0
+            )
+        )
+        logging.info("Isopotential connection Created...")
+        return ret.id
+
     def create_em_database_globalenergy(self, outlv=0):
         """Enable the output of global EM.
 
@@ -363,6 +427,12 @@ class EMType(Enum):
     ELECTROPHYSIOLOGY = 11
 
 
+class EMDimension(Enum):
+    SOLVER_3D = 0
+    PLANAR_2D = 1
+    AXISYMMETRIC_2D = 3
+
+
 class BEMSOLVER(Enum):
     DIRECT_SOLVER = 1
     PCG = 2
@@ -394,6 +464,7 @@ class EMAnalysis:
         self.defined = False
         self.stub = DynaBase.get_stub()
         self.type = type.value
+        self.dimtype = 0
         self.defined_bem = False
         self.defined_fem = False
 
@@ -402,9 +473,10 @@ class EMAnalysis:
         self.defined = True
         self.timestep = timestep
 
-    def set_em_solver(self, type=EMType.EDDY_CURRENT):
+    def set_em_solver(self, type=EMType.EDDY_CURRENT, dimtype=EMDimension.SOLVER_3D):
         """Select Electromagnetism solver."""
         self.type = type.value
+        self.dimtype = dimtype.value
 
     def set_solver_bem(self, solver=BEMSOLVER.PCG, relative_tol=1e-6, max_iteration=1000):
         """Define the type of linear solver and pre-conditioner as well as tolerance for the EM_BEM solve."""
@@ -430,7 +502,9 @@ class EMAnalysis:
         """Create EMAnalysis."""
         if self.defined == False:
             return
-        self.stub.CreateEMControl(EMControlRequest(emsol=self.type, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000))
+        self.stub.CreateEMControl(
+            EMControlRequest(emsol=self.type, numls=100, macrodt=0, dimtype=self.dimtype, ncylfem=5000, ncylbem=5000)
+        )
         self.stub.CreateEMTimestep(EMTimestepRequest(tstype=1, dtconst=self.timestep))
         logging.info("EM Timestep Created...")
         if self.defined_bem:
@@ -540,3 +614,66 @@ class EMContact:
         """Create EM contact."""
         self.stub.CreateEMControlContact(EMControlContactRequest(emct=1, cconly=0, ctype=self.contacttype, dtype=0))
         logging.info("EM Contact Created...")
+
+
+class Isopotential:
+    """Defining an isopotential, i.e. constrain nodes so that they have the same scalar potential value.
+
+    Parameters
+    ----------
+    set : Set
+        Segment Set or Node Set.
+    """
+
+    isopotlist = []
+
+    def __init__(self, set=None):
+        self.stub = DynaBase.get_stub()
+        self.set = set
+        self.id = 0
+
+    def create(self):
+        """Create Isopotential."""
+        isoinfo = [self.set.type, self.set.nodes]
+        if isoinfo in Isopotential.isopotlist:
+            pass
+        id, settype = 0, 1
+        if self.set is not None:
+            id = self.set.create(self.stub)
+            type = self.set.type
+            if type == "NODESET":
+                settype = 2
+            elif type == "SEGMENTSET":
+                settype = 1
+        ret = self.stub.CreateEMIsopotential(EMIsopotentialRequest(settype=settype, setid=id))
+        self.id = ret.id
+        logging.info(f"EM Isopotential {self.id} Created...")
+        return self.id
+
+
+class RogoCoil:
+    """Measure the total current flowing through a given section of the conductor.
+
+    Parameters
+    ----------
+    set : Set
+        Segment Set.
+    """
+
+    def __init__(self, set=None):
+        self.stub = DynaBase.get_stub()
+        self.set = set
+        self.id = 0
+
+    def create(self):
+        """Create Rogowsky coil."""
+        id, settype = 0, 1
+        if self.set is not None:
+            id = self.set.create(self.stub)
+            type = self.set.type
+            if type != "SEGMENTSET":
+                return self.id
+        ret = self.stub.CreateEMIsopotentialRogo(EMIsopotentialRogoRequest(settype=1, setid=id))
+        self.id = ret.id
+        logging.info(f"EM Isopotential Rogo {self.id} Created...")
+        return self.id

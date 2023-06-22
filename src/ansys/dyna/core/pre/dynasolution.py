@@ -9,16 +9,12 @@ import logging
 import os
 import sys
 
+from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
+from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
+
 # from subprocess import DETACHED_PROCESS
 import grpc
 
-"""
-import kwprocess_pb2
-import kwprocess_pb2_grpc
-"""
-
-from .kwprocess_pb2 import *  # noqa : F403
-from .kwprocess_pb2_grpc import *  # noqa : F403
 from .launcher import *  # noqa : F403
 
 CHUNK_SIZE = 1024 * 1024
@@ -107,9 +103,9 @@ class DynaSolution:
         chunks_generator = self.get_file_chunks(filename)
         response = stub_.Upload(chunks_generator)
 
-    def download(self, stub_, remote_name, local_name):
+    def download(self, remote_name, local_name):
         """Download files from server."""
-        response = stub_.Download(DownloadRequest(url=remote_name))
+        response = self.stub.Download(DownloadRequest(url=remote_name))
         with open(local_name, "wb") as f:
             for chunk in response:
                 f.write(chunk.buffer)
@@ -294,4 +290,4 @@ class DynaSolution:
         ret = self.stub.SaveFile(SaveFileRequest(name=self.mainname))
         msg = self.mainname + " is outputed..."
         logging.info(msg)
-        return ret
+        return ret.outpath

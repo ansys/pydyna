@@ -41,6 +41,20 @@ def resolve_standard_path():
     standard_files_path = os.path.join(local_path, "testfiles", "standard")
     return standard_files_path
 
+@pytest.fixture()
+def resolve_standard_path_icfd():
+    """Get the filepath of standard files."""
+    local_path = os.path.dirname(os.path.abspath(__file__))
+    standard_files_path_icfd = os.path.join(local_path, "testfiles", "standard","icfd")
+    return standard_files_path_icfd
+
+@pytest.fixture()
+def resolve_output_path():
+    """Get the filepath of output files."""
+    local_path = os.path.dirname(os.path.abspath(__file__))
+    output_files_path = os.path.join(local_path, "testfiles", "output")
+    return output_files_path
+
 
 @pytest.fixture()
 def base_initialfile():
@@ -58,6 +72,13 @@ def dem_initialfile():
 def em_initialfile():
     """Resolve the path for em initial file."""
     return resolve_test_file("test_em.k", "initial")
+
+@pytest.fixture()
+def resolve_solution_path():
+    """Get the filepath of solution files."""
+    path = os.path.dirname(os.path.abspath(__file__))
+    solution_path = os.path.join(path, "testfiles", "initial", "solution")
+    return solution_path
 
 @pytest.fixture()
 def resolve_icfd_path():
@@ -105,12 +126,6 @@ def sale_initialfile():
 
 
 @pytest.fixture()
-def solution_initialfile():
-    """Resolve the path for solution initial file."""
-    return resolve_test_file("test_solution.k", "initial")
-
-
-@pytest.fixture()
 def isph_initialfile():
     """Resolve the path for isph initial file."""
     return resolve_test_file("test_isph.k", "initial")
@@ -133,3 +148,4 @@ def Connect_Server():
     threadserver = ServerThread(1,port=50051,ip="127.0.0.1",server_path = path)
     threadserver.setDaemon(True)
     threadserver.start()
+    

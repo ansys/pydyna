@@ -7,7 +7,7 @@ build up ansys-dyna input deck, submit to solver and finally post processing the
 
 Project Overview
 ----------------
-There are 3 related packages here, pre and solver are all under the ansys/dyna/ directory,
+There are 3 related packages here, pre and solver are all under the ansys/pydyna/ directory,
 while pyDPF is used for post-processing.
 
 pre contains highly abstracted APIs for setting up a LS-DYNA input deck, so far, 
@@ -35,8 +35,33 @@ leaving a Python environment.
 Visit the `DPF-Post Documentation <https://postdocs.pyansys.com>`_ for a
 detailed description of the package.
 
-Installation
-------------
+Install PyDyna-Pre Docker
+-------------------------
+
+Launching the PyDyna-Pre service locally, the only requirement is that:
+
+* Docker is installed on your machine.
+
+.. caution::
+
+   The PyDyna-Pre service is currently available only as a Linux Docker image. 
+   make sure that your Docker engine is configured to run Linux Docker images.
+
+Please refer to ``docker/README.rst`` to install PyDyna-Pre service docker container
+
+Install PyDyna-Solver Docker
+----------------------------
+
+Once pydyna is installed, the docker-compose.yml file to build and launch the dyna solver docker can be located
+under ``docker``. The yml file can be copied locally. To run the docker the following command can be used
+
+.. code:: bash
+    
+	docker-compose up
+
+
+Install the package
+-------------------
 
 PyDyna has three installation modes: user, developer, and offline.
 
@@ -98,21 +123,20 @@ archive from the `Releases Page <https://github.com/pyansys/pydyna/releases>`_ f
 corresponding machine architecture.
 
 Each wheelhouse archive contains all the Python wheels necessary to install PyDyna from scratch on Windows
-and Linux, from Python 3.7 to 3.10. You can install this on an isolated system with a fresh Python
+and Linux, from Python 3.6,3.8 and 3.9. You can install this on an isolated system with a fresh Python
 installation or on a virtual environment.
 
-For example, on Linux with Python 3.7, unzip the wheelhouse archive and install it with:
+For example, on Linux with Python 3.8, unzip the wheelhouse archive and install it with:
 
 .. code:: bash
 
-    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.7.zip wheelhouse
+    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.8.zip wheelhouse
     pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
 
 If you are on Windows with Python 3.9, unzip the corresponding wheelhouse to a wheelhouse directory
 and install using the preceding command.
 
 Consider installing using a `virtual environment <https://docs.python.org/3/library/venv.html>`_.
-
 
 Documentation
 -------------
@@ -129,28 +153,80 @@ Here is a basic pre-processing example:
 
 .. code:: python
 
-    from ansys.dyna.core.pre.dynasolution import *
-    from ansys.dyna.core.pre.dynaiga import *
-    from ansys.dyna.core.pre.dynamaterial import *
-    hostname = "localhost"
-    iga_solution = DynaSolution(hostname)
-    fns = []
-    path = os.getcwd() + os.sep + "input" + os.sep + "iga_sample" + os.sep
-    fns.append(path + "maino.k")
-    fns.append(path + "rkrwelds.key")
-    fns.append(path + "27parts.key")
-    iga_solution.open_files(fns)
-    iga_solution.set_termination(20)
-    iga_solution.create_database_binary(dt=0.1)
-    iga = DynaIGA()
-    iga_solution.add(iga)
-    iga.set_timestep(timestep_size_for_mass_scaled=-0.0004) 
-    ...
-    selfcontact = Contact(type=ContactType.AUTOMATIC)
-    selfcontact.set_friction_coefficient(static=0.2)
-    surf1=ContactSurface(PartSet(igaparts))
-    selfcontact.set_slave_surface(surf1)
-    iga_solution.save_file()
+    import os
+	import sys
+	from ansys.dyna.core.pre.dynasolution import DynaSolution
+	from ansys.dyna.core.pre.dynaicfd import (
+		DynaICFD,
+		ICFDAnalysis,
+		MatICFD,
+		ICFDPart,
+		ICFDDOF,
+		Curve,
+		ICFDVolumePart,
+		MeshedVolume,
+	)
+	from ansys.dyna.core.pre import examples
+	# sphinx_gallery_thumbnail_path = '_static/pre/icfd/cylinderflow.png'
+
+	hostname = "localhost"
+	if len(sys.argv) > 1:
+		hostname = sys.argv[1]
+
+	icfd_solution = DynaSolution(hostname)
+	# Import the initial mesh data(nodes and elements)
+	fns = []
+	path = examples.cylinder_flow + os.sep
+	fns.append(path + "cylinder_flow.k")
+	icfd_solution.open_files(fns)
+	# Set total time of simulation
+	icfd_solution.set_termination(termination_time=100)
+
+	icfd = DynaICFD()
+	icfd_solution.add(icfd)
+
+	icfdanalysis = ICFDAnalysis()
+	icfdanalysis.set_timestep()
+	icfd.add(icfdanalysis)
+
+	# define model
+	mat = MatICFD(flow_density=1.0, dynamic_viscosity=0.005)
+
+	part_inflow = ICFDPart(1)
+	part_inflow.set_material(mat)
+	part_inflow.set_prescribed_velocity(dof=ICFDDOF.X, motion=Curve(x=[0, 10000], y=[1, 1]))
+	part_inflow.set_prescribed_velocity(dof=ICFDDOF.Y, motion=Curve(x=[0, 10000], y=[0, 0]))
+	icfd.parts.add(part_inflow)
+
+	part_outflow = ICFDPart(2)
+	part_outflow.set_material(mat)
+	part_outflow.set_prescribed_pressure(pressure=Curve(x=[0, 10000], y=[0, 0]))
+	icfd.parts.add(part_outflow)
+
+	part_symmetric = ICFDPart(3)
+	part_symmetric.set_material(mat)
+	part_symmetric.set_free_slip()
+	icfd.parts.add(part_symmetric)
+
+	part_wall = ICFDPart(4)
+	part_wall.set_material(mat)
+	part_wall.set_non_slip()
+	part_wall.compute_drag_force()
+	part_wall.set_boundary_layer(number=3)
+	icfd.parts.add(part_wall)
+
+	partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
+	partvol.set_material(mat)
+	icfd.parts.add(partvol)
+	# define the volume space that will be meshed,The boundaries
+	# of the volume are the surfaces "spids"
+	meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
+	icfd.add(meshvol)
+
+	icfd_solution.create_database_binary(dt=1)
+	icfd_solution.save_file()
+	
+For more examples, visit https://dyna.docs.pyansys.com/version/stable/examples/index.html
 
 Here is a basic solving example:
 

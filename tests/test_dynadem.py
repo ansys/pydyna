@@ -19,7 +19,7 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_dem(dem_initialfile, resolve_server_path, resolve_standard_path):
+def test_dem(dem_initialfile, resolve_server_path, resolve_standard_path,resolve_output_path):
     solution = DynaSolution("localhost")
     fns = []
     fns.append(dem_initialfile)
@@ -27,7 +27,9 @@ def test_dem(dem_initialfile, resolve_server_path, resolve_standard_path):
     dem = DynaDEM()
     solution.add(dem)
     dem.set_des(ndamp=0.99, tdamp=0.99, frics=0.9, fricr=0.9)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_dem.k")
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_dem.k")
+    outputfile = os.path.join(resolve_output_path, "test_dem.k")
+    solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "dem.k")
     assert comparefile(outputfile, standardfile)

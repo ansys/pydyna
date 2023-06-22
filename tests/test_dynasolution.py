@@ -2,6 +2,10 @@ import os
 
 
 from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.dynamech import (
+    DynaMech,
+    Transform
+)
 
 
 def comparefile(outputf, standardf):
@@ -18,8 +22,9 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_solution(solution_initialfile, resolve_server_path, resolve_standard_path):
+def test_solution(resolve_solution_path, resolve_server_path, resolve_standard_path,resolve_output_path):
     solution = DynaSolution("localhost")
+    solution_initialfile = os.path.join(resolve_solution_path, "test_solution.k")
     fns = []
     fns.append(solution_initialfile)
     solution.open_files(fns)
@@ -28,7 +33,31 @@ def test_solution(solution_initialfile, resolve_server_path, resolve_standard_pa
         abstat=2.0e-4, glstat=2.0e-4, matsum=2.0e-4, rcforc=2.0e-4, rbdout=2.0e-4, rwforc=2.0e-4
     )
     solution.create_database_binary(dt=5e-4, ieverp=1)
-    solution.save_file()
-    outputfile = os.path.join(resolve_server_path, "output", "test_solution.k")
-    standardfile = os.path.join(resolve_standard_path, "solution.k")
+    outpath = solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_solution.k")
+    outputfile = os.path.join(resolve_output_path, "test_solution.k")
+    solution.download(serveroutfile,outputfile)
+    standardfile = os.path.join(resolve_standard_path,"solution", "solution.k")
+    assert comparefile(outputfile, standardfile)
+
+def test_elementary_transform(resolve_solution_path, resolve_server_path, resolve_standard_path,resolve_output_path):
+    """Create *INCLUDE_TRANSFORM and *DEFINE_TRANSFORMATION."""
+    solution = DynaSolution("localhost")
+    solution_initialfile = os.path.join(resolve_solution_path, "test_elementary_main.k")
+    fns = []
+    fns.append(solution_initialfile)
+    solution.open_files(fns)
+    obj = DynaMech()
+    solution.add(obj)
+
+    obj.set_transform(
+        filename="transform.k",idnoff=100,ideoff=100,idpoff=100,idmoff=100,idsoff=100,idfoff=100,
+        transform = Transform("MIRROR",param1=-4,param2=0,param3=0,param4=-5,param5=0,param6=0)
+        )
+
+    outpath=solution.save_file()
+    serveroutfile = os.path.join(outpath,"test_elementary_main.k")
+    outputfile = os.path.join(resolve_output_path, "test_elementary_main.k")
+    solution.download(serveroutfile,outputfile)
+    standardfile = os.path.join(resolve_standard_path,"solution", "elementary_main.k")
     assert comparefile(outputfile, standardfile)
