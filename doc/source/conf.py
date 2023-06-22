@@ -22,7 +22,6 @@ cname = os.getenv("DOCUMENTATION_CNAME", default="nocname.com")
 
 # Sphinx extensions
 extensions = [
-    "autoapi.extension",
     'sphinx.ext.intersphinx',
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
@@ -128,9 +127,11 @@ html_static_path = ['_static']
 # -- Declare the Jinja context -----------------------------------------------
 BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
 if not BUILD_API:
-    exclude_patterns.append("api")
+    exclude_patterns.append("_autoapi_templates")
 else:
     # Configuration for Sphinx autoapi
+    extensions.append("autoapi.extension")
+    autoapi_dirs = ["../../src/ansys"]
     autoapi_type = "python"
     autoapi_dirs = ["../../src/ansys"]
     autoapi_options = [
@@ -142,7 +143,7 @@ else:
     ]
     autoapi_template_dir = "_autoapi_templates"
     suppress_warnings = ["autoapi.python_import_resolution"]
-    exclude_patterns = ["_autoapi_templates/index.rst"]
+    exclude_patterns.append("_autoapi_templates/index.rst")
     autoapi_python_use_implicit_namespaces = True
 
 BUILD_EXAMPLES = (
