@@ -62,7 +62,7 @@ You can also install this as a pre-commit hook by running::
 
   pre-commit install
 
-This way, it's not possible for you to push code that fails the style checks. For example::
+This way, it is not possible for you to push code that fails the style checks. For example::
 
   $ pre-commit install
   $ git commit -am "added my cool feature"
