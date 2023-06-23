@@ -4,10 +4,9 @@ documentation:
 maintenance:
 - .github/**/*
 - .flake8
-- setup.py
+- pyproject.toml
 dependencies:
-- requirements/**/*
-- requirements_docs.txt
-- requirements_test.txt
+- pyproject.toml
 testing:
 - _unittest/conftest.py
+- tests/*
