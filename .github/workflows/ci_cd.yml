@@ -55,7 +55,7 @@ jobs:
       - name: "Install system dependencies"
         run: |
           sudo apt-get update
-          sudo apt-get install xvfb pandoc texlive-latex-extra latexmk
+          sudo apt-get install xvfb pandoc texlive-latex-extra latexmk build-essential
 
       - name: "Install python dependencies"
         run: |
