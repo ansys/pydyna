@@ -25,10 +25,10 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
-    'sphinx_gallery.gen_gallery',
     'numpydoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.inheritance_diagram',
+    "sphinx_jinja",
 ]
 
 # Intersphinx mapping
@@ -40,33 +40,6 @@ intersphinx_mapping = {
     "pandas": ("https://pandas.pydata.org/pandas-docs/stable", None),
     "pytest": ("https://docs.pytest.org/en/stable", None),
     }
-
-sphinx_gallery_conf = {
-            # convert rst to md for ipynb
-            "pypandoc": True,
-            # path to your examples scripts
-            "examples_dirs": ["../../examples/"],
-            # path where to save gallery generated examples
-            "gallery_dirs": ["examples"],
-            # Patter to search for examples files
-            "filename_pattern": r"\.py",
-            # Patter to omit some files
-            "ignore_pattern": r"/*_data.py",
-            # Remove the "Download all examples" button from the top level gallery
-            "download_all_examples": False,
-            # Sort gallery examples by file name instead of number of lines (default)
-            "within_subsection_order": FileNameSortKey,
-            # directory where function granular galleries are stored
-            "backreferences_dir": None,
-            # Modules for which function level galleries are created.  In
-            "doc_module": "ansys-dyna-core",
-            "image_scrapers": ("pyvista", "matplotlib"),
-            "thumbnail_size": (600, 300),
-            # 'first_notebook_cell': ("%matplotlib inline\n"
-            #                         "from pyvista import set_plot_theme\n"
-            #                         "set_plot_theme('document')"),
-            'remove_config_comments': True,
-        }
 
 # Numpydoc config
 numpydoc_use_plots = True
@@ -150,5 +123,66 @@ html_theme_options = {
 # static path
 html_static_path = ['_static']
 
-# necessary for pyvista when building the sphinx gallery
-pyvista.BUILDING_GALLERY = True
+
+# -- Declare the Jinja context -----------------------------------------------
+BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
+if not BUILD_API:
+    exclude_patterns.append("_autoapi_templates")
+else:
+    # Configuration for Sphinx autoapi
+    extensions.append("autoapi.extension")
+    autoapi_dirs = ["../../src/ansys"]
+    autoapi_type = "python"
+    autoapi_dirs = ["../../src/ansys"]
+    autoapi_options = [
+        "members",
+        "undoc-members",
+        "show-inheritance",
+        "show-module-summary",
+        "special-members",
+    ]
+    autoapi_template_dir = "_autoapi_templates"
+    suppress_warnings = ["autoapi.python_import_resolution"]
+    exclude_patterns.append("_autoapi_templates/index.rst")
+    autoapi_python_use_implicit_namespaces = True
+
+BUILD_EXAMPLES = (
+    True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
+)
+if BUILD_EXAMPLES is True:
+    # Necessary for pyvista when building the sphinx gallery
+    extensions.append("sphinx_gallery.gen_gallery")
+    pyvista.BUILDING_GALLERY = True
+    sphinx_gallery_conf = {
+                # convert rst to md for ipynb
+                "pypandoc": True,
+                # path to your examples scripts
+                "examples_dirs": ["../../examples/"],
+                # path where to save gallery generated examples
+                "gallery_dirs": ["examples"],
+                # Patter to search for examples files
+                "filename_pattern": r"\.py",
+                # Patter to omit some files
+                "ignore_pattern": r"/*_data.py",
+                # Remove the "Download all examples" button from the top level gallery
+                "download_all_examples": False,
+                # Sort gallery examples by file name instead of number of lines (default)
+                "within_subsection_order": FileNameSortKey,
+                # directory where function granular galleries are stored
+                "backreferences_dir": None,
+                # Modules for which function level galleries are created.  In
+                "doc_module": "ansys-dyna-core",
+                "image_scrapers": ("pyvista", "matplotlib"),
+                "thumbnail_size": (600, 300),
+                # 'first_notebook_cell': ("%matplotlib inline\n"
+                #                         "from pyvista import set_plot_theme\n"
+                #                         "set_plot_theme('document')"),
+                'remove_config_comments': True,
+            }
+
+jinja_contexts = {
+    "main_toctree": {
+        "build_api": BUILD_API,
+        "build_examples": BUILD_EXAMPLES,
+    },
+}
