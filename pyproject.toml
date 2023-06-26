@@ -35,7 +35,7 @@ tests = [
     "pyvista==0.39.1",
     "matplotlib==3.7.1",
     "numpy==1.25.0",
-    "pytest==7.3.2",
+    "pytest==7.4.0",
     "pytest-cov==4.1.0",
     "joblib==1.2.0",
     "pandas==2.0.2",
