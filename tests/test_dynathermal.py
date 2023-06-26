@@ -67,7 +67,8 @@ def test_thermal(thermal_initialfile, resolve_output_path, resolve_standard_path
     solution.create_database_binary(dt=0.01)
 
     outpath=solution.save_file()
-    serveroutfile = os.path.join(outpath,"test_thermal_stress.k")
+    #serveroutfile = os.path.join(outpath,"test_thermal_stress.k")
+    serveroutfile = '/'.join((outpath,"test_thermal_stress.k"))
     outputfile = os.path.join(resolve_output_path, "test_thermal_stress.k")
     solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "thermal_stress.k")
