@@ -58,7 +58,7 @@ Run the image as a container
  
   .. code:: bash
 
-     docker run -d -p 50051:50051 ghcr.io/ansys/ls-pre .
+     docker run -d -p 50051:50051 ghcr.io/ansys/ls-pre
 
 * Check that the image has been created successfully.   
 
