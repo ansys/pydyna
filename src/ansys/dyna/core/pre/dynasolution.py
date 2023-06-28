@@ -9,16 +9,12 @@ import logging
 import os
 import sys
 
+from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
+from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
+
 # from subprocess import DETACHED_PROCESS
 import grpc
 
-"""
-import kwprocess_pb2
-import kwprocess_pb2_grpc
-"""
-
-from .kwprocess_pb2 import *  # noqa : F403
-from .kwprocess_pb2_grpc import *  # noqa : F403
 from .launcher import *  # noqa : F403
 
 CHUNK_SIZE = 1024 * 1024

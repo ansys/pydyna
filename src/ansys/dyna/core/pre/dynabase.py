@@ -7,16 +7,11 @@ Module to create dyna input deck
 
 # from subprocess import DETACHED_PROCESS
 
-"""
-import kwprocess_pb2
-import kwprocess_pb2_grpc
-"""
-
 from enum import Enum
 import logging
 
-from .kwprocess_pb2 import *  # noqa : F403
-from .kwprocess_pb2_grpc import *  # noqa : F403
+from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
+from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
 
 
 class Motion(Enum):

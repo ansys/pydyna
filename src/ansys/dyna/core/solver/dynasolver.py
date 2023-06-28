@@ -11,10 +11,9 @@ import queue
 import sys
 import threading
 
+from ansys.api.dyna.v0 import dynasolver_pb2, dynasolver_pb2_grpc
 import grpc
 
-#!/usr/bin/python3
-from . import dynasolver_pb2, dynasolver_pb2_grpc
 from . import grpc_tags as tag
 
 #

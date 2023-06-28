@@ -5,7 +5,7 @@ Installation
 ~~~~~~~~~~~~
 
 This package is not yet available on the public PyPI, but you can still install
-it using ``pip`` from our private PyPI repository.
+it using ``pip`` from the private PyPI repository.
 
 The following on Windows:
 
@@ -24,7 +24,7 @@ And if you are running Linux:
    python -m pip install ansys-dyna-core --index-url $INDEX_URL
 
 Email your friendly PyAnsys team member for the ``PYANSYS_PYPI_PRIVATE_PAT``
-at `pyansys.core@ansys.com <mailto:pyansys.core@ansys.com>`_ or send us a message via Teams.
+at `pyansys.core@ansys.com <mailto:pyansys.core@ansys.com>`_ or send a message via Teams.
 
 **Installing from git**
 

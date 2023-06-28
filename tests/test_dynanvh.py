@@ -78,7 +78,8 @@ def test_nvh_frf_plate_damping(resolve_nvh_path, resolve_output_path, resolve_st
     nvhobj.parts.add(boxshell)
 
     outpath=solution.save_file()
-    serveroutfile = os.path.join(outpath,"test_frf_plate_damping.k")
+    #serveroutfile = os.path.join(outpath,"test_frf_plate_damping.k")
+    serveroutfile = '/'.join((outpath,"test_frf_plate_damping.k"))
     outputfile = os.path.join(resolve_output_path, "test_frf_plate_damping.k")
     solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "nvh", "frf_plate_damping.k")
@@ -145,7 +146,8 @@ def test_nvh_frf_solid(resolve_nvh_path, resolve_output_path, resolve_standard_p
         matsum=0.1,
     )
     outpath=solution.save_file()
-    serveroutfile = os.path.join(outpath,"test_frf_solid.k")
+    #serveroutfile = os.path.join(outpath,"test_frf_solid.k")
+    serveroutfile = '/'.join((outpath,"test_frf_solid.k"))
     outputfile = os.path.join(resolve_output_path, "test_frf_solid.k")
     solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "nvh", "frf_solid.k")

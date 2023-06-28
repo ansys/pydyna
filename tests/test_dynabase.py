@@ -26,7 +26,7 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_dynabase(base_initialfile, resolve_server_path, resolve_standard_path,resolve_output_path):
+def test_dynabase(base_initialfile, resolve_standard_path,resolve_output_path):
     solution = DynaSolution("localhost")
     fns = []
     fns.append(base_initialfile)
@@ -62,7 +62,8 @@ def test_dynabase(base_initialfile, resolve_server_path, resolve_standard_path,r
     )
     dbase.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
     outpath=solution.save_file()
-    serveroutfile = os.path.join(outpath,"test_base.k")
+    #serveroutfile = os.path.join(outpath,"test_base.k")
+    serveroutfile = '/'.join((outpath,"test_base.k"))
     outputfile = os.path.join(resolve_output_path, "test_base.k")
     solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, "base.k")
