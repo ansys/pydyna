@@ -9,12 +9,12 @@ PyDyna documentation  |version|
     .. toctree::
        :hidden:
 
-       Resources/Getting_Started
-       Resources/User_Guide
+       getting-started/index
+       user-guide/index
        {% if build_api %}
        autoapi/index
        {% endif %}
-       Resources/Contributing
+       contributing
        {% if build_examples %}
        examples/index
        {% endif %}
