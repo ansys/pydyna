@@ -50,7 +50,8 @@ def comparefile(outputf, standardf):
 
 def check(solution,server_output_path,resolve_output_path,resolve_standard_path,filename):
     testfilename = "test_" + filename
-    serveroutfile = os.path.join(server_output_path,testfilename)
+    #serveroutfile = os.path.join(server_output_path,testfilename)
+    serveroutfile = '/'.join((server_output_path,testfilename))
     outputfile = os.path.join(resolve_output_path, testfilename)
     solution.download(serveroutfile,outputfile)
     standardfile = os.path.join(resolve_standard_path, filename)
