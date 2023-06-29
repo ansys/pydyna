@@ -7,15 +7,17 @@ Module to setup Explicit or Implicit analysis
 
 from .dynabase import *  # noqa : F403
 
+
 class AnalysisType(Enum):
     EXPLICIT = 1
     IMPLICIT = 2
     NONE = 3
 
+
 class DynaMech(DynaBase):
     """Define an Mechanical analysis."""
 
-    def __init__(self,analysis=AnalysisType.EXPLICIT):
+    def __init__(self, analysis=AnalysisType.EXPLICIT):
         DynaBase.__init__(self)
         self.casetype = CaseType.STRUCTURE
         self.analysis = analysis.value
@@ -244,7 +246,7 @@ class DynaMech(DynaBase):
         logging.info("Hourglass 1 Created...")
         return ret
 
-    def save_file(self,defaultsetting=1):
+    def save_file(self, defaultsetting=1):
         """Save keyword files.
 
         Returns

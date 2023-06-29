@@ -224,7 +224,6 @@ class DynaBase:
         self.have_bulk_viscosity = False
         self.have_control_shell = False
 
-
     def get_stub():
         """Get the stub of this DynaBase object."""
         return DynaBase.stub
