@@ -7,13 +7,18 @@ Module to setup Explicit or Implicit analysis
 
 from .dynabase import *  # noqa : F403
 
+class AnalysisType(Enum):
+    EXPLICIT = 1
+    IMPLICIT = 2
+    NONE = 3
 
 class DynaMech(DynaBase):
     """Define an Mechanical analysis."""
 
-    def __init__(self):
+    def __init__(self,analysis=AnalysisType.EXPLICIT):
         DynaBase.__init__(self)
         self.casetype = CaseType.STRUCTURE
+        self.analysis = analysis.value
 
     def create_control_output(self, npopt=0, neecho=0):
         """Set miscellaneous output parameters.
@@ -239,7 +244,7 @@ class DynaMech(DynaBase):
         logging.info("Hourglass 1 Created...")
         return ret
 
-    def save_file(self):
+    def save_file(self,defaultsetting=1):
         """Save keyword files.
 
         Returns
@@ -247,32 +252,62 @@ class DynaMech(DynaBase):
         bool
             "True" when successful, "False" when failed
         """
-        self.set_accuracy(
-            objective_stress_updates=Switch.ON,
-            invariant_node_number=InvariantNode.ON_FOR_SHELL_TSHELL_SOLID,
-            implicit_accuracy_flag=Switch.ON,
-        )
-        self.set_bulk_viscosity(bulk_viscosity_type=BulkViscosity.COMPUTE_INTERNAL_ENERGY_DISSIPATED)
-        self.set_energy(
-            hourglass_energy=EnergyFlag.COMPUTED,
-            sliding_interface_energy=EnergyFlag.COMPUTED,
-        )
-        self.set_hourglass(
-            controltype=HourglassControl.FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID,
-            coefficient=0,
-        )
-        if self.parts.get_num_shellpart() > 0:
-            self.create_control_shell(
-                wrpang=0,
-                esort=1,
-                irnxx=0,
-                istupd=4,
-                theory=0,
-                bwc=1,
-                miter=1,
-                proj=1,
-                irquad=0,
+        if self.analysis == 1:
+            self.set_accuracy(
+                objective_stress_updates=Switch.OFF,
+                invariant_node_number=InvariantNode.ON_FOR_SHELL_TSHELL_SOLID,
+                implicit_accuracy_flag=Switch.OFF,
             )
+            self.set_bulk_viscosity(bulk_viscosity_type=BulkViscosity.COMPUTE_INTERNAL_ENERGY_DISSIPATED)
+            self.set_energy(
+                hourglass_energy=EnergyFlag.COMPUTED,
+                sliding_interface_energy=EnergyFlag.COMPUTED,
+            )
+            self.set_hourglass(
+                controltype=HourglassControl.FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID,
+                coefficient=0,
+            )
+            if self.parts.get_num_shellpart() > 0:
+                self.create_control_shell(
+                    wrpang=0,
+                    esort=1,
+                    irnxx=0,
+                    istupd=0,
+                    theory=0,
+                    bwc=1,
+                    miter=1,
+                    proj=1,
+                    irquad=0,
+                )
+        elif self.analysis == 2:
+            self.set_accuracy(
+                objective_stress_updates=Switch.ON,
+                invariant_node_number=InvariantNode.ON_FOR_SHELL_TSHELL_SOLID,
+                implicit_accuracy_flag=Switch.ON,
+            )
+            self.set_bulk_viscosity(bulk_viscosity_type=BulkViscosity.COMPUTE_INTERNAL_ENERGY_DISSIPATED)
+            self.set_energy(
+                hourglass_energy=EnergyFlag.COMPUTED,
+                sliding_interface_energy=EnergyFlag.COMPUTED,
+            )
+            self.set_hourglass(
+                controltype=HourglassControl.FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID,
+                coefficient=0,
+            )
+            if self.parts.get_num_shellpart() > 0:
+                self.create_control_shell(
+                    wrpang=0,
+                    esort=1,
+                    irnxx=0,
+                    istupd=4,
+                    theory=0,
+                    bwc=1,
+                    miter=1,
+                    proj=1,
+                    irquad=0,
+                )
+        else:
+            pass
         DynaBase.save_file(self)
 
 
