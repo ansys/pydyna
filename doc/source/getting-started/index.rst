@@ -1,50 +1,65 @@
 Getting started
 ===============
 
+************
 Installation
-~~~~~~~~~~~~
+************
 
-This package is not yet available on the public PyPI, but you can still install
-it using ``pip`` from the private PyPI repository.
+Python Module
+~~~~~~~~~~~~~
 
-The following on Windows:
+The ``ansys.dyna.core`` package currently supports Python 3.8 through
+Python 3.10 on Windows, Mac OS, and Linux.
 
-.. code::
+Install the latest release from 
+`PyPi <pydyna_pypi_>`_ with:
 
-   set PYANSYS_PYPI_PRIVATE_PAT=<REDACTED>
-   set INDEX_URL=https://%PYANSYS_PYPI_PRIVATE_PAT%@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/
-   python -m pip install ansys-dyna-core --index-url %INDEX_URL%
+.. code:: console
 
-And if you are running Linux:
+   pip install ansys-dyna-core
 
-.. code::
+Alternatively, install the latest from 
+`PyDYNA GitHub <pydyna_issues_>`_ via:
 
-   PYANSYS_PYPI_PRIVATE_PAT=<REDACTED>
-   export INDEX_URL='https://$PYANSYS_PYPI_PRIVATE_PAT@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/'
-   python -m pip install ansys-dyna-core --index-url $INDEX_URL
+.. code:: console
+   
+   pip install git+https://github.com/pyansys/pydyna.git
+   
 
-Email your friendly PyAnsys team member for the ``PYANSYS_PYPI_PRIVATE_PAT``
-at `pyansys.core@ansys.com <mailto:pyansys.core@ansys.com>`_ or send a message via Teams.
+For a local *development* version, install with:
 
-**Installing from git**
+.. code:: console
 
-If you have ``git`` installed and want the bleeding edge version:
-
-.. code::
-
-   pip install -U git+https://github.com/pyansys/pyDyna@main
-
-You need to be logged into GitHub locally and be a member of the `PyAnsys Organization <https://github.com/pyansys>`_.
-
-Alternatively, if you need to modify the repository locally (or want to
-do local development), you can clone it and install it in "development" mode with:
-
-.. code::
-
-   git clone https://github.com/pyansys/pyDyna
-   cd pyDyna
+   git clone https://github.com/pyansys/pydyna.git
+   cd pydyna
    pip install -e .
 
-Note the ``-e`` flag, which denotes that you are in development mode.
-You can make changes in the local ``pyDyna`` and have them reflected
-in your local install of PyDyna.
+This allows you to install the ``ansys-dyna-core`` module
+and modify it locally and have the changes reflected in your setup
+after restarting the Python kernel.
+
+Offline installation
+~~~~~~~~~~~~~~~~~~~~
+If you lack an internet connection on your install machine, the recommended way
+of installing PyDYNA is downloading the wheelhouse archive from the 
+`Releases Page <pydyna_releases_>`_ for your corresponding
+machine architecture.
+
+Each wheelhouse archive contains all the Python wheels necessary to install
+PyDYNA from scratch on Windows and Linux for Python 3.8 through 3.11. You can install
+this on an isolated system with a fresh Python or on a virtual environment.
+
+For example, on Linux with Python 3.8, unzip it and install it with the following:
+
+.. code:: console
+
+   unzip ansys-dyna-core-v0.3.1-wheelhouse-ubuntu-latest-3.8.zip wheelhouse
+   pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
+
+If you're on Windows with Python 3.8, unzip to a ``wheelhouse`` directory and
+install using the preceding command.
+
+Consider installing using a `virtual environment <using_venv_>`_.
+
+.. include:: ../../../docker/pre/README.rst
+.. include:: ../../../docker/solver/README.rst
