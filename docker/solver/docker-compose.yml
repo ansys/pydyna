@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  dyna:
+    image: dyna_solver_v04
+    networks:
+      - dyna_internal
+    volumes:
+       - /rundir
+    cap_add:
+      - SYS_PTRACE
+    ports:
+      - target: 5000
+        published: 5000
+        mode: ingress
+    user: mpirun
+    environment:
+      - LSTC_LICENSE_SERVER=<license_server_name>
+    entrypoint: ["/ansys_inc/server.py","dyna"]
+networks:
+  dyna_internal:
