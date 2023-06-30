@@ -25,7 +25,7 @@ from ansys.dyna.core.pre.dynamech import (
     ContactSurface,
     DOF,
     OffsetType,
-    ImplicitAnalysis,
+    AnalysisType
 )
 from ansys.dyna.core.pre.dynamaterial import (
     MatNull,
@@ -80,7 +80,7 @@ camry_solution.set_termination(10)
 ###############################################################################
 # We can then use the implicit analysis methods in DynaMech class to define
 # the IMILICIT control cards.
-camry = DynaMech()
+camry = DynaMech(analysis=AnalysisType.EXPLICIT)
 camry_solution.add(camry)
 
 ###############################################################################
