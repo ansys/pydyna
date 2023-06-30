@@ -1,13 +1,17 @@
-Create your own pydyna-pre service docker container
-===================================================
+Build pydyna-pre service docker container
+=========================================
 
 The pydyna-pre service Docker containers can be easily built by following
 these steps.
 
-Inside this folder, the instructions (i.e. ``Dockerfile.*`` files) for
-building the pydyna-pre service Docker containers are made available. 
+To build the docker image you will need to clone pydyna repo locally:
 
-* ``Dockerfile``: this file builds the Linux-based Docker image.
+.. code:: console
+
+   git clone https://github.com/pyansys/pydyna.git
+   cd pydyna
+
+*  ``docker/pre/Dockerfile``: this file builds the Linux-based Docker image.
 
 Prerequisites
 ^^^^^^^^^^^^^
