@@ -18,7 +18,8 @@ from ansys.dyna.core.pre.dynamech import (
     ThermalAnalysisType,
     SolidPart,
     SolidFormulation,
-    NodeSet
+    NodeSet,
+    AnalysisType
 )
 from ansys.dyna.core.pre.dynamaterial import MatElasticPlasticThermal
 from ansys.dyna.core.pre import examples
@@ -53,7 +54,7 @@ solution.set_termination(3.0)
 ###############################################################################
 # To invoke the transient thermal solver, the thermal analysis type in CONTROL_SOLUTION is
 # being set to 2 by ThermalAnalysisType.TRANSIENT.
-ts = DynaMech()
+ts = DynaMech(analysis=AnalysisType.EXPLICIT)
 solution.add(ts)
 
 tanalysis = ThermalAnalysis()
