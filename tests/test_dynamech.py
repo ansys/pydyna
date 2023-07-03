@@ -12,6 +12,7 @@ from ansys.dyna.core.pre.dynamech import (
     ContactCategory,
     Curve,
     Point,
+    AnalysisType
 )
 
 
@@ -34,7 +35,7 @@ def test_mech(mech_initialfile, resolve_output_path, resolve_standard_path):
     fns = []
     fns.append(mech_initialfile)
     solution.open_files(fns)
-    mech = DynaMech()
+    mech = DynaMech(analysis=AnalysisType.IMPLICIT)
     solution.add(mech)
     solution.set_termination(0.03)
     airbag = Airbag(

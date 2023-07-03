@@ -111,8 +111,8 @@ Start by cloning the repository
 .. code::
 
    git clone https://github.com/pyansys/pyDyna
-
-and copy the required files.
+   cd pyDyna
+   pip install -e .
 
 Install in offline mode
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -123,17 +123,17 @@ archive from the `Releases Page <https://github.com/pyansys/pydyna/releases>`_ f
 corresponding machine architecture.
 
 Each wheelhouse archive contains all the Python wheels necessary to install PyDyna from scratch on Windows
-and Linux, from Python 3.6,3.8 and 3.9. You can install this on an isolated system with a fresh Python
+and Linux, from Python 3.7 to 3.10. You can install this on an isolated system with a fresh Python
 installation or on a virtual environment.
 
 For example, on Linux with Python 3.8, unzip the wheelhouse archive and install it with:
 
 .. code:: bash
 
-    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.8.zip wheelhouse
+    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.8.zip -d wheelhouse
     pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
 
-If you are on Windows with Python 3.9, unzip the corresponding wheelhouse to a wheelhouse directory
+If you are on Windows with Python 3.8, unzip the corresponding wheelhouse to a wheelhouse directory
 and install using the preceding command.
 
 Consider installing using a `virtual environment <https://docs.python.org/3/library/venv.html>`_.
@@ -176,8 +176,8 @@ Here is a basic pre-processing example:
 	icfd_solution = DynaSolution(hostname)
 	# Import the initial mesh data(nodes and elements)
 	fns = []
-	path = examples.cylinder_flow + os.sep
-	fns.append(path + "cylinder_flow.k")
+	path = os.getcwd()+os.sep
+	fns.append(path+"cylinder_flow.k")
 	icfd_solution.open_files(fns)
 	# Set total time of simulation
 	icfd_solution.set_termination(termination_time=100)
@@ -224,7 +224,13 @@ Here is a basic pre-processing example:
 	icfd.add(meshvol)
 
 	icfd_solution.create_database_binary(dt=1)
-	icfd_solution.save_file()
+	serverpath = icfd_solution.save_file()
+	serveroutfile = '/'.join((serverpath,"cylinder_flow.k"))
+	downloadpath = os.path.join(os.getcwd(), "output")
+	if not os.path.exists(downloadpath):
+		os.makedirs(downloadpath)
+	downloadfile = os.path.join(downloadpath,"cylinder_flow.k")
+	icfd_solution.download(serveroutfile,downloadfile)
 	
 For more examples, visit https://dyna.docs.pyansys.com/version/stable/examples/index.html
 
