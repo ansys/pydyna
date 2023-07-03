@@ -5,7 +5,7 @@ Getting started
 Installation
 ************
 
-Python Module
+Python module
 ~~~~~~~~~~~~~
 
 The ``ansys.dyna.core`` package currently supports Python 3.8 through
@@ -19,7 +19,7 @@ Install the latest release from
    pip install ansys-dyna-core
 
 Alternatively, install the latest from 
-`PyDYNA GitHub <pydyna_issues_>`_ via:
+`PyDyna GitHub <pydyna_issues_>`_ via:
 
 .. code:: console
    
@@ -41,12 +41,12 @@ after restarting the Python kernel.
 Offline installation
 ~~~~~~~~~~~~~~~~~~~~
 If you lack an internet connection on your install machine, the recommended way
-of installing PyDYNA is downloading the wheelhouse archive from the 
+of installing PyDyna is downloading the wheelhouse archive from the 
 `Releases Page <pydyna_releases_>`_ for your corresponding
 machine architecture.
 
 Each wheelhouse archive contains all the Python wheels necessary to install
-PyDYNA from scratch on Windows and Linux for Python 3.8 through 3.11. You can install
+PyDyna from scratch on Windows and Linux for Python 3.8 through 3.11. You can install
 this on an isolated system with a fresh Python or on a virtual environment.
 
 For example, on Linux with Python 3.8, unzip it and install it with the following:
