@@ -63,3 +63,9 @@ Consider installing using a `virtual environment <using_venv_>`_.
 
 .. include:: ../../../docker/pre/README.rst
 .. include:: ../../../docker/solver/README.rst
+
+.. LINKS
+.. _pydyna_pypi: https://pypi.org/projects/ansys-dyna-core/
+.. _pydyna_releases: https://github.com/ansys/pydyna/releases
+.. _pydyna_issues: https://github.com/ansys/pydyna/issues
+.. _using_venv: https://docs.python.org/3/library/venv.html

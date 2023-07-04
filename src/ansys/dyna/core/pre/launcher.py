@@ -21,12 +21,17 @@ def check_ports(port_range, ip="localhost"):
 
 
 def port_in_use(port, host=LOCALHOST):
-    """Returns True when a port is in use at the given host.
-    Must actually "bind" the address.  Just checking if we can create
+    """
+    Returns ``True`` when a port is in use at the given host.
+
+    Notes
+    -----
+    Must actually "bind" the address. Just checking if we can create
     a socket is insufficient as it's possible to run into permission
     errors like:
-    - An attempt was made to access a socket in a way forbidden by its
-      access permissions.
+
+    "An attempt was made to access a socket in a way forbidden by its
+    access permissions."
     """
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         try:
@@ -37,18 +42,19 @@ def port_in_use(port, host=LOCALHOST):
 
 
 def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path=None) -> tuple:  # pragma: no cover
-    """Start kwserver locally in gRPC mode.
+    """
+    Start kwserver locally in gRPC mode.
+    
     Parameters
     ----------
     port : int
-        Port to launch PyDyna gRPC on.  Final port will be the first
+        Port to launch PyDyna gRPC on. Final port will be the first
         port available after (or including) this port.
 
     Returns
     -------
     int
         Returns the port number that the gRPC instance started on.
-
     """
     LOG.debug("Starting 'launch_kwserver'.")
 
@@ -86,7 +92,9 @@ def launch_dynapre(
     port=50051,
     ip="localhost",
 ):
-    """Start kwserver locally.
+    """
+    Start kwserver locally.
+
     Parameters
     ----------
     port : int

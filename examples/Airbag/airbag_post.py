@@ -1,5 +1,4 @@
 """
-.. _ref_airbag_deploy_post:
 Airbag deploy post processing example
 -------------------------------------
 
