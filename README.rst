@@ -10,23 +10,23 @@ Project Overview
 There are 3 related packages here, pre and solver are all under the ansys/pydyna/ directory,
 while pyDPF is used for post-processing.
 
-pre contains highly abstracted APIs for setting up a LS-DYNA input deck, so far, 
+**pre** contains highly abstracted APIs for setting up a LS-DYNA input deck, so far, 
 it includes DynaMech, DynaIGA, DynaICFD, DynaSALE, DynaEM, DynaAirbag and so on.
 
-solver contains code for interfacing with the LS-DYNA solver directly.
+**solver** contains code for interfacing with the LS-DYNA solver directly.
 As LS-DYNA is primarily a batch solver with very limited interactive
 capabilities, the code here is similarly limited.  The target
 use case is that LS-DYNA will be running in a container environment
 such as Docker or Kubernetes.  The code here then allows for pushing
 input files to the container, starting LS-DYNA and monitoring its
-progress, and retrieving results files.
+progress, and retrieving results files. The api also allows changing the value of a load curve that is a function of time.
 
-The Data Processing Framework (DPF) is designed to provide numerical
+The **Data Processing Framework (DPF)** is designed to provide numerical
 simulation users/engineers with a toolbox for accessing and
 transforming simulation data. DPF can access data from solver result
 files as well as several neutral formats (csv, hdf5, vtk,
 etc.). Various operators are available allowing the manipulation and
-the transformation of this data.
+the transformation of this data. Post processing of DYNA resluts can be performed using pyDPF. 
 
 The Python `ansys-dpf-post` package provides a simplified Python
 interface to DPF, thus enabling rapid postprocessing without ever
@@ -34,109 +34,6 @@ leaving a Python environment.
 
 Visit the `DPF-Post Documentation <https://postdocs.pyansys.com>`_ for a
 detailed description of the package.
-
-Install PyDyna-Pre Docker
--------------------------
-
-Launching the PyDyna-Pre service locally, the only requirement is that:
-
-* Docker is installed on your machine.
-
-.. caution::
-
-   The PyDyna-Pre service is currently available only as a Linux Docker image. 
-   make sure that your Docker engine is configured to run Linux Docker images.
-
-Please refer to ``docker/README.rst`` to install PyDyna-Pre service docker container
-
-Install PyDyna-Solver Docker
-----------------------------
-
-Once pydyna is installed, the docker-compose.yml file to build and launch the dyna solver docker can be located
-under ``docker``. The yml file can be copied locally. To run the docker the following command can be used
-
-.. code:: bash
-    
-	docker-compose up
-
-
-Install the package
--------------------
-
-PyDyna has three installation modes: user, developer, and offline.
-
-Install in user mode
-^^^^^^^^^^^^^^^^^^^^
-
-Before installing PyDyna in user mode, make sure you have the latest version of
-`pip`_ with:
-
-.. code:: bash
-
-   python -m pip install -U pip
-
-Then, install PyDyna with:
-
-.. code:: bash
-
-   python -m pip install ansys-dyna-core
-
-.. caution::
-
-    PyDyna is currently hosted in a private PyPI repository. You must provide the index
-    URL to the private PyPI repository:
-
-    * Index URL: ``https://pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/``
-
-    If access to this package registry is needed, email `pyansys.support@ansys.com <mailto:pyansys.support@ansys.com>`_
-    to request access. The PyAnsys team can provide you a read-only token to be inserted in ``${PRIVATE_PYPI_ACCESS_TOKEN}``.
-    Once you have it, run the following command:
-
-    .. code:: bash
-
-        pip install ansys-dyna-core --index-url=https://${PRIVATE_PYPI_ACCESS_TOKEN}@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/
-
-Install in developer mode
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Installing PyDyna in developer mode allows you to modify the source and enhance it.
-
-.. note::
-   
-    Before contributing to the project, ensure that you are thoroughly familiar
-    with the `PyAnsys Developer's Guide`_.
-
-Start by cloning the repository
-
-.. code::
-
-   git clone https://github.com/pyansys/pyDyna
-
-and copy the required files.
-
-Install in offline mode
-^^^^^^^^^^^^^^^^^^^^^^^
-
-If you lack an internet connection on your installation machine (or you do not have access to the
-private Ansys PyPI packages repository), you should install PyDyna by downloading the wheelhouse
-archive from the `Releases Page <https://github.com/pyansys/pydyna/releases>`_ for your
-corresponding machine architecture.
-
-Each wheelhouse archive contains all the Python wheels necessary to install PyDyna from scratch on Windows
-and Linux, from Python 3.6,3.8 and 3.9. You can install this on an isolated system with a fresh Python
-installation or on a virtual environment.
-
-For example, on Linux with Python 3.8, unzip the wheelhouse archive and install it with:
-
-.. code:: bash
-
-    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.8.zip wheelhouse
-    pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
-
-If you are on Windows with Python 3.9, unzip the corresponding wheelhouse to a wheelhouse directory
-and install using the preceding command.
-
-Consider installing using a `virtual environment <https://docs.python.org/3/library/venv.html>`_.
 
 Documentation
 -------------
