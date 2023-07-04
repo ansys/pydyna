@@ -1,5 +1,4 @@
 """
-.. _ref_belted_dummy:
 Belted dummy example
 ====================
 
@@ -61,7 +60,7 @@ dummy_solution = DynaSolution(hostname)
 # Start the Solution workflow
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # NODES and ELEMENTS are read in from the "belted_dummy.k" file. This file also has the
-# *PART defined in it but the section and material fields are empty to begin with
+# *PART* defined in it but the section and material fields are empty to begin with
 
 fns = []
 path = examples.belted_dummy + os.sep

@@ -1,5 +1,4 @@
 """
-.. _ref_thermal_stress:
 Thermal stress example
 ======================
 
@@ -43,7 +42,7 @@ solution = DynaSolution(hostname)
 # Start the Solution workflow
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # NODES and ELEMENTS are read in from the "thermal_stress.k" file. This file also has the
-# *PART defined in it but the section and material fields are empty to begin with
+# *PART* defined in it but the section and material fields are empty to begin with
 fns = []
 path = examples.thermal_stress + os.sep
 fns.append(path + "thermal_stress.k")
