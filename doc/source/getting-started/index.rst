@@ -12,7 +12,7 @@ The ``ansys.dyna.core`` package currently supports Python 3.8 through
 Python 3.10 on Windows, Mac OS, and Linux.
 
 Install the latest release from 
-`PyPi <pydyna_pypi_>`_ with:
+`PyPI <pydyna_pypi_>`_ with:
 
 .. code:: console
 
