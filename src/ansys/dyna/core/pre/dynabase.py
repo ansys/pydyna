@@ -218,6 +218,11 @@ class DynaBase:
         self.constraints = Constraint()
         self.contacts = ContactGroup()
         self.entities = []
+        self.have_accuracy = False
+        self.have_energy = False
+        self.have_hourglass = False
+        self.have_bulk_viscosity = False
+        self.have_control_shell = False
 
     def get_stub():
         """Get the stub of this DynaBase object."""
@@ -280,16 +285,19 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateControlAccuracy(
-            ControlAccuracyRequest(
-                osu=objective_stress_updates.value,
-                inn=invariant_node_number.value,
-                pidosu=partsetid_for_objective_stress_updates,
-                iacc=implicit_accuracy_flag.value,
-                exacc=explicit_accuracy_flag.value,
+        ret = True
+        if not self.have_accuracy:
+            ret = self.stub.CreateControlAccuracy(
+                ControlAccuracyRequest(
+                    osu=objective_stress_updates.value,
+                    inn=invariant_node_number.value,
+                    pidosu=partsetid_for_objective_stress_updates,
+                    iacc=implicit_accuracy_flag.value,
+                    exacc=explicit_accuracy_flag.value,
+                )
             )
-        )
-        logging.info("Control Accuracy Created...")
+            self.have_accuracy = True
+            logging.info("Control Accuracy Created...")
         return ret
 
     def set_energy(
@@ -324,16 +332,19 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateControlEnergy(
-            ControlEnergyRequest(
-                hgen=hourglass_energy.value,
-                rwen=rigidwall_energy.value,
-                slnten=sliding_interface_energy.value,
-                rylen=rayleigh_energy.value,
-                irgen=initial_reference_geometry_energy.value,
+        ret = True
+        if not self.have_energy:
+            ret = self.stub.CreateControlEnergy(
+                ControlEnergyRequest(
+                    hgen=hourglass_energy.value,
+                    rwen=rigidwall_energy.value,
+                    slnten=sliding_interface_energy.value,
+                    rylen=rayleigh_energy.value,
+                    irgen=initial_reference_geometry_energy.value,
+                )
             )
-        )
-        logging.info("Control Energy Created...")
+            self.have_energy = True
+            logging.info("Control Energy Created...")
         return ret
 
     def set_output(
@@ -385,8 +396,11 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateControlHourgalss(ControlHourglassRequest(ihq=controltype.value, qh=coefficient))
-        logging.info("Control Hourglass Created...")
+        ret = True
+        if not self.have_hourglass:
+            ret = self.stub.CreateControlHourgalss(ControlHourglassRequest(ihq=controltype.value, qh=coefficient))
+            self.have_hourglass = True
+            logging.info("Control Hourglass Created...")
         return ret
 
     def set_bulk_viscosity(
@@ -411,14 +425,17 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateControlBulkViscosity(
-            ControlBulkViscosityRequest(
-                q1=quadratic_viscosity_coeff,
-                q2=linear_viscosity_coeff,
-                type=bulk_viscosity_type.value,
+        ret = True
+        if not self.have_bulk_viscosity:
+            ret = self.stub.CreateControlBulkViscosity(
+                ControlBulkViscosityRequest(
+                    q1=quadratic_viscosity_coeff,
+                    q2=linear_viscosity_coeff,
+                    type=bulk_viscosity_type.value,
+                )
             )
-        )
-        logging.info("Control Bulk Viscosity Created...")
+            self.have_bulk_viscosity = True
+            logging.info("Control Bulk Viscosity Created...")
         return ret
 
     def set_init_temperature(self, temp=0):
@@ -482,20 +499,23 @@ class DynaBase:
         bool
             "True" when successful, "False" when failed
         """
-        ret = self.stub.CreateControlShell(
-            ControlShellRequest(
-                wrpang=wrpang,
-                esort=esort,
-                irnxx=irnxx,
-                istupd=istupd,
-                theory=theory,
-                bwc=bwc,
-                miter=miter,
-                proj=proj,
-                irquad=irquad,
+        ret = True
+        if not self.have_control_shell:
+            ret = self.stub.CreateControlShell(
+                ControlShellRequest(
+                    wrpang=wrpang,
+                    esort=esort,
+                    irnxx=irnxx,
+                    istupd=istupd,
+                    theory=theory,
+                    bwc=bwc,
+                    miter=miter,
+                    proj=proj,
+                    irquad=irquad,
+                )
             )
-        )
-        logging.info("Control Shell Created...")
+            self.have_control_shell = True
+            logging.info("Control Shell Created...")
         return ret
 
     def create_control_solid(

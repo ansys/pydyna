@@ -35,6 +35,109 @@ leaving a Python environment.
 Visit the `DPF-Post Documentation <https://postdocs.pyansys.com>`_ for a
 detailed description of the package.
 
+Install PyDyna-Pre Docker
+-------------------------
+
+Launching the PyDyna-Pre service locally, the only requirement is that:
+
+* Docker is installed on your machine.
+
+.. caution::
+
+   The PyDyna-Pre service is currently available only as a Linux Docker image. 
+   make sure that your Docker engine is configured to run Linux Docker images.
+
+Please refer to ``docker/README.rst`` to install PyDyna-Pre service docker container
+
+Install PyDyna-Solver Docker
+----------------------------
+
+Once pydyna is installed, the docker-compose.yml file to build and launch the dyna solver docker can be located
+under ``docker``. The yml file can be copied locally. To run the docker the following command can be used
+
+.. code:: bash
+    
+	docker-compose up
+
+
+Install the package
+-------------------
+
+PyDyna has three installation modes: user, developer, and offline.
+
+Install in user mode
+^^^^^^^^^^^^^^^^^^^^
+
+Before installing PyDyna in user mode, make sure you have the latest version of
+`pip`_ with:
+
+.. code:: bash
+
+   python -m pip install -U pip
+
+Then, install PyDyna with:
+
+.. code:: bash
+
+   python -m pip install ansys-dyna-core
+
+.. caution::
+
+    PyDyna is currently hosted in a private PyPI repository. You must provide the index
+    URL to the private PyPI repository:
+
+    * Index URL: ``https://pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/``
+
+    If access to this package registry is needed, email `pyansys.support@ansys.com <mailto:pyansys.support@ansys.com>`_
+    to request access. The PyAnsys team can provide you a read-only token to be inserted in ``${PRIVATE_PYPI_ACCESS_TOKEN}``.
+    Once you have it, run the following command:
+
+    .. code:: bash
+
+        pip install ansys-dyna-core --index-url=https://${PRIVATE_PYPI_ACCESS_TOKEN}@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/
+
+Install in developer mode
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Installing PyDyna in developer mode allows you to modify the source and enhance it.
+
+.. note::
+   
+    Before contributing to the project, ensure that you are thoroughly familiar
+    with the `PyAnsys Developer's Guide`_.
+
+Start by cloning the repository
+
+.. code::
+
+   git clone https://github.com/pyansys/pyDyna
+   cd pyDyna
+   pip install -e .
+
+Install in offline mode
+^^^^^^^^^^^^^^^^^^^^^^^
+
+If you lack an internet connection on your installation machine (or you do not have access to the
+private Ansys PyPI packages repository), you should install PyDyna by downloading the wheelhouse
+archive from the `Releases Page <https://github.com/pyansys/pydyna/releases>`_ for your
+corresponding machine architecture.
+
+Each wheelhouse archive contains all the Python wheels necessary to install PyDyna from scratch on Windows
+and Linux, from Python 3.7 to 3.10. You can install this on an isolated system with a fresh Python
+installation or on a virtual environment.
+
+For example, on Linux with Python 3.8, unzip the wheelhouse archive and install it with:
+
+.. code:: bash
+
+    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.8.zip -d wheelhouse
+    pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
+
+If you are on Windows with Python 3.8, unzip the corresponding wheelhouse to a wheelhouse directory
+and install using the preceding command.
+
+Consider installing using a `virtual environment <https://docs.python.org/3/library/venv.html>`_.
+
 Documentation
 -------------
 For comprehesive information on PyDyna, see the latest release
@@ -73,8 +176,8 @@ Here is a basic pre-processing example:
 	icfd_solution = DynaSolution(hostname)
 	# Import the initial mesh data(nodes and elements)
 	fns = []
-	path = examples.cylinder_flow + os.sep
-	fns.append(path + "cylinder_flow.k")
+	path = os.getcwd()+os.sep
+	fns.append(path+"cylinder_flow.k")
 	icfd_solution.open_files(fns)
 	# Set total time of simulation
 	icfd_solution.set_termination(termination_time=100)
@@ -121,7 +224,13 @@ Here is a basic pre-processing example:
 	icfd.add(meshvol)
 
 	icfd_solution.create_database_binary(dt=1)
-	icfd_solution.save_file()
+	serverpath = icfd_solution.save_file()
+	serveroutfile = '/'.join((serverpath,"cylinder_flow.k"))
+	downloadpath = os.path.join(os.getcwd(), "output")
+	if not os.path.exists(downloadpath):
+		os.makedirs(downloadpath)
+	downloadfile = os.path.join(downloadpath,"cylinder_flow.k")
+	icfd_solution.download(serveroutfile,downloadfile)
 	
 For more examples, visit https://dyna.docs.pyansys.com/version/stable/examples/index.html
 
