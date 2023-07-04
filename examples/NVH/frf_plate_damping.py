@@ -1,5 +1,4 @@
 """
-.. _ref_frf:
 FRF for a rectangular plate
 ===========================
 
@@ -44,7 +43,7 @@ solution = DynaSolution(hostname)
 ###############################################################################
 # Import the initial mesh data(nodes and elements)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Mesh data is imported which includes the *NODE, *ELEMENT_ and *PART cards predefined
+# Mesh data is imported which includes the *NODE*, *ELEMENT_* and *PART* cards predefined
 fns = []
 path = examples.nvh_frf_plate_damping + os.sep
 fns.append(path + "frf_plate_damping.k")
@@ -69,7 +68,7 @@ nvhobj.implicitanalysis.set_solution(solution_method=1)
 ###############################################################################
 # Frequency Domain Cards
 # ~~~~~~~~~~~~~~~~~~~~~~
-# *FREQUENCY_DOMAIN_FRF is used to compute the frequency response function due to nodal excitations.
+# *FREQUENCY_DOMAIN_FRF* is used to compute the frequency response function due to nodal excitations.
 # In this case a base velocity is define as an input at node 131. The base acceleration response is measured at
 # nodes 131 and 651. The max natural frequency employed in FRF is limited to 2000Hz.
 fd = FrequencyDomain()
