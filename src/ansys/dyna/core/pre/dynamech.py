@@ -43,7 +43,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateControlOutput(ControlOutputRequest(npopt=npopt, neecho=neecho))
         logging.info("Control Output Created...")
@@ -64,7 +64,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         velocity = [
             translational.x,
@@ -108,7 +108,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateDefineOrientation(
             DefineOrientationRequest(vid=vid, iop=iop, vector=vector, node1=node1, node2=node2)
@@ -133,7 +133,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateShellSet(ShellSetRequest(option=option, title=title, sid=sid, eids=eids))
         logging.info("Shell Set Created...")
@@ -154,7 +154,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateSolidSet(SolidSetRequest(title=title, sid=sid, ki=ki))
         logging.info("Solid Set Created...")
@@ -176,7 +176,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateSectionSolid(SectionSolidRequest(title=title, secid=secid, elform=elform))
         logging.info("Section Solid Created...")
@@ -209,7 +209,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateSectionDiscrete(
             SectionDiscreteRequest(secid=secid, dro=dro, kd=kd, v0=v0, cl=cl, fd=fd, cdl=cdl, tdl=tdl)
@@ -240,7 +240,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateHourglass(HourglassRequest(ghid=ghid, ihq=ihq, qm=qm, q1=q1, q2=q2, qb=qb, qw=qw))
         logging.info("Hourglass 1 Created...")
@@ -252,7 +252,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         if self.analysis == 1:
             self.set_accuracy(
@@ -338,7 +338,7 @@ class Airbag:
     Returns
     -------
     bool
-        "True" when successful, "False" when failed.
+        ``True`` when successful, ``False`` when failed..
     """
 
     def __init__(

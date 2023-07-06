@@ -34,7 +34,7 @@ class DynaIGA(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateSectionIGAShell(
             SectionIGAShellRequest(secid=secid, elform=elform, shrf=shrf, thickness=thickness)
@@ -48,7 +48,7 @@ class DynaIGA(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         DynaBase.save_file(self)
         self.create_control_contact(rwpnal=1.0, ignore=1, igactc=1)

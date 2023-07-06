@@ -93,7 +93,7 @@ inheritance_graph_attrs = dict(rankdir="RL", size='"8.0, 10.0"', fontsize=14, ra
 inheritance_node_attrs = dict(shape="ellipse", fontsize=14, height=0.75, color="dodgerblue1", style="filled")
 
 # -- Options for HTML output -------------------------------------------------
-html_short_title = html_title = "PyDyna"
+html_short_title = html_title = "PyDYNA"
 html_show_sourcelink = True
 html_theme = "ansys_sphinx_theme"
 html_logo = pyansys_logo_black

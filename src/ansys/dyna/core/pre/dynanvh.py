@@ -22,7 +22,7 @@ class DynaNVH(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         DynaBase.save_file(self)
 
