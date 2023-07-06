@@ -85,7 +85,7 @@ class StructuredMesh:
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.fillings.append(
             [
@@ -227,7 +227,7 @@ class DynaSALE(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.stub.CreateTermination(TerminationRequest(endtim=endtime))
 
@@ -242,7 +242,7 @@ class DynaSALE(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.stub.CreateDBBinary(DBBinaryRequest(filetype="D3PLOT", dt=database_plot_interval))
 
@@ -266,7 +266,7 @@ class DynaSALE(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.ALECreateControl(
             ControlALERequest(
@@ -296,7 +296,7 @@ class DynaSALE(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         if matsum > 0:
             self.stub.CreateDBAscii(DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0))
@@ -312,7 +312,7 @@ class DynaSALE(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.set_energy(
             hourglass_energy=EnergyFlag.COMPUTED,

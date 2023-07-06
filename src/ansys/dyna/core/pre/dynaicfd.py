@@ -1,8 +1,8 @@
 """
 ICFD API
-==========
+========
 
-Module to create Incompressible Computational Fluid Dynamics(ICFD) dyna input deck
+Module for creating an ICFD (incompressible computational fluid dynamics) DYNA input deck.
 """
 
 import logging
@@ -11,7 +11,7 @@ from .dynabase import *  # noqa : F403
 
 
 class DynaICFD(DynaBase):
-    """Contain methods to create keyword related to ICFD."""
+    """Contains methods for create a keyword related to an ICFD analysis."""
 
     def __init__(self):
         DynaBase.__init__(self)
@@ -20,12 +20,12 @@ class DynaICFD(DynaBase):
         self.termination = 1e28
 
     def set_termination(self, termination_time):
-        """Set total time of simulation for the fluid problem.
+        """Set the total time of the simulation for the fluid problem.
 
         Parameters
         ----------
         termination_time : float
-            Total time of simulation for the fluid problem.
+            Total time of the simulation for the fluid problem.
         """
         self.termination = termination_time
 
@@ -34,19 +34,19 @@ class DynaICFD(DynaBase):
 
         Parameters
         ----------
-        atype : int
-            Analysis type.
-        mtype : int
-            Solving method type.
-        dvcl : int
-            Divergence cleaning flag.
-        rdvcl : int
-            Remeshing divergence cleaning.
+        atype : int, optional
+            Analysis type. The default is ``0``.
+        mtype : int, optional
+            Solving method type. The default is ``0``.
+        dvcl : int, optional
+            Flag for divergence cleaning. The default is ``0``.
+        rdvcl : int, optional
+            Flag for remeshing divergence cleaning. The default is ``0``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.ICFDCreateControlGeneral(
             ICFDControlGeneralRequest(atype=atype, mtype=mtype, dvcl=dvcl, rdvcl=rdvcl)
@@ -55,7 +55,7 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_control_output(self, msgl):
-        """Modify default values for screen and file outputs related to this fluid solver only.
+        """Modify default values for screen and file outputs related to the fluid solver only.
 
         Parameters
         ----------
@@ -65,7 +65,7 @@ class DynaICFD(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.ICFDCreateControlOutput(ICFDControlOutputRequest(msgl=msgl))
         logging.info("ICFD control output Created...")
@@ -77,12 +77,12 @@ class DynaICFD(DynaBase):
         Parameters
         ----------
         tmod : int
-            Indicates what turbulence model will be used.
+            Turbulence model to use.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.ICFDCreateControlTurbulence(ICFDControlTurbulenceRequest(tmod=tmod))
         logging.info("ICFD control turbulence Created...")
@@ -93,75 +93,77 @@ class DynaICFD(DynaBase):
 
         Parameters
         ----------
-        ctype : int
-            Indicates the coupling direction to the solver.
-        bt : float
-            Birth time for the DEM coupling.
-        dt : float
-            Death time for the DEM coupling.
-        sf : float
-            Scale factor applied to the force transmitted by the fluid to the structure.
+        ctype : int, optional
+            Coupling direction to the solver. The default is ``0``.
+        bt : float, optional
+            Birth time for the DEM coupling. The default is ``0``.
+        dt : float, optional
+            Death time for the DEM coupling. The default is ``1e28``.
+        sf : float, optional
+            Scale factor to apply to the force transmitted by the fluid to the structure.
+            The default is ``1``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.ICFDCreateControlDEMCoupling(ICFDControlDEMCouplingRequest(ctype=ctype, bt=bt, dt=dt, sf=sf))
         logging.info("ICFD control dem coupling Created...")
         return ret
 
     def create_section_icfd(self, sid):
-        """Define a section for the incompressible flow solver.
+        """Define a section for the ICFD solver.
 
         Parameters
         ----------
         sid : int
-            Section identifier.
+            Section ID.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.ICFDCreateSection(ICFDSectionRequest(sid=sid))
         logging.info("ICFD Section Created...")
         return ret
 
     def create_part_icfd(self, pid, secid, mid):
-        """Define parts for this incompressible flow solver.
+        """Define parts for the ICFD solver.
 
         Parameters
         ----------
         pid : int
-            Part identifier for fluid surfaces.
+            Part ID for fluid surfaces.
         secid : int
-            Section identifier defined with the \*ICFD_SECTION card.
+            Section ID defined with the ``\*ICFD_SECTION`` card.
         mid : int
-            Material identifier defined with the \*ICFD_MAT card.
+            Material ID defined with the ``\*ICFD_MAT`` card.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.ICFDCreatePart(ICFDPartRequest(pid=pid, secid=secid, mid=mid))
         logging.info("ICFD part Created...")
         return ret
 
     def create_solver_tol_mmov(self, atol=1e-8, rtol=1e-8):
-        """Allow the user to change the default tolerance values for the mesh movement algorithm.
+        """Change the default tolerance values for the mesh movement algorithm.
 
         Parameters
         ----------
-        atol : float
-            Absolute convergence criteria.
-        rtol : float
-            Relative convergence criteria.
+        atol : float, optional
+            Absolute convergence criteria. The default is ``1e-8``.
+        rtol : float, optional
+            Relative convergence criteria. The default is ``1e-8``.
+        
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.ICFDCreateSolverTolMMOV(ICFDSolverTolMMOVRequest(atol=atol, rtol=rtol))
         logging.info("tolerance values for the mesh movement algorithm changed...")
@@ -172,12 +174,12 @@ class DynaICFD(DynaBase):
 
         Parameters
         ----------
-        velocity : Velocity
-            Initial velocity.
-        temperature : float
-            Initial temperature.
-        pressure : float
-            Initial pressure.
+        velocity : Velocity, optional
+            Initial velocity. The default is ``(0, 0, 0)``,
+        temperature : float, optional
+            Initial temperature. The default is ``0``.
+        pressure : float, optional
+            Initial pressure. The default is ``0``.
 
         """
         ret = self.stub.ICFDCreateInit(
@@ -187,7 +189,14 @@ class DynaICFD(DynaBase):
         return ret
 
     def set_imposed_move(self, vx=None, vy=None, vz=None):
-        """Impose a velocity on the whole volume mesh."""
+        """Impose a velocity on the whole volume mesh.
+        
+        Parameters
+        ----------
+        vx :
+        vy :
+
+        """
         lcvx, lcvy, lcvz = 0, 0, 0
         if vx != None:
             vx.create(self.stub)
@@ -238,7 +247,7 @@ class ICFD_CouplingDirection(Enum):
 
 
 class ICFDAnalysis:
-    """Activate ICFD analysis and define associated control parameters."""
+    """Activates an ICFD analysis and defines associated control parameters."""
 
     def __init__(self):
         self.defined_timestep = False
@@ -253,25 +262,25 @@ class ICFDAnalysis:
         self.stub = DynaBase.get_stub()
 
     def set_type(self, analysis_type=ICFD_AnalysisType.TRANSIENT_ANALYSIS):
-        """Specify the type of CFD analysis.
+        """Set the type of the CFD analysis.
 
         Parameters
         ----------
         analysis_type : ICFD_AnalysisType
-            Analysis type.
+            Analysis type. The default is ``TRANSIENT_ANALYSIS``.
         """
         self.defined_type = True
         self.atype = analysis_type.value
 
     def set_output(self, messagelevel=ICFD_MessageLevel.TIMESTEP_INFORMATION, iteration_interval=0):
-        """Modify default values for screen and file outputs related to this fluid solver only.
+        """Modify default values for screen and file outputs related to the fluid solver only.
 
         Parameters
         ----------
-        messagelevel : ICFD_MessageLevel
-            Message level.
-        iteration_interval : int
-            Iteration interval to print the output.
+        messagelevel : ICFD_MessageLevel, optional
+            Message level. The default is ``TIMESTEP_INFORMATION``.
+        iteration_interval : int, optional
+            Iteration interval to print the output at. The default is ``0``.
         """
         self.defined_output = True
         self.msgl = messagelevel.value
@@ -282,8 +291,8 @@ class ICFDAnalysis:
 
         Parameters
         ----------
-        couplingdir : ICFD_CouplingDirection
-            Indicates the coupling direction to the solver.
+        couplingdir : ICFD_CouplingDirection, optional
+            Coupling direction to the solver. The default is ``TWO_WAY_COUPLING``.
         """
         self.defined_fsi = True
         self.owc = couplingdir.value
@@ -297,22 +306,23 @@ class ICFDAnalysis:
         velocity_relax_param=0.3,
         pressure_relax_param=0.7,
     ):
-        """Specify convergence options for the steady state solver.
+        """Set convergence options for the steady state solver.
 
         Parameters
         ----------
-        max_iteration : int
-            Maximum number of iterations to reach convergence.
-        momentum_tol_limit : float
-            Tolerance limits for the momentum equations.
-        pressure_tol_limit : float
-            Tolerance limits for the pressure equations.
-        temperature_tol_limit : float
-            Tolerance limits for the temperature equations.
-        velocity_relax_param : float
-            Relaxation parameters for the velocity.
-        pressure_relax_param : float
-            Relaxation parameters for the pressure.
+        max_iteration : int, optional
+            Maximum number of iterations to reach convergence. The default is
+            ``1000000.0``.
+        momentum_tol_limit : float, optional
+            Tolerance limits for the momentum equations. The default is ``0.001``.
+        pressure_tol_limit : float, optional
+            Tolerance limits for the pressure equations. The default is ``0.001``.
+        temperature_tol_limit : float, optional
+            Tolerance limits for the temperature equations. The default is ``0.001``.
+        velocity_relax_param : float, optional
+            Relaxation parameters for the velocity.  The default is ``0.3``.
+        pressure_relax_param : float, optional
+            Relaxation parameters for the pressure.  The default is ``0.7``.
         """
         self.defined_steady_state = True
         self.its = max_iteration
@@ -323,40 +333,43 @@ class ICFDAnalysis:
         self.rel2 = pressure_relax_param
 
     def set_timestep(self, timestep=0):
-        """Set time step for the fluid problem.
+        """Set the time step for the fluid problem.
 
         Parameters
         ----------
-        dt : float
-            Time step for the fluid problem.
+        dt : float, optional
+            Time step for the fluid problem. The default is ``0``.
         """
         self.defined_timestep = True
         self.timestep = timestep
 
     def set_volume_mesh(self, mesh_growth_scale_factor=1.41):
-        """Modify default values for the automatic volume mesh generation.
+        """Modify the default value for automatic volume mesh generation.
 
         Parameters
         ----------
-        mesh_growth_scale_factor : float
-            Specifies the maximum mesh size that the volume mesher is allowed to use when generating the volume mesh.
+        mesh_growth_scale_factor : float, optional
+            Maximum mesh size that the volume mesher is allowed to use when generating
+            the volume mesh. The default is ``1.41``.
         """
         self.defined_volumemesh = True
         self.mgsf = mesh_growth_scale_factor
 
     def set_mesh_adaptivity(self, min_mesh_size=0, max_mesh_size=0, max_perceptual_error=0, num_iteration=0):
-        """Activate the adaptive mesh refinement feature..
+        """Activate the adaptive mesh refinement feature.
 
         Parameters
         ----------
-        min_mesh_size : float
-            Minimum mesh size allowed to the mesh generator.
-        max_mesh_size : float
-            Maximum mesh size.
-        max_perceptual_error : float
-            Maximum perceptual error allowed in the whole domain.
-        num_iteration : int
-            Number of iterations before a forced remeshing.
+        min_mesh_size : float, optional
+            Minimum mesh size for the mesh generator. The default is ``0``.
+        max_mesh_size : float, optional
+            Maximum mesh size. The default is ``0``.
+        max_perceptual_error : float, optional
+            Maximum perceptual error allowed in the whole domain. The default
+            is ``0``.
+        num_iteration : int, optional
+            Number of iterations before a forced remeshing. The default is
+            ``0``.
         """
         self.defined_mesh_adapt = True
         self.minh = min_mesh_size
@@ -365,12 +378,12 @@ class ICFDAnalysis:
         self.nit = num_iteration
 
     def set_surface_mesh(self, remesh_method=ICFD_SurfRemeshMethod.LAPLACIAN_SMOOTHING):
-        """Enable automatic surface re-meshing.
+        """Enable automatic surface remeshing.
 
         Parameters
         ----------
-        remesh_method : ICFD_SurfRemeshMethod
-            Indicates whether or not to perform a surface re-meshing.
+        remesh_method : ICFD_SurfRemeshMethod, optional
+            Whether to perform a surface remeshing. The default is ``LAPLACIAN_SMOOTHING``.
         """
         self.defined_surfmesh = True
         self.rsrf = remesh_method.value
@@ -387,16 +400,18 @@ class ICFDAnalysis:
 
         Parameters
         ----------
-        coupling_type : int
-            Indicates the coupling direction to the solver.
-        birth_time : float
-            Birth time for the DEM coupling.
-        death_time : float
-            Death time for the DEM coupling.
-        scale_factor : float
-            Scale factor applied to the force transmitted by the fluid to the structure.
-        formulation : int
-            Type of formulation used in the coupling.
+        coupling_type : int, optional
+            Coupling direction to the solver. The default is ``0``.
+        birth_time : float, optional
+            Birth time for the DEM coupling. The default is ``0``.
+        death_time : float, optional
+            Death time for the DEM coupling.  The default is ``1e+28``.
+        scale_factor : float, optional
+            Scale factor applied to the force transmitted by the fluid to
+            the structure. The default is ``1``.
+        formulation : int, optional
+            Type of formulation to use in the coupling. The defalt is
+            ``FORCE_BASED_ON_VELOCITY_DRAG_VALUE``.
         """
         self.defined_coupling_dem = True
         self.ctype = coupling_type
@@ -441,18 +456,24 @@ class Compressible(Enum):
 
 
 class MatICFD:
-    """Specify physical properties for the fluid material.
+    """Defines physical properties for the fluid material.
 
     Parameters
     ----------
         flag : int
-            Flag to choose between fully incompressible, slightly compressible, or barotropic flows:
-            EQ.0: Vacuum (free surface problems only)
-            EQ.1: Fully incompressible fluid.
-        flow_density : float
-            Flow density.
-        dynamic_viscosity : float
-            Dynamic viscosity.
+            Flag for chooseing between fully incompressible, slightly compressible, or barotropic flows.
+            The default is ``FULLY_INCOMPRESSIBLE_FLUID``. Options are:
+            
+            - EQ.0: Vacuum (free surface problems only)
+            - EQ.1: Fully incompressible fluid
+        
+        flow_density : float, optional
+            Flow density. The default is ``0``.
+        dynamic_viscosity : float, optional
+            Dynamic viscosity. The default is ``0``.
+        heat_capacity :
+        thermal_conductivity :
+        thremal_expansion_coefficent :
     """
 
     def __init__(
@@ -473,7 +494,7 @@ class MatICFD:
         self.beta = thermal_expansion_coefficient
 
     def create(self, stub):
-        """Create ICFD material."""
+        """Create an ICFD material."""
         ret = self.stub.ICFDCreateMat(
             ICFDMatRequest(
                 flg=self.flag, ro=self.flow_density, vis=self.dynamic_viscosity, hc=self.hc, tc=self.tc, beta=self.beta
@@ -495,7 +516,7 @@ class Vel(Enum):
 
 
 class ICFDPart:
-    """Define part for the incompressible flow solver."""
+    """Defines a part for the ICFD solver."""
 
     def __init__(self, id):
         self.stub = DynaBase.get_stub()
@@ -505,7 +526,7 @@ class ICFDPart:
         self.mid = 0
 
     def set_material(self, mat):
-        """Set material."""
+        """Set a material."""
         mat.create(self.stub)
         self.mid = mat.material_id
 
@@ -514,20 +535,23 @@ class ICFDPart:
 
         Parameters
         ----------
-        dof : int
-            Applicable degrees of freedom:
-            EQ.1: x-degree of freedom.
-            EQ.2: y-degree of freedom.
-            EQ.3: z-degree of freedom.
-            EQ.4: Normal direction degree of freedom.
-        velocity_flag : int
-            Velocity flag:
-            EQ.1: Linear velocity.
-            EQ.2: Angular velocity.
-            EQ.3: Parabolic velocity profile.
-            EQ.4: Activates synthetic turbulent field on part.
-        motion : Curve
-            Load curve used to describe motion value versus time.
+        dof : int, optional
+            Applicable degrees of freedom. The default is ``ICFDDOF.X``.
+            Options are:
+            
+            - EQ.1: x-degree of freedom
+            - EQ.2: y-degree of freedom
+            - EQ.3: z-degree of freedom
+            - EQ.4: Normal direction degree of freedom
+        
+        velocity_flag : int, optional
+            Velocity flag. The default is ``LINEAR_VELOCITY``. Options are:
+            
+            - EQ.1: Linear velocity
+            - EQ.2: Angular velocity
+            - EQ.3: Parabolic velocity profile
+            - EQ.4: Activates synthetic turbulent field on part
+        
         """
         motion.create(self.stub)
         lcid = motion.id
@@ -565,7 +589,7 @@ class ICFDPart:
         return ret
 
     def set_free_slip(self):
-        """Specify the fluid boundary with free-slip boundary condition."""
+        """Specify the fluid boundary with a free-slip boundary condition."""
         ret = self.stub.ICFDCreateBdyFreeSlip(ICFDBdyFreeSlipRequest(pid=self.id))
         logging.info("ICFD boundary freeslip Created...")
         return ret
@@ -577,7 +601,7 @@ class ICFDPart:
         return ret
 
     def set_fsi(self):
-        """Define fluid surface will be considered in contact with the solid surfaces
+        """Define the fluid surface to consider in contact with the solid surfaces
         for fluid-structure interaction (FSI) analysis."""
         ret = self.stub.ICFDCreateBdyFSI(ICFDBdyFSIRequest(pid=self.id))
         logging.info("ICFD boundary FSI Created...")
@@ -602,24 +626,33 @@ class ICFDPart:
         return ret
 
     def set_boundary_layer(self, number=3):
-        """Define a boundary-layer mesh as a refinement on volume-mesh.
+        """Define a boundary layer mesh as a refinement on the volume mesh.
 
         Parameters
         ----------
-        number : int
+        number : int, optional
             Number of elements normal to the surface (in the boundary layer).
+            The default is ``3.``
         """
         ret = self.stub.MESHCreateBl(MeshBlRequest(pid=self.id, nelth=number - 1))
         logging.info("MESH boundary-layer Created...")
         return ret
 
     def set_boundary_layer_symmetry_condition(self):
-        """Specify the part that will have symmetry conditions for the boundary layer."""
+        """Specify the part that is to have symmetry conditions for the boundary layer."""
         ret = self.stub.MESHCreateBlSym(MeshBlSymRequest(pid=self.id))
         return ret
 
     def set_imposed_move(self, vx=None, vy=None, vz=None):
-        """Impose a velocity on specific ICFD part."""
+        """Impose a velocity on a specific ICFD part.
+        
+        Parameters
+        ----------
+        vx :
+        vy :
+        vz :
+        
+        """
         lcvx, lcvy, lcvz = 0, 0, 0
         if vx != None:
             vx.create(self.stub)
@@ -636,18 +669,18 @@ class ICFDPart:
         return ret
 
     def set_property(self):
-        """Set properties for ICFD part."""
+        """Set properties for an ICFD part."""
         secid = 1
         self.stub.SetICFDPartProperty(ICFDPartPropertyRequest(pid=self.id, secid=secid, mid=self.mid))
 
 
 class ICFDVolumePart:
-    """Assign material properties to the nodes enclosed by surface ICFD parts.
+    """Assigns material properties to the nodes enclosed by surface ICFD parts.
 
     Parameters
     ----------
     surfaces : list
-        List of Part IDs for the surface elements that define the volume mesh.
+        List of part IDs for the surface elements that define the volume mesh.
     """
 
     def __init__(self, surfaces):
@@ -660,18 +693,26 @@ class ICFDVolumePart:
         self.defined_imposed_move = False
 
     def set_material(self, mat):
-        """Set material."""
+        """Set a material."""
         self.mid = mat.material_id
 
     def set_imposed_move(self, vx=None, vy=None, vz=None):
-        """Impose a velocity on specific ICFD part."""
+        """Impose a velocity on a specific ICFD part.
+        
+        Parameters
+        ----------
+        vx :
+        vy :
+        vz :
+        
+        """
         self.defined_imposed_move = True
         self.vx = vx
         self.vy = vy
         self.vz = vz
 
     def create(self):
-        """Create ICFD volume part."""
+        """Create an ICFD volume part."""
         ret = self.stub.ICFDCreatePartVol(ICFDPartVolRequest(secid=1, mid=self.mid, spids=self.surfaces))
         self.id = ret.id
         if self.defined_imposed_move:
@@ -693,12 +734,12 @@ class ICFDVolumePart:
 
 
 class MeshedVolume:
-    """Define the volume space that will be meshed.
+    """Defines the volume space to mesh.
 
     Parameters
     ----------
     surfaces : list
-            list of Part IDs for the surface elements that are used to define the volume.
+        List of part IDs for the surface elements to use to define the volume.
     """
 
     def __init__(self, surfaces):
@@ -710,12 +751,12 @@ class MeshedVolume:
         self.fluid_interfaces = []
 
     def embed_shell(self, embeded):
-        """Define surfaces that the mesher will embed inside the volume mesh.
+        """Define surfaces that the mesher is to embed inside the volume mesh.
 
         Parameters
         ----------
         embeded : list
-            Part IDs for the surface elements that will be embedded in the volume mesh.
+            List of part IDs for the surface elements.
         """
         self.embeded_surf = embeded
 
@@ -725,30 +766,30 @@ class MeshedVolume:
         Parameters
         ----------
         size : float
-            Mesh size that needs to be applied in the zone of the shape defined by SNAME
+            Mesh size to apply in the zone of the shape defined by ``SNAME``.
         parameter : list
-            The parameters to define shape.
+            List of the parameters that define the shape.
         """
         parameter = [min_point.x, min_point.y, min_point.z, max_point.x, max_point.y, max_point.z]
         self.meshsizeshape.append(["BOX", size, parameter])
 
     def set_meshsize(self, surfaces):
-        """Define the surfaces that will be used by the mesher to specify a local mesh size inside the volume.
+        """Define the surfaces that the mesher is to use to specify a local mesh size inside the volume.
 
         Parameters
         ----------
         surfaces : list
-            Part IDs for the surface elements that are used to define the mesh size next to the surface mesh.
+            List of part IDs for the surface elements.
         """
         self.meshsize_surf = surfaces
 
     def set_fluid_interfaces(self, surfaces):
-        """Define the surfaces that will be used by the mesher to specify fluid interfaces in multi-fluid simulations.
+        """Define the surfaces that the mesher is to use to specify fluid interfaces in multi-fluid simulations.
 
         Parameters
         ----------
         surfaces : list
-            Part IDs for the surface elements.
+            List of part IDs for the surface elements.
         """
         self.fluid_interfaces = surfaces
 

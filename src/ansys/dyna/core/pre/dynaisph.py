@@ -48,7 +48,7 @@ class DynaISPH(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateControlSPH(
             CreateControlSPHRequest(
@@ -69,7 +69,7 @@ class DynaISPH(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.isphanalysis.create()
         DynaBase.save_file(self)

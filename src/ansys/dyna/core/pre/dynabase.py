@@ -1,8 +1,8 @@
 """
 Base
-==========
+====
 
-Module to create dyna input deck
+Module for creating a DYNA input deck.
 """
 
 # from subprocess import DETACHED_PROCESS
@@ -78,7 +78,7 @@ from .dynasolution import DynaSolution  # noqa : F403
 
 
 class Box:
-    """Define a box-shaped volume."""
+    """Defines a box-shaped volume."""
 
     def __init__(self, xmin=0, xmax=0, ymin=0, ymax=0, zmin=0, zmax=0):
         self.xmin = xmin
@@ -106,7 +106,12 @@ class Box:
 
 
 class Curve:
-    """Define a curve [for example, load (ordinate value)] as a function of time."""
+    """
+    Defines a curve as a function of time.
+
+    For example, ``load (ordinate value)``. 
+    
+    """
 
     def __init__(self, sfo=1, x=[], y=[], func=None):
         self.sfo = sfo
@@ -115,7 +120,7 @@ class Curve:
         self.func = func
 
     def create(self, stub):
-        """Create curve."""
+        """Create a curve."""
         if self.func != None:
             ret = stub.CreateDefineCurveFunction(DefineCurveFunctionRequest(function=self.func))
         else:
@@ -128,7 +133,7 @@ class Curve:
 
 
 class Function:
-    """Define a function that can be referenced by a limited number of keyword options."""
+    """Defines a function that can be referenced by a limited number of keyword options."""
 
     def __init__(self, Function=None):
         self.function = Function
@@ -142,7 +147,7 @@ class Function:
 
 
 class Point:
-    """Define point."""
+    """Defines a point."""
 
     def __init__(self, x=0, y=0, z=0):
         self.x = x
@@ -151,7 +156,7 @@ class Point:
 
 
 class Direction:
-    """Define direction."""
+    """Defines a direction."""
 
     def __init__(self, x=0, y=0, z=0):
         self.x = x
@@ -160,7 +165,7 @@ class Direction:
 
 
 class Transform:
-    """Define a transformation."""
+    """Defines a transformation."""
 
     def __init__(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0):
         param = [option, param1, param2, param3, param4, param5, param6, param7]
@@ -168,12 +173,12 @@ class Transform:
         self.paramlist.append(param)
 
     def add_transform(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0):
-        """Define a transformation matrix."""
+        """Defines a transformation matrix."""
         param = [option, param1, param2, param3, param4, param5, param6, param7]
         self.paramlist.append(param)
 
     def create(self, stub):
-        """Create transformation."""
+        """Create a transformation."""
         options = []
         params = []
         for obj in self.paramlist:
@@ -187,7 +192,7 @@ class Transform:
 
 
 class Velocity:
-    """Define translational velocity."""
+    """Defines a translational velocity."""
 
     def __init__(self, x=0, y=0, z=0):
         self.x = x
@@ -196,7 +201,7 @@ class Velocity:
 
 
 class RotVelocity:
-    """Define rotational velocity."""
+    """Defines a rotational velocity."""
 
     def __init__(self, x=0, y=0, z=0):
         self.x = x
@@ -205,7 +210,7 @@ class RotVelocity:
 
 
 class DynaBase:
-    """Contains methods to create general LS-DYNA keyword."""
+    """Contains methods for creating a general LS-DYNA keyword."""
 
     def __init__(self):
         self.stub = DynaSolution.get_stub()
@@ -225,27 +230,29 @@ class DynaBase:
         self.have_control_shell = False
 
     def get_stub():
-        """Get the stub of this DynaBase object."""
+        """Get the stub of the ``DynaBase`` object."""
         return DynaBase.stub
 
     def set_timestep(self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0, max_timestep=None):
-        """Set structural time step size control using different options.
+        """Set the structural time step size control using different options.
 
         Parameters
         ----------
-        tssfac : float
-            Scale factor for computed time step.
-        isdo : int
-            Basis of time size calculation for 4-node shell elements.
-        timestep_size_for_mass_scaled : float
-            Time step size for mass scaled solutions.
-        max_timestep : Curve
-            Load curve that limits the maximum time step size.
+        tssfac : float, optional
+            Scale factor for computed time step. The default is ``0.9``.
+        isdo : int, optional
+            Basis of the time size calculation for four-node shell elements.
+            The default is ``0``.
+        timestep_size_for_mass_scaled : float, optional
+            Time step size for mass scaled solutions. The default is ``0.0``.
+        max_timestep : Curve, optional
+            Load curve that limits the maximum time step size. The default
+            is ``None``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         if max_timestep == None:
             cid = 0
@@ -273,17 +280,20 @@ class DynaBase:
             Global flag for 2nd order objective stress updates.
         invariant_node_number : int
             Invariant node numbering for shell and solid elements.
-        partsetid_for_objective_stress_updates : int
-            Part set ID for objective stress updates.
+        partsetid_for_objective_stress_updates : int, optional
+            Part set ID for objective stress updates. The default is ``0``.
         implicit_accuracy_flag : int
             Implicit accuracy flag.
         explicit_accuracy_flag : float
-             Explicit accuracy parameter.EQ.0.0: Off,GT.0.0: On
+            Explicit accuracy parameter.
+            
+            - EQ.0.0: Off
+            - GT.0.0: On
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = True
         if not self.have_accuracy:
@@ -315,22 +325,33 @@ class DynaBase:
         hourglass_energy : enum
             Hourglass energy calculation option.
         rigidwall_energy : int
-            Rigidwall energy dissipation option.EQ.1: Energy dissipation is not computed,
-            EQ.2: Energy dissipation is computed
+            Rigidwall energy dissipation option.
+            
+            - EQ.1: Energy dissipation is not computed.
+            - EQ.2: Energy dissipation is computed.
+        
         sliding_interface_energy : int
-            Sliding interface energy dissipation option.EQ.1: Energy dissipation is not computed,
-            EQ.2: Energy dissipation is computed
+            Sliding interface energy dissipation option.
+            
+            - EQ.1: Energy dissipation is not computed.
+            - EQ.2: Energy dissipation is computed.
+        
         rayleigh_energy : int
-            Rayleigh energy dissipation option.EQ.1: Energy dissipation is not computed,
-            EQ.2: Energy dissipation is computed
+            Rayleigh energy dissipation option.
+            
+            - EQ.1: Energy dissipation is not computed.
+            - EQ.2: Energy dissipation is computed.
+        
         initial_reference_geometry_energy : int
-            Initial reference geometry energy option.EQ.1: Initial reference
-            geometry energy is not computed,EQ.2: Initial reference geometry energy is computed
+            Initial reference geometry energy option.
+            
+            - EQ.1: Initial reference geometry energy is not computed.
+            - EQ.2: Initial reference geometry energy is computed.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = True
         if not self.have_energy:
@@ -356,17 +377,21 @@ class DynaBase:
 
         Parameters
         ----------
-        print_suppression_d3hsp : Boolean
-            Print suppression during input phase flag for the d3hsp file:
-            True :  Nodal coordinates, element connectivities, rigid wall definitions, nodal SPCs,
-            initial velocities, initial strains, adaptive constraints, and SPR2/SPR3 constraints are not printed.
-            False : No suppression
+        print_suppression_d3hsp : bool, optional
+            Whether to suppress printing during the input phase flag for the D3HSP file.
+            The default is ``True``, which means that none of these are printed: nodal
+            coordinates, element connectivities, rigid wall definitions, nodal SPCs,
+            initial velocities, initial strains, adaptive constraints, and SPR2/SPR3
+            constraints. If ``False``, no supression occurs.
         print_suppression_echo : OutputEcho
-            Print suppression during input phase flag for echo file:
-            ALL_DATA_PRINTED:  All data printed
-            SUPPRESSED_NODAL_PRINTING : Nodal printing is suppressed
-            SUPPRESSED_ELEMENT_PRINTING : Element printing is suppressed
-            SUPPRESSED_NODAL_AND_ELEMENT_PRINTING : Both nodal and element printing is suppressed
+            Print suppression setting during the input phase flag for the echo file.
+            Options are:
+            
+            - ALL_DATA_PRINTED: All data is printed.
+            - SUPPRESSED_NODAL_PRINTING: Nodal printing is suppressed.
+            - SUPPRESSED_ELEMENT_PRINTING: Element printing is suppressed.
+            - SUPPRESSED_NODAL_AND_ELEMENT_PRINTING : Both nodal and element printing is suppressed.
+        
         """
         if print_suppression_d3hsp:
             npopt = 1
@@ -382,19 +407,19 @@ class DynaBase:
         return ret
 
     def set_hourglass(self, controltype=HourglassControl.STANDARD_VISCOSITY_FORM, coefficient=0.1):
-        """Redefine the default values of hourglass control type and coefficient.
+        """Redefine the default values for the hourglass control type and coefficient.
 
         Parameters
         ----------
         controltype : enum
             Default hourglass control type.
-        coefficient : float
-            Default hourglass coefficient.
+        coefficient : float, optional
+            Default hourglass coefficient. The default is ``0.``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = True
         if not self.have_hourglass:
@@ -413,17 +438,17 @@ class DynaBase:
 
         Parameters
         ----------
-        quadratic_viscosity_coeff : float
-            Default quadratic viscosity coefficient.
-        linear_viscosity_coeff : float
-            Default linear viscosity coefficient.
+        quadratic_viscosity_coeff : float, optional
+            Default quadratic viscosity coefficient. The default is ``1.5``.
+        linear_viscosity_coeff : float, optional
+            Default linear viscosity coefficient. The default is ``0.06``.
         bulk_viscosity_type : enum
             Default bulk viscosity type.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = True
         if not self.have_bulk_viscosity:
@@ -443,13 +468,13 @@ class DynaBase:
 
         Parameters
         ----------
-        temp : float
-            Temperature at node.
+        temp : float, optional
+            Temperature at node. The default is ``0``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateInitTemperature(InitTemperatureRequest(option="SET", nsid=0, temp=temp))
         logging.info("Initial Temperature Created...")
@@ -471,33 +496,40 @@ class DynaBase:
 
         Parameters
         ----------
-        wrpang : float
-            Shell element warpage angle in degrees.
+        wrpang : int, optional
+            Shell element warpage angle in degrees. The default is ``20``.
         esort : int
             Sorting of triangular shell elements to automatically switch
             degenerate quadrilateral shell formulations to more suitable
-            triangular shell formulations.
-        irnxx : int
-            Shell normal update option.
-        istupd : int
-            Shell thickness change option for deformable shells.
-        theory : int
-            Default shell formulation.
-        bwc : int
-            Warping stiffness for Belytschko-Tsay shells.
-        miter : int
-            Plane stress plasticity option.
-        proj : int
+            triangular shell formulations. The default is ``0``.
+        irnxx : int, optional
+            Shell normal update option. The default is ``1``.
+        istupd : int, optional
+            Shell thickness change option for deformable shells. The
+            default is ``0``.
+        theory : int, optional
+            Default shell formulation. The default is ``2``.
+        bwc : int, optional
+            Warping stiffness for Belytschko-Tsay shells. The
+            default is ``2``.
+        miter : int, optional
+            Plane stress plasticity option. The default is ``1``.
+        proj : int, optional
             Projection method for the warping stiffness in the Belytschko-Tsay
-            shell and the Belytschko-Wong-Chiang elements
-        irquad : int
-             In plane integration rule for the 8-node quadratic shell element.
-             EQ.2: 2*2 Gauss quadrature,EQ.3: 3*3 Gauss quadrature.
+            shell and the Belytschko-Wong-Chiang elements. The default is
+            ``0``.
+        irquad : int, optional
+            In-plane integration rule for the eight-node quadratic shell element.
+            The default is ``0``.
+
+            - EQ.2: 2*2 Gauss quadrature
+            - EQ.3: 3*3 Gauss quadrature
+
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = True
         if not self.have_control_shell:
@@ -529,35 +561,45 @@ class DynaBase:
         icoh=0,
         tet13k=0,
     ):
-        """Provide controls for solid element response.
+        """Provide controls for a solid element response.
 
         Parameters
         ----------
-        esort : int
+        esort : int, optional
             Automatic sorting of tetrahedral and pentahedral elements to avoid
-            use of degenerate formulations for these shapes.EQ.0: No sorting,EQ.1: Sort.
-        fmatrx : int
-            Default method used in the calculation of the deformation gradient matrix.
-        niptets : int
+            use of degenerate formulations for these shapes. The default is ``0``.
+            
+            - EQ.0: No sorting
+            - EQ.1: Sort
+        
+        fmatrx : int, optional
+            Method to use in the calculation of the deformation gradient matrix.
+            The default is ``1``.
+        niptets : int, optional
             Number of integration points used in the quadratic tetrahedron elements.
-        swlocl : int
+            The default is ``4``.
+        swlocl : int, optional
             Output option for stresses in solid elements used as spot welds with
-            material \*MAT_SPOTWELD.
-        psfail : int
+            material ``\*MAT_SPOTWELD``. The default is ``1``.
+        psfail : int, optional
             Solid element erosion from negative volume is limited only to solid elements in
-            the part set indicated by PSFAIL.
-        t10jtol : float
-            Tolerance for Jacobian in 4-point 10-noded quadratic tetrahedra.
-        icoh : int
-            Breaking LS-DYNA convention ICOH is interpreted digit-wise.
-        tet13k : int
-            Set to 1 to invoke a consistent tangent stiffness matrix for the
-            pressure averaged tetrahedron.
+            the part set indicated by PSFAIL. The default is ``0``.
+        t10jtol : float, optional
+            Tolerance for Jacobian in four-point, 10-noded quadratic tetrahedra. The
+            default is ``0.0``.
+        icoh : int, optional
+            Breaking LS-DYNA convention ICOH is interpreted digit-wise. The default
+            is ``0``.
+        tet13k : int, optional
+            Flag for whether to invoke a consistent tangent stiffness matrix
+            for the pressure averaged tetrahedron. The default is ``0``, in which
+            case this matrix is not invoked. If this parameter is set to ``1``,
+            this matrix is invoked.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateControlSolid(
             ControlSolidRequest(
@@ -579,27 +621,38 @@ class DynaBase:
 
         Parameters
         ----------
-        shlthk : int
-            Flag for consideration of shell thickness offsets in non-automatic
-            surface-to-surface and non-automatic nodes-to-surface type contacts.
-        ssthk : int
-            Flag for determining default contact thickness for shells in single
-            surface contact types.
-        orien : int
-            Optional automatic reorientation of contact interface segments during initialization.
         rwpnal : float
             Scale factor for rigid wall penalties, which treat nodal points interacting
             with rigid walls.
-        ignore : int
-            Ignore initial penetrations in the \*CONTACT_AUTOMATIC options.
-        igactc : int
-            Options to use isogeometric shells for contact detection when contact involves
-            isogeometric shells.
+        shlthk : int, optional
+            Flag for whether to consider shell thickness offsets in non-automatic
+            surface-to-surface and non-automatic nodes-to-surface type contacts.
+            The default is ``0``, in which case these offsets are not considered.
+            If this parameter is set to ``1``, these offsets are considered.
+        orien : int, optional
+            Flag for whether to automatically reorient contact interface segments
+            during initialization. The default is ``1``, in which case reorientation
+            automatically occurs. If this parameter is set to ``0``, reorientation
+            does not occur.
+        ssthk : int, optional
+            Flag for whether to determine default contact thickness for shells in single
+            surface contact types. The default is ``0``, in which case default contact
+            thickness is not determined. If this parameter is set to ``1``, default
+            contact thickness is determined.
+        ignore : int, optional
+            Flag for whether to ignore initial penetrations in the ``\*CONTACT_AUTOMATIC``
+            options. The default is ``0``, in which case initial penetrations are ignored.
+            If this parameter is set to ``1``, initial penetrations are not ignored.
+        igactc : int, optional
+            Flag for whether to use isogeometric shells for contact detection when the
+            contact involves isogeometric shells. The default is ``0``, which means
+            isogeometric shells are not used. If this parameter is set to ``1``, isogeometric
+            shells are used.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateControlContact(
             ControlContactRequest(
@@ -615,20 +668,24 @@ class DynaBase:
         return ret
 
     def create_damping_global(self, lcid=0, valdmp=0.0):
-        """Define mass weighted nodal damping that applies globally to the
-        nodes of deformable bodies and to the mass center of the rigid bodies.
+        """Define mass-weighted nodal damping.
+        
+        Mass-weighted nodal damping applies globally to the
+        nodes of deformable bodies and to the mass center of
+        rigid bodies.
 
         Parameters
         ----------
-        lcid : int
-            Load curve ID which specifies the system damping constant vs. time.
-        valdmp : float
-            System damping constant.
+        lcid : int, optional
+            Load curve ID, which specifies the system damping constant
+            versus the time. The default is ``0``.
+        valdmp : float, optional
+            System damping constant. The default is ``0.0``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateDampingGlobal(DampingGlobalRequest(lcid=lcid, valdmp=valdmp))
         logging.info("Damping global Created...")
@@ -660,13 +717,13 @@ class DynaBase:
         Parameters
         ----------
         opcode : string
-            keyword card name.
+            Keyword card name.
         keyworddata : string
-            keyword data.
+            Keyword data.
 
         Examples
         --------
-        Create a \*INITIAL_VELOCITY keyword.
+        Create a ``\*INITIAL_VELOCITY`` keyword.
 
         \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         \*INITIAL_VELOCITY
@@ -686,17 +743,17 @@ class DynaBase:
         return ret
 
     def add(self, obj):
-        """Add entities in this object."""
+        """Add entities to an object."""
         self.entities.append(obj)
 
     def set_transform(self, filename=None, idnoff=0, ideoff=0, idpoff=0, idmoff=0, idsoff=0, idfoff=0, transform=None):
-        """Include independent input files containing model data,allow for node, element, and set
-        IDs to be offset and for coordinates and constitutive parameters to be transformed andnscaled.
+        """Include independent input files containing model data, allow for node, element, and set
+        IDs to be offset and for coordinates and constitutive parameters to be transformed and scaled.
 
         Parameters
         ----------
         filename : string
-            File name of file to be included in this keyword file.
+            Name of file to include in the keyword file.
         idnoff : int
             Offset to node ID.
         ideoff : int
@@ -710,7 +767,7 @@ class DynaBase:
         idfoff : int
             Offset to function ID, table ID, and curve ID.
         transform : Transform
-            Define a transformation.
+            Definition for the transformation.
         """
         tranid = transform.create(self.stub)
         ret = self.stub.CreateIncludeTransform(
@@ -734,7 +791,7 @@ class DynaBase:
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         if self.contacts.num() > 0:
             self.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
@@ -752,7 +809,7 @@ class DynaBase:
 
 
 class BaseSet:
-    """Define the base class for all set classes."""
+    """Defines the base class for all set classes."""
 
     def __init__(self):
         self.type = "PARTSET"
@@ -760,14 +817,14 @@ class BaseSet:
 
 
 class NodeSet:
-    """Define a nodal set with some identical or unique attributes."""
+    """Defines a nodal set with some identical or unique attributes."""
 
     def __init__(self, nodes=[]):
         self.nodes = nodes
         self.type = "NODESET"
 
     def create(self, stub):
-        """Create node set."""
+        """Create a node set."""
         if len(self.nodes) <= 0:
             return 0
         ret = stub.CreateNodeSet(NodeSetRequest(option="LIST", sid=0, genoption="NODE", entities=self.nodes))
@@ -779,7 +836,7 @@ class NodeSet:
         return self.id
 
     def num(self):
-        """Get the number of nodes in this set."""
+        """Get the number of nodes in the node set."""
         return len(self.nodes)
 
     def id(self, pos):
@@ -795,6 +852,7 @@ class NodeSet:
 
 
 class SetType(Enum):
+    """Contains the enums for setting types."""
     SHELL = "SET_SHELL"
     SOLID = "SET_SOLID"
     BEAM = "SET_BEAM"
@@ -803,15 +861,19 @@ class SetType(Enum):
 
 
 class NodesetGeneral(BaseSet):
-    """Include nodal points of element sets defined by SET_XXXX_LIST,
-    where XXXX could be SHELL, SOLID, BEAM, TSHELL and DISCRETE."""
+    """Includes nodal points of element sets.
+    
+    Element sets are defined by ``SET_XXXX_LIST``,
+    where ``XXXX`` can be ``SHELL``, ``SOLID``, ``BEAM``,
+    ``TSHELL`` or ``DISCRETE``.
+    """
 
     def __init__(self, settype=SetType.SHELL, setids=[]):
         self.settype = settype.value
         self.setids = setids
 
     def create(self, stub):
-        """Create node set."""
+        """Create a node set."""
         if len(self.setids) <= 0:
             return 0
         ret = stub.CreateNodeSet(NodeSetRequest(option="GENERAL", sid=0, genoption=self.settype, entities=self.setids))
@@ -821,13 +883,13 @@ class NodesetGeneral(BaseSet):
 
 
 class PartSet(BaseSet):
-    """Define a set of parts with optional attributes."""
+    """Defines a set of parts with optional attributes."""
 
     def __init__(self, parts=[]):
         self.parts = parts
 
     def create(self, stub):
-        """Create part set."""
+        """Create a part set."""
         if len(self.parts) <= 0:
             return 0
         ret = stub.CreatePartSet(PartSetRequest(sid=0, pids=self.parts))
@@ -839,11 +901,11 @@ class PartSet(BaseSet):
         return self.id
 
     def num(self):
-        """Get the number of parts in this set."""
+        """Get the number of parts in the part set."""
         return len(self.parts)
 
     def pos(self, pos):
-        """Get the part ID by position."""
+        """Get a part ID by position."""
         return self.parts[pos]
 
     def get_pid(self):
@@ -855,7 +917,7 @@ class PartSet(BaseSet):
 
 
 class SegmentSet(BaseSet):
-    """Define a set of segments with optional identical or unique attributes.
+    """Defines a set of segments with optional identical or unique attributes.
 
     Parameters
     ----------
@@ -868,7 +930,7 @@ class SegmentSet(BaseSet):
         self.type = "SEGMENTSET"
 
     def create(self, stub):
-        """Create segment set."""
+        """Create a segment set."""
         if len(self.segments) <= 0:
             return 0
         n1 = []
@@ -925,7 +987,7 @@ class HourglassType(Enum):
 
 
 class BeamSection:
-    """Define cross sectional properties for beam, truss, discrete beam, and cable elements."""
+    """Defines cross-sectional properties for beams, trusses, discrete beams, and cable elements."""
 
     def __init__(
         self,
@@ -949,7 +1011,7 @@ class BeamSection:
 
 
 class ShellSection:
-    """Define section properties for shell elements."""
+    """Defines section properties for shell elements."""
 
     def __init__(
         self,
@@ -979,7 +1041,7 @@ class ShellSection:
 
 
 class IGASection:
-    """Define section properties for isogeometric shell elements."""
+    """Defines section properties for isogeometric shell elements."""
 
     def __init__(self, element_formulation, shear_factor=1, thickness=1):
         stub = DynaBase.get_stub()
@@ -990,7 +1052,7 @@ class IGASection:
 
 
 class Part:
-    """Define part object."""
+    """Defines the part object."""
 
     def __init__(self, id):
         self.stub = DynaBase.get_stub()
@@ -1011,7 +1073,7 @@ class Part:
         self.extra_nodes_defined = False
 
     def set_material(self, mat, mat_thermal=None):
-        """Set material."""
+        """Set the material."""
         mat.create(self.stub)
         self.mid = mat.material_id
         if mat_thermal is not None:
@@ -1024,15 +1086,15 @@ class Part:
                 self.tmid = self.mid
 
     def set_element_formulation(self, formulation):
-        """Set Element formulation."""
+        """Set the element formulation."""
         self.formulation = formulation.value
 
     def set_stiffness_damping_coefficient(self, coefficient):
-        """Assign stiffness damping coefficient."""
+        """Set the stiffness damping coefficient."""
         self.stiffness_damping = coefficient
 
     def set_extra_nodes(self, nodeset):
-        """Define extra nodes for rigid body.
+        """Set extra nodes for the rigid body.
 
         Parameters
         ----------
@@ -1043,14 +1105,17 @@ class Part:
         self.extra_nodes = nodeset
 
     def set_rigidbody_initial_velocity(self, translation=Velocity(0, 0, 0), rotation=RotVelocity(0, 0, 0)):
-        """Define the initial translational and rotational velocities
-        at the center of gravity for a rigid body or a nodal rigid body."""
+        """Set initial translational and rotational velocities for the rigid body.
+
+        Initial translational and rotational velocities are set
+        at the center of gravity for a rigid body or a nodal rigid body.
+        """
         self.rigidbody_initial_velocity = True
         self.translation = translation
         self.rotation = rotation
 
     def set_property(self):
-        """Set Properties for part object."""
+        """Set properties for the part."""
         if self.stiffness_damping > 0:
             self.stub.CreateDampingPartStiffness(
                 DampingPartStiffnessRequest(isset=False, id=self.id, coef=self.stiffness_damping)
@@ -1080,8 +1145,13 @@ class Part:
 
 
 class BeamPart(Part):
-    """Define parts, that is, combine material information, section properties,
-    hourglass type, thermal properties, and a flag for part adaptivity."""
+    """
+    Defines a beam part.
+    
+    A beam part definition consists of the combined material information,
+    section properties, hourglass type, thermal properties, and a flag
+    for part adaptivity.
+    """
 
     def __init__(self, pid):
         Part.__init__(self, pid)
@@ -1090,15 +1160,15 @@ class BeamPart(Part):
         self.crosstype = 1
 
     def set_cross_type(self, cross):
-        """Set cross section type."""
+        """Set the type for the cross section."""
         self.crosstype = cross
 
     def set_diameter(self, diameter):
-        """Set outer diameter for cross section."""
+        """Set the outer diameter for the cross section."""
         self.diameter = diameter
 
     def set_property(self):
-        """Set Properties for beam part object."""
+        """Set properties for the beam part."""
         sec = BeamSection(
             element_formulation=self.formulation,
             cross_section=self.crosstype,
@@ -1121,8 +1191,12 @@ class BeamPart(Part):
 
 
 class ShellPart(Part):
-    """Define parts, that is, combine material information, section properties,
-    hourglass type, thermal properties, and a flag for part adaptivity."""
+    """Defines a shell part.
+    
+    A shell part definition consists of the combined material information,
+    section properties, hourglass type, thermal properties, and a flag
+    for part adaptivity.
+    """
 
     def __init__(self, pid):
         Part.__init__(self, pid)
@@ -1141,23 +1215,23 @@ class ShellPart(Part):
         self.des_rsf = 1
 
     def set_hourglass(self, type=HourglassType.STANDARD_LSDYNA_VISCOUS):
-        """Define hourglass/bulk viscosity identification."""
+        """Set the hourglass type, which identifies the bulk viscosity."""
         self.hourglasstype = type.value
 
     def set_shear_factor(self, factor):
-        """Shear correction factor which scales the transverse shear stress."""
+        """Set the shear correction factor, which scales the transverse shear stress."""
         self.shear_factor = factor
 
     def set_integration_points(self, points=5):
-        """Number of through thickness integration points."""
+        """Set the number of through thickness integration points."""
         self.intpoints = points
 
     def set_printout(self, print):
-        """Printout option."""
+        """Set the printout option."""
         self.print = print
 
     def set_thickness(self, thickness):
-        """Shell thickness."""
+        """Set the shell thickness."""
         self.thickness = thickness
 
     def set_des_surface(self, despid=0, desxid=0, nquad=1, nsid=0, rsf=-1):
@@ -1165,16 +1239,18 @@ class ShellPart(Part):
 
         Parameters
         ----------
-        despid : int
-            Part ID for generated DES elements.
-        desxid : int
-            Section ID for generated DES elements.
-        nquad : int
-            Number of equally spaced DES elements created on a shell element in each local shell direction.
-        nsid : int
+        despid : int, optional
+            Part ID for the generated DES elements. The default is ``0``.
+        desxid : int, optional
+            Section ID for the generated DES elements. The default is ``0``.
+        nquad : int, optional
+            Number of equally spaced DES elements to create on a shell element in each local shell direction.
+            The default is ``1``.
+        nsid : int, optional
             If defined, this card creates a node set with ID NSID for the nodes generated by this card.
-        rsf : float
-            Scale factor for determining the DES radius.
+            The default is ``0``.
+        rsf : float, optional
+            Scale factor for determining the DES radius. The default is ``1``.
         """
         self.defined_des_surface = True
         self.despid = despid
@@ -1184,7 +1260,7 @@ class ShellPart(Part):
         self.des_rsf = rsf
 
     def set_property(self):
-        """Set properties for shell part."""
+        """Set properties for the shell part."""
         if self.defined_des_surface:
             ret = self.stub.CreateDefineDEMeshSurface(
                 DefineDEMeshSurfaceRequest(
@@ -1230,8 +1306,13 @@ class ShellPart(Part):
 
 
 class IGAPart(Part):
-    """Define parts, that is, combine material information, section properties,
-    hourglass type, thermal properties, and a flag for part adaptivity."""
+    """
+    Defines an isogeometric shell part.
+    
+    The part definition consists of the combined material information,
+    section properties, hourglass type, thermal properties, and a flag
+    for part adaptivity.
+    """
 
     def __init__(self, pid):
         Part.__init__(self, pid)
@@ -1241,15 +1322,15 @@ class IGAPart(Part):
         self.thickness = 1
 
     def set_shear_factor(self, factor):
-        """Shear correction factor which scales the transverse shear stress."""
+        """Set the shear correction factor, which scales the transverse shear stress."""
         self.shear_factor = factor
 
     def set_thickness(self, thickness):
-        """Shell thickness."""
+        """Set the shell thickness."""
         self.thickness = thickness
 
     def set_property(self):
-        """Set properties for IGA part."""
+        """Set properties for the IGA part."""
         sec = IGASection(
             element_formulation=self.formulation,
             shear_factor=self.shear_factor,
@@ -1271,8 +1352,13 @@ class IGAPart(Part):
 
 
 class SolidPart(Part):
-    """Define parts, that is, combine material information, section properties,
-    hourglass type, thermal properties, and a flag for part adaptivity."""
+    """
+    Defines a solid part.
+    
+    The part definition consists of the combined material information,
+    section properties, hourglass type, thermal properties, and a flag
+    for part adaptivity.
+    """
 
     def __init__(self, pid):
         Part.__init__(self, pid)
@@ -1281,11 +1367,11 @@ class SolidPart(Part):
         self.hourglasstype = -1
 
     def set_hourglass(self, type=HourglassType.STANDARD_LSDYNA_VISCOUS):
-        """Set hourglass/bulk viscosity identification."""
+        """Set the hourglass type, which identifies the bulk viscosity."""
         self.hourglasstype = type.value
 
     def set_property(self):
-        """Set properties for solid part."""
+        """Set the properties for the solid part."""
         ret = self.stub.CreateSectionSolid(SectionSolidRequest(elform=self.formulation))
         self.secid = ret.id
         if self.hourglasstype > 0:
@@ -1313,8 +1399,12 @@ class DRO(Enum):
 
 
 class DiscretePart(Part):
-    """Define parts, that is, combine material information, section properties,
-    hourglass type, thermal properties, and a flag for part adaptivity."""
+    """Defines a discrete part.
+    
+    The part definition consists of the combined material information,
+    section properties, hourglass type, thermal properties, and a flag
+    for part adaptivity.
+    """
 
     def __init__(self, pid):
         Part.__init__(self, pid)
@@ -1323,11 +1413,11 @@ class DiscretePart(Part):
         self.displacement_option = 0
 
     def set_displacement_option(self, displacement_option=DRO.DESCRIBES_TRANSLATIONAL_SPRING):
-        """Set displacement/Rotation Option."""
+        """Set the displacement, which defines the rotation."""
         self.displacement_option = displacement_option.value
 
     def set_property(self):
-        """Set properties for discrete part."""
+        """Set properties for the discrete part."""
         Part.set_property(self)
         ret = self.stub.CreateSectionDiscrete(
             SectionDiscreteRequest(dro=self.displacement_option, kd=0, v0=0, cl=0, fd=0, cdl=0, tdl=0)
@@ -1339,7 +1429,7 @@ class DiscretePart(Part):
                 pid=self.id,
                 secid=self.secid,
                 mid=self.mid,
-                eosid=self.eosid,
+                eosid=self.eosid,hysical properties
                 hgid=self.hgid,
                 grav=self.grav,
                 adpopt=self.adpopt,
@@ -1349,7 +1439,7 @@ class DiscretePart(Part):
 
 
 class Parts:
-    """Store part list."""
+    """Stores the part list."""
 
     def __init__(self):
         self.beamlist = []
@@ -1363,7 +1453,7 @@ class Parts:
         self.isphfluidlist = []
 
     def add(self, part):
-        """Add part in part list."""
+        """Add a part to the part list."""
         if part.type == "BEAM":
             self.beamlist.append(part)
         elif part.type == "SHELL":
@@ -1386,7 +1476,7 @@ class Parts:
             logging.info("Warning: Invalid part type!")
 
     def get_num_shellpart(self):
-        """Get the number of shell part."""
+        """Get the number of shell parts."""
         return len(self.shelllist)
 
     def set_property(self):
@@ -1428,7 +1518,7 @@ class Integration(Enum):
 
 
 class ImplicitAnalysis:
-    """Activate implicit analysis and define associated control parameters."""
+    """Activates implicit analysis and defines associated control parameters."""
 
     def __init__(self, analysis_type=AnalysisType.IMPLICIT, initial_timestep_size=0):
         self.defined = False
@@ -1441,7 +1531,7 @@ class ImplicitAnalysis:
         self.stub = DynaBase.get_stub()
 
     def set_initial_timestep_size(self, size=0):
-        """Define initial time step size."""
+        """Define the initial time step size."""
         self.defined = True
         self.dt0 = size
 
@@ -1456,13 +1546,13 @@ class ImplicitAnalysis:
         ----------
         control_flag : int
             Automatic time step control flag.
-        Optimum_equilibrium_iteration_count : int
-            Optimum equilibrium iteration count per time step.
+        Optimum_equilibrium_iteration_count : int, optional
+            Optimum equilibrium iteration count per time step. The default is ``11``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.defined_auto = True
         self.iauto = control_flag.value
@@ -1480,15 +1570,15 @@ class ImplicitAnalysis:
         ----------
         integration_method : enum
             Implicit analysis type.
-        gamma : float
-            Newmark time integration constant.
-        beta : float
-            Newmark time integration constant.
+        gamma : float, optional
+            Newmark time integration constant. The default is ``0.5``.
+        beta : float, optional
+            Newmark time integration constant. The default is ``0.25``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.defined_dynamic = True
         self.imass = integration_method.value
@@ -1496,19 +1586,19 @@ class ImplicitAnalysis:
         self.beta = beta
 
     def set_eigenvalue(self, number_eigenvalues=0, shift_scale=0):
-        """Activate implicit eigenvalue analysis and defines associated input parameters.
+        """Activate implicit eigenvalue analysis and define associated input parameters.
 
         Parameters
         ----------
-        number_eigenvalues : int
-            Number of eigenvalues to extract.
-        shift_scale : float
-            Shift scale.
+        number_eigenvalues : int, optional
+            Number of eigenvalues to extract. The default is ``0``.
+        shift_scale : float, optional
+            Shift scale. The default is ``0``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.defined_eigenvalue = True
         self.neig = number_eigenvalues
@@ -1525,19 +1615,21 @@ class ImplicitAnalysis:
 
         Parameters
         ----------
-        solution_method : int
-            Solution method for implicit analysis.
-        iteration_limit : int
+        solution_method : int, optional
+            Solution method for implicit analysis. The default is ``12``.
+        iteration_limit : int, optional
             Iteration limit between automatic stiffness reformations.
-        stiffness_reformation_limit : int
-            Stiffness reformation limit per time step.
-        absolute_convergence_tolerance : float
-            Absolute convergence tolerance.
+            The default is ``11``.
+        stiffness_reformation_limit : int, optional
+            Stiffness reformation limit per time step. The default is
+            ``55``.
+        absolute_convergence_tolerance : float, optional
+            Absolute convergence tolerance. The default is ``1e-10``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.defined_solution = True
         self.nsolver = solution_method
@@ -1546,7 +1638,7 @@ class ImplicitAnalysis:
         self.abstol = absolute_convergence_tolerance
 
     def create(self):
-        """Create implicit analysis."""
+        """Create an implicit analysis."""
         if self.defined == False:
             return
         if self.defined:
@@ -1580,7 +1672,7 @@ class ThermalAnalysisTimestep(Enum):
 
 
 class ThermalAnalysis:
-    """Activate thermal analysis and define associated control parameters."""
+    """Activates thermal analysis and defines associated control parameters."""
 
     def __init__(self):
         self.defined_solver = False
@@ -1594,8 +1686,8 @@ class ThermalAnalysis:
         ----------
         timestep_control : ThermalAnalysisTimestep
             Time step control.
-        initial_timestep : float
-            Initial thermal time step.
+        initial_timestep : float, optional
+            Initial thermal time step. The default is ``0``.
         """
         self.defined_timestep = True
         self.ts = timestep_control.value
@@ -1613,7 +1705,7 @@ class ThermalAnalysis:
         self.atype = analysis_type.value
 
     def create(self):
-        """Create thermal analysis."""
+        """Create a thermal analysis."""
         if self.defined_timestep:
             self.stub.CreateControlThermalTimestep(ControlThermalTimestepRequest(its=self.its))
         if self.defined_solver:
@@ -1665,7 +1757,7 @@ class SBOPT(Enum):
 
 
 class ContactSurface:
-    """Define contact interface."""
+    """Defines a contact interface."""
 
     def __init__(self, set):
         self.stub = DynaBase.get_stub()
@@ -1683,18 +1775,18 @@ class ContactSurface:
         self.penalty_stiffness = 1.0
 
     def set_contact_region(self, box):
-        """Include in contact definition only those SURFA nodes/segments within box.
+        """Include in the contact definition only those SURFA nodes/segments within a box.
 
         Parameters
         ----------
         box : Box
-            Define a box-shaped volume.
+            Box-shaped volume.
         """
         self.id = box.id
         return self.id
 
     def set_contact_thickness(self, thickness):
-        """Set contact thickness for SURFA surface.
+        """Set the contact thickness for the SURFA surface.
 
         Parameters
         ----------
@@ -1704,7 +1796,13 @@ class ContactSurface:
         self.thickness = thickness
 
     def set_penalty_stiffness_scale_factor(self, scalefactor=1.0):
-        """Set scale factor on default surface penalty stiffness."""
+        """Set the scale factor on the default surface penalty stiffness.
+        
+        Parameters
+        ----------
+        scalefactor : int, optional
+            Scale factor. The default is ``1.0``.
+        """
         self.penalty_stiffness = scalefactor
 
 
@@ -1737,34 +1835,47 @@ class Contact:
         self.segment_based_contact_option = 2
 
     def set_mortar(self):
-        """Set mortar contact,it is a segment to segment penalty based contact."""
+        """Set the mortar contact.
+        
+        A mort contact is a segment-to-segment, penalty-based contact.
+        """
         self.mortar = True
 
     # def set_algorithm(self, algorithm=ContactAlgorithm.PENALTY_BASED):
     #    self.algorithm = algorithm.value
 
     def set_tiebreak(self):
-        """Define the contact allow for failure, TIEBREAK is a special case of
-        this in which after failure the contact usually becomes a normal one-way,
-        two-way, or single surface version."""
+        """Set the contact allow for failure.
+        
+        A tieback is a special case of this. After failure, the contact
+        usually becomes a normal one-way, two-way, or single surface version.
+        """
         self.option_tiebreak = True
         self.optionres = 2
 
     def set_friction_coefficient(self, static=0, dynamic=0):
-        """Define the coefficient of friction.
+        """Set the coefficient of friction.
 
         Parameters
         ----------
-        static : float
-            Static coefficient of friction.
-        dynamic : float
-            Dynamic coefficient of friction.
+        static : float, optional
+            Static coefficient of friction. The default is ``0``.
+        dynamic : float, optional
+            Dynamic coefficient of friction.  The default is ``0``.
         """
         self.static_friction_coeff = static
         self.dynamic_friction_coeff = dynamic
 
     def set_active_time(self, birth_time=0, death_time=1e20):
-        """Set birth and death time to active and deactivate the contact."""
+        """Set the birth and death time to active and deactivate the contact.
+        
+        Parameters
+        ----------
+        birth_time : int, optional
+            Time to activate the contact. The default is ``0``.
+        death_time : float, optional
+            Time to deactivate the contact. The default is ``1e20``.
+        """
         self.birth_time = birth_time
         self.death_time = death_time
 
@@ -1773,11 +1884,11 @@ class Contact:
         self.ignore = 1
 
     def set_slave_surface(self, surface):
-        """Specifying the slave contact interface."""
+        """Set the slave contact interface."""
         self.slavesurface = surface
 
     def set_master_surface(self, surface):
-        """Specifying the master contact interface."""
+        """Set the master contact interface."""
         self.mastersurface = surface
 
     def set_penalty_algorithm(
@@ -1785,12 +1896,12 @@ class Contact:
         formulation=ContactFormulation.STANDARD_PENALTY,
         segment_based_contact_option=SBOPT.ASSUME_PLANER_SEGMENTS,
     ):
-        """Set contact formulation."""
+        """Set the contact formulation."""
         self.contact_formulation = formulation.value
         self.segment_based_contact_option = segment_based_contact_option.value
 
     def create(self):
-        """Create contact."""
+        """Create a contact."""
         opcode = ""
         if self.type == ContactType.AUTOMATIC:
             opcode += "AUTOMATIC_"
@@ -1879,14 +1990,14 @@ class Contact:
 
 
 class ContactGroup:
-    """Create contact group."""
+    """Create a contact group."""
 
     def __init__(self):
         self.stub = DynaBase.get_stub()
         self.contactlist = []
 
     def add(self, contact):
-        """Add contact in the group."""
+        """Add a contact in the group."""
         self.contactlist.append(contact)
 
     def create(self):
@@ -1915,64 +2026,67 @@ class Constraint:
         Parameters
         ----------
         nodeid1 : int
-            Node ID.
+            ID for the first node.
         nodeid2 : int
-            Node ID.
+            ID for the second node.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         param = [nodeid1, nodeid2]
         self.spotweldlist.append(param)
 
     def create_cnrb(self, nodeset):
-        """Define a nodal rigid body which is a rigid body that consists of defined nodes.
+        """Create a nodal rigid body, which is a rigid body that consists of defined nodes.
 
         Parameters
         ----------
         nodeset : NodeSet
-            This nodal set defines the rigid body.
+            Node set that defines the rigid body.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         nodeset.create(self.stub)
         nsid = nodeset.id
         self.cnrbsetidlist.append(nsid)
 
     def create_joint_spherical(self, nodes, relative_penalty_stiffness=1.0, damping_scale_factor=1.0):
-        """Define a joint between two rigid bodies.
+        """Create a joint between two rigid bodies.
 
         Parameters
         ----------
         nodes : list
-            Define nodes for joint.
-        relative_penalty_stiffness : int
-            Relative penalty stiffness.
-        damping_scale_factor : int
-            Damping scale factor on default damping value.
+            List of nodes for creating the joint.
+        relative_penalty_stiffness : int, optional
+            Relative penalty stiffness. The default is ``1.0``.
+        damping_scale_factor : int, optional
+            Damping scale factor on the default damping value.
+            The default is ``1.0``.
         """
         self.jointsphericallist.append([nodes, relative_penalty_stiffness, damping_scale_factor])
 
     def merge_two_rigid_bodies(self, lead_rigidbody=0, constrained_rigidbody=0):
-        """Merge two rigid bodies. One rigid body, called the constrained rigid body,
-        is merged into another one, called the lead rigid body.
+        """Merge two rigid bodies.
+        
+        One rigid body, called the constrained rigid body,
+        is merged into another rigid body, called the lead rigid body.
 
         Parameters
         ----------
-        lead_rigidbody : int
-            Lead rigid body part ID
+        lead_rigidbody : int, optional
+            Part ID for the lead rigid body. The default is ``0``.
         constrained_rigidbody : int
-            Constrained rigid body part ID.
+            Part ID for the constrained rigid body. The default is ``0``.
         """
         self.mergerigidlist.append([lead_rigidbody, constrained_rigidbody])
 
     def create(self):
-        """Create constraint."""
+        """Create a constraint."""
         for obj in self.spotweldlist:
             self.stub.CreateConstrainedSpotWeld(ConstrainedSpotWeldRequest(node1=obj[0], node2=obj[1]))
             logging.info("Spotweld Created...")
@@ -2000,7 +2114,7 @@ class Constraint:
 
 
 class BoundaryCondition:
-    """Provide a way of defining imposed motions on boundary nodes."""
+    """Provides a way of defining imposed motions on boundary nodes."""
 
     def __init__(self):
         self.stub = DynaBase.get_stub()
@@ -2026,11 +2140,11 @@ class BoundaryCondition:
         Parameters
         ----------
         nodeset : NodeSet.
-            nodal set.
+            Node set.
         contraint_x/y/z_direction : int
-            translational constraint in local x/y/z-direction.
+            Translational constraint in local x/y/z-direction.
         contraint_x/y/zaxis_rotate : int
-            rotational constraint about local x/y/z-axis.
+            Rotational constraint about local x/y/z-axis.
 
         """
         param = [nodeset, tx, ty, tz, rx, ry, rz, cid, birth, death]
@@ -2045,20 +2159,23 @@ class BoundaryCondition:
         scalefactor=1,
         birthtime=0,
     ):
-        """Define an imposed nodal motion (velocity, acceleration, or displacement) on a node or a set of nodes.
+        """Create an imposed nodal motion on a node or set of nodes.
+
+        An imposed nodal motion can be a velocity, acceleration, or displacement.
 
         Parameters
         ----------
         partset : PartSet.
-            part set.
+            Part set.
         curve : Curve
-            Curve ID or function ID to describe motion value as a function of time.
+            Curve ID or function ID to describe the motion value as a function of time.
         motion : enum
             Velocity/Acceleration/Displacement flag.
         dof : enum
-            Applicable degrees-of-freedom.
-        scalefactor : float
-            Load curve scale factor.
+            Applicable degrees of freedom.
+        scalefactor : int, optional
+            Load curve scale factor. The default is ``1``.
+        birthtime : int, optional
 
         """
         param = [set, curve, motion, dof, scalefactor, birthtime]
@@ -2070,23 +2187,23 @@ class BoundaryCondition:
         curve=None,
         scalefactor=1,
     ):
-        """Define temperature boundary conditions for a thermal or coupled thermal/structural analysis.
+        """Create temperature boundary conditions for a thermal or coupled thermal/structural analysis.
 
         Parameters
         ----------
         nodeset : NodeSet.
-            node set.
-        curve : Curve
-            Temperature, T, specification.
-        scalefactor : float
-            Temperature, T, curve multiplier.
+            Node set.
+        curve : Curve, optional
+            Temperature, T, specification. The default is ``None``.
+        scalefactor : float, optional
+            Temperature, T, curve multiplier. The default is ``1``.
 
         """
         param = [nodeset, curve, scalefactor]
         self.templist.append(param)
 
     def create(self):
-        """Create boundary condition."""
+        """Create a boundary condition."""
         for obj in self.imposedmotionlist:
             set = obj[0]
             curve = obj[1]
@@ -2194,7 +2311,7 @@ class BoundaryCondition:
 
 
 class InitialCondition:
-    """Provide a way of initializing velocities and detonation points."""
+    """Provides a way of initializing velocities and detonation points."""
 
     def __init__(self):
         self.stub = DynaBase.get_stub()
@@ -2209,15 +2326,15 @@ class InitialCondition:
         direction=Direction(0, 0, 0),
         stime=0,
     ):
-        """Define initial velocities for rotating and/or translating bodies."""
+        """Create initial velocities for rotating and/or translating bodies."""
         self.velocitylist.append([velocityset, angular_velocity, velocity, direction, stime])
 
     def create_temperature(self, nodeset=None, temperature=0):
-        """Define initial nodal point temperatures."""
+        """Create an initial nodal point temperature."""
         self.temperaturelist.append((nodeset, temperature))
 
     def create(self):
-        """Create initial condition."""
+        """Create an initial condition."""
         for obj in self.velocitylist:
             velocityset = obj[0]
             angular_velocity = obj[1]
@@ -2270,18 +2387,20 @@ class InitialCondition:
 
 
 class RigidwallCylinder:
-    """Define a rigid wall with a cylinder form.
+    """Defines a rigid wall with a cylinder form.
 
     Parameters
     ----------
-      tail : Point
-        The coordinate of tail of normal vector.
-      head : Point
-        The coordinate of head of normal vector.
-      radius : float
-        Radius of cylinder.
-      length : float
-        Length of cylinder.
+      tail : Point, optional
+        Coordinates of the tail of the normal vector.
+        The default is ``(0, 0, 0)``.
+      head : Point, optional
+        Coordinates of the head of the normal vector.
+        The default is ``(0, 0, 0)``.
+      radius : float, optional
+        Radius of the cylinder. The defaut is ``1``.
+      length : float, optional
+        Length of cylinder. The default is ``10``.
     """
 
     def __init__(self, tail=Point(0, 0, 0), head=Point(0, 0, 0), radius=1, length=10):
@@ -2295,7 +2414,7 @@ class RigidwallCylinder:
         self.dir = Direction(1, 0, 0)
 
     def set_motion(self, curve, motion=Motion.VELOCITY, dir=Direction(1, 0, 0)):
-        """Set prescribed motion."""
+        """Set the prescribed motion."""
         curve.create(self.stub)
         self.lcid = curve.id
         self.motion = motion.value
@@ -2304,7 +2423,7 @@ class RigidwallCylinder:
         self.dir = dir
 
     def create(self):
-        """Create rigidwall cylinder."""
+        """Create a rigidwall cylinder."""
         parameter = [
             self.tail.x,
             self.tail.y,
@@ -2331,18 +2450,18 @@ class RigidwallCylinder:
 
 
 class RigidwallPlanar:
-    """Define planar rigid walls with either finite or infinite size.
+    """Defines planar rigid walls with either finite or infinite size.
 
     Parameters
     ----------
       tail : Point
-        The coordinate of tail of normal vector.
+        Coordinate of the tail of the normal vector.
+        The default is ``(0, 0, 0)``.
       head : Point
-        The coordinate of head of normal vector.
-      radius : float
-        Radius of cylinder.
-      length : float
-        Length of cylinder.
+        Coordinate of the head of the normal vector.
+        The default is ``(0, 0, 0)``.
+      coulomb_friction_coefficient : float, optional
+        Friction coefficieint in coulomb units. The default is ``0.5``.
     """
 
     def __init__(self, tail=Point(0, 0, 0), head=Point(0, 0, 0), coulomb_friction_coefficient=0.5):
@@ -2374,8 +2493,11 @@ class GravityOption(Enum):
 
 
 class Gravity:
-    """Define body force loads due to a prescribed base acceleration or
-    angular velocity using global axes directions."""
+    """Defines body force loads using global axes directions.
+    
+    Body force loads are due to a prescribed base acceleration or
+    angular velocity.
+    """
 
     def __init__(self, dir=GravityOption.DIR_Z, load=Curve(x=[0, 0], y=[0, 0])):
         self.stub = DynaBase.get_stub()
@@ -2383,7 +2505,7 @@ class Gravity:
         self.load = load
 
     def create(self):
-        """Define body force."""
+        """Define a body force."""
         id = self.load.create(self.stub)
         ret = self.stub.CreateLoadBody(LoadBodyRequest(option=self.dir, lcid=id))
         logging.info("Load body Created...")

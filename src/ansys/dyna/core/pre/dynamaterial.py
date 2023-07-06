@@ -32,7 +32,7 @@ class Air:
     Returns
     -------
     bool
-        "True" when successful, "False" when failed
+        ``True`` when successful, ``False`` when failed.
     """
 
     def __init__(
@@ -71,7 +71,7 @@ class Liner:
     Returns
     -------
     bool
-        "True" when successful, "False" when failed
+        ``True`` when successful, ``False`` when failed.
     """
 
     def __init__(
@@ -153,7 +153,7 @@ class HighExplosive:
     Returns
     -------
     bool
-        "True" when successful, "False" when failed
+        ``True`` when successful, ``False`` when failed.
     """
 
     def __init__(
@@ -195,7 +195,7 @@ class Vacuum:
     Returns
     -------
     bool
-        "True" when successful, "False" when failed
+        ``True`` when successful, ``False`` when failed.
     """
 
     def __init__(self, estimated_material_density=1e-9):

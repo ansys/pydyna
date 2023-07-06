@@ -1,8 +1,8 @@
 """
 EM API
-==========
+======
 
-Module to create electromagnetism input deck
+Module for creating an electromagnetism (EM) input deck.
 """
 
 import logging
@@ -19,7 +19,7 @@ class Isopotential_ConnType(Enum):
 
 
 class DynaEM(DynaBase):
-    """Contain methods to create keyword related to EM."""
+    """Contains methods for creating keywords related to EM."""
 
     def __init__(self):
         DynaBase.__init__(self)
@@ -30,28 +30,33 @@ class DynaEM(DynaBase):
 
         Parameters
         ----------
-        emsol : int
-           Electromagnetism solver selector:
-           EQ.-1: Turns the EM solver off after reading the EM keywords.
-           EQ.1: Eddy current solver.
-           EQ.2: Induced heating solver.
-           EQ.3: Resistive heating solver.
-           EQ.11: Electrophysiology monodomain.
-           EQ.12: Electrophysiology bidomain.
-           EQ.13: Electrophysiology monodomain coupled with bidomain.
-        numls : int
-            Number of local EM steps in a whole period for emsol = 2.
-        macrodt : float
-            Macro time step when EMSOL = 2.
-        ncylfem : int
+        emsol : int, optional
+           EM solver. The default is ``0``. Options are:
+           
+           - EQ.-1: Turn off the EM solver after reading the EM keywords.
+           - EQ.1: Eddy current solver.
+           - EQ.2: Induced heating solver.
+           - EQ.3: Resistive heating solver.
+           - EQ.11: Electrophysiology monodomain.
+           - EQ.12: Electrophysiology bidomain.
+           - EQ.13: Electrophysiology monodomain coupled with bidomain.
+        
+        numls : int, optional
+            Number of local EM steps in a whole period for when ``emsol = 2``.
+            The default is ``100``.
+        macrodt : int, optional
+            Macro time step for when ``emsol = 2``. The default is ``0``.
+        ncylfem : int, optional
             Number of electromagnetism cycles between the recalculation of FEM matrices.
-        ncylbem : int
+            The default is ``5000``.
+        ncylbem : int, optional
             Number of electromagnetism cycles between the recalculation of BEM matrices.
+            The default is ``5000``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateEMControl(
             EMControlRequest(
@@ -71,47 +76,58 @@ class DynaEM(DynaBase):
         Parameters
         ----------
         tstype : int
-           Time step type:
-           EQ.1: constant time step given in DTCONST
-           EQ.2: time step as a function of time given by a load curve specified in LCID
-           EQ.3: automatic time step computation, depending on the solver type.
-           This time step is then multiplied by FACTOR
+           Time step type. Options are:
+           
+           - EQ.1: Constant time step given in DTCONST
+           - EQ.2: Time step as a function of time given by a load curve specified in LCID
+           - EQ.3: Automatic time step computation, depending on the solver type
+           
+           This time step is then multiplied by FACTOR.
         dtconst : float
-            Constant value for the time step for TSTYPE = 1.
+            Constant value for the time step for when ``tstype = 1``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateEMTimestep(EMTimestepRequest(tstype=tstype, dtconst=dtconst))
         logging.info("EM Timestep Created...")
         return ret
 
     def create_em_contact(self, contid=0, dtype=0, psidm=0, psids=0, eps1=0.3, eps2=0.3, eps3=0.3, d0=0):
-        """Optional card used for defining and specifying options on electromagnetic contacts between two sets of parts.
+        """Create an optional card for defining options on electromagnetic contacts between two sets of parts.
 
         Parameters
         ----------
-        contid : int
-            Electromagnetic contact ID
-        dtype : int
-            Detection type:
-            EQ.0: Contact type 0 (Default).
-            EQ.1: Contact type 1.
-        psidm : int
-            Master part set ID.
+        contid : int, optional
+            Electromagnetic contact ID. The default is ``0``.
+        dtype : int, optional
+            Detection type.  The default is ``0``. Options are:
+            
+            - EQ.0: Contact type 0
+            - EQ.1: Contact type 1
+        
+        psidm : int, optional
+            Master part set ID. The default is ``0``.
         psids : int
-            Slave part set ID.
-        eps1,eps2,eps3 : float
-            Contact Coefficients for contact detection conditions.
-        d0 : float
-            Contact condition 3 when COTYPE = 1.
+            Slave part set ID.  The default is ``0``.
+        eps1 : float, optional
+            First contact coefficient for contact detection conditions.
+            The default is ``0.3``.
+        eps2 : float, optional
+            Second contact coefficient for contact detection conditions.
+            The default is ``0.3``.
+        eps3 : float, optional
+            Third contact coefficient for contact detection conditions.
+            The default is ``0.3``.
+        d0 : float, optional
+            Contact condition 3 when ``dtype = 1``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateEMContact(
             EMContactRequest(
@@ -129,7 +145,7 @@ class DynaEM(DynaBase):
         return ret
 
     def set_rogowsky_coil_to_output_current(self, segmentset=SegmentSet([[]]), settype=1, curtyp=1):
-        """Define Rogowsky coils to measure a global current vs time through a segment set or a node set.
+        """Define Rogowsky coils to measure a global current versus time through a segment set or a node set.
 
         Parameters
         ----------
@@ -137,20 +153,23 @@ class DynaEM(DynaBase):
             Rogowsky coil ID.
         setid : int
             Segment or node set ID.
-        settype : int
-            Type of set:
-            EQ.1: Segment set
-            EQ.2: Node set
+        settype : int, optional
+            Type of set. The default is ``1``. Options are:
+            
+            - EQ.1: Segment set
+            - EQ.2: Node set
+        
         curtyp : int
-            Type of current measured:
-            EQ.1: Volume current
-            EQ.2: Surface current (not available yet}
-            EQ.3: Magnetic field flow (B field times Area)
+            Type of current measured. The default is ``1``. Options are:
+            
+            - EQ.1: Volume current
+            - EQ.2: Surface current (not available yet}
+            - EQ.3: Magnetic field flow (B field times area)
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         segmentset.create(self.stub)
         setid = segmentset.id
@@ -159,7 +178,7 @@ class DynaEM(DynaBase):
         return ret.id
 
     def create_em_mat001(self, mid, mtype, sigma):
-        """Define the electromagnetic material type and properties
+        """Create an electromagnetic material type and set properties
         for a material whose permeability equals the free space permeability.
 
         Parameters
@@ -167,50 +186,54 @@ class DynaEM(DynaBase):
         mid : int
             Material ID.
         mtype : int
-            Defines the electromagnetism type of the material:
-            EQ.0: Air or vacuum.
-            EQ.1: Insulator material: these materials have the same electromagnetism behavior as EQ.0
-            EQ.2: Conductor carrying a source.
-            EQ.3: Fluid conductor.
-            EQ.4: Conductor not connected to any current or voltage source, where the Eddy current problem is solved.
+            Electromagnetism type of the material. Options are:
+            
+            - EQ.0: Air or vacuum
+            - EQ.1: Insulator material (These materials have the same electromagnetism behavior as EQ.0.)
+            - EQ.2: Conductor carrying a source
+            - EQ.3: Fluid conductor
+            - EQ.4: Conductor not connected to any current or voltage source, where the eddy current problem is solved
+        
         sigma : float
             Initial electrical conductivity of the material.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateEMMat001(EMMat001Request(mid=mid, mtype=mtype, sigma=sigma))
         logging.info("EM Material 001 Created...")
         return ret
 
     def create_em_mat002(self, mid, mtype, sigma, eosid, murel):
-        """Define an electromagnetic material type and properties
+        """Create an electromagnetic material type and set properties
         whose permeability is different than the free space permeability.
 
         Parameters
         ----------
         mid : int
-            Material identification.
+            Material ID.
         mtype : int
-            Electromagnetism type of the material:
-            EQ.0: Air or vacuum.
-            EQ.1: Insulator material: these materials have the same electromagnetism behavior as EQ.0
-            EQ.2: Conductor carrying a source.
-            EQ.4: Conductor not connected to any current or voltage source, where the Eddy current problem is solved.
+            Electromagnetism type of the material. Options are:
+            
+            - EQ.0: Air or vacuum
+            - EQ.1: Insulator material (These materials have the same electromagnetism behavior as EQ.0.)
+            - EQ.2: Conductor carrying a source
+            - EQ.4: Conductor not connected to any current or voltage source, where the wddy current problem is solved
+        
         sigma : float
             Initial electrical conductivity of the material.
         eosid : int
-            ID of the EOS to be used for the electrical conductivity.
+            ID of the EOS to use for the electrical conductivity.
         murel : float
-            Relative permeability which is the ratio of the permeability of a specific
-            medium to the permeability of free space
+            Relative permeability, which is the ratio of the permeability of a specific
+            medium to the permeability of the free space.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateEMMat002(EMMat002Request(mid=mid, mtype=mtype, sigma=sigma, eosid=eosid, murel=murel))
         logging.info("EM Material 002 Created...")
@@ -221,24 +244,25 @@ class DynaEM(DynaBase):
 
         Parameters
         ----------
-        mtype : int
-            Monolithic solver type:
-            EQ.0: Direct symmetric solver.
+        mtype : int, optional
+            Monolithic solver type. The default is ``0``. The only option is EQ.0: Direct symmetric solver.
         stype : int
-            Solver type:
-            EQ.0: MINRES iterative solver
-            EQ.1: GMRES iterative solver
-        abstol : float
-            Absolute tolerance.
-        reltol : float
-            Relative tolerance.
-        maxit : int
-            Maximum number of iterations.
+            Solver type. The default is ``0``. Options are:
+            
+            - EQ.0: MINRES iterative solver
+            - EQ.1: GMRES iterative solver
+        
+        abstol : float, optional
+            Absolute tolerance. The default is ``1e-6``. 
+        reltol : float, optional
+            Relative tolerance. The default is ``1e-4``.
+        maxit : int, optional.
+            Maximum number of iterations. The default is 500.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateEMSolverFemBemMonolithic(
             EMSolverFemBemMonolithicRequest(mtype=mtype, stype=stype, abstol=abstol, reltol=reltol, maxit=maxit)
@@ -247,37 +271,47 @@ class DynaEM(DynaBase):
         return ret
 
     def create_em_output(self, mats=0, matf=0, sols=0, solf=0):
-        """Define the level of EM related output on the screen and in the messag file.
+        """Define the level of EM-related output on the screen and in the message file.
 
         Parameters
         ----------
-        mats : int
-            Level of matrix assembly output to the screen:
-            EQ.0: no output
-            EQ.1: basic assembly steps
-            EQ.2: basic assembly steps + percentage completed + final statistics
-            EQ.3: basic assembly steps + percentage completed + statistics at each percentage of completion
-        matf : int
-            Level of matrix assembly output to the messag file:
-            EQ.0: no output
-            EQ.1: basic assembly steps
-            EQ.2: basic assembly steps + percentage completed + final statistics
-            EQ.3: basic assembly steps + percentage completed + statistics at each percentage of completion
+        mats : int, optional
+            Level of matrix assembly output to show on the screen. The default is ``0``.
+            Options are:
+            
+            - EQ.0: No output
+            - EQ.1: Basic assembly steps
+            - EQ.2: Basic assembly steps + percentage completed + final statistics
+            - EQ.3: Basic assembly steps + percentage completed + statistics at each percentage of completion
+        
+        matf : int, optional
+            Level of matrix assembly output to write to the message file. The default
+            is ``0``. Options are:
+            
+            - EQ.0: No output
+            - EQ.1: Basic assembly steps
+            - EQ.2: Basic assembly steps + percentage completed + final statistics
+            - EQ.3: Vasic assembly steps + percentage completed + statistics at each percentage of completion
+        
         sols : int
-            Level of solver output on the screen:
-            EQ.0: no output
-            EQ.1: global information at each FEM iteration
-            EQ.2: detailed information at each FEM iteration
-        solf : int
-            Level of solver output to the messag file:
-            EQ.0: no output
-            EQ.1: global information at each FEM iteration
-            EQ.2: detailed information at each FEM iteration
+            Level of solver output to show on the screen. The default is ``0``. Options are:
+            
+            - EQ.0: No output
+            - EQ.1: Global information at each FEM iteration
+            - EQ.2: Detailed information at each FEM iteration
+        
+        solf : int, optional
+            Level of solver output to write to the message file. The default is ``0``.
+            Options are:
+            
+            - EQ.0: No output
+            - EQ.1: Global information at each FEM iteration
+            0 EQ.2: Detailed information at each FEM iteration
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateEMOutput(EMOutputRequest(mats=mats, matf=matf, sols=sols, solf=solf))
         logging.info("EM Output Created...")
@@ -300,13 +334,20 @@ class DynaEM(DynaBase):
         Parameters
         ----------
         contype : Isopotential_ConnType
-            See Isopotential_ConnType.
+            Isopotential connection type. The default is ``SHORT_CIRCUIT``.
         isopotential1 : Isopotential
-            First isopotential to be connected
+            First isopotential to connect.
         isopotential2 : Isopotential
-            Second isopotential to be connected
-        value : float
-            Value of the resistance, voltage or current depending on contype
+            Second isopotential to connect.
+        value : float, optional
+            Value of the resistance, voltage, or current depending on the isopotential
+            connection type. The default is ``0``.
+        func  :
+        curve :
+        inductance :
+        capacity :
+        initial voltage : 
+        
         Returns
         -------
         int
@@ -344,22 +385,24 @@ class DynaEM(DynaBase):
 
         Parameters
         ----------
-        outlv : int
-            Determines if the output file should be dumped.
-            EQ.0: No output file is generated.
-            EQ.1: The output file is generated.
+        outlv : int, optional
+            Flag for whether to generate the output file. The default is ``0``.
+            Options are:
+
+            - EQ.0: No output file is generated.
+            - EQ.1: The output file is generated.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateEMDatabaseGlobalEnergy(EMDatabaseGlobalEnergyRequest(outlv=outlv))
         logging.info("EM Database Global Energy Created...")
         return ret
 
     def create_Permanent_magnet(self, id, partid, mtype, north, sourth, hc):
-        """Define a permanent magnet.
+        """Create a permanent magnet.
 
         Parameters
         ----------
@@ -367,23 +410,25 @@ class DynaEM(DynaBase):
             ID of the magnet.
         partid : int
             Part ID.
-        mtype : int
-            Magnet definition type:
-            EQ.0: Magnet defined by two node sets for North and South Poles.
-            EQ.1: Magnet defined by two segments sets for North and South Poles.
-            EQ.3: Magnet defined by a global vector orientation.
-            EQ.4: Magnet defined by a global vector orientation given by two node IDs.
+        mtype : int, optional
+            Magnet definition type. Options are:
+            
+            - EQ.0: Magnet defined by two node set for the North and South poles
+            - EQ.1: Magnet defined by two segments set for the North and South poles
+            - EQ.3: Magnet defined by a global vector orientation
+            - EQ.4: Magnet defined by a global vector orientation given by two node IDs
+        
         north : int
-            Set ID of the magnet north face for MTYPE = 0 and MTYPE = 1.
+            ID of the magnet's north face for ``mtype = 0`` and ``mtype = 1``.
         sourth : int
-            Set ID of the magnet south face for MTYPE = 0 and MTYPE = 1.
+            ID of the magnet's south face for ``mtype = 0`` and ``mtype = 1``.
         hc : int
             Coercive force.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateEMPermanentMagnet(
             EMPermanentMagnetRequest(id=id, partid=partid, mtype=mtype, north=north, sourth=sourth, hc=hc)
@@ -397,18 +442,20 @@ class DynaEM(DynaBase):
         Parameters
         ----------
         eosid : int
-            ID of the EM_EOS.
+            EM EOS ID.
         eostype : int
-            Define the type of EOS:
-            EQ.1: Permeability defined by a B function of H curve
-            EQ.2: Permeability defined by a H function of B curve
+            Define the type of EOS. Options are:
+            
+            - EQ.1: Permeability defined by a B function of the H curve
+            - EQ.2: Permeability defined by an H function of the B curve
+        
         lcid : int
             Load curve ID.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateEMEOSPermeability(EMEOSPermeabilityRequest(eosid=eosid, eostype=eostype, lcid=lcid))
         logging.info("EM EOS Permeability Created...")
@@ -444,16 +491,17 @@ class FEMSOLVER(Enum):
 
 
 class EMAnalysis:
-    """Enable the EM solver and set its options.
+    """Enables the EM solver and sets its options.
 
     Parameters
     ----------
     type : int
-       Electromagnetism solver selector:
-       EQ.1: Eddy current solver.
-       EQ.2: Induced heating solver.
-       EQ.3: Resistive heating solver.
-       EQ.11: Electrophysiology monodomain.
+       Electromagnetism solver. The default is ``EDDY_CURRENT``. Options are:
+       
+       - EQ.1: Eddy current solver
+       - EQ.2: Induced heating solver
+       - EQ.3: Resistive heating solver
+       - EQ.11: Electrophysiology monodomain
     """
 
     p_matrix_tol = 1e-6
@@ -469,37 +517,37 @@ class EMAnalysis:
         self.defined_fem = False
 
     def set_timestep(self, timestep):
-        """Control the EM time step and its evolution."""
+        """Set the EM time step and its evolution."""
         self.defined = True
         self.timestep = timestep
 
     def set_em_solver(self, type=EMType.EDDY_CURRENT, dimtype=EMDimension.SOLVER_3D):
-        """Select Electromagnetism solver."""
+        """Set the EM solver."""
         self.type = type.value
         self.dimtype = dimtype.value
 
     def set_solver_bem(self, solver=BEMSOLVER.PCG, relative_tol=1e-6, max_iteration=1000):
-        """Define the type of linear solver and pre-conditioner as well as tolerance for the EM_BEM solve."""
+        """Set the type of linear solver, pre-conditioner, and tolerance for the EM BEM solver."""
         self.defined_bem = True
         self.bem_relative_tol = relative_tol
         self.max_iteration = max_iteration
         self.bemsolver = solver.value
 
     def set_solver_fem(self, solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-6, max_iteration=1000):
-        """Define some parameters for the EM FEM solver."""
+        """Set some parameters for the EM FEM solver."""
         self.defined_fem = True
         self.femsolver = solver.value
         self.fem_relative_tol = relative_tol
         self.max_iteration = max_iteration
 
     def set_bem_matrix_tol(self, p_matrix_tol=1e-6, q_matrix_tol=1e-6, w_matrix_tol=1e-6):
-        """Define the type of BEM matrices as well as the way they are assembled."""
+        """Set the type of BEM matrices and the way that they are assembled."""
         EMAnalysis.p_matrix_tol = p_matrix_tol
         EMAnalysis.q_matrix_tol = q_matrix_tol
         EMAnalysis.w_matrix_tol = w_matrix_tol
 
     def create(self):
-        """Create EMAnalysis."""
+        """Create an EM analysis."""
         if self.defined == False:
             return
         self.stub.CreateEMControl(
@@ -544,16 +592,19 @@ class CircuitType(Enum):
 
 
 class Circuit:
-    """Define an electrical circuit.
+    """Defines an electrical circuit.
 
     Parameters
     ----------
     circtyp : int
-        Circuit type:
-        EQ.1: Imposed current vs time defined by a load curve.
-        EQ.2: Imposed voltage vs time defined by a load curve.
+        Circuit type. Options are:
+        
+        - EQ.1: Imposed current vs time defined by a load curve
+        - EQ.2: Imposed voltage vs time defined by a load curve
+    
     loadcurve : Curve
-        Load curve for circtyp = 1, 2, 21 or 22
+        Load curve for when the ``circtyp`` parameter is set to ``1``,
+        ``2``, ``21`` or ``22``.
     """
 
     def __init__(self, loadcurve, circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME):
@@ -563,7 +614,7 @@ class Circuit:
         self.lcid = loadcurve.id
 
     def set_current(self, current, current_inlet, current_outlet):
-        """Define segment set for current.
+        """Define the segment set for the current.
 
         Parameters
         ----------
@@ -571,9 +622,9 @@ class Circuit:
             Segment set for the current.
         current_inlet : SegmentSet
             Segment set for input voltage or input current
-            when CIRCTYP.EQ.2/3/12/22 and CIRCTYP.EQ 1/11/21 respectively.
+            for CIRCTYP.EQ.2/3/12/22 and CIRCTYP.EQ 1/11/21 respectively.
         current_outlet : SegmentSet
-            Segment set for output voltage or output current when
+            Segment set for the output voltage or output current for
             CIRCTYP = 2/3/12/22 and CIRCTYP = 1/11/21 respectively.
         """
         self.current_id = current.create(self.stub)
@@ -581,7 +632,7 @@ class Circuit:
         self.outlet_id = current_outlet.create(self.stub)
 
     def create(self):
-        """Create circuit."""
+        """Create a circuit."""
         ret = self.stub.CreateEMCircuit(
             EMCircuitRequest(
                 circtyp=self.circuit_type,
@@ -602,27 +653,31 @@ class EMContactType(Enum):
 
 
 class EMContact:
-    """Detect contact between conductors.If no contact parts defined,
-    contact detection between all active parts associated
-    with a conducting material."""
+    """Detects contact between conductors.
+    
+    If no contact parts are defined, this method detects contact between
+    all active parts associated with a conducting material.
+    """
 
     def __init__(self, contact_type=EMContactType.NODE_TO_NODE_PENALTY_BASED_CONTACT):
         self.stub = DynaBase.get_stub()
         self.contacttype = contact_type.value
 
     def create(self):
-        """Create EM contact."""
+        """Create an EM contact."""
         self.stub.CreateEMControlContact(EMControlContactRequest(emct=1, cconly=0, ctype=self.contacttype, dtype=0))
         logging.info("EM Contact Created...")
 
 
 class Isopotential:
-    """Defining an isopotential, i.e. constrain nodes so that they have the same scalar potential value.
+    """Defines an isopotential.
+    
+    This method constrain nodes so that they have the same scalar potential value.
 
     Parameters
     ----------
     set : Set
-        Segment Set or Node Set.
+        Segment set or node set.
     """
 
     isopotlist = []
@@ -633,7 +688,7 @@ class Isopotential:
         self.id = 0
 
     def create(self):
-        """Create Isopotential."""
+        """Create an isopotential."""
         isoinfo = [self.set.type, self.set.nodes]
         if isoinfo in Isopotential.isopotlist:
             pass
@@ -652,12 +707,12 @@ class Isopotential:
 
 
 class RogoCoil:
-    """Measure the total current flowing through a given section of the conductor.
+    """Measures the total current flowing through a given section of the conductor.
 
     Parameters
     ----------
     set : Set
-        Segment Set.
+        Segment set.
     """
 
     def __init__(self, set=None):
@@ -666,7 +721,7 @@ class RogoCoil:
         self.id = 0
 
     def create(self):
-        """Create Rogowsky coil."""
+        """Create a Rogowsky coil."""
         id, settype = 0, 1
         if self.set is not None:
             id = self.set.create(self.stub)
