@@ -2,7 +2,7 @@
 Airbag API
 ==========
 
-Module to create Structural ALE dyna input deck
+Module for creating a Structural ALE DYNA input deck.
 """
 
 from enum import Enum

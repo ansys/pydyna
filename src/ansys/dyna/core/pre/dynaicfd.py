@@ -159,7 +159,7 @@ class DynaICFD(DynaBase):
             Absolute convergence criteria. The default is ``1e-8``.
         rtol : float, optional
             Relative convergence criteria. The default is ``1e-8``.
-        
+
         Returns
         -------
         bool
@@ -190,7 +190,7 @@ class DynaICFD(DynaBase):
 
     def set_imposed_move(self, vx=None, vy=None, vz=None):
         """Impose a velocity on the whole volume mesh.
-        
+
         Parameters
         ----------
         vx :
@@ -410,7 +410,7 @@ class ICFDAnalysis:
             Scale factor applied to the force transmitted by the fluid to
             the structure. The default is ``1``.
         formulation : int, optional
-            Type of formulation to use in the coupling. The defalt is
+            Type of formulation to use in the coupling. The default is
             ``FORCE_BASED_ON_VELOCITY_DRAG_VALUE``.
         """
         self.defined_coupling_dem = True
@@ -463,10 +463,10 @@ class MatICFD:
         flag : int
             Flag for chooseing between fully incompressible, slightly compressible, or barotropic flows.
             The default is ``FULLY_INCOMPRESSIBLE_FLUID``. Options are:
-            
+
             - EQ.0: Vacuum (free surface problems only)
             - EQ.1: Fully incompressible fluid
-        
+
         flow_density : float, optional
             Flow density. The default is ``0``.
         dynamic_viscosity : float, optional
@@ -538,20 +538,20 @@ class ICFDPart:
         dof : int, optional
             Applicable degrees of freedom. The default is ``ICFDDOF.X``.
             Options are:
-            
+
             - EQ.1: x-degree of freedom
             - EQ.2: y-degree of freedom
             - EQ.3: z-degree of freedom
             - EQ.4: Normal direction degree of freedom
-        
+
         velocity_flag : int, optional
             Velocity flag. The default is ``LINEAR_VELOCITY``. Options are:
-            
+
             - EQ.1: Linear velocity
             - EQ.2: Angular velocity
             - EQ.3: Parabolic velocity profile
             - EQ.4: Activates synthetic turbulent field on part
-        
+
         """
         motion.create(self.stub)
         lcid = motion.id
@@ -645,13 +645,13 @@ class ICFDPart:
 
     def set_imposed_move(self, vx=None, vy=None, vz=None):
         """Impose a velocity on a specific ICFD part.
-        
+
         Parameters
         ----------
         vx :
         vy :
         vz :
-        
+
         """
         lcvx, lcvy, lcvz = 0, 0, 0
         if vx != None:
@@ -698,13 +698,13 @@ class ICFDVolumePart:
 
     def set_imposed_move(self, vx=None, vy=None, vz=None):
         """Impose a velocity on a specific ICFD part.
-        
+
         Parameters
         ----------
         vx :
         vy :
         vz :
-        
+
         """
         self.defined_imposed_move = True
         self.vx = vx

@@ -32,7 +32,7 @@ class DynaEM(DynaBase):
         ----------
         emsol : int, optional
            EM solver. The default is ``0``. Options are:
-           
+
            - EQ.-1: Turn off the EM solver after reading the EM keywords.
            - EQ.1: Eddy current solver.
            - EQ.2: Induced heating solver.
@@ -40,7 +40,7 @@ class DynaEM(DynaBase):
            - EQ.11: Electrophysiology monodomain.
            - EQ.12: Electrophysiology bidomain.
            - EQ.13: Electrophysiology monodomain coupled with bidomain.
-        
+
         numls : int, optional
             Number of local EM steps in a whole period for when ``emsol = 2``.
             The default is ``100``.
@@ -77,11 +77,11 @@ class DynaEM(DynaBase):
         ----------
         tstype : int
            Time step type. Options are:
-           
+
            - EQ.1: Constant time step given in DTCONST
            - EQ.2: Time step as a function of time given by a load curve specified in LCID
            - EQ.3: Automatic time step computation, depending on the solver type
-           
+
            This time step is then multiplied by FACTOR.
         dtconst : float
             Constant value for the time step for when ``tstype = 1``.
@@ -104,10 +104,10 @@ class DynaEM(DynaBase):
             Electromagnetic contact ID. The default is ``0``.
         dtype : int, optional
             Detection type.  The default is ``0``. Options are:
-            
+
             - EQ.0: Contact type 0
             - EQ.1: Contact type 1
-        
+
         psidm : int, optional
             Master part set ID. The default is ``0``.
         psids : int
@@ -155,13 +155,13 @@ class DynaEM(DynaBase):
             Segment or node set ID.
         settype : int, optional
             Type of set. The default is ``1``. Options are:
-            
+
             - EQ.1: Segment set
             - EQ.2: Node set
-        
+
         curtyp : int
             Type of current measured. The default is ``1``. Options are:
-            
+
             - EQ.1: Volume current
             - EQ.2: Surface current (not available yet}
             - EQ.3: Magnetic field flow (B field times area)
@@ -187,13 +187,13 @@ class DynaEM(DynaBase):
             Material ID.
         mtype : int
             Electromagnetism type of the material. Options are:
-            
+
             - EQ.0: Air or vacuum
             - EQ.1: Insulator material (These materials have the same electromagnetism behavior as EQ.0.)
             - EQ.2: Conductor carrying a source
             - EQ.3: Fluid conductor
             - EQ.4: Conductor not connected to any current or voltage source, where the eddy current problem is solved
-        
+
         sigma : float
             Initial electrical conductivity of the material.
 
@@ -216,12 +216,12 @@ class DynaEM(DynaBase):
             Material ID.
         mtype : int
             Electromagnetism type of the material. Options are:
-            
+
             - EQ.0: Air or vacuum
             - EQ.1: Insulator material (These materials have the same electromagnetism behavior as EQ.0.)
             - EQ.2: Conductor carrying a source
             - EQ.4: Conductor not connected to any current or voltage source, where the wddy current problem is solved
-        
+
         sigma : float
             Initial electrical conductivity of the material.
         eosid : int
@@ -248,12 +248,12 @@ class DynaEM(DynaBase):
             Monolithic solver type. The default is ``0``. The only option is EQ.0: Direct symmetric solver.
         stype : int
             Solver type. The default is ``0``. Options are:
-            
+
             - EQ.0: MINRES iterative solver
             - EQ.1: GMRES iterative solver
-        
+
         abstol : float, optional
-            Absolute tolerance. The default is ``1e-6``. 
+            Absolute tolerance. The default is ``1e-6``.
         reltol : float, optional
             Relative tolerance. The default is ``1e-4``.
         maxit : int, optional.
@@ -278,32 +278,32 @@ class DynaEM(DynaBase):
         mats : int, optional
             Level of matrix assembly output to show on the screen. The default is ``0``.
             Options are:
-            
+
             - EQ.0: No output
             - EQ.1: Basic assembly steps
             - EQ.2: Basic assembly steps + percentage completed + final statistics
             - EQ.3: Basic assembly steps + percentage completed + statistics at each percentage of completion
-        
+
         matf : int, optional
             Level of matrix assembly output to write to the message file. The default
             is ``0``. Options are:
-            
+
             - EQ.0: No output
             - EQ.1: Basic assembly steps
             - EQ.2: Basic assembly steps + percentage completed + final statistics
             - EQ.3: Vasic assembly steps + percentage completed + statistics at each percentage of completion
-        
+
         sols : int
             Level of solver output to show on the screen. The default is ``0``. Options are:
-            
+
             - EQ.0: No output
             - EQ.1: Global information at each FEM iteration
             - EQ.2: Detailed information at each FEM iteration
-        
+
         solf : int, optional
             Level of solver output to write to the message file. The default is ``0``.
             Options are:
-            
+
             - EQ.0: No output
             - EQ.1: Global information at each FEM iteration
             0 EQ.2: Detailed information at each FEM iteration
@@ -346,8 +346,8 @@ class DynaEM(DynaBase):
         curve :
         inductance :
         capacity :
-        initial voltage : 
-        
+        initial voltage :
+
         Returns
         -------
         int
@@ -412,12 +412,12 @@ class DynaEM(DynaBase):
             Part ID.
         mtype : int, optional
             Magnet definition type. Options are:
-            
-            - EQ.0: Magnet defined by two node set for the North and South poles
-            - EQ.1: Magnet defined by two segments set for the North and South poles
+
+            - EQ.0: Magnet defined by two node set for the north and south poles
+            - EQ.1: Magnet defined by two segments set for the north and south poles
             - EQ.3: Magnet defined by a global vector orientation
             - EQ.4: Magnet defined by a global vector orientation given by two node IDs
-        
+
         north : int
             ID of the magnet's north face for ``mtype = 0`` and ``mtype = 1``.
         sourth : int
@@ -445,10 +445,10 @@ class DynaEM(DynaBase):
             EM EOS ID.
         eostype : int
             Define the type of EOS. Options are:
-            
+
             - EQ.1: Permeability defined by a B function of the H curve
             - EQ.2: Permeability defined by an H function of the B curve
-        
+
         lcid : int
             Load curve ID.
 
@@ -497,7 +497,7 @@ class EMAnalysis:
     ----------
     type : int
        Electromagnetism solver. The default is ``EDDY_CURRENT``. Options are:
-       
+
        - EQ.1: Eddy current solver
        - EQ.2: Induced heating solver
        - EQ.3: Resistive heating solver
@@ -598,10 +598,10 @@ class Circuit:
     ----------
     circtyp : int
         Circuit type. Options are:
-        
+
         - EQ.1: Imposed current vs time defined by a load curve
         - EQ.2: Imposed voltage vs time defined by a load curve
-    
+
     loadcurve : Curve
         Load curve for when the ``circtyp`` parameter is set to ``1``,
         ``2``, ``21`` or ``22``.
@@ -654,7 +654,7 @@ class EMContactType(Enum):
 
 class EMContact:
     """Detects contact between conductors.
-    
+
     If no contact parts are defined, this method detects contact between
     all active parts associated with a conducting material.
     """
@@ -671,7 +671,7 @@ class EMContact:
 
 class Isopotential:
     """Defines an isopotential.
-    
+
     This method constrain nodes so that they have the same scalar potential value.
 
     Parameters
