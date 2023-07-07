@@ -27,10 +27,10 @@ class DynaDEM(DynaBase):
             Tangential damping coefficient. The default is ``0.0``.
         frics : float, optional
             Static coefficient of friction. The default is ``0.0``.
-            
+
             - EQ.0: 3 DOF
             - NE.0: 6 DOF
-        
+
         fricr : float, optional
             Rolling friction coefficient. The default is ``0.0``.
         normk : float, optional
@@ -65,10 +65,10 @@ class DynaDEM(DynaBase):
             Part or part set ID for the region of the mesh to place DES elements on.
         type : int
             SID type:
-            
+
             - type=0: Part set ID
             - type=1: Part ID
-        
+
         despid : int
             Part ID for the generated DES elements.
         desxid : int
@@ -133,9 +133,9 @@ class DEMAnalysis:
         Parameters
         ----------
         normal_damping_coeff : float, optional
-            Normal damping coefficent. The defalt value is ``0.0``.
+            Normal damping coefficient. The default value is ``0.0``.
         tangential_damping_coeff : float, optional
-            Tangential damping coefficent. The defalt value is ``0.0``.
+            Tangential damping coefficient. The default value is ``0.0``.
         static_friction_coeff : float, optional
             Static coefficient of friction. The default is ``0.0``.
         rolling_friction_coeff : float, optional

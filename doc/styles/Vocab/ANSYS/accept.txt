@@ -23,3 +23,10 @@ postprocessing
 PyDPF-Post
 subpackages
 venv
+inout
+propt
+setyp
+solf
+sourth
+embeded
+outputed

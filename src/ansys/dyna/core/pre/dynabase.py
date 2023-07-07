@@ -109,8 +109,8 @@ class Curve:
     """
     Defines a curve as a function of time.
 
-    For example, ``load (ordinate value)``. 
-    
+    For example, ``load (ordinate value)``.
+
     """
 
     def __init__(self, sfo=1, x=[], y=[], func=None):
@@ -286,7 +286,7 @@ class DynaBase:
             Implicit accuracy flag.
         explicit_accuracy_flag : float
             Explicit accuracy parameter.
-            
+
             - EQ.0.0: Off
             - GT.0.0: On
 
@@ -326,25 +326,25 @@ class DynaBase:
             Hourglass energy calculation option.
         rigidwall_energy : int
             Rigidwall energy dissipation option.
-            
+
             - EQ.1: Energy dissipation is not computed.
             - EQ.2: Energy dissipation is computed.
-        
+
         sliding_interface_energy : int
             Sliding interface energy dissipation option.
-            
+
             - EQ.1: Energy dissipation is not computed.
             - EQ.2: Energy dissipation is computed.
-        
+
         rayleigh_energy : int
             Rayleigh energy dissipation option.
-            
+
             - EQ.1: Energy dissipation is not computed.
             - EQ.2: Energy dissipation is computed.
-        
+
         initial_reference_geometry_energy : int
             Initial reference geometry energy option.
-            
+
             - EQ.1: Initial reference geometry energy is not computed.
             - EQ.2: Initial reference geometry energy is computed.
 
@@ -382,16 +382,16 @@ class DynaBase:
             The default is ``True``, which means that none of these are printed: nodal
             coordinates, element connectivities, rigid wall definitions, nodal SPCs,
             initial velocities, initial strains, adaptive constraints, and SPR2/SPR3
-            constraints. If ``False``, no supression occurs.
+            constraints. If ``False``, no suppression occurs.
         print_suppression_echo : OutputEcho
             Print suppression setting during the input phase flag for the echo file.
             Options are:
-            
+
             - ALL_DATA_PRINTED: All data is printed.
             - SUPPRESSED_NODAL_PRINTING: Nodal printing is suppressed.
             - SUPPRESSED_ELEMENT_PRINTING: Element printing is suppressed.
             - SUPPRESSED_NODAL_AND_ELEMENT_PRINTING : Both nodal and element printing is suppressed.
-        
+
         """
         if print_suppression_d3hsp:
             npopt = 1
@@ -568,10 +568,10 @@ class DynaBase:
         esort : int, optional
             Automatic sorting of tetrahedral and pentahedral elements to avoid
             use of degenerate formulations for these shapes. The default is ``0``.
-            
+
             - EQ.0: No sorting
             - EQ.1: Sort
-        
+
         fmatrx : int, optional
             Method to use in the calculation of the deformation gradient matrix.
             The default is ``1``.
@@ -669,7 +669,7 @@ class DynaBase:
 
     def create_damping_global(self, lcid=0, valdmp=0.0):
         """Define mass-weighted nodal damping.
-        
+
         Mass-weighted nodal damping applies globally to the
         nodes of deformable bodies and to the mass center of
         rigid bodies.
@@ -853,6 +853,7 @@ class NodeSet:
 
 class SetType(Enum):
     """Contains the enums for setting types."""
+
     SHELL = "SET_SHELL"
     SOLID = "SET_SOLID"
     BEAM = "SET_BEAM"
@@ -862,7 +863,7 @@ class SetType(Enum):
 
 class NodesetGeneral(BaseSet):
     """Includes nodal points of element sets.
-    
+
     Element sets are defined by ``SET_XXXX_LIST``,
     where ``XXXX`` can be ``SHELL``, ``SOLID``, ``BEAM``,
     ``TSHELL`` or ``DISCRETE``.
@@ -1147,7 +1148,7 @@ class Part:
 class BeamPart(Part):
     """
     Defines a beam part.
-    
+
     A beam part definition consists of the combined material information,
     section properties, hourglass type, thermal properties, and a flag
     for part adaptivity.
@@ -1192,7 +1193,7 @@ class BeamPart(Part):
 
 class ShellPart(Part):
     """Defines a shell part.
-    
+
     A shell part definition consists of the combined material information,
     section properties, hourglass type, thermal properties, and a flag
     for part adaptivity.
@@ -1308,7 +1309,7 @@ class ShellPart(Part):
 class IGAPart(Part):
     """
     Defines an isogeometric shell part.
-    
+
     The part definition consists of the combined material information,
     section properties, hourglass type, thermal properties, and a flag
     for part adaptivity.
@@ -1354,7 +1355,7 @@ class IGAPart(Part):
 class SolidPart(Part):
     """
     Defines a solid part.
-    
+
     The part definition consists of the combined material information,
     section properties, hourglass type, thermal properties, and a flag
     for part adaptivity.
@@ -1400,7 +1401,7 @@ class DRO(Enum):
 
 class DiscretePart(Part):
     """Defines a discrete part.
-    
+
     The part definition consists of the combined material information,
     section properties, hourglass type, thermal properties, and a flag
     for part adaptivity.
@@ -1429,7 +1430,7 @@ class DiscretePart(Part):
                 pid=self.id,
                 secid=self.secid,
                 mid=self.mid,
-                eosid=self.eosid,hysical properties
+                eosid=self.eosid,
                 hgid=self.hgid,
                 grav=self.grav,
                 adpopt=self.adpopt,
@@ -1797,7 +1798,7 @@ class ContactSurface:
 
     def set_penalty_stiffness_scale_factor(self, scalefactor=1.0):
         """Set the scale factor on the default surface penalty stiffness.
-        
+
         Parameters
         ----------
         scalefactor : int, optional
@@ -1836,7 +1837,7 @@ class Contact:
 
     def set_mortar(self):
         """Set the mortar contact.
-        
+
         A mort contact is a segment-to-segment, penalty-based contact.
         """
         self.mortar = True
@@ -1846,7 +1847,7 @@ class Contact:
 
     def set_tiebreak(self):
         """Set the contact allow for failure.
-        
+
         A tieback is a special case of this. After failure, the contact
         usually becomes a normal one-way, two-way, or single surface version.
         """
@@ -1868,7 +1869,7 @@ class Contact:
 
     def set_active_time(self, birth_time=0, death_time=1e20):
         """Set the birth and death time to active and deactivate the contact.
-        
+
         Parameters
         ----------
         birth_time : int, optional
@@ -2072,7 +2073,7 @@ class Constraint:
 
     def merge_two_rigid_bodies(self, lead_rigidbody=0, constrained_rigidbody=0):
         """Merge two rigid bodies.
-        
+
         One rigid body, called the constrained rigid body,
         is merged into another rigid body, called the lead rigid body.
 
@@ -2398,7 +2399,7 @@ class RigidwallCylinder:
         Coordinates of the head of the normal vector.
         The default is ``(0, 0, 0)``.
       radius : float, optional
-        Radius of the cylinder. The defaut is ``1``.
+        Radius of the cylinder. The default is ``1``.
       length : float, optional
         Length of cylinder. The default is ``10``.
     """
@@ -2494,7 +2495,7 @@ class GravityOption(Enum):
 
 class Gravity:
     """Defines body force loads using global axes directions.
-    
+
     Body force loads are due to a prescribed base acceleration or
     angular velocity.
     """
