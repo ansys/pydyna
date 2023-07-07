@@ -10,10 +10,10 @@ Project Overview
 There are 3 related packages here, pre and solver are all under the ansys/pydyna/ directory,
 while pyDPF is used for post-processing.
 
-pre contains highly abstracted APIs for setting up a LS-DYNA input deck, so far, 
+**pre** contains highly abstracted APIs for setting up a LS-DYNA input deck, so far, 
 it includes DynaMech, DynaIGA, DynaICFD, DynaSALE, DynaEM, DynaAirbag and so on.
 
-solver contains code for interfacing with the LS-DYNA solver directly.
+**solver** contains code for interfacing with the LS-DYNA solver directly.
 As LS-DYNA is primarily a batch solver with very limited interactive
 capabilities, the code here is similarly limited.  The target
 use case is that LS-DYNA will be running in a container environment
@@ -21,7 +21,7 @@ such as Docker or Kubernetes.  The code here then allows for pushing
 input files to the container, starting LS-DYNA and monitoring its
 progress, and retrieving results files.
 
-The Data Processing Framework (DPF) is designed to provide numerical
+The **Data Processing Framework (DPF)** is designed to provide numerical
 simulation users/engineers with a toolbox for accessing and
 transforming simulation data. DPF can access data from solver result
 files as well as several neutral formats (csv, hdf5, vtk,
