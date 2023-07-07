@@ -1,5 +1,4 @@
 """
-.. _ref_thermal_stress:
 Thermal stress example
 ======================
 
@@ -18,7 +17,8 @@ from ansys.dyna.core.pre.dynamech import (
     ThermalAnalysisType,
     SolidPart,
     SolidFormulation,
-    NodeSet
+    NodeSet,
+    AnalysisType
 )
 from ansys.dyna.core.pre.dynamaterial import MatElasticPlasticThermal
 from ansys.dyna.core.pre import examples
@@ -42,7 +42,7 @@ solution = DynaSolution(hostname)
 # Start the Solution workflow
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # NODES and ELEMENTS are read in from the "thermal_stress.k" file. This file also has the
-# *PART defined in it but the section and material fields are empty to begin with
+# *PART* defined in it but the section and material fields are empty to begin with
 fns = []
 path = examples.thermal_stress + os.sep
 fns.append(path + "thermal_stress.k")
@@ -53,7 +53,7 @@ solution.set_termination(3.0)
 ###############################################################################
 # To invoke the transient thermal solver, the thermal analysis type in CONTROL_SOLUTION is
 # being set to 2 by ThermalAnalysisType.TRANSIENT.
-ts = DynaMech()
+ts = DynaMech(analysis=AnalysisType.EXPLICIT)
 solution.add(ts)
 
 tanalysis = ThermalAnalysis()

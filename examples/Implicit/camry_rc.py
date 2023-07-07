@@ -1,5 +1,4 @@
 """
-.. _ref_implicit:
 Implicit Example
 =====================
 
@@ -25,7 +24,7 @@ from ansys.dyna.core.pre.dynamech import (
     ContactSurface,
     DOF,
     OffsetType,
-    ImplicitAnalysis,
+    AnalysisType
 )
 from ansys.dyna.core.pre.dynamaterial import (
     MatNull,
@@ -80,7 +79,7 @@ camry_solution.set_termination(10)
 ###############################################################################
 # We can then use the implicit analysis methods in DynaMech class to define
 # the IMILICIT control cards.
-camry = DynaMech()
+camry = DynaMech(analysis=AnalysisType.EXPLICIT)
 camry_solution.add(camry)
 
 ###############################################################################
@@ -189,10 +188,10 @@ plastic220_410 = MatPiecewiseLinearPlasticity(
 )
 
 ###############################################################################
-# Assining Section and Material Properties
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Assigning Section and Material Properties
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Once all the materials are explicitly defined, these material IDs needs to be cross-referenced
-# in the *PART card. set_material() method is used for this. Since many parts share common materials
+# in the *PART* card. set_material() method is used for this. Since many parts share common materials
 # the assignment happens within a loop. While within the loop, set_element_formulation() method
 # is called to assign the elform for the beam and the shell elements. Accordingly either the beam
 # diameter or the shell thickness is also defined. To identify the part ID that has a particular material type
@@ -253,7 +252,7 @@ for spart in shellparts:
 # Spotwelds and Nodal Rigid Bodies
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Again, camry_rc_data.py contains the predefined node pairs and node sets required for
-# *CONSTRAINED_SPOTWELD and *CONSTRAINED_NODAL_RIGID_BODY definitions. We are looping through
+# *CONSTRAINED_SPOTWELD* and *CONSTRAINED_NODAL_RIGID_BODY* definitions. We are looping through
 # these lists to generate the appropriate keywords.
 for sw in spotweld:
     camry.constraints.create_spotweld(nodeid1=sw[0], nodeid2=sw[1])
@@ -265,11 +264,13 @@ for cnrb in cnrbs:
 # Define Contacts
 # ~~~~~~~~~~~~~~~
 # There are three Contacts defined in this model.
+#
 # 1. Automatic Single surface contact for the BIW self contact
 # 2. Surface to Surface Contact between the platen and the BIW
 # 3. Tied contact for the Spotweld beams
+#
 # The ContactSurface() method here sets the SSTYPE and MSTYPE.
-# PartSet() method accepts the name of a list and converts it to *PART_SET_LIST.
+# PartSet() method accepts the name of a list and converts it to *PART_SET_LIST*.
 # Notice how the contact type and category can be used to create the three
 # different type of contacts for this model.
 selfcontact = Contact(type=ContactType.AUTOMATIC)

@@ -26,12 +26,3 @@ leaving a Python environment.
 
 Visit the `DPF-Post Documentation <https://post.docs.pyansys.com>`_ for a
 detailed description of the package
-
-.. toctree::
-   :hidden:
-   
-   pydyna_pre
-   pydyna_solver
-   pydyna_post
-   
-
