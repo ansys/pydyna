@@ -168,7 +168,7 @@ class PymapdlCustomAdapter(logging.LoggerAdapter):
         filename : str, optional
             Name of the file where logs are recorded. The default is ``FILE_NAME``.
         level : str, optional
-            Level of logging. The default is ``LOG_LEVEL``, which casues all messages
+            Level of logging. The default is ``LOG_LEVEL``, which causes all messages
             to be recorded. For example, you can set the level of logging to ``DEBUG``.
         """
 
@@ -181,7 +181,7 @@ class PymapdlCustomAdapter(logging.LoggerAdapter):
         Parameters
         ----------
         level : str, optional
-            Level of logging record. The default is ``LOG_LEVEL``, which casues all messages
+            Level of logging record. The default is ``LOG_LEVEL``, which causes all messages
             to be recorded. For example, you can set the level of logging to ``"DEBUG"``.
         """
         if self.std_out_handler:
@@ -192,12 +192,12 @@ class PymapdlCustomAdapter(logging.LoggerAdapter):
 
     def setLevel(self, level="DEBUG"):
         """Change the log level of the object and the attached handlers.
-        
+
         Parameters
         ----------
         level : str, optional
             Level of logging record. The default is ``"DEBUG``.
-         
+
         """
         self.logger.setLevel(level)
         for each_handler in self.logger.handlers:
@@ -391,7 +391,7 @@ class Logger:
 
     def setLevel(self, level="DEBUG"):
         """Change the log level of the object and the attached handlers.
-        
+
         Parameters
         ----------
         level : str, optional
@@ -577,7 +577,7 @@ def add_stdout_handler(logger, level=LOG_LEVEL, write_headers=False):
     logger : logging.Logger or logging.Logger
         Logger to add the file handler to.
     level : str, optional
-        Level of logging. The default is ``LOG_LEVEL``, in which 
+        Level of logging. The default is ``LOG_LEVEL``, in which
         case ``""DEBUG" is used``.
     write_headers : bool, optional
         Whether to write the headers to the file. The default is ``False``.
