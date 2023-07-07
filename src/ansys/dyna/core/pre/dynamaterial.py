@@ -239,7 +239,7 @@ class Vacuum:
 
 class MatNull:
     """Defines a null material.
-    
+
     Young's modulus and Poisson's ratio are used to set the contact stiffness.
 
     Parameters
@@ -264,7 +264,7 @@ class MatNull:
 
 class EMEOSTabulated1:
     """Defines electrical conductivity or permeability.
-    
+
     Parameters
     ----------
     curve : Curve
@@ -306,13 +306,13 @@ class MatAdditional:
     def set_electromagnetic_property(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None):
         """Define the electromagnetic material type and properties
         for a material whose permeability equals the free space permeability.
-        
+
         Parameters
         ----------
         material_type :
         initial_conductivity :
         eos :
-        
+
         """
         self.em = True
         self.em_material_type = material_type.value
@@ -322,7 +322,7 @@ class MatAdditional:
     def set_em_permeability_equal(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None):
         """Define the electromagnetic material type and properties
         for a material whose permeability equals the free space permeability.
-        
+
         Parameters
         ----------
         material_type :
@@ -340,14 +340,14 @@ class MatAdditional:
     ):
         """Define the electromagnetic material type and properties
         for a material whose permeability equals the free space permeability.
-        
+
         Parameters
         ----------
         material_type :
         initial_conductivity :
         eos :
         murel :
-        
+
         """
         self.em_mat_type = 2
         self.em_material_type = material_type.value
@@ -358,7 +358,7 @@ class MatAdditional:
     def set_em_conducting_shells_3d(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0):
         """Define the electromagnetic material type and properties
         for a material whose permeability equals the free space permeability.
-        
+
         Parameters
         ----------
         material_type :
@@ -372,12 +372,12 @@ class MatAdditional:
     def set_em_resistive_heating_2d(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0):
         """Define the electromagnetic material type and properties
         for a material whose permeability equals the free space permeability.
-        
+
         Parameters
         ----------
         material_type :
         initial_conductivity :
-    
+
         """
         self.em_mat_type = 4
         self.em_material_type = material_type.value
@@ -387,7 +387,7 @@ class MatAdditional:
         self, density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0
     ):
         """Define isotropic thermal properties.
-        
+
         Parameters
         ----------
         density :
@@ -405,10 +405,10 @@ class MatAdditional:
 
     def create(self, stub, matid):
         """Define additional properties for a material.
-        
+
         Parameters
         ----------
-        matid : 
+        matid :
             Material ID.
         """
         if self.em_mat_type:
@@ -517,7 +517,7 @@ class MatElasticPlasticThermal(MatAdditional):
 
 class MatRigid(MatAdditional):
     """Defines a rigid material.
-    
+
     Parts made from a rigid material are considered to belong to a rigid body."""
 
     def __init__(
@@ -583,7 +583,7 @@ class MatThermalIsotropic:
 
 class MatRigidDiscrete:
     """Defines a rigid material for shells or solids.
-    
+
     Parameters
     ----------
     mass_density :
@@ -647,10 +647,10 @@ class MatPiecewiseLinearPlasticity:
 
 class MatModifiedPiecewiseLinearPlasticity:
     """Defines an elasto-plastic material supporting an arbitrary stress.
-    
+
     The arbitrary stress is defined as a function of strain curve and arbitrary
     strain rate dependency.
-    
+
     Parameters
     ----------
     mass_density :
@@ -701,7 +701,7 @@ class MatModifiedPiecewiseLinearPlasticity:
 
 class MatSpotweld:
     """Defines a spotweld material.
-    
+
     Parameters
     ----------
     mass_density :
@@ -806,7 +806,7 @@ class MatFabric:
 
 class MatSpringNonlinearElastic:
     """Provides a nonlinear elastic translational and rotational spring with an arbitrary force.
-    
+
     The arbitrary force is defined as a function of displacement. The moment is defined
     as a function of rotation.
 
@@ -829,7 +829,7 @@ class MatSpringNonlinearElastic:
 
 class MatDamperViscous:
     """Provides a linear translational or rotational damper located between two nodes.
-    
+
     Parameters
     ----------
     damping_constant :
@@ -847,8 +847,8 @@ class MatDamperViscous:
 
 class MatDamperNonlinearViscous:
     """Provides a viscous translational damper with an arbitrary force.
-    
-    The arbitrary force is defind as a function of velocity dependency or a rotational
+
+    The arbitrary force is defined as a function of velocity dependency or a rotational
     damper with an arbitrary moment as a function of rotational velocity dependency.
 
     Parameters
@@ -871,7 +871,7 @@ class MatDamperNonlinearViscous:
 
 class MatSPHIncompressibleFluid:
     """Defines an ISPH (incompressible smooth particle hyrodynamics) fluid material.
-    
+
     Parameters
     ----------
     mass_density : float, optional
@@ -899,7 +899,7 @@ class MatSPHIncompressibleFluid:
 
 class MatSPHIncompressibleStructure:
     """Defines an ISPH structure material.
-    
+
     Parameters
     ----------
     mass_density : float, optional

@@ -36,7 +36,7 @@ class DynaISPH(DynaBase):
         boxid : int, optional
             Box ID. The default is ``0``. ISPH approximations are computed
             inside the specified box. When a particle has gone outside this
-            box, it is deactivated.          
+            box, it is deactivated.
         space_dimension : int, optional
             Space dimension for ISPH particles. The default is ``3``. Options
             are:
@@ -44,7 +44,7 @@ class DynaISPH(DynaBase):
             - EQ.3: 3D problems
             - EQ.2: 2D plane strain problems
             - EQ.-2: 2D axisymmetric problems
-           
+
         neighbors : int, optional
             Initial number of neighbors per particle. The default is ``150``.
         approximation_theory : int, optional
@@ -98,7 +98,7 @@ class ISPHAnalysis:
 
     def set_num_timestep(self, num_timestep):
         """Set the number of time steps between particle sorting.
-        
+
         Parameters
         ----------
         num_timestep : int, optional
@@ -120,7 +120,7 @@ class ISPHAnalysis:
 
     def set_neighbors(self, neighbors):
         """Set the initial number of neighbors per particle.
-        
+
         Parameters
         ----------
         neighbors : int, optional
@@ -130,19 +130,19 @@ class ISPHAnalysis:
 
     def set_particle_deactivation(self, deactivation):
         """Set the type of BEM matrices and the way they are assembled.
-        
+
         Parameters
         ----------
-        deactivation : 
+        deactivation :
         """
         self.particle_deactivation = deactivation
 
     def set_velocity_scaling(self, scaling):
         """Set the type of BEM matrices and the way they are assembled.
-        
+
         Parameters
         ----------
-        scaling : 
+        scaling :
         """
         self.velocity_scaling = scaling
 
@@ -171,14 +171,14 @@ class ISPHAnalysis:
 
 class SPHSection:
     """Defines section properties for ISPH particles.
-    
+
     Parameters
     ----------
     cslh : float, optional
     hmin : float, optional
     hmax : float, optional
     sphini : int, optional
-    
+
     """
 
     def __init__(self, cslh=1.2, hmin=0.2, hmax=2.0, sphini=0):
@@ -363,7 +363,7 @@ class ISPHStructPart(Part):
             Scale factor for the maximum smoothing length.
         optional : float, optional
             Initial smoothing length, which overrides the true smoothing length.
-        
+
         """
         self.cslh = initial
         self.hmin = min
