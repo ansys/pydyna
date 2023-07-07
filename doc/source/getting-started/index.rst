@@ -3,8 +3,8 @@ Getting started
 To run PyDYNA, you must have an installation of Ansys LS-DYNA.
 PyDYNA supports LS-DYNA 2023 R2 and later.
 
-For more information on getting a licensed copy of LS-DYNA, visit
-the `LS-DYNA <https://www.ansys.com/products/structures/ansys-ls-dyna>`_
+For information on getting a licensed copy of LS-DYNA, see
+the `Ansys LS-DYNA <https://www.ansys.com/products/structures/ansys-ls-dyna>`_
 page on the Ansys website.
 
 Installation
@@ -41,16 +41,16 @@ commands:
    cd pydyna
    pip install -e .
 
-The preceding commands install the package and allow you to modify it locally,
-with your changes reflected in your Python setup after restarting the
-Python kernel.
+The preceding commands clone and install the package, allowing you to modify it
+locally. After restarting the Python kernel, your changes are reflected in your
+Python setup.
 
 Offline installation
 ~~~~~~~~~~~~~~~~~~~~
-If you lack an internet connection on your installation machine, the
-recommended way of installing PyDYNA is to download the wheelhouse archive
-for your corresponding machine architecture from the GitHub repository's
-`Releases <pydyna_releases_>`_ page.
+If you lack an internet connection on your installation machine (or you do not have access
+to the private Ansys PyPI packages repository), you should install PyDYNA by downloading
+the wheelhouse archive for your corresponding machine architecture from the
+`Releases Page <https://github.com/pyansys/pydyna/releases>`_ .
 
 Each wheelhouse archive contains all the Python wheels necessary to install
 PyDYNA from scratch on Windows and Linux for Python 3.8 through 3.11. You can install
@@ -66,8 +66,6 @@ with these commands:
 
 If you're on Windows with Python 3.8, unzip thw wheelhouse archive to a ``wheelhouse``
 directory and install PyDYNA using the preceding command.
-
-Consider installing using a `virtual environment <using_venv_>`_.
 
 .. include:: ../../../docker/pre/README.rst
 .. include:: ../../../docker/solver/README.rst
