@@ -64,7 +64,7 @@ with these commands:
    unzip ansys-dyna-core-v0.3.1-wheelhouse-ubuntu-latest-3.8.zip wheelhouse
    pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
 
-If you're on Windows with Python 3.8, unzip thw wheelhouse archive to a ``wheelhouse``
+If you're on Windows with Python 3.8, unzip the wheelhouse archive to a ``wheelhouse``
 directory and install PyDYNA using the preceding command.
 
 .. include:: ../../../docker/pre/README.rst
