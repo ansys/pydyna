@@ -1,4 +1,4 @@
-PyDyna documentation  |version|
+PyDYNA documentation  |version|
 ===============================
 
 .. include:: ../../README.rst
