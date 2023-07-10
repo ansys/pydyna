@@ -1,4 +1,4 @@
-"""Module for launching kwserver locally."""
+"""Module for launching the kwserver locally."""
 
 import os
 import socket
@@ -13,7 +13,15 @@ DYNAPRE_DEFAULT_PORT = 50051
 
 
 def check_ports(port_range, ip="localhost"):
-    """Check the state of ports in a port range"""
+    """Check the state of ports in a port range.
+    
+    Parameters
+    ----------
+    port_range :
+    ip : str, optional
+        IP address. The default is ``"localhost"``, in which case
+        ``"127.0.0.1"``is used.
+    """
     ports = {}
     for port in port_range:
         ports[port] = port_in_use(port, ip)
@@ -22,13 +30,25 @@ def check_ports(port_range, ip="localhost"):
 
 def port_in_use(port, host=LOCALHOST):
     """
-    Returns ``True`` when a port is in use at the given host.
+    Determine if a port is in use at a given host.
+
+    Parameters
+    ----------
+    port : int
+       Port.
+    host :
+       Host. The default is ``LOCALHOST``, in which case ``"127.0.0.1"``
+        is used.
+    
+    Returns
+    -------
+    ``True`` when a port is in use at the given host, ``False`` otherwise.
 
     Notes
     -----
-    Must actually "bind" the address. Just checking if we can create
-    a socket is insufficient as it's possible to run into permission
-    errors like:
+    The port must "bind" the address. Just checking if a socket can be created
+    is insufficient because it is possible to run into permission
+    errors like this one:
 
     "An attempt was made to access a socket in a way forbidden by its
     access permissions."
@@ -43,18 +63,24 @@ def port_in_use(port, host=LOCALHOST):
 
 def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path=None) -> tuple:  # pragma: no cover
     """
-    Start kwserver locally in gRPC mode.
+    Launch the kwserver locally in gRPC mode.
 
     Parameters
     ----------
-    port : int
-        Port to launch PyDyna gRPC on. Final port will be the first
-        port available after (or including) this port.
+    port : int, optional
+        Port to launch the kwserver on. The default is ``DYNAPRE_DEFAULT_PORT``.
+        The final port is the first port available after (or including) this
+        port.
+    ip : str, optional
+        IP address. The default is ``LOCALHOST``, in which case ``"127.0.0.1"``
+        is used.
+    server_path : string, optional
+        Path to the kwserver. The default is ``None``.
 
     Returns
     -------
     int
-        Returns the port number that the gRPC instance started on.
+        Port number that the gRPC instance started on.
     """
     LOG.debug("Starting 'launch_kwserver'.")
 
@@ -73,6 +99,17 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path=None) -> tu
 
 
 class ServerThread(threading.Thread):
+    """Provides server thread properties.
+    
+    Parameters
+    ----------
+    threadID :
+    port : 
+    ip : 
+    server_path : 
+
+
+    """
     def __init__(self, threadID, port, ip, server_path):
         threading.Thread.__init__(self)
         self.threadID = threadID
@@ -93,17 +130,17 @@ def launch_dynapre(
     ip="localhost",
 ):
     """
-    Start kwserver locally.
+    Start the kwserver locally.
 
     Parameters
     ----------
-    port : int
-        Port to launch MAPDL gRPC on.
+    port : int, optional
+        Port to launch MAPDL gRPC on. The default is ``50051``.
     ip : bool, optional
-        Specify the IP address of the PyDyna instance to connect to.
-        You can also provide a hostname as an alternative to an IP address.
-        Defaults to ``'127.0.0.1'``. You can also override the
-        default behavior of this keyword argument with the
+        IP address or host name of the PyDYNA instance to connect to.
+        The default is ``"localhost"``, in which case ``"127.0.0.1"``
+        is used.
+
     """
 
     check_valid_ip(ip)  # double check
