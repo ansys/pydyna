@@ -1,4 +1,4 @@
 EM examples
 ~~~~~~~~~~~~
 
-These examples show how to create electromagnetic model.
+These examples show how to create and use electromagnetic models.

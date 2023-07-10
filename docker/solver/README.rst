@@ -1,11 +1,11 @@
 Build the Docker image for the ``solver`` service
-=================================================
+-------------------------------------------------
 
 You must build the Docker image for the PyDNA ``solver`` service and then
 run the image as a container.
 
 Prerequisites
--------------
+~~~~~~~~~~~~~
 
 * Ensure that you have cloned the PyDYNA repository locally with these commands:
 
@@ -22,7 +22,7 @@ Prerequisites
 
 * If you are building the image on Windows, ensure that the Windows Subsystem for Linux (WSL)
   is installed. For installation information, see Microsoft's
-  `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`.
+  `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
 
 * Download the latest Linux release artifacts for the Linux Docker container:
   `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.2.1/mppdyna_docker_centos7.zip>`_.
@@ -31,7 +31,7 @@ Prerequisites
 
 
 Build the Docker image
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 Once all prerequisites are met, perform these steps to build the Docker image:
 
@@ -59,14 +59,15 @@ Once all prerequisites are met, perform these steps to build the Docker image:
 
 
 Run the image as a container
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Perform these steps to run the image as a container:
 
 #. In the ``docker-compose.yml`` file, replace ``<license_server_name>`` with the correct
-  license server hosting the DYNA license.
-  If you are using Ansy Flexlm license 
+   license server hosting the DYNA license.
+   If you are using Ansy Flexlm license 
   
-* Run this Docker command:
+#. Run this Docker command:
  
   .. code:: bash
 

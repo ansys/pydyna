@@ -1,4 +1,4 @@
 Explicit examples
 ~~~~~~~~~~~~~~~~~
 
-These examples show how to create Explicit model.
+These examples show how to create and use explicit models.
