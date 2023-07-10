@@ -1,6 +1,6 @@
 # PyDYNA ``pre`` service
 
-The PyDYNA ``pre`` service provide the ability to create a keyword input deck through the gRPC framework. 
+The PyDYNA ``pre`` service provide the ability to create keyword input decks through the gRPC framework. 
 
 ## Run the ``pre`` service in a virtual environment
 
@@ -12,20 +12,20 @@ Install virtualenv:
 pip install virtualenv
 ```
 
-Create a Python virtual environment of the same version as ``virtualenv``,installed into the subdirectory "venv":
+Create a Python virtual environment of the same version as ``virtualenv``, installed in the subdirectory ``venv``:
 
 ```
 virtualenv venv
 ```
 
-Activate the ``venv`` environment on Windows by running these commands: 
+On Windows, activate the ``venv`` environment by running these commands: 
 
 ```
 cd venv
 ./Scripts/activate
 ```
 
-Activate the ``venv`` environment on Linux by running these commands: 
+On Linux, activate the ``venv`` environment by running these commands: 
 
 ```
 cd venv
@@ -57,9 +57,9 @@ cd pyDyna/requirement/pythonxx
 pip install -r requirements.txt
 ```
 
-## Start the Server
+## Start the server
 
-So far, Python 3.6 through 3-8 can be used to start server. Validate by running
+Python 3.6 through 3.8 can be used to start the server. Validate by running
 these commands:
 
 ```
@@ -84,7 +84,7 @@ Server/
 
 ### Start the server on Windows
 
-Start the server on Windows by running these commands:
+On Windows, start the server by running these commands:
 
 ```shell
 (venv) C:\pyDyna\ansys\dyna\pre\Server> python .\kwserver.py
@@ -93,7 +93,7 @@ kwgrpc Server listening on: localhost:50051
 
 ### Start the server on Linux
 
-Start the server on Linux by running these commands:
+On Linux, start the server by running these commands:
 
 ```
 (venv) :~/pyDyna/ansys/dyna/pre/Server> python kwserver.py
@@ -101,10 +101,9 @@ Start the server on Linux by running these commands:
 
 ## Run the PyDYNA ``pre`` service
 
-See the ``Examples`` folder for some basic usage examples. More
-examples are to be added later.
+See the ``Examples`` folder for basic usage examples.
 
-### Structure ALE demo
+### S-ALE (Structure ALE) demo
 
 Go to the ``pyDyna/examples/pre`` directory and run the ``sale_efp.py`` file:
 
