@@ -2,7 +2,7 @@
 Sample interactive client for DynaSolver.
 =========================================
 
-Commands are read from an optional file, or interactively,and sent to DYNA via gRPC
+Commands are read from an optional file, or interactively, and sent to DYNA via gRPC
 """
 
 #!/usr/bin/python3
@@ -16,7 +16,7 @@ port = '5000'
 
 
 def get_from_k8s(service):
-    """Get the port of the DYNA server service when running kubernetes
+    """Get the port of the DYNA server service when running Kubernetes.
     locally"""
     ip = 'localhost'   # for local k8s cluster
     f = os.popen("kubectl get service %s" % service, "r")
@@ -30,7 +30,7 @@ def get_from_k8s(service):
 
 def get_from_minikube(service):
     """Get the IP address and port of the DYNA server service when running
-    under minikube locally"""
+    under minikube locally."""
     f = os.popen("minikube ip", "r")
     ip = f.readline().strip()
     f.close
@@ -45,7 +45,7 @@ def get_from_minikube(service):
 
 args = sys.argv[1:]
 #
-# Check for special command line arg "runfile <filename>" to pull commands
+# Check for special command-line arg ``runfile <filename>`` to pull commands.
 # from
 #
 if("runfile" in args):

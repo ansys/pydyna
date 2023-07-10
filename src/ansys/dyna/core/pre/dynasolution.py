@@ -164,7 +164,7 @@ class DynaSolution:
         Parameters
         ----------
         filenames : list
-            List of filenames. ``[0]`` is the main file. The others are subfiles.
+            List of filenames. The main file is ``[0]``. The others are subfiles.
 
         Returns
         -------

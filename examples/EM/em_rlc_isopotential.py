@@ -1,6 +1,6 @@
 """
-Define R,L,C circuit by isopotential
-====================================
+RLC circuit by isopotential
+===========================
 This example shows how to use the corresponding ``contype`` in the
 ``connect_isopotential()`` method to define an RLC circuit as an
 inlet boundary condition. The executable file for LS-DYNA is

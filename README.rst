@@ -1,12 +1,9 @@
-PyDYNA
-######
-
+PyDYNA Overview
+===============
 PyDYNA is a Pythonic package for providing a more convenient and complete way to
 build an Ansys DYNA input deck, submit it to the Ansys LS-DYNA solver, and
 finally postprocess the results. 
 
-Overview
-========
 In the PyDYNA installation, the ``docker`` directory has two child
 directories:
 
@@ -34,6 +31,11 @@ The `ansys-dpf-post package <https://github.com/ansys/pydpf-post>`_ provides
 a simplified Python interface to DPF, thus enabling rapid postprocessing
 without ever leaving a Python environment. For more information on DPF-Post,
 see the `DPF-Post documentation <https://post.docs.pyansys.com>`_.
+
+Installation
+============
+To use PyDYNA, you must install Docker images for the ``pre`` and ``solver``
+services and the package.
 
 Install Docker image for the ``pre`` service
 --------------------------------------------
@@ -146,7 +148,7 @@ If you're on Windows with Python 3.8, unzip thw wheelhouse archive to a ``wheelh
 directory and install PyDYNA using the preceding command.
 
 Documentation
--------------
+=============
 For comprehesive information on PyDYNA, see the latest release
 `documentation <https://dyna.docs.pyansys.com/>`_.
 
@@ -155,7 +157,7 @@ issues to submit questions, report bugs, and request new features. To reach
 the PyAnsys support team, email `pyansys.support@ansys.com <pyansys.support@ansys.com>`_.
 
 Usage
------
+=====
 Here is a basic preprocessing example:
 
 .. code:: python
@@ -268,7 +270,7 @@ For more examples, see `Examples <https://dyna.docs.pyansys.com/version/stable/e
 in the PyDYNA documentation.
 
 License
--------
+=======
 PyDYNA is licensed under the MIT license.
 
 PyDYNA makes no commercial claim over Ansys whatsoever. This libray extends the functionality of
