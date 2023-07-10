@@ -14,7 +14,7 @@ DYNAPRE_DEFAULT_PORT = 50051
 
 def check_ports(port_range, ip="localhost"):
     """Check the state of ports in a port range.
-    
+
     Parameters
     ----------
     port_range :
@@ -39,7 +39,7 @@ def port_in_use(port, host=LOCALHOST):
     host :
        Host. The default is ``LOCALHOST``, in which case ``"127.0.0.1"``
         is used.
-    
+
     Returns
     -------
     ``True`` when a port is in use at the given host, ``False`` otherwise.
@@ -100,16 +100,17 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path=None) -> tu
 
 class ServerThread(threading.Thread):
     """Provides server thread properties.
-    
+
     Parameters
     ----------
     threadID :
-    port : 
-    ip : 
-    server_path : 
+    port :
+    ip :
+    server_path :
 
 
     """
+
     def __init__(self, threadID, port, ip, server_path):
         threading.Thread.__init__(self)
         self.threadID = threadID

@@ -73,7 +73,7 @@ class StructuredMesh:
             Material name.
         geometry_type : string
             Geometry type. The default is ``"Null"``. Options are:
-            
+
             - BOXCOR
             - BOXCPT
             - CYLINDER
@@ -82,7 +82,7 @@ class StructuredMesh:
             - PLANE
             - SEGSET
             - SPHERE
-        
+
         nsample : int, optional
             Number of sampling points. The default is ``4``.
         define_geometry_parameters : list
@@ -94,7 +94,7 @@ class StructuredMesh:
         vid : int, optional
             Flag for assigning the initial velocity to the material filling the domain.
             The default is ``0``.
-        reference_pressure : 
+        reference_pressure :
 
         Returns
         -------
@@ -312,7 +312,7 @@ class DynaSALE(DynaBase):
         matsum : float, optional
             Time interval between outputs of part energies. The
             default is ``0``.
-        glstat : float, optinal
+        glstat : float, optional
             Time interval between outputs of global statistics and energies.
             The default is ``0``.
 

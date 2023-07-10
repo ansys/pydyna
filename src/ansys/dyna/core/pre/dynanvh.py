@@ -83,7 +83,7 @@ class FrequencyDomain:
         Parameters
         ----------
         excitation_input_set :
-        excitation_input_dof : 
+        excitation_input_dof :
         excitation_input_type :
         max_natural_frequency :
         modal_damping_coefficient :

@@ -2,7 +2,7 @@
 Mechanical API
 ==============
 
-Module for settting up explicit or implicit analysis.
+Module for setting up explicit or implicit analysis.
 """
 
 from .dynabase import *  # noqa : F403
@@ -30,16 +30,16 @@ class DynaMech(DynaBase):
         npopt : int, optional
             Print suppression during the input phase flag for the D3HSP file.
             The default is ``0``. Options are:
-            
+
             - EQ.0: No suppression.
             - EQ.1: Nodal coordinates, element connectivities, rigid wall definitions,
               nodal SPCs, initial velocities, initial strains, adaptive constraints, and
               SPR2/SPR3 constraints are not printed.
-        
+
         neecho : int, optional
             Print suppression during the input phase flag for the echo file.
             The default is ``0``. Options are:
-            
+
             - EQ.0: All data is printed.
             - EQ.1: Nodal printing is suppressed.
             - EQ.2: Element printing is suppressed.
@@ -196,10 +196,10 @@ class DynaMech(DynaBase):
             Section ID.
         dro : int, optional
             Displacement/rotation. The default is ``0``. Options are:
-            
+
             - EQ.0: Material describes a translational spring/damper.
             - EQ.1: Material describes a torsional spring/damper.
-        
+
         kd : float, optional
             Dynamic magnification factor. The default is ``0``.
         v0 : float, optional
@@ -327,10 +327,10 @@ class Airbag:
     ----------
     Set : SegmentSet or PartSet
         Set. Options are:
-        
+
         - EQ.0: Segment set ID.
         - EQ.1: Part set ID.
-    
+
     heat_capacity_at_constant_volume : float, optional
         Heat capacity at constant volume. The default is ``0``.
     heat_capacity_at_constant_pressure : float, optional

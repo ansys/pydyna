@@ -106,7 +106,7 @@ base_report_class = Plain_Report
 
 def is_float(input_string):
     """Determine if a string can be converted to a float.
-    
+
     Parameters
     ----------
     input_string : str
@@ -124,26 +124,26 @@ def is_float(input_string):
 
 def random_string(stringLength=10, letters=string.ascii_lowercase):
     """Generate a random string of a fixed length.
-    
+
     Parameters
     ----------
     stringLength : int, optional
         Length of the string. The default is ``10``.
     letters :
-    
+
     """
     return "".join(random.choice(letters) for i in range(stringLength))
 
 
 def create_temp_dir(tmpdir=None):
     """Create a unique working directory in a temporary directory.
-    
+
     Parameters
     ----------
     tempdir : str, optional
-       Name of the temporary directory in whih to create the working
-       directory. The default is ``None``.
-    
+       Name of the temporary directory to create the working
+       directory in. The default is ``None``.
+
     """
     if tmpdir is None:
         tmpdir = tempfile.gettempdir()
@@ -171,7 +171,7 @@ def create_temp_dir(tmpdir=None):
 
 def check_valid_ip(ip):
     """Check if an IP address is valid.
-    
+
     Parameters
     ----------
     ip :
@@ -183,8 +183,8 @@ def check_valid_ip(ip):
 
 
 def check_valid_port(port, lower_bound=1000, high_bound=60000):
-    """ Check if a port is valid.
-    
+    """Check if a port is valid.
+
     Parameters
     ----------
     port : int
