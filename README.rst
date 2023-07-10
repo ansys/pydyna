@@ -1,5 +1,5 @@
-PyDYNA Overview
-===============
+Overview
+========
 PyDYNA is a Pythonic package for providing a more convenient and complete way to
 build an Ansys DYNA input deck, submit it to the Ansys LS-DYNA solver, and
 finally postprocess the results. 
