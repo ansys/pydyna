@@ -28,7 +28,7 @@ class PydynaRuntimeError(RuntimeError):
 
 
 class PydynaInvalidRoutineError(RuntimeError):
-    """Provdies the error raised when MAPDL is in the wrong routine."""
+    """Provides the error raised when MAPDL is in the wrong routine."""
 
     def __init__(self, msg=""):
         RuntimeError.__init__(self, msg)
@@ -42,7 +42,7 @@ class LockFileException(RuntimeError):
 
 
 class KwserverDidNotStart(RuntimeError):
-    """Provides the rrror raised when the kwserver process does not start."""
+    """Provides the error raised when the kwserver process does not start."""
 
     def __init__(self, msg=""):
         RuntimeError.__init__(self, msg)

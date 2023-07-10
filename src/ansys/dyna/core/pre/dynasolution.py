@@ -22,7 +22,7 @@ CHUNK_SIZE = 1024 * 1024
 
 def init_log(log_file):
     """Initialize a log file.
-    
+
     Parameters
     ----------
     log_file : str
@@ -45,7 +45,7 @@ def init_log(log_file):
 
 class DynaSolution:
     """Contains methods for creating a general LS-DYNA keyword.
-    
+
     Parameters
     ----------
     hostname : str, optional
@@ -88,9 +88,9 @@ class DynaSolution:
     @staticmethod
     def grpc_local_server_on() -> bool:
         """Check if the server is launched locally.
-        
-        Retuns
-        ------
+
+        Returns
+        -------
         bool
             ``True`` when successful, ``False`` when failed.
         """
@@ -107,17 +107,17 @@ class DynaSolution:
 
     def add(self, obj):
         """Add a case in the solution.
-        
+
         Parameters
         ----------
         obj :
-        
+
         """
         self.object_list.append(obj)
 
     def get_file_chunks(self, filename):
         """Get file chunks.
-        
+
         Parameters
         ----------
         filename : str
@@ -132,26 +132,26 @@ class DynaSolution:
 
     def upload(self, stub_, filename):
         """Upload files to the server.
-        
+
         Parameters
         ----------
         stub_ :
         filename : str
             Name of the file.
-        
+
         """
         chunks_generator = self.get_file_chunks(filename)
         response = stub_.Upload(chunks_generator)
 
     def download(self, remote_name, local_name):
         """Download files from the server.
-        
+
         Parameters
         ----------
         stub_ :
-        remote_name : 
+        remote_name :
         local_name :
-        
+
         """
         response = self.stub.Download(DownloadRequest(url=remote_name))
         with open(local_name, "wb") as f:
@@ -215,10 +215,10 @@ class DynaSolution:
         ieverp : int, optional
             How to plot output states on plot files. The default is ``0``. Every output
             state for the d3plot database is written to a separate file. Options are:
-            
+
             - EQ.0: More than one state can be on each plot file.
             - EQ.1: Only one state can be on each plot file.
-        
+
         dcomp : int, optional
             Data compression to eliminate rigid body data. The default is ``1``.
         nintsld : int, optional
@@ -250,14 +250,14 @@ class DynaSolution:
         ----------
         type : string
             Type of the database. Options are:
-            
+
             - BNDOUT
             - GLSTAT
             - MATSUM
             - NODFOR
             - RCFORC
             - SLEOUT
-        
+
         dt : float, optional
             Time interval between outputs. The default is ``0.0``.
         binary : int, optional
