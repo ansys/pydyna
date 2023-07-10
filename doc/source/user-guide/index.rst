@@ -17,7 +17,7 @@ directories:
   input files to the container, start LS-DYNA and monitor its progress,
   and then retrieve results (RST) files.
 
-Once you have results, you can use the Data Processing Framework (DPF),
+Once you have results, you can use the Ansys Data Processing Framework (DPF),
 which is designed to provide numerical simulation users and engineers
 with a toolbox for accessing and transforming simulation data. DPF
 can access data from Ansys solver result files and from several
