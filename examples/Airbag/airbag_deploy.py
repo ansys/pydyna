@@ -1,7 +1,6 @@
 """
-Airbag deploy example
----------------------
-
+Airbag deploy
+-------------
 This example shows how to create an airbag deploy model with the PyDNYA ``pre`` service.
 The executable file for LS-DYNA is ``ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe``.
 
@@ -9,7 +8,7 @@ The executable file for LS-DYNA is ``ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_
 ###############################################################################
 # Perform required imports
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-# Import  required imports.
+# Peform required imports.
 
 import os
 import sys
@@ -31,7 +30,7 @@ from ansys.dyna.core.pre.dynamech import (
 )
 
 ###############################################################################
-# Manually start the ``pre`` server
+# Manually start the ``pre`` service
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Copy the ``pyDyna/src/ansys/dyna/core/pre/Server``folder to a desired location.
 # Start the ``pre``service at this location by running this command:
@@ -41,7 +40,7 @@ from ansys.dyna.core.pre.dynamech import (
 # Once the ``pre`` servic is running, you can connect a client to it using
 # the hostname and the port. This example uses the default local host and port
 # (``"localhost"`` and ``"50051"`` respectively).
-
+#
 from ansys.dyna.core.pre.dynamaterial import MatRigid, MatFabric
 from ansys.dyna.core.pre import examples
 # sphinx_gallery_thumbnail_path = '_static/pre/airbag/airbag.png'
@@ -49,7 +48,6 @@ from ansys.dyna.core.pre import examples
 hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
-
 
 ###############################################################################
 # Start the solution workflow
@@ -63,6 +61,7 @@ fns = []
 path = examples.airbag_deploy + os.sep
 fns.append(path + "airbag_deploy.k")
 airbag_solution.open_files(fns)
+
 ###############################################################################
 # Create standard explicit control cards
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -80,9 +79,9 @@ airbag_solution.add(airbagdeploy)
 ###############################################################################
 # Define *AIRBAG_SIMPLE_AIRBAG_MODEL* as a keyword
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Using the ``Airbag`` function in the ``DynaMech`` class, create
+# Use the ``Airbag`` function in the ``DynaMech`` class to define
 # *AIRBAG_SIMPLE_AIRBAG_MODEL* as a keyword. While LS-DYNA has many different
-# airbag models, PyDNYA currently supports only one airbag model:
+# airbag models, PyDYNA currently supports only one airbag model,
 # SIMPLE_AIRBAG_MODEL. If you have an urgent need for PyDYNA to support
 # another airbag model, email `pyansys.core@ansys.com <mailto:pyansys.core@ansys.com>`_.
 
@@ -108,9 +107,9 @@ rigidwall = RigidwallPlanar(Point(0, 0, 0), Point(0, 1, 0), coulomb_friction_coe
 airbagdeploy.add(rigidwall)
 
 ###############################################################################
-# Define a contact *NODES_TO_SURFACE*
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Define a contact NODES_TO_SURFACE by passing a master part set and a slave
+# Define a node-to-surface contact
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Define a node-to-surface contact by passing a master part set and a slave
 # part set.
 
 contact = Contact(category=ContactCategory.NODES_TO_SURFACE)
@@ -178,10 +177,10 @@ airbagpart.set_integration_points(4)
 airbagdeploy.parts.add(airbagpart)
 
 ###############################################################################
-# Define database outputs in ASCII and binary
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Use the ``set_output_database()`` and ``create_database_binary``methods to define the
-# output frequency of the ASCII and binary D3PLOT files. The, use the ``save_file()``
+# Define database outputs
+# ~~~~~~~~~~~~~~~~~~~~~~~
+# Use the ``set_output_database()`` and ``create_database_binary()`` methods to define the
+# output frequency of the ASCII and binary D3PLOT files. Then, use the ``save_file()``
 # method to write out the model as an input DYNA key file.
 
 airbag_solution.set_output_database(

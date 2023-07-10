@@ -2,18 +2,18 @@ PyDYNA
 ######
 
 PyDYNA is a Pythonic package for providing a more convenient and complete way to
-build an Ansys DYNA input deck, submit it to the Ansys LS-Dyna solver, and
+build an Ansys DYNA input deck, submit it to the Ansys LS-DYNA solver, and
 finally postprocess the results. 
 
 Overview
---------
+========
 In the PyDYNA installation, the ``docker`` directory has two child
 directories:
 
 - ``pre``: Provides the interface for creating DYNA input decks.
-   This service includes highly abstracted APIs for setting up
-   LSN-DYNA input decks. Included are DynaMech, DynaIGA, DynaICFD,
-   DynaSALE, DynaEM, and DynaAirbag.
+  This service includes highly abstracted APIs for setting up
+  LSN-DYNA input decks. Included are DynaMech, DynaIGA, DynaICFD,
+  DynaSALE, DynaEM, and DynaAirbag.
 - ``solver``: Contains the code for interfacing directly with
   the Ansys LS-DYNA solver. Because LS-DYNA is primarily a batch
   solver with very limited interactive capabilities, the code in
@@ -23,7 +23,7 @@ directories:
   input files to the container, start LS-DYNA and monitor its progress,
   and then retrieve results (RST) files.
 
-Once you have results, you can use the Data Processing Framework (DPF),
+Once you have results, you can use the Ansys Data Processing Framework (DPF),
 which is designed to provide numerical simulation users and engineers
 with a toolbox for accessing and transforming simulation data. DPF
 can access data from Ansys solver result files and from several
@@ -74,7 +74,7 @@ For more information, see Python's
 PyDYNA has three installation modes: user, developer, and offline.
 
 Install in user mode
-^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~
 
 Before installing PyDYNA in user mode, make sure you have the latest version of
 `pip`_ with this command:
@@ -105,7 +105,7 @@ Then, install PyDYNA with this command:
         pip install ansys-dyna-core --index-url=https://${PRIVATE_PYPI_ACCESS_TOKEN}@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/
 
 Install in developer mode
-^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Installing PyDYNA in developer mode allows you to modify the source and enhance it.
 
@@ -123,11 +123,12 @@ Start by cloning and installing the repository with these commands:
    pip install -e .
 
 Install in offline mode
-^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~
+
 If you lack an internet connection on your installation machine (or you do not have access
 to the private Ansys PyPI packages repository), you should install PyDYNA by downloading
 the wheelhouse archive for your corresponding machine architecture from the
-`Releases Page <https://github.com/pyansys/pydyna/releases>`_ .
+`Releases Page <https://github.com/pyansys/pydyna/releases>`_.
 
 Each wheelhouse archive contains all the Python wheels necessary to install
 PyDYNA from scratch on Windows and Linux for Python 3.8 through 3.11. You can install

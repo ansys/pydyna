@@ -1,11 +1,11 @@
 Build the Docker image for the ``pre`` service
-==============================================
+----------------------------------------------
 
 You must build the Docker image for the PyDNA ``pre`` service and then
 run the image as a container.
 
 Prerequisites
--------------
+~~~~~~~~~~~~~
 
 * Ensure that you have cloned the PyDYNA repository locally with these commands:
 
@@ -28,7 +28,7 @@ Prerequisites
 
 
 Build the Docker image
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 Once all prerequisites are met, perform these steps to build the Docker image:
 
@@ -57,7 +57,8 @@ Once all prerequisites are met, perform these steps to build the Docker image:
 
 
 Run the image as a container
-----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Perform these steps to run the image as a container:
 
 #. Run this Docker command:
