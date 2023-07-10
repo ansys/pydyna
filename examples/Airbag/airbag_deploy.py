@@ -33,7 +33,7 @@ from ansys.dyna.core.pre.dynamech import (
 # Manually start the ``pre`` service
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Copy the ``pyDyna/src/ansys/dyna/core/pre/Server``folder to a desired location.
-# Start the ``pre``service at this location by running this command:
+# Start the ``pre`` service at this location by running this command:
 #
 # ``python kwserver.py``
 #
@@ -66,7 +66,7 @@ airbag_solution.open_files(fns)
 # Create standard explicit control cards
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # This code uses the ``set_termination`` method to set the termination time
-# to ``0.03`` in ``*CONTROL_TERMINATION*``. The ``DynaMech`` class
+# to ``0.03`` in *CONTROL_TERMINATION*. The ``DynaMech`` class
 # automatically generates the common control cards used in
 # explicit problems. ``CONTROL_ACCURACY``, ``CONTACT``, ``BULK VISCOCITY``,
 # and ``CONTACT``are all automatically generated.

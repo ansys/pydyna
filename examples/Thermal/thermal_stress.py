@@ -2,10 +2,15 @@
 Thermal stress example
 ======================
 
-This example show how to create a thermal stress model with Pydyna-pre module. \n
-LS-DYNA version : ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
-"""
+This example shows how to create a thermal stress model with the PyDYNA ``pre`` service.
+The executable file for LS-DYNA is ``ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe``.
 
+"""
+###############################################################################
+# Perform required imports
+# ~~~~~~~~~~~~~~~~~~~~~~~~
+# Peform required imports.
+#
 import os
 import sys
 
@@ -24,35 +29,43 @@ from ansys.dyna.core.pre.dynamaterial import MatElasticPlasticThermal
 from ansys.dyna.core.pre import examples
 # sphinx_gallery_thumbnail_path = '_static/pre/thermal/thermal.png'
 ###############################################################################
-# Manually start the dyna.core.pre server
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Copy the folder pyDyna/src/ansys/dyna/core/pre/Server to a desired location
-# Start the dyna.core.pre server at this location as shown below
+# Manually start the ``pre`` service
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Copy the ``pyDyna/src/ansys/dyna/core/pre/Server``folder to a desired location.
+# Start the ``pre`` service at this location by running this command:
 #
-# python kwserver.py
+# ``python kwserver.py``
 #
-# Now the pre server is up and running and is waiting to be connected to the client
-# Connect to the server using the hostname and the port. In this example, default
-# "localhost" and port "50051" are used
+# Once the ``pre`` servic is running, you can connect a client to it using
+# the hostname and the port. This example uses the default local host and port
+# (``"localhost"`` and ``"50051"`` respectively).
+#
 hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
 solution = DynaSolution(hostname)
+
 ###############################################################################
-# Start the Solution workflow
+# Start the solution workflow
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# NODES and ELEMENTS are read in from the "thermal_stress.k" file. This file also has the
-# *PART* defined in it but the section and material fields are empty to begin with
+# NODES and ELEMENTS are read in from the ``thermal_stress.k`` file. This file also has the
+# *PART* defined in it, but the section and material fields are empty to begin with.
 fns = []
 path = examples.thermal_stress + os.sep
 fns.append(path + "thermal_stress.k")
 solution.open_files(fns)
+
 ###############################################################################
-# Setting simulation termination time
+# Set simulation termination time
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Set the simulation termination time.
+#
 solution.set_termination(3.0)
+
 ###############################################################################
-# To invoke the transient thermal solver, the thermal analysis type in CONTROL_SOLUTION is
-# being set to 2 by ThermalAnalysisType.TRANSIENT.
+# To invoke the transient thermal solver, set the thermal analysis type for
+# ``CONTROL_SOLUTION`` to 2 by ``ThermalAnalysisType.TRANSIENT``.
+#
 ts = DynaMech(analysis=AnalysisType.EXPLICIT)
 solution.add(ts)
 
@@ -62,11 +75,15 @@ tanalysis.set_solver(analysis_type=ThermalAnalysisType.TRANSIENT)
 ts.add(tanalysis)
 
 ts.set_timestep(timestep_size_for_mass_scaled=0.01)
+
 ###############################################################################
-# Material and Section
-# ~~~~~~~~~~~~~~~~~~~~
-# MAT_4 is defined here which can have temperature dependent material properties. Specific heat, thermal conductivity and
-# the thermal generation rate are defined in MAT_THERMAL_ISOTROPIC and associated with the same part.
+# Define material and section properties
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Define the ``MAT_4`` material, which can have temperature-dependent
+# properties. For the ``MAT_THERMAL_ISOTROPIC`` property, which is associated
+# with the same part, define the specific heat, thermal conductivity, and thermal
+# generation rate.
+#
 mat = MatElasticPlasticThermal(
     mass_density=1.0,
     temperatures=(0,10,20,30,40,50),
@@ -83,13 +100,18 @@ slab.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
 ts.parts.add(slab)
 
 ###############################################################################
-# Initial Condition
-# ~~~~~~~~~~~~~~~~~
-# Nodes 1 through 8 are initialized with a temperature of 10 deg
+# Set initial conditions
+# ~~~~~~~~~~~~~~~~~~~~~~~
+# Initialize nodes 1 through 8 with a temperature of 10 degrees.
+#
 for i in range(1,9):
     ts.initialconditions.create_temperature(NodeSet([i]),temperature=10)
+
 ###############################################################################
-# Output frequencies are defined and the input file is saved to disk.
+# Define output frequencies and save input file
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Define output frequencies and save the input file to disk.
+#
 solution.set_output_database(glstat=0.03)
 solution.create_database_binary(dt=0.01)
 solution.save_file()

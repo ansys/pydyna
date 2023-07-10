@@ -1,10 +1,14 @@
 """
-Implicit Example
-=====================
+Implicit model
+==============
+This example shows how to create and use an implicit dynamic roof crush model.
 
-This example demonstrates how to create an Implicit Dynamic Roof Crush model.
 """
-
+###############################################################################
+# Perform required imports
+# ~~~~~~~~~~~~~~~~~~~~~~~~
+# Peform required imports.
+#
 import os
 import sys
 
@@ -37,25 +41,28 @@ from camry_rc_data import *
 from ansys.dyna.core.pre import examples
 
 ###############################################################################
-# Manually start the dyna.core.pre server
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Copy the folder pyDyna/src/ansys/dyna/core/pre/Server to a desired location
-# Start the dyna.core.pre server at this location as shown below
+# Manually start the ``pre`` service
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Copy the ``pyDyna/src/ansys/dyna/core/pre/Server``folder to a desired location.
+# Start the ``pre`` service at this location by running this command:
 #
-# python kwserver.py
+# ``python kwserver.py``
 #
-# Now the pre server is up and running and is waiting to be connected to the client
-# Connect to the server using the hostname and the port. In this example, default
-# "localhost" and port "50051" are used
+# Once the ``pre`` servic is running, you can connect a client to it using
+# the hostname and the port. This example uses the default local host and port
+# (``"localhost"`` and ``"50051"`` respectively).
+#
 hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
 camry_solution = DynaSolution(hostname)
 
 ###############################################################################
-# Import the initial mesh data(nodes and elements)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Mesh data is imported which includes the vehicle data, weld data and the platen data
+# Import the initial mesh data (nodes and elements)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Import the mesh data, which includes the vehicle data, weld data, and
+# platen data.
+#
 fns = []
 path = examples.camry_rc + os.sep
 fns.append(path + "Camry_RC_main.k")
@@ -68,47 +75,53 @@ fns.append(path + "xtra_sw.k")
 camry_solution.open_files(fns)
 
 ###############################################################################
-# Define global Control Cards
+# Define global control cards
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Roof crush being a quasi-static loading case, we need to run this as an implicit
-# dynamic solution. The following few lines are used to define these cards.
-# Termination time and the frequency for the database ascii options are set from
-# from within the Dynasolution class.
+# Because roof crush is a quasi-static loading case, you must run this model
+# as an implicit dynamic solution. Define the global control cards. From
+# the ``dynasolution`` class, set the termination time and the frequency for
+# the database ASCII options.
+#
 camry_solution.set_termination(10)
 
 ###############################################################################
-# We can then use the implicit analysis methods in DynaMech class to define
-# the IMILICIT control cards.
+# Use the implicit analysis methods in the ``dynamech`` class to define
+# the IMPLICIT control cards.
+#
 camry = DynaMech(analysis=AnalysisType.EXPLICIT)
 camry_solution.add(camry)
 
 ###############################################################################
-# Below we are setting the Automatic timestep control flag
-# and the optimal equilibrium iteration count per timestep
+# Set the automatic timestep control flag
+# and the optimal equilibrium iteration count per timestep.
+#
 camry.implicitanalysis.set_initial_timestep_size(0.1)
 camry.implicitanalysis.set_timestep(
     control_flag=TimestepCtrol.AUTOMATICALLY_ADJUST_TIMESTEP_SIZE,
     Optimum_equilibrium_iteration_count=511,
 )
+
 ###############################################################################
-# set_dynamic method, sets the IMASS value to 1 and assigns the
-# gamma and beta value as define
+# Use the ``set_dynamic()`` method to set the IMASS value to 1 and assign the
+# gamma and beta values.
+#
 camry.implicitanalysis.set_dynamic(gamma=0.6, beta=0.38)
 ###############################################################################
-# If normal modes needs to be extracted, set_eigenvalue() function can be used.
-# selt_solution() method defines NSOLVR as 12 ( Nolinear with BFGS update)
+# If normal modes must be extracted, use the ``set_eigenvalue()`` method.
+# The ``set_solution()`` method defines NSOLVR as 12 (Nolinear with BFGS update).
+#
 camry.implicitanalysis.set_eigenvalue()
 camry.implicitanalysis.set_solution(iteration_limit=1,
     stiffness_reformation_limit=50, absolute_convergence_tolerance=-100
 )
 
-
 ###############################################################################
-# Material definitions
-# ~~~~~~~~~~~~~~~~~~~~
-# This model has 4 classes of material used . MAT_NULL, MAT_RIGID, MAT_SPOTWELD and
-# MAT_PIECEWISE_LINEAR_PLASTICITY. The dynamaterial class is used for these material
-# definitions
+# Define materials
+# ~~~~~~~~~~~~~~~~
+# This model uses four classes of material: ``MAT_NULL``, ``MAT_RIGID,``
+# ``MAT_SPOTWELD``, and ``MAT_PIECEWISE_LINEAR_PLASTICITY``. Use the ``dynamaterial``
+# class to define these materials.
+#
 matnull = MatNull(mass_density=6e-11)
 matrigid = MatRigid(mass_density=7.890e-09, young_modulus=2.100e05, poisson_ratio=0.3)
 matplaten = MatRigid(
@@ -188,14 +201,16 @@ plastic220_410 = MatPiecewiseLinearPlasticity(
 )
 
 ###############################################################################
-# Assigning Section and Material Properties
+# Assign section and material properties
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Once all the materials are explicitly defined, these material IDs needs to be cross-referenced
-# in the *PART* card. set_material() method is used for this. Since many parts share common materials
-# the assignment happens within a loop. While within the loop, set_element_formulation() method
-# is called to assign the elform for the beam and the shell elements. Accordingly either the beam
-# diameter or the shell thickness is also defined. To identify the part ID that has a particular material type
-# a predefined list is made available in the camry_rc_data.py file which is read in this script
+# Once all materials are explicitly defined, these material IDs must be cross-referenced
+# in the *PART* card. You use the ``set_material()`` method for this. Because many parts
+# share common materials, the assignment happens within a loop. Within the loop, the
+# ``set_element_formulation()`` method is called to assign the elform for the beam and
+# shell elements. Accordingly, either the beam diameter or the shell thickness is also
+# defined. To identify the part ID that has a particular material type, a predefined
+# list is made available in the ``camry_rc_data.py`` file, which is read in this script.
+#
 for bpart in beamparts:
     part = BeamPart(bpart[0])
     if part.id in [50000002]:
@@ -249,11 +264,12 @@ for spart in shellparts:
     camry.parts.add(part)
 
 ###############################################################################
-# Spotwelds and Nodal Rigid Bodies
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Again, camry_rc_data.py contains the predefined node pairs and node sets required for
-# *CONSTRAINED_SPOTWELD* and *CONSTRAINED_NODAL_RIGID_BODY* definitions. We are looping through
-# these lists to generate the appropriate keywords.
+# Generate keywords for spotwelds and nodal rigid bodies
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# The ``camry_rc_data.py`` contains the predefined node pairs and node sets
+# required for the *CONSTRAINED_SPOTWELD* and *CONSTRAINED_NODAL_RIGID_BODY*
+# definitions. Loop through these lists to generate the appropriate keywords.
+#
 for sw in spotweld:
     camry.constraints.create_spotweld(nodeid1=sw[0], nodeid2=sw[1])
 
@@ -261,18 +277,19 @@ for cnrb in cnrbs:
     camry.constraints.create_cnrb(nodeset=NodeSet(cnrb))
 
 ###############################################################################
-# Define Contacts
+# Define contacts
 # ~~~~~~~~~~~~~~~
-# There are three Contacts defined in this model.
+# There are three contacts defined in this model:
 #
-# 1. Automatic Single surface contact for the BIW self contact
-# 2. Surface to Surface Contact between the platen and the BIW
-# 3. Tied contact for the Spotweld beams
+# - Automatic single surface contact for the BIW self contact
+# - Surface-to-surface contact between the platen and the BIW
+# - Tied contact for the spotweld beams
 #
-# The ContactSurface() method here sets the SSTYPE and MSTYPE.
-# PartSet() method accepts the name of a list and converts it to *PART_SET_LIST*.
-# Notice how the contact type and category can be used to create the three
-# different type of contacts for this model.
+# Use the ``ContactSurface()`` method to set the SSTYPE and MSTYPE.
+# The ``PartSet()`` method accepts the name of a list and converts it to
+# *PART_SET_LIST*. Notice how the contact type and category can be used
+# to create the three different type of contacts for this model.
+#
 selfcontact = Contact(type=ContactType.AUTOMATIC)
 selfcontact.set_mortar()
 selfcontact.set_friction_coefficient(static=0.2)
@@ -305,9 +322,9 @@ camry.contacts.add(swcontact)
 ###############################################################################
 # Define SPC
 # ~~~~~~~~~~
-# boundaryconditions class can be used to defind both SPCs and prescribed motions
-# The bottom of the BIW is SPCed by selecting a few nodes. The prescribed motion is
-# assigned to the platen.
+# You can use the ``boundaryconditions`` class to define both SPCs and
+# prescribed motions. The bottom of the BIW is SPCed by selecting a few nodes.
+# The prescribed motion is then assigned to the platen.
 camry.boundaryconditions.create_spc(NodeSet(spc))
 
 crv = Curve(
@@ -326,10 +343,11 @@ camry.boundaryconditions.create_imposed_motion(
 )
 
 ###############################################################################
-# Define Database cards
-# ~~~~~~~~~~~~~~~~~~~~~
-# Finally define the fequency of output for the Binary and ASCII database outputs
-# and save the input file
+# Define database cards and save input file
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Define the fequency of output for the binary and ASCII database outputs
+# and save the input file.
+#
 camry_solution.create_database_binary(dt=0.001)
 camry_solution.set_output_database(
     elout=0.0001,
