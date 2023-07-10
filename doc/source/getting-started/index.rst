@@ -50,7 +50,7 @@ Offline installation
 If you lack an internet connection on your installation machine (or you do not have access
 to the private Ansys PyPI packages repository), you should install PyDYNA by downloading
 the wheelhouse archive for your corresponding machine architecture from the
-`Releases Page <https://github.com/pyansys/pydyna/releases>`_ .
+`Releases <https://github.com/pyansys/pydyna/releases>`_  page.
 
 Each wheelhouse archive contains all the Python wheels necessary to install
 PyDYNA from scratch on Windows and Linux for Python 3.8 through 3.11. You can install
