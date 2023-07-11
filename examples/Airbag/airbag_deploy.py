@@ -153,7 +153,7 @@ airbagmat = MatFabric(
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # The following code defines the sectional properties of the parts. This example
 # has three shell parts. Each shell part is initialized as ``ShellPart`` with a
-# unique ID and an appropriate shell formulation has been assigned. Again,
+# unique ID and an appropriate shell formulation is assigned. Again,
 # PyDYNA does not yet support all element formulations. You can find the
 # supported formulations in ``dynabase`` class.
 

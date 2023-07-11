@@ -5,9 +5,9 @@ In the PyDYNA installation, the ``docker`` directory has two child
 directories:
 
 - ``pre``: Provides the interface for creating DYNA input decks.
-   This service includes highly abstracted APIs for setting up
-   LSN-DYNA input decks. Included are DynaMech, DynaIGA, DynaICFD,
-   DynaSALE, DynaEM, and DynaAirbag.
+  This service includes highly abstracted APIs for setting up
+  LSN-DYNA input decks. Included are DynaMech, DynaIGA, DynaICFD,
+  DynaSALE, DynaEM, and DynaAirbag.
 - ``solver``: Contains the code for interfacing directly with
   the Ansys LS-DYNA solver. Because LS-DYNA is primarily a batch
   solver with very limited interactive capabilities, the code in

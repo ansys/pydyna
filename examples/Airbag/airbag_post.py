@@ -13,15 +13,15 @@ from ansys.dpf import core as dpf
 from ansys.dpf.core import examples
 
 ###############################################################################
-# Connect to DPF
-# ~~~~~~~~~~~~~~
-# Connect to DPF Server.
+# Connect to DPF Server
+# ~~~~~~~~~~~~~~~~~~~~~
+# Connect to the DPF Server.
 #
 dpf.connect_to_server()
 
 ###############################################################################
-# Load the model
-# ~~~~~~~~~~~~~~
+# Load model
+# ~~~~~~~~~~
 # Load the model and print the contents of the model. All parts in the model
 # are shell parts. Model information includes the result components and the
 # number of states available in the d3plot.
@@ -57,7 +57,7 @@ fields_top = shell_layer_extract.outputs.fields_container_as_fields_container() 
 ###############################################################################
 # Plot deformed state
 # ~~~~~~~~~~~~~~~~~~~
-# Plot the deformed state at 9ms.
+# Plot the deformed state at 9 ms.
 # 
 """ N = fields_top[19]
 D = model.results.displacement(time_scoping=[19]).eval()

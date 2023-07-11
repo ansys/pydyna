@@ -58,10 +58,10 @@ if len(sys.argv) > 1:
 camry_solution = DynaSolution(hostname)
 
 ###############################################################################
-# Import the initial mesh data (nodes and elements)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Import the mesh data, which includes the vehicle data, weld data, and
-# platen data.
+# Import initial mesh data
+# ~~~~~~~~~~~~~~~~~~~~~~~~
+# Import the initial mesh data (nodes and elements), which includes the
+# vehicle data, weld data, and platen data.
 #
 fns = []
 path = examples.camry_rc + os.sep
@@ -345,7 +345,7 @@ camry.boundaryconditions.create_imposed_motion(
 ###############################################################################
 # Define database cards and save input file
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Define the fequency of output for the binary and ASCII database outputs
+# Define the frequency of output for the binary and ASCII database outputs
 # and save the input file.
 #
 camry_solution.create_database_binary(dt=0.001)

@@ -1,7 +1,7 @@
 Build the Docker image for the ``pre`` service
 ==============================================
 
-You must build the Docker image for the PyDNA ``pre`` service and then
+You must build the Docker image for the PyDYNA ``pre`` service and then
 run the image as a container.
 
 Prerequisites
@@ -14,7 +14,7 @@ Prerequisites
    git clone https://github.com/pyansys/pydyna.git
    cd pydyna
 
-  The ``docker`` file in the the ``docker/pre`` directory is used to build the
+  The ``docker`` file in the  ``docker/pre`` directory is used to build the
   Linux-based Docker image.
   
 
@@ -36,9 +36,9 @@ Once all prerequisites are met, perform these steps to build the Docker image:
 #. Run the following Docker command, replacing ``<DOCKERFILE_NAME>``
    with ``Dockerfile`` and ``<DOCKER_IMAGE_TAG>`` with ``latest``.
 
-    .. code:: bash
+   .. code:: bash
 
-        docker build -t ghcr.io/ansys/ls-pre:<DOCKER_IMAGE_TAG> -f <DOCKERFILE_NAME> .
+       docker build -t ghcr.io/ansys/ls-pre:<DOCKER_IMAGE_TAG> -f <DOCKERFILE_NAME> .
 
 #. Check that the image has been built successfully by running this command:
 

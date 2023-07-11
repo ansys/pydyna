@@ -46,13 +46,13 @@ from ansys.dyna.core.pre import examples
 ###############################################################################
 # Manually start the ``pre`` service
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Copy the ``pyDyna/src/ansys/dyna/core/pre/Server``folder to a desired location.
-# Start the ``pre``service at this location by running this command:
+# Copy the ``pyDyna/src/ansys/dyna/core/pre/Server`` folder to a desired location.
+# Start the ``pre`` service at this location by running this command:
 #
 # ``python kwserver.py``
 #
 # Once the ``pre`` servic is running, you can connect a client to it using
-# the hostname and the port. This example uses the default local host and port
+# the host name and the port. This example uses the default local host and port
 # (``"localhost"`` and ``"50051"`` respectively).
 #
 hostname = "localhost"
@@ -89,8 +89,8 @@ dummy.set_timestep(tssfac=0.8)
 dummy.set_init_velocity(Velocity(14.8, 0, 0))
 
 ###############################################################################
-# Define materials for the model
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Define materials
+# ~~~~~~~~~~~~~~~~
 # In this model, many parts share common material types. Thus, these materials
 # are generated in a loop and a list of these materials are created. This list
 # can then be used later to assign materials to parts. The ``dynamaterials`` class
@@ -131,12 +131,12 @@ for i in range(185, 209):
     discmatlist.append(mat)
 
 ###############################################################################
-# Define section properties and assign appropriate materials
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Define section properties and assign materials
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Now that you have a list of materials with the material ID corresponding to
 # the Part ID, you can loop through the list and assign these materials to the
-# parts. While in the loop, the section properties, element formulations, and
-# constraints are also defined.
+# parts. While in the loop, also define the section properties, element
+# formulations, and constraints.
 #
 for i in range(1, 23):
     part = ShellPart(i)
@@ -174,7 +174,7 @@ for i in range(11):
 ###############################################################################
 # Define spherical joints
 # ~~~~~~~~~~~~~~~~~~~~~~~
-# A spherical joint is one of the simpler joint types which. You need only define
+# A spherical joint is one of the simpler joint types. You need only define
 # a coincident node pair. Read the node pairs from the ``jointlist`` array defined in
 # the ``belted_dummy_data.py`` file.
 #
@@ -200,8 +200,8 @@ dummy.boundaryconditions.create_imposed_motion(
     scalefactor=-1,
 )
 ###############################################################################
-# Define the gravity
-# ~~~~~~~~~~~~~~~~~~
+# Define gravity
+# ~~~~~~~~~~~~~~
 # Use the ``Gravity()`` method in the ``dynabase`` class
 # to define the gravity load, direction of the load, and the curve.
 # 
