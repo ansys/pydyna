@@ -69,9 +69,9 @@ Perform these steps to run the image as a container:
   
 #. Run this Docker command:
  
-  .. code:: bash
+   .. code:: bash
 
-     docker-compose up
+      docker-compose up
 
 #. Check that the image is running successfully.   
 
