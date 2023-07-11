@@ -89,7 +89,7 @@ class StructuredMesh:
             List of values having different definitions for different options.
             The default is ``[0, 0, 0, 0, 0]``.
         in_out : int, optional
-            Flat for whether to fill inside or outside of the geometry. The
+            Flag for whether to fill inside or outside of the geometry. The
             default is ``INSIDE_THE_GEOMETRY``.
         vid : int, optional
             Flag for assigning the initial velocity to the material filling the domain.
