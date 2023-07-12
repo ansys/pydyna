@@ -19,7 +19,7 @@ Prerequisites
 * Download the latest release artifacts for the Linux
   Docker container. You can do this as follows:
 
-  * Latest Linux artifacts: `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.2.1/mppdyna_docker_centos7.zip>`_
+  * Latest Linux artifacts: `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/tag/v0.3.1/mppdyna_docker_centos7.zip>`_
 
 * Move these ``.zip`` files to a local directory ``local_image_build_dir``.
 
@@ -56,7 +56,7 @@ Run the image as a container
  
   .. code:: bash
 
-     docker-compose up
+     docker compose up
 
 * Check that the image has been created successfully.   
 
