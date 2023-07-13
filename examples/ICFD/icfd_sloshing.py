@@ -2,8 +2,9 @@
 Sloshing
 ========
 
-This example shows how to directly impose a displacement of the entire volume mesh through the use of the keyword ICFD_CONTROL_IMPOSED_MOVE.\n
-LS-DYNA version : ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
+This example shows how to directly impose a displacement of the entire volume mesh
+through the use of the ``ICFD_CONTROL_IMPOSED_MOVE`` keyword. The executable file
+for LS-DYNA is ``ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe``.
 """
 
 import os

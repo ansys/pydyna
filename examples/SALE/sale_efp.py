@@ -1,9 +1,9 @@
 """
-EFP Concrete Target
+EFP concrete target
 ===================
 
-This example demonstrates how to create a SALE input deck. \n
-LS-DYNA version : ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
+This example shows how to create a S-ALE input deck.
+The executable file for LS-DYNA is ``ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe``.
 """
 
 import os

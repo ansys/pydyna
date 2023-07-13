@@ -1,28 +1,30 @@
-Create your own pydyna-pre service docker container
-===================================================
+Build the Docker image for the ``pre`` service
+==============================================
 
-The pydyna-pre service Docker containers can be easily built by following
-these steps.
-
-Inside this folder, the instructions (i.e. ``Dockerfile`` files) for
-building the pydyna-pre service Docker containers are made available. 
-
-* ``Dockerfile``: this file builds the Linux-based Docker image.
+You must build the Docker image for the PyDYNA ``pre`` service and then
+run the image as a container.
 
 Prerequisites
-^^^^^^^^^^^^^
+-------------
 
-* Ensure that ``docker`` is installed in your machine.
-  If you do not have ``docker`` available, please refer to the
-  `official Docker site <https://www.docker.com>`_.
-  Note that the container can also be started on Windows if the Docker Desktop has been installed.
-  How to install the Docker Desktop: https://docs.docker.com/desktop/install/windows-install/
+* Ensure that you have cloned the PyDYNA repository locally with these commands:
 
-* Download the latest release artifacts. You can do this as follows:
+  .. code:: console
 
-  * Latest Linux artifacts: `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.1/linux-binaries.zip>`_
+   git clone https://github.com/pyansys/pydyna.git
+   cd pydyna
 
-* Move these ``.zip`` files to the current location (i.e. ``<repository-root-folder>/docker/pre``).
+  The ``docker`` file in the  ``docker/pre`` directory is used to build the
+  Linux-based Docker image.
+  
+
+* Ensure that Docker is installed on your machine. If you do not have Docker installed,
+  see the `Docker website <https://www.docker.com>`_ for more information.
+
+* Download the latest Linux release artifacts for the Linux Docker container:
+  `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.1/linux-binaries.zip>`_.
+
+* Move these ZIP files to the current location (``<repository-root-folder>/docker``).
 
 Starting the docker container
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -30,65 +32,69 @@ Starting the docker container
 There are two ways to start docker container.
 
 1.bulid image and run container
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-Building the Docker images
-::::::::::::::::::::::::::
 
-In order to build your images, follow the next instructions:
+Build the Docker image
+::::::::::::::::::::::
 
-* Locate yourself at ``<repository-root-folder>/docker/pre`` in your terminal.
-* Run the following Docker command:
+Once all prerequisites are met, perform these steps to build the Docker image:
 
-  .. code:: bash
+#. In your terminal, go to the ``docker`` directory.
+#. Run the following Docker command, replacing ``<DOCKERFILE_NAME>``
+   with ``Dockerfile`` and ``<DOCKER_IMAGE_TAG>`` with ``latest``.
 
-     docker build -t ghcr.io/ansys/ls-pre:<DOCKER_IMAGE_TAG> -f <DOCKERFILE_NAME> .
+   .. code:: bash
 
-  Bear in mind that you will need to substitute the following entries in the previous command:
+       docker build -t ghcr.io/ansys/ls-pre:<DOCKER_IMAGE_TAG> -f <DOCKERFILE_NAME> .
 
-  * ``<DOCKERFILE_NAME>``: this will be ``Dockerfile``
-  * ``<DOCKER_IMAGE_TAG>``: this will be ``latest`` 
+#. Check that the image has been built successfully by running this command:
 
-* Check that the image has been created successfully. You should see an output similar
-  to this one when running the following command:
+   .. code:: bash
 
-  .. code:: bash
+       docker images
 
-     docker images
 
-     >>> REPOSITORY                                               TAG                                IMAGE ID       CREATED          SIZE
-     >>> ghcr.io/ansys/ls-pre                                     *******-latest                     ............   X seconds ago    188MB
-     >>> ......                                                   ......                             ............   ..............   ......
+   Your output should look similar to this:
+
+   .. code:: bash
+ 
+       >>> REPOSITORY                                               TAG                                IMAGE ID       CREATED          SIZE
+       >>> ghcr.io/ansys/ls-pre                                     *******-latest                     ............   X seconds ago    188MB
+       >>> ......                                                   ......                             ............   ..............   ......
+
 
 Run the image as a container
 ::::::::::::::::::::::::::::
 
-* Run the following Docker command:
+Perform these steps to run the image as a container:
+
+#. Run this Docker command:
  
-  .. code:: bash
+   .. code:: bash
 
-     docker run -d -p 50051:50051 ghcr.io/ansys/ls-pre
+      docker run -d -p 50051:50051 ghcr.io/ansys/ls-pre 
 
-* Check that the image has been created successfully.   
+#. Check that the image is running successfully.
 
+   Your output should look similar to this:
 
-.. code:: bash
-
+   .. code:: bash
 
      >>> CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                                           NAMES
      >>> c77ffd67f9fa   ghcr.io/ansys/ls-pre   "python3 ./linux-bin…"   7 seconds ago   Up 7 seconds   0.0.0.0:50051->50051/tcp, :::50051->50051/tcp   hardcore_margulis
 	 
 	 
 2.Start the container from docker-compose.yml file
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 	 
 Make sure the docker compose have been installed on your computer.
 For more information: https://docs.docker.com/compose/install/
+Ensure that Docker compose is installed on your machine. If you do not have Docker compose installed,
+see the `Docker website <https://docs.docker.com/compose/install/>`_ for more information.
 
 * Locate yourself at ``<repository-root-folder>/docker/pre`` in your terminal.
-* Run the following Docker command:
+* Run this Docker command:
 
   .. code:: bash
 
      docker compose up -d
-     
