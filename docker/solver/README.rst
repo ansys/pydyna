@@ -1,67 +1,81 @@
-Create your own pydyna-solver service docker container
-::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Build the Docker image for the ``solver`` service
+=================================================
 
-The pydyna-solver service Docker containers can be easily built by following
-these steps.
-
-* ``docker/solver/Dockerfile``: this file builds the Linux-based Docker image.
+You must build the Docker image for the PyDNA ``solver`` service and then
+run the image as a container.
 
 Prerequisites
-^^^^^^^^^^^^^
+-------------
 
-* Ensure that ``docker`` is installed in your machine.
-  If you do not have ``docker`` available, please refer to the
-  `official Docker site <https://www.docker.com>`_.
+* Ensure that you have cloned the PyDYNA repository locally with these commands:
 
-* If you are building the image on Windows, you will need to have 
-  Windows Subsystem for Linux (WSL) installed. The instructions for that can be found `here <https://learn.microsoft.com/en-us/windows/wsl/install>`
+  .. code:: console
+
+   git clone https://github.com/pyansys/pydyna.git
+   cd pydyna
+
+  The ``docker`` file in the the ``docker/solver`` directory is used to build the
+  Linux-based Docker image.
+
+* Ensure that Docker is installed on your machine. If you do not have Docker installed,
+  see the `Docker website <https://www.docker.com>`_ for more information.
+
+* If you are building the image on Windows, ensure that the Windows Subsystem for Linux (WSL)
+  is installed. For installation information, see Microsoft's
+  `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
+
+* Download the latest Linux release artifacts for the Linux Docker container:
+  `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.2.1/mppdyna_docker_centos7.zip>`_.
+
+* Move these ZIP files to a a local directory ``local_image_build_dir``. 
+
+
+Build the Docker image
+----------------------
+
+Once all prerequisites are met, perform these steps to build the Docker image:
+
+#. In your terminal, go to the ``local_image_build_dir`` directory.
+#. Run this Docker command:
+
+   .. code:: bash
   
-* Download the latest release artifacts for the Linux
-  Docker container. You can do this as follows:
+      ./do_build 
 
-  * Latest Linux artifacts: `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.2.1/mppdyna_docker_centos7.zip>`_
+#. Check that the image has been built successfully by running this command:
 
-* Move these ``.zip`` files to a local directory ``local_image_build_dir``.
+   .. code:: bash
 
-Building the Docker images
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+       docker images
 
-In order to build your images, follow the next instructions:
 
-* cd to ``local_image_build_dir``.
-* Run the following Docker command:
+   Your output should look similar to this:
 
-  .. code:: bash
-  
-     ./do_build 
+   .. code:: bash
 
-* Check that the image has been created successfully. You should see an output similar
-  to this one when running the following command:
+       >>> REPOSITORY                        TAG                                        IMAGE ID       CREATED          SIZE
+       >>> dyna_solver_v04                   latest                                     defbadbeee8e   16 minutes ago   730MB
+       >>> ......                                                   ......                             ............   ..............   ......
 
-  .. code:: bash
-
-     docker images
-
-     >>> REPOSITORY                        TAG                                        IMAGE ID       CREATED          SIZE
-     >>> dyna_solver_v04                   latest                                     defbadbeee8e   16 minutes ago   730MB
-     >>> ......                                                   ......                             ............   ..............   ......
 
 Run the image as a container
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
-* Edit the docker-compose.yml file and replace ``<license_server_name>`` with the correct license server hosting the DYNA license.
-  If you are using Ansy Flexlm license 
+Perform these steps to run the image as a container:
+
+#. In the ``docker-compose.yml`` file, replace ``<license_server_name>`` with the correct
+   license server hosting the DYNA license.
+   If you are using Ansy Flexlm license 
   
-* Run the following Docker command:
+#. Run this Docker command:
  
-  .. code:: bash
+   .. code:: bash
 
-     docker-compose up
+      docker-compose up
 
-* Check that the image has been created successfully.   
+#. Check that the image is running successfully.   
 
+   .. code:: bash
 
-.. code:: bash
-
-     >>> CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS         PORTS                            NAMES
-     >>> be84c95db31d   dyna_solver_v04   "/ansys_inc/server.p…"   18 minutes ago   Up 8 seconds   22/tcp, 0.0.0.0:5000->5000/tcp   mppdyna_docker_centos7_dyna_1
+       >>> CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS         PORTS                            NAMES
+       >>> be84c95db31d   dyna_solver_v04   "/ansys_inc/server.p…"   18 minutes ago   Up 8 seconds   22/tcp, 0.0.0.0:5000->5000/tcp   mppdyna_docker_centos7_dyna_1

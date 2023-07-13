@@ -1,4 +1,4 @@
 Thermal examples
 ~~~~~~~~~~~~~~~~
 
-These examples show how to create thermal model.
+These examples show how to create and use thermal models.

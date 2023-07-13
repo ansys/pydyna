@@ -2,7 +2,7 @@
 Mechanical API
 ==============
 
-Module to setup Explicit or Implicit analysis
+Module for setting up explicit or implicit analysis.
 """
 
 from .dynabase import *  # noqa : F403
@@ -15,7 +15,7 @@ class AnalysisType(Enum):
 
 
 class DynaMech(DynaBase):
-    """Define an Mechanical analysis."""
+    """Defines a Mechanical analysis."""
 
     def __init__(self, analysis=AnalysisType.EXPLICIT):
         DynaBase.__init__(self)
@@ -27,44 +27,49 @@ class DynaMech(DynaBase):
 
         Parameters
         ----------
-        npopt : int
-            Print suppression during input phase flag for the d3hsp file:
-            EQ.0: No suppression.
-            EQ.1: Nodal coordinates, element connectivities, rigid wall definitions,
-            nodal SPCs, initial velocities, initial strains, adaptive constraints, and
-            SPR2/SPR3 constraints are not printed.
-        neecho : int
-            Print suppression during input phase flag for echo file:
-            EQ.0: All data printed.
-            EQ.1: Nodal printing is suppressed.
-            EQ.2: Element printing is suppressed.
-            EQ.3: Both nodal and element printing is suppressed.
+        npopt : int, optional
+            Print suppression during the input phase flag for the D3HSP file.
+            The default is ``0``. Options are:
+
+            - EQ.0: No suppression.
+            - EQ.1: Nodal coordinates, element connectivities, rigid wall definitions,
+              nodal SPCs, initial velocities, initial strains, adaptive constraints, and
+              SPR2/SPR3 constraints are not printed.
+
+        neecho : int, optional
+            Print suppression during the input phase flag for the echo file.
+            The default is ``0``. Options are:
+
+            - EQ.0: All data is printed.
+            - EQ.1: Nodal printing is suppressed.
+            - EQ.2: Element printing is suppressed.
+            - EQ.3: Both nodal and element printing is suppressed.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateControlOutput(ControlOutputRequest(npopt=npopt, neecho=neecho))
         logging.info("Control Output Created...")
         return ret
 
     def set_init_velocity(self, translational=Velocity(0, 0, 0), rotational=RotVelocity(0, 0, 0)):
-        """Define initial nodal point velocities using nodal set ID.
+        """Define initial nodal point velocities using a nodal set ID.
 
         Parameters
         ----------
         nsid : int
             Nodal set ID.
         translational : Velocity
-            Initial translational velocity in x,y,z-direction.
+            Initial translational velocity in the x,y,z-direction.
         rotational : RotVelocity
             Initial rotational velocity about the x,y,z-axis.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         velocity = [
             translational.x,
@@ -86,20 +91,20 @@ class DynaMech(DynaBase):
         vid : int
             Orientation vector ID.
         iop : int
-            Option:
+            Options are:
 
-            * EQ.0: deflections/rotations are measured and forces/moments applied
+            - EQ.0: Deflections/rotations are measured and forces/moments are applied
               along the following orientation vector.
-            * EQ.1: deflections/rotations are measured and forces/moments applied
+            - EQ.1: Deflections/rotations are measured and forces/moments are applied
               along the axis between the two spring/damper nodes projected onto the plane normal
               to the following orientation vector.
-            * EQ.2: deflections/rotations are measured and forces/moments applied
+            - EQ.2: Deflections/rotations are measured and forces/moments are applied
               along a vector defined by the following two nodes.
-            * EQ.3: deflections/rotations are measured and forces/moments applied
+            - EQ.3: Deflections/rotations are measured and forces/moments are applied
               along the axis between the two spring/damper nodes projected onto the
               plane normal to the a vector defined by the following two nodes.
         vector : list [x,y,z]
-            x,y,z : x,y,z-value of orientation vector.
+            x,y,z : x,y,z-value of the orientation vector.
         node1 : int
             Node 1 ID.
         node2 : int
@@ -108,7 +113,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateDefineOrientation(
             DefineOrientationRequest(vid=vid, iop=iop, vector=vector, node1=node1, node2=node2)
@@ -122,18 +127,18 @@ class DynaMech(DynaBase):
         Parameters
         ----------
         option : string
-            Available options:<BLANK>,LIST,GENERAL
+            Available options. Choices are ``<BLANK>``,``LIST``, and ``GENERAL``.
         title : string
-            Define title for shell set.
+            Title for the shell set.
         sid : int
             Set ID.
         eids : list
-            Shell element IDs.
+            List of shell element IDs.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateShellSet(ShellSetRequest(option=option, title=title, sid=sid, eids=eids))
         logging.info("Shell Set Created...")
@@ -145,7 +150,7 @@ class DynaMech(DynaBase):
         Parameters
         ----------
         title : string
-            Define title for solid set.
+            Title for the set of solid elements.
         sid : int
             Set ID.
         ki : list
@@ -154,7 +159,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateSolidSet(SolidSetRequest(title=title, sid=sid, ki=ki))
         logging.info("Solid Set Created...")
@@ -166,9 +171,9 @@ class DynaMech(DynaBase):
         Parameters
         ----------
         title : string
-            Define title for section solid.
+            Title for section solid.
         secid : int
-            Section ID. SECID is referenced on the \*PART card.
+            Section ID. ``SECID`` is referenced on the ``\*PART`` card.
             A unique number must be specified.
         elform : int
             Element formulation options.
@@ -176,7 +181,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateSectionSolid(SectionSolidRequest(title=title, secid=secid, elform=elform))
         logging.info("Section Solid Created...")
@@ -189,27 +194,29 @@ class DynaMech(DynaBase):
         ----------
         secid : int
             Section ID.
-        dro : int
-            Displacement/Rotation Option:
-            EQ.0: the material describes a translational spring/damper,
-            EQ.1: the material describes a torsional spring/damper.
-        kd : float
-            Dynamic magnification factor.
-        v0 : float
-            Test velocity.
-        cl : float
-            Clearance.
-        fd : float
-            Failure deflection.
-        cdl : float
-            Deflection limit in compression.
-        cd1 : float
-            Deflection limit in tension.
+        dro : int, optional
+            Displacement/rotation. The default is ``0``. Options are:
+
+            - EQ.0: Material describes a translational spring/damper.
+            - EQ.1: Material describes a torsional spring/damper.
+
+        kd : float, optional
+            Dynamic magnification factor. The default is ``0``.
+        v0 : float, optional
+            Test velocity. The default is ``0``.
+        cl : float, optional
+            Clearance. The default is ``0``.
+        fd : float, optional
+            Failure deflection. The default is ``0``.
+        cdl : float, optional
+            Deflection limit in compression. The default is ``0``.
+        td1 : float, optional
+            Deflection limit in tension. The default is ``0``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateSectionDiscrete(
             SectionDiscreteRequest(secid=secid, dro=dro, kd=kd, v0=v0, cl=cl, fd=fd, cdl=cdl, tdl=tdl)
@@ -226,21 +233,21 @@ class DynaMech(DynaBase):
             Hourglass ID. A unique number or label must be specified.
         ihq : int
             Hourglass control type.
-        qm : float
-            Hourglass coefficient.
-        q1 : float
-            Quadratic bulk viscosity coefficient.
-        q2 : float
-            Linear bulk viscosity coefficient.
-        qb : float
-            Hourglass coefficient for shell bending.
-        qw : float
-            Hourglass coefficient for shell warping.
+        qm : float, optional
+            Hourglass coefficient. The default is ``0.1``.
+        q1 : float, optional
+            Quadratic bulk viscosity coefficient. The default is ``1.5``.
+        q2 : float, optional
+            Linear bulk viscosity coefficient. The default is ``0.06``.
+        qb : float, optional
+            Hourglass coefficient for shell bending. The default is ``1e-09``.
+        qw : float, optional
+            Hourglass coefficient for shell warping. The default is ``1e-09``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateHourglass(HourglassRequest(ghid=ghid, ihq=ihq, qm=qm, q1=q1, q2=q2, qb=qb, qw=qw))
         logging.info("Hourglass 1 Created...")
@@ -252,7 +259,7 @@ class DynaMech(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         if self.analysis == 1:
             self.set_accuracy(
@@ -314,31 +321,36 @@ class DynaMech(DynaBase):
 
 
 class Airbag:
-    """Define an airbag or control volume.
+    """Defines an airbag or control volume.
 
     Parameters
     ----------
-    Set : SegmentSet/PartSet
-        Set : EQ.0:segment EQ.1: part set ID.
-    heat_capacity_at_constant_volume : float
-        Heat capacity at constant volume.
-    heat_capacity_at_constant_pressure : float
-        Heat capacity at constant pressure.
-    input_gas_temperature : float
-        Temperature of input gas.
-    input_mass_flow_rate : int
-        Load curve ID specifying input mass flow rate.
-    shape_factor_for_exit_hole : float
-        Shape factor for exit hole.
-    ambient_pressure : float
-        Ambient pressure.
-    ambient_density : float
-        Ambient density.
+    Set : SegmentSet or PartSet
+        Set. Options are:
+
+        - EQ.0: Segment set ID.
+        - EQ.1: Part set ID.
+
+    heat_capacity_at_constant_volume : float, optional
+        Heat capacity at constant volume. The default is ``0``.
+    heat_capacity_at_constant_pressure : float, optional
+        Heat capacity at constant pressure. The default is ``0``.
+    input_gas_temperature : float, optional
+        Temperature of the input gas. The default is ``0``.
+    input_mass_flow_rate : int, optional
+        Load curve ID specifying the input mass flow rate.
+        The default is ``0``.
+    shape_factor_for_exit_hole : float, optional
+        Shape factor for exit hole. The default is ``0``.
+    ambient_pressure : float, optional
+        Ambient pressure. The default is ``0``.
+    ambient_density : float, optional
+        Ambient density. The default is ``0``.
 
     Returns
     -------
     bool
-        "True" when successful, "False" when failed.
+        ``True`` when successful, ``False`` when failed..
     """
 
     def __init__(
@@ -367,7 +379,7 @@ class Airbag:
             self.sidtyp = 1
 
     def create(self):
-        """Create airbag."""
+        """Create an airbag."""
         self.stub.CreateAirbagModel(
             AirbagModelRequest(
                 modeltype="SIMPLE_AIRBAG_MODEL",

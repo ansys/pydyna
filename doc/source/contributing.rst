@@ -1,18 +1,16 @@
-Contributing
-============
+Contribute
+==========
 
 Overall guidance on contributing to a PyAnsys repository appears in the
-`Contributing <https://dev.docs.pyansys.com/overview/contributing.html>`_ topic
-in the *PyAnsys Developer's Guide*. Ensure that you are thoroughly familiar
-with it and all `Guidelines and Best Practices <https://dev.docs.pyansys.com/guidelines/index.html>`_
-before attempting to contribute to PyDyna.
+`PyAnsys Developer's Guide <https://dev.docs.pyansys.com/>`_. Ensure that you
+are thoroughly familiar with this guide before attempting to contribute to PyDYNA.
 
-The following contribution information is specific to PyDyna.
+The following contribution information is specific to PyDYNA.
 
 Clone the repository
 --------------------
 
-To clone and install the latest PyDyna release in development mode, run:
+To clone and install the latest PyDYNA release in development mode, run this code:
 
 .. code::
 
@@ -25,44 +23,44 @@ To clone and install the latest PyDyna release in development mode, run:
 Post issues
 -----------
 
-Use the `PyDyna Issues <https://github.com/pyansys/pydyna/issues>`_
-page to submit questions, report bugs, and request new features. When possible, you
-should use these issue templates:
+Use the `PyDYNA Issues <https://github.com/pyansys/pydyna/issues>`_
+page to submit questions, report bugs, and request new features. When possible,
+use these issue templates:
 
 * Bug report template
 * Feature request template
 
-If your issue does not fit into these categories, create your own issue.
+If your issue does not fit into one of these template categories, create your own issue.
 
-To reach the PyAnsys team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
+To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
 
 View documentation
 ------------------
 
-Documentation for the latest stable release of PyDyna is hosted at
-`PyDyna Documentation <https://dyna.docs.pyansys.com>`_.
+Documentation for the latest stable release of PyDYNA is hosted at
+`PyDYNA documentation <https://dyna.docs.pyansys.com>`_.
 
-Documentation for the latest development version, which tracks the
-``main`` branch, is hosted at `Development PyDyna Documentation <https://dyna.docs.pyansys.com/dev/>`_.
-This version is automatically kept up to date via GitHub actions.
+In the upper right corner of the documentation’s title bar, there is an option
+for switching from viewing the documentation for the latest stable release to
+viewing the documentation for the development version or previously released versions.
 
-Code style
-----------
+Adhere to code style
+--------------------
 
-PyDyna follows the PEP8 standard as outlined in the `PyAnsys Development Guide
+PyDYNA follows the PEP8 standard as outlined in the `PyAnsys Developer's Guide
 <https://dev.docs.pyansys.com>`_ and implements style checking using
 `pre-commit <https://pre-commit.com/>`_.
 
-To ensure your code meets minimum code styling standards, run::
+To ensure your code meets minimum code styling standards, run these commands::
 
   pip install pre-commit
   pre-commit run --all-files
 
-You can also install this as a pre-commit hook by running::
+You can also install this as a pre-commit hook by running this command::
 
   pre-commit install
 
-This way, it is not possible for you to push code that fails the style checks. For example::
+This way, it is not possible for you to push code that fails the style checks::
 
   $ pre-commit install
   $ git commit -am "added my cool feature"

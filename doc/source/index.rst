@@ -1,4 +1,4 @@
-PyDyna documentation  |version|
+PyDYNA documentation  |version|
 ===============================
 
 .. include:: ../../README.rst
@@ -15,7 +15,7 @@ PyDyna documentation  |version|
        {% if build_api %}
        autoapi/index
        {% endif %}
-       contributing
        {% if build_examples %}
        examples/index
        {% endif %}
+       contributing

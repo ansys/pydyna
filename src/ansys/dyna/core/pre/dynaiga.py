@@ -2,7 +2,7 @@
 IGA API
 ==========
 
-Module to create IGA dyna input deck
+Module for creating an IGA DYNA input deck.
 """
 
 import logging
@@ -11,7 +11,7 @@ from .dynabase import *  # noqa : F403
 
 
 class DynaIGA(DynaBase):
-    """Contains methods to create keyword related to IGA."""
+    """Contains methods for creating a keyword related to IGA."""
 
     def __init__(self):
         DynaBase.__init__(self)
@@ -23,18 +23,19 @@ class DynaIGA(DynaBase):
         Parameters
         ----------
         secid : int
-            Section ID. SECID is referenced on the \*PART card. A unique number or label must be specified.
+            Section ID. ``SECID`` is referenced on the ``\*PART`` card.
+            A unique number or label must be specified.
         elform : int
             Element formulation.
         shrf : float
-            Shear correction factor which scales the transverse shear stress.
+            Shear correction factor, which scales the transverse shear stress.
         thickness : float
             Shell thickness.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateSectionIGAShell(
             SectionIGAShellRequest(secid=secid, elform=elform, shrf=shrf, thickness=thickness)
@@ -48,7 +49,7 @@ class DynaIGA(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         DynaBase.save_file(self)
         self.create_control_contact(rwpnal=1.0, ignore=1, igactc=1)
