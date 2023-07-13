@@ -1,12 +1,12 @@
 import os
-import urllib.request
 from threading import Lock
 from typing import Optional
 from urllib.parse import urljoin
+import urllib.request
 
 import ansys.meshing.prime.internals.defaults as defaults
 
-__all__ = ['DownloadManager']
+__all__ = ["DownloadManager"]
 
 
 class DownloadManagerMeta(type):
@@ -93,7 +93,7 @@ class DownloadManager(metaclass=DownloadManagerMeta):
 
         # check if it was able to create the dir
         if destination is not None and not os.path.isdir(destination):
-            raise ValueError('destination directory provided does not exist')
+            raise ValueError("destination directory provided does not exist")
 
         url = self._get_filepath_on_default_server(filename, *directory)
         local_path = self._retrieve_data(url, filename, dest=destination, force=force)
@@ -104,13 +104,13 @@ class DownloadManager(metaclass=DownloadManagerMeta):
 
     def _joinurl(self, base, *paths):
         for path in paths:
-            if base[-1] != '/':
-                base += '/'
+            if base[-1] != "/":
+                base += "/"
             base = urljoin(base, path)
         return base
 
     def _get_default_server_and_joiner(self):
-        return 'https://github.com/ansys/example-data/raw/master', self._joinurl
+        return "https://github.com/ansys/example-data/raw/master", self._joinurl
 
     def _get_filepath_on_default_server(self, filename: str, *directory: str):
         server, joiner = self._get_default_server_and_joiner()
