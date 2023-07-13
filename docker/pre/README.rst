@@ -22,13 +22,20 @@ Prerequisites
   see the `Docker website <https://www.docker.com>`_ for more information.
 
 * Download the latest Linux release artifacts for the Linux Docker container:
-  `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.2.1/linux-binaries.zip>`_.
+  `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.1/linux-binaries.zip>`_.
 
 * Move these ZIP files to the current location (``<repository-root-folder>/docker``).
 
+Starting the docker container
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+There are two ways to start docker container.
+
+1.bulid image and run container
+
 
 Build the Docker image
-----------------------
+::::::::::::::::::::::
 
 Once all prerequisites are met, perform these steps to build the Docker image:
 
@@ -57,7 +64,7 @@ Once all prerequisites are met, perform these steps to build the Docker image:
 
 
 Run the image as a container
-----------------------------
+::::::::::::::::::::::::::::
 
 Perform these steps to run the image as a container:
 
@@ -65,7 +72,7 @@ Perform these steps to run the image as a container:
  
    .. code:: bash
 
-      docker run -d -p 50051:50051 ghcr.io/ansys/ls-pre .
+      docker run -d -p 50051:50051 ghcr.io/ansys/ls-pre 
 
 #. Check that the image is running successfully.
 
@@ -73,5 +80,21 @@ Perform these steps to run the image as a container:
 
    .. code:: bash
 
-       >>> CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                                           NAMES
-       >>> c77ffd67f9fa   ghcr.io/ansys/ls-pre   "python3 ./linux-bin…"   7 seconds ago   Up 7 seconds   0.0.0.0:50051->50051/tcp, :::50051->50051/tcp   hardcore_margulis
+     >>> CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                                           NAMES
+     >>> c77ffd67f9fa   ghcr.io/ansys/ls-pre   "python3 ./linux-bin…"   7 seconds ago   Up 7 seconds   0.0.0.0:50051->50051/tcp, :::50051->50051/tcp   hardcore_margulis
+	 
+	 
+2.Start the container from docker-compose.yml file
+
+	 
+Make sure the docker compose have been installed on your computer.
+For more information: https://docs.docker.com/compose/install/
+Ensure that Docker compose is installed on your machine. If you do not have Docker compose installed,
+see the `Docker website <https://docs.docker.com/compose/install/>`_ for more information.
+
+* Locate yourself at ``<repository-root-folder>/docker/pre`` in your terminal.
+* Run this Docker command:
+
+  .. code:: bash
+
+     docker compose up -d

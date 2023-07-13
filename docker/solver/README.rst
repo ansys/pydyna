@@ -25,7 +25,7 @@ Prerequisites
   `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
 
 * Download the latest Linux release artifacts for the Linux Docker container:
-  `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.2.1/mppdyna_docker_centos7.zip>`_.
+  `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/tag/v0.3.1/mppdyna_docker_centos7.zip>`_.
 
 * Move these ZIP files to a a local directory ``local_image_build_dir``. 
 
@@ -71,7 +71,7 @@ Perform these steps to run the image as a container:
  
    .. code:: bash
 
-      docker-compose up
+      docker compose up
 
 #. Check that the image is running successfully.   
 
