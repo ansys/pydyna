@@ -1,8 +1,8 @@
 """
 Solution
-==========
+========
 
-Top object to setup a Dyna Solution
+Module for providing the top object that sets up a DYNA solution.
 """
 
 import logging
@@ -21,7 +21,13 @@ CHUNK_SIZE = 1024 * 1024
 
 
 def init_log(log_file):
-    """Initial log file."""
+    """Initialize a log file.
+
+    Parameters
+    ----------
+    log_file : str
+        Name of the log file.
+    """
     if not logging.getLogger().handlers:
         logging.basicConfig(
             level=logging.DEBUG,
@@ -38,7 +44,15 @@ def init_log(log_file):
 
 
 class DynaSolution:
-    """Contains methods to create general LS-DYNA keyword."""
+    """Contains methods for creating a general LS-DYNA keyword.
+
+    Parameters
+    ----------
+    hostname : str, optional
+       Host name. The default is ``"localhost"``.
+    port : str, optional
+       Port. the default is ``"50051"``.
+    """
 
     def __init__(self, hostname="localhost", port="50051"):
         # launch server
@@ -73,7 +87,13 @@ class DynaSolution:
 
     @staticmethod
     def grpc_local_server_on() -> bool:
-        """Check if the server is launched locally."""
+        """Check if the server is launched locally.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+        """
         channel = grpc.insecure_channel("localhost:50051")
         try:
             grpc.channel_ready_future(channel).result(timeout=5)
@@ -82,15 +102,27 @@ class DynaSolution:
         return True
 
     def get_stub():
-        """Get the stub of this Solution object."""
+        """Get the stub of the solution object."""
         return DynaSolution.stub
 
     def add(self, obj):
-        """Add case in the solution."""
+        """Add a case in the solution.
+
+        Parameters
+        ----------
+        obj :
+
+        """
         self.object_list.append(obj)
 
     def get_file_chunks(self, filename):
-        """Get file chunks."""
+        """Get file chunks.
+
+        Parameters
+        ----------
+        filename : str
+            Name of the file.
+        """
         with open(filename, "rb") as f:
             while True:
                 piece = f.read(CHUNK_SIZE)
@@ -99,12 +131,28 @@ class DynaSolution:
                 yield Chunk(buffer=piece)
 
     def upload(self, stub_, filename):
-        """Upload files to server."""
+        """Upload files to the server.
+
+        Parameters
+        ----------
+        stub_ :
+        filename : str
+            Name of the file.
+
+        """
         chunks_generator = self.get_file_chunks(filename)
         response = stub_.Upload(chunks_generator)
 
     def download(self, remote_name, local_name):
-        """Download files from server."""
+        """Download files from the server.
+
+        Parameters
+        ----------
+        stub_ :
+        remote_name :
+        local_name :
+
+        """
         response = self.stub.Download(DownloadRequest(url=remote_name))
         with open(local_name, "wb") as f:
             for chunk in response:
@@ -116,12 +164,12 @@ class DynaSolution:
         Parameters
         ----------
         filenames : list
-            filenames[0] is the main file,the others are subfile.
+            List of filenames. The main file is ``[0]``. The others are subfiles.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         splitfiles = os.path.split(filenames[0])
         path = splitfiles[0]
@@ -135,7 +183,7 @@ class DynaSolution:
         return self.stub.LoadFile(LoadFileRequest())
 
     def set_termination(self, termination_time):
-        """Setting termination time to stop the job.
+        """Set time for terminating the job.
 
         Parameters
         ----------
@@ -145,7 +193,7 @@ class DynaSolution:
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         DynaSolution.termination_time = termination_time
         ret = self.stub.CreateTermination(TerminationRequest(endtim=termination_time))
@@ -157,24 +205,30 @@ class DynaSolution:
 
         Parameters
         ----------
-        dt : float
-            Defines the time interval between output states.
-        maxint : int
+        filetype : str, optional
+           Type of file. The default is ``"D3PLOT"``.
+        dt : float, optional
+            Time interval between output states. The default is ``0``.
+        maxint : int, optional
             Number of shell and thick shell through-thickness integration points
-            for which output is written to d3plot.
-        ieverp : int
-            Every output state for the d3plot database is written to a separate file.
-            EQ.0: More than one state can be on each plot file.
-            EQ.1: One state only on each plot file.
-        dcomp : int
-            Data compression to eliminate rigid body data.
-        nintsld : int
+            to output to the d3plot. The default is ``3``.
+        ieverp : int, optional
+            How to plot output states on plot files. The default is ``0``. Every output
+            state for the d3plot database is written to a separate file. Options are:
+
+            - EQ.0: More than one state can be on each plot file.
+            - EQ.1: Only one state can be on each plot file.
+
+        dcomp : int, optional
+            Data compression to eliminate rigid body data. The default is ``1``.
+        nintsld : int, optional
             Number of solid element integration points written to the LS-DYNA database.
+            The default is ``1``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateDBBinary(
             DBBinaryRequest(
@@ -190,25 +244,35 @@ class DynaSolution:
         return ret
 
     def create_database_ascii(self, type, dt=0.0, binary=1, lcur=0, ioopt=0):
-        """Obtain output files containing results information.
+        """Obtain output files containing result information.
 
         Parameters
         ----------
         type : string
-            Specifies the type of database.(BNDOUT,GLSTAT,MATSUM,NODFOR,RCFORC,SLEOUT)
-        dt : float
-            Time interval between outputs
-        binary : int
-            Flag for binary output.
-        lcur : int
-            Optional curve ID specifying time interval between outputs.
-        ioopt : int
-            Flag to govern behavior of the output frequency load curve defined by LCUR.
+            Type of the database. Options are:
+
+            - BNDOUT
+            - GLSTAT
+            - MATSUM
+            - NODFOR
+            - RCFORC
+            - SLEOUT
+
+        dt : float, optional
+            Time interval between outputs. The default is ``0.0``.
+        binary : int, optional
+            Flag for whether to generate binary output. The default is ``1``.
+        lcur : int, optional
+            Curve ID specifying the time interval between outputs. The default
+            is ``0``.
+        ioopt : int, optional
+            Flag for governing the behavior of the output frequency load curve
+            defined by the ``lcur`` parameter. The default is ``0``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateDBAscii(DBAsciiRequest(type=type, dt=dt, binary=binary, lcur=lcur, ioopt=ioopt))
         logging.info("DB Ascii Created...")
@@ -230,20 +294,29 @@ class DynaSolution:
         sleout=0,
         sphmassflow=0,
     ):
-        """Obtain output files containing results information.
+        """Obtain output files containing result information.
 
         Parameters
         ----------
-        matsum : float
-            Time interval between outputs of part energies.
-        glstat : float
+        matsum : float, optional
+            Time interval between outputs of part energies. The default is ``0``.
+        glstat : float, optional
             Time interval between outputs of global statistics
-            and energies.
+            and energies. The default is ``0``.
+        elout :
+        nodout :
+        modfor :
+        rbdout :
+        secforc :
+        rwforce :
+        bndout :
+        sleout :
+        sphmassflow :
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         if matsum > 0:
             self.stub.CreateDBAscii(DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0))
@@ -281,7 +354,7 @@ class DynaSolution:
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
 
         for obj in self.object_list:

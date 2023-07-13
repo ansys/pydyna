@@ -1,9 +1,10 @@
 """
-Define R,L,C circuit by function
-================================
+RLC circuit by function
+=======================
+This example shows how to use the ``Function`` object to define an
+RLC circuit as an inlet boundary condition. The executable file for
+LS-DYNA is ``ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe``.
 
-This example shows a way of defining a R,L,C circuit as an inlet boundary condition using the 'Function' object. \n
-LS-DYNA version : ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe
 """
 
 import os

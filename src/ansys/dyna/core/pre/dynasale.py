@@ -2,7 +2,7 @@
 Airbag API
 ==========
 
-Module to create Structural ALE dyna input deck
+Module for creating a S-ALE (Structured ALE) DYNA input deck.
 """
 
 from enum import Enum
@@ -24,7 +24,7 @@ class FillDirection(Enum):
 
 
 class ControlPoint:
-    """Provide spacing information to generate a 3D structured ALE mesh.
+    """Provides spacing information for generating a 3D S-ALE mesh.
 
     Parameters
     ----------
@@ -43,7 +43,7 @@ class ControlPoint:
 
 
 class StructuredMesh:
-    """Generate a structured 2D or 3D mesh and invoke the Structured ALE (S-ALE) solver."""
+    """Generates a structured 2D or 3D mesh and invokes the S-ALE solver."""
 
     def __init__(self, control_points_x, control_points_y, control_points_z):
         self.stub = DynaBase.get_stub()
@@ -65,27 +65,41 @@ class StructuredMesh:
         vid=0,
         reference_pressure=0,
     ):
-        """Perform volume filling operations on a structured ALE mesh.
+        """Perform volume-filling operations on a S-ALE mesh.
 
         Parameters
         ----------
         material_name : string
-            material name.
-        nsample : int
-            Number of sampling points.
+            Material name.
         geometry_type : string
-            Geometry types. They are: PARTSET, PART, SEGSET, PLANE, CYLINDER, BOXCOR, BOXCPT and SPHERE.
+            Geometry type. The default is ``"Null"``. Options are:
+
+            - BOXCOR
+            - BOXCPT
+            - CYLINDER
+            - PARTSET
+            - PART
+            - PLANE
+            - SEGSET
+            - SPHERE
+
+        nsample : int, optional
+            Number of sampling points. The default is ``4``.
         define_geometry_parameters : list
-            These values have different definitions for different options.
-        in_out : int
-            To fill inside or outside of the geometry.
-        vid : int
-            This flag is used to assign initial velocity to material filling the domain.
+            List of values having different definitions for different options.
+            The default is ``[0, 0, 0, 0, 0]``.
+        in_out : int, optional
+            Flag for whether to fill inside or outside of the geometry. The
+            default is ``INSIDE_THE_GEOMETRY``.
+        vid : int, optional
+            Flag for assigning the initial velocity to the material filling the domain.
+            The default is ``0``.
+        reference_pressure :
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.fillings.append(
             [
@@ -100,29 +114,33 @@ class StructuredMesh:
         )
 
     def refine(self, refine_factor_x=1, refine_factor_y=1, refine_factor_z=1):
-        """Refine existing structured ALE (S-ALE) meshes.
+        """Refine existing S-ALE meshes.
 
         Parameters
         ----------
-        refine_factor_x/y/y : int
-            Refinement factor for each local direction.
+        refine_factor_x : int, optional
+            Refinement factor for the x-direction. The default is ``1``.
+        refine_factor_y : int, optional
+            Refinement factor for the y-direction. The default is ``1``.
+        refine_factor_z : int, optional
+            Refinement factor for the z-direction. The default is ``1``.
         """
         self.refine_factor_x = refine_factor_x
         self.refine_factor_y = refine_factor_y
         self.refine_factor_z = refine_factor_z
 
     def initial_detonation(self, detonation_point):
-        """Define points to initiate the location of high explosive detonations.
+        """Define a point for initiating the location of a high-explosive detonation.
 
         Parameters
         ----------
         detonation_point : Point
-            x,y,z-coordinate of detonation point.
+            Coordinates (x,y,z) of the detonation point.
         """
         self.detonation_point = detonation_point
 
     def create(self):
-        """Create mesh."""
+        """Create a mesh."""
         nx = []
         xx = []
         ratiox = []
@@ -210,24 +228,24 @@ class StructuredMesh:
 
 
 class DynaSALE(DynaBase):
-    """Setup SALE simulation process."""
+    """Sets up the S-ALE simulation process."""
 
     def __init__(self):
         DynaBase.__init__(self)
         self.stub.CreateDBSALE(DBSALERequest(switch=1))
 
     def set_termination(self, endtime):
-        """Setting termination time to stop the job.
+        """Set the time for ending the simulation.
 
         Parameters
         ----------
-        termination_time : float
-            Termination time.
+        endtime : float
+            Time for ending the simulation.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.stub.CreateTermination(TerminationRequest(endtim=endtime))
 
@@ -237,12 +255,12 @@ class DynaSALE(DynaBase):
         Parameters
         ----------
         database_plot_interval : float
-            Defines the time interval between output states.
+            Time interval between output states.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.stub.CreateDBBinary(DBBinaryRequest(filetype="D3PLOT", dt=database_plot_interval))
 
@@ -252,21 +270,24 @@ class DynaSALE(DynaBase):
         method=AdvectionMethod.DONOR_CELL_WITH_HALF_INDEX_SHIFT,
         background_pressure=0,
     ):
-        """Setup analysis type.
+        """Set the analysis type.
 
         Parameters
         ----------
-        num_of_cycle : float
-            Total time of simulation for the fluid problem.
-        method : float
-            Time step for the fluid problem.
-        background_pressure : int
-            Reference pressure to compute the internal forces
+        num_of_cycle : float, optional
+            Total time of simulation for the fluid problem. The
+            default is ``1``.
+        method : float, optional
+            Time step for the fluid problem. The default is
+            ``DONOR_CELL_WITH_HALF_INDEX_SHIFT``.
+        background_pressure : int, optional
+            Reference pressure for computing the internal forces.
+            The default is ``0``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.ALECreateControl(
             ControlALERequest(
@@ -284,19 +305,21 @@ class DynaSALE(DynaBase):
         return ret
 
     def set_output_database(self, matsum=0, glstat=0):
-        """Obtain output files containing results information.
+        """Obtain output files containing the results.
 
         Parameters
         ----------
-        matsum : float
-            Time interval between outputs of part energies.
-        glstat : float
+        matsum : float, optional
+            Time interval between outputs of part energies. The
+            default is ``0``.
+        glstat : float, optional
             Time interval between outputs of global statistics and energies.
+            The default is ``0``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         if matsum > 0:
             self.stub.CreateDBAscii(DBAsciiRequest(type="MATSUM", dt=matsum, binary=1, lcur=0, ioopt=0))
@@ -312,7 +335,7 @@ class DynaSALE(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.set_energy(
             hourglass_energy=EnergyFlag.COMPUTED,
