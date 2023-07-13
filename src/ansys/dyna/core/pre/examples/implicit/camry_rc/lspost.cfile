@@ -1,0 +1,3 @@
+$# LS-PrePost command file created by LS-PrePost(R) V4.11(Beta)-06Jun2023 -64bit-Window
+$# Created on Jul-12-2023 (09:17:43)
+open keyword "C:\pydyna\src\ansys\dyna\core\pre\examples\implicit\camry_rc\Camry_RC_main.k"
