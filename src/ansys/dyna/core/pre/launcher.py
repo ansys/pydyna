@@ -1,4 +1,4 @@
-"""Module for launching the kwserver locally."""
+"""Module for launching the pre service locally."""
 
 import os
 import socket
@@ -63,34 +63,34 @@ def port_in_use(port, host=LOCALHOST):
 
 def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path=None) -> tuple:  # pragma: no cover
     """
-    Launch the kwserver locally in gRPC mode.
+    Launch the pre service locally in gRPC mode.
 
     Parameters
     ----------
     port : int, optional
-        Port to launch the kwserver on. The default is ``DYNAPRE_DEFAULT_PORT``.
+        Port to launch the pre service on. The default is ``DYNAPRE_DEFAULT_PORT``.
         The final port is the first port available after (or including) this
         port.
     ip : str, optional
         IP address. The default is ``LOCALHOST``, in which case ``"127.0.0.1"``
         is used.
     server_path : string, optional
-        Path to the kwserver. The default is ``None``.
+        Path to the pre service. The default is ``None``.
 
     Returns
     -------
     int
         Port number that the gRPC instance started on.
     """
-    LOG.debug("Starting 'launch_kwserver'.")
+    LOG.debug("Starting 'launch_grpc'.")
 
     command = "python kwserver.py"
-    LOG.debug(f"Starting kwserver with command: {command}")
+    LOG.debug(f"Starting the pre service with command: {command}")
 
     # env_vars = update_env_vars(add_env_vars, replace_env_vars)
     LOG.info(f"Running in {ip}:{port} the following command: '{command}'")
 
-    LOG.debug("kwserver starting in background.")
+    LOG.debug("the pre service starting in background.")
     process = subprocess.Popen(["python", "kwserver.py"], cwd=server_path, shell=True)
     process.wait()
     # while True:
@@ -131,7 +131,7 @@ def launch_dynapre(
     ip="localhost",
 ):
     """
-    Start the kwserver locally.
+    Start the pre service locally.
 
     Parameters
     ----------
@@ -152,7 +152,7 @@ def launch_dynapre(
         LOG.debug(f"Using default port {port}")
 
     if (ip.lower() == "localhost" or ip == LOCALHOST) and not DynaSolution.grpc_local_server_on():
-        LOG.debug("Starting kwserver")
+        LOG.debug("Starting the pre service")
         server_path = os.path.join(os.getcwd(), "../../src/ansys/dyna/core/pre/Server")
         threadserver = ServerThread(1, port=port, ip=ip, server_path=server_path)
         threadserver.setDaemon(True)
