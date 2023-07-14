@@ -129,13 +129,14 @@ Here is a basic preprocessing example:
 Here is a basic solving example:
 
 .. code:: python
-   >>> hostname = "localhost"
-   >>> port = "5000"
-   >>> import ansys.dyna.core.solver as solver
-   >>> dyna=solver.DynaSolver(hostname,port)           # connect to the container
-   >>> dyna.push("cylinder_flow.k")                            # push an input file
-   >>> dyna.start(4)                                   # start 4 ranks of mppdyna
-   >>> dyna.run("i=./output/cylinder_flow.k memory=10m ncycle=20000")   # begin execution
+
+     hostname = "localhost"
+     port = "5000"
+     import ansys.dyna.core.solver as solver
+     dyna=solver.DynaSolver(hostname,port)           # connect to the container
+     dyna.push("cylinder_flow.k")                            # push an input file
+     dyna.start(4)                                   # start 4 ranks of mppdyna
+     dyna.run("i=./output/cylinder_flow.k memory=10m ncycle=20000")   # begin execution
 
 Here is a basic postprocessing example:
 
