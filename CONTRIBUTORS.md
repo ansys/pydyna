@@ -1,6 +1,6 @@
-# Authors
+# Contributors
 
-## Contributors
+## Individual contributors
 
 * [Zhanqun Zhang](https://github.com/zhangzhanqun)
 * [Wenhui Yu](https://github.com/wenhuiuy)
