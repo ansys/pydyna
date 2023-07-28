@@ -44,7 +44,9 @@ the PyAnsys support team, email `pyansys.support@ansys.com <pyansys.support@ansy
 Usage
 =====
 Here is a basic preprocessing example:
-Firstly, get the input file from "pydyna\\src\\ansys\\dyna\\core\\pre\\examples\\explicit\\ball_plate\\ball_plate.k"
+
+Get the input file from "pydyna\\src\\ansys\\dyna\\core\\pre\\examples\\explicit\\ball_plate\\ball_plate.k"
+
 The follow example can be obtained from "pydyna\examples\Explicit\ball_plate.py"
 
 .. code:: python
@@ -129,7 +131,9 @@ The follow example can be obtained from "pydyna\examples\Explicit\ball_plate.py"
     solution.download(serveroutfile,downloadfile)
     
 Here is a basic solving example:
+
 The follow example can be obtained from "pydyna\\examples\\solver\\ball_plate_solver.py"
+
 .. code:: python
 
     import ansys.dyna.core.solver as solver
