@@ -2317,6 +2317,7 @@ class InitialCondition:
     def __init__(self):
         self.stub = DynaBase.get_stub()
         self.velocitylist = []
+        self.velocitynodelist = []
         self.temperaturelist = []
 
     def create_velocity(
@@ -2329,6 +2330,10 @@ class InitialCondition:
     ):
         """Create initial velocities for rotating and/or translating bodies."""
         self.velocitylist.append([velocityset, angular_velocity, velocity, direction, stime])
+
+    def create_velocity_node(self, nodeid, trans=Velocity(0, 0, 0), rot=RotVelocity(0, 0, 0)):
+        """Define initial nodal point velocities for a node."""
+        self.velocitynodelist.append([nodeid, trans, rot])
 
     def create_temperature(self, nodeset=None, temperature=0):
         """Create an initial nodal point temperature."""
@@ -2371,6 +2376,13 @@ class InitialCondition:
                 )
             )
             logging.info(f"Define initial velocities for {type} {id}.")
+        for obj in self.velocitynodelist:
+            nid = obj[0]
+            trans = obj[1]
+            rot = obj[2]
+            velocity = [trans.x, trans.y, trans.z, rot.x, rot.y, rot.z]
+            self.stub.CreateInitVel(InitVelRequest(nsid=nid, velocity=velocity))
+            logging.info(f"Define initial velocities for node {nid}.")
         for obj in self.temperaturelist:
             nset = obj[0]
             temp = obj[1]
