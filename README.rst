@@ -132,13 +132,14 @@ Here is a basic solving example:
 The follow example can be obtained from pydyna\examples\solver\ball_plate_solver.py
 .. code:: python
 
+    import ansys.dyna.core.solver as solver
+
     hostname = "localhost"
     port = "5000"
-    import ansys.dyna.core.solver as solver
     dyna=solver.DynaSolver(hostname,port)           # connect to the container
-    dyna.push("cylinder_flow.k")                            # push an input file
+    dyna.push("./output/ball_plate.k")                            # push an input file
     dyna.start(4)                                   # start 4 ranks of mppdyna
-    dyna.run("i=./output/cylinder_flow.k memory=10m ncycle=20000")   # begin execution
+    dyna.run("i=ball_plate.k memory=10m ncycle=20000")   # begin execution
 
 Here is a basic postprocessing example:
 
