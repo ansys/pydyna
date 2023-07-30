@@ -2,8 +2,9 @@
 Driven cavity
 =============
 
-This example shows the universally famous driven cavity case tested with the second order steady solver and for Re=1000. \n
-LS-DYNA version : ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe
+This example shows the universally famous driven-cavity case tested with
+the second-order steady solver and for ``Re=1000``. The executable file
+for LS-DYNA is ``ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe``.
 """
 
 import os

@@ -2,7 +2,7 @@
 ISPH API
 ==========
 
-Module to create ISPH dyna input deck
+Module for creating an ISPH (incompressible smooth particle hydrodynamics) DYNA input deck.
 """
 
 import logging
@@ -11,7 +11,7 @@ from .dynabase import *  # noqa : F403
 
 
 class DynaISPH(DynaBase):
-    """Contains methods to create keyword related to incompressible smooth particle hydrodynamics."""
+    """Contains methods for creating a keyword related to ISPH."""
 
     def __init__(self):
         DynaBase.__init__(self)
@@ -26,29 +26,37 @@ class DynaISPH(DynaBase):
         approximation_theory=0,
         max_velocty=1e15,
     ):
-        """Provide controls related to SPH.
+        """Provide controls related to ISPH.
 
         Parameters
         ----------
-        num_timestep : int
-            Number of time steps between particle sorting.
-        boxid : int
-            SPH approximations are computed inside a specified box.
-            When a particle has gone outside the BOX, it is deactivated.
-        space_dimension : int
-            Space dimension for SPH particles, EQ.3: 3D problems,
-            EQ.2: 2D plane strain problems, EQ.-2: 2D axisymmetric problems
-        neighbors : int
-            Defines the initial number of neighbors per particle.
-        approximation_theory : int
-            Particle approximation theory.
-        max_velocty : float
-            Maximum value for velocity for the SPH particles.
+        num_timestep : int, optional
+            Number of time steps between particle sorting. The default
+            is ``1``.
+        boxid : int, optional
+            Box ID. The default is ``0``. ISPH approximations are computed
+            inside the specified box. When a particle has gone outside this
+            box, it is deactivated.
+        space_dimension : int, optional
+            Space dimension for ISPH particles. The default is ``3``. Options
+            are:
+
+            - EQ.3: 3D problems
+            - EQ.2: 2D plane strain problems
+            - EQ.-2: 2D axisymmetric problems
+
+        neighbors : int, optional
+            Initial number of neighbors per particle. The default is ``150``.
+        approximation_theory : int, optional
+            Particle approximation theory. The default is ``0``.
+        max_velocty : float, optional
+            Maximum value for velocity for the ISPH particles. The default
+            is ``1000000000000000.0``.
 
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         ret = self.stub.CreateControlSPH(
             CreateControlSPHRequest(
@@ -69,14 +77,14 @@ class DynaISPH(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         self.isphanalysis.create()
         DynaBase.save_file(self)
 
 
 class ISPHAnalysis:
-    """Provide controls related to SPH (Smooth Particle Hydrodynamics)."""
+    """Provide controls related to ISPH."""
 
     def __init__(self, num_timestep=1):
         self.stub = DynaBase.get_stub()
@@ -89,35 +97,57 @@ class ISPHAnalysis:
         self.velocity_scaling = 0
 
     def set_num_timestep(self, num_timestep):
-        """Set number of time steps between particle sorting."""
+        """Set the number of time steps between particle sorting.
+
+        Parameters
+        ----------
+        num_timestep : int, optional
+            Number of time steps between particle sorting. The default
+            is ``1``.
+        """
         self.num_timestep = num_timestep
 
     def set_box(self, box):
-        """Define box,SPH approximations are computed inside a specified box.
+        """Set the box. ISPH approximations are computed inside a specified box.
 
         Parameters
         ----------
         box : Box
-            When a particle has gone outside the BOX, it is deactivated.
-            This will save computational time by eliminating particles that no
-            longer interact with the structure.
+            Box for computing ISHPH approximattions. When a particle has gone
+            outside this box, it is deactivated.
         """
         self.box = box
 
     def set_neighbors(self, neighbors):
-        """Define the initial number of neighbors per particle."""
+        """Set the initial number of neighbors per particle.
+
+        Parameters
+        ----------
+        neighbors : int, optional
+            Initial number of neighbors per particle.
+        """
         self.neighbors = neighbors
 
     def set_particle_deactivation(self, deactivation):
-        """Define the type of BEM matrices as well as the way they are assembled."""
+        """Set the type of BEM matrices and the way they are assembled.
+
+        Parameters
+        ----------
+        deactivation :
+        """
         self.particle_deactivation = deactivation
 
     def set_velocity_scaling(self, scaling):
-        """Define the type of BEM matrices as well as the way they are assembled."""
+        """Set the type of BEM matrices and the way they are assembled.
+
+        Parameters
+        ----------
+        scaling :
+        """
         self.velocity_scaling = scaling
 
     def create(self):
-        """Create ISPHAnalysis."""
+        """Create an ISPH analysis."""
         if self.box == None:
             boxid = 0
         else:
@@ -140,7 +170,16 @@ class ISPHAnalysis:
 
 
 class SPHSection:
-    """Define section properties for SPH particles."""
+    """Defines section properties for ISPH particles.
+
+    Parameters
+    ----------
+    cslh : float, optional
+    hmin : float, optional
+    hmax : float, optional
+    sphini : int, optional
+
+    """
 
     def __init__(self, cslh=1.2, hmin=0.2, hmax=2.0, sphini=0):
         stub = DynaBase.get_stub()
@@ -149,14 +188,14 @@ class SPHSection:
 
 
 class MassflowPlane:
-    """Measure SPH mass flow rate across a defined plane.
+    """Measures ISPH mass flow rate across a defined plane.
 
     Parameters
     ----------
-    particles : NodeSet,PartSet
-        Node set or part set specifying the SPH particles to be measured.
+    particles : NodeSet, PartSet
+        Node set or part set specifying the ISPH particles to measure.
     surface : PartSet
-        Part set ID or part ID defining the surface across which the flow rate is measured.
+        Part set ID or part ID defining the surface across which to measure the flow rate.
     """
 
     def __init__(self, particles, surface):
@@ -164,7 +203,7 @@ class MassflowPlane:
         self.surface = surface
 
     def create(self, stub):
-        """Create mass flow plane."""
+        """Create a mass flow plane."""
         self.particles.create(stub)
         self.surface.create(stub)
         pid = self.particles.id
@@ -191,20 +230,22 @@ class MassflowPlane:
 
 
 class ISPHFluidPart(Part):
-    """Generate SPH particles inside a given box.
+    """Generates ISPH particles inside a box.
 
     Parameters
     ----------
+    pid : int
+        Part ID.
     minpoint : Point
         Minimum x,y,z-coordinate.
     length : Point
         Box length in the x,y,z-direction.
     numdirx : int
-        Number of SPH particles in the x-direction.
+        Number of ISPH particles in the x-direction.
     numdiry : int
-        Number of SPH particles in the y-direction.
+        Number of ISPH particles in the y-direction.
     numdirz : int
-        Number of SPH particles in the z-direction.
+        Number of ISPH particles in the z-direction.
     """
 
     def __init__(self, pid, minpoint, length, numdirx, numdiry, numdirz):
@@ -230,13 +271,13 @@ class ISPHFluidPart(Part):
         Parameters
         ----------
         initial : float
-            Constant used to calculate the initial smoothing length of the particles.
+            Constant for calculating the initial smoothing length of the particles.
         min : float
             Scale factor for the minimum smoothing length.
         max : float
             Scale factor for the maximum smoothing length.
-        optional : float
-            Optional initial smoothing length (overrides true smoothing length).
+        optional : float, optional
+            Initial smoothing length, which overrides the true smoothing length.
         """
         self.cslh = initial
         self.hmin = min
@@ -244,7 +285,7 @@ class ISPHFluidPart(Part):
         self.sphini = optional
 
     def create_particles(self):
-        """Create SPH particles inside a given box."""
+        """Create ISPH particles inside the box."""
         coords = (
             self.minpoint.x,
             self.minpoint.y,
@@ -259,11 +300,11 @@ class ISPHFluidPart(Part):
         )
 
     def create_massflow_plane(self, surfaces):
-        """Measure SPH mass flow rate across a defined plane."""
+        """Measure ISPH mass flow rate across a defined plane."""
         self.massflowplane = MassflowPlane(PartSet([self.id]), surfaces)
 
     def set_property(self):
-        """Set properties for SPH fluid part."""
+        """Set properties for an ISPH fluid part."""
         self.create_particles()
         self.massflowplane.create(self.stub)
         sec = SPHSection(cslh=self.cslh, hmin=self.hmin, hmax=self.hmax, sphini=self.sphini)
@@ -283,14 +324,16 @@ class ISPHFluidPart(Part):
 
 
 class ISPHStructPart(Part):
-    """Generate and place SPH elements on the surface of triangular shell elements.
+    """Generates and places ISPH elements on the surface of triangular shell elements.
 
     Parameters
     ----------
+    pid : int
+        Part ID.
     couple_partset : PartSet
-        Part or part set ID for the region of the mesh upon which the SPH elements will be placed.
+        Part or part set ID for the region of the mesh to place the ISPH elements on.
     space : float
-        Maximum space between SPH elements.
+        Maximum space between ISPH elements.
     """
 
     def __init__(self, pid, couple_partset, space):
@@ -310,14 +353,17 @@ class ISPHStructPart(Part):
 
         Parameters
         ----------
+        Parameters
+        ----------
         initial : float
-            Constant used to calculate the initial smoothing length of the particles.
+            Constant for calculating the initial smoothing length of the particles.
         min : float
             Scale factor for the minimum smoothing length.
         max : float
             Scale factor for the maximum smoothing length.
-        optional : float
-            Optional initial smoothing length (overrides true smoothing length).
+        optional : float, optional
+            Initial smoothing length, which overrides the true smoothing length.
+
         """
         self.cslh = initial
         self.hmin = min
@@ -325,7 +371,7 @@ class ISPHStructPart(Part):
         self.sphini = optional
 
     def create_particles(self):
-        """Create SPH elements on the surface of triangular shell elements."""
+        """Create ISPH elements on the surface of triangular shell elements."""
         sid = self.couple_partset.create(self.stub)
         if self.couple_partset.type == "PARTSET":
             type = 0
@@ -337,7 +383,7 @@ class ISPHStructPart(Part):
         )
 
     def set_property(self):
-        """Set properties for SPH structural part."""
+        """Set properties for the ISPH structural part."""
         self.create_particles()
         sec = SPHSection(cslh=self.cslh, hmin=self.hmin, hmax=self.hmax, sphini=self.sphini)
         self.secid = sec.id

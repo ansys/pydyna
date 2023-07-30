@@ -1,38 +1,38 @@
-# pyDyna-pre
+# PyDYNA ``pre`` service
 
-The PyDyna-pre provide the ability to create keyword inputdeck through gRPC framework. 
+The PyDYNA ``pre`` service provide the ability to create keyword input decks through the gRPC framework. 
 
-## Running pyDyna-pre in virtualenv
+## Run the ``pre`` service in a virtual environment
 
-virtualenv is a CLI tool that needs a Python interpreter to run.
+A virtual environment is a CLI tool that must have a Python interpreter to run.
 
-Install virtualenv
+Install virtualenv:
 
 ```
 pip install virtualenv
 ```
 
-Create a python virtual environment of the same version as virtualenv,installed into the subdirectory "venv"
+Create a Python virtual environment of the same version as ``virtualenv``, installed in the subdirectory ``venv``:
 
 ```
 virtualenv venv
 ```
 
-Activate venv on Windows by running command: 
+On Windows, activate the ``venv`` environment by running these commands: 
 
 ```
 cd venv
 ./Scripts/activate
 ```
 
-Activate venv on Linux by running command: 
+On Linux, activate the ``venv`` environment by running these commands: 
 
 ```
 cd venv
 source bin/activate
 ```
 
-Copy pyDyna package in venv folder
+Copy the PyDYNA package into the ``venv`` folder:
 
 ```
 venv/
@@ -49,24 +49,25 @@ venv/
 
 ## Requirements
 
-Go to pyDyna/requirements/pythonxx according to your Python version.
-Then running command:
+Go to ``pyDyna/requirements/python[xx]``, where ``[xx]`` is your Python version.
+Then, run these commands:
 
 ```
 cd pyDyna/requirement/pythonxx
 pip install -r requirements.txt
 ```
 
-## Starting the Server
+## Start the server
 
-So far, Python 3.6/3.8/3.9 is used to start server, make sure this like below:
+Python 3.6 through 3.8 can be used to start the server. Validate by running
+these commands:
 
 ```
 (venv) C:\pyDyna\examples\pre> C:\python36\python.exe --version
 Python 3.6.8
 ```
 
-Here is the minimal content in Server folder 
+Here is the minimal content in the ``Server`` folder: 
 ```
 Server/
       kwserver.py
@@ -81,29 +82,30 @@ Server/
                 cp39/keywordreader.pyd				
 ```
 
-### Starting the Server on Windows:
+### Start the server on Windows
 
-Start server by running command:
+On Windows, start the server by running these commands:
+
 ```shell
 (venv) C:\pyDyna\ansys\dyna\pre\Server> python .\kwserver.py
 kwgrpc Server listening on: localhost:50051
 ```
 
-### Starting the server on Linux:
+### Start the server on Linux
 
-Start server by running command:
+On Linux, start the server by running these commands:
 
 ```
 (venv) :~/pyDyna/ansys/dyna/pre/Server> python kwserver.py
 ```
 
-## Running pyDyna-pre client
+## Run the PyDYNA ``pre`` service
 
-See the examples in the examples folder for some basic example.  More will be added later.
+See the ``Examples`` folder for basic usage examples.
 
-### Structure ALE demo
+### S-ALE (Structure ALE) demo
 
-Go to pyDyna/examples/pre,and run sale_efp.py:
+Go to the ``pyDyna/examples/pre`` directory and run the ``sale_efp.py`` file:
 
 ```
 (venv) C:\pyDyna\examples\pre> python .\sale_efp.py
@@ -127,7 +129,7 @@ Go to pyDyna/examples/pre,and run sale_efp.py:
 2022-07-05 08:19:43 :  efpcase.k is outputed...
 ```
 
-At the same time, corresponding information will be printed in the server side.
+Corresponding information is printed on the server side:
 
 ```
 Load model: C:\pyDyna\ansys\dyna\pre\Server\input\efpcase.k
@@ -159,7 +161,8 @@ Database GLSTATCreated...
 Saved Successfully!
 ```
 
-After running this file,the result file will be save in pyDyna/ansys/dyna/pre/Server/output
+After running the ``sale_efp.py`` file, the result file is saved in the
+``pyDyna/ansys/dyna/pre/Server/output`` directory.
 
 ```
 (venv) C:\pyDyna\ansys\dyna\pre\Server> cd .\output\
@@ -174,4 +177,4 @@ Mode                 LastWriteTime         Length Name
 -a----          2022/7/5      8:19        2436058 efpcase.k
 ```
 
-Submit the result file, efpcase.k, to LS-Dyna for simulation results.
+Submit the result file, ``efpcase.k``, to Ansys LS-DYNA for simulation results.

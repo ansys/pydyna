@@ -1,9 +1,9 @@
 """
 Resistive heating 2D
 ====================
+This example of a simple metal bar imposes potential on both ends. The executable
+file for LS-DYNA is ``ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe``.
 
-This example features a simple metal bar where potential is imposed on both ends. \n
-LS-DYNA version : ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe
 """
 
 import os

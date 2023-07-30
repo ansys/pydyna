@@ -2,7 +2,7 @@
 NVH API
 ==========
 
-Module to create NVH dyna input deck
+Module for creating an NVH Dyna input deck.
 """
 
 import logging
@@ -11,7 +11,7 @@ from .dynabase import *  # noqa : F403
 
 
 class DynaNVH(DynaBase):
-    """Contains methods to create keyword related to NVH."""
+    """Contains methods for creating a keyword related to NVH."""
 
     def __init__(self):
         DynaBase.__init__(self)
@@ -22,7 +22,7 @@ class DynaNVH(DynaBase):
         Returns
         -------
         bool
-            "True" when successful, "False" when failed
+            ``True`` when successful, ``False`` when failed.
         """
         DynaBase.save_file(self)
 
@@ -56,7 +56,7 @@ class ResponseType(Enum):
 
 
 class FrequencyDomain:
-    """Provide a way of defining and solving frequency domain vibration and acoustic problems."""
+    """Provides a way of defining and solving frequency domain vibration and acoustic problems."""
 
     def __init__(self):
         self.stub = DynaBase.get_stub()
@@ -82,8 +82,20 @@ class FrequencyDomain:
 
         Parameters
         ----------
-        box : Box
-            When l save eract with the structure.
+        excitation_input_set :
+        excitation_input_dof :
+        excitation_input_type :
+        max_natural_frequency :
+        modal_damping_coefficient :
+        modal_damping_coefficient_curve :
+        modal_damping_coefficient_curve_type :
+        response_output_set :
+        response_output_dof :
+        response_output_type :
+        frf_output_min_frequency :
+        frf_output_max_frequency :
+        frf_output_num_frequency :
+
         """
         self.defined_frf = True
         self.n1 = excitation_input_set
@@ -101,7 +113,7 @@ class FrequencyDomain:
         self.nfreq = frf_output_num_frequency
 
     def create(self):
-        """Define frequency domain vibration and acoustic problems."""
+        """Define a frequency domain vibration and acoustic problem."""
         if self.defined_frf:
             if self.lcdam is not None:
                 cid = self.lcdam.create(self.stub)

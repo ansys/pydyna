@@ -1,8 +1,9 @@
-PyDyna documentation  |version|
+PyDYNA documentation  |version|
 ===============================
 
 .. include:: ../../README.rst
-
+.. include:: ../../docker/pre/README.rst
+.. include:: ../../docker/solver/README.rst
 
 .. jinja:: main_toctree
 
@@ -14,7 +15,7 @@ PyDyna documentation  |version|
        {% if build_api %}
        autoapi/index
        {% endif %}
-       contributing
        {% if build_examples %}
        examples/index
        {% endif %}
+       contributing

@@ -1,0 +1,213 @@
+open keyword "C:\pydyna\src\ansys\dyna\core\pre\examples\implicit\camry_rc\Camry_RC_main.k"
+ Time to read keyword file =  9.375 seconds
+Warning - SECTION 1 not found:
+  Referenced in *PART ID = 1
+Warning - MAT 598 not found:
+  Referenced in *PART ID = 1
+Warning - SECTION 4 not found:
+  Referenced in *PART ID = 2
+Warning - MAT 282 not found:
+  Referenced in *PART ID = 2
+Warning - SECTION 5 not found:
+  Referenced in *PART ID = 3
+Warning - MAT 283 not found:
+  Referenced in *PART ID = 3
+Warning - SECTION 6 not found:
+  Referenced in *PART ID = 4
+Warning - MAT 284 not found:
+  Referenced in *PART ID = 4
+Warning - SECTION 2 not found:
+  Referenced in *PART ID = 5
+Warning - MAT 599 not found:
+  Referenced in *PART ID = 5
+Warning - SECTION 7 not found:
+  Referenced in *PART ID = 6
+Warning - MAT 285 not found:
+  Referenced in *PART ID = 6
+Warning - SECTION 3 not found:
+  Referenced in *PART ID = 7
+Warning - MAT 600 not found:
+  Referenced in *PART ID = 7
+Warning - SECTION 8 not found:
+  Referenced in *PART ID = 8
+Warning - MAT 286 not found:
+  Referenced in *PART ID = 8
+Warning - SECTION 9 not found:
+  Referenced in *PART ID = 9
+Warning - MAT 287 not found:
+  Referenced in *PART ID = 9
+Warning - SECTION 10 not found:
+  Referenced in *PART ID = 10
+Warning - MAT 288 not found:
+  Referenced in *PART ID = 10
+Warning - SECTION 11 not found:
+  Referenced in *PART ID = 11
+Warning - MAT 289 not found:
+  Referenced in *PART ID = 11
+Warning - SECTION 12 not found:
+  Referenced in *PART ID = 12
+Warning - MAT 290 not found:
+  Referenced in *PART ID = 12
+Warning - SECTION 13 not found:
+  Referenced in *PART ID = 13
+Warning - MAT 291 not found:
+  Referenced in *PART ID = 13
+Warning - SECTION 14 not found:
+  Referenced in *PART ID = 14
+Warning - MAT 292 not found:
+  Referenced in *PART ID = 14
+Warning - SECTION 15 not found:
+  Referenced in *PART ID = 15
+Warning - MAT 293 not found:
+  Referenced in *PART ID = 15
+Warning - SECTION 16 not found:
+  Referenced in *PART ID = 16
+Warning - MAT 294 not found:
+  Referenced in *PART ID = 16
+Warning - SECTION 17 not found:
+  Referenced in *PART ID = 17
+Warning - MAT 295 not found:
+  Referenced in *PART ID = 17
+Warning - SECTION 18 not found:
+  Referenced in *PART ID = 18
+Warning - MAT 296 not found:
+  Referenced in *PART ID = 18
+Warning - SECTION 19 not found:
+  Referenced in *PART ID = 19
+Warning - MAT 297 not found:
+  Referenced in *PART ID = 19
+Warning - SECTION 20 not found:
+  Referenced in *PART ID = 20
+Warning - MAT 298 not found:
+  Referenced in *PART ID = 20
+Warning - SECTION 21 not found:
+  Referenced in *PART ID = 21
+Warning - MAT 299 not found:
+  Referenced in *PART ID = 21
+Warning - SECTION 22 not found:
+  Referenced in *PART ID = 22
+Warning - MAT 300 not found:
+  Referenced in *PART ID = 22
+Warning - SECTION 23 not found:
+  Referenced in *PART ID = 23
+Warning - MAT 301 not found:
+  Referenced in *PART ID = 23
+Warning - SECTION 24 not found:
+  Referenced in *PART ID = 24
+Warning - MAT 302 not found:
+  Referenced in *PART ID = 24
+Warning - SECTION 25 not found:
+  Referenced in *PART ID = 25
+Warning - MAT 303 not found:
+  Referenced in *PART ID = 25
+Warning - SECTION 26 not found:
+  Referenced in *PART ID = 26
+Warning - MAT 304 not found:
+  Referenced in *PART ID = 26
+Warning - SECTION 27 not found:
+  Referenced in *PART ID = 27
+Warning - MAT 305 not found:
+  Referenced in *PART ID = 27
+Warning - SECTION 28 not found:
+  Referenced in *PART ID = 28
+Warning - MAT 306 not found:
+  Referenced in *PART ID = 28
+Warning - SECTION 29 not found:
+  Referenced in *PART ID = 29
+Warning - MAT 307 not found:
+  Referenced in *PART ID = 29
+Warning - SECTION 30 not found:
+  Referenced in *PART ID = 30
+Warning - MAT 308 not found:
+  Referenced in *PART ID = 30
+Warning - SECTION 34 not found:
+  Referenced in *PART ID = 34
+Warning - MAT 312 not found:
+  Referenced in *PART ID = 34
+Warning - SECTION 38 not found:
+  Referenced in *PART ID = 38
+Warning - MAT 316 not found:
+  Referenced in *PART ID = 38
+Warning - SECTION 39 not found:
+  Referenced in *PART ID = 39
+Warning - MAT 317 not found:
+  Referenced in *PART ID = 39
+Warning - SECTION 40 not found:
+  Referenced in *PART ID = 40
+Warning - MAT 318 not found:
+  Referenced in *PART ID = 40
+Warning - SECTION 41 not found:
+  Referenced in *PART ID = 41
+Warning - MAT 319 not found:
+  Referenced in *PART ID = 41
+Warning - SECTION 44 not found:
+  Referenced in *PART ID = 44
+Warning - MAT 322 not found:
+  Referenced in *PART ID = 44
+Warning - SECTION 45 not found:
+  Referenced in *PART ID = 45
+Warning - MAT 323 not found:
+  Referenced in *PART ID = 45
+Warning - SECTION 46 not found:
+  Referenced in *PART ID = 46
+Warning - MAT 324 not found:
+  Referenced in *PART ID = 46
+Warning - SECTION 47 not found:
+  Referenced in *PART ID = 47
+Warning - MAT 325 not found:
+  Referenced in *PART ID = 47
+Warning - SECTION 48 not found:
+  Referenced in *PART ID = 48
+Warning - MAT 326 not found:
+  Referenced in *PART ID = 48
+Warning - SECTION 49 not found:
+  Referenced in *PART ID = 49
+Warning - MAT 327 not found:
+  Referenced in *PART ID = 49
+Warning - SECTION 50 not found:
+  Referenced in *PART ID = 50
+Warning - MAT 328 not found:
+  Referenced in *PART ID = 50
+Warning - SECTION 51 not found:
+  Referenced in *PART ID = 51
+Warning - MAT 329 not found:
+  Referenced in *PART ID = 51
+Warning - SECTION 52 not found:
+  Referenced in *PART ID = 52
+Warning - MAT 330 not found:
+  Referenced in *PART ID = 52
+Warning - SECTION 53 not found:
+  Referenced in *PART ID = 53
+Warning - MAT 331 not found:
+  Referenced in *PART ID = 53
+Warning - SECTION 54 not found:
+  Referenced in *PART ID = 54
+Warning - MAT 332 not found:
+  Referenced in *PART ID = 54
+Warning - SECTION 55 not found:
+  Referenced in *PART ID = 55
+Warning - MAT 333 not found:
+  Referenced in *PART ID = 55
+Warning - SECTION 56 not found:
+  Referenced in *PART ID = 56
+Warning - MAT 334 not found:
+  Referenced in *PART ID = 56
+Warning - SECTION 57 not found:
+  Referenced in *PART ID = 57
+Warning - MAT 335 not found:
+  Referenced in *PART ID = 57
+Warning - SECTION 58 not found:
+  Referenced in *PART ID = 58
+This is the last warning message for - SECTION
+Warning - MAT 336 not found:
+  Referenced in *PART ID = 58
+This is the last warning message for - MAT
+Warning - SECTION 59 not found:
+  Referenced in *PART ID = 59
+Warning - MAT 337 not found:
+  Referenced in *PART ID = 59
+ Time to process element data =  2.656 seconds
+Finished reading model
+Nothing picked !
+Nothing picked !
+Save Config. parameters to file C:\Users\zhazhang\AppData\Roaming\LSTC\LS-PrePost4.11\lsppconf

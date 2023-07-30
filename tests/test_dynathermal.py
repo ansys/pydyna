@@ -8,6 +8,7 @@ from ansys.dyna.core.pre.dynamech import (
     SolidPart,
     SolidFormulation,
     NodeSet,
+    AnalysisType
 )
 from ansys.dyna.core.pre.dynamaterial import MatElasticPlasticThermal
 
@@ -32,7 +33,7 @@ def test_thermal(thermal_initialfile, resolve_output_path, resolve_standard_path
     fns.append(thermal_initialfile)
     solution.open_files(fns)
     solution.set_termination(3.0)
-    ts = DynaMech()
+    ts = DynaMech(analysis=AnalysisType.IMPLICIT)
     solution.add(ts)
 
     tanalysis = ThermalAnalysis()

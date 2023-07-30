@@ -1,11 +1,9 @@
-version: "3.8"
+version: "3.3"
 services:
   dyna:
-    image: ghcr.io/ansys/dynasolver:0.3
+    image: dyna_solver_v04
     networks:
       - dyna_internal
-    deploy:
-      replicas: 1
     volumes:
        - /rundir
     cap_add:
@@ -15,8 +13,8 @@ services:
         published: 5000
         mode: ingress
     user: mpirun
-    entrypoint: ["/ansys_inc/server.py","dyna"]
     environment:
-      - LSTC_LICENSE_SERVER=lvrpanda.ansys.com
+      - LSTC_LICENSE_SERVER=<license_server_name>
+    entrypoint: ["/ansys_inc/server.py","dyna"]
 networks:
   dyna_internal:

@@ -1,9 +1,10 @@
 """
-Rigid test example
-=====================
+Rigid test
+==========
 
-This example show how to create an ISPH model with Pydyna-pre module. \n
-LS-DYNA version : ls-dyna_mpp_d_R13.0_365-gf8a97bda2a_winx64_ifort190_msmpi.exe
+This examples show how to use the PyDYNA ``pre`` service to create
+an ISPH model. The executable file for LS-DYNA is
+``ls-dyna_mpp_d_R13.0_365-gf8a97bda2a_winx64_ifort190_msmpi.exe``.
 """
 
 import os

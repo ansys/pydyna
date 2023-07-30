@@ -1,4 +1,4 @@
-"""Module for miscellaneous functions and methods"""
+"""Module providing miscellaneous functions and methods."""
 import inspect
 import os
 import random
@@ -14,20 +14,23 @@ MODULE_PATH = os.path.dirname(inspect.getfile(inspect.currentframe()))
 class Plain_Report:
     def __init__(self, core, optional=None, additional=None, **kwargs):
         """
-        Base class for a plain report.
+        Provides the base class for a plain report.
 
-
-        Based on `scooby <https://github.com/banesullivan/scooby>`_ package.
+        This class is based on the `scooby <https://github.com/banesullivan/scooby>`_
+        package.
 
         Parameters
         ----------
-        additional : iter[str]
-            List of packages or package names to add to output information.
         core : iter[str]
-            The core packages to list first.
-        optional : iter[str]
-            A list of packages to list if they are available. If not available,
-            no warnings or error will be thrown.
+            Core packages to list first.
+        optional : iter[str], optional
+            List of packages to list if they are available. The default is ``None``.
+            If no packages are available, no warnings or errors are raised.
+        additional : iter[str], optional
+            List of packages or package names to add to the output information.
+            The default is ``None``.
+        **kwargs : dict
+            Dictionary of keyword arguments.
         """
 
         self.additional = additional
@@ -102,7 +105,16 @@ base_report_class = Plain_Report
 
 
 def is_float(input_string):
-    """Returns true when a string can be converted to a float"""
+    """Determine if a string can be converted to a float.
+
+    Parameters
+    ----------
+    input_string : str
+        String.
+
+    Returns
+    -------
+        ``True`` when the string can be converted to a float, ``False`` otherwise."""
     try:
         float(input_string)
         return True
@@ -111,12 +123,28 @@ def is_float(input_string):
 
 
 def random_string(stringLength=10, letters=string.ascii_lowercase):
-    """Generate a random string of fixed length"""
+    """Generate a random string of a fixed length.
+
+    Parameters
+    ----------
+    stringLength : int, optional
+        Length of the string. The default is ``10``.
+    letters :
+
+    """
     return "".join(random.choice(letters) for i in range(stringLength))
 
 
 def create_temp_dir(tmpdir=None):
-    """Create a new unique directory at a given temporary directory"""
+    """Create a unique working directory in a temporary directory.
+
+    Parameters
+    ----------
+    tempdir : str, optional
+       Name of the temporary directory to create the working
+       directory in. The default is ``None``.
+
+    """
     if tmpdir is None:
         tmpdir = tempfile.gettempdir()
     elif not os.path.isdir(tmpdir):
@@ -142,13 +170,30 @@ def create_temp_dir(tmpdir=None):
 
 
 def check_valid_ip(ip):
-    """Check for valid IP address"""
+    """Check if an IP address is valid.
+
+    Parameters
+    ----------
+    ip :
+        IP address.
+    """
     if ip.lower() != "localhost":
         ip = ip.replace('"', "").replace("'", "")
         socket.inet_aton(ip)
 
 
 def check_valid_port(port, lower_bound=1000, high_bound=60000):
+    """Check if a port is valid.
+
+    Parameters
+    ----------
+    port : int
+        Port.
+    lower_bound : int, optional
+        Lowest value for the port range. The default is ``1000``.
+    high_bound : int, optional
+        Highest value for the port range. The default is ``6000``.
+    """
     if not isinstance(port, int):
         raise ValueError("The 'port' parameter should be an integer.")
 

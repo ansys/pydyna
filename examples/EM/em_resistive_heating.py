@@ -2,8 +2,9 @@
 Resistive heating
 =================
 
-This example introduces the user to the minimum number of keywords required to turn on the EM resistive heating solver. \n
-LS-DYNA version : ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe
+This example shows the minimum number of keywords required to turn on the
+EM resistive heating solver. The executable file for LS-DYNA is
+``ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe``.
 """
 
 import os
