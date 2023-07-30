@@ -22,6 +22,7 @@ em_rlc_isopotential = os.path.join(_module_path, "em", "em_rlc_isopotential")
 em_rlc_define_func = os.path.join(_module_path, "em", "em_rlc_define_func")
 
 belted_dummy = os.path.join(_module_path, "explicit", "belted_dummy")
+ball_plate = os.path.join(_module_path, "explicit", "ball_plate")
 # ICFD
 cylinder_flow = os.path.join(_module_path, "icfd", "cylinder_flow")
 internal_3d_flow = os.path.join(_module_path, "icfd", "internal_3d_flow")

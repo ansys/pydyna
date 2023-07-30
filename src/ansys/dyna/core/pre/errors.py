@@ -1,13 +1,13 @@
-"""pydyna specific errors"""
+"""Module containing PyDYNA-specific errors."""
 
 
 SIGINT_TRACKER = []
 
 
 LOCKFILE_MSG = """
-Another ANSYS job with the same job name is already running in this
-directory, or the lock file has not been deleted from an abnormally
-terminated ANSYS run.
+Either another Ansys job with the same job name is already running in this
+directory or the lock file has not been deleted from an abnormally
+terminated Ansys run.
 
 Disable this check by passing ``override=True``
 
@@ -15,34 +15,34 @@ Disable this check by passing ``override=True``
 
 
 class VersionError(ValueError):
-    """Raised when keserver is the wrong version"""
+    """Provides the error raised when the kwserver is invalid."""
 
     def __init__(self, msg="Invalid kwserver version"):
         ValueError.__init__(self, msg)
 
 
 class PydynaRuntimeError(RuntimeError):
-    """Raised when PyDyna passes an error"""
+    """Provides the error raised when PyDYNA passes an error."""
 
     pass
 
 
 class PydynaInvalidRoutineError(RuntimeError):
-    """Raised when MAPDL is in the wrong routine"""
+    """Provides the error raised when MAPDL is in the wrong routine."""
 
     def __init__(self, msg=""):
         RuntimeError.__init__(self, msg)
 
 
 class LockFileException(RuntimeError):
-    """Error message when the lockfile has not been removed"""
+    """Provides the error raised when the lockfile has not been removed."""
 
     def __init__(self, msg=LOCKFILE_MSG):
         RuntimeError.__init__(self, msg)
 
 
 class KwserverDidNotStart(RuntimeError):
-    """Error when the kwserver process does not start"""
+    """Provides the error raised when the kwserver process does not start."""
 
     def __init__(self, msg=""):
         RuntimeError.__init__(self, msg)

@@ -4,7 +4,8 @@ import os
 from ansys.dyna.core.pre.dynasolution import DynaSolution
 from ansys.dyna.core.pre.dynamech import (
     DynaMech,
-    Transform
+    Transform,
+    AnalysisType
 )
 
 
@@ -48,7 +49,7 @@ def test_elementary_transform(resolve_solution_path, resolve_server_path, resolv
     fns = []
     fns.append(solution_initialfile)
     solution.open_files(fns)
-    obj = DynaMech()
+    obj = DynaMech(analysis=AnalysisType.IMPLICIT)
     solution.add(obj)
 
     obj.set_transform(

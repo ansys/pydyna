@@ -1,7 +1,8 @@
 API reference
 =============
 
-This page contains the ``ansys-dyna-core`` API reference.
+This section provides descriptions of PyDYNA subpackages, submodules, classes,
+methods, and attributes. Use the search feature or click links to view API documentation.
 
 .. toctree::
    :titlesonly:

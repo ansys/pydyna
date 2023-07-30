@@ -2,7 +2,7 @@
 Material API
 =============
 
-Module to create material
+Module for creating a material.
 """
 
 from enum import Enum
@@ -12,27 +12,29 @@ from .dynabase import *  # noqa : F403
 
 
 class Air:
-    """Create material of air.
+    """Defines an air material.
 
     Parameters
     ----------
     name : string
-        material name.
-    mass_density : float
-        mass density.
-    pressure_cutoff : float
-        pressure cutoff.
-    initial_internal_energy : float
+        Material name.
+    mass_density : float, optional
+        Mass density. The default is ``0.00128``.
+    pressure_cutoff : float, optional
+        pressure cutoff. The default is ``1e-09``.
+    initial_internal_energy : float, optional
         Initial internal energy per unit reference volume.
-    initial_relative_volume : float
-        Initial relative volume.
-    equation_coefficient : list
-        six polynomial equation coefficient.
+        The default is ``2.5331e-06``.
+    initial_relative_volume : float, optional
+        Initial relative volume. The default is ``1.0``.
+    equation_coefficient : list, optional
+        Six polynomial equation coefficient. The default is
+        ``[0, 0, 0, 0, 0.4, 0.4, 0])``.
 
     Returns
     -------
     bool
-        "True" when successful, "False" when failed
+        ``True`` when successful, ``False`` when failed.
     """
 
     def __init__(
@@ -50,7 +52,7 @@ class Air:
         self.equation_coefficient = equation_coefficient
 
     def create(self, stub):
-        """Create air material."""
+        """Create an air material."""
         ret = stub.CreateEOSLinearPolynomial(
             EOSLinearPolynomialRequest(
                 ci=self.equation_coefficient,
@@ -66,12 +68,34 @@ class Air:
 
 
 class Liner:
-    """Define material of liner.
+    """Defines a liner material.
+
+    Parameters
+    ----------
+    mass_density : float, optional
+        Mass density. The default is ``8.96``.
+    shear_modulus : float, optional
+    youngs_modulus : float, optional
+    poissons_ratio : float optional
+    constants : list, optional
+    melt_temperature : int, optional
+    room_temperature : int, optional
+    strain_rate : float, optional
+    specific_heat : float, optional
+    tensile_failure_stress : float, optional
+    spall_type, int, optional
+    iteration_option ; int, optional
+    failure_parameters : list, optional
+    equation_constants, list, optional
+    volume_correction_coefficient : float, optional
+    initial_internal_energy : float, optional
+        Initial internal energy per unit reference volume.
+        The default is ``0``.
 
     Returns
     -------
     bool
-        "True" when successful, "False" when failed
+        ``True`` when successful, ``False`` when failed.
     """
 
     def __init__(
@@ -111,7 +135,7 @@ class Liner:
         self.initial_internal_energy = initial_internal_energy
 
     def create(self, stub):
-        """Create material of liner."""
+        """Create a liner material."""
         ret = stub.CreateMatJohnsonCook(
             MatJohnsonCookRequest(
                 ro=self.mass_density,
@@ -143,17 +167,20 @@ class Liner:
 
 
 class HighExplosive:
-    """Define material of high explosive.
+    """Defines a high-explosive material.
 
     Parameters
     ----------
-    name : string
-        material name.
+    mass_density : float, optional
+        Mass density. The default is ``8.96``.
+    detonation_velocity : float, optional
+    chapman_jouget_pressure : float, optional
+    jwl_equation_parameters : list, optional
 
     Returns
     -------
     bool
-        "True" when successful, "False" when failed
+        ``True`` when successful, ``False`` when failed.
     """
 
     def __init__(
@@ -169,7 +196,7 @@ class HighExplosive:
         self.jwl_equation_parameters = jwl_equation_parameters
 
     def create(self, stub):
-        """Create material of high explosive."""
+        """Create a high-explosive material."""
         ret = stub.CreateMatHighExplosiveBurn(
             MatHighExplosiveBurnRequest(
                 ro=self.mass_density,
@@ -185,24 +212,24 @@ class HighExplosive:
 
 
 class Vacuum:
-    """Define material null.
+    """Defines a vacuum material.
 
     Parameters
     ----------
     estimated_material_density : float
-        Estimated material density.
+        Estimated material density. The default is ``1e-09``.
 
     Returns
     -------
     bool
-        "True" when successful, "False" when failed
+        ``True`` when successful, ``False`` when failed.
     """
 
     def __init__(self, estimated_material_density=1e-9):
         self.estimated_material_density = estimated_material_density
 
     def create(self, stub):
-        """Create null material."""
+        """Create a null material."""
         ret = stub.CreateMatVacuum(MatVacuumRequest(rho=self.estimated_material_density))
         self.material_id = ret.mid
         self.eos_id = 0
@@ -211,14 +238,24 @@ class Vacuum:
 
 
 class MatNull:
-    """Define null material,The Young's modulus and Poisson's ratio are used only for setting the contact stiffness."""
+    """Defines a null material.
+
+    Young's modulus and Poisson's ratio are used to set the contact stiffness.
+
+    Parameters
+    ----------
+    mass_density : float, optional
+        Mass density. The default is ``0``.
+    pressure_cutoff :
+
+    """
 
     def __init__(self, mass_density=0, pressure_cutoff=0):
         self.ro = mass_density
         self.pc = pressure_cutoff
 
     def create(self, stub):
-        """Create null material."""
+        """Create a null material."""
         ret = stub.CreateMatNull(MatNullRequest(ro=self.ro, pc=self.pc))
         self.material_id = ret.mid
         self.name = "NULL"
@@ -226,13 +263,19 @@ class MatNull:
 
 
 class EMEOSTabulated1:
-    """Define the electrical conductivity or permeability."""
+    """Defines electrical conductivity or permeability.
+
+    Parameters
+    ----------
+    curve : Curve
+
+    """
 
     def __init__(self, curve=None):
         self.curve = curve
 
     def create(self, stub):
-        """Create EM EOS tabulated1."""
+        """Create an EM EOS tabulated1."""
         lcid = self.curve.create(stub)
         ret = stub.CreateEMEOSTabulated1(
             EMEOSTabulated1Request(
@@ -252,7 +295,7 @@ class EMMATTYPE(Enum):
 
 
 class MatAdditional:
-    """Define additional properties for material."""
+    """Defines additional properties for a material."""
 
     def __init__(self):
         self.em = False
@@ -262,7 +305,15 @@ class MatAdditional:
 
     def set_electromagnetic_property(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None):
         """Define the electromagnetic material type and properties
-        for a material whose permeability equals the free space permeability."""
+        for a material whose permeability equals the free space permeability.
+
+        Parameters
+        ----------
+        material_type :
+        initial_conductivity :
+        eos :
+
+        """
         self.em = True
         self.em_material_type = material_type.value
         self.em_initial_conductivity = initial_conductivity
@@ -270,7 +321,15 @@ class MatAdditional:
 
     def set_em_permeability_equal(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None):
         """Define the electromagnetic material type and properties
-        for a material whose permeability equals the free space permeability."""
+        for a material whose permeability equals the free space permeability.
+
+        Parameters
+        ----------
+        material_type :
+        initial_conductivity :
+        eos :
+
+        """
         self.em_mat_type = 1
         self.em_material_type = material_type.value
         self.em_initial_conductivity = initial_conductivity
@@ -280,7 +339,16 @@ class MatAdditional:
         self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None, murel=0
     ):
         """Define the electromagnetic material type and properties
-        for a material whose permeability equals the free space permeability."""
+        for a material whose permeability equals the free space permeability.
+
+        Parameters
+        ----------
+        material_type :
+        initial_conductivity :
+        eos :
+        murel :
+
+        """
         self.em_mat_type = 2
         self.em_material_type = material_type.value
         self.em_initial_conductivity = initial_conductivity
@@ -289,14 +357,28 @@ class MatAdditional:
 
     def set_em_conducting_shells_3d(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0):
         """Define the electromagnetic material type and properties
-        for a material whose permeability equals the free space permeability."""
+        for a material whose permeability equals the free space permeability.
+
+        Parameters
+        ----------
+        material_type :
+        initial_conductivity :
+
+        """
         self.em_mat_type = 4
         self.em_material_type = material_type.value
         self.em_initial_conductivity = initial_conductivity
 
     def set_em_resistive_heating_2d(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0):
         """Define the electromagnetic material type and properties
-        for a material whose permeability equals the free space permeability."""
+        for a material whose permeability equals the free space permeability.
+
+        Parameters
+        ----------
+        material_type :
+        initial_conductivity :
+
+        """
         self.em_mat_type = 4
         self.em_material_type = material_type.value
         self.em_initial_conductivity = initial_conductivity
@@ -304,7 +386,16 @@ class MatAdditional:
     def set_thermal_isotropic(
         self, density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0
     ):
-        """Define isotropic thermal properties."""
+        """Define isotropic thermal properties.
+
+        Parameters
+        ----------
+        density :
+        generation_rate :
+        generation_rate_multiplier :
+        specific_heat :
+        conductivity :
+        """
         self.thermal_isotropic = True
         self.tro = density
         self.tgrlc = generation_rate
@@ -313,7 +404,13 @@ class MatAdditional:
         self.tc = conductivity
 
     def create(self, stub, matid):
-        """Define additional properties for material."""
+        """Define additional properties for a material.
+
+        Parameters
+        ----------
+        matid :
+            Material ID.
+        """
         if self.em_mat_type:
             if self.em_eos is not None:
                 eosid = self.em_eos.create(stub)
@@ -363,7 +460,7 @@ class MatAdditional:
 
 
 class MatElastic(MatAdditional):
-    """Define an isotropic hypoelastic material."""
+    """Defines an isotropic hypoelastic material."""
 
     def __init__(self, mass_density=0, young_modulus=0, poisson_ratio=0.3):
         MatAdditional.__init__(self)
@@ -372,7 +469,7 @@ class MatElastic(MatAdditional):
         self.pr = poisson_ratio
 
     def create(self, stub):
-        """Create elastic material."""
+        """Create an elastic material."""
         ret = stub.CreateMatElastic(MatElasticRequest(ro=self.ro, e=self.e, pr=self.pr))
         self.material_id = ret.mid
         self.name = "Elastic"
@@ -381,7 +478,7 @@ class MatElastic(MatAdditional):
 
 
 class MatElasticPlasticThermal(MatAdditional):
-    """Define temperature dependent material coefficients."""
+    """Defines temperature-dependent material coefficients."""
 
     def __init__(
         self,
@@ -419,7 +516,9 @@ class MatElasticPlasticThermal(MatAdditional):
 
 
 class MatRigid(MatAdditional):
-    """Define rigid material,Parts made from this material are considered to belong to a rigid body."""
+    """Defines a rigid material.
+
+    Parts made from a rigid material are considered to belong to a rigid body."""
 
     def __init__(
         self,
@@ -457,7 +556,7 @@ class MatRigid(MatAdditional):
 
 
 class MatThermalIsotropic:
-    """Define isotropic thermal properties."""
+    """Defines isotropic thermal properties."""
 
     def __init__(self, density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0):
         self.tro = density
@@ -483,7 +582,15 @@ class MatThermalIsotropic:
 
 
 class MatRigidDiscrete:
-    """Define a rigid material for shells or solids."""
+    """Defines a rigid material for shells or solids.
+
+    Parameters
+    ----------
+    mass_density :
+    young_modulus :
+    poisson_ratio :
+
+    """
 
     def __init__(self, mass_density=0, young_modulus=0, poisson_ratio=0.3):
         self.ro = mass_density
@@ -491,7 +598,7 @@ class MatRigidDiscrete:
         self.pr = poisson_ratio
 
     def create(self, stub):
-        """Create rigid material."""
+        """Create a rigid material."""
         ret = stub.CreateMatRigidDiscrete(MatRigidDiscreteRequest(ro=self.ro, e=self.e, pr=self.pr))
         self.material_id = ret.mid
         self.name = "RIGID Discrete"
@@ -499,9 +606,20 @@ class MatRigidDiscrete:
 
 
 class MatPiecewiseLinearPlasticity:
-    """Define an elasto-plastic material with an arbitrary stress
-    as a function of strain curve that can also have an arbitrary
-    strain rate dependency."""
+    """Defines an elasto-plastic material with an arbitrary stress.
+
+    The arbitrary stress is defined as a function of strain curve
+    that can also have an arbitrary strain rate dependency.
+
+    Parameters
+    ----------
+    mass_density :
+    young_modulus :
+    poisson_ratio :
+    yield_stress :
+    tangent_modulus :
+
+    """
 
     def __init__(
         self,
@@ -518,7 +636,7 @@ class MatPiecewiseLinearPlasticity:
         self.etan = tangent_modulus
 
     def create(self, stub):
-        """Create piecewise linear plasticity material."""
+        """Create a piecewise linear plasticity material."""
         ret = stub.CreateMatPiecewiseLinearPlasticity(
             MatPiecewiseLinearPlasticityRequest(ro=self.ro, e=self.e, pr=self.pr, sigy=self.sigy, etan=self.etan)
         )
@@ -528,8 +646,22 @@ class MatPiecewiseLinearPlasticity:
 
 
 class MatModifiedPiecewiseLinearPlasticity:
-    """Define an elasto-plastic material supporting an arbitrary
-    stress as a function of strain curve as well as arbitrary strain rate dependency."""
+    """Defines an elasto-plastic material supporting an arbitrary stress.
+
+    The arbitrary stress is defined as a function of strain curve and arbitrary
+    strain rate dependency.
+
+    Parameters
+    ----------
+    mass_density :
+    young_modulus :
+    poisson_ratio :
+    yield_stress :
+    tangent_modulus :
+    plastic_strain_to_failure :
+    integration_points_number :
+
+    """
 
     def __init__(
         self,
@@ -550,7 +682,7 @@ class MatModifiedPiecewiseLinearPlasticity:
         self.numint = integration_points_number
 
     def create(self, stub):
-        """Create modified piecewise linear plasticity."""
+        """Create a modified piecewise linear plasticity."""
         ret = stub.CreateMatModifiedPiecewiseLinearPlasticity(
             MatModifiedPiecewiseLinearPlasticityRequest(
                 ro=self.ro,
@@ -568,7 +700,19 @@ class MatModifiedPiecewiseLinearPlasticity:
 
 
 class MatSpotweld:
-    """Define material for spotweld."""
+    """Defines a spotweld material.
+
+    Parameters
+    ----------
+    mass_density :
+    young_modulus :
+    poisson_ratio :
+    yield_stress :
+    plastic_hardening_modulus :
+    axial_force_resultant_at_failure :
+    force_resultant_nrs_at_failure :
+    force_resultant_nrt_at_failure :
+    """
 
     def __init__(
         self,
@@ -591,7 +735,7 @@ class MatSpotweld:
         self.nrt = force_resultant_nrt_at_failure
 
     def create(self, stub):
-        """Create material for spotweld."""
+        """Create a spotweld material."""
         ret = stub.CreateMatSpotweld(
             MatSpotweldRequest(
                 ro=self.ro,
@@ -610,22 +754,22 @@ class MatSpotweld:
 
 
 class MatFabric:
-    """Define material for airbag.
+    """Define an airbag material.
 
     Parameters
     ----------
-    mass_density : float
-        Mass density.
-    young_modulus_longitudinal_direction : float
-        Young's modulus-longitudinal direction.
-    young_modulus_transverse_direction : float
-        Young's modulus-transverse direction.
-    minor_poisson_ratio : float
-        Minor Poisson's ratio ba direction.
-    major_poisson_ratio : float
-        Major Poisson's ratio ab direction.
-    shear_modulus : float
-        shear modulus in the ab direction.
+    mass_density : float, optional
+        Mass density. The default is ``0``.
+    young_modulus_longitudinal_direction : float, optional
+        Young's modulus-longitudinal direction. The default is ``0``.
+    young_modulus_transverse_direction : float, optional
+        Young's modulus-transverse direction. The default is ``0``.
+    minor_poisson_ratio : float, optional
+        Minor Poisson's ratio ba direction. The default is ``0.35``.
+    major_poisson_ratio : float, optional
+        Major Poisson's ratio ab direction. The default is ``0.35``.
+    shear_modulus : float, optional
+        Shear modulus in the ab direction. The default is ``0``.
     """
 
     def __init__(
@@ -645,7 +789,7 @@ class MatFabric:
         self.gab = shear_modulus
 
     def create(self, stub):
-        """Create material for airbag."""
+        """Create an airbag material."""
         ret = stub.CreateMatFabric(
             MatFabricRequest(
                 ro=self.ro,
@@ -661,8 +805,10 @@ class MatFabric:
 
 
 class MatSpringNonlinearElastic:
-    """Provide a nonlinear elastic translational and rotational spring with
-    arbitrary force as a function of displacement and moment as a function of rotation.
+    """Provides a nonlinear elastic translational and rotational spring with an arbitrary force.
+
+    The arbitrary force is defined as a function of displacement. The moment is defined
+    as a function of rotation.
 
     Parameters
     ----------
@@ -682,22 +828,28 @@ class MatSpringNonlinearElastic:
 
 
 class MatDamperViscous:
-    """Provide a linear translational or rotational damper located between two nodes."""
+    """Provides a linear translational or rotational damper located between two nodes.
+
+    Parameters
+    ----------
+    damping_constant :
+    """
 
     def __init__(self, damping_constant=0):
         self.dc = damping_constant
 
     def create(self, stub):
-        """Create material damper viscous."""
+        """Create a material damper viscous."""
         ret = stub.CreateMatDamperViscous(MatDamperViscousRequest(dc=self.dc))
         self.material_id = ret.mid
         logging.info("Material damper viscous Created...")
 
 
 class MatDamperNonlinearViscous:
-    """Provide a viscous translational damper with an arbitrary force as a
-    function of velocity dependency or a rotational damper with an arbitrary
-    moment as a function of rotational velocity dependency.
+    """Provides a viscous translational damper with an arbitrary force.
+
+    The arbitrary force is defined as a function of velocity dependency or a rotational
+    damper with an arbitrary moment as a function of rotational velocity dependency.
 
     Parameters
     ----------
@@ -710,7 +862,7 @@ class MatDamperNonlinearViscous:
         self.curve = curve
 
     def create(self, stub):
-        """Create material damper nonlinear viscous."""
+        """Create a material damper nonlinear viscous."""
         lcdr = self.curve.create(stub)
         ret = stub.CreateMatDamperNonlinearViscous(MatDamperNonlinearViscousRequest(lcdr=lcdr))
         self.material_id = ret.mid
@@ -718,7 +870,16 @@ class MatDamperNonlinearViscous:
 
 
 class MatSPHIncompressibleFluid:
-    """Define an SPH incompressible fluid material."""
+    """Defines an ISPH (incompressible smooth particle hyrodynamics) fluid material.
+
+    Parameters
+    ----------
+    mass_density : float, optional
+        Mass density. The default is ``0``.
+    dynamic_viscosity :
+    tension_coefficient1 :
+    tension_coefficient2 :
+    """
 
     def __init__(self, mass_density=0, dynamic_viscosity=0, tension_coefficient1=0, tension_coefficient2=0):
         self.ro = mass_density
@@ -727,7 +888,7 @@ class MatSPHIncompressibleFluid:
         self.gamma2 = tension_coefficient2
 
     def create(self, stub):
-        """Create SPH incompressible fluid material."""
+        """Create an ISPH fluid material."""
         ret = stub.CreateMatSPHIncompressibleFluid(
             MatSPHIncompressibleFluidRequest(ro=self.ro, mu=self.mu, gamma1=self.gamma1, gamma2=self.gamma2)
         )
@@ -737,7 +898,16 @@ class MatSPHIncompressibleFluid:
 
 
 class MatSPHIncompressibleStructure:
-    """Define an SPH incompressible structure material."""
+    """Defines an ISPH structure material.
+
+    Parameters
+    ----------
+    mass_density : float, optional
+        Mass density. The default is ``0``.
+    adhension_coefficient :
+    roughness_coefficient :
+    adhesion_scaling_coefficient :
+    """
 
     def __init__(
         self,
@@ -752,7 +922,7 @@ class MatSPHIncompressibleStructure:
         self.adh = adhesion_scaling_coefficient
 
     def create(self, stub):
-        """Create SPH incompressible structure material."""
+        """Create an ISPH structure material."""
         ret = stub.CreateMatSPHIncompressibleStructure(
             MatSPHIncompressibleStructureRequest(ro=self.ro, beta=self.beta, rough=self.rough, adh=self.adh)
         )
