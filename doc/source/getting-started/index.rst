@@ -107,7 +107,7 @@ with these commands:
 
 .. code:: bash
 
-    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.8.zip -d wheelhouse
+    unzip ansys-dyna-core-v0.3.3-wheelhouse-Linux-3.8.zip -d wheelhouse
     pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
 
 If you're on Windows with Python 3.8, unzip the wheelhouse archive to a ``wheelhouse``
