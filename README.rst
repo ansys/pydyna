@@ -1,3 +1,35 @@
+PyDYNA
+========
+|pyansys| |python| |pypi| |GH-CI| |codecov| |MIT| |black|
+
+.. |pyansys| image:: https://img.shields.io/badge/Py-Ansys-ffc107.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABDklEQVQ4jWNgoDfg5mD8vE7q/3bpVyskbW0sMRUwofHD7Dh5OBkZGBgW7/3W2tZpa2tLQEOyOzeEsfumlK2tbVpaGj4N6jIs1lpsDAwMJ278sveMY2BgCA0NFRISwqkhyQ1q/Nyd3zg4OBgYGNjZ2ePi4rB5loGBhZnhxTLJ/9ulv26Q4uVk1NXV/f///////69du4Zdg78lx//t0v+3S88rFISInD59GqIH2esIJ8G9O2/XVwhjzpw5EAam1xkkBJn/bJX+v1365hxxuCAfH9+3b9/+////48cPuNehNsS7cDEzMTAwMMzb+Q2u4dOnT2vWrMHu9ZtzxP9vl/69RVpCkBlZ3N7enoDXBwEAAA+YYitOilMVAAAAAElFTkSuQmCC
+   :target: https://docs.pyansys.com/
+   :alt: PyAnsys
+
+.. |python| image:: https://img.shields.io/pypi/pyversions/ansys-dyna-core?logo=pypi
+   :target: https://pypi.org/project/ansys-dyna-core/
+   :alt: Python
+
+.. |pypi| image:: https://img.shields.io/pypi/v/ansys-dyna-core.svg?logo=python&logoColor=white
+   :target: https://pypi.org/project/ansys-dyna-core
+   :alt: PyPI
+
+.. |codecov| image:: https://codecov.io/gh/ansys/ansys-dyna-core/branch/main/graph/badge.svg
+   :target: https://codecov.io/gh/ansys/pydyna
+   :alt: Codecov
+
+.. |GH-CI| image:: https://github.com/ansys/pydyna/actions/workflows/ci_cd.yml/badge.svg
+   :target: https://github.com/ansys/pydyna/actions/workflows/ci_cd.yml
+   :alt: GH-CI
+
+.. |MIT| image:: https://img.shields.io/badge/License-MIT-yellow.svg
+   :target: https://opensource.org/licenses/MIT
+   :alt: MIT
+
+.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg?style=flat
+   :target: https://github.com/psf/black
+   :alt: Black
+
 Overview
 ========
 PyDYNA is a Pythonic package for providing a more convenient and complete way to
@@ -45,98 +77,105 @@ Usage
 =====
 Here is a basic preprocessing example:
 
+Get the input file from "pydyna\\src\\ansys\\dyna\\core\\pre\\examples\\explicit\\ball_plate\\ball_plate.k"
+
+The follow example can be obtained from "pydyna\examples\Explicit\ball_plate.py"
+
 .. code:: python
 
     import os
     import sys
     from ansys.dyna.core.pre.dynasolution import DynaSolution
-    from ansys.dyna.core.pre.dynaicfd import (
-        DynaICFD,
-        ICFDAnalysis,
-        MatICFD,
-        ICFDPart,
-        ICFDDOF,
-        Curve,
-        ICFDVolumePart,
-        MeshedVolume,
+    from ansys.dyna.core.pre.dynamech import (
+        DynaMech,
+        Velocity,
+        PartSet,
+        ShellPart,
+        SolidPart,
+        NodeSet,
+        Contact,
+        ContactSurface,
+        ShellFormulation,
+        SolidFormulation,
+        ContactType,
+        AnalysisType
+    )
+    from ansys.dyna.core.pre.dynamaterial import (
+        MatRigid,
+        MatPiecewiseLinearPlasticity,
     )
     from ansys.dyna.core.pre import examples
-    # sphinx_gallery_thumbnail_path = '_static/pre/icfd/cylinderflow.png'
 
     hostname = "localhost"
     if len(sys.argv) > 1:
         hostname = sys.argv[1]
+    solution = DynaSolution(hostname)
 
-    icfd_solution = DynaSolution(hostname)
-    # Import the initial mesh data(nodes and elements)
     fns = []
-    path = os.getcwd()+os.sep
-    fns.append(path+"cylinder_flow.k")
-    icfd_solution.open_files(fns)
-    # Set total time of simulation
-    icfd_solution.set_termination(termination_time=100)
+    path = examples.ball_plate + os.sep
+    fns.append(path+"ball_plate.k")
+    solution.open_files(fns)
 
-    icfd = DynaICFD()
-    icfd_solution.add(icfd)
+    solution.set_termination(termination_time=10)
 
-    icfdanalysis = ICFDAnalysis()
-    icfdanalysis.set_timestep()
-    icfd.add(icfdanalysis)
+    ballplate = DynaMech(AnalysisType.NONE)
+    solution.add(ballplate)
 
-    # define model
-    mat = MatICFD(flow_density=1.0, dynamic_viscosity=0.005)
+    matrigid = MatRigid(mass_density=7.83e-6, young_modulus=207, poisson_ratio=0.3)
+    matplastic = MatPiecewiseLinearPlasticity(mass_density=7.83e-6, young_modulus=207, yield_stress=0.2, tangent_modulus=2)
 
-    part_inflow = ICFDPart(1)
-    part_inflow.set_material(mat)
-    part_inflow.set_prescribed_velocity(dof=ICFDDOF.X, motion=Curve(x=[0, 10000], y=[1, 1]))
-    part_inflow.set_prescribed_velocity(dof=ICFDDOF.Y, motion=Curve(x=[0, 10000], y=[0, 0]))
-    icfd.parts.add(part_inflow)
+    plate = ShellPart(1)
+    plate.set_element_formulation(ShellFormulation.BELYTSCHKO_TSAY)
+    plate.set_material(matplastic)
+    plate.set_thickness(1)
+    plate.set_integration_points(5)
+    ballplate.parts.add(plate)
 
-    part_outflow = ICFDPart(2)
-    part_outflow.set_material(mat)
-    part_outflow.set_prescribed_pressure(pressure=Curve(x=[0, 10000], y=[0, 0]))
-    icfd.parts.add(part_outflow)
+    ball = SolidPart(2)
+    ball.set_material(matrigid)
+    ball.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
+    ballplate.parts.add(ball)
 
-    part_symmetric = ICFDPart(3)
-    part_symmetric.set_material(mat)
-    part_symmetric.set_free_slip()
-    icfd.parts.add(part_symmetric)
+    selfcontact = Contact(type=ContactType.AUTOMATIC)
+    surf1 = ContactSurface(PartSet([1, 2]))
+    selfcontact.set_slave_surface(surf1)
+    ballplate.contacts.add(selfcontact)
 
-    part_wall = ICFDPart(4)
-    part_wall.set_material(mat)
-    part_wall.set_non_slip()
-    part_wall.compute_drag_force()
-    part_wall.set_boundary_layer(number=3)
-    icfd.parts.add(part_wall)
+    spc = [34,35,51,52,68,69,85,86,102,103,119,120,136,137,153,154,170,171,187,188,204,205,221,222,238,239,255,256]
+    for i in range(1,19):
+        spc.append(i)
+    for i in range(272,290):
+        spc.append(i)
+    ballplate.boundaryconditions.create_spc(NodeSet(spc),rx=False,ry=False,rz=False)
 
-    partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
-    partvol.set_material(mat)
-    icfd.parts.add(partvol)
-    # define the volume space that will be meshed,The boundaries
-    # of the volume are the surfaces "spids"
-    meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
-    icfd.add(meshvol)
+    for i in range(1,1652):
+        ballplate.initialconditions.create_velocity_node(i,trans=Velocity(0, 0, -10))
 
-    icfd_solution.create_database_binary(dt=1)
-    serverpath = icfd_solution.save_file()
-    serveroutfile = '/'.join((serverpath,"cylinder_flow.k"))
+    solution.set_output_database(glstat=0.1, matsum=0.1, sleout=0.1)
+    solution.create_database_binary(dt=1)
+    serverpath = solution.save_file()
+
+    serveroutfile = '/'.join((serverpath,"ball_plate.k"))
     downloadpath = os.path.join(os.getcwd(), "output")
     if not os.path.exists(downloadpath):
         os.makedirs(downloadpath)
-    downloadfile = os.path.join(downloadpath,"cylinder_flow.k")
-    icfd_solution.download(serveroutfile,downloadfile)
+    downloadfile = os.path.join(downloadpath,"ball_plate.k")
+    solution.download(serveroutfile,downloadfile)
     
 Here is a basic solving example:
 
+The follow example can be obtained from "pydyna\\examples\\solver\\ball_plate_solver.py"
+
 .. code:: python
+
+    import ansys.dyna.core.solver as solver
 
     hostname = "localhost"
     port = "5000"
-    import ansys.dyna.core.solver as solver
     dyna=solver.DynaSolver(hostname,port)           # connect to the container
-    dyna.push("cylinder_flow.k")                            # push an input file
+    dyna.push("./output/ball_plate.k")                            # push an input file
     dyna.start(4)                                   # start 4 ranks of mppdyna
-    dyna.run("i=./output/cylinder_flow.k memory=10m ncycle=20000")   # begin execution
+    dyna.run("i=ball_plate.k memory=10m ncycle=20000")   # begin execution
 
 Here is a basic postprocessing example:
 
