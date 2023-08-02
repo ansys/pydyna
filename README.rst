@@ -79,7 +79,7 @@ Here is a basic preprocessing example:
 
 Get the input file from "pydyna\\src\\ansys\\dyna\\core\\pre\\examples\\explicit\\ball_plate\\ball_plate.k"
 
-The follow example can be obtained from "pydyna\examples\Explicit\ball_plate.py"
+The follow example can be obtained from "pydyna\\examples\\Explicit\\ball_plate.py"
 
 .. code:: python
 

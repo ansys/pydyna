@@ -119,8 +119,10 @@ class Curve:
         self.ordinate = y
         self.func = func
 
-    def create(self, stub):
+    def create(self, stub=None):
         """Create a curve."""
+        if stub is None:
+            stub = DynaBase.get_stub()
         if self.func != None:
             ret = stub.CreateDefineCurveFunction(DefineCurveFunctionRequest(function=self.func))
         else:
