@@ -383,6 +383,24 @@ class MatAdditional:
         self.em_material_type = material_type.value
         self.em_initial_conductivity = initial_conductivity
 
+    def set_em_randles_batmac(
+        self, positive_current_collector_conductivity=0, negative_current_collector_conductivity=0
+    ):
+        """Define two conductivities per EM node for special applications (Randles Batmac).
+
+        Parameters
+        ----------
+        positive_current_collector_conductivity : float
+            conductivities of the positive current collector materials
+        negative_current_collector_conductivity : float
+            conductivities of the negative current collector materials
+
+        """
+        self.em_mat_type = 6
+        self.em_material_type = 5
+        self.sigp = positive_current_collector_conductivity
+        self.sign = negative_current_collector_conductivity
+
     def set_thermal_isotropic(
         self, density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0
     ):
@@ -436,6 +454,10 @@ class MatAdditional:
                 stub.CreateEMMat004(
                     EMMat004Request(mid=matid, mtype=self.em_material_type, sigma=self.em_initial_conductivity)
                 )
+            elif self.em_mat_type == 6:
+                stub.CreateEMMat006(
+                    EMMat006Request(mid=matid, mtype=self.em_material_type, sigp=self.sigp, sign=self.sign)
+                )
         if self.em:
             if self.em_eos is not None:
                 eosid = self.em_eos.create(stub)
@@ -474,6 +496,29 @@ class MatElastic(MatAdditional):
         self.material_id = ret.mid
         self.name = "Elastic"
         MatAdditional.create(self, stub, self.material_id)
+        logging.info(f"Material {self.name} Created...")
+
+
+class MatPlasticKinematic:
+    """Define material of modelling isotropic and kinematic hardening plasticity."""
+
+    def __init__(
+        self, mass_density=0, young_modulus=0, poisson_ratio=0.3, yield_stress=0, tangent_modulus=0, hardening=0
+    ):
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr = poisson_ratio
+        self.sigy = yield_stress
+        self.etan = tangent_modulus
+        self.beta = hardening
+
+    def create(self, stub):
+        """Create plastic kinematic material."""
+        ret = stub.CreateMatPlasticKinematic(
+            MatPlasticKinematicRequest(ro=self.ro, e=self.e, pr=self.pr, sigy=self.sigy, etan=self.etan, beta=self.beta)
+        )
+        self.material_id = ret.mid
+        self.name = "Plastic Kinematic"
         logging.info(f"Material {self.name} Created...")
 
 
@@ -555,6 +600,32 @@ class MatRigid(MatAdditional):
         logging.info(f"Material {self.name} Created...")
 
 
+class MatCrushableFoam:
+    """Define material of modelling crushable foam."""
+
+    def __init__(
+        self, mass_density=0, young_modulus=0, poisson_ratio=0.3, yield_stress_curve=None, tensile_stress_cutoff=0
+    ):
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr = poisson_ratio
+        self.lcid = yield_stress_curve
+        self.tsl = tensile_stress_cutoff
+
+    def create(self, stub):
+        """Create crushable foam material."""
+        if self.lcid is not None:
+            cid = self.lcid.create(stub)
+        else:
+            cid = 0
+        ret = stub.CreateMatCrushableFoam(
+            MatCrushableFoamRequest(ro=self.ro, e=self.e, pr=self.pr, lcid=cid, tsl=self.tsl)
+        )
+        self.material_id = ret.mid
+        self.name = "Crushable Foam"
+        logging.info(f"Material {self.name} Created...")
+
+
 class MatThermalIsotropic:
     """Defines isotropic thermal properties."""
 
@@ -578,6 +649,30 @@ class MatThermalIsotropic:
         )
         self.material_id = ret.mid
         self.name = "Isotropic thermal"
+        logging.info(f"Material {self.name} Created...")
+
+
+class MatThermalOrthotropic:
+    """Defines orthotropic thermal properties."""
+
+    def __init__(self, specific_heat=0, conductivity_x=0, conductivity_y=0, conductivity_z=0):
+        self.hc = specific_heat
+        self.k1 = conductivity_x
+        self.k2 = conductivity_y
+        self.k3 = conductivity_z
+
+    def create(self, stub):
+        """Create orthotropic thermal material."""
+        ret = stub.CreateMatThermalOrthotropic(
+            MatThermalOrthotropicRequest(
+                hc=self.hc,
+                k1=self.k1,
+                k2=self.k2,
+                k3=self.k3,
+            )
+        )
+        self.material_id = ret.mid
+        self.name = "Orthotropic thermal"
         logging.info(f"Material {self.name} Created...")
 
 
