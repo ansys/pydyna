@@ -54,11 +54,11 @@ $#     pid       dof       vad      lcid        sf       vid     death     birth
 $#     pid      lcid        sf     death     birth
          2         3       0.0       0.0       0.0
 *ICFD_CONTROL_IMPOSED_MOVE
-$#     pid      lcvx      lcvy      lcvz      vadt
-         4         0         4         0         0
+$#     pid      lcvx      lcvy      lcvz      vadt       idr
+         4         0         4         0         0         0
 *ICFD_CONTROL_IMPOSED_MOVE
-$#     pid      lcvx      lcvy      lcvz      vadt
-         7         0         5         0         0
+$#     pid      lcvx      lcvy      lcvz      vadt       idr
+         7         0         5         0         0         0
 *ICFD_CONTROL_TIME
 $#     ttm        dt       cfl    lcidsf     dtmin     dtmax    dtinit    tdeath
       40.0      0.05       1.0         0       0.0       0.0       0.0       0.0
