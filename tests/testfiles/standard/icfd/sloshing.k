@@ -34,8 +34,8 @@ $#     pid
 $#     pid
          2
 *ICFD_CONTROL_IMPOSED_MOVE
-$#     pid      lcvx      lcvy      lcvz      vadt
-         0         1         0         0         0
+$#     pid      lcvx      lcvy      lcvz      vadt       idr
+         0         1         0         0         0         0
 *ICFD_CONTROL_TIME
 $#     ttm        dt       cfl    lcidsf     dtmin     dtmax    dtinit    tdeath
        1.0      0.02       1.0         0       0.0       0.0       0.0       0.0

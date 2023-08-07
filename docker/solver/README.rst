@@ -27,15 +27,20 @@ Prerequisites
 * Download the latest Linux release artifacts for the Linux Docker container:
   `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/tag/v0.3.1/mppdyna_docker_centos7.zip>`_.
 
-* Move these ZIP files to a a local directory ``local_image_build_dir``. 
+* Move these ZIP files to the directory of pydyna/docker/solver and unzip the mppdyna_docker_centos7.zip file.
 
+   The files in this folder should look similar to this:
+
+   .. code:: bash
+
+       >>> Dockerfile README.rst do_build docker-compose.yml docker_dir mpi mppdyna_docker_centos7.zip ssh                                        IMAGE ID       CREATED          SIZE
 
 Build the Docker image
 ----------------------
 
 Once all prerequisites are met, perform these steps to build the Docker image:
 
-#. In your terminal, go to the ``local_image_build_dir`` directory.
+#. In your terminal, go to the ``pydyna/docker/solver`` directory.
 #. Run this Docker command:
 
    .. code:: bash

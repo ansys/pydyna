@@ -42,7 +42,7 @@ $#    nsid       cid      dofx      dofy      dofz     dofrx     dofry     dofrz
          1         0         1         1         1         1         1         1
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         1                                        MECH      1                                                 
+         1                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        163       166       169       172       175       178       181       184
        187       307       310       313       316       319       322       391
@@ -84,7 +84,7 @@ $#     es1       es2       es3       es4       es5       es6       es7       es8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         2                                        MECH      1                                                 
+         2                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        290       292       294       296       298       300       302       304
        306       380       382       384       386       388       390       482
