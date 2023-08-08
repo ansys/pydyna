@@ -113,21 +113,22 @@ class Curve:
 
     """
 
-    def __init__(self, sfo=1, x=[], y=[], func=None):
+    def __init__(self, sfo=1, x=[], y=[], func=None, title=""):
         self.sfo = sfo
         self.abscissa = x
         self.ordinate = y
         self.func = func
+        self.title = title
 
     def create(self, stub=None):
         """Create a curve."""
         if stub is None:
             stub = DynaBase.get_stub()
         if self.func != None:
-            ret = stub.CreateDefineCurveFunction(DefineCurveFunctionRequest(function=self.func))
+            ret = stub.CreateDefineCurveFunction(DefineCurveFunctionRequest(function=self.func, title=self.title))
         else:
             ret = stub.CreateDefineCurve(
-                DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate)
+                DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate, title=self.title)
             )
         self.id = ret.id
         logging.info(f"Curve {self.id} defined...")
@@ -1529,6 +1530,7 @@ class ImplicitAnalysis:
         self.defined_dynamic = False
         self.defined_eigenvalue = False
         self.defined_solution = False
+        self.defined_mass_matrix = False
         self.imflag = analysis_type.value
         self.dt0 = initial_timestep_size
         self.stub = DynaBase.get_stub()
@@ -1640,6 +1642,10 @@ class ImplicitAnalysis:
         self.maxref = stiffness_reformation_limit
         self.abstol = absolute_convergence_tolerance
 
+    def set_consistent_mass_matrix(self):
+        """Use the consistent mass matrix in implicit dynamics and eigenvalue solutions."""
+        self.defined_mass_matrix = True
+
     def create(self):
         """Create an implicit analysis."""
         if self.defined == False:
@@ -1662,6 +1668,8 @@ class ImplicitAnalysis:
                     nsolver=self.nsolver, ilimit=self.ilimit, maxref=self.maxref, abstol=self.abstol
                 )
             )
+        if self.defined_mass_matrix:
+            self.stub.CreateControlImplicitConsistentMass(ControlImplicitConsistentMassRequest(iflag=1))
 
 
 class ThermalAnalysisType(Enum):
