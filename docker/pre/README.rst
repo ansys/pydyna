@@ -22,16 +22,16 @@ Prerequisites
   see the `Docker website <https://www.docker.com>`_ for more information.
 
 * Download the latest Linux release artifacts for the Linux Docker container:
-  `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.1/linux-binaries.zip>`_.
+  `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.4/linux-binaries.zip>`_.
 
-* Move these ZIP files to the current location (``<repository-root-folder>/docker``).
+* Move these ZIP files to the current location (``<repository-root-folder>/docker/pre``).
 
 Starting the docker container
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 There are two ways to start docker container.
 
-1.bulid image and run container
+1.build image and run container
 
 
 Build the Docker image
