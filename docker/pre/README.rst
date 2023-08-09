@@ -28,7 +28,7 @@ Prerequisites
 * Download the latest Linux release artifacts for the Linux Docker container:
   `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.4/linux-binaries.zip>`_.
 
-* Move this ZIP files to the current location (``<repository-root-folder>/docker/pre``).
+* Move this ZIP file to the current location (``<repository-root-folder>/docker/pre``).
 
 Starting the docker container
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
