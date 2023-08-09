@@ -25,15 +25,15 @@ Prerequisites
   `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
 
 * Download the latest Linux release artifacts for the Linux Docker container:
-  `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/tag/v0.3.1/mppdyna_docker_centos7.zip>`_.
+  `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.3.4/mppdyna_docker_centos7.zip>`_.
 
-* Move these ZIP files to the directory of pydyna/docker/solver and unzip the mppdyna_docker_centos7.zip file.
+* Move this ZIP file to the current location (``<repository-root-folder>/docker/solver``) and unzip the mppdyna_docker_centos7.zip file.
 
    The files in this folder should look similar to this:
 
    .. code:: bash
 
-       >>> Dockerfile README.rst do_build docker-compose.yml docker_dir mpi mppdyna_docker_centos7.zip ssh                                        IMAGE ID       CREATED          SIZE
+       >>> Dockerfile README.rst do_build docker-compose.yml docker_dir mpi mppdyna_docker_centos7.zip
 
 Build the Docker image
 ----------------------
