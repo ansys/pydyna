@@ -113,21 +113,22 @@ class Curve:
 
     """
 
-    def __init__(self, sfo=1, x=[], y=[], func=None):
+    def __init__(self, sfo=1, x=[], y=[], func=None, title=""):
         self.sfo = sfo
         self.abscissa = x
         self.ordinate = y
         self.func = func
+        self.title = title
 
     def create(self, stub=None):
         """Create a curve."""
         if stub is None:
             stub = DynaBase.get_stub()
         if self.func != None:
-            ret = stub.CreateDefineCurveFunction(DefineCurveFunctionRequest(function=self.func))
+            ret = stub.CreateDefineCurveFunction(DefineCurveFunctionRequest(function=self.func, title=self.title))
         else:
             ret = stub.CreateDefineCurve(
-                DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate)
+                DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate, title=self.title)
             )
         self.id = ret.id
         logging.info(f"Curve {self.id} defined...")
@@ -145,6 +146,32 @@ class Function:
         ret = stub.CreateDefineFunction(DefineFunctionRequest(function=self.function))
         self.id = ret.id
         logging.info(f"Function {self.id} defined...")
+        return self.id
+
+
+class Table2D:
+    """Define a table,a curve ID is specified for each value defined in the table."""
+
+    def __init__(self, title=""):
+        self.title = title
+        self.valuecurvelist = []
+
+    def append(self, value=0, curve=None):
+        self.valuecurvelist.append((value, curve))
+
+    def create(self, stub=None):
+        """Create Table2D."""
+        if stub is None:
+            stub = DynaBase.get_stub()
+        vls = []
+        cvs = []
+        for obj in self.valuecurvelist:
+            vls.append(obj[0])
+            cid = obj[1].create(stub)
+            cvs.append(cid)
+        ret = stub.CreateDefineTable2D(DefineTable2DRequest(title=self.title, values=vls, cids=cvs))
+        self.id = ret.id
+        logging.info(f"Table2D {self.id} defined...")
         return self.id
 
 
@@ -885,6 +912,33 @@ class NodesetGeneral(BaseSet):
         return self.id
 
 
+class NodeSetBox(BaseSet):
+    """include the nodes inside boxes.
+
+    Parameters
+        ----------
+        boxes : list
+            A list of BOX.
+    """
+
+    def __init__(self, boxes=[]):
+        self.boxes = boxes
+        self.type = "NODESETBOX"
+
+    def create(self, stub):
+        """Create a node set."""
+        if len(self.boxes) <= 0:
+            return 0
+        boxids = []
+        for box in self.boxes:
+            boxid = box.create(stub)
+            boxids.append(boxid)
+        ret = stub.CreateNodeSet(NodeSetRequest(option="GENERAL", sid=0, genoption="BOX", entities=boxids))
+        self.id = ret.id
+        self.type = "NODESETBOX"
+        return self.id
+
+
 class PartSet(BaseSet):
     """Defines a set of parts with optional attributes."""
 
@@ -1529,6 +1583,7 @@ class ImplicitAnalysis:
         self.defined_dynamic = False
         self.defined_eigenvalue = False
         self.defined_solution = False
+        self.defined_mass_matrix = False
         self.imflag = analysis_type.value
         self.dt0 = initial_timestep_size
         self.stub = DynaBase.get_stub()
@@ -1640,6 +1695,10 @@ class ImplicitAnalysis:
         self.maxref = stiffness_reformation_limit
         self.abstol = absolute_convergence_tolerance
 
+    def set_consistent_mass_matrix(self):
+        """Use the consistent mass matrix in implicit dynamics and eigenvalue solutions."""
+        self.defined_mass_matrix = True
+
     def create(self):
         """Create an implicit analysis."""
         if self.defined == False:
@@ -1662,6 +1721,8 @@ class ImplicitAnalysis:
                     nsolver=self.nsolver, ilimit=self.ilimit, maxref=self.maxref, abstol=self.abstol
                 )
             )
+        if self.defined_mass_matrix:
+            self.stub.CreateControlImplicitConsistentMass(ControlImplicitConsistentMassRequest(iflag=1))
 
 
 class ThermalAnalysisType(Enum):

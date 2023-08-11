@@ -50,12 +50,12 @@ $#                a1                  o1
                200.0                 0.0
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         1                                        MECH      1                                                 
+         1                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        131                                                                      
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         2                                        MECH      1                                                 
+         2                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        131       651         0         0         0         0         0         0
 *ELEMENT_SHELL

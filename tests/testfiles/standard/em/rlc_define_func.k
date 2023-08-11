@@ -45,7 +45,7 @@ float rlc(float time,float emdt,float curr,float curr1,
             }
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         1                                        MECH      1                                                 
+         1                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        429       433       437       441       445       449       453       457
        461       465       469       473       477       481       485       489
@@ -53,7 +53,7 @@ $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        525                                                                      
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         2                                        MECH      1                                                 
+         2                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
         26        31        36        41        46        51        56        61
         66        71        76        81        86        91        96       101

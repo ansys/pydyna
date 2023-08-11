@@ -61,32 +61,32 @@ $#                a1                  o1
                 10.0                10.0
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         1                                        MECH      1                                                 
+         1                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        642       652       661       670       643         0         0         0
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         2                                        MECH      1                                                 
+         2                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        549       548       577       597       617         0         0         0
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         3                                        MECH      1                                                 
+         3                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        642       652       661       670       643         0         0         0
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         4                                        MECH      1                                                 
+         4                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        549       548       577       597       617         0         0         0
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         5                                        MECH      1                                                 
+         5                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        653       644       626       627       662         0         0         0
 *SET_NODE_LIST
 $#     sid       da1       da2       da3       da4    solver       its         -
-         6                                        MECH      1                                                 
+         6                                        MECH                          
 $#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
        521       517       513       509       525         0         0         0
 *SET_PART_LIST

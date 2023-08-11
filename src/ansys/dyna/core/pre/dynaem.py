@@ -669,6 +669,15 @@ class EMContact:
         logging.info("EM Contact Created...")
 
 
+class EMRandlesLayer(Enum):
+    DEFAULT = 0
+    CURRENT_COLLECTOR_POSITIVE = 1
+    POSITIVE_ELECTRODE = 2
+    SEPARATOR = 3
+    NEGATIVE_ELECTRODE = 4
+    CURRENT_COLLECTOR_NEGATIVE = 5
+
+
 class Isopotential:
     """Defines an isopotential.
 
@@ -682,25 +691,29 @@ class Isopotential:
 
     isopotlist = []
 
-    def __init__(self, set=None):
+    def __init__(self, set=None, layer=EMRandlesLayer.DEFAULT):
         self.stub = DynaBase.get_stub()
         self.set = set
         self.id = 0
+        self.rdltype = layer.value
 
     def create(self):
         """Create an isopotential."""
-        isoinfo = [self.set.type, self.set.nodes]
+        if self.set.type == "NODESETBOX":
+            isoinfo = [self.set.type, self.set.boxes]
+        else:
+            isoinfo = [self.set.type, self.set.nodes]
         if isoinfo in Isopotential.isopotlist:
             pass
         id, settype = 0, 1
         if self.set is not None:
             id = self.set.create(self.stub)
             type = self.set.type
-            if type == "NODESET":
+            if type == "NODESET" or type == "NODESETBOX":
                 settype = 2
             elif type == "SEGMENTSET":
                 settype = 1
-        ret = self.stub.CreateEMIsopotential(EMIsopotentialRequest(settype=settype, setid=id))
+        ret = self.stub.CreateEMIsopotential(EMIsopotentialRequest(settype=settype, setid=id, rdltype=self.rdltype))
         self.id = ret.id
         logging.info(f"EM Isopotential {self.id} Created...")
         return self.id
@@ -732,3 +745,68 @@ class RogoCoil:
         self.id = ret.id
         logging.info(f"EM Isopotential Rogo {self.id} Created...")
         return self.id
+
+
+class RandlesCellType(Enum):
+    USER_DEFINED_EQUIVALENT_CIRCUIT_MODEL = -1
+    RANDLES_CELL_0_ORDER = 0
+    RANDLES_CELL_1_ORDER = 1
+    RANDLES_CELL_2_ORDER = 2
+    RANDLES_CELL_3_ORDER = 3
+
+
+class RandlesCell:
+    """Define parameters for a Randles Cell."""
+
+    def __init__(self, set=None):
+        self.stub = DynaBase.get_stub()
+        self.define_batmac = False
+
+    def set_batmac_model(
+        self,
+        cell_type=RandlesCellType.RANDLES_CELL_1_ORDER,
+        cell_parts=None,
+        area=2,
+        cell_capacity=0,
+        soc_conversion_factor=0,
+        charge_init_state=0,
+        circuit_parameter=None,
+        constant_temperature=0,
+        temperature_from_thermal_solver=False,
+        add_heating_to_thermal_solver=False,
+    ):
+        """define the distributed Randles circuit parameters for a Randles cell when using the batmac model."""
+        self.define_batmac = True
+        self.rdltype = cell_type.value
+        self.rdlarea = area
+        self.psid = cell_parts
+        self.q = cell_capacity
+        self.cq = soc_conversion_factor
+        self.socinit = charge_init_state
+        self.prm = circuit_parameter
+        self.temp = constant_temperature
+        self.frther = temperature_from_thermal_solver
+        self.r0toth = add_heating_to_thermal_solver
+
+    def create(self):
+        """Set parameter for Randles Cell."""
+        if self.define_batmac:
+            sid = 0
+            if self.psid is not None:
+                sid = self.psid.create(self.stub)
+            ret = self.stub.CreateEMRandlesBatmac(
+                EMRandlesBatmacRequest(
+                    rdltype=self.rdltype,
+                    rdlarea=self.rdlarea,
+                    psid=sid,
+                    q=self.q,
+                    cq=self.cq,
+                    socinit=self.socinit,
+                    chargedirparam=self.prm,
+                    temp=self.temp,
+                    frther=self.frther,
+                    r0toth=self.r0toth,
+                )
+            )
+            self.id = ret.rdlid
+            logging.info(f"EM Randles Batmac {self.id} Created...")

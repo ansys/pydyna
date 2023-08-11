@@ -77,9 +77,9 @@ Usage
 =====
 Here is a basic preprocessing example:
 
-Get the input file from "pydyna\\src\\ansys\\dyna\\core\\pre\\examples\\explicit\\ball_plate\\ball_plate.k"
+Get the input file from (``<repository-root-folder>/src/ansys/dyna/core/pre/examples/explicit/ball_plate/ball_plate.k``)
 
-The follow example can be obtained from "pydyna\\examples\\Explicit\\ball_plate.py"
+The follow example can be obtained from (``<repository-root-folder>/examples/Explicit/ball_plate.py``)
 
 .. code:: python
 
@@ -164,7 +164,7 @@ The follow example can be obtained from "pydyna\\examples\\Explicit\\ball_plate.
     
 Here is a basic solving example:
 
-The follow example can be obtained from "pydyna\\examples\\solver\\ball_plate_solver.py"
+The follow example can be obtained from (``<repository-root-folder>/examples/solver/ball_plate_solver.py``)
 
 .. code:: python
 

@@ -18,8 +18,8 @@ $#     pid
 $#     pid       dof       vad      lcid        sf       vid     death     birth
          1         1         1         1       1.0         0       0.0       0.0
 *ICFD_CONTROL_GENERAL
-$#   atype     mtype      dvcl     rdvcl     solcl
-         1         0         0         0         0
+$#   atype     mtype      dvcl     rdvcl     solcl         -       idr
+         1         0         0         0         0                   0
 *ICFD_CONTROL_OUTPUT
 $#    msgl      outl     dtout   lsppout         -     itout
          4         0       0.0         0                 250
