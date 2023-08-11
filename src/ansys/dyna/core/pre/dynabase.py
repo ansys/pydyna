@@ -149,6 +149,32 @@ class Function:
         return self.id
 
 
+class Table2D:
+    """Define a table,a curve ID is specified for each value defined in the table."""
+
+    def __init__(self, title=""):
+        self.title = title
+        self.valuecurvelist = []
+
+    def append(self, value=0, curve=None):
+        self.valuecurvelist.append((value, curve))
+
+    def create(self, stub=None):
+        """Create Table2D."""
+        if stub is None:
+            stub = DynaBase.get_stub()
+        vls = []
+        cvs = []
+        for obj in self.valuecurvelist:
+            vls.append(obj[0])
+            cid = obj[1].create(stub)
+            cvs.append(cid)
+        ret = stub.CreateDefineTable2D(DefineTable2DRequest(title=self.title, values=vls, cids=cvs))
+        self.id = ret.id
+        logging.info(f"Table2D {self.id} defined...")
+        return self.id
+
+
 class Point:
     """Defines a point."""
 
@@ -883,6 +909,33 @@ class NodesetGeneral(BaseSet):
         ret = stub.CreateNodeSet(NodeSetRequest(option="GENERAL", sid=0, genoption=self.settype, entities=self.setids))
         self.id = ret.id
         self.type = "NODESET"
+        return self.id
+
+
+class NodeSetBox(BaseSet):
+    """include the nodes inside boxes.
+
+    Parameters
+        ----------
+        boxes : list
+            A list of BOX.
+    """
+
+    def __init__(self, boxes=[]):
+        self.boxes = boxes
+        self.type = "NODESETBOX"
+
+    def create(self, stub):
+        """Create a node set."""
+        if len(self.boxes) <= 0:
+            return 0
+        boxids = []
+        for box in self.boxes:
+            boxid = box.create(stub)
+            boxids.append(boxid)
+        ret = stub.CreateNodeSet(NodeSetRequest(option="GENERAL", sid=0, genoption="BOX", entities=boxids))
+        self.id = ret.id
+        self.type = "NODESETBOX"
         return self.id
 
 

@@ -600,12 +600,13 @@ class MatRigid(MatAdditional):
         logging.info(f"Material {self.name} Created...")
 
 
-class MatCrushableFoam:
+class MatCrushableFoam(MatAdditional):
     """Define material of modelling crushable foam."""
 
     def __init__(
         self, mass_density=0, young_modulus=0, poisson_ratio=0.3, yield_stress_curve=None, tensile_stress_cutoff=0
     ):
+        MatAdditional.__init__(self)
         self.ro = mass_density
         self.e = young_modulus
         self.pr = poisson_ratio
@@ -623,6 +624,7 @@ class MatCrushableFoam:
         )
         self.material_id = ret.mid
         self.name = "Crushable Foam"
+        MatAdditional.create(self, stub, self.material_id)
         logging.info(f"Material {self.name} Created...")
 
 
