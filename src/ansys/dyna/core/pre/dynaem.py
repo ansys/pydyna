@@ -669,6 +669,15 @@ class EMContact:
         logging.info("EM Contact Created...")
 
 
+class EMRandlesLayer(Enum):
+    DEFAULT = 0
+    CURRENT_COLLECTOR_POSITIVE = 1
+    POSITIVE_ELECTRODE = 2
+    SEPARATOR = 3
+    NEGATIVE_ELECTRODE = 4
+    CURRENT_COLLECTOR_NEGATIVE = 5
+
+
 class Isopotential:
     """Defines an isopotential.
 
@@ -682,25 +691,29 @@ class Isopotential:
 
     isopotlist = []
 
-    def __init__(self, set=None):
+    def __init__(self, set=None, layer=EMRandlesLayer.DEFAULT):
         self.stub = DynaBase.get_stub()
         self.set = set
         self.id = 0
+        self.rdltype = layer.value
 
     def create(self):
         """Create an isopotential."""
-        isoinfo = [self.set.type, self.set.nodes]
+        if self.set.type == "NODESETBOX":
+            isoinfo = [self.set.type, self.set.boxes]
+        else:
+            isoinfo = [self.set.type, self.set.nodes]
         if isoinfo in Isopotential.isopotlist:
             pass
         id, settype = 0, 1
         if self.set is not None:
             id = self.set.create(self.stub)
             type = self.set.type
-            if type == "NODESET":
+            if type == "NODESET" or type == "NODESETBOX":
                 settype = 2
             elif type == "SEGMENTSET":
                 settype = 1
-        ret = self.stub.CreateEMIsopotential(EMIsopotentialRequest(settype=settype, setid=id))
+        ret = self.stub.CreateEMIsopotential(EMIsopotentialRequest(settype=settype, setid=id, rdltype=self.rdltype))
         self.id = ret.id
         logging.info(f"EM Isopotential {self.id} Created...")
         return self.id
