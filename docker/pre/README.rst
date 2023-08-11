@@ -26,7 +26,7 @@ Prerequisites
   `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
 
 * Download the latest Linux release artifacts for the Linux Docker container:
-  `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.4/linux-binaries.zip>`_.
+  `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.5/linux-binaries.zip>`_.
 
 * Move this ZIP file to the current location (``<repository-root-folder>/docker/pre``).
 

@@ -25,7 +25,7 @@ Prerequisites
   `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
 
 * Download the latest Linux release artifacts for the Linux Docker container:
-  `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.3.4/mppdyna_docker_centos7.zip>`_.
+  `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.3.5/mppdyna_docker_centos7.zip>`_.
 
 * Move this ZIP file to the current location (``<repository-root-folder>/docker/solver``) and unzip the mppdyna_docker_centos7.zip file.
 
