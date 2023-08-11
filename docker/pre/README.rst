@@ -20,18 +20,22 @@ Prerequisites
 
 * Ensure that Docker is installed on your machine. If you do not have Docker installed,
   see the `Docker website <https://www.docker.com>`_ for more information.
+  
+* If you are building the image on Windows, ensure that the Windows Subsystem for Linux (WSL)
+  is installed. For installation information, see Microsoft's
+  `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
 
 * Download the latest Linux release artifacts for the Linux Docker container:
-  `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.1/linux-binaries.zip>`_.
+  `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.4/linux-binaries.zip>`_.
 
-* Move these ZIP files to the current location (``<repository-root-folder>/docker``).
+* Move this ZIP file to the current location (``<repository-root-folder>/docker/pre``).
 
 Starting the docker container
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 There are two ways to start docker container.
 
-1.bulid image and run container
+1.build image and run container
 
 
 Build the Docker image
@@ -74,7 +78,11 @@ Perform these steps to run the image as a container:
 
       docker run -d -p 50051:50051 ghcr.io/ansys/ls-pre 
 
-#. Check that the image is running successfully.
+#. Check that the image is running successfully by running this command.
+
+   .. code:: bash
+
+       docker ps
 
    Your output should look similar to this:
 
