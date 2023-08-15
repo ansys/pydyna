@@ -7,15 +7,15 @@ directories:
 In the PyDYNA installation, the ``docker`` directory has two child
 directories:
 
-- ``pre``: Contains the ``ls-pre`` Docker image of the ``pre`` subpackage. This
-  subpackage provides a service with highly abstracted APIs for creating and
+- ``pre``: Contains the package with the ``ls-pre`` Docker image for the
+  ``pre`` service. This service provides highly abstracted APIs for creating and
   setting up DYNA input decks for DynaMech, DynaIGA, DynaICFD, DynaSALE, DynaEM,
   and DynaAirbag.
-- ``solver``: Contains the ``dynasolver`` Docker image of the ``solver``
-  subpackage. This subpackage provides a service with highly abstracted
+- ``solver``: Contains the package with the ``dynasolver`` Docker image
+  for the ``solver`` service. This service provides highly abstracted
   APIs for interacting directly with the Ansys LS-DYNA solver. Because LS-DYNA
-  is primarily a batch solver with very limited interactive capabilities, this
-  service is similarly limited. The target use case is that LS-DYNA is
+  is primarily a batch solver with very limited interactive capabilities, the
+  ``solver`` service is similarly limited. The target use case is that LS-DYNA is
   running in a container environment such as Docker or Kubernetes. Using this
   service, you can push input files to the container, start LS-DYNA
   and monitor its progress, and then retrieve Ansys solver results (RST)
