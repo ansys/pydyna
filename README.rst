@@ -75,8 +75,9 @@ viewing the documentation for the latest stable release to viewing the documenta
 development version or previously released versions.
 
 On the `PyDYNA Issues <https://github.com/ansys/pydyna/issues>`_ page, you can create issues to
-report bugs and request new features. On the `Discussions <https://discuss.ansys.com/>`_
-page on the Ansys Developer portal, you can post questions, share ideas, and get community feedback. 
+report bugs and request new features. On the `PyDYNA Discussions <https://github.com/ansys/pydyna/discussions>`_
+page or the `Discussions <https://discuss.ansys.com/>`_ page on the Ansys Developer portal,
+you can post questions, share ideas, and get community feedback. 
 
 To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
 
