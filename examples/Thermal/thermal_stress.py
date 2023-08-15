@@ -9,7 +9,7 @@ The executable file for LS-DYNA is ``ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_
 ###############################################################################
 # Perform required imports
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-# Peform required imports.
+# Peform the required imports.
 #
 import os
 import sys

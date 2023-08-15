@@ -39,23 +39,24 @@ finally postprocess the results.
 In the PyDYNA installation, the ``docker`` directory has two child
 directories:
 
-- ``pre``: Provides the interface for creating DYNA input decks.
-  This service includes highly abstracted APIs for setting up
-  LS-DYNA input decks. Included are DynaMech, DynaIGA, DynaICFD,
-  DynaSALE, DynaEM, and DynaAirbag.
-- ``solver``: Contains the code for interfacing directly with
-  the Ansys LS-DYNA solver. Because LS-DYNA is primarily a batch
-  solver with very limited interactive capabilities, the code in
-  this directory is similarly limited. The target use case is that
-  LS-DYNA is running in a container environment such as Docker or
-  Kubernetes. The code in the ``solver`` directory allows you to push
-  input files to the container, start LS-DYNA and monitor its progress,
-  and then retrieve results (RST) files.`
+- ``pre``: Contains the ``ls-pre`` Docker image of the ``pre`` subpackage. This
+  subpackage provides a service with highly abstracted APIs for creating and
+  setting up DYNA input decks for DynaMech, DynaIGA, DynaICFD, DynaSALE, DynaEM,
+  and DynaAirbag.
+- ``solver``: Contains the ``dynasolver`` Docker image of the ``solver``
+  subpackage. This subpackage provides a service with highly abstracted
+  APIs for interacting directly with the Ansys LS-DYNA solver. Because LS-DYNA
+  is primarily a batch solver with very limited interactive capabilities, this
+  service is similarly limited. The target use case is that LS-DYNA is
+  running in a container environment such as Docker or Kubernetes. Using this
+  service, you can push input files to the container, start LS-DYNA
+  and monitor its progress, and then retrieve Ansys solver results (RST)
+  files.
 
 Once you have results, you can use the Ansys Data Processing Framework (DPF),
 which is designed to provide numerical simulation users and engineers
 with a toolbox for accessing and transforming simulation data. DPF
-can access data from Ansys solver result files and from several
+can access data from Ansys solver RST files and from several
 files with neutral formats, including CSV, HDF5, and VTK. Using DPF's
 various operators, you can manipulate and transform this data.
 
@@ -64,22 +65,30 @@ a simplified Python interface to DPF, thus enabling rapid postprocessing
 without ever leaving a Python environment. For more information on DPF-Post,
 see the `DPF-Post documentation <https://post.docs.pyansys.com>`_.
 
-Documentation
-=============
-For comprehesive information on PyDYNA, see the latest release
-`documentation <https://dyna.docs.pyansys.com/>`_.
+Documentation and issues
+========================
+Documentation for the latest stable release of PyDyna is hosted at `PyDYNA documentation
+<https://dyna.docs.pyansys.com/version/stable//>`_.
 
-On the `PyDyna Issues <https://github.com.mcas.ms/pyansys/pyDyna/issues>`_ page, you can create
-issues to submit questions, report bugs, and request new features. To reach
-the PyAnsys support team, email `pyansys.support@ansys.com <pyansys.support@ansys.com>`_.
+In the upper right corner of the documentation's title bar, there is an option for switching from
+viewing the documentation for the latest stable release to viewing the documentation for the
+development version or previously released versions.
+
+On the `PyDYNA Issues <https://github.com/ansys/pydyna/issues>`_ page, you can create issues to
+report bugs and request new features. On the `Discussions <https://discuss.ansys.com/>`_
+page on the Ansys Developer portal, you can post questions, share ideas, and get community feedback. 
+
+To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
 
 Usage
 =====
-Here is a basic preprocessing example:
+The next few sections show how to preprocess, solve, and postprocess a ball plate example.
 
-Get the input file from (``<repository-root-folder>/src/ansys/dyna/core/pre/examples/explicit/ball_plate/ball_plate.k``)
-
-The follow example can be obtained from (``<repository-root-folder>/examples/Explicit/ball_plate.py``)
+Preprocess
+----------
+The following code preprocesses a ball plate example. In the repository, you can get the
+input file from ``src/ansys/dyna/core/pre/examples/explicit/ball_plate/ball_plate.k`` and
+the Python file from ``examples/Explicit/ball_plate.py``.
 
 .. code:: python
 
@@ -162,9 +171,10 @@ The follow example can be obtained from (``<repository-root-folder>/examples/Exp
     downloadfile = os.path.join(downloadpath,"ball_plate.k")
     solution.download(serveroutfile,downloadfile)
     
-Here is a basic solving example:
-
-The follow example can be obtained from (``<repository-root-folder>/examples/solver/ball_plate_solver.py``)
+Solve
+-----
+The following code solves this basic ball plate example. In the repository,
+you can get the Python file from ``examples/solver/ball_plate_solver.py``.
 
 .. code:: python
 
@@ -177,7 +187,10 @@ The follow example can be obtained from (``<repository-root-folder>/examples/sol
     dyna.start(4)                                   # start 4 ranks of mppdyna
     dyna.run("i=ball_plate.k memory=10m ncycle=20000")   # begin execution
 
-Here is a basic postprocessing example:
+
+Postprocess
+-----------
+The following code postprocesses results from the solve of this basic ball plate example:
 
 .. code:: python
 

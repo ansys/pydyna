@@ -9,7 +9,7 @@ The executable file for LS-DYNA is ``ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_
 ###############################################################################
 # Perform required imports
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-# Peform required imports.
+# Peform the required imports.
 #
 import os
 import sys
@@ -33,13 +33,13 @@ from ansys.dyna.core.pre import examples
 ###############################################################################
 # Manually start the ``pre`` service
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Copy the ``pyDyna/src/ansys/dyna/core/pre/Server``folder to a desired location.
+# Copy the ``pyDyna/src/ansys/dyna/core/pre/Server`` folder to a desired location.
 # Start the ``pre`` service at this location by running this command:
 #
 # ``python kwserver.py``
 #
-# Once the ``pre`` servic is running, you can connect a client to it using
-# the hostname and the port. This example uses the default local host and port
+# Once the ``pre`` service is running, you can connect a client to it using
+# the hostname and port. This example uses the default localhost and port
 # (``"localhost"`` and ``"50051"`` respectively).
 #
 hostname = "localhost"
@@ -47,9 +47,9 @@ if len(sys.argv) > 1:
     hostname = sys.argv[1]
 solution = DynaSolution(hostname)
 ###############################################################################
-# Import the initial mesh data (nodes and elements)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Import mesh data, which includes the predefined *NODE*, *ELEMENT_* and *PART*
+# Import mesh data (nodes and elements)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Import initial mesh data, which includes the predefined *NODE*, *ELEMENT_* and *PART*
 # cards.
 #
 fns = []
@@ -88,7 +88,7 @@ nvhobj.implicitanalysis.set_solution(solution_method=1)
 # Define frequency domain cards
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # *FREQUENCY_DOMAIN_FRF* is used to compute the frequency response function due to
-# nodal excitations. In this case, a base velocity is define as an input at node 131.
+# nodal excitations. In this case, a base velocity is defined as an input at node 131.
 # The base acceleration response is measured at nodes 131 and 651. The maximum
 # natural frequency employed in FRF is limited to 2000 Hz.
 fd = FrequencyDomain()
@@ -114,7 +114,7 @@ nvhobj.add(fd)
 ###############################################################################
 # Define material and section properties
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Define the ``MAT_ELASTIC`` material. Set shell formulation to ``SR_HUGHES_LIU.
+# Define the ``MAT_ELASTIC`` material. Set shell formulation to ``SR_HUGHES_LIU``.
 #
 matelastic = MatElastic(mass_density=7870, young_modulus=2.07e11, poisson_ratio=0.292)
 

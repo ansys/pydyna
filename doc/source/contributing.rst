@@ -1,16 +1,17 @@
 Contribute
 ==========
 
-Overall guidance on contributing to a PyAnsys repository appears in the
-`PyAnsys Developer's Guide <https://dev.docs.pyansys.com/>`_. Ensure that you
-are thoroughly familiar with this guide before attempting to contribute to PyDYNA.
+Overall guidance on contributing to a PyAnsys library appears in the
+`Contributing <dev_guide_contributing_>`_ topic
+in the *PyAnsys Developer's Guide*. Ensure that you are thoroughly familiar
+with this guide before attempting to contribute to PyDYNA.
 
 The following contribution information is specific to PyDYNA.
 
 Clone the repository
 --------------------
 
-To clone and install the latest PyDYNA release in development mode, run this code:
+To clone and install the latest PyDYNA release in development mode, run these commands:
 
 .. code::
 
@@ -24,13 +25,16 @@ Post issues
 -----------
 
 Use the `PyDYNA Issues <https://github.com/pyansys/pydyna/issues>`_
-page to submit questions, report bugs, and request new features. When possible,
+page to report bugs and request new features. When possible,
 use these issue templates:
 
-* Bug report template
-* Feature request template
+* Bug, problem, error: For filing a bug report
+* Documentation issue: For requesting modifications to the documentation
+* Adding an example: For proposing a new example
+* New feature: For requesting enhancements to the code
 
-If your issue does not fit into one of these template categories, create your own issue.
+If your issue does not fit into one of these template categories, you can click
+the link for opening a blank issue.
 
 To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
 

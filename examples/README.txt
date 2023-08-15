@@ -5,4 +5,4 @@ Examples
 ========
 
 
-Here are a series of examples using LS-DYNA with PyDYNA.
+These examples use LS-DYNA with PyDYNA.
