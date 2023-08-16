@@ -10,7 +10,8 @@ page on the Ansys website.
 Installation
 ============
 To use PyDYNA, you must install Docker images for the ``pre`` and ``solver``
-services and the package.
+services and the ``ansys.dyna.core`` package itself.
+
 
 Install Docker image for the ``pre`` service
 --------------------------------------------

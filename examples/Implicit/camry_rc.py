@@ -7,7 +7,7 @@ This example shows how to create and use an implicit dynamic roof crush model.
 ###############################################################################
 # Perform required imports
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-# Peform required imports.
+# Peform the required imports.
 #
 import os
 import sys
@@ -43,13 +43,13 @@ from ansys.dyna.core.pre import examples
 ###############################################################################
 # Manually start the ``pre`` service
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Copy the ``pyDyna/src/ansys/dyna/core/pre/Server``folder to a desired location.
+# Copy the ``pyDyna/src/ansys/dyna/core/pre/Server`` folder to a desired location.
 # Start the ``pre`` service at this location by running this command:
 #
 # ``python kwserver.py``
 #
-# Once the ``pre`` servic is running, you can connect a client to it using
-# the hostname and the port. This example uses the default local host and port
+# Once the ``pre`` service is running, you can connect a client to it using
+# the hostname and port. This example uses the default localhost and port
 # (``"localhost"`` and ``"50051"`` respectively).
 #
 hostname = "localhost"
@@ -209,7 +209,7 @@ plastic220_410 = MatPiecewiseLinearPlasticity(
 # ``set_element_formulation()`` method is called to assign the elform for the beam and
 # shell elements. Accordingly, either the beam diameter or the shell thickness is also
 # defined. To identify the part ID that has a particular material type, a predefined
-# list is made available in the ``camry_rc_data.py`` file, which is read in this script.
+# list is made available in the ``camry_rc_data.py`` file, which this script reads.
 #
 for bpart in beamparts:
     part = BeamPart(bpart[0])
@@ -266,7 +266,7 @@ for spart in shellparts:
 ###############################################################################
 # Generate keywords for spotwelds and nodal rigid bodies
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# The ``camry_rc_data.py`` contains the predefined node pairs and node sets
+# The ``camry_rc_data.py`` file contains the predefined node pairs and node sets
 # required for the *CONSTRAINED_SPOTWELD* and *CONSTRAINED_NODAL_RIGID_BODY*
 # definitions. Loop through these lists to generate the appropriate keywords.
 #
@@ -282,7 +282,7 @@ for cnrb in cnrbs:
 # There are three contacts defined in this model:
 #
 # - Automatic single surface contact for the BIW self contact
-# - Surface-to-surface contact between the platen and the BIW
+# - Surface-to-surface contact between the platen and the BIW self contact
 # - Tied contact for the spotweld beams
 #
 # Use the ``ContactSurface()`` method to set the SSTYPE and MSTYPE.
@@ -320,8 +320,8 @@ swcontact.set_master_surface(spotweldsurface)
 camry.contacts.add(swcontact)
 
 ###############################################################################
-# Define SPC
-# ~~~~~~~~~~
+# Define SPCs
+# ~~~~~~~~~~~
 # You can use the ``boundaryconditions`` class to define both SPCs and
 # prescribed motions. The bottom of the BIW is SPCed by selecting a few nodes.
 # The prescribed motion is then assigned to the platen.

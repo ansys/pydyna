@@ -57,7 +57,7 @@ fields_top = shell_layer_extract.outputs.fields_container_as_fields_container() 
 ###############################################################################
 # Plot deformed state
 # ~~~~~~~~~~~~~~~~~~~
-# Plot the deformed state at 9 ms.
+# Plot the deformed state at 9 milliseconds.
 # 
 """ N = fields_top[19]
 D = model.results.displacement(time_scoping=[19]).eval()

@@ -16,10 +16,9 @@ Prerequisites
 
   The ``docker`` file in the  ``docker/pre`` directory is used to build the
   Linux-based Docker image.
-  
 
-* Ensure that Docker is installed on your machine. If you do not have Docker installed,
-  see the `Docker website <https://www.docker.com>`_ for more information.
+* Ensure that Docker is installed on your machine. If you do not have Docker Desktop installed,
+  see `Overview of Docker Desktop <https://docs.docker.com/desktop/>`_ for installation links.
   
 * If you are building the image on Windows, ensure that the Windows Subsystem for Linux (WSL)
   is installed. For installation information, see Microsoft's
@@ -28,20 +27,29 @@ Prerequisites
 * Download the latest Linux release artifacts for the Linux Docker container:
   `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.4/linux-binaries.zip>`_.
 
-* Move this ZIP file to the current location (``<repository-root-folder>/docker/pre``).
+* Move this ZIP file to the ``docker/pre`` directory and unzip it.
 
-Starting the docker container
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-There are two ways to start docker container.
+Once all prerequisites are met, you can start the Docker container for the ``pre`` service.
 
-1.build image and run container
+Start the Docker container for the ``pre`` service
+--------------------------------------------------
 
+There are two methods for starting a Docker container for the ``pre`` service:
+
+- Method 1: Build the Docker image and run the image as a container
+- Method 2: Start the container from a ``docker-compose.yml`` file
+
+
+Method 1: Build the Docker image and run the image as a container
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To use this first method, you first build the Docker image of the ``pre`` service
+and then run the image as a container.
 
 Build the Docker image
 ::::::::::::::::::::::
 
-Once all prerequisites are met, perform these steps to build the Docker image:
+To build the Docker image, perform these steps:
 
 #. In your terminal, go to the ``docker`` directory.
 #. Run the following Docker command, replacing ``<DOCKERFILE_NAME>``
@@ -70,7 +78,8 @@ Once all prerequisites are met, perform these steps to build the Docker image:
 Run the image as a container
 ::::::::::::::::::::::::::::
 
-Perform these steps to run the image as a container:
+Once the Docker image of the ``pre`` service is built successfully, perform these steps to
+run this image as a container:
 
 #. Run this Docker command:
  
@@ -92,16 +101,16 @@ Perform these steps to run the image as a container:
      >>> c77ffd67f9fa   ghcr.io/ansys/ls-pre   "python3 ./linux-bin…"   7 seconds ago   Up 7 seconds   0.0.0.0:50051->50051/tcp, :::50051->50051/tcp   hardcore_margulis
 	 
 	 
-2.Start the container from docker-compose.yml file
-
+Method 2: Start the container from a ``docker-compose.yml`` file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To use this second method, you start the container for the ``pre`` service from a
+``docker-compose.yml`` file.
 	 
-Make sure the docker compose have been installed on your computer.
-For more information: https://docs.docker.com/compose/install/
-Ensure that Docker compose is installed on your machine. If you do not have Docker compose installed,
-see the `Docker website <https://docs.docker.com/compose/install/>`_ for more information.
+#. Ensure that Docker Compose has been installed on your computer. If Docker Compose is not
+   installed, see `Overview of installing Docker Compose <https://docs.docker.com/compose/install/>`_
+   in the Docker documentation.
 
-* Locate yourself at ``<repository-root-folder>/docker/pre`` in your terminal.
-* Run this Docker command:
+#. In your terminal, go to the ``docker/pre`` directory and run this Docker command:
 
   .. code:: bash
 

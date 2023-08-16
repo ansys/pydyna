@@ -32,13 +32,13 @@ from ansys.dyna.core.pre.dynamech import (
 ###############################################################################
 # Manually start the ``pre`` service
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Copy the ``pyDyna/src/ansys/dyna/core/pre/Server``folder to a desired location.
+# Copy the ``pyDyna/src/ansys/dyna/core/pre/Server`` folder to a desired location.
 # Start the ``pre`` service at this location by running this command:
 #
 # ``python kwserver.py``
 #
-# Once the ``pre`` servic is running, you can connect a client to it using
-# the hostname and the port. This example uses the default local host and port
+# Once the ``pre`` service is running, you can connect a client to it using
+# the hostname and port. This example uses the default localhost and port
 # (``"localhost"`` and ``"50051"`` respectively).
 #
 from ansys.dyna.core.pre.dynamaterial import MatRigid, MatFabric
@@ -65,11 +65,11 @@ airbag_solution.open_files(fns)
 ###############################################################################
 # Create standard explicit control cards
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# This code uses the ``set_termination`` method to set the termination time
+# The following code uses the ``set_termination`` method to set the termination time
 # to ``0.03`` in *CONTROL_TERMINATION*. The ``DynaMech`` class
 # automatically generates the common control cards used in
 # explicit problems. ``CONTROL_ACCURACY``, ``CONTACT``, ``BULK VISCOCITY``,
-# and ``CONTACT``are all automatically generated.
+# and ``CONTACT`` are all automatically generated.
 #
 airbag_solution.set_termination(0.03)
 
@@ -77,13 +77,13 @@ airbagdeploy = DynaMech()
 airbag_solution.add(airbagdeploy)
 
 ###############################################################################
-# Define *AIRBAG_SIMPLE_AIRBAG_MODEL* as a keyword
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Define a keyword
+# ~~~~~~~~~~~~~~~~
 # Use the ``Airbag`` function in the ``DynaMech`` class to define
 # *AIRBAG_SIMPLE_AIRBAG_MODEL* as a keyword. While LS-DYNA has many different
-# airbag models, PyDYNA currently supports only one airbag model,
-# SIMPLE_AIRBAG_MODEL. If you have an urgent need for PyDYNA to support
-# another airbag model, email `pyansys.core@ansys.com <mailto:pyansys.core@ansys.com>`_.
+# airbag models, PyDYNA currently supports only one: SIMPLE_AIRBAG_MODEL.
+# If you have an urgent need for PyDYNA to support another airbag model, email
+# `pyansys.core@ansys.com <mailto:pyansys.core@ansys.com>`_ with your request.
 
 airbag = Airbag(
     set=PartSet([3]),
@@ -125,13 +125,13 @@ airbagdeploy.contacts.add(contact)
 # Define material cards
 # ~~~~~~~~~~~~~~~~~~~~~
 # LS-DYNA has over 300 materials that are used for varied applications.
-# Whlie PyDYNA does not yet support all material cards, it does support some
-# of the most commonly used materials, including ``FABRIC``, `MAT_ELASTIC``,
+# While PyDYNA does not yet support all material cards, it does support
+# most commonly used materials, including ``FABRIC``, ``MAT_ELASTIC``,
 # ``PIECEWISE_LINEAR_PLASTICITY``, and ``RIGID``. All supported materials
 # are accessed from the ``dynamaterial`` class. In the following code,
 # ``MAT_RIGID`` is defined as the material  for the cylindrical tube and the
 # bottom plate. ``MAT_FABRIC`` is defined as the material for the airbag volume.
-# Note that ``platemat`` has contraints defined as well.
+# Note that ``platemat`` also has contraints defined.
 
 platemat = MatRigid(
     mass_density=7.84e-4,
@@ -155,7 +155,7 @@ airbagmat = MatFabric(
 # has three shell parts. Each shell part is initialized as ``ShellPart`` with a
 # unique ID and an appropriate shell formulation is assigned. Again,
 # PyDYNA does not yet support all element formulations. You can find the
-# supported formulations in ``dynabase`` class.
+# supported formulations in the ``dynabase`` class.
 
 plate = ShellPart(1)
 plate.set_material(platemat)
