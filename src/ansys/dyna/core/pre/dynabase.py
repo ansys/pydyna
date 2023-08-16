@@ -2525,6 +2525,66 @@ class RigidwallCylinder:
         logging.info("Cylinder Rigidwall Created...")
 
 
+class RigidwallSphere:
+    """Defines a rigid wall with a sphere form.
+
+    Parameters
+    ----------
+      center : Point, optional
+        The center of sphere.
+        The default is ``(0, 0, 0)``.
+      orient : Point, optional
+        Vector n determines the orintation of the rigidwall,the center define the tail of normal n,
+        the orient define the head of normal n.
+        The default is ``(0, 0, 0)``.
+      radius : float, optional
+        Radius of the sphere. The default is ``1``.
+    """
+
+    def __init__(self, center=Point(0, 0, 0), orient=Point(0, 0, 0), radius=1):
+        self.stub = DynaBase.get_stub()
+        self.center = center
+        self.orient = orient
+        self.radius = radius
+        self.motion = -1
+        self.lcid = 0
+        self.dir = Direction(1, 0, 0)
+
+    def set_motion(self, curve, motion=Motion.VELOCITY, dir=Direction(1, 0, 0)):
+        """Set the prescribed motion."""
+        curve.create(self.stub)
+        self.lcid = curve.id
+        self.motion = motion.value
+        if self.motion == Motion.DISPLACEMENT:
+            self.motion = 1
+        self.dir = dir
+
+    def create(self):
+        """Create a rigidwall sphere."""
+        parameter = [
+            self.center.x,
+            self.center.y,
+            self.center.z,
+            self.orient.x,
+            self.orient.y,
+            self.orient.z,
+            self.radius,
+        ]
+        self.stub.CreateRigidWallGeom(
+            RigidWallGeomRequest(
+                geomtype=4,
+                motion=self.motion,
+                display=1,
+                parameter=parameter,
+                lcid=self.lcid,
+                vx=self.dir.x,
+                vy=self.dir.y,
+                vz=self.dir.z,
+            )
+        )
+        logging.info("Sphere Rigidwall Created...")
+
+
 class RigidwallPlanar:
     """Defines planar rigid walls with either finite or infinite size.
 
