@@ -3,7 +3,7 @@ Thermal flow
 ============
 
 This example shows a simple ICFD forced-convection input deck with a coarse mesh.
-The executable file for LS-DYNA is`` ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe``.
+The executable file for LS-DYNA is `` ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe``.
 """
 
 import os

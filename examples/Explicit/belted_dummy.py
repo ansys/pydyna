@@ -9,7 +9,7 @@ a belted dummy model. The executable file for LS-DYNA is
 ###############################################################################
 # Perform required imports
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-# Peform required imports.
+# Peform the required imports.
 import os
 import sys
 
@@ -51,8 +51,8 @@ from ansys.dyna.core.pre import examples
 #
 # ``python kwserver.py``
 #
-# Once the ``pre`` servic is running, you can connect a client to it using
-# the host name and the port. This example uses the default local host and port
+# Once the ``pre`` service is running, you can connect a client to it using
+# the host name and port. This example uses the default localhost and port
 # (``"localhost"`` and ``"50051"`` respectively).
 #
 hostname = "localhost"
@@ -134,7 +134,7 @@ for i in range(185, 209):
 # Define section properties and assign materials
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Now that you have a list of materials with the material ID corresponding to
-# the Part ID, you can loop through the list and assign these materials to the
+# the part ID, you can loop through the list and assign these materials to the
 # parts. While in the loop, also define the section properties, element
 # formulations, and constraints.
 #

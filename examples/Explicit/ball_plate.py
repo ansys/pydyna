@@ -1,5 +1,5 @@
 """
-Ball Plate
+Ball plate
 ==========
 This example shows how to use the PyDYNA ``pre`` service to create
 a ball plate model. The executable file for LS-DYNA is
@@ -9,7 +9,7 @@ a ball plate model. The executable file for LS-DYNA is
 ###############################################################################
 # Perform required imports
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-# Peform required imports.
+# Peform the required imports.
 import os
 import sys
 
@@ -39,11 +39,12 @@ from ansys.dyna.core.pre import examples
 ###############################################################################
 # Start the ``pre`` service
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Prerequisite: make sure the ``pre`` service docker have been started.
-# Refer to: https://dyna.docs.pyansys.com/version/stable/getting-started/index.html
-
-# Once the ``pre`` servic is running, you can connect a client to it using
-# the host name and the port. This example uses the default local host and port
+# Before starting the ``pre`` service, you must ensure that the Docker container
+# for this service has been started. For more information, see "Start the Docker
+# container for the ``pre`` service" in https://dyna.docs.pyansys.com/version/stable/index.html.
+#
+# Once the ``pre`` service is running, you can connect a client to it using
+# the host name and port. This code uses the default localhost and port
 # (``"localhost"`` and ``"50051"`` respectively).
 #
 hostname = "localhost"
@@ -77,8 +78,8 @@ solution.add(ballplate)
 ###############################################################################
 # Define materials
 # ~~~~~~~~~~~~~~~~
-# The ``dynamaterials`` class
-# are used to define these materials: ``MAT_RIGID``, ``MAT_PIECEWISE_LINEAR_PLASTICITY``,
+# The ``dynamaterials`` class is used to define these materials: ``MAT_RIGID``,
+# ``MAT_PIECEWISE_LINEAR_PLASTICITY``,
 
 matrigid = MatRigid(mass_density=7.83e-6, young_modulus=207, poisson_ratio=0.3)
 matplastic = MatPiecewiseLinearPlasticity(mass_density=7.83e-6, young_modulus=207, yield_stress=0.2, tangent_modulus=2)
@@ -89,7 +90,7 @@ matplastic = MatPiecewiseLinearPlasticity(mass_density=7.83e-6, young_modulus=20
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Now that you have materials with the material ID corresponding to
 # the Part ID, you can assign these materials to the
-# parts. also define the section properties, element
+# parts. You can also define section properties, element
 # formulations, and constraints.
 #
 
@@ -109,7 +110,7 @@ ballplate.parts.add(ball)
 ###############################################################################
 # Define surface-to-surface contacts
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Define single-surface contact between predefined part set.
+# Define a single-surface contact between a predefined part set.
 
 selfcontact = Contact(type=ContactType.AUTOMATIC)
 surf1 = ContactSurface(PartSet([1, 2]))
@@ -119,7 +120,7 @@ ballplate.contacts.add(selfcontact)
 ###############################################################################
 # Define nodal single point constraints.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Constrain the nodes in the spc list
+# Constrain the nodes in a list of single point constraints (spc).
 
 spc = [34,35,51,52,68,69,85,86,102,103,119,120,136,137,153,154,170,171,187,188,204,205,221,222,238,239,255,256]
 for i in range(1,19):
@@ -148,7 +149,8 @@ serverpath = solution.save_file()
 ###############################################################################
 # Download output file
 # ~~~~~~~~~~~~~~~~~~~~
-# Download output file from service docker to local <working directory>/output/.
+# Download output file from Docker image for the server to
+# your local ``<working directory>/output/`` location.
 
 serveroutfile = '/'.join((serverpath,"ball_plate.k"))
 downloadpath = os.path.join(os.getcwd(), "output")

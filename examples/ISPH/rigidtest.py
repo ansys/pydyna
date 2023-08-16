@@ -2,7 +2,7 @@
 Rigid test
 ==========
 
-This examples show how to use the PyDYNA ``pre`` service to create
+This example shows how to use the PyDYNA ``pre`` service to create
 an ISPH model. The executable file for LS-DYNA is
 ``ls-dyna_mpp_d_R13.0_365-gf8a97bda2a_winx64_ifort190_msmpi.exe``.
 """
