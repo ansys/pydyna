@@ -761,6 +761,7 @@ class RandlesCell:
     def __init__(self, set=None):
         self.stub = DynaBase.get_stub()
         self.define_batmac = False
+        self.define_randles_short = False
 
     def set_batmac_model(
         self,
@@ -770,6 +771,7 @@ class RandlesCell:
         cell_capacity=0,
         soc_conversion_factor=0,
         charge_init_state=0,
+        equilibrium_voltage=None,
         circuit_parameter=None,
         constant_temperature=0,
         temperature_from_thermal_solver=False,
@@ -783,10 +785,24 @@ class RandlesCell:
         self.q = cell_capacity
         self.cq = soc_conversion_factor
         self.socinit = charge_init_state
+        self.soctou = equilibrium_voltage
         self.prm = circuit_parameter
         self.temp = constant_temperature
         self.frther = temperature_from_thermal_solver
         self.r0toth = add_heating_to_thermal_solver
+
+    def set_randles_short(self, resistances_func=None):
+        """Define conditions to turn on a Randles short (replace one or several Randles circuits by resistances),
+        and to define the value of the short resistance.
+
+        Parameters
+        ----------
+        resistances_func : Function
+            Define the local resistance function of local parameters for the local Randles circuit.
+
+        """
+        self.define_randles_short = True
+        self.randles_short_function = resistances_func
 
     def create(self):
         """Set parameter for Randles Cell."""
@@ -794,6 +810,7 @@ class RandlesCell:
             sid = 0
             if self.psid is not None:
                 sid = self.psid.create(self.stub)
+            soctou = self.soctou.create(self.stub)
             ret = self.stub.CreateEMRandlesBatmac(
                 EMRandlesBatmacRequest(
                     rdltype=self.rdltype,
@@ -802,6 +819,7 @@ class RandlesCell:
                     q=self.q,
                     cq=self.cq,
                     socinit=self.socinit,
+                    soctou=soctou,
                     chargedirparam=self.prm,
                     temp=self.temp,
                     frther=self.frther,
@@ -810,3 +828,9 @@ class RandlesCell:
             )
             self.id = ret.rdlid
             logging.info(f"EM Randles Batmac {self.id} Created...")
+        if self.define_randles_short:
+            fid = 0
+            if self.randles_short_function is not None:
+                fid = self.randles_short_function.create(self.stub)
+            ret = self.stub.CreateEMRandlesShort(EMRandlesShortRequest(function=fid))
+            logging.info(f"EM Randles Short Created...")
