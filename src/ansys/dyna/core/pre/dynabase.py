@@ -1271,9 +1271,18 @@ class ShellPart(Part):
         self.des_nsid = 0
         self.des_rsf = 1
 
-    def set_hourglass(self, type=HourglassType.STANDARD_LSDYNA_VISCOUS):
-        """Set the hourglass type, which identifies the bulk viscosity."""
+    def set_hourglass(self, type=HourglassType.STANDARD_LSDYNA_VISCOUS, coefficient=0.1):
+        """Set the hourglass type, which identifies the bulk viscosity.
+
+        Parameters
+        ----------
+        type : enum
+            Default hourglass control type.
+        coefficient : float, optional
+            Default hourglass coefficient. The default is ``0.``.
+        """
         self.hourglasstype = type.value
+        self.coefficient = coefficient
 
     def set_shear_factor(self, factor):
         """Set the shear correction factor, which scales the transverse shear stress."""
@@ -1344,7 +1353,9 @@ class ShellPart(Part):
         )
         self.secid = sec.id
         if self.hourglasstype > 0:
-            ret = self.stub.CreateHourglass(HourglassRequest(ihq=self.hourglasstype, qm=1, q1=0, q2=0, qb=0, qw=0))
+            ret = self.stub.CreateHourglass(
+                HourglassRequest(ihq=self.hourglasstype, qm=self.coefficient, q1=0, q2=0, qb=0, qw=0)
+            )
             self.hgid = ret.id
         else:
             self.hgid = 0
@@ -1423,16 +1434,27 @@ class SolidPart(Part):
         self.type = "SOLID"
         self.hourglasstype = -1
 
-    def set_hourglass(self, type=HourglassType.STANDARD_LSDYNA_VISCOUS):
-        """Set the hourglass type, which identifies the bulk viscosity."""
+    def set_hourglass(self, type=HourglassType.STANDARD_LSDYNA_VISCOUS, coefficient=0.1):
+        """Set the hourglass type, which identifies the bulk viscosity.
+
+        Parameters
+        ----------
+        type : enum
+            Default hourglass control type.
+        coefficient : float, optional
+            Default hourglass coefficient. The default is ``0.``.
+        """
         self.hourglasstype = type.value
+        self.coefficient = coefficient
 
     def set_property(self):
         """Set the properties for the solid part."""
         ret = self.stub.CreateSectionSolid(SectionSolidRequest(elform=self.formulation))
         self.secid = ret.id
         if self.hourglasstype > 0:
-            ret = self.stub.CreateHourglass(HourglassRequest(ihq=self.hourglasstype, qm=1, q1=0, q2=0, qb=0, qw=0))
+            ret = self.stub.CreateHourglass(
+                HourglassRequest(ihq=self.hourglasstype, qm=self.coefficient, q1=0, q2=0, qb=0, qw=0)
+            )
             self.hgid = ret.id
         else:
             self.hgid = 0
@@ -1741,6 +1763,7 @@ class ThermalAnalysis:
     def __init__(self):
         self.defined_solver = False
         self.defined_timestep = False
+        self.defined_nonlinear = False
         self.stub = DynaBase.get_stub()
 
     def set_timestep(self, timestep_control=ThermalAnalysisTimestep.FIXED, initial_timestep=0):
@@ -1768,6 +1791,20 @@ class ThermalAnalysis:
         self.defined_solver = True
         self.atype = analysis_type.value
 
+    def set_nonlinear(self, convergence_tol=1e-4, divergence=0.5):
+        """Set parameters for a nonlinear thermal or coupled structural/thermal analysis.
+
+        Parameters
+        ----------
+        convergence_tol : float
+            Convergence tolerance for temperature.
+        divergence : float
+            Divergence control parameter.
+        """
+        self.defined_nonlinear = True
+        self.tol = convergence_tol
+        self.dcp = divergence
+
     def create(self):
         """Create a thermal analysis."""
         if self.defined_timestep:
@@ -1776,6 +1813,8 @@ class ThermalAnalysis:
             self.stub.CreateControlThermalSolver(ControlThermalSolverRequest(atype=self.atype))
         if self.defined_timestep or self.defined_solver:
             self.stub.CreateControlSolution(ControlSolutionRequest(soln=2))
+        if self.defined_nonlinear:
+            self.stub.CreateControlThermalNonlinear(ControlThermalNonlinearRequest(tol=self.tol, dcp=self.dcp))
 
 
 class ContactCategory(Enum):
