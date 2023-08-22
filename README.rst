@@ -196,15 +196,31 @@ The following code postprocesses results from the solve of this basic ball plate
 .. code:: python
 
     from ansys.dpf import core as dpf
+    import os
 
     ds = dpf.DataSources()
-    ds.set_result_file_path(r'./d3plot', 'd3plot')
+    data_path = os.path.join(os.getcwd(), 'd3plot')
+    ds.set_result_file_path(data_path, 'd3plot')
 
-    resultOp = dpf.Operator("lsdyna::d3plot::stress_von_mises")
-    resultOp.inputs.data_sources(ds)
-    # set the time
-    resultOp.inputs.time_scoping.connect([3])
-    result = resultOp.outputs.stress_von_mises()
+    model = dpf.Model(ds)
+    # Extract displacements for all time steps from d3plot
+    D = model.results.displacement.on_all_time_freqs().eval()
+    D.animate()
+
+    stress = dpf.operators.result.stress()
+    stress.inputs.data_sources(ds)
+    stress.inputs.time_scoping([12])
+    stress.connect(25, [1])
+    stress.inputs.requested_location.connect("Nodal")
+    fields = stress.outputs.fields_container()
+
+    shell_layer_extract = dpf.operators.utility.change_shell_layers()
+    shell_layer_extract.inputs.fields_container.connect(fields)
+    print(shell_layer_extract.inputs.e_shell_layer)
+    shell_layer_extract.inputs.e_shell_layer.connect(0)
+    fields_top = shell_layer_extract.outputs.fields_container_as_fields_container()
+    print(fields_top)
+    fields_top.animate()
 
 For more examples, see `Examples <https://dyna.docs.pyansys.com/version/stable/examples/index.html>`_
 in the PyDYNA documentation.
