@@ -17,7 +17,7 @@ Prerequisites
   The ``docker`` file in the the ``docker/solver`` directory is used to build the
   Linux-based Docker image.
 
-* Ensure that Docker is installed on your machine. If you do not have Docker Desktop installed,
+* Ensure that Docker is installed and started on your machine. If you do not have Docker Desktop installed,
   see `Overview of Docker Desktop <https://docs.docker.com/desktop/>`_ for installation links.
 
 * If you are building the image on Windows, ensure that the Windows Subsystem for Linux (WSL)
@@ -25,7 +25,7 @@ Prerequisites
   `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
 
 * Download the latest Linux release artifacts for the Linux Docker container:
-  `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.3.4/mppdyna_docker_centos7.zip>`_.
+  `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.3.5/mppdyna_docker_centos7.zip>`_.
 
 * Move this ZIP file to the ``docker/solver`` directory and unzip it.
 
