@@ -811,6 +811,13 @@ class RandlesCell:
             if self.psid is not None:
                 sid = self.psid.create(self.stub)
             soctou = self.soctou.create(self.stub)
+            modified_prm = []
+            for par in self.prm:
+                if type(par) == float:
+                    modified_prm.append(par)
+                elif type(par) == Table2D:
+                    tid = par.create(self.stub)
+                    modified_prm.append(-tid)
             ret = self.stub.CreateEMRandlesBatmac(
                 EMRandlesBatmacRequest(
                     rdltype=self.rdltype,
@@ -820,7 +827,7 @@ class RandlesCell:
                     cq=self.cq,
                     socinit=self.socinit,
                     soctou=soctou,
-                    chargedirparam=self.prm,
+                    chargedirparam=modified_prm,
                     temp=self.temp,
                     frther=self.frther,
                     r0toth=self.r0toth,
