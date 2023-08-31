@@ -20,8 +20,8 @@ $#    hgen      rwen    slnten     rylen     irgen     maten     drlen     disen
 $#     ihq        qh
          2       0.0
 *CONTROL_SOLUTION
-$#    soln       nlq     isnan     lcint     lcacc     ncdcf     nocop
-         2                                                            
+$#    soln       nlq     isnan     lcint     lcacc     ncdcf     nocop      crvp
+         2                                                                      
 *CONTROL_TERMINATION
 $#  endtim    endcyc     dtmin    endeng    endmas     nosol
        3.0         0       0.0       0.01.000000E8         0
@@ -48,7 +48,7 @@ $      PID     SECID       MID                                              TMID
 $#                                                                         title
 slab
 $#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
-         1         1         1                                                 1
+         1         1         1         0         0         0         0         1
 *SECTION_SOLID
 $#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
          1         1         0                                     0.0       0.0
