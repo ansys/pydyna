@@ -87,13 +87,13 @@ $#                 n                   x            ratio/xl
                  339                                     5.0
 *ALE_STRUCTURED_MULTI-MATERIAL_GROUP
 $#  ammgnm       mid     eosid    unused    unused    unused    unused      pref
-vacuum             1         0                                               0.0
+    vacuum         1         0                                               0.0
 $#  ammgnm       mid     eosid    unused    unused    unused    unused      pref
-air                2         1                                        1.01325E-6
+       air         2         1                                        1.01325E-6
 $#  ammgnm       mid     eosid    unused    unused    unused    unused      pref
-HE                 3         2                                               0.0
+        HE         3         2                                               0.0
 $#  ammgnm       mid     eosid    unused    unused    unused    unused      pref
-liner              4         3                                               0.0
+     liner         4         3                                               0.0
 *ALE_STRUCTURED_MESH_VOLUME_FILLING
 $#   mshid    unused    ammgto    unused   nsample    unused   unused-       vid
          1          air                          4                             0
