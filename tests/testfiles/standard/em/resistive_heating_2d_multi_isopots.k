@@ -3,8 +3,8 @@
 $#                                                                         title
 EM Resistive heating basic 2D problem with connected isopots
 *CONTROL_SOLUTION
-$#    soln       nlq     isnan     lcint     lcacc     ncdcf     nocop
-         2                                                            
+$#    soln       nlq     isnan     lcint     lcacc     ncdcf     nocop      crvp
+         2                                                                      
 *CONTROL_TERMINATION
 $#  endtim    endcyc     dtmin    endeng    endmas     nosol
     0.0101         0       0.0       0.01.000000E8         0
