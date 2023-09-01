@@ -58,20 +58,6 @@ Then, install PyDYNA with this command:
 
    python -m pip install ansys-dyna-core
 
-.. caution::
-
-    PyDYNA is currently hosted in a private PyPI repository. You must provide the index
-    URL to the private PyPI repository: ``https://pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/``.
-
-    If access to this package registry is needed, email `pyansys.core@ansys.com <mailto:pyansys.core@ansys.com>`_
-    to request access. The PyAnsys team can provide you with a read-only token.
-    
-	Once you have the token, run this command, replacing ``${PRIVATE_PYPI_ACCESS_TOKEN}`` with the
-	read-only token:
-
-    .. code:: bash
-
-        pip install ansys-dyna-core --index-url=https://${PRIVATE_PYPI_ACCESS_TOKEN}@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/
 
 Install in developer mode
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -94,10 +80,9 @@ Start by cloning and installing the repository with these commands:
 Install in offline mode
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-If you lack an internet connection on your installation machine (or you do not have access
-to the private Ansys PyPI packages repository), you should install PyDYNA by downloading
-the wheelhouse archive for your corresponding machine architecture from the
-`Releases Page <https://github.com/pyansys/pydyna/releases>`_.
+If you lack an internet connection on your installation machine, you should install
+PyDYNA by downloading the wheelhouse archive for your corresponding machine
+architecture from the `Releases Page <https://github.com/pyansys/pydyna/releases>`_.
 
 Each wheelhouse archive contains all the Python wheels necessary to install
 PyDYNA from scratch on Windows and Linux for Python 3.8 through 3.11. You can install
