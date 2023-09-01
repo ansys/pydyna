@@ -90,8 +90,8 @@ $#   spid1     spid2     spid3     spid4     spid5     spid6     spid7     spid8
 $#     sid
          1
 *MESH_BL
-$#     pid     nelth      blth      blfe      blst
-         4         2       0.0       0.0         0
+$#     pid     nelth      blth      blfe      blst      bldr
+         4         2       0.0       0.0         0         0
 *MESH_SURFACE_ELEMENT
 $#   eid     pid      n1      n2      n3      n4
        1       1       1       2       0       0

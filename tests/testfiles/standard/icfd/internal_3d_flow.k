@@ -83,8 +83,8 @@ $#    pid1      pid2      pid3      pid4      pid5      pid6      pid7      pid8
 $#    pid1      pid2      pid3      pid4      pid5      pid6      pid7      pid8
          2                                                                      
 *MESH_BL
-$#     pid     nelth      blth      blfe      blst
-         3         1       0.0       0.0         0
+$#     pid     nelth      blth      blfe      blst      bldr
+         3         1       0.0       0.0         0         0
 *MESH_SURFACE_ELEMENT
 $#   eid     pid      n1      n2      n3      n4
     3151       1       1       2       8       7

@@ -18,7 +18,7 @@ $#     pid       dof       vad      lcid        sf       vid     death     birth
 $#                                                                         title
 
 $#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
-         1         1         1         0         0         0         0          
+         1         1         1         0         0         0         0         0
 *SECTION_SHELL
 $#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
          1        12       1.0         5       1.0         0         0         1
@@ -344,8 +344,8 @@ $#     ttm        dt       cfl    lcidsf     dtmin     dtmax    dtinit    tdeath
 *ICFD_CONTROL_FSI
 $#     owc        bt        dt       idc    lcidsf     xproj
          0                                                  
-$#    nsub
-         0
+$#    nsub         -         -         -     vforc
+         0                                        
 *ICFD_DATABASE_DRAG
 $#     pid      cpid     dtout    perout      divi     elout     ssout
          4                                                            
@@ -382,8 +382,8 @@ $#   spid1     spid2     spid3     spid4     spid5     spid6     spid7     spid8
 $#     sid
          1
 *MESH_BL
-$#     pid     nelth      blth      blfe      blst
-         4         2       0.0       0.0         0
+$#     pid     nelth      blth      blfe      blst      bldr
+         4         2       0.0       0.0         0         0
 *MESH_SURFACE_ELEMENT
 $#   eid     pid      n1      n2      n3      n4
        1       1       1       2       0       0
