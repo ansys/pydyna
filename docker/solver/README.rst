@@ -1,11 +1,11 @@
 Build the Docker image for the ``solver`` service
-=================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must build the Docker image for the PyDYNA ``solver`` service and then
 run the image as a container.
 
 Prerequisites
--------------
+~~~~~~~~~~~~~
 
 * Ensure that you have cloned the PyDYNA repository locally with these commands:
 
@@ -14,20 +14,20 @@ Prerequisites
    git clone https://github.com/pyansys/pydyna.git
    cd pydyna
 
-  The ``docker`` file in the the ``docker/solver`` directory is used to build the
+  The ``docker`` file in the  ``docker/pre`` directory is used to build the
   Linux-based Docker image.
-
-* Ensure that Docker is installed and started on your machine. If you do not have Docker Desktop installed,
-  see `Overview of Docker Desktop <https://docs.docker.com/desktop/>`_ for installation links.
 
 * If you are building the image on Windows, ensure that the Windows Subsystem for Linux (WSL)
   is installed. For installation information, see Microsoft's
   `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
 
-* Download the latest Linux release artifacts for the Linux Docker container:
+* Install ``docker`` engine. Based on the linux distro you can use the corresponding installation
+  instructions from `this page <https://docs.docker.com/engine/install/>`_.
+
+* Download the latest Linux release artifacts for the ``solver`` Docker container:
   `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.3.5/mppdyna_docker_centos7.zip>`_.
 
-* Move this ZIP file to the ``docker/solver`` directory and unzip it.
+* Move this ZIP file to the ``docker/solver`` directory and unzip it in the same directory.
 
   The files in this folder should look similar to this:
 
@@ -38,7 +38,7 @@ Prerequisites
 Once all prerequisites are met, you can build the Docker image for the ``solver`` service.
 
 Build the Docker image
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 To build the Docker image for the ``solver`` service, perform these steps:
 
@@ -67,12 +67,12 @@ To build the Docker image for the ``solver`` service, perform these steps:
 
 
 Run the image as a container
-----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform these steps to run the image for the ``solver`` service as a container:
 
 #. In the ``docker-compose.yml`` file, replace ``<license_server_name>`` with the correct
-   license server hosting the DYNA license if you are using an Ansy FLEXlm license.
+   license server hosting the LS-DYNA license.
   
 #. Run this Docker command:
  
@@ -92,3 +92,13 @@ Perform these steps to run the image for the ``solver`` service as a container:
 
        >>> CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS         PORTS                            NAMES
        >>> be84c95db31d   dyna_solver_v04   "/ansys_inc/server.p…"   18 minutes ago   Up 8 seconds   22/tcp, 0.0.0.0:5000->5000/tcp   mppdyna_docker_centos7_dyna_1
+
+Copy Files from Docker
+~~~~~~~~~~~~~~~~~~~~~~
+To copy files back from the ``solver`` container to your host machine use the command below
+
+  .. code:: bash
+
+     docker cp <containerId>:/file/path/within/container /host/target/path
+
+The path within the container is ``/rundir``.

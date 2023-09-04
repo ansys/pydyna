@@ -1,11 +1,11 @@
 Build the Docker image for the ``pre`` service
-==============================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must build the Docker image for the PyDYNA ``pre`` service and then
 run the image as a container.
 
 Prerequisites
--------------
+~~~~~~~~~~~~~
 
 * Ensure that you have cloned the PyDYNA repository locally with these commands:
 
@@ -17,38 +17,23 @@ Prerequisites
   The ``docker`` file in the  ``docker/pre`` directory is used to build the
   Linux-based Docker image.
 
-* Ensure that Docker is installed and started on your machine. If you do not have Docker Desktop installed,
-  see `Overview of Docker Desktop <https://docs.docker.com/desktop/>`_ for installation links.
-  
 * If you are building the image on Windows, ensure that the Windows Subsystem for Linux (WSL)
   is installed. For installation information, see Microsoft's
   `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
 
-* Download the latest Linux release artifacts for the Linux Docker container:
+* Install ``docker`` engine. Based on the linux distro you can use the corresponding installation
+  instructions from `this page <https://docs.docker.com/engine/install/>`_.
+
+* Download the latest Linux release artifacts for the ``pre`` Docker container:
   `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.3.5/linux-binaries.zip>`_.
 
 * Move this ZIP file to the ``docker/pre`` directory.
 
 
-Once all prerequisites are met, you can start the Docker container for the ``pre`` service.
+Once all prerequisites are met, you can build the Docker container for the ``pre`` service.
 
-Start the Docker container for the ``pre`` service
---------------------------------------------------
-
-There are two methods for starting a Docker container for the ``pre`` service:
-
-- Method 1: Build the Docker image and run the image as a container
-- Method 2: Start the container from a ``docker-compose.yml`` file
-
-
-Method 1: Build the Docker image and run the image as a container
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-To use this first method, you first build the Docker image of the ``pre`` service
-and then run the image as a container.
-
-Build the Docker image
-::::::::::::::::::::::
-
+Build the Docker container for the ``pre`` service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 To build the Docker image, perform these steps:
 
 #. In your terminal, go to the ``docker`` directory.
@@ -76,7 +61,7 @@ To build the Docker image, perform these steps:
 
 
 Run the image as a container
-::::::::::::::::::::::::::::
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once the Docker image of the ``pre`` service is built successfully, perform these steps to
 run this image as a container:
@@ -101,9 +86,7 @@ run this image as a container:
      >>> c77ffd67f9fa   ghcr.io/ansys/ls-pre   "python3 ./linux-bin…"   7 seconds ago   Up 7 seconds   0.0.0.0:50051->50051/tcp, :::50051->50051/tcp   hardcore_margulis
 	 
 	 
-Method 2: Start the container from a ``docker-compose.yml`` file
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-To use this second method, you start the container for the ``pre`` service from a
+Alternatively, you can start the container for the ``pre`` service from a
 ``docker-compose.yml`` file.
 	 
 #. Ensure that Docker Compose has been installed on your computer. If Docker Compose is not
@@ -115,3 +98,13 @@ To use this second method, you start the container for the ``pre`` service from 
   .. code:: bash
 
      docker compose up -d
+
+Copy Files from Docker
+~~~~~~~~~~~~~~~~~~~~~~
+To copy files back from the ``pre`` docker container to your host machine use the command below
+
+  .. code:: bash
+
+     docker cp <containerId>:/file/path/within/container /host/target/path
+
+The path within the container is ``/server/output``.
