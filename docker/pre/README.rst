@@ -21,7 +21,7 @@ Prerequisites
   is installed. For installation information, see Microsoft's
   `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
 
-* Install ``docker`` engine. Based on the linux distro you can use the corresponding installation
+* Install ``docker`` engine. Based on the Linux distro you can use the corresponding installation
   instructions from `this page <https://docs.docker.com/engine/install/>`_.
 
 * Download the latest Linux release artifacts for the ``pre`` Docker container:
@@ -99,9 +99,9 @@ Alternatively, you can start the container for the ``pre`` service from a
 
      docker compose up -d
 
-Copy Files from Docker
+Copy files from Docker
 ~~~~~~~~~~~~~~~~~~~~~~
-To copy files back from the ``pre`` docker container to your host machine use the command below
+To copy files back from the ``pre`` docker container to your host machine use the command below:
 
   .. code:: bash
 

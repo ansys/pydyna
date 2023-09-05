@@ -83,7 +83,7 @@ directory and install PyDYNA using the preceding command.
 Install the server
 ------------------
 Currently, PyDYNA server is only supported withing a Docker container.
-Future release will support launching the servers directly on local machines as well.
+Future releases support launching the servers directly on local machines as well.
 
 .. include:: ../../../docker/pre/README.rst
 

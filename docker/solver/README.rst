@@ -14,14 +14,14 @@ Prerequisites
    git clone https://github.com/pyansys/pydyna.git
    cd pydyna
 
-  The ``docker`` file in the  ``docker/pre`` directory is used to build the
+  The ``docker`` file in the  ``docker/solver`` directory is used to build the
   Linux-based Docker image.
 
 * If you are building the image on Windows, ensure that the Windows Subsystem for Linux (WSL)
   is installed. For installation information, see Microsoft's
   `Install Linux on Windows with WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_.
 
-* Install ``docker`` engine. Based on the linux distro you can use the corresponding installation
+* Install ``docker`` engine. Based on the Linux distro you can use the corresponding installation
   instructions from `this page <https://docs.docker.com/engine/install/>`_.
 
 * Download the latest Linux release artifacts for the ``solver`` Docker container:
@@ -93,9 +93,9 @@ Perform these steps to run the image for the ``solver`` service as a container:
        >>> CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS         PORTS                            NAMES
        >>> be84c95db31d   dyna_solver_v04   "/ansys_inc/server.p…"   18 minutes ago   Up 8 seconds   22/tcp, 0.0.0.0:5000->5000/tcp   mppdyna_docker_centos7_dyna_1
 
-Copy Files from Docker
+Copy files from Docker
 ~~~~~~~~~~~~~~~~~~~~~~
-To copy files back from the ``solver`` container to your host machine use the command below
+To copy files back from the ``solver`` container to your host machine use the command below:
 
   .. code:: bash
 
