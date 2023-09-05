@@ -1,7 +1,7 @@
 Getting started
 ===============
-To run PyDYNA, you must have an installation of Ansys LS-DYNA.
-PyDYNA supports LS-DYNA 2023 R2 and later.
+
+To use the solver features of PyDYNA, you must have a valid LS-DYNA license.
 
 For information on getting a licensed copy of LS-DYNA, see
 the `Ansys LS-DYNA <https://www.ansys.com/products/structures/ansys-ls-dyna>`_
@@ -9,30 +9,11 @@ page on the Ansys website.
 
 Installation
 ============
-To use PyDYNA, you must install Docker images for the ``pre`` and ``solver``
-services and the ``ansys.dyna.core`` package itself.
+PyDYNA consists of two modules, ``ansys.dyna.core.pre`` and ``ansys.dyna.core.solver``.
+Both these modules are gRPC enabled and hence need to be run using server-client connection.
 
-
-Install Docker image for the ``pre`` service
---------------------------------------------
-To launch the ``pre`` service locally, you must have Docker installed
-on your machine.
-
-.. caution::
-
-   The ``pre`` service is available only as a Linux Docker image. 
-   Make sure that your Docker engine is configured to run Linux Docker images.
-
-For information on installing the Docker container for the ``pre`` service,
-see the ``README.rst`` file in the repository's ``docker/pre`` directory.
-
-Install Docker image for the ``solver`` service
------------------------------------------------
-For information on installing the Docker container for the ``solver`` service,
-see the ``README.rst`` file in the repository's ``docker/solver`` directory.
-
-Install the package
--------------------
+Install the client
+------------------
 The ``ansys.dyna.core`` package supports Python 3.8 through
 Python 3.11 on Windows, Linux, and MacOS.
 
@@ -46,7 +27,7 @@ Install in user mode
 ~~~~~~~~~~~~~~~~~~~~
 
 Before installing PyDYNA in user mode, make sure you have the latest version of
-`pip`_ with this command:
+`pip <https://pip.pypa.io/en/stable/installation/>`_ with this command:
 
 .. code:: bash
 
@@ -65,9 +46,9 @@ Install in developer mode
 Installing PyDYNA in developer mode allows you to modify the source and enhance it.
 
 .. note::
-   
+
     Before contributing to the project, ensure that you are thoroughly familiar
-    with the `PyAnsys Developer's Guide`_.
+    with the `PyAnsys Developer's Guide <https://dev.docs.pyansys.com/index.html>`_.
 
 Start by cloning and installing the repository with these commands:
 
@@ -99,6 +80,14 @@ with these commands:
 If you're on Windows with Python 3.8, unzip the wheelhouse archive to a ``wheelhouse``
 directory and install PyDYNA using the preceding command.
 
+Install the server
+------------------
+Currently, PyDYNA server is only supported withing a Docker container.
+Future releases support launching the servers directly on local machines as well.
+
+.. include:: ../../../docker/pre/README.rst
+
+.. include:: ../../../docker/solver/README.rst
 
 .. LINKS
 .. _pydyna_pypi: https://pypi.org/projects/ansys-dyna-core/
