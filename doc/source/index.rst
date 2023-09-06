@@ -2,8 +2,7 @@ PyDYNA documentation  |version|
 ===============================
 
 .. include:: ../../README.rst
-.. include:: ../../docker/pre/README.rst
-.. include:: ../../docker/solver/README.rst
+   :start-after: .. readme_start
 
 .. jinja:: main_toctree
 

@@ -7,7 +7,7 @@ directories:
 In the PyDYNA installation, the ``docker`` directory has two child
 directories:
 
-- ``pre``: Contains the package with the ``ls-pre`` Docker image for the
+- ``pre``: Contains the package with the ``pre`` Docker image for the
   ``pre`` service. This service provides highly abstracted APIs for creating and
   setting up DYNA input decks for DynaMech, DynaIGA, DynaICFD, DynaSALE, DynaEM,
   and DynaAirbag.
