@@ -85,3 +85,4 @@ COPY mpi /opt/openmpi
 # ifort runtime libraries in /ansys_inc/lib
 
 COPY docker_dir /ansys_inc
+RUN chmod 755 /ansys_inc/server.py
