@@ -35,10 +35,6 @@ Prerequisites
 
      >>> Dockerfile README.rst do_build docker-compose.yml docker_dir mpi mppdyna_docker_centos7.zip
 
-* Within docker_dir, there is a file called mppdyna. This file is the executable to run. It can be
-  any executable (SMP, MPP) or revision and branch. To run a given file, the name shall be changed to
-  mppdyna and copied inside docker_dir.
-
 Once all prerequisites are met, you can build the Docker image for the ``solver`` service.
 
 Build the Docker image
