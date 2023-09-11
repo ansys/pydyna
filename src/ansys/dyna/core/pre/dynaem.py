@@ -808,9 +808,11 @@ class RandlesCell:
         """Set parameter for Randles Cell."""
         if self.define_batmac:
             sid = 0
+            soutouid = 0
             if self.psid is not None:
                 sid = self.psid.create(self.stub)
-            soctou = self.soctou.create(self.stub)
+            if self.soctou is not None:
+                soutouid = self.soctou.create(self.stub)
             modified_prm = []
             for par in self.prm:
                 if type(par) == float:
@@ -826,7 +828,7 @@ class RandlesCell:
                     q=self.q,
                     cq=self.cq,
                     socinit=self.socinit,
-                    soctou=soctou,
+                    soctou=soutouid,
                     chargedirparam=modified_prm,
                     temp=self.temp,
                     frther=self.frther,

@@ -20,6 +20,11 @@ class Motion(Enum):
     DISPLACEMENT = 2
 
 
+class RWMotion(Enum):
+    VELOCITY = 0
+    DISPLACEMENT = 1
+
+
 class DOF(Enum):
     X_TRANSLATIONAL = 1
     Y_TRANSLATIONAL = 2
@@ -2528,13 +2533,11 @@ class RigidwallCylinder:
         self.lcid = 0
         self.dir = Direction(1, 0, 0)
 
-    def set_motion(self, curve, motion=Motion.VELOCITY, dir=Direction(1, 0, 0)):
+    def set_motion(self, curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0)):
         """Set the prescribed motion."""
         curve.create(self.stub)
         self.lcid = curve.id
         self.motion = motion.value
-        if self.motion == Motion.DISPLACEMENT:
-            self.motion = 1
         self.dir = dir
 
     def create(self):
@@ -2589,13 +2592,11 @@ class RigidwallSphere:
         self.lcid = 0
         self.dir = Direction(1, 0, 0)
 
-    def set_motion(self, curve, motion=Motion.VELOCITY, dir=Direction(1, 0, 0)):
+    def set_motion(self, curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0)):
         """Set the prescribed motion."""
         curve.create(self.stub)
         self.lcid = curve.id
         self.motion = motion.value
-        if self.motion == Motion.DISPLACEMENT:
-            self.motion = 1
         self.dir = dir
 
     def create(self):
