@@ -13,10 +13,12 @@ import logging
 from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
 from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
 
+
 class Motion(Enum):
     VELOCITY = 0
     ACCELERATION = 1
     DISPLACEMENT = 2
+
 
 class RWMotion(Enum):
     VELOCITY = 0
