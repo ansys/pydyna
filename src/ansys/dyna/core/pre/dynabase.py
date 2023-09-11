@@ -13,11 +13,14 @@ import logging
 from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
 from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
 
-
 class Motion(Enum):
     VELOCITY = 0
     ACCELERATION = 1
     DISPLACEMENT = 2
+
+class RWMotion(Enum):
+    VELOCITY = 0
+    DISPLACEMENT = 1
 
 
 class DOF(Enum):
@@ -2528,13 +2531,11 @@ class RigidwallCylinder:
         self.lcid = 0
         self.dir = Direction(1, 0, 0)
 
-    def set_motion(self, curve, motion=Motion.VELOCITY, dir=Direction(1, 0, 0)):
+    def set_motion(self, curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0)):
         """Set the prescribed motion."""
         curve.create(self.stub)
         self.lcid = curve.id
         self.motion = motion.value
-        if self.motion == Motion.DISPLACEMENT:
-            self.motion = 1
         self.dir = dir
 
     def create(self):
@@ -2589,13 +2590,11 @@ class RigidwallSphere:
         self.lcid = 0
         self.dir = Direction(1, 0, 0)
 
-    def set_motion(self, curve, motion=Motion.VELOCITY, dir=Direction(1, 0, 0)):
+    def set_motion(self, curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0)):
         """Set the prescribed motion."""
         curve.create(self.stub)
         self.lcid = curve.id
         self.motion = motion.value
-        if self.motion == Motion.DISPLACEMENT:
-            self.motion = 1
         self.dir = dir
 
     def create(self):
