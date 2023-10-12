@@ -768,7 +768,7 @@ class DynaBase:
         \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
         opcode = "INITIAL_VELOCITY"
-        keyworddata = "0\\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
+        keyworddata = "0\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
         create_general_keyword(opcode = opcode,keyworddata=keyworddata)
         """
         ret = self.stub.CreateGeneralKWD(GeneralKWDRequest(opcode=opcode, keyworddata=keyworddata))
