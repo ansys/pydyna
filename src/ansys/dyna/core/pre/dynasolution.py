@@ -54,7 +54,7 @@ class DynaSolution:
        Port. the default is ``"50051"``.
     """
 
-    def __init__(self, hostname="localhost", port="50051",server_path=""):
+    def __init__(self, hostname="localhost", port="50051", server_path=""):
         # launch server
         check_valid_ip(hostname)  # double check
         if port is None:
@@ -64,7 +64,7 @@ class DynaSolution:
 
         if (hostname.lower() == "localhost" or hostname == LOCALHOST) and not DynaSolution.grpc_local_server_on():
             LOG.debug("Starting kwserver")
-            #server_path = os.path.join(os.getcwd(), "../../src/ansys/dyna/core/pre/Server")
+            # server_path = os.path.join(os.getcwd(), "../../src/ansys/dyna/core/pre/Server")
             threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
             threadserver.setDaemon(True)
             threadserver.start()
