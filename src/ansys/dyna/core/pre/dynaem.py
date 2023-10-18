@@ -815,11 +815,13 @@ class RandlesCell:
                 soutouid = self.soctou.create(self.stub)
             modified_prm = []
             for par in self.prm:
-                if type(par) == float:
+                if type(par) == float or type(par) == int:
                     modified_prm.append(par)
                 elif type(par) == Table2D:
                     tid = par.create(self.stub)
                     modified_prm.append(-tid)
+            while len(modified_prm) < 6:
+                modified_prm.append(0)
             ret = self.stub.CreateEMRandlesBatmac(
                 EMRandlesBatmacRequest(
                     rdltype=self.rdltype,
