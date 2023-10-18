@@ -4,6 +4,8 @@ import os
 import socket
 import subprocess
 import threading
+import pip
+import subprocess
 
 from ansys.dyna.core.pre import LOG
 from ansys.dyna.core.pre.misc import check_valid_ip, check_valid_port
@@ -91,7 +93,21 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path=None) -> tu
     LOG.info(f"Running in {ip}:{port} the following command: '{command}'")
 
     LOG.debug("the pre service starting in background.")
-    process = subprocess.Popen(["python", "kwserver.py"], cwd=server_path, shell=True)
+    file_proto = server_path + os.sep + "kwprocess.proto"
+    if not os.path.exists(file_proto):
+        LOG.debug("Non proto file.")
+        return
+    #pip.main(['install','grpc_tools'])
+    obj =subprocess.check_call("pip3 install grpcio grpcio-tools protobuf")
+    #obj.wait()
+    #result = os.system("pip3 install grpcio grpcio-tools protobuf")
+    print("grpc installed")
+    print(os.getcwd())
+
+    obj2 = subprocess.check_call(f"python -m grpc_tools.protoc --python_out={server_path} --grpc_python_out={server_path} -I{server_path} {server_path}\kwprocess.proto",shell = True)
+ 
+    print("grpc installed2")
+    process = subprocess.Popen(["python", f"{server_path}/kwserver.py"], cwd=server_path, shell=True)
     process.wait()
     # while True:
     #     pass
