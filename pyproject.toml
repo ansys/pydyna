@@ -33,7 +33,7 @@ dependencies = [
 [project.optional-dependencies]
 tests = [
     "pyvista==0.42.3",
-    "matplotlib==3.8.0",
+    "matplotlib==3.8.1",
     "numpy==1.26.1",
     "pytest==7.4.3",
     "pytest-cov==4.1.0",
@@ -46,7 +46,7 @@ tests = [
 ]
 doc = [
     "recommonmark==0.7.1",
-    "matplotlib==3.8.0",
+    "matplotlib==3.8.1",
     "imageio==2.32.0",
     "imageio-ffmpeg==0.4.9",
     "pyvista==0.42.3",
