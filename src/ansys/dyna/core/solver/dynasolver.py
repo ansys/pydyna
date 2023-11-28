@@ -66,18 +66,18 @@ class DynaSolver:
         self.hostname = hostname
         self.port = port
 
-        #start server locally
+        # start server locally
         if (hostname.lower() == "localhost" or hostname == LOCALHOST) and not DynaSolver.grpc_local_server_on():
-            #LOG.debug("Starting solver server")
-            
+            # LOG.debug("Starting solver server")
+
             if len(server_path) == 0:
-               server_path = os.getenv('ANSYS_PYDYNA_SOLVER_SERVER_PATH')
-               if server_path is None:
-                   print('Please set the environment variable for ANSYS_PYDYNA_SOLVER_SERVER_PATH')
-                   return
+                server_path = os.getenv("ANSYS_PYDYNA_SOLVER_SERVER_PATH")
+                if server_path is None:
+                    print("Please set the environment variable for ANSYS_PYDYNA_SOLVER_SERVER_PATH")
+                    return
             if os.path.isdir(server_path):
                 threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
-                #threadserver.setDaemon(True)
+                # threadserver.setDaemon(True)
                 threadserver.start()
                 waittime = 0
                 while not DynaSolver.grpc_local_server_on():
@@ -85,11 +85,11 @@ class DynaSolver:
                     waittime += 5
                     print(waittime)
                     if waittime > 60:
-                        print('Failed to start pydyna solver server locally')
+                        print("Failed to start pydyna solver server locally")
                         break
-            
+
             else:
-                print('Failed to start pydyna solver server locally,Invalid server path!')
+                print("Failed to start pydyna solver server locally,Invalid server path!")
 
         temp = hostname + ":" + str(port)
         self.channel = grpc.insecure_channel(temp)
@@ -112,7 +112,7 @@ class DynaSolver:
         #    DynaSolver.logger.propagate = False
         # self.logger = DynaSolver.logger
         self.logger = logging.getLogger("DynaSolver")
-    
+
     @staticmethod
     def grpc_local_server_on() -> bool:
         """Check if the server is launched locally.
@@ -298,7 +298,7 @@ class DynaSolver:
         #
         # First packet contains the filename. The rest hold the contents.
         #
-        #self.logger.debug("upload: %s" % fname)
+        # self.logger.debug("upload: %s" % fname)
         fsize = 0
 
         def push_packets(fname):
@@ -441,15 +441,15 @@ class DynaSolver:
         self.logger.debug("start: %d" % nproc)
         # request = dynasolver_pb2.DynaSolverStart()
         request = DynaSolverStart()
-        #request.exename = b"mppdyna"
-        request.exename = bytes(solver_fname,'utf-8')
+        # request.exename = b"mppdyna"
+        request.exename = bytes(solver_fname, "utf-8")
         request.nproc = nproc
         response = self.stub.start_solver(request)
         if response.status == tag.RUNNING:
             raise RunningError("LSDYNA is already running")
         return
 
-    def start_locally(self, preset="MPP_DOUBLE",input="", nproc=1,memory=20):
+    def start_locally(self, preset="MPP_DOUBLE", input="", nproc=1, memory=20):
         """Begin execution with the given string as the command-line arguments.
 
         Parameters
@@ -460,12 +460,12 @@ class DynaSolver:
 
         self.logger.debug("start: %d" % nproc)
         request = DynaSolverStartLocal()
-        request.prset = bytes(preset,'utf-8')
-        request.input = bytes(input,'utf-8')
+        request.prset = bytes(preset, "utf-8")
+        request.input = bytes(input, "utf-8")
         request.nproc = nproc
         request.memory = memory
         response = self.stub.start_solver_locally(request)
-        #if response.status == tag.RUNNING:
+        # if response.status == tag.RUNNING:
         #    raise RunningError("LSDYNA is already running")
         return
 
