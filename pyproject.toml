@@ -27,7 +27,7 @@ classifiers = [
 
 dependencies = [
     "ansys-dpf-core>=0.7.2",
-    "ansys-api-dyna==0.3.3",
+    "ansys-api-dyna==0.3.4",
 ]
 
 [project.optional-dependencies]
