@@ -33,7 +33,7 @@ dependencies = [
 [project.optional-dependencies]
 tests = [
     "pyvista==0.42.3",
-    "matplotlib==3.8.1",
+    "matplotlib==3.8.2",
     "numpy==1.26.2",
     "pytest==7.4.3",
     "pytest-cov==4.1.0",
@@ -46,8 +46,8 @@ tests = [
 ]
 doc = [
     "recommonmark==0.7.1",
-    "matplotlib==3.8.1",
-    "imageio==2.32.0",
+    "matplotlib==3.8.2",
+    "imageio==2.33.0",
     "imageio-ffmpeg==0.4.9",
     "pyvista==0.42.3",
     "numpydoc==1.6.0",
@@ -66,7 +66,7 @@ doc = [
     "joblib==1.3.2",
     "scikit-learn==1.3.2",
     "ipython==8.17.2",
-    "jupyterlab==4.0.8",
+    "jupyterlab==4.0.9",
     "sphinx-jinja==2.0.2",
     "sphinx-autoapi==3.0.0",
 ]
