@@ -88,7 +88,7 @@ License
 =======
 PyDYNA is licensed under the MIT license.
 
-PyDYNA makes no commercial claim over Ansys whatsoever. This libray extends the functionality of
+PyDYNA makes no commercial claim over Ansys whatsoever. This library extends the functionality of
 Ansys LS-DYNA by adding a Python interface to LS-DYNA without changing the core behavior or
 license of the original software. The use of the interactive control of PyDYNA requires a legally
 licensed local copy of LS-DYNA.
