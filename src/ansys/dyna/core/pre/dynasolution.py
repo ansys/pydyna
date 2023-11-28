@@ -62,21 +62,21 @@ class DynaSolution:
             check_valid_port(port)
             LOG.debug(f"Using default port {port}")
 
-        #start server locally
+        # start server locally
         if (hostname.lower() == "localhost" or hostname == LOCALHOST) and not DynaSolution.grpc_local_server_on():
             LOG.debug("Starting kwserver")
-            
+
             if len(server_path) == 0:
-               server_path = os.getenv('ANSYS_PYDYNA_PRE_SERVER_PATH')
-               if server_path is None:
-                   print('Please set the environment variable for ANSYS_PYDYNA_PRE_SERVER_PATH')
-                   return False
+                server_path = os.getenv("ANSYS_PYDYNA_PRE_SERVER_PATH")
+                if server_path is None:
+                    print("Please set the environment variable for ANSYS_PYDYNA_PRE_SERVER_PATH")
+                    return False
             if os.path.isdir(server_path):
                 threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
                 threadserver.setDaemon(True)
                 threadserver.start()
             else:
-                print('Failed to start pydyna pre server locally,Invalid server path!')
+                print("Failed to start pydyna pre server locally,Invalid server path!")
 
         init_log("client.log")
         temp = hostname + ":" + str(port)
