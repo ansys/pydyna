@@ -11,7 +11,7 @@ import queue
 import sys
 import threading
 
-from ansys.api.dyna.v0 import dynasolver_pb2, dynasolver_pb2_grpc
+from ansys.api.dyna.v0 import dynasolver_pb2
 import grpc
 
 from . import grpc_tags as tag
@@ -460,7 +460,7 @@ class DynaSolver:
 
         self.logger.debug("start: %d" % nproc)
         request = DynaSolverStartLocal()
-        request.prset = bytes(preset, "utf-8")
+        request.preset = bytes(preset, "utf-8")
         request.input = bytes(input, "utf-8")
         request.nproc = nproc
         request.memory = memory
