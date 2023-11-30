@@ -1,5 +1,8 @@
 PyDYNA
-========
+======
+
+.. readme_start
+
 |pyansys| |python| |pypi| |GH-CI| |codecov| |MIT| |black|
 
 .. |pyansys| image:: https://img.shields.io/badge/Py-Ansys-ffc107.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABDklEQVQ4jWNgoDfg5mD8vE7q/3bpVyskbW0sMRUwofHD7Dh5OBkZGBgW7/3W2tZpa2tLQEOyOzeEsfumlK2tbVpaGj4N6jIs1lpsDAwMJ278sveMY2BgCA0NFRISwqkhyQ1q/Nyd3zg4OBgYGNjZ2ePi4rB5loGBhZnhxTLJ/9ulv26Q4uVk1NXV/f///////69du4Zdg78lx//t0v+3S88rFISInD59GqIH2esIJ8G9O2/XVwhjzpw5EAam1xkkBJn/bJX+v1365hxxuCAfH9+3b9/+////48cPuNehNsS7cDEzMTAwMMzb+Q2u4dOnT2vWrMHu9ZtzxP9vl/69RVpCkBlZ3N7enoDXBwEAAA+YYitOilMVAAAAAElFTkSuQmCC
@@ -85,7 +88,7 @@ License
 =======
 PyDYNA is licensed under the MIT license.
 
-PyDYNA makes no commercial claim over Ansys whatsoever. This libray extends the functionality of
+PyDYNA makes no commercial claim over Ansys whatsoever. This library extends the functionality of
 Ansys LS-DYNA by adding a Python interface to LS-DYNA without changing the core behavior or
 license of the original software. The use of the interactive control of PyDYNA requires a legally
 licensed local copy of LS-DYNA.

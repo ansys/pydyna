@@ -54,7 +54,7 @@ class DynaSolution:
        Port. the default is ``"50051"``.
     """
 
-    def __init__(self, hostname="localhost", port="50051"):
+    def __init__(self, hostname="localhost", port="50051", server_path=""):
         # launch server
         check_valid_ip(hostname)  # double check
         if port is None:
@@ -62,12 +62,21 @@ class DynaSolution:
             check_valid_port(port)
             LOG.debug(f"Using default port {port}")
 
+        # start server locally
         if (hostname.lower() == "localhost" or hostname == LOCALHOST) and not DynaSolution.grpc_local_server_on():
             LOG.debug("Starting kwserver")
-            server_path = os.path.join(os.getcwd(), "../../src/ansys/dyna/core/pre/Server")
-            threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
-            threadserver.setDaemon(True)
-            threadserver.start()
+
+            if len(server_path) == 0:
+                server_path = os.getenv("ANSYS_PYDYNA_PRE_SERVER_PATH")
+                if server_path is None:
+                    print("Please set the environment variable for ANSYS_PYDYNA_PRE_SERVER_PATH")
+                    return False
+            if os.path.isdir(server_path):
+                threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
+                threadserver.setDaemon(True)
+                threadserver.start()
+            else:
+                print("Failed to start pydyna pre server locally,Invalid server path!")
 
         init_log("client.log")
         temp = hostname + ":" + str(port)

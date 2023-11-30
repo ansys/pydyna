@@ -25,7 +25,7 @@ Prerequisites
   instructions from `this page <https://docs.docker.com/engine/install/>`_.
 
 * Download the latest Linux release artifacts for the ``solver`` Docker container:
-  `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.3.5/mppdyna_docker_centos7.zip>`_.
+  `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.4.2/mppdyna_docker_centos7.zip>`_.
 
 * Move this ZIP file to the ``docker/solver`` directory and unzip it in the same directory.
 
@@ -34,6 +34,10 @@ Prerequisites
   .. code:: bash
 
      >>> Dockerfile README.rst do_build docker-compose.yml docker_dir mpi mppdyna_docker_centos7.zip
+
+* Within docker_dir, there is a file called mppdyna. This file is the executable to run. It can be
+  any executable (SMP, MPP) or revision and branch. To run a given file, the name shall be changed to
+  mppdyna and copied inside docker_dir.
 
 Once all prerequisites are met, you can build the Docker image for the ``solver`` service.
 

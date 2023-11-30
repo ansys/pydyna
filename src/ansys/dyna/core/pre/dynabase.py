@@ -20,6 +20,11 @@ class Motion(Enum):
     DISPLACEMENT = 2
 
 
+class RWMotion(Enum):
+    VELOCITY = 0
+    DISPLACEMENT = 1
+
+
 class DOF(Enum):
     X_TRANSLATIONAL = 1
     Y_TRANSLATIONAL = 2
@@ -140,12 +145,27 @@ class Function:
 
     def __init__(self, Function=None):
         self.function = Function
+        self.tabulated = False
+
+    def set_tabulated(self, heading="", function="", x=[], y=[]):
+        self.tabulated = True
+        self.heading = heading
+        self.function_name = function
+        self.x = x
+        self.y = y
 
     def create(self, stub):
         """Create function."""
+        if self.tabulated:
+            ret = stub.CreateDefineFunctionTabulated(
+                DefineFunctionTabulatedRequest(
+                    heading=self.heading, function=self.function_name, abscissa=self.x, ordinate=self.y
+                )
+            )
         ret = stub.CreateDefineFunction(DefineFunctionRequest(function=self.function))
         self.id = ret.id
         logging.info(f"Function {self.id} defined...")
+
         return self.id
 
 
@@ -763,7 +783,7 @@ class DynaBase:
         \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
         opcode = "INITIAL_VELOCITY"
-        keyworddata = "0\\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
+        keyworddata = "0\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
         create_general_keyword(opcode = opcode,keyworddata=keyworddata)
         """
         ret = self.stub.CreateGeneralKWD(GeneralKWDRequest(opcode=opcode, keyworddata=keyworddata))
@@ -2224,6 +2244,7 @@ class BoundaryCondition:
         self.spclist = []
         self.imposedmotionlist = []
         self.templist = []
+        self.convectionlist = []
 
     def create_spc(
         self,
@@ -2304,6 +2325,39 @@ class BoundaryCondition:
         """
         param = [nodeset, curve, scalefactor]
         self.templist.append(param)
+
+    def create_convection(
+        self,
+        segmentset=None,
+        convection_heat_transfer_coefficient=None,
+        convection_heat_transfer_coefficient_multiplier=0.0,
+        environment_temperature=None,
+        environment_temperature_multiplier=0.0,
+    ):
+        """Apply a convection boundary condition on SEGMENT_SET for a thermal analysis.
+
+        Parameters
+        ----------
+        segmentset : SegmentSet.
+            Segment set.
+        convection_heat_transfer_coefficient : Curve
+            Convection heat transfer coefficient.
+        convection_heat_transfer_coefficient_multiplier : float
+            Curve multiplier for convection heat transfer coefficient.
+        environment_temperature : Curve
+            Environment temperature.
+        environment_temperature_multiplier : float
+            Curve multiplier for environment temperature.
+
+        """
+        param = [
+            segmentset,
+            convection_heat_transfer_coefficient,
+            convection_heat_transfer_coefficient_multiplier,
+            environment_temperature,
+            environment_temperature_multiplier,
+        ]
+        self.convectionlist.append(param)
 
     def create(self):
         """Create a boundary condition."""
@@ -2399,7 +2453,7 @@ class BoundaryCondition:
                 nid = nodeset.create(self.stub)
                 option = "SET"
             if curve is not None:
-                cid = curve.id
+                cid = curve.create(self.stub)
             else:
                 cid = 0
             self.stub.CreateBdyTemp(
@@ -2411,6 +2465,19 @@ class BoundaryCondition:
                 )
             )
             logging.info("Boundary Temperature Created...")
+        for obj in self.convectionlist:
+            ss, hlc, hmult, tlc, tmult = obj[0], obj[1], obj[2], obj[3], obj[4]
+            ssid, hlcid, tlcid = 0, 0, 0
+            if ss is not None:
+                ssid = ss.create(self.stub)
+            if hlc is not None:
+                hlcid = hlc.create(self.stub)
+            if tlc is not None:
+                tlcid = tlc.create(self.stub)
+            self.stub.CreateBdyConvection(
+                BdyConvectionRequest(ssid=ssid, pserod=0, hlcid=hlcid, hmult=hmult, tlcid=tlcid, tmult=tmult, loc=0)
+            )
+            logging.info("Boundary Convection Created...")
 
 
 class InitialCondition:
@@ -2528,13 +2595,11 @@ class RigidwallCylinder:
         self.lcid = 0
         self.dir = Direction(1, 0, 0)
 
-    def set_motion(self, curve, motion=Motion.VELOCITY, dir=Direction(1, 0, 0)):
+    def set_motion(self, curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0)):
         """Set the prescribed motion."""
         curve.create(self.stub)
         self.lcid = curve.id
         self.motion = motion.value
-        if self.motion == Motion.DISPLACEMENT:
-            self.motion = 1
         self.dir = dir
 
     def create(self):
@@ -2589,13 +2654,11 @@ class RigidwallSphere:
         self.lcid = 0
         self.dir = Direction(1, 0, 0)
 
-    def set_motion(self, curve, motion=Motion.VELOCITY, dir=Direction(1, 0, 0)):
+    def set_motion(self, curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0)):
         """Set the prescribed motion."""
         curve.create(self.stub)
         self.lcid = curve.id
         self.motion = motion.value
-        if self.motion == Motion.DISPLACEMENT:
-            self.motion = 1
         self.dir = dir
 
     def create(self):

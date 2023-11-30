@@ -2,7 +2,7 @@ PyDYNA documentation  |version|
 ===============================
 
 .. include:: ../../README.rst
-
+   :start-after: .. readme_start
 
 .. jinja:: main_toctree
 

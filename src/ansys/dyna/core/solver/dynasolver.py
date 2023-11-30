@@ -11,10 +11,11 @@ import queue
 import sys
 import threading
 
-from ansys.api.dyna.v0 import dynasolver_pb2, dynasolver_pb2_grpc
+from ansys.api.dyna.v0 import dynasolver_pb2
 import grpc
 
 from . import grpc_tags as tag
+from .launcher import *  # noqa : F403
 
 #
 # Define our own exceptions
@@ -60,12 +61,46 @@ class DynaSolver:
     """
 
     # logger = None
-    def __init__(self, hostname, port):
+    def __init__(self, hostname, port, server_path=""):
         """Create a client instance connected to the host name (or IP address) and port."""
         self.hostname = hostname
         self.port = port
-        self.channel = grpc.insecure_channel(hostname + ":" + port)
-        self.stub = dynasolver_pb2_grpc.DynaSolverCommStub(self.channel)
+
+        # start server locally
+        if (hostname.lower() == "localhost" or hostname == LOCALHOST) and not DynaSolver.grpc_local_server_on():
+            # LOG.debug("Starting solver server")
+
+            if len(server_path) == 0:
+                server_path = os.getenv("ANSYS_PYDYNA_SOLVER_SERVER_PATH")
+                if server_path is None:
+                    print("Please set the environment variable for ANSYS_PYDYNA_SOLVER_SERVER_PATH")
+                    return
+            if os.path.isdir(server_path):
+                threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
+                # threadserver.setDaemon(True)
+                threadserver.start()
+                waittime = 0
+                while not DynaSolver.grpc_local_server_on():
+                    sleep(5)
+                    waittime += 5
+                    print(waittime)
+                    if waittime > 60:
+                        print("Failed to start pydyna solver server locally")
+                        break
+
+            else:
+                print("Failed to start pydyna solver server locally,Invalid server path!")
+
+        temp = hostname + ":" + str(port)
+        self.channel = grpc.insecure_channel(temp)
+        try:
+            grpc.channel_ready_future(self.channel).result(timeout=5)
+        except grpc.FutureTimeoutError:
+            logging.critical("Can not connect to Solver Server")
+            sys.exit()
+        logging.info("Connected to Solver Server...")
+        # self.stub = dynasolver_pb2_grpc.DynaSolverCommStub(self.channel)
+        self.stub = DynaSolverCommStub(self.channel)
         # if DynaSolver.logger is None:
         #    DynaSolver.logger = logging.getLogger("DynaSolver")
         #    DynaSolver.logger.setLevel(logging.INFO)
@@ -77,6 +112,22 @@ class DynaSolver:
         #    DynaSolver.logger.propagate = False
         # self.logger = DynaSolver.logger
         self.logger = logging.getLogger("DynaSolver")
+
+    @staticmethod
+    def grpc_local_server_on() -> bool:
+        """Check if the server is launched locally.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+        """
+        channel = grpc.insecure_channel("localhost:5000")
+        try:
+            grpc.channel_ready_future(channel).result(timeout=5)
+        except:
+            return False
+        return True
 
     def _argcheck(self, cmd, ngiven, nrequired):
         """Internally used routine for checking command argument counts
@@ -247,12 +298,13 @@ class DynaSolver:
         #
         # First packet contains the filename. The rest hold the contents.
         #
-        self.logger.debug("upload: %s" % fname)
+        # self.logger.debug("upload: %s" % fname)
         fsize = 0
 
         def push_packets(fname):
             nonlocal fsize
-            request = dynasolver_pb2.DynaSolverFileData()
+            # request = dynasolver_pb2.DynaSolverFileData()
+            request = DynaSolverFileData()
             # Only send the base file name, not the whole path!
             bfname = os.path.split(fname)[1]
             request.b = bytes(bfname, "utf-8")
@@ -261,7 +313,8 @@ class DynaSolver:
             blocksize = 1000000
             n = blocksize
             while n == blocksize:
-                request = dynasolver_pb2.DynaSolverFileData()
+                # request = dynasolver_pb2.DynaSolverFileData()
+                request = DynaSolverFileData()
                 request.b = fp.read(blocksize)
                 n = len(request.b)
                 fsize = fsize + n
@@ -335,7 +388,8 @@ class DynaSolver:
             Command line to pass to LS-DYNA.
         """
         self.logger.debug("run: %s" % args)
-        request = dynasolver_pb2.DynaSolverRelay()
+        # request = dynasolver_pb2.DynaSolverRelay()
+        request = DynaSolverRelay()
         request.tag = tag.RUN
         request.b = bytes(args, "utf-8")
         response = self.stub.send_request(request)
@@ -369,7 +423,7 @@ class DynaSolver:
         self._check_return(response)
         return
 
-    def start(self, nproc):
+    def start(self, nproc, solver_fname=""):
         """Start LS-DYNA.
 
         The program starts and awaits further input. To begin a
@@ -385,12 +439,34 @@ class DynaSolver:
             Number of cores (MPI ranks) to run.
         """
         self.logger.debug("start: %d" % nproc)
-        request = dynasolver_pb2.DynaSolverStart()
-        request.exename = b"mppdyna"
+        # request = dynasolver_pb2.DynaSolverStart()
+        request = DynaSolverStart()
+        # request.exename = b"mppdyna"
+        request.exename = bytes(solver_fname, "utf-8")
         request.nproc = nproc
         response = self.stub.start_solver(request)
         if response.status == tag.RUNNING:
             raise RunningError("LSDYNA is already running")
+        return
+
+    def start_locally(self, preset="MPP_DOUBLE", input="", nproc=1, memory=20):
+        """Begin execution with the given string as the command-line arguments.
+
+        Parameters
+        ----------
+        args : str
+            Command line to pass to LS-DYNA.
+        """
+
+        self.logger.debug("start: %d" % nproc)
+        request = DynaSolverStartLocal()
+        request.preset = bytes(preset, "utf-8")
+        request.input = bytes(input, "utf-8")
+        request.nproc = nproc
+        request.memory = memory
+        response = self.stub.start_solver_locally(request)
+        # if response.status == tag.RUNNING:
+        #    raise RunningError("LSDYNA is already running")
         return
 
     def switch(self, args):
