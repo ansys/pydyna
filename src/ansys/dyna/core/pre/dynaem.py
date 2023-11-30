@@ -762,6 +762,7 @@ class RandlesCell:
         self.stub = DynaBase.get_stub()
         self.define_batmac = False
         self.define_randles_short = False
+        self.define_extra_heat_source = False
 
     def set_batmac_model(
         self,
@@ -804,20 +805,37 @@ class RandlesCell:
         self.define_randles_short = True
         self.randles_short_function = resistances_func
 
+    def set_extra_heat_source(self, heat_source_func=None):
+        """Add an extra heat source term to the Randles circuit nodes in order to account for thermal runaway
+        situations.
+
+        Parameters
+        ----------
+        heat_source_func : Function
+            Define the local heat source function of local parameters for the local Randles circuit.
+
+        """
+        self.define_extra_heat_source = True
+        self.heat_source_func = heat_source_func
+
     def create(self):
         """Set parameter for Randles Cell."""
         if self.define_batmac:
             sid = 0
+            soutouid = 0
             if self.psid is not None:
                 sid = self.psid.create(self.stub)
-            soctou = self.soctou.create(self.stub)
+            if self.soctou is not None:
+                soutouid = self.soctou.create(self.stub)
             modified_prm = []
             for par in self.prm:
-                if type(par) == float:
+                if type(par) == float or type(par) == int:
                     modified_prm.append(par)
                 elif type(par) == Table2D:
                     tid = par.create(self.stub)
                     modified_prm.append(-tid)
+            while len(modified_prm) < 6:
+                modified_prm.append(0)
             ret = self.stub.CreateEMRandlesBatmac(
                 EMRandlesBatmacRequest(
                     rdltype=self.rdltype,
@@ -826,7 +844,7 @@ class RandlesCell:
                     q=self.q,
                     cq=self.cq,
                     socinit=self.socinit,
-                    soctou=soctou,
+                    soctou=soutouid,
                     chargedirparam=modified_prm,
                     temp=self.temp,
                     frther=self.frther,
@@ -841,3 +859,9 @@ class RandlesCell:
                 fid = self.randles_short_function.create(self.stub)
             ret = self.stub.CreateEMRandlesShort(EMRandlesShortRequest(function=fid))
             logging.info(f"EM Randles Short Created...")
+        if self.define_extra_heat_source:
+            fid = 0
+            if self.heat_source_func is not None:
+                fid = self.heat_source_func.create(self.stub)
+            ret = self.stub.CreateEMRandlesExothermicReaction(EMRandlesExothermicReactionRequest(function=fid))
+            logging.info(f"EM Randles Exothermic Reaction Created...")
