@@ -44,12 +44,15 @@ from ansys.dyna.core.pre import examples
 # sphinx_gallery_thumbnail_path = '_static/pre/explicit/belted_dummy.png'
 
 ###############################################################################
-# Manually start the ``pre`` service
+# Start the ``pre`` service
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Copy the ``pyDyna/src/ansys/dyna/core/pre/Server`` folder to a desired location.
-# Start the ``pre`` service at this location by running this command:
-#
-# ``python kwserver.py``
+# Before starting the ``pre`` service, you must ensure that the Docker container
+# for this service has been started. For more information, see "Start the Docker
+# container for the ``pre`` service" in https://dyna.docs.pyansys.com/version/stable/index.html.
+# 
+# The ``pre`` service can also be started locally, please download the latest version of 
+# ansys-pydyna-pre-server.zip package from https://github.com/ansys/pydyna/releases and start it 
+# refering to the README.rst file in this server package.
 #
 # Once the ``pre`` service is running, you can connect a client to it using
 # the host name and port. This example uses the default localhost and port
