@@ -1,12 +1,12 @@
 documentation:
-- doc/source/**/*
-- README.rst
+- changed-files:
+  - any-glob-to-any-file: ['doc/**/*', 'README.rst']
 maintenance:
-- .github/**/*
-- .flake8
-- pyproject.toml
+- changed-files:
+  - any-glob-to-any-file: ['.github/**/*', 'pyproject.toml', '.flake8']
 dependencies:
-- pyproject.toml
+- changed-files:
+  - any-glob-to-any-file: ['pyproject.toml']
 testing:
-- _unittest/conftest.py
-- tests/*
+- changed-files:
+  - any-glob-to-any-file: ['_unittest/conftest.py', 'tests/*']
