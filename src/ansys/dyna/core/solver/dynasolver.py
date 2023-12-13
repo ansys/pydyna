@@ -10,6 +10,7 @@ import os
 import queue
 import sys
 import threading
+from time import sleep
 
 from ansys.api.dyna.v0 import dynasolver_pb2
 import grpc
