@@ -12,7 +12,7 @@ import sys
 import threading
 from time import sleep
 
-from ansys.api.dyna.v0 import dynasolver_pb2
+from ansys.api.dyna.v0 import dynasolver_pb2, dynasolver_pb2_grpc
 import grpc
 
 from . import grpc_tags as tag
@@ -100,8 +100,8 @@ class DynaSolver:
             logging.critical("Can not connect to Solver Server")
             sys.exit()
         logging.info("Connected to Solver Server...")
-        # self.stub = dynasolver_pb2_grpc.DynaSolverCommStub(self.channel)
-        self.stub = DynaSolverCommStub(self.channel)
+        self.stub = dynasolver_pb2_grpc.DynaSolverCommStub(self.channel)
+        # self.stub = DynaSolverCommStub(self.channel)
         # if DynaSolver.logger is None:
         #    DynaSolver.logger = logging.getLogger("DynaSolver")
         #    DynaSolver.logger.setLevel(logging.INFO)
@@ -304,8 +304,8 @@ class DynaSolver:
 
         def push_packets(fname):
             nonlocal fsize
-            # request = dynasolver_pb2.DynaSolverFileData()
-            request = DynaSolverFileData()
+            request = dynasolver_pb2.DynaSolverFileData()
+            # request = DynaSolverFileData()
             # Only send the base file name, not the whole path!
             bfname = os.path.split(fname)[1]
             request.b = bytes(bfname, "utf-8")
@@ -314,8 +314,8 @@ class DynaSolver:
             blocksize = 1000000
             n = blocksize
             while n == blocksize:
-                # request = dynasolver_pb2.DynaSolverFileData()
-                request = DynaSolverFileData()
+                request = dynasolver_pb2.DynaSolverFileData()
+                # request = DynaSolverFileData()
                 request.b = fp.read(blocksize)
                 n = len(request.b)
                 fsize = fsize + n
@@ -389,8 +389,8 @@ class DynaSolver:
             Command line to pass to LS-DYNA.
         """
         self.logger.debug("run: %s" % args)
-        # request = dynasolver_pb2.DynaSolverRelay()
-        request = DynaSolverRelay()
+        request = dynasolver_pb2.DynaSolverRelay()
+        # request = DynaSolverRelay()
         request.tag = tag.RUN
         request.b = bytes(args, "utf-8")
         response = self.stub.send_request(request)
@@ -424,7 +424,7 @@ class DynaSolver:
         self._check_return(response)
         return
 
-    def start(self, nproc, solver_fname=""):
+    def start(self, nproc):
         """Start LS-DYNA.
 
         The program starts and awaits further input. To begin a
@@ -440,10 +440,9 @@ class DynaSolver:
             Number of cores (MPI ranks) to run.
         """
         self.logger.debug("start: %d" % nproc)
-        # request = dynasolver_pb2.DynaSolverStart()
-        request = DynaSolverStart()
-        # request.exename = b"mppdyna"
-        request.exename = bytes(solver_fname, "utf-8")
+        request = dynasolver_pb2.DynaSolverStart()
+        # request = DynaSolverStart()
+        request.exename = b"mppdyna"
         request.nproc = nproc
         response = self.stub.start_solver(request)
         if response.status == tag.RUNNING:
@@ -460,7 +459,7 @@ class DynaSolver:
         """
 
         self.logger.debug("start: %d" % nproc)
-        request = DynaSolverStartLocal()
+        request = dynasolver_pb2.DynaSolverStartLocal()
         request.preset = bytes(preset, "utf-8")
         request.input = bytes(input, "utf-8")
         request.nproc = nproc
