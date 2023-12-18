@@ -17,6 +17,7 @@ RUN yum -y install openssh-clients openssh-server bind-utils sudo python3
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install grpcio
 RUN python3 -m pip install grpcio-tools
+RUN python3 -m pip install protobuf==4.21.0
 #
 ENV USER mpirun
 ENV HOME /home/mpirun
@@ -85,4 +86,4 @@ COPY mpi /opt/openmpi
 # ifort runtime libraries in /ansys_inc/lib
 
 COPY docker_dir /ansys_inc
-RUN chmod 755 /ansys_inc/server.py
+RUN chmod 755 /ansys_inc/
