@@ -109,7 +109,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: server_output.txt
+          name: server_output_docs.txt
           path: server_output.txt
           
       - name: DPF Logs (on screen)
@@ -179,7 +179,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: server_output.txt
+          name: server_output_tests.txt
           path: server_output.txt
 
       - name: "Upload coverage results"
