@@ -87,14 +87,14 @@ jobs:
           make -C doc pdf
 
       - name: "Upload html documentation"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: documentation-html
           path: doc/_build/html
           retention-days: 7
 
       - name: "Upload pdf documentation"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: documentation-pdf
           path: doc/_build/latex/*.pdf
@@ -107,9 +107,9 @@ jobs:
 
       - name: "Upload the server logs"
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: server_output.txt
+          name: server_output_docs.txt
           path: server_output.txt
           
       - name: DPF Logs (on screen)
@@ -177,13 +177,13 @@ jobs:
 
       - name: "Upload the server logs"
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: server_output.txt
+          name: server_output_tests.txt
           path: server_output.txt
 
       - name: "Upload coverage results"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-html
           path: .cov/html
