@@ -80,14 +80,22 @@ with these commands:
 If you're on Windows with Python 3.8, unzip the wheelhouse archive to a ``wheelhouse``
 directory and install PyDYNA using the preceding command.
 
-Install the server
-------------------
-Currently, PyDYNA server is only supported withing a Docker container.
-Future releases support launching the servers directly on local machines as well.
+Run PyDYNA Server locally 
+-------------------------
+Launching the servers directly on local machines.
+
+.. include:: ./SERVER_PRE_README.rst
+
+.. include:: ./SERVER_SOLVER_README.rst
+
+Run PyDYNA Server in a Docker container
+---------------------------------------
+PyDYNA server can be run in a Docker container.
 
 .. include:: ../../../docker/pre/README.rst
 
 .. include:: ../../../docker/solver/README.rst
+
 
 .. LINKS
 .. _pydyna_pypi: https://pypi.org/projects/ansys-dyna-core/
