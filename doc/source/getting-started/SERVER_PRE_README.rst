@@ -1,7 +1,7 @@
-Start pydyna pre server locally
+Start PyDYNA Pre server locally
 ===============================
 
-There are two ways to start the pydyna pre server
+There are two ways to start the PyDYNA Pre server
 
 1.Start server manually
 -----------------------
@@ -49,4 +49,4 @@ Run an example on the client side
            solution = DynaSolution(hostname)
            ......
 
-#. The function of DynaSolution() will start the pre server automatically.
+#. The function of DynaSolution() can start the Pre server automatically.
