@@ -1,7 +1,8 @@
 version: "3.3"
+name: "dyna"
 services:
   dyna:
-    image: dyna_solver_v04
+    build: ./
     networks:
       - dyna_internal
     volumes:
@@ -14,7 +15,7 @@ services:
         mode: ingress
     user: mpirun
     environment:
-      - LSTC_LICENSE_SERVER=<license_server_name>
+      - LSTC_LICENSE_SERVER=lvrpanda.ansys.com
     entrypoint: ["/ansys_inc/server.py","dyna"]
 networks:
   dyna_internal:
