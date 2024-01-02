@@ -8,9 +8,9 @@ version = "0.4.dev0"
 description = "Python interface to LS-DYNA Service"
 readme = "README.rst"
 requires-python = ">=3.8,<4"
-license = {file = "LICENSE"}
-authors = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
-maintainers = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
+license = { file = "LICENSE" }
+authors = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
+maintainers = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
 keywords = ["Ansys", "LS-DYNA", "gRPC"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -23,12 +23,10 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
 
-dependencies = [
-    "ansys-dpf-core>=0.7.2",
-    "ansys-api-dyna==0.3.5",
-]
+dependencies = ["ansys-dpf-core>=0.7.2", "ansys-api-dyna==0.3.5"]
 
 [project.optional-dependencies]
 tests = [
@@ -99,6 +97,4 @@ show_missing = true
 [tool.pytest.ini_options]
 minversion = "7.1"
 addopts = "-ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv"
-testpaths = [
-    "tests",
-]
+testpaths = ["tests"]
