@@ -14,7 +14,7 @@ Both these modules are gRPC enabled and hence need to be run using server-client
 
 Install the client
 ------------------
-The ``ansys.dyna.core`` package supports Python 3.8 through
+The ``ansys.dyna.core`` package supports Python 3.9 through
 Python 3.12 on Windows, Linux, and MacOS.
 
 You should consider installing PyDYNA in a virtual environment.
@@ -66,18 +66,18 @@ PyDYNA by downloading the wheelhouse archive for your corresponding machine
 architecture from the `Releases Page <https://github.com/pyansys/pydyna/releases>`_.
 
 Each wheelhouse archive contains all the Python wheels necessary to install
-PyDYNA from scratch on Windows and Linux for Python 3.8 through 3.12. You can install
+PyDYNA from scratch on Windows and Linux for Python 3.9 through 3.12. You can install
 PyDYNA on an isolated system with a fresh Python installation or on a virtual environment.
 
-For example, on Linux with Python 3.8, unzip the wheelhouse archive and install PyDYNA
+For example, on Linux with Python 3.9, unzip the wheelhouse archive and install PyDYNA
 with these commands:
 
 .. code:: bash
 
-    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.8.zip -d wheelhouse
+    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.9.zip -d wheelhouse
     pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
 
-If you're on Windows with Python 3.8, unzip the wheelhouse archive to a ``wheelhouse``
+If you're on Windows with Python 3.9, unzip the wheelhouse archive to a ``wheelhouse``
 directory and install PyDYNA using the preceding command.
 
 Run PyDYNA Server locally 
