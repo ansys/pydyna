@@ -14,8 +14,8 @@ Both these modules are gRPC enabled and hence need to be run using server-client
 
 Install the client
 ------------------
-The ``ansys.dyna.core`` package supports Python 3.8 through
-Python 3.11 on Windows, Linux, and MacOS.
+The ``ansys.dyna.core`` package supports Python 3.9 through
+Python 3.12 on Windows, Linux, and MacOS.
 
 You should consider installing PyDYNA in a virtual environment.
 For more information, see Python's
@@ -66,28 +66,36 @@ PyDYNA by downloading the wheelhouse archive for your corresponding machine
 architecture from the `Releases Page <https://github.com/pyansys/pydyna/releases>`_.
 
 Each wheelhouse archive contains all the Python wheels necessary to install
-PyDYNA from scratch on Windows and Linux for Python 3.8 through 3.11. You can install
+PyDYNA from scratch on Windows and Linux for Python 3.9 through 3.12. You can install
 PyDYNA on an isolated system with a fresh Python installation or on a virtual environment.
 
-For example, on Linux with Python 3.8, unzip the wheelhouse archive and install PyDYNA
+For example, on Linux with Python 3.9, unzip the wheelhouse archive and install PyDYNA
 with these commands:
 
 .. code:: bash
 
-    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.8.zip -d wheelhouse
+    unzip ansys-dyna-core-v0.3.dev0-wheelhouse-Linux-3.9.zip -d wheelhouse
     pip install ansys-dyna-core -f wheelhouse --no-index --upgrade --ignore-installed
 
-If you're on Windows with Python 3.8, unzip the wheelhouse archive to a ``wheelhouse``
+If you're on Windows with Python 3.9, unzip the wheelhouse archive to a ``wheelhouse``
 directory and install PyDYNA using the preceding command.
 
-Install the server
-------------------
-Currently, PyDYNA server is only supported withing a Docker container.
-Future releases support launching the servers directly on local machines as well.
+Run PyDYNA Server locally 
+-------------------------
+Launching the servers directly on local machines.
+
+.. include:: ./SERVER_PRE_README.rst
+
+.. include:: ./SERVER_SOLVER_README.rst
+
+Run PyDYNA Server in a Docker container
+---------------------------------------
+PyDYNA server can be run in a Docker container.
 
 .. include:: ../../../docker/pre/README.rst
 
 .. include:: ../../../docker/solver/README.rst
+
 
 .. LINKS
 .. _pydyna_pypi: https://pypi.org/projects/ansys-dyna-core/

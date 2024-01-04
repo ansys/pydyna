@@ -17,13 +17,14 @@ RUN yum -y install openssh-clients openssh-server bind-utils sudo python3
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install grpcio
 RUN python3 -m pip install grpcio-tools
+RUN python3 -m pip install protobuf==4.21.0
 #
 ENV USER mpirun
 ENV HOME /home/mpirun
 ENV LD_LIBRARY_PATH /ansys_inc/lib
 ENV LSTC_LICENSE network
 ENV LSTC_LICENSE_SERVER license
-ENV SSHDIR ${HOME}/.ssh/
+ENV SSHDIR ${HOME}/.ssh
 
 
 RUN groupadd ${USER}
@@ -65,10 +66,18 @@ CMD ["/usr/sbin/sshd", "-D"]
 ENV PATH /opt/openmpi/bin:${PATH}
 RUN echo "export PATH=/opt/openmpi/bin:\${PATH}" >> ${HOME}/.bashrc
 
-ADD ssh/config ${SSHDIR}/config
-ADD ssh/id_rsa ${SSHDIR}/id_rsa
-ADD ssh/id_rsa.pub ${SSHDIR}/id_rsa.pub
-ADD ssh/id_rsa.pub ${SSHDIR}/authorized_keys
+#ADD ssh/config ${SSHDIR}/config
+#ADD ssh/id_rsa ${SSHDIR}/id_rsa
+#ADD ssh/id_rsa.pub ${SSHDIR}/id_rsa.pub
+#ADD ssh/id_rsa.pub ${SSHDIR}/authorized_keys
+#RUN ssh-keygen -A
+
+
+RUN ssh-keygen -q -b 2048 -f ${SSHDIR}/id_rsa -N ""
+RUN chmod 700 ${SSHDIR} && chmod -R 600 ${SSHDIR}/id_rsa
+RUN echo "Host *" > ${SSHDIR}/config
+RUN echo "  StrictHostKeyChecking no" >> ${SSHDIR}/config
+RUN cp ${SSHDIR}/id_rsa.pub ${SSHDIR}/authorized_keys
 RUN ssh-keygen -A
 
 RUN chmod -R 600 ${SSHDIR}* && \
@@ -78,11 +87,15 @@ RUN chown -R ${USER}:${USER} ${HOME}
 
 # Copy the openmpi libraries
 
-RUN mkdir -p /opt
-COPY mpi /opt/openmpi
+RUN yum install -y unzip
+COPY mppdyna_docker_centos7.zip .
+RUN unzip -qu mppdyna_docker_centos7.zip && rm mppdyna_docker_centos7.zip
+RUN mkdir -p /opt/openmpi
+RUN cp -r mpi/* /opt/openmpi
+RUN chmod -R 777 /opt/openmpi
 
 # The executable will go in /ansys_inc, and the
 # ifort runtime libraries in /ansys_inc/lib
 
-COPY docker_dir /ansys_inc
-RUN chmod 755 /ansys_inc/server.py
+RUN cp -rpu docker_dir/* /ansys_inc/
+RUN chmod -R 777 /ansys_inc/
