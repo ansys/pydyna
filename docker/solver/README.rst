@@ -27,17 +27,14 @@ Prerequisites
 * Download the latest Linux release artifacts for the ``solver`` Docker container:
   `mppdyna_docker_centos7.zip <https://github.com/ansys/pydyna/releases/download/v0.4.3/mppdyna_docker_centos7.zip>`_.
 
-* Move this ZIP file to the ``docker/solver`` directory and unzip it in the same directory.
+* Move this ZIP file to the ``docker/solver`` directory.
 
   The files in this folder should look similar to this:
 
   .. code:: bash
 
-     >>> Dockerfile README.rst do_build docker-compose.yml docker_dir mpi mppdyna_docker_centos7.zip
+     >>> Dockerfile README.rst docker-compose.yml  mppdyna_docker_centos7.zip
 
-* Within docker_dir, there is a file called mppdyna. This file is the executable to run. It can be
-  any executable (SMP, MPP) or revision and branch. To run a given file, the name shall be changed to
-  mppdyna and copied inside docker_dir.
 
 Once all prerequisites are met, you can build the Docker image for the ``solver`` service.
 
@@ -52,7 +49,7 @@ To build the Docker image for the ``solver`` service, perform these steps:
 
    .. code:: bash
   
-      ./do_build 
+      docker build -t dyna_solver_v04 .
 
 #. Check that the image has been built successfully by running this command:
 
@@ -70,15 +67,20 @@ To build the Docker image for the ``solver`` service, perform these steps:
        >>> ......                                                   ......                             ............   ..............   ......
 
 
-Run the image as a container
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Start the container from a ``docker-compose.yml`` file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Perform these steps to run the image for the ``solver`` service as a container:
+Alternatively, you can start the container for the ``pre`` service from a
+``docker-compose.yml`` file.
+	 
+#. Ensure that Docker Compose has been installed on your computer. If Docker Compose is not
+   installed, see `Overview of installing Docker Compose <https://docs.docker.com/compose/install/>`_
+   in the Docker documentation.
 
 #. In the ``docker-compose.yml`` file, replace ``<license_server_name>`` with the correct
    license server hosting the LS-DYNA license.
   
-#. Run this Docker command:
+#. In your terminal, go to the ``docker/solver`` directory and run this Docker command:
  
    .. code:: bash
 
