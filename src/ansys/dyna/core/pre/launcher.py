@@ -3,7 +3,6 @@
 import os
 import socket
 import subprocess
-import threading
 
 from ansys.dyna.core.pre import LOG
 from ansys.dyna.core.pre.misc import check_valid_ip, check_valid_port
@@ -92,13 +91,14 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path=None) -> tu
 
     LOG.debug("the pre service starting in background.")
     process = subprocess.Popen("python kwserver.py", cwd=server_path, shell=True)
-    process.wait()
+    # process.wait()
     # while True:
     #     pass
     return port
 
 
-class ServerThread(threading.Thread):
+# class ServerThread(threading.Thread):
+class ServerThread:
     """Provides server thread properties.
 
     Parameters
@@ -112,7 +112,7 @@ class ServerThread(threading.Thread):
     """
 
     def __init__(self, threadID, port, ip, server_path):
-        threading.Thread.__init__(self)
+        # threading.Thread.__init__(self)
         self.threadID = threadID
         self.port = port
         self.ip = ip

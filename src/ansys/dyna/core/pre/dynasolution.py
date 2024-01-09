@@ -8,12 +8,16 @@ Module for providing the top object that sets up a DYNA solution.
 import logging
 import os
 import sys
+from time import sleep
+from zipfile import ZipFile
 
 from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
 from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
 
 # from subprocess import DETACHED_PROCESS
 import grpc
+import requests
+from tqdm import tqdm
 
 from .launcher import *  # noqa : F403
 
@@ -65,16 +69,38 @@ class DynaSolution:
         # start server locally
         if (hostname.lower() == "localhost" or hostname == LOCALHOST) and not DynaSolution.grpc_local_server_on():
             LOG.debug("Starting kwserver")
-
+            # download server form webset
             if len(server_path) == 0:
-                server_path = os.getenv("ANSYS_PYDYNA_PRE_SERVER_PATH")
-                if server_path is None:
-                    print("Please set the environment variable for ANSYS_PYDYNA_PRE_SERVER_PATH")
-                    return False
+                # server_path = os.getenv("ANSYS_PYDYNA_PRE_SERVER_PATH")
+                # if server_path is None:
+                url = "https://github.com/ansys/pydyna/releases/download/v0.4.5/ansys-pydyna-pre-server.zip"
+                directory = DynaSolution.get_appdata_path()
+                filename = directory + os.sep + "ansys-pydyna-pre-server.zip"
+                extractpath = directory
+                if not os.path.exists(directory + os.sep + "ansys-pydyna-pre-server"):
+                    # r = requests.get(url)
+                    # print(directory)
+                    # f = open(filename, "wb")
+                    # f.write(r.content)
+                    # with ZipFile(filename, "r") as zipf:
+                    # zipf.extractall(extractpath)
+                    DynaSolution.downloadfile(url, filename)
+                    with ZipFile(filename, "r") as zipf:
+                        zipf.extractall(extractpath)
+                server_path = directory + os.sep + "ansys-pydyna-pre-server"
+                # os.environ["ANSYS_PYDYNA_PRE_SERVER_PATH"] = server_path
             if os.path.isdir(server_path):
                 threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
-                threadserver.setDaemon(True)
-                threadserver.start()
+                threadserver.run()
+                # threadserver.setDaemon(True)
+                # threadserver.start()
+                waittime = 0
+                while not DynaSolution.grpc_local_server_on():
+                    sleep(5)
+                    waittime += 5
+                    if waittime > 60:
+                        print("Failed to start pydyna solver server locally")
+                        break
             else:
                 print("Failed to start pydyna pre server locally,Invalid server path!")
 
@@ -93,6 +119,49 @@ class DynaSolution:
         self._path = None
         DynaSolution.stub = self.stub
         DynaSolution.terminationtime = 0
+
+    def get_download_path():
+        system_type = os.name
+        if system_type == "nt":  # Windows
+            downloads_folder = os.getenv("USERPROFILE") + "\Downloads"
+        elif system_type == "posix":  # Linux or Macos
+            downloads_folder = "/home/user/Downloads"
+        else:
+            print("platform unsupported")
+
+        return downloads_folder
+
+    @staticmethod
+    def get_appdata_path():
+        system_type = os.name
+        if system_type == "nt":  # Windows
+            appdata_folder = os.getenv("APPDATA") + "\PYDYNA"
+            if not os.path.isdir(appdata_folder):
+                os.mkdir(appdata_folder)
+        elif system_type == "posix":  # Linux or Macos
+            # appdata_folder = "/usr/local/lib" + "/pydyna"
+            appdata_folder = os.path.expanduser("~") + "/Downloads"
+            if not os.path.isdir(appdata_folder):
+                os.mkdir(appdata_folder)
+        else:
+            print("platform unsupported")
+
+        return appdata_folder
+
+    @staticmethod
+    def downloadfile(url: str, fname: str):
+        resp = requests.get(url, stream=True)
+        total = int(resp.headers.get("content-length", 0))
+        with open(fname, "wb") as file, tqdm(
+            desc=fname,
+            total=total,
+            unit="iB",
+            unit_scale=True,
+            unit_divisor=1024,
+        ) as bar:
+            for data in resp.iter_content(chunk_size=1024):
+                size = file.write(data)
+                bar.update(size)
 
     @staticmethod
     def grpc_local_server_on() -> bool:

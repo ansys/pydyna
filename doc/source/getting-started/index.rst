@@ -96,6 +96,10 @@ PyDYNA server can be run in a Docker container.
 
 .. include:: ../../../docker/solver/README.rst
 
+Example
+-------
+
+.. include:: ./example.rst
 
 .. LINKS
 .. _pydyna_pypi: https://pypi.org/projects/ansys-dyna-core/
