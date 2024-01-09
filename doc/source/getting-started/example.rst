@@ -104,8 +104,8 @@ you can get the Python file from ``examples/solver/ball_plate_solver.py``.
     dyna.run("i=ball_plate.k memory=10m ncycle=20000")   # begin execution
 
 
-Postprocessing
-~~~~~~~~~~~~~~
+Post processing
+~~~~~~~~~~~~~~~
 The following code processes results from the solve of this basic ball plate example:
 
 .. code:: python
