@@ -1,4 +1,4 @@
-Start pydyna solver server locally
+Start PyDYNA solver server locally
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Prerequisites
@@ -12,13 +12,13 @@ Start server on Windows
 Start server on Linux(Centos7)
 ++++++++++++++++++++++++++++++
 
-#. If you want to start the server on Linux,please ensure that you have installed the openmpi package.
+#. If you want to start the server on Linux,please ensure that you have installed the Open MPI package.
 
    .. code:: bash
 
        yum install openmpi3 openmpi3-dev
 
-#. set environment variable for openmpi
+#. set environment variable for Open MPI
 
    .. code:: bash
 
@@ -38,4 +38,4 @@ Run an example on the client side
        dyna.push("./output/ball_plate.k")        # push an input file
        dyna.start_locally(input = "ball_plate.k",nproc=1) 
 
-#. The function of solver.DynaSolver() will download and start the solver server automatically.
+#. The function of DynaSolver() can download and start the solver server automatically.
