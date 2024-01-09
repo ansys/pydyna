@@ -80,7 +80,7 @@ with these commands:
 If you're on Windows with Python 3.9, unzip the wheelhouse archive to a ``wheelhouse``
 directory and install PyDYNA using the preceding command.
 
-Run PyDYNA Server locally 
+Run PyDYNA server locally 
 -------------------------
 Launching the servers directly on local machines.
 
