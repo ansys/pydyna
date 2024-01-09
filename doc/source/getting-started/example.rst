@@ -1,8 +1,8 @@
-The next few sections show how to preprocess, solve, and postprocess a ball plate example.
+The next few sections show how to preprocessing, solve, and postprocessing a ball plate example.
 
-Preprocess
-~~~~~~~~~~
-The following code preprocesses a ball plate example. In the repository, you can get the
+Preprocessing
+~~~~~~~~~~~~~
+The following code processes a ball plate example. In the repository, you can get the
 input file from ``src/ansys/dyna/core/pre/examples/explicit/ball_plate/ball_plate.k`` and
 the Python file from ``examples/Explicit/ball_plate.py``.
 
@@ -104,9 +104,9 @@ you can get the Python file from ``examples/solver/ball_plate_solver.py``.
     dyna.run("i=ball_plate.k memory=10m ncycle=20000")   # begin execution
 
 
-Postprocess
-~~~~~~~~~~~
-The following code postprocesses results from the solve of this basic ball plate example:
+Postprocessing
+~~~~~~~~~~~~~~
+The following code processes results from the solve of this basic ball plate example:
 
 .. code:: python
 
