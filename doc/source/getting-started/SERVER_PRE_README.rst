@@ -1,9 +1,9 @@
-Start pydyna pre server locally
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Start PyDYNA preprocessing server locally
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Run an example on the client side
 *********************************
- 
+
    .. code:: bash
 
        hostname = "localhost"
@@ -12,4 +12,4 @@ Run an example on the client side
            solution = DynaSolution(hostname)
            ......
 
-#. The function of DynaSolution() will download and start the pre server automatically.
+#. The function of DynaSolution() can download and start the preprocessing server automatically.

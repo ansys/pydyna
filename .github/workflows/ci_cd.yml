@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  MAIN_PYTHON_VERSION: '3.9'
+  MAIN_PYTHON_VERSION: '3.10'
   PACKAGE_NAME: 'ansys-dyna-core'
   PACKAGE_NAMESPACE: 'ansys.dyna.core'
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
@@ -24,7 +24,7 @@ jobs:
     name: "Code style"
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/code-style@v4
+      - uses: ansys/actions/code-style@v5
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@v4
+        uses: ansys/actions/doc-style@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -126,12 +126,11 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest]
-        python-version: ['3.8', '3.9', '3.10', '3.11']
+        python-version: ['3.9', '3.10', '3.11', '3.12']
     steps:
-      - uses: ansys/actions/build-wheelhouse@v4
+      - uses: ansys/actions/build-wheelhouse@v5
         with:
           library-name: ${{ env.PACKAGE_NAME }}
-          library-namespace: ${{ env.PACKAGE_NAMESPACE }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
@@ -194,7 +193,7 @@ jobs:
     needs: [doc, tests]
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/build-library@v4
+      - uses: ansys/actions/build-library@v5
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -206,14 +205,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Release to the public PyPI repository"
-        uses: ansys/actions/release-pypi-public@v4
+        uses: ansys/actions/release-pypi-public@v5
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYPI_TOKEN }}
 
       - name: "Release to GitHub"
-        uses: ansys/actions/release-github@v4
+        uses: ansys/actions/release-github@v5
         with:
           library-name: ${{ env.PACKAGE_NAME }}
 
@@ -223,7 +222,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-library]
     steps:
-      - uses: ansys/actions/doc-deploy-dev@v4
+      - uses: ansys/actions/doc-deploy-dev@v5
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -234,8 +233,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [release]
     steps:
-      - uses: ansys/actions/doc-deploy-stable@v4
+      - uses: ansys/actions/doc-deploy-stable@v5
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
