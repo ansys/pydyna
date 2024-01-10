@@ -1,8 +1,8 @@
 """Module for launching the pydyna solver service locally."""
 
+import platform
 import socket
 import subprocess
-import threading
 
 from ansys.dyna.core.pre import LOG
 
@@ -89,12 +89,16 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path=None) -> tu
     LOG.info(f"Running in {ip}:{port} the following command: '{command}'")
 
     LOG.debug("the solver service starting in background.")
-    process = subprocess.Popen("python server.py", cwd=server_path, shell=True)
-    process.wait()
+    if platform.system() == "Windows":
+        process = subprocess.Popen("python server.py", cwd=server_path, shell=True)
+    else:
+        process = subprocess.Popen("python3 server.py", cwd=server_path, shell=True)
+    # process.wait()
     return port
 
 
-class ServerThread(threading.Thread):
+# class ServerThread(threading.Thread):
+class ServerThread:
     """Provides server thread properties.
 
     Parameters
@@ -107,7 +111,7 @@ class ServerThread(threading.Thread):
     """
 
     def __init__(self, threadID, port, ip, server_path):
-        threading.Thread.__init__(self)
+        # threading.Thread.__init__(self)
         self.threadID = threadID
         self.port = port
         self.ip = ip

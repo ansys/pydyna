@@ -1,16 +1,16 @@
 Start PyDYNA solver server locally
-==================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Prerequisites
--------------
+*************
 
 Start server on Windows
-~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++
 
 #. If you want to start the server on Windows,please ensure that you have installed the ANSYS locally.
 
 Start server on Linux(Centos7)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++
 
 #. If you want to start the server on Linux,please ensure that you have installed the Open MPI package.
 
@@ -25,47 +25,8 @@ Start server on Linux(Centos7)
        export LD_LIBRARY_PATH=/usr/lib64/openmpi3/lib:$LD_LIBRARY_PATH
        export PATH=/usr/lib64/openmpi3/bin:$PATH
 
-
-There are two ways to start the PyDYNA solver server
-====================================================
-
-1.Start server manually
------------------------
-
-* Run this command in the current folder:
-
-  .. code:: console
-
-   python server.py
-
-2.Start Server Automatically
-----------------------------
-
-Start Server On Windows
-~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Set environment variable:
-
-   .. code:: bash
-  
-      Variable name:  ANSYS_PYDYNA_SOLVER_SERVER_PATH
-      variable value: <The file path of this package>
-
-      example of variable value: C:\pydyna\ansys-pydyna-solver-server
-
-Start Server on Linux(Centos7)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Set environment variable:
-
-   .. code:: bash
-  
-      ANSYS_PYDYNA_SOLVER_SERVER_PATH=<The file path of this package>
-
-      example of variable value: /home/lstc/ansys-pydyna-solver-server
-
 Run an example on the client side
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*********************************
  
    .. code:: bash
 
@@ -77,4 +38,4 @@ Run an example on the client side
        dyna.push("./output/ball_plate.k")        # push an input file
        dyna.start_locally(input = "ball_plate.k",nproc=1) 
 
-#. The function of DynaSolver() can start the solver server automatically.
+#. The function of DynaSolver() can download and start the solver server automatically.
