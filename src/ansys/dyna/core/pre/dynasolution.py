@@ -91,9 +91,9 @@ class DynaSolution:
                 # os.environ["ANSYS_PYDYNA_PRE_SERVER_PATH"] = server_path
             if os.path.isdir(server_path):
                 threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
-                threadserver.run()
+                # threadserver.run()
                 # threadserver.setDaemon(True)
-                # threadserver.start()
+                threadserver.start()
                 waittime = 0
                 while not DynaSolution.grpc_local_server_on():
                     sleep(5)
