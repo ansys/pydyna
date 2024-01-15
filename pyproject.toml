@@ -50,7 +50,7 @@ doc = [
     "numpydoc==1.6.0",
     "Sphinx==7.2.6",
     "sphinx-autobuild==2021.3.14",
-    "sphinxcontrib-websupport==1.2.6",
+    "sphinxcontrib-websupport==1.2.7",
     "pytest-sphinx==0.5.0",
     "sphinx-notfound-page==1.0.0",
     "sphinx-copybutton==0.5.2",
