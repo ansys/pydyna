@@ -11,9 +11,12 @@ import queue
 import sys
 import threading
 from time import sleep
+from zipfile import ZipFile
 
 from ansys.api.dyna.v0 import dynasolver_pb2, dynasolver_pb2_grpc
 import grpc
+import requests
+from tqdm import tqdm
 
 from . import grpc_tags as tag
 from .launcher import *  # noqa : F403
@@ -72,19 +75,33 @@ class DynaSolver:
             # LOG.debug("Starting solver server")
 
             if len(server_path) == 0:
-                server_path = os.getenv("ANSYS_PYDYNA_SOLVER_SERVER_PATH")
-                if server_path is None:
-                    print("Please set the environment variable for ANSYS_PYDYNA_SOLVER_SERVER_PATH")
-                    return
+                # server_path = os.getenv("ANSYS_PYDYNA_SOLVER_SERVER_PATH")
+                # if server_path is None:
+                url = "https://github.com/ansys/pydyna/releases/download/v0.4.5/ansys-pydyna-solver-server.zip"
+                directory = DynaSolver.get_appdata_path()
+                filename = directory + os.sep + "ansys-pydyna-solver-server.zip"
+                extractpath = directory
+                if not os.path.exists(directory + os.sep + "ansys-pydyna-solver-server"):
+                    # r = requests.get(url)
+                    # print(directory)
+                    # f = open(filename, "wb")
+                    # f.write(r.content)
+                    # with ZipFile(filename, "r") as zipf:
+                    # zipf.extractall(extractpath)
+                    DynaSolver.downloadfile(url, filename)
+                    with ZipFile(filename, "r") as zipf:
+                        zipf.extractall(extractpath)
+                server_path = directory + os.sep + "ansys-pydyna-solver-server"
+                # os.environ["ANSYS_PYDYNA_SOLVER_SERVER_PATH"] = server_path
             if os.path.isdir(server_path):
                 threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
+                threadserver.run()
                 # threadserver.setDaemon(True)
-                threadserver.start()
+                # threadserver.start()
                 waittime = 0
                 while not DynaSolver.grpc_local_server_on():
                     sleep(5)
                     waittime += 5
-                    print(waittime)
                     if waittime > 60:
                         print("Failed to start pydyna solver server locally")
                         break
@@ -113,6 +130,38 @@ class DynaSolver:
         #    DynaSolver.logger.propagate = False
         # self.logger = DynaSolver.logger
         self.logger = logging.getLogger("DynaSolver")
+
+    @staticmethod
+    def get_appdata_path():
+        system_type = os.name
+        if system_type == "nt":  # Windows
+            appdata_folder = os.getenv("APPDATA") + "\PYDYNA"
+            if not os.path.isdir(appdata_folder):
+                os.mkdir(appdata_folder)
+        elif system_type == "posix":  # Linux or Macos
+            # appdata_folder = "/usr/local/lib" + "/pydyna"
+            appdata_folder = os.path.expanduser("~") + "/Downloads"
+            if not os.path.isdir(appdata_folder):
+                os.mkdir(appdata_folder)
+        else:
+            print("platform unsupported")
+
+        return appdata_folder
+
+    @staticmethod
+    def downloadfile(url: str, fname: str):
+        resp = requests.get(url, stream=True)
+        total = int(resp.headers.get("content-length", 0))
+        with open(fname, "wb") as file, tqdm(
+            desc=fname,
+            total=total,
+            unit="iB",
+            unit_scale=True,
+            unit_divisor=1024,
+        ) as bar:
+            for data in resp.iter_content(chunk_size=1024):
+                size = file.write(data)
+                bar.update(size)
 
     @staticmethod
     def grpc_local_server_on() -> bool:
