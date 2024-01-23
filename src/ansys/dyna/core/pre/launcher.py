@@ -99,6 +99,7 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path=None) -> tu
 
 
 class ServerThread(threading.Thread):
+    # class ServerThread:
     """Provides server thread properties.
 
     Parameters
