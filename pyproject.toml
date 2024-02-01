@@ -25,7 +25,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 
-dependencies = ["ansys-dpf-core>=0.7.2", "ansys-api-dyna==0.3.5"]
+dependencies = ["ansys-dpf-core>=0.7.2", "ansys-api-dyna==0.3.6"]
 
 [project.optional-dependencies]
 tests = [

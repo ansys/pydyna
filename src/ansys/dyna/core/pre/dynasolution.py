@@ -19,9 +19,13 @@ import grpc
 import requests
 from tqdm import tqdm
 
+from ansys.dyna.core.pre.model import Model
+
 from .launcher import *  # noqa : F403
 
 CHUNK_SIZE = 1024 * 1024
+
+MAX_MESSAGE_LENGTH = 1024 * 1024 * 1024
 
 
 def init_log(log_file):
@@ -73,7 +77,7 @@ class DynaSolution:
             if len(server_path) == 0:
                 # server_path = os.getenv("ANSYS_PYDYNA_PRE_SERVER_PATH")
                 # if server_path is None:
-                url = "https://github.com/ansys/pydyna/releases/download/v0.4.5/ansys-pydyna-pre-server.zip"
+                url = "https://github.com/ansys/pydyna/releases/download/v0.4.6/ansys-pydyna-pre-server.zip"
                 directory = DynaSolution.get_appdata_path()
                 filename = directory + os.sep + "ansys-pydyna-pre-server.zip"
                 extractpath = directory
@@ -106,7 +110,10 @@ class DynaSolution:
 
         init_log("client.log")
         temp = hostname + ":" + str(port)
-        channel = grpc.insecure_channel(temp)
+        options = [
+            ("grpc.max_receive_message_length", MAX_MESSAGE_LENGTH),
+        ]
+        channel = grpc.insecure_channel(temp, options=options)
         try:
             grpc.channel_ready_future(channel).result(timeout=5)
         except grpc.FutureTimeoutError:
@@ -119,6 +126,7 @@ class DynaSolution:
         self._path = None
         DynaSolution.stub = self.stub
         DynaSolution.terminationtime = 0
+        self._default_model: Model = None
 
     def get_download_path():
         system_type = os.name
@@ -179,6 +187,13 @@ class DynaSolution:
             return False
         return True
 
+    @property
+    def model(self):
+        """Get model associated with the solution."""
+        if self._default_model is None:
+            self._default_model = Model(self.stub)
+        return self._default_model
+
     def get_stub():
         """Get the stub of the solution object."""
         return DynaSolution.stub
@@ -191,6 +206,7 @@ class DynaSolution:
         obj :
 
         """
+        obj.set_parent(self)
         self.object_list.append(obj)
 
     def get_file_chunks(self, filename):
