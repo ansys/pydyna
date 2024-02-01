@@ -5,8 +5,8 @@ from typing import List
 
 import numpy as np
 import pyvista as pv
-import vtk
 from pyvista.plotting.plotting import Plotter
+import vtk
 
 import ansys.dyna.core.pre as pre
 from ansys.dyna.core.pre.graphics.trame_gui import _HAS_TRAME, TrameVisualizer
@@ -19,6 +19,7 @@ class DisplayMeshType(enum.IntEnum):
     FACE = 0
     BEAM = 1
 
+
 class ColorByType(enum.IntEnum):
     """Contains the zone types to display."""
 
@@ -27,8 +28,8 @@ class ColorByType(enum.IntEnum):
     PART = 2
 
 
-''' bright color palette '''
-'''color_matrix = np.array([
+""" bright color palette """
+"""color_matrix = np.array([
 [0.99609375, 0.76171875, 0.0703125],
 [0.96484375, 0.62109375, 0.12109375],
 [0.9296875, 0.3515625, 0.140625],
@@ -43,11 +44,11 @@ class ColorByType(enum.IntEnum):
 [0.10546875, 0.078125, 0.390625],
 [0.98828125, 0.65234375, 0.87109375],
 [0.84765625, 0.5, 0.9765625],
-[0.59765625, 0.5, 0.9765625] ]) * 255 '''
+[0.59765625, 0.5, 0.9765625] ]) * 255 """
 
 
-''' winter color palette '''
-'''color_matrix = np.array([
+""" winter color palette """
+"""color_matrix = np.array([
 [0.2734375, 0.71875, 0.8671875],
 [0.2734375, 0.90234375, 0.86328125],
 [0.2734375, 0.87109375, 0.62109375],
@@ -62,9 +63,9 @@ class ColorByType(enum.IntEnum):
 [0.2734375, 0.8828125, 0.70703125],
 [0.2734375, 0.99609375, 0.8515625],
 [0.2734375, 0.91015625, 0.9765625],
-[0.2734375, 0.99609375, 0.6171875] ]) * 255'''
+[0.2734375, 0.99609375, 0.6171875] ]) * 255"""
 
-''' light fall color palette '''
+""" light fall color palette """
 color_matrix = np.array(
     [
         [155, 186, 126],
@@ -205,7 +206,7 @@ class Graphics(object):
                 "'use_trame' is active but Trame dependencies are not installed."
                 "Consider installing 'pyvista[trame]' to use this functionality."
             )
-            #self._model._logger.warning(warn_msg)
+            # self._model._logger.warning(warn_msg)
         self.__update_display_data()
 
     def __update_display_data(self):
@@ -216,20 +217,16 @@ class Graphics(object):
         for i, part_id in enumerate(part_ids):
             data = {}
             part = self._model.get_part(part_id)
-            disp_mesh_data: list[_DisplayMesh] = [
-                self.__get_face_display_mesh_object(part_id)
-            ]
+            disp_mesh_data: list[_DisplayMesh] = [self.__get_face_display_mesh_object(part_id)]
             if len(disp_mesh_data) > 0:
                 data["faces"] = disp_mesh_data
             self._display_data[part_id] = data
         self._init_velocity_data = self._model.get_init_velocity()
         self._bdy_spc = self._model.get_bdy_spc()
 
-        #self._model._sync_up_model()
-    
-    def __get_face_display_mesh_object(
-        self, part_id: int
-    ):
+        # self._model._sync_up_model()
+
+    def __get_face_display_mesh_object(self, part_id: int):
         """Display the faces in an object.
 
         Parameters
@@ -246,9 +243,9 @@ class Graphics(object):
         node_coords = self._model.get_nodes()
         face_list = part.connectivity
         ptype = part.type
-        if(ptype == "SOLID" or ptype == "SHELL"):
+        if ptype == "SOLID" or ptype == "SHELL":
             meshtype = DisplayMeshType.FACE
-        elif(ptype == "BEAM"):
+        elif ptype == "BEAM":
             meshtype = DisplayMeshType.BEAM
 
         disp_mesh = _DisplayMesh(
@@ -261,7 +258,7 @@ class Graphics(object):
             part_name=part.name,
         )
         return disp_mesh
-    
+
     def __call__(
         self,
         parts: List = None,
@@ -278,7 +275,7 @@ class Graphics(object):
         """
         parts = [part.id for part in self._model.parts]
         self.__draw_parts(parts, False)
-        #self.show()
+        # self.show()
 
     def __color_by_type_callback(self, button_value: bool):  # pragma: no cover
         """Determine the color of a type in the callback."""
@@ -288,13 +285,11 @@ class Graphics(object):
         r = vtk.vtkPNGReader()
         color_by_type_icon_file = ""
         if self._color_by_type == ColorByType.ZONELET:
-            color_by_type_icon_file = os.path.join(
-                os.path.dirname(__file__), 'images', 'surface_body.png'
-            )
+            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), "images", "surface_body.png")
         elif self._color_by_type == ColorByType.ZONE:
-            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'bin.png')
+            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), "images", "bin.png")
         else:
-            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'parts.png')
+            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), "images", "parts.png")
         r.SetFileName(color_by_type_icon_file)
         r.Update()
         image = r.GetOutput()
@@ -305,26 +300,24 @@ class Graphics(object):
             if data.get("faces") != None
             for disp_mesh in data["faces"]
         ]
-    
+
     def __show_init_velocity_callback(self, button_value: bool):  # pragma: no cover
         """Show initial velocity in the callback."""
-        if len(self._init_velocity_data)==0:
+        if len(self._init_velocity_data) == 0:
             return
         vr = self._showInitVelBt.GetRepresentation()
         state = vr.GetState()
         r = vtk.vtkPNGReader()
         color_by_type_icon_file = ""
         if button_value:
-            color_by_type_icon_file = os.path.join(
-                os.path.dirname(__file__), 'images', 'surface_body.png'
-            )
-            list1 = self._init_velocity_data[:len(self._init_velocity_data)//2]
-            list2 = self._init_velocity_data[len(self._init_velocity_data)//2:]
+            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), "images", "surface_body.png")
+            list1 = self._init_velocity_data[: len(self._init_velocity_data) // 2]
+            list2 = self._init_velocity_data[len(self._init_velocity_data) // 2 :]
             vertices = np.array(list1)
             vel = np.array(list2)
-            self._actor_init_velocity = self._plotter.add_arrows(vertices,vel)
+            self._actor_init_velocity = self._plotter.add_arrows(vertices, vel)
         else:
-            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'bin.png')
+            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), "images", "bin.png")
             self._plotter.remove_actor(self._actor_init_velocity)
             self._actor_init_velocity = None
         r.SetFileName(color_by_type_icon_file)
@@ -334,20 +327,18 @@ class Graphics(object):
 
     def __show_bdy_spc_callback(self, button_value: bool):  # pragma: no cover
         """Show boundary spc in the callback."""
-        if len(self._bdy_spc)==0:
+        if len(self._bdy_spc) == 0:
             return
         vr = self._colorByTypeBt.GetRepresentation()
         state = vr.GetState()
         r = vtk.vtkPNGReader()
         color_by_type_icon_file = ""
         if button_value:
-            color_by_type_icon_file = os.path.join(
-                os.path.dirname(__file__), 'images', 'surface_body.png'
-            )
+            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), "images", "surface_body.png")
             vertices = np.array(self._bdy_spc)
-            self._actor_bdy_spc = self._plotter.add_points(vertices,color = 'red')
+            self._actor_bdy_spc = self._plotter.add_points(vertices, color="red")
         else:
-            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'bin.png')
+            color_by_type_icon_file = os.path.join(os.path.dirname(__file__), "images", "bin.png")
             self._plotter.remove_actor(self._actor_bdy_spc)
             self._actor = None
         r.SetFileName(color_by_type_icon_file)
@@ -372,10 +363,10 @@ class Graphics(object):
     def __show_edges_callback(self, flag):  # pragma: no cover
         """Show or hide the edges."""
         [
-            disp_mesh.show_edges(flag)\
-            for part_id, data in self._display_data.items()\
-            if data.get("faces") != None\
-            for disp_mesh in data["faces"]\
+            disp_mesh.show_edges(flag)
+            for part_id, data in self._display_data.items()
+            if data.get("faces") != None
+            for disp_mesh in data["faces"]
         ]
 
     def __print_callback(self, flag):  # pragma: no cover
@@ -391,15 +382,15 @@ class Graphics(object):
                 self._ruler_visible = False
             else:
                 self._ruler_actor = self._plotter.show_bounds(
-                    grid='front',
-                    location='outer',
+                    grid="front",
+                    location="outer",
                     all_edges=False,
                     show_xaxis=True,
                     show_yaxis=True,
                     show_zaxis=True,
                 )
                 self._ruler_visible = True
-    
+
     def __view_iso_callback(self, flag):  # pragma: no cover
         """View iso."""
         self._plotter.view_isometric()
@@ -452,25 +443,25 @@ class Graphics(object):
         vertices = np.array(nodes)
         faces = []
         for elem in solidlist:
-            face1 = [4,elem[0]-1,elem[1]-1,elem[2]-1,elem[3]-1]
-            face2 = [4,elem[0]-1,elem[4]-1,elem[5]-1,elem[1]-1]
-            face3 = [4,elem[1]-1,elem[5]-1,elem[6]-1,elem[2]-1]
-            face4 = [4,elem[2]-1,elem[6]-1,elem[7]-1,elem[3]-1]
-            face5 = [4,elem[3]-1,elem[7]-1,elem[4]-1,elem[0]-1]
-            face6 = [4,elem[4]-1,elem[7]-1,elem[6]-1,elem[5]-1]
+            face1 = [4, elem[0] - 1, elem[1] - 1, elem[2] - 1, elem[3] - 1]
+            face2 = [4, elem[0] - 1, elem[4] - 1, elem[5] - 1, elem[1] - 1]
+            face3 = [4, elem[1] - 1, elem[5] - 1, elem[6] - 1, elem[2] - 1]
+            face4 = [4, elem[2] - 1, elem[6] - 1, elem[7] - 1, elem[3] - 1]
+            face5 = [4, elem[3] - 1, elem[7] - 1, elem[4] - 1, elem[0] - 1]
+            face6 = [4, elem[4] - 1, elem[7] - 1, elem[6] - 1, elem[5] - 1]
             faces.append(face1)
             faces.append(face2)
             faces.append(face3)
             faces.append(face4)
             faces.append(face5)
             faces.append(face6)
-        for elem in shelllist: 
-            face = [4,elem[0]-1,elem[1]-1,elem[2]-1,elem[3]-1]
+        for elem in shelllist:
+            face = [4, elem[0] - 1, elem[1] - 1, elem[2] - 1, elem[3] - 1]
             faces.append(face)
         fs = np.hstack(faces)
-        surf = pv.PolyData(vertices,fs)
+        surf = pv.PolyData(vertices, fs)
         self._plotter = pv.Plotter()
-        self._plotter.add_mesh(surf,show_edges=True, line_width=5)
+        self._plotter.add_mesh(surf, show_edges=True, line_width=5)
         self._plotter.show_axes()
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
@@ -497,13 +488,13 @@ class Graphics(object):
             self._showRulerBt = self._plotter.add_checkbox_button_widget(
                 self.__show_ruler_callback, position=(10, 500), size=30, border_size=3
             )
-        self._plotter.camera_position = 'xy'
+        self._plotter.camera_position = "xy"
         self._picker = Picker(self._plotter, self)
-        self._plotter.track_click_position(self._picker, side='left')
+        self._plotter.track_click_position(self._picker, side="left")
         if self._sphinx_build == False:
             self.__update_bt_icons()
         self._plotter.show()
-    
+
     def __draw_parts(self, parts: List = [], update: bool = False, spline: bool = False):
         """Draw parts in the display.
 
@@ -520,13 +511,13 @@ class Graphics(object):
             self.__update_display_data()
         self._plotter = pv.Plotter()
         self._plotter.show_axes()
-        #disp_mesh.add_to_plotter(self._plotter)
+        # disp_mesh.add_to_plotter(self._plotter)
         [
-            disp_mesh.add_to_plotter(self._plotter)\
-            for part_id, data in self._display_data.items()\
-            if (part_id in parts)\
-            for key, disp_mesh_data in data.items()\
-            for disp_mesh in disp_mesh_data\
+            disp_mesh.add_to_plotter(self._plotter)
+            for part_id, data in self._display_data.items()
+            if (part_id in parts)
+            for key, disp_mesh_data in data.items()
+            for disp_mesh in disp_mesh_data
         ]
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
@@ -575,7 +566,7 @@ class Graphics(object):
                 self.__view_left_callback, position=(400, 10), size=30, border_size=3
             )
         self._picker = Picker(self._plotter, self)
-        self._plotter.track_click_position(self._picker, side='left')
+        self._plotter.track_click_position(self._picker, side="left")
         if self._sphinx_build == False:
             self.__update_bt_icons()
         self._show_selector()
@@ -587,7 +578,7 @@ class Graphics(object):
             visualizer.set_scene(self._plotter)
             visualizer.show()
         else:
-            self._plotter.camera_position = 'xy'
+            self._plotter.camera_position = "xy"
             self._plotter.show()
 
     def __update_bt_icons(self):
@@ -595,7 +586,7 @@ class Graphics(object):
         vr = self._colorByTypeBt.GetRepresentation()
         vr.SetNumberOfStates(2)
         r = vtk.vtkPNGReader()
-        color_by_zone_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'bin.png')
+        color_by_zone_icon_file = os.path.join(os.path.dirname(__file__), "images", "bin.png")
         r.SetFileName(color_by_zone_icon_file)
         r.Update()
         image_1 = r.GetOutput()
@@ -604,16 +595,14 @@ class Graphics(object):
         vr = self._showInitVelBt.GetRepresentation()
         vr.SetNumberOfStates(2)
         r = vtk.vtkPNGReader()
-        color_by_zone_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'bin.png')
+        color_by_zone_icon_file = os.path.join(os.path.dirname(__file__), "images", "bin.png")
         r.SetFileName(color_by_zone_icon_file)
         r.Update()
         image_1 = r.GetOutput()
         vr.SetButtonTexture(0, image_1)
 
         hide_vr = self._hideBt.GetRepresentation()
-        hide_unhide_icon_file = os.path.join(
-            os.path.dirname(__file__), 'images', 'invert_visibility.png'
-        )
+        hide_unhide_icon_file = os.path.join(os.path.dirname(__file__), "images", "invert_visibility.png")
         hide_r = vtk.vtkPNGReader()
         hide_r.SetFileName(hide_unhide_icon_file)
         hide_r.Update()
@@ -621,7 +610,7 @@ class Graphics(object):
         hide_vr.SetButtonTexture(0, image_2)
         hide_vr.SetButtonTexture(1, image_2)
         show_edge_vr = self._showEdgeBt.GetRepresentation()
-        show_edges_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'show_edges.png')
+        show_edges_icon_file = os.path.join(os.path.dirname(__file__), "images", "show_edges.png")
         show_edge_r = vtk.vtkPNGReader()
         show_edge_r.SetFileName(show_edges_icon_file)
         show_edge_r.Update()
@@ -630,9 +619,7 @@ class Graphics(object):
         show_edge_vr.SetButtonTexture(1, image_3)
 
         print_info_vr = self._printInfoBt.GetRepresentation()
-        print_info_icon_file = os.path.join(
-            os.path.dirname(__file__), 'images', 'selectioninfo.png'
-        )
+        print_info_icon_file = os.path.join(os.path.dirname(__file__), "images", "selectioninfo.png")
         print_info_r = vtk.vtkPNGReader()
         print_info_r.SetFileName(print_info_icon_file)
         print_info_r.Update()
@@ -641,7 +628,7 @@ class Graphics(object):
         print_info_vr.SetButtonTexture(1, image_4)
 
         show_ruler_vr = self._showRulerBt.GetRepresentation()
-        show_ruler_icon_file = os.path.join(os.path.dirname(__file__), 'images', 'show_ruler.png')
+        show_ruler_icon_file = os.path.join(os.path.dirname(__file__), "images", "show_ruler.png")
         show_ruler_r = vtk.vtkPNGReader()
         show_ruler_r.SetFileName(show_ruler_icon_file)
         show_ruler_r.Update()
@@ -650,9 +637,7 @@ class Graphics(object):
         show_ruler_vr.SetButtonTexture(1, image_5)
 
         show_viewiso_vr = self._viewIsoBt.GetRepresentation()
-        viewiso_icon_file = os.path.join(
-            os.path.dirname(__file__), 'images', 'iso_metric.png'
-        )
+        viewiso_icon_file = os.path.join(os.path.dirname(__file__), "images", "iso_metric.png")
         show_view_r = vtk.vtkPNGReader()
         show_view_r.SetFileName(viewiso_icon_file)
         show_view_r.Update()
@@ -661,9 +646,7 @@ class Graphics(object):
         show_viewiso_vr.SetButtonTexture(1, image_6)
 
         show_viewtop_vr = self._viewTopBt.GetRepresentation()
-        viewtop_icon_file = os.path.join(
-            os.path.dirname(__file__), 'images', 'iso_top.png'
-        )
+        viewtop_icon_file = os.path.join(os.path.dirname(__file__), "images", "iso_top.png")
         show_viewtop_r = vtk.vtkPNGReader()
         show_viewtop_r.SetFileName(viewtop_icon_file)
         show_viewtop_r.Update()
@@ -672,9 +655,7 @@ class Graphics(object):
         show_viewtop_vr.SetButtonTexture(1, image_7)
 
         show_viewbottom_vr = self._viewBottomBt.GetRepresentation()
-        viewbottom_icon_file = os.path.join(
-            os.path.dirname(__file__), 'images', 'iso_bottom.png'
-        )
+        viewbottom_icon_file = os.path.join(os.path.dirname(__file__), "images", "iso_bottom.png")
         show_viewbottom_r = vtk.vtkPNGReader()
         show_viewbottom_r.SetFileName(viewbottom_icon_file)
         show_viewbottom_r.Update()
@@ -683,9 +664,7 @@ class Graphics(object):
         show_viewbottom_vr.SetButtonTexture(1, image_8)
 
         show_viewfront_vr = self._viewFrontBt.GetRepresentation()
-        viewfront_icon_file = os.path.join(
-            os.path.dirname(__file__), 'images', 'iso_front.png'
-        )
+        viewfront_icon_file = os.path.join(os.path.dirname(__file__), "images", "iso_front.png")
         show_viewfront_r = vtk.vtkPNGReader()
         show_viewfront_r.SetFileName(viewfront_icon_file)
         show_viewfront_r.Update()
@@ -694,9 +673,7 @@ class Graphics(object):
         show_viewfront_vr.SetButtonTexture(1, image_9)
 
         show_viewback_vr = self._viewBackBt.GetRepresentation()
-        viewback_icon_file = os.path.join(
-            os.path.dirname(__file__), 'images', 'iso_back.png'
-        )
+        viewback_icon_file = os.path.join(os.path.dirname(__file__), "images", "iso_back.png")
         show_viewback_r = vtk.vtkPNGReader()
         show_viewback_r.SetFileName(viewback_icon_file)
         show_viewback_r.Update()
@@ -705,9 +682,7 @@ class Graphics(object):
         show_viewback_vr.SetButtonTexture(1, image_10)
 
         show_viewright_vr = self._viewRightBt.GetRepresentation()
-        viewright_icon_file = os.path.join(
-            os.path.dirname(__file__), 'images', 'iso_right.png'
-        )
+        viewright_icon_file = os.path.join(os.path.dirname(__file__), "images", "iso_right.png")
         show_viewright_r = vtk.vtkPNGReader()
         show_viewright_r.SetFileName(viewright_icon_file)
         show_viewright_r.Update()
@@ -716,9 +691,7 @@ class Graphics(object):
         show_viewright_vr.SetButtonTexture(1, image_11)
 
         show_viewleft_vr = self._viewLeftBt.GetRepresentation()
-        viewleft_icon_file = os.path.join(
-            os.path.dirname(__file__), 'images', 'iso_left.png'
-        )
+        viewleft_icon_file = os.path.join(os.path.dirname(__file__), "images", "iso_left.png")
         show_viewleft_r = vtk.vtkPNGReader()
         show_viewleft_r.SetFileName(viewleft_icon_file)
         show_viewleft_r.Update()
@@ -781,11 +754,11 @@ class _DisplayMesh(object):  # pragma: no cover
         self._actor = None
         self._part_name = part_name
         # self.__update()
-    
+
     @property
     def poly_data(self):
         return self._poly_data
-    
+
     def __str__(self):
         msg = "Part Id : " + str(self._part_id) + ", Part Name : " + self._part_name + "\n"
         return msg
@@ -798,7 +771,7 @@ class _DisplayMesh(object):  # pragma: no cover
         plotter : Plotter
             Elements of another plotter to add.
         """
-        
+
         if self._poly_data == None:
             if self._type is DisplayMeshType.FACE:
                 surf = pv.PolyData(self._vertices, self._facet_list)
@@ -807,8 +780,8 @@ class _DisplayMesh(object):  # pragma: no cover
                 surf["colors"] = colors
                 surf.disp_mesh = self
                 self._poly_data = surf
-                #sh_edge = self._has_mesh if self._type is DisplayMeshType.TOPOFACE else True
-        #if self._poly_data.n_points > 0:
+                # sh_edge = self._has_mesh if self._type is DisplayMeshType.TOPOFACE else True
+                # if self._poly_data.n_points > 0:
                 self._actor = plotter.add_mesh(
                     self._poly_data, show_edges=True, scalars="colors", rgb=True, pickable=True
                 )
@@ -820,10 +793,8 @@ class _DisplayMesh(object):  # pragma: no cover
                     coord = self._vertices[line[2]]
                     lines.append(coord)
                 self._poly_data = np.array(lines)
-                self._actor = plotter.add_lines(
-                    self._poly_data, color = 'purple',width = 8
-                )
-                
+                self._actor = plotter.add_lines(self._poly_data, color="purple", width=8)
+
     def get_face_color(self):
         """Get the colors of faces.
 
@@ -867,10 +838,10 @@ class _DisplayMesh(object):  # pragma: no cover
         """Deselect mesh."""
         if self._type == DisplayMeshType.FACE:
             if self._poly_data != None and self._actor != None:
-                self._actor.prop.edge_color = 'black'
-                #fcolor = np.array(self.get_face_color())
-                #colors = np.tile(fcolor, (self._poly_data.n_faces, 1))
-                #self._poly_data["colors"] = colors
+                self._actor.prop.edge_color = "black"
+                # fcolor = np.array(self.get_face_color())
+                # colors = np.tile(fcolor, (self._poly_data.n_faces, 1))
+                # self._poly_data["colors"] = colors
 
     def select(self):
         """Select mesh."""
@@ -878,9 +849,9 @@ class _DisplayMesh(object):  # pragma: no cover
             if self._poly_data != None and self._actor != None:
                 self._actor.prop.edge_color = "white"
                 # fcolor = np.array([255, 255, 0])
-                #fcolor = np.array([233, 99, 28])
-                #colors = np.tile(fcolor, (self._poly_data.n_faces, 1))
-                #self._poly_data["colors"] = colors
+                # fcolor = np.array([233, 99, 28])
+                # colors = np.tile(fcolor, (self._poly_data.n_faces, 1))
+                # self._poly_data["colors"] = colors
 
     def hide(self, plotter: Plotter):
         """Hide mesh."""
