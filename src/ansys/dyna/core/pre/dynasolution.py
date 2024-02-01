@@ -26,6 +26,7 @@ from .launcher import *  # noqa : F403
 CHUNK_SIZE = 1024 * 1024
 
 MAX_MESSAGE_LENGTH = 1024 * 1024 * 1024
+SERVER_PRE_VERSION = "v0.4.6"
 
 
 def init_log(log_file):
@@ -81,7 +82,8 @@ class DynaSolution:
                 directory = DynaSolution.get_appdata_path()
                 filename = directory + os.sep + "ansys-pydyna-pre-server.zip"
                 extractpath = directory
-                if not os.path.exists(directory + os.sep + "ansys-pydyna-pre-server"):
+                server_package = directory + os.sep + "ansys-pydyna-pre-server"
+                if not os.path.exists(server_package):
                     # r = requests.get(url)
                     # print(directory)
                     # f = open(filename, "wb")
@@ -91,7 +93,15 @@ class DynaSolution:
                     DynaSolution.downloadfile(url, filename)
                     with ZipFile(filename, "r") as zipf:
                         zipf.extractall(extractpath)
-                server_path = directory + os.sep + "ansys-pydyna-pre-server"
+                else:
+                    with ZipFile(filename, "r") as zipf:
+                        zipinfo = zipf.getinfo("ansys-pydyna-pre-server/")
+                        version = str(zipinfo.comment, encoding="utf-8")
+                        if version != SERVER_PRE_VERSION:
+                            DynaSolution.downloadfile(url, filename)
+                            with ZipFile(filename, "r") as zipf:
+                                zipf.extractall(extractpath)
+                server_path = server_package
                 # os.environ["ANSYS_PYDYNA_PRE_SERVER_PATH"] = server_path
             if os.path.isdir(server_path):
                 threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)

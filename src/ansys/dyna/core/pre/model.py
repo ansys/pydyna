@@ -1,12 +1,14 @@
 """Module containing the managing logic of the PyDYNA model."""
 
 from typing import List
-import numpy as np
+
 from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
 from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
+
 from ansys.dyna.core.pre.part import Part
 
-class Model():
+
+class Model:
     """Contains all information about Ansys PyDYNA Model."""
 
     def __init__(self, stub):
@@ -18,8 +20,8 @@ class Model():
         self._nodes = []
         self._bdy_spc: List = []
         self._init_velocity: List = []
-        #self._freeze()
-    
+        # self._freeze()
+
     def add_bdy_spc(self, nodes):
         """Add boundary spc nodes."""
         self._bdy_spc = nodes
@@ -42,7 +44,7 @@ class Model():
         lscons = cons.nodeids
         solidlist = [lscons[i : i + num] for i in range(0, len(lscons), num)]
         return solidlist
-    
+
     def get_shell_elements(self) -> List:
         """Get the shell elements.
 
@@ -57,7 +59,7 @@ class Model():
         lscons = shells.nodeids
         shelllist = [lscons[i : i + num] for i in range(0, len(lscons), num)]
         return shelllist
-    
+
     def get_nodes(self) -> List:
         """Get nodes.
 
@@ -95,17 +97,17 @@ class Model():
     def get_init_velocity(self) -> List:
         """Get initial velocity data."""
         nids = [i[0] for i in self._init_velocity]
-        data = self.stub.GetNodesCoord(GetNodesCoordRequest(nodeids = nids))
+        data = self.stub.GetNodesCoord(GetNodesCoordRequest(nodeids=nids))
         num = 3
         coord = data.coords
         nlist1 = [coord[i : i + num] for i in range(0, len(coord), num)]
-        nlist2 = [[vel[1],vel[2],vel[3]] for vel in self._init_velocity]
+        nlist2 = [[vel[1], vel[2], vel[3]] for vel in self._init_velocity]
         return nlist1 + nlist2
-    
+
     def get_bdy_spc(self) -> List:
         """Get boundary spc data."""
         nids = self._bdy_spc
-        data = self.stub.GetNodesCoord(GetNodesCoordRequest(nodeids = nids))
+        data = self.stub.GetNodesCoord(GetNodesCoordRequest(nodeids=nids))
         num = 3
         coord = data.coords
         nlist = [coord[i : i + num] for i in range(0, len(coord), num)]
@@ -118,37 +120,43 @@ class Model():
         child objects of the server model.
 
         """
-        shells = self.stub.GetPart(GetPartRequest(type = "SHELL"))
+        shells = self.stub.GetPart(GetPartRequest(type="SHELL"))
         num = 6
         data = shells.data
         shell_dict = {}
         for i in range(0, len(data), num):
-            mat = data[i+1]
-            face = [4, data[i+2]-1,data[i+3]-1,data[i+4]-1,data[i+5]-1]
+            mat = data[i + 1]
+            face = [4, data[i + 2] - 1, data[i + 3] - 1, data[i + 4] - 1, data[i + 5] - 1]
             if mat in shell_dict.keys():
                 shell_dict[mat][1].append(face)
             else:
-                info = self.stub.GetPartInfo(GetPartInfoRequest(ids = [mat]))
+                info = self.stub.GetPartInfo(GetPartInfoRequest(ids=[mat]))
                 name = info.names[0]
                 extid = info.extids[0]
-                shell_dict[mat] = [[name,extid],[face]]
+                shell_dict[mat] = [[name, extid], [face]]
         for pid, conn in shell_dict.items():
             self._parts.append(Part(self, conn[0][1], conn[0][0], "SHELL", conn[1]))
 
-        solids = self.stub.GetPart(GetPartRequest(type = "SOLID"))
+        solids = self.stub.GetPart(GetPartRequest(type="SOLID"))
         num = 10
         data = solids.data
         solid_dict = {}
         for i in range(0, len(data), num):
-            mat = data[i+1]
-            elem0 = data[i+2] - 1; elem1 = data[i+3] - 1;elem2 = data[i+4]-1;elem3 = data[i+5]-1
-            elem4 = data[i+6] - 1; elem5 = data[i+7] - 1;elem6 = data[i+8]-1;elem7 = data[i+9]-1
-            face1 = [4,elem0,elem1,elem2,elem3]
-            face2 = [4,elem0,elem4,elem5,elem1]
-            face3 = [4,elem1,elem5,elem6,elem2]
-            face4 = [4,elem2,elem6,elem7,elem3]
-            face5 = [4,elem3,elem7,elem4,elem0]
-            face6 = [4,elem4,elem7,elem6,elem5]
+            mat = data[i + 1]
+            elem0 = data[i + 2] - 1
+            elem1 = data[i + 3] - 1
+            elem2 = data[i + 4] - 1
+            elem3 = data[i + 5] - 1
+            elem4 = data[i + 6] - 1
+            elem5 = data[i + 7] - 1
+            elem6 = data[i + 8] - 1
+            elem7 = data[i + 9] - 1
+            face1 = [4, elem0, elem1, elem2, elem3]
+            face2 = [4, elem0, elem4, elem5, elem1]
+            face3 = [4, elem1, elem5, elem6, elem2]
+            face4 = [4, elem2, elem6, elem7, elem3]
+            face5 = [4, elem3, elem7, elem4, elem0]
+            face6 = [4, elem4, elem7, elem6, elem5]
             if mat in solid_dict.keys():
                 solid_dict[mat][1].append(face1)
                 solid_dict[mat][1].append(face2)
@@ -157,27 +165,27 @@ class Model():
                 solid_dict[mat][1].append(face5)
                 solid_dict[mat][1].append(face6)
             else:
-                info = self.stub.GetPartInfo(GetPartInfoRequest(ids = [mat]))
+                info = self.stub.GetPartInfo(GetPartInfoRequest(ids=[mat]))
                 name = info.names[0]
                 extid = info.extids[0]
-                solid_dict[mat] = [[name, extid], [face1,face2,face3,face4,face5,face6]]   
+                solid_dict[mat] = [[name, extid], [face1, face2, face3, face4, face5, face6]]
         for pid, conn in solid_dict.items():
             self._parts.append(Part(self, conn[0][1], conn[0][0], "SOLID", conn[1]))
 
-        beams = self.stub.GetPart(GetPartRequest(type = "BEAM"))
+        beams = self.stub.GetPart(GetPartRequest(type="BEAM"))
         num = 5
         data = beams.data
         beam_dict = {}
         for i in range(0, len(data), num):
-            mat = data[i+1]
-            line = [2, data[i+2]-1,data[i+3]-1]
+            mat = data[i + 1]
+            line = [2, data[i + 2] - 1, data[i + 3] - 1]
             if mat in beam_dict.keys():
                 beam_dict[mat][1].append(line)
             else:
-                info = self.stub.GetPartInfo(GetPartInfoRequest(ids = [mat]))
+                info = self.stub.GetPartInfo(GetPartInfoRequest(ids=[mat]))
                 name = info.names[0]
                 extid = info.extids[0]
-                beam_dict[mat] = [[name, extid],[line]]
+                beam_dict[mat] = [[name, extid], [line]]
         for pid, conn in beam_dict.items():
             self._parts.append(Part(self, conn[0][1], conn[0][0], "BEAM", conn[1]))
         return
@@ -193,4 +201,3 @@ class Model():
 
         """
         return self._parts
-        

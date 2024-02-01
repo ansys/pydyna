@@ -16,9 +16,7 @@ class TrameVisualizer:
     def __init__(self) -> None:
         """Initialize the server and server-related variables."""
         if not _HAS_TRAME:  # pragma: no cover
-            raise ModuleNotFoundError(
-                "The package 'pyvista[trame]' is required to use this function."
-            )
+            raise ModuleNotFoundError("The package 'pyvista[trame]' is required to use this function.")
 
         self.server = get_server()
         self.state, self.ctrl = self.server.state, self.server.controller

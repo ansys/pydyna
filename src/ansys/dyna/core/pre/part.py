@@ -22,36 +22,36 @@ class Part(object):
         self._print_mesh = False
         self._print_id = False
         self._id = id
-        self._name = name 
+        self._name = name
         self._type = type
         self._connectivity: List = conn
-    
+
     @property
     def id(self) -> int:
         return self._id
-    
+
     @property
     def name(self) -> str:
         return self._name
-    
+
     @property
     def type(self) -> str:
         return self._type
-    
+
     @property
     def connectivity(self) -> List:
         return self._connectivity
 
     @property
     def id(self):
-        """ Get the id of Part."""
+        """Get the id of Part."""
         return self._id
 
     @property
     def name(self):
-        """ Get the name of Part."""
+        """Get the name of Part."""
         return self._name
-    
+
     @property
     def print_mesh(self) -> bool:
         """Whether the mesh summary is set to print along with the part summary."""

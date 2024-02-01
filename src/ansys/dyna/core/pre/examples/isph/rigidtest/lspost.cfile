@@ -1,3 +1,0 @@
-$# LS-PrePost command file created by LS-PrePost(R) 2024/R1(4.11)-24Jan2024 -64bit-Window
-$# Created on Jan-31-2024 (10:55:00)
-open keyword "C:\pydyna_main\pydyna\src\ansys\dyna\core\pre\examples\isph\rigidtest\rigidtest.k"

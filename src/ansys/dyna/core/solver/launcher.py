@@ -20,6 +20,7 @@ from ansys.dyna.core.solver import DynaSolver
 
 LOCALHOST = "127.0.0.1"
 DYNAPRE_DEFAULT_PORT = 50051
+SERVER_SOLVER_VERSION = "v0.4.6"
 
 
 def check_ports(port_range, ip="localhost"):
@@ -102,12 +103,21 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
             url = "https://github.com/ansys/pydyna/releases/download/v0.4.6/ansys-pydyna-solver-server.zip"
             directory = DynaSolver.get_appdata_path()
             filename = directory + os.sep + "ansys-pydyna-solver-server.zip"
+            server_package = directory + os.sep + "ansys-pydyna-solver-server"
             extractpath = directory
-            if not os.path.exists(directory + os.sep + "ansys-pydyna-solver-server"):
+            if not os.path.exists(server_package):
                 DynaSolver.downloadfile(url, filename)
                 with ZipFile(filename, "r") as zipf:
                     zipf.extractall(extractpath)
-            server_path = directory + os.sep + "ansys-pydyna-solver-server"
+            else:
+                with ZipFile(filename, "r") as zipf:
+                    zipinfo = zipf.getinfo("ansys-pydyna-solver-server/")
+                    version = str(zipinfo.comment, encoding="utf-8")
+                    if version != SERVER_SOLVER_VERSION:
+                        DynaSolver.downloadfile(url, filename)
+                        with ZipFile(filename, "r") as zipf:
+                            zipf.extractall(extractpath)
+            server_path = server_package
             # os.environ["ANSYS_PYDYNA_SOLVER_SERVER_PATH"] = server_path
         if os.path.isdir(server_path):
             # threadserver = ServerThread(1, port=port, ip=ip, server_path=server_path)
