@@ -25,7 +25,7 @@ Prerequisites
   instructions from `this page <https://docs.docker.com/engine/install/>`_.
 
 * Download the latest Linux release artifacts for the ``pre`` Docker container:
-  `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.4.3/linux-binaries.zip>`_.
+  `linux-binaries.zip <https://github.com/ansys/pydyna/releases/download/v0.4.6/linux-binaries.zip>`_.
 
 * Move this ZIP file to the ``docker/pre`` directory.
 
