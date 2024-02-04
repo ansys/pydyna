@@ -141,7 +141,7 @@ class Picker:
         closest_disp_mesh = None
         closest_dist = np.finfo(0.0).max
         for disp_mesh in disp_mesh_list:
-            if disp_mesh.poly_data is None or disp_mesh._type == DisplayMeshType.BEAM:
+            if disp_mesh.poly_data is None:
                 continue
             point, ix = disp_mesh.poly_data.ray_trace(start, end, first_point=True)
             if ix.size != 0:
@@ -786,6 +786,16 @@ class _DisplayMesh(object):  # pragma: no cover
                     self._poly_data, show_edges=True, scalars="colors", rgb=True, pickable=True
                 )
             elif self._type is DisplayMeshType.BEAM:
+                surf = pv.PolyData(self._vertices, lines=self._facet_list)
+                fcolor = np.array(self.get_face_color())
+                colors = np.tile(fcolor, (surf.n_faces, 1))
+                surf["colors"] = colors
+                surf.disp_mesh = self
+                self._poly_data = surf
+                self._actor = plotter.add_mesh(
+                    self._poly_data, show_edges=True, scalars="colors", rgb=True, pickable=True
+                )
+                return
                 lines = []
                 for line in self._facet_list:
                     coord = self._vertices[line[1]]

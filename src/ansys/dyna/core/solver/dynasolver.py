@@ -404,6 +404,7 @@ class DynaSolver:
         request.b = bytes(args, "utf-8")
         response = self.stub.send_request(request)
         self._check_return(response)
+        self.tail(which=1, how=0)
         return
 
     def setlc(self, lc, value):
