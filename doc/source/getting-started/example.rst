@@ -98,7 +98,7 @@ you can get the Python file from ``examples/solver/ball_plate_solver.py``.
 
     hostname = "localhost"
     port = "5000"
-    dyna=solver.DynaSolver(hostname,port)           # connect to the container
+    dyna=launch_dyna(ip = hostname,port = port)            # connect to the container
     dyna.push("./output/ball_plate.k")                            # push an input file
     dyna.start(4)                                   # start 4 ranks of mppdyna
     dyna.run("i=ball_plate.k memory=10m ncycle=20000")   # begin execution
