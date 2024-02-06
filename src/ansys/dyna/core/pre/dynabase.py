@@ -5,10 +5,11 @@ Base
 Module for creating a DYNA input deck.
 """
 
-# from subprocess import DETACHED_PROCESS
-
 from enum import Enum
 import logging
+
+# from subprocess import DETACHED_PROCESS
+from typing import List
 
 from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
 from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
@@ -277,10 +278,20 @@ class DynaBase:
         self.have_hourglass = False
         self.have_bulk_viscosity = False
         self.have_control_shell = False
+        # add for drawing entity
+        self._parent: DynaSolution = None
+        self.init_velocity: List = None
+        self.bdy_spc: List = None
 
     def get_stub():
         """Get the stub of the ``DynaBase`` object."""
         return DynaBase.stub
+
+    def set_parent(self, parent=None):
+        self._parent = parent
+        model = self._parent.model
+        self.boundaryconditions.assign_model(model)
+        self.initialconditions.assign_model(model)
 
     def set_timestep(self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0, max_timestep=None):
         """Set the structural time step size control using different options.
@@ -2245,6 +2256,10 @@ class BoundaryCondition:
         self.imposedmotionlist = []
         self.templist = []
         self.convectionlist = []
+        self._model = None
+
+    def assign_model(self, model):
+        self._model = model
 
     def create_spc(
         self,
@@ -2273,6 +2288,8 @@ class BoundaryCondition:
         """
         param = [nodeset, tx, ty, tz, rx, ry, rz, cid, birth, death]
         self.spclist.append(param)
+        # self.bdy_spc = nodeset.nodes
+        self._model.add_bdy_spc(nodeset.nodes)
 
     def create_imposed_motion(
         self,
@@ -2488,6 +2505,10 @@ class InitialCondition:
         self.velocitylist = []
         self.velocitynodelist = []
         self.temperaturelist = []
+        self._model = None
+
+    def assign_model(self, model):
+        self._model = model
 
     def create_velocity(
         self,
@@ -2503,6 +2524,8 @@ class InitialCondition:
     def create_velocity_node(self, nodeid, trans=Velocity(0, 0, 0), rot=RotVelocity(0, 0, 0)):
         """Define initial nodal point velocities for a node."""
         self.velocitynodelist.append([nodeid, trans, rot])
+        # self.init_velocity.append([nodeid,trans.x,trans.y,trans.z])
+        self._model.add_init_velocity([nodeid, trans.x, trans.y, trans.z])
 
     def create_temperature(self, nodeset=None, temperature=0):
         """Create an initial nodal point temperature."""

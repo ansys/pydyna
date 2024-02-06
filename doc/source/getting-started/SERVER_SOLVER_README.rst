@@ -34,7 +34,7 @@ Run an example on the client side
 
        hostname = "localhost"
        port = "5000"
-       dyna=solver.DynaSolver(hostname,port)     # connect to the server
+       dyna=launch_dyna(ip = hostname,port = port)     # connect to the server
        dyna.push("./output/ball_plate.k")        # push an input file
        dyna.start_locally(input = "ball_plate.k",nproc=1) 
 
