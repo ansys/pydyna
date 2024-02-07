@@ -10,7 +10,7 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre import launch_dynapre
 from ansys.dyna.core.pre.dynaicfd import (
     DynaICFD,
     ICFDAnalysis,
@@ -28,7 +28,7 @@ hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
 
-icfd_solution = DynaSolution(hostname)
+icfd_solution = launch_dynapre(ip = hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
 path = examples.cylinder_flow + os.sep

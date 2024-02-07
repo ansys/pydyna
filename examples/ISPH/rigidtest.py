@@ -11,7 +11,7 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre import launch_dynapre
 from ansys.dyna.core.pre.dynamaterial import (
     MatRigid,
     MatSPHIncompressibleFluid,
@@ -38,7 +38,7 @@ from ansys.dyna.core.pre import examples
 hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
-isphsolution = DynaSolution(hostname)
+isphsolution = launch_dynapre(ip = hostname)
 fns = []
 path = examples.isph_rigidtest + os.sep
 fns.append(path + "rigidtest.k")

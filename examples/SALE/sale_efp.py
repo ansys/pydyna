@@ -9,7 +9,7 @@ The executable file for LS-DYNA is ``ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_
 import os
 import sys
 
-from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre import launch_dynapre
 from ansys.dyna.core.pre.dynasale import (
     DynaSALE,
     ControlPoint,
@@ -26,7 +26,7 @@ hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
 
-efp_solution = DynaSolution(hostname)
+efp_solution = launch_dynapre(ip = hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
 path = examples.sale_efp + os.sep

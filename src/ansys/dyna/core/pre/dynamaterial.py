@@ -481,6 +481,7 @@ class MatAdditional:
             logging.info(f"Material thermal isotropic Created...")
 
 
+# MAT_001
 class MatElastic(MatAdditional):
     """Defines an isotropic hypoelastic material."""
 
@@ -499,6 +500,7 @@ class MatElastic(MatAdditional):
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_003
 class MatPlasticKinematic:
     """Define material of modelling isotropic and kinematic hardening plasticity."""
 
@@ -522,6 +524,7 @@ class MatPlasticKinematic:
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_004
 class MatElasticPlasticThermal(MatAdditional):
     """Defines temperature-dependent material coefficients."""
 
@@ -560,6 +563,7 @@ class MatElasticPlasticThermal(MatAdditional):
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_020
 class MatRigid(MatAdditional):
     """Defines a rigid material.
 
@@ -600,6 +604,51 @@ class MatRigid(MatAdditional):
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_030
+class MatShapeMemory:
+    """Describe the superelastic response present in shape-memory alloys,
+    the peculiar material ability to undergo large deformations
+    with a full recovery in loading-unloading cycles."""
+
+    def __init__(
+        self,
+        mass_density=0,
+        young_modulus=0,
+        poisson_ratio=0.3,
+        effective_stress=None,
+        forward_phase_transformation_start=None,
+        forward_phase_transformation_final=None,
+        reverse_phase_transformation_start=None,
+        reverse_phase_transformation_final=None,
+        recoverable_strain=0,
+    ):
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr = poisson_ratio
+        self.lcss = effective_stress
+        self.params = [forward_phase_transformation_start]
+        self.params.append(forward_phase_transformation_final)
+        self.params.append(reverse_phase_transformation_start)
+        self.params.append(reverse_phase_transformation_final)
+        self.params.append(recoverable_strain)
+
+    def create(self, stub):
+        """Create shape memory material."""
+        ret = stub.CreateMatShapeMemory(
+            MatShapeMemoryRequest(
+                ro=self.ro,
+                e=self.e,
+                pr=self.pr,
+                lcss=self.lcss,
+                params=self.params,
+            )
+        )
+        self.material_id = ret.mid
+        self.name = "SHAPE_MEMORY"
+        logging.info(f"Material {self.name} Created...")
+
+
+# MAT_063
 class MatCrushableFoam(MatAdditional):
     """Define material of modelling crushable foam."""
 
@@ -628,6 +677,45 @@ class MatCrushableFoam(MatAdditional):
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_077_O
+class MatOgdenRubber:
+    """Provides the Ogden rubber model."""
+
+    def __init__(
+        self,
+        mass_density=0,
+        poisson_ratio=0.3,
+        limit_stress=0,
+        shear_modulus=None,
+        exponent=None,
+    ):
+        self.ro = mass_density
+        self.pr = poisson_ratio
+        self.sigf = limit_stress
+        self.mu = shear_modulus
+        self.alpha = exponent
+
+    def create(self, stub):
+        """Create ogden rubber material."""
+        ret = stub.CreateMatOgdenRubber(
+            MatOgdenRubberRequest(
+                ro=self.ro,
+                pr=self.pr,
+                n=0,
+                nv=0,
+                g=0,
+                sigf=limit_stress,
+                tbhys=0,
+                mu=self.mu,
+                alpha=self.alpha,
+            )
+        )
+        self.material_id = ret.mid
+        self.name = "OGDEN_RUBBER"
+        logging.info(f"Material {self.name} Created...")
+
+
+# MAT_T01
 class MatThermalIsotropic:
     """Defines isotropic thermal properties."""
 
@@ -654,6 +742,7 @@ class MatThermalIsotropic:
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_T02
 class MatThermalOrthotropic:
     """Defines orthotropic thermal properties."""
 
@@ -678,6 +767,7 @@ class MatThermalOrthotropic:
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_220
 class MatRigidDiscrete:
     """Defines a rigid material for shells or solids.
 
@@ -702,6 +792,7 @@ class MatRigidDiscrete:
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_024
 class MatPiecewiseLinearPlasticity:
     """Defines an elasto-plastic material with an arbitrary stress.
 
@@ -742,6 +833,7 @@ class MatPiecewiseLinearPlasticity:
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_123
 class MatModifiedPiecewiseLinearPlasticity:
     """Defines an elasto-plastic material supporting an arbitrary stress.
 
@@ -796,6 +888,7 @@ class MatModifiedPiecewiseLinearPlasticity:
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_100
 class MatSpotweld:
     """Defines a spotweld material.
 
@@ -850,6 +943,7 @@ class MatSpotweld:
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_034
 class MatFabric:
     """Define an airbag material.
 
@@ -901,6 +995,7 @@ class MatFabric:
         logging.info("Material Fabric Created...")
 
 
+# MAT_S04
 class MatSpringNonlinearElastic:
     """Provides a nonlinear elastic translational and rotational spring with an arbitrary force.
 
@@ -924,6 +1019,7 @@ class MatSpringNonlinearElastic:
         logging.info("Material Spring Nonlinear Elastic Created...")
 
 
+# MAT_S02
 class MatDamperViscous:
     """Provides a linear translational or rotational damper located between two nodes.
 
@@ -942,6 +1038,7 @@ class MatDamperViscous:
         logging.info("Material damper viscous Created...")
 
 
+# MAT_S05
 class MatDamperNonlinearViscous:
     """Provides a viscous translational damper with an arbitrary force.
 
@@ -966,6 +1063,7 @@ class MatDamperNonlinearViscous:
         logging.info("Material damper viscous Created...")
 
 
+# MAT_SPH_02
 class MatSPHIncompressibleFluid:
     """Defines an ISPH (incompressible smooth particle hyrodynamics) fluid material.
 
@@ -994,6 +1092,7 @@ class MatSPHIncompressibleFluid:
         logging.info(f"Material {self.name} Created...")
 
 
+# MAT_SPH_03
 class MatSPHIncompressibleStructure:
     """Defines an ISPH structure material.
 

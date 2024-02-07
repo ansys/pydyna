@@ -11,7 +11,7 @@ connect two parts. The executable file for LS-DYNA is
 import os
 import sys
 
-from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre import launch_dynapre
 from ansys.dyna.core.pre.dynaem import (
     DynaEM,
     PartSet,
@@ -38,7 +38,7 @@ hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
 
-solution = DynaSolution(hostname)
+solution = launch_dynapre(ip = hostname)
 fns = []
 path = examples.em_resistive_heating_2d_isopots + os.sep
 fns.append(path + "em_resistive_heating_2d_isopots.k")

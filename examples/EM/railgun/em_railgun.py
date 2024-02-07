@@ -9,7 +9,7 @@ LS-DYNA version : ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
 import os
 import sys
 
-from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre import launch_dynapre
 from ansys.dyna.core.pre.dynaem import (
     DynaEM,
     Circuit,
@@ -32,7 +32,7 @@ hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
 
-solution = DynaSolution(hostname)
+solution = launch_dynapre(ip = hostname)
 fns = []
 path = examples.em_railgun + os.sep
 fns.append(path + "em_railgun.k")

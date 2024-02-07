@@ -10,7 +10,7 @@ the Python file from ``examples/Explicit/ball_plate.py``.
 
     import os
     import sys
-    from ansys.dyna.core.pre.dynasolution import DynaSolution
+    from ansys.dyna.core.pre import launch_dynapre
     from ansys.dyna.core.pre.dynamech import (
         DynaMech,
         Velocity,
@@ -34,7 +34,7 @@ the Python file from ``examples/Explicit/ball_plate.py``.
     hostname = "localhost"
     if len(sys.argv) > 1:
         hostname = sys.argv[1]
-    solution = DynaSolution(hostname)
+    solution = launch_dynapre(ip = hostname)
 
     fns = []
     path = examples.ball_plate + os.sep
@@ -98,7 +98,7 @@ you can get the Python file from ``examples/solver/ball_plate_solver.py``.
 
     hostname = "localhost"
     port = "5000"
-    dyna=solver.DynaSolver(hostname,port)           # connect to the container
+    dyna=launch_dyna(ip = hostname,port = port)            # connect to the container
     dyna.push("./output/ball_plate.k")                            # push an input file
     dyna.start(4)                                   # start 4 ranks of mppdyna
     dyna.run("i=ball_plate.k memory=10m ncycle=20000")   # begin execution

@@ -9,7 +9,7 @@ Run an example on the client side
        hostname = "localhost"
        if len(sys.argv) > 1:
            hostname = sys.argv[1]
-           solution = DynaSolution(hostname)
+           solution = launch_dynapre(ip = hostname)
            ......
 
-#. The function of DynaSolution() can download and start the preprocessing server automatically.
+#. The function of launch_dynapre() can download and start the preprocessing server automatically.

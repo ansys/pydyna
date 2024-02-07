@@ -8,8 +8,6 @@ Module for providing the top object that sets up a DYNA solution.
 import logging
 import os
 import sys
-from time import sleep
-from zipfile import ZipFile
 
 from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
 from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
@@ -19,9 +17,14 @@ import grpc
 import requests
 from tqdm import tqdm
 
-from .launcher import *  # noqa : F403
+from ansys.dyna.core.pre.model import Model
+
+# from .launcher import *  # noqa : F403
 
 CHUNK_SIZE = 1024 * 1024
+
+MAX_MESSAGE_LENGTH = 1024 * 1024 * 1024
+SERVER_PRE_VERSION = "v0.4.6"
 
 
 def init_log(log_file):
@@ -58,67 +61,37 @@ class DynaSolution:
        Port. the default is ``"50051"``.
     """
 
-    def __init__(self, hostname="localhost", port="50051", server_path=""):
+    def __init__(self, hostname="localhost", port="50051", channel=None, server_path=""):
         # launch server
-        check_valid_ip(hostname)  # double check
+        # check_valid_ip(hostname)  # double check
         if port is None:
             port = int(os.environ.get("PYDYNAPRE_PORT", DYNAPRE_DEFAULT_PORT))
             check_valid_port(port)
             LOG.debug(f"Using default port {port}")
 
-        # start server locally
-        if (hostname.lower() == "localhost" or hostname == LOCALHOST) and not DynaSolution.grpc_local_server_on():
-            LOG.debug("Starting kwserver")
-            # download server form webset
-            if len(server_path) == 0:
-                # server_path = os.getenv("ANSYS_PYDYNA_PRE_SERVER_PATH")
-                # if server_path is None:
-                url = "https://github.com/ansys/pydyna/releases/download/v0.4.5/ansys-pydyna-pre-server.zip"
-                directory = DynaSolution.get_appdata_path()
-                filename = directory + os.sep + "ansys-pydyna-pre-server.zip"
-                extractpath = directory
-                if not os.path.exists(directory + os.sep + "ansys-pydyna-pre-server"):
-                    # r = requests.get(url)
-                    # print(directory)
-                    # f = open(filename, "wb")
-                    # f.write(r.content)
-                    # with ZipFile(filename, "r") as zipf:
-                    # zipf.extractall(extractpath)
-                    DynaSolution.downloadfile(url, filename)
-                    with ZipFile(filename, "r") as zipf:
-                        zipf.extractall(extractpath)
-                server_path = directory + os.sep + "ansys-pydyna-pre-server"
-                # os.environ["ANSYS_PYDYNA_PRE_SERVER_PATH"] = server_path
-            if os.path.isdir(server_path):
-                threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
-                # threadserver.run()
-                # threadserver.setDaemon(True)
-                threadserver.start()
-                waittime = 0
-                while not DynaSolution.grpc_local_server_on():
-                    sleep(5)
-                    waittime += 5
-                    if waittime > 60:
-                        print("Failed to start pydyna solver server locally")
-                        break
-            else:
-                print("Failed to start pydyna pre server locally,Invalid server path!")
-
         init_log("client.log")
         temp = hostname + ":" + str(port)
-        channel = grpc.insecure_channel(temp)
+        options = [
+            ("grpc.max_receive_message_length", MAX_MESSAGE_LENGTH),
+        ]
+        if channel is None:
+            self._channel = grpc.insecure_channel(temp, options=options)
+        else:
+            self._channel = channel
+
         try:
-            grpc.channel_ready_future(channel).result(timeout=5)
+            grpc.channel_ready_future(self._channel).result(timeout=5)
         except grpc.FutureTimeoutError:
             logging.critical("Can not connect to kwServer")
             sys.exit()
         logging.info("Connected to kwServer...")
-        self.stub = kwC2SStub(channel)
+        self.stub = kwC2SStub(self._channel)
         self.object_list = []
         self.mainname = ""
         self._path = None
         DynaSolution.stub = self.stub
         DynaSolution.terminationtime = 0
+        self._default_model: Model = None
 
     def get_download_path():
         system_type = os.name
@@ -179,6 +152,13 @@ class DynaSolution:
             return False
         return True
 
+    @property
+    def model(self):
+        """Get model associated with the solution."""
+        if self._default_model is None:
+            self._default_model = Model(self.stub)
+        return self._default_model
+
     def get_stub():
         """Get the stub of the solution object."""
         return DynaSolution.stub
@@ -191,6 +171,7 @@ class DynaSolution:
         obj :
 
         """
+        obj.set_parent(self)
         self.object_list.append(obj)
 
     def get_file_chunks(self, filename):
