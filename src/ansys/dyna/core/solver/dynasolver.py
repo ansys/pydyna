@@ -10,8 +10,6 @@ import os
 import queue
 import sys
 import threading
-from time import sleep
-from zipfile import ZipFile
 
 from ansys.api.dyna.v0 import dynasolver_pb2, dynasolver_pb2_grpc
 import grpc
@@ -19,7 +17,8 @@ import requests
 from tqdm import tqdm
 
 from . import grpc_tags as tag
-from .launcher import *  # noqa : F403
+
+# from .launcher import *  # noqa : F403
 
 #
 # Define our own exceptions
@@ -65,59 +64,24 @@ class DynaSolver:
     """
 
     # logger = None
-    def __init__(self, hostname, port, server_path=""):
+    def __init__(self, hostname=None, port=None, channel=None, server_path=""):
         """Create a client instance connected to the host name (or IP address) and port."""
         self.hostname = hostname
         self.port = port
 
-        # start server locally
-        if (hostname.lower() == "localhost" or hostname == LOCALHOST) and not DynaSolver.grpc_local_server_on():
-            # LOG.debug("Starting solver server")
-
-            if len(server_path) == 0:
-                # server_path = os.getenv("ANSYS_PYDYNA_SOLVER_SERVER_PATH")
-                # if server_path is None:
-                url = "https://github.com/ansys/pydyna/releases/download/v0.4.5/ansys-pydyna-solver-server.zip"
-                directory = DynaSolver.get_appdata_path()
-                filename = directory + os.sep + "ansys-pydyna-solver-server.zip"
-                extractpath = directory
-                if not os.path.exists(directory + os.sep + "ansys-pydyna-solver-server"):
-                    # r = requests.get(url)
-                    # print(directory)
-                    # f = open(filename, "wb")
-                    # f.write(r.content)
-                    # with ZipFile(filename, "r") as zipf:
-                    # zipf.extractall(extractpath)
-                    DynaSolver.downloadfile(url, filename)
-                    with ZipFile(filename, "r") as zipf:
-                        zipf.extractall(extractpath)
-                server_path = directory + os.sep + "ansys-pydyna-solver-server"
-                # os.environ["ANSYS_PYDYNA_SOLVER_SERVER_PATH"] = server_path
-            if os.path.isdir(server_path):
-                threadserver = ServerThread(1, port=port, ip=hostname, server_path=server_path)
-                threadserver.run()
-                # threadserver.setDaemon(True)
-                # threadserver.start()
-                waittime = 0
-                while not DynaSolver.grpc_local_server_on():
-                    sleep(5)
-                    waittime += 5
-                    if waittime > 60:
-                        print("Failed to start pydyna solver server locally")
-                        break
-
-            else:
-                print("Failed to start pydyna solver server locally,Invalid server path!")
-
         temp = hostname + ":" + str(port)
-        self.channel = grpc.insecure_channel(temp)
+        if channel is None:
+            self._channel = grpc.insecure_channel(temp)
+        else:
+            self._channel = channel
+
         try:
-            grpc.channel_ready_future(self.channel).result(timeout=5)
+            grpc.channel_ready_future(self._channel).result(timeout=5)
         except grpc.FutureTimeoutError:
             logging.critical("Can not connect to Solver Server")
             sys.exit()
         logging.info("Connected to Solver Server...")
-        self.stub = dynasolver_pb2_grpc.DynaSolverCommStub(self.channel)
+        self.stub = dynasolver_pb2_grpc.DynaSolverCommStub(self._channel)
         # self.stub = DynaSolverCommStub(self.channel)
         # if DynaSolver.logger is None:
         #    DynaSolver.logger = logging.getLogger("DynaSolver")
@@ -444,6 +408,7 @@ class DynaSolver:
         request.b = bytes(args, "utf-8")
         response = self.stub.send_request(request)
         self._check_return(response)
+        self.tail(which=1, how=0)
         return
 
     def setlc(self, lc, value):
@@ -516,6 +481,7 @@ class DynaSolver:
         response = self.stub.start_solver_locally(request)
         # if response.status == tag.RUNNING:
         #    raise RunningError("LSDYNA is already running")
+        self.tail(which=1, how=0)
         return
 
     def switch(self, args):

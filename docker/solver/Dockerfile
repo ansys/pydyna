@@ -13,11 +13,11 @@ LABEL "com.ansys.description"="Ansys MPPDYNA with gRPC server"
 
 # install some missing stuff we want/need
 
-RUN yum -y install openssh-clients openssh-server bind-utils sudo python3
-RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install grpcio
-RUN python3 -m pip install grpcio-tools
-RUN python3 -m pip install protobuf==4.21.0
+RUN yum -y install openssh-clients openssh-server bind-utils sudo python3 unzip &>/dev/null && yum clean all
+RUN python3 -m pip install --upgrade pip && \ 
+python3 -m pip install grpcio && \
+python3 -m pip install grpcio-tools && \ 
+python3 -m pip install protobuf==4.21.0
 #
 ENV USER mpirun
 ENV HOME /home/mpirun
@@ -27,16 +27,15 @@ ENV LSTC_LICENSE_SERVER license
 ENV SSHDIR ${HOME}/.ssh
 
 
-RUN groupadd ${USER}
-RUN useradd -g ${USER} -d ${HOME} ${USER} && \
+RUN groupadd ${USER} && useradd -g ${USER} -d ${HOME} ${USER} && \
     echo "${USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 #
-RUN mkdir -p /ansys_inc/lib
-RUN mkdir -p /rundir
-RUN mkdir /var/run/sshd
-RUN mkdir -p ${SSHDIR}
-RUN chown -R ${USER}:${USER} /rundir
-RUN chmod -R 755 /rundir
+RUN mkdir -p /ansys_inc/lib && \
+mkdir -p /rundir && \
+mkdir /var/run/sshd && \
+mkdir -p ${SSHDIR} && \
+chown -R ${USER}:${USER} /rundir && \
+chmod -R 755 /rundir
 WORKDIR /rundir
 
 # set up the runtime environment variables for
@@ -73,29 +72,28 @@ RUN echo "export PATH=/opt/openmpi/bin:\${PATH}" >> ${HOME}/.bashrc
 #RUN ssh-keygen -A
 
 
-RUN ssh-keygen -q -b 2048 -f ${SSHDIR}/id_rsa -N ""
-RUN chmod 700 ${SSHDIR} && chmod -R 600 ${SSHDIR}/id_rsa
-RUN echo "Host *" > ${SSHDIR}/config
-RUN echo "  StrictHostKeyChecking no" >> ${SSHDIR}/config
-RUN cp ${SSHDIR}/id_rsa.pub ${SSHDIR}/authorized_keys
-RUN ssh-keygen -A
+RUN ssh-keygen -q -b 2048 -f ${SSHDIR}/id_rsa -N "" && \
+chmod 700 ${SSHDIR} && chmod -R 600 ${SSHDIR}/id_rsa && \
+echo "Host *" > ${SSHDIR}/config && \
+echo "  StrictHostKeyChecking no" >> ${SSHDIR}/config && \
+cp ${SSHDIR}/id_rsa.pub ${SSHDIR}/authorized_keys && \
+ssh-keygen -A
 
 RUN chmod -R 600 ${SSHDIR}* && \
-    chown -R ${USER}:${USER} ${SSHDIR}
-
-RUN chown -R ${USER}:${USER} ${HOME}
+    chown -R ${USER}:${USER} ${SSHDIR} && \
+    chown -R ${USER}:${USER} ${HOME}
 
 # Copy the openmpi libraries
 
-RUN yum install -y unzip
 COPY mppdyna_docker_centos7.zip .
-RUN unzip -qu mppdyna_docker_centos7.zip && rm mppdyna_docker_centos7.zip
-RUN mkdir -p /opt/openmpi
-RUN cp -r mpi/* /opt/openmpi
-RUN chmod -R 777 /opt/openmpi
+RUN unzip -qu mppdyna_docker_centos7.zip && \
+rm mppdyna_docker_centos7.zip && \
+mkdir -p /opt/openmpi && \
+cp -r mpi/* /opt/openmpi && \
+chmod -R 777 /opt/openmpi && \
 
 # The executable will go in /ansys_inc, and the
 # ifort runtime libraries in /ansys_inc/lib
 
-RUN cp -rpu docker_dir/* /ansys_inc/
-RUN chmod -R 777 /ansys_inc/
+cp -rpu docker_dir/* /ansys_inc/ && \
+chmod -R 777 /ansys_inc/

@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-import logging
 import os
 
-from ansys.dyna.core.pre.dynalogging import Logger
-
-LOG = Logger(level=logging.ERROR, to_file=False, to_stdout=True)
-LOG.debug("Loaded logging module as LOG")
+from ansys.dyna.core.pre.launcher import launch_dynapre
+from ansys.dyna.core.pre.model import Model
 
 _LOCAL_PORTS = []
 

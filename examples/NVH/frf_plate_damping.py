@@ -15,7 +15,7 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre import launch_dynapre
 from ansys.dyna.core.pre.dynamaterial import MatElastic
 from ansys.dyna.core.pre.dynanvh import (
     DynaNVH,
@@ -48,7 +48,7 @@ from ansys.dyna.core.pre import examples
 hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
-solution = DynaSolution(hostname)
+solution = launch_dynapre(ip = hostname)
 ###############################################################################
 # Import mesh data (nodes and elements)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
