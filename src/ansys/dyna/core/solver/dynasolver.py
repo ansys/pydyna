@@ -70,14 +70,18 @@ class DynaSolver:
         self.port = port
 
         temp = hostname + ":" + str(port)
-        self.channel = grpc.insecure_channel(temp)
+        if channel is None:
+            self._channel = grpc.insecure_channel(temp)
+        else:
+            self._channel = channel
+
         try:
-            grpc.channel_ready_future(self.channel).result(timeout=5)
+            grpc.channel_ready_future(self._channel).result(timeout=5)
         except grpc.FutureTimeoutError:
             logging.critical("Can not connect to Solver Server")
             sys.exit()
         logging.info("Connected to Solver Server...")
-        self.stub = dynasolver_pb2_grpc.DynaSolverCommStub(self.channel)
+        self.stub = dynasolver_pb2_grpc.DynaSolverCommStub(self._channel)
         # self.stub = DynaSolverCommStub(self.channel)
         # if DynaSolver.logger is None:
         #    DynaSolver.logger = logging.getLogger("DynaSolver")

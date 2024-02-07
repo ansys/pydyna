@@ -10,7 +10,7 @@ LS-DYNA is ``ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe``.
 import os
 import sys
 
-from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre import launch_dynapre
 from ansys.dyna.core.pre.dynaem import (
     DynaEM,
     NodeSet,
@@ -31,7 +31,7 @@ hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
 
-solution = DynaSolution(hostname)
+solution = launch_dynapre(ip = hostname)
 fns = []
 path = examples.em_rlc_define_func + os.sep
 fns.append(path + "em_rlc_define_func.k")
