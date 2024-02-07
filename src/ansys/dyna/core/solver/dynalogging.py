@@ -129,7 +129,6 @@ string_to_loglevel = {
     "CRITICAL": CRITICAL,
 }
 
-
 class PymapdlCustomAdapter(logging.LoggerAdapter):
     """Adapter for keeping the reference to an MAPDL instance name dynamic.
 
@@ -599,7 +598,6 @@ def add_stdout_handler(logger, level=LOG_LEVEL, write_headers=False):
         std_out_handler.stream.write(DEFAULT_STDOUT_HEADER)
 
     return logger
-
 
 LOG = Logger(level=logging.ERROR, to_file=False, to_stdout=True)
 LOG.debug("Loaded logging module as LOG")

@@ -10,7 +10,7 @@ the Python file from ``examples/Explicit/ball_plate.py``.
 
     import os
     import sys
-    from ansys.dyna.core.pre.dynasolution import DynaSolution
+    from ansys.dyna.core.pre import launch_dynapre
     from ansys.dyna.core.pre.dynamech import (
         DynaMech,
         Velocity,
@@ -34,7 +34,7 @@ the Python file from ``examples/Explicit/ball_plate.py``.
     hostname = "localhost"
     if len(sys.argv) > 1:
         hostname = sys.argv[1]
-    solution = DynaSolution(hostname)
+    solution = launch_dynapre(ip = hostname)
 
     fns = []
     path = examples.ball_plate + os.sep
