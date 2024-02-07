@@ -7,7 +7,7 @@ import subprocess
 from time import sleep
 from zipfile import ZipFile
 
-from ansys.dyna.core.pre import LOG
+from ansys.dyna.core.solver.dynalogging import LOG
 
 try:
     import ansys.platform.instancemanagement as pypim
@@ -19,8 +19,9 @@ except ModuleNotFoundError:  # pragma: no cover
 from ansys.dyna.core.solver import DynaSolver
 
 LOCALHOST = "127.0.0.1"
-DYNAPRE_DEFAULT_PORT = 50051
+DYNA_DEFAULT_PORT = 5000
 SERVER_SOLVER_VERSION = "v0.4.6"
+MAX_MESSAGE_LENGTH = 8 * 1024**2
 
 
 def check_ports(port_range, ip="localhost"):
@@ -72,7 +73,7 @@ def port_in_use(port, host=LOCALHOST):
             return True
 
 
-def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tuple:  # pragma: no cover
+def launch_grpc(port=DYNA_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tuple:  # pragma: no cover
     """
     Launch the solver service locally in gRPC mode.
 
@@ -141,7 +142,7 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
 
     LOG.debug("Starting 'launch_grpc'.")
 
-    command = "python kwserver.py"
+    command = "python server.py"
     LOG.debug(f"Starting the solver service with command: {command}")
 
     # env_vars = update_env_vars(add_env_vars, replace_env_vars)
@@ -187,7 +188,7 @@ def launch_remote_dyna(
         raise ModuleNotFoundError("The package 'ansys-platform-instancemanagement' is required to use this function.")
 
     pim = pypim.connect()
-    instance = pim.create_instance(product_name="mapdl", product_version=version)
+    instance = pim.create_instance(product_name="dynasolver", product_version=version)
     instance.wait_for_ready()
     channel = instance.build_grpc_channel(
         options=[
@@ -225,7 +226,7 @@ def launch_dyna(
     Connect to an existing instance of DYNA at IP 192.168.1.30 and
     port 5000.
 
-    >>> mapdl = launch_mapdl(ip='192.168.1.30',port=5000)
+    >>> solution = launch_dyna(ip='192.168.1.30',port=5000)
 
     """
 

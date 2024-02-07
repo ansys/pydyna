@@ -14,7 +14,7 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre import launch_dynapre
 from ansys.dyna.core.pre.dynamech import (
     DynaMech,
     Airbag,
@@ -58,7 +58,7 @@ if len(sys.argv) > 1:
 # The ``DynaSolution`` class is like a workflow orchestrator.
 # It inherits methods from other classes and helps create a complete workflow.
 #
-airbag_solution = DynaSolution(hostname)
+airbag_solution = launch_dynapre(ip = hostname)
 fns = []
 # path = sys.path[0] + os.sep + "input" + os.sep + "airbag_deploy" + os.sep
 path = examples.airbag_deploy + os.sep
