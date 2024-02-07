@@ -10,7 +10,7 @@ import os
 import sys
 
 
-from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre import launch_dynapre
 from ansys.dyna.core.pre.dynaicfd import (
     DynaICFD,
     MatICFD,
@@ -30,7 +30,7 @@ hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
 
-solution = DynaSolution(hostname)
+solution = launch_dynapre(ip = hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
 path = examples.free_convection_flow + os.sep
