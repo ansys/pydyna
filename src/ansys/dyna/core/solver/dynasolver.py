@@ -64,7 +64,7 @@ class DynaSolver:
     """
 
     # logger = None
-    def __init__(self, hostname=None, port=None, channel=None, server_path=""):
+    def __init__(self, hostname="localhost", port="5000", channel=None, server_path=""):
         """Create a client instance connected to the host name (or IP address) and port."""
         self.hostname = hostname
         self.port = port
