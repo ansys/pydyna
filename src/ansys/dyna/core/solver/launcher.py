@@ -126,9 +126,9 @@ def launch_grpc(port=DYNA_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tuple: 
             # threadserver.setDaemon(True)
             # threadserver.start()
             if platform.system() == "Windows":
-                process = subprocess.Popen("python server.py", cwd=server_path, shell=True)
+                process = subprocess.Popen(f"python server.py --host {ip} --port {port}", cwd=server_path, shell=True)
             else:
-                process = subprocess.Popen("python3 server.py", cwd=server_path, shell=True)
+                process = subprocess.Popen(f"python3 server.py --host {ip} --port {port}", cwd=server_path, shell=True)
             waittime = 0
             while not DynaSolver.grpc_local_server_on():
                 sleep(5)
@@ -201,6 +201,7 @@ def launch_remote_dyna(
 def launch_dyna(
     port=None,
     ip=None,
+    server_path=""
 ) -> DynaSolver:
     """Start DYNA locally.
 
@@ -240,11 +241,11 @@ def launch_dyna(
         LOG.info("Starting DYNA remotely. The startup configuration will be ignored.")
         return launch_remote_dyna()
 
-    launch_grpc(port=port, ip=ip)
+    launch_grpc(port=port, ip=ip, server_path=server_path)
 
     dyna = DynaSolver(
         hostname=ip,
-        port=port,
+        port=port
     )
 
     return dyna
