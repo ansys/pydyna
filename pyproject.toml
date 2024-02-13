@@ -29,7 +29,7 @@ dependencies = ["ansys-dpf-core>=0.7.2", "ansys-api-dyna==0.3.6"]
 
 [project.optional-dependencies]
 tests = [
-    "pyvista==0.43.2",
+    "pyvista==0.43.3",
     "matplotlib==3.8.2",
     "numpy==1.26.3",
     "pytest==8.0.0",
@@ -46,7 +46,7 @@ doc = [
     "matplotlib==3.8.2",
     "imageio==2.33.1",
     "imageio-ffmpeg==0.4.9",
-    "pyvista==0.43.2",
+    "pyvista==0.43.3",
     "numpydoc==1.6.0",
     "Sphinx==7.2.6",
     "sphinx-autobuild==2024.2.4",
