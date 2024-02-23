@@ -26,10 +26,11 @@ from ansys.dyna.core.pre.dynaem import (
 )
 from ansys.dyna.core.pre.dynamaterial import MatRigid,MatThermalIsotropic,EMMATTYPE,EMEOSTabulated1
 from ansys.dyna.core.pre import examples
+from ansys.dyna.core.pre.misc import check_valid_ip
 # sphinx_gallery_thumbnail_path = '_static/pre/em/resistive_heating_2d.png'
 
 hostname = "localhost"
-if len(sys.argv) > 1:
+if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 
 solution = launch_dynapre(ip = hostname)

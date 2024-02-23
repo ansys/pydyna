@@ -64,6 +64,8 @@ class DynaSolution:
     def __init__(self, hostname="localhost", port="50051", channel=None, server_path=""):
         # launch server
         # check_valid_ip(hostname)  # double check
+        self.pim_client = None
+        self.remote_instance = None
         if port is None:
             port = int(os.environ.get("PYDYNAPRE_PORT", DYNAPRE_DEFAULT_PORT))
             check_valid_port(port)
@@ -423,3 +425,12 @@ class DynaSolution:
         msg = self.mainname + " is outputed..."
         logging.info(msg)
         return ret.outpath
+
+    def quit(self):
+        """Delete remote instance."""
+
+        if self.pim_client is not None:
+            self.pim_client.close()
+        if self.remote_instance is not None:
+            self.remote_instance.delete()
+        return
