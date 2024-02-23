@@ -195,7 +195,10 @@ def launch_remote_dyna(
             ("grpc.max_receive_message_length", MAX_MESSAGE_LENGTH),
         ]
     )
-    return DynaSolver(channel=channel)
+    client = DynaSolver(channel=channel)
+    client.pim_client = pim
+    client.remote_instance = instance
+    return client
 
 
 def launch_dyna(

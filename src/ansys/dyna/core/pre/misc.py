@@ -177,9 +177,14 @@ def check_valid_ip(ip):
     ip :
         IP address.
     """
-    if ip.lower() != "localhost":
-        ip = ip.replace('"', "").replace("'", "")
+    if ip.lower() == "localhost":
+        return True
+    ip = ip.replace('"', "").replace("'", "")
+    try:
         socket.inet_aton(ip)
+        return True
+    except socket.error:
+        return False
 
 
 def check_valid_port(port, lower_bound=1000, high_bound=60000):

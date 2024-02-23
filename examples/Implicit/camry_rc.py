@@ -39,6 +39,7 @@ from ansys.dyna.core.pre.dynamaterial import (
 )
 from camry_rc_data import *
 from ansys.dyna.core.pre import examples
+from ansys.dyna.core.pre.misc import check_valid_ip
 
 ###############################################################################
 # Start the ``pre`` service
@@ -56,7 +57,7 @@ from ansys.dyna.core.pre import examples
 # (``"localhost"`` and ``"50051"`` respectively).
 #
 hostname = "localhost"
-if len(sys.argv) > 1:
+if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 camry_solution = launch_dynapre(ip = hostname)
 
