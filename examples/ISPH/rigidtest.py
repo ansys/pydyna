@@ -33,10 +33,11 @@ from ansys.dyna.core.pre.dynaisph import (
     GravityOption,
 )
 from ansys.dyna.core.pre import examples
+from ansys.dyna.core.pre.misc import check_valid_ip
 # sphinx_gallery_thumbnail_path = '_static/pre/isph/rigidtest.png'
 
 hostname = "localhost"
-if len(sys.argv) > 1:
+if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 isphsolution = launch_dynapre(ip = hostname)
 fns = []

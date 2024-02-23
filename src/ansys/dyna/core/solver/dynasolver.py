@@ -68,6 +68,8 @@ class DynaSolver:
         """Create a client instance connected to the host name (or IP address) and port."""
         self.hostname = hostname
         self.port = port
+        self.pim_client = None
+        self.remote_instance = None
 
         temp = hostname + ":" + str(port)
         if channel is None:
@@ -351,6 +353,10 @@ class DynaSolver:
         request = dynasolver_pb2.QuitServer()
         # ALWAYS returns ACK, so don't bother checking
         self.stub.quit_server(request)
+        if self.pim_client is not None:
+            self.pim_client.close()
+        if self.remote_instance is not None:
+            self.remote_instance.delete()
         return
 
     def resume(self, cycle=None, time=None):
@@ -463,7 +469,7 @@ class DynaSolver:
             raise RunningError("LSDYNA is already running")
         return
 
-    def start_locally(self, preset="MPP_DOUBLE", input="", nproc=1, memory=20):
+    def start_locally(self, preset="MPP", input="", nproc=1, memory=20):
         """Begin execution with the given string as the command-line arguments.
 
         Parameters
