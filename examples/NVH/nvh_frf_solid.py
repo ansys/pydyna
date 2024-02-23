@@ -26,10 +26,11 @@ from ansys.dyna.core.pre.dynanvh import (
     ExcitationType
 )
 from ansys.dyna.core.pre import examples
+from ansys.dyna.core.pre.misc import check_valid_ip
 # sphinx_gallery_thumbnail_path = '_static/pre/nvh/frf_column_hole.png'
 
 hostname = "localhost"
-if len(sys.argv) > 1:
+if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 solution = launch_dynapre(ip = hostname)
 fns = []
