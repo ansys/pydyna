@@ -186,7 +186,10 @@ def launch_remote_dynapre(
             ("grpc.max_receive_message_length", MAX_MESSAGE_LENGTH),
         ]
     )
-    return DynaSolution(channel=channel)
+    client = DynaSolution(channel=channel)
+    client.pim_client = pim
+    client.remote_instance = instance
+    return client
 
 
 class ServerThread(threading.Thread):
