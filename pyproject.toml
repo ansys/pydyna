@@ -33,7 +33,7 @@ dependencies = ["ansys-dpf-core>=0.7.2",
 [project.optional-dependencies]
 tests = [
     "pyvista==0.43.3",
-    "matplotlib==3.8.2",
+    "matplotlib==3.8.3",
     "numpy==1.26.4",
     "pytest==8.0.1",
     "pytest-cov==4.1.0",
@@ -46,7 +46,7 @@ tests = [
 ]
 doc = [
     "recommonmark==0.7.1",
-    "matplotlib==3.8.2",
+    "matplotlib==3.8.3",
     "imageio==2.34.0",
     "imageio-ffmpeg==0.4.9",
     "pyvista==0.43.3",
