@@ -118,6 +118,7 @@ class DEMAnalysis(BaseObj):
     def __init__(self):
         self.defined_des = False
         self.stub = DynaBase.get_stub()
+        self.type = "analysis_dem"
 
     def set_des(
         self,
