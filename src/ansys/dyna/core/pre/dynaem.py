@@ -719,7 +719,7 @@ class Isopotential:
         return self.id
 
 
-class RogoCoil:
+class RogoCoil(BaseObj):
     """Measures the total current flowing through a given section of the conductor.
 
     Parameters

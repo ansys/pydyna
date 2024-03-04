@@ -246,7 +246,7 @@ class ICFD_CouplingDirection(Enum):
     TWO_WAY_WEAK_COUPLING = 3
 
 
-class ICFDAnalysis:
+class ICFDAnalysis(BaseObj):
     """Activates an ICFD analysis and defines associated control parameters."""
 
     def __init__(self):
@@ -733,7 +733,7 @@ class ICFDVolumePart:
         return ret
 
 
-class MeshedVolume:
+class MeshedVolume(BaseObj):
     """Defines the volume space to mesh.
 
     Parameters

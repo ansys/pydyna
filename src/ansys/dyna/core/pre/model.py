@@ -5,6 +5,8 @@ from typing import List
 from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
 from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
 
+# from .kwprocess_pb2 import *
+# from .kwprocess_pb2_grpc import *
 from ansys.dyna.core.pre.part import Part
 
 
@@ -20,6 +22,7 @@ class Model:
         self._nodes = []
         self._bdy_spc: List = []
         self._init_velocity: List = []
+        self._rigidwall = []
         # self._freeze()
 
     def add_bdy_spc(self, nodes):
@@ -29,6 +32,10 @@ class Model:
     def add_init_velocity(self, nodes):
         """Add initial velocity nodes."""
         self._init_velocity.append(nodes)
+
+    def add_rigidwall(self, data: List):
+        """Add rigidwall data."""
+        self._rigidwall.append(data)
 
     def get_solid_elements(self) -> List:
         """Get the solid elements.
@@ -113,6 +120,23 @@ class Model:
         nlist = [coord[i : i + num] for i in range(0, len(coord), num)]
         return nlist
 
+    def get_rigidwall(self, id):
+        """Get rigidwall data."""
+
+        data = self._rigidwall(id - 1)
+        return data
+        data = self.stub.GetRigidWall(GetRigidWallRequest(id=id))
+        geomtype = data.geomtype
+        param = data.parameter
+        rigidwall = [geomtype]
+        if geomtype == 3:
+            num = 8
+        elif geomtype == 4:
+            num = 7
+        for i in range(num):
+            rigidwall.append(param[i])
+        return rigidwall
+
     def _sync_up_model(self):
         """Synchronize the client model with the server model.
 
@@ -188,6 +212,12 @@ class Model:
                 beam_dict[mat] = [[name, extid], [line]]
         for pid, conn in beam_dict.items():
             self._parts.append(Part(self, conn[0][1], conn[0][0], "BEAM", conn[1]))
+        return
+        rigid_num = self.stub.GetNum(GetNumRequest(type="rigidwall"))
+        num = rigid_num.num
+        for i in range(1, num + 1):
+            rigid = self.get_rigidwall(id=i)
+            self._rigidwall.append(rigid)
         return
 
     @property

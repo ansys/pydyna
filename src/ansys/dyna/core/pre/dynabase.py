@@ -14,6 +14,9 @@ from typing import List
 from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
 from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
 
+# from .kwprocess_pb2 import *
+# from .kwprocess_pb2_grpc import *
+
 
 class Motion(Enum):
     VELOCITY = 0
@@ -257,6 +260,18 @@ class RotVelocity:
         self.x = x
         self.y = y
         self.z = z
+
+
+class BaseObj:
+    """Define the base object."""
+
+    def __init__(self):
+        self.type = ""
+        self.subtype = ""
+
+    def get_data(self) -> List:
+        """Get the data of the object."""
+        return None
 
 
 class DynaBase:
@@ -804,6 +819,12 @@ class DynaBase:
 
     def add(self, obj):
         """Add entities to an object."""
+
+        if obj.type == "rigidwall_cylinder" or obj.type == "rigidwall_sphere" or obj.type == "rigidwall_planar":
+            data = obj.get_data()
+            if data != None:
+                model = self._parent.model
+                model.add_rigidwall(data)
         self.entities.append(obj)
 
     def set_transform(self, filename=None, idnoff=0, ideoff=0, idpoff=0, idmoff=0, idsoff=0, idfoff=0, transform=None):
@@ -1788,7 +1809,7 @@ class ThermalAnalysisTimestep(Enum):
     VARIABLE = 1
 
 
-class ThermalAnalysis:
+class ThermalAnalysis(BaseObj):
     """Activates thermal analysis and defines associated control parameters."""
 
     def __init__(self):
@@ -2591,7 +2612,7 @@ class InitialCondition:
             logging.info(f"Define temperature at {type} {id}.")
 
 
-class RigidwallCylinder:
+class RigidwallCylinder(BaseObj):
     """Defines a rigid wall with a cylinder form.
 
     Parameters
@@ -2617,6 +2638,7 @@ class RigidwallCylinder:
         self.motion = -1
         self.lcid = 0
         self.dir = Direction(1, 0, 0)
+        self.type = "rigidwall_cylinder"
 
     def set_motion(self, curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0)):
         """Set the prescribed motion."""
@@ -2624,6 +2646,21 @@ class RigidwallCylinder:
         self.lcid = curve.id
         self.motion = motion.value
         self.dir = dir
+
+    def get_data(self) -> List:
+        """Get the rigidwall data."""
+        data = [
+            self.type,
+            self.tail.x,
+            self.tail.y,
+            self.tail.z,
+            self.head.x,
+            self.head.y,
+            self.head.z,
+            self.radius,
+            self.length,
+        ]
+        return data
 
     def create(self):
         """Create a rigidwall cylinder."""
@@ -2652,7 +2689,7 @@ class RigidwallCylinder:
         logging.info("Cylinder Rigidwall Created...")
 
 
-class RigidwallSphere:
+class RigidwallSphere(BaseObj):
     """Defines a rigid wall with a sphere form.
 
     Parameters
@@ -2676,6 +2713,7 @@ class RigidwallSphere:
         self.motion = -1
         self.lcid = 0
         self.dir = Direction(1, 0, 0)
+        self.type = "rigidwall_sphere"
 
     def set_motion(self, curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0)):
         """Set the prescribed motion."""
@@ -2683,6 +2721,20 @@ class RigidwallSphere:
         self.lcid = curve.id
         self.motion = motion.value
         self.dir = dir
+
+    def get_data(self) -> List:
+        """Get the rigidwall data."""
+        data = [
+            self.type,
+            self.center.x,
+            self.center.y,
+            self.center.z,
+            self.orient.x,
+            self.orient.y,
+            self.orient.z,
+            self.radius,
+        ]
+        return data
 
     def create(self):
         """Create a rigidwall sphere."""
@@ -2710,7 +2762,7 @@ class RigidwallSphere:
         logging.info("Sphere Rigidwall Created...")
 
 
-class RigidwallPlanar:
+class RigidwallPlanar(BaseObj):
     """Defines planar rigid walls with either finite or infinite size.
 
     Parameters
@@ -2730,6 +2782,12 @@ class RigidwallPlanar:
         self.tail = tail
         self.head = head
         self.fric = coulomb_friction_coefficient
+        self.type = "rigidwall_planar"
+
+    def get_data(self) -> List:
+        """Get the rigidwall data."""
+        data = [self.type, self.tail.x, self.tail.y, self.tail.z, self.head.x, self.head.y, self.head.z]
+        return data
 
     def create(self):
         """Create planar rigid walls."""
@@ -2753,7 +2811,7 @@ class GravityOption(Enum):
     DIR_Z = "Z"
 
 
-class Gravity:
+class Gravity(BaseObj):
     """Defines body force loads using global axes directions.
 
     Body force loads are due to a prescribed base acceleration or
