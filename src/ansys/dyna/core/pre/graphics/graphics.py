@@ -18,6 +18,9 @@ class DisplayMeshType(enum.IntEnum):
 
     FACE = 0
     BEAM = 1
+    CYLINDER = 2
+    SPHERE = 3
+    PLANAR = 4
 
 
 class ColorByType(enum.IntEnum):
@@ -173,7 +176,7 @@ class Graphics(object):
         """Initialize graphics."""
         self._model = model
         self._display_data = {}
-        self._display_spline_data = {}
+        self._display_entity_data = {}
         self._plotter = None
         self._picker = None
         self._color_by_type = ColorByType.ZONE
@@ -223,6 +226,15 @@ class Graphics(object):
             self._display_data[part_id] = data
         self._init_velocity_data = self._model.get_init_velocity()
         self._bdy_spc = self._model.get_bdy_spc()
+        # rigidwall
+        self._display_entity_data.clear()
+        num = len(self._model._rigidwall)
+        for entity_id in range(1, num + 1):
+            data = {}
+            disp_mesh_data: list[_DisplayMesh] = [self.__get_entity_display_mesh_object(entity_id)]
+            if len(disp_mesh_data) > 0:
+                data["faces"] = disp_mesh_data
+            self._display_entity_data[entity_id] = data
 
         # self._model._sync_up_model()
 
@@ -256,6 +268,44 @@ class Graphics(object):
             node_coords,
             face_list,
             part_name=part.name,
+        )
+        return disp_mesh
+
+    def __get_entity_display_mesh_object(self, entity_id: int):
+        """Display the faces in an object.
+
+        Parameters
+        ----------
+        entity_id : int
+            ID of the entity to show the edges on.
+
+        Returns
+        -------
+        _DisplayMesh
+            Displayed mesh.
+        """
+        index = entity_id - 1
+        rw = self._model._rigidwall[index]
+        type = rw[0]
+        if type == "rigidwall_cylinder":
+            meshtype = DisplayMeshType.CYLINDER
+            mesh = pv.Cylinder(
+                center=[rw[1], rw[2], rw[3]], direction=[rw[4], rw[5], rw[6]], radius=rw[7], height=rw[8]
+            )
+        elif type == "rigidwall_sphere":
+            meshtype = DisplayMeshType.SPHERE
+            mesh = pv.Sphere(center=[rw[1], rw[2], rw[3]], direction=[rw[4], rw[5], rw[6]], radius=rw[7])
+        elif type == "rigidwall_planar":
+            meshtype = DisplayMeshType.PLANAR
+            dir = [rw[4] - rw[1], rw[5] - rw[2], rw[6] - rw[3]]
+            mesh = pv.Plane(center=[rw[1], rw[2], rw[3]], direction=dir, i_size=1000, j_size=1000)
+
+        disp_mesh = _DisplayMesh(
+            type=meshtype,
+            part_id=entity_id,
+            graphics=self,
+            model=self._model,
+            mesh=mesh,
         )
         return disp_mesh
 
@@ -519,6 +569,13 @@ class Graphics(object):
             for key, disp_mesh_data in data.items()
             for disp_mesh in disp_mesh_data
         ]
+
+        [
+            disp_mesh.add_to_plotter(self._plotter)
+            for entity_id, data in self._display_entity_data.items()
+            for key, disp_mesh_data in data.items()
+            for disp_mesh in disp_mesh_data
+        ]
         if self._sphinx_build == False:
             self._colorByTypeBt = self._plotter.add_checkbox_button_widget(
                 self.__show_bdy_spc_callback,
@@ -739,8 +796,9 @@ class _DisplayMesh(object):  # pragma: no cover
         part_id: int,
         graphics: Graphics,
         model: pre.Model,
-        vertices: np.array,
-        facet_list: np.array,
+        vertices: np.array = None,
+        facet_list: np.array = None,
+        mesh=None,
         part_name: str = "",
     ):
         """Initialize the parameters to display."""
@@ -750,6 +808,7 @@ class _DisplayMesh(object):  # pragma: no cover
         self._model = model
         self._vertices = vertices
         self._facet_list = facet_list
+        self._mesh = mesh
         self._poly_data = None
         self._actor = None
         self._part_name = part_name
@@ -795,15 +854,21 @@ class _DisplayMesh(object):  # pragma: no cover
                 self._actor = plotter.add_mesh(
                     self._poly_data, show_edges=True, scalars="colors", rgb=True, pickable=True
                 )
+            elif (
+                self._type is DisplayMeshType.CYLINDER
+                or self._type is DisplayMeshType.SPHERE
+                or self._type is DisplayMeshType.PLANAR
+            ):
+                surf = self._mesh
+                fcolor = np.array(self.get_face_color())
+                colors = np.tile(fcolor, (surf.n_faces, 1))
+                surf["colors"] = colors
+                surf.disp_mesh = self
+                self._poly_data = surf
+                self._actor = plotter.add_mesh(
+                    self._poly_data, show_edges=True, scalars="colors", rgb=True, pickable=True
+                )
                 return
-                lines = []
-                for line in self._facet_list:
-                    coord = self._vertices[line[1]]
-                    lines.append(coord)
-                    coord = self._vertices[line[2]]
-                    lines.append(coord)
-                self._poly_data = np.array(lines)
-                self._actor = plotter.add_lines(self._poly_data, color="purple", width=8)
 
     def get_face_color(self):
         """Get the colors of faces.

@@ -112,12 +112,13 @@ class DynaDEM(DynaBase):
         DynaBase.save_file(self)
 
 
-class DEMAnalysis:
+class DEMAnalysis(BaseObj):
     """Activates DEM analysis and defines associated control parameters."""
 
     def __init__(self):
         self.defined_des = False
         self.stub = DynaBase.get_stub()
+        self.type = "analysis_dem"
 
     def set_des(
         self,

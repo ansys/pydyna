@@ -55,12 +55,13 @@ class ResponseType(Enum):
     NODAL_FORCE = 3
 
 
-class FrequencyDomain:
+class FrequencyDomain(BaseObj):
     """Provides a way of defining and solving frequency domain vibration and acoustic problems."""
 
     def __init__(self):
         self.stub = DynaBase.get_stub()
         self.defined_frf = False
+        self.type = "frequency_domain"
 
     def set_frequency_response_function(
         self,
