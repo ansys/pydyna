@@ -320,7 +320,7 @@ class DynaMech(DynaBase):
         DynaBase.save_file(self)
 
 
-class Airbag:
+class Airbag(BaseObj):
     """Defines an airbag or control volume.
 
     Parameters
@@ -377,6 +377,7 @@ class Airbag:
             self.sidtyp = 0
         else:
             self.sidtyp = 1
+        self.type = "airbag"
 
     def create(self):
         """Create an airbag."""
