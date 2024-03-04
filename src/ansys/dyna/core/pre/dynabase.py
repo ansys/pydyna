@@ -1817,6 +1817,7 @@ class ThermalAnalysis(BaseObj):
         self.defined_timestep = False
         self.defined_nonlinear = False
         self.stub = DynaBase.get_stub()
+        self.type = "analysis_thermal"
 
     def set_timestep(self, timestep_control=ThermalAnalysisTimestep.FIXED, initial_timestep=0):
         """Set time step controls for the thermal solution in a thermal only or coupled structural/thermal analysis.
@@ -2822,6 +2823,7 @@ class Gravity(BaseObj):
         self.stub = DynaBase.get_stub()
         self.dir = dir.value
         self.load = load
+        self.type = "gravity"
 
     def create(self):
         """Define a body force."""

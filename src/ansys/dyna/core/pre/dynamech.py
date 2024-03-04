@@ -377,6 +377,7 @@ class Airbag(BaseObj):
             self.sidtyp = 0
         else:
             self.sidtyp = 1
+        self.type = "airbag"
 
     def create(self):
         """Create an airbag."""
