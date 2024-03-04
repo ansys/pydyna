@@ -42,7 +42,7 @@ class ControlPoint:
         self.ratio = ratio
 
 
-class StructuredMesh:
+class StructuredMesh(BaseObj):
     """Generates a structured 2D or 3D mesh and invokes the S-ALE solver."""
 
     def __init__(self, control_points_x, control_points_y, control_points_z):

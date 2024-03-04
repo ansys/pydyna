@@ -55,7 +55,7 @@ class ResponseType(Enum):
     NODAL_FORCE = 3
 
 
-class FrequencyDomain:
+class FrequencyDomain(BaseObj):
     """Provides a way of defining and solving frequency domain vibration and acoustic problems."""
 
     def __init__(self):
