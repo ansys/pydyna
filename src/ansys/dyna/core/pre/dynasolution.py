@@ -19,6 +19,10 @@ from tqdm import tqdm
 
 from ansys.dyna.core.pre.model import Model
 
+# from .kwprocess_pb2 import *
+# from .kwprocess_pb2_grpc import *
+
+
 # from .launcher import *  # noqa : F403
 
 CHUNK_SIZE = 1024 * 1024

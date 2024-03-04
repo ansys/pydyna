@@ -246,7 +246,7 @@ class ICFD_CouplingDirection(Enum):
     TWO_WAY_WEAK_COUPLING = 3
 
 
-class ICFDAnalysis:
+class ICFDAnalysis(BaseObj):
     """Activates an ICFD analysis and defines associated control parameters."""
 
     def __init__(self):
@@ -260,6 +260,7 @@ class ICFDAnalysis:
         self.defined_coupling_dem = False
         self.defined_mesh_adapt = False
         self.stub = DynaBase.get_stub()
+        self.type = "analysis_icfd"
 
     def set_type(self, analysis_type=ICFD_AnalysisType.TRANSIENT_ANALYSIS):
         """Set the type of the CFD analysis.
@@ -733,7 +734,7 @@ class ICFDVolumePart:
         return ret
 
 
-class MeshedVolume:
+class MeshedVolume(BaseObj):
     """Defines the volume space to mesh.
 
     Parameters
@@ -749,6 +750,7 @@ class MeshedVolume:
         self.embeded_surf = []
         self.meshsize_surf = []
         self.fluid_interfaces = []
+        self.type = "meshedvolume"
 
     def embed_shell(self, embeded):
         """Define surfaces that the mesher is to embed inside the volume mesh.
