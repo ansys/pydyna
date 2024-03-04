@@ -750,6 +750,7 @@ class MeshedVolume(BaseObj):
         self.embeded_surf = []
         self.meshsize_surf = []
         self.fluid_interfaces = []
+        self.type = "meshedvolume"
 
     def embed_shell(self, embeded):
         """Define surfaces that the mesher is to embed inside the volume mesh.
