@@ -260,6 +260,7 @@ class ICFDAnalysis(BaseObj):
         self.defined_coupling_dem = False
         self.defined_mesh_adapt = False
         self.stub = DynaBase.get_stub()
+        self.type = "analysis_icfd"
 
     def set_type(self, analysis_type=ICFD_AnalysisType.TRANSIENT_ANALYSIS):
         """Set the type of the CFD analysis.

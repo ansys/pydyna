@@ -54,6 +54,7 @@ class StructuredMesh(BaseObj):
         self.refine_factor_y = 1
         self.refine_factor_z = 1
         self.fillings = []
+        self.type = "structured_mesh"
 
     def fill(
         self,

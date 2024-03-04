@@ -732,6 +732,7 @@ class RogoCoil(BaseObj):
         self.stub = DynaBase.get_stub()
         self.set = set
         self.id = 0
+        self.type = "rogocoil"
 
     def create(self):
         """Create a Rogowsky coil."""

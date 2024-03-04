@@ -61,6 +61,7 @@ class FrequencyDomain(BaseObj):
     def __init__(self):
         self.stub = DynaBase.get_stub()
         self.defined_frf = False
+        self.type = "frequency_domain"
 
     def set_frequency_response_function(
         self,
