@@ -350,10 +350,10 @@ class DynaSolver:
         command and continues running.
         """
         self.logger.debug("quit")
-        if self.pim_client is not None:
-            self.pim_client.close()
         if self.remote_instance is not None:
             self.remote_instance.delete()
+        if self.pim_client is not None:
+            self.pim_client.close()
         request = dynasolver_pb2.QuitServer()
         # ALWAYS returns ACK, so don't bother checking
         self.stub.quit_server(request)
