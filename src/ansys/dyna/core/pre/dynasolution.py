@@ -433,8 +433,8 @@ class DynaSolution:
     def quit(self):
         """Delete remote instance."""
 
-        if self.pim_client is not None:
-            self.pim_client.close()
         if self.remote_instance is not None:
             self.remote_instance.delete()
+        if self.pim_client is not None:
+            self.pim_client.close()
         return
