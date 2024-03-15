@@ -20,7 +20,7 @@ from ansys.dyna.core.solver import DynaSolver
 
 LOCALHOST = "127.0.0.1"
 DYNA_DEFAULT_PORT = 5000
-SERVER_SOLVER_VERSION = "v0.4.6"
+SERVER_SOLVER_VERSION = "v0.4.12"
 MAX_MESSAGE_LENGTH = 8 * 1024**2
 
 
@@ -101,7 +101,7 @@ def launch_grpc(port=DYNA_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tuple: 
         if len(server_path) == 0:
             # server_path = os.getenv("ANSYS_PYDYNA_SOLVER_SERVER_PATH")
             # if server_path is None:
-            url = "https://github.com/ansys/pydyna/releases/download/v0.4.6/ansys-pydyna-solver-server.zip"
+            url = "https://github.com/ansys/pydyna/releases/download/v0.4.12/ansys-pydyna-solver-server.zip"
             directory = DynaSolver.get_appdata_path()
             filename = directory + os.sep + "ansys-pydyna-solver-server.zip"
             server_package = directory + os.sep + "ansys-pydyna-solver-server"
