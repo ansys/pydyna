@@ -5,7 +5,7 @@ from typing import List
 
 import numpy as np
 import pyvista as pv
-from pyvista.plotting.plotting import Plotter
+from pyvista.plotting import Plotter
 import vtk
 
 import ansys.dyna.core.pre as pre
@@ -631,12 +631,13 @@ class Graphics(object):
     def _show_selector(self):
         """Chooses between using Trame or Python visualizer."""
         if self._use_trame:  # pragma: no cover
+            pv.set_jupyter_backend("server")
             visualizer = TrameVisualizer()
             visualizer.set_scene(self._plotter)
             visualizer.show()
         else:
             self._plotter.camera_position = "xy"
-            self._plotter.show()
+            self._plotter.show(jupyter_backend="static")
 
     def __update_bt_icons(self):
         """Update the icons on display."""

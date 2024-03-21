@@ -2,7 +2,8 @@
 try:
     from pyvista.trame.ui import plotter_ui
     from trame.app import get_server
-    from trame.ui.vuetify import SinglePageLayout
+    from trame.ui.vuetify3 import SinglePageLayout
+    from trame.widgets import vuetify3
 
     _HAS_TRAME = True
 
@@ -18,7 +19,7 @@ class TrameVisualizer:
         if not _HAS_TRAME:  # pragma: no cover
             raise ModuleNotFoundError("The package 'pyvista[trame]' is required to use this function.")
 
-        self.server = get_server()
+        self.server = get_server(client_type="vue3")
         self.state, self.ctrl = self.server.state, self.server.controller
 
     def set_scene(self, plotter):
@@ -31,16 +32,17 @@ class TrameVisualizer:
         plotter : pv.Plotter
             PyVista plotter to render the mesh.
         """
-        self.state.trame__title = "PyPrime Viewer"
+        self.state.trame__title = "PyDYNA Viewer"
 
         with SinglePageLayout(self.server) as layout:
             layout.icon.click = self.ctrl.view_reset_camera
-            layout.title.set_text("PyPrime")
+            layout.title.set_text("PyDYNA")
 
             with layout.content:
-                # Use PyVista UI template for Plotters
-                view = plotter_ui(plotter)
-                self.ctrl.view_update = view.update
+                with vuetify3.VContainer(fluid=True, classes="pa-0 fill-height"):
+                    # Use PyVista UI template for Plotters
+                    view = plotter_ui(plotter)
+                    self.ctrl.view_update = view.update
 
             # hide footer with trame watermark
             layout.footer.hide()
