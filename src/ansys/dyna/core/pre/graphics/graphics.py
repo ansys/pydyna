@@ -172,7 +172,7 @@ class Graphics(object):
         Whether to use the Trame visualizer. The default is ``False``.
     """
 
-    def __init__(self, model: pre.Model, use_trame: bool = False):
+    def __init__(self, model: pre.Model, use_trame: bool = False, view_position: str = "xy"):
         """Initialize graphics."""
         self._model = model
         self._display_data = {}
@@ -199,6 +199,7 @@ class Graphics(object):
         self._viewLeftBt: vtk.vtkButtonWidget = None
         self._sphinx_build = defaults.get_sphinx_build()
         self._use_trame = use_trame
+        self._view_position = view_position
         self._init_velocity_data = []
         self._bdy_spc = []
         self._actor_init_velocity = None
@@ -636,7 +637,11 @@ class Graphics(object):
             visualizer.set_scene(self._plotter)
             visualizer.show()
         else:
-            self._plotter.camera_position = "xy"
+            if self._view_position in ["xy", "xz", "yx", "yz", "zx", "zy"]:
+                pos = self._view_position
+            else:
+                pos = "xy"
+            self._plotter.camera_position = pos
             self._plotter.show(jupyter_backend="static")
 
     def __update_bt_icons(self):
@@ -836,7 +841,7 @@ class _DisplayMesh(object):  # pragma: no cover
             if self._type is DisplayMeshType.FACE:
                 surf = pv.PolyData(self._vertices, self._facet_list)
                 fcolor = np.array(self.get_face_color())
-                colors = np.tile(fcolor, (surf.n_faces, 1))
+                colors = np.tile(fcolor, (surf.n_cells, 1))
                 surf["colors"] = colors
                 surf.disp_mesh = self
                 self._poly_data = surf
@@ -848,7 +853,7 @@ class _DisplayMesh(object):  # pragma: no cover
             elif self._type is DisplayMeshType.BEAM:
                 surf = pv.PolyData(self._vertices, lines=self._facet_list)
                 fcolor = np.array(self.get_face_color())
-                colors = np.tile(fcolor, (surf.n_faces, 1))
+                colors = np.tile(fcolor, (surf.n_cells, 1))
                 surf["colors"] = colors
                 surf.disp_mesh = self
                 self._poly_data = surf
@@ -862,7 +867,7 @@ class _DisplayMesh(object):  # pragma: no cover
             ):
                 surf = self._mesh
                 fcolor = np.array(self.get_face_color())
-                colors = np.tile(fcolor, (surf.n_faces, 1))
+                colors = np.tile(fcolor, (surf.n_cells, 1))
                 surf["colors"] = colors
                 surf.disp_mesh = self
                 self._poly_data = surf
@@ -969,5 +974,5 @@ class _DisplayMesh(object):  # pragma: no cover
         if self._type == DisplayMeshType.FACE:
             if self._poly_data != None:
                 fcolor = np.array(self.get_face_color())
-                colors = np.tile(fcolor, (self._poly_data.n_faces, 1))
+                colors = np.tile(fcolor, (self._poly_data.n_cells, 1))
                 self._poly_data["colors"] = colors
