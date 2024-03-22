@@ -28,12 +28,11 @@ classifiers = [
 dependencies = ["ansys-dpf-core>=0.7.2",
                 "ansys-api-dyna==0.3.6",
                 "ansys-platform-instancemanagement~=1.0", 
-				"pyvista==0.43.4",
+                "pyvista==0.43.4",
 ]
 
 [project.optional-dependencies]
 tests = [
-    "pyvista==0.43.4",
     "matplotlib==3.8.3",
     "numpy==1.26.4",
     "pytest==8.1.1",
@@ -50,7 +49,6 @@ doc = [
     "matplotlib==3.8.3",
     "imageio==2.34.0",
     "imageio-ffmpeg==0.4.9",
-    "pyvista==0.43.4",
     "numpydoc==1.6.0",
     "Sphinx==7.2.6",
     "sphinx-autobuild==2024.2.4",
