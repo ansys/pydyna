@@ -3,6 +3,7 @@
 import os
 import socket
 import subprocess
+import sys
 import threading
 from time import sleep
 from zipfile import ZipFile
@@ -74,6 +75,17 @@ def port_in_use(port, host=LOCALHOST):
             return True
 
 
+def get_virtualenv_path():
+    """Get the virtual environment path."""
+
+    python_executable_path = sys.executable
+    if hasattr(sys, "real_prefix"):
+        virtual_env_path = sys.prefix
+    else:
+        virtual_env_path = os.path.dirname(python_executable_path)
+    return virtual_env_path
+
+
 def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tuple:  # pragma: no cover
     """
     Launch the pre service locally in gRPC mode.
@@ -123,6 +135,7 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
             # threadserver.run()
             # threadserver.setDaemon(True)
             # threadserver.start()
+            # env_path = get_virtualenv_path()
             process = subprocess.Popen("python kwserver.py", cwd=server_path, shell=True)
             waittime = 0
             while not DynaSolution.grpc_local_server_on():
