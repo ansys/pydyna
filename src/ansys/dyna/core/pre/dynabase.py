@@ -274,6 +274,14 @@ class BaseObj:
         return None
 
 
+class ParameterType(Enum):
+    """Contains the parameter types."""
+
+    R = 1
+    I = 2
+    C = 3
+
+
 class DynaBase:
     """Contains methods for creating a general LS-DYNA keyword."""
 
