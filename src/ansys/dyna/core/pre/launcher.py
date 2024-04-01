@@ -112,7 +112,7 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
         LOG.debug("Starting kwserver")
         # download server form webset
         if len(server_path) == 0:
-            url = "https://github.com/ansys/pydyna/releases/download/v0.4.6/ansys-pydyna-pre-server.zip"
+            url = "https://github.com/ansys/pydyna/releases/download/v0.4.8/ansys-pydyna-pre-server.zip"
             directory = DynaSolution.get_appdata_path()
             filename = directory + os.sep + "ansys-pydyna-pre-server.zip"
             server_package = directory + os.sep + "ansys-pydyna-pre-server"
