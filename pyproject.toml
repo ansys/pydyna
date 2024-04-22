@@ -50,7 +50,7 @@ doc = [
     "imageio==2.34.0",
     "imageio-ffmpeg==0.4.9",
     "numpydoc==1.7.0",
-    "Sphinx==7.2.6",
+    "Sphinx==7.3.7",
     "sphinx-autobuild==2024.4.13",
     "sphinxcontrib-websupport==1.2.7",
     "pytest-sphinx==0.6.3",
