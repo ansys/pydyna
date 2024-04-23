@@ -24,7 +24,7 @@ jobs:
     name: "Code style"
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/code-style@v5
+      - uses: ansys/actions/code-style@v6
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@v5
+        uses: ansys/actions/doc-style@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -128,7 +128,7 @@ jobs:
         os: [windows-latest, ubuntu-latest]
         python-version: ['3.9', '3.10', '3.11', '3.12']
     steps:
-      - uses: ansys/actions/build-wheelhouse@v5
+      - uses: ansys/actions/build-wheelhouse@v6
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
@@ -193,7 +193,7 @@ jobs:
     needs: [doc, tests]
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/build-library@v5
+      - uses: ansys/actions/build-library@v6
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -205,14 +205,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Release to the public PyPI repository"
-        uses: ansys/actions/release-pypi-public@v5
+        uses: ansys/actions/release-pypi-public@v6
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYPI_TOKEN }}
 
       - name: "Release to GitHub"
-        uses: ansys/actions/release-github@v5
+        uses: ansys/actions/release-github@v6
         with:
           library-name: ${{ env.PACKAGE_NAME }}
 
@@ -222,7 +222,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-library]
     steps:
-      - uses: ansys/actions/doc-deploy-dev@v5
+      - uses: ansys/actions/doc-deploy-dev@v6
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -233,7 +233,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [release]
     steps:
-      - uses: ansys/actions/doc-deploy-stable@v5
+      - uses: ansys/actions/doc-deploy-stable@v6
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
