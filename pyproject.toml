@@ -65,7 +65,7 @@ doc = [
     "joblib==1.4.0",
     "scikit-learn==1.4.2",
     "ipython==8.23.0",
-    "jupyterlab==4.1.6",
+    "jupyterlab==4.1.8",
     "sphinx-jinja==2.0.2",
     "sphinx-autoapi==3.0.0",
 ]
