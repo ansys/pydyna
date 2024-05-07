@@ -28,7 +28,7 @@ classifiers = [
 dependencies = ["ansys-dpf-core>=0.7.2",
                 "ansys-api-dyna==0.3.6",
                 "ansys-platform-instancemanagement~=1.0", 
-                "pyvista==0.43.6",
+                "pyvista==0.43.7",
 ]
 
 [project.optional-dependencies]
@@ -42,7 +42,7 @@ tests = [
     "openpyxl==3.1.2",
     "scikit-learn==1.4.2",
     "pytest-xdist==3.6.1",
-    "ipython==8.23.0",
+    "ipython==8.24.0",
 ]
 doc = [
     "recommonmark==0.7.1",
@@ -64,7 +64,7 @@ doc = [
     "ipywidgets==8.1.2",
     "joblib==1.4.0",
     "scikit-learn==1.4.2",
-    "ipython==8.23.0",
+    "ipython==8.24.0",
     "jupyterlab==4.2.0",
     "sphinx-jinja==2.0.2",
     "sphinx-autoapi==3.0.0",
