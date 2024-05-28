@@ -67,7 +67,7 @@ doc = [
     "ipython==8.24.0",
     "jupyterlab==4.2.0",
     "sphinx-jinja==2.0.2",
-    "sphinx-autoapi==3.0.0",
+    "sphinx-autoapi==3.1.1",
 ]
 
 [tool.flit.module]
