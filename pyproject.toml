@@ -34,7 +34,7 @@ dependencies = ["ansys-dpf-core>=0.7.2",
 [project.optional-dependencies]
 tests = [
     "matplotlib==3.9.1",
-    "numpy==2.0.0",
+    "numpy==2.0.1",
     "pytest==8.2.2",
     "pytest-cov==5.0.0",
     "joblib==1.4.2",
