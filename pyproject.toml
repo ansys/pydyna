@@ -28,7 +28,7 @@ classifiers = [
 dependencies = ["ansys-dpf-core>=0.7.2",
                 "ansys-api-dyna==0.3.6",
                 "ansys-platform-instancemanagement~=1.0", 
-                "pyvista==0.44.1",
+                "pyvista>=0.43.4",
 ]
 
 [project.optional-dependencies]
@@ -43,6 +43,7 @@ tests = [
     "scikit-learn==1.5.1",
     "pytest-xdist==3.6.1",
     "ipython==8.26.0",
+    "pyvista==0.44.1",
 ]
 doc = [
     "recommonmark==0.7.1",
@@ -68,6 +69,7 @@ doc = [
     "jupyterlab==4.2.4",
     "sphinx-jinja==2.0.2",
     "sphinx-autoapi==3.2.1",
+    "pyvista==0.44.1",
 ]
 
 [tool.flit.module]
