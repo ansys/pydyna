@@ -4,7 +4,7 @@ import datetime
 import os
 
 import pyvista
-from ansys_sphinx_theme import get_version_match, pyansys_logo_black, ansys_favicon
+from ansys_sphinx_theme import get_version_match, ansys_favicon
 from sphinx.builders.latex import LaTeXBuilder
 from sphinx_gallery.sorting import FileNameSortKey
 
@@ -96,7 +96,6 @@ inheritance_node_attrs = dict(shape="ellipse", fontsize=14, height=0.75, color="
 html_short_title = html_title = "PyDYNA"
 html_show_sourcelink = True
 html_theme = "ansys_sphinx_theme"
-html_logo = pyansys_logo_black
 html_context = {
     "github_user": "pyansys",
     "github_repo": "pydyna",
@@ -104,6 +103,7 @@ html_context = {
     "doc_path": "doc/source",
 }
 html_theme_options = {
+    "logo": "pyansys",
     "switcher": {
         "json_url": f"https://{cname}/versions.json",
         "version_match": get_version_match(__version__),
