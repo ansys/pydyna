@@ -50,7 +50,7 @@ doc = [
     "matplotlib==3.9.1",
     "imageio==2.34.2",
     "imageio-ffmpeg==0.5.1",
-    "numpydoc==1.7.0",
+    "numpydoc==1.8.0",
     "Sphinx==8.0.2",
     "sphinx-autobuild==2024.4.16",
     "sphinxcontrib-websupport==2.0.0",
