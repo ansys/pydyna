@@ -42,7 +42,7 @@ tests = [
     "openpyxl==3.1.5",
     "scikit-learn==1.5.1",
     "pytest-xdist==3.6.1",
-    "ipython==8.26.0",
+    "ipython==8.27.0",
     "pyvista==0.44.1",
 ]
 doc = [
@@ -65,7 +65,7 @@ doc = [
     "ipywidgets==8.1.5",
     "joblib==1.4.2",
     "scikit-learn==1.5.1",
-    "ipython==8.26.0",
+    "ipython==8.27.0",
     "jupyterlab==4.2.4",
     "sphinx-jinja==2.0.2",
     "sphinx-autoapi==3.3.1",
