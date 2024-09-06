@@ -47,4 +47,7 @@ isph_rigidtest = os.path.join(_module_path, "isph", "rigidtest")
 nvh_frf_plate_damping = os.path.join(_module_path, "nvh", "frf_plate_damping")
 nvh_frf_solid = os.path.join(_module_path, "nvh", "frf_solid")
 
+# Metalforming
+mf_simple_roll = os.path.join(_module_path, "metalforming", "simple_roll")
+
 thermal_stress = os.path.join(_module_path, "thermal", "thermal_stress")

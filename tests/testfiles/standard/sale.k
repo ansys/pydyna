@@ -110,7 +110,7 @@ $#   mshid    unused    ammgto    unused   nsample    unused   unused-       vid
 $#    geom    in/out       pid        e2        e3        e4        e5
 PART               1        22       0.0         0         0         0
 *ALE_STRUCTURED_MESH_REFINE
-$#   mshid      ifx,      ify,      ifz,
+$#   mshid       ifx       ify       ifz
          1         1         1         1
 *EOS_LINEAR_POLYNOMIAL
 $#   eosid        c0        c1        c2        c3        c4        c5        c6

@@ -39,14 +39,14 @@ $#     pid       dof       vad      lcid        sf       vid     death     birth
 $#     pid       dof       vad      lcid        sf       vid     death     birth
          1         2         1         2       1.0         0       0.0       0.0
 *ICFD_BOUNDARY_PRESCRIBED_PRE
-$#     pid      lcid        sf     death     birth
-         2         3       0.0       0.0       0.0
+$#     pid      lcid        sf     death     birth       iso
+         2         3       0.0       0.0       0.0         0
 *ICFD_CONTROL_TIME
 $#     ttm        dt       cfl    lcidsf     dtmin     dtmax    dtinit    tdeath
       40.0       0.0       1.0         0       0.0       0.0       0.0       0.0
 *ICFD_CONTROL_ADAPT
 $#    minh      maxh       err       mth       nit       var    unused       kis
-      0.02       0.2       2.0         0        10         0                   0
+      0.02       0.2       2.0         1        10         0                   0
 *ICFD_DATABASE_DRAG
 $#     pid      cpid     dtout    perout      divi     elout     ssout
          4                                                            

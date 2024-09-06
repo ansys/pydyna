@@ -11,11 +11,8 @@ import logging
 # from subprocess import DETACHED_PROCESS
 from typing import List
 
-from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
-from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
-
-# from .kwprocess_pb2 import *
-# from .kwprocess_pb2_grpc import *
+from ansys.api.dyna.v0.dynaprocess_pb2 import *  # noqa : F403
+from ansys.api.dyna.v0.dynaprocess_pb2_grpc import *  # noqa : F403
 
 
 class Motion(Enum):
@@ -58,10 +55,12 @@ class EnergyFlag(Enum):
 class HourglassControl(Enum):
     STANDARD_VISCOSITY_FORM = 1
     FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID = 2
+    FLANAGAN_BELYTSCHKO_EXACT_VOLUME_INTEGRATION_SOLID = 3
 
 
 class BulkViscosity(Enum):
     STANDARD_BULK_VISCOSITY = 1
+    STANDARD_BULK_VISCOSITY_SHELL = -1
     RICHARDS_WILKINS_BULK_VISCOSITY = 2
     COMPUTE_INTERNAL_ENERGY_DISSIPATED = -2
 
@@ -295,12 +294,14 @@ class DynaBase:
         self.initialconditions = InitialCondition()
         self.constraints = Constraint()
         self.contacts = ContactGroup()
+        self.loads = Load()
         self.entities = []
         self.have_accuracy = False
         self.have_energy = False
         self.have_hourglass = False
         self.have_bulk_viscosity = False
         self.have_control_shell = False
+        self.defined_contact = False
         # add for drawing entity
         self._parent: DynaSolution = None
         self.init_velocity: List = None
@@ -315,6 +316,7 @@ class DynaBase:
         model = self._parent.model
         self.boundaryconditions.assign_model(model)
         self.initialconditions.assign_model(model)
+        self.loads.assign_model(model)
 
     def set_timestep(self, tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0, max_timestep=None):
         """Set the structural time step size control using different options.
@@ -563,6 +565,73 @@ class DynaBase:
         logging.info("Initial Temperature Created...")
         return ret
 
+    def set_adaptive(
+        self,
+        initial_relaxation_factor=1.0,
+        incremental_increase=0.01,
+        time_interval_refinement=0,
+        adaptive_error_tolerance=1e20,
+        adaptive_type=1,
+        generate_adaptive_mesh_at_exit=0,
+        min_shell_size=0,
+        h_adaptivity_pass_flag=0,
+        shell_h_adapt=0.0,
+        fission_control_flag=0,
+    ):
+        """Define initial nodal point temperatures on all nodes.
+
+        Parameters
+        ----------
+        initial_relaxation_factor : float
+            Initial relaxation factor for contact force during each adaptive remesh.
+        incremental_increase : float
+            Incremental increase of "initial_relaxation_factor" during each time step after the adaptive step
+        time_interval_refinement : float
+            Time interval between adaptive refinements.
+        adaptive_error_tolerance : float
+            Adaptive error tolerance.
+        adaptive_type : int
+            Adaptive options. ADPTYP = 1, 2 and 4 refer to h-adaptivity for
+            shells. ADPTYP = 1 and 2 refer to h-adaptivity for shell/solid/shell sandwich composites.
+            EQ 1: Angle change in degrees per adaptive refinement relative to the surrounding shells
+                  for each shell to be refined.
+            EQ 2: Total angle change in degrees relative to the surrounding shells for each shell to be refined.
+            EQ 4: Adapts when the shell error in the energy norm.
+        generate_adaptive_mesh_at_exit : int
+            Flag to generate adaptive mesh at exit.
+        min_shell_size : float
+            Minimum shell size to be adapted based on element edge length.
+        h_adaptivity_pass_flag : int
+            EQ.0: Two pass adaptivity
+            EQ.1: One pass adaptivity
+        shell_h_adapt : float
+            For shells, h-adapt the mesh when the FORMING contact surfaces approach or penetrate the
+            tooling surface depending on whether the value of "shell_h_adapt" is positive or negative respectively
+        fission_control_flag : int
+            Fission control flag around radii:
+            GT. 0: Maximum number of shells after fission covering the entire radius from starting
+                   tangent to ending tangent.
+            EQ.-1: This setting works with look-forward adaptivity, making more consistent mesh adaptivity
+                   along the radius from starting tangent to ending tangent.
+        """
+        self.stub.CreateControlAdaptive(
+            ControlAdaptiveRequest(
+                adpfreq=time_interval_refinement,
+                adptol=adaptive_error_tolerance,
+                adptype=adaptive_type,
+                ioflag=generate_adaptive_mesh_at_exit,
+                adpsize=min_shell_size,
+                adpass=h_adaptivity_pass_flag,
+                adpene=shell_h_adapt,
+                iadpn90=fission_control_flag,
+            )
+        )
+        self.stub.CreateControlAdapstep(
+            ControlAdapstepRequest(factin=initial_relaxation_factor, dfactr=incremental_increase)
+        )
+
+        logging.info("Control adaptive Created...")
+
     def create_control_shell(
         self,
         wrpang=20,
@@ -573,7 +642,7 @@ class DynaBase:
         bwc=2,
         miter=1,
         proj=0,
-        irquad=0,
+        irquad=3,
     ):
         """Provide controls for computing shell response.
 
@@ -699,7 +768,18 @@ class DynaBase:
         logging.info("Control Solid Created...")
         return ret
 
-    def create_control_contact(self, rwpnal, shlthk=0, orien=1, ssthk=0, ignore=0, igactc=0):
+    def create_control_contact(
+        self,
+        rwpnal=0,
+        initial_penetration_check=1,
+        shlthk=0,
+        penalty_stiffness_option=1,
+        orien=1,
+        penetration_check_multiplier=0.4,
+        ssthk=0,
+        ignore=0,
+        igactc=0,
+    ):
         """Change defaults for computation with contact surfaces.
 
         Parameters
@@ -737,11 +817,15 @@ class DynaBase:
         bool
             ``True`` when successful, ``False`` when failed.
         """
+        self.defined_contact = True
         ret = self.stub.CreateControlContact(
             ControlContactRequest(
                 rwpnal=rwpnal,
+                islchk=initial_penetration_check,
                 shlthk=shlthk,
+                penopt=penalty_stiffness_option,
                 orien=orien,
+                xpene=penetration_check_multiplier,
                 ssthk=ssthk,
                 ignore=ignore,
                 igactc=igactc,
@@ -882,7 +966,7 @@ class DynaBase:
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if self.contacts.num() > 0:
+        if self.contacts.num() > 0 and self.defined_contact == False:
             self.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
         self.implicitanalysis.create()
         self.parts.set_property()
@@ -890,6 +974,7 @@ class DynaBase:
         self.constraints.create()
         self.boundaryconditions.create()
         self.contacts.create()
+        self.loads.create()
         for obj in self.entities:
             obj.create()
 
@@ -1071,6 +1156,7 @@ class BeamFormulation(Enum):
 
 class ShellFormulation(Enum):
     FULLY_INTEGRATED = -16
+    FULLY_INTEGRATED_FAST = 16
     BELYTSCHKO_TSAY = 2
     SR_HUGHES_LIU = 6
     FULLY_INTEGRATED_BELYTSCHKO_TSAY_MEMBRANE = 9
@@ -1807,6 +1893,52 @@ class ImplicitAnalysis:
             self.stub.CreateControlImplicitConsistentMass(ControlImplicitConsistentMassRequest(iflag=1))
 
 
+class MetalFormingAnalysis(BaseObj):
+    """Activates metal forming analysis and defines associated control parameters."""
+
+    def __init__(self):
+        self.defined = False
+        self.defined_springback = False
+        self.defined_rigidbody = False
+        self.stub = DynaBase.get_stub()
+        self.type = "analysis_metalforming"
+
+    def set_springback(self, part_set=None, num_history_variable=0):
+        """Define the springback parameter.
+
+         Parameters
+        ----------
+        part_set : PartSet.
+            Part set.
+        num_history_variable : int
+            Number of shell or solid history variables.
+        """
+        self.defined_springback = True
+        self.part_set = part_set
+        self.nshv = num_history_variable
+
+    def set_rigid_body_nodes_fast_update(self, fast_update=0):
+        """Define the springback parameter.
+
+         Parameters
+        ----------
+        part_set : PartSet.
+            Part set.
+        num_history_variable : int
+            Number of shell or solid history variables.
+        """
+        self.defined_rigidbody = True
+        self.metalf = fast_update
+
+    def create(self):
+        """Create a metal forming analysis."""
+        if self.defined_springback:
+            psid = self.part_set.create(self.stub)
+            self.stub.CreateInterfaceSpringback(InterfaceSpringbackRequest(psid=psid, nshv=self.nshv))
+        if self.defined_rigidbody:
+            self.stub.CreateControlRigid(ControlRigidRequest(metalf=self.metalf))
+
+
 class ThermalAnalysisType(Enum):
     STEADY_STATE = 0
     TRANSIENT = 1
@@ -1883,6 +2015,7 @@ class ContactCategory(Enum):
     SINGLE_SURFACE_CONTACT = 3
     SHELL_EDGE_TO_SURFACE_CONTACT = 4
     NODES_TO_SURFACE = 5
+    ONE_WAY_SURFACE_TO_SURFACE = 6
 
 
 class ContactType(Enum):
@@ -1894,6 +2027,7 @@ class ContactType(Enum):
     TIED_WITH_FAILURE = 5
     ERODING = 6
     EDGE = 7
+    FORMING = 8
 
 
 # class ContactAlgorithm(Enum):
@@ -1923,10 +2057,11 @@ class SBOPT(Enum):
 class ContactSurface:
     """Defines a contact interface."""
 
-    def __init__(self, set):
+    def __init__(self, set, save_interface_force=0):
         self.stub = DynaBase.get_stub()
         self.id = set.create(self.stub)
         self.thickness = 0
+        self.save_force = save_interface_force
         if set.type.upper() == "PART":
             self.type = 3
             self.id = set.pos(0)
@@ -1991,6 +2126,7 @@ class Contact:
         self.offset = offset.value
         self.static_friction_coeff = 0
         self.dynamic_friction_coeff = 0
+        self.vdc = 0
         self.birth_time = 0
         self.death_time = 1e20
         self.option_tiebreak = False
@@ -2029,6 +2165,17 @@ class Contact:
         """
         self.static_friction_coeff = static
         self.dynamic_friction_coeff = dynamic
+
+    def set_extra_coefficient(self, viscous_damping=0):
+        """Set coefficients.
+
+        Parameters
+        ----------
+        viscous_damping : float
+            Viscous damping coefficient in percent of critical or the coefficient of restitution
+            expressed as percentage.
+        """
+        self.vdc = viscous_damping
 
     def set_active_time(self, birth_time=0, death_time=1e20):
         """Set the birth and death time to active and deactivate the contact.
@@ -2071,6 +2218,8 @@ class Contact:
             opcode += "AUTOMATIC_"
         elif self.type == ContactType.TIED:
             opcode += "TIED_"
+        elif self.type == ContactType.FORMING:
+            opcode += "FORMING_"
         else:
             opcode += ""
         if self.category != ContactCategory.SINGLE_SURFACE_CONTACT:
@@ -2090,6 +2239,8 @@ class Contact:
             opcode += "SHELL_EDGE_TO_SURFACE"
         elif self.category == ContactCategory.NODES_TO_SURFACE:
             opcode += "NODES_TO_SURFACE"
+        elif self.category == ContactCategory.ONE_WAY_SURFACE_TO_SURFACE:
+            opcode += "ONE_WAY_SURFACE_TO_SURFACE"
         else:
             opcode += ""
 
@@ -2117,15 +2268,17 @@ class Contact:
                 option2=option2,
                 option3=False,
                 offset=self.offset,
+                # card1
                 ssid=self.slavesurface.id,
                 msid=msid,
                 sstyp=self.slavesurface.type,
                 mstyp=mstyp,
-                sapr=0,
-                sbpr=0,
+                sapr=self.slavesurface.save_force,
+                sbpr=self.mastersurface.save_force,
+                # card2
                 fs=self.static_friction_coeff,
                 fd=self.dynamic_friction_coeff,
-                vdc=0,
+                vdc=self.vdc,
                 penchk=0,
                 birthtime=self.birth_time,
                 sfsa=self.slavesurface.penalty_stiffness,
@@ -2838,3 +2991,56 @@ class Gravity(BaseObj):
         id = self.load.create(self.stub)
         ret = self.stub.CreateLoadBody(LoadBodyRequest(option=self.dir, lcid=id))
         logging.info("Load body Created...")
+
+
+class Load:
+    """provides a way of defining applied forces."""
+
+    def __init__(self):
+        self.stub = DynaBase.get_stub()
+        self.nodeforcelist = []
+        self._model = None
+
+    def assign_model(self, model):
+        self._model = model
+
+    def create_nodal_force(
+        self,
+        nodeset,
+        degree_of_freedom=1,
+        load_curve=None,
+        scale_factor=1.0,
+    ):
+        """Apply a concentrated nodal force to a node or each node in a set of nodes.
+
+        Parameters
+        ----------
+        nodeset : NodeSet.
+            Node set.
+        degree_of_freedom : int
+            Translational constraint in local x/y/z-direction.
+        load_curve : int
+            Rotational constraint about local x/y/z-axis.
+        scale_factor : float
+
+        """
+        param = [nodeset, degree_of_freedom, load_curve, scale_factor]
+        self.nodeforcelist.append(param)
+        # self._model.add_bdy_spc(nodeset.nodes)
+
+    def create(self):
+        """Define applied forces."""
+
+        for obj in self.nodeforcelist:
+            nodeset, dof, load_curve, sf = obj[0], obj[1], obj[2], obj[3]
+            nsid = nodeset.create(self.stub)
+            lcid = load_curve.create(self.stub)
+            self.stub.CreateLoadNodalForce(
+                LoadNodalForceRequest(
+                    nsid=nsid,
+                    dof=dof,
+                    lcid=lcid,
+                    sf=sf,
+                )
+            )
+            logging.info("Load nodal force Created...")
