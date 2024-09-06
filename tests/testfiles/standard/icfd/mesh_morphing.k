@@ -51,8 +51,8 @@ $#     pid       dof       vad      lcid        sf       vid     death     birth
 $#     pid       dof       vad      lcid        sf       vid     death     birth
          1         2         1         2       1.0         0       0.0       0.0
 *ICFD_BOUNDARY_PRESCRIBED_PRE
-$#     pid      lcid        sf     death     birth
-         2         3       0.0       0.0       0.0
+$#     pid      lcid        sf     death     birth       iso
+         2         3       0.0       0.0       0.0         0
 *ICFD_CONTROL_IMPOSED_MOVE
 $#     pid      lcvx      lcvy      lcvz      vadt       idr
          4         0         4         0         0         0

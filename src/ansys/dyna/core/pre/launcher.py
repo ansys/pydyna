@@ -22,7 +22,7 @@ from ansys.dyna.core.pre.dynasolution import DynaSolution
 
 LOCALHOST = "127.0.0.1"
 DYNAPRE_DEFAULT_PORT = 50051
-SERVER_PRE_VERSION = "v0.4.6"
+SERVER_VERSION = "v0.5.0"
 MAX_MESSAGE_LENGTH = 8 * 1024**2
 
 
@@ -112,10 +112,10 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
         LOG.debug("Starting kwserver")
         # download server form webset
         if len(server_path) == 0:
-            url = "https://github.com/ansys/pydyna/releases/download/v0.4.8/ansys-pydyna-pre-server.zip"
+            url = "https://github.com/ansys/pydyna/releases/download/v0.5.0/ansys-pydyna-server.zip"
             directory = DynaSolution.get_appdata_path()
-            filename = directory + os.sep + "ansys-pydyna-pre-server.zip"
-            server_package = directory + os.sep + "ansys-pydyna-pre-server"
+            filename = directory + os.sep + "ansys-pydyna-server.zip"
+            server_package = directory + os.sep + "ansys-pydyna-server"
             extractpath = directory
             if not os.path.exists(server_package):
                 DynaSolution.downloadfile(url, filename)
@@ -123,9 +123,9 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
                     zipf.extractall(extractpath)
             else:
                 with ZipFile(filename, "r") as zipf:
-                    zipinfo = zipf.getinfo("ansys-pydyna-pre-server/")
+                    zipinfo = zipf.getinfo("ansys-pydyna-server/")
                     version = str(zipinfo.comment, encoding="utf-8")
-                    if version != SERVER_PRE_VERSION:
+                    if version != SERVER_VERSION:
                         DynaSolution.downloadfile(url, filename)
                         with ZipFile(filename, "r") as zipf:
                             zipf.extractall(extractpath)
@@ -136,7 +136,7 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
             # threadserver.setDaemon(True)
             # threadserver.start()
             # env_path = get_virtualenv_path()
-            process = subprocess.Popen("python kwserver.py", cwd=server_path, shell=True)
+            process = subprocess.Popen("python dynaserver.py", cwd=server_path, shell=True)
             waittime = 0
             while not DynaSolution.grpc_local_server_on():
                 sleep(5)
@@ -149,14 +149,14 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
 
     LOG.debug("Starting 'launch_grpc'.")
 
-    command = "python kwserver.py"
+    command = "python dynaserver.py"
     LOG.debug(f"Starting the pre service with command: {command}")
 
     # env_vars = update_env_vars(add_env_vars, replace_env_vars)
     LOG.info(f"Running in {ip}:{port} the following command: '{command}'")
 
     LOG.debug("the pre service starting in background.")
-    # process = subprocess.Popen("python kwserver.py", cwd=server_path, shell=True)
+    # process = subprocess.Popen("python dynaserver.py", cwd=server_path, shell=True)
     # process.wait()
     # return port
 
@@ -280,6 +280,10 @@ def launch_dynapre(
         threadserver = ServerThread(1, port=port, ip=ip, server_path=server_path)
         threadserver.setDaemon(True)
         threadserver.start()
+
+
+def launch_dyna(port=50051, ip="localhost"):
+    return launch_dynapre(port=port, ip=ip)
 
 
 if __name__ == "__main__":

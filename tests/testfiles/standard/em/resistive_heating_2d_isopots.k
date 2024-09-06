@@ -3,7 +3,7 @@
 $#                                                                         title
 EM Resistive heating basic 2D problem with connected isopots
 *CONTROL_SOLUTION
-$#    soln       nlq     isnan     lcint     lcacc     ncdcf     nocop      crvp
+$#    soln       nlq     isnan     lcint     lcacc     ncdcf    nocopy      crvp
          2                                                                      
 *CONTROL_TERMINATION
 $#  endtim    endcyc     dtmin    endeng    endmas     nosol
@@ -36,8 +36,8 @@ $#      t1        t2        t3        t4      nloc     marea      idof    edgset
 *MAT_RIGID
 $#     mid        ro         e        pr         n    couple         m     alias
          1       1.02.00000E11       0.3       0.0       0.0       0.0                    
-$#     cmo      con1      con2
-       0.0                    
+$#     cmo      con1      con2    spcnid      xspc      yspc      zspc
+       0.0                                                            
 $#lco or a1        a2        a3        v1        v2        v3
        0.0       0.0       0.0       0.0       0.0       0.0
 *MAT_THERMAL_ISOTROPIC
@@ -285,8 +285,8 @@ $#   nid               x               y               z      tc      rc
 $#    mats      matf      sols      solf      mesh       mem    timing
          2         2         2         2         0         0         0
 *EM_CONTROL
-$#   emsol     numls   macrodt   dimtype    nperio         -   ncylfem   ncylbem
-         3       100       0.0         1         2                5000      5000
+$#   emsol     numls         -   dimtype    nperio         -   ncylfem   ncylbem
+         3       100                   1         2                5000      5000
 *EM_CONTROL_TIMESTEP
 $#  tstype    dtcons      lcid    factor     tsmin     tsmas     rlcsf    mecats
          11.00000E-4         0       1.0       0.0       0.0        25         0

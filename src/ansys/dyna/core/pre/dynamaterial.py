@@ -647,6 +647,88 @@ class MatShapeMemory:
         self.name = "SHAPE_MEMORY"
         logging.info(f"Material {self.name} Created...")
 
+    """Defines a rigid material.
+
+    Parts made from a rigid material are considered to belong to a rigid body."""
+
+    def __init__(
+        self,
+        mass_density=0,
+        young_modulus=0,
+        poisson_ratio=0.3,
+        center_of_mass_constraint=0,
+        translational_constraint=0,
+        rotational_constraint=0,
+    ):
+        MatAdditional.__init__(self)
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr = poisson_ratio
+        self.cmo = center_of_mass_constraint
+        self.con1 = translational_constraint
+        self.con2 = rotational_constraint
+
+    def create(self, stub):
+        """Create rigid material."""
+        ret = stub.CreateMatRigid(
+            MatRigidRequest(
+                ro=self.ro,
+                e=self.e,
+                pr=self.pr,
+                cmo=self.cmo,
+                con1=self.con1,
+                con2=self.con2,
+            )
+        )
+        self.material_id = ret.mid
+        self.name = "RIGID"
+        MatAdditional.create(self, stub, self.material_id)
+        logging.info(f"Material {self.name} Created...")
+
+
+# MAT_037
+class MatTransverselyAnisotropicElasticPlastic:
+    """Defines the material that is for simulating sheet forming processes with an anisotropic.
+
+    Parameters
+    ----------
+    mass_density :
+    young_modulus :
+    poisson_ratio :
+    yield_stress :
+    anisotropic_hardening_parameter :
+    curve_stress:Curve expressing effective yield stress as a function of effective plastic strain in uniaxial tension.
+
+    """
+
+    def __init__(
+        self,
+        mass_density=0,
+        young_modulus=0,
+        poisson_ratio=0.3,
+        yield_stress=0,
+        anisotropic_hardening_parameter=0,
+        curve_stress=None,
+    ):
+        self.ro = mass_density
+        self.e = young_modulus
+        self.pr = poisson_ratio
+        self.sigy = yield_stress
+        self.r = anisotropic_hardening_parameter
+        self.hlcid = curve_stress
+
+    def create(self, stub):
+        """Create a transversely anisotropic elastic plastic material."""
+        hlcid = self.hlcid.create(stub)
+        ret = stub.CreateMatTransverselyAnisotropicElasticPlastic(
+            MatTransverselyAnisotropicElasticPlasticRequest(
+                ro=self.ro, e=self.e, pr=self.pr, sigy=self.sigy, r=self.r, hlcid=hlcid
+            )
+        )
+        self.material_id = ret.mid
+        self.name = "Transversely anisotropic elastic plastic"
+        logging.info(f"Material {self.name} Created...")
+
 
 # MAT_063
 class MatCrushableFoam(MatAdditional):

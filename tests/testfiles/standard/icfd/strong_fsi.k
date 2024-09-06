@@ -15,8 +15,8 @@ $#   dnorm    diverg     istif   nlprint    nlnorm   d3itctl     cpchk
          2         1         1         3         0         0         0
 $#  arcctl    arcdir    arclen    arcmth    arcdmp    arcpsi    arcalf    arctim
          0         0       0.0         1         2       0.0       0.0       0.0
-$#   lsmtd     lsdir      irad      srad      awgt      sred
-         4         2       0.0       0.0       0.0       0.0
+$#   lsmtd     lsdir      irad      srad      awgt      sred    kssize
+         4         2       0.0       0.0       0.0       0.0        10
 *CONTROL_TERMINATION
 $#  endtim    endcyc     dtmin    endeng    endmas     nosol
       40.0         0       0.0       0.01.000000E8         0
@@ -39,8 +39,8 @@ $#      t1        t2        t3        t4      nloc     marea      idof    edgset
 *MAT_RIGID
 $#     mid        ro         e        pr         n    couple         m     alias
          1       1.22.00000E11       0.3       0.0       0.0       0.0                    
-$#     cmo      con1      con2
-       0.0                    
+$#     cmo      con1      con2    spcnid      xspc      yspc      zspc
+       0.0                                                            
 $#lco or a1        a2        a3        v1        v2        v3
        0.0       0.0       0.0       0.0       0.0       0.0
 *DEFINE_CURVE
@@ -342,8 +342,8 @@ $#     pid       dof       vad      lcid        sf       vid     death     birth
 $#     pid       dof       vad      lcid        sf       vid     death     birth
          1         2         1         2       1.0         0       0.0       0.0
 *ICFD_BOUNDARY_PRESCRIBED_PRE
-$#     pid      lcid        sf     death     birth
-         2         3       0.0       0.0       0.0
+$#     pid      lcid        sf     death     birth       iso
+         2         3       0.0       0.0       0.0         0
 *ICFD_CONTROL_TIME
 $#     ttm        dt       cfl    lcidsf     dtmin     dtmax    dtinit    tdeath
       40.0      0.05       1.0         0       0.0       0.0       0.0       0.0

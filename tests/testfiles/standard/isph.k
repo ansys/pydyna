@@ -79,8 +79,8 @@ $#      t1        t2        t3        t4      nloc     marea      idof    edgset
 *MAT_RIGID
 $#     mid        ro         e        pr         n    couple         m     alias
          21.00000E-9      10.0       0.3       0.0       0.0       0.0                    
-$#     cmo      con1      con2
-       1.0         5         4
+$#     cmo      con1      con2    spcnid      xspc      yspc      zspc
+       1.0         5         4         0       0.0       0.0       0.0
 $#lco or a1        a2        a3        v1        v2        v3
        0.0       0.0       0.0       0.0       0.0       0.0
 *PART
@@ -96,8 +96,8 @@ $#      t1        t2        t3        t4      nloc     marea      idof    edgset
 *MAT_RIGID
 $#     mid        ro         e        pr         n    couple         m     alias
          31.00000E-9      10.0       0.3       0.0       0.0       0.0                    
-$#     cmo      con1      con2
-       1.0         7         7
+$#     cmo      con1      con2    spcnid      xspc      yspc      zspc
+       1.0         7         7         0       0.0       0.0       0.0
 $#lco or a1        a2        a3        v1        v2        v3
        0.0       0.0       0.0       0.0       0.0       0.0
 *SECTION_SHELL
@@ -108,8 +108,8 @@ $#      t1        t2        t3        t4      nloc     marea      idof    edgset
 *MAT_RIGID
 $#     mid        ro         e        pr         n    couple         m     alias
          11.00000E-9      10.0       0.3       0.0       0.0       0.0                    
-$#     cmo      con1      con2
-       1.0         7         7
+$#     cmo      con1      con2    spcnid      xspc      yspc      zspc
+       1.0         7         7         0       0.0       0.0       0.0
 $#lco or a1        a2        a3        v1        v2        v3
        0.0       0.0       0.0       0.0       0.0       0.0
 *DEFINE_BOX
