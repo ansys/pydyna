@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-from ansys.dyna.core.pre.launcher import launch_dyna
+from ansys.dyna.core.pre.launcher import launch_dyna, launch_dynapre
 from ansys.dyna.core.pre.model import Model
 
 _LOCAL_PORTS = []

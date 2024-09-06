@@ -2133,6 +2133,7 @@ class Contact:
         self.optionres = 0
         self.contact_formulation = 0
         self.segment_based_contact_option = 2
+        self.mastersurface = None
 
     def set_mortar(self):
         """Set the mortar contact.
@@ -2260,6 +2261,10 @@ class Contact:
             option2 = "MORTAR"
         else:
             option2 = ""
+        if self.mastersurface != None:
+            sbpr = self.mastersurface.save_force
+        else:
+            sbpr = 0
         ret = self.stub.CreateContact(
             ContactRequest(
                 cid=0,
@@ -2274,7 +2279,7 @@ class Contact:
                 sstyp=self.slavesurface.type,
                 mstyp=mstyp,
                 sapr=self.slavesurface.save_force,
-                sbpr=self.mastersurface.save_force,
+                sbpr=sbpr,
                 # card2
                 fs=self.static_friction_coeff,
                 fd=self.dynamic_friction_coeff,

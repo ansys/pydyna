@@ -9,6 +9,9 @@ import logging
 import os
 import sys
 
+from ansys.api.dyna.v0.dynaprocess_pb2 import *  # noqa : F403
+from ansys.api.dyna.v0.dynaprocess_pb2_grpc import *  # noqa : F403
+
 # from subprocess import DETACHED_PROCESS
 import grpc
 import requests
@@ -16,10 +19,8 @@ from tqdm import tqdm
 
 from ansys.dyna.core.pre.model import Model
 
-from ansys.api.dyna.v0.dynaprocess_pb2 import *  # noqa : F403
-from ansys.api.dyna.v0.dynaprocess_pb2_grpc import *  # noqa : F403
-#from .dynaprocess_pb2 import *
-#from .dynaprocess_pb2_grpc import *
+# from .dynaprocess_pb2 import *
+# from .dynaprocess_pb2_grpc import *
 
 
 # from .launcher import *  # noqa : F403
