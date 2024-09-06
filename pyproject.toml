@@ -42,7 +42,7 @@ tests = [
     "openpyxl==3.1.5",
     "scikit-learn==1.5.1",
     "pytest-xdist==3.6.1",
-    "ipython==8.26.0",
+    "ipython==8.27.0",
     "pyvista==0.44.1",
 ]
 doc = [
@@ -58,17 +58,17 @@ doc = [
     "sphinx-notfound-page==1.0.4",
     "sphinx-copybutton==0.5.2",
     "sphinx-gallery==0.17.1",
-    "sphinx-autodoc-typehints==2.2.3",
+    "sphinx-autodoc-typehints==2.3.0",
     "ansys-sphinx-theme==1.0.7",
     "pypandoc==1.13",
     "nbsphinx==0.9.5",
     "ipywidgets==8.1.5",
     "joblib==1.4.2",
     "scikit-learn==1.5.1",
-    "ipython==8.26.0",
-    "jupyterlab==4.2.4",
+    "ipython==8.27.0",
+    "jupyterlab==4.2.5",
     "sphinx-jinja==2.0.2",
-    "sphinx-autoapi==3.2.1",
+    "sphinx-autoapi==3.3.1",
     "pyvista==0.44.1",
 ]
 
