@@ -3,7 +3,7 @@
 $#                                                                         title
 EM heated metal bar example
 *CONTROL_SOLUTION
-$#    soln       nlq     isnan     lcint     lcacc     ncdcf     nocop      crvp
+$#    soln       nlq     isnan     lcint     lcacc     ncdcf    nocopy      crvp
          2                                                                      
 *CONTROL_TERMINATION
 $#  endtim    endcyc     dtmin    endeng    endmas     nosol
@@ -33,8 +33,8 @@ $#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
 $#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
          3         1         0                                     0.0       0.0
 *MAT_ELASTIC
-$#     mid        ro         e        pr        da        db  not used
-         3    7000.01.00000E11      0.33       0.0       0.0       0.0
+$#     mid        ro         e        pr        da        db  not used  not used
+         3    7000.01.00000E11      0.33       0.0       0.0         0         0
 *PART
 $#                                                                         title
 
@@ -45,8 +45,8 @@ $#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
 $#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
          1         1         0                                     0.0       0.0
 *MAT_ELASTIC
-$#     mid        ro         e        pr        da        db  not used
-         1    8000.01.00000E11      0.33       0.0       0.0       0.0
+$#     mid        ro         e        pr        da        db  not used  not used
+         1    8000.01.00000E11      0.33       0.0       0.0         0         0
 *PART
 $#                                                                         title
 
@@ -57,8 +57,8 @@ $#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
 $#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
          2         1         0                                     0.0       0.0
 *MAT_ELASTIC
-$#     mid        ro         e        pr        da        db  not used
-         2    8000.01.00000E11      0.33       0.0       0.0       0.0
+$#     mid        ro         e        pr        da        db  not used  not used
+         2    8000.01.00000E11      0.33       0.0       0.0         0         0
 *MAT_THERMAL_ISOTROPIC
 $#    tmid        ro     tgrlc    tgmult      tlat      hlat
          1    8000.0       0.0       0.0       0.0       0.0
@@ -13720,8 +13720,8 @@ $#   nid               x               y               z      tc      rc
 $#    mats      matf      sols      solf      mesh       mem    timing
          2         2         2         2         0         0         0
 *EM_CONTROL
-$#   emsol     numls   macrodt   dimtype    nperio         -   ncylfem   ncylbem
-         3       100       0.0         0         2                5000      5000
+$#   emsol     numls         -   dimtype    nperio         -   ncylfem   ncylbem
+         3       100                   0         2                5000      5000
 *EM_CONTROL_TIMESTEP
 $#  tstype    dtcons      lcid    factor     tsmin     tsmas     rlcsf    mecats
          1      0.01         0       1.0       0.0       0.0        25         0

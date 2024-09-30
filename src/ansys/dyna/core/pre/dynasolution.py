@@ -9,8 +9,8 @@ import logging
 import os
 import sys
 
-from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
-from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
+from ansys.api.dyna.v0.dynaprocess_pb2 import *  # noqa : F403
+from ansys.api.dyna.v0.dynaprocess_pb2_grpc import *  # noqa : F403
 
 # from subprocess import DETACHED_PROCESS
 import grpc
@@ -19,8 +19,8 @@ from tqdm import tqdm
 
 from ansys.dyna.core.pre.model import Model
 
-# from .kwprocess_pb2 import *
-# from .kwprocess_pb2_grpc import *
+# from .dynaprocess_pb2 import *
+# from .dynaprocess_pb2_grpc import *
 
 
 # from .launcher import *  # noqa : F403
@@ -91,7 +91,7 @@ class DynaSolution:
             logging.critical("Can not connect to kwServer")
             sys.exit()
         logging.info("Connected to kwServer...")
-        self.stub = kwC2SStub(self._channel)
+        self.stub = DynaCommStub(self._channel)
         self.object_list = []
         self.mainname = ""
         self._path = None

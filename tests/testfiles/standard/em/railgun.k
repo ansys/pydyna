@@ -1,9 +1,9 @@
 *KEYWORD
 *CONTROL_CONTACT
 $#  slsfac    rwpnal    islchk    shlthk    penopt    thkchg     orien    enmass
-       0.0       1.0         0         0         0         0         1         0
+       0.1       1.0         1         0         1         0         1         0
 $#  usrstr    usrfrc     nsbcs    interm     xpene     ssthk      ecdt   tiedprj
-         0         0         0         0       0.0         0         0         0
+         0         0        10         0       0.4         0         0         0
 $#   sfric     dfric       edc       vfc        th     th_sf    pen_sf     ptscl
                                                                                 
 $#  ignore    frceng   skiprwg    outseg   spotstp   spotdel   spothin   dir_tie
@@ -33,8 +33,8 @@ $#    mats      matf      sols      solf      mesh       mem    timing
 $#   outlv     dtout
          1       0.0
 *EM_CONTROL
-$#   emsol     numls   macrodt   dimtype    nperio         -   ncylfem   ncylbem
-         1       100       0.0         0         2                5000      5000
+$#   emsol     numls         -   dimtype    nperio         -   ncylfem   ncylbem
+         1       100                   0         2                5000      5000
 *EM_CONTROL_TIMESTEP
 $#  tstype    dtcons      lcid    factor     tsmin     tsmas     rlcsf    mecats
          15.00000E-6         0       1.0       0.0       0.0        25         0
