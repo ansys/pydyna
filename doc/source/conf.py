@@ -97,7 +97,7 @@ html_short_title = html_title = "PyDYNA"
 html_show_sourcelink = True
 html_theme = "ansys_sphinx_theme"
 html_context = {
-    "github_user": "pyansys",
+    "github_user": "ansys",
     "github_repo": "pydyna",
     "github_version": "main",
     "doc_path": "doc/source",
@@ -110,7 +110,7 @@ html_theme_options = {
     },
     "check_switcher": False,
     "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
-    "github_url": "https://github.com/pyansys/pydyna",
+    "github_url": "https://github.com/ansys/pydyna",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "additional_breadcrumbs": [

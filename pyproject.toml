@@ -58,7 +58,7 @@ doc = [
     "sphinx-notfound-page==1.0.4",
     "sphinx-copybutton==0.5.2",
     "sphinx-gallery==0.17.1",
-    "sphinx-autodoc-typehints==2.4.1",
+    "sphinx-autodoc-typehints==2.4.4",
     "ansys-sphinx-theme==1.0.11",
     "pypandoc==1.13",
     "nbsphinx==0.9.5",
