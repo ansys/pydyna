@@ -59,7 +59,7 @@ doc = [
     "sphinx-copybutton==0.5.2",
     "sphinx-gallery==0.17.1",
     "sphinx-autodoc-typehints==2.4.4",
-    "ansys-sphinx-theme==1.0.11",
+    "ansys-sphinx-theme==1.1.2",
     "pypandoc==1.13",
     "nbsphinx==0.9.5",
     "ipywidgets==8.1.5",
