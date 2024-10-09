@@ -1,0 +1,612 @@
+:orphan:
+
+.. _ref_examples:
+
+========
+Examples
+========
+
+
+Here are a series of examples using LS-DYNA with the ``ansys-dyna-core`` library.
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    </div>
+
+Airbag examples
+~~~~~~~~~~~~~~~~
+
+These examples show how to create Airbag model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example show how to create an Airbag deploy model with Pydyna-pre module. ">
+
+.. only:: html
+
+  .. image:: /examples/Airbag/images/thumb/sphx_glr_airbag_deploy_thumb.png
+    :alt: Airbag deploy example
+
+  :ref:`sphx_glr_examples_Airbag_airbag_deploy.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Airbag deploy example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+EM examples
+~~~~~~~~~~~~
+
+These examples show how to create electromagnetic model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to create an EM Railgun input deck. ">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_railgun_thumb.png
+    :alt: Railgun example
+
+  :ref:`sphx_glr_examples_EM_em_railgun.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Railgun example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+Explicit examples
+~~~~~~~~~~~~~~~~~
+
+These examples show how to create Explicit model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example show how to create an Belted dummy model with Pydyna-pre module. ">
+
+.. only:: html
+
+  .. image:: /examples/Explicit/images/thumb/sphx_glr_belted_dummy_thumb.png
+    :alt: Belted dummy example
+
+  :ref:`sphx_glr_examples_Explicit_belted_dummy.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Belted dummy example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+ICFD examples
+~~~~~~~~~~~~~~
+
+These examples show how to create ICFD model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to create a simple ICFD cylinder flow input deck. ">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_cylinderflow_thumb.png
+    :alt: Cylinder flow example
+
+  :ref:`sphx_glr_examples_ICFD_icfd_cylinderflow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Cylinder flow example</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple free surface example using the ICFD solver. A column of water colla...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_dam_break_thumb.png
+    :alt: Dam break
+
+  :ref:`sphx_glr_examples_ICFD_icfd_dam_break.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Dam break</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to couple the ICFD fluid solver with DEM particles. ">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_dem_coupling_thumb.png
+    :alt: DEM Coupling
+
+  :ref:`sphx_glr_examples_ICFD_icfd_dem_coupling.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">DEM Coupling</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows the universally famous driven cavity case tested with the second order stead...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_driven_cavity_thumb.png
+    :alt: Driven cavity
+
+  :ref:`sphx_glr_examples_ICFD_icfd_driven_cavity.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Driven cavity</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD forced convection input deck with a coarse mesh. ">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_free_convection_flow_thumb.png
+    :alt: Thermal flow
+
+  :ref:`sphx_glr_examples_ICFD_icfd_free_convection_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Thermal flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to impose the displacements on the fluid nodes through the use of the IC...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_imposed_move_thumb.png
+    :alt: Imposed move
+
+  :ref:`sphx_glr_examples_ICFD_icfd_imposed_move.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Imposed move</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple 3D ICFD problem. ">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_internal_3d_flow_thumb.png
+    :alt: Internal 3D flow
+
+  :ref:`sphx_glr_examples_ICFD_icfd_internal_3d_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Internal 3D flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD problem with adaptivity. ">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_mesh_adaptivity_thumb.png
+    :alt: Mesh Adaptivity
+
+  :ref:`sphx_glr_examples_ICFD_icfd_mesh_adaptivity.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mesh Adaptivity</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD problem with mesh morphing. ">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_mesh_morphing_thumb.png
+    :alt: Mesh Morphing
+
+  :ref:`sphx_glr_examples_ICFD_icfd_mesh_morphing.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mesh Morphing</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD input deck with a coarse mesh. ">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_mesh_size_thumb.png
+    :alt: Mesh size
+
+  :ref:`sphx_glr_examples_ICFD_icfd_mesh_size.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mesh size</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD input deck with a coarse mesh. ">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_plate_flow_thumb.png
+    :alt: Plate flow
+
+  :ref:`sphx_glr_examples_ICFD_icfd_plate_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Plate flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to directly impose a displacement of the entire volume mesh through the ...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_sloshing_thumb.png
+    :alt: Sloshing
+
+  :ref:`sphx_glr_examples_ICFD_icfd_sloshing.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Sloshing</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple FSI coupling problem using strong FSI. ">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_strong_fsi_thumb.png
+    :alt: Strong FSI
+
+  :ref:`sphx_glr_examples_ICFD_icfd_strong_fsi.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Strong FSI</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD forced convection input deck with a coarse mesh. ">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_thermal_flow_thumb.png
+    :alt: Thermal flow
+
+  :ref:`sphx_glr_examples_ICFD_icfd_thermal_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Thermal flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple FSI coupling problem using weak/loose/explicit FSI. ">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_weak_fsi_thumb.png
+    :alt: Weak FSI
+
+  :ref:`sphx_glr_examples_ICFD_icfd_weak_fsi.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Weak FSI</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+IGA examples
+~~~~~~~~~~~~~
+
+These examples show how to create Isogeometric Analysis model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to create an IGA input deck. ">
+
+.. only:: html
+
+  .. image:: /examples/IGA/images/thumb/sphx_glr_iga_sample_thumb.png
+    :alt: IGA example
+
+  :ref:`sphx_glr_examples_IGA_iga_sample.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">IGA example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+ISPH examples
+~~~~~~~~~~~~~
+
+These examples show how to create ISPH model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example show how to create an ISPH model with Pydyna-pre module. ">
+
+.. only:: html
+
+  .. image:: /examples/ISPH/images/thumb/sphx_glr_rigidtest_thumb.png
+    :alt: Rigid test example
+
+  :ref:`sphx_glr_examples_ISPH_rigidtest.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Rigid test example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+Implicit examples
+~~~~~~~~~~~~~~~~~~
+
+These examples show how to create implicit model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to create a simple crash input deck.">
+
+.. only:: html
+
+  .. image:: /examples/Implicit/images/thumb/sphx_glr_camry_rc_thumb.png
+    :alt: Crash example
+
+  :ref:`sphx_glr_examples_Implicit_camry_rc.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Crash example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+NVH examples
+~~~~~~~~~~~~~
+
+These examples show how to create NVH model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to setup the keywords for FRF computation. ">
+
+.. only:: html
+
+  .. image:: /examples/NVH/images/thumb/sphx_glr_frf_plate_damping_thumb.png
+    :alt: FRF for a rectangular plate
+
+  :ref:`sphx_glr_examples_NVH_frf_plate_damping.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">FRF for a rectangular plate</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+SALE examples
+~~~~~~~~~~~~~~
+
+These examples show how to create SALE model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to create a SALE input deck. ">
+
+.. only:: html
+
+  .. image:: /examples/SALE/images/thumb/sphx_glr_sale_efp_thumb.png
+    :alt: EFP Concrete Target
+
+  :ref:`sphx_glr_examples_SALE_sale_efp.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">EFP Concrete Target</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+Thermal examples
+~~~~~~~~~~~~~~~~
+
+These examples show how to create thermal model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example show how to create a thermal stress model with Pydyna-pre module. ">
+
+.. only:: html
+
+  .. image:: /examples/Thermal/images/thumb/sphx_glr_thermal_stress_thumb.png
+    :alt: Thermal stress example
+
+  :ref:`sphx_glr_examples_Thermal_thermal_stress.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Thermal stress example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+   :includehidden:
+
+   /examples/Airbag/index.rst
+   /examples/EM/index.rst
+   /examples/Explicit/index.rst
+   /examples/ICFD/index.rst
+   /examples/IGA/index.rst
+   /examples/ISPH/index.rst
+   /examples/Implicit/index.rst
+   /examples/NVH/index.rst
+   /examples/SALE/index.rst
+   /examples/Thermal/index.rst
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_
