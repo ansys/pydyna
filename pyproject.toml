@@ -48,7 +48,7 @@ tests = [
 doc = [
     "recommonmark==0.7.1",
     "matplotlib==3.9.2",
-    "imageio==2.35.1",
+    "imageio==2.36.0",
     "imageio-ffmpeg==0.5.1",
     "numpydoc==1.8.0",
     "Sphinx==8.0.2",
