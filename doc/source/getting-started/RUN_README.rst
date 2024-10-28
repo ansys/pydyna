@@ -18,8 +18,8 @@ Run LS-DYNA using ansys.dyna.core.run
 How it works
 ************
 
-`run_dyna`` attempts to find an installation of the LS-DYNA solver on your machine.
-It uses the Python dependency `ansys-tools-path` to discover where LS-DYNA is installed.
-After installing `ansys-tools-path`, the location of LS-DYNA can be saved by running
-`save-ansys-path --name dyna {path/to/dyna}` so that subsequent usages of `run_dyna`
+``run_dyna`` attempts to find an installation of the LS-DYNA solver on your machine.
+It uses the Python dependency ``ansys-tools-path`` to discover where LS-DYNA is installed.
+After installing ``ansys-tools-path``, the location of LS-DYNA can be saved by running
+``save-ansys-path --name dyna {path/to/dyna}`` so that subsequent usages of ``run_dyna``
 will look there.
