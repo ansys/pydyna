@@ -27,7 +27,8 @@ classifiers = [
 
 dependencies = ["ansys-dpf-core>=0.7.2",
                 "ansys-api-dyna==0.4.1",
-                "ansys-platform-instancemanagement~=1.0", 
+                "ansys-tools-path==0.6.0",
+                "ansys-platform-instancemanagement~=1.0",
                 "pyvista>=0.43.4",
 ]
 
