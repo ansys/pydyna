@@ -25,7 +25,7 @@ import pathlib
 
 import pytest
 
-from ansys.dyna.run import run_dyna
+from ansys.dyna.core.run import run_dyna
 from .conftest import resolve_test_file
 
 
