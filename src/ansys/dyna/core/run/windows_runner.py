@@ -25,10 +25,11 @@
 import os
 import subprocess
 
-from ansys.dyna.core.run.base_runner import BaseRunner
-from ansys.dyna.core.run.options import MpiOption, Precision
 from ansys.tools.path import get_latest_ansys_installation
 from ansys.tools.path.path import _get_unified_install_base_for_version
+
+from ansys.dyna.core.run.base_runner import BaseRunner
+from ansys.dyna.core.run.options import MpiOption, Precision
 
 
 class WindowsRunner(BaseRunner):
