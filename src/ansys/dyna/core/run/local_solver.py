@@ -26,8 +26,8 @@ import pathlib
 import tempfile
 import typing
 
-from ansys.dyna.run.linux_runner import LinuxRunner
-from ansys.dyna.run.windows_runner import WindowsRunner
+from ansys.dyna.core.run.linux_runner import LinuxRunner
+from ansys.dyna.core.run.windows_runner import WindowsRunner
 
 
 def __make_temp_dir():

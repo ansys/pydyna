@@ -22,7 +22,7 @@
 
 """Base runner class."""
 
-from ansys.dyna.run.options import MemoryUnit, MpiOption, Precision
+from ansys.dyna.core.run.options import MemoryUnit, MpiOption, Precision
 
 
 class BaseRunner:

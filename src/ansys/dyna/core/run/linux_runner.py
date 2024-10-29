@@ -22,8 +22,8 @@
 
 import os
 
-from ansys.dyna.run.base_runner import BaseRunner
-from ansys.dyna.run.options import MpiOption, Precision
+from ansys.dyna.core.run.base_runner import BaseRunner
+from ansys.dyna.core.run.options import MpiOption, Precision
 from ansys.tools.path import get_dyna_path, get_latest_ansys_installation
 from ansys.tools.path.path import _get_unified_install_base_for_version
 
