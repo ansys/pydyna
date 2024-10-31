@@ -4,8 +4,6 @@ from typing import Optional
 from urllib.parse import urljoin
 import urllib.request
 
-import ansys.meshing.prime.internals.defaults as defaults
-
 __all__ = ["DownloadManager"]
 
 
@@ -124,8 +122,6 @@ class DownloadManager(metaclass=DownloadManagerMeta):
         return saved_file
 
     def _retrieve_data(self, url: str, filename: str, dest: str = None, force: bool = False):
-        if dest is None:
-            dest = defaults.get_examples_path()
         local_path = os.path.join(dest, os.path.basename(filename))
         if not force and os.path.isfile(local_path):
             return local_path
