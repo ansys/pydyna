@@ -22,4 +22,4 @@ How it works
 It uses the Python dependency ``ansys-tools-path`` to discover where LS-DYNA is installed.
 After installing ``ansys-tools-path``, the location of LS-DYNA can be saved by running
 ``save-ansys-path --name dyna {path/to/dyna}`` so that subsequent usages of ``run_dyna``
-will look there.
+look there.
