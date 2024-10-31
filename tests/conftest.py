@@ -86,14 +86,14 @@ def resolve_icfd_path():
     path = os.path.dirname(os.path.abspath(__file__))
     icfd_path = os.path.join(path, "testfiles", "initial", "icfd")
     return icfd_path
-    
+
 @pytest.fixture()
 def resolve_nvh_path():
     """Get the filepath of nvh files."""
     path = os.path.dirname(os.path.abspath(__file__))
     nvh_path = os.path.join(path, "testfiles", "initial", "nvh")
     return nvh_path
-    
+
 @pytest.fixture()
 def resolve_em_path():
     """Get the filepath of em files."""
@@ -135,12 +135,14 @@ def isph_initialfile():
 def nvh_initialfile():
     """Resolve the path for nvh initial file."""
     return resolve_test_file("test_nvh.k", "initial")
-    
+
+
 @pytest.fixture()
 def thermal_initialfile():
     """Resolve the path for thermal initial file."""
     return resolve_test_file("test_thermal_stress.k", "initial")
-    
+
+
 @pytest.fixture(scope = "session",autouse=True)
 def Connect_Server():
     """Connect to the kwserver."""
@@ -148,4 +150,12 @@ def Connect_Server():
     threadserver = ServerThread(1,port=50051,ip="127.0.0.1",server_path = path)
     threadserver.setDaemon(True)
     threadserver.start()
-    
+
+
+def pytest_collection_modifyitems(config, items):
+    keywordexpr = config.option.keyword
+    markexpr = config.option.markexpr
+    if keywordexpr or markexpr:
+        return  # command line has a -k or -m, let pytest handle it
+    skip_run = pytest.mark.skip(reason="run not selected for pytest run (`pytest -m run`).  Skip by default")
+    [item.add_marker(skip_run) for item in items if "run" in item.keywords]

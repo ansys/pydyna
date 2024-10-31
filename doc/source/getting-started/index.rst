@@ -9,8 +9,11 @@ page on the Ansys website.
 
 Installation
 ============
-PyDYNA consists of two modules, ``ansys.dyna.core.pre`` and ``ansys.dyna.core.solver``.
-Both these modules are gRPC enabled and hence need to be run using server-client connection.
+PyDYNA consists of three modules, ``ansys.dyna.core.pre``, ``ansys.dyna.core.solver``, and
+``ansys.dyna.core.run``.
+
+``ansys.dyna.core.pre`` and ``ansys.dyna.core.solver`` use gRPC and hence need to be run
+using server-client connection.
 
 Install the client
 ------------------
@@ -80,7 +83,7 @@ with these commands:
 If you're on Windows with Python 3.9, unzip the wheelhouse archive to a ``wheelhouse``
 directory and install PyDYNA using the preceding command.
 
-Run PyDYNA server locally 
+Run PyDYNA server locally
 -------------------------
 Launching the servers directly on local machines.
 
@@ -95,6 +98,11 @@ PyDYNA server can be run in a Docker container.
 .. include:: ../../../docker/pre/README.rst
 
 .. include:: ../../../docker/solver/README.rst
+
+Run DYNA using ``ansys.dyna.core.run`` on a local machine,
+this does not require Docker.
+
+.. include:: ./RUN_README.rst
 
 Example
 -------

@@ -24,7 +24,7 @@ jobs:
     name: "Code style"
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/code-style@v7
+      - uses: ansys/actions/code-style@v8
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@v7
+        uses: ansys/actions/doc-style@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -99,7 +99,7 @@ jobs:
           name: documentation-pdf
           path: doc/_build/latex/*.pdf
           retention-days: 7
-      
+
       - name: Extract the server logs
         if: always()
         run: |
@@ -111,7 +111,7 @@ jobs:
         with:
           name: server_output_docs.txt
           path: server_output.txt
-          
+
       - name: DPF Logs (on screen)
         if: always()
         run: |
@@ -128,7 +128,7 @@ jobs:
         os: [windows-latest, ubuntu-latest]
         python-version: ['3.9', '3.10', '3.11', '3.12']
     steps:
-      - uses: ansys/actions/build-wheelhouse@v7
+      - uses: ansys/actions/build-wheelhouse@v8
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
@@ -188,12 +188,49 @@ jobs:
           path: .cov/html
           retention-days: 7
 
+  run-testing:
+    name: Test the "run" subpackage
+    runs-on: ubuntu-latest
+    needs: [code-style]
+    container:
+      image: ghcr.io/ansys/mechanical:24.1.0
+      options: --entrypoint /bin/bash
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+            apt update
+            apt install --reinstall ca-certificates
+            apt install software-properties-common git -y
+            add-apt-repository ppa:deadsnakes/ppa -y
+            apt install python3.11 python3.11-venv -y
+            python3.11 -m ensurepip --default-pip
+            python3.11 -m pip install --upgrade pip
+            python3.11 -m venv /env
+
+      - name: Install library
+        run: |
+          . /env/bin/activate
+          pip install .[tests]
+
+      - name: Unit testing
+        env:
+          ANSYSLI_SERVERS: 2325@${{secrets.LICENSE_SERVER}}
+          ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
+          LSTC_LICENSE: ansys
+        run: |
+          . /env/bin/activate
+          save-ansys-path --name dyna /install/ansys_inc/v241/ansys/bin/linx64/lsdyna_dp.e
+          pytest -m run
+
   build-library:
     name: "Build library"
-    needs: [doc, tests]
+    needs: [doc, tests, run-testing]
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/build-library@v7
+      - uses: ansys/actions/build-library@v8
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -205,14 +242,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Release to the public PyPI repository"
-        uses: ansys/actions/release-pypi-public@v7
+        uses: ansys/actions/release-pypi-public@v8
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYPI_TOKEN }}
 
       - name: "Release to GitHub"
-        uses: ansys/actions/release-github@v7
+        uses: ansys/actions/release-github@v8
         with:
           library-name: ${{ env.PACKAGE_NAME }}
 
@@ -222,10 +259,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-library]
     steps:
-      - uses: ansys/actions/doc-deploy-dev@v7
+      - uses: ansys/actions/doc-deploy-dev@v8
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
   doc-deploy-stable:
     name: "Deploy stable documentation"
@@ -233,7 +272,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [release]
     steps:
-      - uses: ansys/actions/doc-deploy-stable@v7
+      - uses: ansys/actions/doc-deploy-stable@v8
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
