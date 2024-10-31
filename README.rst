@@ -37,9 +37,9 @@ Overview
 ========
 PyDYNA is a Pythonic package for providing a more convenient and complete way to
 build an Ansys DYNA input deck, submit it to the Ansys LS-DYNA solver, and
-finally postprocess the results. 
+finally postprocess the results.
 
-PyDYNA contains two submodules, ``ansys.dyna.core.pre`` and ``ansys.dyna.core.solver``
+PyDYNA contains three submodules, ``ansys.dyna.core.pre``, ``ansys.dyna.core.solver``, and ``ansys.dyna.core.run``.
 
 - ``pre``: This module provides highly abstracted APIs for creating and
   setting up DYNA input decks. There are many classes supported, namely,
@@ -52,6 +52,8 @@ PyDYNA contains two submodules, ``ansys.dyna.core.pre`` and ``ansys.dyna.core.so
   ``solver`` service provides a way to push input files to the LS-DYNA solver, monitor the state
   of the running job, change the value of a load curve and finally retrieve result files back from
   the server
+- ``run``: This module provides the ability to start the LS-DYNA solver. This does not require any
+  client-server library or Docker container.
 
 Once you have results, you can use the Ansys Data Processing Framework (DPF),
 which is designed to provide numerical simulation users and engineers
@@ -80,7 +82,7 @@ development version or previously released versions.
 On the `PyDYNA Issues <https://github.com/ansys/pydyna/issues>`_ page, you can create issues to
 report bugs and request new features. On the `PyDYNA Discussions <https://github.com/ansys/pydyna/discussions>`_
 page or the `Discussions <https://discuss.ansys.com/>`_ page on the Ansys Developer portal,
-you can post questions, share ideas, and get community feedback. 
+you can post questions, share ideas, and get community feedback.
 
 To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
 
