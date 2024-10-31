@@ -4,6 +4,8 @@ from typing import Optional
 from urllib.parse import urljoin
 import urllib.request
 
+from ansys.dyna.core.pre.internals.defaults import EXAMPLES_PATH
+
 __all__ = ["DownloadManager"]
 
 
@@ -122,6 +124,8 @@ class DownloadManager(metaclass=DownloadManagerMeta):
         return saved_file
 
     def _retrieve_data(self, url: str, filename: str, dest: str = None, force: bool = False):
+        if dest == None:
+            dest = EXAMPLES_PATH
         local_path = os.path.join(dest, os.path.basename(filename))
         if not force and os.path.isfile(local_path):
             return local_path
