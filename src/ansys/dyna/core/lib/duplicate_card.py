@@ -23,13 +23,14 @@
 import io
 import typing
 
-from ansys.dyna.keywords.lib.card import Card, Field
-from ansys.dyna.keywords.lib.field_writer import write_c_dataframe
-from ansys.dyna.keywords.lib.format_type import format_type
-from ansys.dyna.keywords.lib.io_utils import write_or_return
-from ansys.dyna.keywords.lib.kwd_line_formatter import buffer_to_lines
 import numpy as np
 import pandas as pd
+
+from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.field_writer import write_c_dataframe
+from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.io_utils import write_or_return
+from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 
 CHECK_TYPE = True
 

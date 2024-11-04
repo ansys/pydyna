@@ -27,9 +27,9 @@ import typing
 from typing import Union
 import warnings
 
-from ansys.dyna.keywords.lib.format_type import format_type
-from ansys.dyna.keywords.lib.io_utils import write_or_return
-from ansys.dyna.keywords.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.io_utils import write_or_return
+from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 
 class Deck:

@@ -24,10 +24,10 @@ from dataclasses import dataclass
 import io
 import typing
 
-from ansys.dyna.keywords.lib.card_interface import CardInterface
-from ansys.dyna.keywords.lib.card_writer import write_cards
-from ansys.dyna.keywords.lib.format_type import format_type
-from ansys.dyna.keywords.lib.io_utils import write_or_return
+from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_writer import write_cards
+from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.io_utils import write_or_return
 
 
 @dataclass

@@ -23,10 +23,9 @@
 import io
 import typing
 
-import ansys.dyna.keywords
-from ansys.dyna.keywords.keyword_classes.type_mapping import TypeMapping
-from ansys.dyna.keywords.lib.format_type import format_type
-from ansys.dyna.keywords.lib.keyword_base import KeywordBase
+import ansys.dyna.core
+from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 
 class IterState:
@@ -58,6 +57,8 @@ def _get_kwd_class_and_format(keyword_name: str) -> str:
     # *ELEMENT_SOLID (ten nodes format) => *ELEMENT_SOLID
     # the spaces are used as hints for LSPP but not needed
     # by the dyna solver
+    from ansys.dyna.keywords.keyword_classes.type_mapping import TypeMapping
+
     keyword_name = keyword_name.split()[0]
     title_tokens = keyword_name.split("_")
 
@@ -83,7 +84,7 @@ def _get_kwd_class_and_format(keyword_name: str) -> str:
     return keyword_object_type, format
 
 
-def _try_load_deck(deck: "ansys.dyna.keywords.deck.Deck", text: str, result: DeckLoaderResult) -> None:
+def _try_load_deck(deck: "ansys.dyna.core.deck.Deck", text: str, result: DeckLoaderResult) -> None:
     lines = text.splitlines()
     iterator = iter(lines)
     iterstate = IterState.USERCOMMENT
@@ -97,7 +98,7 @@ def _try_load_deck(deck: "ansys.dyna.keywords.deck.Deck", text: str, result: Dec
             return IterState.END
         return IterState.KEYWORDS
 
-    def update_deck_format(block: typing.List[str], deck: "ansys.dyna.keywords.deck.Deck") -> None:
+    def update_deck_format(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
         assert len(block) == 1
         line = block[0].upper()
         if "LONG" in line:
@@ -112,7 +113,7 @@ def _try_load_deck(deck: "ansys.dyna.keywords.deck.Deck", text: str, result: Dec
             if format == "Y":
                 deck.format = format_type.long
 
-    def update_deck_comment(block: typing.List[str], deck: "ansys.dyna.keywords.deck.Deck") -> None:
+    def update_deck_comment(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
         def remove_comment_symbol(line: str):
             if not line.startswith("$"):
                 raise Exception("Only comments can precede *KEYWORD")
@@ -121,12 +122,12 @@ def _try_load_deck(deck: "ansys.dyna.keywords.deck.Deck", text: str, result: Dec
         block_without_comment_symbol = [remove_comment_symbol(line) for line in block]
         deck.comment_header = "\n".join(block_without_comment_symbol)
 
-    def update_deck_title(block: typing.List[str], deck: "ansys.dyna.keywords.deck.Deck") -> None:
+    def update_deck_title(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
         block = [line for line in block if not line.startswith("$")]
         assert len(block) == 2, "Title block can only have one line"
         deck.title = block[1]
 
-    def handle_keyword(block: typing.List[str], deck: "ansys.dyna.keywords.deck.Deck") -> None:
+    def handle_keyword(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
         keyword = block[0].strip()
         keyword_data = "\n".join(block)
         keyword_object_type, format = _get_kwd_class_and_format(keyword)
@@ -134,6 +135,8 @@ def _try_load_deck(deck: "ansys.dyna.keywords.deck.Deck", text: str, result: Dec
             result.add_unprocessed_keyword(keyword)
             deck.append(keyword_data)
         else:
+            import ansys.dyna.keywords
+
             keyword_object: KeywordBase = getattr(ansys.dyna.keywords.keywords, keyword_object_type)()
             if format == format_type.default:
                 format = deck.format
@@ -182,7 +185,7 @@ def _try_load_deck(deck: "ansys.dyna.keywords.deck.Deck", text: str, result: Dec
             return
 
 
-def load_deck(deck: "ansys.dyna.keywords.deck.Deck", text: str) -> DeckLoaderResult:
+def load_deck(deck: "ansys.dyna.core.deck.Deck", text: str) -> DeckLoaderResult:
     result = DeckLoaderResult()
     _try_load_deck(deck, text, result)
     return result

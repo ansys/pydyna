@@ -24,14 +24,12 @@ import io
 import math
 import typing
 
-import ansys.dyna.keywords.lib.array as arr
-from ansys.dyna.keywords.lib.format_type import format_type
-from ansys.dyna.keywords.lib.kwd_line_formatter import read_line
-
-from .card_interface import CardInterface
-from .field import Field
-from .field_writer import write_fields
-from .kwd_line_formatter import load_dataline
+import ansys.dyna.core.lib.array as arr
+from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.field import Field
+from ansys.dyna.core.lib.field_writer import write_fields
+from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.kwd_line_formatter import load_dataline, read_line
 
 
 class VariableCard(CardInterface):

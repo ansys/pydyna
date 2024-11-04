@@ -22,8 +22,8 @@
 
 import typing
 
-from ansys.dyna.keywords.lib.format_type import format_type
-from ansys.dyna.keywords.lib.kwd_line_formatter import read_line
+from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.kwd_line_formatter import read_line
 
 from .card_interface import CardInterface
 

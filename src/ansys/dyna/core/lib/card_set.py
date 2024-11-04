@@ -28,12 +28,12 @@ That type is used for each card, and behaves like a keyword.
 
 import typing
 
-from ansys.dyna.keywords.lib.card_interface import CardInterface
-from ansys.dyna.keywords.lib.cards import Cards
-from ansys.dyna.keywords.lib.format_type import format_type
-from ansys.dyna.keywords.lib.io_utils import write_or_return
-from ansys.dyna.keywords.lib.kwd_line_formatter import at_end_of_keyword
-from ansys.dyna.keywords.lib.option_card import OptionSpec
+from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.cards import Cards
+from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.io_utils import write_or_return
+from ansys.dyna.core.lib.kwd_line_formatter import at_end_of_keyword
+from ansys.dyna.core.lib.option_card import OptionSpec
 
 
 class CardSet(CardInterface):

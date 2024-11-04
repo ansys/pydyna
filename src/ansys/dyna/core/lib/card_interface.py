@@ -23,7 +23,7 @@
 import abc
 import typing
 
-from ansys.dyna.keywords.lib.format_type import format_type
+from ansys.dyna.core.lib.format_type import format_type
 
 # TODO - implement __repr__ on all cards
 

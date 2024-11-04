@@ -24,8 +24,8 @@
 
 import typing
 
-from ansys.dyna.keywords.lib.card_interface import CardInterface
-from ansys.dyna.keywords.lib.format_type import format_type
+from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.format_type import format_type
 
 
 def write_cards(
