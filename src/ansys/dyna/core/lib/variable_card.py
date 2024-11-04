@@ -127,9 +127,7 @@ class VariableCard(CardInterface):
         return math.ceil(self._length_func() / self._card_size)
 
     def __getitem__(self, index):
-        err_string = (
-            f"get indexer for VariableCard must be of the form [index] or [start:end].  End must be greater than start"  # noqa : E501
-        )
+        err_string = f"get indexer for VariableCard must be of the form [index] or [start:end].  End must be greater than start"  # noqa : E501
         assert type(index) in (slice, int), err_string
         if type(index) == int:
             return self.__get_value(index)

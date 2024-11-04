@@ -22,10 +22,9 @@
 
 import typing
 
+from ansys.dyna.keywords import Deck
 import numpy as np
 import pandas as pd
-
-from ansys.dyna.keywords import Deck
 
 
 def get_nid_to_index_mapping(nodes) -> typing.Dict:

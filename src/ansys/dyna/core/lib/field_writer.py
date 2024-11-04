@@ -23,12 +23,11 @@
 import io
 import typing
 
+from ansys.dyna.keywords.lib.field import Field, to_long
+from ansys.dyna.keywords.lib.format_type import format_type
 import hollerith as holler
 import pandas as pd
 import pandas._libs.missing as libmissing
-
-from ansys.dyna.keywords.lib.field import Field, to_long
-from ansys.dyna.keywords.lib.format_type import format_type
 
 
 def _write_string_right(value, width):

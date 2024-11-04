@@ -24,14 +24,13 @@ import io
 import math
 import typing
 
-import pandas as pd
-
 from ansys.dyna.keywords.lib.card import Card
 from ansys.dyna.keywords.lib.card_interface import CardInterface
 from ansys.dyna.keywords.lib.duplicate_card import DuplicateCard
 from ansys.dyna.keywords.lib.format_type import format_type
 from ansys.dyna.keywords.lib.io_utils import write_or_return
 from ansys.dyna.keywords.lib.kwd_line_formatter import buffer_to_lines
+import pandas as pd
 
 
 def _to_duplicate_card(card: Card, length_func: typing.Callable) -> DuplicateCard:

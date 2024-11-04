@@ -355,7 +355,9 @@ class Deck:
             return [kwd for kwd in kwds if kwargs["filter"](kwd)]
         return kwds
 
-    def import_file(self, path: str, encoding="utf-8") -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821
+    def import_file(
+        self, path: str, encoding="utf-8"
+    ) -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821
         """Import a keyword file.
 
         Parameters
