@@ -120,7 +120,6 @@ def test_variable_card_read_long(string_utils):
     assert math.isnan(v[2])
 
 
-@pytest.mark.xfail(reason = "Keyword module not yet available.")
 @pytest.mark.keywords
 def test_variable_card_read_write_set(ref_string):
     """test to read and write variable cards, especially checking case where last card contains all fields"""
