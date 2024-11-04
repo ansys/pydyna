@@ -1,3 +1,4 @@
+from ansys.dyna.core.lib.deck import Deck
 from ansys.dyna.core.solver.dynasolver import *
 import ansys.dyna.core.solver.grpc_tags
 
