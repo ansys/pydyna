@@ -3,7 +3,6 @@
 ## Project Lead
 
 * [Srikanth Adya](https://github.com/kanthadya)
-* [Wenhui Yu](https://github.com/wenhuiuy)
 * [Zhanqun Zhang](https://github.com/zhangzhanqun)
 
 ## Individual Contributors
@@ -15,3 +14,4 @@
 * [Maxime Rey](https://github.com/MaxJPRey)
 * [Revathy Venugopal](https://github.com/Revathyvenugopal162)
 * [Roberto Pastor](https://github.com/RobPasMue)
+* [Mohamed Koubaa](https://github.com/koubaa)

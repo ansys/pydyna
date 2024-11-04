@@ -165,9 +165,6 @@ def pytest_collection_modifyitems(config, items):
 
 
 class StringUtils:
-    def __init__(self):
-        pass
-
     def as_buffer(self, string: str) -> io.StringIO:
         s = io.StringIO(string)
         s.seek(0)
@@ -181,9 +178,6 @@ def string_utils() -> StringUtils:
 
 
 class FileUtils:
-    def __init__(self):
-        pass
-
     def __normalize_line_endings(self, text: str) -> str:
         return text.replace("\r\n", "\n").replace("\r", "\n")
 
@@ -216,9 +210,11 @@ def file_utils() -> FileUtils:
 
 
 @pytest.fixture
-def ref_string(file_utils):
-    from importlib.machinery import SourceFileLoader
+def ref_string(file_utils: FileUtils):
+    import importlib.util
 
     ref_string_file = file_utils.get_asset_file_path("reference_string.py")
-    ref_string = SourceFileLoader("reference_string", ref_string_file).load_module()
-    return ref_string
+    spec = importlib.util.spec_from_file_location("reference_string", ref_string_file)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
