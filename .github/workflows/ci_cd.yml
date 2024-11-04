@@ -134,6 +134,38 @@ jobs:
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
+  # this is already done when running tests, but this is done before smoke-tests which is expensive.
+  # TODO - remove me after the keywords migration is done
+  keyword-tests:
+    name: Test the keywords module
+    runs-on: ubuntu-latest
+    needs: [code-style]
+    container:
+        image: ubuntu:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+            apt update -y
+            apt install --reinstall ca-certificates -y
+            apt install software-properties-common git -y
+            add-apt-repository ppa:deadsnakes/ppa -y
+            apt install python3.11 python3.11-venv -y
+            python3.11 -m ensurepip --default-pip
+            python3.11 -m pip install --upgrade pip
+            python3.11 -m venv /env
+
+      - name: Install library
+        run: |
+          . /env/bin/activate
+          pip install .[tests]
+
+      - name: Unit testing
+        run: |
+          . /env/bin/activate
+          pytest -m keywords
+
   tests:
     name: "Testing"
     runs-on: ubuntu-latest
@@ -227,7 +259,7 @@ jobs:
 
   build-library:
     name: "Build library"
-    needs: [doc, tests, run-testing]
+    needs: [doc, tests, run-testing, keyword-tests]
     runs-on: ubuntu-latest
     steps:
       - uses: ansys/actions/build-library@v8
