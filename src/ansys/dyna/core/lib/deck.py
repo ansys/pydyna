@@ -422,6 +422,6 @@ class Deck:
             Keyword arguments. Use * *cwd* (``int``) if the deck and include files are in
             a separate directory.
         """
-        from ansys.dyna.keywords.lib.deck_plotter import plot_deck
+        from ansys.dyna.core.lib.deck_plotter import plot_deck
 
         plot_deck(self, **args)
