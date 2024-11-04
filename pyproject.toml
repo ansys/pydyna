@@ -30,6 +30,9 @@ dependencies = ["ansys-dpf-core>=0.7.2",
                 "ansys-tools-path>=0.6.0",
                 "ansys-platform-instancemanagement~=1.0",
                 "pyvista>=0.43.4",
+                "hollerith==0.4.1",
+                "numpy>=2.0.0",
+                "pandas>=2.0"
 ]
 
 [project.optional-dependencies]
