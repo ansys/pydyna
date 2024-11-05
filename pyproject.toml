@@ -32,7 +32,8 @@ dependencies = ["ansys-dpf-core>=0.7.2",
                 "pyvista>=0.43.4",
                 "hollerith==0.4.1",
                 "numpy>=2.0.0",
-                "pandas>=2.0"
+                "pandas>=2.0",
+                "appdirs>=^1.4"
 ]
 
 [project.optional-dependencies]
