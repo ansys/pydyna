@@ -863,10 +863,8 @@ def run_codegen(args):
     output = args.output
     this_folder = get_this_folder()
     if args.output == "":
-        raise Exception("Output folder required")
-        # TODO - re-enable default output when keyword classes move
-        #output = this_folder.parent / "ansys" / "dyna" / "keywords" / "keyword_classes"
-        #output = str(output.resolve())
+        output = this_folder.parent / "src" / "ansys" / "dyna" / "core" /"keywords" / "keyword_classes"
+        output = str(output.resolve())
     else:
         output = args.output
     if args.clean:
