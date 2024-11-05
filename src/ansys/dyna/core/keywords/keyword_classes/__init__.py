@@ -20,5 +20,5 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from ansys.dyna.keywords.keyword_classes.auto_keywords import *  # noqa: F401, F403
-from ansys.dyna.keywords.keyword_classes.manual_keywords import *  # noqa: F401, F403
+from ansys.dyna.core.keywords.keyword_classes.auto_keywords import *  # noqa: F401, F403
+from ansys.dyna.core.keywords.keyword_classes.manual_keywords import *  # noqa: F401, F403
