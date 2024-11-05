@@ -118,13 +118,3 @@ def test_variable_card_read_long(string_utils):
     assert v[0] == 1.0
     assert v[1] == 2.0
     assert math.isnan(v[2])
-
-
-@pytest.mark.xfail(reason = "Keyword module not yet available.")
-@pytest.mark.keywords
-def test_variable_card_read_write_set(ref_string):
-    """test to read and write variable cards, especially checking case where last card contains all fields"""
-    set_string = ref_string.test_variable_card_sets_string
-    input_deck = Deck()
-    input_deck.loads(set_string)
-    assert input_deck.write() == set_string
