@@ -28,7 +28,6 @@ import appdirs
 
 __all__ = ["keywords", "EXAMPLES_PATH", "USER_DATA_PATH"]
 
-from ansys.dyna.keywords._version import __version__  # noqa: F401
 import ansys.dyna.keywords.keyword_classes as keywords  # noqa: F401
 
 USER_DATA_PATH = appdirs.user_data_dir(appname="ansys_dyna_keywords", appauthor="Ansys")
