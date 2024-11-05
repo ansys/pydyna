@@ -57,7 +57,7 @@ def _get_kwd_class_and_format(keyword_name: str) -> str:
     # *ELEMENT_SOLID (ten nodes format) => *ELEMENT_SOLID
     # the spaces are used as hints for LSPP but not needed
     # by the dyna solver
-    from ansys.dyna.keywords.keyword_classes.type_mapping import TypeMapping
+    from ansys.dyna.core.keywords.keyword_classes.type_mapping import TypeMapping
 
     keyword_name = keyword_name.split()[0]
     title_tokens = keyword_name.split("_")
@@ -135,9 +135,9 @@ def _try_load_deck(deck: "ansys.dyna.core.deck.Deck", text: str, result: DeckLoa
             result.add_unprocessed_keyword(keyword)
             deck.append(keyword_data)
         else:
-            import ansys.dyna.keywords
+            import ansys.dyna.core.keywords
 
-            keyword_object: KeywordBase = getattr(ansys.dyna.keywords.keywords, keyword_object_type)()
+            keyword_object: KeywordBase = getattr(ansys.dyna.core.keywords, keyword_object_type)()
             if format == format_type.default:
                 format = deck.format
             keyword_object.format = format
