@@ -32,7 +32,7 @@ from ansys.dyna.core.run.windows_runner import WindowsRunner
 
 def __make_temp_dir():
     """Creates a temporary directory for the job."""
-    job_folder = os.path.join(tempfile.gettempdir(), "ansys", "dynalib", "jobs")
+    job_folder = os.path.join(tempfile.gettempdir(), "ansys", "pydyna", "jobs")
     pathlib.Path(job_folder).mkdir(parents=True, exist_ok=True)
     return tempfile.mkdtemp(dir=job_folder)
 
@@ -107,7 +107,7 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
             Working directory.
             If the `input` parameter is a path to the input file,
             defaults to the same folder as that file.  Otherwise, the job is run
-            in a new folder under $TMP/ansys/dynalib/jobs.
+            in a new folder under $TMP/ansys/pydyna/jobs.
 
     Returns
     -------
