@@ -49,6 +49,9 @@ tests = [
     "ipython==8.29.0",
     "pyvista==0.44.1",
 ]
+codegen = [
+    "Jinja2"
+]
 doc = [
     "recommonmark==0.7.1",
     "matplotlib==3.9.2",

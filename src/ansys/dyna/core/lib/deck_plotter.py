@@ -300,7 +300,7 @@ def get_pyvista():
 def get_polydata(deck: Deck, cwd=None):
     """Creates the PolyData Object for plotting from a given deck with nodes and elements"""
 
-    # import this lazily (otherwise this adds over a second to the import time of dynalib)
+    # import this lazily (otherwise this adds over a second to the import time of pyDyna)
     pv = get_pyvista()
 
     # check kwargs for cwd. future more arguments to plot
