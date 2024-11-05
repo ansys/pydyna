@@ -1,0 +1,1999 @@
+{
+    "WILDCARDS": [
+        {
+            "type": "prefix",
+            "patterns": ["DEFINE", "SECTION", "HOURGLASS", "SENSOR", "SET", "MAT"],
+            "generation-options": {
+                "add-option": [
+                    {
+                        "card-order": -1,
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "TITLE"
+                            }
+                        ],
+                        "option-name": "TITLE"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "prefix",
+            "patterns": ["CONSTRAINED_NODAL_RIGID_BODY"],
+            "generation-options": {
+                "add-option": [
+                    {
+                        "card-order": -1,
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "TITLE"
+                            }
+                        ],
+                        "option-name": "TITLE"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "prefix",
+            "patterns": ["CONTACT"],
+            "generation-options": {
+                "add-option": [
+                    {
+                        "card-order": -2,
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "CONTACT_ID"
+                            }
+                        ],
+                        "option-name": "ID"
+                    },
+                    {
+                        "card-order": -1,
+                        "title-order": 2,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "CONTACT_MPP_1"
+                            },
+                            {
+                                "source": "additional-cards",
+                                "card-name": "CONTACT_MPP_2"
+                            }
+                        ],
+                        "option-name": "MPP"
+                    }
+                ]
+            }
+        }
+    ],
+    "DEFINE_TRANSFORMATION": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 1,
+                    "property-name": "transforms"
+                }
+            ]
+        }
+    },
+    "PARAMETER_PARAMETER": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "parameters"
+                }
+            ]
+        }
+    },
+    "PARAMETER_LOCAL": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "parameters"
+                }
+            ]
+        }
+    },
+    "PARAMETER_EXPRESSION": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "parameters"
+                }
+            ]
+        }
+    },
+    "PARAMETER_EXPRESSION_LOCAL": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "parameters"
+                }
+            ]
+        }
+    },
+    "PART_PART": {
+        "generation-options": {
+            "replace-card": [
+                {
+                    "index": 0,
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "HEADING"
+                    }
+                }
+            ],
+            "duplicate-card-group":[
+                {
+                    "indices": [0, 1],
+                    "overall-name": "parts"
+
+                }
+            ]
+        }
+    },
+    "HOURGLASS_HOURGLASS": {
+        "generation-options": {
+            "card-set": [
+                {
+                    "source-indices": [0],
+                    "source-options": [0],
+                    "target-index": 0,
+                    "name": "HourglassCardSet"
+                }
+            ]
+        }
+    },
+    "CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET": {
+        "generation-options": {
+            "add-option": [
+                {
+                    "card-order": 1,
+                    "title-order": 0,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CONTACT_CARD_A"
+                        }
+                    ],
+                    "option-name": "A"
+                },
+                {
+                    "card-order": 2,
+                    "title-order": 0,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CONTACT_CARD_B"
+                        }
+                    ],
+                    "option-name": "B"
+                },
+                {
+                    "card-order": 3,
+                    "title-order": 0,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CONTACT_CARD_C"
+                        }
+                    ],
+                    "option-name": "C"
+                },
+                {
+                    "card-order": 4,
+                    "title-order": 0,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CONTACT_CARD_D"
+                        }
+                    ],
+                    "option-name": "D"
+                },
+                {
+                    "card-order": 5,
+                    "title-order": 0,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CONTACT_CARD_E"
+                        }
+                    ],
+                    "option-name": "E"
+                },
+                {
+                    "card-order": 6,
+                    "title-order": 0,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CONTACT_CARD_F"
+                        }
+                    ],
+                    "option-name": "F"
+                },
+                {
+                    "card-order": 7,
+                    "title-order": 0,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CONTACT_CARD_G"
+                        }
+                    ],
+                    "option-name": "G"
+                }
+            ]
+        }
+    },
+    "CONTACT_AUTOMATIC_SINGLE_SURFACE": {
+        "generation-options": {
+            "insert-card": [
+                {
+                    "index": 0,
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "CONTACT_CARD_1"
+                    }
+                },
+                {
+                    "index": 1,
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "CONTACT_CARD_2"
+                    }
+                },
+                {
+                    "index": 2,
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "CONTACT_CARD_3"
+                    }
+                }
+            ],
+            "skip-card": [0, 1, 2]
+        },
+        "comment": "CONTACT_AUTOMATIC_SINGLE_SURFACE is basically defined by hand... everything is overridden."
+    },
+    "CONTROL_IMPLICIT_AUTO": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "self.iauto == 3"
+                }
+            ]
+        }
+    },
+    "CONTROL_IMPLICIT_DYNAMICS": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "self.alpha <= -1"
+                }
+            ]
+        }
+    },
+    "CONTROL_IMPLICIT_SOLVER": {
+        "generation-options": {
+            "override-field": [
+                {
+                    "index": 2,
+                    "name": "absmem",
+                    "position": 20
+                }
+            ]
+        }
+    },
+    "CONTROL_IMPLICIT_SOLUTION": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 2,
+                    "func": "self.dnorm < 0"
+                }
+            ]
+        }
+    },
+    "SECTION_BEAM": {
+        "generation-options": {
+            "skip-card": [6, 7, 9],
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "self.elform in [1,11]"
+                },
+                {
+                    "index": 2,
+                    "func": "self.elform in [2,12,13]"
+                },
+                {
+                    "index": 3,
+                    "func": "self.elform == 3"
+                },
+                {
+                    "index": 4,
+                    "func": "self.elform in [4,5]"
+                },
+                {
+                    "index": 5,
+                    "func": "self.elform == 6"
+                },
+                {
+                    "index": 8,
+                    "func": "self.elform == 9"
+                }
+            ]
+        },
+        "comment": "card 6 is skipped because of the condition for mat 146 - which we can't easily check here.  Maybe that can be handled in a subclass.  card 7 is skipped because its a duplicate of card 4.  card 9 is skipped because its a duplicate of 2"
+    },
+    "SECTION_SHELL" : {
+        "generation-options": {
+            "reorder-card": {
+                "order": [0, 1, 4, 2, 3, 5]
+            },
+            "variable-card": [
+                {
+                    "index": 2,
+                    "name": "angle",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "length-func": "self.nip",
+                    "active-func": "self.icomp == 1",
+                    "type": "float",
+                    "help": "dynamic array of beta-i: material angle at ith-integration point."
+                },
+                {
+                    "index": 5,
+                    "name": "pi",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "length-func": "self.lmc",
+                    "active-func": "self.elform in [101, 102, 103, 104, 105]",
+                    "type": "float",
+                    "help": "dynamic array of LMC property parameters."
+                }
+            ],
+            "conditional-card": [
+                {
+                    "index": 3,
+                    "func": "self.elform in [101, 102, 103, 104, 105]"
+                }
+            ],
+            "duplicate-card": [
+                {
+                    "index": 4,
+                    "property-name": "integration_points",
+                    "length-func": "self.nipp",
+                    "active-func": "self.elform in [101, 102, 103, 104, 105]"
+                }
+            ]
+        },
+        "comment": "a mix of conditional, variable length, and duplicate cards"
+    },
+    "CONTROL_REFERENCE_CONFIGURAION": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "CONTROL_REFERENCE_CONFIGURATION",
+                "source-keyword": "CONTROL_REFERENCE_CONFIGURAION"
+            }
+        ]
+    },
+    "SECTION_TSHELL": {
+        "classname": "SectionTShell",
+        "generation-options": {
+            "variable-card": [
+                    {
+                    "index": 1,
+                    "name": "bi",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "length-func": "self.nip",
+                    "active-func": "self.icomp == 1",
+                    "type": "float",
+                    "help": "dynamic array of beta-i: material angle at ith-integration point."
+                }
+            ]
+        },
+        "comment": "error handling in subclass"
+    },
+    "DEFINE_CONTACT_VOLUME": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "self.type==0"
+                },
+                {
+                    "index": 2,
+                    "func": "self.type==1"
+                },
+                {
+                    "index": 3,
+                    "func": "self.type==2"
+                }
+            ],
+            "shared-field": [
+                {
+                    "name": "RINNER",
+                    "cards": [2, 3]
+                },
+                {
+                    "name": "ROUTER",
+                    "cards": [2, 3]
+                }
+            ]
+        },
+        "comment": "some union properties are needed"
+    },
+    "ELEMENT_SOLID_ORTHO": {
+        "generation-options": {
+            "duplicate-card-group": [
+                {
+                    "indices": [0, 1, 2],
+                    "overall-name": "elements"
+                }
+            ]
+        }
+    },
+    "SECTION_SOLID": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 2,
+                    "property-name": "integration_points",
+                    "length-func": "self.nip",
+                    "active-func": "self.nip and self.elform in [101, 102, 103, 104, 105]"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "self.elform in [101, 102, 103, 104, 105]"
+                }
+            ],
+            "override-field": [
+                {
+                    "index": 1,
+                    "name": "nip",
+                    "default": 0
+                },
+                {
+                    "index": 1,
+                    "name": "nxdof",
+                    "default": 0
+                },
+                {
+                    "index": 1,
+                    "name": "lmc",
+                    "default": 0
+                },
+                {
+                    "index": 1,
+                    "name": "nhsv",
+                    "default": 0
+                }
+            ],
+            "variable-card": [
+                {
+                    "index": 3,
+                    "name": "pi",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "length-func": "self.lmc",
+                    "active-func": "self.elform in [101, 102, 103, 104, 105]",
+                    "type": "float",
+                    "help": "dynamic array of LMC property parameters."
+                }
+            ]
+        }
+    },
+    "DEFINE_CURVE": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 1,
+                    "property-name": "curves"
+                }
+            ]
+        }
+    },
+    "EM_EP_CELLMODEL_TENTUSSCHER": {
+        "generation-options": {
+            "rename-property": [
+                {
+                    "index": 1,
+                    "name": "r",
+                    "property-name": "gas_constant"
+                },
+                {
+                    "index": 1,
+                    "name": "f",
+                    "property-name": "faraday_constant"
+                }
+            ]
+        }
+    },
+    "CONTROL_TIME_STEP" : {
+        "generation-options": {
+            "override-subkeyword": "TIMESTEP"
+        }
+    },
+    "MAT_NULL": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "MAT_NULL",
+                "source-keyword": "MAT_NULL"
+            },
+            {
+                "keyword": "MAT_009",
+                "source-keyword": "MAT_NULL"
+            }
+        ]
+    },
+    "MAT_058": {
+        "alias": "MAT_LAMINATED_COMPOSITE_FABRIC",
+        "generation-options": {
+            "override-field": [
+                {
+                    "index": 8,
+                    "name": "lcefs",
+                    "position": 50
+                }
+            ]
+        }
+    },
+    "MAT_058_SOLID": {
+        "alias": "MAT_LAMINATED_COMPOSITE_FABRIC_SOLID",
+        "generation-options": {
+            "override-field": [
+                {
+                    "index": 11,
+                    "name": "lcefs",
+                    "position": 50
+                }
+            ]
+        }
+    },
+    "MAT_077_H" : {
+        "alias": "MAT_HYPERELASTIC_RUBBER",
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "self.pr and self.pr < 0"
+                },
+                {
+                    "index": 2,
+                    "func": "self.n > 0"
+                },
+                {
+                    "index": 3,
+                    "func": "self.n == 0"
+                }
+            ],
+            "duplicate-card": [
+                {
+                    "index": 4,
+                    "property-name": "constants"
+                }
+            ]
+        }
+    },
+    "MAT_077_O" : {
+        "alias": "MAT_OGDEN_RUBBER",
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "self.pr and self.pr < 0"
+                },
+                {
+                    "index": 2,
+                    "func": "self.n > 0"
+                },
+                {
+                    "index": 3,
+                    "func": "self.n == 0 or self.n == -1"
+                },
+                {
+                    "index": 4,
+                    "func": "self.n == 0 or self.n == -1"
+                }
+            ],
+            "duplicate-card": [
+                {
+                    "index": 5,
+                    "property-name": "constants"
+                }
+            ],
+            "override-field": [
+                {
+                    "index": 0,
+                    "name": "n",
+                    "options": ["-1", "0", "1", "2", "3", "4", "5", "6", "7", "8"]
+                }
+            ]
+        }
+    },
+    "MAT_MODIFIED_JOHNSON_COOK": {
+        "alias": "MAT_107"
+    },
+    "MAT_MA_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "MAT_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN",
+                "source-keyword": "MAT_MA_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN"
+            }
+        ]
+    },
+    "MAT_124": {
+        "alias": "MAT_PLASTICITY_COMPRESSION_TENSION",
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 4,
+                    "property-name": "constants"
+                }
+            ]
+        }
+    },
+    "MAT_181": {
+        "alias": "MAT_SIMPLIFIED_RUBBER/FOAM",
+        "generation-options": {
+            "skip-card": 2,
+            "duplicate-card": [
+                {
+                    "index": 4,
+                    "property-name": "constants"
+                }
+            ]
+        }
+    },
+    "MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 4,
+                    "property-name": "constants"
+                }
+            ]
+        }
+    },
+    "MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 3,
+                    "property-name": "constants"
+                }
+            ]
+        }
+    },
+    "MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE_LOG_LOG_INTERPOLATION": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 4,
+                    "property-name": "constants"
+                }
+            ]
+        }
+    },
+    "MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION_WITH_FAILURE": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 4,
+                    "property-name": "constants"
+                }
+            ]
+        }
+    },
+    "MAT_138": {
+        "alias": "MAT_COHESIVE_MIXED_MODE",
+        "generation-options": {
+            "override-field": [
+                {
+                    "index": 0,
+                    "name": "roflg",
+                    "type": "integer",
+                    "default": 0
+                }
+            ]
+        }
+    },
+    "MAT_295": {
+        "alias": "MAT_ANISOTROPIC_HYPERELASTIC",
+        "generation-options": {
+            "override-field": [
+                {
+                    "index": 1,
+                    "name": "title",
+                    "readonly": true
+                },
+                {
+                    "index": 6,
+                    "name": "title",
+                    "readonly": true
+                },
+                {
+                    "index": 11,
+                    "name": "title",
+                    "readonly": true
+                }
+            ],
+            "rename-property": [
+                {
+                    "index": 1,
+                    "name": "title",
+                    "property-name": "isotropic_title"
+                },
+                {
+                    "index": 6,
+                    "name": "title",
+                    "property-name": "anisotropic_title"
+                },
+                {
+                    "index": 11,
+                    "name": "title",
+                    "property-name": "active_title"
+                },
+                {
+                    "index": 10,
+                    "name": "k1",
+                    "property-name": "coupling_k1"
+                },
+                {
+                    "index": 10,
+                    "name": "k2",
+                    "property-name": "coupling_k2"
+                },
+                {
+                    "index": 20,
+                    "name": "beta",
+                    "property-name": "material_angle_beta"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "index": 2,
+                    "func": "self.itype and abs(self.itype) == 1"
+                },
+                {
+                    "index": 3,
+                    "func": "self.itype and abs(self.itype) == 1"
+                },
+                {
+                    "index": 4,
+                    "func": "self.itype and abs(self.itype) == 2"
+                },
+                {
+                    "index": 5,
+                    "func": "self.itype and abs(self.itype) == 3"
+                },
+                {
+                    "index": 6,
+                    "func": "self.atype and abs(self.atype) == 1"
+                },
+                {
+                    "index": 8,
+                    "func": "self.atype and abs(self.atype) == 1 and self.ftype == 1"
+                },
+                {
+                    "index": 9,
+                    "func": "self.atype and abs(self.atype) == 1 and self.ftype == 2"
+                },
+                {
+                    "index": 10,
+                    "func": "self.atype and abs(self.atype) == 1 and self.intype == 1"
+                },
+                {
+                    "index": 11,
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype in [1,2,3,4,5]"
+                },
+                {
+                    "index": 12,
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype in [1,2]"
+                },
+                {
+                    "index": 13,
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 1"
+                },
+                {
+                    "index": 14,
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 2"
+                },
+                {
+                    "index": 15,
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 3"
+                },
+                {
+                    "index": 16,
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 4"
+                },
+                {
+                    "index": 17,
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 4"
+                },
+                {
+                    "index": 18,
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 5"
+                },
+                {
+                    "index": 19,
+                    "func": "self.atype and abs(self.atype) == 1"
+                },
+                {
+                    "index": 20,
+                    "func": "self.atype and abs(self.atype) == 1"
+                }
+            ],
+            "duplicate-card-group": [
+                {
+                    "indices": [7, 8, 9],
+                    "overall-name": "anisotropic_settings",
+                    "length-func": "self.nf or 0"
+                }
+            ],
+            "shared-field": [
+                {
+                    "name": "ETA",
+                    "cards": [12, 13, 15]
+                },
+                {
+                    "name": "F",
+                    "cards": [13, 14]
+                },
+                {
+                    "name": "SIGMAX",
+                    "cards": [13, 14]
+                },
+                {
+                    "name": "N",
+                    "cards": [10, 13, 14]
+                },
+                {
+                    "name": "CA2ION50",
+                    "cards": [13, 14]
+                },
+                {
+                    "name": "CA2ION",
+                    "cards": [10, 13]
+                },
+                {
+                    "name": "T0",
+                    "cards": [10, 13, 14]
+                },
+                {
+                    "name": "L",
+                    "cards": [11, 12, 13, 15]
+                }
+            ]
+        },
+        "comment": "union properties (issue #34), ftype there makes the lambdas work in the duplicate card entries"
+    },
+    "ALE_COUPLING_NODAL_CONSTRAINT": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "RIGIDWALL_PLANAR": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_ID",
+                "source-keyword": "RIGIDWALL_PLANAR"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_FINITE": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_FINITE"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_FINITE_DISPLAY": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_DISPLAY",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_DISPLAY_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_FINITE_DISPLAY"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_FINITE_FORCES": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_FORCES",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_FORCES_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_FINITE_FORCES"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_FINITE_MOVING": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_FINITE_MOVING"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_FINITE_MOVING_DISPLAY": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_DISPLAY",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_DISPLAY_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_DISPLAY"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES_DISPLAY": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES_DISPLAY",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES_DISPLAY_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES_DISPLAY"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_FORCES": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_FORCES",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_FORCES_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_FORCES"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_MOVING": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_MOVING",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_MOVING_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_MOVING"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_MOVING_DISPLAY": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_MOVING_DISPLAY",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_MOVING_DISPLAY_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_MOVING_DISPLAY"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_MOVING_FORCES": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_MOVING_FORCES",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_MOVING_FORCES_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_MOVING_FORCES"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_MOVING_FORCES_DISPLAY": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_MOVING_FORCES_DISPLAY",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_MOVING_FORCES_DISPLAY_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_MOVING_FORCES_DISPLAY"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_ORTHO": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_ORTHO",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_ORTHO_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_ORTHO"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_ORTHO_FINITE": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_ORTHO_FINITE_FORCES": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE_FORCES",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE_FORCES_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE_FORCES"
+            }
+        ]
+    },
+    "RIGIDWALL_PLANAR_ORTHO_FORCES": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "RIGIDWALL_PLANAR_ORTHO_FORCES",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "RIGIDWALL_PLANAR_ORTHO_FORCES_ID",
+                "source-keyword": "RIGIDWALL_PLANAR_ORTHO_FORCES"
+            }
+        ]
+    },
+    "LOAD_SEGMENT": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "LOAD_SEGMENT",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "LOAD_SEGMENT_ID",
+                "source-keyword": "LOAD_SEGMENT"
+            }
+        ]
+    },
+    "LOAD_SEGMENT_SET": {
+        "type": "multiple",
+        "generations": [
+            {
+                "keyword": "LOAD_SEGMENT_SET",
+                "generation-options": {
+                    "skip-card": 0
+                }
+            },
+            {
+                "keyword": "LOAD_SEGMENT_SET_ID",
+                "source-keyword": "LOAD_SEGMENT_SET"
+            }
+        ]
+    },
+    "AIRBAG_ADIABATIC_GAS_MODEL": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_FLUID_AND_GAS": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_HYBRID": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_HYBRID_JETTING": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_HYBRID_JETTING_CM": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_HYBRID_CHEMKIN": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_LINEAR_FLUID": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_LOAD_CURVE": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_PARTICLE": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_PARTICLE_DECOMPOSITION": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_SEGMENT": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_SEGMENT": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_PARTICLE_DECOMPOSITION_SEGMENT": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_PARTICLE_INFLATION": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_PARTICLE_INFLATION_SEGMENT": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_PARTICLE_MOLEFRACTION": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_PARTICLE_MOLEFRACTION_SEGMENT": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_SIMPLE_AIRBAG_MODEL": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_SIMPLE_PRESSURE_VOLUME": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_WANG_NEFSKE": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_WANG_NEFSKE_POP": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_WANG_NEFSKE_JETTING": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_WANG_NEFSKE_JETTING_CM": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_WANG_NEFSKE_JETTING_POP": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_WANG_NEFSKE_JETTING_POP_CM": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_CM": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_POP": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_POP_CM": {
+        "generation-options": {
+            "skip-card": 0
+        }
+    },
+    "INITIAL_STRAIN_SHELL": {
+        "generation-options": {
+            "card-set": [
+                {
+                    "source-indices": [0, 1],
+                    "target-index": 0,
+                    "name": "InitialStrainShellCardSet"
+                }
+            ],
+            "duplicate-card": [
+                {
+                    "index": 1,
+                    "property-name": "strains",
+                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 0",
+                    "active-func": "self.large == None or self.large == 0"
+                }
+            ]
+        },
+        "comment": "TODO(1) - self.large==1 has different cards that aren't defined here."
+    },
+    "INITIAL_STRESS_SHELL": {
+        "generation-options": {
+            "card-set": [
+                {
+                    "source-indices": [1, 2],
+                    "target-index": 1,
+                    "target-name": "InitialStressShellCardSet",
+                    "name": "InitialStressShellThicknessLargeCardSet",
+                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 0",
+                    "active-func": "self.large == None or self.large == 0"
+                },
+                {
+                    "source-indices": [0],
+                    "target-index": 0,
+                    "name": "InitialStressShellCardSet"
+                }
+            ],
+            "variable-card": [
+                {
+                    "index": 2,
+                    "name": "hisv",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "float",
+                    "help": "dynamic array of history variables",
+                    "length-func": "self.parent.nhisv"
+                }
+            ]
+        },
+        "comment": "TODO(1) - self.large==1 has different cards that aren't defined here."
+    },
+    "ELEMENT_SHELL": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "elements"
+                }
+            ]
+        }
+    },
+    "ELEMENT_SHELL_THICKNESS": {
+        "generation-options": {
+            "duplicate-card-group": [
+                {
+                    "indices": [0, 1, 2],
+                    "overall-name": "elements"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "index": 2,
+                    "func": "self.elements['n5'].any()"
+                }
+            ]
+        }
+    },
+    "ELEMENT_SOLID": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "elements"
+                }
+            ]
+        }
+    },
+    "NODE_NODE": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "nodes"
+                }
+            ]
+        }
+    },
+    "SET_SEGMENT": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 1,
+                    "property-name": "segments"
+                }
+            ]
+        }
+    },
+    "DEFINE_SD_ORIENTATION": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "vectors"
+                }
+            ]
+        }
+    },
+    "ELEMENT_BEAM": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "elements"
+                }
+            ]
+        }
+    },
+    "ELEMENT_DISCRETE": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "elements"
+                }
+            ]
+        }
+    },
+    "BOUNDARY_SPC_NODE": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "nodes"
+                }
+            ]
+        }
+    },
+    "SET_NODE_ADD": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "nodes",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of node ids."
+                }
+            ]
+        }
+    },
+    "INITIAL_VELOCITY": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 2,
+                    "func": "self.nsidex > 0"
+                }
+            ]
+        }
+    },
+    "SET_NODE_INTERSECT": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "nodes",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of node ids."
+                }
+            ]
+        }
+    },
+    "SET_NODE_LIST": {
+        "alias": "SET_NODE",
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "nodes",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of node ids."
+                }
+            ]
+        }
+    },
+    "SET_SEGMENT_ADD": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "sets",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of set segment ids."
+                }
+            ]
+        }
+    },
+    "SET_PART_ADD": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "parts",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of part set ids."
+                }
+            ]
+        }
+    },
+    "SET_PART": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "parts",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of part ids."
+                }
+            ]
+        }
+    },
+    "SET_PART_LIST": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "parts",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of part ids."
+                }
+            ]
+        }
+    },
+    "SET_PART_LIST_COLLECT": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "parts",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of part ids."
+                }
+            ]
+        }
+    },
+    "SET_BEAM": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "element",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of beam element ids."
+                }
+            ]
+        }
+    },
+    "SET_BEAM_ADD": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "beams",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of beam set ids."
+                }
+            ]
+        }
+    },
+    "SET_BEAM_INTERSECT": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "beams",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of beam set ids."
+                }
+            ]
+        }
+    },
+    "SET_BOX":{
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "box",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of box set ids."
+                }
+            ]
+        }
+    },
+    "SET_SHELL_ADD":{
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "shells",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of shell set ids."
+                }
+            ]
+        }
+    },
+    "SET_SHELL_INTERSECT":{
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "shells",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of shell set ids."
+                }
+            ]
+        }
+    },
+    "SET_SHELL_LIST": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "shells",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "static array of shell ids"
+                }
+            ]
+        }
+    },
+    "MESH_NODE":{
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "nodes"
+                }
+            ]
+        }
+    },
+    "MESH_SURFACE_NODE":{
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "nodes"
+                }
+            ]
+        }
+    },
+    "MESH_SURFACE_ELEMENT":{
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "elements"
+                }
+            ]
+        }
+    },
+    "ICFD_DATABASE_FLUX":{
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "boundaries"
+                }
+            ]
+        }
+    },
+    "ICFD_BOUNDARY_FREESLIP":{
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "boundaries"
+                }
+            ]
+        }
+    },
+    "ICFD_BOUNDARY_NONSLIP":{
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "boundaries"
+                }
+            ]
+        }
+    },
+    "ICFD_BOUNDARY_FSI":{
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "boundaries"
+                }
+            ]
+        }
+    },
+    "ICFD_BOUNDARY_FSI_EXCLUDE":{
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "boundaries"
+                }
+            ]
+        }
+    },
+    "ICFD_BOUNDARY_PRESCRIBED_PRE":{
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "boundaries"
+                }
+            ]
+        }
+    },
+    "ICFD_PART":{
+        "generation-options": {
+            "add-option": [
+                    {
+                        "card-order": -1,
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "TITLE"
+                            }
+                        ],
+                        "option-name": "TITLE"
+                    }
+                ],
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "nodes"
+                }
+            ]
+        }
+    },
+    "ICFD_PART_VOL":{
+        "generation-options": {
+            "add-option": [
+                    {
+                        "card-order": -1,
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "TITLE"
+                            }
+                        ],
+                        "option-name": "TITLE"
+                    }
+                ],
+            "duplicate-card": [
+                {
+                    "index": 1,
+                    "property-name": "nodes"
+                }
+            ]
+        }
+    },
+    "CONSTRAINED_NODAL_RIGID_BODY": {
+        "generation-options": {
+            "duplicate-card-group": [
+                {
+                    "indices": [0],
+                    "overall-name": "constrained_nodal_rigid_bodies"
+                }
+            ]
+        }
+    },
+    "CONSTRAINED_NODAL_RIGID_BODY_INERTIA": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 4,
+                    "func": "self.ircs and self.ircs == 1"
+                }
+            ]
+        }
+    },
+    "CONSTRAINED_RIVET":{
+        "generation-options": {
+            "add-option": [
+                {
+                    "card-order": -1,
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "ID"
+                        }
+                    ],
+                    "option-name": "ID"
+                }
+            ],
+            "skip-card": [0]
+        }
+    },
+    "MESH_VOLUME":{
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "elements",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of surface element ids."
+                }
+            ]
+        }
+    },
+    "MESH_EMBEDSHELL":{
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "elements",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "dynamic array of surface element ids."
+                }
+            ]
+        }
+    },
+    "ICFD_CONTROL_TURBULENCE":{
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "self.tmod==1"
+                },
+                {
+                    "index": 2,
+                    "func": "self.tmod==2 or self.tmod==3"
+                },
+                {
+                    "index": 3,
+                    "func": "self.tmod==4"
+                },
+                {
+                    "index": 4,
+                    "func": "self.tmod==4"
+                },
+                {
+                    "index": 5,
+                    "func": "self.tmod==5"
+                }
+            ],
+            "shared-field": [
+                {
+                    "name": "Ccut",
+                    "cards": [1, 4]
+                }
+            ]
+        }
+    },
+    "ELEMENT_SOLID (ten nodes format)": {
+        "generation-options": {
+            "duplicate-card-group":[
+                {
+                    "indices": [0, 1],
+                    "overall-name": "elements"
+                }
+            ]
+        }
+    },
+    "LOAD_NODE_POINT": {
+        "generation-options": {
+            "duplicate-card": [
+                {
+                    "index": 0,
+                    "property-name": "nodes"
+                }
+            ]
+        }
+    },
+    "EM_ISOPOTENTIAL_CONNECT": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "self.contype == 6"
+                }
+            ]
+        }
+    },
+    "EM_RANDLES_BATMAC": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 3,
+                    "func": "self.rdltype > 1"
+                }
+            ]
+        }
+    },
+    "EM_RANDLES_SOLID": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 3,
+                    "func": "self.rdltype > 1"
+                }
+            ]
+        }
+    },
+    "EM_RANDLES_TSHELL": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 3,
+                    "func": "self.rdltype > 1"
+                }
+            ]
+        }
+    }
+}
