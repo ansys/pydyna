@@ -132,8 +132,8 @@ else:
     # Configuration for Sphinx autoapi
     extensions.append("autoapi.extension")
     autoapi_dirs = ["../../src/ansys"]
+    autoapi_ignore = ["*keyword_classes/auto*"]
     autoapi_type = "python"
-    autoapi_dirs = ["../../src/ansys"]
     autoapi_options = [
         "members",
         "undoc-members",
