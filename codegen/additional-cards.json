@@ -14,6 +14,18 @@
             {"name": "ID", "type": "integer", "default": null, "position": 0, "width": 10, "help": "ID keyword option"}
         ]
     },
+    "BLANK": {
+        "fields": [
+            {"name": "__blank1", "type": "integer", "default": null, "position": 0, "used": false, "width": 10, "help": ""},
+            {"name": "__blank2", "type": "integer", "default": null, "position": 10, "used": false,"width": 10, "help": ""},
+            {"name": "__blank3", "type": "integer", "default": null, "position": 20, "used": false,"width": 10, "help": ""},
+            {"name": "__blank4", "type": "integer", "default": null, "position": 30, "used": false,"width": 10, "help": ""},
+            {"name": "__blank5", "type": "integer", "default": null, "position": 40, "used": false,"width": 10, "help": ""},
+            {"name": "__blank6", "type": "integer", "default": null, "position": 50, "used": false,"width": 10, "help": ""},
+            {"name": "__blank7", "type": "integer", "default": null, "position": 60, "used": false,"width": 10, "help": ""},
+            {"name": "__blank8", "type": "integer", "default": null, "position": 70, "used": false,"width": 10, "help": ""}
+        ]
+    },
     "CONTACT_ID": {
         "fields": [
             {"name": "CID", "type": "integer", "default": null, "position": 0, "width": 10, "help": "ID keyword option"},

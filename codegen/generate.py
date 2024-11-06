@@ -570,9 +570,9 @@ def get_keyword_data(keyword_name, keyword, settings):
 
     # transformations based on generation settings
     handle_keyword_data(kwd_data, settings)
+
     # default transformations to a valid format we need for jinja
     transform_data(kwd_data)
-
     return kwd_data
 
 
@@ -673,7 +673,7 @@ def get_loader():
 def match_wildcard(keyword, wildcard):
     assert wildcard["type"] == "prefix"
     for pattern in wildcard["patterns"]:
-        if keyword.startswith(f"{pattern}_"):
+        if keyword.startswith(f"{pattern}"):
             return True
     return False
 
@@ -724,6 +724,7 @@ def get_undefined_alias_keywords(keywords_list: typing.List[typing.Dict]) -> typ
 
 
 def merge_options(keyword_options: typing.Dict, generation_settings: typing.Dict) -> None:
+    generation_settings = copy.deepcopy(generation_settings)
     if keyword_options == {}:
         keyword_options.update({"generation-options": generation_settings})
     else:
@@ -741,7 +742,6 @@ def merge_options(keyword_options: typing.Dict, generation_settings: typing.Dict
             for difference_key in difference_keys:
                 generation_options[difference_key] = generation_settings[difference_key]
 
-
 def handle_wildcards(keyword_options: typing.Dict, keyword: str) -> None:
     if skip_generate_keyword_class(keyword):
         return
@@ -753,12 +753,13 @@ def handle_wildcards(keyword_options: typing.Dict, keyword: str) -> None:
     keyword_options["wildcards_handled"] = True
 
 
-def get_keyword_options(keyword: str) -> typing.Dict:
+def get_keyword_options(keyword: str, wildcards: bool = True) -> typing.Dict:
     """Returns the generation options of the given keyword from the manifest.  If apply_wildcards is True,
     this will return the generataion options of the keyword merged with the generation options of the
     wildard that matches this keyword, if any."""
     keyword_options = MANIFEST.get(keyword, {})
-    handle_wildcards(keyword_options, keyword)
+    if wildcards:
+        handle_wildcards(keyword_options, keyword)
     return keyword_options
 
 
@@ -790,6 +791,13 @@ def get_generations(keyword: str) -> typing.List[typing.Tuple]:
     return result
 
 
+def add_aliases(kwd_list: typing.List[str]) -> None:
+    for keyword in kwd_list:
+        keyword_options = get_keyword_options(keyword, False)
+        if "alias" in keyword_options:
+            add_alias(keyword, keyword_options["alias"])
+
+
 def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.List[typing.Dict]:
     """Get keywords to generate. If a kwd name is not none, only generate
     it and its generations."""
@@ -797,10 +805,7 @@ def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.Li
     kwd_list = KWDM_INSTANCE.get_keywords_list()
 
     # first get all aliases
-    for keyword in kwd_list:
-        for keyword, keyword_options in get_generations(keyword):
-            if "alias" in keyword_options:
-                add_alias(keyword, keyword_options["alias"])
+    add_aliases(kwd_list)
 
     # then get keywords to generate
     for keyword in kwd_list:
@@ -810,6 +815,7 @@ def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.Li
             item = get_keyword_item(keyword)
             item["options"] = keyword_options
             keywords.append(item)
+
     return keywords
 
 

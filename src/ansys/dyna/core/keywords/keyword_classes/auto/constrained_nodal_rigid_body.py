@@ -23,6 +23,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.duplicate_card_group import DuplicateCardGroup
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedNodalRigidBody(KeywordBase):
@@ -30,9 +31,13 @@ class ConstrainedNodalRigidBody(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "NODAL_RIGID_BODY"
+    option_specs = [
+        OptionSpec("TITLE", -1, 1),
+    ]
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             DuplicateCardGroup(
                 [
@@ -85,6 +90,23 @@ class ConstrainedNodalRigidBody(KeywordBase):
                 ],
                 None,
                 data = kwargs.get("constrained_nodal_rigid_bodies")),
+            OptionCardSet(
+                option_spec = ConstrainedNodalRigidBody.option_specs[0],
+                cards = [
+                    Card(
+                        [
+                            Field(
+                                "title",
+                                str,
+                                0,
+                                80,
+                                kwargs.get("title")
+                            ),
+                        ],
+                    ),
+                ],
+                **kwargs
+            ),
         ]
 
     @property
@@ -96,4 +118,14 @@ class ConstrainedNodalRigidBody(KeywordBase):
     def constrained_nodal_rigid_bodies(self, df):
         '''sets constrained_nodal_rigid_bodies from the dataframe df'''
         self._cards[0].table = df
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        self._cards[1].cards[0].set_value("title", value)
 

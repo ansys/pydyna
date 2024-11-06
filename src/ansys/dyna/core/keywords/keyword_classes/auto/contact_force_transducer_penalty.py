@@ -102,120 +102,120 @@ class ContactForceTransducerPenalty(KeywordBase):
             Card(
                 [
                     Field(
-                        "fs",
-                        float,
+                        "unused",
+                        int,
                         0,
                         10,
-                        kwargs.get("fs", 0.0)
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "fd",
-                        float,
+                        "unused",
+                        int,
                         10,
                         10,
-                        kwargs.get("fd", 0.0)
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "dc",
-                        float,
+                        "unused",
+                        int,
                         20,
                         10,
-                        kwargs.get("dc", 0.0)
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "vc",
-                        float,
+                        "unused",
+                        int,
                         30,
                         10,
-                        kwargs.get("vc", 0.0)
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "vdc",
-                        float,
+                        "unused",
+                        int,
                         40,
                         10,
-                        kwargs.get("vdc", 0.0)
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "penchk",
+                        "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("penchk")
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "bt",
-                        float,
+                        "unused",
+                        int,
                         60,
                         10,
-                        kwargs.get("bt", 0.0)
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "dt",
-                        float,
+                        "unused",
+                        int,
                         70,
                         10,
-                        kwargs.get("dt", 1.0E+20)
+                        kwargs.get("unused")
                     ),
                 ],
             ),
             Card(
                 [
                     Field(
-                        "sfsa",
-                        float,
+                        "unused",
+                        int,
                         0,
                         10,
-                        kwargs.get("sfsa", 1.0)
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "sfsb",
-                        float,
+                        "unused",
+                        int,
                         10,
                         10,
-                        kwargs.get("sfsb", 1.0)
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "sast",
-                        float,
+                        "unused",
+                        int,
                         20,
                         10,
-                        kwargs.get("sast")
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "sbst",
-                        float,
+                        "unused",
+                        int,
                         30,
                         10,
-                        kwargs.get("sbst")
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "sfsat",
-                        float,
+                        "unused",
+                        int,
                         40,
                         10,
-                        kwargs.get("sfsat", 1.0)
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "sfsbt",
-                        float,
+                        "unused",
+                        int,
                         50,
                         10,
-                        kwargs.get("sfsbt", 1.0)
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "fsf",
-                        float,
+                        "unused",
+                        int,
                         60,
                         10,
-                        kwargs.get("fsf", 1.0)
+                        kwargs.get("unused")
                     ),
                     Field(
-                        "vsf",
-                        float,
+                        "unused",
+                        int,
                         70,
                         10,
-                        kwargs.get("vsf", 1.0)
+                        kwargs.get("unused")
                     ),
                 ],
             ),
@@ -458,174 +458,6 @@ class ContactForceTransducerPenalty(KeywordBase):
         if value not in [0, 1, 2]:
             raise Exception("""sbpr must be one of {0,1,2}""")
         self._cards[0].set_value("sbpr", value)
-
-    @property
-    def fs(self) -> float:
-        """Get or set the Static coefficient of friction if FS > 0 and not equal to 2.
-        EQ.-1.0: If the frictional coefficients defined in the *PART section are to be used, set FS to a negative number.
-        EQ. 2: For contact types SURFACE_TO_SURFACE and ONE_WAY_ SURFACE_TO_SURFACE, the dynamic coefficient of friction points to the table, see DEFINE_TABLE (The table ID is give by FD below.), giving the coefficient of friction as a function of the relative velocity and pressure. This option must be used in combination with the thickness offset option. See Figure 6.1.
-        Note: For the special contact option TIED_SURFACE_TO_SURFACE_FAILURE only, the variables FS is the Normal tensile stress at failure.,
-        """ # nopep8
-        return self._cards[1].get_value("fs")
-
-    @fs.setter
-    def fs(self, value: float) -> None:
-        self._cards[1].set_value("fs", value)
-
-    @property
-    def fd(self) -> float:
-        """Get or set the Dynamic coefficient of friction. The frictional coefficient is assumed to be dependent on the relative velocity v-rel of the surfaces in contact. Give table ID if FS=2 (default=0.0).
-        Note: For the special contact option TIED_SURFACE_TO_SURFACE_ FAILURE only, the variables FD is Shear stress at failure
-        """ # nopep8
-        return self._cards[1].get_value("fd")
-
-    @fd.setter
-    def fd(self, value: float) -> None:
-        self._cards[1].set_value("fd", value)
-
-    @property
-    def dc(self) -> float:
-        """Get or set the Exponential decay coefficient. The frictional coefficient is assumed to be dependent on the relative velocity v-rel of the surfaces in contact. (default=0.0).
-        """ # nopep8
-        return self._cards[1].get_value("dc")
-
-    @dc.setter
-    def dc(self, value: float) -> None:
-        self._cards[1].set_value("dc", value)
-
-    @property
-    def vc(self) -> float:
-        """Get or set the Coefficient for viscous friction. This is necessary to limit the friction force to a maximum.
-        """ # nopep8
-        return self._cards[1].get_value("vc")
-
-    @vc.setter
-    def vc(self, value: float) -> None:
-        self._cards[1].set_value("vc", value)
-
-    @property
-    def vdc(self) -> float:
-        """Get or set the Viscous damping coefficient in percent of critical. In order to avoid undesirable oscillation in contact, e.g., for sheet forming simulation, a contact damping perpendicular to the contacting surfaces is applied.
-        """ # nopep8
-        return self._cards[1].get_value("vdc")
-
-    @vdc.setter
-    def vdc(self, value: float) -> None:
-        self._cards[1].set_value("vdc", value)
-
-    @property
-    def penchk(self) -> typing.Optional[int]:
-        """Get or set the Small penetration in contact search option.  If the tracked node penetrates more than the segment thickness times the factor XPENE (see *CONTROL_CONTACT), the penetration is ignored, and the tracked node is set free.  The thickness is taken as the shell thickness if the segment belongs to a shell element or it is taken as 1/20 of its shortest diagonal if the segment belongs to a solid element.  This option applies to the surface-to-surface contact algorithms.  See Table 0-17 for contact types and more details.
-        """ # nopep8
-        return self._cards[1].get_value("penchk")
-
-    @penchk.setter
-    def penchk(self, value: int) -> None:
-        self._cards[1].set_value("penchk", value)
-
-    @property
-    def bt(self) -> float:
-        """Get or set the Birth time (contact surface becomes active at this time):LT.0:	Birth time is set to | "BT" | .When negative, birth time is followed during the dynamic relaxation phase of the calculation.After dynamic relaxation has completed, contact is activated regardless of the value of BT.EQ.0 : Birth time is inactive, meaning contact is always activeGT.0 : If DT = -9999, BT is interpreted as the curve or table ID defining multiple pairs of birth - time / death - time; see Remark 2 below.Otherwise, if "DT" > 0, birth time applies both duringand after dynamic relaxation.
-        """ # nopep8
-        return self._cards[1].get_value("bt")
-
-    @bt.setter
-    def bt(self, value: float) -> None:
-        self._cards[1].set_value("bt", value)
-
-    @property
-    def dt(self) -> float:
-        """Get or set the Death time (contact surface is deactivated at this time):LT.0:	If DT = -9999, BT is interpreted as the curve or table ID defining multiple pairs of birth - time / death - time.Otherwise, negative DT indicates that contact is inactive during dynamic relaxation.After dynamic relaxation the birth and death times are followed and set to | "BT" | and | "DT" | , respectively.EQ.0 : DT defaults to 10e20.GT.0 : DT sets the time at which the contact is deactivated.
-        """ # nopep8
-        return self._cards[1].get_value("dt")
-
-    @dt.setter
-    def dt(self, value: float) -> None:
-        self._cards[1].set_value("dt", value)
-
-    @property
-    def sfsa(self) -> float:
-        """Get or set the Scale factor on default SURFA penalty stiffness when SOFT = 0 or SOFT = 2; see also *CONTROL_CONTACT.For MORTAR frictional contact this is the stiffness scale factor for the entire contact, and SFSB does not apply.
-        """ # nopep8
-        return self._cards[2].get_value("sfsa")
-
-    @sfsa.setter
-    def sfsa(self, value: float) -> None:
-        self._cards[2].set_value("sfsa", value)
-
-    @property
-    def sfsb(self) -> float:
-        """Get or set the Scale factor on default SURFA penalty stiffness when SOFT = 0 or SOFT = 2; see also *CONTROL_CONTACT.For MORTAR tied contact, this is an additional stiffness scale factor, resulting in a total stiffness scale of SFSA*SFSB.
-        """ # nopep8
-        return self._cards[2].get_value("sfsb")
-
-    @sfsb.setter
-    def sfsb(self, value: float) -> None:
-        self._cards[2].set_value("sfsb", value)
-
-    @property
-    def sast(self) -> typing.Optional[float]:
-        """Get or set the Optional thickness for SURFA surface (overrides true thickness). This option applies only to contact with shell elements. SAST has no bearing on the actual thickness of the elements; it only affects the location of the contact surface. For the *CONTACT_TIED_.. options, SAST and SBST below can be defined as negative values, which will cause the determination of whether or not a node is tied to depend only on the separation distance relative to the absolute value of these thicknesses. More information is given under General Remarks on *CONTACT following Optional Card C.
-        """ # nopep8
-        return self._cards[2].get_value("sast")
-
-    @sast.setter
-    def sast(self, value: float) -> None:
-        self._cards[2].set_value("sast", value)
-
-    @property
-    def sbst(self) -> typing.Optional[float]:
-        """Get or set the Optional thickness for SURFA surface (overrides true thickness). This option applies only to contact with shell elements. True thickness is the element thickness of the shell elements. For the TIED options see SAST above.
-        """ # nopep8
-        return self._cards[2].get_value("sbst")
-
-    @sbst.setter
-    def sbst(self, value: float) -> None:
-        self._cards[2].set_value("sbst", value)
-
-    @property
-    def sfsat(self) -> float:
-        """Get or set the Scale factor applied to contact thickness of SURFA surface.  This option applies to contact with shell and beam elements.
-        SFSAT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface.
-        SFSAT is ignored if SAST is nonzero except in the case of MORTAR contact (see Remark 9 in the General Remarks: *Contact section).
-        """ # nopep8
-        return self._cards[2].get_value("sfsat")
-
-    @sfsat.setter
-    def sfsat(self, value: float) -> None:
-        self._cards[2].set_value("sfsat", value)
-
-    @property
-    def sfsbt(self) -> float:
-        """Get or set the Scale factor applied to contact thickness of SURFA surface.  This option applies only to contact with shell elements.
-        SFSAT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface.
-        SFSAT is ignored if SBST is nonzero except in the case of MORTAR contact (see Remark 9 in the General Remarks: *Contact section).
-        """ # nopep8
-        return self._cards[2].get_value("sfsbt")
-
-    @sfsbt.setter
-    def sfsbt(self, value: float) -> None:
-        self._cards[2].set_value("sfsbt", value)
-
-    @property
-    def fsf(self) -> float:
-        """Get or set the Coulomb friction scale factor (default=1.0).The Coulomb friction value is scaled as μ_sc=FSF×μ_c; see Mandatory Card 2.
-        """ # nopep8
-        return self._cards[2].get_value("fsf")
-
-    @fsf.setter
-    def fsf(self, value: float) -> None:
-        self._cards[2].set_value("fsf", value)
-
-    @property
-    def vsf(self) -> float:
-        """Get or set the Viscous friction scale factor (default=1.0).If this factor is defined, then the limiting force becomes: F_lim =VSF×VC×A_cont ; see Mandatory Card 2.
-        """ # nopep8
-        return self._cards[2].get_value("vsf")
-
-    @vsf.setter
-    def vsf(self, value: float) -> None:
-        self._cards[2].set_value("vsf", value)
 
     @property
     def cid(self) -> typing.Optional[int]:
