@@ -40,6 +40,28 @@
         },
         {
             "type": "prefix",
+            "patterns": ["CONTACT_FORCE_TRANSDUCER"],
+            "generation-options": {
+            "replace-card": [
+                    {
+                        "index": 1,
+                        "card": {
+                            "source": "additional-cards",
+                            "card-name": "BLANK"
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "card": {
+                            "source": "additional-cards",
+                            "card-name": "BLANK"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "prefix",
             "patterns": ["CONTACT"],
             "generation-options": {
                 "add-option": [
