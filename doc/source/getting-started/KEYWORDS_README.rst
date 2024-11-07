@@ -5,11 +5,11 @@ Getting started
 
 Overview
 --------
-The `keywords`` subpackage of PyDyna project provides Python libraries to build a DYNA keyword deck.
+The `keywords`` module of PyDyna provides Python libraries to build an Ansys LS-DYNA keyword deck.
 
 Usage
 -----
-Here's an example of how you use DYNA-Lib to render Python code:
+Here's an example of how you can generate a `*SECTION_TSHELL`` keyword:
 
 .. code:: pycon
 
@@ -26,7 +26,7 @@ See also
 
 - `API reference <api_reference_pydyna_keywords_>`_: Provides API member descriptions and usage examples.
 - `Examples <examples_pydyna_keywords_>`_: Provides examples showing end-to-end workflows for using PyDyna -
-   write a deck using the ``keywords`` subpackage and run the solver using the ``run`` subpackage.
+   write a deck using the ``keywords`` module and run the solver using the ``run`` module.
 
 .. LINKS AND REFERENCES
 .. _api_reference_pydyna_keywords_: https://dyna.docs.pyansys.com/version/dev/keyword_class_documentation.html

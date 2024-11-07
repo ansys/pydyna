@@ -85,7 +85,7 @@ directory and install PyDYNA using the preceding command.
 
 Working with LS-DYNA keywords
 -----------------------------
-The ``keywords`` subpackage can be used to interact with LS-DYNA keywords.
+The ``keywords`` module can be used to interact with LS-DYNA keywords.
 
 .. include:: ./KEYWOERDS_README.rst
 
@@ -110,7 +110,7 @@ this does not require Docker.
 
 .. include:: ./RUN_README.rst
 
-Keyword and run axample
+Keyword and run example
 -----------------------
 
 .. include:: ./example1.rst
