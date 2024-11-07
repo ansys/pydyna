@@ -83,6 +83,7 @@ jobs:
           apt update
           apt install --reinstall ca-certificates
           apt-get install xvfb pandoc texlive-latex-extra latexmk -y
+          apt install docker -y
           apt install software-properties-common git -y
           add-apt-repository ppa:deadsnakes/ppa -y
           apt install python${{ env.MAIN_PYTHON_VERSION }} python${{ env.MAIN_PYTHON_VERSION }}-venv -y
