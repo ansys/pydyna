@@ -110,13 +110,13 @@ this does not require Docker.
 
 .. include:: ./RUN_README.rst
 
-`Keyword` and `Run` example
----------------------------
+Keyword and run example
+-----------------------
 
 .. include:: ./example1.rst
 
-`Pre` and `Solver` example
---------------------------
+Pre and solver example
+----------------------
 
 .. include:: ./example.rst
 
