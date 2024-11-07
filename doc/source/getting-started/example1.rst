@@ -1,5 +1,5 @@
-The next few sections show how to generate, preview, solve, and postprocess a taylor bar impact example.
-An example of a sweep over impact velocities for this problam can be found in this repository at
+The next few sections show how to generate, preview, solve, and review a Taylor bar impact problem.
+An example of a sweep over impact velocities for this problem can be found in this repository at
 ``examples/keywords/Taylor_Bar/plot_taylor_bar_example.py``.
 
 Preprocessing
@@ -145,7 +145,7 @@ The following code runs LS-DYNA using the `input.k` file.
 Post processing
 ~~~~~~~~~~~~~~~
 The following code processes results and generates a line chart of Time vs. Energy from the impact. This requires an installation
-of a matplotlib backend.
+of a `matplotlib` backend.
 
 .. code:: python
 
