@@ -9,8 +9,8 @@ page on the Ansys website.
 
 Installation
 ============
-PyDYNA consists of three modules, ``ansys.dyna.core.pre``, ``ansys.dyna.core.solver``, and
-``ansys.dyna.core.run``.
+PyDYNA consists of four modules, ``ansys.dyna.core.pre``, ``ansys.dyna.core.solver``,
+``ansys.dyna.core.run``, and ``ansys.dyna.core.keywords``.
 
 ``ansys.dyna.core.pre`` and ``ansys.dyna.core.solver`` use gRPC and hence need to be run
 using server-client connection.
@@ -83,6 +83,12 @@ with these commands:
 If you're on Windows with Python 3.9, unzip the wheelhouse archive to a ``wheelhouse``
 directory and install PyDYNA using the preceding command.
 
+Working with LS-DYNA keywords
+-----------------------------
+The ``keywords`` subpackage can be used to interact with LS-DYNA keywords.
+
+.. include:: ./KEYWOERDS_README.rst
+
 Run PyDYNA server locally
 -------------------------
 Launching the servers directly on local machines.
@@ -104,8 +110,13 @@ this does not require Docker.
 
 .. include:: ./RUN_README.rst
 
-Example
--------
+Keyword and run axample
+-----------------------
+
+.. include:: ./example1.rst
+
+Pre and solver example
+---------------------
 
 .. include:: ./example.rst
 
