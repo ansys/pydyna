@@ -145,7 +145,7 @@ The following code runs LS-DYNA using the `input.k` file.
 Post processing
 ~~~~~~~~~~~~~~~
 The following code processes results and generates a line chart of Time vs. Energy from the impact. This requires an installation
-of a `matplotlib` backend.
+of a ``matplotlib`` backend.
 
 .. code:: python
 
