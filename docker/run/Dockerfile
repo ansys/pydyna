@@ -1,11 +1,6 @@
 FROM ghcr.io/ansys/mechanical:24.1.0
 
-#TODO - update to a more recent mechanical imaged
-#TODO - reduce the size of this image by pruning unnecessary files from the Mechanical image
-
 LABEL description="lsdyna solver"
-
-# install Intel-MPI
 
 RUN apt update -y
 RUN apt install -y wget
@@ -19,14 +14,23 @@ RUN echo "deb [signed-by=/usr/share/keyrings/intel-mpi-archive-keyring.gpg] http
 RUN apt update -y
 RUN apt install -y intel-mpi-rt-2019.9-304
 
-# Set environment variables pointing to Intel-MPI and LS-DYNA
-
 ENV MPIVARS=/opt/intel/impi/2019.9.304/intel64/bin/mpivars.sh
 ENV MPIRUN=/install/ansys_inc/v241/commonfiles/MPI/Intel/2021.10.0/linx64/bin/mpirun
 ENV LSDYNA_DP=/install/ansys_inc/v241/ansys/bin/linx64/lsdyna_dp.e
 ENV LSDYNA_DP_MPP=/install/ansys_inc/v241/ansys/bin/linx64/lsdyna_dp_mpp.e
 ENV LSDYNA_SP=/install/ansys_inc/v241/ansys/bin/linx64/lsdyna_sp.e
 ENV LSDYNA_SP_MPP=/install/ansys_inc/v241/ansys/bin/linx64/lsdyna_sp_mpp.e
+
+# OPTIONAL
+# pass licensing environment variables into the build
+ARG LSTC_LICENSE
+ENV LSTC_LICENSE=$LSTC_LICENSE
+
+ARG ANSYSLI_SERVERS
+ENV ANSYSLI_SERVERS=$ANSYSLI_SERVERS
+
+ARG ANSYSLMD_LICENSE_FILE
+ENV ANSYSLMD_LICENSE_FILE=$ANSYSLMD_LICENSE_FILE
 
 COPY ./file.sh /
 

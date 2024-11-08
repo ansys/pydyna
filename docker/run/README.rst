@@ -33,11 +33,17 @@ To build the ``run`` Docker image, perform these steps:
 
 #. In your terminal, go to the ``pydyna/docker/run`` directory.
 
-#. Run this Docker command:
+#. Either run this Docker command (if defining licensing environment variables from Python):
 
    .. code:: bash
 
       docker build -t dyna_run .
+
+#. Or run this Docker command (if defining licensing environment variables in the container itself):
+
+.. code:: bash
+
+      docker build -t dyna_run . --build-arg LSTC_LICENSE=ansys --build-arg ANSYSLI_SERVERS=*** --build-arg ANSYSLMD_LICENSE_FILE=***
 
 #. Check that the image has been built successfully by running this command:
 
@@ -59,7 +65,7 @@ Use the container to run a dyna input deck
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This examples assumes that the LS-DYNA deck "input.k" exists in the directory "run". It will use the Docker
-container to execute the
+container to run LS-DYNA. If licensing was configured in the container, it can be used like this.
 
    .. code:: python
 
@@ -76,8 +82,7 @@ container to execute the
         working_directory="run"
     )
 
-Licenses are handled using environment variables in the container. Environment variables can either be added to the image using a Dockerfile,
-or they can be passed into ``run_dyna`` using ``container_env``.
+If licenses were not configured into the container, they can be passed as environment variables in the ``docker run`` command, like below:
 
 .. code:: python
 
