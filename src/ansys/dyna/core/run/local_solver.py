@@ -26,8 +26,16 @@ import pathlib
 import tempfile
 import typing
 
+from ansys.dyna.core.lib.deck import Deck
 from ansys.dyna.core.run.linux_runner import LinuxRunner
 from ansys.dyna.core.run.windows_runner import WindowsRunner
+
+try:
+    from ansys.dyna.core.run.docker_runner import DockerRunner
+
+    HAS_DOCKER = True
+except ImportError:
+    HAS_DOCKER = False
 
 
 def __make_temp_dir():
@@ -37,7 +45,7 @@ def __make_temp_dir():
     return tempfile.mkdtemp(dir=job_folder)
 
 
-def __prepare(input: typing.Union[str, object], **kwargs) -> typing.Tuple[str, str]:
+def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str]:
     """Returns the working directory and input file from a launch_dyna input."""
     wdir = kwargs.get("working_directory", None)
     if isinstance(input, str):
@@ -59,6 +67,11 @@ def __prepare(input: typing.Union[str, object], **kwargs) -> typing.Tuple[str, s
 
 def get_runner(**kwargs) -> typing.Any:
     """Returns the runner for the job."""
+    container = kwargs.get("container", None)
+    if container != None:
+        if not HAS_DOCKER:
+            raise Exception("Cannot run in container, `docker` is not installed.")
+        return DockerRunner(**kwargs)
     if os.name == "nt":
         return WindowsRunner(**kwargs)
     else:
@@ -109,6 +122,18 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
             defaults to the same folder as that file.  Otherwise, the job is run
             in a new folder under $TMP/ansys/pydyna/jobs.
 
+        * container : str
+            DockerContainer to run LS-DYNA in.
+
+        * container_env: dict()
+            Environment variables to pass into the docker container.
+
+        * stream: bool
+            Currently only affects runs using the `container` option.
+            If True, the stdout of solver is streamed to python's stdout during the solve.
+            If False, the solver stdout is printed once after the container exits.
+            Defaults to True.
+
     Returns
     -------
     str
@@ -122,8 +147,6 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
         license_server_check, license_type => as in pymapdl
     """
     wdir, input_file = __prepare(input, **kwargs)
-    if "working_directory" in kwargs:
-        kwargs.pop("working_directory")
 
     runner = get_runner(**kwargs)
     runner.set_input(input_file, wdir)
