@@ -70,7 +70,7 @@ jobs:
   doc:
     name: "Documentation build"
     runs-on: public-ubuntu-latest-8-cores
-#    needs: [doc-style]
+    needs: [doc-style]
     steps:
       - name: "Checkout project"
         uses: actions/checkout@v4
@@ -121,10 +121,14 @@ jobs:
           cd ../..
 
       - name: "Build the html documentation"
+        env:
+            PYDYNA_RUN_CONTAINER: dyna_run:latest
         run: |
           xvfb-run make -C doc html
 
       - name: "Build the pdf documentation"
+        env:
+            PYDYNA_RUN_CONTAINER: dyna_run:latest
         run: |
           make -C doc pdf
 
