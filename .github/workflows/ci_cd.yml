@@ -112,11 +112,13 @@ jobs:
 
       - name: Build local LS-DYNA Solver runner image
         run: |
-          docker build docker/run -t dyna_run \
+          cd docker/run
+          docker build . -t dyna_run \
              --build-arg LSTC_LICENSE=ansys \
              --build-arg ANSYSLI_SERVERS=2325@${{secrets.LICENSE_SERVER}} \
              --build-arg ANSYSLMD_LICENSE_FILE=1055@${{secrets.LICENSE_SERVER}}
           docker image ls
+          cd ../..
 
       - name: "Build the html documentation"
         run: |
