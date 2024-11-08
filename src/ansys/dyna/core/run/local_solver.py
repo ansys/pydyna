@@ -148,6 +148,11 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
     """
     wdir, input_file = __prepare(input, **kwargs)
 
+    if "container" not in kwargs:
+        container = os.environ.get("PYDYNA_RUN_CONTAINER", None)
+        if container != None:
+            kwargs["container"] = container
+
     runner = get_runner(**kwargs)
     runner.set_input(input_file, wdir)
 
