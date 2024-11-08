@@ -1,4 +1,5 @@
 """Module for the trame visualizer."""
+
 try:
     from pyvista.trame.ui import plotter_ui
     from trame.app import get_server
