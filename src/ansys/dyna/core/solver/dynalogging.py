@@ -398,13 +398,13 @@ class Logger:
             each_handler.setLevel(level)
         self._level = level
 
-    def _make_child_logger(self, sufix, level):
+    def _make_child_logger(self, suffix, level):
         """Create a child logger.
 
         This method uses the ``getChild`` method or copies attributes between the
         ``pymapdl_global`` logger and the new one.
         """
-        logger = logging.getLogger(sufix)
+        logger = logging.getLogger(suffix)
         logger.std_out_handler = None
         logger.file_handler = None
 
@@ -437,7 +437,7 @@ class Logger:
         logger.propagate = True
         return logger
 
-    def add_child_logger(self, sufix, level=None):
+    def add_child_logger(self, suffix, level=None):
         """Add a child logger to the main logger.
 
         This child logger is more general than an instance logger, which is designed to
@@ -448,7 +448,7 @@ class Logger:
 
         Parameters
         ----------
-        sufix : str
+        suffix : str
             Name of the logger.
         level : str, optional
             Level of logging. The default is ``None``.
@@ -458,7 +458,7 @@ class Logger:
         logging.logger
             Logger class.
         """
-        name = self.logger.name + "." + sufix
+        name = self.logger.name + "." + suffix
         self._instances[name] = self._make_child_logger(self, name, level)
         return self._instances[name]
 

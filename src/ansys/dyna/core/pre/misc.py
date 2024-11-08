@@ -1,4 +1,5 @@
 """Module providing miscellaneous functions and methods."""
+
 import inspect
 import os
 import random

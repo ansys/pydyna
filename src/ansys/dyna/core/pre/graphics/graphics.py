@@ -1,4 +1,5 @@
 """Module for graphics-related implementations."""
+
 import enum
 import os
 from typing import List
