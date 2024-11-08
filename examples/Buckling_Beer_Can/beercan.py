@@ -45,9 +45,12 @@ import numpy as np
 import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
-from ansys.dyna.core.run import run_dyna
+from ansys.dyna.core.run import MemoryUnit, MpiOption, run_dyna
 
-dynadir = "run"
+thisdir = os.path.abspath(os.path.dirname(__file__))
+
+rundir = os.path.join(thisdir, "run")
+
 dynafile = "beer_can.k"
 
 ###############################################################################
@@ -57,7 +60,7 @@ dynafile = "beer_can.k"
 # Then, create and append individual keywords to the deck.
 
 
-p = pathlib.Path(dynadir)
+p = pathlib.Path(rundir)
 p.mkdir(parents=True, exist_ok=True)
 
 
@@ -565,8 +568,8 @@ def run_post(filepath):
     pass
 
 
-deck = write_deck(os.path.join(dynadir, dynafile))
-shutil.copy("mesh.k", "run/mesh.k")
+deck = write_deck(os.path.join(rundir, dynafile))
+shutil.copy(os.path.join(thisdir,"mesh.k"), rundir)
 
 ###############################################################################
 # View the model
@@ -574,17 +577,13 @@ shutil.copy("mesh.k", "run/mesh.k")
 # You can use the PyVista ``plot`` method in the ``deck`` class to view
 # the model.
 
-out = deck.plot(cwd=dynadir)
+out = deck.plot(cwd=rundir)
 
 ###############################################################################
 # Run the Dyna solver
 # ~~~~~~~~~~~~~~~~~~~
 #
 
-try:
-    filepath = run_dyna(dynafile, working_directory=dynadir)
-    print("completed")
-    run_post(filepath)
-    print("post_completed")
-except Exception as e:
-    print(e)
+
+filepath = run_dyna(dynafile, working_directory=rundir, ncpu=2, mpi_option = MpiOption.MPP_INTEL_MPI, memory=20, memory_unit=MemoryUnit.MB)
+run_post(filepath)

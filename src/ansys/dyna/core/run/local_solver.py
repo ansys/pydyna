@@ -138,6 +138,7 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
     -------
     str
         The working directory where the solver is launched.
+        If stream is false and container is set, returns the stdout of the run
     """
     """TODO:
         jobname => jobid={jobname}
@@ -156,5 +157,7 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
     runner = get_runner(**kwargs)
     runner.set_input(input_file, wdir)
 
-    runner.run()
+    result = runner.run()
+    if container != None and kwargs.get("stream",True) is False:
+        return result
     return wdir

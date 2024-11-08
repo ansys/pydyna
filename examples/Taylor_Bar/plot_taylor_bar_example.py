@@ -39,11 +39,9 @@ a Pythonic environment.
 
 # sphinx_gallery_thumbnail_number = 1
 
-import datetime
+import pathlib
 import os
 import shutil
-import tempfile
-import time
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -52,6 +50,10 @@ import ansys.dpf.core as dpf
 from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import run_dyna
 
+thisdir = os.path.abspath(os.path.dirname(__file__))
+workdir = os.path.join(thisdir, "workdir")
+
+pathlib.Path(workdir).mkdir(exist_ok=True)
 
 ###############################################################################
 # Create a deck and keywords
@@ -59,13 +61,7 @@ from ansys.dyna.core.run import run_dyna
 # Create a deck, which is the container for all the keywords.
 # Then, create and append individual keywords to the deck.
 
-
-def create_input_deck(**kwargs):
-    initial_velocity = kwargs.get("initial_velocity")
-    wd = kwargs.get("wd")
-    if not all((initial_velocity, wd)):
-        raise Exception("Missing input!")
-
+def create_input_deck(initial_velocity):
     deck = Deck()
     deck.title = "Taylor-Bar Velocity - %s - Unit: t-mm-s" % initial_velocity
 
@@ -157,7 +153,18 @@ def create_input_deck(**kwargs):
     #          the absolute path.  You may choose to solve this problem in a different
     #          way, for example by copying the mesh file to that working directory
     #          before solving and using only the file name without an absolute path
-    deck.append(kwd.Include(filename=os.path.abspath("taylor_bar_mesh.k")))
+    deck.append(kwd.Include(filename="taylor_bar_mesh.k"))
+
+
+
+    return deck
+
+def write_input_deck(**kwargs):
+    initial_velocity = kwargs.get("initial_velocity")
+    wd = kwargs.get("wd")
+    if not all((initial_velocity, wd)):
+        raise Exception("Missing input!")
+    deck = create_input_deck(initial_velocity)
 
     # Convert deck to string
     deck_string = deck.write()
@@ -176,13 +183,12 @@ def create_input_deck(**kwargs):
 #
 
 
-def run(**kwargs):
-    wd = kwargs.get("wd")
-    shutil.copy("taylor_bar_mesh.k", f"{wd}/taylor_bar_mesh.k")
-    inputfile = os.path.join(wd, "input.k")
-    run_dyna(inputfile)
-    assert os.path.isfile(os.path.join(wd, "d3plot"))
-    assert os.path.isfile(os.path.join(wd, "lsrun.out.txt"))
+def run(directory):
+    shutil.copy(os.path.join(thisdir,"taylor_bar_mesh.k"), directory)
+    result = run_dyna("input.k", working_directory=directory, stream=False)
+    assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
+    return result
+
 
 
 ###############################################################################
@@ -191,10 +197,11 @@ def run(**kwargs):
 #
 
 
-def get_global_ke(**kwargs):
-    wd = kwargs.get("wd")
+def get_global_ke(directory):
     ds = dpf.DataSources()
-    ds.set_result_file_path(os.path.join(wd, "d3plot"), "d3plot")
+    result_file = os.path.join(directory, "d3plot")
+    assert os.path.isfile(result_file)
+    ds.set_result_file_path(result_file, "d3plot")
     model = dpf.Model(ds)
 
     gke_op = dpf.operators.result.global_kinetic_energy()
@@ -211,8 +218,9 @@ def get_global_ke(**kwargs):
 # View the model
 # ~~~~~~~~~~~~~~
 # etc etc
-deck_for_graphic = create_input_deck(initial_velocity=300e3, wd="run")
-deck_for_graphic.plot(cwd="run")
+deck_for_graphic = create_input_deck(300e3)
+#deck_for_graphic.plot(cwd=thisdir)
+
 ###############################################################################
 # Run a parametric solve
 # ~~~~~~~~~~~~~~~~~~~~~~
@@ -221,34 +229,27 @@ deck_for_graphic.plot(cwd="run")
 
 # Define base working directory
 
-root_out_dir = tempfile.gettempdir()
-stamp = datetime.datetime.fromtimestamp(time.time()).strftime("%Y-%m-%d_%H_%M_%S")
-base_wd = os.path.join(root_out_dir, "PyDyna.%s" % stamp)
-os.mkdir(base_wd)
-
 color = ["b", "r", "g", "y"]
 # Specify different velocities in mm/s
 initial_velocities = [275.0e3, 300.0e3, 325.0e3, 350.0e3]
 
 for index, initial_velocity in enumerate(initial_velocities):
     # Create a folder for each parameter
-    wd = os.path.join(base_wd, "tb_vel_%s" % initial_velocity)
-    os.mkdir(wd)
+    wd = os.path.join(workdir, "tb_vel_%s" % initial_velocity)
+    pathlib.Path(wd).mkdir(exist_ok=True)
     # Create LS-Dyna input deck
-    create_input_deck(initial_velocity=initial_velocity, wd=wd)
+    write_input_deck(initial_velocity=initial_velocity, wd=wd)
     # Run Solver
     try:
-        run(wd=wd)
+        run(wd)
         # Run PyDPF Post
-        time_data, ke_data = get_global_ke(initial_velocity=initial_velocity, wd=wd)
+        time_data, ke_data = get_global_ke(wd)
         # Add series to the plot
         plt.plot(time_data, ke_data, color[index], label="KE at vel. %s mm/s" % initial_velocity)
 
     except Exception as e:
         print(e)
     # sphinx_gallery_defer_figures
-
-shutil.rmtree(base_wd, True)
 
 plt.xlabel("Time (s)")
 plt.ylabel("Energy (mJ)")

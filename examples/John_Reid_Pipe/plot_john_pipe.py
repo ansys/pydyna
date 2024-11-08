@@ -46,11 +46,13 @@ import pandas as pd
 from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import run_dyna
 
-dynadir = "run"
+thisdir = os.path.abspath(os.path.dirname(__file__))
+rundir = os.path.join(thisdir, "run")
+
 dynafile = "pipe.k"
 
-p = pathlib.Path(dynadir)
-p.mkdir(parents=True, exist_ok=True)
+p = pathlib.Path(rundir)
+p.mkdir(exist_ok=True)
 
 ###############################################################################
 # Create a deck and keywords
@@ -155,14 +157,14 @@ def run_post(filepath):
     pass
 
 
-deck = write_deck(os.path.join(dynadir, dynafile))
-shutil.copy("nodes.k", "run/nodes.k")
-deck.plot(cwd=dynadir)
+deck = write_deck(os.path.join(rundir, dynafile))
+shutil.copy(os.path.join(thisdir,"nodes.k"), rundir)
+deck.plot(cwd=rundir)
 
 ###############################################################################
 # Run the Dyna solver
 # ~~~~~~~~~~~~~~~~~~~
 # Uncomment the following lines to run the Dyna solver.
 
-filepath = run_dyna(dynafile, working_directory=dynadir)
-# run_post(filepath)
+filepath = run_dyna(dynafile, working_directory=rundir)
+run_post(rundir)
