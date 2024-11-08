@@ -1,12 +1,12 @@
 The next few sections show how to generate, preview, solve, and review a Taylor bar impact problem.
 An example of a sweep over impact velocities for this problem can be found in this repository at
-``examples/keywords/Taylor_Bar/plot_taylor_bar_example.py``.
+``examples/Taylor_Bar/plot_taylor_bar_example.py``.
 
 Preprocessing
 ~~~~~~~~~~~~~
 The following code describes an LS-DYNA Model for a Taylor bar impact problem. It assumes that the mesh file
 `taylor_bar_mesh.k` exists in the working directory. This mesh file can be found in this repository at
-``examples/keywords/Taylor_Bar/taylor_bar_mesh.k``.
+``examples/Taylor_Bar/taylor_bar_mesh.k``.
 
 .. code:: python
 
