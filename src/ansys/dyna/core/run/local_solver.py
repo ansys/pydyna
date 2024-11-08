@@ -158,6 +158,6 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
     runner.set_input(input_file, wdir)
 
     result = runner.run()
-    if container != None and kwargs.get("stream",True) is False:
+    if container != None and kwargs.get("stream", True) is False:
         return result
     return wdir
