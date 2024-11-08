@@ -1,6 +1,11 @@
 FROM ghcr.io/ansys/mechanical:24.1.0
 
+#TODO - update to a more recent mechanical imaged
+#TODO - reduce the size of this image by pruning unnecessary files from the Mechanical image
+
 LABEL description="lsdyna solver"
+
+# install Intel-MPI
 
 RUN apt update -y
 RUN apt install -y wget
@@ -13,6 +18,8 @@ RUN wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRO
 RUN echo "deb [signed-by=/usr/share/keyrings/intel-mpi-archive-keyring.gpg] https://apt.repos.intel.com/mpi all main" | tee /etc/apt/sources.list.d/intel-mpi.list
 RUN apt update -y
 RUN apt install -y intel-mpi-rt-2019.9-304
+
+# Set environment variables pointing to Intel-MPI and LS-DYNA
 
 ENV MPIVARS=/opt/intel/impi/2019.9.304/intel64/bin/mpivars.sh
 ENV MPIRUN=/install/ansys_inc/v241/commonfiles/MPI/Intel/2021.10.0/linx64/bin/mpirun

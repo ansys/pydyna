@@ -122,13 +122,13 @@ jobs:
 
       - name: "Build the html documentation"
         env:
-            PYDYNA_RUN_CONTAINER: dyna_run:latest
+          PYDYNA_RUN_CONTAINER: dyna_run:latest
         run: |
           xvfb-run make -C doc html
 
       - name: "Build the pdf documentation"
         env:
-            PYDYNA_RUN_CONTAINER: dyna_run:latest
+          PYDYNA_RUN_CONTAINER: dyna_run:latest
         run: |
           make -C doc pdf
 
