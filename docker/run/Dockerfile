@@ -28,6 +28,17 @@ ENV LSDYNA_DP_MPP=/install/ansys_inc/v241/ansys/bin/linx64/lsdyna_dp_mpp.e
 ENV LSDYNA_SP=/install/ansys_inc/v241/ansys/bin/linx64/lsdyna_sp.e
 ENV LSDYNA_SP_MPP=/install/ansys_inc/v241/ansys/bin/linx64/lsdyna_sp_mpp.e
 
+# OPTIONAL
+# pass licensing environment variables into the build
+ARG LSTC_LICENSE
+ENV LSTC_LICENSE=$LSTC_LICENSE
+
+ARG ANSYSLI_SERVERS
+ENV ANSYSLI_SERVERS=$ANSYSLI_SERVERS
+
+ARG ANSYSLMD_LICENSE_FILE
+ENV ANSYSLMD_LICENSE_FILE=$ANSYSLMD_LICENSE_FILE
+
 COPY ./file.sh /
 
 ENTRYPOINT ["/file.sh"]
