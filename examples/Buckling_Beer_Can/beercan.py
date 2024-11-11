@@ -38,8 +38,7 @@ Python.
 # Import required packages, including those for the keywords, deck, and solver.
 
 import os
-import pathlib
-import shutil
+import tempfile
 
 import numpy as np
 import pandas as pd
@@ -48,9 +47,7 @@ from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import MemoryUnit, MpiOption, run_dyna
 from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
 
-thisdir = os.path.abspath(os.path.dirname(__file__))
-
-rundir = os.path.join(thisdir, "run")
+rundir = tempfile.TemporaryDirectory()
 mesh_file = DownloadManager().download_file("mesh.k", "ls-dyna", "Buckling_Beer_Can", destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can"))
 
 dynafile = "beer_can.k"
@@ -60,11 +57,6 @@ dynafile = "beer_can.k"
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create a deck, which is the container for all the keywords.
 # Then, create and append individual keywords to the deck.
-
-
-p = pathlib.Path(rundir)
-p.mkdir(parents=True, exist_ok=True)
-
 
 def write_deck(filepath):
     deck = Deck()
@@ -560,7 +552,7 @@ def write_deck(filepath):
     deck.append(boundary_spc_node)
 
     # Define nodes and elements
-    deck.append(kwd.Include(filename="mesh.k"))
+    deck.append(kwd.Include(filename=mesh_file))
 
     deck.export_file(filepath)
     return deck
@@ -570,8 +562,7 @@ def run_post(filepath):
     pass
 
 
-deck = write_deck(os.path.join(rundir, dynafile))
-shutil.copy(mesh_file, rundir)
+deck = write_deck(os.path.join(rundir.name, dynafile))
 
 ###############################################################################
 # View the model
@@ -579,7 +570,7 @@ shutil.copy(mesh_file, rundir)
 # You can use the PyVista ``plot`` method in the ``deck`` class to view
 # the model.
 
-out = deck.plot(cwd=rundir)
+out = deck.plot()
 
 ###############################################################################
 # Run the Dyna solver
@@ -587,5 +578,5 @@ out = deck.plot(cwd=rundir)
 #
 
 
-filepath = run_dyna(dynafile, working_directory=rundir, ncpu=2, mpi_option = MpiOption.MPP_INTEL_MPI, memory=20, memory_unit=MemoryUnit.MB)
+filepath = run_dyna(dynafile, working_directory=rundir.name, ncpu=2, mpi_option = MpiOption.MPP_INTEL_MPI, memory=20, memory_unit=MemoryUnit.MB)
 run_post(filepath)

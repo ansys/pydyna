@@ -40,6 +40,7 @@ a Pythonic environment.
 import os
 import pathlib
 import shutil
+import tempfile
 
 import pandas as pd
 
@@ -49,16 +50,10 @@ from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXA
 
 mesh_file = DownloadManager().download_file("nodes.k", "ls-dyna", "John_Reid_Pendulum", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pendulum"))
 
-#folder = os.path.dirname(output)
-
-
-thisdir = os.path.abspath(os.path.dirname(__file__))
-rundir = os.path.join(thisdir, "run")
+rundir = tempfile.TemporaryDirectory()
 
 dynafile = "pendulum.k"
 
-p = pathlib.Path(rundir)
-p.mkdir(parents=True, exist_ok=True)
 
 ###############################################################################
 # Create a deck and keywords
@@ -176,12 +171,12 @@ shutil.copy(mesh_file, rundir)
 # You can use the PyVista ``plot`` method in the ``deck`` class to view
 # the model.
 
-out = deck.plot(cwd=rundir)
+out = deck.plot()
 
 ###############################################################################
 # Run the Dyna solver
 # ~~~~~~~~~~~~~~~~~~~
 #
 
-filepath = run_dyna(dynafile, working_directory=rundir)
+filepath = run_dyna(dynafile, working_directory=rundir.name)
 run_post(filepath)

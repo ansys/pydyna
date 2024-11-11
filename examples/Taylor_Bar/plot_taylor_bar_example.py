@@ -54,7 +54,6 @@ from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXA
 
 workdir = tempfile.TemporaryDirectory()
 
-#pathlib.Path(workdir).mkdir(exist_ok=True)
 mesh_file = DownloadManager().download_file("taylor_bar_mesh.k", "ls-dyna", "Taylor_Bar", destination=os.path.join(EXAMPLES_PATH, "Taylor_Bar"))
 
 ###############################################################################
@@ -177,7 +176,6 @@ def write_input_deck(**kwargs):
 
 
 def run(directory):
-    shutil.copy(mesh_file, directory)
     result = run_dyna("input.k", working_directory=directory, stream=False)
     assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
     return result

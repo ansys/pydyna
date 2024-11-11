@@ -38,8 +38,7 @@ a Pythonic environment.
 # Import required packages, including those for the keywords, deck, and solver.
 
 import os
-import pathlib
-import shutil
+import tempfile
 
 import pandas as pd
 
@@ -49,13 +48,10 @@ from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXA
 
 mesh_file = DownloadManager().download_file("nodes.k", "ls-dyna", "John_Reid_Pipe", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pipe"))
 
-thisdir = os.path.abspath(os.path.dirname(__file__))
-rundir = os.path.join(thisdir, "run")
+rundir = tempfile.TemporaryDirectory()
 
 dynafile = "pipe.k"
 
-p = pathlib.Path(rundir)
-p.mkdir(exist_ok=True)
 
 ###############################################################################
 # Create a deck and keywords
@@ -150,7 +146,7 @@ def write_deck(filepath):
     deck.extend([kwd.DeformableToRigid(pid=1), kwd.DeformableToRigid(pid=2)])
 
     # Define nodes and elements
-    deck.extend([kwd.Include(filename="nodes.k")])
+    deck.extend([kwd.Include(filename=mesh_file)])
 
     deck.export_file(filepath)
     return deck
@@ -160,14 +156,13 @@ def run_post(filepath):
     pass
 
 
-deck = write_deck(os.path.join(rundir, dynafile))
-shutil.copy(mesh_file, rundir)
-deck.plot(cwd=rundir)
+deck = write_deck(os.path.join(rundir.name, dynafile))
+deck.plot()
 
 ###############################################################################
 # Run the Dyna solver
 # ~~~~~~~~~~~~~~~~~~~
 # Uncomment the following lines to run the Dyna solver.
 
-filepath = run_dyna(dynafile, working_directory=rundir)
+filepath = run_dyna(dynafile, working_directory=rundir.name)
 run_post(rundir)
