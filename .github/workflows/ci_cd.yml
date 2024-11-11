@@ -256,7 +256,7 @@ jobs:
 
       - name: Pull PyDyna-run image
         run: |
-          docker pull ${{ github.event.inputs.PyDynaRunContainer }}
+          docker pull ${{ env.PYDYNA_RUN_CONTAINER }}
 
       - name: Unit testing
         env:
