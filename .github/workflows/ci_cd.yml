@@ -130,7 +130,7 @@ jobs:
         env:
             PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
         run: |
-          make -C doc pdf
+          xvfb-run make -C doc pdf
 
       - name: "Upload html documentation"
         uses: actions/upload-artifact@v4
