@@ -37,8 +37,8 @@ jobs:
       - name: Build and export to Docker
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: docker/run
           file: docker/run/Dockerfile
-          push: false
+          push: true
           tags: ${{ env.REGISTRY }}/ansys/pydyna-run:latest
           cache-from: type=registry,ref=${{ env.REGISTRY }}/ansys/pydyna-run:latest
