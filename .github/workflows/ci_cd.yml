@@ -232,37 +232,33 @@ jobs:
     name: Test the "run" subpackage
     runs-on: ubuntu-latest
     needs: [code-style]
-    container:
-      image: ghcr.io/ansys/mechanical:24.1.0
-      options: --entrypoint /bin/bash
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-            apt update
-            apt install --reinstall ca-certificates
-            apt install software-properties-common git -y
-            add-apt-repository ppa:deadsnakes/ppa -y
-            apt install python3.11 python3.11-venv -y
-            python3.11 -m ensurepip --default-pip
-            python3.11 -m pip install --upgrade pip
-            python3.11 -m venv /env
+      - name: "Set up Python ${{ env.MAIN_PYTHON_VERSION }}"
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: 'pyproject.toml'
 
-      - name: Install library
+      - name: "Install python dependencies"
         run: |
-          . /env/bin/activate
-          pip install .[tests]
+          python -m pip install docker # todo make this an option?
+          python -m pip install .[tests]
+
+      - name: Pull PyDyna-run image
+        run: |
+          docker pull ghcr.io/ansys/pydyna-run:latest
 
       - name: Unit testing
         env:
+          PYDYNA_RUN_CONTAINER: ghcr.io/ansys/pydyna-run:latest
           ANSYSLI_SERVERS: 2325@${{secrets.LICENSE_SERVER}}
           ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
           LSTC_LICENSE: ansys
         run: |
-          . /env/bin/activate
-          save-ansys-path --name dyna /install/ansys_inc/v241/ansys/bin/linx64/lsdyna_dp.e
           pytest -m run
 
   build-library:

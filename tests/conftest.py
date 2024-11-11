@@ -9,7 +9,7 @@ import pathlib
 
 import pytest
 from ansys.dyna.core.pre.launcher import ServerThread
-
+from ansys.dyna.core.run import run_dyna
 
 # from ansys.dyna.core.pre.Server.kwserver import *
 
@@ -166,6 +166,19 @@ def pytest_collection_modifyitems(config, items):
     [item.add_marker(skip_viz) for item in items if "viz" in item.keywords]
 
 
+class DynaRunner:
+    def run(self, *args, **kwargs):
+        if "PYDYNA_RUN_CONTAINER" in os.environ:
+            container_env = dict((k, os.environ[k]) for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE"))
+        else:
+            container_env = {}
+        return run_dyna(*args, container_env = container_env, **kwargs)
+
+@pytest.fixture
+def runner():
+    runner = DynaRunner()
+    return runner
+
 class StringUtils:
     def as_buffer(self, string: str) -> io.StringIO:
         s = io.StringIO(string)
@@ -184,8 +197,12 @@ class FileUtils:
         return text.replace("\r\n", "\n").replace("\r", "\n")
 
     @property
+    def testfiles_folder(self) -> pathlib.Path:
+        return pathlib.Path(__file__).parent / "testfiles"
+
+    @property
     def assets_folder(self) -> pathlib.Path:
-        return pathlib.Path(__file__).parent / "testfiles" / "keywords"
+        return self.testfiles_folder / "keywords"
 
     def read_file(self, file: pathlib.Path) -> str:
         with open(file, encoding="utf-8") as ref:
