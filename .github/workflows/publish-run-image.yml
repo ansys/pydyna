@@ -2,6 +2,11 @@ name: Docker images publishing
 
 on:
   workflow_dispatch:
+    inputs:
+      tagVersion:
+        description: 'Tag'
+        required: false
+        default: latest
   push:
     tags:
       - "*"
@@ -40,5 +45,5 @@ jobs:
           context: docker/run
           file: docker/run/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/ansys/pydyna-run:latest
+          tags: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ github.event.inputs.tagVersion }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/ansys/pydyna-run:latest
