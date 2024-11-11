@@ -41,4 +41,6 @@ ENV ANSYSLMD_LICENSE_FILE=$ANSYSLMD_LICENSE_FILE
 
 COPY ./file.sh /
 
+RUN ["chmod", "+x", "/file.sh"]
+
 ENTRYPOINT ["/file.sh"]
