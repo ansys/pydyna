@@ -1,11 +1,13 @@
-FROM ghcr.io/ansys/mechanical:24.1.0
+FROM ghcr.io/ansys/mechanical:24.1.0 AS pymechanical
 
-#TODO - update to a more recent mechanical imaged
-#TODO - reduce the size of this image by pruning unnecessary files from the Mechanical image
+FROM ubuntu:20.04
 
 LABEL description="lsdyna solver"
 
 # install Intel-MPI
+
+ENV TZ=America/New_York
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update -y
 RUN apt install -y wget
@@ -19,14 +21,31 @@ RUN echo "deb [signed-by=/usr/share/keyrings/intel-mpi-archive-keyring.gpg] http
 RUN apt update -y
 RUN apt install -y intel-mpi-rt-2019.9-304
 
+ARG MAJORVER=24
+ARG MINORVER=1
+ARG VER=$MAJORVER$MINORVER
+
+RUN mkdir -p /install/ansys_inc/shared_files
+RUN mkdir -p /install/ansys_inc/v$VER/ansys/bin/linx64
+RUN mkdir -p /install/ansys_inc/v$VER/mpi
+
+COPY --from=pymechanical /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp.e /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp.e
+COPY --from=pymechanical /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp_mpp.e /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp_mpp.e
+COPY --from=pymechanical /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp.e /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp.e
+COPY --from=pymechanical /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp_mpp.e /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp_mpp.e
+COPY --from=pymechanical /install/ansys_inc/v$VER/licensingclient /install/ansys_inc/v$VER/licensingclient
+COPY --from=pymechanical /install/ansys_inc/shared_files /install/ansys_inc/shared_files
+COPY --from=pymechanical /install/ansys_inc/v$VER/builddate.txt /install/ansys_inc/v$VER/builddate.txt
+COPY --from=pymechanical /install/ansys_inc/v$VER/commonfiles/MPI/Intel/2021.10.0/linx64/bin /install/ansys_inc/v$VER/mpi
+
 # Set environment variables pointing to Intel-MPI and LS-DYNA
 
 ENV MPIVARS=/opt/intel/impi/2019.9.304/intel64/bin/mpivars.sh
-ENV MPIRUN=/install/ansys_inc/v241/commonfiles/MPI/Intel/2021.10.0/linx64/bin/mpirun
-ENV LSDYNA_DP=/install/ansys_inc/v241/ansys/bin/linx64/lsdyna_dp.e
-ENV LSDYNA_DP_MPP=/install/ansys_inc/v241/ansys/bin/linx64/lsdyna_dp_mpp.e
-ENV LSDYNA_SP=/install/ansys_inc/v241/ansys/bin/linx64/lsdyna_sp.e
-ENV LSDYNA_SP_MPP=/install/ansys_inc/v241/ansys/bin/linx64/lsdyna_sp_mpp.e
+ENV MPIRUN=/install/ansys_inc/v$VER/mpi/mpirun
+ENV LSDYNA_DP=/install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp.e
+ENV LSDYNA_DP_MPP=/install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp_mpp.e
+ENV LSDYNA_SP=/install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp.e
+ENV LSDYNA_SP_MPP=/install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp_mpp.e
 
 # OPTIONAL
 # pass licensing environment variables into the build
