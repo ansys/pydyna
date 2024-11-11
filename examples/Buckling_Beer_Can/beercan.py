@@ -43,12 +43,15 @@ import tempfile
 import numpy as np
 import pandas as pd
 
-from ansys.dyna.core import Deck, keywords as kwd
+from ansys.dyna.core import Deck
+from ansys.dyna.core import keywords as kwd
+from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import MemoryUnit, MpiOption, run_dyna
-from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
 
 rundir = tempfile.TemporaryDirectory()
-mesh_file = DownloadManager().download_file("mesh.k", "ls-dyna", "Buckling_Beer_Can", destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can"))
+mesh_file = DownloadManager().download_file(
+    "mesh.k", "ls-dyna", "Buckling_Beer_Can", destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can")
+)
 
 dynafile = "beer_can.k"
 
@@ -57,6 +60,7 @@ dynafile = "beer_can.k"
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create a deck, which is the container for all the keywords.
 # Then, create and append individual keywords to the deck.
+
 
 def write_deck(filepath):
     deck = Deck()
@@ -578,5 +582,12 @@ out = deck.plot()
 #
 
 
-filepath = run_dyna(dynafile, working_directory=rundir.name, ncpu=2, mpi_option = MpiOption.MPP_INTEL_MPI, memory=20, memory_unit=MemoryUnit.MB)
+filepath = run_dyna(
+    dynafile,
+    working_directory=rundir.name,
+    ncpu=2,
+    mpi_option=MpiOption.MPP_INTEL_MPI,
+    memory=20,
+    memory_unit=MemoryUnit.MB,
+)
 run_post(filepath)

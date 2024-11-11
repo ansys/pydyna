@@ -11,29 +11,30 @@ inlet boundary condition. The executable file for LS-DYNA is
 import os
 import sys
 
-from ansys.dyna.core.pre import launch_dynapre
+from em_set_data import rlc_rogoseg
+
+from ansys.dyna.core.pre import examples, launch_dynapre
 from ansys.dyna.core.pre.dynaem import (
     DynaEM,
-    NodeSet,
-    SegmentSet,
-    SolidPart,
-    SolidFormulation,
     EMType,
-    Isopotential_ConnType,
     Isopotential,
+    Isopotential_ConnType,
+    NodeSet,
     RogoCoil,
+    SegmentSet,
+    SolidFormulation,
+    SolidPart,
 )
-from ansys.dyna.core.pre.dynamaterial import MatRigid,EMMATTYPE
-from em_set_data import rlc_rogoseg
-from ansys.dyna.core.pre import examples
+from ansys.dyna.core.pre.dynamaterial import EMMATTYPE, MatRigid
 from ansys.dyna.core.pre.misc import check_valid_ip
+
 # sphinx_gallery_thumbnail_path = '_static/pre/em/rlc_isopotential.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 
-solution = launch_dynapre(ip = hostname)
+solution = launch_dynapre(ip=hostname)
 fns = []
 path = examples.em_rlc_isopotential + os.sep
 fns.append(path + "em_rlc_isopotential.k")
@@ -44,12 +45,18 @@ solution.create_database_binary(dt=1e-4)
 emobj = DynaEM()
 solution.add(emobj)
 
-emobj.set_timestep(tssfac=1,timestep_size_for_mass_scaled=1e-4)
+emobj.set_timestep(tssfac=1, timestep_size_for_mass_scaled=1e-4)
 
 emobj.analysis.set_timestep(timestep=1e-4)
 emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING)
 
-matrigid = MatRigid(mass_density=7000, young_modulus=2e11,center_of_mass_constraint=1,translational_constraint=7,rotational_constraint=7)
+matrigid = MatRigid(
+    mass_density=7000,
+    young_modulus=2e11,
+    center_of_mass_constraint=1,
+    translational_constraint=7,
+    rotational_constraint=7,
+)
 matrigid.set_em_permeability_equal(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=1e4)
 
 part1 = SolidPart(1)
@@ -57,12 +64,49 @@ part1.set_material(matrigid)
 part1.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
 emobj.parts.add(part1)
 
-nset1 = NodeSet([429,433,437,441,445,449,453,457,461,465,469,473,477,481,485,489,493,497,501,505,509,513,517,521,525])
-nset2 = NodeSet([26,31,36,41,46,51,56,61,66,71,76,81,86,91,96,101,106,111,116,121,126,131,136,141,146])
+nset1 = NodeSet(
+    [
+        429,
+        433,
+        437,
+        441,
+        445,
+        449,
+        453,
+        457,
+        461,
+        465,
+        469,
+        473,
+        477,
+        481,
+        485,
+        489,
+        493,
+        497,
+        501,
+        505,
+        509,
+        513,
+        517,
+        521,
+        525,
+    ]
+)
+nset2 = NodeSet(
+    [26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 76, 81, 86, 91, 96, 101, 106, 111, 116, 121, 126, 131, 136, 141, 146]
+)
 isopos_conn1 = Isopotential(nset1)
 isopos_conn2 = Isopotential(nset2)
-emobj.connect_isopotential(contype = Isopotential_ConnType.RLC_CIRCUIT,isopotential1 = isopos_conn1,value=5e-4,inductance=7.8e-5,capacity=0.0363,initial_voltage=5000)
-emobj.connect_isopotential(contype = Isopotential_ConnType.VOLTAGE_SOURCE,isopotential1 = isopos_conn2)
+emobj.connect_isopotential(
+    contype=Isopotential_ConnType.RLC_CIRCUIT,
+    isopotential1=isopos_conn1,
+    value=5e-4,
+    inductance=7.8e-5,
+    capacity=0.0363,
+    initial_voltage=5000,
+)
+emobj.connect_isopotential(contype=Isopotential_ConnType.VOLTAGE_SOURCE, isopotential1=isopos_conn2)
 emobj.add(RogoCoil(SegmentSet(rlc_rogoseg)))
 
 emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)

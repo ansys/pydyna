@@ -10,21 +10,22 @@ import os
 import sys
 
 import ansys.dyna.core.solver as solver
+
 #
-hostname = 'localhost'
-port = '5000'
+hostname = "localhost"
+port = "5000"
 
 
 def get_from_k8s(service):
     """Get the port of the DYNA server service when running Kubernetes.
     locally"""
-    ip = 'localhost'   # for local k8s cluster
+    ip = "localhost"  # for local k8s cluster
     f = os.popen("kubectl get service %s" % service, "r")
     f.readline()
     p = f.readline()
     n1 = p.find(":")
     n2 = p.find("/")
-    p = p[n1+1:n2]
+    p = p[n1 + 1 : n2]
     return (ip, p)
 
 
@@ -39,7 +40,7 @@ def get_from_minikube(service):
     p = f.readline()
     n1 = p.find(":")
     n2 = p.find("/")
-    p = p[n1+1:n2]
+    p = p[n1 + 1 : n2]
     return (ip, p)
 
 
@@ -48,37 +49,37 @@ args = sys.argv[1:]
 # Check for special command-line arg ``runfile <filename>`` to pull commands.
 # from
 #
-if("runfile" in args):
+if "runfile" in args:
     i = args.index("runfile")
-    runfile = args[i+1]
-    args = args[:i] + args[i+2:]
+    runfile = args[i + 1]
+    args = args[:i] + args[i + 2 :]
 else:
     runfile = None
 #
 try:
     hostname = args[0]
 except IndexError:
-    hostname = 'localhost'
+    hostname = "localhost"
 try:
     port = args[1]
     service = port
 except IndexError:
-    port = '5000'
-    service = 'server'
+    port = "5000"
+    service = "server"
 #
 # Special code here for testing on my system with minikube:
 # if run with just "minikube" as the argument, figure out
 # the correct IP address and port to use.  If there is a second
 # argument, it is the name of the "server" service, which defaults to "server"
 #
-if(hostname == 'minikube'):
+if hostname == "minikube":
     (hostname, port) = get_from_minikube(service)
     print("Using %s:%s" % (hostname, port))
 #
 # Similarly, if running under kubernetes locally, get the hostname
 # and port to use
 #
-elif(hostname == 'k8s'):
+elif hostname == "k8s":
     (hostname, port) = get_from_k8s(service)
     print("Using %s:%s" % (hostname, port))
 
@@ -89,19 +90,19 @@ dyna = solver.DynaSolver(hostname, port)
 #
 # Run commands from the runfile first, if there are any
 #
-if(runfile):
+if runfile:
     dyna.runfile(runfile)
 #
 # If the runfile didn't end with "quit" then process commands from the terminal
 # until we get a "quit" command
 #
-while(1):
-    #cmdin = input("> ").rstrip()
-    #cannot use input() builtin function in Sphinx-Gallery examples
+while 1:
+    # cmdin = input("> ").rstrip()
+    # cannot use input() builtin function in Sphinx-Gallery examples
     cmdin = "quit"
     try:
         dyna.send(cmdin)
-        if(cmdin == 'quit'):
+        if cmdin == "quit":
             sys.exit(0)
     except solver.RunningError as err:
         print(err)

@@ -38,17 +38,18 @@ a Pythonic environment.
 # Import required packages, including those for the keywords, deck, and solver.
 
 import os
-import pathlib
-import shutil
 import tempfile
 
 import pandas as pd
 
-from ansys.dyna.core import Deck, keywords as kwd
+from ansys.dyna.core import Deck
+from ansys.dyna.core import keywords as kwd
+from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import run_dyna
-from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
 
-mesh_file = DownloadManager().download_file("nodes.k", "ls-dyna", "John_Reid_Pendulum", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pendulum"))
+mesh_file = DownloadManager().download_file(
+    "nodes.k", "ls-dyna", "John_Reid_Pendulum", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pendulum")
+)
 
 rundir = tempfile.TemporaryDirectory()
 
@@ -152,7 +153,7 @@ def write_deck(filepath):
     deck.extend([kwd.DeformableToRigid(pid=1), kwd.DeformableToRigid(pid=2)])
 
     # Define nodes and elements
-    deck.extend([kwd.Include(filename="nodes.k")])
+    deck.append(kwd.Include(filename=mesh_file))
 
     deck.export_file(filepath)
     return deck
@@ -163,7 +164,6 @@ def run_post(filepath):
 
 
 deck = write_deck(os.path.join(rundir, dynafile))
-shutil.copy(mesh_file, rundir)
 
 ###############################################################################
 # View the model

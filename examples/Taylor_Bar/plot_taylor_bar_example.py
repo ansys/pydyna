@@ -39,28 +39,31 @@ a Pythonic environment.
 
 # sphinx_gallery_thumbnail_number = 1
 
-import pathlib
 import os
-import shutil
+import pathlib
 import tempfile
 
+import ansys.dpf.core as dpf
 import matplotlib.pyplot as plt
 import pandas as pd
 
-import ansys.dpf.core as dpf
-from ansys.dyna.core import Deck, keywords as kwd
+from ansys.dyna.core import Deck
+from ansys.dyna.core import keywords as kwd
+from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import run_dyna
-from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
 
 workdir = tempfile.TemporaryDirectory()
 
-mesh_file = DownloadManager().download_file("taylor_bar_mesh.k", "ls-dyna", "Taylor_Bar", destination=os.path.join(EXAMPLES_PATH, "Taylor_Bar"))
+mesh_file = DownloadManager().download_file(
+    "taylor_bar_mesh.k", "ls-dyna", "Taylor_Bar", destination=os.path.join(EXAMPLES_PATH, "Taylor_Bar")
+)
 
 ###############################################################################
 # Create a deck and keywords
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create a deck, which is the container for all the keywords.
 # Then, create and append individual keywords to the deck.
+
 
 def create_input_deck(initial_velocity):
     deck = Deck()
@@ -151,6 +154,7 @@ def create_input_deck(initial_velocity):
     deck.append(kwd.Include(filename=mesh_file))
     return deck
 
+
 def write_input_deck(**kwargs):
     initial_velocity = kwargs.get("initial_velocity")
     wd = kwargs.get("wd")
@@ -179,6 +183,7 @@ def run(directory):
     result = run_dyna("input.k", working_directory=directory, stream=False)
     assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
     return result
+
 
 ###############################################################################
 # Define the DPF output function
