@@ -38,6 +38,7 @@ Python.
 # Import required packages, including those for the keywords, deck, and solver.
 
 import os
+import subprocess
 import tempfile
 
 import numpy as np
@@ -582,12 +583,17 @@ out = deck.plot()
 #
 
 
-filepath = run_dyna(
-    dynafile,
-    working_directory=rundir.name,
-    ncpu=2,
-    mpi_option=MpiOption.MPP_INTEL_MPI,
-    memory=20,
-    memory_unit=MemoryUnit.MB,
-)
+try:
+    filepath = run_dyna(
+        dynafile,
+        working_directory=rundir.name,
+        ncpu=2,
+        mpi_option=MpiOption.MPP_INTEL_MPI,
+        memory=20,
+        memory_unit=MemoryUnit.MB,
+    )
+except subprocess.CalledProcessError:
+    # this example doesn't run to completion because it is a highly nonlinear buckling
+    pass
+
 run_post(filepath)
