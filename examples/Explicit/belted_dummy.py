@@ -18,6 +18,7 @@ from belted_dummy_data import (
     curvedata,
     dampingconst,
     elasticmats,
+    extra_nodes,
     jointlist,
     lcidlist,
     motion_curve_x,

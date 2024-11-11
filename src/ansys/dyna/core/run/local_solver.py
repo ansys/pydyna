@@ -154,7 +154,9 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
         if container != None:
             kwargs["container"] = container
         if "container_env" not in kwargs:
-            kwargs["container_env"] = dict((k, os.environ[k]) for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE"))
+            kwargs["container_env"] = dict(
+                (k, os.environ[k]) for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE")
+            )
 
     runner = get_runner(**kwargs)
     runner.set_input(input_file, wdir)
