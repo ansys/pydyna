@@ -163,7 +163,7 @@ def run_post(filepath):
     pass
 
 
-deck = write_deck(os.path.join(rundir, dynafile))
+deck = write_deck(os.path.join(rundir.name, dynafile))
 
 ###############################################################################
 # View the model

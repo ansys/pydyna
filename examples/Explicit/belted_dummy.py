@@ -14,7 +14,21 @@ a belted dummy model. The executable file for LS-DYNA is
 import os
 import sys
 
-from belted_dummy_data import motion_curve_x, motion_curve_y, motion_nodes
+from belted_dummy_data import (
+    curvedata,
+    dampingconst,
+    elasticmats,
+    jointlist,
+    lcidlist,
+    motion_curve_x,
+    motion_curve_y,
+    motion_nodes,
+    nlist,
+    rigidmats,
+    segments,
+    shellsec,
+    vector,
+)
 
 from ansys.dyna.core.pre import examples, launch_dynapre
 from ansys.dyna.core.pre.dynamaterial import (
