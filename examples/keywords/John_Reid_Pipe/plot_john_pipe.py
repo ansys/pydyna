@@ -45,6 +45,9 @@ import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import run_dyna
+from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
+
+mesh_file = DownloadManager().download_file("nodes.k", "ls-dyna", "John_Reid_Pipe", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pipe"))
 
 dynadir = "run"
 dynafile = "pipe.k"
@@ -156,7 +159,7 @@ def run_post(filepath):
 
 
 deck = write_deck(os.path.join(dynadir, dynafile))
-shutil.copy("nodes.k", "run/nodes.k")
+shutil.copy(mesh_file, "run/nodes.k")
 deck.plot(cwd=dynadir)
 
 ###############################################################################

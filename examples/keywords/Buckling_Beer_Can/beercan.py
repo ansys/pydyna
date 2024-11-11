@@ -46,6 +46,9 @@ import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import run_dyna
+from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
+
+mesh_file = DownloadManager().download_file("mesh.k", "ls-dyna", "Buckling_Beer_Can", destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can"))
 
 dynadir = "run"
 dynafile = "beer_can.k"
@@ -566,7 +569,7 @@ def run_post(filepath):
 
 
 deck = write_deck(os.path.join(dynadir, dynafile))
-shutil.copy("mesh.k", "run/mesh.k")
+shutil.copy(mesh_file, "run/mesh.k")
 
 ###############################################################################
 # View the model

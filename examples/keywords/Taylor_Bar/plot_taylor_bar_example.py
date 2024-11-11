@@ -51,7 +51,9 @@ import pandas as pd
 import ansys.dpf.core as dpf
 from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import run_dyna
+from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
 
+mesh_file = DownloadManager().download_file("taylor_bar_mesh.k", "ls-dyna", "Taylor_Bar", destination=os.path.join(EXAMPLES_PATH, "Taylor_Bar"))
 
 ###############################################################################
 # Create a deck and keywords
@@ -157,7 +159,7 @@ def create_input_deck(**kwargs):
     #          the absolute path.  You may choose to solve this problem in a different
     #          way, for example by copying the mesh file to that working directory
     #          before solving and using only the file name without an absolute path
-    deck.append(kwd.Include(filename=os.path.abspath("taylor_bar_mesh.k")))
+    deck.append(kwd.Include(filename=mesh_file))
 
     # Convert deck to string
     deck_string = deck.write()
@@ -178,7 +180,7 @@ def create_input_deck(**kwargs):
 
 def run(**kwargs):
     wd = kwargs.get("wd")
-    shutil.copy("taylor_bar_mesh.k", f"{wd}/taylor_bar_mesh.k")
+    shutil.copy(mesh_file, f"{wd}/taylor_bar_mesh.k")
     inputfile = os.path.join(wd, "input.k")
     run_dyna(inputfile)
     assert os.path.isfile(os.path.join(wd, "d3plot"))
