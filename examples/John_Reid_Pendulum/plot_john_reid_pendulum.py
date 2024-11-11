@@ -45,6 +45,11 @@ import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import run_dyna
+from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
+
+mesh_file = DownloadManager().download_file("nodes.k", "ls-dyna", "John_Reid_Pendulum", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pendulum"))
+
+#folder = os.path.dirname(output)
 
 
 thisdir = os.path.abspath(os.path.dirname(__file__))
@@ -163,7 +168,7 @@ def run_post(filepath):
 
 
 deck = write_deck(os.path.join(rundir, dynafile))
-shutil.copy(os.path.join(thisdir,"nodes.k"), rundir)
+shutil.copy(mesh_file, rundir)
 
 ###############################################################################
 # View the model

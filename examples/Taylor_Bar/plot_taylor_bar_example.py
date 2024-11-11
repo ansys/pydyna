@@ -49,11 +49,13 @@ import pandas as pd
 import ansys.dpf.core as dpf
 from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import run_dyna
+from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
 
 thisdir = os.path.abspath(os.path.dirname(__file__))
 workdir = os.path.join(thisdir, "workdir")
 
 pathlib.Path(workdir).mkdir(exist_ok=True)
+mesh_file = DownloadManager().download_file("taylor_bar_mesh.k", "ls-dyna", "Taylor_Bar", destination=os.path.join(EXAMPLES_PATH, "Taylor_Bar"))
 
 ###############################################################################
 # Create a deck and keywords
@@ -166,6 +168,8 @@ def write_input_deck(**kwargs):
         raise Exception("Missing input!")
     deck = create_input_deck(initial_velocity)
 
+    deck.append(kwd.Include(filename="taylor_bar_mesh.k"))
+
     # Convert deck to string
     deck_string = deck.write()
 
@@ -184,12 +188,10 @@ def write_input_deck(**kwargs):
 
 
 def run(directory):
-    shutil.copy(os.path.join(thisdir,"taylor_bar_mesh.k"), directory)
+    shutil.copy(mesh_file, directory)
     result = run_dyna("input.k", working_directory=directory, stream=False)
     assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
     return result
-
-
 
 ###############################################################################
 # Define the DPF output function
