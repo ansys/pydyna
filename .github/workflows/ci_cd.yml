@@ -245,6 +245,7 @@ jobs:
 
       - name: "Install python dependencies"
         run: |
+          python -m pip install docker # todo make this an option?
           python -m pip install .[tests]
 
       - name: Pull PyDyna-run image
