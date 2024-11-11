@@ -13,7 +13,6 @@ from ansys.dyna.core.run import run_dyna
 
 # from ansys.dyna.core.pre.Server.kwserver import *
 
-@pytest.fixture
 def resolve_test_file(basename, additional_path=""):
     """Resolves a test file's full path based on the base name and the
     environment.
