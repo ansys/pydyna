@@ -39,6 +39,6 @@ jobs:
         with:
           context: docker/run
           file: docker/run/Dockerfile
-          push: false
+          push: true
           tags: ${{ env.REGISTRY }}/pydyna-run:latest
           cache-from: type=registry,ref=${{ env.REGISTRY }}/pydyna-run:latest
