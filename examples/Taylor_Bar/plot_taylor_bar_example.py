@@ -42,6 +42,7 @@ a Pythonic environment.
 import pathlib
 import os
 import shutil
+import tempfile
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -51,10 +52,9 @@ from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import run_dyna
 from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
 
-thisdir = os.path.abspath(os.path.dirname(__file__))
-workdir = os.path.join(thisdir, "workdir")
+workdir = tempfile.TemporaryDirectory()
 
-pathlib.Path(workdir).mkdir(exist_ok=True)
+#pathlib.Path(workdir).mkdir(exist_ok=True)
 mesh_file = DownloadManager().download_file("taylor_bar_mesh.k", "ls-dyna", "Taylor_Bar", destination=os.path.join(EXAMPLES_PATH, "Taylor_Bar"))
 
 ###############################################################################
@@ -149,16 +149,7 @@ def create_input_deck(initial_velocity):
     )
 
     # Import mesh
-    #    note: this assumes that `taylor_bar_mesh` is in the working directory
-    #          an absolute path is used becuase the problem is solved in another
-    #          working directory, and the `Include` keyword will need to point to
-    #          the absolute path.  You may choose to solve this problem in a different
-    #          way, for example by copying the mesh file to that working directory
-    #          before solving and using only the file name without an absolute path
-    deck.append(kwd.Include(filename="taylor_bar_mesh.k"))
-
-
-
+    deck.append(kwd.Include(filename=mesh_file))
     return deck
 
 def write_input_deck(**kwargs):
@@ -167,8 +158,6 @@ def write_input_deck(**kwargs):
     if not all((initial_velocity, wd)):
         raise Exception("Missing input!")
     deck = create_input_deck(initial_velocity)
-
-    deck.append(kwd.Include(filename="taylor_bar_mesh.k"))
 
     # Convert deck to string
     deck_string = deck.write()
@@ -221,7 +210,7 @@ def get_global_ke(directory):
 # ~~~~~~~~~~~~~~
 # etc etc
 deck_for_graphic = create_input_deck(300e3)
-#deck_for_graphic.plot(cwd=thisdir)
+deck_for_graphic.plot()
 
 ###############################################################################
 # Run a parametric solve
@@ -237,7 +226,7 @@ initial_velocities = [275.0e3, 300.0e3, 325.0e3, 350.0e3]
 
 for index, initial_velocity in enumerate(initial_velocities):
     # Create a folder for each parameter
-    wd = os.path.join(workdir, "tb_vel_%s" % initial_velocity)
+    wd = os.path.join(workdir.name, "tb_vel_%s" % initial_velocity)
     pathlib.Path(wd).mkdir(exist_ok=True)
     # Create LS-Dyna input deck
     write_input_deck(initial_velocity=initial_velocity, wd=wd)
