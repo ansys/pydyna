@@ -37,7 +37,7 @@ jobs:
       - name: Build and export to Docker
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: docker/run
           file: docker/run/Dockerfile
           push: false
           tags: ${{ env.REGISTRY }}/pydyna-run:latest
