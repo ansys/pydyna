@@ -164,13 +164,9 @@ def write_input_deck(**kwargs):
         raise Exception("Missing input!")
     deck = create_input_deck(initial_velocity)
 
-    # Convert deck to string
-    deck_string = deck.write()
-
-    # Create LS-DYNA input deck
+    # Write LS-DYNA input deck
     os.makedirs(wd, exist_ok=True)
-    with open(os.path.join(wd, "input.k"), "w") as file_handle:
-        file_handle.write(deck_string)
+    deck.export_file(os.path.join(wd, "input.k"))
     shutil.copyfile(mesh_file, os.path.join(wd, mesh_file_name))
 
 
