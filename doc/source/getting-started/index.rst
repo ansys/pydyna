@@ -110,6 +110,10 @@ this does not require Docker.
 
 .. include:: ./RUN_README.rst
 
+Use ``ansys.dyna.core.keywords`` to work with keywords
+
+.. include:: ./KEYWORDS_README.rst
+
 Keyword and run example
 -----------------------
 
