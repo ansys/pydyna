@@ -177,9 +177,8 @@ def write_input_deck(**kwargs):
 
 
 def run(directory):
-    result = run_dyna("input.k", working_directory=directory, stream=False)
+    run_dyna("input.k", working_directory=directory, stream=False)
     assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
-    return result
 
 
 ###############################################################################
