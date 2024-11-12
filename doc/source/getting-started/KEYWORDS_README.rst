@@ -26,10 +26,10 @@ Examples
 Examples showing end-to-end workflows for using PyDyna -
 write a deck using the ``keywords`` module and run the solver using the ``run`` module.
 
-#. Buckling_Beer_Can
-#. John_Reid_Pendulum
-#. John_Reid_Pipe
-#. Taylor_Bar
+#. ``Buckling_Beer_Can``
+#. ``John_Reid_Pendulum``
+#. ``John_Reid_Pipe``
+#. ``Taylor_Bar``
 
 .. - `API reference <api_reference_pydyna_keywords_>`_: Provides API member descriptions and usage examples.
 .. - `Examples <examples_pydyna_keywords_>`_: Provides examples showing end-to-end workflows for using PyDyna -
