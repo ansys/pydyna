@@ -38,8 +38,8 @@ Python.
 # Import required packages, including those for the keywords, deck, and solver.
 
 import os
-import subprocess
 import shutil
+import subprocess
 import tempfile
 
 import numpy as np
