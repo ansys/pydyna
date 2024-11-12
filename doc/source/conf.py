@@ -29,6 +29,7 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.inheritance_diagram',
     "sphinx_jinja",
+    "pyvista.ext.plot_directive",
 ]
 
 # Intersphinx mapping
