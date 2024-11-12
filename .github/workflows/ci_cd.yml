@@ -122,15 +122,12 @@ jobs:
 
       - name: "Build the html documentation"
         env:
+          ANSYSLI_SERVERS: 2325@${{secrets.LICENSE_SERVER}}
+          ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
+          LSTC_LICENSE: ansys
           PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
         run: |
           xvfb-run make -C doc html
-
-      - name: "Build the pdf documentation"
-        env:
-            PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
-        run: |
-          make -C doc pdf
 
       - name: "Upload html documentation"
         uses: actions/upload-artifact@v4
@@ -138,6 +135,17 @@ jobs:
           name: documentation-html
           path: doc/_build/html
           retention-days: 7
+
+      - name: "Build the pdf documentation"
+        env:
+          ANSYSLI_SERVERS: 2325@${{secrets.LICENSE_SERVER}}
+          ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
+          LSTC_LICENSE: ansys
+          PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
+          PYDYNA_RUN_STREAM: "0"
+        run: |
+          xvfb-run make -C doc pdf
+
 
       - name: "Upload pdf documentation"
         uses: actions/upload-artifact@v4

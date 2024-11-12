@@ -87,7 +87,7 @@ Working with LS-DYNA keywords
 -----------------------------
 The ``keywords`` module can be used to interact with LS-DYNA keywords.
 
-.. include:: ./KEYWOERDS_README.rst
+.. include:: ./KEYWORDS_README.rst
 
 Run PyDYNA server locally
 -------------------------

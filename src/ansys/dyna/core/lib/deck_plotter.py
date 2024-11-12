@@ -40,6 +40,8 @@ def merge_keywords(
     deck: Deck,
 ) -> typing.Tuple[pd.DataFrame, typing.Dict]:
     """
+    Merge mesh keywords.
+
     Given a deck, merges specific keywords (NODE, ELEMENT_SHELL, ELEMENT_BEAM, ELEMENT_SOLID)
     and returns tham as data frames.
     """
@@ -64,7 +66,9 @@ def process_nodes(nodes_df):
 
 def shell_facet_array(facets: pd.DataFrame) -> np.array:
     """
-    facets are a pandas frame that is a sequence of integers
+    Get the shell facet array from the DataFrame.
+
+    Facets are a pandas frame that is a sequence of integers
     or NAs with max length of 8.
     valid rows contain 3,4,6, or 8 items consecutive from the
     left.  we don't plot quadratic edges so 6/8 collapse to 3/4
@@ -98,7 +102,9 @@ def shell_facet_array(facets: pd.DataFrame) -> np.array:
 
 def solid_array(solids: pd.DataFrame):
     """
-    solids are a pandas frame that is a sequence of integers
+    Get the solid array from the DataFrame.
+
+    Solids are a pandas frame that is a sequence of integers
     or NAs with max length of 28.
     valid rows contain 3, 4, 6, or 8 items consecutive from the
     left.  We don't plot quadratic edges so 6/8 collapse to 3/4
@@ -152,7 +158,9 @@ def solid_array(solids: pd.DataFrame):
 
 def line_array(lines: pd.DataFrame) -> np.array:
     """
-    line are a pandas frame that is a sequence of integers
+    Convert DataFrame to lines array.
+
+    `lines` is a pandas frame that is a sequence of integers
     or NAs with max length of 2.
     valid rows contain 2 items consecutive from the
     left.
@@ -179,7 +187,9 @@ def line_array(lines: pd.DataFrame) -> np.array:
 
 
 def map_facet_nid_to_index(flat_facets: np.array, mapping: typing.Dict) -> np.array:
-    """Given a flat list of facets or lines, use the mapping from nid to python index
+    """Convert mapping to numpy array.
+
+    Given a flat list of facets or lines, use the mapping from nid to python index
     to output the numbering system for pyvista from the numbering from dyna
     """
     # Map the indexes but skip the prefix
@@ -198,10 +208,12 @@ def map_facet_nid_to_index(flat_facets: np.array, mapping: typing.Dict) -> np.ar
 
 
 def extract_shell_facets(shells: pd.DataFrame, mapping):
-    """shells table comes in with the form
+    """Extract shell faces from DataFrame.
+
+    Shells table comes in with the form
     |  eid  | nid1 | nid2 | nid3 | nid4
-       1       10     11     12
-      20       21     22     23     24
+    |  1    | 10   | 11   | 12   |
+    |  20   | 21   | 22   | 23   | 24
 
     but the array needed for pyvista polydata is
     of the form where each element is prefixed by the length of the element node list
@@ -234,10 +246,12 @@ def extract_shell_facets(shells: pd.DataFrame, mapping):
 
 
 def extract_lines(beams: pd.DataFrame, mapping: typing.Dict[int, int]) -> np.ndarray:
-    """beams table comes in with the form with extra information not supported,
+    """Extract lines from DataFrame.
+
+    Beams table comes in with the form with extra information not supported,
     |  eid  | nid1 | nid2
-       1       10     11
-      20       21     22
+    |  1    | 10   | 11
+    |  20   | 21   | 22
 
       we only care about nid 1 and 2
 
@@ -298,7 +312,7 @@ def get_pyvista():
 
 
 def get_polydata(deck: Deck, cwd=None):
-    """Creates the PolyData Object for plotting from a given deck with nodes and elements"""
+    """Create the PolyData Object for plotting from a given deck with nodes and elements."""
 
     # import this lazily (otherwise this adds over a second to the import time of pyDyna)
     pv = get_pyvista()
@@ -328,6 +342,6 @@ def get_polydata(deck: Deck, cwd=None):
 
 
 def plot_deck(deck, **args):
-    """Plot wrapper"""
+    """Plot the deck."""
     plot_data = get_polydata(deck, args.pop("cwd", ""))
     return plot_data.plot()

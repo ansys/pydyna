@@ -9,25 +9,18 @@ The executable file for LS-DYNA is ``ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_
 import os
 import sys
 
-from ansys.dyna.core.pre import launch_dynapre
-from ansys.dyna.core.pre.dynasale import (
-    DynaSALE,
-    ControlPoint,
-    AdvectionMethod,
-    StructuredMesh,
-    FillDirection,
-    Point,
-)
 from ansys.dyna.core.pre import dynamaterial as matDB
-from ansys.dyna.core.pre import examples
+from ansys.dyna.core.pre import examples, launch_dynapre
+from ansys.dyna.core.pre.dynasale import AdvectionMethod, ControlPoint, DynaSALE, FillDirection, Point, StructuredMesh
 from ansys.dyna.core.pre.misc import check_valid_ip
+
 # sphinx_gallery_thumbnail_path = '_static/pre/sale/efpcase.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 
-efp_solution = launch_dynapre(ip = hostname)
+efp_solution = launch_dynapre(ip=hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
 path = examples.sale_efp + os.sep
@@ -40,7 +33,7 @@ efp_solution.set_termination(280)
 efp = DynaSALE()
 efp_solution.add(efp)
 
-# set post result ouput interval
+# set post result output interval
 efp.set_output_interval(5.0)
 
 # set analysis type
@@ -94,7 +87,7 @@ mesh.fill(
 # Set the initial conditions
 mesh.initial_detonation(Point(0, 0, 19.33))
 
-# set outut datebase
+# set output datebase
 efp_solution.set_output_database(matsum=0.2, glstat=0.2)
 
 # save file on server end
