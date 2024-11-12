@@ -158,6 +158,11 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
                 (k, os.environ[k]) for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE")
             )
 
+    if "stream" not in kwargs:
+        stream = os.environ.get("PYDYNA_RUN_STREAM", None)
+        if stream != None:
+            kwargs["stream"] = bool(int(stream))
+
     runner = get_runner(**kwargs)
     runner.set_input(input_file, wdir)
 

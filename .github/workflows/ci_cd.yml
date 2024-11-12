@@ -135,6 +135,7 @@ jobs:
           ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
           LSTC_LICENSE: ansys
           PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
+          PYDYNA_RUN_STREAM: 0
         run: |
           xvfb-run make -C doc pdf
 
