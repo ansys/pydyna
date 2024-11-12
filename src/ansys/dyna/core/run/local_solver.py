@@ -39,14 +39,14 @@ except ImportError:
 
 
 def __make_temp_dir():
-    """Creates a temporary directory for the job."""
+    """Create a temporary directory for the job."""
     job_folder = os.path.join(tempfile.gettempdir(), "ansys", "pydyna", "jobs")
     pathlib.Path(job_folder).mkdir(parents=True, exist_ok=True)
     return tempfile.mkdtemp(dir=job_folder)
 
 
 def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str]:
-    """Returns the working directory and input file from a launch_dyna input."""
+    """Return the working directory and input file from a launch_dyna input."""
     wdir = kwargs.get("working_directory", None)
     if isinstance(input, str):
         input_file = input
@@ -66,7 +66,7 @@ def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str
 
 
 def get_runner(**kwargs) -> typing.Any:
-    """Returns the runner for the job."""
+    """Return the runner for the job."""
     container = kwargs.get("container", None)
     if container != None:
         if not HAS_DOCKER:
@@ -79,7 +79,7 @@ def get_runner(**kwargs) -> typing.Any:
 
 
 def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
-    """Runs the Ls-Dyna solver with the given input file.
+    """Run the Ls-Dyna solver with the given input file.
 
     Parameters
     ----------
@@ -87,48 +87,40 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
         Either the path to a dyna keyword file or an instance of
         ``ansys.dyna.keywords.Deck``.
     **kwargs : dict
-        Keyword arguments.
-        * mpi_option : int
+        mpi_option : int
             The mpi option to use. Choose from the values defined in ``MpiOption``.
             Defaults to MpiOption.SMP.
-        * precision : int
+        precision : int
             Floating point precision. Choose from the values defined in ``Precision``.
             Defaults to Precision.DOUBLE.
-        * version : str
+        version : str
             Version of Ansys Unified installed to use.
             Defaults to: TODO (find the latest one?).
-        * executable : str
+        executable : str
             Optional and Linux-Only: The name of the DYNA solver executable.
             Default is s based on the value of the ``mpi_option`` argument.
             On linux: it can be the full path.
             Also on linux, ansys-tools-path can be used to save a custom location of
             a dyna executable so that it doesn't need to be set here each time.
-
-        * ncpu : int
+        ncpu : int
             Number of cpus.
             Defaults to 1.
-
-        * memory : int
+        memory : int
             Amount of memory units, as defined by `memory_unit` for DYNA to use.
             Defaults to 20.
-
-        * memory_unit : int
+        memory_unit : int
             Memory unit.  Choose from the values defined in ``MemoryUnit``.
             Defaults to MemoryUnit.MB.
-
-        * working_directory : str
+        working_directory : str
             Working directory.
             If the `input` parameter is a path to the input file,
             defaults to the same folder as that file.  Otherwise, the job is run
             in a new folder under $TMP/ansys/pydyna/jobs.
-
-        * container : str
+        container : str
             DockerContainer to run LS-DYNA in.
-
-        * container_env: dict()
+        container_env : dict()
             Environment variables to pass into the docker container.
-
-        * stream: bool
+        stream : bool
             Currently only affects runs using the `container` option.
             If True, the stdout of solver is streamed to python's stdout during the solve.
             If False, the solver stdout is printed once after the container exits.
@@ -136,25 +128,37 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
 
     Returns
     -------
-    str
+    result : str
         The working directory where the solver is launched.
+        If `stream` is `False` and `container` is set, returns the stdout of the run
+
     """
-    """TODO:
-        jobname => jobid={jobname}
-        override => clear all generated files before running (like in launch_mapdl)
-        additional_switches => literal string to add to the command line of the dyna solver
-        cleanup_on_exit => maybe delete some unneeded files to save space
-        license_server_check, license_type => as in pymapdl
-    """
+
+    # TODO: jobname => jobid={jobname}
+    # TODO: override => clear all generated files before running (like in launch_mapdl)
+    # TODO: additional_switches => literal string to add to the command line of the dyna solver
+    # TODO: cleanup_on_exit => maybe delete some unneeded files to save space
+    # TODO: license_server_check, license_type => as in pymapdl
     wdir, input_file = __prepare(input, **kwargs)
 
     if "container" not in kwargs:
         container = os.environ.get("PYDYNA_RUN_CONTAINER", None)
         if container != None:
             kwargs["container"] = container
+        if "container_env" not in kwargs:
+            kwargs["container_env"] = dict(
+                (k, os.environ[k]) for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE")
+            )
+
+    if "stream" not in kwargs:
+        stream = os.environ.get("PYDYNA_RUN_STREAM", None)
+        if stream != None:
+            kwargs["stream"] = bool(int(stream))
 
     runner = get_runner(**kwargs)
     runner.set_input(input_file, wdir)
 
-    runner.run()
+    result = runner.run()
+    if container != None and kwargs.get("stream", True) is False:
+        return result
     return wdir

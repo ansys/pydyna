@@ -21,13 +21,20 @@ Here's an example of how you can generate a `*SECTION_TSHELL`` keyword:
                       1       1.0         2       1.0         0         0         0
 
 
-See also
+Examples
 --------
+Examples showing end-to-end workflows for using PyDyna -
+write a deck using the ``keywords`` module and run the solver using the ``run`` module.
 
-- `API reference <api_reference_pydyna_keywords_>`_: Provides API member descriptions and usage examples.
-- `Examples <examples_pydyna_keywords_>`_: Provides examples showing end-to-end workflows for using PyDyna -
+#. ``Buckling_Beer_Can``
+#. ``John_Reid_Pendulum``
+#. ``John_Reid_Pipe``
+#. ``Taylor_Bar``
+
+.. - `API reference <api_reference_pydyna_keywords_>`_: Provides API member descriptions and usage examples.
+.. - `Examples <examples_pydyna_keywords_>`_: Provides examples showing end-to-end workflows for using PyDyna -
    write a deck using the ``keywords`` module and run the solver using the ``run`` module.
 
 .. LINKS AND REFERENCES
-.. _api_reference_pydyna_keywords_: https://dyna.docs.pyansys.com/version/dev/keyword_class_documentation.html
-.. _examples_pydyna_keywords_: https://dyna.docs.pyansys.com/version/dev/keyword_examples/index.html
+.. .. _api_reference_pydyna_keywords_: https://dyna.docs.pyansys.com/version/dev/keyword_class_documentation.html
+.. .. _examples_pydyna_keywords_: https://dyna.docs.pyansys.com/version/dev/keyword_examples/index.html

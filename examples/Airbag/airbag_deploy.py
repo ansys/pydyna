@@ -5,29 +5,16 @@ This example shows how to create an airbag deploy model with the PyDNYA ``pre`` 
 The executable file for LS-DYNA is ``ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe``.
 
 """
+
 ###############################################################################
 # Perform required imports
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-# Peform required imports.
+# Perform required imports.
 
 import os
 import sys
 
-
-from ansys.dyna.core.pre import launch_dynapre
-from ansys.dyna.core.pre.dynamech import (
-    DynaMech,
-    Airbag,
-    PartSet,
-    Curve,
-    Point,
-    RigidwallPlanar,
-    Contact,
-    ContactSurface,
-    ContactCategory,
-    ShellPart,
-    ShellFormulation,
-)
+from ansys.dyna.core.pre import examples, launch_dynapre
 
 ###############################################################################
 # Start the ``pre`` service
@@ -35,18 +22,31 @@ from ansys.dyna.core.pre.dynamech import (
 # Before starting the ``pre`` service, you must ensure that the Docker container
 # for this service has been started. For more information, see "Start the Docker
 # container for the ``pre`` service" in https://dyna.docs.pyansys.com/version/stable/index.html.
-# 
-# The ``pre`` service can also be started locally, please download the latest version of 
-# ansys-pydyna-pre-server.zip package from https://github.com/ansys/pydyna/releases and start it 
-# refering to the README.rst file in this server package.
+#
+# The ``pre`` service can also be started locally, please download the latest version of
+# ansys-pydyna-pre-server.zip package from https://github.com/ansys/pydyna/releases and start it
+# referring to the README.rst file in this server package.
 #
 # Once the ``pre`` service is running, you can connect a client to it using
 # the hostname and port. This example uses the default localhost and port
 # (``"localhost"`` and ``"50051"`` respectively).
 #
-from ansys.dyna.core.pre.dynamaterial import MatRigid, MatFabric
-from ansys.dyna.core.pre import examples
+from ansys.dyna.core.pre.dynamaterial import MatFabric, MatRigid
+from ansys.dyna.core.pre.dynamech import (
+    Airbag,
+    Contact,
+    ContactCategory,
+    ContactSurface,
+    Curve,
+    DynaMech,
+    PartSet,
+    Point,
+    RigidwallPlanar,
+    ShellFormulation,
+    ShellPart,
+)
 from ansys.dyna.core.pre.misc import check_valid_ip
+
 # sphinx_gallery_thumbnail_path = '_static/pre/airbag/airbag.png'
 
 hostname = "localhost"
@@ -59,7 +59,7 @@ if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
 # The ``DynaSolution`` class is like a workflow orchestrator.
 # It inherits methods from other classes and helps create a complete workflow.
 #
-airbag_solution = launch_dynapre(ip = hostname)
+airbag_solution = launch_dynapre(ip=hostname)
 fns = []
 # path = sys.path[0] + os.sep + "input" + os.sep + "airbag_deploy" + os.sep
 path = examples.airbag_deploy + os.sep
@@ -135,7 +135,7 @@ airbagdeploy.contacts.add(contact)
 # are accessed from the ``dynamaterial`` class. In the following code,
 # ``MAT_RIGID`` is defined as the material  for the cylindrical tube and the
 # bottom plate. ``MAT_FABRIC`` is defined as the material for the airbag volume.
-# Note that ``platemat`` also has contraints defined.
+# Note that ``platemat`` also has constraints defined.
 
 platemat = MatRigid(
     mass_density=7.84e-4,

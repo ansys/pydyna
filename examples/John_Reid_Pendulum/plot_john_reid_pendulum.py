@@ -38,24 +38,25 @@ a Pythonic environment.
 # Import required packages, including those for the keywords, deck, and solver.
 
 import os
-import pathlib
 import shutil
+import tempfile
 
 import pandas as pd
 
-from ansys.dyna.core import Deck, keywords as kwd
+from ansys.dyna.core import Deck
+from ansys.dyna.core import keywords as kwd
+from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import run_dyna
-from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
 
-mesh_file = DownloadManager().download_file("nodes.k", "ls-dyna", "John_Reid_Pendulum", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pendulum"))
+mesh_file_name = "nodes.k"
+mesh_file = DownloadManager().download_file(
+    mesh_file_name, "ls-dyna", "John_Reid_Pendulum", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pendulum")
+)
 
-#folder = os.path.dirname(output)
+rundir = tempfile.TemporaryDirectory()
 
-dynadir = "run"
 dynafile = "pendulum.k"
 
-p = pathlib.Path(dynadir)
-p.mkdir(parents=True, exist_ok=True)
 
 ###############################################################################
 # Create a deck and keywords
@@ -154,7 +155,7 @@ def write_deck(filepath):
     deck.extend([kwd.DeformableToRigid(pid=1), kwd.DeformableToRigid(pid=2)])
 
     # Define nodes and elements
-    deck.extend([kwd.Include(filename="nodes.k")])
+    deck.append(kwd.Include(filename=mesh_file_name))
 
     deck.export_file(filepath)
     return deck
@@ -164,8 +165,8 @@ def run_post(filepath):
     pass
 
 
-deck = write_deck(os.path.join(dynadir, dynafile))
-shutil.copy(mesh_file, "run/nodes.k")
+shutil.copy(mesh_file, os.path.join(rundir.name, mesh_file_name))
+deck = write_deck(os.path.join(rundir.name, dynafile))
 
 ###############################################################################
 # View the model
@@ -173,12 +174,12 @@ shutil.copy(mesh_file, "run/nodes.k")
 # You can use the PyVista ``plot`` method in the ``deck`` class to view
 # the model.
 
-out = deck.plot(cwd=dynadir)
+deck.plot(cwd=rundir.name)
 
 ###############################################################################
 # Run the Dyna solver
 # ~~~~~~~~~~~~~~~~~~~
 #
 
-filepath = run_dyna(dynafile, working_directory=dynadir)
-run_post(filepath)
+filepath = run_dyna(dynafile, working_directory=rundir.name)
+run_post(rundir.name)

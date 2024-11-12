@@ -31,9 +31,10 @@ from ansys.dyna.core.lib.option_card import OptionsAPI
 
 
 class KeywordBase(Cards):
-    """base class for all keywords.
-    Derived class must provide:
-        -  _cards
+    """Base class for all keywords.
+
+    Derived class must provide::
+        - _cards
         - keyword
         - subkeyword
     """
@@ -217,7 +218,15 @@ class KeywordBase(Cards):
         deck_format: format_type = format_type.default,
     ) -> str:
         """Renders the keyword in the dyna keyword format.
-        :param buf: Optional - buffer to write to. If None, the output is returned as a string
+
+        Parameters
+        ----------
+        buf: IO
+            Optional - buffer to write to.
+
+        Returns
+        _______
+        If `buf` is None, the output is returned as a string
         """
         if format == None:
             format = self.format
@@ -237,7 +246,7 @@ class KeywordBase(Cards):
                 buf.seek(buf.tell() - 1)
 
     def dumps(self) -> str:
-        """Returns the string representation of the keyword"""
+        """Return the string representation of the keyword."""
         warnings.warn("dumps is deprecated - use write instead")
         return self.write()
 
@@ -271,7 +280,8 @@ class KeywordBase(Cards):
         self._read_data(buf)
 
     def loads(self, value: str) -> None:
-        """Loads the keyword from string. TODO - add a load from buffer"""
+        """Load the keyword from string."""
+        # TODO - add a method to load from a buffer.
         s = io.StringIO()
         s.write(value)
         s.seek(0)

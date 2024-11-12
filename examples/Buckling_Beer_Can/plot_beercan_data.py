@@ -38,19 +38,24 @@ Python.
 # Import required packages, including those for the keywords, deck, and solver.
 
 import os
-import pathlib
 import shutil
+import subprocess
+import tempfile
 
 import numpy as np
 import pandas as pd
 
-from ansys.dyna.core import Deck, keywords as kwd
-from ansys.dyna.core.run import run_dyna
-from ansys.dyna.core.pre.examples.download_utilities import DownloadManager, EXAMPLES_PATH
+from ansys.dyna.core import Deck
+from ansys.dyna.core import keywords as kwd
+from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
+from ansys.dyna.core.run import MemoryUnit, MpiOption, run_dyna
 
-mesh_file = DownloadManager().download_file("mesh.k", "ls-dyna", "Buckling_Beer_Can", destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can"))
+rundir = tempfile.TemporaryDirectory()
+mesh_file_name = "mesh.k"
+mesh_file = DownloadManager().download_file(
+    mesh_file_name, "ls-dyna", "Buckling_Beer_Can", destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can")
+)
 
-dynadir = "run"
 dynafile = "beer_can.k"
 
 ###############################################################################
@@ -58,10 +63,6 @@ dynafile = "beer_can.k"
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create a deck, which is the container for all the keywords.
 # Then, create and append individual keywords to the deck.
-
-
-p = pathlib.Path(dynadir)
-p.mkdir(parents=True, exist_ok=True)
 
 
 def write_deck(filepath):
@@ -558,7 +559,7 @@ def write_deck(filepath):
     deck.append(boundary_spc_node)
 
     # Define nodes and elements
-    deck.append(kwd.Include(filename="mesh.k"))
+    deck.append(kwd.Include(filename=mesh_file_name))
 
     deck.export_file(filepath)
     return deck
@@ -568,8 +569,8 @@ def run_post(filepath):
     pass
 
 
-deck = write_deck(os.path.join(dynadir, dynafile))
-shutil.copy(mesh_file, "run/mesh.k")
+shutil.copy(mesh_file, os.path.join(rundir.name, mesh_file_name))
+deck = write_deck(os.path.join(rundir.name, dynafile))
 
 ###############################################################################
 # View the model
@@ -577,17 +578,25 @@ shutil.copy(mesh_file, "run/mesh.k")
 # You can use the PyVista ``plot`` method in the ``deck`` class to view
 # the model.
 
-out = deck.plot(cwd=dynadir)
+deck.plot(cwd=rundir.name)
 
 ###############################################################################
 # Run the Dyna solver
 # ~~~~~~~~~~~~~~~~~~~
 #
 
+
 try:
-    filepath = run_dyna(dynafile, working_directory=dynadir)
-    print("completed")
-    run_post(filepath)
-    print("post_completed")
-except Exception as e:
-    print(e)
+    run_dyna(
+        dynafile,
+        working_directory=rundir.name,
+        ncpu=2,
+        mpi_option=MpiOption.MPP_INTEL_MPI,
+        memory=20,
+        memory_unit=MemoryUnit.MB,
+    )
+except subprocess.CalledProcessError:
+    # this example doesn't run to completion because it is a highly nonlinear buckling
+    pass
+
+run_post(rundir.name)

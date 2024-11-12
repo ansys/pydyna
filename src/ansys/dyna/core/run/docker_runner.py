@@ -64,7 +64,6 @@ class DockerRunner(BaseRunner):
         return solver_option
 
     def run(self) -> None:
-        print("Running in docker!")
         env = {
             "DYNA_OPTION": self._get_solver_option(),
             "DYNA_NCPU": f"{self.ncpu}",
@@ -85,5 +84,4 @@ class DockerRunner(BaseRunner):
                 sys.stdout.write(log.decode("utf-8"))
         else:
             result = self._client.containers.run(self._name, environment=env, volumes=volumes)
-            print(result.decode("utf-8"))
-        print("Done running LS-DYNA in docker!")
+            return result
