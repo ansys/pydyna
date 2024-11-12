@@ -140,7 +140,7 @@ else:
     # Configuration for Sphinx autoapi
     extensions.append("autoapi.extension")
     autoapi_dirs = ["../../src/ansys"]
-    autoapi_ignore = ["*core/keywords/*", "*core/run/*"]
+    autoapi_ignore = ["*core/keywords/*", "*core/run/*", "*core/lib/*"]
     autoapi_type = "python"
     autoapi_options = [
         "members",
