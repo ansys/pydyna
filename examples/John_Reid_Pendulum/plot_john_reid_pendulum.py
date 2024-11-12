@@ -174,7 +174,7 @@ deck = write_deck(os.path.join(rundir.name, dynafile))
 # You can use the PyVista ``plot`` method in the ``deck`` class to view
 # the model.
 
-deck.plot()
+deck.plot(cwd=rundir.name)
 
 ###############################################################################
 # Run the Dyna solver
@@ -182,4 +182,4 @@ deck.plot()
 #
 
 filepath = run_dyna(dynafile, working_directory=rundir.name)
-run_post(filepath)
+run_post(rundir.name)

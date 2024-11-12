@@ -152,8 +152,6 @@ def create_input_deck(initial_velocity):
         ]
     )
 
-    # Import mesh
-    deck.append(kwd.Include(filename=mesh_file_name))
     return deck
 
 
@@ -163,6 +161,8 @@ def write_input_deck(**kwargs):
     if not all((initial_velocity, wd)):
         raise Exception("Missing input!")
     deck = create_input_deck(initial_velocity)
+    # Import mesh
+    deck.append(kwd.Include(filename=mesh_file_name))
 
     # Write LS-DYNA input deck
     os.makedirs(wd, exist_ok=True)
@@ -210,6 +210,7 @@ def get_global_ke(directory):
 # ~~~~~~~~~~~~~~
 # etc etc
 deck_for_graphic = create_input_deck(300e3)
+deck_for_graphic.append(kwd.Include(filename=mesh_file))
 deck_for_graphic.plot()
 
 ###############################################################################

@@ -39,6 +39,7 @@ Python.
 
 import os
 import subprocess
+import shutil
 import tempfile
 
 import numpy as np
@@ -577,7 +578,7 @@ deck = write_deck(os.path.join(rundir.name, dynafile))
 # You can use the PyVista ``plot`` method in the ``deck`` class to view
 # the model.
 
-deck.plot()
+deck.plot(cwd=rundir.name)
 
 ###############################################################################
 # Run the Dyna solver
@@ -586,7 +587,7 @@ deck.plot()
 
 
 try:
-    filepath = run_dyna(
+    run_dyna(
         dynafile,
         working_directory=rundir.name,
         ncpu=2,
@@ -598,4 +599,4 @@ except subprocess.CalledProcessError:
     # this example doesn't run to completion because it is a highly nonlinear buckling
     pass
 
-run_post(filepath)
+run_post(rundir.name)
