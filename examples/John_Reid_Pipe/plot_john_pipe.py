@@ -123,15 +123,6 @@ def write_deck(filepath):
         }
     )
 
-    deck2=Deck()
-    s=kwd.SectionShell(secid=1, elfrom=2, nip=5, t1=11.0, t2=11.0, t3=11.0, t4=11.0)
-    deck2.extend(
-        [
-            kwd.SectionShell(secid=1, elfrom=2, nip=5, t1=11.0, t2=11.0, t3=11.0, t4=11.0),
-            kwd.SectionShell(secid=2, elfrom=2, nip=3, t1=11.0, t2=11.0, t3=11.0, t4=11.0)
-        ]
-    )
-    raise Exception(deck2.write()+"*****")
     deck.extend(
         [
             pipe_parts,
@@ -179,5 +170,5 @@ deck.plot(cwd=rundir.name)
 # ~~~~~~~~~~~~~~~~~~~
 # Run the Dyna solver.
 
-#run_dyna(dynafile, working_directory=rundir.name)
-#run_post(rundir.name)
+run_dyna(dynafile, working_directory=rundir.name)
+run_post(rundir.name)
