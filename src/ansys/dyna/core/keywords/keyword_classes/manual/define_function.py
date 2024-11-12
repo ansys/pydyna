@@ -51,7 +51,7 @@ class DefineFunction(KeywordBase):
     def fid(self) -> typing.Optional[int]:
         """Get or set the Function ID.
 
-        Functions, tables (see *DEFINE_TABLE), and load curves may not share common ID's.
+        Functions, tables (see `*DEFINE_TABLE`), and load curves may not share common ID's.
         A unique number has to be defined.
         """
         return self._cards[0].get_value("fid")
@@ -74,10 +74,10 @@ class DefineFunction(KeywordBase):
         """Get or set the Arithmetic expression involving a combination
         of independent variables and other functions.
 
-        ,i.e., f(a,b,c)=a*2+b*c+sqrt(a*c)
+        ,i.e., `f(a,b,c)=a*2+b*c+sqrt(a*c)`
         where a, b, and c are the independent variables.  The function name, f(a,b,c), must be
         unique since other functions can then use and reference this function.
-        For example, g(a,b,c,d)=f(a,b,c)**2+d.  In this example, two *DEFINE_ FUNCTION definitions
+        For example, `g(a,b,c,d)=f(a,b,c)**2+d`.  In this example, two `*DEFINE_ FUNCTION` definitions
         are needed to define functions f and g.
         """
         return self._cards[1].value
