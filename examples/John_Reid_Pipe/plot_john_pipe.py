@@ -38,6 +38,7 @@ a Pythonic environment.
 # Import required packages, including those for the keywords, deck, and solver.
 
 import os
+import shutil
 import tempfile
 
 import pandas as pd
@@ -47,8 +48,9 @@ from ansys.dyna.core import keywords as kwd
 from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import run_dyna
 
+mesh_file_name = "nodes.k"
 mesh_file = DownloadManager().download_file(
-    "nodes.k", "ls-dyna", "John_Reid_Pipe", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pipe")
+    mesh_file_name, "ls-dyna", "John_Reid_Pipe", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pipe")
 )
 
 rundir = tempfile.TemporaryDirectory()
@@ -149,7 +151,7 @@ def write_deck(filepath):
     deck.extend([kwd.DeformableToRigid(pid=1), kwd.DeformableToRigid(pid=2)])
 
     # Define nodes and elements
-    deck.extend([kwd.Include(filename=mesh_file)])
+    deck.extend([kwd.Include(filename=mesh_file_name)])
 
     deck.export_file(filepath)
     return deck
@@ -159,6 +161,7 @@ def run_post(filepath):
     pass
 
 
+shutil.copy(mesh_file, os.path.join(rundir.name, mesh_file_name))
 deck = write_deck(os.path.join(rundir.name, dynafile))
 deck.plot()
 

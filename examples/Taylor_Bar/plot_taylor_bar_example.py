@@ -41,6 +41,7 @@ a Pythonic environment.
 
 import os
 import pathlib
+import shutil
 import tempfile
 
 import ansys.dpf.core as dpf
@@ -54,8 +55,9 @@ from ansys.dyna.core.run import run_dyna
 
 workdir = tempfile.TemporaryDirectory()
 
+mesh_file_name = "taylor_bar_mesh.k"
 mesh_file = DownloadManager().download_file(
-    "taylor_bar_mesh.k", "ls-dyna", "Taylor_Bar", destination=os.path.join(EXAMPLES_PATH, "Taylor_Bar")
+    mesh_file_name, "ls-dyna", "Taylor_Bar", destination=os.path.join(EXAMPLES_PATH, "Taylor_Bar")
 )
 
 ###############################################################################
@@ -151,7 +153,7 @@ def create_input_deck(initial_velocity):
     )
 
     # Import mesh
-    deck.append(kwd.Include(filename=mesh_file))
+    deck.append(kwd.Include(filename=mesh_file_name))
     return deck
 
 
@@ -169,8 +171,7 @@ def write_input_deck(**kwargs):
     os.makedirs(wd, exist_ok=True)
     with open(os.path.join(wd, "input.k"), "w") as file_handle:
         file_handle.write(deck_string)
-
-    return deck
+    shutil.copyfile(mesh_file, os.path.join(wd, mesh_file_name))
 
 
 ###############################################################################

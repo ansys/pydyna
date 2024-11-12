@@ -50,8 +50,9 @@ from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, Downl
 from ansys.dyna.core.run import MemoryUnit, MpiOption, run_dyna
 
 rundir = tempfile.TemporaryDirectory()
+mesh_file_name = "mesh.k"
 mesh_file = DownloadManager().download_file(
-    "mesh.k", "ls-dyna", "Buckling_Beer_Can", destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can")
+    mesh_file_name, "ls-dyna", "Buckling_Beer_Can", destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can")
 )
 
 dynafile = "beer_can.k"
@@ -557,7 +558,7 @@ def write_deck(filepath):
     deck.append(boundary_spc_node)
 
     # Define nodes and elements
-    deck.append(kwd.Include(filename=mesh_file))
+    deck.append(kwd.Include(filename=mesh_file_name))
 
     deck.export_file(filepath)
     return deck
@@ -567,6 +568,7 @@ def run_post(filepath):
     pass
 
 
+shutil.copy(mesh_file, os.path.join(rundir.name, mesh_file_name))
 deck = write_deck(os.path.join(rundir.name, dynafile))
 
 ###############################################################################
@@ -575,7 +577,7 @@ deck = write_deck(os.path.join(rundir.name, dynafile))
 # You can use the PyVista ``plot`` method in the ``deck`` class to view
 # the model.
 
-# out = deck.plot()
+deck.plot()
 
 ###############################################################################
 # Run the Dyna solver
