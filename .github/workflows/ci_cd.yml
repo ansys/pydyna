@@ -40,9 +40,20 @@ jobs:
           bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
           bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
+  pr-name:
+    if: github.event_name == 'pull_request'
+    name: Check the name of the PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check commit name
+        uses: ansys/actions/check-pr-title@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   code-style:
     name: "Code style"
     runs-on: ubuntu-latest
+    needs: pr-name
     steps:
       - uses: ansys/actions/code-style@v8
         with:
@@ -81,6 +92,7 @@ jobs:
   doc-style:
     name: "Documentation style"
     runs-on: ubuntu-latest
+    needs: pr-name
     steps:
       - name: PyAnsys documentation style checks
         uses: ansys/actions/doc-style@v8
