@@ -10,7 +10,7 @@ This example shows how to animate the d3plot and display the stress on the airba
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 # Import  required imports.
 #
-from ansys.dpf import core as dpf
+# from ansys.dpf import core as dpf
 
 ###############################################################################
 # Connect to DPF Server
