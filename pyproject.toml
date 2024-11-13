@@ -4,10 +4,10 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-dyna-core"
-version = "0.4.dev0"
+version = "0.6.dev0"
 description = "Python interface to LS-DYNA Service"
 readme = "README.rst"
-requires-python = ">=3.10,<4"
+requires-python = ">=3.11,<4"
 license = { file = "LICENSE" }
 authors = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
 maintainers = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
@@ -19,10 +19,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 
 dependencies = ["ansys-dpf-core>=0.7.2",
@@ -84,10 +83,10 @@ doc = [
 name = "ansys.dyna.core"
 
 [project.urls]
-Source = "https://github.com/pyansys/pydyna"
+Source = "https://github.com/ansys/pydyna"
 Homepage = "https://dyna.docs.pyansys.com"
 Documentation = "https://dyna.docs.pyansys.com"
-Tracker = "https://github.com/pyansys/pydyna/issues"
+Tracker = "https://github.com/ansys/pydyna/issues"
 
 [tool.black]
 line-length = 120
