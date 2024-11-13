@@ -132,10 +132,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: "Install and run DPF server"
+      - name: Set Licensing
+        shell: bash
         run: |
-          docker pull ghcr.io/ansys/dpf-core:22.2dev
-          docker run -d --name dpfserver -p 50054:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port 50054."
+          echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
+
+      - name: Install DPF
+        uses: ansys/pydpf-actions/install-dpf-server@v2.3
+        with:
+          dpf-standalone-TOKEN: ${{secrets.PYANSYS_CI_BOT_TOKEN}}
+          ANSYS_VERSION : "242"
 
       - name: LS-DYNA Keyword server activation
         run: |
@@ -191,12 +197,6 @@ jobs:
         with:
           name: server_output_docs.txt
           path: server_output.txt
-
-      - name: DPF Logs (on screen)
-        if: always()
-        run: |
-          docker logs dpfserver
-          docker stop dpfserver
 
   smoke-tests:
     name: "Build wheelhouse for ${{ matrix.os }} and Python ${{ matrix.python-version }}"
