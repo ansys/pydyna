@@ -45,7 +45,7 @@ def _gen_nodes(count):
 
 
 def write1(s: io.StringIO, nodes: kwd.Node):
-    """Write the keyword with the implementation that is built into dynalib"""
+    """Write the keyword with the implementation that is built into PyDyna."""
     nodes.write(s)
     return s
 
