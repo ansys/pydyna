@@ -120,15 +120,22 @@ def write_fields(
     values: typing.Optional[typing.List[typing.Any]] = None,
     format: typing.Optional[format_type] = format_type.default,
 ) -> None:
-    """Write fields line to buf
-    writes a keyword card line with fixed column offsets and width
-    parameters:
-        buf: buffer to write to
-        fields: fields to write
-        values: optional - list of values for the field. If not set, use the value property of each field.
-                this is used by DuplicateCard
-        format: optional - format to write
-    example:
+    """Write `fields` representing a line of a keyword to `buf`.
+
+    Use the fixed column offsets and width
+
+    Parameters
+    ----------
+    buf: IO
+        buffer to write to
+    fields: List
+        fields to write
+    values: List
+        optional - list of values for the field. If not set, use the value property of each field.
+        used by DuplicateCard
+    format: format_type
+        optional - format to write
+
     >>> s=io.String()
     >>> fields = [
     ...     Field("a", int, 0, 10, 1),
@@ -157,11 +164,16 @@ def write_comment_line(
     format: typing.Optional[format_type] = format_type.default,
 ) -> None:
     """Writes the comment line to the buffer.
-    parameters:
-        buf: buffer to write to
-        fields: fields to write
-        format: format to write in
-    example:
+
+    Parameters
+    ----------
+    buf: IO
+        buffer to write to
+    fields: List
+        fields to write
+    format: format_type
+        format to write in
+
     >>> s=io.String()
     >>> fields = [
     ...     Field("a", int, 0, 10, 1),

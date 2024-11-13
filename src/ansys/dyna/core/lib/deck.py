@@ -377,7 +377,13 @@ class Deck:
             Full path for the new keyword file.
         """
         with open(path, "w+", encoding=encoding) as f:
-            self.write(f)
+            if os.name == "nt":
+                self.write(f)
+            else:
+                # TODO - on linux writing to the buffer can insert a spurious newline
+                #        this is less performant but more correct until that is fixed
+                contents = self.write()
+                f.write(contents)
 
     @property
     def comment_header(self) -> typing.Optional[str]:

@@ -2,6 +2,11 @@ name: CI
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      PyDynaRunContainer:
+        description: 'Run container name'
+        required: false
+        default: ghcr.io/ansys/pydyna-run:latest
   push:
     tags:
       - "*"
@@ -13,6 +18,7 @@ env:
   PACKAGE_NAME: 'ansys-dyna-core'
   PACKAGE_NAMESPACE: 'ansys.dyna.core'
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
+  PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.PyDynaRunContainer || 'ghcr.io/ansys/pydyna-run:latest'}}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -27,6 +33,36 @@ jobs:
       - uses: ansys/actions/code-style@v8
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+  codegen-testing:
+    name: Build and Testing for codegen
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+      - name: Install library
+        run: pip install -e .[codegen]
+
+      - name: Generate codegen
+        run: |
+          python codegen/generate.py -c
+          python codegen/generate.py
+
+      - name: Run codegen testing
+        run: |
+          if git -C src/ansys/dyna/core/keywords/keyword_classes/auto diff --relative --exit-code; then
+            echo "CHANGES=false" >> "$GITHUB_ENV"
+          else
+            echo "CHANGES=true" >> "$GITHUB_ENV"
+          fi
+      - name: Exit on changes
+        if: ${{ env.CHANGES == 'true' }}
+        run: exit 1
 
   doc-style:
     name: "Documentation style"
@@ -60,7 +96,9 @@ jobs:
       - name: "Install python dependencies"
         run: |
           python -m pip install .[doc]
-
+          # optional dependency for `run_dyna` to work with docker.
+          # TODO - consider adding to pyproject.toml under an option
+          python -m pip install docker
       - name: "Login to GitHub container registry"
         uses: docker/login-action@v3
         with:
@@ -78,13 +116,18 @@ jobs:
           docker pull ghcr.io/ansys/ls-pre:latest
           docker run -d --name kw_server -p 50051:50051 ghcr.io/ansys/ls-pre:latest && echo "Keyword server active on port 50051."
 
+      - name: Pull PyDyna-run image
+        run: |
+          docker pull ghcr.io/ansys/pydyna-run:latest
+
       - name: "Build the html documentation"
+        env:
+          ANSYSLI_SERVERS: 2325@${{secrets.LICENSE_SERVER}}
+          ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
+          LSTC_LICENSE: ansys
+          PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
         run: |
           xvfb-run make -C doc html
-
-      - name: "Build the pdf documentation"
-        run: |
-          make -C doc pdf
 
       - name: "Upload html documentation"
         uses: actions/upload-artifact@v4
@@ -92,6 +135,17 @@ jobs:
           name: documentation-html
           path: doc/_build/html
           retention-days: 7
+
+      - name: "Build the pdf documentation"
+        env:
+          ANSYSLI_SERVERS: 2325@${{secrets.LICENSE_SERVER}}
+          ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
+          LSTC_LICENSE: ansys
+          PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
+          PYDYNA_RUN_STREAM: "0"
+        run: |
+          xvfb-run make -C doc pdf
+
 
       - name: "Upload pdf documentation"
         uses: actions/upload-artifact@v4
@@ -133,38 +187,6 @@ jobs:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
-
-  # this is already done when running tests, but this is done before smoke-tests which is expensive.
-  # TODO - remove me after the keywords migration is done
-  keyword-tests:
-    name: Test the keywords module
-    runs-on: ubuntu-latest
-    needs: [code-style]
-    container:
-        image: ubuntu:latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: |
-            apt update -y
-            apt install --reinstall ca-certificates -y
-            apt install software-properties-common git -y
-            add-apt-repository ppa:deadsnakes/ppa -y
-            apt install python3.11 python3.11-venv -y
-            python3.11 -m ensurepip --default-pip
-            python3.11 -m pip install --upgrade pip
-            python3.11 -m venv /env
-
-      - name: Install library
-        run: |
-          . /env/bin/activate
-          pip install .[tests]
-
-      - name: Unit testing
-        run: |
-          . /env/bin/activate
-          pytest -m keywords
 
   tests:
     name: "Testing"
@@ -224,42 +246,38 @@ jobs:
     name: Test the "run" subpackage
     runs-on: ubuntu-latest
     needs: [code-style]
-    container:
-      image: ghcr.io/ansys/mechanical:24.1.0
-      options: --entrypoint /bin/bash
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-            apt update
-            apt install --reinstall ca-certificates
-            apt install software-properties-common git -y
-            add-apt-repository ppa:deadsnakes/ppa -y
-            apt install python3.11 python3.11-venv -y
-            python3.11 -m ensurepip --default-pip
-            python3.11 -m pip install --upgrade pip
-            python3.11 -m venv /env
+      - name: "Set up Python ${{ env.MAIN_PYTHON_VERSION }}"
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: 'pyproject.toml'
 
-      - name: Install library
+      - name: "Install python dependencies"
         run: |
-          . /env/bin/activate
-          pip install .[tests]
+          python -m pip install docker # todo make this an option?
+          python -m pip install .[tests]
+
+      - name: Pull PyDyna-run image
+        run: |
+          docker pull ${{ env.PYDYNA_RUN_CONTAINER }}
 
       - name: Unit testing
         env:
+          PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
           ANSYSLI_SERVERS: 2325@${{secrets.LICENSE_SERVER}}
           ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
           LSTC_LICENSE: ansys
         run: |
-          . /env/bin/activate
-          save-ansys-path --name dyna /install/ansys_inc/v241/ansys/bin/linx64/lsdyna_dp.e
           pytest -m run
 
   build-library:
     name: "Build library"
-    needs: [doc, tests, run-testing, keyword-tests]
+    needs: [doc, tests, run-testing]
     runs-on: ubuntu-latest
     steps:
       - uses: ansys/actions/build-library@v8

@@ -9,29 +9,27 @@ The executable file for LS-DYNA is `` ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64
 import os
 import sys
 
-
-from ansys.dyna.core.pre import launch_dynapre
+from ansys.dyna.core.pre import examples, launch_dynapre
 from ansys.dyna.core.pre.dynaicfd import (
-    DynaICFD,
-    MatICFD,
-    ICFDPart,
     Curve,
-    ICFDVolumePart,
-    MeshedVolume,
-    ICFDAnalysis,
+    DynaICFD,
     Gravity,
-    GravityOption
-
+    GravityOption,
+    ICFDAnalysis,
+    ICFDPart,
+    ICFDVolumePart,
+    MatICFD,
+    MeshedVolume,
 )
-from ansys.dyna.core.pre import examples
 from ansys.dyna.core.pre.misc import check_valid_ip
+
 # sphinx_gallery_thumbnail_path = '_static/pre/icfd/free_convection_flow.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 
-solution = launch_dynapre(ip = hostname)
+solution = launch_dynapre(ip=hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
 path = examples.free_convection_flow + os.sep
@@ -46,7 +44,13 @@ icfdanalysis.set_timestep(0.01)
 icfd.add(icfdanalysis)
 
 # define model
-mat = MatICFD(flow_density=37.799999, dynamic_viscosity=1,heat_capacity = 0.7,thermal_conductivity=1.0,thermal_expansion_coefficient=1)
+mat = MatICFD(
+    flow_density=37.799999,
+    dynamic_viscosity=1,
+    heat_capacity=0.7,
+    thermal_conductivity=1.0,
+    thermal_expansion_coefficient=1,
+)
 
 part_inflow = ICFDPart(1)
 part_inflow.set_material(mat)
@@ -82,7 +86,7 @@ partvol.set_material(mat)
 icfd.parts.add(partvol)
 # define the volume space that will be meshed,The boundaries
 # of the volume are the surfaces "spids"
-meshvol = MeshedVolume(surfaces=[1, 2, 3,4])
+meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
 icfd.add(meshvol)
 
 solution.create_database_binary(dt=1)

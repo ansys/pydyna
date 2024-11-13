@@ -25,21 +25,14 @@ import pathlib
 
 import pytest
 
-from ansys.dyna.core.run import run_dyna
-from .conftest import resolve_test_file
-
-
 @pytest.mark.run
-def test_run_from_input_file_001():
-    input = resolve_test_file("i.k", "run/basic-eddy-current")
-    example_folder = str(pathlib.Path(input).parent.resolve())
-    input = os.path.join(example_folder, "i.k")
+def test_run_from_input_file_001(file_utils, runner):
+    input_file = file_utils.testfiles_folder / "run"/ "basic-eddy-current" / "test.k"
+    example_folder = str(input_file.parent.resolve())
     try:
-        wdir = run_dyna(input)
+        wdir = runner.run("i.k", working_directory=example_folder)
         assert wdir == example_folder
         assert os.path.isfile(os.path.join(example_folder, "d3plot"))
-        if os.name == "nt":
-            assert os.path.isfile(os.path.join(example_folder, "lsrun.out.txt"))
     except Exception as e:
         # TODO use a fixture for this?
         raise e
