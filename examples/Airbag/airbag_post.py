@@ -17,7 +17,7 @@ from ansys.dpf import core as dpf
 # ~~~~~~~~~~~~~~~~~~~~~
 # Connect to the DPF Server.
 #
-dpf.connect_to_server()
+# dpf.connect_to_server()
 
 ###############################################################################
 # Load model
