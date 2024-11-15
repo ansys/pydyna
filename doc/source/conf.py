@@ -96,6 +96,7 @@ rst_epilog = ""
 # Read link all targets from file
 with open("links.rst") as f:
     rst_epilog += f.read()
+linkcheck_exclude_documents = ["changelog"]
 
 inheritance_graph_attrs = dict(rankdir="RL", size='"8.0, 10.0"', fontsize=14, ratio="compress")
 inheritance_node_attrs = dict(shape="ellipse", fontsize=14, height=0.75, color="dodgerblue1", style="filled")

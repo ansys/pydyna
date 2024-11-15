@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-dyna-core"
-version = "0.4.dev0"
+version = "0.6.dev0"
 description = "Python interface to LS-DYNA Service"
 readme = "README.rst"
 requires-python = ">=3.10,<4"
@@ -83,10 +83,10 @@ doc = [
 name = "ansys.dyna.core"
 
 [project.urls]
-Source = "https://github.com/pyansys/pydyna"
+Source = "https://github.com/ansys/pydyna"
 Homepage = "https://dyna.docs.pyansys.com"
 Documentation = "https://dyna.docs.pyansys.com"
-Tracker = "https://github.com/pyansys/pydyna/issues"
+Tracker = "https://github.com/ansys/pydyna/issues"
 
 [tool.black]
 line-length = 120
@@ -108,3 +108,56 @@ show_missing = true
 minversion = "7.1"
 addopts = "-ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv"
 testpaths = ["tests"]
+
+[tool.towncrier]
+directory = "doc/changelog"
+filename = "doc/source/changelog.rst"
+template = "doc/changelog/template"
+start_string = ".. towncrier release notes start\n"
+title_format = "`{version} <https://github.com/ansys/pydyna/releases/tag/v{version}>`_ - {project_date}"
+issue_format = "`#{issue} <https://github.com/ansys/pydyna/pull/{issue}>`_"
+
+[[tool.towncrier.type]]
+directory = "added"
+name = "Added"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "dependencies"
+name = "Dependencies"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "documentation"
+name = "Documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "fixed"
+name = "Fixed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "maintenance"
+name = "Maintenance"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "miscellaneous"
+name = "Miscellaneous"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "documentation"
+name = "Documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "maintenance"
+name = "Maintenance"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "test"
+name = "Test"
+showcontent = true
