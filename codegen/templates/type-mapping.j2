@@ -1,0 +1,6 @@
+{{license}}
+TypeMapping = {
+{% for keyword in keywords %}
+    "*{{keyword.title}}": "{{keyword.classname}}",
+{% endfor %}
+}

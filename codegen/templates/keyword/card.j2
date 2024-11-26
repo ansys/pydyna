@@ -1,0 +1,100 @@
+{% if card.variable %}
+            VariableCard(
+                "{{card.variable.name}}",
+                {{card.variable.size}},
+                {{card.variable.width}},
+                {{card.variable.type}},
+{% if card.variable.length_func %}
+                lambda: {{card.variable.length_func}},
+{% else %}
+                None,
+{% endif %}{# card.variable.length_func #}
+{% if card.variable.active_func %}
+                lambda: {{card.variable.active_func}},
+{% endif %}{# card.variable.active_func #}
+                data = kwargs.get("{{card.variable.name}}")),
+{% elif card.set %}
+            CardSet(
+                {{card.set.name}},
+{% if card.length_func %}
+                length_func = lambda: {{card.length_func}},
+{% endif %}{# card.length_func #}
+{% if card.active_func %}
+                active_func = lambda: {{card.active_func}},
+{% endif %}{# card.active_func #}
+{% if keyword_data.card_sets %}
+{% if keyword_data.card_sets.options %}
+                option_specs = {{card.set.name}}.option_specs,
+{% endif %}{# keyword_data.card_sets.options #}
+{% endif %}{# keyword_data.card_sets #}
+                **kwargs
+            ),
+{% elif card.duplicate %}
+            DuplicateCard(
+                [
+{% for field in card.fields %}
+                    Field("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}),
+{% endfor %}{# field in card.fields #}
+                ],
+{% if card.duplicate.length_func %}
+                lambda: {{card.duplicate.length_func}},
+{% else %}{# card.duplicate.length_func #}
+                None,
+{% endif %}
+{% if card.duplicate.active_func %}
+                lambda: {{card.duplicate.active_func}},
+{% endif %}
+                data = kwargs.get("{{card.duplicate.name}}")),
+{% elif card.duplicate_group %}
+            DuplicateCardGroup(
+                [
+{% for sub_card in card.sub_cards %}
+                    Card(
+                            [
+{% for field in sub_card.fields %}
+                                Field(
+                                    "{{field.name}}",
+                                    {{field.type}},
+                                    {{field.position}},
+                                    {{field.width}},
+                                ),
+{% endfor %}
+                            ],
+{% if sub_card.func %}
+                            lambda: {{sub_card.func}},
+{% endif %}
+                    ),
+{% endfor %}
+                ],
+{% if card.length_func %}
+                lambda: {{card.length_func}},
+{% else %}
+                None,
+{% endif %}
+                data = kwargs.get("{{card.overall_name}}")),
+{% else %}
+            Card(
+                [
+{% for field in card.fields %}
+                    Field(
+                        "{{field.name}}",
+                        {{field.type}},
+                        {{field.position}},
+                        {{field.width}},
+{% if field.default is not none %}
+{% if field.readonly %}
+                        {{field.default}}
+{% else %}
+                        kwargs.get("{{field.name}}", {{field.default}})
+{% endif %}
+{% else %}
+                        kwargs.get("{{field.name}}")
+{% endif %}
+                    ),
+{% endfor %}
+                ],
+{% if card.func %}
+                lambda: {{card.func}},
+{% endif %}
+            ),
+{% endif %}{# if card.variable #}

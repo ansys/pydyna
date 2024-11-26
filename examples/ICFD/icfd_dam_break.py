@@ -10,29 +10,28 @@ for LS-DYNA is ``ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe``.
 import os
 import sys
 
-
-from ansys.dyna.core.pre import launch_dynapre
+from ansys.dyna.core.pre import examples, launch_dynapre
 from ansys.dyna.core.pre.dynaicfd import (
-    DynaICFD,
-    MatICFD,
-    ICFDPart,
+    Compressible,
     Curve,
-    ICFDVolumePart,
-    MeshedVolume,
-    ICFDAnalysis,
+    DynaICFD,
     Gravity,
     GravityOption,
-    Compressible
+    ICFDAnalysis,
+    ICFDPart,
+    ICFDVolumePart,
+    MatICFD,
+    MeshedVolume,
 )
-from ansys.dyna.core.pre import examples
 from ansys.dyna.core.pre.misc import check_valid_ip
+
 # sphinx_gallery_thumbnail_path = '_static/pre/icfd/dam_break.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 
-solution = launch_dynapre(ip = hostname)
+solution = launch_dynapre(ip=hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
 path = examples.dam_break + os.sep

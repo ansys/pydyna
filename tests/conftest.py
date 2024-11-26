@@ -4,9 +4,12 @@ Launch or connect to a persistent local DPF service to be shared in
 pytest as a sesson fixture
 """
 import os
+import io
+import pathlib
+
 import pytest
 from ansys.dyna.core.pre.launcher import ServerThread
-
+from ansys.dyna.core.run import run_dyna
 
 # from ansys.dyna.core.pre.Server.kwserver import *
 
@@ -148,7 +151,7 @@ def Connect_Server():
     """Connect to the kwserver."""
     path = get_server_path()
     threadserver = ServerThread(1,port=50051,ip="127.0.0.1",server_path = path)
-    threadserver.setDaemon(True)
+    threadserver.daemon = True
     threadserver.start()
 
 
@@ -159,3 +162,78 @@ def pytest_collection_modifyitems(config, items):
         return  # command line has a -k or -m, let pytest handle it
     skip_run = pytest.mark.skip(reason="run not selected for pytest run (`pytest -m run`).  Skip by default")
     [item.add_marker(skip_run) for item in items if "run" in item.keywords]
+    skip_viz = pytest.mark.skip(reason="viz not selected for pytest run (`pytest -m viz`).  Skip by default")
+    [item.add_marker(skip_viz) for item in items if "viz" in item.keywords]
+
+
+class DynaRunner:
+    def run(self, *args, **kwargs):
+        if "PYDYNA_RUN_CONTAINER" in os.environ:
+            container_env = dict((k, os.environ[k]) for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE"))
+        else:
+            container_env = {}
+        return run_dyna(*args, container_env = container_env, **kwargs)
+
+@pytest.fixture
+def runner():
+    runner = DynaRunner()
+    return runner
+
+class StringUtils:
+    def as_buffer(self, string: str) -> io.StringIO:
+        s = io.StringIO(string)
+        s.seek(0)
+        return s
+
+
+@pytest.fixture
+def string_utils() -> StringUtils:
+    string_utils = StringUtils()
+    return string_utils
+
+
+class FileUtils:
+    def __normalize_line_endings(self, text: str) -> str:
+        return text.replace("\r\n", "\n").replace("\r", "\n")
+
+    @property
+    def testfiles_folder(self) -> pathlib.Path:
+        return pathlib.Path(__file__).parent / "testfiles"
+
+    @property
+    def assets_folder(self) -> pathlib.Path:
+        return self.testfiles_folder / "keywords"
+
+    def read_file(self, file: pathlib.Path) -> str:
+        with open(file, encoding="utf-8") as ref:
+            return self.__normalize_line_endings(ref.read())
+
+    def get_asset_file_path(self, reference_file: str) -> str:
+        reference_file: pathlib.Path = self.assets_folder / reference_file
+        return str(reference_file.resolve())
+
+    def compare_string_with_file(self, output: str, reference_file: str) -> None:
+        """compare the string in output, with the contents of reference_file
+        normalize all line endinges to \\n
+        """
+        reference_file: pathlib.Path = self.assets_folder / reference_file
+        output = self.__normalize_line_endings(output)
+        ref_contents = FileUtils().read_file(reference_file)
+        assert output == ref_contents
+
+
+@pytest.fixture
+def file_utils() -> FileUtils:
+    file_utils = FileUtils()
+    return file_utils
+
+
+@pytest.fixture
+def ref_string(file_utils: FileUtils):
+    import importlib.util
+
+    ref_string_file = file_utils.get_asset_file_path("reference_string.py")
+    spec = importlib.util.spec_from_file_location("reference_string", ref_string_file)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module

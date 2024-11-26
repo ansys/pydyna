@@ -1,4 +1,5 @@
 """Module containing the ``Part`` class."""
+
 from typing import List
 
 

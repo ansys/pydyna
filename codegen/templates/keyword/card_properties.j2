@@ -1,0 +1,68 @@
+{% if card.duplicate %}
+    @property
+    def {{card.duplicate.name}}(self):
+        '''Gets the table of {{card.duplicate.name}}'''
+        return self._cards[{{card.index}}].table
+
+    @{{card.duplicate.name}}.setter
+    def {{card.duplicate.name}}(self, df):
+        '''sets {{card.duplicate.name}} from the dataframe df'''
+        self._cards[{{card.index}}].table = df
+
+{% elif card.variable %}
+    @property
+    def {{card.variable.name}}(self) -> VariableCard:
+        """{{card.variable.help}}"""
+        return self._cards[{{card.index}}]
+
+{% elif card.set %}
+    @property
+    def sets(self) -> typing.List[{{card.set.name}}]:
+        return self._cards[{{card.target_index}}].items()
+
+    def add_set(self, **kwargs):
+        self._cards[{{card.target_index}}].add_item(**kwargs)
+
+{% elif card.duplicate_group %}
+    @property
+    def {{card.overall_name}}(self):
+        '''Gets the full table of {{card.overall_name}}'''
+        return self._cards[{{card.index}}].table
+
+    @{{card.overall_name}}.setter
+    def {{card.overall_name}}(self, df):
+        '''sets {{card.overall_name}} from the dataframe df'''
+        self._cards[{{card.index}}].table = df
+
+{% else %}
+{% for field in card.fields %}
+{% if field.used %}
+{% if not field.redundant %}
+    @property
+    def {{field.property_name}}(self) -> {%- if field.default is none %} typing.Optional[
+                {%- else %} {% endif %}{{field.type}}{%- if field.default is none %}]{%- endif %}:
+        """Get or set the {% filter indent(width=8) %}{{field.help}}
+        {% endfilter %}
+        """ # nopep8
+        return self._cards[{{card.index}}].get_value("{{field.name}}")
+
+{% if not field.readonly %}
+    @{{field.property_name}}.setter
+    def {{field.property_name}}(self, value: {{field.type}}) -> None:
+        {% if field.options is defined %}
+        if value not in [{{ field.options|join(', ')}}]:
+            raise Exception("""{{field.property_name}} must be one of {{openbrace}}{{ field.options|join(',')}}{{closebrace}}""")
+        {% endif %}
+{% if field.card_indices %}
+{% for card_index in field.card_indices %}
+        self._cards[{{card_index}}].set_value("{{field.name}}", value)
+{% endfor %}{# card_index in field.card_indices #}
+{% else %}
+        self._cards[{{card.index}}].set_value("{{field.name}}", value)
+{% endif %}{# card.indices #}
+
+{% endif %}{# not field.readonly #}
+{% endif %}{# not field.redundant #}
+{% endif %}{# field.used #}
+{% endfor %}
+{% endif %}
