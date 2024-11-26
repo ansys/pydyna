@@ -7,6 +7,8 @@ $#    neig    center     lflag    lftend     rflag    rhtend    eigmth    shfscl
        100       0.0         0-1.0000E29         01.00000E29         2       0.0
 $#  isolid     ibeam    ishell   itshell    mstres    evdump   mstrscl
          0         0         0         0         0         0       0.0
+$#  rotscl   eigmscl
+                2160
 *CONTROL_IMPLICIT_GENERAL
 $#  imflag       dt0    imform      nsbs       igs     cnstn      form    zero_v
          1       1.0         2         1         2         0         0         0
@@ -17,8 +19,8 @@ $#   dnorm    diverg     istif   nlprint    nlnorm   d3itctl     cpchk
          2         1         1         3         0         0         0
 $#  arcctl    arcdir    arclen    arcmth    arcdmp    arcpsi    arcalf    arctim
          0         0       0.0         1         2       0.0       0.0       0.0
-$#   lsmtd     lsdir      irad      srad      awgt      sred
-         4         2       0.0       0.0       0.0       0.0
+$#   lsmtd     lsdir      irad      srad      awgt      sred    kssize
+         4         2       0.0       0.0       0.0       0.0        10
 *PART
 $#                                                                         title
 boxshell
@@ -30,8 +32,8 @@ $#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
 $#      t1        t2        t3        t4      nloc     marea      idof    edgset
      0.002     0.002     0.002     0.002       0.0       0.0       0.0         0
 *MAT_ELASTIC
-$#     mid        ro         e        pr        da        db  not used
-         1    7870.02.07000E11     0.292       0.0       0.0       0.0
+$#     mid        ro         e        pr        da        db  not used  not used
+         1    7870.02.07000E11     0.292       0.0       0.0         0         0
 *DEFINE_CURVE
 $#    lcid      sidr       sfa       sfo      offa      offo    dattyp     lcint
          1         0       1.0       1.0       0.0       0.0         0         0

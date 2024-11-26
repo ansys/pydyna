@@ -20,7 +20,7 @@ $#    hgen      rwen    slnten     rylen     irgen     maten     drlen     disen
 $#     ihq        qh
          2       0.0
 *CONTROL_SOLUTION
-$#    soln       nlq     isnan     lcint     lcacc     ncdcf     nocop      crvp
+$#    soln       nlq     isnan     lcint     lcacc     ncdcf    nocopy      crvp
          2                                                                      
 *CONTROL_TERMINATION
 $#  endtim    endcyc     dtmin    endeng    endmas     nosol
