@@ -1,0 +1,216 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+import numpy as np
+import pandas as pd
+import pytest
+
+from ansys.dyna.core.lib.card import Field
+from ansys.dyna.core.lib.duplicate_card import DuplicateCard
+from ansys.dyna.core.lib.format_type import format_type
+
+
+@pytest.mark.keywords
+def test_duplicate_card_read_bounded(string_utils):
+    """test reading fixed number of lines"""
+    d = DuplicateCard(
+        [
+            Field("nid", int, 0, 8),
+            Field("x", float, 8, 16),
+            Field("y", float, 24, 16),
+            Field("z", float, 40, 16),
+            Field("tc", int, 56, 8),
+            Field("rc", int, 64, 8),
+        ],
+        lambda: 3,
+    )
+
+    card_text = """ 2000000
+ 2000001   -2772.1652832     643.8095703     376.7990417
+ 2000002   -3093.8891602     685.0078125     811.2246704       2       5"""
+    d.read(string_utils.as_buffer(card_text))
+    table = d.table
+    assert len(table) == 3
+    node_repr = """       nid            x           y           z    tc    rc
+0  2000000          NaN         NaN         NaN  <NA>  <NA>
+1  2000001 -2772.165283  643.809570  376.799042  <NA>  <NA>
+2  2000002 -3093.889160  685.007812  811.224670     2     5"""
+    assert repr(table) == node_repr
+    assert table["x"][1] == -2772.1652832
+    assert table["rc"][2] == 5
+
+
+@pytest.mark.keywords
+def test_duplicate_card_read_unbounded(string_utils):
+    """test reading an unknown number of lines into an unbounded card"""
+    d = DuplicateCard(
+        [
+            Field("nid", int, 0, 8),
+            Field("x", float, 8, 16),
+            Field("y", float, 24, 16),
+            Field("z", float, 40, 16),
+            Field("tc", int, 56, 8),
+            Field("rc", int, 64, 8),
+        ],
+        None,
+    )
+    card_text = """ 2000000
+ 2000001   -2772.1652832     643.8095703     376.7990417
+ 2000002   -3093.8891602     685.0078125     811.2246704       2       5"""
+    d.read(string_utils.as_buffer(card_text))
+    table = d.table
+    assert len(table) == 3
+    node_repr = """       nid            x           y           z    tc    rc
+0  2000000          NaN         NaN         NaN  <NA>  <NA>
+1  2000001 -2772.165283  643.809570  376.799042  <NA>  <NA>
+2  2000002 -3093.889160  685.007812  811.224670     2     5"""
+    assert repr(table) == node_repr
+    assert table["x"][1] == -2772.1652832
+    assert table["rc"][2] == 5
+
+
+@pytest.mark.keywords
+def test_duplicate_card_assign():
+    """test assigning dataframe to duplicate card"""
+    d = DuplicateCard(
+        [
+            Field("nid", int, 0, 8),
+            Field("x", float, 8, 16),
+            Field("y", float, 24, 16),
+            Field("z", float, 40, 16),
+            Field("tc", int, 56, 8),
+            Field("rc", int, 64, 8),
+        ],
+        None,
+    )
+
+    node_ids = np.arange(30) + 1
+    xs = np.zeros(30) + 0.1
+    ys = np.zeros(30) + 0.2
+    zs = np.zeros(30) + 0.3
+    df = pd.DataFrame({"nid": node_ids, "x": xs, "y": ys, "z": zs})
+    d.table = df  # assign the dataframe
+    table = d.table  # get the dataframe, see if the contents match what was assigned
+    assert (len(table)) == 30
+    for column in ["nid", "x", "y", "z"]:
+        assert len(df[column]) == len(table[column]), f"Length of {column} column doesn't match"
+        assert len(df[column].compare(table[column])) == 0, f"{column} column values don't match"
+
+
+@pytest.mark.keywords
+def test_duplicate_card_assign_wrong_types():
+    """test assigning wrong type as dataframe to duplicate card"""
+
+    def assign():
+        d = DuplicateCard(
+            [
+                Field("nid", int, 0, 8),
+                Field("x", float, 8, 16),
+                Field("y", float, 24, 16),
+                Field("z", float, 40, 16),
+                Field("tc", int, 56, 8),
+                Field("rc", int, 64, 8),
+            ],
+            None,
+        )
+        node_ids = np.arange(30) + 1
+        d.table = node_ids
+
+    pytest.raises(AssertionError, assign)
+
+
+@pytest.mark.keywords
+def test_duplicate_card_write_long_format(string_utils, ref_string):
+    """Test writing a duplicate card with the long format."""
+    d = DuplicateCard(
+        [
+            Field("nid", int, 0, 8),
+            Field("x", float, 8, 16),
+            Field("y", float, 24, 16),
+            Field("z", float, 40, 16),
+            Field("tc", int, 56, 8),
+            Field("rc", int, 64, 8),
+        ],
+        None,
+    )
+    card_text = """ 2000000
+ 2000001   -2772.1652832     643.8095703     376.7990417
+ 2000002   -3093.8891602     685.0078125     811.2246704       2       5"""
+    d.read(string_utils.as_buffer(card_text))
+    d_str = d.write(format=format_type.long)
+    assert d_str == ref_string.test_mesh_string_long
+
+
+@pytest.mark.keywords
+def test_duplicate_card_read_long(string_utils, ref_string):
+    """Test writing a duplicate card with the long format."""
+    d = DuplicateCard(
+        [
+            Field("nid", int, 0, 8),
+            Field("x", float, 8, 16),
+            Field("y", float, 24, 16),
+            Field("z", float, 40, 16),
+            Field("tc", int, 56, 8),
+            Field("rc", int, 64, 8),
+        ],
+        None,
+    )
+    d.format = format_type.long
+    d.read(string_utils.as_buffer(ref_string.test_mesh_string_long))
+    table = d.table
+    assert len(table) == 3
+    assert table["x"][1] == -2772.1652832
+    assert pd.isna(table["x"][0])
+
+
+@pytest.mark.keywords
+def test_write_inactive_duplicate_card():
+    card = DuplicateCard(
+        [
+            Field("nid", int, 0, 8),
+            Field("x", float, 8, 16),
+            Field("y", float, 24, 16),
+            Field("z", float, 40, 16),
+            Field("tc", int, 56, 8),
+            Field("rc", int, 64, 8),
+        ],
+        None,
+        lambda: False,
+    )
+    assert card.write() == ""
+
+
+@pytest.mark.keywords
+def test_write_empty_duplicate_card():
+    card = DuplicateCard(
+        [
+            Field("nid", int, 0, 8),
+            Field("x", float, 8, 16),
+            Field("y", float, 24, 16),
+            Field("z", float, 40, 16),
+            Field("tc", int, 56, 8),
+            Field("rc", int, 64, 8),
+        ],
+        lambda: 0,
+        lambda: True,
+    )
+    assert card.write() == ""

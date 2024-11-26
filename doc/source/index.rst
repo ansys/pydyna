@@ -18,3 +18,4 @@ PyDYNA documentation  |version|
        examples/index
        {% endif %}
        contributing
+       changelog

@@ -44,7 +44,7 @@ View documentation
 Documentation for the latest stable release of PyDYNA is hosted at
 `PyDYNA documentation <https://dyna.docs.pyansys.com>`_.
 
-In the upper right corner of the documentation’s title bar, there is an option
+In the upper right corner of the documentation's title bar, there is an option
 for switching from viewing the documentation for the latest stable release to
 viewing the documentation for the development version or previously released versions.
 

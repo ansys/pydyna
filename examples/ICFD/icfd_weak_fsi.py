@@ -10,34 +10,32 @@ using weak/loose/explicit FSI. The executable file for LS-DYNA is
 import os
 import sys
 
-
-from ansys.dyna.core.pre import launch_dynapre
+from ansys.dyna.core.pre import examples, launch_dynapre
 from ansys.dyna.core.pre.dynaicfd import (
-    DynaICFD,
-    MatICFD,
-    ICFDPart,
+    DOF,
     ICFDDOF,
     Curve,
-    ICFDVolumePart,
-    MeshedVolume,
+    DynaICFD,
     ICFDAnalysis,
-    ShellPart,
-    ShellFormulation,
+    ICFDPart,
+    ICFDVolumePart,
+    MatICFD,
+    MeshedVolume,
+    Motion,
     PartSet,
-    Curve,
-    DOF,
-    Motion
+    ShellFormulation,
+    ShellPart,
 )
 from ansys.dyna.core.pre.dynamaterial import MatRigid
-from ansys.dyna.core.pre import examples
 from ansys.dyna.core.pre.misc import check_valid_ip
+
 # sphinx_gallery_thumbnail_path = '_static/pre/icfd/weak_fsi.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 
-solution = launch_dynapre(ip = hostname)
+solution = launch_dynapre(ip=hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
 path = examples.weak_fsi + os.sep
@@ -47,7 +45,7 @@ solution.set_termination(termination_time=40)
 icfd = DynaICFD()
 solution.add(icfd)
 
-icfd.set_timestep(tssfac=0.9,max_timestep=Curve(x=[0,10000],y=[0.05,0.05]))
+icfd.set_timestep(tssfac=0.9, max_timestep=Curve(x=[0, 10000], y=[0.05, 0.05]))
 
 icfdanalysis = ICFDAnalysis()
 icfdanalysis.set_timestep(0.05)
@@ -89,14 +87,16 @@ icfd.parts.add(partvol)
 meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
 icfd.add(meshvol)
 
-#define rigid cylinder
-matrigid = MatRigid(mass_density=1000,young_modulus=2e11,poisson_ratio=0.3)
+# define rigid cylinder
+matrigid = MatRigid(mass_density=1000, young_modulus=2e11, poisson_ratio=0.3)
 cylinder = ShellPart(1)
 cylinder.set_material(matrigid)
 cylinder.set_element_formulation(ShellFormulation.PLANE_STRESS)
 icfd.parts.add(cylinder)
 # Define boundary conddition
-icfd.boundaryconditions.create_imposed_motion(PartSet([1]),Curve(func="2*3.14/10*sin(2*3.14/10*TIME+3.14/2)"),dof=DOF.Y_TRANSLATIONAL,motion=Motion.VELOCITY)
+icfd.boundaryconditions.create_imposed_motion(
+    PartSet([1]), Curve(func="2*3.14/10*sin(2*3.14/10*TIME+3.14/2)"), dof=DOF.Y_TRANSLATIONAL, motion=Motion.VELOCITY
+)
 
 solution.create_database_binary(dt=0.2)
 solution.save_file()

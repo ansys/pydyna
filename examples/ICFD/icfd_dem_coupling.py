@@ -9,28 +9,26 @@ The executable file for LS-DYNA is ``ls-dyna_smp_d_R101_winx64_ifort131.exe``.
 import os
 import sys
 
-
-from ansys.dyna.core.pre import launch_dynapre
+from ansys.dyna.core.pre import examples, launch_dynapre
+from ansys.dyna.core.pre.dynadem import DEMAnalysis
 from ansys.dyna.core.pre.dynaicfd import (
-    DynaICFD,
-    MatICFD,
-    ICFDPart,
     ICFDDOF,
     Curve,
-    ICFDVolumePart,
-    MeshedVolume,
+    DynaICFD,
+    ICFD_CouplingForm,
     ICFDAnalysis,
-    SolidPart,
-    SolidFormulation,
-    Curve,
-    Velocity,
+    ICFDPart,
+    ICFDVolumePart,
+    MatICFD,
+    MeshedVolume,
     Point,
-    ICFD_CouplingForm
+    SolidFormulation,
+    SolidPart,
+    Velocity,
 )
-from ansys.dyna.core.pre.dynadem import DEMAnalysis
 from ansys.dyna.core.pre.dynamaterial import MatRigidDiscrete
-from ansys.dyna.core.pre import examples
 from ansys.dyna.core.pre.misc import check_valid_ip
+
 # sphinx_gallery_thumbnail_path = '_static/pre/icfd/dem_coupling.png'
 
 
@@ -38,7 +36,7 @@ hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 
-solution = launch_dynapre(ip = hostname)
+solution = launch_dynapre(ip=hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
 path = examples.dem_coupling + os.sep
@@ -56,7 +54,9 @@ icfdanalysis.set_coupling_dem(formulation=ICFD_CouplingForm.FORCE_USING_FLUID_PR
 icfd.add(icfdanalysis)
 
 demanalysis = DEMAnalysis()
-demanalysis.set_des(normal_damping_coeff=0.9, tangential_damping_coeff=0.9, static_friction_coeff=0.3, rolling_friction_coeff=0.001)
+demanalysis.set_des(
+    normal_damping_coeff=0.9, tangential_damping_coeff=0.9, static_friction_coeff=0.3, rolling_friction_coeff=0.001
+)
 icfd.add(demanalysis)
 
 # define model
@@ -85,11 +85,11 @@ icfd.parts.add(partvol)
 # define the volume space that will be meshed,The boundaries
 # of the volume are the surfaces "spids"
 meshvol = MeshedVolume(surfaces=[1, 2, 3])
-meshvol.meshsize_box(size=0.05,min_point=Point(-1, -1, -1),max_point=Point(1, 1, 1))
+meshvol.meshsize_box(size=0.05, min_point=Point(-1, -1, -1), max_point=Point(1, 1, 1))
 icfd.add(meshvol)
 
-#define rigid cylinder
-matrigid = MatRigidDiscrete(mass_density=1000,young_modulus=1e4)
+# define rigid cylinder
+matrigid = MatRigidDiscrete(mass_density=1000, young_modulus=1e4)
 disc = SolidPart(101)
 disc.set_material(matrigid)
 disc.set_element_formulation(SolidFormulation.ONE_POINT_COROTATIONAL)

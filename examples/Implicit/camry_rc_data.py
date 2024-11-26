@@ -1,4 +1,4 @@
-from ansys.dyna.core.pre.dynabase import ShellFormulation, BeamFormulation
+from ansys.dyna.core.pre.dynabase import BeamFormulation, ShellFormulation
 
 spotweld = [
     [63540, 71415],

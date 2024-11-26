@@ -1,6 +1,5 @@
 """Module containing PyDYNA-specific errors."""
 
-
 SIGINT_TRACKER = []
 
 

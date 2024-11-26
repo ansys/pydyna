@@ -10,27 +10,26 @@ a coarse mesh. The executable file for LS-DYNA is
 import os
 import sys
 
-
-from ansys.dyna.core.pre import launch_dynapre
+from ansys.dyna.core.pre import examples, launch_dynapre
 from ansys.dyna.core.pre.dynaicfd import (
-    DynaICFD,
-    MatICFD,
-    ICFDPart,
     ICFDDOF,
     Curve,
+    DynaICFD,
+    ICFDAnalysis,
+    ICFDPart,
     ICFDVolumePart,
+    MatICFD,
     MeshedVolume,
-    ICFDAnalysis
 )
-from ansys.dyna.core.pre import examples
 from ansys.dyna.core.pre.misc import check_valid_ip
+
 # sphinx_gallery_thumbnail_path = '_static/pre/icfd/thermal_flow.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 
-solution = launch_dynapre(ip = hostname)
+solution = launch_dynapre(ip=hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
 path = examples.thermal_flow + os.sep
@@ -45,7 +44,7 @@ icfdanalysis.set_timestep()
 icfd.add(icfdanalysis)
 
 # define model
-mat = MatICFD(flow_density=1.0, dynamic_viscosity=0.005,heat_capacity = 1000,thermal_conductivity=200)
+mat = MatICFD(flow_density=1.0, dynamic_viscosity=0.005, heat_capacity=1000, thermal_conductivity=200)
 
 part_inflow = ICFDPart(1)
 part_inflow.set_material(mat)
@@ -79,7 +78,7 @@ partvol.set_material(mat)
 icfd.parts.add(partvol)
 # define the volume space that will be meshed,The boundaries
 # of the volume are the surfaces "spids"
-meshvol = MeshedVolume(surfaces=[1, 2, 3,4])
+meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
 icfd.add(meshvol)
 
 solution.create_database_binary(dt=1)

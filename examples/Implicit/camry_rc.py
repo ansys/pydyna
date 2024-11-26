@@ -4,41 +4,59 @@ Implicit model
 This example shows how to create and use an implicit dynamic roof crush model.
 
 """
+
 ###############################################################################
 # Perform required imports
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-# Peform the required imports.
+# Perform the required imports.
 #
 import os
 import sys
 
-
-from ansys.dyna.core.pre import launch_dynapre
-from ansys.dyna.core.pre.dynamech import (
-    DynaMech,
-    Curve,
-    BeamPart,
-    ShellPart,
-    NodeSet,
-    PartSet,
-    TimestepCtrol,
-    Contact,
-    ContactType,
-    ContactCategory,
-    ContactSurface,
-    DOF,
-    OffsetType,
-    AnalysisType
+from camry_rc_data import (
+    beamparts,
+    biw,
+    cnrbs,
+    partswithmat180,
+    partswithmat250,
+    partswithmat300,
+    partswithmat360,
+    partswithmat400,
+    partswithmat450,
+    partswithmat500,
+    platen,
+    shellparts,
+    spc,
+    spotweld,
+    spotweldbeams,
+    spotweldsurfaces,
+    vehicle,
 )
+
+from ansys.dyna.core.pre import examples, launch_dynapre
 from ansys.dyna.core.pre.dynamaterial import (
+    MatModifiedPiecewiseLinearPlasticity,
     MatNull,
+    MatPiecewiseLinearPlasticity,
     MatRigid,
     MatSpotweld,
-    MatModifiedPiecewiseLinearPlasticity,
-    MatPiecewiseLinearPlasticity,
 )
-from camry_rc_data import *
-from ansys.dyna.core.pre import examples
+from ansys.dyna.core.pre.dynamech import (
+    DOF,
+    AnalysisType,
+    BeamPart,
+    Contact,
+    ContactCategory,
+    ContactSurface,
+    ContactType,
+    Curve,
+    DynaMech,
+    NodeSet,
+    OffsetType,
+    PartSet,
+    ShellPart,
+    TimestepCtrol,
+)
 from ansys.dyna.core.pre.misc import check_valid_ip
 
 ###############################################################################
@@ -47,10 +65,10 @@ from ansys.dyna.core.pre.misc import check_valid_ip
 # Before starting the ``pre`` service, you must ensure that the Docker container
 # for this service has been started. For more information, see "Start the Docker
 # container for the ``pre`` service" in https://dyna.docs.pyansys.com/version/stable/index.html.
-# 
-# The ``pre`` service can also be started locally, please download the latest version of 
-# ansys-pydyna-pre-server.zip package from https://github.com/ansys/pydyna/releases and start it 
-# refering to the README.rst file in this server package.
+#
+# The ``pre`` service can also be started locally, please download the latest version of
+# ansys-pydyna-pre-server.zip package from https://github.com/ansys/pydyna/releases and start it
+# referring to the README.rst file in this server package.
 #
 # Once the ``pre`` service is running, you can connect a client to it using
 # the hostname and port. This example uses the default localhost and port
@@ -59,7 +77,7 @@ from ansys.dyna.core.pre.misc import check_valid_ip
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
-camry_solution = launch_dynapre(ip = hostname)
+camry_solution = launch_dynapre(ip=hostname)
 
 ###############################################################################
 # Import initial mesh data
@@ -115,8 +133,8 @@ camry.implicitanalysis.set_dynamic(gamma=0.6, beta=0.38)
 # The ``set_solution()`` method defines NSOLVR as 12 (Nolinear with BFGS update).
 #
 camry.implicitanalysis.set_eigenvalue()
-camry.implicitanalysis.set_solution(iteration_limit=1,
-    stiffness_reformation_limit=50, absolute_convergence_tolerance=-100
+camry.implicitanalysis.set_solution(
+    iteration_limit=1, stiffness_reformation_limit=50, absolute_convergence_tolerance=-100
 )
 
 ###############################################################################
@@ -336,15 +354,9 @@ crv = Curve(
     y=[0, 13, 26, 39, 52, 65, 78, 91, 104, 117, 127, 127],
 )
 platen = PartSet([50000001])
-camry.boundaryconditions.create_imposed_motion(
-    platen, crv, dof=DOF.X_TRANSLATIONAL, scalefactor=-0.0802216
-)
-camry.boundaryconditions.create_imposed_motion(
-    platen, crv, dof=DOF.Y_TRANSLATIONAL, scalefactor=-0.0802216
-)
-camry.boundaryconditions.create_imposed_motion(
-    platen, crv, dof=DOF.Z_TRANSLATIONAL, scalefactor=-0.0802216
-)
+camry.boundaryconditions.create_imposed_motion(platen, crv, dof=DOF.X_TRANSLATIONAL, scalefactor=-0.0802216)
+camry.boundaryconditions.create_imposed_motion(platen, crv, dof=DOF.Y_TRANSLATIONAL, scalefactor=-0.0802216)
+camry.boundaryconditions.create_imposed_motion(platen, crv, dof=DOF.Z_TRANSLATIONAL, scalefactor=-0.0802216)
 
 ###############################################################################
 # Define database cards and save input file

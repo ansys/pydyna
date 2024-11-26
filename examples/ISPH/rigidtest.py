@@ -10,36 +10,31 @@ an ISPH model. The executable file for LS-DYNA is
 import os
 import sys
 
-
-from ansys.dyna.core.pre import launch_dynapre
-from ansys.dyna.core.pre.dynamaterial import (
-    MatRigid,
-    MatSPHIncompressibleFluid,
-    MatSPHIncompressibleStructure,
-)
+from ansys.dyna.core.pre import examples, launch_dynapre
 from ansys.dyna.core.pre.dynaisph import (
-    DynaISPH,
-    Box,
-    Point,
-    Curve,
-    PartSet,
-    ShellPart,
-    ShellFormulation,
-    ISPHStructPart,
-    ISPHFluidPart,
     DOF,
-    Motion,
+    Box,
+    Curve,
+    DynaISPH,
     Gravity,
     GravityOption,
+    ISPHFluidPart,
+    ISPHStructPart,
+    Motion,
+    PartSet,
+    Point,
+    ShellFormulation,
+    ShellPart,
 )
-from ansys.dyna.core.pre import examples
+from ansys.dyna.core.pre.dynamaterial import MatRigid, MatSPHIncompressibleFluid, MatSPHIncompressibleStructure
 from ansys.dyna.core.pre.misc import check_valid_ip
+
 # sphinx_gallery_thumbnail_path = '_static/pre/isph/rigidtest.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
-isphsolution = launch_dynapre(ip = hostname)
+isphsolution = launch_dynapre(ip=hostname)
 fns = []
 path = examples.isph_rigidtest + os.sep
 fns.append(path + "rigidtest.k")
@@ -50,9 +45,7 @@ isphsolution.set_termination(0.5)
 isphobj = DynaISPH()
 isphsolution.add(isphobj)
 
-isphobj.set_timestep(
-    tssfac=1, max_timestep=Curve(x=[0, 0.04, 0.05, 0.1, 100], y=[0.5, 0.5, 1, 1, 1])
-)
+isphobj.set_timestep(tssfac=1, max_timestep=Curve(x=[0, 0.04, 0.05, 0.1, 100], y=[0.5, 0.5, 1, 1, 1]))
 isphobj.isphanalysis.set_box(Box(-750, 800, -800, 800, -100, 3000))
 
 platemat1 = MatRigid(

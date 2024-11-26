@@ -24,7 +24,7 @@ def get_from_minikube():
     p = f.readline()
     n1 = p.find(":")
     n2 = p.find("/")
-    p = p[n1+1:n2]
+    p = p[n1 + 1 : n2]
     return (ip, p)
 
 
@@ -55,7 +55,7 @@ dyna.resume(cycle=2600)
 #
 # And watch it until it gets there
 #
-while (1):
+while 1:
     time.sleep(1.0)
     try:
         (c, t) = dyna.time()
@@ -63,7 +63,7 @@ while (1):
         print(err)
     else:
         print("cycle=%d, time=%.10e" % (c, t))
-        if(c >= 2600):
+        if c >= 2600:
             break
 #
 # Get some information about a node
@@ -84,7 +84,7 @@ print(s)
 # Now just watch the job until it is done
 #
 getnode = 1
-while(1):
+while 1:
     time.sleep(1.0)
     try:
         (c, t) = dyna.time()
@@ -93,10 +93,9 @@ while(1):
         break
     else:
         print("cycle=%d, time=%.10e" % (c, t))
-        if(getnode and (c > 10000)):
+        if getnode and (c > 10000):
             (x, v) = dyna.node(569)
-            print("Node 569 has Y position %f and Y velocity %f" %
-                  (x[1], v[1]))
+            print("Node 569 has Y position %f and Y velocity %f" % (x[1], v[1]))
             getnode = 0
 #
 print("Job Complete")

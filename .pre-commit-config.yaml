@@ -1,6 +1,7 @@
 files: |
     (?x)(
         ^src/ansys/ |
+        ^examples |
         ^.github/
     )
 exclude: |
@@ -10,45 +11,49 @@ exclude: |
         src/ansys/dyna/core/pre/doc/|
         src/ansys/dyna/core/pre/DigitalWeaving_BCs.py|
         src/ansys/dyna/core/pre/kwprocess_pb2.py|
-        src/ansys/dyna/core/pre/kwprocess_pb2_grpc.py
-        )
+        src/ansys/dyna/core/pre/kwprocess_pb2_grpc.py|
+        src/ansys/dyna/core/keywords/keyword_classes/auto/|
+        src/ansys/dyna/core/keywords/keyword_classes/type_mapping.py|
+        src/ansys/dyna/core/keywords/keyword_classes/auto_keywords.py|
+        .*\.k$
+    )
 repos:
 
 - repo: https://github.com/psf/black
-  rev: 23.3.0  # IF VERSION CHANGES --> MODIFY "blacken-docs" MANUALLY AS WELL!!
+  rev: 24.10.0  # IF VERSION CHANGES --> MODIFY "blacken-docs" MANUALLY AS WELL!!
   hooks:
   - id: black
 
 - repo: https://github.com/adamchainz/blacken-docs
-  rev: 1.14.0
+  rev: 1.19.1
   hooks:
   - id: blacken-docs
     additional_dependencies: [black==23.3.0]
 
 - repo: https://github.com/pycqa/isort
-  rev: 5.12.0
+  rev: 5.13.2
   hooks:
   - id: isort
 
 - repo: https://github.com/PyCQA/flake8
-  rev: 6.0.0
+  rev: 7.1.1
   hooks:
   - id: flake8
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.2.5
+  rev: v2.3.0
   hooks:
   - id: codespell
     args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt"]
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.4.0
+  rev: v5.0.0
   hooks:
   - id: check-merge-conflict
   - id: debug-statements
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.23.2
+  rev: 0.29.4
   hooks:
     - id: check-github-workflows

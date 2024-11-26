@@ -9,30 +9,31 @@ LS-DYNA version : ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
 import os
 import sys
 
-from ansys.dyna.core.pre import launch_dynapre
+from em_railgun_data import cur, inlet, outlet, spc1, spc2
+
+from ansys.dyna.core.pre import examples, launch_dynapre
 from ansys.dyna.core.pre.dynaem import (
-    DynaEM,
-    Circuit,
-    CircuitType,
-    SegmentSet,
-    NodeSet,
-    Curve,
-    SolidPart,
-    SolidFormulation,
-    EMContact,
     BEMSOLVER,
     FEMSOLVER,
+    Circuit,
+    CircuitType,
+    Curve,
+    DynaEM,
+    EMContact,
+    NodeSet,
+    SegmentSet,
+    SolidFormulation,
+    SolidPart,
 )
-from ansys.dyna.core.pre.dynamaterial import MatElastic, MatRigid, EMMATTYPE
-from em_railgun_data import *
-from ansys.dyna.core.pre import examples
+from ansys.dyna.core.pre.dynamaterial import EMMATTYPE, MatElastic, MatRigid
+
 # sphinx_gallery_thumbnail_path = '_static/pre/em/railgun.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1:
     hostname = sys.argv[1]
 
-solution = launch_dynapre(ip = hostname)
+solution = launch_dynapre(ip=hostname)
 fns = []
 path = examples.em_railgun + os.sep
 fns.append(path + "em_railgun.k")
@@ -51,9 +52,7 @@ circuit = Circuit(
     circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME,
     loadcurve=Curve(x=[0, 8e-5, 2e-4, 4e-4, 6e-4, 1e-3], y=[0, 350, 450, 310, 230, 125], sfo=2e6),
 )
-circuit.set_current(
-    current=SegmentSet(cur), current_inlet=SegmentSet(inlet), current_outlet=SegmentSet(outlet)
-)
+circuit.set_current(current=SegmentSet(cur), current_inlet=SegmentSet(inlet), current_outlet=SegmentSet(outlet))
 railgun.add(circuit)
 
 matelastic = MatElastic(mass_density=2.64e-3, young_modulus=9.7e10, poisson_ratio=0.31)

@@ -888,21 +888,20 @@ class DynaBase:
         keyworddata : string
             Keyword data.
 
-        Examples
-        --------
-        Create a ``\*INITIAL_VELOCITY`` keyword.
+        Example::
+            Create a ``\*INITIAL_VELOCITY`` keyword.
 
-        \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-        \*INITIAL_VELOCITY
+            \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            \*INITIAL_VELOCITY
 
 
-        &       vx        vy        vz       vxr       vyr       vzr
-        1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
-        \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            &       vx        vy        vz       vxr       vyr       vzr
+            1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
+            \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-        opcode = "INITIAL_VELOCITY"
-        keyworddata = "0\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
-        create_general_keyword(opcode = opcode,keyworddata=keyworddata)
+            opcode = "INITIAL_VELOCITY"
+            keyworddata = "0\n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
+            create_general_keyword(opcode = opcode,keyworddata=keyworddata)
         """
         ret = self.stub.CreateGeneralKWD(GeneralKWDRequest(opcode=opcode, keyworddata=keyworddata))
         msg = opcode + " Created..."

@@ -9,27 +9,26 @@ The executable file for LS-DYNA is ``ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_
 import os
 import sys
 
-
-from ansys.dyna.core.pre import launch_dynapre
+from ansys.dyna.core.pre import examples, launch_dynapre
 from ansys.dyna.core.pre.dynaicfd import (
-    DynaICFD,
-    MatICFD,
-    ICFDPart,
     ICFDDOF,
     Curve,
+    DynaICFD,
+    ICFDAnalysis,
+    ICFDPart,
     ICFDVolumePart,
+    MatICFD,
     MeshedVolume,
-    ICFDAnalysis
 )
-from ansys.dyna.core.pre import examples
 from ansys.dyna.core.pre.misc import check_valid_ip
+
 # sphinx_gallery_thumbnail_path = '_static/pre/icfd/mesh_adaptivity.png'
 
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 
-solution = launch_dynapre(ip = hostname)
+solution = launch_dynapre(ip=hostname)
 # Import the initial mesh data(nodes and elements)
 fns = []
 path = examples.mesh_adaptivity + os.sep
@@ -41,7 +40,7 @@ solution.add(icfd)
 
 icfdanalysis = ICFDAnalysis()
 icfdanalysis.set_timestep()
-icfdanalysis.set_mesh_adaptivity(min_mesh_size=0.02,max_mesh_size=0.2,max_perceptual_error=2,num_iteration=10)
+icfdanalysis.set_mesh_adaptivity(min_mesh_size=0.02, max_mesh_size=0.2, max_perceptual_error=2, num_iteration=10)
 icfd.add(icfdanalysis)
 
 # define model

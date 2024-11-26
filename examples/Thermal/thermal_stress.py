@@ -6,28 +6,28 @@ This example shows how to create a thermal stress model with the PyDYNA ``pre`` 
 The executable file for LS-DYNA is ``ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe``.
 
 """
+
 ###############################################################################
 # Perform required imports
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-# Peform the required imports.
+# Perform the required imports.
 #
 import os
 import sys
 
-
-from ansys.dyna.core.pre import launch_dynapre
+from ansys.dyna.core.pre import examples, launch_dynapre
+from ansys.dyna.core.pre.dynamaterial import MatElasticPlasticThermal
 from ansys.dyna.core.pre.dynamech import (
+    AnalysisType,
     DynaMech,
+    NodeSet,
+    SolidFormulation,
+    SolidPart,
     ThermalAnalysis,
     ThermalAnalysisType,
-    SolidPart,
-    SolidFormulation,
-    NodeSet,
-    AnalysisType
 )
-from ansys.dyna.core.pre.dynamaterial import MatElasticPlasticThermal
-from ansys.dyna.core.pre import examples
 from ansys.dyna.core.pre.misc import check_valid_ip
+
 # sphinx_gallery_thumbnail_path = '_static/pre/thermal/thermal.png'
 ###############################################################################
 # Start the ``pre`` service
@@ -35,10 +35,10 @@ from ansys.dyna.core.pre.misc import check_valid_ip
 # Before starting the ``pre`` service, you must ensure that the Docker container
 # for this service has been started. For more information, see "Start the Docker
 # container for the ``pre`` service" in https://dyna.docs.pyansys.com/version/stable/index.html.
-# 
-# The ``pre`` service can also be started locally, please download the latest version of 
-# ansys-pydyna-pre-server.zip package from https://github.com/ansys/pydyna/releases and start it 
-# refering to the README.rst file in this server package.
+#
+# The ``pre`` service can also be started locally, please download the latest version of
+# ansys-pydyna-pre-server.zip package from https://github.com/ansys/pydyna/releases and start it
+# refefring to the README.rst file in this server package.
 #
 # Once the ``pre`` servic is running, you can connect a client to it using
 # the hostname and the port. This example uses the default local host and port
@@ -47,7 +47,7 @@ from ansys.dyna.core.pre.misc import check_valid_ip
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
-solution = launch_dynapre(ip = hostname)
+solution = launch_dynapre(ip=hostname)
 
 ###############################################################################
 # Start the solution workflow
@@ -90,13 +90,13 @@ ts.set_timestep(timestep_size_for_mass_scaled=0.01)
 #
 mat = MatElasticPlasticThermal(
     mass_density=1.0,
-    temperatures=(0,10,20,30,40,50),
-    young_modulus=(1e10,1e10,1e10,1e10,1e10,1e10),
-    poisson_ratio=(0.3,0.3,0.3,0.3,0.3,0.3),
-    thermal_expansion=(0,2e-6,4e-6,6e-6,8e-6,1e-5),
-    yield_stress = (1e20,1e20,1e20,1e20,1e20,1e20)
+    temperatures=(0, 10, 20, 30, 40, 50),
+    young_modulus=(1e10, 1e10, 1e10, 1e10, 1e10, 1e10),
+    poisson_ratio=(0.3, 0.3, 0.3, 0.3, 0.3, 0.3),
+    thermal_expansion=(0, 2e-6, 4e-6, 6e-6, 8e-6, 1e-5),
+    yield_stress=(1e20, 1e20, 1e20, 1e20, 1e20, 1e20),
 )
-mat.set_thermal_isotropic(density=1,generation_rate_multiplier=10,specific_heat=1,conductivity=1)
+mat.set_thermal_isotropic(density=1, generation_rate_multiplier=10, specific_heat=1, conductivity=1)
 
 slab = SolidPart(1)
 slab.set_material(mat)
@@ -108,8 +108,8 @@ ts.parts.add(slab)
 # ~~~~~~~~~~~~~~~~~~~~~~~
 # Initialize nodes 1 through 8 with a temperature of 10 degrees.
 #
-for i in range(1,9):
-    ts.initialconditions.create_temperature(NodeSet([i]),temperature=10)
+for i in range(1, 9):
+    ts.initialconditions.create_temperature(NodeSet([i]), temperature=10)
 
 ###############################################################################
 # Define output frequencies and save input file

@@ -1,0 +1,866 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""
+Test the keyword library
+"""
+
+import math
+
+import numpy as np
+import pandas as pd
+
+from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core import keywords as kwd
+
+import pytest
+
+@pytest.mark.keywords
+def test_mesh(ref_string):
+    ref_node = ref_string.test_mesh_string
+    nodes = kwd.Node()
+    nodes.nodes = pd.DataFrame(
+        {
+            "nid": [100, 101, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113],
+            "x": [
+                -0.2969848,
+                -0.2687006,
+                -0.160727,
+                -0.1454197,
+                -0.2969848,
+                -0.2687006,
+                -0.1454197,
+                -0.160727,
+                -0.2969848,
+                -0.2687006,
+                -0.1454197,
+                -0.160727,
+            ],
+            "y": [
+                0.2969848,
+                0.2687006,
+                0.3880294,
+                0.3510742,
+                0.2969848,
+                0.2687006,
+                0.3510742,
+                0.3880294,
+                0.2969848,
+                0.2687006,
+                0.3510742,
+                0.3880294,
+            ],
+            "z": [0.0, 0.0, 0.0, 0.0, 0.25, 0.25, 0.25, 0.25, 0.5, 0.5, 0.5, 0.5],
+        }
+    )
+    node_string = nodes.write()
+    assert node_string == ref_node, "node block does not match"
+
+    ref_element = """*ELEMENT_SOLID
+$#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
+       1       1     100     101     105     104     106     107     108     109
+       2       1     106     107     108     109     110     111     112     113"""
+
+    elements = kwd.ElementSolid()
+    elements.set_legacy_format()
+    elements.elements = pd.DataFrame(
+        {
+            "eid": [1, 2],
+            "pid": [1, 1],
+            "n1": [100, 106],
+            "n2": [101, 107],
+            "n3": [105, 108],
+            "n4": [104, 109],
+            "n5": [106, 110],
+            "n6": [107, 111],
+            "n7": [108, 112],
+            "n8": [109, 113],
+        }
+    )
+    element_string = elements.write()
+    assert element_string == ref_element, "element solid block does not match"
+
+
+@pytest.mark.keywords
+def test_read_node(ref_string):
+    n = kwd.Node()
+    n.loads(ref_string.test_node_long_id)
+    assert n.nodes["nid"][0] == 69000001
+    assert n.write() == ref_string.test_node_long_id
+
+
+@pytest.mark.keywords
+def test_nodes_from_dataframe():
+    node_ids = np.arange(30) + 1
+    xs = np.zeros(30) + 0.1
+    ys = np.zeros(30) + 0.2
+    zs = np.zeros(30) + 0.3
+    df = pd.DataFrame({"nid": node_ids, "x": xs, "y": ys, "z": zs})
+    n = kwd.Node()
+    n.nodes = df
+    table = n.nodes
+    assert (len(table)) == 30
+    for column in ["nid", "x", "y", "z"]:
+        assert len(df[column]) == len(table[column]), f"Length of {column} column doesn't match"
+        assert len(df[column].compare(table[column])) == 0, f"{column} column values don't match"
+
+
+@pytest.mark.keywords
+def test_read_segment():
+    segment_text = """*SET_SEGMENT
+$#     sid       da1       da2       da3       da4    solver
+         2       0.0       0.0       0.0       0.0MECH
+$#      n1        n2        n3        n4        a1        a2        a3        a4
+      2145      2124      2004      2045       0.0       0.0       0.0       0.0
+       262       265       264       263       0.0       0.0       0.0       0.0
+       304       262       263       305       0.0       0.0       0.0       0.0
+       263       264       385       384       0.0       0.0       0.0       0.0
+       344       345       265       262       0.0       0.0       0.0       0.0
+       265       445       444       264       0.0       0.0       0.0       0.0
+      1265      1285       405       525       0.0       0.0       0.0       0.0
+      1865      1844      1784      1805       0.0       0.0       0.0       0.0
+       444       584       665       545       0.0       0.0       0.0       0.0
+       905       845       803       344       0.0       0.0       0.0       0.0
+       182      2204      2084      2165       0.0       0.0       0.0       0.0"""
+    seg = kwd.SetSegment()
+    seg.loads(segment_text)
+    assert (seg.sid, seg.da1, seg.da2, seg.da3, seg.da4, seg.solver) == (
+        2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        "MECH",
+    )
+
+
+@pytest.mark.keywords
+def test_read_keyword_no_data():
+    seatbelt_text = """*SECTION_SEATBELT
+$#   secid      area     thick
+                              """
+    belt = kwd.SectionSeatbelt()
+    # ensure that it does not throw when the data line is empty
+    belt.loads(seatbelt_text)
+
+
+@pytest.mark.keywords
+def test_read_nodes(ref_string):
+    node_text = """*NODE
+$#   nid               x               y               z      tc      rc
+ 2000000
+ 2000001   -2772.1652832     643.8095703     376.7990417
+ 2000002   -3093.8891602     685.0078125     811.2246704       2       5"""
+    node = kwd.Node()
+    node.loads(node_text)
+    node_table = node.nodes
+    assert len(node_table) == 3
+    node_repr = """       nid            x           y           z    tc    rc
+0  2000000          NaN         NaN         NaN  <NA>  <NA>
+1  2000001 -2772.165283  643.809570  376.799042  <NA>  <NA>
+2  2000002 -3093.889160  685.007812  811.224670     2     5"""
+    assert repr(node_table) == node_repr
+    assert node_table["x"][1] == -2772.1652832
+    assert node_table["rc"][2] == 5
+    assert pd.isna(node_table["tc"][0])
+    node_table.loc[2, "tc"] = 1
+    node_text = ref_string.test_read_nodes_string
+    assert repr(node) == node_text
+    assert node.write() == node_text
+
+
+@pytest.mark.keywords
+def test_hourglass(ref_string):
+    h = kwd.Hourglass()
+    h.options["TITLE"].active = True
+    assert h.get_title() == "*HOURGLASS_TITLE"
+    h.add_set(title="hello")
+    assert h.write() == ref_string.test_hourglass_title
+    h = kwd.Hourglass()
+    h.loads(ref_string.test_hourglass_title)
+    assert len(h.sets) == 1
+
+
+@pytest.mark.keywords
+def test_load_segment(ref_string):
+    seg = kwd.LoadSegment()
+    assert seg.write() == ref_string.test_load_segment_string
+    seg = kwd.LoadSegmentId()
+    assert seg.write() == ref_string.test_load_segment_id_string
+
+
+@pytest.mark.keywords
+def test_section_tshell(ref_string):
+    tshell = kwd.SectionTShell(format=format_type.long)
+    # check that the keyword wries using the long format
+    assert tshell.format == format_type.long
+    assert tshell.write() == ref_string.test_section_shell_long
+
+    tshell.format = format_type.standard
+    assert tshell.write(format=format_type.long) == ref_string.test_section_shell_long
+
+    # check that the variable card is saved and loaded correctly
+    tshell = kwd.SectionTShell(icomp=1, nip=9)
+    tshell.bi[0] = 1.0
+    tshell.bi[1] = 2.0
+    tshell.bi[2] = 0.0
+    tshell.bi[8] = 12.0
+    tshell_string = tshell.write(format=format_type.long)
+    tshell = kwd.SectionTShell()
+    tshell.loads(tshell_string)
+    assert tshell.icomp == 1
+    assert tshell.nip == 9
+    assert tshell.bi[0] == 1.0
+    assert tshell.bi[2] == 0.0
+    assert math.isnan(tshell.bi[3])
+    assert tshell.bi[8] == 12.0
+
+
+@pytest.mark.keywords
+def test_section_solid(ref_string):
+    ss = kwd.SectionSolid()
+    # check the default output
+    assert ss.write() == ref_string.test_ss_string
+    # check the output with elform = 101
+    ss.elform = 101
+    assert ss.write() == ref_string.test_ss_elform_101_string
+    # check the output with elform = 101, nip=2
+    ss.nip = 2
+    ss.integration_points = pd.DataFrame({"xi": [1, 0], "eta": [2, np.nan], "zeta": [3, 3], "wgt": [np.nan, 5.0]})
+    assert ss.write() == ref_string.test_ss_elform_101_nip_2_string
+    # check the output with elform = 101, nip = 2, lmc=9
+    ss.lmc = 9
+    ss.pi[0] = 22
+    ss.pi[8] = 3.7
+    assert ss.write() == ref_string.test_ss_elform_101_nip_2_lmc_9_string
+
+
+@pytest.mark.keywords
+def test_initial_strain_shell(ref_string):
+    # test read
+    ref = """*INITIAL_STRAIN_SHELL
+         1         1         5
+ 1.96E-003 7.65E-003-9.61E-003-2.29E-004-5.79E-004 1.41E-004-1.00E+000
+ 2.30E-003 7.56E-003-9.86E-003-6.10E-004-5.89E-004 1.61E-004-5.00E-001
+ 2.63E-003 7.47E-003-1.01E-002-9.91E-004-5.98E-004 1.80E-004 0.00E+000
+ 2.97E-003 7.36E-003-1.03E-002-1.34E-003-6.07E-004 1.98E-004 5.00E-001
+ 3.32E-003 7.26E-003-1.06E-002-1.68E-003-6.15E-004 2.17E-004 1.00E+000
+         2         1         5
+ 1.96E-003 7.27E-003-9.23E-003-3.36E-004-3.96E-004-1.32E-005-1.00E+000
+ 2.11E-003 7.05E-003-9.16E-003-5.73E-004-3.88E-004-7.72E-006-5.00E-001
+ 2.27E-003 6.82E-003-9.09E-003-8.10E-004-3.81E-004-2.20E-006 0.00E+000
+ 2.45E-003 6.58E-003-9.03E-003-1.04E-003-3.73E-004 3.18E-006 5.00E-001
+ 2.63E-003 6.34E-003-8.96E-003-1.28E-003-3.65E-004 8.55E-006 1.00E+000
+         3         1         5
+ 2.30E-003 7.28E-003-9.58E-003 1.63E-004-3.67E-004-2.03E-005-1.00E+000
+ 2.35E-003 7.14E-003-9.48E-003 1.57E-004-3.62E-004-2.01E-005-5.00E-001
+ 2.39E-003 7.00E-003-9.39E-003 1.51E-004-3.57E-004-1.99E-005 0.00E+000
+ 2.43E-003 6.88E-003-9.31E-003 1.73E-004-3.52E-004-2.03E-005 5.00E-001
+ 2.47E-003 6.75E-003-9.22E-003 1.96E-004-3.48E-004-2.07E-005 1.00E+000"""
+    i = kwd.InitialStrainShell()
+    i.loads(ref)
+    assert i.sets[1].eid == 2
+    assert i.sets[2].strains.loc[0, "epszz"] == -9.58e-003
+
+    # test write
+    i = kwd.InitialStrainShell()
+    i.add_set(eid=1, nplane=1, nthick=5, strains=pd.DataFrame({"epsxx": [1, 1, 1, 1, 1]}))
+    assert 1 == i.sets[0].eid
+    i.add_set(eid=2, nplane=1, nthick=5)
+    i.sets[1].strains = pd.DataFrame({"epsxy": [22, 2, 2, 2, 2]})
+    assert i.write() == ref_string.test_initial_strain_shell_string
+
+
+@pytest.mark.keywords
+def test_initial_stress_shell_single_element_single_layer(ref_string):
+    i = kwd.InitialStressShell()
+    i.loads(ref_string.test_initial_stress_shell_string_single_element_single_layer)
+    assert len(i.sets) == 1
+    element0 = i.sets[0]
+    assert element0.eid == 1
+    assert element0.nhisv == 19
+    assert element0.large == 0
+    assert element0.nthick == 1
+    assert element0.nplane == 1
+    assert len(element0.sets) == 1
+    assert len(i.sets) == 1
+    stress0 = element0.sets[0]
+    assert stress0.sigxx == 0.0
+    assert stress0.t == -1.0
+    assert stress0.eps == 0.194
+    assert len(stress0.hisv) == element0.nhisv
+    assert stress0.hisv[18] == 0.311
+
+
+@pytest.mark.keywords
+def test_initial_stress_shell_single_element_multiple_layers(ref_string):
+    i = kwd.InitialStressShell()
+    i.loads(ref_string.test_initial_stress_shell_string_single_element_multiple_layers)
+    assert len(i.sets) == 1
+    element0 = i.sets[0]
+    assert element0.nhisv == 19
+    assert len(element0.sets) == 5
+    stress1 = element0.sets[1]
+    assert stress1.t == -0.5
+    assert stress1.hisv[18] == 0.32
+
+
+@pytest.mark.keywords
+def test_initial_stress_shell(ref_string):
+    i = kwd.InitialStressShell()
+    i.loads(ref_string.test_initial_stress_shell_string)
+    assert len(i.sets) == 3
+    element1 = i.sets[1]
+    assert element1.eid == 2
+    assert element1.nhisv == 19
+    assert len(element1.sets) == 5
+    stress4 = element1.sets[4]
+    assert stress4.t == 1.0
+    assert len(stress4.hisv) == 19
+    assert stress4.hisv[5] == 0.163
+
+
+@pytest.mark.keywords
+def test_element_shell_thickness(ref_string):
+    ref_element = """*ELEMENT_SHELL_THICKNESS
+       1       1       1     105       2       2
+ 1.98036024E+000 1.97992622E+000 1.97992622E+000 1.97992622E+000 1.49965326E+002
+       2       1     136     133    2834    2834
+ 1.98166233E+000 1.98166233E+000 1.98296441E+000 1.98296441E+000 1.46006557E+002
+       3       1     141     146     135     135
+ 1.98187934E+000 1.97949219E+000 1.98280165E+000 1.98280165E+000 9.00245614E+001"""
+    elements = kwd.ElementShellThickness()
+    elements.loads(ref_element)
+    assert elements.elements.loc[0, "eid"] == 1
+    assert elements.elements.loc[0, "thic1"] == 1.98036024
+    elements.elements.loc[0, "thic1"] = 2
+    assert elements.elements.loc[0, "thic1"] == 2
+    assert elements.write() == ref_string.element_shell_thickness_string
+
+
+@pytest.mark.keywords
+def test_element_solid_ortho(ref_string):
+    # assign with one dataframe for all cards
+    elements = kwd.ElementSolidOrtho()
+    elements.set_legacy_format()
+    df_elements = pd.DataFrame(
+        {
+            "eid": [1, 2],
+            "pid": [1, 1],
+            "n1": [100, 106],
+            "n2": [101, 107],
+            "n3": [105, 108],
+            "n4": [104, 109],
+            "n5": [106, 110],
+            "n6": [107, 111],
+            "n7": [108, 112],
+            "n8": [109, 113],
+            "a1": [0.4, 0.1],
+            "a2": [0.3, 0.9],
+            "a3": [0.1, 0.6],
+            "d1": [0.1, 0.0],
+            "d2": [0.8, 0.0],
+            "d3": [0.2, 0.1],
+        }
+    )
+    elements.elements = df_elements
+    element_string = elements.write()
+    assert element_string == ref_string.element_solid_ortho_legacy, "element solid ortho block does not match"
+
+    # reading using the non-legacy format
+    elements = kwd.ElementSolidOrtho()
+    elements.loads(ref_string.element_solid_ortho)
+    assert len(elements.elements) == 25
+
+    # reading using the legacy format
+    elements = kwd.ElementSolidOrtho()
+    elements.loads(element_string)
+    assert len(elements.elements) == 2
+    assert len(elements.cards[0]._cards) == 3
+
+
+@pytest.mark.keywords
+def test_control_timestep_read(ref_string):
+    """Read CONTROL_TIMESTEP"""
+    c = kwd.ControlTimeStep()
+    c.loads(ref_string.test_control_timestep_string)
+    assert c.tssfac == 1.0
+
+
+@pytest.mark.keywords
+def test_mat_plastic_kinematic_read(ref_string):
+    ref_mat_plastic_kinematic_string = ref_string.test_mat_plastic_kinematic_ref
+    m = kwd.MatPlasticKinematic()
+    m.loads(ref_mat_plastic_kinematic_string)
+    assert m.write() == ref_mat_plastic_kinematic_string
+
+
+@pytest.mark.keywords
+def test_mat_null_read(ref_string):
+    ref_mat_null_string = ref_string.test_mat_null_ref
+    m = kwd.MatNull()
+    m.loads(ref_mat_null_string)
+    assert m.write() == ref_mat_null_string
+
+
+@pytest.mark.keywords
+def test_mat_piecewise_linear_plasticity_read(ref_string):
+    ref_mat_piecewise_linear_plasticity_string = ref_string.test_mat_piecewise_linear_plasticity_ref
+    m = kwd.MatPiecewiseLinearPlasticity()
+    m.loads(ref_mat_piecewise_linear_plasticity_string)
+    assert m.write() == ref_mat_piecewise_linear_plasticity_string
+
+
+"""@pytest.mark.keywords
+def test_mat_piecewise_linear_plasticity_2d_read(ref_string):
+    ref_mat_piecewise_linear_plasticity_2d_string = \
+        ref_string.test_mat_piecewise_linear_plasticity_2d_ref
+    m = kwd.MatPiecewiseLinearPlasticity2d()
+    m.loads(ref_mat_piecewise_linear_plasticity_2d_string)
+    assert m.write() == ref_mat_piecewise_linear_plasticity_2d_string"""
+
+
+@pytest.mark.keywords
+def test_mat_piecewise_linear_plasticity_haz_read(ref_string):
+    ref_mat_piecewise_linear_plasticity_haz_string = ref_string.test_mat_piecewise_linear_plasticity_haz_ref
+    m = kwd.MatPiecewiseLinearPlasticityHaz()
+    m.loads(ref_mat_piecewise_linear_plasticity_haz_string)
+    assert m.write() == ref_mat_piecewise_linear_plasticity_haz_string
+
+
+@pytest.mark.keywords
+def test_mat_piecewise_linear_plasticity_log_interpolation_read(ref_string):
+    ref_mat_piecewise_linear_plasticity_log_interpolation_string = (
+        ref_string.test_mat_piecewise_linear_plasticity_log_interpolation_ref
+    )
+    m = kwd.MatPiecewiseLinearPlasticityLogInterpolation()
+    m.loads(ref_mat_piecewise_linear_plasticity_log_interpolation_string)
+    assert m.write() == ref_mat_piecewise_linear_plasticity_log_interpolation_string
+
+
+@pytest.mark.keywords
+def test_mat_piecewise_linear_plasticity_midfail_read(ref_string):
+    ref_mat_piecewise_linear_plasticity_midfail_string = ref_string.test_mat_piecewise_linear_plasticity_midfail_ref
+    m = kwd.MatPiecewiseLinearPlasticityMidfail()
+    m.loads(ref_mat_piecewise_linear_plasticity_midfail_string)
+    assert m.write() == ref_mat_piecewise_linear_plasticity_midfail_string
+
+
+@pytest.mark.keywords
+def test_mat_piecewise_linear_plasticity_stochastic_read(ref_string):
+    ref_mat_piecewise_linear_plasticity_stochastic_string = (
+        ref_string.test_mat_piecewise_linear_plasticity_stochastic_ref
+    )
+    m = kwd.MatPiecewiseLinearPlasticityStochastic()
+    m.loads(ref_mat_piecewise_linear_plasticity_stochastic_string)
+    assert m.write() == ref_mat_piecewise_linear_plasticity_stochastic_string
+
+
+@pytest.mark.keywords
+def test_mat_laminated_composite_fabric_read(ref_string):
+    ref_mat_laminated_composite_fabric_string = ref_string.test_mat_laminated_composite_fabric_ref
+    m = kwd.MatLaminatedCompositeFabric()
+    m.loads(ref_mat_laminated_composite_fabric_string)
+    assert m.write() == ref_mat_laminated_composite_fabric_string
+
+
+@pytest.mark.keywords
+def test_mat_laminated_composite_fabric_solid_read(ref_string):
+    ref_mat_laminated_composite_fabric_solid_string = ref_string.test_mat_laminated_composite_fabric_solid_ref
+    m = kwd.MatLaminatedCompositeFabricSolid()
+    m.loads(ref_mat_laminated_composite_fabric_solid_string)
+    assert m.write() == ref_mat_laminated_composite_fabric_solid_string
+
+
+@pytest.mark.keywords
+def test_mat_hyperelastic_rubber_read(ref_string):
+    ref_mat_hyperelastic_rubber_string = ref_string.test_mat_hyperelastic_rubber_ref
+    m = kwd.MatHyperelasticRubber()
+    m.loads(ref_mat_hyperelastic_rubber_string)
+    assert m.write() == ref_mat_hyperelastic_rubber_string
+    m.pr = -1
+    assert m.cards[1]._is_active()
+    m.n = 1
+    assert m.cards[2]._is_active()
+    m.n = 0
+    assert m.cards[3]._is_active()
+
+
+@pytest.mark.keywords
+def test_mat_ogden_rubber_read(ref_string):
+    ref_mat_ogden_rubber_string = ref_string.test_mat_ogden_rubber_ref
+    m = kwd.MatOgdenRubber()
+    m.loads(ref_mat_ogden_rubber_string)
+    assert m.write() == ref_mat_ogden_rubber_string
+    m.pr = -1
+    assert m.cards[1]._is_active()
+    m.n = 1
+    assert m.cards[2]._is_active()
+    m.n = 0
+    assert m.cards[3]._is_active()
+
+
+@pytest.mark.keywords
+def test_mat_fu_chang_foam_read(ref_string):
+    ref_mat_fu_chang_foam_string = ref_string.test_mat_fu_chang_foam_ref
+    m = kwd.MatFuChangFoam()
+    m.loads(ref_mat_fu_chang_foam_string)
+    assert m.write() == ref_mat_fu_chang_foam_string
+
+
+@pytest.mark.keywords
+def test_mat_fu_chang_foam_damage_decay_read(ref_string):
+    ref_mat_fu_chang_foam_damage_decay_string = ref_string.test_mat_fu_chang_foam_damage_decay_ref
+    m = kwd.MatFuChangFoamDamageDecay()
+    m.loads(ref_mat_fu_chang_foam_damage_decay_string)
+    assert m.write() == ref_mat_fu_chang_foam_damage_decay_string
+
+
+@pytest.mark.keywords
+def test_mat_fu_chang_foam_log_log_interpolation_read(ref_string):
+    ref_mat_fu_chang_foam_log_log_interpolation_string = ref_string.test_mat_fu_chang_foam_log_log_interpolation_ref
+    m = kwd.MatFuChangFoamLogLogInterpolation()
+    m.loads(ref_mat_fu_chang_foam_log_log_interpolation_string)
+    assert m.write() == ref_mat_fu_chang_foam_log_log_interpolation_string
+
+
+@pytest.mark.keywords
+def test_mat_modified_johnson_cook_read(ref_string):
+    ref_mat_modified_johnson_cook_string = ref_string.test_mat_modified_johnson_cook_ref
+    m = kwd.MatModifiedJohnsonCook()
+    m.loads(ref_mat_modified_johnson_cook_string)
+    assert m.write() == ref_mat_modified_johnson_cook_string
+
+
+@pytest.mark.keywords
+def test_mat_modified_piecewise_linear_plasticity_read(ref_string):
+    ref_mat_modified_piecewise_linear_plasticity_string = ref_string.test_mat_modified_piecewise_linear_plasticity_ref
+    m = kwd.MatModifiedPiecewiseLinearPlasticity()
+    m.loads(ref_mat_modified_piecewise_linear_plasticity_string)
+    assert m.write() == ref_mat_modified_piecewise_linear_plasticity_string
+
+
+@pytest.mark.keywords
+def test_mat_modified_piecewise_linear_plasticity_log_interpolation_read(ref_string):
+    ref_mat_modified_piecewise_linear_plasticity_log_interpolation_string = (
+        ref_string.test_mat_modified_piecewise_linear_plasticity_log_interpolation_ref
+    )
+    m = kwd.MatModifiedPiecewiseLinearPlasticityLogInterpolation()
+    m.loads(ref_mat_modified_piecewise_linear_plasticity_log_interpolation_string)
+    assert m.write() == ref_mat_modified_piecewise_linear_plasticity_log_interpolation_string
+
+
+@pytest.mark.keywords
+def test_mat_modified_piecewise_linear_plasticity_prestrain_read(ref_string):
+    ref_mat_modified_piecewise_linear_plasticity_prestrain_string = (
+        ref_string.test_mat_modified_piecewise_linear_plasticity_prestrain_ref
+    )
+    m = kwd.MatModifiedPiecewiseLinearPlasticityPrestrain()
+    m.loads(ref_mat_modified_piecewise_linear_plasticity_prestrain_string)
+    assert m.write() == ref_mat_modified_piecewise_linear_plasticity_prestrain_string
+
+
+@pytest.mark.keywords
+def test_mat_modified_piecewise_linear_plasticity_rate_read(ref_string):
+    ref_mat_modified_piecewise_linear_plasticity_rate_string = (
+        ref_string.test_mat_modified_piecewise_linear_plasticity_rate_ref
+    )
+    m = kwd.MatModifiedPiecewiseLinearPlasticityRate()
+    m.loads(ref_mat_modified_piecewise_linear_plasticity_rate_string)
+    assert m.write() == ref_mat_modified_piecewise_linear_plasticity_rate_string
+
+
+@pytest.mark.keywords
+def test_mat_modified_piecewise_linear_plasticity_rtcl_read(ref_string):
+    ref_mat_modified_piecewise_linear_plasticity_rtcl_string = (
+        ref_string.test_mat_modified_piecewise_linear_plasticity_rtcl_ref
+    )
+    m = kwd.MatModifiedPiecewiseLinearPlasticityRtcl()
+    m.loads(ref_mat_modified_piecewise_linear_plasticity_rtcl_string)
+    assert m.write() == ref_mat_modified_piecewise_linear_plasticity_rtcl_string
+
+
+@pytest.mark.keywords
+def test_mat_modified_piecewise_linear_plasticity_stochastic_read(ref_string):
+    ref_mat_modified_piecewise_linear_plasticity_stochastic_string = (
+        ref_string.test_mat_modified_piecewise_linear_plasticity_stochastic_ref
+    )
+    m = kwd.MatModifiedPiecewiseLinearPlasticityStochastic()
+    m.loads(ref_mat_modified_piecewise_linear_plasticity_stochastic_string)
+    assert m.write() == ref_mat_modified_piecewise_linear_plasticity_stochastic_string
+
+
+@pytest.mark.keywords
+def test_mat_plasticity_compression_tension_read(ref_string):
+    ref_mat_plasticity_compression_tension_string = ref_string.test_mat_plasticity_compression_tension_ref
+    m = kwd.MatPlasticityCompressionTension()
+    m.loads(ref_mat_plasticity_compression_tension_string)
+    assert m.write() == ref_mat_plasticity_compression_tension_string
+
+
+@pytest.mark.keywords
+def test_mat_cohesive_mixed_mode_read(ref_string):
+    ref_mat_cohesive_mixed_mode_string = ref_string.test_mat_cohesive_mixed_mode_ref
+    m = kwd.MatCohesiveMixedMode()
+    m.loads(ref_mat_cohesive_mixed_mode_string)
+    assert m.write() == ref_mat_cohesive_mixed_mode_string
+
+
+@pytest.mark.keywords
+def test_mat_simplified_rubber_foam_read(ref_string):
+    ref_mat_simplified_rubber_foam_string = ref_string.test_mat_simplified_rubber_foam_ref
+    m = kwd.MatSimplifiedRubberFoam()
+    m.loads(ref_mat_simplified_rubber_foam_string)
+    assert m.write() == ref_mat_simplified_rubber_foam_string
+
+
+@pytest.mark.keywords
+def test_mat_simplified_rubber_foam_log_log_interpolation_read(ref_string):
+    ref_mat_simplified_rubber_foam_log_log_interpolation_string = (
+        ref_string.test_mat_simplified_rubber_foam_log_log_interpolation_ref
+    )
+    m = kwd.MatSimplifiedRubberFoamLogLogInterpolation()
+    m.loads(ref_mat_simplified_rubber_foam_log_log_interpolation_string)
+    assert m.write() == ref_mat_simplified_rubber_foam_log_log_interpolation_string
+
+
+@pytest.mark.keywords
+def test_mat_simplified_rubber_foam_with_failure_read(ref_string):
+    ref_mat_simplified_rubber_foam_with_failure_string = ref_string.test_mat_simplified_rubber_foam_with_failure_ref
+    m = kwd.MatSimplifiedRubberFoamWithFailure()
+    m.loads(ref_mat_simplified_rubber_foam_with_failure_string)
+    assert m.write() == ref_mat_simplified_rubber_foam_with_failure_string
+
+
+@pytest.mark.keywords
+def test_mat_simplified_rubber_foam_with_failure_log_log_interpolation_read(ref_string):
+    ref_mat_simplified_rubber_foam_with_failure_log_log_interpolation_string = (
+        ref_string.test_mat_simplified_rubber_foam_with_failure_log_log_interpolation_ref
+    )
+    m = kwd.MatSimplifiedRubberFoamWithFailureLogLogInterpolation()
+    m.loads(ref_mat_simplified_rubber_foam_with_failure_log_log_interpolation_string)
+    assert m.write() == ref_mat_simplified_rubber_foam_with_failure_log_log_interpolation_string
+
+
+@pytest.mark.keywords
+def test_mat295_read(ref_string):
+    """Round trip test of reading MAT_295."""
+    ref_mat295_string = ref_string.test_mat_295_ref
+    m = kwd.Mat295()
+    m.loads(ref_mat295_string)
+    assert m.ftype == 1
+    assert m.rho == 0.001
+    assert len(m.anisotropic_settings) == 1
+    assert m.actype == 1
+    assert m.l == 1.85
+    assert m.k2 == 1.75
+    assert m.write() == ref_mat295_string
+
+
+@pytest.mark.keywords
+def test_constrained_nodal_rigid_body_inertia_title(ref_string):
+    c = kwd.ConstrainedNodalRigidBodyInertia()
+    c.loads(ref_string.test_constrained_nodal_rigid_body_inertia_title)
+
+
+@pytest.mark.keywords
+def test_mat_piecewise_linear_plasticity_title(ref_string):
+    m = kwd.MatPiecewiseLinearPlasticity()
+    m.loads(ref_string.test_mat_piecewise_linear_plasticity_title)
+
+
+@pytest.mark.keywords
+def test_set_node_title(ref_string):
+    s = kwd.SetNode()
+    s.loads(ref_string.test_set_node_title)
+
+
+@pytest.mark.keywords
+def test_contact_1d(ref_string):
+    c = kwd.Contact1D()
+    c.options["ID"].active = True
+    c.options["MPP"].active = True
+    assert c.write() == ref_string.test_contact_1d_id_mpp1_mpp2
+    c.options["ID"].active = False
+    c.mpp2 = False
+    assert c.write() == ref_string.test_contact_1d_mpp1
+
+
+@pytest.mark.keywords
+def test_parameter_expression(ref_string):
+    p = kwd.ParameterExpression()
+    p.loads(ref_string.test_parameter_expression_ref)
+    assert len(p.parameters) == 3
+    assert "PE_300" in p.parameters["prmr"][1]
+    assert p.write() == ref_string.test_parameter_expression_ref
+
+
+@pytest.mark.keywords
+def test_define_transformation(ref_string):
+    d = kwd.DefineTransformation()
+    d.loads(ref_string.test_define_transformation_ref)
+    assert d.tranid == 1
+    assert len(d.transforms) == 3
+    assert "TRANSL" in d.transforms["option"][1]
+    assert 3 == d.transforms["a1"][2]
+    assert d.write() == ref_string.test_define_transformation_ref
+
+
+@pytest.mark.keywords
+def test_contact_automatic_single_surface(ref_string):
+    c = kwd.ContactAutomaticSingleSurface(ssid=1)
+    assert c.write() == ref_string.test_contact_automatic_single_surface
+
+
+@pytest.mark.keywords
+def test_define_function(ref_string):
+    ref_function_string = ref_string.test_define_function_string
+    d = kwd.DefineFunction()
+    d.function = """1,x-velo
+x(t)=1000*sin(100*t)
+*DEFINE_FUNCTION
+2,z-velo
+a(t)=x(t)+200"""
+    function_string = d.write()
+    assert function_string == ref_function_string
+
+
+@pytest.mark.keywords
+def test_set_shell_intersect(ref_string):
+    s = kwd.SetShellIntersect()
+    assert s.write() == ref_string.test_set_shell_intersect_ref_1
+    s.options["TITLE"].active = True
+    assert s.write() == ref_string.test_set_shell_intersect_ref_2
+    s.title = "hello"
+    assert s.write() == ref_string.test_set_shell_intersect_ref_3
+
+
+@pytest.mark.keywords
+def test_set_part_list(ref_string):
+    """Test formatting of set part list (uses variable card with ints)."""
+    s = kwd.SetPartList()
+    s.sid = 1
+    s.parts._data = [1, 2, 3]
+    ref = ref_string.test_set_part_list_ref
+    assert s.write() == ref
+
+
+@pytest.mark.keywords
+def test_contact_tied_shell_edge_to_surface_id(ref_string):
+    """Test reading CONTACT_TIED_SHELL_EDGE_TO_SURFACE_ID."""
+    s = kwd.ContactTiedShellEdgeToSurface()
+    ref = ref_string.test_contact_tied_shell_edge_to_surface_id
+    s.loads(ref)
+
+
+@pytest.mark.keywords
+def test_em_control(ref_string):
+    """Test formatting of EM control."""
+    s = kwd.EmControl()
+    ref = ref_string.test_em_control_string
+    assert s.write() == ref
+
+
+@pytest.mark.keywords
+def test_format_symbol():
+    """Test all permutations of the keyword format symbol given the deck format."""
+    node = kwd.Node()
+
+    def _get_write_format_and_format_symbol(format, deck_format):
+        """Used in tests..."""
+        return node._get_write_format(format, deck_format), node._get_symbol(format, deck_format)
+
+    # default deck format
+    assert _get_write_format_and_format_symbol(format_type.long, format_type.default) == (format_type.long, "+")
+    assert _get_write_format_and_format_symbol(format_type.standard, format_type.default) == (
+        format_type.standard,
+        "-",
+    )
+    assert _get_write_format_and_format_symbol(format_type.default, format_type.default) == (
+        format_type.default,
+        "",
+    )
+
+    # long deck format
+    assert _get_write_format_and_format_symbol(format_type.long, format_type.long) == (format_type.long, "")
+    assert _get_write_format_and_format_symbol(format_type.standard, format_type.long) == (
+        format_type.standard,
+        "-",
+    )
+    assert _get_write_format_and_format_symbol(format_type.default, format_type.long) == (format_type.long, "")
+
+    # standard deck format
+    assert _get_write_format_and_format_symbol(format_type.long, format_type.standard) == (format_type.long, "+")
+    assert _get_write_format_and_format_symbol(format_type.standard, format_type.standard) == (
+        format_type.standard,
+        "",
+    )
+    assert _get_write_format_and_format_symbol(format_type.default, format_type.standard) == (
+        format_type.standard,
+        "",
+    )
+
+
+@pytest.mark.keywords
+def test_em_isopotential_connect(ref_string):
+    """Test default card of EM_ISOPOTENTIAL_CONNECT and conditional in case contype=6"""
+    s = kwd.EmIsopotentialConnect()
+    assert s.write() == ref_string.test_default_card_em_isopotential_connect_string
+    s.contype = 6
+    assert s.write() == ref_string.test_conditional_card_em_isopotential_connect_string
+
+
+@pytest.mark.keywords
+def test_contact_tied_shell_edge_to_surface_beam_offset_opt_cards(ref_string):
+    """Test to read optional contact cards"""
+    # These are for the option A, B, C, D, E, F, G
+    # These do not affect the title, and appear in order at the end of the keyword
+    s1 = kwd.ContactTiedShellEdgeToSurfaceBeamOffset()
+    s1.loads(ref_string.test_contact_tied_shell_edge_to_surface_beam_offset_opt_cards1)
+    assert s1.write() == ref_string.test_contact_tied_shell_edge_to_surface_beam_offset_opt_cards1
+    s2 = kwd.ContactTiedShellEdgeToSurfaceBeamOffset()
+    s2.loads(ref_string.test_contact_tied_shell_edge_to_surface_beam_offset_opt_cards2)
+    assert s2.write() == ref_string.test_contact_tied_shell_edge_to_surface_beam_offset_opt_cards2
+
+
+@pytest.mark.keywords
+def test_em_randles_batmac_rdltype(ref_string):
+    s = kwd.EmRandlesBatmac(rdltype=1)
+    assert s.write() == ref_string.test_em_randles_batmac_rdltype_0_1
+    s = kwd.EmRandlesBatmac(rdltype=3)
+    assert s.write() == ref_string.test_em_randles_batmac_rdltype_2_3
+
+
+@pytest.mark.keywords
+def test_em_randles_solid_rdltype(ref_string):
+    s = kwd.EmRandlesSolid(rdltype=1)
+    assert s.write() == ref_string.test_em_randles_solid_rdltype_0_1
+    s = kwd.EmRandlesSolid(rdltype=3)
+    assert s.write() == ref_string.test_em_randles_solid_rdltype_2_3
+
+
+@pytest.mark.keywords
+def test_em_randles_tshell_rdltype(ref_string):
+    s = kwd.EmRandlesTshell(rdltype=1)
+    assert s.write() == ref_string.test_em_randles_tshell_rdltype_0_1
+    s = kwd.EmRandlesTshell(rdltype=3)
+    assert s.write() == ref_string.test_em_randles_tshell_rdltype_2_3
