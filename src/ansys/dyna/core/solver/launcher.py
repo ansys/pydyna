@@ -4,6 +4,7 @@ import os
 import platform
 import socket
 import subprocess
+import sys
 from time import sleep
 from zipfile import ZipFile
 
@@ -17,10 +18,11 @@ except ModuleNotFoundError:  # pragma: no cover
     _HAS_PIM = False
 
 from ansys.dyna.core.solver import DynaSolver
+from ansys.tools.path import get_available_ansys_installations, get_latest_ansys_installation
 
 LOCALHOST = "127.0.0.1"
 DYNA_DEFAULT_PORT = 5000
-SERVER_SOLVER_VERSION = "v0.4.12"
+SERVER_SOLVER_VERSION = "v0.4.13"
 MAX_MESSAGE_LENGTH = 8 * 1024**2
 
 
@@ -72,8 +74,28 @@ def port_in_use(port, host=LOCALHOST):
         except:
             return True
 
+def _check_minimal_versions(latest_installed_version: int) -> None:
+    """Check client is compatible with Ansys Products.
 
-def launch_grpc(port=DYNA_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tuple:  # pragma: no cover
+    Check that at least V241 is installed.
+    """
+    if abs(latest_installed_version) < 241:
+        msg = (
+            "PyAnsys Geometry is compatible with Ansys Products from version 24.1.0. "
+            + "Please install Ansys products 24.1.0 or later."
+        )
+        raise SystemError(msg)
+
+def _check_version_is_available(version: int, installations: dict[int, str]) -> None:
+    """Check that the requested version for launcher is installed."""
+    if version not in installations:
+        msg = (
+            f"The requested Ansys product's version {version} is not available, "
+            + "please specify a different version."
+        )
+        raise SystemError(msg)
+      
+def launch_grpc(port=DYNA_DEFAULT_PORT, ip=LOCALHOST, server_path="", product_version = None) -> tuple:  # pragma: no cover
     """
     Launch the solver service locally in gRPC mode.
 
@@ -120,15 +142,41 @@ def launch_grpc(port=DYNA_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tuple: 
                             zipf.extractall(extractpath)
             server_path = server_package
             # os.environ["ANSYS_PYDYNA_SOLVER_SERVER_PATH"] = server_path
+        
+        #Check Ansys version
+        installations = get_available_ansys_installations()
+        if product_version is not None:
+            try:
+                _check_version_is_available(product_version, installations)
+            except SystemError as serr:
+                # The user requested a version as a Student version...
+                # Let's negate it and try again... if this works, we override the
+                # product_version variable.
+                try:
+                    _check_version_is_available(-product_version, installations)
+                except SystemError:
+                    # The student version is not installed either... raise the original error.
+                    raise serr
+
+                product_version = -product_version
+        else:
+            product_version = get_latest_ansys_installation()[0]
+
+        # Verify that the minimum version is installed.
+        _check_minimal_versions(product_version)
+
         if os.path.isdir(server_path):
             # threadserver = ServerThread(1, port=port, ip=ip, server_path=server_path)
             # threadserver.run()
             # threadserver.setDaemon(True)
             # threadserver.start()
-            if platform.system() == "Windows":
-                process = subprocess.Popen("python server.py", cwd=server_path, shell=True)
-            else:
-                process = subprocess.Popen("python3 server.py", cwd=server_path, shell=True)
+
+            process = subprocess.Popen(f"{sys.executable} server.py {product_version}", cwd=server_path, shell=True)
+
+            # if platform.system() == "Windows":
+            #     process = subprocess.Popen("python server.py", cwd=server_path, shell=True)
+            # else:
+            #     process = subprocess.Popen("python3 server.py", cwd=server_path, shell=True)
             waittime = 0
             while not DynaSolver.grpc_local_server_on():
                 sleep(5)
@@ -202,6 +250,7 @@ def launch_remote_dyna(
 
 
 def launch_dyna(
+    product_version: int = None,
     port=None,
     ip=None,
 ) -> DynaSolver:
@@ -209,6 +258,16 @@ def launch_dyna(
 
     Parameters
     ----------
+    product_version: int, optional
+        The product version to be started. Goes from v20.1 to
+        the latest. Default is ``None``.
+        If a specific product version is requested but not installed locally,
+        a SystemError will be raised.
+
+        **Ansys products versions and their corresponding int values:**
+
+        * ``241`` : Ansys 24R1
+        * ``242`` : Ansys 24R2
     port : int
         Port to launch DYNA gRPC on.  Final port will be the first
         port available after (or including) this port.  Defaults to
@@ -243,7 +302,7 @@ def launch_dyna(
         LOG.info("Starting DYNA remotely. The startup configuration will be ignored.")
         return launch_remote_dyna()
 
-    launch_grpc(port=port, ip=ip)
+    launch_grpc(port=port, ip=ip,product_version = product_version)
 
     dyna = DynaSolver(
         hostname=ip,
