@@ -70,6 +70,7 @@ class DynaSolver:
         self.port = port
         self.pim_client = None
         self.remote_instance = None
+        self.working_dir = None
 
         temp = hostname + ":" + str(port)
         if channel is None:
@@ -215,7 +216,23 @@ class DynaSolver:
         for i in range(n):
             ret.append((str(response.name[i], "utf-8"), response.size[i]))
         return ret
+    
+    def working_dir(self, working_dir = None):
+        """Set current working directory.
 
+        Parameters
+        ----------
+        working_dir : string
+            Current working directory.
+        """
+        if os.path.exists(working_dir):
+            if not os.path.isdir(working_dir):
+                working_dir = '.'
+        else:
+            os.makedirs(working_dir)
+        os.chdir(working_dir)
+        self.working_dir = working_dir    
+    
     def node(self, n):
         """Get size information about a node in the model's working directory.
 
@@ -292,8 +309,11 @@ class DynaSolver:
         fp.close()
         return fsize
 
-    def push(self, fname):
+    def push(self, fname, workdir):
         """Provide an alias for the ``upload` method for backward compatibility."""
+        request = dynasolver_pb2.DynaSolverWorkDir()
+        request.dirname = bytes(workdir, "utf-8")
+        self.stub.set_working_directory(request)
         return self.upload(fname)
 
     def upload(self, fname):
