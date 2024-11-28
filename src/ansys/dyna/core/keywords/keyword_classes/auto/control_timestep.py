@@ -24,11 +24,11 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
-class ControlTimeStep(KeywordBase):
-    """DYNA CONTROL_TIME_STEP keyword"""
+class ControlTimestep(KeywordBase):
+    """DYNA CONTROL_TIMESTEP keyword"""
 
     keyword = "CONTROL"
-    subkeyword = "TIME_STEP"
+    subkeyword = "TIMESTEP"
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -150,6 +150,24 @@ class ControlTimeStep(KeywordBase):
                         70,
                         10,
                         kwargs.get("ihdo", 0)
+                    ),
+                ],
+            ),
+            Card(
+                [
+                    Field(
+                        "unused",
+                        int,
+                        0,
+                        10,
+                        kwargs.get("unused")
+                    ),
+                    Field(
+                        "igado",
+                        int,
+                        10,
+                        10,
+                        kwargs.get("igado", 0)
                     ),
                 ],
             ),
@@ -322,4 +340,18 @@ class ControlTimeStep(KeywordBase):
         if value not in [0, 1]:
             raise Exception("""ihdo must be one of {0,1}""")
         self._cards[1].set_value("ihdo", value)
+
+    @property
+    def igado(self) -> int:
+        """Get or set the Method for calculating time steps for IGA elements:
+        EQ.0:	Default method(conservative)
+        EQ.1 : account for interelement continuity(usually leads to larger time steps)
+        """ # nopep8
+        return self._cards[2].get_value("igado")
+
+    @igado.setter
+    def igado(self, value: int) -> None:
+        if value not in [0, 1]:
+            raise Exception("""igado must be one of {0,1}""")
+        self._cards[2].set_value("igado", value)
 
