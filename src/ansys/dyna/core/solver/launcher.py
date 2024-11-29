@@ -17,8 +17,9 @@ try:
 except ModuleNotFoundError:  # pragma: no cover
     _HAS_PIM = False
 
-from ansys.dyna.core.solver import DynaSolver
 from ansys.tools.path import get_available_ansys_installations, get_latest_ansys_installation
+
+from ansys.dyna.core.solver import DynaSolver
 
 LOCALHOST = "127.0.0.1"
 DYNA_DEFAULT_PORT = 5000
@@ -74,6 +75,7 @@ def port_in_use(port, host=LOCALHOST):
         except:
             return True
 
+
 def _check_minimal_versions(latest_installed_version: int) -> None:
     """Check client is compatible with Ansys Products.
 
@@ -86,6 +88,7 @@ def _check_minimal_versions(latest_installed_version: int) -> None:
         )
         raise SystemError(msg)
 
+
 def _check_version_is_available(version: int, installations: dict[int, str]) -> None:
     """Check that the requested version for launcher is installed."""
     if version not in installations:
@@ -94,8 +97,11 @@ def _check_version_is_available(version: int, installations: dict[int, str]) -> 
             + "please specify a different version."
         )
         raise SystemError(msg)
-      
-def launch_grpc(port=DYNA_DEFAULT_PORT, ip=LOCALHOST, server_path="", product_version = None) -> tuple:  # pragma: no cover
+
+
+def launch_grpc(
+    port=DYNA_DEFAULT_PORT, ip=LOCALHOST, server_path="", product_version=None
+) -> tuple:  # pragma: no cover
     """
     Launch the solver service locally in gRPC mode.
 
@@ -142,8 +148,8 @@ def launch_grpc(port=DYNA_DEFAULT_PORT, ip=LOCALHOST, server_path="", product_ve
                             zipf.extractall(extractpath)
             server_path = server_package
             # os.environ["ANSYS_PYDYNA_SOLVER_SERVER_PATH"] = server_path
-        
-        #Check Ansys version
+
+        # Check Ansys version
         installations = get_available_ansys_installations()
         if product_version is not None:
             try:
@@ -302,7 +308,7 @@ def launch_dyna(
         LOG.info("Starting DYNA remotely. The startup configuration will be ignored.")
         return launch_remote_dyna()
 
-    launch_grpc(port=port, ip=ip,product_version = product_version)
+    launch_grpc(port=port, ip=ip, product_version=product_version)
 
     dyna = DynaSolver(
         hostname=ip,

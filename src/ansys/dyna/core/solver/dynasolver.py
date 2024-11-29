@@ -216,8 +216,8 @@ class DynaSolver:
         for i in range(n):
             ret.append((str(response.name[i], "utf-8"), response.size[i]))
         return ret
-    
-    def working_dir(self, working_dir = None):
+
+    def working_dir(self, working_dir=None):
         """Set current working directory.
 
         Parameters
@@ -227,12 +227,12 @@ class DynaSolver:
         """
         if os.path.exists(working_dir):
             if not os.path.isdir(working_dir):
-                working_dir = '.'
+                working_dir = "."
         else:
             os.makedirs(working_dir)
         os.chdir(working_dir)
-        self.working_dir = working_dir    
-    
+        self.working_dir = working_dir
+
     def node(self, n):
         """Get size information about a node in the model's working directory.
 
