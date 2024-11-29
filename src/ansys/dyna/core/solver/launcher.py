@@ -1,7 +1,6 @@
 """Module for launching the pydyna solver service locally."""
 
 import os
-import platform
 import socket
 import subprocess
 import sys
