@@ -325,6 +325,12 @@ $#   nid               x               y               z      tc      rc
       59             0.1             0.2             0.3                
 ...console output truncated at 60 rows"""
 
+test_control_time_step_string = """*CONTROL_TIME_STEP
+$#  dtinit    tssfac      isdo    tslimt     dt2ms      lctm     erode     ms1st
+     0.000  1.000000         0     0.000         1         0         0         0
+$#  dt2msf   dt2mslc     imscl    unused    unused     rmscl
+     0.000         0         0         0         0     0.000"""
+
 test_control_timestep_string = """*CONTROL_TIMESTEP
 $#  dtinit    tssfac      isdo    tslimt     dt2ms      lctm     erode     ms1st
      0.000  1.000000         0     0.000         1         0         0         0
