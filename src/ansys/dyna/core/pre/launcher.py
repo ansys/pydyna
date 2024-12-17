@@ -136,7 +136,7 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
             # threadserver.setDaemon(True)
             # threadserver.start()
             # env_path = get_virtualenv_path()
-            process = subprocess.Popen("python kwserver.py", cwd=server_path, shell=True)
+            process = subprocess.Popen(f"{sys.executable} kwserver.py", cwd=server_path, shell=True)
             waittime = 0
             while not DynaSolution.grpc_local_server_on():
                 sleep(5)
@@ -284,7 +284,7 @@ def launch_dynapre(
 
 if __name__ == "__main__":
     server_path = os.path.join(os.getcwd(), "Server")
-    process = subprocess.Popen(["python", "kwserver.py"], cwd=server_path, shell=True)
+    process = subprocess.Popen(f"{sys.executable} kwserver.py", cwd=server_path, shell=True)
     process.wait()
     process.terminate()
     print(process)
