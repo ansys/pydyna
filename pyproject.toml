@@ -76,7 +76,7 @@ doc = [
     "ipython==8.29.0",
     "jupyterlab==4.3.1",
     "sphinx-jinja==2.0.2",
-    "sphinx-autoapi==3.3.3",
+    "sphinx-autoapi==3.4.0",
     "pyvista==0.44.1",
 ]
 
