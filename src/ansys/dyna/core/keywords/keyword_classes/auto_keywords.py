@@ -996,6 +996,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.control_thermal_forming impor
 from ansys.dyna.core.keywords.keyword_classes.auto.control_thermal_nonlinear import ControlThermalNonlinear
 from ansys.dyna.core.keywords.keyword_classes.auto.control_thermal_solver import ControlThermalSolver
 from ansys.dyna.core.keywords.keyword_classes.auto.control_thermal_timestep import ControlThermalTimestep
+from ansys.dyna.core.keywords.keyword_classes.auto.control_timestep import ControlTimestep
 from ansys.dyna.core.keywords.keyword_classes.auto.control_time_step import ControlTimeStep
 from ansys.dyna.core.keywords.keyword_classes.auto.control_units import ControlUnits
 from ansys.dyna.core.keywords.keyword_classes.auto.control_vibro_acoustic import ControlVibroAcoustic

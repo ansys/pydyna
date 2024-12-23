@@ -399,12 +399,18 @@ def test_element_solid_ortho(ref_string):
 
 
 @pytest.mark.keywords
-def test_control_timestep_read(ref_string):
-    """Read CONTROL_TIMESTEP"""
+def test_control_time_step_read(ref_string):
+    """Read CONTROL_TIME_STEP"""
     c = kwd.ControlTimeStep()
-    c.loads(ref_string.test_control_timestep_string)
+    c.loads(ref_string.test_control_time_step_string)
     assert c.tssfac == 1.0
 
+@pytest.mark.keywords
+def test_control_timestep_read(ref_string):
+    """Read CONTROL_TIMESTEP"""
+    c = kwd.ControlTimestep()
+    c.loads(ref_string.test_control_timestep_string)
+    assert c.tssfac == 1.0
 
 @pytest.mark.keywords
 def test_mat_plastic_kinematic_read(ref_string):
