@@ -550,11 +550,6 @@
             ]
         }
     },
-    "CONTROL_TIME_STEP" : {
-        "generation-options": {
-            "override-subkeyword": "TIMESTEP"
-        }
-    },
     "MAT_NULL": {
         "type": "multiple",
         "generations": [
