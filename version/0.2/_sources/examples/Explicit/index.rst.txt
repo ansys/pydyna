@@ -1,0 +1,43 @@
+
+
+.. _sphx_glr_examples_Explicit:
+
+Explicit examples
+~~~~~~~~~~~~~~~~~
+
+These examples show how to create Explicit model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example show how to create an Belted dummy model with Pydyna-pre module. ">
+
+.. only:: html
+
+  .. image:: /examples/Explicit/images/thumb/sphx_glr_belted_dummy_thumb.png
+    :alt: Belted dummy example
+
+  :ref:`sphx_glr_examples_Explicit_belted_dummy.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Belted dummy example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Explicit/belted_dummy
+
