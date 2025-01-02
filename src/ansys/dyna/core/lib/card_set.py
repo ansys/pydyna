@@ -34,7 +34,7 @@ from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import at_end_of_keyword
 from ansys.dyna.core.lib.option_card import OptionSpec
-
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 class CardSet(CardInterface):
     def __init__(
@@ -137,37 +137,37 @@ class CardSet(CardInterface):
 
         return write_or_return(buf, _write)
 
-    def _read_item_cards(self, buf: typing.TextIO, index: int) -> bool:
+    def _read_item_cards(self, buf: typing.TextIO, index: int, parameter_set: ParameterSet) -> bool:
         item = self._items[index]
         for card in item._get_all_cards():
-            ret = card.read(buf)
+            ret = card.read(buf, parameter_set)
             if ret:
                 # according to the card, we are at the end of the keyword, so
                 # we can break out of the card reading loop.
                 return True
         return False
 
-    def _load_bounded_from_buffer(self, buf: typing.TextIO) -> None:
+    def _load_bounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
         length = self._length_func()
         for index in range(length):
-            if self._read_item_cards(buf, index):
+            if self._read_item_cards(buf, index, parameter_set):
                 break
 
-    def _load_unbounded_from_buffer(self, buf: typing.TextIO) -> None:
+    def _load_unbounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
         index = -1
         while True:
             self._add_item_simple()
             index += 1
-            self._read_item_cards(buf, index)
+            self._read_item_cards(buf, index, parameter_set)
             if at_end_of_keyword(buf):
                 # the buffer is at the end of the keyword, exit
                 return
 
-    def read(self, buf: typing.TextIO) -> bool:
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
         self._initialize()
         if self.bounded:
-            self._load_bounded_from_buffer(buf)
+            self._load_bounded_from_buffer(buf, parameter_set)
             return False
         else:
-            self._load_unbounded_from_buffer(buf)
+            self._load_unbounded_from_buffer(buf, parameter_set)
             return True

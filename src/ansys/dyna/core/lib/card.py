@@ -28,6 +28,7 @@ from ansys.dyna.core.lib.field import Field, Flag, to_long  # noqa: F401
 from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline, read_line
 
 
@@ -54,22 +55,22 @@ class Card(CardInterface):
             fields.append(new_field)
         return fields
 
-    def read(self, buf: typing.TextIO) -> bool:
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
         if not self._is_active():
             return False
         line, to_exit = read_line(buf)
         if to_exit:
             return True
-        self._load(line)
+        self._load(line, parameter_set)
         return False
 
-    def _load(self, data_line: str) -> None:
+    def _load(self, data_line: str, parameter_set: ParameterSet) -> None:
         """loads the card data from a list of strings"""
         fields = self._fields
         if self.format == format_type.long:
             fields = self._convert_fields_to_long_format()
         format = [(field.offset, field.width, field.type) for field in fields]
-        values = load_dataline(format, data_line)
+        values = load_dataline(format, data_line, parameter_set)
         num_fields = len(fields)
         for field_index in range(num_fields):
             self._fields[field_index].value = values[field_index]

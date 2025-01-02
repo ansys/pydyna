@@ -31,6 +31,7 @@ from ansys.dyna.core.lib.field_writer import write_c_dataframe
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 CHECK_TYPE = True
 
@@ -138,7 +139,7 @@ class DuplicateCard(Card):
         options = {"names": names, "colspecs": colspecs, "dtype": dtype, "comment": "$"}
         return options
 
-    def _read_buffer_as_dataframe(self, buffer: typing.TextIO, fields: typing.Iterable[Field]) -> pd.DataFrame:
+    def _read_buffer_as_dataframe(self, buffer: typing.TextIO, fields: typing.Iterable[Field], parameter_set: ParameterSet) -> pd.DataFrame:
         read_options = self._get_read_options()
         df = pd.read_fwf(buffer, **read_options)
         return df
@@ -149,32 +150,32 @@ class DuplicateCard(Card):
             fields = self._convert_fields_to_long_format()
         return fields
 
-    def _load_bounded_from_buffer(self, buf: typing.TextIO) -> None:
+    def _load_bounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
         read_options = self._get_read_options()
         read_options["nrows"] = self._num_rows()
         df = pd.read_fwf(buf, **read_options)
         self._table = df
         self._initialized = True
 
-    def _load_unbounded_from_buffer(self, buf: typing.TextIO) -> None:
+    def _load_unbounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
         data_lines = buffer_to_lines(buf)
-        self._load_lines(data_lines)
+        self._load_lines(data_lines, parameter_set)
 
-    def read(self, buf: typing.TextIO) -> None:
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
         if self.bounded:
             self._initialized = True
-            self._load_bounded_from_buffer(buf)
+            self._load_bounded_from_buffer(buf, parameter_set)
         else:
             self._initialize_data(0)
             self._initialized = True
-            self._load_unbounded_from_buffer(buf)
+            self._load_unbounded_from_buffer(buf, parameter_set)
 
-    def _load_lines(self, data_lines: typing.List[str]) -> None:
+    def _load_lines(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
         fields = self._get_fields()
         buffer = io.StringIO()
         [(buffer.write(line), buffer.write("\n")) for line in data_lines]
         buffer.seek(0)
-        self._table = self._read_buffer_as_dataframe(buffer, fields)
+        self._table = self._read_buffer_as_dataframe(buffer, fields, parameter_set)
         self._initialized = True
 
     def write(

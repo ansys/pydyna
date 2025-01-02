@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Base class for cards and I/O"""
+"""Base class for cards and I/O."""
 
 import typing
 
@@ -29,6 +29,7 @@ from ansys.dyna.core.lib.card_writer import write_cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionsAPI
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
 class Cards:
@@ -141,14 +142,12 @@ class Cards:
         if not any_options_read:
             buf.seek(pos)
 
-    def _read_data(self, buf: typing.TextIO) -> None:
+    def _read_data(self, buf: typing.TextIO, parameters: ParameterSet) -> None:
         for card in self._get_pre_option_cards():
-            card.read(buf)
-
+            card.read(buf, parameters)
         for card in self._get_non_option_cards():
-            card.read(buf)
-
+            card.read(buf, parameters)
         for card in self._get_post_option_cards():
-            card.read(buf)
+            card.read(buf, parameters)
 
         self._try_read_options_with_no_title(buf)
