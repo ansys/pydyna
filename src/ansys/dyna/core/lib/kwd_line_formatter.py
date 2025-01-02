@@ -24,6 +24,7 @@ import typing
 
 from ansys.dyna.core.lib.parameter_set import ParameterSet
 
+
 def read_line(buf: typing.TextIO, skip_comment=True) -> typing.Tuple[str, bool]:
     """Read and return the line, and a flag on whether to stop reading."""
     while True:

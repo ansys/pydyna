@@ -139,7 +139,9 @@ class DuplicateCard(Card):
         options = {"names": names, "colspecs": colspecs, "dtype": dtype, "comment": "$"}
         return options
 
-    def _read_buffer_as_dataframe(self, buffer: typing.TextIO, fields: typing.Iterable[Field], parameter_set: ParameterSet) -> pd.DataFrame:
+    def _read_buffer_as_dataframe(
+        self, buffer: typing.TextIO, fields: typing.Iterable[Field], parameter_set: ParameterSet
+    ) -> pd.DataFrame:
         read_options = self._get_read_options()
         df = pd.read_fwf(buffer, **read_options)
         return df

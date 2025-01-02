@@ -22,8 +22,10 @@
 
 import typing
 
+
 class ParameterSet:
     """Deck parameters."""
+
     def __init__(self):
         self._params = dict()
 

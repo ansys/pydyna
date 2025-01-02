@@ -32,6 +32,7 @@ from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline, read_line
 from ansys.dyna.core.lib.parameter_set import ParameterSet
 
+
 class VariableCard(CardInterface):
     """Variable length card"""
 
