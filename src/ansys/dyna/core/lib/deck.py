@@ -30,6 +30,7 @@ import warnings
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
 class Deck:
@@ -38,6 +39,7 @@ class Deck:
     def __init__(self, title: str = None, **kwargs):
         """Initialize the deck."""
         self._keywords: typing.List = kwargs.get("keywords", [])
+        self._parameter_set = ParameterSet()
         self.comment_header: str = None
         self.title: str = title
         self.format: format_type = kwargs.get("format", format_type.default)
@@ -55,6 +57,10 @@ class Deck:
         self.comment_header = None
         self.title = None
         self.format = format_type.default
+
+    @property
+    def parameters(self) -> ParameterSet:
+        return self._parameter_set
 
     @property
     def format(self) -> format_type:

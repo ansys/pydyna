@@ -22,10 +22,10 @@
 
 import typing
 
+from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
-
-from .card_interface import CardInterface
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 # TODO - should TextCard do anything special for long format?
 
@@ -57,7 +57,7 @@ class TextCard(CardInterface):
         else:
             return "$#" + f"{{0:>{158}}}".format(self._name)
 
-    def read(self, buf: typing.TextIO) -> None:
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
         self._content_lines = []
         while True:
             line, exit_loop = read_line(buf)

@@ -28,6 +28,7 @@ from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.card_writer import write_cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
 @dataclass
@@ -96,10 +97,10 @@ class OptionCardSet(CardInterface):
     def __lt__(self, other: "OptionCardSet"):
         return self.card_order < other.card_order
 
-    def read(self, buf: typing.TextIO) -> bool:
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
         """Read from buf."""
         for card in self._cards:
-            card.read(buf)
+            card.read(buf, parameter_set)
 
     def write(
         self,
