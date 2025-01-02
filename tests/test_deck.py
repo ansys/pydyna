@@ -147,6 +147,21 @@ def test_deck_006(ref_string):
 
 
 @pytest.mark.keywords
+def test_deck_read_parameters():
+    """Test reading a deck with parameters."""
+    test_string = """*CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET_ID
+99999999  Mycontact
+  99999999  99999998         4         0                             0         0
+                                             &vdct
+        1.        1.       -2.       -2.        1.        1.        1.        1."""
+    deck = Deck()
+    deck.parameters.add("vdct", 1.12)
+    deck.loads(test_string)
+    assert len(deck.string_keywords) == 0
+    kwd = deck.keywords[0]
+    assert kwd.vdc == 1.12
+
+@pytest.mark.keywords
 def test_deck_007():
     "unit testing for .extend"
     deck = Deck()

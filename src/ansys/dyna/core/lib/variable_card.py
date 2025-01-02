@@ -30,6 +30,7 @@ from ansys.dyna.core.lib.field import Field
 from ansys.dyna.core.lib.field_writer import write_fields
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline, read_line
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
 class VariableCard(CardInterface):
@@ -190,7 +191,8 @@ class VariableCard(CardInterface):
             values = load_dataline(read_format, line)
             self.extend(values)
 
-    def read(self, buf: typing.TextIO) -> bool:
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
+        # parameter sets are ignored for variable cards
         if self.bounded:
             self._load_bounded_from_buffer(buf)
             return False

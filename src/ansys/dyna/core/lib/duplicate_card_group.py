@@ -32,6 +32,7 @@ from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
 def _to_duplicate_card(card: Card, length_func: typing.Callable) -> DuplicateCard:
@@ -99,25 +100,25 @@ class DuplicateCardGroup(CardInterface):
         for card in self._cards:
             card.format = value
 
-    def _load_unbounded_from_buffer(self, buf: typing.TextIO) -> None:
+    def _load_unbounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
         data_lines = buffer_to_lines(buf)
-        self._load_lines(data_lines)
+        self._load_lines(data_lines, parameter_set)
 
-    def _load_bounded_from_buffer(self, buf: typing.TextIO) -> None:
+    def _load_bounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
         data_lines = buffer_to_lines(buf, self._num_rows())
-        self._load_lines(data_lines)
+        self._load_lines(data_lines, parameter_set)
 
-    def read(self, buf: typing.TextIO) -> None:
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
         if self.bounded:
-            self._load_bounded_from_buffer(buf)
+            self._load_bounded_from_buffer(buf, parameter_set)
         else:
-            self._load_unbounded_from_buffer(buf)
+            self._load_unbounded_from_buffer(buf, parameter_set)
 
-    def _load_lines(self, data_lines: typing.List[str]) -> None:
+    def _load_lines(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
         """Load the card data from a list of strings."""
         card_lines = self._divide_data_lines(data_lines)
         for index, lines in enumerate(card_lines):
-            self._cards[index]._load_lines(lines)
+            self._cards[index]._load_lines(lines, parameter_set)
         self.table = pd.concat([card.table for card in self._cards], axis=1)
 
     def write(
