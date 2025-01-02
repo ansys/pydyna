@@ -114,6 +114,14 @@ $#    ssid
 
 
 @pytest.mark.keywords
+def test_control_debug():
+    from ansys.dyna.core.lib.deck import Deck
+    deck = Deck()
+    deck.loads('*CONTROL_DEBUG')
+    deck.write()
+
+
+@pytest.mark.keywords
 def test_deck_006(ref_string):
     """test adding two decks together"""
     deck1 = Deck()
