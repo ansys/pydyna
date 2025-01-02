@@ -43,7 +43,8 @@ def _write_null(width):
 
 
 def _field_iterator(fields: typing.List[Field], long_format: bool) -> typing.Iterable[Field]:
-    assert len(fields) > 0, "at least one field is needed"
+    if len(fields) == 0:
+        return []
     if fields[0].offset > 0:
         # insert a blank field in the beginning up to the offset
         blank_field = Field(name=None, type=None, offset=0, width=fields[0].offset)
