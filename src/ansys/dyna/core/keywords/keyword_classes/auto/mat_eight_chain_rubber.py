@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,28 +74,28 @@ class MatEightChainRubber(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("n", 0)
+                        kwargs.get("n", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mull",
                         int,
                         50,
                         10,
-                        kwargs.get("mull", 1)
+                        kwargs.get("mull", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vispl",
                         int,
                         60,
                         10,
-                        kwargs.get("vispl", 0)
+                        kwargs.get("vispl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "visel",
                         int,
                         70,
                         10,
-                        kwargs.get("visel", 0)
+                        kwargs.get("visel", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -207,7 +208,7 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("vcon", 9.0)
+                        kwargs.get("vcon", 9.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -324,14 +325,14 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt", 0.0)
+                        kwargs.get("aopt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "macf",
                         int,
                         10,
                         10,
-                        kwargs.get("macf", 1)
+                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xp",

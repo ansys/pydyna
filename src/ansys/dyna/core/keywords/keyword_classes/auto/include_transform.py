@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IncludeTransform(KeywordBase):
@@ -51,49 +52,49 @@ class IncludeTransform(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idnoff", 0)
+                        kwargs.get("idnoff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ideoff",
                         int,
                         10,
                         10,
-                        kwargs.get("ideoff", 0)
+                        kwargs.get("ideoff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idpoff",
                         int,
                         20,
                         10,
-                        kwargs.get("idpoff", 0)
+                        kwargs.get("idpoff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idmoff",
                         int,
                         30,
                         10,
-                        kwargs.get("idmoff", 0)
+                        kwargs.get("idmoff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idsoff",
                         int,
                         40,
                         10,
-                        kwargs.get("idsoff", 0)
+                        kwargs.get("idsoff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idfoff",
                         int,
                         50,
                         10,
-                        kwargs.get("idfoff", 0)
+                        kwargs.get("idfoff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iddoff",
                         int,
                         60,
                         10,
-                        kwargs.get("iddoff", 0)
+                        kwargs.get("iddoff", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -104,7 +105,7 @@ class IncludeTransform(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idroff", 0)
+                        kwargs.get("idroff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -136,35 +137,35 @@ class IncludeTransform(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fctmas", 1.0)
+                        kwargs.get("fctmas", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fcttim",
                         float,
                         10,
                         10,
-                        kwargs.get("fcttim", 1.0)
+                        kwargs.get("fcttim", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fctlen",
                         float,
                         20,
                         10,
-                        kwargs.get("fctlen", 1.0)
+                        kwargs.get("fctlen", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fcttem",
                         str,
                         30,
                         10,
-                        kwargs.get("fcttem", "1.0")
+                        kwargs.get("fcttem", "1.0" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "incout1",
                         int,
                         40,
                         10,
-                        kwargs.get("incout1", 1)
+                        kwargs.get("incout1", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fctchg",
@@ -182,7 +183,7 @@ class IncludeTransform(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tranid", 0)
+                        kwargs.get("tranid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

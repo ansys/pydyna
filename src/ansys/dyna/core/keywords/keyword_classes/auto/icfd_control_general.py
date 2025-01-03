@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlGeneral(KeywordBase):
@@ -40,28 +41,28 @@ class IcfdControlGeneral(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("atype", 0)
+                        kwargs.get("atype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mtype",
                         int,
                         10,
                         10,
-                        kwargs.get("mtype", 0)
+                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dvcl",
                         int,
                         20,
                         10,
-                        kwargs.get("dvcl", 0)
+                        kwargs.get("dvcl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rdvcl",
                         int,
                         30,
                         10,
-                        kwargs.get("rdvcl", 0)
+                        kwargs.get("rdvcl", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundarySphSymmetryPlane(KeywordBase):
@@ -40,42 +41,42 @@ class BoundarySphSymmetryPlane(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vtx", 0.0)
+                        kwargs.get("vtx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vty",
                         float,
                         10,
                         10,
-                        kwargs.get("vty", 0.0)
+                        kwargs.get("vty", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vtz",
                         float,
                         20,
                         10,
-                        kwargs.get("vtz", 0.0)
+                        kwargs.get("vtz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vhx",
                         float,
                         30,
                         10,
-                        kwargs.get("vhx", 0.0)
+                        kwargs.get("vhx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vhy",
                         float,
                         40,
                         10,
-                        kwargs.get("vhy", 0.0)
+                        kwargs.get("vhy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vhz",
                         float,
                         50,
                         10,
-                        kwargs.get("vhz", 0.0)
+                        kwargs.get("vhz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

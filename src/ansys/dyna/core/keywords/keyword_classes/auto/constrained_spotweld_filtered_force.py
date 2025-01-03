@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedSpotweldFilteredForce(KeywordBase):
@@ -93,14 +94,14 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("tf", 1.0E+20)
+                        kwargs.get("tf", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ep",
                         float,
                         70,
                         10,
-                        kwargs.get("ep", 1.0E+20)
+                        kwargs.get("ep", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -80,14 +81,14 @@ class MatModifiedForceLimited(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("iaflc", 0)
+                        kwargs.get("iaflc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ytflag",
                         float,
                         60,
                         10,
-                        kwargs.get("ytflag", 0.0)
+                        kwargs.get("ytflag", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "asoft",
@@ -172,49 +173,49 @@ class MatModifiedForceLimited(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("lc2", 0)
+                        kwargs.get("lc2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc3",
                         int,
                         20,
                         10,
-                        kwargs.get("lc3", 0)
+                        kwargs.get("lc3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc4",
                         int,
                         30,
                         10,
-                        kwargs.get("lc4", 0)
+                        kwargs.get("lc4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc5",
                         int,
                         40,
                         10,
-                        kwargs.get("lc5", 0)
+                        kwargs.get("lc5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc6",
                         int,
                         50,
                         10,
-                        kwargs.get("lc6", 0)
+                        kwargs.get("lc6", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc7",
                         int,
                         60,
                         10,
-                        kwargs.get("lc7", 0)
+                        kwargs.get("lc7", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc8",
                         int,
                         70,
                         10,
-                        kwargs.get("lc8", 0)
+                        kwargs.get("lc8", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -225,42 +226,42 @@ class MatModifiedForceLimited(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lps1", 0)
+                        kwargs.get("lps1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfs1",
                         float,
                         10,
                         10,
-                        kwargs.get("sfs1", 1.0)
+                        kwargs.get("sfs1", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lps2",
                         int,
                         20,
                         10,
-                        kwargs.get("lps2", 0)
+                        kwargs.get("lps2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfs2",
                         float,
                         30,
                         10,
-                        kwargs.get("sfs2", 1.0)
+                        kwargs.get("sfs2", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yms1",
                         float,
                         40,
                         10,
-                        kwargs.get("yms1", 1.0E+20)
+                        kwargs.get("yms1", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yms2",
                         float,
                         50,
                         10,
-                        kwargs.get("yms2", 1.0E+20)
+                        kwargs.get("yms2", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -271,42 +272,42 @@ class MatModifiedForceLimited(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lpt1", 0)
+                        kwargs.get("lpt1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sft1",
                         float,
                         10,
                         10,
-                        kwargs.get("sft1", 1.0)
+                        kwargs.get("sft1", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lpt2",
                         int,
                         20,
                         10,
-                        kwargs.get("lpt2", 0)
+                        kwargs.get("lpt2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sft2",
                         float,
                         30,
                         10,
-                        kwargs.get("sft2", 1.0)
+                        kwargs.get("sft2", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ymt1",
                         float,
                         40,
                         10,
-                        kwargs.get("ymt1", 1.0E+20)
+                        kwargs.get("ymt1", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ymt2",
                         float,
                         50,
                         10,
-                        kwargs.get("ymt2", 1.0E+20)
+                        kwargs.get("ymt2", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -317,21 +318,21 @@ class MatModifiedForceLimited(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lpr", 0)
+                        kwargs.get("lpr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfr",
                         float,
                         10,
                         10,
-                        kwargs.get("sfr", 1.0)
+                        kwargs.get("sfr", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ymr",
                         float,
                         20,
                         10,
-                        kwargs.get("ymr", 1.0E+20)
+                        kwargs.get("ymr", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -342,56 +343,56 @@ class MatModifiedForceLimited(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lys1", 0)
+                        kwargs.get("lys1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sys1",
                         float,
                         10,
                         10,
-                        kwargs.get("sys1", 1.0)
+                        kwargs.get("sys1", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lys2",
                         int,
                         20,
                         10,
-                        kwargs.get("lys2", 0)
+                        kwargs.get("lys2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sys2",
                         float,
                         30,
                         10,
-                        kwargs.get("sys2", 1.0)
+                        kwargs.get("sys2", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lyt1",
                         int,
                         40,
                         10,
-                        kwargs.get("lyt1", 0)
+                        kwargs.get("lyt1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "syt1",
                         float,
                         50,
                         10,
-                        kwargs.get("syt1", 1.0)
+                        kwargs.get("syt1", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lyt2",
                         int,
                         60,
                         10,
-                        kwargs.get("lyt2", 0)
+                        kwargs.get("lyt2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "syt2",
                         float,
                         70,
                         10,
-                        kwargs.get("syt2", 1.0)
+                        kwargs.get("syt2", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -402,14 +403,14 @@ class MatModifiedForceLimited(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lyr", 0)
+                        kwargs.get("lyr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "syr",
                         float,
                         10,
                         10,
-                        kwargs.get("syr", 1.0)
+                        kwargs.get("syr", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -960,56 +961,56 @@ class MatModifiedForceLimited(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lpmr_1", 0)
+                        kwargs.get("lpmr_1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lpmr_2",
                         int,
                         10,
                         10,
-                        kwargs.get("lpmr_2", 0)
+                        kwargs.get("lpmr_2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lpmr_3",
                         int,
                         20,
                         10,
-                        kwargs.get("lpmr_3", 0)
+                        kwargs.get("lpmr_3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lpmr_4",
                         int,
                         30,
                         10,
-                        kwargs.get("lpmr_4", 0)
+                        kwargs.get("lpmr_4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lpmr_5",
                         int,
                         40,
                         10,
-                        kwargs.get("lpmr_5", 0)
+                        kwargs.get("lpmr_5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lpmr_6",
                         int,
                         50,
                         10,
-                        kwargs.get("lpmr_6", 0)
+                        kwargs.get("lpmr_6", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lpmr_7",
                         int,
                         60,
                         10,
-                        kwargs.get("lpmr_7", 0)
+                        kwargs.get("lpmr_7", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lpmr_8",
                         int,
                         70,
                         10,
-                        kwargs.get("lpmr_8", 0)
+                        kwargs.get("lpmr_8", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

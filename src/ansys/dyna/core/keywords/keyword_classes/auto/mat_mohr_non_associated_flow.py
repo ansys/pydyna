@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,28 +74,28 @@ class MatMohrNonAssociatedFlow(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("p12", -0.5)
+                        kwargs.get("p12", -0.5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "p22",
                         float,
                         50,
                         10,
-                        kwargs.get("p22", 1.0)
+                        kwargs.get("p22", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "p33",
                         float,
                         60,
                         10,
-                        kwargs.get("p33", 3.0)
+                        kwargs.get("p33", 3.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "g12",
                         float,
                         70,
                         10,
-                        kwargs.get("g12", -0.5)
+                        kwargs.get("g12", -0.5 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,14 +106,14 @@ class MatMohrNonAssociatedFlow(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("g22", 1.0)
+                        kwargs.get("g22", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "g33",
                         float,
                         10,
                         10,
-                        kwargs.get("g33", 3.0)
+                        kwargs.get("g33", 3.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcids",
@@ -140,7 +141,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("lfld", 0)
+                        kwargs.get("lfld", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lfrac",
@@ -200,7 +201,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("scale", 1.0)
+                        kwargs.get("scale", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "size0",

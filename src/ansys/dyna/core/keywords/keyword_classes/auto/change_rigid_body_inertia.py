@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChangeRigidBodyInertia(KeywordBase):
@@ -47,14 +48,14 @@ class ChangeRigidBodyInertia(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("pid", 0)
+                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tm",
                         float,
                         20,
                         10,
-                        kwargs.get("tm", 0)
+                        kwargs.get("tm", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -72,35 +73,35 @@ class ChangeRigidBodyInertia(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("ixy", 0)
+                        kwargs.get("ixy", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ixz",
                         float,
                         20,
                         10,
-                        kwargs.get("ixz", 0)
+                        kwargs.get("ixz", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iyy",
                         float,
                         30,
                         10,
-                        kwargs.get("iyy", 0)
+                        kwargs.get("iyy", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iyz",
                         float,
                         40,
                         10,
-                        kwargs.get("iyz", 0)
+                        kwargs.get("iyz", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "izz",
                         float,
                         50,
                         10,
-                        kwargs.get("izz", 0)
+                        kwargs.get("izz", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartInertiaContactPrint(KeywordBase):
@@ -72,21 +73,21 @@ class PartInertiaContactPrint(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("eosid", 0)
+                        kwargs.get("eosid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hgid",
                         int,
                         40,
                         10,
-                        kwargs.get("hgid", 0)
+                        kwargs.get("hgid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "grav",
                         int,
                         50,
                         10,
-                        kwargs.get("grav", 0)
+                        kwargs.get("grav", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "adpopt",
@@ -100,7 +101,7 @@ class PartInertiaContactPrint(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("tmid", 0)
+                        kwargs.get("tmid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -139,7 +140,7 @@ class PartInertiaContactPrint(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("ircs", 0)
+                        kwargs.get("ircs", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nodeid",
@@ -362,7 +363,7 @@ class PartInertiaContactPrint(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("prbf", 0)
+                        kwargs.get("prbf", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosLinearPolynomial(KeywordBase):
@@ -47,49 +48,49 @@ class EosLinearPolynomial(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("c0", 0.0)
+                        kwargs.get("c0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "c1",
                         float,
                         20,
                         10,
-                        kwargs.get("c1", 0.0)
+                        kwargs.get("c1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "c2",
                         float,
                         30,
                         10,
-                        kwargs.get("c2", 0.0)
+                        kwargs.get("c2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "c3",
                         float,
                         40,
                         10,
-                        kwargs.get("c3", 0.0)
+                        kwargs.get("c3", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "c4",
                         float,
                         50,
                         10,
-                        kwargs.get("c4", 0.0)
+                        kwargs.get("c4", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "c5",
                         float,
                         60,
                         10,
-                        kwargs.get("c5", 0.0)
+                        kwargs.get("c5", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "c6",
                         float,
                         70,
                         10,
-                        kwargs.get("c6", 0.0)
+                        kwargs.get("c6", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

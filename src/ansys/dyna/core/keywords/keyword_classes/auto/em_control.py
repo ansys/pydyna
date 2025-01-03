@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmControl(KeywordBase):
@@ -40,14 +41,14 @@ class EmControl(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("emsol", -1)
+                        kwargs.get("emsol", -1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "numls",
                         int,
                         10,
                         10,
-                        kwargs.get("numls", 100)
+                        kwargs.get("numls", 100 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "macrodt",
@@ -61,14 +62,14 @@ class EmControl(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("dimtype", 0)
+                        kwargs.get("dimtype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nperio",
                         int,
                         40,
                         10,
-                        kwargs.get("nperio", 2)
+                        kwargs.get("nperio", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -82,14 +83,14 @@ class EmControl(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("ncylfem", 5000)
+                        kwargs.get("ncylfem", 5000 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ncylbem",
                         int,
                         70,
                         10,
-                        kwargs.get("ncylbem", 5000)
+                        kwargs.get("ncylbem", 5000 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

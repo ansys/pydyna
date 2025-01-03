@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -45,14 +46,14 @@ class DefineDeCohesive(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid", 0)
+                        kwargs.get("sid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "styp",
                         int,
                         10,
                         10,
-                        kwargs.get("styp", 0)
+                        kwargs.get("styp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -63,28 +64,28 @@ class DefineDeCohesive(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gamma", 0.0)
+                        kwargs.get("gamma", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vol",
                         float,
                         10,
                         10,
-                        kwargs.get("vol", 0.0)
+                        kwargs.get("vol", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ang",
                         float,
                         20,
                         10,
-                        kwargs.get("ang", 0.0)
+                        kwargs.get("ang", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gap",
                         float,
                         30,
                         10,
-                        kwargs.get("gap", 0.0)
+                        kwargs.get("gap", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CosimFmiInterface(KeywordBase):
@@ -51,14 +52,14 @@ class CosimFmiInterface(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("impexp", "IMP")
+                        kwargs.get("impexp", "IMP" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "regtyp",
                         str,
                         10,
                         10,
-                        kwargs.get("regtyp", "NODE")
+                        kwargs.get("regtyp", "NODE" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "regid",
@@ -93,14 +94,14 @@ class CosimFmiInterface(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("cid", 0)
+                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ref",
                         int,
                         70,
                         10,
-                        kwargs.get("ref", 0)
+                        kwargs.get("ref", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

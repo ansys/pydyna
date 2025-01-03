@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleCouplingNodalConstraintId(KeywordBase):
@@ -72,21 +73,21 @@ class AleCouplingNodalConstraintId(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("strsty", 0)
+                        kwargs.get("strsty", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "alesty",
                         int,
                         30,
                         10,
-                        kwargs.get("alesty", 0)
+                        kwargs.get("alesty", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ctype",
                         int,
                         40,
                         10,
-                        kwargs.get("ctype", 0)
+                        kwargs.get("ctype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mcoup",
@@ -104,14 +105,14 @@ class AleCouplingNodalConstraintId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("start", 0)
+                        kwargs.get("start", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "end",
                         float,
                         10,
                         10,
-                        kwargs.get("end", 1.0E10)
+                        kwargs.get("end", 1.0E10 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -139,7 +140,7 @@ class AleCouplingNodalConstraintId(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("frcmin", 0.5)
+                        kwargs.get("frcmin", 0.5 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

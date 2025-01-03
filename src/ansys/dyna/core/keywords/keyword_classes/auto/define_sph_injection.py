@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -66,35 +67,35 @@ class DefineSphInjection(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("vx", 0.0)
+                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vy",
                         float,
                         40,
                         10,
-                        kwargs.get("vy", 0.0)
+                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vz",
                         float,
                         50,
                         10,
-                        kwargs.get("vz", 0.0)
+                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "area",
                         float,
                         60,
                         10,
-                        kwargs.get("area", 0.0)
+                        kwargs.get("area", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vmag",
                         int,
                         70,
                         10,
-                        kwargs.get("vmag", 0)
+                        kwargs.get("vmag", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,21 +106,21 @@ class DefineSphInjection(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tbeg", 0.0)
+                        kwargs.get("tbeg", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tend",
                         float,
                         10,
                         10,
-                        kwargs.get("tend", 1.e+20)
+                        kwargs.get("tend", 1.e+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid",
                         int,
                         20,
                         10,
-                        kwargs.get("nid", 0)
+                        kwargs.get("nid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

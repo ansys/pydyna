@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmIsopotential(KeywordBase):
@@ -47,7 +48,7 @@ class EmIsopotential(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("settype", 1)
+                        kwargs.get("settype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "setid",
@@ -61,7 +62,7 @@ class EmIsopotential(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("rdltype", 0)
+                        kwargs.get("rdltype", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

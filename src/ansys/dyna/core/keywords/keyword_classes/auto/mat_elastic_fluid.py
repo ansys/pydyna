@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -87,7 +88,7 @@ class MatElasticFluid(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("k", 0)
+                        kwargs.get("k", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,7 +106,7 @@ class MatElasticFluid(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("cp", 1.0E+20)
+                        kwargs.get("cp", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

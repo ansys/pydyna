@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Iga2DNurbsUvw(KeywordBase):
@@ -79,14 +80,14 @@ class Iga2DNurbsUvw(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unir", 0)
+                        kwargs.get("unir", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unis",
                         int,
                         10,
                         10,
-                        kwargs.get("unis", 0)
+                        kwargs.get("unis", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -218,7 +219,7 @@ class Iga2DNurbsUvw(KeywordBase):
                         float,
                         60,
                         20,
-                        kwargs.get("wgt", 1.0)
+                        kwargs.get("wgt", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

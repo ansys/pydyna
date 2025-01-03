@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseFrequencyBinaryD3SsdSubcase(KeywordBase):
@@ -51,35 +52,35 @@ class DatabaseFrequencyBinaryD3SsdSubcase(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fmin", 0.0)
+                        kwargs.get("fmin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fmax",
                         float,
                         10,
                         10,
-                        kwargs.get("fmax", 0.0)
+                        kwargs.get("fmax", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nfreq",
                         int,
                         20,
                         10,
-                        kwargs.get("nfreq", 0)
+                        kwargs.get("nfreq", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fspace",
                         int,
                         30,
                         10,
-                        kwargs.get("fspace", 0)
+                        kwargs.get("fspace", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcfreq",
                         int,
                         40,
                         10,
-                        kwargs.get("lcfreq", 0)
+                        kwargs.get("lcfreq", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

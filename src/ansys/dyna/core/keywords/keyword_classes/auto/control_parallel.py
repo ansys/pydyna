@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlParallel(KeywordBase):
@@ -40,28 +41,28 @@ class ControlParallel(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ncpu", 1)
+                        kwargs.get("ncpu", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "numrhs",
                         int,
                         10,
                         10,
-                        kwargs.get("numrhs", 0)
+                        kwargs.get("numrhs", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "const",
                         int,
                         20,
                         10,
-                        kwargs.get("const", 2)
+                        kwargs.get("const", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "para",
                         int,
                         30,
                         10,
-                        kwargs.get("para", 0)
+                        kwargs.get("para", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

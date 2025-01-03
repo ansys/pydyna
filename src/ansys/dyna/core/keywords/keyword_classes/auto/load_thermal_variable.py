@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadThermalVariable(KeywordBase):
@@ -47,14 +48,14 @@ class LoadThermalVariable(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("nsidex", 0)
+                        kwargs.get("nsidex", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "boxid",
                         int,
                         20,
                         10,
-                        kwargs.get("boxid", 0)
+                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -65,14 +66,14 @@ class LoadThermalVariable(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ts", 0.0)
+                        kwargs.get("ts", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tb",
                         float,
                         10,
                         10,
-                        kwargs.get("tb", 0.0)
+                        kwargs.get("tb", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",
@@ -86,14 +87,14 @@ class LoadThermalVariable(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("tse", 0.0)
+                        kwargs.get("tse", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tbe",
                         float,
                         40,
                         10,
-                        kwargs.get("tbe", 0.0)
+                        kwargs.get("tbe", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcide",

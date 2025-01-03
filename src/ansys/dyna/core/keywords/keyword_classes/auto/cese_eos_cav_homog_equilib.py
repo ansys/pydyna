@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseEosCavHomogEquilib(KeywordBase):
@@ -47,49 +48,49 @@ class CeseEosCavHomogEquilib(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("p_vap", 0.8)
+                        kwargs.get("p_vap", 0.8 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "p_liq",
                         float,
                         20,
                         10,
-                        kwargs.get("p_liq", 880.0)
+                        kwargs.get("p_liq", 880.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a_vap",
                         float,
                         30,
                         10,
-                        kwargs.get("a_vap", 334.0)
+                        kwargs.get("a_vap", 334.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a_liq",
                         float,
                         40,
                         10,
-                        kwargs.get("a_liq", 1386.0)
+                        kwargs.get("a_liq", 1386.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "u_vap",
                         float,
                         50,
                         10,
-                        kwargs.get("u_vap", 1.435e-5)
+                        kwargs.get("u_vap", 1.435e-5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "u_liq",
                         float,
                         60,
                         10,
-                        kwargs.get("u_liq", 1.586e-4)
+                        kwargs.get("u_liq", 1.586e-4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "p_sat_vap",
                         float,
                         70,
                         10,
-                        kwargs.get("p_sat_vap", 1.2e+4)
+                        kwargs.get("p_sat_vap", 1.2e+4 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

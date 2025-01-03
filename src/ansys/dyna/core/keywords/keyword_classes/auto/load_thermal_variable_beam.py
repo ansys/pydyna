@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadThermalVariableBeam(KeywordBase):
@@ -54,7 +55,7 @@ class LoadThermalVariableBeam(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("ipolar", 0)
+                        kwargs.get("ipolar", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -65,14 +66,14 @@ class LoadThermalVariableBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tbase", 0.0)
+                        kwargs.get("tbase", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tscale",
                         float,
                         10,
                         10,
-                        kwargs.get("tscale", 1.0)
+                        kwargs.get("tscale", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tcurve",

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlRefineSolid(KeywordBase):
@@ -47,28 +48,28 @@ class ControlRefineSolid(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("type", 0)
+                        kwargs.get("type", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nlvl",
                         int,
                         20,
                         10,
-                        kwargs.get("nlvl", 1)
+                        kwargs.get("nlvl", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ibox",
                         int,
                         30,
                         10,
-                        kwargs.get("ibox", 0)
+                        kwargs.get("ibox", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ielout",
                         int,
                         40,
                         10,
-                        kwargs.get("ielout", 0)
+                        kwargs.get("ielout", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -79,49 +80,49 @@ class ControlRefineSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ntotrf", 0)
+                        kwargs.get("ntotrf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ncycrf",
                         float,
                         10,
                         10,
-                        kwargs.get("ncycrf", 0.0)
+                        kwargs.get("ncycrf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "critrf",
                         int,
                         20,
                         10,
-                        kwargs.get("critrf", 0)
+                        kwargs.get("critrf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "valrf",
                         float,
                         30,
                         10,
-                        kwargs.get("valrf", 0.0)
+                        kwargs.get("valrf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "begrf",
                         float,
                         40,
                         10,
-                        kwargs.get("begrf", 0.0)
+                        kwargs.get("begrf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "endrf",
                         float,
                         50,
                         10,
-                        kwargs.get("endrf", 0.0)
+                        kwargs.get("endrf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "layrf",
                         int,
                         60,
                         10,
-                        kwargs.get("layrf", 0)
+                        kwargs.get("layrf", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -132,42 +133,42 @@ class ControlRefineSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("maxrm", 0)
+                        kwargs.get("maxrm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ncycrm",
                         float,
                         10,
                         10,
-                        kwargs.get("ncycrm", 0.0)
+                        kwargs.get("ncycrm", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "critrm",
                         int,
                         20,
                         10,
-                        kwargs.get("critrm", 0)
+                        kwargs.get("critrm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "valrm",
                         float,
                         30,
                         10,
-                        kwargs.get("valrm", 0.0)
+                        kwargs.get("valrm", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "begrm",
                         float,
                         40,
                         10,
-                        kwargs.get("begrm", 0.0)
+                        kwargs.get("begrm", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "endrm",
                         float,
                         50,
                         10,
-                        kwargs.get("endrm", 0.0)
+                        kwargs.get("endrm", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

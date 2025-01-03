@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialDetonation(KeywordBase):
@@ -47,28 +48,28 @@ class InitialDetonation(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("x", 0.0)
+                        kwargs.get("x", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y",
                         float,
                         20,
                         10,
-                        kwargs.get("y", 0.0)
+                        kwargs.get("y", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z",
                         float,
                         30,
                         10,
-                        kwargs.get("z", 0.0)
+                        kwargs.get("z", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lt",
                         float,
                         40,
                         10,
-                        kwargs.get("lt", 0.0)
+                        kwargs.get("lt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -107,28 +108,28 @@ class InitialDetonation(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("xs", 0.0)
+                        kwargs.get("xs", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ys",
                         float,
                         30,
                         10,
-                        kwargs.get("ys", 0.0)
+                        kwargs.get("ys", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zs",
                         float,
                         40,
                         10,
-                        kwargs.get("zs", 0.0)
+                        kwargs.get("zs", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid",
                         int,
                         50,
                         10,
-                        kwargs.get("nid", 0)
+                        kwargs.get("nid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

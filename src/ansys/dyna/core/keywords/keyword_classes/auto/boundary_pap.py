@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryPap(KeywordBase):
@@ -68,28 +69,28 @@ class BoundaryPap(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("block", 0.0)
+                        kwargs.get("block", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tbirth",
                         float,
                         50,
                         10,
-                        kwargs.get("tbirth", 0.0)
+                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdeath",
                         float,
                         60,
                         10,
-                        kwargs.get("tdeath", 1.0E20)
+                        kwargs.get("tdeath", 1.0E20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cvrper",
                         float,
                         70,
                         10,
-                        kwargs.get("cvrper", 1.0)
+                        kwargs.get("cvrper", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

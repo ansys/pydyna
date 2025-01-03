@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleCouplingNodalDrag(KeywordBase):
@@ -72,14 +73,14 @@ class AleCouplingNodalDrag(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("strsty", 0)
+                        kwargs.get("strsty", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "alesty",
                         int,
                         30,
                         10,
-                        kwargs.get("alesty", 0)
+                        kwargs.get("alesty", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -90,14 +91,14 @@ class AleCouplingNodalDrag(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("start", 0)
+                        kwargs.get("start", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "end",
                         float,
                         10,
                         10,
-                        kwargs.get("end", 1.0E10)
+                        kwargs.get("end", 1.0E10 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -111,7 +112,7 @@ class AleCouplingNodalDrag(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("fcoef", 1)
+                        kwargs.get("fcoef", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -132,14 +133,14 @@ class AleCouplingNodalDrag(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("direcg", 1)
+                        kwargs.get("direcg", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "grav",
                         float,
                         70,
                         10,
-                        kwargs.get("grav", 0.0)
+                        kwargs.get("grav", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

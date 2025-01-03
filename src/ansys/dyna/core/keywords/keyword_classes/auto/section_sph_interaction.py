@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,49 +53,49 @@ class SectionSphInteraction(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("cslh", 1.2)
+                        kwargs.get("cslh", 1.2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hmin",
                         float,
                         20,
                         10,
-                        kwargs.get("hmin", 0.2)
+                        kwargs.get("hmin", 0.2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hmax",
                         float,
                         30,
                         10,
-                        kwargs.get("hmax", 2.0)
+                        kwargs.get("hmax", 2.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sphini",
                         float,
                         40,
                         10,
-                        kwargs.get("sphini", 0.0)
+                        kwargs.get("sphini", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "death",
                         float,
                         50,
                         10,
-                        kwargs.get("death", 1.0E+20)
+                        kwargs.get("death", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "start",
                         float,
                         60,
                         10,
-                        kwargs.get("start", 0.0)
+                        kwargs.get("start", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sphkern",
                         int,
                         70,
                         10,
-                        kwargs.get("sphkern", 0)
+                        kwargs.get("sphkern", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

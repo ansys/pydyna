@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlExplicitThermalOutput(KeywordBase):
@@ -47,21 +48,21 @@ class ControlExplicitThermalOutput(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("dtoutyp", 0)
+                        kwargs.get("dtoutyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "setid",
                         int,
                         20,
                         10,
-                        kwargs.get("setid", 0)
+                        kwargs.get("setid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "setyp",
                         int,
                         30,
                         10,
-                        kwargs.get("setyp", 1)
+                        kwargs.get("setyp", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

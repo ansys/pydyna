@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosPropellantDeflagration(KeywordBase):
@@ -47,35 +48,35 @@ class EosPropellantDeflagration(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("a", 0.0)
+                        kwargs.get("a", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "b",
                         float,
                         20,
                         10,
-                        kwargs.get("b", 0.0)
+                        kwargs.get("b", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xp1",
                         float,
                         30,
                         10,
-                        kwargs.get("xp1", 0.0)
+                        kwargs.get("xp1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xp2",
                         float,
                         40,
                         10,
-                        kwargs.get("xp2", 0.0)
+                        kwargs.get("xp2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "frer",
                         float,
                         50,
                         10,
-                        kwargs.get("frer", 0.0)
+                        kwargs.get("frer", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -86,35 +87,35 @@ class EosPropellantDeflagration(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("g", 0.0)
+                        kwargs.get("g", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r1",
                         float,
                         10,
                         10,
-                        kwargs.get("r1", 0.0)
+                        kwargs.get("r1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r2",
                         float,
                         20,
                         10,
-                        kwargs.get("r2", 0.0)
+                        kwargs.get("r2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r3",
                         float,
                         30,
                         10,
-                        kwargs.get("r3", 0.0)
+                        kwargs.get("r3", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r5",
                         float,
                         40,
                         10,
-                        kwargs.get("r5", 0.0)
+                        kwargs.get("r5", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -125,35 +126,35 @@ class EosPropellantDeflagration(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r6", 0.0)
+                        kwargs.get("r6", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fmxig",
                         float,
                         10,
                         10,
-                        kwargs.get("fmxig", 0.0)
+                        kwargs.get("fmxig", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "freq",
                         float,
                         20,
                         10,
-                        kwargs.get("freq", 0.0)
+                        kwargs.get("freq", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "grow1",
                         float,
                         30,
                         10,
-                        kwargs.get("grow1", 0.0)
+                        kwargs.get("grow1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "em",
                         float,
                         40,
                         10,
-                        kwargs.get("em", 0.0)
+                        kwargs.get("em", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -164,56 +165,56 @@ class EosPropellantDeflagration(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ar1", 0.0)
+                        kwargs.get("ar1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "es1",
                         float,
                         10,
                         10,
-                        kwargs.get("es1", 0.0)
+                        kwargs.get("es1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cvp",
                         float,
                         20,
                         10,
-                        kwargs.get("cvp", 0.0)
+                        kwargs.get("cvp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cvr",
                         float,
                         30,
                         10,
-                        kwargs.get("cvr", 0.0)
+                        kwargs.get("cvr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eetal",
                         float,
                         40,
                         10,
-                        kwargs.get("eetal", 0.0)
+                        kwargs.get("eetal", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ccrit",
                         float,
                         50,
                         10,
-                        kwargs.get("ccrit", 0.0)
+                        kwargs.get("ccrit", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "enq",
                         float,
                         60,
                         10,
-                        kwargs.get("enq", 0.0)
+                        kwargs.get("enq", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tmp0",
                         float,
                         70,
                         10,
-                        kwargs.get("tmp0", 298.0)
+                        kwargs.get("tmp0", 298.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -224,42 +225,42 @@ class EosPropellantDeflagration(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("grow2", 0.0)
+                        kwargs.get("grow2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ar2",
                         float,
                         10,
                         10,
-                        kwargs.get("ar2", 0.0)
+                        kwargs.get("ar2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "es2",
                         float,
                         20,
                         10,
-                        kwargs.get("es2", 0.0)
+                        kwargs.get("es2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "en",
                         float,
                         30,
                         10,
-                        kwargs.get("en", 0.0)
+                        kwargs.get("en", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fmxgr",
                         float,
                         40,
                         10,
-                        kwargs.get("fmxgr", 0.0)
+                        kwargs.get("fmxgr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fmngr",
                         float,
                         50,
                         10,
-                        kwargs.get("fmngr", 0.0)
+                        kwargs.get("fmngr", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

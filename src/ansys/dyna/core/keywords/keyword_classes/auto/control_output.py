@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlOutput(KeywordBase):
@@ -40,56 +41,56 @@ class ControlOutput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("npopt", 0)
+                        kwargs.get("npopt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "neecho",
                         int,
                         10,
                         10,
-                        kwargs.get("neecho", 0)
+                        kwargs.get("neecho", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nrefup",
                         int,
                         20,
                         10,
-                        kwargs.get("nrefup", 0)
+                        kwargs.get("nrefup", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iaccop",
                         int,
                         30,
                         10,
-                        kwargs.get("iaccop", 0)
+                        kwargs.get("iaccop", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "opifs",
                         float,
                         40,
                         10,
-                        kwargs.get("opifs", 0.0)
+                        kwargs.get("opifs", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ipnint",
                         int,
                         50,
                         10,
-                        kwargs.get("ipnint", 0)
+                        kwargs.get("ipnint", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ikedit",
                         int,
                         60,
                         10,
-                        kwargs.get("ikedit", 100)
+                        kwargs.get("ikedit", 100 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iflush",
                         int,
                         70,
                         10,
-                        kwargs.get("iflush", 5000)
+                        kwargs.get("iflush", 5000 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,56 +101,56 @@ class ControlOutput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iprtf", 0)
+                        kwargs.get("iprtf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ierode",
                         int,
                         10,
                         10,
-                        kwargs.get("ierode", 0)
+                        kwargs.get("ierode", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tet10s8",
                         int,
                         20,
                         10,
-                        kwargs.get("tet10s8", 2)
+                        kwargs.get("tet10s8", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "msgmax",
                         int,
                         30,
                         10,
-                        kwargs.get("msgmax", 50)
+                        kwargs.get("msgmax", 50 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ipcurv",
                         int,
                         40,
                         10,
-                        kwargs.get("ipcurv", 0)
+                        kwargs.get("ipcurv", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gmdt",
                         float,
                         50,
                         10,
-                        kwargs.get("gmdt", 0.0)
+                        kwargs.get("gmdt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ip1dblt",
                         int,
                         60,
                         10,
-                        kwargs.get("ip1dblt", 0)
+                        kwargs.get("ip1dblt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eocs",
                         int,
                         70,
                         10,
-                        kwargs.get("eocs", 0)
+                        kwargs.get("eocs", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -160,49 +161,49 @@ class ControlOutput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tolev", 2)
+                        kwargs.get("tolev", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "newleg",
                         int,
                         10,
                         10,
-                        kwargs.get("newleg", 0)
+                        kwargs.get("newleg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "frfreq",
                         int,
                         20,
                         10,
-                        kwargs.get("frfreq", 1)
+                        kwargs.get("frfreq", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "minfo",
                         int,
                         30,
                         10,
-                        kwargs.get("minfo", 0)
+                        kwargs.get("minfo", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "solsig",
                         int,
                         40,
                         10,
-                        kwargs.get("solsig", 0)
+                        kwargs.get("solsig", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "msgflg",
                         int,
                         50,
                         10,
-                        kwargs.get("msgflg", 0)
+                        kwargs.get("msgflg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cdetol",
                         float,
                         60,
                         10,
-                        kwargs.get("cdetol", 10.0)
+                        kwargs.get("cdetol", 10.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -213,21 +214,21 @@ class ControlOutput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("phschng", 0)
+                        kwargs.get("phschng", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "demden",
                         int,
                         10,
                         10,
-                        kwargs.get("demden", 0)
+                        kwargs.get("demden", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "icrfile",
                         int,
                         20,
                         10,
-                        kwargs.get("icrfile", 0)
+                        kwargs.get("icrfile", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "spc2bnd",
@@ -241,28 +242,28 @@ class ControlOutput(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("penout", 0)
+                        kwargs.get("penout", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shlsig",
                         int,
                         50,
                         10,
-                        kwargs.get("shlsig", 0)
+                        kwargs.get("shlsig", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hisnout",
                         int,
                         60,
                         10,
-                        kwargs.get("hisnout", 0)
+                        kwargs.get("hisnout", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "engout",
                         int,
                         70,
                         10,
-                        kwargs.get("engout", 0)
+                        kwargs.get("engout", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -273,35 +274,35 @@ class ControlOutput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("insf", 0)
+                        kwargs.get("insf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "isolsf",
                         int,
                         10,
                         10,
-                        kwargs.get("isolsf", 0)
+                        kwargs.get("isolsf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ibsf",
                         int,
                         20,
                         10,
-                        kwargs.get("ibsf", 0)
+                        kwargs.get("ibsf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "issf",
                         int,
                         30,
                         10,
-                        kwargs.get("issf", 0)
+                        kwargs.get("issf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mlkbag",
                         int,
                         40,
                         10,
-                        kwargs.get("mlkbag", 0)
+                        kwargs.get("mlkbag", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

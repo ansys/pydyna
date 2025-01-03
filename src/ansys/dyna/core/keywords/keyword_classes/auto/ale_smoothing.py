@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleSmoothing(KeywordBase):
@@ -61,28 +62,28 @@ class AleSmoothing(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("ipre", 0)
+                        kwargs.get("ipre", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xco",
                         float,
                         40,
                         10,
-                        kwargs.get("xco", 0.0)
+                        kwargs.get("xco", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yco",
                         float,
                         50,
                         10,
-                        kwargs.get("yco", 0.0)
+                        kwargs.get("yco", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zco",
                         float,
                         60,
                         10,
-                        kwargs.get("zco", 0.0)
+                        kwargs.get("zco", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

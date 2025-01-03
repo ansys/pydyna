@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundarySaleMeshFace(KeywordBase):
@@ -40,7 +41,7 @@ class BoundarySaleMeshFace(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("option", "FIXED")
+                        kwargs.get("option", "FIXED" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mshid",
@@ -54,42 +55,42 @@ class BoundarySaleMeshFace(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("-x", 0)
+                        kwargs.get("-x", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "+x",
                         int,
                         30,
                         10,
-                        kwargs.get("+x", 0)
+                        kwargs.get("+x", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "-y",
                         int,
                         40,
                         10,
-                        kwargs.get("-y", 0)
+                        kwargs.get("-y", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "+y",
                         int,
                         50,
                         10,
-                        kwargs.get("+y", 0)
+                        kwargs.get("+y", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "-z",
                         int,
                         60,
                         10,
-                        kwargs.get("-z", 0)
+                        kwargs.get("-z", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "-z",
                         int,
                         70,
                         10,
-                        kwargs.get("-z", 0)
+                        kwargs.get("-z", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingBlankmesh(KeywordBase):
@@ -47,42 +48,42 @@ class ControlFormingBlankmesh(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("eleng", 0.0)
+                        kwargs.get("eleng", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xleng",
                         float,
                         20,
                         10,
-                        kwargs.get("xleng", 0.0)
+                        kwargs.get("xleng", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yleng",
                         float,
                         30,
                         10,
-                        kwargs.get("yleng", 0.0)
+                        kwargs.get("yleng", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "angelx",
                         float,
                         40,
                         10,
-                        kwargs.get("angelx", 0.0)
+                        kwargs.get("angelx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nplane",
                         int,
                         50,
                         10,
-                        kwargs.get("nplane", 1)
+                        kwargs.get("nplane", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cid",
                         int,
                         60,
                         10,
-                        kwargs.get("cid", 0)
+                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -114,35 +115,35 @@ class ControlFormingBlankmesh(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("xcent", 0.0)
+                        kwargs.get("xcent", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ycent",
                         float,
                         40,
                         10,
-                        kwargs.get("ycent", 0.0)
+                        kwargs.get("ycent", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zcent",
                         float,
                         50,
                         10,
-                        kwargs.get("zcent", 0.0)
+                        kwargs.get("zcent", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xshift",
                         float,
                         60,
                         10,
-                        kwargs.get("xshift", 0.0)
+                        kwargs.get("xshift", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yshift",
                         float,
                         70,
                         10,
-                        kwargs.get("yshift", 0.0)
+                        kwargs.get("yshift", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

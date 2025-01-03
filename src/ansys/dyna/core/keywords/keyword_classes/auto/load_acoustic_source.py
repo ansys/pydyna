@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadAcousticSource(KeywordBase):
@@ -47,7 +48,7 @@ class LoadAcousticSource(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("srctyp", 1)
+                        kwargs.get("srctyp", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",
@@ -61,35 +62,35 @@ class LoadAcousticSource(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("data1", 1.0)
+                        kwargs.get("data1", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "data2",
                         float,
                         40,
                         10,
-                        kwargs.get("data2", 0.0)
+                        kwargs.get("data2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "data3",
                         float,
                         50,
                         10,
-                        kwargs.get("data3", 0.0)
+                        kwargs.get("data3", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "data4",
                         float,
                         60,
                         10,
-                        kwargs.get("data4", 0.0)
+                        kwargs.get("data4", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "data5",
                         float,
                         70,
                         10,
-                        kwargs.get("data5", 0.0)
+                        kwargs.get("data5", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

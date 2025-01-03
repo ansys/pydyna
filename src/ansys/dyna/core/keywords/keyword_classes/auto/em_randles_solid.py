@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmRandlesSolid(KeywordBase):
@@ -47,14 +48,14 @@ class EmRandlesSolid(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("rdltype", -1)
+                        kwargs.get("rdltype", -1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rdlarea",
                         int,
                         20,
                         10,
-                        kwargs.get("rdlarea", 2)
+                        kwargs.get("rdlarea", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ccppart",
@@ -239,35 +240,35 @@ class EmRandlesSolid(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("temp", 0.0)
+                        kwargs.get("temp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "frther",
                         int,
                         10,
                         10,
-                        kwargs.get("frther", 0)
+                        kwargs.get("frther", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r0toth",
                         int,
                         20,
                         10,
-                        kwargs.get("r0toth", 0)
+                        kwargs.get("r0toth", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dudt",
                         float,
                         30,
                         10,
-                        kwargs.get("dudt", 0)
+                        kwargs.get("dudt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tempu",
                         int,
                         40,
                         10,
-                        kwargs.get("tempu", 0)
+                        kwargs.get("tempu", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -278,7 +279,7 @@ class EmRandlesSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("usesocs", 0)
+                        kwargs.get("usesocs", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tau",

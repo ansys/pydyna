@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedMultipleGlobal(KeywordBase):
@@ -69,7 +70,7 @@ class ConstrainedMultipleGlobal(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("dir", 1)
+                        kwargs.get("dir", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "coef",

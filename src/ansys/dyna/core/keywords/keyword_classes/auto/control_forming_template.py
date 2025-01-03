@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingTemplate(KeywordBase):
@@ -40,14 +41,14 @@ class ControlFormingTemplate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idtemp", 0)
+                        kwargs.get("idtemp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "blkid",
                         int,
                         10,
                         10,
-                        kwargs.get("blkid", 0)
+                        kwargs.get("blkid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dieid",
@@ -82,7 +83,7 @@ class ControlFormingTemplate(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("type", 0)
+                        kwargs.get("type", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prebd",
@@ -107,28 +108,28 @@ class ControlFormingTemplate(KeywordBase):
                         str,
                         10,
                         10,
-                        kwargs.get("al/fe", "F")
+                        kwargs.get("al/fe", "F" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r00",
                         float,
                         20,
                         10,
-                        kwargs.get("r00", 1.0)
+                        kwargs.get("r00", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r45",
                         float,
                         30,
                         10,
-                        kwargs.get("r45", 1.0)
+                        kwargs.get("r45", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r90",
                         float,
                         40,
                         10,
-                        kwargs.get("r90", 1.0)
+                        kwargs.get("r90", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "e",
@@ -167,14 +168,14 @@ class ControlFormingTemplate(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("mtype", 37)
+                        kwargs.get("mtype", 37 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unit",
                         int,
                         30,
                         10,
-                        kwargs.get("unit", 1)
+                        kwargs.get("unit", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "thick",
@@ -188,14 +189,14 @@ class ControlFormingTemplate(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("gap", 1.1)
+                        kwargs.get("gap", 1.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fs",
                         float,
                         60,
                         10,
-                        kwargs.get("fs", 0.1)
+                        kwargs.get("fs", 0.1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -206,35 +207,35 @@ class ControlFormingTemplate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("patern", 1)
+                        kwargs.get("patern", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vmax",
                         float,
                         10,
                         10,
-                        kwargs.get("vmax", 1000)
+                        kwargs.get("vmax", 1000 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vx",
                         float,
                         20,
                         10,
-                        kwargs.get("vx", 0)
+                        kwargs.get("vx", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vy",
                         float,
                         30,
                         10,
-                        kwargs.get("vy", 0)
+                        kwargs.get("vy", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vz",
                         float,
                         40,
                         10,
-                        kwargs.get("vz", -1)
+                        kwargs.get("vz", -1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vid",
@@ -248,7 +249,7 @@ class ControlFormingTemplate(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("amax", 1.0E6)
+                        kwargs.get("amax", 1.0E6 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -273,14 +274,14 @@ class ControlFormingTemplate(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("timsada", 20)
+                        kwargs.get("timsada", 20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "d3plt",
                         int,
                         30,
                         10,
-                        kwargs.get("d3plt", 10)
+                        kwargs.get("d3plt", 10 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

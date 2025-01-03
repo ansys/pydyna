@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadNodeSet(KeywordBase):
@@ -47,7 +48,7 @@ class LoadNodeSet(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("dof", 0)
+                        kwargs.get("dof", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",
@@ -61,35 +62,35 @@ class LoadNodeSet(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cid",
                         int,
                         40,
                         10,
-                        kwargs.get("cid", 0)
+                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "m1",
                         int,
                         50,
                         10,
-                        kwargs.get("m1", 0)
+                        kwargs.get("m1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "m2",
                         int,
                         60,
                         10,
-                        kwargs.get("m2", 0)
+                        kwargs.get("m2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "m3",
                         int,
                         70,
                         10,
-                        kwargs.get("m3", 0)
+                        kwargs.get("m3", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

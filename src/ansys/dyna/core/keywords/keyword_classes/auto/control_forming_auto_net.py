@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingAutoNet(KeywordBase):
@@ -54,35 +55,35 @@ class ControlFormingAutoNet(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("idv", 0)
+                        kwargs.get("idv", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idp",
                         int,
                         30,
                         10,
-                        kwargs.get("idp", 0)
+                        kwargs.get("idp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "x",
                         float,
                         40,
                         10,
-                        kwargs.get("x", 0.0)
+                        kwargs.get("x", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y",
                         float,
                         50,
                         10,
-                        kwargs.get("y", 0.0)
+                        kwargs.get("y", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z",
                         float,
                         60,
                         10,
-                        kwargs.get("z", 0.0)
+                        kwargs.get("z", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -93,21 +94,21 @@ class ControlFormingAutoNet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sx", 0.0)
+                        kwargs.get("sx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sy",
                         float,
                         10,
                         10,
-                        kwargs.get("sy", 0.0)
+                        kwargs.get("sy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "offset",
                         float,
                         20,
                         10,
-                        kwargs.get("offset", 0.0)
+                        kwargs.get("offset", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

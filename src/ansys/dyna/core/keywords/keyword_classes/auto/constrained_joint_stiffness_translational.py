@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedJointStiffnessTranslational(KeywordBase):
@@ -68,7 +69,7 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("cidb", 0)
+                        kwargs.get("cidb", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "jid",
@@ -132,42 +133,42 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("esx", 0.0)
+                        kwargs.get("esx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ffx",
                         float,
                         10,
                         10,
-                        kwargs.get("ffx", 0.0)
+                        kwargs.get("ffx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "esy",
                         float,
                         20,
                         10,
-                        kwargs.get("esy", 0.0)
+                        kwargs.get("esy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ffy",
                         float,
                         30,
                         10,
-                        kwargs.get("ffy", 0.0)
+                        kwargs.get("ffy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "esz",
                         float,
                         40,
                         10,
-                        kwargs.get("esz", 0.0)
+                        kwargs.get("esz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ffz",
                         float,
                         50,
                         10,
-                        kwargs.get("ffz", 0.0)
+                        kwargs.get("ffz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

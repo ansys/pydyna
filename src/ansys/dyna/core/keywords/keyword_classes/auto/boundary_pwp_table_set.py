@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryPwpTableSet(KeywordBase):
@@ -68,14 +69,14 @@ class BoundaryPwpTableSet(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("tbirth", 0.0)
+                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdeath",
                         float,
                         50,
                         10,
-                        kwargs.get("tdeath", 1.0E20)
+                        kwargs.get("tdeath", 1.0E20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -93,7 +94,7 @@ class BoundaryPwpTableSet(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("itotex", 0)
+                        kwargs.get("itotex", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -107,7 +108,7 @@ class BoundaryPwpTableSet(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("table", 0)
+                        kwargs.get("table", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -151,42 +152,42 @@ class Mat068(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcpdr", 0)
+                        kwargs.get("lcpdr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcpds",
                         int,
                         10,
                         10,
-                        kwargs.get("lcpds", 0)
+                        kwargs.get("lcpds", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcpdt",
                         int,
                         20,
                         10,
-                        kwargs.get("lcpdt", 0)
+                        kwargs.get("lcpdt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcpmr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcpmr", 0)
+                        kwargs.get("lcpmr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcpms",
                         int,
                         40,
                         10,
-                        kwargs.get("lcpms", 0)
+                        kwargs.get("lcpms", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcpmt",
                         int,
                         50,
                         10,
-                        kwargs.get("lcpmt", 0)
+                        kwargs.get("lcpmt", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,7 +74,7 @@ class Mat019(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("vp", 0.0)
+                        kwargs.get("vp", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -84,7 +85,7 @@ class Mat019(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lc1", 0)
+                        kwargs.get("lc1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "etan",
@@ -98,21 +99,21 @@ class Mat019(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("lc2", 0)
+                        kwargs.get("lc2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc3",
                         int,
                         30,
                         10,
-                        kwargs.get("lc3", 0)
+                        kwargs.get("lc3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc4",
                         int,
                         40,
                         10,
-                        kwargs.get("lc4", 0)
+                        kwargs.get("lc4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdel",
@@ -126,7 +127,7 @@ class Mat019(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("rdef", 1.0)
+                        kwargs.get("rdef", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

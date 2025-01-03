@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -119,7 +120,7 @@ class MatDeshpandeFleckFoam(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("derfi", 0)
+                        kwargs.get("derfi", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cfail",
@@ -140,7 +141,7 @@ class MatDeshpandeFleckFoam(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("num", 1000)
+                        kwargs.get("num", 1000 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

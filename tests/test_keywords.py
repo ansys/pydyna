@@ -194,6 +194,18 @@ $#   nid               x               y               z      tc      rc
 
 
 @pytest.mark.keywords
+def test_read_keyword_no_defaults():
+    m = kwd.MatHyperelasticRubber()
+    assert m.n == 0 # LSPP default for `n` is 0.
+    assert m.pr is None # No LSPP default for `pr`
+
+    from ansys.dyna.core.lib.config import disable_lspp_defaults
+    with disable_lspp_defaults():
+        m = kwd.MatHyperelasticRubber()
+        assert m.n == None # LSPP default for `n` is 0.
+
+
+@pytest.mark.keywords
 def test_hourglass(ref_string):
     h = kwd.Hourglass()
     h.options["TITLE"].active = True

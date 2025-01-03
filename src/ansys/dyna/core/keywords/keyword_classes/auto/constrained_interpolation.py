@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedInterpolation(KeywordBase):
@@ -47,14 +48,14 @@ class ConstrainedInterpolation(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("dnid", 0)
+                        kwargs.get("dnid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ddof",
                         int,
                         20,
                         10,
-                        kwargs.get("ddof", 123456)
+                        kwargs.get("ddof", 123456 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cidd",
@@ -68,21 +69,21 @@ class ConstrainedInterpolation(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("ityp", 0)
+                        kwargs.get("ityp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idnsw",
                         int,
                         50,
                         10,
-                        kwargs.get("idnsw", 0)
+                        kwargs.get("idnsw", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fgm",
                         int,
                         60,
                         10,
-                        kwargs.get("fgm", 0)
+                        kwargs.get("fgm", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -93,56 +94,56 @@ class ConstrainedInterpolation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("inid", 0)
+                        kwargs.get("inid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idof",
                         int,
                         10,
                         10,
-                        kwargs.get("idof", 123456)
+                        kwargs.get("idof", 123456 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "twghtx",
                         float,
                         20,
                         10,
-                        kwargs.get("twghtx", 1.0)
+                        kwargs.get("twghtx", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "twghty",
                         float,
                         30,
                         10,
-                        kwargs.get("twghty", 1.0)
+                        kwargs.get("twghty", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "twghtz",
                         float,
                         40,
                         10,
-                        kwargs.get("twghtz", 1.0)
+                        kwargs.get("twghtz", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rwghtx",
                         float,
                         50,
                         10,
-                        kwargs.get("rwghtx", 1.0)
+                        kwargs.get("rwghtx", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rwghty",
                         float,
                         60,
                         10,
-                        kwargs.get("rwghty", 1.0)
+                        kwargs.get("rwghty", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rwghtz",
                         float,
                         70,
                         10,
-                        kwargs.get("rwghtz", 1.0)
+                        kwargs.get("rwghtz", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -126,7 +127,7 @@ class Mat034(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("cse", 0.0)
+                        kwargs.get("cse", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "el",
@@ -193,28 +194,28 @@ class Mat034(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("lnrc", 0.0)
+                        kwargs.get("lnrc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "form",
                         int,
                         50,
                         10,
-                        kwargs.get("form", 0)
+                        kwargs.get("form", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fvopt",
                         int,
                         60,
                         10,
-                        kwargs.get("fvopt", 0)
+                        kwargs.get("fvopt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tsrfac",
                         float,
                         70,
                         10,
-                        kwargs.get("tsrfac", 0)
+                        kwargs.get("tsrfac", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -239,7 +240,7 @@ class Mat034(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("a0ref", 0)
+                        kwargs.get("a0ref", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a1",
@@ -334,7 +335,7 @@ class Mat034(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("isrefg", 0)
+                        kwargs.get("isrefg", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -345,42 +346,42 @@ class Mat034(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lca", 0)
+                        kwargs.get("lca", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcb",
                         int,
                         10,
                         10,
-                        kwargs.get("lcb", 0)
+                        kwargs.get("lcb", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcab",
                         int,
                         20,
                         10,
-                        kwargs.get("lcab", 0)
+                        kwargs.get("lcab", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcua",
                         int,
                         30,
                         10,
-                        kwargs.get("lcua", 0)
+                        kwargs.get("lcua", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcub",
                         int,
                         40,
                         10,
-                        kwargs.get("lcub", 0)
+                        kwargs.get("lcub", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcuab",
                         int,
                         50,
                         10,
-                        kwargs.get("lcuab", 0)
+                        kwargs.get("lcuab", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rl",

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,42 +60,42 @@ class Mat143Pine(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("nplot", 1)
+                        kwargs.get("nplot", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iters",
                         int,
                         30,
                         10,
-                        kwargs.get("iters", 1)
+                        kwargs.get("iters", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "irate",
                         int,
                         40,
                         10,
-                        kwargs.get("irate", 0)
+                        kwargs.get("irate", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ghard",
                         float,
                         50,
                         10,
-                        kwargs.get("ghard", 0)
+                        kwargs.get("ghard", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ifail",
                         int,
                         60,
                         10,
-                        kwargs.get("ifail", 0)
+                        kwargs.get("ifail", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ivol",
                         int,
                         70,
                         10,
-                        kwargs.get("ivol", 0)
+                        kwargs.get("ivol", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -133,14 +134,14 @@ class Mat143Pine(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("units", 0)
+                        kwargs.get("units", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iqual",
                         int,
                         50,
                         10,
-                        kwargs.get("iqual", 0)
+                        kwargs.get("iqual", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PerturbationShellThickness(KeywordBase):
@@ -40,7 +41,7 @@ class PerturbationShellThickness(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("type", 1)
+                        kwargs.get("type", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eid",
@@ -54,28 +55,28 @@ class PerturbationShellThickness(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("scl", 1.0)
+                        kwargs.get("scl", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cmp",
                         int,
                         30,
                         10,
-                        kwargs.get("cmp", 7)
+                        kwargs.get("cmp", 7 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "icoord",
                         int,
                         40,
                         10,
-                        kwargs.get("icoord", 0)
+                        kwargs.get("icoord", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cid",
                         int,
                         50,
                         10,
-                        kwargs.get("cid", 0)
+                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -86,49 +87,49 @@ class PerturbationShellThickness(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ampl", 1.0)
+                        kwargs.get("ampl", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xwl",
                         float,
                         10,
                         10,
-                        kwargs.get("xwl", 0.0)
+                        kwargs.get("xwl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xoff",
                         float,
                         20,
                         10,
-                        kwargs.get("xoff", 0.0)
+                        kwargs.get("xoff", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ywl",
                         float,
                         30,
                         10,
-                        kwargs.get("ywl", 0.0)
+                        kwargs.get("ywl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yoff",
                         float,
                         40,
                         10,
-                        kwargs.get("yoff", 0.0)
+                        kwargs.get("yoff", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zwl",
                         float,
                         50,
                         10,
-                        kwargs.get("zwl", 0.0)
+                        kwargs.get("zwl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zoff",
                         float,
                         60,
                         10,
-                        kwargs.get("zoff", 0.0)
+                        kwargs.get("zoff", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -139,7 +140,7 @@ class PerturbationShellThickness(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fade", 1.0)
+                        kwargs.get("fade", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -161,28 +162,28 @@ class PerturbationShellThickness(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cstype", 1)
+                        kwargs.get("cstype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ellip1",
                         float,
                         10,
                         10,
-                        kwargs.get("ellip1", 0.0)
+                        kwargs.get("ellip1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ellip2",
                         float,
                         20,
                         10,
-                        kwargs.get("ellip2", 0.0)
+                        kwargs.get("ellip2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rnd",
                         int,
                         30,
                         10,
-                        kwargs.get("rnd", 0)
+                        kwargs.get("rnd", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -193,28 +194,28 @@ class PerturbationShellThickness(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cftype", 1)
+                        kwargs.get("cftype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cfc1",
                         float,
                         10,
                         10,
-                        kwargs.get("cfc1", 1.0)
+                        kwargs.get("cfc1", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cfc2",
                         float,
                         20,
                         10,
-                        kwargs.get("cfc2", 1.0)
+                        kwargs.get("cfc2", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cfc3",
                         float,
                         30,
                         10,
-                        kwargs.get("cfc3", 1.0)
+                        kwargs.get("cfc3", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -225,14 +226,14 @@ class PerturbationShellThickness(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ampl", 1)
+                        kwargs.get("ampl", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtype",
                         float,
                         10,
                         10,
-                        kwargs.get("dtype", 0.0)
+                        kwargs.get("dtype", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

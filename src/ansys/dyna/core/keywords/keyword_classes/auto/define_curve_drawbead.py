@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,7 +53,7 @@ class DefineCurveDrawbead(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("tcype", 1)
+                        kwargs.get("tcype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vid",
@@ -91,14 +92,14 @@ class DefineCurveDrawbead(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("cx", 0.0)
+                        kwargs.get("cx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cy",
                         float,
                         20,
                         20,
-                        kwargs.get("cy", 0.0)
+                        kwargs.get("cy", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

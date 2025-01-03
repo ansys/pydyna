@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedPoints(KeywordBase):
@@ -58,21 +59,21 @@ class ConstrainedPoints(KeywordBase):
                         float,
                         8,
                         16,
-                        kwargs.get("x1", 0.0)
+                        kwargs.get("x1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y1",
                         float,
                         24,
                         16,
-                        kwargs.get("y1", 0.0)
+                        kwargs.get("y1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z1",
                         float,
                         40,
                         16,
-                        kwargs.get("z1", 0.0)
+                        kwargs.get("z1", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -90,21 +91,21 @@ class ConstrainedPoints(KeywordBase):
                         float,
                         8,
                         16,
-                        kwargs.get("x2", 0.0)
+                        kwargs.get("x2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y2",
                         float,
                         24,
                         16,
-                        kwargs.get("y2", 0.0)
+                        kwargs.get("y2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z2",
                         float,
                         40,
                         16,
-                        kwargs.get("z2", 0.0)
+                        kwargs.get("z2", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -115,28 +116,28 @@ class ConstrainedPoints(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("psf", 1.0)
+                        kwargs.get("psf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "faila",
                         float,
                         10,
                         10,
-                        kwargs.get("faila", 0.0)
+                        kwargs.get("faila", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fails",
                         float,
                         20,
                         10,
-                        kwargs.get("fails", 0.0)
+                        kwargs.get("fails", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "failm",
                         float,
                         30,
                         10,
-                        kwargs.get("failm", 0.0)
+                        kwargs.get("failm", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

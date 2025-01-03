@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainAcousticFem(KeywordBase):
@@ -68,28 +69,28 @@ class FrequencyDomainAcousticFem(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("nfreq", 0)
+                        kwargs.get("nfreq", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtout",
                         float,
                         50,
                         10,
-                        kwargs.get("dtout", 0)
+                        kwargs.get("dtout", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tstart",
                         float,
                         60,
                         10,
-                        kwargs.get("tstart", 0)
+                        kwargs.get("tstart", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pref",
                         float,
                         70,
                         10,
-                        kwargs.get("pref", 0)
+                        kwargs.get("pref", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -107,14 +108,14 @@ class FrequencyDomainAcousticFem(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("fftwin", 0)
+                        kwargs.get("fftwin", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mixdmp",
                         int,
                         20,
                         10,
-                        kwargs.get("mixdmp", 0)
+                        kwargs.get("mixdmp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -132,7 +133,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("ptyp", 0)
+                        kwargs.get("ptyp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -150,49 +151,49 @@ class FrequencyDomainAcousticFem(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("styp", 0)
+                        kwargs.get("styp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vad",
                         int,
                         20,
                         10,
-                        kwargs.get("vad", 0)
+                        kwargs.get("vad", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dof",
                         int,
                         30,
                         10,
-                        kwargs.get("dof", 0)
+                        kwargs.get("dof", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid1",
                         int,
                         40,
                         10,
-                        kwargs.get("lcid1", 0)
+                        kwargs.get("lcid1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid2",
                         int,
                         50,
                         10,
-                        kwargs.get("lcid2", 0)
+                        kwargs.get("lcid2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sf",
                         float,
                         60,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vid",
                         int,
                         70,
                         10,
-                        kwargs.get("vid", 0)
+                        kwargs.get("vid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -210,21 +211,21 @@ class FrequencyDomainAcousticFem(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("ntyp", 0)
+                        kwargs.get("ntyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ipfile",
                         int,
                         20,
                         10,
-                        kwargs.get("ipfile", 0)
+                        kwargs.get("ipfile", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dba",
                         int,
                         30,
                         10,
-                        kwargs.get("dba", 0)
+                        kwargs.get("dba", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

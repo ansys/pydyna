@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleFsiSwitchMmg(KeywordBase):
@@ -65,49 +66,49 @@ class AleFsiSwitchMmg(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("stype", 0)
+                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nquad",
                         int,
                         20,
                         10,
-                        kwargs.get("nquad", 1)
+                        kwargs.get("nquad", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xoff",
                         float,
                         30,
                         10,
-                        kwargs.get("xoff", 0.0)
+                        kwargs.get("xoff", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "btime",
                         float,
                         40,
                         10,
-                        kwargs.get("btime", 0.0)
+                        kwargs.get("btime", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtime",
                         float,
                         50,
                         10,
-                        kwargs.get("dtime", 1.0e20)
+                        kwargs.get("dtime", 1.0e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nfreq",
                         int,
                         60,
                         10,
-                        kwargs.get("nfreq", 1)
+                        kwargs.get("nfreq", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nfold",
                         int,
                         70,
                         10,
-                        kwargs.get("nfold", 0)
+                        kwargs.get("nfold", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -132,7 +133,7 @@ class AleFsiSwitchMmg(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("xclen", 0.0)
+                        kwargs.get("xclen", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

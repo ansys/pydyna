@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEosBurgess(KeywordBase):
@@ -135,14 +136,14 @@ class EmEosBurgess(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("temuni", 1)
+                        kwargs.get("temuni", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "adjust",
                         int,
                         60,
                         10,
-                        kwargs.get("adjust", 0)
+                        kwargs.get("adjust", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

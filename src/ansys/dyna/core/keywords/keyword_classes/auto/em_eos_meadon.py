@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEosMeadon(KeywordBase):
@@ -68,7 +69,7 @@ class EmEosMeadon(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("temuni", 1)
+                        kwargs.get("temuni", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "v0",
@@ -114,7 +115,7 @@ class EmEosMeadon(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("adjust", 0)
+                        kwargs.get("adjust", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

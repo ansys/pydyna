@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialStressSph(KeywordBase):
@@ -47,49 +48,49 @@ class InitialStressSph(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("sigxx", 0.0)
+                        kwargs.get("sigxx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigyy",
                         float,
                         20,
                         10,
-                        kwargs.get("sigyy", 0.0)
+                        kwargs.get("sigyy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigzz",
                         float,
                         30,
                         10,
-                        kwargs.get("sigzz", 0.0)
+                        kwargs.get("sigzz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigxy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigxy", 0.0)
+                        kwargs.get("sigxy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigyz",
                         float,
                         50,
                         10,
-                        kwargs.get("sigyz", 0.0)
+                        kwargs.get("sigyz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigzx",
                         float,
                         60,
                         10,
-                        kwargs.get("sigzx", 0.0)
+                        kwargs.get("sigzx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eps",
                         float,
                         70,
                         10,
-                        kwargs.get("eps", 0.0)
+                        kwargs.get("eps", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

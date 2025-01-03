@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IncludeStampedSetMatrix(KeywordBase):
@@ -58,35 +59,35 @@ class IncludeStampedSetMatrix(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("thick", 0)
+                        kwargs.get("thick", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pstrn",
                         int,
                         20,
                         10,
-                        kwargs.get("pstrn", 0)
+                        kwargs.get("pstrn", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "strain",
                         int,
                         30,
                         10,
-                        kwargs.get("strain", 0)
+                        kwargs.get("strain", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stress",
                         int,
                         40,
                         10,
-                        kwargs.get("stress", 0)
+                        kwargs.get("stress", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "incout",
                         int,
                         50,
                         10,
-                        kwargs.get("incout", 0)
+                        kwargs.get("incout", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -100,7 +101,7 @@ class IncludeStampedSetMatrix(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("rmax", 20.)
+                        kwargs.get("rmax", 20. if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -207,14 +208,14 @@ class IncludeStampedSetMatrix(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("isym", 0)
+                        kwargs.get("isym", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iafter",
                         int,
                         10,
                         10,
-                        kwargs.get("iafter", 0)
+                        kwargs.get("iafter", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "percele",

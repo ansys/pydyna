@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -87,14 +88,14 @@ class Mat015(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("vp", 0.0)
+                        kwargs.get("vp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rateop",
                         float,
                         70,
                         10,
-                        kwargs.get("rateop", 0.0)
+                        kwargs.get("rateop", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -179,14 +180,14 @@ class Mat015(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("spall", 2.0)
+                        kwargs.get("spall", 2.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "it",
                         float,
                         30,
                         10,
-                        kwargs.get("it", 0.0)
+                        kwargs.get("it", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "d1",
@@ -246,7 +247,7 @@ class Mat015(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("efmin", 0.000001)
+                        kwargs.get("efmin", 0.000001 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "numint",

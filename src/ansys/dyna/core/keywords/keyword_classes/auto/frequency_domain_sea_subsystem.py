@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainSeaSubsystem(KeywordBase):
@@ -61,7 +62,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("nfspace", 0)
+                        kwargs.get("nfspace", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcfreq",
@@ -75,7 +76,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("iread", 0)
+                        kwargs.get("iread", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -93,7 +94,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("subtyp", 1)
+                        kwargs.get("subtyp", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "density",
@@ -121,7 +122,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("output", 0)
+                        kwargs.get("output", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -227,21 +228,21 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("lc1", 0)
+                        kwargs.get("lc1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc2",
                         int,
                         40,
                         10,
-                        kwargs.get("lc2", 0)
+                        kwargs.get("lc2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc3",
                         int,
                         50,
                         10,
-                        kwargs.get("lc3", 0)
+                        kwargs.get("lc3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -474,28 +475,28 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("lc1", 0)
+                        kwargs.get("lc1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc2",
                         int,
                         50,
                         10,
-                        kwargs.get("lc2", 0)
+                        kwargs.get("lc2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc3",
                         int,
                         60,
                         10,
-                        kwargs.get("lc3", 0)
+                        kwargs.get("lc3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc4",
                         int,
                         70,
                         10,
-                        kwargs.get("lc4", 0)
+                        kwargs.get("lc4", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartPrintAttachmentNodes(KeywordBase):
@@ -72,21 +73,21 @@ class PartPrintAttachmentNodes(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("eosid", 0)
+                        kwargs.get("eosid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hgid",
                         int,
                         40,
                         10,
-                        kwargs.get("hgid", 0)
+                        kwargs.get("hgid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "grav",
                         int,
                         50,
                         10,
-                        kwargs.get("grav", 0)
+                        kwargs.get("grav", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "adpopt",
@@ -100,7 +101,7 @@ class PartPrintAttachmentNodes(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("tmid", 0)
+                        kwargs.get("tmid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -111,7 +112,7 @@ class PartPrintAttachmentNodes(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("prbf", 0)
+                        kwargs.get("prbf", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -122,7 +123,7 @@ class PartPrintAttachmentNodes(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ansid", 0)
+                        kwargs.get("ansid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

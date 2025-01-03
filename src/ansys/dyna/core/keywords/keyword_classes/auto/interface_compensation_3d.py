@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceCompensation3D(KeywordBase):
@@ -40,28 +41,28 @@ class InterfaceCompensation3D(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("method", 6)
+                        kwargs.get("method", 6 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sl",
                         float,
                         10,
                         10,
-                        kwargs.get("sl", 5.0)
+                        kwargs.get("sl", 5.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sf",
                         float,
                         20,
                         10,
-                        kwargs.get("sf", 0.75)
+                        kwargs.get("sf", 0.75 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "elref",
                         int,
                         30,
                         10,
-                        kwargs.get("elref", 1)
+                        kwargs.get("elref", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psidp",
@@ -82,14 +83,14 @@ class InterfaceCompensation3D(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("angle", 0.0)
+                        kwargs.get("angle", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nlinear",
                         int,
                         70,
                         10,
-                        kwargs.get("nlinear", 1)
+                        kwargs.get("nlinear", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,7 +101,7 @@ class InterfaceCompensation3D(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tangent", 0)
+                        kwargs.get("tangent", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

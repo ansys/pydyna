@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedNodeToNurbsPatchSet(KeywordBase):
@@ -54,7 +55,7 @@ class ConstrainedNodeToNurbsPatchSet(KeywordBase):
                         str,
                         20,
                         10,
-                        kwargs.get("con", "000000")
+                        kwargs.get("con", "000000" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cid",
@@ -68,14 +69,14 @@ class ConstrainedNodeToNurbsPatchSet(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dbflg",
                         int,
                         50,
                         10,
-                        kwargs.get("dbflg", 0)
+                        kwargs.get("dbflg", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

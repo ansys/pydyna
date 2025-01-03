@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialVelocity(KeywordBase):
@@ -47,28 +48,28 @@ class InitialVelocity(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("nsidex", 0)
+                        kwargs.get("nsidex", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "boxid",
                         int,
                         20,
                         10,
-                        kwargs.get("boxid", 0)
+                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "irigid",
                         int,
                         30,
                         10,
-                        kwargs.get("irigid", 0)
+                        kwargs.get("irigid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "icid",
                         int,
                         40,
                         10,
-                        kwargs.get("icid", 0)
+                        kwargs.get("icid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -79,42 +80,42 @@ class InitialVelocity(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vx", 0.0)
+                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vy",
                         float,
                         10,
                         10,
-                        kwargs.get("vy", 0.0)
+                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vz",
                         float,
                         20,
                         10,
-                        kwargs.get("vz", 0.0)
+                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vxr",
                         float,
                         30,
                         10,
-                        kwargs.get("vxr", 0.0)
+                        kwargs.get("vxr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vyr",
                         float,
                         40,
                         10,
-                        kwargs.get("vyr", 0.0)
+                        kwargs.get("vyr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vzr",
                         float,
                         50,
                         10,
-                        kwargs.get("vzr", 0.0)
+                        kwargs.get("vzr", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -125,42 +126,42 @@ class InitialVelocity(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vxe", 0.0)
+                        kwargs.get("vxe", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vye",
                         float,
                         10,
                         10,
-                        kwargs.get("vye", 0.0)
+                        kwargs.get("vye", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vze",
                         float,
                         20,
                         10,
-                        kwargs.get("vze", 0.0)
+                        kwargs.get("vze", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vxre",
                         float,
                         30,
                         10,
-                        kwargs.get("vxre", 0.0)
+                        kwargs.get("vxre", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vyre",
                         float,
                         40,
                         10,
-                        kwargs.get("vyre", 0.0)
+                        kwargs.get("vyre", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vzre",
                         float,
                         50,
                         10,
-                        kwargs.get("vzre", 0.0)
+                        kwargs.get("vzre", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
                 lambda: self.nsidex > 0,

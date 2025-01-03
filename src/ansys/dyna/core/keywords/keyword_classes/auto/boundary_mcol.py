@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryMcol(KeywordBase):
@@ -40,7 +41,7 @@ class BoundaryMcol(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nmcol", 2)
+                        kwargs.get("nmcol", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mxstep",
@@ -54,14 +55,14 @@ class BoundaryMcol(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("endtmcol", 0.0)
+                        kwargs.get("endtmcol", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tsubc",
                         float,
                         30,
                         10,
-                        kwargs.get("tsubc", 0.0)
+                        kwargs.get("tsubc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prtmcol",
@@ -79,7 +80,7 @@ class BoundaryMcol(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rbmcol", 2)
+                        kwargs.get("rbmcol", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mcolfile",

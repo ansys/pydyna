@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedNodeSet(KeywordBase):
@@ -58,14 +59,14 @@ class ConstrainedNodeSet(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("dof", 1)
+                        kwargs.get("dof", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tf",
                         float,
                         20,
                         10,
-                        kwargs.get("tf", 1.0E+20)
+                        kwargs.get("tf", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

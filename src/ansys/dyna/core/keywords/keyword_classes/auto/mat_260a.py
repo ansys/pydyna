@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,21 +74,21 @@ class Mat260A(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("r00", 1.0)
+                        kwargs.get("r00", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r45",
                         float,
                         50,
                         10,
-                        kwargs.get("r45", 1.0)
+                        kwargs.get("r45", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r90",
                         float,
                         60,
                         10,
-                        kwargs.get("r90", 1.0)
+                        kwargs.get("r90", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sig00",
@@ -140,7 +141,7 @@ class Mat260A(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("scale", 1.0)
+                        kwargs.get("scale", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

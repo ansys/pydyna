@@ -2,6 +2,7 @@
 import typing
 {# TODO - only do this if there's a keyword without a default #}
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 {% if keyword_data.duplicate %}
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 {% endif %}

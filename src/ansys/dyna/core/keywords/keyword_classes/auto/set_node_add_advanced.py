@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,28 +53,28 @@ class SetNodeAddAdvanced(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("da1", 0.0)
+                        kwargs.get("da1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "da2",
                         float,
                         20,
                         10,
-                        kwargs.get("da2", 0.0)
+                        kwargs.get("da2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "da3",
                         float,
                         30,
                         10,
-                        kwargs.get("da3", 0.0)
+                        kwargs.get("da3", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "da4",
                         float,
                         40,
                         10,
-                        kwargs.get("da4", 0.0)
+                        kwargs.get("da4", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -91,7 +92,7 @@ class SetNodeAddAdvanced(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("type1", 1)
+                        kwargs.get("type1", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sid2",
@@ -105,7 +106,7 @@ class SetNodeAddAdvanced(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("type2", 1)
+                        kwargs.get("type2", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sid3",
@@ -119,7 +120,7 @@ class SetNodeAddAdvanced(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("type3", 1)
+                        kwargs.get("type3", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sid4",
@@ -133,7 +134,7 @@ class SetNodeAddAdvanced(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("type4", 1)
+                        kwargs.get("type4", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

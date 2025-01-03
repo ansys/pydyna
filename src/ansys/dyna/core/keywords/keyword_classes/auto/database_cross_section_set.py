@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseCrossSectionSet(KeywordBase):
@@ -58,42 +59,42 @@ class DatabaseCrossSectionSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsid", 0)
+                        kwargs.get("nsid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hsid",
                         int,
                         10,
                         10,
-                        kwargs.get("hsid", 0)
+                        kwargs.get("hsid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bsid",
                         int,
                         20,
                         10,
-                        kwargs.get("bsid", 0)
+                        kwargs.get("bsid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ssid",
                         int,
                         30,
                         10,
-                        kwargs.get("ssid", 0)
+                        kwargs.get("ssid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tsid",
                         int,
                         40,
                         10,
-                        kwargs.get("tsid", 0)
+                        kwargs.get("tsid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dsid",
                         int,
                         50,
                         10,
-                        kwargs.get("dsid", 0)
+                        kwargs.get("dsid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "id",
@@ -107,7 +108,7 @@ class DatabaseCrossSectionSet(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("itype", 0)
+                        kwargs.get("itype", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

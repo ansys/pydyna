@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlSegmentsInAleCoupling(KeywordBase):
@@ -40,28 +41,28 @@ class ControlSegmentsInAleCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rankey", 0)
+                        kwargs.get("rankey", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "segset",
                         int,
                         10,
                         10,
-                        kwargs.get("segset", 0)
+                        kwargs.get("segset", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ncychk",
                         int,
                         20,
                         10,
-                        kwargs.get("ncychk", 10)
+                        kwargs.get("ncychk", 10 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sym",
                         int,
                         30,
                         10,
-                        kwargs.get("sym", 0)
+                        kwargs.get("sym", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -72,14 +73,14 @@ class ControlSegmentsInAleCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ninthk", 0)
+                        kwargs.get("ninthk", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "conthk",
                         float,
                         10,
                         10,
-                        kwargs.get("conthk", 0.0)
+                        kwargs.get("conthk", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialDetonationGeometry(KeywordBase):
@@ -47,14 +48,14 @@ class InitialDetonationGeometry(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("hetyp", 0)
+                        kwargs.get("hetyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mmgse",
                         float,
                         20,
                         10,
-                        kwargs.get("mmgse", 0)
+                        kwargs.get("mmgse", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -65,21 +66,21 @@ class InitialDetonationGeometry(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("geotyp", 0)
+                        kwargs.get("geotyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lt",
                         float,
                         10,
                         10,
-                        kwargs.get("lt", 0.0)
+                        kwargs.get("lt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dgeo",
                         float,
                         20,
                         10,
-                        kwargs.get("dgeo", 0.0)
+                        kwargs.get("dgeo", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

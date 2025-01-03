@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
@@ -68,7 +69,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("cidb", 0)
+                        kwargs.get("cidb", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "jid",
@@ -86,42 +87,42 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidal", 0)
+                        kwargs.get("lcidal", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidg",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidg", 0)
+                        kwargs.get("lcidg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidbt",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidbt", 0)
+                        kwargs.get("lcidbt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dlcidal",
                         int,
                         30,
                         10,
-                        kwargs.get("dlcidal", 0)
+                        kwargs.get("dlcidal", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dlcidg",
                         int,
                         40,
                         10,
-                        kwargs.get("dlcidg", 0)
+                        kwargs.get("dlcidg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dlcidbt",
                         int,
                         50,
                         10,
-                        kwargs.get("dlcidbt", 0)
+                        kwargs.get("dlcidbt", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -132,28 +133,28 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("esal", 0.0)
+                        kwargs.get("esal", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fmal",
                         float,
                         10,
                         10,
-                        kwargs.get("fmal", 0.0)
+                        kwargs.get("fmal", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "esbt",
                         float,
                         20,
                         10,
-                        kwargs.get("esbt", 0.0)
+                        kwargs.get("esbt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fmbt",
                         float,
                         30,
                         10,
-                        kwargs.get("fmbt", 0.0)
+                        kwargs.get("fmbt", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -164,21 +165,21 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("saal", 0)
+                        kwargs.get("saal", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsabt",
                         float,
                         10,
                         10,
-                        kwargs.get("nsabt", 0)
+                        kwargs.get("nsabt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psabt",
                         float,
                         20,
                         10,
-                        kwargs.get("psabt", 0)
+                        kwargs.get("psabt", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

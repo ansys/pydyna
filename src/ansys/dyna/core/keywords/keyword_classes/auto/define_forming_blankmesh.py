@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,35 +53,35 @@ class DefineFormingBlankmesh(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("eleng", 0.0)
+                        kwargs.get("eleng", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xleng",
                         float,
                         20,
                         10,
-                        kwargs.get("xleng", 0.0)
+                        kwargs.get("xleng", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yleng",
                         float,
                         30,
                         10,
-                        kwargs.get("yleng", 0.0)
+                        kwargs.get("yleng", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "anglex",
                         float,
                         40,
                         10,
-                        kwargs.get("anglex", 0.0)
+                        kwargs.get("anglex", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nplane",
                         int,
                         50,
                         10,
-                        kwargs.get("nplane", 1)
+                        kwargs.get("nplane", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cid",
@@ -119,35 +120,35 @@ class DefineFormingBlankmesh(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("xcent", 0.0)
+                        kwargs.get("xcent", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ycent",
                         float,
                         40,
                         10,
-                        kwargs.get("ycent", 0.0)
+                        kwargs.get("ycent", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zcent",
                         float,
                         50,
                         10,
-                        kwargs.get("zcent", 0.0)
+                        kwargs.get("zcent", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xshift",
                         float,
                         60,
                         10,
-                        kwargs.get("xshift", 0.0)
+                        kwargs.get("xshift", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yshift",
                         float,
                         70,
                         10,
-                        kwargs.get("yshift", 0.0)
+                        kwargs.get("yshift", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

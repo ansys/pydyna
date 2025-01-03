@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceSpringbackLsdynaThickness(KeywordBase):
@@ -54,7 +55,7 @@ class InterfaceSpringbackLsdynaThickness(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("ftype", 0)
+                        kwargs.get("ftype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -68,7 +69,7 @@ class InterfaceSpringbackLsdynaThickness(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("ftensr", 0)
+                        kwargs.get("ftensr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nthhsv",
@@ -100,14 +101,14 @@ class InterfaceSpringbackLsdynaThickness(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("optc", "OPTCARD")
+                        kwargs.get("optc", "OPTCARD" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sldo",
                         int,
                         10,
                         10,
-                        kwargs.get("sldo", 0)
+                        kwargs.get("sldo", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ncyc",
@@ -121,21 +122,21 @@ class InterfaceSpringbackLsdynaThickness(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("fsplit", 0)
+                        kwargs.get("fsplit", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ndflag",
                         int,
                         40,
                         10,
-                        kwargs.get("ndflag", 0)
+                        kwargs.get("ndflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cflag",
                         int,
                         50,
                         10,
-                        kwargs.get("cflag", 0)
+                        kwargs.get("cflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hflag",
@@ -160,14 +161,14 @@ class InterfaceSpringbackLsdynaThickness(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("tc", 0)
+                        kwargs.get("tc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rc",
                         int,
                         20,
                         10,
-                        kwargs.get("rc", 0)
+                        kwargs.get("rc", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

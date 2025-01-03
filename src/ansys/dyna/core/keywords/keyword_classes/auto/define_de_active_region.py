@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,7 +53,7 @@ class DefineDeActiveRegion(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("type", 0)
+                        kwargs.get("type", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xm/r",
@@ -87,14 +88,14 @@ class DefineDeActiveRegion(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("tdeath", 1.E+20)
+                        kwargs.get("tdeath", 1.E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nfreq",
                         int,
                         70,
                         10,
-                        kwargs.get("nfreq", 1)
+                        kwargs.get("nfreq", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

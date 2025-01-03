@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSsa(KeywordBase):
@@ -54,35 +55,35 @@ class LoadSsa(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("refl", 0)
+                        kwargs.get("refl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zb",
                         float,
                         30,
                         10,
-                        kwargs.get("zb", 0.0)
+                        kwargs.get("zb", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zsurf",
                         float,
                         40,
                         10,
-                        kwargs.get("zsurf", 0.0)
+                        kwargs.get("zsurf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fpsid",
                         int,
                         50,
                         10,
-                        kwargs.get("fpsid", 0)
+                        kwargs.get("fpsid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psid",
                         int,
                         60,
                         10,
-                        kwargs.get("psid", 0)
+                        kwargs.get("psid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

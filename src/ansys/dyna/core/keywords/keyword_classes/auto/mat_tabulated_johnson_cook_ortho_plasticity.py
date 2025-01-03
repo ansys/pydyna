@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -87,14 +88,14 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("beta", 1.0)
+                        kwargs.get("beta", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "numint",
                         float,
                         70,
                         10,
-                        kwargs.get("numint", 1.0)
+                        kwargs.get("numint", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,42 +106,42 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lct00r", 0)
+                        kwargs.get("lct00r", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lct00t",
                         int,
                         10,
                         10,
-                        kwargs.get("lct00t", 0)
+                        kwargs.get("lct00t", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcf",
                         int,
                         20,
                         10,
-                        kwargs.get("lcf", 0)
+                        kwargs.get("lcf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcg",
                         int,
                         30,
                         10,
-                        kwargs.get("lcg", 0)
+                        kwargs.get("lcg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lch",
                         int,
                         40,
                         10,
-                        kwargs.get("lch", 0)
+                        kwargs.get("lch", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lci",
                         int,
                         50,
                         10,
-                        kwargs.get("lci", 0)
+                        kwargs.get("lci", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -179,21 +180,21 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("iflag", 0)
+                        kwargs.get("iflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfiepm",
                         int,
                         50,
                         10,
-                        kwargs.get("sfiepm", 1)
+                        kwargs.get("sfiepm", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "niter",
                         int,
                         60,
                         10,
-                        kwargs.get("niter", 100)
+                        kwargs.get("niter", 100 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "aopt",
@@ -211,42 +212,42 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lct90r", 0)
+                        kwargs.get("lct90r", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lct45r",
                         int,
                         10,
                         10,
-                        kwargs.get("lct45r", 0)
+                        kwargs.get("lct45r", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lctthr",
                         int,
                         20,
                         10,
-                        kwargs.get("lctthr", 0)
+                        kwargs.get("lctthr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcc90r",
                         int,
                         30,
                         10,
-                        kwargs.get("lcc90r", 0)
+                        kwargs.get("lcc90r", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcc45r",
                         int,
                         40,
                         10,
-                        kwargs.get("lcc45r", 0)
+                        kwargs.get("lcc45r", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lccth",
                         int,
                         50,
                         10,
-                        kwargs.get("lccth", 0)
+                        kwargs.get("lccth", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -257,42 +258,42 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lct90t", 0)
+                        kwargs.get("lct90t", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lct45t",
                         int,
                         10,
                         10,
-                        kwargs.get("lct45t", 0)
+                        kwargs.get("lct45t", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcttht",
                         int,
                         20,
                         10,
-                        kwargs.get("lcttht", 0)
+                        kwargs.get("lcttht", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcc90t",
                         int,
                         30,
                         10,
-                        kwargs.get("lcc90t", 0)
+                        kwargs.get("lcc90t", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcc45t",
                         int,
                         40,
                         10,
-                        kwargs.get("lcc45t", 0)
+                        kwargs.get("lcc45t", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcctht",
                         int,
                         50,
                         10,
-                        kwargs.get("lcctht", 0)
+                        kwargs.get("lcctht", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -345,7 +346,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("macf", 1)
+                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

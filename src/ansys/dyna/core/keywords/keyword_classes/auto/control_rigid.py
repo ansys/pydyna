@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlRigid(KeywordBase):
@@ -40,56 +41,56 @@ class ControlRigid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lmf", 0)
+                        kwargs.get("lmf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "jntf",
                         int,
                         10,
                         10,
-                        kwargs.get("jntf", 0)
+                        kwargs.get("jntf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "orthmd",
                         int,
                         20,
                         10,
-                        kwargs.get("orthmd", 0)
+                        kwargs.get("orthmd", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "partm",
                         int,
                         30,
                         10,
-                        kwargs.get("partm", 0)
+                        kwargs.get("partm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sparse",
                         int,
                         40,
                         10,
-                        kwargs.get("sparse", 0)
+                        kwargs.get("sparse", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "metalf",
                         int,
                         50,
                         10,
-                        kwargs.get("metalf", 0)
+                        kwargs.get("metalf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "plotel",
                         int,
                         60,
                         10,
-                        kwargs.get("plotel", 0)
+                        kwargs.get("plotel", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rbsms",
                         int,
                         70,
                         10,
-                        kwargs.get("rbsms", 0)
+                        kwargs.get("rbsms", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,35 +101,35 @@ class ControlRigid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("norbic", 0)
+                        kwargs.get("norbic", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gjadstf",
                         float,
                         10,
                         10,
-                        kwargs.get("gjadstf", 0.0)
+                        kwargs.get("gjadstf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gjadvsc",
                         float,
                         20,
                         10,
-                        kwargs.get("gjadvsc", 0.0)
+                        kwargs.get("gjadvsc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tjastf",
                         float,
                         30,
                         10,
-                        kwargs.get("tjastf", 0.0)
+                        kwargs.get("tjastf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tjadvsc",
                         float,
                         40,
                         10,
-                        kwargs.get("tjadvsc", 0.0)
+                        kwargs.get("tjadvsc", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -45,49 +46,49 @@ class DefineBoxDrawbeadLocal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("boxid", 0)
+                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pid",
                         int,
                         10,
                         10,
-                        kwargs.get("pid", 0)
+                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sid",
                         int,
                         20,
                         10,
-                        kwargs.get("sid", 0)
+                        kwargs.get("sid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idir",
                         int,
                         30,
                         10,
-                        kwargs.get("idir", 1)
+                        kwargs.get("idir", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stype",
                         int,
                         40,
                         10,
-                        kwargs.get("stype", 4)
+                        kwargs.get("stype", 4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "radius",
                         float,
                         50,
                         10,
-                        kwargs.get("radius", 0.0)
+                        kwargs.get("radius", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cid",
                         int,
                         60,
                         10,
-                        kwargs.get("cid", 0)
+                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -98,42 +99,42 @@ class DefineBoxDrawbeadLocal(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xx", 0)
+                        kwargs.get("xx", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yx",
                         float,
                         10,
                         10,
-                        kwargs.get("yx", 0.0)
+                        kwargs.get("yx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zx",
                         float,
                         20,
                         10,
-                        kwargs.get("zx", 0.0)
+                        kwargs.get("zx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xv",
                         float,
                         30,
                         10,
-                        kwargs.get("xv", 0.0)
+                        kwargs.get("xv", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yv",
                         float,
                         40,
                         10,
-                        kwargs.get("yv", 0.0)
+                        kwargs.get("yv", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zv",
                         float,
                         50,
                         10,
-                        kwargs.get("zv", 0.0)
+                        kwargs.get("zv", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -144,21 +145,21 @@ class DefineBoxDrawbeadLocal(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cx", 0.0)
+                        kwargs.get("cx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cy",
                         float,
                         10,
                         10,
-                        kwargs.get("cy", 0.0)
+                        kwargs.get("cy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cz",
                         float,
                         20,
                         10,
-                        kwargs.get("cz", 0.0)
+                        kwargs.get("cz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

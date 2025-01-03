@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceBlanksizeSymmetricPlane(KeywordBase):
@@ -40,42 +41,42 @@ class InterfaceBlanksizeSymmetricPlane(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x0", 0.0)
+                        kwargs.get("x0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y0",
                         float,
                         10,
                         10,
-                        kwargs.get("y0", 0.0)
+                        kwargs.get("y0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z0",
                         float,
                         20,
                         10,
-                        kwargs.get("z0", 0.0)
+                        kwargs.get("z0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "v1",
                         float,
                         30,
                         10,
-                        kwargs.get("v1", 1.0)
+                        kwargs.get("v1", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "v2",
                         float,
                         40,
                         10,
-                        kwargs.get("v2", 0.0)
+                        kwargs.get("v2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "v3",
                         float,
                         50,
                         10,
-                        kwargs.get("v3", 0.0)
+                        kwargs.get("v3", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedSpr2(KeywordBase):
@@ -149,7 +150,7 @@ class ConstrainedSpr2(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("intp", 0)
+                        kwargs.get("intp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -160,14 +161,14 @@ class ConstrainedSpr2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("expn", 8.0)
+                        kwargs.get("expn", 8.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "expt",
                         float,
                         10,
                         10,
-                        kwargs.get("expt", 8.0)
+                        kwargs.get("expt", 8.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pidvb",

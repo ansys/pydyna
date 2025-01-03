@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,7 +53,7 @@ class SensorDefineMisc(KeywordBase):
                         str,
                         10,
                         10,
-                        kwargs.get("mtype", "ANGLE")
+                        kwargs.get("mtype", "ANGLE" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "i0",

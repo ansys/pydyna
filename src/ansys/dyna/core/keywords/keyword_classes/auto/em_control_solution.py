@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmControlSolution(KeywordBase):
@@ -40,56 +41,56 @@ class EmControlSolution(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ncylfem", 5000)
+                        kwargs.get("ncylfem", 5000 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ncylbem",
                         int,
                         10,
                         10,
-                        kwargs.get("ncylbem", 5000)
+                        kwargs.get("ncylbem", 5000 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "autofem",
                         int,
                         20,
                         10,
-                        kwargs.get("autofem", 0)
+                        kwargs.get("autofem", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "autobem",
                         int,
                         30,
                         10,
-                        kwargs.get("autobem", 0)
+                        kwargs.get("autobem", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tol1fem",
                         float,
                         40,
                         10,
-                        kwargs.get("tol1fem", 0.3)
+                        kwargs.get("tol1fem", 0.3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tol2fem",
                         float,
                         50,
                         10,
-                        kwargs.get("tol2fem", 0.1)
+                        kwargs.get("tol2fem", 0.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tol1bem",
                         float,
                         60,
                         10,
-                        kwargs.get("tol1bem", 0.3)
+                        kwargs.get("tol1bem", 0.3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tol2bem",
                         float,
                         70,
                         10,
-                        kwargs.get("tol2bem", 0.1)
+                        kwargs.get("tol2bem", 0.1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class RigidwallGeometricSphereMotionDisplay(KeywordBase):
@@ -65,28 +66,28 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("nsidex", 0)
+                        kwargs.get("nsidex", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "boxid",
                         int,
                         20,
                         10,
-                        kwargs.get("boxid", 0)
+                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "birth",
                         float,
                         30,
                         10,
-                        kwargs.get("birth", 0.0)
+                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "death",
                         float,
                         40,
                         10,
-                        kwargs.get("death", 1.0E+20)
+                        kwargs.get("death", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -97,49 +98,49 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xt", 0.0)
+                        kwargs.get("xt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yt",
                         float,
                         10,
                         10,
-                        kwargs.get("yt", 0.0)
+                        kwargs.get("yt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zt",
                         float,
                         20,
                         10,
-                        kwargs.get("zt", 0.0)
+                        kwargs.get("zt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xh",
                         float,
                         30,
                         10,
-                        kwargs.get("xh", 0.0)
+                        kwargs.get("xh", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yh",
                         float,
                         40,
                         10,
-                        kwargs.get("yh", 0.0)
+                        kwargs.get("yh", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zh",
                         float,
                         50,
                         10,
-                        kwargs.get("zh", 0.0)
+                        kwargs.get("zh", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fric",
                         float,
                         60,
                         10,
-                        kwargs.get("fric", 0.0)
+                        kwargs.get("fric", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -150,7 +151,7 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("radsph", 0.0)
+                        kwargs.get("radsph", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -168,7 +169,7 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("opt", 0)
+                        kwargs.get("opt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vx",
@@ -207,21 +208,21 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("ro", 1.0E-09)
+                        kwargs.get("ro", 1.0E-09 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e", 1.0E-04)
+                        kwargs.get("e", 1.0E-04 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr", 0.30)
+                        kwargs.get("pr", 0.30 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

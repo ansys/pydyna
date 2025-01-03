@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialMomentum(KeywordBase):
@@ -47,28 +48,28 @@ class InitialMomentum(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("mx", 0.0)
+                        kwargs.get("mx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "my",
                         float,
                         20,
                         10,
-                        kwargs.get("my", 0.0)
+                        kwargs.get("my", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mz",
                         float,
                         30,
                         10,
-                        kwargs.get("mz", 0.0)
+                        kwargs.get("mz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dept",
                         float,
                         40,
                         10,
-                        kwargs.get("dept", 0.0)
+                        kwargs.get("dept", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

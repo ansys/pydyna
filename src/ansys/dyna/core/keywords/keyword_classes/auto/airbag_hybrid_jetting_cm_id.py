@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagHybridJettingCmId(KeywordBase):
@@ -65,49 +66,49 @@ class AirbagHybridJettingCmId(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("sidtyp", 0)
+                        kwargs.get("sidtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rbid",
                         int,
                         20,
                         10,
-                        kwargs.get("rbid", 0)
+                        kwargs.get("rbid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vsca",
                         float,
                         30,
                         10,
-                        kwargs.get("vsca", 1.0)
+                        kwargs.get("vsca", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psca",
                         float,
                         40,
                         10,
-                        kwargs.get("psca", 1.0)
+                        kwargs.get("psca", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vini",
                         float,
                         50,
                         10,
-                        kwargs.get("vini", 0.0)
+                        kwargs.get("vini", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mwd",
                         float,
                         60,
                         10,
-                        kwargs.get("mwd", 0.0)
+                        kwargs.get("mwd", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "spsf",
                         float,
                         70,
                         10,
-                        kwargs.get("spsf", 0.0)
+                        kwargs.get("spsf", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -146,7 +147,7 @@ class AirbagHybridJettingCmId(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("cc", 1.0)
+                        kwargs.get("cc", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -164,7 +165,7 @@ class AirbagHybridJettingCmId(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("lcc23", 0)
+                        kwargs.get("lcc23", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a23",
@@ -178,7 +179,7 @@ class AirbagHybridJettingCmId(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("lca23", 0)
+                        kwargs.get("lca23", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cp23",
@@ -192,7 +193,7 @@ class AirbagHybridJettingCmId(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("lcp23", 0)
+                        kwargs.get("lcp23", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ap23",
@@ -206,7 +207,7 @@ class AirbagHybridJettingCmId(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("lcap23", 0)
+                        kwargs.get("lcap23", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -217,7 +218,7 @@ class AirbagHybridJettingCmId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("opt", 1)
+                        kwargs.get("opt", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pvent",
@@ -238,14 +239,14 @@ class AirbagHybridJettingCmId(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("lcefr", 0)
+                        kwargs.get("lcefr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidm0",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidm0", 0)
+                        kwargs.get("lcidm0", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vntopt",
@@ -429,21 +430,21 @@ class AirbagHybridJettingCmId(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("node1", 0)
+                        kwargs.get("node1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "node2",
                         int,
                         60,
                         10,
-                        kwargs.get("node2", 0)
+                        kwargs.get("node2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "node3",
                         int,
                         70,
                         10,
-                        kwargs.get("node3", 0)
+                        kwargs.get("node3", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -454,7 +455,7 @@ class AirbagHybridJettingCmId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nreact", 0)
+                        kwargs.get("nreact", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -154,7 +155,7 @@ class Mat187(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("incdam", 0)
+                        kwargs.get("incdam", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -172,7 +173,7 @@ class Mat187(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("epfail", 1.0E+5)
+                        kwargs.get("epfail", 1.0E+5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "deprpt",
@@ -225,14 +226,14 @@ class Mat187(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("incfail", 0)
+                        kwargs.get("incfail", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iconv",
                         int,
                         40,
                         10,
-                        kwargs.get("iconv", 0)
+                        kwargs.get("iconv", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "asaf",

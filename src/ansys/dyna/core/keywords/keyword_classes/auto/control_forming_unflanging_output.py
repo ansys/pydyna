@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingUnflangingOutput(KeywordBase):
@@ -40,21 +41,21 @@ class ControlFormingUnflangingOutput(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("thmx", 1.0E+20)
+                        kwargs.get("thmx", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "thmn",
                         float,
                         10,
                         10,
-                        kwargs.get("thmn", 0.0)
+                        kwargs.get("thmn", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "epsmx",
                         float,
                         20,
                         10,
-                        kwargs.get("epsmx", 1.0E+20)
+                        kwargs.get("epsmx", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

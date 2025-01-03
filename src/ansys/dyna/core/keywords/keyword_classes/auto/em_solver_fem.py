@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmSolverFem(KeywordBase):
@@ -40,42 +41,42 @@ class EmSolverFem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("reltol", 1e-3)
+                        kwargs.get("reltol", 1e-3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "maxite",
                         int,
                         10,
                         10,
-                        kwargs.get("maxite", 1000)
+                        kwargs.get("maxite", 1000 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stype",
                         int,
                         20,
                         10,
-                        kwargs.get("stype", 1)
+                        kwargs.get("stype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "precon",
                         int,
                         30,
                         10,
-                        kwargs.get("precon", 1)
+                        kwargs.get("precon", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "uselast",
                         int,
                         40,
                         10,
-                        kwargs.get("uselast", 1)
+                        kwargs.get("uselast", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ncyclfem",
                         int,
                         50,
                         10,
-                        kwargs.get("ncyclfem", 5000)
+                        kwargs.get("ncyclfem", 5000 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

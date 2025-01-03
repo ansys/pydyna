@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -60,14 +61,14 @@ class Contact2DSlidingOnly(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("tbirth", 0.0)
+                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdeath",
                         float,
                         30,
                         10,
-                        kwargs.get("tdeath", 1.0E20)
+                        kwargs.get("tdeath", 1.0E20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -78,56 +79,56 @@ class Contact2DSlidingOnly(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ext_pas", 0)
+                        kwargs.get("ext_pas", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "theta1",
                         float,
                         10,
                         10,
-                        kwargs.get("theta1", 0.0)
+                        kwargs.get("theta1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "theta2",
                         float,
                         20,
                         10,
-                        kwargs.get("theta2", 0.0)
+                        kwargs.get("theta2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tol_ig",
                         float,
                         30,
                         10,
-                        kwargs.get("tol_ig", 1.0E-03)
+                        kwargs.get("tol_ig", 1.0E-03 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pen",
                         float,
                         40,
                         10,
-                        kwargs.get("pen", 1.0E-01)
+                        kwargs.get("pen", 1.0E-01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "toloff",
                         float,
                         50,
                         10,
-                        kwargs.get("toloff", 0.25)
+                        kwargs.get("toloff", 0.25 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "frcscl",
                         float,
                         60,
                         10,
-                        kwargs.get("frcscl", 1.0E-01)
+                        kwargs.get("frcscl", 1.0E-01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "oneway",
                         float,
                         70,
                         10,
-                        kwargs.get("oneway", 0.0)
+                        kwargs.get("oneway", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

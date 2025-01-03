@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,28 +74,28 @@ class Mat169(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("tenmax", 1.0E+20)
+                        kwargs.get("tenmax", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gcten",
                         float,
                         50,
                         10,
-                        kwargs.get("gcten", 1.0E+20)
+                        kwargs.get("gcten", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shrmax",
                         float,
                         60,
                         10,
-                        kwargs.get("shrmax", 1.0E+20)
+                        kwargs.get("shrmax", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gcshr",
                         float,
                         70,
                         10,
-                        kwargs.get("gcshr", 1.0E+20)
+                        kwargs.get("gcshr", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,14 +106,14 @@ class Mat169(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pwrt", 2.0)
+                        kwargs.get("pwrt", 2.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pwrs",
                         float,
                         10,
                         10,
-                        kwargs.get("pwrs", 2.0)
+                        kwargs.get("pwrs", 2.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shrp",
@@ -133,7 +134,7 @@ class Mat169(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("edot0", 1.0)
+                        kwargs.get("edot0", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "edot2",
@@ -147,7 +148,7 @@ class Mat169(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("thkdir", 0.0)
+                        kwargs.get("thkdir", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "extra",
@@ -165,42 +166,42 @@ class Mat169(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tmaxe", 1.0E+20)
+                        kwargs.get("tmaxe", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gcte",
                         float,
                         10,
                         10,
-                        kwargs.get("gcte", 1.0E+20)
+                        kwargs.get("gcte", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "smaxe",
                         float,
                         20,
                         10,
-                        kwargs.get("smaxe", 1.0E+20)
+                        kwargs.get("smaxe", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gcse",
                         float,
                         30,
                         10,
-                        kwargs.get("gcse", 1.0E+20)
+                        kwargs.get("gcse", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pwrte",
                         float,
                         40,
                         10,
-                        kwargs.get("pwrte", 2.0)
+                        kwargs.get("pwrte", 2.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pwrse",
                         float,
                         50,
                         10,
-                        kwargs.get("pwrse", 2.0)
+                        kwargs.get("pwrse", 2.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -211,42 +212,42 @@ class Mat169(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("facet", 1.0)
+                        kwargs.get("facet", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "facct",
                         float,
                         10,
                         10,
-                        kwargs.get("facct", 1.0)
+                        kwargs.get("facct", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "faces",
                         float,
                         20,
                         10,
-                        kwargs.get("faces", 1.0)
+                        kwargs.get("faces", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "faccs",
                         float,
                         30,
                         10,
-                        kwargs.get("faccs", 1.0)
+                        kwargs.get("faccs", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "softt",
                         float,
                         40,
                         10,
-                        kwargs.get("softt", 1.0)
+                        kwargs.get("softt", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "softs",
                         float,
                         50,
                         10,
-                        kwargs.get("softs", 1.0)
+                        kwargs.get("softs", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -257,28 +258,28 @@ class Mat169(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sdfac", 1.0)
+                        kwargs.get("sdfac", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sgfac",
                         float,
                         10,
                         10,
-                        kwargs.get("sgfac", 1.0)
+                        kwargs.get("sgfac", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sdefac",
                         float,
                         20,
                         10,
-                        kwargs.get("sdefac", 1.0)
+                        kwargs.get("sdefac", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sgefac",
                         float,
                         30,
                         10,
-                        kwargs.get("sgefac", 1.0)
+                        kwargs.get("sgefac", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -296,7 +297,7 @@ class Mat169(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("outfail", 0.0)
+                        kwargs.get("outfail", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fsip",
@@ -317,7 +318,7 @@ class Mat169(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("ele2ns", 0.0)
+                        kwargs.get("ele2ns", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

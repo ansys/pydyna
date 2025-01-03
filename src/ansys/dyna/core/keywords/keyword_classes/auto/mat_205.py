@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -80,7 +81,7 @@ class Mat205(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("dmxpz", 1.e20)
+                        kwargs.get("dmxpz", 1.e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "limpz",
@@ -98,28 +99,28 @@ class Mat205(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dmxpx", 1.e20)
+                        kwargs.get("dmxpx", 1.e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmxnx",
                         float,
                         10,
                         10,
-                        kwargs.get("dmxnx", 1.e20)
+                        kwargs.get("dmxnx", 1.e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmxpy",
                         float,
                         20,
                         10,
-                        kwargs.get("dmxpy", 1.e20)
+                        kwargs.get("dmxpy", 1.e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmxny",
                         float,
                         30,
                         10,
-                        kwargs.get("dmxny", 1.e20)
+                        kwargs.get("dmxny", 1.e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "limpx",
@@ -200,14 +201,14 @@ class Mat205(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("dbondh", 1.e20)
+                        kwargs.get("dbondh", 1.e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dbondt",
                         float,
                         70,
                         10,
-                        kwargs.get("dbondt", 1.e20)
+                        kwargs.get("dbondt", 1.e20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -218,7 +219,7 @@ class Mat205(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcz", 0)
+                        kwargs.get("lcz", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dampz",
@@ -260,7 +261,7 @@ class Mat205(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("afac", 1.0)
+                        kwargs.get("afac", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

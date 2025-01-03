@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class RigidwallPlanarOrthoFinite(KeywordBase):
@@ -47,42 +48,42 @@ class RigidwallPlanarOrthoFinite(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("nsidex", 0)
+                        kwargs.get("nsidex", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "boxid",
                         int,
                         20,
                         10,
-                        kwargs.get("boxid", 0)
+                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "offset",
                         float,
                         30,
                         10,
-                        kwargs.get("offset", 0.0)
+                        kwargs.get("offset", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "birth",
                         float,
                         40,
                         10,
-                        kwargs.get("birth", 0.0)
+                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "death",
                         float,
                         50,
                         10,
-                        kwargs.get("death", 1.0E+20)
+                        kwargs.get("death", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rwksf",
                         float,
                         60,
                         10,
-                        kwargs.get("rwksf", 1.0)
+                        kwargs.get("rwksf", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -93,56 +94,56 @@ class RigidwallPlanarOrthoFinite(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xt", 0.0)
+                        kwargs.get("xt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yt",
                         float,
                         10,
                         10,
-                        kwargs.get("yt", 0.0)
+                        kwargs.get("yt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zt",
                         float,
                         20,
                         10,
-                        kwargs.get("zt", 0.0)
+                        kwargs.get("zt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xh",
                         float,
                         30,
                         10,
-                        kwargs.get("xh", 0.0)
+                        kwargs.get("xh", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yh",
                         float,
                         40,
                         10,
-                        kwargs.get("yh", 0.0)
+                        kwargs.get("yh", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zh",
                         float,
                         50,
                         10,
-                        kwargs.get("zh", 0.0)
+                        kwargs.get("zh", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fric",
                         float,
                         60,
                         10,
-                        kwargs.get("fric", 0.0)
+                        kwargs.get("fric", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "wvel",
                         float,
                         70,
                         10,
-                        kwargs.get("wvel", 0.0)
+                        kwargs.get("wvel", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -153,42 +154,42 @@ class RigidwallPlanarOrthoFinite(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfrica", 0.0)
+                        kwargs.get("sfrica", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfricb",
                         float,
                         10,
                         10,
-                        kwargs.get("sfricb", 0.0)
+                        kwargs.get("sfricb", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dfrica",
                         float,
                         20,
                         10,
-                        kwargs.get("dfrica", 0.0)
+                        kwargs.get("dfrica", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dfricb",
                         float,
                         30,
                         10,
-                        kwargs.get("dfricb", 0.0)
+                        kwargs.get("dfricb", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "decaya",
                         float,
                         40,
                         10,
-                        kwargs.get("decaya", 0.0)
+                        kwargs.get("decaya", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "decayb",
                         float,
                         50,
                         10,
-                        kwargs.get("decayb", 0.0)
+                        kwargs.get("decayb", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -199,35 +200,35 @@ class RigidwallPlanarOrthoFinite(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("node1", 0)
+                        kwargs.get("node1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "node2",
                         int,
                         10,
                         10,
-                        kwargs.get("node2", 0)
+                        kwargs.get("node2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "d1",
                         float,
                         20,
                         10,
-                        kwargs.get("d1", 0.0)
+                        kwargs.get("d1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "d2",
                         float,
                         30,
                         10,
-                        kwargs.get("d2", 0.0)
+                        kwargs.get("d2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "d3",
                         float,
                         40,
                         10,
-                        kwargs.get("d3", 0.0)
+                        kwargs.get("d3", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -238,35 +239,35 @@ class RigidwallPlanarOrthoFinite(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xhev", 0.0)
+                        kwargs.get("xhev", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yhev",
                         float,
                         10,
                         10,
-                        kwargs.get("yhev", 0.0)
+                        kwargs.get("yhev", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zhev",
                         float,
                         20,
                         10,
-                        kwargs.get("zhev", 0.0)
+                        kwargs.get("zhev", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lenl",
                         float,
                         30,
                         10,
-                        kwargs.get("lenl", 0.0)
+                        kwargs.get("lenl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lenm",
                         float,
                         40,
                         10,
-                        kwargs.get("lenm", 0.0)
+                        kwargs.get("lenm", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

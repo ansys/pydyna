@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitInertiaRelief(KeywordBase):
@@ -40,21 +41,21 @@ class ControlImplicitInertiaRelief(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("irflag", 0)
+                        kwargs.get("irflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "thresh",
                         float,
                         10,
                         10,
-                        kwargs.get("thresh", 0.001)
+                        kwargs.get("thresh", 0.001 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ircnt",
                         int,
                         20,
                         10,
-                        kwargs.get("ircnt", 0)
+                        kwargs.get("ircnt", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

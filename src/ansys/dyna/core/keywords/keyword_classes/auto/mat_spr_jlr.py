@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,14 +74,14 @@ class MatSprJlr(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("helas", 0.0)
+                        kwargs.get("helas", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "telas",
                         float,
                         50,
                         10,
-                        kwargs.get("telas", 0.0)
+                        kwargs.get("telas", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -112,21 +113,21 @@ class MatSprJlr(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("sfaxh", 1.0)
+                        kwargs.get("sfaxh", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfshh",
                         float,
                         40,
                         10,
-                        kwargs.get("sfshh", 1.0)
+                        kwargs.get("sfshh", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfbmh",
                         float,
                         50,
                         10,
-                        kwargs.get("sfbmh", 1.0)
+                        kwargs.get("sfbmh", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -158,21 +159,21 @@ class MatSprJlr(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("dmfaxh", 0.1)
+                        kwargs.get("dmfaxh", 0.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmfshh",
                         float,
                         40,
                         10,
-                        kwargs.get("dmfshh", 0.1)
+                        kwargs.get("dmfshh", 0.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmfbmh",
                         float,
                         50,
                         10,
-                        kwargs.get("dmfbmh", 0.1)
+                        kwargs.get("dmfbmh", 0.1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -204,21 +205,21 @@ class MatSprJlr(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("sfaxt", 1.0)
+                        kwargs.get("sfaxt", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfsht",
                         float,
                         40,
                         10,
-                        kwargs.get("sfsht", 1.0)
+                        kwargs.get("sfsht", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sbfmt",
                         float,
                         50,
                         10,
-                        kwargs.get("sbfmt", 1.0)
+                        kwargs.get("sbfmt", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -250,21 +251,21 @@ class MatSprJlr(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("dfmaxt", 0.1)
+                        kwargs.get("dfmaxt", 0.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmfsht",
                         float,
                         40,
                         10,
-                        kwargs.get("dmfsht", 0.1)
+                        kwargs.get("dmfsht", 0.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmfbmt",
                         float,
                         50,
                         10,
-                        kwargs.get("dmfbmt", 0.1)
+                        kwargs.get("dmfbmt", 0.1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

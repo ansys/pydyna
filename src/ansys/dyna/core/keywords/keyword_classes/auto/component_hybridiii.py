@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ComponentHybridiii(KeywordBase):
@@ -47,42 +48,42 @@ class ComponentHybridiii(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("size", 1)
+                        kwargs.get("size", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "units",
                         int,
                         20,
                         10,
-                        kwargs.get("units", 1)
+                        kwargs.get("units", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "defrm",
                         int,
                         30,
                         10,
-                        kwargs.get("defrm", 1)
+                        kwargs.get("defrm", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vx",
                         float,
                         40,
                         10,
-                        kwargs.get("vx", 0.0)
+                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vy",
                         float,
                         50,
                         10,
-                        kwargs.get("vy", 0.0)
+                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vz",
                         float,
                         60,
                         10,
-                        kwargs.get("vz", 0.0)
+                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -93,42 +94,42 @@ class ComponentHybridiii(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hx", 0.0)
+                        kwargs.get("hx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hy",
                         float,
                         10,
                         10,
-                        kwargs.get("hy", 0.0)
+                        kwargs.get("hy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hz",
                         float,
                         20,
                         10,
-                        kwargs.get("hz", 0.0)
+                        kwargs.get("hz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rx",
                         float,
                         30,
                         10,
-                        kwargs.get("rx", 0.0)
+                        kwargs.get("rx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ry",
                         float,
                         40,
                         10,
-                        kwargs.get("ry", 0.0)
+                        kwargs.get("ry", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rz",
                         float,
                         50,
                         10,
-                        kwargs.get("rz", 0.0)
+                        kwargs.get("rz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

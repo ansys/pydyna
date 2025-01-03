@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialVolumeFractionGeometry(KeywordBase):
@@ -47,21 +48,21 @@ class InitialVolumeFractionGeometry(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("fmidtyp", 0)
+                        kwargs.get("fmidtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bammg",
                         int,
                         20,
                         10,
-                        kwargs.get("bammg", 0)
+                        kwargs.get("bammg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ntrace",
                         int,
                         30,
                         10,
-                        kwargs.get("ntrace", 3)
+                        kwargs.get("ntrace", 3 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -72,14 +73,14 @@ class InitialVolumeFractionGeometry(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("conttyp", 1)
+                        kwargs.get("conttyp", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fillopt",
                         int,
                         10,
                         10,
-                        kwargs.get("fillopt", 0)
+                        kwargs.get("fillopt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fammg",
@@ -139,7 +140,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("stype", 0)
+                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "normdir",
@@ -153,7 +154,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("xoffset", 0.0)
+                        kwargs.get("xoffset", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -206,7 +207,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("xoffset", 0.0)
+                        kwargs.get("xoffset", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",

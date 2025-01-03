@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -133,21 +134,21 @@ class MatLaminatedFractureDaimlerPinho(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("daf", 0.0)
+                        kwargs.get("daf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dkf",
                         float,
                         50,
                         10,
-                        kwargs.get("dkf", 0.0)
+                        kwargs.get("dkf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmf",
                         float,
                         60,
                         10,
-                        kwargs.get("dmf", 0.0)
+                        kwargs.get("dmf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "efs",
@@ -342,7 +343,7 @@ class MatLaminatedFractureDaimlerPinho(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fio", 53.0)
+                        kwargs.get("fio", 53.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigy",
@@ -377,14 +378,14 @@ class MatLaminatedFractureDaimlerPinho(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("puck", 0.0)
+                        kwargs.get("puck", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "soft",
                         float,
                         60,
                         10,
-                        kwargs.get("soft", 1.0)
+                        kwargs.get("soft", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

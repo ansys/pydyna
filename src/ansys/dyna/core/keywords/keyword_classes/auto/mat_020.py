@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,21 +74,21 @@ class Mat020(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("n", 0)
+                        kwargs.get("n", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "couple",
                         float,
                         50,
                         10,
-                        kwargs.get("couple", 0)
+                        kwargs.get("couple", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "m",
                         float,
                         60,
                         10,
-                        kwargs.get("m", 0)
+                        kwargs.get("m", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "alias",
@@ -105,7 +106,7 @@ class Mat020(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cmo", 0.0)
+                        kwargs.get("cmo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "con1",
