@@ -162,6 +162,11 @@ $#   secid      area     thick
     # ensure that it does not throw when the data line is empty
     belt.loads(seatbelt_text)
 
+    seatbelt_text = seatbelt_text + "..."
+    # ensure that it does not throw when extra characters are added
+    with pytest.warns(UserWarning, match="Detected out of bound card characters"):
+        belt.loads(seatbelt_text)
+
 
 @pytest.mark.keywords
 def test_read_nodes(ref_string):
