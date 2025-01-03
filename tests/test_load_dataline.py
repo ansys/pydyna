@@ -65,7 +65,7 @@ def test_load_dataline_005():
 @pytest.mark.keywords
 def test_load_dataline_006():
     """test loading a data line that is too long."""
-    with pytest.raises(Exception):
+    with pytest.warns(UserWarning, match="Detected out of bound card characters"):
         load_dataline([(0, 8, int), (8, 8, float), (16, 8, float)], "                                          ")
 
 
