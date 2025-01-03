@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,7 +74,7 @@ class Mat166(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("epflg", 0)
+                        kwargs.get("epflg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cta",
@@ -345,21 +346,21 @@ class Mat166(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cfa", 1.0)
+                        kwargs.get("cfa", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cfb",
                         float,
                         10,
                         10,
-                        kwargs.get("cfb", 1.0)
+                        kwargs.get("cfb", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cft",
                         float,
                         20,
                         10,
-                        kwargs.get("cft", 1.0)
+                        kwargs.get("cft", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hrule",
@@ -373,28 +374,28 @@ class Mat166(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("reps", 1.0E+20)
+                        kwargs.get("reps", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rbeta",
                         float,
                         50,
                         10,
-                        kwargs.get("rbeta", 1.0E+20)
+                        kwargs.get("rbeta", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rcapay",
                         float,
                         60,
                         10,
-                        kwargs.get("rcapay", 1.0E+20)
+                        kwargs.get("rcapay", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rcapaz",
                         float,
                         70,
                         10,
-                        kwargs.get("rcapaz", 1.0E+20)
+                        kwargs.get("rcapaz", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

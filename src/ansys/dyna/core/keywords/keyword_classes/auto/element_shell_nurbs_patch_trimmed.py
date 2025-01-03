@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementShellNurbsPatchTrimmed(KeywordBase):
@@ -107,14 +108,14 @@ class ElementShellNurbsPatchTrimmed(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 0)
+                        kwargs.get("elform", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "int",
                         int,
                         20,
                         10,
-                        kwargs.get("int", 0)
+                        kwargs.get("int", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nisr",
@@ -135,7 +136,7 @@ class ElementShellNurbsPatchTrimmed(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("imass", 0)
+                        kwargs.get("imass", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -149,7 +150,7 @@ class ElementShellNurbsPatchTrimmed(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("idfne", 0)
+                        kwargs.get("idfne", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,35 +60,35 @@ class DefineDeInjectBondedEllipse(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("xc", 0.0)
+                        kwargs.get("xc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yc",
                         float,
                         30,
                         10,
-                        kwargs.get("yc", 0.0)
+                        kwargs.get("yc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zc",
                         float,
                         40,
                         10,
-                        kwargs.get("zc", 0.0)
+                        kwargs.get("zc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xl",
                         float,
                         50,
                         10,
-                        kwargs.get("xl", 0.0)
+                        kwargs.get("xl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yl",
                         float,
                         60,
                         10,
-                        kwargs.get("yl", 0.0)
+                        kwargs.get("yl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cid",
@@ -105,42 +106,42 @@ class DefineDeInjectBondedEllipse(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rmass", 0.0)
+                        kwargs.get("rmass", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vx",
                         float,
                         10,
                         10,
-                        kwargs.get("vx", 0.0)
+                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xy",
                         float,
                         20,
                         10,
-                        kwargs.get("xy", 0.0)
+                        kwargs.get("xy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vz",
                         float,
                         30,
                         10,
-                        kwargs.get("vz", 0.0)
+                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tbeg",
                         float,
                         40,
                         10,
-                        kwargs.get("tbeg", 0.0)
+                        kwargs.get("tbeg", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tend",
                         float,
                         50,
                         10,
-                        kwargs.get("tend", 0.0)
+                        kwargs.get("tend", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -165,35 +166,35 @@ class DefineDeInjectBondedEllipse(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("pbn_s", 0.0)
+                        kwargs.get("pbn_s", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pbs_s",
                         float,
                         30,
                         10,
-                        kwargs.get("pbs_s", 0.0)
+                        kwargs.get("pbs_s", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfa",
                         float,
                         40,
                         10,
-                        kwargs.get("sfa", 0.0)
+                        kwargs.get("sfa", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "alpha",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha", 0.0)
+                        kwargs.get("alpha", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "maxgap",
                         float,
                         60,
                         10,
-                        kwargs.get("maxgap", 1.0E-4)
+                        kwargs.get("maxgap", 1.0E-4 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -204,7 +205,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nshape", 0)
+                        kwargs.get("nshape", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

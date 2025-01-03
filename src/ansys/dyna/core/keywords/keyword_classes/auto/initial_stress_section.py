@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialStressSection(KeywordBase):
@@ -75,14 +76,14 @@ class InitialStressSection(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("izshear", 0)
+                        kwargs.get("izshear", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "istiff",
                         int,
                         60,
                         10,
-                        kwargs.get("istiff", 0)
+                        kwargs.get("istiff", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

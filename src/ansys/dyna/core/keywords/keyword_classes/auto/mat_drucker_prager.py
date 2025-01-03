@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,7 +74,7 @@ class MatDruckerPrager(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("rkf", 1.0)
+                        kwargs.get("rkf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "phi",
@@ -105,7 +106,7 @@ class MatDruckerPrager(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("str_lim", 5.0E-03)
+                        kwargs.get("str_lim", 5.0E-03 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

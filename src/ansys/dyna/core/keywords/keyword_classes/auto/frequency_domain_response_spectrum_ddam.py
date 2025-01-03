@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainResponseSpectrumDdam(KeywordBase):
@@ -40,7 +41,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mdmin", 1)
+                        kwargs.get("mdmin", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mdmax",
@@ -54,7 +55,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("fnmin", 0.0)
+                        kwargs.get("fnmin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fnmax",
@@ -68,28 +69,28 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("restrt", 0)
+                        kwargs.get("restrt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mcomb",
                         int,
                         50,
                         10,
-                        kwargs.get("mcomb", 0)
+                        kwargs.get("mcomb", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "relatv",
                         int,
                         60,
                         10,
-                        kwargs.get("relatv", 0)
+                        kwargs.get("relatv", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mprs",
                         int,
                         70,
                         10,
-                        kwargs.get("mprs", 0)
+                        kwargs.get("mprs", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,14 +101,14 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mcomb1", 0)
+                        kwargs.get("mcomb1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mcomb2",
                         int,
                         10,
                         10,
-                        kwargs.get("mcomb2", 0)
+                        kwargs.get("mcomb2", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -118,14 +119,14 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("w1", 0.5)
+                        kwargs.get("w1", 0.5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "w1",
                         float,
                         10,
                         10,
-                        kwargs.get("w1", 0.5)
+                        kwargs.get("w1", 0.5 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -136,7 +137,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r40", 0.4)
+                        kwargs.get("r40", 0.4 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -161,21 +162,21 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("ldtyp", 0)
+                        kwargs.get("ldtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmpmas",
                         float,
                         30,
                         10,
-                        kwargs.get("dmpmas", 0.0)
+                        kwargs.get("dmpmas", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmpstf",
                         float,
                         40,
                         10,
-                        kwargs.get("dmpstf", 0.0)
+                        kwargs.get("dmpstf", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -186,56 +187,56 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("std", 1)
+                        kwargs.get("std", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unit",
                         int,
                         10,
                         10,
-                        kwargs.get("unit", 1)
+                        kwargs.get("unit", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "amin",
                         float,
                         20,
                         10,
-                        kwargs.get("amin", 6.0)
+                        kwargs.get("amin", 6.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vid",
                         int,
                         30,
                         10,
-                        kwargs.get("vid", 0)
+                        kwargs.get("vid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xc",
                         float,
                         40,
                         10,
-                        kwargs.get("xc", 0.0)
+                        kwargs.get("xc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yc",
                         float,
                         50,
                         10,
-                        kwargs.get("yc", 0.0)
+                        kwargs.get("yc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zc",
                         float,
                         60,
                         10,
-                        kwargs.get("zc", 0.0)
+                        kwargs.get("zc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "effmas",
                         float,
                         70,
                         10,
-                        kwargs.get("effmas", 80.0)
+                        kwargs.get("effmas", 80.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -246,28 +247,28 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("shptyp", 1)
+                        kwargs.get("shptyp", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mount",
                         int,
                         10,
                         10,
-                        kwargs.get("mount", 1)
+                        kwargs.get("mount", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "movemt",
                         int,
                         20,
                         10,
-                        kwargs.get("movemt", 1)
+                        kwargs.get("movemt", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mattyp",
                         int,
                         30,
                         10,
-                        kwargs.get("mattyp", 1)
+                        kwargs.get("mattyp", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

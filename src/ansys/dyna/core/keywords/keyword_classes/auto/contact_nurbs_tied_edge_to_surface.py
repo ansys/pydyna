@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -78,21 +79,21 @@ class ContactNurbsTiedEdgeToSurface(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("sstyp", 0)
+                        kwargs.get("sstyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mstyp",
                         int,
                         30,
                         10,
-                        kwargs.get("mstyp", 0)
+                        kwargs.get("mstyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cform",
                         int,
                         40,
                         10,
-                        kwargs.get("cform", 0)
+                        kwargs.get("cform", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadNurbsShell(KeywordBase):
@@ -72,35 +73,35 @@ class LoadNurbsShell(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "at",
                         float,
                         30,
                         10,
-                        kwargs.get("at", 0.0)
+                        kwargs.get("at", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt",
                         float,
                         40,
                         10,
-                        kwargs.get("dt", 1.0e+16)
+                        kwargs.get("dt", 1.0e+16 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ltype",
                         str,
                         50,
                         10,
-                        kwargs.get("ltype", "PRESS")
+                        kwargs.get("ltype", "PRESS" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "regdef",
                         str,
                         60,
                         10,
-                        kwargs.get("regdef", "RS")
+                        kwargs.get("regdef", "RS" if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -111,7 +112,7 @@ class LoadNurbsShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cid", 0)
+                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "v1",

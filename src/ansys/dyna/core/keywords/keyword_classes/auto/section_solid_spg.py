@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,14 +53,14 @@ class SectionSolidSpg(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 1)
+                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "aet",
                         int,
                         20,
                         10,
-                        kwargs.get("aet", 0)
+                        kwargs.get("aet", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -126,14 +127,14 @@ class SectionSolidSpg(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("ispline", 0)
+                        kwargs.get("ispline", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kernel",
                         int,
                         40,
                         10,
-                        kwargs.get("kernel", 0)
+                        kwargs.get("kernel", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -165,7 +166,7 @@ class SectionSolidSpg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idam", 1)
+                        kwargs.get("idam", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fs",
@@ -179,7 +180,7 @@ class SectionSolidSpg(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("stretch", 1.0E10)
+                        kwargs.get("stretch", 1.0E10 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "itb",
@@ -214,7 +215,7 @@ class SectionSolidSpg(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("pdamp", -0.001)
+                        kwargs.get("pdamp", -0.001 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -239,14 +240,14 @@ class SectionSolidSpg(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("ihgf", 0)
+                        kwargs.get("ihgf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "itaj",
                         int,
                         30,
                         10,
-                        kwargs.get("itaj", 0)
+                        kwargs.get("itaj", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lmc",

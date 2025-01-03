@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseControlMeshMov(KeywordBase):
@@ -47,28 +48,28 @@ class DualceseControlMeshMov(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("ialg", 9)
+                        kwargs.get("ialg", 9 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ninter",
                         int,
                         20,
                         10,
-                        kwargs.get("ninter", 100)
+                        kwargs.get("ninter", 100 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "relerr",
                         float,
                         30,
                         10,
-                        kwargs.get("relerr", 1.0E-3)
+                        kwargs.get("relerr", 1.0E-3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mxdispr",
                         float,
                         40,
                         10,
-                        kwargs.get("mxdispr", 1.0E-2)
+                        kwargs.get("mxdispr", 1.0E-2 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseBoundaryCyclicMsurf(KeywordBase):
@@ -54,7 +55,7 @@ class CeseBoundaryCyclicMsurf(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("cyctyp", 0)
+                        kwargs.get("cyctyp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -65,21 +66,21 @@ class CeseBoundaryCyclicMsurf(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("axisx1", 0)
+                        kwargs.get("axisx1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "axisy1",
                         float,
                         10,
                         10,
-                        kwargs.get("axisy1", 0)
+                        kwargs.get("axisy1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "axisz1",
                         float,
                         20,
                         10,
-                        kwargs.get("axisz1", 0)
+                        kwargs.get("axisz1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dirx",

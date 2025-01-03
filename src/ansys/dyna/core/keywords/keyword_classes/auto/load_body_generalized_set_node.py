@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadBodyGeneralizedSetNode(KeywordBase):
@@ -61,28 +62,28 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("drlcid", 0)
+                        kwargs.get("drlcid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xc",
                         float,
                         40,
                         10,
-                        kwargs.get("xc", 0.0)
+                        kwargs.get("xc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yc",
                         float,
                         50,
                         10,
-                        kwargs.get("yc", 0.0)
+                        kwargs.get("yc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zc",
                         float,
                         60,
                         10,
-                        kwargs.get("zc", 0.0)
+                        kwargs.get("zc", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -93,42 +94,42 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ax", 0.0)
+                        kwargs.get("ax", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ay",
                         float,
                         10,
                         10,
-                        kwargs.get("ay", 0.0)
+                        kwargs.get("ay", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "az",
                         float,
                         20,
                         10,
-                        kwargs.get("az", 0.0)
+                        kwargs.get("az", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "omx",
                         float,
                         30,
                         10,
-                        kwargs.get("omx", 0.0)
+                        kwargs.get("omx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "omy",
                         float,
                         40,
                         10,
-                        kwargs.get("omy", 0.0)
+                        kwargs.get("omy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "omz",
                         float,
                         50,
                         10,
-                        kwargs.get("omz", 0.0)
+                        kwargs.get("omz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cid",
@@ -142,7 +143,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
                         str,
                         70,
                         10,
-                        kwargs.get("angtyp", "CENT")
+                        kwargs.get("angtyp", "CENT" if use_lspp_defaults() else None)
                     ),
                 ],
             ),

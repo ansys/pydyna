@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementShellBextPatch(KeywordBase):
@@ -72,14 +73,14 @@ class ElementShellBextPatch(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("form", 0)
+                        kwargs.get("form", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "int",
                         int,
                         20,
                         10,
-                        kwargs.get("int", 0)
+                        kwargs.get("int", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nisr",
@@ -100,7 +101,7 @@ class ElementShellBextPatch(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("imass", 0)
+                        kwargs.get("imass", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nl",
@@ -118,7 +119,7 @@ class ElementShellBextPatch(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("shpe", 0)
+                        kwargs.get("shpe", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pr",
@@ -139,21 +140,21 @@ class ElementShellBextPatch(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("bdry", 0)
+                        kwargs.get("bdry", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "trm",
                         int,
                         40,
                         10,
-                        kwargs.get("trm", 0)
+                        kwargs.get("trm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "smth",
                         int,
                         50,
                         10,
-                        kwargs.get("smth", 0)
+                        kwargs.get("smth", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -164,56 +165,56 @@ class ElementShellBextPatch(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("b1", 0)
+                        kwargs.get("b1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "b2",
                         int,
                         10,
                         10,
-                        kwargs.get("b2", 0)
+                        kwargs.get("b2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "b3",
                         int,
                         20,
                         10,
-                        kwargs.get("b3", 0)
+                        kwargs.get("b3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "b4",
                         int,
                         30,
                         10,
-                        kwargs.get("b4", 0)
+                        kwargs.get("b4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "b5",
                         int,
                         40,
                         10,
-                        kwargs.get("b5", 0)
+                        kwargs.get("b5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "b6",
                         int,
                         50,
                         10,
-                        kwargs.get("b6", 0)
+                        kwargs.get("b6", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "b7",
                         int,
                         60,
                         10,
-                        kwargs.get("b7", 0)
+                        kwargs.get("b7", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "b8",
                         int,
                         70,
                         10,
-                        kwargs.get("b8", 0)
+                        kwargs.get("b8", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -224,56 +225,56 @@ class ElementShellBextPatch(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("s1", 0)
+                        kwargs.get("s1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "s2",
                         int,
                         10,
                         10,
-                        kwargs.get("s2", 0)
+                        kwargs.get("s2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "s3",
                         int,
                         20,
                         10,
-                        kwargs.get("s3", 0)
+                        kwargs.get("s3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "s4",
                         int,
                         30,
                         10,
-                        kwargs.get("s4", 0)
+                        kwargs.get("s4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "s5",
                         int,
                         40,
                         10,
-                        kwargs.get("s5", 0)
+                        kwargs.get("s5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "s6",
                         int,
                         50,
                         10,
-                        kwargs.get("s6", 0)
+                        kwargs.get("s6", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "s7",
                         int,
                         60,
                         10,
-                        kwargs.get("s7", 0)
+                        kwargs.get("s7", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "s8",
                         int,
                         70,
                         10,
-                        kwargs.get("s8", 0)
+                        kwargs.get("s8", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -284,56 +285,56 @@ class ElementShellBextPatch(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1", 0)
+                        kwargs.get("n1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n2",
                         int,
                         10,
                         10,
-                        kwargs.get("n2", 0)
+                        kwargs.get("n2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n3",
                         int,
                         20,
                         10,
-                        kwargs.get("n3", 0)
+                        kwargs.get("n3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n4",
                         int,
                         30,
                         10,
-                        kwargs.get("n4", 0)
+                        kwargs.get("n4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n5",
                         int,
                         40,
                         10,
-                        kwargs.get("n5", 0)
+                        kwargs.get("n5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n6",
                         int,
                         50,
                         10,
-                        kwargs.get("n6", 0)
+                        kwargs.get("n6", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n7",
                         int,
                         60,
                         10,
-                        kwargs.get("n7", 0)
+                        kwargs.get("n7", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n8",
                         int,
                         70,
                         10,
-                        kwargs.get("n8", 0)
+                        kwargs.get("n8", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -344,56 +345,56 @@ class ElementShellBextPatch(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("w1", 0)
+                        kwargs.get("w1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "w2",
                         float,
                         10,
                         10,
-                        kwargs.get("w2", 0)
+                        kwargs.get("w2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "w3",
                         float,
                         20,
                         10,
-                        kwargs.get("w3", 0)
+                        kwargs.get("w3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "w4",
                         float,
                         30,
                         10,
-                        kwargs.get("w4", 0)
+                        kwargs.get("w4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "w5",
                         float,
                         40,
                         10,
-                        kwargs.get("w5", 0)
+                        kwargs.get("w5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "w6",
                         float,
                         50,
                         10,
-                        kwargs.get("w6", 0)
+                        kwargs.get("w6", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "w7",
                         float,
                         60,
                         10,
-                        kwargs.get("w7", 0)
+                        kwargs.get("w7", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "w8",
                         float,
                         70,
                         10,
-                        kwargs.get("w8", 0)
+                        kwargs.get("w8", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -404,56 +405,56 @@ class ElementShellBextPatch(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("o1", 0)
+                        kwargs.get("o1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "o2",
                         float,
                         10,
                         10,
-                        kwargs.get("o2", 0)
+                        kwargs.get("o2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "o3",
                         float,
                         20,
                         10,
-                        kwargs.get("o3", 0)
+                        kwargs.get("o3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "o4",
                         float,
                         30,
                         10,
-                        kwargs.get("o4", 0)
+                        kwargs.get("o4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "o5",
                         float,
                         40,
                         10,
-                        kwargs.get("o5", 0)
+                        kwargs.get("o5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "o6",
                         float,
                         50,
                         10,
-                        kwargs.get("o6", 0)
+                        kwargs.get("o6", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "o7",
                         float,
                         60,
                         10,
-                        kwargs.get("o7", 0)
+                        kwargs.get("o7", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "o8",
                         float,
                         70,
                         10,
-                        kwargs.get("o8", 0)
+                        kwargs.get("o8", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

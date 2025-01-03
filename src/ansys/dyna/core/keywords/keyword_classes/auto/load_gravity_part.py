@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadGravityPart(KeywordBase):
@@ -61,7 +62,7 @@ class LoadGravityPart(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("accel", 0.0)
+                        kwargs.get("accel", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdr",
@@ -75,14 +76,14 @@ class LoadGravityPart(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("stga", 0)
+                        kwargs.get("stga", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stgr",
                         int,
                         60,
                         10,
-                        kwargs.get("stgr", 0)
+                        kwargs.get("stgr", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitDynamics(KeywordBase):
@@ -40,56 +41,56 @@ class ControlImplicitDynamics(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("imass", 0)
+                        kwargs.get("imass", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gamma",
                         float,
                         10,
                         10,
-                        kwargs.get("gamma", 0.50)
+                        kwargs.get("gamma", 0.50 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beta",
                         float,
                         20,
                         10,
-                        kwargs.get("beta", 0.25)
+                        kwargs.get("beta", 0.25 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdybir",
                         float,
                         30,
                         10,
-                        kwargs.get("tdybir", 0.0)
+                        kwargs.get("tdybir", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdydth",
                         float,
                         40,
                         10,
-                        kwargs.get("tdydth", 1.0E+28)
+                        kwargs.get("tdydth", 1.0E+28 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdybur",
                         float,
                         50,
                         10,
-                        kwargs.get("tdybur", 1.0E+28)
+                        kwargs.get("tdybur", 1.0E+28 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "irate",
                         int,
                         60,
                         10,
-                        kwargs.get("irate", 0)
+                        kwargs.get("irate", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "alpha",
                         float,
                         70,
                         10,
-                        kwargs.get("alpha", 0)
+                        kwargs.get("alpha", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -107,7 +108,7 @@ class ControlImplicitDynamics(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("angle", 90)
+                        kwargs.get("angle", 90 if use_lspp_defaults() else None)
                     ),
                 ],
                 lambda: self.alpha <= -1,

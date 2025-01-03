@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedSoilPileConstantsSet(KeywordBase):
@@ -75,14 +76,14 @@ class ConstrainedSoilPileConstantsSet(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("error", 0)
+                        kwargs.get("error", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nring",
                         int,
                         60,
                         10,
-                        kwargs.get("nring", 1)
+                        kwargs.get("nring", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nringb",
@@ -100,14 +101,14 @@ class ConstrainedSoilPileConstantsSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("damp", 0.0)
+                        kwargs.get("damp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "local",
                         int,
                         10,
                         10,
-                        kwargs.get("local", 1)
+                        kwargs.get("local", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -213,7 +214,7 @@ class ConstrainedSoilPileConstantsSet(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("bstfac", 1.0)
+                        kwargs.get("bstfac", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bhyper",
@@ -273,7 +274,7 @@ class ConstrainedSoilPileConstantsSet(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("vstfac", 1.0)
+                        kwargs.get("vstfac", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vhyper",
@@ -333,7 +334,7 @@ class ConstrainedSoilPileConstantsSet(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("hstfac", 1.0)
+                        kwargs.get("hstfac", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hhyper",

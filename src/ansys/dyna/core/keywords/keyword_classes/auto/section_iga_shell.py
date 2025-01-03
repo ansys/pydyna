@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,42 +53,42 @@ class SectionIgaShell(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 0)
+                        kwargs.get("elform", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shrf",
                         float,
                         20,
                         10,
-                        kwargs.get("shrf", 1.0)
+                        kwargs.get("shrf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nip",
                         int,
                         30,
                         10,
-                        kwargs.get("nip", 2)
+                        kwargs.get("nip", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "irl",
                         int,
                         40,
                         10,
-                        kwargs.get("irl", 0)
+                        kwargs.get("irl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "qr/irid",
                         float,
                         50,
                         10,
-                        kwargs.get("qr/irid", 0)
+                        kwargs.get("qr/irid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "icomp",
                         int,
                         60,
                         10,
-                        kwargs.get("icomp", 0)
+                        kwargs.get("icomp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -98,7 +99,7 @@ class SectionIgaShell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t", 0.0)
+                        kwargs.get("t", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -126,7 +127,7 @@ class SectionIgaShell(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("nloc", 0.0)
+                        kwargs.get("nloc", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

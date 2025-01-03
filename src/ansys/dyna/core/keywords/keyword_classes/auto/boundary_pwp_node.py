@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryPwpNode(KeywordBase):
@@ -54,7 +55,7 @@ class BoundaryPwpNode(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("cmult", 0.0)
+                        kwargs.get("cmult", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdr",
@@ -68,14 +69,14 @@ class BoundaryPwpNode(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("tbirth", 0.0)
+                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdeath",
                         float,
                         50,
                         10,
-                        kwargs.get("tdeath", 1.0E20)
+                        kwargs.get("tdeath", 1.0E20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -86,21 +87,21 @@ class BoundaryPwpNode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iphre", 0)
+                        kwargs.get("iphre", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "itotex",
                         int,
                         10,
                         10,
-                        kwargs.get("itotex", 0)
+                        kwargs.get("itotex", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idrflag",
                         int,
                         20,
                         10,
-                        kwargs.get("idrflag", 0)
+                        kwargs.get("idrflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",

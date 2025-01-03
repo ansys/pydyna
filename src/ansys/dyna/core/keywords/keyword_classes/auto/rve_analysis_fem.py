@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class RveAnalysisFem(KeywordBase):
@@ -51,14 +52,14 @@ class RveAnalysisFem(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("inpt", 0)
+                        kwargs.get("inpt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "oupt",
                         int,
                         10,
                         10,
-                        kwargs.get("oupt", 1)
+                        kwargs.get("oupt", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",
@@ -79,14 +80,14 @@ class RveAnalysisFem(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("bc", 0)
+                        kwargs.get("bc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "imatch",
                         int,
                         50,
                         10,
-                        kwargs.get("imatch", 1)
+                        kwargs.get("imatch", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

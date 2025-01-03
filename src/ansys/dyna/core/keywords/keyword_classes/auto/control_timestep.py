@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlTimestep(KeywordBase):
@@ -40,56 +41,56 @@ class ControlTimestep(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dtinit", 0)
+                        kwargs.get("dtinit", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tssfac",
                         float,
                         10,
                         10,
-                        kwargs.get("tssfac", 0.0)
+                        kwargs.get("tssfac", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "isdo",
                         int,
                         20,
                         10,
-                        kwargs.get("isdo", 0)
+                        kwargs.get("isdo", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tslimt",
                         float,
                         30,
                         10,
-                        kwargs.get("tslimt", 0.0)
+                        kwargs.get("tslimt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt2ms",
                         float,
                         40,
                         10,
-                        kwargs.get("dt2ms", 0.0)
+                        kwargs.get("dt2ms", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lctm",
                         int,
                         50,
                         10,
-                        kwargs.get("lctm", 0)
+                        kwargs.get("lctm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "erode",
                         int,
                         60,
                         10,
-                        kwargs.get("erode", 0)
+                        kwargs.get("erode", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ms1st",
                         int,
                         70,
                         10,
-                        kwargs.get("ms1st", 0)
+                        kwargs.get("ms1st", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -135,21 +136,21 @@ class ControlTimestep(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("rmscl", 0.0)
+                        kwargs.get("rmscl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "emscl",
                         float,
                         60,
                         10,
-                        kwargs.get("emscl", 0.0)
+                        kwargs.get("emscl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ihdo",
                         int,
                         70,
                         10,
-                        kwargs.get("ihdo", 0)
+                        kwargs.get("ihdo", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -167,7 +168,7 @@ class ControlTimestep(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("igado", 0)
+                        kwargs.get("igado", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

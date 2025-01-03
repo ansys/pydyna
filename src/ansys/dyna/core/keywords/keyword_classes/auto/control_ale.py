@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlAle(KeywordBase):
@@ -40,56 +41,56 @@ class ControlAle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("dct", 1)
+                        kwargs.get("dct", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nadv",
                         int,
                         10,
                         10,
-                        kwargs.get("nadv", 1)
+                        kwargs.get("nadv", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "meth",
                         int,
                         20,
                         10,
-                        kwargs.get("meth", 2)
+                        kwargs.get("meth", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "afac",
                         float,
                         30,
                         10,
-                        kwargs.get("afac", 0.0)
+                        kwargs.get("afac", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bfac",
                         float,
                         40,
                         10,
-                        kwargs.get("bfac", 0.0)
+                        kwargs.get("bfac", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cfac",
                         float,
                         50,
                         10,
-                        kwargs.get("cfac", 0.0)
+                        kwargs.get("cfac", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dfac",
                         float,
                         60,
                         10,
-                        kwargs.get("dfac", 0.0)
+                        kwargs.get("dfac", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "efac",
                         float,
                         70,
                         10,
-                        kwargs.get("efac", 0.0)
+                        kwargs.get("efac", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,49 +101,49 @@ class ControlAle(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("start", 0.0)
+                        kwargs.get("start", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "end",
                         float,
                         10,
                         10,
-                        kwargs.get("end", 1.0E+20)
+                        kwargs.get("end", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "aafac",
                         float,
                         20,
                         10,
-                        kwargs.get("aafac", 1.0)
+                        kwargs.get("aafac", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vfact",
                         float,
                         30,
                         10,
-                        kwargs.get("vfact", 1.0E-06)
+                        kwargs.get("vfact", 1.0E-06 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prit",
                         int,
                         40,
                         10,
-                        kwargs.get("prit", 0)
+                        kwargs.get("prit", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ebc",
                         int,
                         50,
                         10,
-                        kwargs.get("ebc", 0)
+                        kwargs.get("ebc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pref",
                         float,
                         60,
                         10,
-                        kwargs.get("pref", 0.0)
+                        kwargs.get("pref", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsidebc",
@@ -160,56 +161,56 @@ class ControlAle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ncpl", 1)
+                        kwargs.get("ncpl", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nbkt",
                         int,
                         10,
                         10,
-                        kwargs.get("nbkt", 50)
+                        kwargs.get("nbkt", 50 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "imascl",
                         int,
                         20,
                         10,
-                        kwargs.get("imascl", 0)
+                        kwargs.get("imascl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "checkr",
                         float,
                         30,
                         10,
-                        kwargs.get("checkr", 0.0)
+                        kwargs.get("checkr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beamin",
                         float,
                         40,
                         10,
-                        kwargs.get("beamin", 0.0)
+                        kwargs.get("beamin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mmgpref",
                         int,
                         50,
                         10,
-                        kwargs.get("mmgpref", 0)
+                        kwargs.get("mmgpref", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pdifmx",
                         float,
                         60,
                         10,
-                        kwargs.get("pdifmx", 0.0)
+                        kwargs.get("pdifmx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtmufac",
                         float,
                         70,
                         10,
-                        kwargs.get("dtmufac", 0.0)
+                        kwargs.get("dtmufac", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -220,28 +221,28 @@ class ControlAle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("optimpp", 0)
+                        kwargs.get("optimpp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ialedr",
                         int,
                         10,
                         10,
-                        kwargs.get("ialedr", 0)
+                        kwargs.get("ialedr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bndflx",
                         int,
                         20,
                         10,
-                        kwargs.get("bndflx", 0)
+                        kwargs.get("bndflx", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "minmas",
                         float,
                         30,
                         10,
-                        kwargs.get("minmas", 1.0E-5)
+                        kwargs.get("minmas", 1.0E-5 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

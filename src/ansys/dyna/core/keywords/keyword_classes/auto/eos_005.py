@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Eos005(KeywordBase):
@@ -51,28 +52,28 @@ class Eos005(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a10", 0.0)
+                        kwargs.get("a10", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a11",
                         float,
                         20,
                         20,
-                        kwargs.get("a11", 0.0)
+                        kwargs.get("a11", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a12",
                         float,
                         40,
                         20,
-                        kwargs.get("a12", 0.0)
+                        kwargs.get("a12", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a13",
                         float,
                         60,
                         20,
-                        kwargs.get("a13", 0.0)
+                        kwargs.get("a13", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -83,28 +84,28 @@ class Eos005(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a20", 0.0)
+                        kwargs.get("a20", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a21",
                         float,
                         20,
                         20,
-                        kwargs.get("a21", 0.0)
+                        kwargs.get("a21", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a22",
                         float,
                         40,
                         20,
-                        kwargs.get("a22", 0.0)
+                        kwargs.get("a22", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a23",
                         float,
                         60,
                         20,
-                        kwargs.get("a23", 0.0)
+                        kwargs.get("a23", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -115,28 +116,28 @@ class Eos005(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a30", 0.0)
+                        kwargs.get("a30", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a31",
                         float,
                         20,
                         20,
-                        kwargs.get("a31", 0.0)
+                        kwargs.get("a31", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a32",
                         float,
                         40,
                         20,
-                        kwargs.get("a32", 0.0)
+                        kwargs.get("a32", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a33",
                         float,
                         60,
                         20,
-                        kwargs.get("a33", 0.0)
+                        kwargs.get("a33", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -147,28 +148,28 @@ class Eos005(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a40", 0.0)
+                        kwargs.get("a40", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a41",
                         float,
                         20,
                         20,
-                        kwargs.get("a41", 0.0)
+                        kwargs.get("a41", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a42",
                         float,
                         40,
                         20,
-                        kwargs.get("a42", 0.0)
+                        kwargs.get("a42", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a43",
                         float,
                         60,
                         20,
-                        kwargs.get("a43", 0.0)
+                        kwargs.get("a43", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -179,28 +180,28 @@ class Eos005(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a50", 0.0)
+                        kwargs.get("a50", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a51",
                         float,
                         20,
                         20,
-                        kwargs.get("a51", 0.0)
+                        kwargs.get("a51", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a52",
                         float,
                         40,
                         20,
-                        kwargs.get("a52", 0.0)
+                        kwargs.get("a52", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a53",
                         float,
                         60,
                         20,
-                        kwargs.get("a53", 0.0)
+                        kwargs.get("a53", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -211,28 +212,28 @@ class Eos005(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a60", 0.0)
+                        kwargs.get("a60", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a61",
                         float,
                         20,
                         20,
-                        kwargs.get("a61", 0.0)
+                        kwargs.get("a61", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a62",
                         float,
                         40,
                         20,
-                        kwargs.get("a62", 0.0)
+                        kwargs.get("a62", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a63",
                         float,
                         60,
                         20,
-                        kwargs.get("a63", 0.0)
+                        kwargs.get("a63", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -243,28 +244,28 @@ class Eos005(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a70", 0.0)
+                        kwargs.get("a70", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a71",
                         float,
                         20,
                         20,
-                        kwargs.get("a71", 0.0)
+                        kwargs.get("a71", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a72",
                         float,
                         40,
                         20,
-                        kwargs.get("a72", 0.0)
+                        kwargs.get("a72", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a73",
                         float,
                         60,
                         20,
-                        kwargs.get("a73", 0.0)
+                        kwargs.get("a73", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

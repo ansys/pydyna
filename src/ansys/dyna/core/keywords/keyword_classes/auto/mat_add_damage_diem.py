@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,28 +53,28 @@ class MatAddDamageDiem(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("ndiemc", 0.0)
+                        kwargs.get("ndiemc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dinit",
                         int,
                         20,
                         10,
-                        kwargs.get("dinit", 0)
+                        kwargs.get("dinit", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "deps",
                         float,
                         30,
                         10,
-                        kwargs.get("deps", 0.0)
+                        kwargs.get("deps", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "numfip",
                         float,
                         40,
                         10,
-                        kwargs.get("numfip", 1.0)
+                        kwargs.get("numfip", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -84,7 +85,7 @@ class MatAddDamageDiem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dityp", 0.0)
+                        kwargs.get("dityp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "p1",
@@ -130,14 +131,14 @@ class MatAddDamageDiem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("detyp", 0.0)
+                        kwargs.get("detyp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dctyp",
                         float,
                         10,
                         10,
-                        kwargs.get("dctyp", 0.0)
+                        kwargs.get("dctyp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "q1",

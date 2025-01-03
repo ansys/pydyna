@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -80,7 +81,7 @@ class Mat179(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("hu", 1.0)
+                        kwargs.get("hu", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beta",
@@ -94,7 +95,7 @@ class Mat179(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("damp", .05)
+                        kwargs.get("damp", .05 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -112,14 +113,14 @@ class Mat179(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("fail", 0.0)
+                        kwargs.get("fail", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bvflag",
                         float,
                         20,
                         10,
-                        kwargs.get("bvflag", 0.0)
+                        kwargs.get("bvflag", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ed",
@@ -147,7 +148,7 @@ class Mat179(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("ref", 0.0)
+                        kwargs.get("ref", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tc",
@@ -165,7 +166,7 @@ class Mat179(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rflag", 0.0)
+                        kwargs.get("rflag", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtrt",

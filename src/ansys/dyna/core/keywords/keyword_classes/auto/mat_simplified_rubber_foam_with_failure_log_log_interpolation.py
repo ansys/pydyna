@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -67,7 +68,7 @@ class MatSimplifiedRubberFoamWithFailureLogLogInterpolation(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("mu", 0.10)
+                        kwargs.get("mu", 0.10 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "g",
@@ -88,7 +89,7 @@ class MatSimplifiedRubberFoamWithFailureLogLogInterpolation(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("ref", 0.0)
+                        kwargs.get("ref", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prten",
@@ -134,14 +135,14 @@ class MatSimplifiedRubberFoamWithFailureLogLogInterpolation(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("tension", -1.0)
+                        kwargs.get("tension", -1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rtype",
                         float,
                         50,
                         10,
-                        kwargs.get("rtype", 0.0)
+                        kwargs.get("rtype", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "avgopt",
@@ -205,7 +206,7 @@ class MatSimplifiedRubberFoamWithFailureLogLogInterpolation(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("hu", 1.0)
+                        kwargs.get("hu", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shape",
@@ -226,14 +227,14 @@ class MatSimplifiedRubberFoamWithFailureLogLogInterpolation(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("visco", 0.0)
+                        kwargs.get("visco", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hisout",
                         float,
                         50,
                         10,
-                        kwargs.get("hisout", 0.0)
+                        kwargs.get("hisout", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

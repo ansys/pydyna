@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -299,28 +300,28 @@ class MatPaper(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("prp1", 0.5)
+                        kwargs.get("prp1", 0.5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prp2",
                         float,
                         50,
                         10,
-                        kwargs.get("prp2", 0.133)
+                        kwargs.get("prp2", 0.133 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prp4",
                         float,
                         60,
                         10,
-                        kwargs.get("prp4", 0.5)
+                        kwargs.get("prp4", 0.5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prp5",
                         float,
                         70,
                         10,
-                        kwargs.get("prp5", 0.133)
+                        kwargs.get("prp5", 0.133 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -384,7 +385,7 @@ class MatPaper(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("macf", 1)
+                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xp",

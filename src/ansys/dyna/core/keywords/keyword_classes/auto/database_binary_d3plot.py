@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseBinaryD3Plot(KeywordBase):
@@ -54,7 +55,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("beam", 0)
+                        kwargs.get("beam", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "npltc",
@@ -79,7 +80,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ioopt", 0)
+                        kwargs.get("ioopt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rate",
@@ -107,14 +108,14 @@ class DatabaseBinaryD3Plot(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("type", 0)
+                        kwargs.get("type", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pset",
                         int,
                         50,
                         10,
-                        kwargs.get("pset", 0)
+                        kwargs.get("pset", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

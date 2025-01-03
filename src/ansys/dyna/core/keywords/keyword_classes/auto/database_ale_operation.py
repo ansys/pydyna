@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseAleOperation(KeywordBase):
@@ -54,7 +55,7 @@ class DatabaseAleOperation(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("wrt", 1)
+                        kwargs.get("wrt", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -83,56 +84,56 @@ class DatabaseAleOperation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("var", 0)
+                        kwargs.get("var", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "var",
                         int,
                         10,
                         10,
-                        kwargs.get("var", 0)
+                        kwargs.get("var", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "var",
                         int,
                         20,
                         10,
-                        kwargs.get("var", 0)
+                        kwargs.get("var", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "var",
                         int,
                         30,
                         10,
-                        kwargs.get("var", 0)
+                        kwargs.get("var", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "var",
                         int,
                         40,
                         10,
-                        kwargs.get("var", 0)
+                        kwargs.get("var", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "var",
                         int,
                         50,
                         10,
-                        kwargs.get("var", 0)
+                        kwargs.get("var", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "var",
                         int,
                         60,
                         10,
-                        kwargs.get("var", 0)
+                        kwargs.get("var", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "var",
                         int,
                         70,
                         10,
-                        kwargs.get("var", 0)
+                        kwargs.get("var", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryPrescribedMotionRigid(KeywordBase):
@@ -47,14 +48,14 @@ class BoundaryPrescribedMotionRigid(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("dof", 0)
+                        kwargs.get("dof", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vad",
                         int,
                         20,
                         10,
-                        kwargs.get("vad", 0)
+                        kwargs.get("vad", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",
@@ -68,7 +69,7 @@ class BoundaryPrescribedMotionRigid(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vid",
@@ -82,14 +83,14 @@ class BoundaryPrescribedMotionRigid(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("death", 1.0E+28)
+                        kwargs.get("death", 1.0E+28 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "birth",
                         float,
                         70,
                         10,
-                        kwargs.get("birth", 0.0)
+                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,35 +101,35 @@ class BoundaryPrescribedMotionRigid(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("offset1", 0.0)
+                        kwargs.get("offset1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "offset2",
                         float,
                         10,
                         10,
-                        kwargs.get("offset2", 0.0)
+                        kwargs.get("offset2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lrb",
                         int,
                         20,
                         10,
-                        kwargs.get("lrb", 0)
+                        kwargs.get("lrb", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "node1",
                         int,
                         30,
                         10,
-                        kwargs.get("node1", 0)
+                        kwargs.get("node1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "node2",
                         int,
                         40,
                         10,
-                        kwargs.get("node2", 0)
+                        kwargs.get("node2", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

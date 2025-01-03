@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryThermalWeld(KeywordBase):
@@ -47,21 +48,21 @@ class BoundaryThermalWeld(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("ptyp", 1)
+                        kwargs.get("ptyp", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid",
                         int,
                         20,
                         10,
-                        kwargs.get("nid", 0)
+                        kwargs.get("nid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nflag",
                         int,
                         30,
                         10,
-                        kwargs.get("nflag", 1)
+                        kwargs.get("nflag", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "x0",

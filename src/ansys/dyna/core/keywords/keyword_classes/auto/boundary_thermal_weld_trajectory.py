@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryThermalWeldTrajectory(KeywordBase):
@@ -47,14 +48,14 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("ptyp", 1)
+                        kwargs.get("ptyp", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsid1",
                         int,
                         20,
                         10,
-                        kwargs.get("nsid1", 0)
+                        kwargs.get("nsid1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "spd1",
@@ -82,14 +83,14 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("ncyc", 1)
+                        kwargs.get("ncyc", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "relvel",
                         int,
                         70,
                         10,
-                        kwargs.get("relvel", 0)
+                        kwargs.get("relvel", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,7 +101,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iform", 1)
+                        kwargs.get("iform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",

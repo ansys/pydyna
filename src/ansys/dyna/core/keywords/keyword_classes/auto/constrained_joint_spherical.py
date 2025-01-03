@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedJointSpherical(KeywordBase):
@@ -54,42 +55,42 @@ class ConstrainedJointSpherical(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("n3", 0)
+                        kwargs.get("n3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n4",
                         int,
                         30,
                         10,
-                        kwargs.get("n4", 0)
+                        kwargs.get("n4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n5",
                         int,
                         40,
                         10,
-                        kwargs.get("n5", 0)
+                        kwargs.get("n5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n6",
                         int,
                         50,
                         10,
-                        kwargs.get("n6", 0)
+                        kwargs.get("n6", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rps",
                         float,
                         60,
                         10,
-                        kwargs.get("rps", 1.0)
+                        kwargs.get("rps", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "damp",
                         float,
                         70,
                         10,
-                        kwargs.get("damp", 1.0)
+                        kwargs.get("damp", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

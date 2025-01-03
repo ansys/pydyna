@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class MeshSizeShape(KeywordBase):
@@ -40,35 +41,35 @@ class MeshSizeShape(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("sname", "BOX")
+                        kwargs.get("sname", "BOX" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "force",
                         int,
                         10,
                         10,
-                        kwargs.get("force", 0)
+                        kwargs.get("force", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "method",
                         int,
                         20,
                         10,
-                        kwargs.get("method", 0)
+                        kwargs.get("method", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bt",
                         float,
                         30,
                         10,
-                        kwargs.get("bt", 0.0)
+                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt",
                         float,
                         40,
                         10,
-                        kwargs.get("dt", 1.E12)
+                        kwargs.get("dt", 1.E12 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

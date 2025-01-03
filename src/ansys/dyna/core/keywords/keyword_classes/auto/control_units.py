@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlUnits(KeywordBase):
@@ -40,28 +41,28 @@ class ControlUnits(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("length", "m")
+                        kwargs.get("length", "m" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "time",
                         str,
                         10,
                         10,
-                        kwargs.get("time", "sec")
+                        kwargs.get("time", "sec" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mass",
                         str,
                         20,
                         10,
-                        kwargs.get("mass", "kg")
+                        kwargs.get("mass", "kg" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "temp",
                         str,
                         30,
                         10,
-                        kwargs.get("temp", "k")
+                        kwargs.get("temp", "k" if use_lspp_defaults() else None)
                     ),
                 ],
             ),

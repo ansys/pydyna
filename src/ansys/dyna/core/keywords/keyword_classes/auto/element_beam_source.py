@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementBeamSource(KeywordBase):
@@ -40,49 +41,49 @@ class ElementBeamSource(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("bsid", 0)
+                        kwargs.get("bsid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bsnid",
                         int,
                         10,
                         10,
-                        kwargs.get("bsnid", 0)
+                        kwargs.get("bsnid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bseid",
                         int,
                         20,
                         10,
-                        kwargs.get("bseid", 0)
+                        kwargs.get("bseid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nele",
                         int,
                         30,
                         10,
-                        kwargs.get("nele", 0)
+                        kwargs.get("nele", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lfed",
                         float,
                         40,
                         10,
-                        kwargs.get("lfed", 0.0)
+                        kwargs.get("lfed", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fpull",
                         float,
                         50,
                         10,
-                        kwargs.get("fpull", 0.0)
+                        kwargs.get("fpull", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lmin",
                         float,
                         60,
                         10,
-                        kwargs.get("lmin", 0.0)
+                        kwargs.get("lmin", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

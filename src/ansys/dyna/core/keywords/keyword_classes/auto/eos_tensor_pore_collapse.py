@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosTensorPoreCollapse(KeywordBase):
@@ -61,28 +62,28 @@ class EosTensorPoreCollapse(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("mu1", 0.0)
+                        kwargs.get("mu1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mu2",
                         float,
                         40,
                         10,
-                        kwargs.get("mu2", 0.0)
+                        kwargs.get("mu2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ie0",
                         float,
                         50,
                         10,
-                        kwargs.get("ie0", 0.0)
+                        kwargs.get("ie0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ec0",
                         float,
                         60,
                         10,
-                        kwargs.get("ec0", 0.0)
+                        kwargs.get("ec0", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

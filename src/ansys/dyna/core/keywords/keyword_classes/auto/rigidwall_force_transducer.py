@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class RigidwallForceTransducer(KeywordBase):
@@ -40,14 +41,14 @@ class RigidwallForceTransducer(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tid", 0)
+                        kwargs.get("tid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rwid",
                         int,
                         10,
                         10,
-                        kwargs.get("rwid", 0)
+                        kwargs.get("rwid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -69,7 +70,7 @@ class RigidwallForceTransducer(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsid", 0)
+                        kwargs.get("nsid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

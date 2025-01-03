@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmBoundary(KeywordBase):
@@ -47,7 +48,7 @@ class EmBoundary(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("btype", 9)
+                        kwargs.get("btype", 9 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

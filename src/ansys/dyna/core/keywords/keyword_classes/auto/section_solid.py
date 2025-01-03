@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 from ansys.dyna.core.lib.variable_card import VariableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -54,14 +55,14 @@ class SectionSolid(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 1)
+                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "aet",
                         int,
                         20,
                         10,
-                        kwargs.get("aet", 0)
+                        kwargs.get("aet", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -107,42 +108,42 @@ class SectionSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nip", 0)
+                        kwargs.get("nip", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nxdof",
                         int,
                         10,
                         10,
-                        kwargs.get("nxdof", 0)
+                        kwargs.get("nxdof", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ihgf",
                         int,
                         20,
                         10,
-                        kwargs.get("ihgf", 0)
+                        kwargs.get("ihgf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "itaj",
                         int,
                         30,
                         10,
-                        kwargs.get("itaj", 0)
+                        kwargs.get("itaj", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lmc",
                         int,
                         40,
                         10,
-                        kwargs.get("lmc", 0)
+                        kwargs.get("lmc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nhsv",
                         int,
                         50,
                         10,
-                        kwargs.get("nhsv", 0)
+                        kwargs.get("nhsv", 0 if use_lspp_defaults() else None)
                     ),
                 ],
                 lambda: self.elform in [101, 102, 103, 104, 105],

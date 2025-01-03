@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleInjection(KeywordBase):
@@ -54,21 +55,21 @@ class AleInjection(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("global", 0)
+                        kwargs.get("global", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lce",
                         int,
                         30,
                         10,
-                        kwargs.get("lce", 0)
+                        kwargs.get("lce", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcrvl",
                         int,
                         40,
                         10,
-                        kwargs.get("lcrvl", 0)
+                        kwargs.get("lcrvl", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -79,56 +80,56 @@ class AleInjection(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcvt", 0)
+                        kwargs.get("lcvt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vect",
                         int,
                         10,
                         10,
-                        kwargs.get("vect", 0)
+                        kwargs.get("vect", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcvr",
                         int,
                         20,
                         10,
-                        kwargs.get("lcvr", 0)
+                        kwargs.get("lcvr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vecr",
                         int,
                         30,
                         10,
-                        kwargs.get("vecr", 0)
+                        kwargs.get("vecr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "boxv",
                         int,
                         40,
                         10,
-                        kwargs.get("boxv", 0)
+                        kwargs.get("boxv", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xg",
                         float,
                         50,
                         10,
-                        kwargs.get("xg", 0.0)
+                        kwargs.get("xg", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yg",
                         float,
                         60,
                         10,
-                        kwargs.get("yg", 0.0)
+                        kwargs.get("yg", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zg",
                         float,
                         70,
                         10,
-                        kwargs.get("zg", 0.0)
+                        kwargs.get("zg", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -139,56 +140,56 @@ class AleInjection(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("surfct", 0)
+                        kwargs.get("surfct", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ndiv",
                         int,
                         10,
                         10,
-                        kwargs.get("ndiv", 3)
+                        kwargs.get("ndiv", 3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xl",
                         float,
                         20,
                         10,
-                        kwargs.get("xl", 0.0)
+                        kwargs.get("xl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yl",
                         float,
                         30,
                         10,
-                        kwargs.get("yl", 0.0)
+                        kwargs.get("yl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zd",
                         float,
                         40,
                         10,
-                        kwargs.get("zd", 0.0)
+                        kwargs.get("zd", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zu",
                         float,
                         50,
                         10,
-                        kwargs.get("zu", 0.0)
+                        kwargs.get("zu", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xc",
                         float,
                         60,
                         10,
-                        kwargs.get("xc", 0.0)
+                        kwargs.get("xc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yc",
                         float,
                         70,
                         10,
-                        kwargs.get("yc", 0.0)
+                        kwargs.get("yc", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

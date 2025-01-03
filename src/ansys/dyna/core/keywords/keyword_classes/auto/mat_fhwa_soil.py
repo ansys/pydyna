@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,7 +60,7 @@ class MatFhwaSoil(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("nplot", 1)
+                        kwargs.get("nplot", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "spgrav",
@@ -73,7 +74,7 @@ class MatFhwaSoil(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("rhowat", 1.0)
+                        kwargs.get("rhowat", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vn",
@@ -94,7 +95,7 @@ class MatFhwaSoil(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("intrmx", 1)
+                        kwargs.get("intrmx", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

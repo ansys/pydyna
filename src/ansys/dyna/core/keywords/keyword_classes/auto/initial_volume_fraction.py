@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialVolumeFraction(KeywordBase):
@@ -47,49 +48,49 @@ class InitialVolumeFraction(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("vf1", 0.0)
+                        kwargs.get("vf1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vf2",
                         float,
                         20,
                         10,
-                        kwargs.get("vf2", 0.0)
+                        kwargs.get("vf2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vf3",
                         float,
                         30,
                         10,
-                        kwargs.get("vf3", 0.0)
+                        kwargs.get("vf3", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vf4",
                         float,
                         40,
                         10,
-                        kwargs.get("vf4", 0.0)
+                        kwargs.get("vf4", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vf5",
                         float,
                         50,
                         10,
-                        kwargs.get("vf5", 0.0)
+                        kwargs.get("vf5", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vf6",
                         float,
                         60,
                         10,
-                        kwargs.get("vf6", 0.0)
+                        kwargs.get("vf6", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vf7",
                         float,
                         70,
                         10,
-                        kwargs.get("vf7", 0.0)
+                        kwargs.get("vf7", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,7 +74,7 @@ class Mat198(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("rkf", 1.0)
+                        kwargs.get("rkf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "phi",
@@ -105,56 +106,56 @@ class Mat198(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("str_lim", 0.005)
+                        kwargs.get("str_lim", 0.005 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nplanes",
                         int,
                         10,
                         10,
-                        kwargs.get("nplanes", 0)
+                        kwargs.get("nplanes", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "elastic",
                         int,
                         20,
                         10,
-                        kwargs.get("elastic", 0)
+                        kwargs.get("elastic", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lccpdr",
                         int,
                         30,
                         10,
-                        kwargs.get("lccpdr", 0)
+                        kwargs.get("lccpdr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lccpt",
                         int,
                         40,
                         10,
-                        kwargs.get("lccpt", 0)
+                        kwargs.get("lccpt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lccjdr",
                         int,
                         50,
                         10,
-                        kwargs.get("lccjdr", 0)
+                        kwargs.get("lccjdr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lccjt",
                         int,
                         60,
                         10,
-                        kwargs.get("lccjt", 0)
+                        kwargs.get("lccjt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcsfac",
                         int,
                         70,
                         10,
-                        kwargs.get("lcsfac", 0)
+                        kwargs.get("lcsfac", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -260,7 +261,7 @@ class Mat198(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("shrmax", 1.e20)
+                        kwargs.get("shrmax", 1.e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "local",

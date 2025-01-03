@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -60,14 +61,14 @@ class ContactFormingOneWaySurfaceToSurface(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("surfatyp", 0)
+                        kwargs.get("surfatyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "surfbtyp",
                         int,
                         30,
                         10,
-                        kwargs.get("surfbtyp", 0)
+                        kwargs.get("surfbtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "saboxid",
@@ -88,14 +89,14 @@ class ContactFormingOneWaySurfaceToSurface(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("sapr", 0)
+                        kwargs.get("sapr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sbpr",
                         int,
                         70,
                         10,
-                        kwargs.get("sbpr", 0)
+                        kwargs.get("sbpr", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -106,35 +107,35 @@ class ContactFormingOneWaySurfaceToSurface(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs", 0.0)
+                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fd",
                         float,
                         10,
                         10,
-                        kwargs.get("fd", 0.0)
+                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dc",
                         float,
                         20,
                         10,
-                        kwargs.get("dc", 0.0)
+                        kwargs.get("dc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vc",
                         float,
                         30,
                         10,
-                        kwargs.get("vc", 0.0)
+                        kwargs.get("vc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vdc",
                         float,
                         40,
                         10,
-                        kwargs.get("vdc", 0.0)
+                        kwargs.get("vdc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "penchk",
@@ -148,14 +149,14 @@ class ContactFormingOneWaySurfaceToSurface(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("bt", 0.0)
+                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt",
                         float,
                         70,
                         10,
-                        kwargs.get("dt", 1.0E+20)
+                        kwargs.get("dt", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -166,14 +167,14 @@ class ContactFormingOneWaySurfaceToSurface(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfsa", 1.0)
+                        kwargs.get("sfsa", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfsb",
                         float,
                         10,
                         10,
-                        kwargs.get("sfsb", 1.0)
+                        kwargs.get("sfsb", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sast",
@@ -194,28 +195,28 @@ class ContactFormingOneWaySurfaceToSurface(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("sfsat", 1.0)
+                        kwargs.get("sfsat", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfsbt",
                         float,
                         50,
                         10,
-                        kwargs.get("sfsbt", 1.0)
+                        kwargs.get("sfsbt", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fsf",
                         float,
                         60,
                         10,
-                        kwargs.get("fsf", 1.0)
+                        kwargs.get("fsf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vsf",
                         float,
                         70,
                         10,
-                        kwargs.get("vsf", 1.0)
+                        kwargs.get("vsf", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

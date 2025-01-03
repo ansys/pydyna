@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class RailTrack(KeywordBase):
@@ -68,28 +69,28 @@ class RailTrack(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("oset1", 0.0)
+                        kwargs.get("oset1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sf1",
                         float,
                         50,
                         10,
-                        kwargs.get("sf1", 1.0)
+                        kwargs.get("sf1", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ga1",
                         float,
                         60,
                         10,
-                        kwargs.get("ga1", 0.0)
+                        kwargs.get("ga1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idir",
                         int,
                         70,
                         10,
-                        kwargs.get("idir", 0)
+                        kwargs.get("idir", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -128,21 +129,21 @@ class RailTrack(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("oset2", 0.0)
+                        kwargs.get("oset2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sf2",
                         float,
                         50,
                         10,
-                        kwargs.get("sf2", 1.0)
+                        kwargs.get("sf2", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ga2",
                         float,
                         60,
                         10,
-                        kwargs.get("ga2", 0.0)
+                        kwargs.get("ga2", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

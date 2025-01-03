@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -165,14 +166,14 @@ class MatPseudoTensor(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("lcp", 0)
+                        kwargs.get("lcp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcr",
                         int,
                         50,
                         10,
-                        kwargs.get("lcr", 0)
+                        kwargs.get("lcr", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

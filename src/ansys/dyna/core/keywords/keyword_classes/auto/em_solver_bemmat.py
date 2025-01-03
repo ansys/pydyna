@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmSolverBemmat(KeywordBase):
@@ -40,7 +41,7 @@ class EmSolverBemmat(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("matid", 1)
+                        kwargs.get("matid", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -89,7 +90,7 @@ class EmSolverBemmat(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("reltol", 1.e-6)
+                        kwargs.get("reltol", 1.e-6 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -87,14 +88,14 @@ class MatConcreteBeam(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("fail", 10.E+20)
+                        kwargs.get("fail", 10.E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdel",
                         float,
                         70,
                         10,
-                        kwargs.get("tdel", 10.0E+20)
+                        kwargs.get("tdel", 10.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -119,14 +120,14 @@ class MatConcreteBeam(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("lcss", 0)
+                        kwargs.get("lcss", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcsr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcsr", 0)
+                        kwargs.get("lcsr", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -137,14 +138,14 @@ class MatConcreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("noten", 0)
+                        kwargs.get("noten", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tencut",
                         float,
                         10,
                         10,
-                        kwargs.get("tencut", 1.0E+15)
+                        kwargs.get("tencut", 1.0E+15 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sdr",

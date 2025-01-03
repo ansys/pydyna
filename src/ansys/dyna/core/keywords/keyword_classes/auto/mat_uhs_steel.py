@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -80,21 +81,21 @@ class MatUhsSteel(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("crsh", 0)
+                        kwargs.get("crsh", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "phase",
                         int,
                         60,
                         10,
-                        kwargs.get("phase", 0)
+                        kwargs.get("phase", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "heat",
                         int,
                         70,
                         10,
-                        kwargs.get("heat", 0)
+                        kwargs.get("heat", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -267,7 +268,7 @@ class MatUhsSteel(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("cwm", 0)
+                        kwargs.get("cwm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lctre",
@@ -313,7 +314,7 @@ class MatUhsSteel(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("tref", 273.15)
+                        kwargs.get("tref", 273.15 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lat1",
@@ -447,14 +448,14 @@ class MatUhsSteel(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("react", 0)
+                        kwargs.get("react", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "temper",
                         int,
                         70,
                         10,
-                        kwargs.get("temper", 0)
+                        kwargs.get("temper", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -514,7 +515,7 @@ class MatUhsSteel(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("tau1", 2.08E+8)
+                        kwargs.get("tau1", 2.08E+8 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -525,28 +526,28 @@ class MatUhsSteel(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gra", 3.11)
+                        kwargs.get("gra", 3.11 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "grb",
                         float,
                         10,
                         10,
-                        kwargs.get("grb", 7520.)
+                        kwargs.get("grb", 7520. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "expa",
                         float,
                         20,
                         10,
-                        kwargs.get("expa", 1.0)
+                        kwargs.get("expa", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "expb",
                         float,
                         30,
                         10,
-                        kwargs.get("expb", 1.0)
+                        kwargs.get("expb", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "grcc",
@@ -567,14 +568,14 @@ class MatUhsSteel(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("heatn", 1.0)
+                        kwargs.get("heatn", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tau2",
                         float,
                         70,
                         10,
-                        kwargs.get("tau2", 4.806)
+                        kwargs.get("tau2", 4.806 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -645,14 +646,14 @@ class MatUhsSteel(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lch4", 0)
+                        kwargs.get("lch4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lch5",
                         int,
                         10,
                         10,
-                        kwargs.get("lch5", 0)
+                        kwargs.get("lch5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtcrit",

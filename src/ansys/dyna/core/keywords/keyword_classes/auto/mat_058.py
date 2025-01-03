@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -193,7 +194,7 @@ class Mat058(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("fs", 0.0)
+                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "epsf",
@@ -214,7 +215,7 @@ class Mat058(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("tsmd", 0.9)
+                        kwargs.get("tsmd", 0.9 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -483,42 +484,42 @@ class Mat058(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lce11c", 0)
+                        kwargs.get("lce11c", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lce11t",
                         int,
                         10,
                         10,
-                        kwargs.get("lce11t", 0)
+                        kwargs.get("lce11t", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lce22c",
                         int,
                         20,
                         10,
-                        kwargs.get("lce22c", 0)
+                        kwargs.get("lce22c", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lce22t",
                         int,
                         30,
                         10,
-                        kwargs.get("lce22t", 0)
+                        kwargs.get("lce22t", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcgms",
                         int,
                         40,
                         10,
-                        kwargs.get("lcgms", 0)
+                        kwargs.get("lcgms", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcefs",
                         int,
                         50,
                         10,
-                        kwargs.get("lcefs", 0)
+                        kwargs.get("lcefs", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

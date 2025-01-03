@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,7 +74,7 @@ class MatLouYoonAnisotropicPlastictiy(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("hr", 1.0)
+                        kwargs.get("hr", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "p1",
@@ -94,7 +95,7 @@ class MatLouYoonAnisotropicPlastictiy(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("iter", 0.0)
+                        kwargs.get("iter", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -112,7 +113,7 @@ class MatLouYoonAnisotropicPlastictiy(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("nfunc", 1)
+                        kwargs.get("nfunc", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "aopt",
@@ -147,7 +148,7 @@ class MatLouYoonAnisotropicPlastictiy(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("lcf", 0)
+                        kwargs.get("lcf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "p3",

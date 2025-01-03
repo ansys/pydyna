@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainFrf(KeywordBase):
@@ -47,49 +48,49 @@ class FrequencyDomainFrf(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("n1typ", 0)
+                        kwargs.get("n1typ", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dof1",
                         int,
                         20,
                         10,
-                        kwargs.get("dof1", 0)
+                        kwargs.get("dof1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vad1",
                         int,
                         30,
                         10,
-                        kwargs.get("vad1", 3)
+                        kwargs.get("vad1", 3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vid1",
                         int,
                         40,
                         10,
-                        kwargs.get("vid1", 0)
+                        kwargs.get("vid1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fnmax",
                         float,
                         50,
                         10,
-                        kwargs.get("fnmax", 0.0)
+                        kwargs.get("fnmax", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mdmin",
                         int,
                         60,
                         10,
-                        kwargs.get("mdmin", 0)
+                        kwargs.get("mdmin", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mdmax",
                         int,
                         70,
                         10,
-                        kwargs.get("mdmax", 0)
+                        kwargs.get("mdmax", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,35 +101,35 @@ class FrequencyDomainFrf(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dampf", 0.0)
+                        kwargs.get("dampf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdam",
                         int,
                         10,
                         10,
-                        kwargs.get("lcdam", 0)
+                        kwargs.get("lcdam", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lctyp",
                         int,
                         20,
                         10,
-                        kwargs.get("lctyp", 0)
+                        kwargs.get("lctyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmpmas",
                         float,
                         30,
                         10,
-                        kwargs.get("dmpmas", 0.0)
+                        kwargs.get("dmpmas", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmpstf",
                         float,
                         40,
                         10,
-                        kwargs.get("dmpstf", 0.0)
+                        kwargs.get("dmpstf", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -146,35 +147,35 @@ class FrequencyDomainFrf(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("n2typ", 0)
+                        kwargs.get("n2typ", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dof2",
                         int,
                         20,
                         10,
-                        kwargs.get("dof2", 0)
+                        kwargs.get("dof2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vad2",
                         int,
                         30,
                         10,
-                        kwargs.get("vad2", 2)
+                        kwargs.get("vad2", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vid2",
                         int,
                         40,
                         10,
-                        kwargs.get("vid2", 0)
+                        kwargs.get("vid2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "relatv",
                         int,
                         50,
                         10,
-                        kwargs.get("relatv", 0)
+                        kwargs.get("relatv", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -199,14 +200,14 @@ class FrequencyDomainFrf(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("nfreq", 2)
+                        kwargs.get("nfreq", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fspace",
                         int,
                         30,
                         10,
-                        kwargs.get("fspace", 0)
+                        kwargs.get("fspace", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcfreq",
@@ -220,14 +221,14 @@ class FrequencyDomainFrf(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("restrt", 0)
+                        kwargs.get("restrt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "output",
                         int,
                         60,
                         10,
-                        kwargs.get("output", 0)
+                        kwargs.get("output", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

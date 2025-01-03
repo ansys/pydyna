@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -285,7 +286,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("soft", 1.0)
+                        kwargs.get("soft", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fbrt",
@@ -299,7 +300,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("ycfac", 2.0)
+                        kwargs.get("ycfac", 2.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dfailt",
@@ -366,7 +367,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("crit", 54.0)
+                        kwargs.get("crit", 54.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beta",
@@ -412,7 +413,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("soft2", 1.0)
+                        kwargs.get("soft2", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -465,7 +466,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("softg", 1.0)
+                        kwargs.get("softg", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

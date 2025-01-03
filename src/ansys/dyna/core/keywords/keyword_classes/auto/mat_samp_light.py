@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -112,21 +113,21 @@ class MatSampLight(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("lcid_c", 0)
+                        kwargs.get("lcid_c", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ctflg",
                         int,
                         20,
                         10,
-                        kwargs.get("ctflg", 0)
+                        kwargs.get("ctflg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rateop",
                         int,
                         30,
                         10,
-                        kwargs.get("rateop", 0)
+                        kwargs.get("rateop", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nuep",
@@ -140,14 +141,14 @@ class MatSampLight(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("lcid-p", 0)
+                        kwargs.get("lcid-p", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rfiltf",
                         float,
                         60,
                         10,
-                        kwargs.get("rfiltf", 0.95)
+                        kwargs.get("rfiltf", 0.95 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingBestfitVector(KeywordBase):
@@ -40,35 +41,35 @@ class ControlFormingBestfitVector(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ifit", 0)
+                        kwargs.get("ifit", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nskip",
                         int,
                         10,
                         10,
-                        kwargs.get("nskip", -3)
+                        kwargs.get("nskip", -3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gaponly",
                         int,
                         20,
                         10,
-                        kwargs.get("gaponly", 0)
+                        kwargs.get("gaponly", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ifast",
                         int,
                         30,
                         10,
-                        kwargs.get("ifast", 1)
+                        kwargs.get("ifast", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ifset",
                         int,
                         40,
                         10,
-                        kwargs.get("ifset", 0)
+                        kwargs.get("ifset", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsets",

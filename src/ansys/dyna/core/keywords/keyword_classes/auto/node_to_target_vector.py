@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class NodeToTargetVector(KeywordBase):
@@ -47,21 +48,21 @@ class NodeToTargetVector(KeywordBase):
                         float,
                         8,
                         16,
-                        kwargs.get("xdelta", 0.0)
+                        kwargs.get("xdelta", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ydelta",
                         float,
                         24,
                         16,
-                        kwargs.get("ydelta", 0.0)
+                        kwargs.get("ydelta", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zdelta",
                         float,
                         40,
                         16,
-                        kwargs.get("zdelta", 0.0)
+                        kwargs.get("zdelta", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

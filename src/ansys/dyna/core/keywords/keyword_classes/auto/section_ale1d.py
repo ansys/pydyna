@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,21 +53,21 @@ class SectionAle1D(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("aleform", 11)
+                        kwargs.get("aleform", 11 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "aet",
                         int,
                         20,
                         10,
-                        kwargs.get("aet", 4)
+                        kwargs.get("aet", 4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "elform",
                         int,
                         30,
                         10,
-                        kwargs.get("elform", 7)
+                        kwargs.get("elform", 7 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

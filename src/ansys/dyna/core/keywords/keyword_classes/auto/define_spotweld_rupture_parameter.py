@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -176,42 +177,42 @@ class DefineSpotweldRuptureParameter(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcdpa", 0)
+                        kwargs.get("lcdpa", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdpm",
                         int,
                         10,
                         10,
-                        kwargs.get("lcdpm", 0)
+                        kwargs.get("lcdpm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdps",
                         int,
                         20,
                         10,
-                        kwargs.get("lcdps", 0)
+                        kwargs.get("lcdps", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdna",
                         int,
                         30,
                         10,
-                        kwargs.get("lcdna", 0)
+                        kwargs.get("lcdna", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdnm",
                         int,
                         40,
                         10,
-                        kwargs.get("lcdnm", 0)
+                        kwargs.get("lcdnm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdns",
                         int,
                         50,
                         10,
-                        kwargs.get("lcdns", 0)
+                        kwargs.get("lcdns", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -225,7 +226,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("nsmt", 0)
+                        kwargs.get("nsmt", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

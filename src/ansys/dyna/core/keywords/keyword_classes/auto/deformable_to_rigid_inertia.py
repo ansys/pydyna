@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DeformableToRigidInertia(KeywordBase):
@@ -90,14 +91,14 @@ class DeformableToRigidInertia(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("ixy", 0.0)
+                        kwargs.get("ixy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ixz",
                         float,
                         20,
                         10,
-                        kwargs.get("ixz", 0.0)
+                        kwargs.get("ixz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iyy",
@@ -111,7 +112,7 @@ class DeformableToRigidInertia(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("iyz", 0.0)
+                        kwargs.get("iyz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "izz",

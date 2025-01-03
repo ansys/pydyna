@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmControlCoupling(KeywordBase):
@@ -40,42 +41,42 @@ class EmControlCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("thcoupl", 0)
+                        kwargs.get("thcoupl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "smcoupl",
                         int,
                         10,
                         10,
-                        kwargs.get("smcoupl", 0)
+                        kwargs.get("smcoupl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "thlcid",
                         int,
                         20,
                         10,
-                        kwargs.get("thlcid", 0)
+                        kwargs.get("thlcid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "smlcid",
                         int,
                         30,
                         10,
-                        kwargs.get("smlcid", 0)
+                        kwargs.get("smlcid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "thcplfl",
                         int,
                         40,
                         10,
-                        kwargs.get("thcplfl", 0)
+                        kwargs.get("thcplfl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "smcplfl",
                         int,
                         50,
                         10,
-                        kwargs.get("smcplfl", 0)
+                        kwargs.get("smcplfl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cflag",
@@ -100,7 +101,7 @@ class EmControlCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("smmod", 0)
+                        kwargs.get("smmod", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dfx",

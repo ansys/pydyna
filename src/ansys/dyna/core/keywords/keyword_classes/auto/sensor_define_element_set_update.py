@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,7 +53,7 @@ class SensorDefineElementSetUpdate(KeywordBase):
                         str,
                         10,
                         10,
-                        kwargs.get("etype", "BEAM")
+                        kwargs.get("etype", "BEAM" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "elemid",
@@ -66,21 +67,21 @@ class SensorDefineElementSetUpdate(KeywordBase):
                         str,
                         30,
                         10,
-                        kwargs.get("comp", "XX")
+                        kwargs.get("comp", "XX" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ctype",
                         str,
                         40,
                         10,
-                        kwargs.get("ctype", "STRAIN")
+                        kwargs.get("ctype", "STRAIN" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "layer",
                         str,
                         50,
                         10,
-                        kwargs.get("layer", "BOT")
+                        kwargs.get("layer", "BOT" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sf",
@@ -105,7 +106,7 @@ class SensorDefineElementSetUpdate(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("setopt", "AVG")
+                        kwargs.get("setopt", "AVG" if use_lspp_defaults() else None)
                     ),
                 ],
             ),

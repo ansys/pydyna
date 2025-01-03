@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -45,56 +46,56 @@ class DefineCoordinateVector(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cid", 0)
+                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xx",
                         float,
                         10,
                         10,
-                        kwargs.get("xx", 0.0)
+                        kwargs.get("xx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yx",
                         float,
                         20,
                         10,
-                        kwargs.get("yx", 0.0)
+                        kwargs.get("yx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zx",
                         float,
                         30,
                         10,
-                        kwargs.get("zx", 0.0)
+                        kwargs.get("zx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xv",
                         float,
                         40,
                         10,
-                        kwargs.get("xv", 0.0)
+                        kwargs.get("xv", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yv",
                         float,
                         50,
                         10,
-                        kwargs.get("yv", 0.0)
+                        kwargs.get("yv", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zv",
                         float,
                         60,
                         10,
-                        kwargs.get("zv", 0.0)
+                        kwargs.get("zv", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid",
                         int,
                         70,
                         10,
-                        kwargs.get("nid", 0)
+                        kwargs.get("nid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DampingFrequencyRange(KeywordBase):
@@ -40,49 +41,49 @@ class DampingFrequencyRange(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cdamp", 0.0)
+                        kwargs.get("cdamp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "flow",
                         float,
                         10,
                         10,
-                        kwargs.get("flow", 0.0)
+                        kwargs.get("flow", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fhigh",
                         float,
                         20,
                         10,
-                        kwargs.get("fhigh", 0.0)
+                        kwargs.get("fhigh", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psid",
                         int,
                         30,
                         10,
-                        kwargs.get("psid", 0)
+                        kwargs.get("psid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "blank",
                         int,
                         40,
                         10,
-                        kwargs.get("blank", 0)
+                        kwargs.get("blank", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pidrel",
                         int,
                         50,
                         10,
-                        kwargs.get("pidrel", 0)
+                        kwargs.get("pidrel", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iflg",
                         int,
                         60,
                         10,
-                        kwargs.get("iflg", 0)
+                        kwargs.get("iflg", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

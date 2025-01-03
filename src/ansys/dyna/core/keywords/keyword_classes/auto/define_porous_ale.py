@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,35 +53,35 @@ class DefinePorousAle(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("eidend", 0)
+                        kwargs.get("eidend", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "local",
                         int,
                         20,
                         10,
-                        kwargs.get("local", 0)
+                        kwargs.get("local", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vecid1",
                         int,
                         30,
                         10,
-                        kwargs.get("vecid1", 0)
+                        kwargs.get("vecid1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vecid2",
                         int,
                         40,
                         10,
-                        kwargs.get("vecid2", 0)
+                        kwargs.get("vecid2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "userdef",
                         int,
                         50,
                         10,
-                        kwargs.get("userdef", 0)
+                        kwargs.get("userdef", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -91,42 +92,42 @@ class DefinePorousAle(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("axx", 0.0)
+                        kwargs.get("axx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "axy",
                         float,
                         10,
                         10,
-                        kwargs.get("axy", 0.0)
+                        kwargs.get("axy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "axz",
                         float,
                         20,
                         10,
-                        kwargs.get("axz", 0.0)
+                        kwargs.get("axz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bxx",
                         float,
                         30,
                         10,
-                        kwargs.get("bxx", 0.0)
+                        kwargs.get("bxx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bxy",
                         float,
                         40,
                         10,
-                        kwargs.get("bxy", 0.0)
+                        kwargs.get("bxy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bxz",
                         float,
                         50,
                         10,
-                        kwargs.get("bxz", 0.0)
+                        kwargs.get("bxz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -137,42 +138,42 @@ class DefinePorousAle(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ayx", 0.0)
+                        kwargs.get("ayx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ayy",
                         float,
                         10,
                         10,
-                        kwargs.get("ayy", 0.0)
+                        kwargs.get("ayy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ayz",
                         float,
                         20,
                         10,
-                        kwargs.get("ayz", 0.0)
+                        kwargs.get("ayz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "byx",
                         float,
                         30,
                         10,
-                        kwargs.get("byx", 0.0)
+                        kwargs.get("byx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "byy",
                         float,
                         40,
                         10,
-                        kwargs.get("byy", 0.0)
+                        kwargs.get("byy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "byz",
                         float,
                         50,
                         10,
-                        kwargs.get("byz", 0.0)
+                        kwargs.get("byz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -183,42 +184,42 @@ class DefinePorousAle(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("azx", 0.0)
+                        kwargs.get("azx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "azy",
                         float,
                         10,
                         10,
-                        kwargs.get("azy", 0.0)
+                        kwargs.get("azy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "azz",
                         float,
                         20,
                         10,
-                        kwargs.get("azz", 0.0)
+                        kwargs.get("azz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bzx",
                         float,
                         30,
                         10,
-                        kwargs.get("bzx", 0.0)
+                        kwargs.get("bzx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bzy",
                         float,
                         40,
                         10,
-                        kwargs.get("bzy", 0.0)
+                        kwargs.get("bzy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bzz",
                         float,
                         50,
                         10,
-                        kwargs.get("bzz", 0.0)
+                        kwargs.get("bzz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

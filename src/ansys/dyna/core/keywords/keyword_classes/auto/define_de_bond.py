@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,14 +53,14 @@ class DefineDeBond(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("stype", 0)
+                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bdform",
                         int,
                         20,
                         10,
-                        kwargs.get("bdform", 1)
+                        kwargs.get("bdform", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -98,14 +99,14 @@ class DefineDeBond(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("sfa", 1.0)
+                        kwargs.get("sfa", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "alpha",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha", 0.0)
+                        kwargs.get("alpha", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -119,7 +120,7 @@ class DefineDeBond(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("maxgap", 1.E-4)
+                        kwargs.get("maxgap", 1.E-4 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

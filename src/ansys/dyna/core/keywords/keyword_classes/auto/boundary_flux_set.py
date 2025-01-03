@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryFluxSet(KeywordBase):
@@ -65,42 +66,42 @@ class BoundaryFluxSet(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("mlc1", 1.0)
+                        kwargs.get("mlc1", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mlc2",
                         float,
                         20,
                         10,
-                        kwargs.get("mlc2", 1.0)
+                        kwargs.get("mlc2", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mlc3",
                         float,
                         30,
                         10,
-                        kwargs.get("mlc3", 1.0)
+                        kwargs.get("mlc3", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mlc4",
                         float,
                         40,
                         10,
-                        kwargs.get("mlc4", 1.0)
+                        kwargs.get("mlc4", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "loc",
                         int,
                         50,
                         10,
-                        kwargs.get("loc", 0)
+                        kwargs.get("loc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nhisv",
                         int,
                         60,
                         10,
-                        kwargs.get("nhisv", 0)
+                        kwargs.get("nhisv", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -118,56 +119,56 @@ class BoundaryFluxSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("nhisv1", 0.0)
+                        kwargs.get("nhisv1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nhisv2",
                         float,
                         10,
                         10,
-                        kwargs.get("nhisv2", 0.0)
+                        kwargs.get("nhisv2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nhisv3",
                         float,
                         20,
                         10,
-                        kwargs.get("nhisv3", 0.0)
+                        kwargs.get("nhisv3", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nhisv4",
                         float,
                         30,
                         10,
-                        kwargs.get("nhisv4", 0.0)
+                        kwargs.get("nhisv4", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nhisv5",
                         float,
                         40,
                         10,
-                        kwargs.get("nhisv5", 0.0)
+                        kwargs.get("nhisv5", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nhisv6",
                         float,
                         50,
                         10,
-                        kwargs.get("nhisv6", 0.0)
+                        kwargs.get("nhisv6", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nhisv7",
                         float,
                         60,
                         10,
-                        kwargs.get("nhisv7", 0.0)
+                        kwargs.get("nhisv7", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nhisv8",
                         float,
                         70,
                         10,
-                        kwargs.get("nhisv8", 0.0)
+                        kwargs.get("nhisv8", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

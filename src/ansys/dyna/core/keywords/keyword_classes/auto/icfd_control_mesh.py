@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlMesh(KeywordBase):
@@ -40,7 +41,7 @@ class IcfdControlMesh(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("mgsf", 1.41)
+                        kwargs.get("mgsf", 1.41 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -54,21 +55,21 @@ class IcfdControlMesh(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("mstrat", 0)
+                        kwargs.get("mstrat", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "2dstruc",
                         int,
                         30,
                         10,
-                        kwargs.get("2dstruc", 0)
+                        kwargs.get("2dstruc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nrmsh",
                         int,
                         40,
                         10,
-                        kwargs.get("nrmsh", 0)
+                        kwargs.get("nrmsh", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -79,7 +80,7 @@ class IcfdControlMesh(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("aver", 14)
+                        kwargs.get("aver", 14 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -45,28 +46,28 @@ class DefineSphActiveRegion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id", 0)
+                        kwargs.get("id", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "type",
                         int,
                         10,
                         10,
-                        kwargs.get("type", 0)
+                        kwargs.get("type", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stype",
                         int,
                         20,
                         10,
-                        kwargs.get("stype", 0)
+                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cycle",
                         int,
                         30,
                         10,
-                        kwargs.get("cycle", 1)
+                        kwargs.get("cycle", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid",
@@ -87,7 +88,7 @@ class DefineSphActiveRegion(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("ibuff", 0)
+                        kwargs.get("ibuff", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -98,42 +99,42 @@ class DefineSphActiveRegion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ximin", 0.0)
+                        kwargs.get("ximin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yimin",
                         float,
                         10,
                         10,
-                        kwargs.get("yimin", 0.0)
+                        kwargs.get("yimin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zimin",
                         float,
                         20,
                         10,
-                        kwargs.get("zimin", 0.0)
+                        kwargs.get("zimin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ximax",
                         float,
                         30,
                         10,
-                        kwargs.get("ximax", 0.0)
+                        kwargs.get("ximax", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yimax",
                         float,
                         40,
                         10,
-                        kwargs.get("yimax", 0.0)
+                        kwargs.get("yimax", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zimax",
                         float,
                         50,
                         10,
-                        kwargs.get("zimax", 0.0)
+                        kwargs.get("zimax", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -144,42 +145,42 @@ class DefineSphActiveRegion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xomin", 0.0)
+                        kwargs.get("xomin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yomin",
                         float,
                         10,
                         10,
-                        kwargs.get("yomin", 0.0)
+                        kwargs.get("yomin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zomin",
                         float,
                         20,
                         10,
-                        kwargs.get("zomin", 0.0)
+                        kwargs.get("zomin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xomax",
                         float,
                         30,
                         10,
-                        kwargs.get("xomax", 0.0)
+                        kwargs.get("xomax", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yomax",
                         float,
                         40,
                         10,
-                        kwargs.get("yomax", 0.0)
+                        kwargs.get("yomax", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zomax",
                         float,
                         50,
                         10,
-                        kwargs.get("zomax", 0.0)
+                        kwargs.get("zomax", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -190,42 +191,42 @@ class DefineSphActiveRegion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x0", 0.0)
+                        kwargs.get("x0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y0",
                         float,
                         10,
                         10,
-                        kwargs.get("y0", 0.0)
+                        kwargs.get("y0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z0",
                         float,
                         20,
                         10,
-                        kwargs.get("z0", 0.0)
+                        kwargs.get("z0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xh",
                         float,
                         30,
                         10,
-                        kwargs.get("xh", 0.0)
+                        kwargs.get("xh", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yh",
                         float,
                         40,
                         10,
-                        kwargs.get("yh", 0.0)
+                        kwargs.get("yh", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zh",
                         float,
                         50,
                         10,
-                        kwargs.get("zh", 0.0)
+                        kwargs.get("zh", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -236,28 +237,28 @@ class DefineSphActiveRegion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rmin", 0.0)
+                        kwargs.get("rmin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zmin",
                         float,
                         10,
                         10,
-                        kwargs.get("zmin", 0.0)
+                        kwargs.get("zmin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rmax",
                         float,
                         20,
                         10,
-                        kwargs.get("rmax", 0.0)
+                        kwargs.get("rmax", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zmax",
                         float,
                         30,
                         10,
-                        kwargs.get("zmax", 0.0)
+                        kwargs.get("zmax", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -268,21 +269,21 @@ class DefineSphActiveRegion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x0", 0.0)
+                        kwargs.get("x0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y0",
                         float,
                         10,
                         10,
-                        kwargs.get("y0", 0.0)
+                        kwargs.get("y0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z0",
                         float,
                         20,
                         10,
-                        kwargs.get("z0", 0.0)
+                        kwargs.get("z0", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -293,14 +294,14 @@ class DefineSphActiveRegion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rmin", 0.0)
+                        kwargs.get("rmin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rmax",
                         float,
                         10,
                         10,
-                        kwargs.get("rmax", 0.0)
+                        kwargs.get("rmax", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

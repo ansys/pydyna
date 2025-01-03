@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingGenerateBlankmesh(KeywordBase):
@@ -54,7 +55,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("center", 0)
+                        kwargs.get("center", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xleng",
@@ -82,7 +83,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("plane", 1)
+                        kwargs.get("plane", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cid",

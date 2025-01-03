@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingProjection(KeywordBase):
@@ -61,14 +62,14 @@ class ControlFormingProjection(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("nrbst", 0)
+                        kwargs.get("nrbst", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nrtst",
                         int,
                         40,
                         10,
-                        kwargs.get("nrtst", 0)
+                        kwargs.get("nrtst", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

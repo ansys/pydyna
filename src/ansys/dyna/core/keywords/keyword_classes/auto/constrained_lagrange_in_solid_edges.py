@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedLagrangeInSolidEdges(KeywordBase):
@@ -72,42 +73,42 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("sstyp", 0)
+                        kwargs.get("sstyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mstyp",
                         int,
                         30,
                         10,
-                        kwargs.get("mstyp", 0)
+                        kwargs.get("mstyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nquad",
                         int,
                         40,
                         10,
-                        kwargs.get("nquad", 0)
+                        kwargs.get("nquad", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ctype",
                         int,
                         50,
                         10,
-                        kwargs.get("ctype", 2)
+                        kwargs.get("ctype", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "direc",
                         int,
                         60,
                         10,
-                        kwargs.get("direc", 1)
+                        kwargs.get("direc", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mcoup",
                         int,
                         70,
                         10,
-                        kwargs.get("mcoup", 0)
+                        kwargs.get("mcoup", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -118,56 +119,56 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("start", 0.0)
+                        kwargs.get("start", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "end",
                         float,
                         10,
                         10,
-                        kwargs.get("end", 1.0E+10)
+                        kwargs.get("end", 1.0E+10 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pfac",
                         float,
                         20,
                         10,
-                        kwargs.get("pfac", 0.1)
+                        kwargs.get("pfac", 0.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fric",
                         float,
                         30,
                         10,
-                        kwargs.get("fric", 0.0)
+                        kwargs.get("fric", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "frcmin",
                         float,
                         40,
                         10,
-                        kwargs.get("frcmin", 0.5)
+                        kwargs.get("frcmin", 0.5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "norm",
                         int,
                         50,
                         10,
-                        kwargs.get("norm", 0)
+                        kwargs.get("norm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "normtyp",
                         int,
                         60,
                         10,
-                        kwargs.get("normtyp", 0)
+                        kwargs.get("normtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "damp",
                         float,
                         70,
                         10,
-                        kwargs.get("damp", 0.0)
+                        kwargs.get("damp", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -178,7 +179,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cq", 0.0)
+                        kwargs.get("cq", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hmin",
@@ -199,14 +200,14 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("ileak", 0)
+                        kwargs.get("ileak", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pleak",
                         float,
                         40,
                         10,
-                        kwargs.get("pleak", 0.1)
+                        kwargs.get("pleak", 0.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidpor",
@@ -220,14 +221,14 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("nvent", 0)
+                        kwargs.get("nvent", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "blockage",
                         int,
                         70,
                         10,
-                        kwargs.get("blockage", 0)
+                        kwargs.get("blockage", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -238,49 +239,49 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iboxid", 0)
+                        kwargs.get("iboxid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ipenchk",
                         int,
                         10,
                         10,
-                        kwargs.get("ipenchk", 0)
+                        kwargs.get("ipenchk", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "intforc",
                         int,
                         20,
                         10,
-                        kwargs.get("intforc", 0)
+                        kwargs.get("intforc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ialesof",
                         int,
                         30,
                         10,
-                        kwargs.get("ialesof", 0)
+                        kwargs.get("ialesof", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lagmul",
                         float,
                         40,
                         10,
-                        kwargs.get("lagmul", 0.0)
+                        kwargs.get("lagmul", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pfacmm",
                         int,
                         50,
                         10,
-                        kwargs.get("pfacmm", 0)
+                        kwargs.get("pfacmm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "thkf",
                         float,
                         60,
                         10,
-                        kwargs.get("thkf", 0.0)
+                        kwargs.get("thkf", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

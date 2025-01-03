@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -60,35 +61,35 @@ class Contact2DForceTransducer(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("sfact", 1.0)
+                        kwargs.get("sfact", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "freq",
                         int,
                         30,
                         10,
-                        kwargs.get("freq", 50)
+                        kwargs.get("freq", 50 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fs",
                         float,
                         40,
                         10,
-                        kwargs.get("fs", 0.0)
+                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fd",
                         float,
                         50,
                         10,
-                        kwargs.get("fd", 0.0)
+                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dc",
                         float,
                         60,
                         10,
-                        kwargs.get("dc", 0.0)
+                        kwargs.get("dc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -106,56 +107,56 @@ class Contact2DForceTransducer(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tbirth", 0.0)
+                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdeath",
                         float,
                         10,
                         10,
-                        kwargs.get("tdeath", 1.0E+20)
+                        kwargs.get("tdeath", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "soa",
                         float,
                         20,
                         10,
-                        kwargs.get("soa", 1.0)
+                        kwargs.get("soa", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sob",
                         float,
                         30,
                         10,
-                        kwargs.get("sob", 1.0)
+                        kwargs.get("sob", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nda",
                         int,
                         40,
                         10,
-                        kwargs.get("nda", 0)
+                        kwargs.get("nda", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ndb",
                         int,
                         50,
                         10,
-                        kwargs.get("ndb", 0)
+                        kwargs.get("ndb", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cof",
                         int,
                         60,
                         10,
-                        kwargs.get("cof", 0)
+                        kwargs.get("cof", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "init",
                         int,
                         70,
                         10,
-                        kwargs.get("init", 0)
+                        kwargs.get("init", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

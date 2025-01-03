@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadThermalRsw(KeywordBase):
@@ -58,7 +59,7 @@ class LoadThermalRsw(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("option", 0)
+                        kwargs.get("option", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid1",
@@ -79,28 +80,28 @@ class LoadThermalRsw(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("tdeath", 1.e20)
+                        kwargs.get("tdeath", 1.e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tbirth",
                         float,
                         50,
                         10,
-                        kwargs.get("tbirth", 0.)
+                        kwargs.get("tbirth", 0. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "loc",
                         int,
                         60,
                         10,
-                        kwargs.get("loc", 0)
+                        kwargs.get("loc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "geoup",
                         int,
                         70,
                         10,
-                        kwargs.get("geoup", 0)
+                        kwargs.get("geoup", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -111,42 +112,42 @@ class LoadThermalRsw(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dist", 0)
+                        kwargs.get("dist", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "h1",
                         float,
                         10,
                         10,
-                        kwargs.get("h1", 0.0)
+                        kwargs.get("h1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "h2",
                         float,
                         20,
                         10,
-                        kwargs.get("h2", 0.0)
+                        kwargs.get("h2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r",
                         float,
                         30,
                         10,
-                        kwargs.get("r", 0.0)
+                        kwargs.get("r", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tempc",
                         float,
                         40,
                         10,
-                        kwargs.get("tempc", 0.0)
+                        kwargs.get("tempc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tempb",
                         float,
                         50,
                         10,
-                        kwargs.get("tempb", 0.0)
+                        kwargs.get("tempb", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidt",
@@ -178,21 +179,21 @@ class LoadThermalRsw(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("hz2", 0.0)
+                        kwargs.get("hz2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rz",
                         float,
                         20,
                         10,
-                        kwargs.get("rz", 0.0)
+                        kwargs.get("rz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tempzb",
                         float,
                         30,
                         10,
-                        kwargs.get("tempzb", 0.0)
+                        kwargs.get("tempzb", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

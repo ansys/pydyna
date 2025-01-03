@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartComposite(KeywordBase):
@@ -58,7 +59,7 @@ class PartComposite(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 2)
+                        kwargs.get("elform", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shrf",
@@ -72,35 +73,35 @@ class PartComposite(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("nloc", 0.0)
+                        kwargs.get("nloc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "marea",
                         float,
                         40,
                         10,
-                        kwargs.get("marea", 0)
+                        kwargs.get("marea", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hgid",
                         int,
                         50,
                         10,
-                        kwargs.get("hgid", 0)
+                        kwargs.get("hgid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "adpopt",
                         int,
                         60,
                         10,
-                        kwargs.get("adpopt", 0)
+                        kwargs.get("adpopt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "thshel",
                         int,
                         70,
                         10,
-                        kwargs.get("thshel", 0)
+                        kwargs.get("thshel", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

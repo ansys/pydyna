@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlStagedConstruction(KeywordBase):
@@ -40,35 +41,35 @@ class ControlStagedConstruction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tstart", 0.0)
+                        kwargs.get("tstart", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stgs",
                         int,
                         10,
                         10,
-                        kwargs.get("stgs", 0)
+                        kwargs.get("stgs", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stge",
                         int,
                         20,
                         10,
-                        kwargs.get("stge", 0)
+                        kwargs.get("stge", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "accel",
                         float,
                         30,
                         10,
-                        kwargs.get("accel", 0.0)
+                        kwargs.get("accel", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fact",
                         float,
                         40,
                         10,
-                        kwargs.get("fact", 1e-6)
+                        kwargs.get("fact", 1e-6 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -82,14 +83,14 @@ class ControlStagedConstruction(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("dordel", 0)
+                        kwargs.get("dordel", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nopdel",
                         int,
                         70,
                         10,
-                        kwargs.get("nopdel", 0)
+                        kwargs.get("nopdel", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,7 +101,7 @@ class ControlStagedConstruction(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("itime", 0)
+                        kwargs.get("itime", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -114,7 +115,7 @@ class ControlStagedConstruction(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("idynain", 0)
+                        kwargs.get("idynain", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

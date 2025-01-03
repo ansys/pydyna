@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementDiscreteLco(KeywordBase):
@@ -68,28 +69,28 @@ class ElementDiscreteLco(KeywordBase):
                         int,
                         32,
                         8,
-                        kwargs.get("vid", 0)
+                        kwargs.get("vid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "s",
                         float,
                         40,
                         16,
-                        kwargs.get("s", 1.0)
+                        kwargs.get("s", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pf",
                         int,
                         56,
                         8,
-                        kwargs.get("pf", 0)
+                        kwargs.get("pf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "offset",
                         float,
                         64,
                         16,
-                        kwargs.get("offset", 0.0)
+                        kwargs.get("offset", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

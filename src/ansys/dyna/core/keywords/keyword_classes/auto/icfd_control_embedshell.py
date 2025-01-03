@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlEmbedshell(KeywordBase):
@@ -40,21 +41,21 @@ class IcfdControlEmbedshell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("gtype", 0)
+                        kwargs.get("gtype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dist",
                         float,
                         10,
                         10,
-                        kwargs.get("dist", 0.1)
+                        kwargs.get("dist", 0.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tps",
                         int,
                         20,
                         10,
-                        kwargs.get("tps", 0)
+                        kwargs.get("tps", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

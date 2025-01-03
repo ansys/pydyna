@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,7 +53,7 @@ class SetSolidGeneral(KeywordBase):
                         str,
                         10,
                         10,
-                        kwargs.get("solver", "MECH")
+                        kwargs.get("solver", "MECH" if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -63,7 +64,7 @@ class SetSolidGeneral(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("option", "ALL")
+                        kwargs.get("option", "ALL" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "e1",

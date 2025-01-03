@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadErodingPartSet(KeywordBase):
@@ -54,14 +55,14 @@ class LoadErodingPartSet(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("sf", 1)
+                        kwargs.get("sf", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "at",
                         float,
                         30,
                         10,
-                        kwargs.get("at", 0.0)
+                        kwargs.get("at", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psid",
@@ -75,21 +76,21 @@ class LoadErodingPartSet(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("boxid", 0)
+                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mem",
                         int,
                         60,
                         10,
-                        kwargs.get("mem", 50)
+                        kwargs.get("mem", 50 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "alpha",
                         float,
                         70,
                         10,
-                        kwargs.get("alpha", 80.0)
+                        kwargs.get("alpha", 80.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,35 +101,35 @@ class LoadErodingPartSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iflag", 0)
+                        kwargs.get("iflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "x",
                         float,
                         10,
                         10,
-                        kwargs.get("x", 0.0)
+                        kwargs.get("x", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y",
                         float,
                         20,
                         10,
-                        kwargs.get("y", 0.0)
+                        kwargs.get("y", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z",
                         float,
                         30,
                         10,
-                        kwargs.get("z", 0.0)
+                        kwargs.get("z", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beta",
                         float,
                         40,
                         10,
-                        kwargs.get("beta", 90.0)
+                        kwargs.get("beta", 90.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

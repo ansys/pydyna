@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitGeneralSpr(KeywordBase):
@@ -40,7 +41,7 @@ class ControlImplicitGeneralSpr(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("imflag", 0)
+                        kwargs.get("imflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt0",
@@ -54,42 +55,42 @@ class ControlImplicitGeneralSpr(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("imform", 2)
+                        kwargs.get("imform", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsbs",
                         int,
                         30,
                         10,
-                        kwargs.get("nsbs", 1)
+                        kwargs.get("nsbs", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "igs",
                         int,
                         40,
                         10,
-                        kwargs.get("igs", 2)
+                        kwargs.get("igs", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cnstn",
                         int,
                         50,
                         10,
-                        kwargs.get("cnstn", 0)
+                        kwargs.get("cnstn", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "form",
                         int,
                         60,
                         10,
-                        kwargs.get("form", 0)
+                        kwargs.get("form", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zero_v",
                         int,
                         70,
                         10,
-                        kwargs.get("zero_v", 0)
+                        kwargs.get("zero_v", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

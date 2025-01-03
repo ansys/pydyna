@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.variable_card import VariableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -53,49 +54,49 @@ class SectionTShell(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 1)
+                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shrf",
                         float,
                         20,
                         10,
-                        kwargs.get("shrf", 1.0)
+                        kwargs.get("shrf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nip",
                         int,
                         30,
                         10,
-                        kwargs.get("nip", 2)
+                        kwargs.get("nip", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "propt",
                         float,
                         40,
                         10,
-                        kwargs.get("propt", 1.0)
+                        kwargs.get("propt", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "qr",
                         int,
                         50,
                         10,
-                        kwargs.get("qr", 0)
+                        kwargs.get("qr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "icomp",
                         int,
                         60,
                         10,
-                        kwargs.get("icomp", 0)
+                        kwargs.get("icomp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tshear",
                         int,
                         70,
                         10,
-                        kwargs.get("tshear", 0)
+                        kwargs.get("tshear", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

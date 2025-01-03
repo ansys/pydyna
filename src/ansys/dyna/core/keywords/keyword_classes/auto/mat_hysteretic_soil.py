@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -80,7 +81,7 @@ class MatHystereticSoil(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("a0", 1.0)
+                        kwargs.get("a0", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a1",
@@ -126,7 +127,7 @@ class MatHystereticSoil(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("sflc", 1.0)
+                        kwargs.get("sflc", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dil_a",
@@ -214,7 +215,7 @@ class MatHystereticSoil(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("pinit", 0)
+                        kwargs.get("pinit", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

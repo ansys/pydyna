@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -126,7 +127,7 @@ class Mat074(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("dle", 1.0)
+                        kwargs.get("dle", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "glcid",

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlRemeshingEfg(KeywordBase):
@@ -54,42 +55,42 @@ class ControlRemeshingEfg(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("vf_loss", 1.0)
+                        kwargs.get("vf_loss", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mfrac",
                         float,
                         30,
                         10,
-                        kwargs.get("mfrac", 0.0)
+                        kwargs.get("mfrac", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt_min",
                         float,
                         40,
                         10,
-                        kwargs.get("dt_min", 0.0)
+                        kwargs.get("dt_min", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "icurv",
                         int,
                         50,
                         10,
-                        kwargs.get("icurv", 4)
+                        kwargs.get("icurv", 4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iadp10",
                         int,
                         60,
                         10,
-                        kwargs.get("iadp10", 0)
+                        kwargs.get("iadp10", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sefang",
                         float,
                         70,
                         10,
-                        kwargs.get("sefang", 0.0)
+                        kwargs.get("sefang", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,21 +101,21 @@ class ControlRemeshingEfg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ivt", 1)
+                        kwargs.get("ivt", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iat",
                         int,
                         10,
                         10,
-                        kwargs.get("iat", 0)
+                        kwargs.get("iat", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iaat",
                         int,
                         20,
                         10,
-                        kwargs.get("iaat", 0)
+                        kwargs.get("iaat", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -128,7 +129,7 @@ class ControlRemeshingEfg(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("mm", 0)
+                        kwargs.get("mm", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -139,21 +140,21 @@ class ControlRemeshingEfg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("iat1", 1.0E+20)
+                        kwargs.get("iat1", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iat2",
                         float,
                         10,
                         10,
-                        kwargs.get("iat2", 1.0E+20)
+                        kwargs.get("iat2", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iat3",
                         float,
                         20,
                         10,
-                        kwargs.get("iat3", 1.0E+20)
+                        kwargs.get("iat3", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,14 +74,14 @@ class Mat0831(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("tc", 1.0E+20)
+                        kwargs.get("tc", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fail",
                         float,
                         50,
                         10,
-                        kwargs.get("fail", 0.0)
+                        kwargs.get("fail", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "damp",
@@ -105,56 +106,56 @@ class Mat0831(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("bvflag", 0.0)
+                        kwargs.get("bvflag", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sflag",
                         float,
                         10,
                         10,
-                        kwargs.get("sflag", 0.0)
+                        kwargs.get("sflag", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rflag",
                         float,
                         20,
                         10,
-                        kwargs.get("rflag", 0.0)
+                        kwargs.get("rflag", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tflag",
                         float,
                         30,
                         10,
-                        kwargs.get("tflag", 0.0)
+                        kwargs.get("tflag", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pvid",
                         int,
                         40,
                         10,
-                        kwargs.get("pvid", 0)
+                        kwargs.get("pvid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sraf",
                         float,
                         50,
                         10,
-                        kwargs.get("sraf", 0.0)
+                        kwargs.get("sraf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ref",
                         float,
                         60,
                         10,
-                        kwargs.get("ref", 0.0)
+                        kwargs.get("ref", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hu",
                         float,
                         70,
                         10,
-                        kwargs.get("hu", 0.0)
+                        kwargs.get("hu", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -204,14 +205,14 @@ class Mat0831(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("expon", 1.0)
+                        kwargs.get("expon", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "riuld",
                         float,
                         10,
                         10,
-                        kwargs.get("riuld", 0.0)
+                        kwargs.get("riuld", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

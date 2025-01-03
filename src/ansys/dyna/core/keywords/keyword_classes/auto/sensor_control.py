@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,7 +53,7 @@ class SensorControl(KeywordBase):
                         str,
                         10,
                         10,
-                        kwargs.get("type", "AIRBAG")
+                        kwargs.get("type", "AIRBAG" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "typeid",
@@ -66,21 +67,21 @@ class SensorControl(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("timeoff", 0)
+                        kwargs.get("timeoff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nrep",
                         int,
                         40,
                         10,
-                        kwargs.get("nrep", 0)
+                        kwargs.get("nrep", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "estyp",
                         str,
                         50,
                         10,
-                        kwargs.get("estyp", "BEAM")
+                        kwargs.get("estyp", "BEAM" if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -91,7 +92,7 @@ class SensorControl(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("initstt", "ON")
+                        kwargs.get("initstt", "ON" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "swit1",

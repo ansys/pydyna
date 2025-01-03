@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,14 +53,14 @@ class MatAddFatigue(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("lcid", -1)
+                        kwargs.get("lcid", -1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ltype",
                         int,
                         20,
                         10,
-                        kwargs.get("ltype", 0)
+                        kwargs.get("ltype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a",
@@ -87,14 +88,14 @@ class MatAddFatigue(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("snlimt", 0)
+                        kwargs.get("snlimt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sntype",
                         int,
                         70,
                         10,
-                        kwargs.get("sntype", 0)
+                        kwargs.get("sntype", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

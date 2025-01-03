@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagHybridId(KeywordBase):
@@ -65,49 +66,49 @@ class AirbagHybridId(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("sidtyp", 0)
+                        kwargs.get("sidtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rbid",
                         int,
                         20,
                         10,
-                        kwargs.get("rbid", 0)
+                        kwargs.get("rbid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vsca",
                         float,
                         30,
                         10,
-                        kwargs.get("vsca", 1.0)
+                        kwargs.get("vsca", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psca",
                         float,
                         40,
                         10,
-                        kwargs.get("psca", 1.0)
+                        kwargs.get("psca", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vini",
                         float,
                         50,
                         10,
-                        kwargs.get("vini", 0.0)
+                        kwargs.get("vini", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mwd",
                         float,
                         60,
                         10,
-                        kwargs.get("mwd", 0.0)
+                        kwargs.get("mwd", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "spsf",
                         float,
                         70,
                         10,
-                        kwargs.get("spsf", 0.0)
+                        kwargs.get("spsf", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -146,14 +147,14 @@ class AirbagHybridId(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("cc", 1.0)
+                        kwargs.get("cc", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hconv",
                         float,
                         50,
                         10,
-                        kwargs.get("hconv", 0.0)
+                        kwargs.get("hconv", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -171,7 +172,7 @@ class AirbagHybridId(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("lcc23", 0)
+                        kwargs.get("lcc23", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a23",
@@ -185,7 +186,7 @@ class AirbagHybridId(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("lca23", 0)
+                        kwargs.get("lca23", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cp23",
@@ -199,7 +200,7 @@ class AirbagHybridId(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("lcp23", 0)
+                        kwargs.get("lcp23", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ap23",
@@ -213,7 +214,7 @@ class AirbagHybridId(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("lcap23", 0)
+                        kwargs.get("lcap23", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -224,7 +225,7 @@ class AirbagHybridId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("opt", 0)
+                        kwargs.get("opt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pvent",
@@ -259,7 +260,7 @@ class AirbagHybridId(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("vntopt", 0)
+                        kwargs.get("vntopt", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

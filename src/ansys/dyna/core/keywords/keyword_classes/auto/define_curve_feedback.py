@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,7 +60,7 @@ class DefineCurveFeedback(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("boxid", 0)
+                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fldid",
@@ -91,21 +92,21 @@ class DefineCurveFeedback(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("sff", 1.0)
+                        kwargs.get("sff", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sft",
                         float,
                         30,
                         10,
-                        kwargs.get("sft", 1.0)
+                        kwargs.get("sft", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bias",
                         float,
                         40,
                         10,
-                        kwargs.get("bias", 0.0)
+                        kwargs.get("bias", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -77,28 +78,28 @@ class DefineSphDeCouplingId(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("sphtyp", 0)
+                        kwargs.get("sphtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "destyp",
                         int,
                         30,
                         10,
-                        kwargs.get("destyp", 0)
+                        kwargs.get("destyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pfact",
                         float,
                         40,
                         10,
-                        kwargs.get("pfact", 1.0)
+                        kwargs.get("pfact", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dfact",
                         float,
                         50,
                         10,
-                        kwargs.get("dfact", 0.0)
+                        kwargs.get("dfact", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sphbox",

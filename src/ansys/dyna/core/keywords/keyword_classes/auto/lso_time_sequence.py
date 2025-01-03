@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LsoTimeSequence(KeywordBase):
@@ -40,7 +41,7 @@ class LsoTimeSequence(KeywordBase):
                         str,
                         0,
                         20,
-                        kwargs.get("solver_name", "MECH")
+                        kwargs.get("solver_name", "MECH" if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -51,42 +52,42 @@ class LsoTimeSequence(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt", 0.0)
+                        kwargs.get("dt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdt",
                         int,
                         10,
                         10,
-                        kwargs.get("lcdt", 0)
+                        kwargs.get("lcdt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcopt",
                         int,
                         20,
                         10,
-                        kwargs.get("lcopt", 1)
+                        kwargs.get("lcopt", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "npltc",
                         int,
                         30,
                         10,
-                        kwargs.get("npltc", 0)
+                        kwargs.get("npltc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tbeg",
                         float,
                         40,
                         10,
-                        kwargs.get("tbeg", 0.0)
+                        kwargs.get("tbeg", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tend",
                         float,
                         50,
                         10,
-                        kwargs.get("tend", 0.0)
+                        kwargs.get("tend", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
