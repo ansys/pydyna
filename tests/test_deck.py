@@ -147,6 +147,17 @@ def test_deck_006(ref_string):
 
 
 @pytest.mark.keywords
+def test_deck_copy():
+    import copy
+    x = Deck()
+    x.append(kwd.Mat001(mid=99))
+    y = copy.deepcopy(x)
+    y.keywords[0].mid = 100
+    assert x.keywords[0].mid == 99
+    assert y.keywords[0].mid == 100
+
+
+@pytest.mark.keywords
 def test_deck_read_parameters():
     """Test reading a deck with parameters."""
     test_string = """*CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET_ID
