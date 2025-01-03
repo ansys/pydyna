@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IntegrationBeam(KeywordBase):
@@ -47,28 +48,28 @@ class IntegrationBeam(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("nip", 0)
+                        kwargs.get("nip", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ra",
                         float,
                         20,
                         10,
-                        kwargs.get("ra", 0.0)
+                        kwargs.get("ra", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "icst",
                         int,
                         30,
                         10,
-                        kwargs.get("icst", 0)
+                        kwargs.get("icst", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "k",
                         int,
                         40,
                         10,
-                        kwargs.get("k", 1)
+                        kwargs.get("k", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -107,14 +108,14 @@ class IntegrationBeam(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("sref", 0.0)
+                        kwargs.get("sref", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tref",
                         float,
                         50,
                         10,
-                        kwargs.get("tref", 0.0)
+                        kwargs.get("tref", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "d5",

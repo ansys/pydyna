@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartCompositeIgaShell(KeywordBase):
@@ -58,7 +59,7 @@ class PartCompositeIgaShell(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 0)
+                        kwargs.get("elform", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shrf",
@@ -72,7 +73,7 @@ class PartCompositeIgaShell(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("nloc", 0.0)
+                        kwargs.get("nloc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -86,7 +87,7 @@ class PartCompositeIgaShell(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("irl", 0)
+                        kwargs.get("irl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",

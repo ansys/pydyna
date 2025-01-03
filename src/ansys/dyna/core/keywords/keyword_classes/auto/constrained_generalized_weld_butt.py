@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedGeneralizedWeldButt(KeywordBase):
@@ -72,7 +73,7 @@ class ConstrainedGeneralizedWeldButt(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("window", 0)
+                        kwargs.get("window", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "npr",
@@ -86,7 +87,7 @@ class ConstrainedGeneralizedWeldButt(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("nprt", 0)
+                        kwargs.get("nprt", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -97,7 +98,7 @@ class ConstrainedGeneralizedWeldButt(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tfail", 1.0E+20)
+                        kwargs.get("tfail", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "epsf",

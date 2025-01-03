@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingOnestepDrawbead(KeywordBase):
@@ -54,14 +55,14 @@ class ControlFormingOnestepDrawbead(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("th", 0.0)
+                        kwargs.get("th", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "percnt",
                         float,
                         30,
                         10,
-                        kwargs.get("percnt", 0.0)
+                        kwargs.get("percnt", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

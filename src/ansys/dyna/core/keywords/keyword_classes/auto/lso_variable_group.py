@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LsoVariableGroup(KeywordBase):
@@ -51,7 +52,7 @@ class LsoVariableGroup(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("domain_type", "NODE")
+                        kwargs.get("domain_type", "NODE" if use_lspp_defaults() else None)
                     ),
                 ],
             ),

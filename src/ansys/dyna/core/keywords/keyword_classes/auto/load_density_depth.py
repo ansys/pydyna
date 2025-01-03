@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadDensityDepth(KeywordBase):
@@ -40,21 +41,21 @@ class LoadDensityDepth(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psid", 0)
+                        kwargs.get("psid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gc",
                         float,
                         10,
                         10,
-                        kwargs.get("gc", 0.0)
+                        kwargs.get("gc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dir",
                         int,
                         20,
                         10,
-                        kwargs.get("dir", 1)
+                        kwargs.get("dir", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedSolidInSolidPenalty(KeywordBase):
@@ -72,14 +73,14 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("bstypb", 0)
+                        kwargs.get("bstypb", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sstypa",
                         int,
                         30,
                         10,
-                        kwargs.get("sstypa", 0)
+                        kwargs.get("sstypa", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -90,14 +91,14 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("start", 0.0)
+                        kwargs.get("start", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "end",
                         float,
                         10,
                         10,
-                        kwargs.get("end", 10E20)
+                        kwargs.get("end", 10E20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -125,7 +126,7 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("pssf", 0.1)
+                        kwargs.get("pssf", 0.1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

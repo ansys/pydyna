@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -151,14 +152,14 @@ class MatNonlinearOrthotropic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lcida", 0)
+                        kwargs.get("lcida", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidb",
                         float,
                         10,
                         10,
-                        kwargs.get("lcidb", 0)
+                        kwargs.get("lcidb", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "efail",
@@ -193,14 +194,14 @@ class MatNonlinearOrthotropic(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("macf", 1)
+                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "atrack",
                         int,
                         70,
                         10,
-                        kwargs.get("atrack", 0)
+                        kwargs.get("atrack", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -310,28 +311,28 @@ class MatNonlinearOrthotropic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidc", 0)
+                        kwargs.get("lcidc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidab",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidab", 0)
+                        kwargs.get("lcidab", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidbc",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidbc", 0)
+                        kwargs.get("lcidbc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidca",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidca", 0)
+                        kwargs.get("lcidca", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

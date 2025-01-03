@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseFrequencyBinaryD3Acc(KeywordBase):
@@ -51,56 +52,56 @@ class DatabaseFrequencyBinaryD3Acc(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid1", 0)
+                        kwargs.get("nid1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid2",
                         int,
                         10,
                         10,
-                        kwargs.get("nid2", 0)
+                        kwargs.get("nid2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid3",
                         int,
                         20,
                         10,
-                        kwargs.get("nid3", 0)
+                        kwargs.get("nid3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid4",
                         int,
                         30,
                         10,
-                        kwargs.get("nid4", 0)
+                        kwargs.get("nid4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid5",
                         int,
                         40,
                         10,
-                        kwargs.get("nid5", 0)
+                        kwargs.get("nid5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid6",
                         int,
                         50,
                         10,
-                        kwargs.get("nid6", 0)
+                        kwargs.get("nid6", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid7",
                         int,
                         60,
                         10,
-                        kwargs.get("nid7", 0)
+                        kwargs.get("nid7", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid8",
                         int,
                         70,
                         10,
-                        kwargs.get("nid8", 0)
+                        kwargs.get("nid8", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

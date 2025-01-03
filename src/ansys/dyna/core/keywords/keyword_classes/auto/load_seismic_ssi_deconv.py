@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSeismicSsiDeconv(KeywordBase):
@@ -47,21 +48,21 @@ class LoadSeismicSsiDeconv(KeywordBase):
                         float,
                         8,
                         16,
-                        kwargs.get("xp", 0.0)
+                        kwargs.get("xp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yp",
                         float,
                         24,
                         16,
-                        kwargs.get("yp", 0.0)
+                        kwargs.get("yp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zp",
                         float,
                         40,
                         16,
-                        kwargs.get("zp", 0.0)
+                        kwargs.get("zp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gmx",
@@ -93,42 +94,42 @@ class LoadSeismicSsiDeconv(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cid",
                         int,
                         10,
                         10,
-                        kwargs.get("cid", 0)
+                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "birth",
                         float,
                         20,
                         10,
-                        kwargs.get("birth", 0.0)
+                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "death",
                         float,
                         30,
                         10,
-                        kwargs.get("death", 1.E+28)
+                        kwargs.get("death", 1.E+28 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "isg",
                         int,
                         40,
                         10,
-                        kwargs.get("isg", 0)
+                        kwargs.get("isg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "igm",
                         int,
                         50,
                         10,
-                        kwargs.get("igm", 0)
+                        kwargs.get("igm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pset",
@@ -142,7 +143,7 @@ class LoadSeismicSsiDeconv(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("vdir", 3)
+                        kwargs.get("vdir", 3 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadHeatExothermicReaction(KeywordBase):
@@ -61,35 +62,35 @@ class LoadHeatExothermicReaction(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("bt", 0.0)
+                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt",
                         float,
                         40,
                         10,
-                        kwargs.get("dt", 1.E16)
+                        kwargs.get("dt", 1.E16 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tmin",
                         float,
                         50,
                         10,
-                        kwargs.get("tmin", 0.0)
+                        kwargs.get("tmin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tmax",
                         float,
                         60,
                         10,
-                        kwargs.get("tmax", 1.E16)
+                        kwargs.get("tmax", 1.E16 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "toff",
                         float,
                         70,
                         10,
-                        kwargs.get("toff", 0.0)
+                        kwargs.get("toff", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,42 +101,42 @@ class LoadHeatExothermicReaction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("csei0", 0.0)
+                        kwargs.get("csei0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "asei",
                         float,
                         10,
                         10,
-                        kwargs.get("asei", 0.0)
+                        kwargs.get("asei", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "easei",
                         float,
                         20,
                         10,
-                        kwargs.get("easei", 0.0)
+                        kwargs.get("easei", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "msei",
                         float,
                         30,
                         10,
-                        kwargs.get("msei", 0.0)
+                        kwargs.get("msei", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hsei",
                         float,
                         40,
                         10,
-                        kwargs.get("hsei", 0.0)
+                        kwargs.get("hsei", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "wc",
                         float,
                         50,
                         10,
-                        kwargs.get("wc", 0.0)
+                        kwargs.get("wc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -149,7 +150,7 @@ class LoadHeatExothermicReaction(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("ru", 8.314)
+                        kwargs.get("ru", 8.314 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -160,56 +161,56 @@ class LoadHeatExothermicReaction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cne0", 0.0)
+                        kwargs.get("cne0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ane",
                         float,
                         10,
                         10,
-                        kwargs.get("ane", 0.0)
+                        kwargs.get("ane", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eane",
                         float,
                         20,
                         10,
-                        kwargs.get("eane", 0.0)
+                        kwargs.get("eane", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mne",
                         float,
                         30,
                         10,
-                        kwargs.get("mne", 0.0)
+                        kwargs.get("mne", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hne",
                         float,
                         40,
                         10,
-                        kwargs.get("hne", 0.0)
+                        kwargs.get("hne", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "wcne",
                         float,
                         50,
                         10,
-                        kwargs.get("wcne", 0.0)
+                        kwargs.get("wcne", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tsei0",
                         float,
                         60,
                         10,
-                        kwargs.get("tsei0", 0.0)
+                        kwargs.get("tsei0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tseir",
                         float,
                         70,
                         10,
-                        kwargs.get("tseir", 0.0)
+                        kwargs.get("tseir", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -220,49 +221,49 @@ class LoadHeatExothermicReaction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha0", 0.0)
+                        kwargs.get("alpha0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ape",
                         float,
                         10,
                         10,
-                        kwargs.get("ape", 0.0)
+                        kwargs.get("ape", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eape",
                         float,
                         20,
                         10,
-                        kwargs.get("eape", 0.0)
+                        kwargs.get("eape", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mpep1",
                         float,
                         30,
                         10,
-                        kwargs.get("mpep1", 0.0)
+                        kwargs.get("mpep1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hpe",
                         float,
                         40,
                         10,
-                        kwargs.get("hpe", 0.0)
+                        kwargs.get("hpe", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "wpe",
                         float,
                         50,
                         10,
-                        kwargs.get("wpe", 0.0)
+                        kwargs.get("wpe", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mpep2",
                         float,
                         60,
                         10,
-                        kwargs.get("mpep2", 0.0)
+                        kwargs.get("mpep2", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -273,42 +274,42 @@ class LoadHeatExothermicReaction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ce0", 0.0)
+                        kwargs.get("ce0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ae",
                         float,
                         10,
                         10,
-                        kwargs.get("ae", 0.0)
+                        kwargs.get("ae", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eae",
                         float,
                         20,
                         10,
-                        kwargs.get("eae", 0.0)
+                        kwargs.get("eae", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "me",
                         float,
                         30,
                         10,
-                        kwargs.get("me", 0.0)
+                        kwargs.get("me", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "he",
                         float,
                         40,
                         10,
-                        kwargs.get("he", 0.0)
+                        kwargs.get("he", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "we",
                         float,
                         50,
                         10,
-                        kwargs.get("we", 0.0)
+                        kwargs.get("we", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

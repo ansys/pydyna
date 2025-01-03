@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadBlast(KeywordBase):
@@ -47,42 +48,42 @@ class LoadBlast(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("xbo", 0.0)
+                        kwargs.get("xbo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ybo",
                         float,
                         20,
                         10,
-                        kwargs.get("ybo", 0.0)
+                        kwargs.get("ybo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zbo",
                         float,
                         30,
                         10,
-                        kwargs.get("zbo", 0.0)
+                        kwargs.get("zbo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tbo",
                         float,
                         40,
                         10,
-                        kwargs.get("tbo", 0.0)
+                        kwargs.get("tbo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iunit",
                         int,
                         50,
                         10,
-                        kwargs.get("iunit", 2)
+                        kwargs.get("iunit", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "isurf",
                         int,
                         60,
                         10,
-                        kwargs.get("isurf", 2)
+                        kwargs.get("isurf", 2 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -93,35 +94,35 @@ class LoadBlast(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cfm", 0.0)
+                        kwargs.get("cfm", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cfl",
                         float,
                         10,
                         10,
-                        kwargs.get("cfl", 0.0)
+                        kwargs.get("cfl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cft",
                         float,
                         20,
                         10,
-                        kwargs.get("cft", 0.0)
+                        kwargs.get("cft", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cfp",
                         float,
                         30,
                         10,
-                        kwargs.get("cfp", 0.0)
+                        kwargs.get("cfp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "death",
                         float,
                         40,
                         10,
-                        kwargs.get("death", 0.0)
+                        kwargs.get("death", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

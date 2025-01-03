@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -133,21 +134,21 @@ class MatBoltBeam(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("dafail", 1.E20)
+                        kwargs.get("dafail", 1.E20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "drfail",
                         float,
                         50,
                         10,
-                        kwargs.get("drfail", 1.E20)
+                        kwargs.get("drfail", 1.E20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "damag",
                         float,
                         60,
                         10,
-                        kwargs.get("damag", 0.1)
+                        kwargs.get("damag", 0.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "t0pre",
@@ -165,21 +166,21 @@ class MatBoltBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dacfail", 1.E20)
+                        kwargs.get("dacfail", 1.E20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "axshel",
                         int,
                         10,
                         10,
-                        kwargs.get("axshel", 0)
+                        kwargs.get("axshel", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "holshr",
                         int,
                         20,
                         10,
-                        kwargs.get("holshr", 0)
+                        kwargs.get("holshr", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

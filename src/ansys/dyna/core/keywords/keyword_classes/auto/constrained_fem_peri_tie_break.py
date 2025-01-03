@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedFemPeriTieBreak(KeywordBase):
@@ -61,14 +62,14 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("ft", 100000000000000000000)
+                        kwargs.get("ft", 100000000000000000000 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fs",
                         int,
                         40,
                         10,
-                        kwargs.get("fs", 100000000000000000000)
+                        kwargs.get("fs", 100000000000000000000 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

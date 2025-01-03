@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -45,21 +46,21 @@ class DefineConnectionProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("con_id", 0)
+                        kwargs.get("con_id", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "proprul",
                         int,
                         10,
                         10,
-                        kwargs.get("proprul", 0)
+                        kwargs.get("proprul", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "areaeq",
                         int,
                         20,
                         10,
-                        kwargs.get("areaeq", 0)
+                        kwargs.get("areaeq", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -73,14 +74,14 @@ class DefineConnectionProperties(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("dgtyp", 0)
+                        kwargs.get("dgtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "moarfl",
                         int,
                         50,
                         10,
-                        kwargs.get("moarfl", 0)
+                        kwargs.get("moarfl", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -112,7 +113,7 @@ class DefineConnectionProperties(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("ddg_pr", 1.0E+10)
+                        kwargs.get("ddg_pr", 1.0E+10 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "drank",
@@ -151,21 +152,21 @@ class DefineConnectionProperties(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dexsn", 1.0)
+                        kwargs.get("dexsn", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dexsb",
                         float,
                         10,
                         10,
-                        kwargs.get("dexsb", 1.0)
+                        kwargs.get("dexsb", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dexss",
                         float,
                         20,
                         10,
-                        kwargs.get("dexss", 1.0)
+                        kwargs.get("dexss", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dcsn",
@@ -200,7 +201,7 @@ class DefineConnectionProperties(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("dsclmrr", 1.0)
+                        kwargs.get("dsclmrr", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

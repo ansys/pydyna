@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialGasMixture(KeywordBase):
@@ -47,7 +48,7 @@ class InitialGasMixture(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("stype", 0)
+                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mmgid",
@@ -72,56 +73,56 @@ class InitialGasMixture(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ro1", 0.0)
+                        kwargs.get("ro1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ro2",
                         float,
                         10,
                         10,
-                        kwargs.get("ro2", 0.0)
+                        kwargs.get("ro2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ro3",
                         float,
                         20,
                         10,
-                        kwargs.get("ro3", 0.0)
+                        kwargs.get("ro3", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ro4",
                         float,
                         30,
                         10,
-                        kwargs.get("ro4", 0.0)
+                        kwargs.get("ro4", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ro5",
                         float,
                         40,
                         10,
-                        kwargs.get("ro5", 0.0)
+                        kwargs.get("ro5", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ro6",
                         float,
                         50,
                         10,
-                        kwargs.get("ro6", 0.0)
+                        kwargs.get("ro6", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ro7",
                         float,
                         60,
                         10,
-                        kwargs.get("ro7", 0.0)
+                        kwargs.get("ro7", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ro8",
                         float,
                         70,
                         10,
-                        kwargs.get("ro8", 0.0)
+                        kwargs.get("ro8", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

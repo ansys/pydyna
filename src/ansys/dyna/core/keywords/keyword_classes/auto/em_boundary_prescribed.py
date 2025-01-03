@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmBoundaryPrescribed(KeywordBase):
@@ -47,14 +48,14 @@ class EmBoundaryPrescribed(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("bptype", 1)
+                        kwargs.get("bptype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "settype",
                         int,
                         20,
                         10,
-                        kwargs.get("settype", 1)
+                        kwargs.get("settype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "setid",
@@ -68,7 +69,7 @@ class EmBoundaryPrescribed(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("val", 0.0)
+                        kwargs.get("val", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",
@@ -86,14 +87,14 @@ class EmBoundaryPrescribed(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("birtht", 0.0)
+                        kwargs.get("birtht", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "deatht",
                         float,
                         10,
                         10,
-                        kwargs.get("deatht", 1e28)
+                        kwargs.get("deatht", 1e28 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

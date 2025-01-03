@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlSpotweldBeam(KeywordBase):
@@ -40,7 +41,7 @@ class ControlSpotweldBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lct", 0)
+                        kwargs.get("lct", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcs",
@@ -54,42 +55,42 @@ class ControlSpotweldBeam(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("t_ort", 0)
+                        kwargs.get("t_ort", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prtflg",
                         int,
                         30,
                         10,
-                        kwargs.get("prtflg", 0)
+                        kwargs.get("prtflg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "t_ors",
                         int,
                         40,
                         10,
-                        kwargs.get("t_ors", 0)
+                        kwargs.get("t_ors", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rpbhx",
                         int,
                         50,
                         10,
-                        kwargs.get("rpbhx", 0)
+                        kwargs.get("rpbhx", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bmsid",
                         int,
                         60,
                         10,
-                        kwargs.get("bmsid", 0)
+                        kwargs.get("bmsid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "id_off",
                         int,
                         70,
                         10,
-                        kwargs.get("id_off", 0)
+                        kwargs.get("id_off", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

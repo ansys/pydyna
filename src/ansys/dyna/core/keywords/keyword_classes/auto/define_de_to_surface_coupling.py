@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,14 +60,14 @@ class DefineDeToSurfaceCoupling(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("stype", 0)
+                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mtype",
                         int,
                         30,
                         10,
-                        kwargs.get("mtype", 0)
+                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -98,35 +99,35 @@ class DefineDeToSurfaceCoupling(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("bsort", 100)
+                        kwargs.get("bsort", 100 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcvx",
                         int,
                         40,
                         10,
-                        kwargs.get("lcvx", 0)
+                        kwargs.get("lcvx", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcvy",
                         int,
                         50,
                         10,
-                        kwargs.get("lcvy", 0)
+                        kwargs.get("lcvy", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcvz",
                         int,
                         60,
                         10,
-                        kwargs.get("lcvz", 0)
+                        kwargs.get("lcvz", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "wearc",
                         float,
                         70,
                         10,
-                        kwargs.get("wearc", 0)
+                        kwargs.get("wearc", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -197,14 +198,14 @@ class DefineDeToSurfaceCoupling(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfp", 1.0)
+                        kwargs.get("sfp", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sft",
                         float,
                         10,
                         10,
-                        kwargs.get("sft", 1.0)
+                        kwargs.get("sft", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -232,21 +233,21 @@ class DefineDeToSurfaceCoupling(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("cid_rcf", 0)
+                        kwargs.get("cid_rcf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bt",
                         float,
                         60,
                         10,
-                        kwargs.get("bt", 0.0)
+                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt",
                         float,
                         70,
                         10,
-                        kwargs.get("dt", 1.E20)
+                        kwargs.get("dt", 1.E20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

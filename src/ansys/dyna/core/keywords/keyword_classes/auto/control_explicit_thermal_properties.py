@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlExplicitThermalProperties(KeywordBase):
@@ -54,28 +55,28 @@ class ControlExplicitThermalProperties(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("cptyp", 0)
+                        kwargs.get("cptyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vecid1",
                         int,
                         30,
                         10,
-                        kwargs.get("vecid1", 0)
+                        kwargs.get("vecid1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vecid2",
                         int,
                         40,
                         10,
-                        kwargs.get("vecid2", 0)
+                        kwargs.get("vecid2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "local",
                         int,
                         50,
                         10,
-                        kwargs.get("local", 0)
+                        kwargs.get("local", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -86,42 +87,42 @@ class ControlExplicitThermalProperties(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("kxx", 0.0)
+                        kwargs.get("kxx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kxy",
                         float,
                         10,
                         10,
-                        kwargs.get("kxy", 0.0)
+                        kwargs.get("kxy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kxz",
                         float,
                         20,
                         10,
-                        kwargs.get("kxz", 0.0)
+                        kwargs.get("kxz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kxxtyp",
                         int,
                         30,
                         10,
-                        kwargs.get("kxxtyp", 0)
+                        kwargs.get("kxxtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kxytyp",
                         int,
                         40,
                         10,
-                        kwargs.get("kxytyp", 0)
+                        kwargs.get("kxytyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kxztyp",
                         int,
                         50,
                         10,
-                        kwargs.get("kxztyp", 0)
+                        kwargs.get("kxztyp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -132,42 +133,42 @@ class ControlExplicitThermalProperties(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("kyx", 0.0)
+                        kwargs.get("kyx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kyy",
                         float,
                         10,
                         10,
-                        kwargs.get("kyy", 0.0)
+                        kwargs.get("kyy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kyz",
                         float,
                         20,
                         10,
-                        kwargs.get("kyz", 0.0)
+                        kwargs.get("kyz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kyxtyp",
                         int,
                         30,
                         10,
-                        kwargs.get("kyxtyp", 0)
+                        kwargs.get("kyxtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kyytyp",
                         int,
                         40,
                         10,
-                        kwargs.get("kyytyp", 0)
+                        kwargs.get("kyytyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kyztyp",
                         int,
                         50,
                         10,
-                        kwargs.get("kyztyp", 0)
+                        kwargs.get("kyztyp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -178,42 +179,42 @@ class ControlExplicitThermalProperties(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("kzx", 0.0)
+                        kwargs.get("kzx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kzy",
                         float,
                         10,
                         10,
-                        kwargs.get("kzy", 0.0)
+                        kwargs.get("kzy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kzz",
                         float,
                         20,
                         10,
-                        kwargs.get("kzz", 0.0)
+                        kwargs.get("kzz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kzxtyp",
                         int,
                         30,
                         10,
-                        kwargs.get("kzxtyp", 0)
+                        kwargs.get("kzxtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kzytyp",
                         int,
                         40,
                         10,
-                        kwargs.get("kzytyp", 0)
+                        kwargs.get("kzytyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kzztyp",
                         int,
                         50,
                         10,
-                        kwargs.get("kzztyp", 0)
+                        kwargs.get("kzztyp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

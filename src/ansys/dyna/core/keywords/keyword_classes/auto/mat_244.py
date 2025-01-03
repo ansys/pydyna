@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -80,21 +81,21 @@ class Mat244(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("crsh", 0)
+                        kwargs.get("crsh", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "phase",
                         int,
                         60,
                         10,
-                        kwargs.get("phase", 0)
+                        kwargs.get("phase", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "heat",
                         int,
                         70,
                         10,
-                        kwargs.get("heat", 0)
+                        kwargs.get("heat", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -267,7 +268,7 @@ class Mat244(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("cwm", 0)
+                        kwargs.get("cwm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lctre",
@@ -313,7 +314,7 @@ class Mat244(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("tref", 273.15)
+                        kwargs.get("tref", 273.15 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lat1",
@@ -447,14 +448,14 @@ class Mat244(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("react", 0)
+                        kwargs.get("react", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "temper",
                         int,
                         70,
                         10,
-                        kwargs.get("temper", 0)
+                        kwargs.get("temper", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

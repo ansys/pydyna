@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleStructuredMeshVolumeFilling(KeywordBase):
@@ -40,7 +41,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mshid", 0)
+                        kwargs.get("mshid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -54,7 +55,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
                         str,
                         20,
                         10,
-                        kwargs.get("ammgto", "0")
+                        kwargs.get("ammgto", "0" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -68,7 +69,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("nsample", 3)
+                        kwargs.get("nsample", 3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -89,7 +90,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("vid", 0)
+                        kwargs.get("vid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,14 +101,14 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("geom", "ALL")
+                        kwargs.get("geom", "ALL" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "in/out",
                         int,
                         10,
                         10,
-                        kwargs.get("in/out", 0)
+                        kwargs.get("in/out", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "e1",

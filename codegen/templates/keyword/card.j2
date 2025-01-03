@@ -85,7 +85,7 @@
 {% if field.readonly %}
                         {{field.default}}
 {% else %}
-                        kwargs.get("{{field.name}}", {{field.default}})
+                        kwargs.get("{{field.name}}", {{field.default}} if use_lspp_defaults() else None)
 {% endif %}
 {% else %}
                         kwargs.get("{{field.name}}")

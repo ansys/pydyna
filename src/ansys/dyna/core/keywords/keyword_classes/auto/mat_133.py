@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,7 +74,7 @@ class Mat133(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("fit", 0.0)
+                        kwargs.get("fit", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beta",
@@ -87,14 +88,14 @@ class Mat133(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("iter", 0.0)
+                        kwargs.get("iter", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iscale",
                         float,
                         70,
                         10,
-                        kwargs.get("iscale", 0.0)
+                        kwargs.get("iscale", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -140,7 +141,7 @@ class Mat133(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("hard", 1)
+                        kwargs.get("hard", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a",
@@ -391,7 +392,7 @@ class Mat133(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("htflag", 0)
+                        kwargs.get("htflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hta",
@@ -518,7 +519,7 @@ class Mat133(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("usrfail", 0)
+                        kwargs.get("usrfail", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

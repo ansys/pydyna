@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DampingGlobal(KeywordBase):
@@ -40,56 +41,56 @@ class DampingGlobal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid", 0)
+                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "valdmp",
                         float,
                         10,
                         10,
-                        kwargs.get("valdmp", 0.0)
+                        kwargs.get("valdmp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stx",
                         float,
                         20,
                         10,
-                        kwargs.get("stx", 0.0)
+                        kwargs.get("stx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sty",
                         float,
                         30,
                         10,
-                        kwargs.get("sty", 0.0)
+                        kwargs.get("sty", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stz",
                         float,
                         40,
                         10,
-                        kwargs.get("stz", 0.0)
+                        kwargs.get("stz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "srx",
                         float,
                         50,
                         10,
-                        kwargs.get("srx", 0.0)
+                        kwargs.get("srx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sry",
                         float,
                         60,
                         10,
-                        kwargs.get("sry", 0.0)
+                        kwargs.get("sry", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "srz",
                         float,
                         70,
                         10,
-                        kwargs.get("srz", 0.0)
+                        kwargs.get("srz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

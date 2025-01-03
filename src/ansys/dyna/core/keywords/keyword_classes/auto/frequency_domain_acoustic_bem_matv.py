@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainAcousticBemMatv(KeywordBase):
@@ -68,28 +69,28 @@ class FrequencyDomainAcousticBemMatv(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("nfreq", 0)
+                        kwargs.get("nfreq", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtout",
                         float,
                         50,
                         10,
-                        kwargs.get("dtout", 0.0)
+                        kwargs.get("dtout", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tstart",
                         float,
                         60,
                         10,
-                        kwargs.get("tstart", 0.0)
+                        kwargs.get("tstart", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pref",
                         float,
                         70,
                         10,
-                        kwargs.get("pref", 0.0)
+                        kwargs.get("pref", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,56 +101,56 @@ class FrequencyDomainAcousticBemMatv(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsidext", 0)
+                        kwargs.get("nsidext", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "typext",
                         int,
                         10,
                         10,
-                        kwargs.get("typext", 0)
+                        kwargs.get("typext", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsidint",
                         int,
                         20,
                         10,
-                        kwargs.get("nsidint", 0)
+                        kwargs.get("nsidint", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "typint",
                         int,
                         30,
                         10,
-                        kwargs.get("typint", 0)
+                        kwargs.get("typint", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fftwin",
                         int,
                         40,
                         10,
-                        kwargs.get("fftwin", 0)
+                        kwargs.get("fftwin", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "trslt",
                         int,
                         50,
                         10,
-                        kwargs.get("trslt", 0)
+                        kwargs.get("trslt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ipfile",
                         int,
                         60,
                         10,
-                        kwargs.get("ipfile", 0)
+                        kwargs.get("ipfile", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iunits",
                         int,
                         70,
                         10,
-                        kwargs.get("iunits", 0)
+                        kwargs.get("iunits", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -160,56 +161,56 @@ class FrequencyDomainAcousticBemMatv(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("method", 0)
+                        kwargs.get("method", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "maxit",
                         int,
                         10,
                         10,
-                        kwargs.get("maxit", 100)
+                        kwargs.get("maxit", 100 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tolitr",
                         float,
                         20,
                         10,
-                        kwargs.get("tolitr", 1E-4)
+                        kwargs.get("tolitr", 1E-4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ndd",
                         int,
                         30,
                         10,
-                        kwargs.get("ndd", 1)
+                        kwargs.get("ndd", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tollr",
                         float,
                         40,
                         10,
-                        kwargs.get("tollr", 1E-6)
+                        kwargs.get("tollr", 1E-6 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tolfct",
                         float,
                         50,
                         10,
-                        kwargs.get("tolfct", 1E-6)
+                        kwargs.get("tolfct", 1E-6 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ibdim",
                         int,
                         60,
                         10,
-                        kwargs.get("ibdim", 1000)
+                        kwargs.get("ibdim", 1000 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "npg",
                         int,
                         70,
                         10,
-                        kwargs.get("npg", 2)
+                        kwargs.get("npg", 2 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -227,49 +228,49 @@ class FrequencyDomainAcousticBemMatv(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("nbc", 1)
+                        kwargs.get("nbc", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "restrt",
                         int,
                         20,
                         10,
-                        kwargs.get("restrt", 0)
+                        kwargs.get("restrt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iedge",
                         int,
                         30,
                         10,
-                        kwargs.get("iedge", 0)
+                        kwargs.get("iedge", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "noel",
                         int,
                         40,
                         10,
-                        kwargs.get("noel", 0)
+                        kwargs.get("noel", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nfrup",
                         int,
                         50,
                         10,
-                        kwargs.get("nfrup", 0)
+                        kwargs.get("nfrup", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "velout",
                         int,
                         60,
                         10,
-                        kwargs.get("velout", 0)
+                        kwargs.get("velout", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dba",
                         int,
                         70,
                         10,
-                        kwargs.get("dba", 0)
+                        kwargs.get("dba", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -280,28 +281,28 @@ class FrequencyDomainAcousticBemMatv(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid", 0)
+                        kwargs.get("ssid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sstype",
                         int,
                         10,
                         10,
-                        kwargs.get("sstype", 0)
+                        kwargs.get("sstype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "norm",
                         int,
                         20,
                         10,
-                        kwargs.get("norm", 0)
+                        kwargs.get("norm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bemtype",
                         int,
                         30,
                         10,
-                        kwargs.get("bemtype", 0)
+                        kwargs.get("bemtype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc1",
@@ -326,14 +327,14 @@ class FrequencyDomainAcousticBemMatv(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t_hold", 0.0)
+                        kwargs.get("t_hold", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "decay",
                         float,
                         10,
                         10,
-                        kwargs.get("decay", 0.02)
+                        kwargs.get("decay", 0.02 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

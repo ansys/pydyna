@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -94,7 +95,7 @@ class Mat192(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("rmu", 1.0)
+                        kwargs.get("rmu", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -119,7 +120,7 @@ class Mat192(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("tol", 0.0005)
+                        kwargs.get("tol", 0.0005 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pgcl",
@@ -147,14 +148,14 @@ class Mat192(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("grav", 9.807)
+                        kwargs.get("grav", 9.807 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "theory",
                         int,
                         70,
                         10,
-                        kwargs.get("theory", 0)
+                        kwargs.get("theory", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

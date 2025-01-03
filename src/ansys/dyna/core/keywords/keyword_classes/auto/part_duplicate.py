@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartDuplicate(KeywordBase):
@@ -40,7 +41,7 @@ class PartDuplicate(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("ptype", "PART")
+                        kwargs.get("ptype", "PART" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "typeid",
@@ -54,42 +55,42 @@ class PartDuplicate(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("idpoff", 0)
+                        kwargs.get("idpoff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ideoff",
                         int,
                         30,
                         10,
-                        kwargs.get("ideoff", 0)
+                        kwargs.get("ideoff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idnoff",
                         int,
                         40,
                         10,
-                        kwargs.get("idnoff", 0)
+                        kwargs.get("idnoff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tranid",
                         int,
                         50,
                         10,
-                        kwargs.get("tranid", 0)
+                        kwargs.get("tranid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "boxid",
                         int,
                         60,
                         10,
-                        kwargs.get("boxid", 0)
+                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zmin",
                         float,
                         70,
                         10,
-                        kwargs.get("zmin", 0.0)
+                        kwargs.get("zmin", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

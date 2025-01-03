@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementInertiaOffset(KeywordBase):
@@ -65,49 +66,49 @@ class ElementInertiaOffset(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ixx", 0.0)
+                        kwargs.get("ixx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ixy",
                         float,
                         10,
                         10,
-                        kwargs.get("ixy", 0.0)
+                        kwargs.get("ixy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ixz",
                         float,
                         20,
                         10,
-                        kwargs.get("ixz", 0.0)
+                        kwargs.get("ixz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iyy",
                         float,
                         30,
                         10,
-                        kwargs.get("iyy", 0.0)
+                        kwargs.get("iyy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iyz",
                         float,
                         40,
                         10,
-                        kwargs.get("iyz", 0.0)
+                        kwargs.get("iyz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "izz",
                         float,
                         50,
                         10,
-                        kwargs.get("izz", 0.0)
+                        kwargs.get("izz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mass",
                         float,
                         60,
                         10,
-                        kwargs.get("mass", 0.0)
+                        kwargs.get("mass", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -118,21 +119,21 @@ class ElementInertiaOffset(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x-off", 0.0)
+                        kwargs.get("x-off", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y_off",
                         float,
                         10,
                         10,
-                        kwargs.get("y_off", 0.0)
+                        kwargs.get("y_off", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z_off",
                         float,
                         20,
                         10,
-                        kwargs.get("z_off", 0.0)
+                        kwargs.get("z_off", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

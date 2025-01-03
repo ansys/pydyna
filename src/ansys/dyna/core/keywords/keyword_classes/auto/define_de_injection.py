@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,42 +60,42 @@ class DefineDeInjection(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("xc", 0.0)
+                        kwargs.get("xc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yc",
                         float,
                         30,
                         10,
-                        kwargs.get("yc", 0.0)
+                        kwargs.get("yc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zc",
                         float,
                         40,
                         10,
-                        kwargs.get("zc", 0.0)
+                        kwargs.get("zc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xl",
                         float,
                         50,
                         10,
-                        kwargs.get("xl", 0.0)
+                        kwargs.get("xl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yl",
                         float,
                         60,
                         10,
-                        kwargs.get("yl", 0.0)
+                        kwargs.get("yl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cid",
                         int,
                         70,
                         10,
-                        kwargs.get("cid", 0)
+                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -126,35 +127,35 @@ class DefineDeInjection(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("vx", 0.0)
+                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vy",
                         float,
                         40,
                         10,
-                        kwargs.get("vy", 0.0)
+                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vz",
                         float,
                         50,
                         10,
-                        kwargs.get("vz", 0.0)
+                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tbeg",
                         float,
                         60,
                         10,
-                        kwargs.get("tbeg", 0.0)
+                        kwargs.get("tbeg", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tend",
                         float,
                         70,
                         10,
-                        kwargs.get("tend", 1.0E20)
+                        kwargs.get("tend", 1.0E20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

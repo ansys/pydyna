@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -70,14 +71,14 @@ class DefineAdaptiveSolidToDesId(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("itype", 0)
+                        kwargs.get("itype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nq",
                         int,
                         20,
                         10,
-                        kwargs.get("nq", 1)
+                        kwargs.get("nq", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ipdes",
@@ -98,21 +99,21 @@ class DefineAdaptiveSolidToDesId(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("rsf", 1.0)
+                        kwargs.get("rsf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "outdes",
                         int,
                         60,
                         10,
-                        kwargs.get("outdes", 0)
+                        kwargs.get("outdes", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ibond",
                         int,
                         70,
                         10,
-                        kwargs.get("ibond", 0)
+                        kwargs.get("ibond", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -151,14 +152,14 @@ class DefineAdaptiveSolidToDesId(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("sfa", 1.0)
+                        kwargs.get("sfa", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "alpha",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha", 0.0)
+                        kwargs.get("alpha", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,21 +74,21 @@ class MatConcreteEc2(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("typec", 1.0)
+                        kwargs.get("typec", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unitc",
                         float,
                         50,
                         10,
-                        kwargs.get("unitc", 1.0)
+                        kwargs.get("unitc", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ecuten",
                         float,
                         60,
                         10,
-                        kwargs.get("ecuten", 0.0025)
+                        kwargs.get("ecuten", 0.0025 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fcc",
@@ -119,28 +120,28 @@ class MatConcreteEc2(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("mu", 0.4)
+                        kwargs.get("mu", 0.4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "taumxf",
                         float,
                         30,
                         10,
-                        kwargs.get("taumxf", 1.E20)
+                        kwargs.get("taumxf", 1.E20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "taumxc",
                         float,
                         40,
                         10,
-                        kwargs.get("taumxc", 1.161)
+                        kwargs.get("taumxc", 1.161 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ecragg",
                         float,
                         50,
                         10,
-                        kwargs.get("ecragg", 0.001)
+                        kwargs.get("ecragg", 0.001 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "aggsz",
@@ -154,7 +155,7 @@ class MatConcreteEc2(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("unitl", 1.0)
+                        kwargs.get("unitl", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -186,7 +187,7 @@ class MatConcreteEc2(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("typer", 1.0)
+                        kwargs.get("typer", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fracrx",
@@ -239,7 +240,7 @@ class MatConcreteEc2(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("prt36 ", 0.25)
+                        kwargs.get("prt36 ", 0.25 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ecut36",
@@ -267,14 +268,14 @@ class MatConcreteEc2(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("ishchk", 0)
+                        kwargs.get("ishchk", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unlfac",
                         float,
                         70,
                         10,
-                        kwargs.get("unlfac", 0.5)
+                        kwargs.get("unlfac", 0.5 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -306,7 +307,7 @@ class MatConcreteEc2(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("a1", 1.E20)
+                        kwargs.get("a1", 1.E20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a2",
@@ -384,7 +385,7 @@ class MatConcreteEc2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("typesc", 1)
+                        kwargs.get("typesc", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "p_or_f",
@@ -412,21 +413,21 @@ class MatConcreteEc2(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("erodet", 2.0)
+                        kwargs.get("erodet", 2.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "erodec",
                         float,
                         50,
                         10,
-                        kwargs.get("erodec", 0.01)
+                        kwargs.get("erodec", 0.01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eroder",
                         float,
                         60,
                         10,
-                        kwargs.get("eroder", 0.05)
+                        kwargs.get("eroder", 0.05 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tmpoff",

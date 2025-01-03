@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,7 +53,7 @@ class SectionSolidPeri(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 48)
+                        kwargs.get("elform", 48 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -63,14 +64,14 @@ class SectionSolidPeri(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dr", 1.01)
+                        kwargs.get("dr", 1.01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ptype",
                         int,
                         10,
                         10,
-                        kwargs.get("ptype", 0)
+                        kwargs.get("ptype", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

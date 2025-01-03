@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabasePllyout(KeywordBase):
@@ -40,28 +41,28 @@ class DatabasePllyout(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt", 0.0)
+                        kwargs.get("dt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "binary",
                         int,
                         10,
                         10,
-                        kwargs.get("binary", 0)
+                        kwargs.get("binary", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcur",
                         int,
                         20,
                         10,
-                        kwargs.get("lcur", 0)
+                        kwargs.get("lcur", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ioopt",
                         int,
                         30,
                         10,
-                        kwargs.get("ioopt", 1)
+                        kwargs.get("ioopt", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

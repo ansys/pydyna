@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSegmentSetId(KeywordBase):
@@ -72,14 +73,14 @@ class LoadSegmentSetId(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "at",
                         float,
                         30,
                         10,
-                        kwargs.get("at", 0.0)
+                        kwargs.get("at", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

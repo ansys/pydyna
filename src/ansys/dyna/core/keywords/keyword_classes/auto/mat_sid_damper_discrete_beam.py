@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -140,14 +141,14 @@ class MatSidDamperDiscreteBeam(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("lcidf", 0)
+                        kwargs.get("lcidf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidd",
                         float,
                         60,
                         10,
-                        kwargs.get("lcidd", 0)
+                        kwargs.get("lcidd", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "s0",
@@ -179,7 +180,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dc",

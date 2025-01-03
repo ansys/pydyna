@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundarySpcSetBirthDeath(KeywordBase):
@@ -47,49 +48,49 @@ class BoundarySpcSetBirthDeath(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("cid", 0)
+                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dofx",
                         int,
                         20,
                         10,
-                        kwargs.get("dofx", 0)
+                        kwargs.get("dofx", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dofy",
                         int,
                         30,
                         10,
-                        kwargs.get("dofy", 0)
+                        kwargs.get("dofy", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dofz",
                         int,
                         40,
                         10,
-                        kwargs.get("dofz", 0)
+                        kwargs.get("dofz", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dofrx",
                         int,
                         50,
                         10,
-                        kwargs.get("dofrx", 0)
+                        kwargs.get("dofrx", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dofry",
                         int,
                         60,
                         10,
-                        kwargs.get("dofry", 0)
+                        kwargs.get("dofry", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dofrz",
                         int,
                         70,
                         10,
-                        kwargs.get("dofrz", 0)
+                        kwargs.get("dofrz", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,14 +101,14 @@ class BoundarySpcSetBirthDeath(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("birth", 0.0)
+                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "death",
                         float,
                         10,
                         10,
-                        kwargs.get("death", 1.0E+20)
+                        kwargs.get("death", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

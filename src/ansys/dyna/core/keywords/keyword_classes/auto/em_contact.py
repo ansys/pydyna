@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmContact(KeywordBase):
@@ -47,7 +48,7 @@ class EmContact(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("conttype", 1)
+                        kwargs.get("conttype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psidm",
@@ -68,21 +69,21 @@ class EmContact(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("eps1", 0.3)
+                        kwargs.get("eps1", 0.3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eps2",
                         float,
                         50,
                         10,
-                        kwargs.get("eps2", 0.3)
+                        kwargs.get("eps2", 0.3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eps3",
                         float,
                         60,
                         10,
-                        kwargs.get("eps3", 0.3)
+                        kwargs.get("eps3", 0.3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "d0",

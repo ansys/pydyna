@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementBeamThicknessOrientation(KeywordBase):
@@ -75,35 +76,35 @@ class ElementBeamThicknessOrientation(KeywordBase):
                         int,
                         40,
                         8,
-                        kwargs.get("rt1", 0)
+                        kwargs.get("rt1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rr1",
                         int,
                         48,
                         8,
-                        kwargs.get("rr1", 0)
+                        kwargs.get("rr1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rt2",
                         int,
                         56,
                         8,
-                        kwargs.get("rt2", 0)
+                        kwargs.get("rt2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rr2",
                         int,
                         64,
                         8,
-                        kwargs.get("rr2", 0)
+                        kwargs.get("rr2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "local",
                         int,
                         72,
                         8,
-                        kwargs.get("local", 2)
+                        kwargs.get("local", 2 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -153,21 +154,21 @@ class ElementBeamThicknessOrientation(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vx", 0.0)
+                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vy",
                         float,
                         10,
                         10,
-                        kwargs.get("vy", 0.0)
+                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vz",
                         float,
                         20,
                         10,
-                        kwargs.get("vz", 0.0)
+                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BatteryBaEchemControlSolver(KeywordBase):
@@ -54,35 +55,35 @@ class BatteryBaEchemControlSolver(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("ncycle", 1)
+                        kwargs.get("ncycle", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "aging",
                         int,
                         30,
                         10,
-                        kwargs.get("aging", 1)
+                        kwargs.get("aging", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tra",
                         int,
                         40,
                         10,
-                        kwargs.get("tra", 0)
+                        kwargs.get("tra", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gas",
                         int,
                         50,
                         10,
-                        kwargs.get("gas", 0)
+                        kwargs.get("gas", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "esolid",
                         int,
                         60,
                         10,
-                        kwargs.get("esolid", 0)
+                        kwargs.get("esolid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -121,14 +122,14 @@ class BatteryBaEchemControlSolver(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("ctime", 0.0)
+                        kwargs.get("ctime", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vcut",
                         float,
                         40,
                         10,
-                        kwargs.get("vcut", 0.0)
+                        kwargs.get("vcut", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

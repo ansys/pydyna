@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -66,21 +67,21 @@ class MatQuasilinearViscoelastic(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("lc1", 0)
+                        kwargs.get("lc1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lc2",
                         int,
                         40,
                         10,
-                        kwargs.get("lc2", 0)
+                        kwargs.get("lc2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n",
                         float,
                         50,
                         10,
-                        kwargs.get("n", 6)
+                        kwargs.get("n", 6 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gstart",
@@ -94,7 +95,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("m", 6)
+                        kwargs.get("m", 6 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,21 +106,21 @@ class MatQuasilinearViscoelastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("so", 0.0)
+                        kwargs.get("so", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "e_min",
                         float,
                         10,
                         10,
-                        kwargs.get("e_min", -0.9)
+                        kwargs.get("e_min", -0.9 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "e_max",
                         float,
                         20,
                         10,
-                        kwargs.get("e_max", 5.1)
+                        kwargs.get("e_max", 5.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gama1",
@@ -154,7 +155,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("form", 0)
+                        kwargs.get("form", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

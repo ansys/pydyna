@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleStructuredMeshTrim(KeywordBase):
@@ -40,28 +41,28 @@ class AleStructuredMeshTrim(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mshid", 0)
+                        kwargs.get("mshid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "option",
                         str,
                         10,
                         10,
-                        kwargs.get("option", "PARTSET")
+                        kwargs.get("option", "PARTSET" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "oper",
                         int,
                         20,
                         10,
-                        kwargs.get("oper", 0)
+                        kwargs.get("oper", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ioutin",
                         int,
                         30,
                         10,
-                        kwargs.get("ioutin", 0)
+                        kwargs.get("ioutin", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psid",

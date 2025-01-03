@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadBeamSet(KeywordBase):
@@ -47,7 +48,7 @@ class LoadBeamSet(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("dal", 1)
+                        kwargs.get("dal", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",
@@ -61,7 +62,7 @@ class LoadBeamSet(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

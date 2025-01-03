@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleTankTest(KeywordBase):
@@ -40,49 +41,49 @@ class AleTankTest(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mdotlc", 0)
+                        kwargs.get("mdotlc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tankvol",
                         float,
                         10,
                         10,
-                        kwargs.get("tankvol", 0.0)
+                        kwargs.get("tankvol", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pamb",
                         float,
                         20,
                         10,
-                        kwargs.get("pamb", 0.0)
+                        kwargs.get("pamb", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pfinal",
                         float,
                         30,
                         10,
-                        kwargs.get("pfinal", 0.0)
+                        kwargs.get("pfinal", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "machlim",
                         float,
                         40,
                         10,
-                        kwargs.get("machlim", 0.0)
+                        kwargs.get("machlim", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "velmax",
                         float,
                         50,
                         10,
-                        kwargs.get("velmax", 0.0)
+                        kwargs.get("velmax", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "aorif",
                         float,
                         60,
                         10,
-                        kwargs.get("aorif", 0.0)
+                        kwargs.get("aorif", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -93,21 +94,21 @@ class AleTankTest(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ammgidg", 0)
+                        kwargs.get("ammgidg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ammgida",
                         int,
                         10,
                         10,
-                        kwargs.get("ammgida", 0)
+                        kwargs.get("ammgida", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "numpnt",
                         int,
                         20,
                         10,
-                        kwargs.get("numpnt", 50)
+                        kwargs.get("numpnt", 50 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

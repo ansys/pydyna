@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainSeaConnection(KeywordBase):
@@ -47,7 +48,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("ctype", 1)
+                        kwargs.get("ctype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsub",
@@ -61,7 +62,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("ibeam", 0)
+                        kwargs.get("ibeam", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -192,7 +193,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("length", 0.0)
+                        kwargs.get("length", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -203,14 +204,14 @@ class FrequencyDomainSeaConnection(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("absorb", 0.0)
+                        kwargs.get("absorb", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "thick",
                         float,
                         10,
                         10,
-                        kwargs.get("thick", 0.0)
+                        kwargs.get("thick", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

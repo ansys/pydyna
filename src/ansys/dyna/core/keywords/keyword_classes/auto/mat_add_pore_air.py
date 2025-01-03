@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -66,7 +67,7 @@ class MatAddPoreAir(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("pore", 1.)
+                        kwargs.get("pore", 1. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dvimin",
@@ -84,7 +85,7 @@ class MatAddPoreAir(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("perm1", 0.)
+                        kwargs.get("perm1", 0. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "perm2",
@@ -105,21 +106,21 @@ class MatAddPoreAir(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("cdarcy", 1.)
+                        kwargs.get("cdarcy", 1. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cdf",
                         float,
                         40,
                         10,
-                        kwargs.get("cdf", 0.)
+                        kwargs.get("cdf", 0. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcpgd1",
                         int,
                         50,
                         10,
-                        kwargs.get("lcpgd1", 0)
+                        kwargs.get("lcpgd1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcpgd2",

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagInteraction(KeywordBase):
@@ -68,21 +69,21 @@ class AirbagInteraction(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("pid", 0)
+                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",
                         int,
                         50,
                         10,
-                        kwargs.get("lcid", 0)
+                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iflow",
                         int,
                         60,
                         10,
-                        kwargs.get("iflow", 0)
+                        kwargs.get("iflow", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

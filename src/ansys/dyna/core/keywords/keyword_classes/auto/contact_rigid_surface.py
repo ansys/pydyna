@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -60,7 +61,7 @@ class ContactRigidSurface(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("boxid", 0)
+                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "segid",
@@ -74,28 +75,28 @@ class ContactRigidSurface(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("fs", 0.0)
+                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fd",
                         float,
                         50,
                         10,
-                        kwargs.get("fd", 0.0)
+                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dc",
                         float,
                         60,
                         10,
-                        kwargs.get("dc", 0.0)
+                        kwargs.get("dc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vc",
                         float,
                         70,
                         10,
-                        kwargs.get("vc", 0.0)
+                        kwargs.get("vc", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -106,35 +107,35 @@ class ContactRigidSurface(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidx", 0)
+                        kwargs.get("lcidx", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidy",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidy", 0)
+                        kwargs.get("lcidy", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidz",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidz", 0)
+                        kwargs.get("lcidz", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fslcid",
                         int,
                         30,
                         10,
-                        kwargs.get("fslcid", 0)
+                        kwargs.get("fslcid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fdlcid",
                         int,
                         40,
                         10,
-                        kwargs.get("fdlcid", 0)
+                        kwargs.get("fdlcid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -145,42 +146,42 @@ class ContactRigidSurface(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfs", 1.0)
+                        kwargs.get("sfs", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stthk",
                         float,
                         10,
                         10,
-                        kwargs.get("stthk", 0.0)
+                        kwargs.get("stthk", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfthk",
                         float,
                         20,
                         10,
-                        kwargs.get("sfthk", 1.0)
+                        kwargs.get("sfthk", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xpene",
                         float,
                         30,
                         10,
-                        kwargs.get("xpene", 4.0)
+                        kwargs.get("xpene", 4.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bsort",
                         float,
                         40,
                         10,
-                        kwargs.get("bsort", 10.0)
+                        kwargs.get("bsort", 10.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ctype",
                         int,
                         50,
                         10,
-                        kwargs.get("ctype", 0)
+                        kwargs.get("ctype", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

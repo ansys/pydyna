@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedSoilPile(KeywordBase):
@@ -75,14 +76,14 @@ class ConstrainedSoilPile(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("error", 0)
+                        kwargs.get("error", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nring",
                         int,
                         60,
                         10,
-                        kwargs.get("nring", 1)
+                        kwargs.get("nring", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nringb",
@@ -195,7 +196,7 @@ class ConstrainedSoilPile(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("bstfac", 1.0)
+                        kwargs.get("bstfac", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bhyper",
@@ -255,7 +256,7 @@ class ConstrainedSoilPile(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("vstfac", 1.0)
+                        kwargs.get("vstfac", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vhyper",
@@ -315,7 +316,7 @@ class ConstrainedSoilPile(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("hstfac", 1.0)
+                        kwargs.get("hstfac", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hhyper",

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitEigenvalue(KeywordBase):
@@ -40,56 +41,56 @@ class ControlImplicitEigenvalue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("neig", 0)
+                        kwargs.get("neig", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "center",
                         float,
                         10,
                         10,
-                        kwargs.get("center", 0.0)
+                        kwargs.get("center", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lflag",
                         int,
                         20,
                         10,
-                        kwargs.get("lflag", 0)
+                        kwargs.get("lflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lftend",
                         float,
                         30,
                         10,
-                        kwargs.get("lftend", -1E29)
+                        kwargs.get("lftend", -1E29 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rflag",
                         int,
                         40,
                         10,
-                        kwargs.get("rflag", 0)
+                        kwargs.get("rflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rhtend",
                         float,
                         50,
                         10,
-                        kwargs.get("rhtend", +1E29)
+                        kwargs.get("rhtend", +1E29 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eigmth",
                         int,
                         60,
                         10,
-                        kwargs.get("eigmth", 2)
+                        kwargs.get("eigmth", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shfscl",
                         float,
                         70,
                         10,
-                        kwargs.get("shfscl", 0.0)
+                        kwargs.get("shfscl", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,35 +101,35 @@ class ControlImplicitEigenvalue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("isolid", 0)
+                        kwargs.get("isolid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ibeam",
                         int,
                         10,
                         10,
-                        kwargs.get("ibeam", 0)
+                        kwargs.get("ibeam", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ishell",
                         int,
                         20,
                         10,
-                        kwargs.get("ishell", 0)
+                        kwargs.get("ishell", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "itshell",
                         int,
                         30,
                         10,
-                        kwargs.get("itshell", 0)
+                        kwargs.get("itshell", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mstres",
                         int,
                         40,
                         10,
-                        kwargs.get("mstres", 0)
+                        kwargs.get("mstres", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "evdump",
@@ -142,7 +143,7 @@ class ControlImplicitEigenvalue(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("mstrscl", 0.001)
+                        kwargs.get("mstrscl", 0.001 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -153,7 +154,7 @@ class ControlImplicitEigenvalue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iparm1", 100)
+                        kwargs.get("iparm1", 100 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iparm2",
@@ -174,14 +175,14 @@ class ControlImplicitEigenvalue(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("iparm4", 1500)
+                        kwargs.get("iparm4", 1500 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rparm1",
                         float,
                         40,
                         10,
-                        kwargs.get("rparm1", 4.0)
+                        kwargs.get("rparm1", 4.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -192,14 +193,14 @@ class ControlImplicitEigenvalue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iparm1", 100)
+                        kwargs.get("iparm1", 100 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iparm2",
                         int,
                         10,
                         10,
-                        kwargs.get("iparm2", 100)
+                        kwargs.get("iparm2", 100 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -220,14 +221,14 @@ class ControlImplicitEigenvalue(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("rparm1", 0)
+                        kwargs.get("rparm1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rparm2",
                         int,
                         50,
                         10,
-                        kwargs.get("rparm2", 0)
+                        kwargs.get("rparm2", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -245,7 +246,7 @@ class ControlImplicitEigenvalue(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("iparm2", 0)
+                        kwargs.get("iparm2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iparm3",
@@ -273,7 +274,7 @@ class ControlImplicitEigenvalue(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("rparm6", 0)
+                        kwargs.get("rparm6", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

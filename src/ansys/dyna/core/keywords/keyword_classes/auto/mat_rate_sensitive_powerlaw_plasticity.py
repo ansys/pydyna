@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -80,21 +81,21 @@ class MatRateSensitivePowerlawPlasticity(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("m", 1.0E-04)
+                        kwargs.get("m", 1.0E-04 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n",
                         float,
                         60,
                         10,
-                        kwargs.get("n", 0.0 )
+                        kwargs.get("n", 0.0  if use_lspp_defaults() else None)
                     ),
                     Field(
                         "e0",
                         float,
                         70,
                         10,
-                        kwargs.get("e0", 2.0E-04)
+                        kwargs.get("e0", 2.0E-04 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,21 +106,21 @@ class MatRateSensitivePowerlawPlasticity(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vp", 0.0)
+                        kwargs.get("vp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eps0",
                         float,
                         10,
                         10,
-                        kwargs.get("eps0", 1.0)
+                        kwargs.get("eps0", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rfiltf",
                         float,
                         20,
                         10,
-                        kwargs.get("rfiltf", 0.0)
+                        kwargs.get("rfiltf", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

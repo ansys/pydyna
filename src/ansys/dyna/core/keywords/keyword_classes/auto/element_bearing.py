@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementBearing(KeywordBase):
@@ -47,7 +48,7 @@ class ElementBearing(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("itype", 0)
+                        kwargs.get("itype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n1",
@@ -93,35 +94,35 @@ class ElementBearing(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eball", 0.0)
+                        kwargs.get("eball", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prball",
                         float,
                         10,
                         10,
-                        kwargs.get("prball", 0.0)
+                        kwargs.get("prball", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "erace",
                         float,
                         20,
                         10,
-                        kwargs.get("erace", 0.0)
+                        kwargs.get("erace", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prrace",
                         float,
                         30,
                         10,
-                        kwargs.get("prrace", 0.0)
+                        kwargs.get("prrace", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stresl",
                         float,
                         40,
                         10,
-                        kwargs.get("stresl", 0.0)
+                        kwargs.get("stresl", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -132,28 +133,28 @@ class ElementBearing(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("d", 0.0)
+                        kwargs.get("d", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "di",
                         float,
                         10,
                         10,
-                        kwargs.get("di", 0.0)
+                        kwargs.get("di", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "do",
                         float,
                         20,
                         10,
-                        kwargs.get("do", 0.0)
+                        kwargs.get("do", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dm",
                         float,
                         30,
                         10,
-                        kwargs.get("dm", 0.0)
+                        kwargs.get("dm", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -164,28 +165,28 @@ class ElementBearing(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ao", 0.0)
+                        kwargs.get("ao", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ai",
                         float,
                         10,
                         10,
-                        kwargs.get("ai", 0.0)
+                        kwargs.get("ai", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bo",
                         float,
                         20,
                         10,
-                        kwargs.get("bo", 0.0)
+                        kwargs.get("bo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pd",
                         float,
                         30,
                         10,
-                        kwargs.get("pd", 0.0)
+                        kwargs.get("pd", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -196,42 +197,42 @@ class ElementBearing(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ipflag", 0)
+                        kwargs.get("ipflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xtran",
                         float,
                         10,
                         10,
-                        kwargs.get("xtran", 0.0)
+                        kwargs.get("xtran", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ytran",
                         float,
                         20,
                         10,
-                        kwargs.get("ytran", 0.0)
+                        kwargs.get("ytran", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ztran",
                         float,
                         30,
                         10,
-                        kwargs.get("ztran", 0.0)
+                        kwargs.get("ztran", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xrot",
                         float,
                         40,
                         10,
-                        kwargs.get("xrot", 0.0)
+                        kwargs.get("xrot", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yrot",
                         float,
                         50,
                         10,
-                        kwargs.get("yrot", 0.0)
+                        kwargs.get("yrot", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

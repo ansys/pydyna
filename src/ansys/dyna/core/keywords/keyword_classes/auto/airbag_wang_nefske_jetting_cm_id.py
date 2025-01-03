@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagWangNefskeJettingCmId(KeywordBase):
@@ -65,49 +66,49 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("sidtyp", 0)
+                        kwargs.get("sidtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rbid",
                         int,
                         20,
                         10,
-                        kwargs.get("rbid", 0)
+                        kwargs.get("rbid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vsca",
                         float,
                         30,
                         10,
-                        kwargs.get("vsca", 1.0)
+                        kwargs.get("vsca", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psca",
                         float,
                         40,
                         10,
-                        kwargs.get("psca", 1.0)
+                        kwargs.get("psca", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vini",
                         float,
                         50,
                         10,
-                        kwargs.get("vini", 0.0)
+                        kwargs.get("vini", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mwd",
                         float,
                         60,
                         10,
-                        kwargs.get("mwd", 0.0)
+                        kwargs.get("mwd", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "spsf",
                         float,
                         70,
                         10,
-                        kwargs.get("spsf", 0.0)
+                        kwargs.get("spsf", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -132,14 +133,14 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("t", 0.0)
+                        kwargs.get("t", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lct",
                         int,
                         30,
                         10,
-                        kwargs.get("lct", 0)
+                        kwargs.get("lct", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcmt",
@@ -153,21 +154,21 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("tvol", 0.0)
+                        kwargs.get("tvol", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdt",
                         int,
                         60,
                         10,
-                        kwargs.get("lcdt", 0)
+                        kwargs.get("lcdt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iabt",
                         float,
                         70,
                         10,
-                        kwargs.get("iabt", not used)
+                        kwargs.get("iabt", not used if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -185,7 +186,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("lcc23", 0)
+                        kwargs.get("lcc23", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a23",
@@ -199,7 +200,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("lca23", 0)
+                        kwargs.get("lca23", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cp23",
@@ -213,21 +214,21 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("lccp23", 0)
+                        kwargs.get("lccp23", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ap23",
                         float,
                         60,
                         10,
-                        kwargs.get("ap23", 0.0)
+                        kwargs.get("ap23", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcap23",
                         int,
                         70,
                         10,
-                        kwargs.get("lcap23", 0)
+                        kwargs.get("lcap23", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -259,35 +260,35 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("lcefr", 0)
+                        kwargs.get("lcefr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pover",
                         float,
                         40,
                         10,
-                        kwargs.get("pover", 0.0)
+                        kwargs.get("pover", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ppop",
                         float,
                         50,
                         10,
-                        kwargs.get("ppop", 0.0)
+                        kwargs.get("ppop", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "opt",
                         int,
                         60,
                         10,
-                        kwargs.get("opt", 1)
+                        kwargs.get("opt", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "knkdn",
                         int,
                         70,
                         10,
-                        kwargs.get("knkdn", 0)
+                        kwargs.get("knkdn", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -379,7 +380,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("hconv", 0.0)
+                        kwargs.get("hconv", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -439,7 +440,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("beta", 1.0)
+                        kwargs.get("beta", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -485,21 +486,21 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("node1", 0)
+                        kwargs.get("node1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "node2",
                         int,
                         60,
                         10,
-                        kwargs.get("node2", 0)
+                        kwargs.get("node2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "node3",
                         int,
                         70,
                         10,
-                        kwargs.get("node3", 0)
+                        kwargs.get("node3", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -510,7 +511,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nreact", 0)
+                        kwargs.get("nreact", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

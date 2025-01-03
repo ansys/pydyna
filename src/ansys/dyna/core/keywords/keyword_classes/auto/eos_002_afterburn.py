@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Eos002Afterburn(KeywordBase):
@@ -100,7 +101,7 @@ class Eos002Afterburn(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("opt", 0.0)
+                        kwargs.get("opt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "qt",
@@ -132,7 +133,7 @@ class Eos002Afterburn(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("opt", 0.0)
+                        kwargs.get("opt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "q0",
@@ -153,35 +154,35 @@ class Eos002Afterburn(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("qm", 0.5)
+                        kwargs.get("qm", 0.5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "qn",
                         float,
                         40,
                         10,
-                        kwargs.get("qn", 0.17)
+                        kwargs.get("qn", 0.17 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "conm",
                         float,
                         50,
                         10,
-                        kwargs.get("conm", 1.)
+                        kwargs.get("conm", 1. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "conl",
                         float,
                         60,
                         10,
-                        kwargs.get("conl", 1.)
+                        kwargs.get("conl", 1. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cont",
                         float,
                         70,
                         10,
-                        kwargs.get("cont", 1.)
+                        kwargs.get("cont", 1. if use_lspp_defaults() else None)
                     ),
                 ],
             ),

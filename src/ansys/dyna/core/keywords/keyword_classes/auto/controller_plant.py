@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControllerPlant(KeywordBase):
@@ -139,7 +140,7 @@ class ControllerPlant(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("dofi1", 1)
+                        kwargs.get("dofi1", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nodi2",
@@ -153,7 +154,7 @@ class ControllerPlant(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("dofi2", 1)
+                        kwargs.get("dofi2", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nodi3",
@@ -167,7 +168,7 @@ class ControllerPlant(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("dofi3", 1)
+                        kwargs.get("dofi3", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nodi4",
@@ -181,7 +182,7 @@ class ControllerPlant(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("dofi4", 1)
+                        kwargs.get("dofi4", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -199,7 +200,7 @@ class ControllerPlant(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("dofo1", 1)
+                        kwargs.get("dofo1", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nodo2",
@@ -213,7 +214,7 @@ class ControllerPlant(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("dofo2", 1)
+                        kwargs.get("dofo2", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nodo3",
@@ -227,7 +228,7 @@ class ControllerPlant(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("dofo3", 1)
+                        kwargs.get("dofo3", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nodo4",
@@ -241,7 +242,7 @@ class ControllerPlant(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("dofo4", 1)
+                        kwargs.get("dofo4", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -252,14 +253,14 @@ class ControllerPlant(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nfeq", 1)
+                        kwargs.get("nfeq", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "deftol",
                         float,
                         10,
                         10,
-                        kwargs.get("deftol", 1.0e-9)
+                        kwargs.get("deftol", 1.0e-9 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",

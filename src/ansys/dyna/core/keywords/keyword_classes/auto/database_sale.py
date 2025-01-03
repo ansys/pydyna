@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseSale(KeywordBase):
@@ -40,7 +41,7 @@ class DatabaseSale(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("on/off", 1)
+                        kwargs.get("on/off", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

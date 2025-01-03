@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedLocal(KeywordBase):
@@ -58,21 +59,21 @@ class ConstrainedLocal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tc", 1)
+                        kwargs.get("tc", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rc",
                         int,
                         10,
                         10,
-                        kwargs.get("rc", 1)
+                        kwargs.get("rc", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dir",
                         int,
                         20,
                         10,
-                        kwargs.get("dir", 1)
+                        kwargs.get("dir", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "x",
@@ -107,7 +108,7 @@ class ConstrainedLocal(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("tol", 0.0)
+                        kwargs.get("tol", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

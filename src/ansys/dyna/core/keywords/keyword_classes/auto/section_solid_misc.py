@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,14 +53,14 @@ class SectionSolidMisc(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 1)
+                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "aet",
                         int,
                         20,
                         10,
-                        kwargs.get("aet", 0)
+                        kwargs.get("aet", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -179,14 +180,14 @@ class SectionSolidMisc(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("ihgf", 0)
+                        kwargs.get("ihgf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "itaj",
                         int,
                         30,
                         10,
-                        kwargs.get("itaj", 0)
+                        kwargs.get("itaj", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lmc",

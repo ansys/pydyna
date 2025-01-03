@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -126,7 +127,7 @@ class MatCodam2(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("nlayer", 0)
+                        kwargs.get("nlayer", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r1",
@@ -147,7 +148,7 @@ class MatCodam2(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("nfreq", 0)
+                        kwargs.get("nfreq", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -260,7 +261,7 @@ class MatCodam2(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("macf", 1)
+                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -451,7 +452,7 @@ class MatCodam2(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("erode", 0)
+                        kwargs.get("erode", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "erpar1",

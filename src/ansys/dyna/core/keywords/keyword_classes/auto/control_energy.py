@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlEnergy(KeywordBase):
@@ -40,56 +41,56 @@ class ControlEnergy(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("hgen", 1)
+                        kwargs.get("hgen", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rwen",
                         int,
                         10,
                         10,
-                        kwargs.get("rwen", 2)
+                        kwargs.get("rwen", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "slnten",
                         int,
                         20,
                         10,
-                        kwargs.get("slnten", 1)
+                        kwargs.get("slnten", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rylen",
                         int,
                         30,
                         10,
-                        kwargs.get("rylen", 1)
+                        kwargs.get("rylen", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "irgen",
                         int,
                         40,
                         10,
-                        kwargs.get("irgen", 2)
+                        kwargs.get("irgen", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "maten",
                         int,
                         50,
                         10,
-                        kwargs.get("maten", 1)
+                        kwargs.get("maten", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "drlen",
                         int,
                         60,
                         10,
-                        kwargs.get("drlen", 1)
+                        kwargs.get("drlen", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "disen",
                         int,
                         70,
                         10,
-                        kwargs.get("disen", 1)
+                        kwargs.get("disen", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

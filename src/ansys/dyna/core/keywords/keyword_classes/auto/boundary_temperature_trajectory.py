@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryTemperatureTrajectory(KeywordBase):
@@ -47,7 +48,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("pype", 1)
+                        kwargs.get("pype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsid1",
@@ -89,7 +90,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("relvel", 0)
+                        kwargs.get("relvel", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,7 +101,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iform", 1)
+                        kwargs.get("iform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",

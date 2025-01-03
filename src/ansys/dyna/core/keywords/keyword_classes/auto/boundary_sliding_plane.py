@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundarySlidingPlane(KeywordBase):
@@ -47,28 +48,28 @@ class BoundarySlidingPlane(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("vx", 0.0)
+                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vy",
                         float,
                         20,
                         10,
-                        kwargs.get("vy", 0.0)
+                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vz",
                         float,
                         30,
                         10,
-                        kwargs.get("vz", 0.0)
+                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "copt",
                         int,
                         40,
                         10,
-                        kwargs.get("copt", 0)
+                        kwargs.get("copt", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

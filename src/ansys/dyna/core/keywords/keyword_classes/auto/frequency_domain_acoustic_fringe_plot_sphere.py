@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
@@ -40,7 +41,7 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("center", 1)
+                        kwargs.get("center", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r",
@@ -82,14 +83,14 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("half1", 0)
+                        kwargs.get("half1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "half2",
                         int,
                         70,
                         10,
-                        kwargs.get("half2", 0)
+                        kwargs.get("half2", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

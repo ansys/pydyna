@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitSsdDirect(KeywordBase):
@@ -40,7 +41,7 @@ class ControlImplicitSsdDirect(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("issflg", 0)
+                        kwargs.get("issflg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fmin",
@@ -61,28 +62,28 @@ class ControlImplicitSsdDirect(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("nfreq", 1)
+                        kwargs.get("nfreq", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "loss",
                         float,
                         40,
                         10,
-                        kwargs.get("loss", 0.0)
+                        kwargs.get("loss", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fspace",
                         float,
                         50,
                         10,
-                        kwargs.get("fspace", 0)
+                        kwargs.get("fspace", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fractn",
                         int,
                         60,
                         10,
-                        kwargs.get("fractn", 1)
+                        kwargs.get("fractn", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

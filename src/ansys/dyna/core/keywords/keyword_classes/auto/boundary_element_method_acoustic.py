@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryElementMethodAcoustic(KeywordBase):
@@ -107,7 +108,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("type_ext", 1)
+                        kwargs.get("type_ext", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsid_int",
@@ -121,14 +122,14 @@ class BoundaryElementMethodAcoustic(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("type_int", 1)
+                        kwargs.get("type_int", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fft_win",
                         int,
                         40,
                         10,
-                        kwargs.get("fft_win", 0)
+                        kwargs.get("fft_win", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -139,7 +140,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("method", 0)
+                        kwargs.get("method", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "maxit",
@@ -178,14 +179,14 @@ class BoundaryElementMethodAcoustic(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("sstype", 0)
+                        kwargs.get("sstype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "norm",
                         int,
                         20,
                         10,
-                        kwargs.get("norm", 0)
+                        kwargs.get("norm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bem_type",
@@ -199,7 +200,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("restart", 0)
+                        kwargs.get("restart", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlExplicitThermalInitial(KeywordBase):
@@ -47,14 +48,14 @@ class ControlExplicitThermalInitial(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("idtyp", 1)
+                        kwargs.get("idtyp", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tempini",
                         float,
                         20,
                         10,
-                        kwargs.get("tempini", 0.0)
+                        kwargs.get("tempini", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryAleMapping(KeywordBase):
@@ -47,7 +48,7 @@ class BoundaryAleMapping(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("typ", 0)
+                        kwargs.get("typ", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ammsid",
@@ -68,14 +69,14 @@ class BoundaryAleMapping(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("birth", 0.0)
+                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "death",
                         float,
                         50,
                         10,
-                        kwargs.get("death", 1e20)
+                        kwargs.get("death", 1e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtout",
@@ -89,7 +90,7 @@ class BoundaryAleMapping(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("ini", 0)
+                        kwargs.get("ini", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,56 +101,56 @@ class BoundaryAleMapping(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("thick", 0.0)
+                        kwargs.get("thick", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "radius",
                         float,
                         10,
                         10,
-                        kwargs.get("radius", 0.0)
+                        kwargs.get("radius", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "x1",
                         float,
                         20,
                         10,
-                        kwargs.get("x1", 0.0)
+                        kwargs.get("x1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y1",
                         float,
                         30,
                         10,
-                        kwargs.get("y1", 0.0)
+                        kwargs.get("y1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z1",
                         float,
                         40,
                         10,
-                        kwargs.get("z1", 0.0)
+                        kwargs.get("z1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "x2",
                         float,
                         50,
                         10,
-                        kwargs.get("x2", 0.0)
+                        kwargs.get("x2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y2",
                         float,
                         60,
                         10,
-                        kwargs.get("y2", 0.0)
+                        kwargs.get("y2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z2",
                         float,
                         70,
                         10,
-                        kwargs.get("z2", 0.0)
+                        kwargs.get("z2", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -160,21 +161,21 @@ class BoundaryAleMapping(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x0", 0.0)
+                        kwargs.get("x0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "y0",
                         float,
                         10,
                         10,
-                        kwargs.get("y0", 0.0)
+                        kwargs.get("y0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "z0",
                         float,
                         20,
                         10,
-                        kwargs.get("z0", 0.0)
+                        kwargs.get("z0", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vecid",

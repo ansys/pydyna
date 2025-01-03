@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -45,56 +46,56 @@ class DefineDeFlowDrag(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cd", 0.0)
+                        kwargs.get("cd", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rho",
                         float,
                         10,
                         10,
-                        kwargs.get("rho", 0.0)
+                        kwargs.get("rho", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mu",
                         float,
                         20,
                         10,
-                        kwargs.get("mu", 0.0)
+                        kwargs.get("mu", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vx",
                         float,
                         30,
                         10,
-                        kwargs.get("vx", 0.0)
+                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vy",
                         float,
                         40,
                         10,
-                        kwargs.get("vy", 0.0)
+                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vz",
                         float,
                         50,
                         10,
-                        kwargs.get("vz", 0.0)
+                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tbirth",
                         float,
                         60,
                         10,
-                        kwargs.get("tbirth", 0.0)
+                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdeath",
                         float,
                         70,
                         10,
-                        kwargs.get("tdeath", 1E+20)
+                        kwargs.get("tdeath", 1E+20 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,28 +106,28 @@ class DefineDeFlowDrag(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vs", 0.0)
+                        kwargs.get("vs", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dflag",
                         int,
                         10,
                         10,
-                        kwargs.get("dflag", 1)
+                        kwargs.get("dflag", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfn",
                         float,
                         20,
                         10,
-                        kwargs.get("sfn", 1.0)
+                        kwargs.get("sfn", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfs",
                         float,
                         30,
                         10,
-                        kwargs.get("sfs", 1.0)
+                        kwargs.get("sfs", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

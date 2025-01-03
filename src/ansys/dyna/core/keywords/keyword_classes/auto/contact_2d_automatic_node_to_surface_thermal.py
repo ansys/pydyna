@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -60,35 +61,35 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("sfact", 1.0)
+                        kwargs.get("sfact", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "freq",
                         int,
                         30,
                         10,
-                        kwargs.get("freq", 50)
+                        kwargs.get("freq", 50 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fs",
                         float,
                         40,
                         10,
-                        kwargs.get("fs", 0.0)
+                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fd",
                         float,
                         50,
                         10,
-                        kwargs.get("fd", 0.0)
+                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dc",
                         float,
                         60,
                         10,
-                        kwargs.get("dc", 0.0)
+                        kwargs.get("dc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -106,56 +107,56 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tbirth", 0.0)
+                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdeath",
                         float,
                         10,
                         10,
-                        kwargs.get("tdeath", 1.0E+20)
+                        kwargs.get("tdeath", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "soa",
                         float,
                         20,
                         10,
-                        kwargs.get("soa", 1.0)
+                        kwargs.get("soa", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sob",
                         float,
                         30,
                         10,
-                        kwargs.get("sob", 1.0)
+                        kwargs.get("sob", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nda",
                         int,
                         40,
                         10,
-                        kwargs.get("nda", 0)
+                        kwargs.get("nda", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ndb",
                         int,
                         50,
                         10,
-                        kwargs.get("ndb", 0)
+                        kwargs.get("ndb", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cof",
                         int,
                         60,
                         10,
-                        kwargs.get("cof", 0)
+                        kwargs.get("cof", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "init",
                         int,
                         70,
                         10,
-                        kwargs.get("init", 0)
+                        kwargs.get("init", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -201,14 +202,14 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("chlm", 1.0)
+                        kwargs.get("chlm", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bc_flag",
                         int,
                         60,
                         10,
-                        kwargs.get("bc_flag", 0)
+                        kwargs.get("bc_flag", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -219,56 +220,56 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vc", 0.0)
+                        kwargs.get("vc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vdc",
                         float,
                         10,
                         10,
-                        kwargs.get("vdc", 10.0)
+                        kwargs.get("vdc", 10.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ipf",
                         int,
                         20,
                         10,
-                        kwargs.get("ipf", 0)
+                        kwargs.get("ipf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "slide",
                         int,
                         30,
                         10,
-                        kwargs.get("slide", 0)
+                        kwargs.get("slide", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "istiff",
                         int,
                         40,
                         10,
-                        kwargs.get("istiff", 0)
+                        kwargs.get("istiff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tiedgap",
                         float,
                         50,
                         10,
-                        kwargs.get("tiedgap", 0.0)
+                        kwargs.get("tiedgap", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "igapcl",
                         int,
                         60,
                         10,
-                        kwargs.get("igapcl", 0)
+                        kwargs.get("igapcl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tietyp",
                         int,
                         70,
                         10,
-                        kwargs.get("tietyp", 0)
+                        kwargs.get("tietyp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -279,21 +280,21 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sldsoa", 0.0)
+                        kwargs.get("sldsoa", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sldsob",
                         float,
                         10,
                         10,
-                        kwargs.get("sldsob", 0.0)
+                        kwargs.get("sldsob", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdpen",
                         float,
                         20,
                         10,
-                        kwargs.get("tdpen", 0.0)
+                        kwargs.get("tdpen", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

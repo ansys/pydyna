@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,28 +74,28 @@ class Mat248(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("tunit", 3600)
+                        kwargs.get("tunit", 3600 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "trip",
                         int,
                         50,
                         10,
-                        kwargs.get("trip", 0)
+                        kwargs.get("trip", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "phase",
                         int,
                         60,
                         10,
-                        kwargs.get("phase", 0)
+                        kwargs.get("phase", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "heat",
                         int,
                         70,
                         10,
-                        kwargs.get("heat", 0)
+                        kwargs.get("heat", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -553,14 +554,14 @@ class Mat248(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("islc", 0)
+                        kwargs.get("islc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iextra",
                         int,
                         50,
                         10,
-                        kwargs.get("iextra", 0)
+                        kwargs.get("iextra", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -585,49 +586,49 @@ class Mat248(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alph_m", 0.0428)
+                        kwargs.get("alph_m", 0.0428 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n_m",
                         float,
                         10,
                         10,
-                        kwargs.get("n_m", 0.191)
+                        kwargs.get("n_m", 0.191 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "phi_m",
                         float,
                         20,
                         10,
-                        kwargs.get("phi_m", 0.382)
+                        kwargs.get("phi_m", 0.382 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psi_m",
                         float,
                         30,
                         10,
-                        kwargs.get("psi_m", 2.421)
+                        kwargs.get("psi_m", 2.421 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "omg_f",
                         float,
                         40,
                         10,
-                        kwargs.get("omg_f", 0.41)
+                        kwargs.get("omg_f", 0.41 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "phi_f",
                         float,
                         50,
                         10,
-                        kwargs.get("phi_f", 0.4)
+                        kwargs.get("phi_f", 0.4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psi_f",
                         float,
                         60,
                         10,
-                        kwargs.get("psi_f", 0.4)
+                        kwargs.get("psi_f", 0.4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cr_f",
@@ -645,21 +646,21 @@ class Mat248(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("omg_p", 0.32)
+                        kwargs.get("omg_p", 0.32 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "phi_p",
                         float,
                         10,
                         10,
-                        kwargs.get("phi_p", 0.4)
+                        kwargs.get("phi_p", 0.4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psi_p",
                         float,
                         20,
                         10,
-                        kwargs.get("psi_p", 0.4)
+                        kwargs.get("psi_p", 0.4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cr_p",
@@ -673,21 +674,21 @@ class Mat248(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("omg_b", 0.29)
+                        kwargs.get("omg_b", 0.29 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "phi_b",
                         float,
                         50,
                         10,
-                        kwargs.get("phi_b", 0.4)
+                        kwargs.get("phi_b", 0.4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psi_b",
                         float,
                         60,
                         10,
-                        kwargs.get("psi_b", 0.4)
+                        kwargs.get("psi_b", 0.4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cr_b",
@@ -754,7 +755,7 @@ class Mat248(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("tau1", 2.08E+8)
+                        kwargs.get("tau1", 2.08E+8 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -765,28 +766,28 @@ class Mat248(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gra", 3.11)
+                        kwargs.get("gra", 3.11 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "grb",
                         float,
                         10,
                         10,
-                        kwargs.get("grb", 7520.)
+                        kwargs.get("grb", 7520. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "expa",
                         float,
                         20,
                         10,
-                        kwargs.get("expa", 1.0)
+                        kwargs.get("expa", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "expb",
                         float,
                         30,
                         10,
-                        kwargs.get("expb", 1.0)
+                        kwargs.get("expb", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "grcc",
@@ -807,14 +808,14 @@ class Mat248(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("heatn", 1.0)
+                        kwargs.get("heatn", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tau2",
                         float,
                         70,
                         10,
-                        kwargs.get("tau2", 4.806)
+                        kwargs.get("tau2", 4.806 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -846,28 +847,28 @@ class Mat248(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("tcvup", 0.0)
+                        kwargs.get("tcvup", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tcvlo",
                         float,
                         40,
                         10,
-                        kwargs.get("tcvlo", 0.0)
+                        kwargs.get("tcvlo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cvcrit",
                         float,
                         50,
                         10,
-                        kwargs.get("cvcrit", 0.0)
+                        kwargs.get("cvcrit", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tcvsl",
                         float,
                         60,
                         10,
-                        kwargs.get("tcvsl", 0.0)
+                        kwargs.get("tcvsl", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -878,14 +879,14 @@ class Mat248(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("epsp", 0.0)
+                        kwargs.get("epsp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "expon",
                         float,
                         10,
                         10,
-                        kwargs.get("expon", 0.0)
+                        kwargs.get("expon", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

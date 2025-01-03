@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadBrode(KeywordBase):
@@ -40,56 +41,56 @@ class LoadBrode(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("yld", 0.0)
+                        kwargs.get("yld", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bht",
                         float,
                         10,
                         10,
-                        kwargs.get("bht", 0.0)
+                        kwargs.get("bht", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xbo",
                         float,
                         20,
                         10,
-                        kwargs.get("xbo", 0.0)
+                        kwargs.get("xbo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ybo",
                         float,
                         30,
                         10,
-                        kwargs.get("ybo", 0.0)
+                        kwargs.get("ybo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zbo",
                         float,
                         40,
                         10,
-                        kwargs.get("zbo", 0.0)
+                        kwargs.get("zbo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tbo",
                         float,
                         50,
                         10,
-                        kwargs.get("tbo", 0.0)
+                        kwargs.get("tbo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "talc",
                         int,
                         60,
                         10,
-                        kwargs.get("talc", 0)
+                        kwargs.get("talc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sflc",
                         int,
                         70,
                         10,
-                        kwargs.get("sflc", 0)
+                        kwargs.get("sflc", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,21 +101,21 @@ class LoadBrode(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cfl", 0.0)
+                        kwargs.get("cfl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cft",
                         float,
                         10,
                         10,
-                        kwargs.get("cft", 0.0)
+                        kwargs.get("cft", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cfp",
                         float,
                         20,
                         10,
-                        kwargs.get("cfp", 0.0)
+                        kwargs.get("cfp", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

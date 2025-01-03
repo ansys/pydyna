@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -80,7 +81,7 @@ class MatSimplifiedJohnsonCookOrthotropicDamage(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("eppfr", 1.E+16)
+                        kwargs.get("eppfr", 1.E+16 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdm",
@@ -133,28 +134,28 @@ class MatSimplifiedJohnsonCookOrthotropicDamage(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("psfail", 1.0E+17)
+                        kwargs.get("psfail", 1.0E+17 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigmax",
                         float,
                         50,
                         10,
-                        kwargs.get("sigmax", 1.0E+28)
+                        kwargs.get("sigmax", 1.0E+28 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigsat",
                         float,
                         60,
                         10,
-                        kwargs.get("sigsat", 1.0E+28)
+                        kwargs.get("sigsat", 1.0E+28 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "epso",
                         float,
                         70,
                         10,
-                        kwargs.get("epso", 1.0)
+                        kwargs.get("epso", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

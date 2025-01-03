@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CosimFmiControl(KeywordBase):
@@ -47,21 +48,21 @@ class CosimFmiControl(KeywordBase):
                         str,
                         20,
                         10,
-                        kwargs.get("opt", "G")
+                        kwargs.get("opt", "G" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mode",
                         str,
                         30,
                         10,
-                        kwargs.get("mode", "P")
+                        kwargs.get("mode", "P" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fmi",
                         int,
                         40,
                         10,
-                        kwargs.get("fmi", 0)
+                        kwargs.get("fmi", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

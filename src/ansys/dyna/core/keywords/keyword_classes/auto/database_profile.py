@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseProfile(KeywordBase):
@@ -54,28 +55,28 @@ class DatabaseProfile(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("stype", 1)
+                        kwargs.get("stype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "data",
                         int,
                         30,
                         10,
-                        kwargs.get("data", 1)
+                        kwargs.get("data", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dir",
                         int,
                         40,
                         10,
-                        kwargs.get("dir", 1)
+                        kwargs.get("dir", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "updloc",
                         int,
                         50,
                         10,
-                        kwargs.get("updloc", 0)
+                        kwargs.get("updloc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mmg",

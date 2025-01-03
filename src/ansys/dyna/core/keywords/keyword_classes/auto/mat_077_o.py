@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -67,14 +68,14 @@ class Mat077O(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("n", 0)
+                        kwargs.get("n", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nv",
                         int,
                         40,
                         10,
-                        kwargs.get("nv", 6)
+                        kwargs.get("nv", 6 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "g",
@@ -95,7 +96,7 @@ class Mat077O(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("ref", 0.0)
+                        kwargs.get("ref", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -146,7 +147,7 @@ class Mat077O(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("data", 1.0)
+                        kwargs.get("data", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid2",

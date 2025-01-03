@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,35 +60,35 @@ class DefineStochasticVariation(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("pid_typ", 0)
+                        kwargs.get("pid_typ", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "icor",
                         int,
                         30,
                         10,
-                        kwargs.get("icor", 0)
+                        kwargs.get("icor", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "var_s",
                         int,
                         40,
                         10,
-                        kwargs.get("var_s", 0)
+                        kwargs.get("var_s", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "var_f",
                         int,
                         50,
                         10,
-                        kwargs.get("var_f", 0)
+                        kwargs.get("var_f", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "irng",
                         int,
                         60,
                         10,
-                        kwargs.get("irng", 0)
+                        kwargs.get("irng", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

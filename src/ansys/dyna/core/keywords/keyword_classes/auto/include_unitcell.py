@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IncludeUnitcell(KeywordBase):
@@ -51,21 +52,21 @@ class IncludeUnitcell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("inpt", 0)
+                        kwargs.get("inpt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "oupt",
                         int,
                         10,
                         10,
-                        kwargs.get("oupt", 0)
+                        kwargs.get("oupt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nedof",
                         int,
                         20,
                         10,
-                        kwargs.get("nedof", 0)
+                        kwargs.get("nedof", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -76,49 +77,49 @@ class IncludeUnitcell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dx", 1.0)
+                        kwargs.get("dx", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dy",
                         float,
                         10,
                         10,
-                        kwargs.get("dy", 1.0)
+                        kwargs.get("dy", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dz",
                         float,
                         20,
                         10,
-                        kwargs.get("dz", 1.0)
+                        kwargs.get("dz", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nex",
                         int,
                         30,
                         10,
-                        kwargs.get("nex", 1)
+                        kwargs.get("nex", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ney",
                         int,
                         40,
                         10,
-                        kwargs.get("ney", 1)
+                        kwargs.get("ney", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nez",
                         int,
                         50,
                         10,
-                        kwargs.get("nez", 1)
+                        kwargs.get("nez", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nnpe",
                         int,
                         60,
                         10,
-                        kwargs.get("nnpe", 8)
+                        kwargs.get("nnpe", 8 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tol",

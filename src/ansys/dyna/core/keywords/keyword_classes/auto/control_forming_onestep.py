@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingOnestep(KeywordBase):
@@ -40,35 +41,35 @@ class ControlFormingOnestep(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("option", 6)
+                        kwargs.get("option", 6 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tsclmax",
                         float,
                         10,
                         10,
-                        kwargs.get("tsclmax", 1.0)
+                        kwargs.get("tsclmax", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "autobd",
                         float,
                         20,
                         10,
-                        kwargs.get("autobd", 0.3)
+                        kwargs.get("autobd", 0.3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tsclmin",
                         float,
                         30,
                         10,
-                        kwargs.get("tsclmin", 1.0)
+                        kwargs.get("tsclmin", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "epsmax",
                         float,
                         40,
                         10,
-                        kwargs.get("epsmax", 1.0)
+                        kwargs.get("epsmax", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",

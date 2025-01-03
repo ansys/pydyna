@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingTipping(KeywordBase):
@@ -47,7 +48,7 @@ class ControlFormingTipping(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("itype", 1)
+                        kwargs.get("itype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ifstrn",
@@ -79,7 +80,7 @@ class ControlFormingTipping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rot/tran", 1)
+                        kwargs.get("rot/tran", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "v11",
@@ -139,7 +140,7 @@ class ControlFormingTipping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rot/tran", 1)
+                        kwargs.get("rot/tran", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dx",

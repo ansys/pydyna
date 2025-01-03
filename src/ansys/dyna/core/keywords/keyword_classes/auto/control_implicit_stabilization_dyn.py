@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitStabilizationDyn(KeywordBase):
@@ -40,28 +41,28 @@ class ControlImplicitStabilizationDyn(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ias", 2)
+                        kwargs.get("ias", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "scale",
                         float,
                         10,
                         10,
-                        kwargs.get("scale", 1.0)
+                        kwargs.get("scale", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tstart",
                         float,
                         20,
                         10,
-                        kwargs.get("tstart", 0.0)
+                        kwargs.get("tstart", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tend",
                         float,
                         30,
                         10,
-                        kwargs.get("tend", 0.0)
+                        kwargs.get("tend", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
