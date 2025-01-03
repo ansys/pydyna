@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import typing
+import warnings
 
 from ansys.dyna.core.lib.parameter_set import ParameterSet
 
@@ -146,6 +147,7 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         data.append(value)
 
     if end_position < len(line_data):
-        raise Exception("Data line is too long!")
+        warning_message = f'Detected out of bound card characters:\n"{line_data[end_position:]}"\n"Ignoring.'
+        warnings.warn(warning_message)
 
     return tuple(data)
