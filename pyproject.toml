@@ -48,7 +48,7 @@ tests = [
     "scikit-learn==1.6.0",
     "pytest-xdist==3.6.1",
     "ipython==8.29.0",
-    "pyvista==0.44.1",
+    "pyvista==0.44.2",
 ]
 codegen = [
     "Jinja2"
@@ -77,7 +77,7 @@ doc = [
     "jupyterlab==4.3.1",
     "sphinx-jinja==2.0.2",
     "sphinx-autoapi==3.4.0",
-    "pyvista==0.44.1",
+    "pyvista==0.44.2",
 ]
 
 [tool.flit.module]
