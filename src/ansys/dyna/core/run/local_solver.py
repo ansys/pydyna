@@ -145,10 +145,10 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
         container = os.environ.get("PYDYNA_RUN_CONTAINER", None)
         if container != None:
             kwargs["container"] = container
-        if "container_env" not in kwargs:
-            kwargs["container_env"] = dict(
-                (k, os.environ[k]) for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE")
-            )
+            if "container_env" not in kwargs:
+                kwargs["container_env"] = dict(
+                    (k, os.environ[k]) for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE")
+                )
 
     if "stream" not in kwargs:
         stream = os.environ.get("PYDYNA_RUN_STREAM", None)
