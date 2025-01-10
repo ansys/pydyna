@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 from ansys.dyna.core.lib.card_set import CardSet
 from ansys.dyna.core.lib.cards import Cards
@@ -62,7 +63,7 @@ class InitialStrainShellCardSet(Cards):
                         int,
                         30,
                         10,
-                        kwargs.get("large", 0)
+                        kwargs.get("large", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -90,7 +91,7 @@ class InitialStrainShellCardSet(Cards):
                         int,
                         70,
                         10,
-                        kwargs.get("ilocal", 0)
+                        kwargs.get("ilocal", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,14 +74,14 @@ class Mat252(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("flg", 0)
+                        kwargs.get("flg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "jcfl",
                         int,
                         50,
                         10,
-                        kwargs.get("jcfl", 0)
+                        kwargs.get("jcfl", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dopt",

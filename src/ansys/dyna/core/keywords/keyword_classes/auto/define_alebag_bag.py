@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,21 +60,21 @@ class DefineAlebagBag(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("sidtype", 0)
+                        kwargs.get("sidtype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cvbag",
                         int,
                         30,
                         10,
-                        kwargs.get("cvbag", 1)
+                        kwargs.get("cvbag", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iblock",
                         int,
                         40,
                         10,
-                        kwargs.get("iblock", 0)
+                        kwargs.get("iblock", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vcof",
@@ -94,7 +95,7 @@ class DefineAlebagBag(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("vtype", 0)
+                        kwargs.get("vtype", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,56 +106,56 @@ class DefineAlebagBag(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nquad", 0)
+                        kwargs.get("nquad", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ctype",
                         int,
                         10,
                         10,
-                        kwargs.get("ctype", 2)
+                        kwargs.get("ctype", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pfac",
                         float,
                         20,
                         10,
-                        kwargs.get("pfac", 0.1)
+                        kwargs.get("pfac", 0.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fric",
                         float,
                         30,
                         10,
-                        kwargs.get("fric", 0.0)
+                        kwargs.get("fric", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "frcmin",
                         float,
                         40,
                         10,
-                        kwargs.get("frcmin", 0.5)
+                        kwargs.get("frcmin", 0.5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "normtyp",
                         int,
                         50,
                         10,
-                        kwargs.get("normtyp", 0)
+                        kwargs.get("normtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ileak",
                         int,
                         60,
                         10,
-                        kwargs.get("ileak", 0)
+                        kwargs.get("ileak", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pleak",
                         float,
                         70,
                         10,
-                        kwargs.get("pleak", 0.01)
+                        kwargs.get("pleak", 0.01 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -165,21 +166,21 @@ class DefineAlebagBag(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("norm", 0)
+                        kwargs.get("norm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "start",
                         float,
                         10,
                         10,
-                        kwargs.get("start", 0.0)
+                        kwargs.get("start", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "end",
                         float,
                         20,
                         10,
-                        kwargs.get("end", 1.0E+10)
+                        kwargs.get("end", 1.0E+10 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

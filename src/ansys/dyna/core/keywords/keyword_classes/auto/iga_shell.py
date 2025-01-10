@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IgaShell(KeywordBase):
@@ -54,14 +55,14 @@ class IgaShell(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("nisr", 0.0)
+                        kwargs.get("nisr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "niss",
                         float,
                         30,
                         10,
-                        kwargs.get("niss", 0.0)
+                        kwargs.get("niss", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -82,7 +83,7 @@ class IgaShell(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("idfne", 0)
+                        kwargs.get("idfne", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",

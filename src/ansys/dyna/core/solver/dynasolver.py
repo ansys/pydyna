@@ -102,7 +102,7 @@ class DynaSolver:
     def get_appdata_path():
         system_type = os.name
         if system_type == "nt":  # Windows
-            appdata_folder = os.getenv("APPDATA") + "\PYDYNA"
+            appdata_folder = os.getenv("APPDATA") + "\\PYDYNA"
             if not os.path.isdir(appdata_folder):
                 os.mkdir(appdata_folder)
         elif system_type == "posix":  # Linux or Macos

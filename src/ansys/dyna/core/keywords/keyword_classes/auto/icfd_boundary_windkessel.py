@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdBoundaryWindkessel(KeywordBase):
@@ -54,28 +55,28 @@ class IcfdBoundaryWindkessel(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("r1", 0.0)
+                        kwargs.get("r1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "c1",
                         float,
                         30,
                         10,
-                        kwargs.get("c1", 0.0)
+                        kwargs.get("c1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r2",
                         float,
                         40,
                         10,
-                        kwargs.get("r2", 0.0)
+                        kwargs.get("r2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "l1",
                         float,
                         50,
                         10,
-                        kwargs.get("l1", 0.0)
+                        kwargs.get("l1", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

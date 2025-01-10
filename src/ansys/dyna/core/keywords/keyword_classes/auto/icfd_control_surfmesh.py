@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlSurfmesh(KeywordBase):
@@ -40,14 +41,14 @@ class IcfdControlSurfmesh(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rsrf", 0)
+                        kwargs.get("rsrf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sadapt",
                         int,
                         10,
                         10,
-                        kwargs.get("sadapt", 0)
+                        kwargs.get("sadapt", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

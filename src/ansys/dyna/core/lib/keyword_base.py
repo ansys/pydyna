@@ -28,6 +28,7 @@ from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.option_card import OptionsAPI
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
 class KeywordBase(Cards):
@@ -269,7 +270,7 @@ class KeywordBase(Cards):
             return title_line[:-1]
         return title_line
 
-    def read(self, buf: typing.TextIO) -> None:
+    def read(self, buf: typing.TextIO, parameters: ParameterSet = None) -> None:
         title_line = buf.readline()
         title_line = self._process_title(title_line)
         self.before_read(buf)
@@ -277,12 +278,12 @@ class KeywordBase(Cards):
             self._activate_options(title_line.strip("*"))
         # TODO: self.user_comment should come from somewhere.
         # maybe after the keyword but before any $#
-        self._read_data(buf)
+        self._read_data(buf, parameters)
 
-    def loads(self, value: str) -> None:
+    def loads(self, value: str, parameters: ParameterSet = None) -> None:
         """Load the keyword from string."""
         # TODO - add a method to load from a buffer.
         s = io.StringIO()
         s.write(value)
         s.seek(0)
-        self.read(s)
+        self.read(s, parameters)

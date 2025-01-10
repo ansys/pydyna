@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartModes(KeywordBase):
@@ -54,7 +55,7 @@ class PartModes(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("form", 0)
+                        kwargs.get("form", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ansid",
@@ -68,28 +69,28 @@ class PartModes(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("format", 0)
+                        kwargs.get("format", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "kmflag",
                         int,
                         50,
                         10,
-                        kwargs.get("kmflag", 0)
+                        kwargs.get("kmflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nupdf",
                         int,
                         60,
                         10,
-                        kwargs.get("nupdf", 0)
+                        kwargs.get("nupdf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigrec",
                         int,
                         70,
                         10,
-                        kwargs.get("sigrec", 0)
+                        kwargs.get("sigrec", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

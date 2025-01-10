@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseTracerGenerate(KeywordBase):
@@ -47,14 +48,14 @@ class DatabaseTracerGenerate(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("valow", 0.0)
+                        kwargs.get("valow", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "valup",
                         float,
                         20,
                         10,
-                        kwargs.get("valup", 0.0)
+                        kwargs.get("valup", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "valtype1",
@@ -75,7 +76,7 @@ class DatabaseTracerGenerate(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("setype", 0)
+                        kwargs.get("setype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mmgset",
@@ -100,21 +101,21 @@ class DatabaseTracerGenerate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("varloc", 0)
+                        kwargs.get("varloc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "valtype2",
                         int,
                         10,
                         10,
-                        kwargs.get("valtype2", 0)
+                        kwargs.get("valtype2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mmgset",
                         int,
                         20,
                         10,
-                        kwargs.get("mmgset", 0)
+                        kwargs.get("mmgset", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

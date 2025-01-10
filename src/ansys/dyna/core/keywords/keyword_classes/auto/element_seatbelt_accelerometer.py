@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementSeatbeltAccelerometer(KeywordBase):
@@ -40,42 +41,42 @@ class ElementSeatbeltAccelerometer(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sbacid", 0)
+                        kwargs.get("sbacid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid1",
                         int,
                         10,
                         10,
-                        kwargs.get("nid1", 0)
+                        kwargs.get("nid1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid2",
                         int,
                         20,
                         10,
-                        kwargs.get("nid2", 0)
+                        kwargs.get("nid2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid3",
                         int,
                         30,
                         10,
-                        kwargs.get("nid3", 0)
+                        kwargs.get("nid3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "igrav",
                         int,
                         40,
                         10,
-                        kwargs.get("igrav", 0)
+                        kwargs.get("igrav", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "intopt",
                         int,
                         50,
                         10,
-                        kwargs.get("intopt", 0)
+                        kwargs.get("intopt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mass",

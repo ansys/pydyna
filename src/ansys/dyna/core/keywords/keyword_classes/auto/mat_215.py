@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,14 +53,14 @@ class Mat215(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("mmopt", 0.0)
+                        kwargs.get("mmopt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bupd",
                         float,
                         20,
                         10,
-                        kwargs.get("bupd", 0.01)
+                        kwargs.get("bupd", 0.01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -87,14 +88,14 @@ class Mat215(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("failf", 0)
+                        kwargs.get("failf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "numint",
                         float,
                         70,
                         10,
-                        kwargs.get("numint", 1.0)
+                        kwargs.get("numint", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -112,7 +113,7 @@ class Mat215(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("macf", 1)
+                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xp",
@@ -239,7 +240,7 @@ class Mat215(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("fd", 1.0)
+                        kwargs.get("fd", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -253,7 +254,7 @@ class Mat215(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("a11", 1.0)
+                        kwargs.get("a11", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a22",
@@ -366,7 +367,7 @@ class Mat215(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("ncyred", 10.0)
+                        kwargs.get("ncyred", 10.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -497,7 +498,7 @@ class Mat215(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("ncyred2", 1.0)
+                        kwargs.get("ncyred2", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

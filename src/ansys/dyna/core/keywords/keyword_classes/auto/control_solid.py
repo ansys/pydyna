@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlSolid(KeywordBase):
@@ -40,56 +41,56 @@ class ControlSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("esort", 0)
+                        kwargs.get("esort", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fmatrix",
                         int,
                         10,
                         10,
-                        kwargs.get("fmatrix", 0)
+                        kwargs.get("fmatrix", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "niptets",
                         int,
                         20,
                         10,
-                        kwargs.get("niptets", 4)
+                        kwargs.get("niptets", 4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "swlocl",
                         int,
                         30,
                         10,
-                        kwargs.get("swlocl", 1)
+                        kwargs.get("swlocl", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psfail",
                         int,
                         40,
                         10,
-                        kwargs.get("psfail", 0)
+                        kwargs.get("psfail", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "t10jtol",
                         float,
                         50,
                         10,
-                        kwargs.get("t10jtol", 0.0)
+                        kwargs.get("t10jtol", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "icoh",
                         int,
                         60,
                         10,
-                        kwargs.get("icoh", 0)
+                        kwargs.get("icoh", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tet13k",
                         int,
                         70,
                         10,
-                        kwargs.get("tet13k", 0)
+                        kwargs.get("tet13k", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseControlLimiter(KeywordBase):
@@ -40,28 +41,28 @@ class CeseControlLimiter(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idlmt", 0)
+                        kwargs.get("idlmt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "alfa",
                         float,
                         10,
                         10,
-                        kwargs.get("alfa", 0.0)
+                        kwargs.get("alfa", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beta ",
                         float,
                         20,
                         10,
-                        kwargs.get("beta ", 0.0)
+                        kwargs.get("beta ", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "epsr",
                         float,
                         30,
                         10,
-                        kwargs.get("epsr", 0.0)
+                        kwargs.get("epsr", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

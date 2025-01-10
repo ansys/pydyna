@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagAdiabaticGasModel(KeywordBase):
@@ -47,49 +48,49 @@ class AirbagAdiabaticGasModel(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("sidtyp", 0)
+                        kwargs.get("sidtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rbid",
                         int,
                         20,
                         10,
-                        kwargs.get("rbid", 0)
+                        kwargs.get("rbid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vsca",
                         float,
                         30,
                         10,
-                        kwargs.get("vsca", 1.0)
+                        kwargs.get("vsca", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psca",
                         float,
                         40,
                         10,
-                        kwargs.get("psca", 1.0)
+                        kwargs.get("psca", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vini",
                         float,
                         50,
                         10,
-                        kwargs.get("vini", 0.0)
+                        kwargs.get("vini", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mwd",
                         float,
                         60,
                         10,
-                        kwargs.get("mwd", 0.0)
+                        kwargs.get("mwd", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "spsf",
                         float,
                         70,
                         10,
-                        kwargs.get("spsf", 0.0)
+                        kwargs.get("spsf", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,7 +101,7 @@ class AirbagAdiabaticGasModel(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("psf", 1.0)
+                        kwargs.get("psf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",

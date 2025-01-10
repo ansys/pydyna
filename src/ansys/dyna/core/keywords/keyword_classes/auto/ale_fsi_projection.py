@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleFsiProjection(KeywordBase):
@@ -54,14 +55,14 @@ class AleFsiProjection(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("lsidtyp", 0)
+                        kwargs.get("lsidtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "asidtyp",
                         int,
                         30,
                         10,
-                        kwargs.get("asidtyp", 0)
+                        kwargs.get("asidtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "smmgid",
@@ -93,14 +94,14 @@ class AleFsiProjection(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("birth", 0.0)
+                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "death",
                         float,
                         10,
                         10,
-                        kwargs.get("death", 1.0e10)
+                        kwargs.get("death", 1.0e10 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

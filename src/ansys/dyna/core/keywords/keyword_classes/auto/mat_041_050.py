@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -80,7 +81,7 @@ class Mat041050(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("iortho", 0)
+                        kwargs.get("iortho", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ibulk",
@@ -105,7 +106,7 @@ class Mat041050(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ivect", 0)
+                        kwargs.get("ivect", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ifail",
@@ -119,21 +120,21 @@ class Mat041050(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("itherm", 0)
+                        kwargs.get("itherm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ihyper",
                         int,
                         30,
                         10,
-                        kwargs.get("ihyper", 0)
+                        kwargs.get("ihyper", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ieos",
                         int,
                         40,
                         10,
-                        kwargs.get("ieos", 0)
+                        kwargs.get("ieos", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lmca",
@@ -172,7 +173,7 @@ class Mat041050(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("macf", 1)
+                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xp",

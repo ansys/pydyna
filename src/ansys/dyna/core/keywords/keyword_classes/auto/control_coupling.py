@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlCoupling(KeywordBase):
@@ -40,56 +41,56 @@ class ControlCoupling(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("unleng", 1.0)
+                        kwargs.get("unleng", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "untime",
                         float,
                         10,
                         10,
-                        kwargs.get("untime", 1.0)
+                        kwargs.get("untime", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unforc",
                         float,
                         20,
                         10,
-                        kwargs.get("unforc", 1.0)
+                        kwargs.get("unforc", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "timidl",
                         float,
                         30,
                         10,
-                        kwargs.get("timidl", 0.0)
+                        kwargs.get("timidl", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "flipx",
                         int,
                         40,
                         10,
-                        kwargs.get("flipx", 0)
+                        kwargs.get("flipx", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "flipy",
                         int,
                         50,
                         10,
-                        kwargs.get("flipy", 0)
+                        kwargs.get("flipy", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "flipz",
                         int,
                         60,
                         10,
-                        kwargs.get("flipz", 0)
+                        kwargs.get("flipz", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "subcyl",
                         int,
                         70,
                         10,
-                        kwargs.get("subcyl", 1)
+                        kwargs.get("subcyl", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

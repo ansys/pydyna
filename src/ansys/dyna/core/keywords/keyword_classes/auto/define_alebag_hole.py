@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,42 +60,42 @@ class DefineAlebagHole(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("sidtype", 0)
+                        kwargs.get("sidtype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nquad",
                         int,
                         30,
                         10,
-                        kwargs.get("nquad", 1)
+                        kwargs.get("nquad", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xoff",
                         float,
                         40,
                         10,
-                        kwargs.get("xoff", 0.0)
+                        kwargs.get("xoff", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nfold",
                         int,
                         50,
                         10,
-                        kwargs.get("nfold", 0)
+                        kwargs.get("nfold", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xclen",
                         float,
                         60,
                         10,
-                        kwargs.get("xclen", 0.0)
+                        kwargs.get("xclen", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "int/ext",
                         int,
                         70,
                         10,
-                        kwargs.get("int/ext", 0)
+                        kwargs.get("int/ext", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

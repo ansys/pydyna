@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlCoarsen(KeywordBase):
@@ -40,7 +41,7 @@ class ControlCoarsen(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("icoarse", 0)
+                        kwargs.get("icoarse", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "angle",
@@ -54,7 +55,7 @@ class ControlCoarsen(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("nseed", 0)
+                        kwargs.get("nseed", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psid",
@@ -79,56 +80,56 @@ class ControlCoarsen(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1", 0)
+                        kwargs.get("n1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n2",
                         int,
                         10,
                         10,
-                        kwargs.get("n2", 0)
+                        kwargs.get("n2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n3",
                         int,
                         20,
                         10,
-                        kwargs.get("n3", 0)
+                        kwargs.get("n3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n4",
                         int,
                         30,
                         10,
-                        kwargs.get("n4", 0)
+                        kwargs.get("n4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n5",
                         int,
                         40,
                         10,
-                        kwargs.get("n5", 0)
+                        kwargs.get("n5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n6",
                         int,
                         50,
                         10,
-                        kwargs.get("n6", 0)
+                        kwargs.get("n6", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n7",
                         int,
                         60,
                         10,
-                        kwargs.get("n7", 0)
+                        kwargs.get("n7", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "n8",
                         int,
                         70,
                         10,
-                        kwargs.get("n8", 0)
+                        kwargs.get("n8", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

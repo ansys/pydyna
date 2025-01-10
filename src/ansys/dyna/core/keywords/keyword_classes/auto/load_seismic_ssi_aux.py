@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSeismicSsiAux(KeywordBase):
@@ -65,35 +66,35 @@ class LoadSeismicSsiAux(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "birth",
                         float,
                         30,
                         10,
-                        kwargs.get("birth", 0.0)
+                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "death",
                         float,
                         40,
                         10,
-                        kwargs.get("death", 1.E+28)
+                        kwargs.get("death", 1.E+28 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "isg",
                         int,
                         50,
                         10,
-                        kwargs.get("isg", 0)
+                        kwargs.get("isg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "memgm",
                         int,
                         60,
                         10,
-                        kwargs.get("memgm", 2500000)
+                        kwargs.get("memgm", 2500000 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

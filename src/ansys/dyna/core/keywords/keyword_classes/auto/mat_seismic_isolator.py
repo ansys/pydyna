@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,21 +60,21 @@ class MatSeismicIsolator(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("a", 1.0)
+                        kwargs.get("a", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beta",
                         float,
                         30,
                         10,
-                        kwargs.get("beta", 0.5)
+                        kwargs.get("beta", 0.5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "gamma",
                         float,
                         40,
                         10,
-                        kwargs.get("gamma", 0.5)
+                        kwargs.get("gamma", 0.5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dispy",
@@ -94,7 +95,7 @@ class MatSeismicIsolator(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("itype", 0)
+                        kwargs.get("itype", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,56 +106,56 @@ class MatSeismicIsolator(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("preload", 0)
+                        kwargs.get("preload", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "damp",
                         float,
                         10,
                         10,
-                        kwargs.get("damp", 1.0)
+                        kwargs.get("damp", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mx1",
                         float,
                         20,
                         10,
-                        kwargs.get("mx1", 0)
+                        kwargs.get("mx1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mx2",
                         float,
                         30,
                         10,
-                        kwargs.get("mx2", 0)
+                        kwargs.get("mx2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "my1",
                         float,
                         40,
                         10,
-                        kwargs.get("my1", 0)
+                        kwargs.get("my1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "my2",
                         float,
                         50,
                         10,
-                        kwargs.get("my2", 0)
+                        kwargs.get("my2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cde",
                         float,
                         60,
                         10,
-                        kwargs.get("cde", 0)
+                        kwargs.get("cde", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iextra",
                         int,
                         70,
                         10,
-                        kwargs.get("iextra", 0)
+                        kwargs.get("iextra", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -165,42 +166,42 @@ class MatSeismicIsolator(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fmax", 0)
+                        kwargs.get("fmax", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "delf",
                         float,
                         10,
                         10,
-                        kwargs.get("delf", 0)
+                        kwargs.get("delf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "afric",
                         float,
                         20,
                         10,
-                        kwargs.get("afric", 0)
+                        kwargs.get("afric", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "radx",
                         float,
                         30,
                         10,
-                        kwargs.get("radx", 1.0e20)
+                        kwargs.get("radx", 1.0e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rady",
                         float,
                         40,
                         10,
-                        kwargs.get("rady", 1.0e20)
+                        kwargs.get("rady", 1.0e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "radb",
                         float,
                         50,
                         10,
-                        kwargs.get("radb", 1.0e20)
+                        kwargs.get("radb", 1.0e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stiffl",
@@ -214,7 +215,7 @@ class MatSeismicIsolator(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("stiffts", 0)
+                        kwargs.get("stiffts", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -225,14 +226,14 @@ class MatSeismicIsolator(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("forcey", 0)
+                        kwargs.get("forcey", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "alpha",
                         float,
                         10,
                         10,
-                        kwargs.get("alpha", 0)
+                        kwargs.get("alpha", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stifft",
@@ -246,7 +247,7 @@ class MatSeismicIsolator(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("dfail", 1.0e20)
+                        kwargs.get("dfail", 1.0e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fmaxyc",
@@ -391,7 +392,7 @@ class MatSeismicIsolator(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("beta", 0)
+                        kwargs.get("beta", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

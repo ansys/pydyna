@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdSolverSplit(KeywordBase):
@@ -40,14 +41,14 @@ class IcfdSolverSplit(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nit", 1)
+                        kwargs.get("nit", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tol",
                         float,
                         10,
                         10,
-                        kwargs.get("tol", 1.0e-3)
+                        kwargs.get("tol", 1.0e-3 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

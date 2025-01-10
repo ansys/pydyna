@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdMat(KeywordBase):
@@ -47,28 +48,28 @@ class IcfdMat(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("flg", 1)
+                        kwargs.get("flg", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ro",
                         float,
                         20,
                         10,
-                        kwargs.get("ro", 0)
+                        kwargs.get("ro", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vis",
                         float,
                         30,
                         10,
-                        kwargs.get("vis", 0)
+                        kwargs.get("vis", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "st",
                         float,
                         40,
                         10,
-                        kwargs.get("st", 0)
+                        kwargs.get("st", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stsflcid",
@@ -82,7 +83,7 @@ class IcfdMat(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("ca", 0)
+                        kwargs.get("ca", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -93,28 +94,28 @@ class IcfdMat(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hc", 0)
+                        kwargs.get("hc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tc",
                         float,
                         10,
                         10,
-                        kwargs.get("tc", 0)
+                        kwargs.get("tc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beta",
                         float,
                         20,
                         10,
-                        kwargs.get("beta", 0)
+                        kwargs.get("beta", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prt",
                         float,
                         30,
                         10,
-                        kwargs.get("prt", 0.85)
+                        kwargs.get("prt", 0.85 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hcsflcid",

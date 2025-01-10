@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlThermalForming(KeywordBase):
@@ -47,42 +48,42 @@ class ControlThermalForming(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("ptype", 0)
+                        kwargs.get("ptype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tsf",
                         float,
                         20,
                         10,
-                        kwargs.get("tsf", 1.0)
+                        kwargs.get("tsf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "thshel",
                         int,
                         30,
                         10,
-                        kwargs.get("thshel", 0)
+                        kwargs.get("thshel", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ithoff",
                         int,
                         40,
                         10,
-                        kwargs.get("ithoff", 0)
+                        kwargs.get("ithoff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "solver",
                         int,
                         50,
                         10,
-                        kwargs.get("solver", 3)
+                        kwargs.get("solver", 3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fwork",
                         float,
                         60,
                         10,
-                        kwargs.get("fwork", 1.0)
+                        kwargs.get("fwork", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -128,21 +129,21 @@ class ControlThermalForming(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("ftoslv", 0.5)
+                        kwargs.get("ftoslv", 0.5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bc_flg",
                         int,
                         60,
                         10,
-                        kwargs.get("bc_flg", 0)
+                        kwargs.get("bc_flg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "algo",
                         int,
                         70,
                         10,
-                        kwargs.get("algo", 0)
+                        kwargs.get("algo", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -167,7 +168,7 @@ class ControlThermalForming(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("formula", 1)
+                        kwargs.get("formula", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a",

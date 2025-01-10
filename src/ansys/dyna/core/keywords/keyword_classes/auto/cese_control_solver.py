@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseControlSolver(KeywordBase):
@@ -40,28 +41,28 @@ class CeseControlSolver(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("icese", 0)
+                        kwargs.get("icese", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iflow",
                         int,
                         10,
                         10,
-                        kwargs.get("iflow", 0)
+                        kwargs.get("iflow", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "igeom",
                         int,
                         20,
                         10,
-                        kwargs.get("igeom", 0)
+                        kwargs.get("igeom", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iframe",
                         int,
                         30,
                         10,
-                        kwargs.get("iframe", 0)
+                        kwargs.get("iframe", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

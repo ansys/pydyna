@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -105,7 +106,7 @@ class MatPlasticNonlinearKinematic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs", 1.E+16)
+                        kwargs.get("fs", 1.E+16 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

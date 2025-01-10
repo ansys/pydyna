@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseDatabaseFluxavg(KeywordBase):
@@ -40,14 +41,14 @@ class CeseDatabaseFluxavg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("outlv", 0)
+                        kwargs.get("outlv", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtout",
                         float,
                         10,
                         10,
-                        kwargs.get("dtout", 0.0)
+                        kwargs.get("dtout", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

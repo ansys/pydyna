@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseBoundarySolidWallSegmentRotate(KeywordBase):
@@ -68,28 +69,28 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("lcid", 0)
+                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vx",
                         float,
                         50,
                         10,
-                        kwargs.get("vx", 0.0)
+                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vy",
                         float,
                         60,
                         10,
-                        kwargs.get("vy", 0.0)
+                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vz",
                         float,
                         70,
                         10,
-                        kwargs.get("vz", 0.0)
+                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,21 +101,21 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("nx", 0.0)
+                        kwargs.get("nx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ny",
                         float,
                         10,
                         10,
-                        kwargs.get("ny", 0.0)
+                        kwargs.get("ny", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nz",
                         float,
                         20,
                         10,
-                        kwargs.get("nz", 0.0)
+                        kwargs.get("nz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

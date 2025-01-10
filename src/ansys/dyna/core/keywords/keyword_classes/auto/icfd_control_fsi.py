@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlFsi(KeywordBase):
@@ -40,28 +41,28 @@ class IcfdControlFsi(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("owc", 0)
+                        kwargs.get("owc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bt",
                         float,
                         10,
                         10,
-                        kwargs.get("bt", 0.0)
+                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt",
                         float,
                         20,
                         10,
-                        kwargs.get("dt", 1.0E28)
+                        kwargs.get("dt", 1.0E28 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idc",
                         float,
                         30,
                         10,
-                        kwargs.get("idc", 0.25)
+                        kwargs.get("idc", 0.25 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidsf",
@@ -75,7 +76,7 @@ class IcfdControlFsi(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("xproj", 0)
+                        kwargs.get("xproj", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

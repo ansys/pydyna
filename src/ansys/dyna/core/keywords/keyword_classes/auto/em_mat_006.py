@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmMat006(KeywordBase):
@@ -47,7 +48,7 @@ class EmMat006(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("mtype", 0)
+                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigp",
@@ -82,7 +83,7 @@ class EmMat006(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("deatht", 1.0E28)
+                        kwargs.get("deatht", 1.0E28 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlSph(KeywordBase):
@@ -40,7 +41,7 @@ class ControlSph(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ncbs", 1)
+                        kwargs.get("ncbs", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "boxid",
@@ -54,7 +55,7 @@ class ControlSph(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("dt", 1.E+20)
+                        kwargs.get("dt", 1.E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idim",
@@ -68,28 +69,28 @@ class ControlSph(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("nmneigh", 150)
+                        kwargs.get("nmneigh", 150 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "form",
                         int,
                         50,
                         10,
-                        kwargs.get("form", 0)
+                        kwargs.get("form", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "start",
                         float,
                         60,
                         10,
-                        kwargs.get("start", 0.0)
+                        kwargs.get("start", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "maxv",
                         float,
                         70,
                         10,
-                        kwargs.get("maxv", 1.0E+15)
+                        kwargs.get("maxv", 1.0E+15 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,56 +101,56 @@ class ControlSph(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cont", 0)
+                        kwargs.get("cont", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "deriv",
                         int,
                         10,
                         10,
-                        kwargs.get("deriv", 0)
+                        kwargs.get("deriv", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ini",
                         int,
                         20,
                         10,
-                        kwargs.get("ini", 0)
+                        kwargs.get("ini", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ishow",
                         int,
                         30,
                         10,
-                        kwargs.get("ishow", 0)
+                        kwargs.get("ishow", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ierod",
                         int,
                         40,
                         10,
-                        kwargs.get("ierod", 0)
+                        kwargs.get("ierod", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "icont",
                         int,
                         50,
                         10,
-                        kwargs.get("icont", 0)
+                        kwargs.get("icont", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iavis",
                         int,
                         60,
                         10,
-                        kwargs.get("iavis", 0)
+                        kwargs.get("iavis", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "isymp",
                         int,
                         70,
                         10,
-                        kwargs.get("isymp", 100)
+                        kwargs.get("isymp", 100 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -160,21 +161,21 @@ class ControlSph(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ithk", 0)
+                        kwargs.get("ithk", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "istab",
                         int,
                         10,
                         10,
-                        kwargs.get("istab", 0)
+                        kwargs.get("istab", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ql",
                         float,
                         20,
                         10,
-                        kwargs.get("ql", 0.01)
+                        kwargs.get("ql", 0.01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -188,14 +189,14 @@ class ControlSph(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("sphsort", 0)
+                        kwargs.get("sphsort", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ishift",
                         int,
                         50,
                         10,
-                        kwargs.get("ishift", 0)
+                        kwargs.get("ishift", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

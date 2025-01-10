@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitSolverSpr(KeywordBase):
@@ -40,35 +41,35 @@ class ControlImplicitSolverSpr(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lsolvr", 2)
+                        kwargs.get("lsolvr", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lprint",
                         int,
                         10,
                         10,
-                        kwargs.get("lprint", 0)
+                        kwargs.get("lprint", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "negev",
                         int,
                         20,
                         10,
-                        kwargs.get("negev", 2)
+                        kwargs.get("negev", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "order",
                         int,
                         30,
                         10,
-                        kwargs.get("order", 0)
+                        kwargs.get("order", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "drcm",
                         int,
                         40,
                         10,
-                        kwargs.get("drcm", 4)
+                        kwargs.get("drcm", 4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "drcprm",
@@ -82,7 +83,7 @@ class ControlImplicitSolverSpr(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("autospc", 1)
+                        kwargs.get("autospc", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "autotol",
@@ -100,35 +101,35 @@ class ControlImplicitSolverSpr(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcpack", 2)
+                        kwargs.get("lcpack", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mtxdmp",
                         int,
                         10,
                         10,
-                        kwargs.get("mtxdmp", 0)
+                        kwargs.get("mtxdmp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iparm1",
                         int,
                         20,
                         10,
-                        kwargs.get("iparm1", 500)
+                        kwargs.get("iparm1", 500 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rparm1",
                         float,
                         30,
                         10,
-                        kwargs.get("rparm1", 10.0e-10)
+                        kwargs.get("rparm1", 10.0e-10 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rparm2",
                         float,
                         40,
                         10,
-                        kwargs.get("rparm2", 10.0e-4)
+                        kwargs.get("rparm2", 10.0e-4 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -149,7 +150,7 @@ class ControlImplicitSolverSpr(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("rparm5", 0.0)
+                        kwargs.get("rparm5", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -160,14 +161,14 @@ class ControlImplicitSolverSpr(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("emxdmp", 0)
+                        kwargs.get("emxdmp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rdcmem",
                         float,
                         10,
                         10,
-                        kwargs.get("rdcmem", 0.85)
+                        kwargs.get("rdcmem", 0.85 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "absmem",

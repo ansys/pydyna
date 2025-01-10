@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabasePowerSpectralDensityFrequency(KeywordBase):
@@ -40,28 +41,28 @@ class DatabasePowerSpectralDensityFrequency(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fbeg", 0.0)
+                        kwargs.get("fbeg", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fend",
                         float,
                         10,
                         10,
-                        kwargs.get("fend", 0.0)
+                        kwargs.get("fend", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fintval",
                         float,
                         20,
                         10,
-                        kwargs.get("fintval", 1.0)
+                        kwargs.get("fintval", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ftrunk",
                         float,
                         30,
                         10,
-                        kwargs.get("ftrunk", 1.1)
+                        kwargs.get("ftrunk", 1.1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

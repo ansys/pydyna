@@ -24,6 +24,7 @@ import abc
 import typing
 
 from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 # TODO - implement __repr__ on all cards
 
@@ -41,7 +42,7 @@ class CardInterface(metaclass=abc.ABCMeta):
         )
 
     @abc.abstractmethod
-    def read(self, buf: typing.TextIO) -> None:
+    def read(self, buf: typing.TextIO, parameter_set: typing.Optional[ParameterSet]) -> None:
         """Reads the card data from an input text buffer."""
         raise NotImplementedError
 

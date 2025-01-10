@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlVibroAcoustic(KeywordBase):
@@ -40,42 +41,42 @@ class ControlVibroAcoustic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("vaflag", 0)
+                        kwargs.get("vaflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vaprld",
                         int,
                         10,
                         10,
-                        kwargs.get("vaprld", 0)
+                        kwargs.get("vaprld", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vastrs",
                         int,
                         20,
                         10,
-                        kwargs.get("vastrs", 0)
+                        kwargs.get("vastrs", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vapsd",
                         int,
                         30,
                         10,
-                        kwargs.get("vapsd", 0)
+                        kwargs.get("vapsd", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "varms",
                         int,
                         40,
                         10,
-                        kwargs.get("varms", 0)
+                        kwargs.get("varms", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vaplot",
                         int,
                         50,
                         10,
-                        kwargs.get("vaplot", 0)
+                        kwargs.get("vaplot", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ipanelu",
@@ -100,7 +101,7 @@ class ControlVibroAcoustic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("restart", 0)
+                        kwargs.get("restart", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nmodstr",

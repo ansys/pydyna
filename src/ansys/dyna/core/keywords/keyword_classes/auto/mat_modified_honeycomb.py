@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -87,14 +88,14 @@ class MatModifiedHoneycomb(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("mu", 5.0E-02)
+                        kwargs.get("mu", 5.0E-02 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bulk",
                         float,
                         70,
                         10,
-                        kwargs.get("bulk", 0.0)
+                        kwargs.get("bulk", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -112,49 +113,49 @@ class MatModifiedHoneycomb(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("lcb", 0)
+                        kwargs.get("lcb", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcc",
                         int,
                         20,
                         10,
-                        kwargs.get("lcc", 0)
+                        kwargs.get("lcc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcs",
                         int,
                         30,
                         10,
-                        kwargs.get("lcs", 0)
+                        kwargs.get("lcs", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcab",
                         int,
                         40,
                         10,
-                        kwargs.get("lcab", 0)
+                        kwargs.get("lcab", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcbc",
                         int,
                         50,
                         10,
-                        kwargs.get("lcbc", 0)
+                        kwargs.get("lcbc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcca",
                         int,
                         60,
                         10,
-                        kwargs.get("lcca", 0)
+                        kwargs.get("lcca", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcsr",
                         int,
                         70,
                         10,
-                        kwargs.get("lcsr", 0)
+                        kwargs.get("lcsr", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -214,7 +215,7 @@ class MatModifiedHoneycomb(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("macf", 1)
+                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -320,7 +321,7 @@ class MatModifiedHoneycomb(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("shdflg", 0.0)
+                        kwargs.get("shdflg", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

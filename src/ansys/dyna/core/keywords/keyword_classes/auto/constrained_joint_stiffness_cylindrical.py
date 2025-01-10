@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedJointStiffnessCylindrical(KeywordBase):
@@ -68,7 +69,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("cidb", 0)
+                        kwargs.get("cidb", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "jid",
@@ -86,7 +87,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidr", 0)
+                        kwargs.get("lcidr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -100,42 +101,42 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("lcidz", 0)
+                        kwargs.get("lcidz", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dlcidr",
                         int,
                         30,
                         10,
-                        kwargs.get("dlcidr", 0)
+                        kwargs.get("dlcidr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dlcidp",
                         int,
                         40,
                         10,
-                        kwargs.get("dlcidp", 0)
+                        kwargs.get("dlcidp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dlcidz",
                         int,
                         50,
                         10,
-                        kwargs.get("dlcidz", 0)
+                        kwargs.get("dlcidz", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidt",
                         int,
                         60,
                         10,
-                        kwargs.get("lcidt", 0)
+                        kwargs.get("lcidt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dlcidt",
                         int,
                         70,
                         10,
-                        kwargs.get("dlcidt", 0)
+                        kwargs.get("dlcidt", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -146,14 +147,14 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("esr", 0.0)
+                        kwargs.get("esr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ffr",
                         float,
                         10,
                         10,
-                        kwargs.get("ffr", 0.0)
+                        kwargs.get("ffr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -174,28 +175,28 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("esz", 0.0)
+                        kwargs.get("esz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ffz",
                         float,
                         50,
                         10,
-                        kwargs.get("ffz", 0.0)
+                        kwargs.get("ffz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rad1",
                         float,
                         60,
                         10,
-                        kwargs.get("rad1", 0.0)
+                        kwargs.get("rad1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rad2",
                         float,
                         70,
                         10,
-                        kwargs.get("rad2", 0.0)
+                        kwargs.get("rad2", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -213,7 +214,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("psdr", 0.0)
+                        kwargs.get("psdr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -234,14 +235,14 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("nsdz", 0.0)
+                        kwargs.get("nsdz", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "psdz",
                         float,
                         50,
                         10,
-                        kwargs.get("psdz", 0.0)
+                        kwargs.get("psdz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

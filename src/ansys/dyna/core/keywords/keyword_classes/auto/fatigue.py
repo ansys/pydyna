@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Fatigue(KeywordBase):
@@ -47,7 +48,7 @@ class Fatigue(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("ptype", 0)
+                        kwargs.get("ptype", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -69,35 +70,35 @@ class Fatigue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("strsn", 0)
+                        kwargs.get("strsn", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "index",
                         int,
                         10,
                         10,
-                        kwargs.get("index", 0)
+                        kwargs.get("index", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "restrt",
                         int,
                         20,
                         10,
-                        kwargs.get("restrt", 0)
+                        kwargs.get("restrt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "texpos",
                         float,
                         30,
                         10,
-                        kwargs.get("texpos", 0.0)
+                        kwargs.get("texpos", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dmgmin",
                         float,
                         40,
                         10,
-                        kwargs.get("dmgmin", 0.0)
+                        kwargs.get("dmgmin", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceBlanksizeDevelopment(KeywordBase):
@@ -40,7 +41,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ioption", 1)
+                        kwargs.get("ioption", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -61,28 +62,28 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("maxsize", 30.0)
+                        kwargs.get("maxsize", 30.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "referenc",
                         int,
                         40,
                         10,
-                        kwargs.get("referenc", 0)
+                        kwargs.get("referenc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "space",
                         float,
                         50,
                         10,
-                        kwargs.get("space", 2.0)
+                        kwargs.get("space", 2.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "maxgap",
                         float,
                         60,
                         10,
-                        kwargs.get("maxgap", 30.0)
+                        kwargs.get("maxgap", 30.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "orient",

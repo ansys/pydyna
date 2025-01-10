@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -137,14 +138,14 @@ class Mat034M(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("isrefg", 0.0)
+                        kwargs.get("isrefg", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cse",
                         float,
                         10,
                         10,
-                        kwargs.get("cse", 0.0)
+                        kwargs.get("cse", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "srfac",

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChangeThermalParameters(KeywordBase):
@@ -40,42 +41,42 @@ class ChangeThermalParameters(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ts", 0)
+                        kwargs.get("ts", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt",
                         float,
                         10,
                         10,
-                        kwargs.get("dt", 0.0)
+                        kwargs.get("dt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tmin",
                         float,
                         20,
                         10,
-                        kwargs.get("tmin", 0.0)
+                        kwargs.get("tmin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tmax",
                         float,
                         30,
                         10,
-                        kwargs.get("tmax", 0.0)
+                        kwargs.get("tmax", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtemp",
                         float,
                         40,
                         10,
-                        kwargs.get("dtemp", 0.0)
+                        kwargs.get("dtemp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tscp",
                         float,
                         50,
                         10,
-                        kwargs.get("tscp", 0.0)
+                        kwargs.get("tscp", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -86,14 +87,14 @@ class ChangeThermalParameters(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("refmax", 0)
+                        kwargs.get("refmax", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tol",
                         float,
                         10,
                         10,
-                        kwargs.get("tol", 0.0)
+                        kwargs.get("tol", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

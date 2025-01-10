@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryFluxTrajectory(KeywordBase):
@@ -61,7 +62,7 @@ class BoundaryFluxTrajectory(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("spd1", 0.)
+                        kwargs.get("spd1", 0. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsid2",
@@ -75,14 +76,14 @@ class BoundaryFluxTrajectory(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("spd2", 0.)
+                        kwargs.get("spd2", 0. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "relvel",
                         int,
                         60,
                         10,
-                        kwargs.get("relvel", 0)
+                        kwargs.get("relvel", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -93,7 +94,7 @@ class BoundaryFluxTrajectory(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("erod", 0)
+                        kwargs.get("erod", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "loc",
@@ -139,7 +140,7 @@ class BoundaryFluxTrajectory(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("q", 0.)
+                        kwargs.get("q", 0. if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcinc",
@@ -153,7 +154,7 @@ class BoundaryFluxTrajectory(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("enfor", 0)
+                        kwargs.get("enfor", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

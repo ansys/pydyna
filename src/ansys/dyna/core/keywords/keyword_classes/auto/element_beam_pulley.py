@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementBeamPulley(KeywordBase):
@@ -40,56 +41,56 @@ class ElementBeamPulley(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("puid", 0)
+                        kwargs.get("puid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bid1",
                         int,
                         10,
                         10,
-                        kwargs.get("bid1", 0)
+                        kwargs.get("bid1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bid2",
                         int,
                         20,
                         10,
-                        kwargs.get("bid2", 0)
+                        kwargs.get("bid2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pnid",
                         int,
                         30,
                         10,
-                        kwargs.get("pnid", 0)
+                        kwargs.get("pnid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fd",
                         float,
                         40,
                         10,
-                        kwargs.get("fd", 0.0)
+                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "fs",
                         float,
                         50,
                         10,
-                        kwargs.get("fs", 0.0)
+                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lmin",
                         float,
                         60,
                         10,
-                        kwargs.get("lmin", 0.0)
+                        kwargs.get("lmin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dc",
                         float,
                         70,
                         10,
-                        kwargs.get("dc", 0.0)
+                        kwargs.get("dc", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdSolverTolMonolithic(KeywordBase):
@@ -40,14 +41,14 @@ class IcfdSolverTolMonolithic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("atol", 1.0e-8)
+                        kwargs.get("atol", 1.0e-8 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rtol",
                         float,
                         10,
                         10,
-                        kwargs.get("rtol", 1.0e-8)
+                        kwargs.get("rtol", 1.0e-8 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -61,7 +62,7 @@ class IcfdSolverTolMonolithic(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("maxit", 1000)
+                        kwargs.get("maxit", 1000 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

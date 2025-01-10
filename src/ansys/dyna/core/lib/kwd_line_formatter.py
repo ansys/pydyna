@@ -21,6 +21,9 @@
 # SOFTWARE.
 
 import typing
+import warnings
+
+from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
 def read_line(buf: typing.TextIO, skip_comment=True) -> typing.Tuple[str, bool]:
@@ -79,7 +82,7 @@ def buffer_to_lines(buf: typing.TextIO, max_num_lines: int = -1) -> typing.List[
     return data_lines
 
 
-def load_dataline(spec: typing.List[tuple], line_data: str) -> tuple:
+def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None) -> tuple:
     """loads a keyword card line with fixed column offsets and width from string
     spec: list of tuples representing the (offset, width, type) of each field
     line_data: string with keyword data
@@ -112,6 +115,17 @@ def load_dataline(spec: typing.List[tuple], line_data: str) -> tuple:
             return float("nan")
         return None
 
+    def has_parameter(text_block: str) -> bool:
+        return "&" in text_block
+
+    def get_parameter(text_block: str, item_type: type) -> typing.Any:
+        stripped_text_block = text_block.strip()
+        assert stripped_text_block.startswith("&")
+        param_name = stripped_text_block[1:]
+        value = parameter_set.get(param_name)
+        assert type(value) == item_type
+        return value
+
     data = []
     end_position = 0
     for item_spec in spec:
@@ -119,6 +133,9 @@ def load_dataline(spec: typing.List[tuple], line_data: str) -> tuple:
         end_position, text_block = seek_text_block(line_data, position, width)
         if not has_value(text_block):
             value = get_none_value(item_type)
+        elif has_parameter(text_block):
+            assert parameter_set != None
+            value = get_parameter(text_block, item_type)
         elif item_type is int:
             value = int(float(text_block))
         elif item_type is str:
@@ -130,6 +147,7 @@ def load_dataline(spec: typing.List[tuple], line_data: str) -> tuple:
         data.append(value)
 
     if end_position < len(line_data):
-        raise Exception("Data line is too long!")
+        warning_message = f'Detected out of bound card characters:\n"{line_data[end_position:]}"\n"Ignoring.'
+        warnings.warn(warning_message)
 
     return tuple(data)

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -80,21 +81,21 @@ class MatTabulatedJohnsonCookGys(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("tr", 0.0)
+                        kwargs.get("tr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta", 1.0)
+                        kwargs.get("beta", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "numint",
                         float,
                         70,
                         10,
-                        kwargs.get("numint", 1.0)
+                        kwargs.get("numint", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,42 +106,42 @@ class MatTabulatedJohnsonCookGys(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lck1", 0)
+                        kwargs.get("lck1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lckt",
                         int,
                         10,
                         10,
-                        kwargs.get("lckt", 0)
+                        kwargs.get("lckt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcf",
                         int,
                         20,
                         10,
-                        kwargs.get("lcf", 0)
+                        kwargs.get("lcf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcg",
                         int,
                         30,
                         10,
-                        kwargs.get("lcg", 0)
+                        kwargs.get("lcg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lch",
                         int,
                         40,
                         10,
-                        kwargs.get("lch", 0)
+                        kwargs.get("lch", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lci",
                         int,
                         50,
                         10,
-                        kwargs.get("lci", 0)
+                        kwargs.get("lci", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -179,21 +180,21 @@ class MatTabulatedJohnsonCookGys(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("iflag", 0)
+                        kwargs.get("iflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfiepm",
                         float,
                         50,
                         10,
-                        kwargs.get("sfiepm", 1.0)
+                        kwargs.get("sfiepm", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "niter",
                         int,
                         60,
                         10,
-                        kwargs.get("niter", 100)
+                        kwargs.get("niter", 100 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

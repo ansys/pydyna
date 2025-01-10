@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitRotationalDynamics(KeywordBase):
@@ -47,7 +48,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("stype", 0)
+                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "omega",
@@ -68,14 +69,14 @@ class ControlImplicitRotationalDynamics(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("nomeg", 0)
+                        kwargs.get("nomeg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iref",
                         int,
                         50,
                         10,
-                        kwargs.get("iref", 0)
+                        kwargs.get("iref", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "omegadr",

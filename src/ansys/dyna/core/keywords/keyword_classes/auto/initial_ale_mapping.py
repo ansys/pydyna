@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialAleMapping(KeywordBase):
@@ -47,7 +48,7 @@ class InitialAleMapping(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("typ", 0)
+                        kwargs.get("typ", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ammsid",
@@ -65,21 +66,21 @@ class InitialAleMapping(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xo", 0.0)
+                        kwargs.get("xo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yo",
                         float,
                         10,
                         10,
-                        kwargs.get("yo", 0.0)
+                        kwargs.get("yo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zo",
                         float,
                         20,
                         10,
-                        kwargs.get("zo", 0.0)
+                        kwargs.get("zo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vecid",
@@ -100,14 +101,14 @@ class InitialAleMapping(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("sym", 0)
+                        kwargs.get("sym", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tbeg",
                         float,
                         60,
                         10,
-                        kwargs.get("tbeg", 0.0)
+                        kwargs.get("tbeg", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

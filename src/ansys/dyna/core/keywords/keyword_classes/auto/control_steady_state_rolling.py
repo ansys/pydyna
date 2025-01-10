@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlSteadyStateRolling(KeywordBase):
@@ -40,35 +41,35 @@ class ControlSteadyStateRolling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("imass", 0)
+                        kwargs.get("imass", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdmu",
                         int,
                         10,
                         10,
-                        kwargs.get("lcdmu", 0)
+                        kwargs.get("lcdmu", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcdmur",
                         int,
                         20,
                         10,
-                        kwargs.get("lcdmur", 0)
+                        kwargs.get("lcdmur", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ivel",
                         int,
                         30,
                         10,
-                        kwargs.get("ivel", 0)
+                        kwargs.get("ivel", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "scl_k",
                         int,
                         40,
                         10,
-                        kwargs.get("scl_k", 0)
+                        kwargs.get("scl_k", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

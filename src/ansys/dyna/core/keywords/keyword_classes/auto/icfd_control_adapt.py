@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlAdapt(KeywordBase):
@@ -54,28 +55,28 @@ class IcfdControlAdapt(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("err", 1.0)
+                        kwargs.get("err", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mth",
                         int,
                         30,
                         10,
-                        kwargs.get("mth", 0)
+                        kwargs.get("mth", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nit",
                         int,
                         40,
                         10,
-                        kwargs.get("nit", 0)
+                        kwargs.get("nit", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "var",
                         int,
                         50,
                         10,
-                        kwargs.get("var", 0)
+                        kwargs.get("var", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -89,7 +90,7 @@ class IcfdControlAdapt(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("kis", 0)
+                        kwargs.get("kis", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedRigidBodyInsert(KeywordBase):
@@ -68,7 +69,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("idir", 3)
+                        kwargs.get("idir", 3 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -79,7 +80,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mflag", 0)
+                        kwargs.get("mflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mcid",
@@ -93,7 +94,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("deathm", 0.0)
+                        kwargs.get("deathm", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -111,7 +112,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("deathb", 0.0)
+                        kwargs.get("deathb", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlTurbSynthesis(KeywordBase):
@@ -40,28 +41,28 @@ class IcfdControlTurbSynthesis(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid", 0)
+                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iu",
                         float,
                         10,
                         10,
-                        kwargs.get("iu", 1e-3)
+                        kwargs.get("iu", 1e-3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iv",
                         float,
                         20,
                         10,
-                        kwargs.get("iv", 1e-3)
+                        kwargs.get("iv", 1e-3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iw",
                         float,
                         30,
                         10,
-                        kwargs.get("iw", 1e-3)
+                        kwargs.get("iw", 1e-3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ls",

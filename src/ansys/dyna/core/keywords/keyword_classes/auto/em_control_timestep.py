@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmControlTimestep(KeywordBase):
@@ -40,7 +41,7 @@ class EmControlTimestep(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tstype", 1)
+                        kwargs.get("tstype", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtcons",
@@ -61,7 +62,7 @@ class EmControlTimestep(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("factor", 1.0)
+                        kwargs.get("factor", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tsmin",
@@ -82,14 +83,14 @@ class EmControlTimestep(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("rlcsf", 25)
+                        kwargs.get("rlcsf", 25 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mecats",
                         int,
                         70,
                         10,
-                        kwargs.get("mecats", 0)
+                        kwargs.get("mecats", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

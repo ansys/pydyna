@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryAcousticImpedanceComplex(KeywordBase):
@@ -47,28 +48,28 @@ class BoundaryAcousticImpedanceComplex(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("zr", 0.0)
+                        kwargs.get("zr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zi",
                         float,
                         20,
                         10,
-                        kwargs.get("zi", 0.0)
+                        kwargs.get("zi", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidr", 0)
+                        kwargs.get("lcidr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidi",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidi", 0)
+                        kwargs.get("lcidi", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

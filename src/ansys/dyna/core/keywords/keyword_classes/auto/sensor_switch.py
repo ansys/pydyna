@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,7 +53,7 @@ class SensorSwitch(KeywordBase):
                         str,
                         10,
                         10,
-                        kwargs.get("type", "SENSOR")
+                        kwargs.get("type", "SENSOR" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sensid",
@@ -66,7 +67,7 @@ class SensorSwitch(KeywordBase):
                         str,
                         30,
                         10,
-                        kwargs.get("logic", "LT")
+                        kwargs.get("logic", "LT" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "value",

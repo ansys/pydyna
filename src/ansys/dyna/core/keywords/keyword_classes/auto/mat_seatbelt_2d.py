@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -45,7 +46,7 @@ class MatSeatbelt2D(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid", 0)
+                        kwargs.get("mid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mpul",
@@ -59,14 +60,14 @@ class MatSeatbelt2D(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("llcid", 0)
+                        kwargs.get("llcid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ulcid",
                         int,
                         30,
                         10,
-                        kwargs.get("ulcid", 0)
+                        kwargs.get("ulcid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lmin",
@@ -80,7 +81,7 @@ class MatSeatbelt2D(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("cse", 0.0)
+                        kwargs.get("cse", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "damp",
@@ -133,21 +134,21 @@ class MatSeatbelt2D(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("f", 1.0e20)
+                        kwargs.get("f", 1.0e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "m",
                         float,
                         50,
                         10,
-                        kwargs.get("m", 1.0e20)
+                        kwargs.get("m", 1.0e20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r",
                         float,
                         60,
                         10,
-                        kwargs.get("r", 0.05)
+                        kwargs.get("r", 0.05 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -165,7 +166,7 @@ class MatSeatbelt2D(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("form", 0)
+                        kwargs.get("form", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ecoat",
@@ -193,21 +194,21 @@ class MatSeatbelt2D(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("eb", -0.1)
+                        kwargs.get("eb", -0.1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prba",
                         float,
                         60,
                         10,
-                        kwargs.get("prba", 0.3)
+                        kwargs.get("prba", 0.3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "prba",
                         float,
                         70,
                         10,
-                        kwargs.get("prba", 0.3)
+                        kwargs.get("prba", 0.3 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

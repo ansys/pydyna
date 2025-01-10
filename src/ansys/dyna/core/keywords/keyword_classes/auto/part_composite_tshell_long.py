@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartCompositeTshellLong(KeywordBase):
@@ -58,14 +59,14 @@ class PartCompositeTshellLong(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 1)
+                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shrf",
                         float,
                         20,
                         10,
-                        kwargs.get("shrf", 1.0)
+                        kwargs.get("shrf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -86,7 +87,7 @@ class PartCompositeTshellLong(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("hgid", 0)
+                        kwargs.get("hgid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -100,7 +101,7 @@ class PartCompositeTshellLong(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("tshear", 0)
+                        kwargs.get("tshear", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

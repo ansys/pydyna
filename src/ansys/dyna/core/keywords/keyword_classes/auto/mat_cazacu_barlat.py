@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -66,14 +67,14 @@ class MatCazacuBarlat(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("pr", 0)
+                        kwargs.get("pr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hr",
                         float,
                         40,
                         10,
-                        kwargs.get("hr", 1.0)
+                        kwargs.get("hr", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "p1",
@@ -94,7 +95,7 @@ class MatCazacuBarlat(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("iter", 0.0)
+                        kwargs.get("iter", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -126,7 +127,7 @@ class MatCazacuBarlat(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("c33", 0)
+                        kwargs.get("c33", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",
@@ -246,7 +247,7 @@ class MatCazacuBarlat(KeywordBase):
                         float,
                         30,
                         10,
-                        kwargs.get("a1", 0)
+                        kwargs.get("a1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a2",
@@ -320,7 +321,7 @@ class MatCazacuBarlat(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("fit", 0)
+                        kwargs.get("fit", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

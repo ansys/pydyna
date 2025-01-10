@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,14 +60,14 @@ class DefineSphToSphCoupling(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("sstyp", 0)
+                        kwargs.get("sstyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mstyp",
                         int,
                         30,
                         10,
-                        kwargs.get("mstyp", 0)
+                        kwargs.get("mstyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ibox1",
@@ -87,14 +88,14 @@ class DefineSphToSphCoupling(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("pfact", 1.0)
+                        kwargs.get("pfact", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "srad",
                         float,
                         70,
                         10,
-                        kwargs.get("srad", 1.0)
+                        kwargs.get("srad", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,14 +106,14 @@ class DefineSphToSphCoupling(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dfact", 0.0)
+                        kwargs.get("dfact", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "isoft",
                         int,
                         10,
                         10,
-                        kwargs.get("isoft", 0)
+                        kwargs.get("isoft", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

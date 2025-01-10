@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitForming(KeywordBase):
@@ -40,7 +41,7 @@ class ControlImplicitForming(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ioption", 1)
+                        kwargs.get("ioption", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsmin",
@@ -54,28 +55,28 @@ class ControlImplicitForming(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("nsmax", 2)
+                        kwargs.get("nsmax", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "birth",
                         float,
                         30,
                         10,
-                        kwargs.get("birth", 0.0)
+                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "death",
                         float,
                         40,
                         10,
-                        kwargs.get("death", 1.e+20)
+                        kwargs.get("death", 1.e+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "penchk",
                         float,
                         50,
                         10,
-                        kwargs.get("penchk", 0.0)
+                        kwargs.get("penchk", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt0",

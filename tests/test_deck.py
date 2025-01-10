@@ -114,6 +114,14 @@ $#    ssid
 
 
 @pytest.mark.keywords
+def test_control_debug():
+    from ansys.dyna.core.lib.deck import Deck
+    deck = Deck()
+    deck.loads('*CONTROL_DEBUG')
+    deck.write()
+
+
+@pytest.mark.keywords
 def test_deck_006(ref_string):
     """test adding two decks together"""
     deck1 = Deck()
@@ -137,6 +145,32 @@ def test_deck_006(ref_string):
     assert isinstance(deck5, Deck)
     assert len(deck5._keywords) == len(deck3._keywords) + len(deck4._keywords)
 
+
+@pytest.mark.keywords
+def test_deck_copy():
+    import copy
+    x = Deck()
+    x.append(kwd.Mat001(mid=99))
+    y = copy.deepcopy(x)
+    y.keywords[0].mid = 100
+    assert x.keywords[0].mid == 99
+    assert y.keywords[0].mid == 100
+
+
+@pytest.mark.keywords
+def test_deck_read_parameters():
+    """Test reading a deck with parameters."""
+    test_string = """*CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET_ID
+99999999  Mycontact
+  99999999  99999998         4         0                             0         0
+                                             &vdct
+        1.        1.       -2.       -2.        1.        1.        1.        1."""
+    deck = Deck()
+    deck.parameters.add("vdct", 1.12)
+    deck.loads(test_string)
+    assert len(deck.string_keywords) == 0
+    kwd = deck.keywords[0]
+    assert kwd.vdc == 1.12
 
 @pytest.mark.keywords
 def test_deck_007():

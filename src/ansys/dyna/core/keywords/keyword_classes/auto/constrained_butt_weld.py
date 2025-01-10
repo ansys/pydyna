@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedButtWeld(KeywordBase):
@@ -54,21 +55,21 @@ class ConstrainedButtWeld(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("eppf", 0.0)
+                        kwargs.get("eppf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigf",
                         float,
                         30,
                         10,
-                        kwargs.get("sigf", 1.0e16)
+                        kwargs.get("sigf", 1.0e16 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beta",
                         float,
                         40,
                         10,
-                        kwargs.get("beta", 1.0)
+                        kwargs.get("beta", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

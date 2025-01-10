@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,7 +60,7 @@ class MatAddDamageGissmo(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("dtyp", 0)
+                        kwargs.get("dtyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "refsz",
@@ -73,7 +74,7 @@ class MatAddDamageGissmo(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("numfip", 1.0)
+                        kwargs.get("numfip", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -84,7 +85,7 @@ class MatAddDamageGissmo(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcsdg", 0)
+                        kwargs.get("lcsdg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ecrit",
@@ -98,7 +99,7 @@ class MatAddDamageGissmo(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("dmgexp", 1.0)
+                        kwargs.get("dmgexp", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dcrit",
@@ -112,14 +113,14 @@ class MatAddDamageGissmo(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("fadexp", 1.0)
+                        kwargs.get("fadexp", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcregd",
                         int,
                         50,
                         10,
-                        kwargs.get("lcregd", 0)
+                        kwargs.get("lcregd", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "instf",
@@ -158,7 +159,7 @@ class MatAddDamageGissmo(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("lcdlim", 0)
+                        kwargs.get("lcdlim", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "midfail",

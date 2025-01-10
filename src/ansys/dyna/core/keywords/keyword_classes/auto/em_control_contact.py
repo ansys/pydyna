@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmControlContact(KeywordBase):
@@ -40,49 +41,49 @@ class EmControlContact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("emct", 0)
+                        kwargs.get("emct", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cconly",
                         int,
                         10,
                         10,
-                        kwargs.get("cconly", 0)
+                        kwargs.get("cconly", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ctype",
                         int,
                         20,
                         10,
-                        kwargs.get("ctype", 0)
+                        kwargs.get("ctype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cotype",
                         int,
                         30,
                         10,
-                        kwargs.get("cotype", 0)
+                        kwargs.get("cotype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eps1",
                         float,
                         40,
                         10,
-                        kwargs.get("eps1", 0.3)
+                        kwargs.get("eps1", 0.3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eps2",
                         float,
                         50,
                         10,
-                        kwargs.get("eps2", 0.3)
+                        kwargs.get("eps2", 0.3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eps3",
                         float,
                         60,
                         10,
-                        kwargs.get("eps3", 0.3)
+                        kwargs.get("eps3", 0.3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "d0",

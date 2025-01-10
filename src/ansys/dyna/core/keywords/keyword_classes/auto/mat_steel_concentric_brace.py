@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -123,56 +124,56 @@ class MatSteelConcentricBrace(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ts1", 0)
+                        kwargs.get("ts1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ts2",
                         float,
                         10,
                         10,
-                        kwargs.get("ts2", 0)
+                        kwargs.get("ts2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ts3",
                         float,
                         20,
                         10,
-                        kwargs.get("ts3", 0)
+                        kwargs.get("ts3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ts4",
                         float,
                         30,
                         10,
-                        kwargs.get("ts4", 0)
+                        kwargs.get("ts4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cs1",
                         float,
                         40,
                         10,
-                        kwargs.get("cs1", 0)
+                        kwargs.get("cs1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cs2",
                         float,
                         50,
                         10,
-                        kwargs.get("cs2", 0)
+                        kwargs.get("cs2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cs3",
                         float,
                         60,
                         10,
-                        kwargs.get("cs3", 0)
+                        kwargs.get("cs3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cs4",
                         float,
                         70,
                         10,
-                        kwargs.get("cs4", 0)
+                        kwargs.get("cs4", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

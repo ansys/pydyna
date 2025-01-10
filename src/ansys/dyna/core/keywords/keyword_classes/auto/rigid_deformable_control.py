@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class RigidDeformableControl(KeywordBase):
@@ -40,21 +41,21 @@ class RigidDeformableControl(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nrbf", 0)
+                        kwargs.get("nrbf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ncsf",
                         int,
                         10,
                         10,
-                        kwargs.get("ncsf", 0)
+                        kwargs.get("ncsf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rwf",
                         int,
                         20,
                         10,
-                        kwargs.get("rwf", 0)
+                        kwargs.get("rwf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtmax",

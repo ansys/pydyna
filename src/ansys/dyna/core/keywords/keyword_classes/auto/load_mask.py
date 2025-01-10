@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadMask(KeywordBase):
@@ -54,28 +55,28 @@ class LoadMask(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("vid1", 1)
+                        kwargs.get("vid1", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "off",
                         float,
                         30,
                         10,
-                        kwargs.get("off", 0)
+                        kwargs.get("off", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "boxid",
                         int,
                         40,
                         10,
-                        kwargs.get("boxid", 0)
+                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcidm",
                         int,
                         50,
                         10,
-                        kwargs.get("lcidm", 0)
+                        kwargs.get("lcidm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vid2",
@@ -89,7 +90,7 @@ class LoadMask(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("inout", 0)
+                        kwargs.get("inout", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,7 +101,7 @@ class LoadMask(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("icycle", 200)
+                        kwargs.get("icycle", 200 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,14 +53,14 @@ class SectionSolidEfg(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 1)
+                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "aet",
                         int,
                         20,
                         10,
-                        kwargs.get("aet", 0)
+                        kwargs.get("aet", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -105,56 +106,56 @@ class SectionSolidEfg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dx", 1.01)
+                        kwargs.get("dx", 1.01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dy",
                         float,
                         10,
                         10,
-                        kwargs.get("dy", 1.01)
+                        kwargs.get("dy", 1.01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dz",
                         float,
                         20,
                         10,
-                        kwargs.get("dz", 1.01)
+                        kwargs.get("dz", 1.01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ispline",
                         int,
                         30,
                         10,
-                        kwargs.get("ispline", 0)
+                        kwargs.get("ispline", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idila",
                         int,
                         40,
                         10,
-                        kwargs.get("idila", 0)
+                        kwargs.get("idila", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iebt",
                         int,
                         50,
                         10,
-                        kwargs.get("iebt", 3)
+                        kwargs.get("iebt", 3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "idim",
                         int,
                         60,
                         10,
-                        kwargs.get("idim", 2)
+                        kwargs.get("idim", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "toldef",
                         float,
                         70,
                         10,
-                        kwargs.get("toldef", 0.01)
+                        kwargs.get("toldef", 0.01 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -165,28 +166,28 @@ class SectionSolidEfg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ips", 0)
+                        kwargs.get("ips", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stime",
                         float,
                         10,
                         10,
-                        kwargs.get("stime", 1e+20)
+                        kwargs.get("stime", 1e+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iken",
                         int,
                         20,
                         10,
-                        kwargs.get("iken", 0)
+                        kwargs.get("iken", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sf",
                         float,
                         30,
                         10,
-                        kwargs.get("sf", 0.0)
+                        kwargs.get("sf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cmid",
@@ -200,21 +201,21 @@ class SectionSolidEfg(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("ibr", 1)
+                        kwargs.get("ibr", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ds",
                         float,
                         60,
                         10,
-                        kwargs.get("ds", 0.01)
+                        kwargs.get("ds", 0.01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ecut",
                         float,
                         70,
                         10,
-                        kwargs.get("ecut", 0.01)
+                        kwargs.get("ecut", 0.01 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -239,14 +240,14 @@ class SectionSolidEfg(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("ihgf", 0)
+                        kwargs.get("ihgf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "itaj",
                         int,
                         30,
                         10,
-                        kwargs.get("itaj", 0)
+                        kwargs.get("itaj", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lmc",

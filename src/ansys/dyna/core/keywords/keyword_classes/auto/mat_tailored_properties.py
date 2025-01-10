@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -87,7 +88,7 @@ class MatTailoredProperties(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("fail", 10.E+20)
+                        kwargs.get("fail", 10.E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdel",
@@ -119,7 +120,7 @@ class MatTailoredProperties(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("lcss", 0)
+                        kwargs.get("lcss", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -133,14 +134,14 @@ class MatTailoredProperties(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("vp", 0.0)
+                        kwargs.get("vp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "hisvn",
                         int,
                         50,
                         10,
-                        kwargs.get("hisvn", 0)
+                        kwargs.get("hisvn", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "phase",

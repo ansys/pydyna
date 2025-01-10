@@ -42,9 +42,9 @@ SKIPPED_KEYWORDS = set(
         "ELEMENT_SOLID (ten nodes format)",
         "ELEMENT_SOLID",
         "ELEMENT_SOLID_ORTHO (ten nodes format)",
-        "ELEMENT_SOLID_ORTHO",
+        "ELEMENT_SOLID_ORTHO"
         # issue #184 - this is not documented in the manual
-        "CONTROL_TIMESTEP",
+        #"CONTROL_TIMESTEP",CONTROL_TIMESTEP is in the kwd.json now and should be generated issue #629
     ]
 )
 

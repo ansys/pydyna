@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleStructuredMeshControlPoints(KeywordBase):
@@ -40,7 +41,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cpid", 0)
+                        kwargs.get("cpid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -54,14 +55,14 @@ class AleStructuredMeshControlPoints(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("icase", 0)
+                        kwargs.get("icase", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfo",
                         float,
                         30,
                         10,
-                        kwargs.get("sfo", 1.0)
+                        kwargs.get("sfo", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -75,7 +76,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
                         float,
                         50,
                         10,
-                        kwargs.get("offo", 0.0)
+                        kwargs.get("offo", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -86,7 +87,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
                         int,
                         0,
                         20,
-                        kwargs.get("n", 0)
+                        kwargs.get("n", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "x",
@@ -100,7 +101,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
                         float,
                         40,
                         20,
-                        kwargs.get("ratio", 0.0)
+                        kwargs.get("ratio", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

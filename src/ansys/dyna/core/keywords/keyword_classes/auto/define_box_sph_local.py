@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,49 +53,49 @@ class DefineBoxSphLocal(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("xmn", 0.0)
+                        kwargs.get("xmn", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xmx",
                         float,
                         20,
                         10,
-                        kwargs.get("xmx", 0.0)
+                        kwargs.get("xmx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ymn",
                         float,
                         30,
                         10,
-                        kwargs.get("ymn", 0.0)
+                        kwargs.get("ymn", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ymx",
                         float,
                         40,
                         10,
-                        kwargs.get("ymx", 0.0)
+                        kwargs.get("ymx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zmn",
                         float,
                         50,
                         10,
-                        kwargs.get("zmn", 0.0)
+                        kwargs.get("zmn", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zmx",
                         float,
                         60,
                         10,
-                        kwargs.get("zmx", 0.0)
+                        kwargs.get("zmx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vid",
                         int,
                         70,
                         10,
-                        kwargs.get("vid", 0)
+                        kwargs.get("vid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,49 +106,49 @@ class DefineBoxSphLocal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid", 0)
+                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vd",
                         int,
                         10,
                         10,
-                        kwargs.get("vd", 0)
+                        kwargs.get("vd", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nid",
                         int,
                         20,
                         10,
-                        kwargs.get("nid", 0)
+                        kwargs.get("nid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ireact",
                         int,
                         30,
                         10,
-                        kwargs.get("ireact", 0)
+                        kwargs.get("ireact", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ibuff",
                         int,
                         40,
                         10,
-                        kwargs.get("ibuff", 0)
+                        kwargs.get("ibuff", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ishow",
                         int,
                         50,
                         10,
-                        kwargs.get("ishow", 0)
+                        kwargs.get("ishow", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "pid",
                         int,
                         60,
                         10,
-                        kwargs.get("pid", 0)
+                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -158,42 +159,42 @@ class DefineBoxSphLocal(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xx", 0)
+                        kwargs.get("xx", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yx",
                         float,
                         10,
                         10,
-                        kwargs.get("yx", 0.0)
+                        kwargs.get("yx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zx",
                         float,
                         20,
                         10,
-                        kwargs.get("zx", 0.0)
+                        kwargs.get("zx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "xv",
                         float,
                         30,
                         10,
-                        kwargs.get("xv", 0.0)
+                        kwargs.get("xv", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yv",
                         float,
                         40,
                         10,
-                        kwargs.get("yv", 0.0)
+                        kwargs.get("yv", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zv",
                         float,
                         50,
                         10,
-                        kwargs.get("zv", 0.0)
+                        kwargs.get("zv", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -204,21 +205,21 @@ class DefineBoxSphLocal(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cx", 0.0)
+                        kwargs.get("cx", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cy",
                         float,
                         10,
                         10,
-                        kwargs.get("cy", 0.0)
+                        kwargs.get("cy", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cz",
                         float,
                         20,
                         10,
-                        kwargs.get("cz", 0.0)
+                        kwargs.get("cz", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

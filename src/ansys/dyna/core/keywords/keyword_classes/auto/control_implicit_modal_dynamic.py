@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitModalDynamic(KeywordBase):
@@ -40,7 +41,7 @@ class ControlImplicitModalDynamic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mdflag", 0)
+                        kwargs.get("mdflag", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zeta",
@@ -68,7 +69,7 @@ class ControlImplicitModalDynamic(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("integ", 0)
+                        kwargs.get("integ", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsid",

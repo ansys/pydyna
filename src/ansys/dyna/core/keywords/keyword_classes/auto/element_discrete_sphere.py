@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementDiscreteSphere(KeywordBase):
@@ -54,21 +55,21 @@ class ElementDiscreteSphere(KeywordBase):
                         float,
                         20,
                         10,
-                        kwargs.get("mass", 0.0)
+                        kwargs.get("mass", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "inertia",
                         float,
                         30,
                         10,
-                        kwargs.get("inertia", 0.0)
+                        kwargs.get("inertia", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "radii",
                         float,
                         40,
                         10,
-                        kwargs.get("radii", 0.0)
+                        kwargs.get("radii", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",

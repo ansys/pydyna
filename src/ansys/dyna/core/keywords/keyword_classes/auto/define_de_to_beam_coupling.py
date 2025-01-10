@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -45,28 +46,28 @@ class DefineDeToBeamCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("slave", 0)
+                        kwargs.get("slave", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "master",
                         int,
                         10,
                         10,
-                        kwargs.get("master", 0)
+                        kwargs.get("master", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stype",
                         int,
                         20,
                         10,
-                        kwargs.get("stype", 0)
+                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "mtype",
                         int,
                         30,
                         10,
-                        kwargs.get("mtype", 0)
+                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -84,21 +85,21 @@ class DefineDeToBeamCoupling(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("fricd", 0)
+                        kwargs.get("fricd", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "damp",
                         float,
                         20,
                         10,
-                        kwargs.get("damp", 0)
+                        kwargs.get("damp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bsort",
                         int,
                         30,
                         10,
-                        kwargs.get("bsort", 100)
+                        kwargs.get("bsort", 100 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -60,35 +61,35 @@ class ContactGebodRightLowerArm(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("sstyp", 0)
+                        kwargs.get("sstyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sf",
                         float,
                         30,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "df",
                         float,
                         40,
                         10,
-                        kwargs.get("df", 20.0)
+                        kwargs.get("df", 20.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "cf",
                         float,
                         50,
                         10,
-                        kwargs.get("cf", 0.5)
+                        kwargs.get("cf", 0.5 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "intord",
                         int,
                         60,
                         10,
-                        kwargs.get("intord", 0)
+                        kwargs.get("intord", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -99,21 +100,21 @@ class ContactGebodRightLowerArm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("bt", 0.0)
+                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dt",
                         float,
                         10,
                         10,
-                        kwargs.get("dt", 1.0E+20)
+                        kwargs.get("dt", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "so",
                         int,
                         20,
                         10,
-                        kwargs.get("so", 0)
+                        kwargs.get("so", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

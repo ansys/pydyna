@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card_group import DuplicateCardGroup
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -427,7 +428,7 @@ class Mat295(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("acdir", 0)
+                        kwargs.get("acdir", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "acid",
@@ -441,28 +442,28 @@ class Mat295(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("acthr", 0.0)
+                        kwargs.get("acthr", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sf",
                         float,
                         50,
                         10,
-                        kwargs.get("sf", 1.0)
+                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ss",
                         float,
                         60,
                         10,
-                        kwargs.get("ss", 0.0)
+                        kwargs.get("ss", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sn",
                         float,
                         70,
                         10,
-                        kwargs.get("sn", 0.0)
+                        kwargs.get("sn", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1 and self.actype in [1,2,3,4,5],
@@ -803,7 +804,7 @@ class Mat295(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("macf", 1)
+                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",

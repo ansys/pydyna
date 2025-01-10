@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlTermination(KeywordBase):
@@ -40,42 +41,42 @@ class ControlTermination(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("endtim", 0.0)
+                        kwargs.get("endtim", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "endcyc",
                         int,
                         10,
                         10,
-                        kwargs.get("endcyc", 0)
+                        kwargs.get("endcyc", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtmin",
                         float,
                         20,
                         10,
-                        kwargs.get("dtmin", 0.0)
+                        kwargs.get("dtmin", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "endeng",
                         float,
                         30,
                         10,
-                        kwargs.get("endeng", 0.0)
+                        kwargs.get("endeng", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "endmas",
                         float,
                         40,
                         10,
-                        kwargs.get("endmas", 100000000.0)
+                        kwargs.get("endmas", 100000000.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nosol",
                         int,
                         50,
                         10,
-                        kwargs.get("nosol", 0)
+                        kwargs.get("nosol", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

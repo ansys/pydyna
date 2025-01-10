@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -73,7 +74,7 @@ class MatGeneralViscoelasticMoisture(KeywordBase):
                         float,
                         40,
                         10,
-                        kwargs.get("ef", 0)
+                        kwargs.get("ef", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tref",
@@ -112,14 +113,14 @@ class MatGeneralViscoelasticMoisture(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("nt", 6)
+                        kwargs.get("nt", 6 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bstart",
                         float,
                         20,
                         10,
-                        kwargs.get("bstart", 0.01)
+                        kwargs.get("bstart", 0.01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tramp",
@@ -140,14 +141,14 @@ class MatGeneralViscoelasticMoisture(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("ntk", 6)
+                        kwargs.get("ntk", 6 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bstartk",
                         float,
                         60,
                         10,
-                        kwargs.get("bstartk", 0.01)
+                        kwargs.get("bstartk", 0.01 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "trampk",

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementMassPart(KeywordBase):
@@ -47,14 +48,14 @@ class ElementMassPart(KeywordBase):
                         float,
                         8,
                         16,
-                        kwargs.get("addmass", 0.0)
+                        kwargs.get("addmass", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "finmass",
                         float,
                         24,
                         16,
-                        kwargs.get("finmass", 0.0)
+                        kwargs.get("finmass", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcid",

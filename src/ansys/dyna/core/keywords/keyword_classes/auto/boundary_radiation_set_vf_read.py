@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryRadiationSetVfRead(KeywordBase):
@@ -47,35 +48,35 @@ class BoundaryRadiationSetVfRead(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("type", 2)
+                        kwargs.get("type", 2 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rad_grp",
                         int,
                         20,
                         10,
-                        kwargs.get("rad_grp", 0)
+                        kwargs.get("rad_grp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "file_no",
                         int,
                         30,
                         10,
-                        kwargs.get("file_no", 0)
+                        kwargs.get("file_no", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "block",
                         int,
                         40,
                         10,
-                        kwargs.get("block", 0)
+                        kwargs.get("block", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nint",
                         int,
                         50,
                         10,
-                        kwargs.get("nint", 0)
+                        kwargs.get("nint", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -86,14 +87,14 @@ class BoundaryRadiationSetVfRead(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("selcid", 0)
+                        kwargs.get("selcid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "semult",
                         float,
                         10,
                         10,
-                        kwargs.get("semult", 1.0)
+                        kwargs.get("semult", 1.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

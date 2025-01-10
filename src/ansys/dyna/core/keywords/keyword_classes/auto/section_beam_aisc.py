@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -63,49 +64,49 @@ class SectionBeamAisc(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("elform", 1)
+                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shrf",
                         float,
                         10,
                         10,
-                        kwargs.get("shrf", 0.0)
+                        kwargs.get("shrf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsm",
                         float,
                         20,
                         10,
-                        kwargs.get("nsm", 0.0)
+                        kwargs.get("nsm", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lfac",
                         float,
                         30,
                         10,
-                        kwargs.get("lfac", 0.0)
+                        kwargs.get("lfac", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsloc",
                         float,
                         40,
                         10,
-                        kwargs.get("nsloc", 0.0)
+                        kwargs.get("nsloc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ntloc",
                         float,
                         50,
                         10,
-                        kwargs.get("ntloc", 0.0)
+                        kwargs.get("ntloc", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "k",
                         int,
                         60,
                         10,
-                        kwargs.get("k", 0)
+                        kwargs.get("k", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -116,28 +117,28 @@ class SectionBeamAisc(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("elform", 1)
+                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shrf",
                         float,
                         10,
                         10,
-                        kwargs.get("shrf", 0.0)
+                        kwargs.get("shrf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsm",
                         float,
                         20,
                         10,
-                        kwargs.get("nsm", 0.0)
+                        kwargs.get("nsm", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lfac",
                         float,
                         30,
                         10,
-                        kwargs.get("lfac", 0.0)
+                        kwargs.get("lfac", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -148,28 +149,28 @@ class SectionBeamAisc(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("elform", 1)
+                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lfac",
                         float,
                         10,
                         10,
-                        kwargs.get("lfac", 0.0)
+                        kwargs.get("lfac", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rampt",
                         float,
                         20,
                         10,
-                        kwargs.get("rampt", 0.0)
+                        kwargs.get("rampt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "stress",
                         float,
                         30,
                         10,
-                        kwargs.get("stress", 0.0)
+                        kwargs.get("stress", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -180,28 +181,28 @@ class SectionBeamAisc(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("elform", 1)
+                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "shrf",
                         float,
                         10,
                         10,
-                        kwargs.get("shrf", 0.0)
+                        kwargs.get("shrf", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "nsm",
                         float,
                         20,
                         10,
-                        kwargs.get("nsm", 0.0)
+                        kwargs.get("nsm", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lfac",
                         float,
                         30,
                         10,
-                        kwargs.get("lfac", 0.0)
+                        kwargs.get("lfac", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "k",

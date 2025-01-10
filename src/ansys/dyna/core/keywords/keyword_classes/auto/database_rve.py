@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseRve(KeywordBase):
@@ -40,14 +41,14 @@ class DatabaseRve(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt", 0.0)
+                        kwargs.get("dt", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "bina",
                         int,
                         10,
                         10,
-                        kwargs.get("bina", 0)
+                        kwargs.get("bina", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

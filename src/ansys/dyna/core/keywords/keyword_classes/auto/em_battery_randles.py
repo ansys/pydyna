@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmBatteryRandles(KeywordBase):
@@ -54,7 +55,7 @@ class EmBatteryRandles(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("rdlarea", 0)
+                        kwargs.get("rdlarea", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ccppart",
@@ -185,14 +186,14 @@ class EmBatteryRandles(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("frtherm", 0)
+                        kwargs.get("frtherm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "r0toth",
                         int,
                         20,
                         10,
-                        kwargs.get("r0toth", 0)
+                        kwargs.get("r0toth", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dudt",
@@ -206,7 +207,7 @@ class EmBatteryRandles(KeywordBase):
                         int,
                         40,
                         10,
-                        kwargs.get("tempu", 0)
+                        kwargs.get("tempu", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -217,7 +218,7 @@ class EmBatteryRandles(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("usesocs", 0)
+                        kwargs.get("usesocs", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tausocs",

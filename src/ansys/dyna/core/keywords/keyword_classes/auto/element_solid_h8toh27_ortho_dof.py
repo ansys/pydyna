@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementSolidH8Toh27OrthoDof(KeywordBase):
@@ -114,21 +115,21 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("a1", 0.0)
+                        kwargs.get("a1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a2",
                         float,
                         16,
                         16,
-                        kwargs.get("a2", 0.0)
+                        kwargs.get("a2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "a3",
                         float,
                         32,
                         16,
-                        kwargs.get("a3", 0.0)
+                        kwargs.get("a3", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -139,21 +140,21 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("d1", 0.0)
+                        kwargs.get("d1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "d2",
                         float,
                         16,
                         16,
-                        kwargs.get("d2", 0.0)
+                        kwargs.get("d2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "d3",
                         float,
                         32,
                         16,
-                        kwargs.get("d3", 0.0)
+                        kwargs.get("d3", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

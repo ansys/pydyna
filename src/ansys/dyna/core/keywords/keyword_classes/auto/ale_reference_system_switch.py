@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleReferenceSystemSwitch(KeywordBase):
@@ -51,49 +52,49 @@ class AleReferenceSystemSwitch(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t1", 0.0)
+                        kwargs.get("t1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "t2",
                         float,
                         10,
                         10,
-                        kwargs.get("t2", 0.0)
+                        kwargs.get("t2", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "t3",
                         float,
                         20,
                         10,
-                        kwargs.get("t3", 0.0)
+                        kwargs.get("t3", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "t4",
                         float,
                         30,
                         10,
-                        kwargs.get("t4", 0.0)
+                        kwargs.get("t4", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "t5",
                         float,
                         40,
                         10,
-                        kwargs.get("t5", 0.0)
+                        kwargs.get("t5", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "t6",
                         float,
                         50,
                         10,
-                        kwargs.get("t6", 0.0)
+                        kwargs.get("t6", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "t7",
                         float,
                         60,
                         10,
-                        kwargs.get("t7", 0.0)
+                        kwargs.get("t7", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -104,56 +105,56 @@ class AleReferenceSystemSwitch(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("type1", 0)
+                        kwargs.get("type1", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "type2",
                         int,
                         10,
                         10,
-                        kwargs.get("type2", 0)
+                        kwargs.get("type2", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "type3",
                         int,
                         20,
                         10,
-                        kwargs.get("type3", 0)
+                        kwargs.get("type3", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "type4",
                         int,
                         30,
                         10,
-                        kwargs.get("type4", 0)
+                        kwargs.get("type4", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "type5",
                         int,
                         40,
                         10,
-                        kwargs.get("type5", 0)
+                        kwargs.get("type5", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "type6",
                         int,
                         50,
                         10,
-                        kwargs.get("type6", 0)
+                        kwargs.get("type6", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "type7",
                         int,
                         60,
                         10,
-                        kwargs.get("type7", 0)
+                        kwargs.get("type7", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "type8",
                         int,
                         70,
                         10,
-                        kwargs.get("type8", 0)
+                        kwargs.get("type8", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -59,14 +60,14 @@ class DefineFpToSurfaceCoupling(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("fptype", 0)
+                        kwargs.get("fptype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "surftype",
                         int,
                         30,
                         10,
-                        kwargs.get("surftype", 0)
+                        kwargs.get("surftype", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -84,7 +85,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("sca", 0)
+                        kwargs.get("sca", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -112,7 +113,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
                         int,
                         50,
                         10,
-                        kwargs.get("sfp", 0)
+                        kwargs.get("sfp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

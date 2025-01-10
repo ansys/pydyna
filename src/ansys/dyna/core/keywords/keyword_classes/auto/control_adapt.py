@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlAdapt(KeywordBase):
@@ -47,49 +48,49 @@ class ControlAdapt(KeywordBase):
                         float,
                         10,
                         10,
-                        kwargs.get("adptol", 1.0E+20)
+                        kwargs.get("adptol", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "adptyp",
                         int,
                         20,
                         10,
-                        kwargs.get("adptyp", 1)
+                        kwargs.get("adptyp", 1 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "maxlvl",
                         int,
                         30,
                         10,
-                        kwargs.get("maxlvl", 3)
+                        kwargs.get("maxlvl", 3 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tbirth",
                         float,
                         40,
                         10,
-                        kwargs.get("tbirth", 0.0)
+                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdeath",
                         float,
                         50,
                         10,
-                        kwargs.get("tdeath", 1.0E+20)
+                        kwargs.get("tdeath", 1.0E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcadp",
                         int,
                         60,
                         10,
-                        kwargs.get("lcadp", 0)
+                        kwargs.get("lcadp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ioflag",
                         int,
                         70,
                         10,
-                        kwargs.get("ioflag", 0)
+                        kwargs.get("ioflag", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -100,56 +101,56 @@ class ControlAdapt(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("adpsize", 0.0)
+                        kwargs.get("adpsize", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "adpass",
                         int,
                         10,
                         10,
-                        kwargs.get("adpass", 0)
+                        kwargs.get("adpass", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ireflg",
                         int,
                         20,
                         10,
-                        kwargs.get("ireflg", 0)
+                        kwargs.get("ireflg", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "adpene",
                         float,
                         30,
                         10,
-                        kwargs.get("adpene", 0.0)
+                        kwargs.get("adpene", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "adpth",
                         float,
                         40,
                         10,
-                        kwargs.get("adpth", 0.0)
+                        kwargs.get("adpth", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "memory",
                         int,
                         50,
                         10,
-                        kwargs.get("memory", 0)
+                        kwargs.get("memory", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "orient",
                         int,
                         60,
                         10,
-                        kwargs.get("orient", 0)
+                        kwargs.get("orient", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "maxel",
                         int,
                         70,
                         10,
-                        kwargs.get("maxel", 0)
+                        kwargs.get("maxel", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

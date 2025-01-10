@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmMat003(KeywordBase):
@@ -47,7 +48,7 @@ class EmMat003(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("mtype", 0)
+                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sigma11",
@@ -121,7 +122,7 @@ class EmMat003(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("aopt", 0)
+                        kwargs.get("aopt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lambda",
@@ -181,7 +182,7 @@ class EmMat003(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("macf", 1)
+                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -162,6 +162,11 @@ $#   secid      area     thick
     # ensure that it does not throw when the data line is empty
     belt.loads(seatbelt_text)
 
+    seatbelt_text = seatbelt_text + "..."
+    # ensure that it does not throw when extra characters are added
+    with pytest.warns(UserWarning, match="Detected out of bound card characters"):
+        belt.loads(seatbelt_text)
+
 
 @pytest.mark.keywords
 def test_read_nodes(ref_string):
@@ -186,6 +191,18 @@ $#   nid               x               y               z      tc      rc
     node_text = ref_string.test_read_nodes_string
     assert repr(node) == node_text
     assert node.write() == node_text
+
+
+@pytest.mark.keywords
+def test_read_keyword_no_defaults():
+    m = kwd.MatHyperelasticRubber()
+    assert m.n == 0 # LSPP default for `n` is 0.
+    assert m.pr is None # No LSPP default for `pr`
+
+    from ansys.dyna.core.lib.config import disable_lspp_defaults
+    with disable_lspp_defaults():
+        m = kwd.MatHyperelasticRubber()
+        assert m.n == None # LSPP default for `n` is 0.
 
 
 @pytest.mark.keywords
@@ -399,12 +416,18 @@ def test_element_solid_ortho(ref_string):
 
 
 @pytest.mark.keywords
-def test_control_timestep_read(ref_string):
-    """Read CONTROL_TIMESTEP"""
+def test_control_time_step_read(ref_string):
+    """Read CONTROL_TIME_STEP"""
     c = kwd.ControlTimeStep()
-    c.loads(ref_string.test_control_timestep_string)
+    c.loads(ref_string.test_control_time_step_string)
     assert c.tssfac == 1.0
 
+@pytest.mark.keywords
+def test_control_timestep_read(ref_string):
+    """Read CONTROL_TIMESTEP"""
+    c = kwd.ControlTimestep()
+    c.loads(ref_string.test_control_timestep_string)
+    assert c.tssfac == 1.0
 
 @pytest.mark.keywords
 def test_mat_plastic_kinematic_read(ref_string):

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -87,7 +88,7 @@ class MatModifiedPiecewiseLinearPlasticityRtcl(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("fail", 10.E+20)
+                        kwargs.get("fail", 10.E+20 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdel",
@@ -119,21 +120,21 @@ class MatModifiedPiecewiseLinearPlasticityRtcl(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("lcss", 0)
+                        kwargs.get("lcss", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcsr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcsr", 0)
+                        kwargs.get("lcsr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vp",
                         float,
                         40,
                         10,
-                        kwargs.get("vp", 0.0)
+                        kwargs.get("vp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "epsthin",
@@ -154,7 +155,7 @@ class MatModifiedPiecewiseLinearPlasticityRtcl(KeywordBase):
                         float,
                         70,
                         10,
-                        kwargs.get("numint", 0)
+                        kwargs.get("numint", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -285,49 +286,49 @@ class MatModifiedPiecewiseLinearPlasticityRtcl(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lctsrf", 0)
+                        kwargs.get("lctsrf", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eps0",
                         float,
                         10,
                         10,
-                        kwargs.get("eps0", 0)
+                        kwargs.get("eps0", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "triax",
                         float,
                         20,
                         10,
-                        kwargs.get("triax", 0)
+                        kwargs.get("triax", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ips",
                         int,
                         30,
                         10,
-                        kwargs.get("ips", 0)
+                        kwargs.get("ips", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcemod",
                         int,
                         40,
                         10,
-                        kwargs.get("lcemod", 0)
+                        kwargs.get("lcemod", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "beta",
                         float,
                         50,
                         10,
-                        kwargs.get("beta", 0.0)
+                        kwargs.get("beta", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "rfiltf",
                         float,
                         60,
                         10,
-                        kwargs.get("rfiltf", 0.0)
+                        kwargs.get("rfiltf", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

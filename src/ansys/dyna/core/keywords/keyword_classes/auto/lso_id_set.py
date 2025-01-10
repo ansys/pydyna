@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LsoIdSet(KeywordBase):
@@ -47,14 +48,14 @@ class LsoIdSet(KeywordBase):
                         str,
                         10,
                         20,
-                        kwargs.get("type", "SEG_SETS")
+                        kwargs.get("type", "SEG_SETS" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "solver",
                         str,
                         20,
                         20,
-                        kwargs.get("solver", "MECH")
+                        kwargs.get("solver", "MECH" if use_lspp_defaults() else None)
                     ),
                 ],
             ),

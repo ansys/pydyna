@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseRecoverNode(KeywordBase):
@@ -47,49 +48,49 @@ class DatabaseRecoverNode(KeywordBase):
                         str,
                         10,
                         10,
-                        kwargs.get("iax", "SMNPD")
+                        kwargs.get("iax", "SMNPD" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iay",
                         str,
                         20,
                         10,
-                        kwargs.get("iay", "SMNPD")
+                        kwargs.get("iay", "SMNPD" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "iaz",
                         str,
                         30,
                         10,
-                        kwargs.get("iaz", "SMNPD")
+                        kwargs.get("iaz", "SMNPD" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "method",
                         int,
                         40,
                         10,
-                        kwargs.get("method", 0)
+                        kwargs.get("method", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ivx",
                         str,
                         50,
                         10,
-                        kwargs.get("ivx", "SMNPD")
+                        kwargs.get("ivx", "SMNPD" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ivy",
                         str,
                         60,
                         10,
-                        kwargs.get("ivy", "SMNPD")
+                        kwargs.get("ivy", "SMNPD" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ivz",
                         str,
                         70,
                         10,
-                        kwargs.get("ivz", "SMNPD")
+                        kwargs.get("ivz", "SMNPD" if use_lspp_defaults() else None)
                     ),
                 ],
             ),

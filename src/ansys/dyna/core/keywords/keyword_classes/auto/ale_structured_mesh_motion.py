@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleStructuredMeshMotion(KeywordBase):
@@ -47,21 +48,21 @@ class AleStructuredMeshMotion(KeywordBase):
                         str,
                         10,
                         10,
-                        kwargs.get("option", "FOLLOW_GC")
+                        kwargs.get("option", "FOLLOW_GC" if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ammgsid",
                         int,
                         20,
                         10,
-                        kwargs.get("ammgsid", 0)
+                        kwargs.get("ammgsid", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "explim",
                         float,
                         30,
                         10,
-                        kwargs.get("explim", 1.0)
+                        kwargs.get("explim", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "unused",
@@ -89,7 +90,7 @@ class AleStructuredMeshMotion(KeywordBase):
                         int,
                         70,
                         10,
-                        kwargs.get("symcod", 0)
+                        kwargs.get("symcod", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -52,49 +53,49 @@ class DefineCurve3858(KeywordBase):
                         int,
                         10,
                         10,
-                        kwargs.get("sidr", 0)
+                        kwargs.get("sidr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfa",
                         float,
                         20,
                         10,
-                        kwargs.get("sfa", 1.0)
+                        kwargs.get("sfa", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "sfo",
                         float,
                         30,
                         10,
-                        kwargs.get("sfo", 1.0)
+                        kwargs.get("sfo", 1.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "offa",
                         float,
                         40,
                         10,
-                        kwargs.get("offa", 0.0)
+                        kwargs.get("offa", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "offo",
                         float,
                         50,
                         10,
-                        kwargs.get("offo", 0.0)
+                        kwargs.get("offo", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dattyp",
                         int,
                         60,
                         10,
-                        kwargs.get("dattyp", 0)
+                        kwargs.get("dattyp", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcint",
                         int,
                         70,
                         10,
-                        kwargs.get("lcint", 0)
+                        kwargs.get("lcint", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -105,14 +106,14 @@ class DefineCurve3858(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a1", 0.0)
+                        kwargs.get("a1", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "o1",
                         float,
                         20,
                         20,
-                        kwargs.get("o1", 0.0)
+                        kwargs.get("o1", 0.0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

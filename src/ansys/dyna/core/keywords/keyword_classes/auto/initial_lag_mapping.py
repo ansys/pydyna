@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialLagMapping(KeywordBase):
@@ -51,21 +52,21 @@ class InitialLagMapping(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp", 0.0)
+                        kwargs.get("xp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp", 0.0)
+                        kwargs.get("yp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp", 0.0)
+                        kwargs.get("zp", 0.0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vecid",

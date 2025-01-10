@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -77,28 +78,28 @@ class MatAleIncompressible(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tol", 1e-8)
+                        kwargs.get("tol", 1e-8 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "dtout",
                         float,
                         10,
                         10,
-                        kwargs.get("dtout", 1e10)
+                        kwargs.get("dtout", 1e10 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "ncg",
                         int,
                         20,
                         10,
-                        kwargs.get("ncg", 50)
+                        kwargs.get("ncg", 50 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "meth",
                         int,
                         30,
                         10,
-                        kwargs.get("meth", -7)
+                        kwargs.get("meth", -7 if use_lspp_defaults() else None)
                     ),
                 ],
             ),

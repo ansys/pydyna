@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartStackedElements(KeywordBase):
@@ -51,28 +52,28 @@ class PartStackedElements(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pidref", 0)
+                        kwargs.get("pidref", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "numlay",
                         int,
                         10,
                         10,
-                        kwargs.get("numlay", 0)
+                        kwargs.get("numlay", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "adpopt",
                         int,
                         20,
                         10,
-                        kwargs.get("adpopt", 0)
+                        kwargs.get("adpopt", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "inplcmp",
                         int,
                         30,
                         10,
-                        kwargs.get("inplcmp", 0)
+                        kwargs.get("inplcmp", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
@@ -104,14 +105,14 @@ class PartStackedElements(KeywordBase):
                         int,
                         30,
                         10,
-                        kwargs.get("hgidi", 0)
+                        kwargs.get("hgidi", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tmidi",
                         int,
                         40,
                         10,
-                        kwargs.get("tmidi", 0)
+                        kwargs.get("tmidi", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "thki",

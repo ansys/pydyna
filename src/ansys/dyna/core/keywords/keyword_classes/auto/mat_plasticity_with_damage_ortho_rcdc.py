@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -87,7 +88,7 @@ class MatPlasticityWithDamageOrthoRcdc(KeywordBase):
                         float,
                         60,
                         10,
-                        kwargs.get("eppf", 10.E+11)
+                        kwargs.get("eppf", 10.E+11 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "tdel",
@@ -119,21 +120,21 @@ class MatPlasticityWithDamageOrthoRcdc(KeywordBase):
                         int,
                         20,
                         10,
-                        kwargs.get("lcss", 0)
+                        kwargs.get("lcss", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "lcsr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcsr", 0)
+                        kwargs.get("lcsr", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "eppfr",
                         float,
                         40,
                         10,
-                        kwargs.get("eppfr", 10.E+13)
+                        kwargs.get("eppfr", 10.E+13 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "vp",
@@ -147,14 +148,14 @@ class MatPlasticityWithDamageOrthoRcdc(KeywordBase):
                         int,
                         60,
                         10,
-                        kwargs.get("lcdm", 0)
+                        kwargs.get("lcdm", 0 if use_lspp_defaults() else None)
                     ),
                     Field(
                         "numint",
                         int,
                         70,
                         10,
-                        kwargs.get("numint", 0)
+                        kwargs.get("numint", 0 if use_lspp_defaults() else None)
                     ),
                 ],
             ),
