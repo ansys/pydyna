@@ -285,6 +285,8 @@ def handle_override_field(kwd_data, settings):
                     field["default"] = setting["default"]
                 if "options" in setting:
                     field["options"] = setting["options"]
+                if "new-name" in setting:
+                    field["name"] = setting["new-name"]
 
 def handle_rename_property(kwd_data, settings):
     for setting in settings:

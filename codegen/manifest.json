@@ -124,7 +124,14 @@
                     "option-name": "ID"
                 }
             ],
-            "skip-card": 0
+            "skip-card": 0,
+            "override-field": [
+                {
+                    "index": 1,
+                    "name": "ncoup ",
+                    "new-name": "ncoup"
+                }
+            ]
         },
         "comment": "TODO - the option name is either ID or TITLE, but there is no way in pydyna to have a union option"
     },

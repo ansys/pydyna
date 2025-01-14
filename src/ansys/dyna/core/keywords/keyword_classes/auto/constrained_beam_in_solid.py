@@ -84,11 +84,11 @@ class ConstrainedBeamInSolid(KeywordBase):
                         kwargs.get("unused")
                     ),
                     Field(
-                        "ncoup ",
+                        "ncoup",
                         int,
                         60,
                         10,
-                        kwargs.get("ncoup ")
+                        kwargs.get("ncoup")
                     ),
                     Field(
                         "cdir",
@@ -234,14 +234,14 @@ class ConstrainedBeamInSolid(KeywordBase):
         self._cards[0].set_value("sstyp", value)
 
     @property
-    def ncoup_(self) -> typing.Optional[int]:
+    def ncoup(self) -> typing.Optional[int]:
         """Get or set the Number of coupling points generated in one beam element. If set to 0, coupling only happens at beam nodes. Otherwise, coupling is done at both the beam nodes and those automatically generated coupling points
         """ # nopep8
-        return self._cards[0].get_value("ncoup ")
+        return self._cards[0].get_value("ncoup")
 
-    @ncoup_.setter
-    def ncoup_(self, value: int) -> None:
-        self._cards[0].set_value("ncoup ", value)
+    @ncoup.setter
+    def ncoup(self, value: int) -> None:
+        self._cards[0].set_value("ncoup", value)
 
     @property
     def cdir(self) -> typing.Optional[int]:
