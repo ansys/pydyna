@@ -108,6 +108,26 @@
             }
         }
     ],
+    "CONSTRAINED_BEAM_IN_SOLID": {
+        "generation-options": {
+            "add-option": [
+                {
+                    "card-order": 1,
+                    "title-order": 0,
+                    "cards": [
+                        {
+                            "source": "kwd-data",
+                            "keyword-name": "CONSTRAINED_BEAM_IN_SOLID",
+                            "card-index": 0
+                        }
+                    ],
+                    "option-name": "ID"
+                }
+            ],
+            "skip-card": 0
+        },
+        "comment": "TODO - the option name is either ID or TITLE, but there is no way in pydyna to have a union option"
+    },
     "DEFINE_TRANSFORMATION": {
         "generation-options": {
             "duplicate-card": [

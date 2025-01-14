@@ -212,6 +212,12 @@ def test_boundary_prescribed_motion_set(ref_string):
 
 
 @pytest.mark.keywords
+def test_constrained_beam_in_solid(ref_string):
+    b = kwd.ConstrainedBeamInSolid()
+    assert(b.write() == ref_string.test_constrained_beam_in_solid)
+
+
+@pytest.mark.keywords
 def test_hourglass(ref_string):
     h = kwd.Hourglass()
     h.options["TITLE"].active = True
