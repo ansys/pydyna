@@ -155,6 +155,10 @@ $#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
   69000314        13                                                            
 *END"""
 
+test_boundary_prescribed_motion_set = """*BOUNDARY_PRESCRIBED_MOTION_SET
+$#    nsid       dof       vad      lcid        sf       vid     death     birth
+                   0         0                 1.0               1e+28       0.0"""
+
 test_hourglass_title = """*HOURGLASS_TITLE
 $#                                                                         title
 hello                                                                           

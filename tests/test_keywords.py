@@ -206,6 +206,12 @@ def test_read_keyword_no_defaults():
 
 
 @pytest.mark.keywords
+def test_boundary_prescribed_motion_set(ref_string):
+    b = kwd.BoundaryPrescribedMotionSet()
+    assert(b.write() == ref_string.test_boundary_prescribed_motion_set)
+
+
+@pytest.mark.keywords
 def test_hourglass(ref_string):
     h = kwd.Hourglass()
     h.options["TITLE"].active = True

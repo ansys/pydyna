@@ -672,7 +672,10 @@ def get_loader():
 
 def match_wildcard(keyword, wildcard):
     assert wildcard["type"] == "prefix"
+    exclusions = set(wildcard.get("exclusions", []))
     for pattern in wildcard["patterns"]:
+        if keyword in exclusions:
+            continue
         if keyword.startswith(f"{pattern}"):
             return True
     return False
