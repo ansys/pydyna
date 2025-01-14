@@ -100,12 +100,17 @@ class Insertion:
     card: typing.Dict = None
 
 
-def get_card(source: str, identity: str):
-    if source != "additional-cards":
-        # TODO - allow getting option from elsewhere, like a given keywords/card index
-        #        or a new location entirely
-        raise Exception()
-    return ADDITIONAL_CARDS[identity]
+def get_card(setting: typing.Dict[str, str]):
+    source = setting["source"]
+    if source == "kwd-data":
+        data = KWDM_INSTANCE.get_keyword_data_dict(setting["keyword-name"])
+        card = data[setting["card-index"]]
+        return card
+
+    if source == "additional-cards":
+        return ADDITIONAL_CARDS[setting["card-name"]]
+
+    raise Exception()
 
 
 def get_classname(keyword: str):
@@ -190,7 +195,7 @@ def handle_card_sets(kwd_data, settings):
 def handle_replace_cards(kwd_data, settings):
     for card_settings in settings:
         index = card_settings["index"]
-        replacement = get_card(card_settings["card"]["source"], card_settings["card"]["card-name"])
+        replacement = get_card(card_settings["card"])
         replacement["index"] = index
         kwd_data["cards"][index] = replacement
 
@@ -198,7 +203,7 @@ def handle_replace_cards(kwd_data, settings):
 def handle_insert_cards(kwd_data, settings):
     for card_settings in settings:
         index = card_settings["index"]
-        card = get_card(card_settings["card"]["source"], card_settings["card"]["card-name"])
+        card = get_card(card_settings["card"])
         insertion = Insertion(index, "", card)
         kwd_data["card_insertions"].append(insertion)
 
@@ -280,6 +285,8 @@ def handle_override_field(kwd_data, settings):
                     field["default"] = setting["default"]
                 if "options" in setting:
                     field["options"] = setting["options"]
+                if "new-name" in setting:
+                    field["name"] = setting["new-name"]
 
 def handle_rename_property(kwd_data, settings):
     for setting in settings:
@@ -311,7 +318,7 @@ def handle_override_subkeyword(kwd_data, settings) -> None:
 
 def handle_add_option(kwd_data, settings):
     def expand(card):
-        card = get_card(card["source"], card["card-name"])
+        card = get_card(card)
         if "active" in card:
             card["func"] = card["active"]
         return card
@@ -672,7 +679,10 @@ def get_loader():
 
 def match_wildcard(keyword, wildcard):
     assert wildcard["type"] == "prefix"
+    exclusions = set(wildcard.get("exclusions", []))
     for pattern in wildcard["patterns"]:
+        if keyword in exclusions:
+            continue
         if keyword.startswith(f"{pattern}"):
             return True
     return False

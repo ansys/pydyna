@@ -21,6 +21,19 @@
         },
         {
             "type": "prefix",
+            "patterns": ["BOUNDARY_PRESCRIBED_MOTION"],
+            "exclusions": ["BOUNDARY_PRESCRIBED_MOTION_SET_SEGMENT"],
+            "generation-options": {
+                "conditional-card": [
+                    {
+                        "index": 1,
+                        "func": "abs(self.dof) in [9, 10, 11] or self.vad==4"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "prefix",
             "patterns": ["CONSTRAINED_NODAL_RIGID_BODY"],
             "generation-options": {
                 "add-option": [
@@ -95,6 +108,33 @@
             }
         }
     ],
+    "CONSTRAINED_BEAM_IN_SOLID": {
+        "generation-options": {
+            "add-option": [
+                {
+                    "card-order": 1,
+                    "title-order": 0,
+                    "cards": [
+                        {
+                            "source": "kwd-data",
+                            "keyword-name": "CONSTRAINED_BEAM_IN_SOLID",
+                            "card-index": 0
+                        }
+                    ],
+                    "option-name": "ID"
+                }
+            ],
+            "skip-card": 0,
+            "override-field": [
+                {
+                    "index": 1,
+                    "name": "ncoup ",
+                    "new-name": "ncoup"
+                }
+            ]
+        },
+        "comment": "TODO - the option name is either ID or TITLE, but there is no way in pydyna to have a union option"
+    },
     "DEFINE_TRANSFORMATION": {
         "generation-options": {
             "duplicate-card": [
