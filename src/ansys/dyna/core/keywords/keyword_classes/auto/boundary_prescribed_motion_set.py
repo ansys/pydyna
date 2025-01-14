@@ -132,6 +132,7 @@ class BoundaryPrescribedMotionSet(KeywordBase):
                         kwargs.get("node2", 0 if use_lspp_defaults() else None)
                     ),
                 ],
+                lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
             ),
         ]
 
