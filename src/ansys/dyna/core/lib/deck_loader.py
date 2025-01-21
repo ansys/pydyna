@@ -144,7 +144,7 @@ def _try_load_deck(deck: "ansys.dyna.core.deck.Deck", text: str, result: DeckLoa
             try:
                 keyword_object.loads(keyword_data, deck.parameters)
                 deck.append(keyword_object)
-            except:
+            except Exception as e:
                 result.add_unprocessed_keyword(keyword)
                 deck.append(keyword_data)
 

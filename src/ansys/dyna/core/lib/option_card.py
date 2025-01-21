@@ -21,7 +21,6 @@
 # SOFTWARE.
 
 import abc
-from dataclasses import dataclass
 import io
 import typing
 
@@ -145,23 +144,9 @@ class OptionCardSet(CardInterface):
 
         return write_or_return(buf, _write)
 
-class OptionCardAPIInterface(metaclass=abc.ABCMeta):
-    """Abstract base class for all the implementations of keyword cards."""
 
-    @classmethod
-    def __subclasshook__(cls, subclass):
-        return (
-            hasattr(subclass, "is_option_active")
-            and callable(subclass.is_option_active)
-            and hasattr(subclass, "option_specs")
-            and callable(subclass.option_specs)
-            and hasattr(subclass, "activate_option")
-            and callable(subclass.activate_option)
-            and hasattr(subclass, "deactivate_option")
-            and callable(subclass.deactivate_option)
-            and hasattr(subclass, "get_option_spec")
-            and callable(subclass.get_option_spec)
-        )
+class OptionsInterface(metaclass=abc.ABCMeta):
+    """Abstract base class for option card api interface."""
 
     @abc.abstractmethod
     def get_option_spec(self, name: str) -> OptionSpec:
@@ -189,7 +174,7 @@ class OptionCardAPIInterface(metaclass=abc.ABCMeta):
 class OptionAPI:
     """API for an individual option associated with a keyword."""
 
-    def __init__(self, options_api: OptionCardAPIInterface, name: str):
+    def __init__(self, options_api: OptionsInterface, name: str):
         self._options_api = options_api
         self._name = name
 
@@ -202,20 +187,24 @@ class OptionAPI:
         option_spec: OptionSpec = self._options_api.get_option_spec(self._name)
         if value:
             self._options_api.activate_option(self._name)
-            # deactivate all other options with the same card order and title order, since they will be mutually exclusive
+            # deactivate all other options with the same card order and title order
+            # since they will be mutually exclusive
             for any_option_spec in self._options_api.option_specs:
                 if any_option_spec.name == self._name:
                     continue
-                if any_option_spec.title_order == option_spec.title_order and any_option_spec.card_order == option_spec.card_order:
+                if (
+                    any_option_spec.title_order == option_spec.title_order
+                    and any_option_spec.card_order == option_spec.card_order
+                ):
                     self._options_api.deactivate_option(any_option_spec.name)
         else:
             self._options_api.deactivate_option(self._name)
 
 
-class OptionsAPI:
-    """API for options associated with a keyword."""
+class Options:
+    """Option collection associated with an options API."""
 
-    def __init__(self, api: OptionCardAPIInterface):
+    def __init__(self, api: OptionsInterface):
         self._api = api
 
     def __getitem__(self, name: str) -> OptionAPI:
@@ -233,3 +222,7 @@ class OptionsAPI:
             active_string = "active" if active else "not active"
             sio.write(f"\n    {option_name} option is {active_string}.")
         return sio.getvalue()
+
+    @property
+    def api(self) -> OptionsInterface:
+        return self._api

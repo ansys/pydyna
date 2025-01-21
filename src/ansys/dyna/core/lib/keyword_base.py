@@ -27,7 +27,6 @@ import warnings
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.format_type import format_type
-from ansys.dyna.core.lib.option_card import OptionsAPI, OptionSpec
 from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
@@ -43,9 +42,7 @@ class KeywordBase(Cards):
     def __init__(self, **kwargs):
         super().__init__(self)
         self.user_comment = kwargs.get("user_comment", "")
-        self._options_api: OptionsAPI = OptionsAPI(self)
         self._format_type: format_type = kwargs.get("format", format_type.default)
-        self._active_options: typing.Set[str] = set()
 
     @property
     def format(self) -> format_type:
@@ -101,43 +98,6 @@ class KeywordBase(Cards):
 
     def _is_valid(self) -> typing.Tuple[bool, str]:
         return True, ""
-
-    def is_option_active(self, option: str) -> bool:
-        return option in self._active_options
-
-    def activate_option(self, option: str) -> None:
-        self._active_options.add(option)
-
-    def deactivate_option(self, option: str) -> None:
-        if option in self._active_options:
-            self._active_options.remove(option)
-
-    def _try_activate_options(self, names: typing.List[str]) -> None:
-        for option in self.option_specs:
-            if option.name in names:
-                self.activate_option(option.name)
-
-    def _activate_options(self, title: str) -> None:
-        if self.options is None:
-            return
-        title_list = title.split("_")
-        self._try_activate_options(title_list)
-
-    def get_option_spec(self, name: str) -> OptionSpec:
-        for option_spec in self.option_specs:
-            if option_spec.name == name:
-                return option_spec
-        raise Exception(f"No option spec with name `{name}` found")
-
-    @property
-    def option_specs(self) -> typing.Iterable[OptionSpec]:
-        for card in self._cards:
-            if hasattr(card, "option_spec"):
-                option_spec = card.option_spec
-                yield option_spec
-            elif hasattr(card, "option_specs"):
-                for option_spec in card.option_specs:
-                    yield option_spec
 
     def __repr__(self) -> str:
         """Returns a console-friendly representation of the keyword data as it would appear in the .k file"""

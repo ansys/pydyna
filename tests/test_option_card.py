@@ -25,7 +25,7 @@ import typing
 import pytest
 
 from ansys.dyna.core.lib.card import Card, Field
-from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec, OptionsAPI
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec, Options
 
 class OptionAPIImplementation:
     def __init__(self, **kwargs):
@@ -90,16 +90,17 @@ class OptionAPIImplementation:
 @pytest.mark.keywords
 def test_options_basic():
     impl = OptionAPIImplementation()
-    options = OptionsAPI(impl)
+    options = Options(impl)
     assert options["FOO"].active is True
     assert options["BAR"].active is False
     options["BAR"].active = True
     assert options["BAR"].active is True
 
+
 @pytest.mark.keywords
 def test_options_union():
     impl = OptionAPIImplementation()
-    options = OptionsAPI(impl)
+    options = Options(impl)
     assert options["FOO"].active is True
     assert options["BAR"].active is False
     options["BAR"].active = True
