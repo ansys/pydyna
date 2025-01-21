@@ -31,8 +31,8 @@ class OptionAPIImplementation:
     def __init__(self, **kwargs):
         self._active_options = set(["FOO"])
         self._option_specs = {
-                "FOO": OptionSpec("FOO", 1, 0, ["BAR"]),
-                "BAR": OptionSpec("BAR", 1, 0, ["FOO"])
+                "FOO": OptionSpec("FOO", 1, 0),
+                "BAR": OptionSpec("BAR", 1, 0)
         }
         _cards = [
             OptionCardSet(
@@ -81,6 +81,10 @@ class OptionAPIImplementation:
 
     def get_option_spec(self, name: str) -> OptionSpec:
         return self._option_specs[name]
+
+    @property
+    def option_specs(self) -> typing.Iterable[OptionSpec]:
+        return [self._option_specs["FOO"], self._option_specs["BAR"]]
 
 
 @pytest.mark.keywords

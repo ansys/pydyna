@@ -70,7 +70,7 @@ class KeywordBase(Cards):
         base_title = self._get_base_title()
         titles = [base_title]
         if self.options != None:
-            options_specs = self.options.option_specs
+            options_specs = self.option_specs
             title_suffix_options = [o for o in options_specs if self.is_option_active(o.name) and o.title_order > 0]
             title_suffix_options.sort(key=lambda option: option.title_order)
             suffix_names = [op.name for op in title_suffix_options]
@@ -113,7 +113,7 @@ class KeywordBase(Cards):
             self._active_options.remove(option)
 
     def _try_activate_options(self, names: typing.List[str]) -> None:
-        for option in self.options.option_specs:
+        for option in self.option_specs:
             if option.name in names:
                 self.activate_option(option.name)
 
@@ -124,16 +124,20 @@ class KeywordBase(Cards):
         self._try_activate_options(title_list)
 
     def get_option_spec(self, name: str) -> OptionSpec:
+        for option_spec in self.option_specs:
+            if option_spec.name == name:
+                return option_spec
+        raise Exception(f"No option spec with name `{name}` found")
+
+    @property
+    def option_specs(self) -> typing.Iterable[OptionSpec]:
         for card in self._cards:
             if hasattr(card, "option_spec"):
                 option_spec = card.option_spec
-                if option_spec.name == name:
-                    return option_spec
+                yield option_spec
             elif hasattr(card, "option_specs"):
                 for option_spec in card.option_specs:
-                    if option_spec.name == name:
-                        return option_spec
-        raise Exception(f"No option spec with name `{name}` found")
+                    yield option_spec
 
     def __repr__(self) -> str:
         """Returns a console-friendly representation of the keyword data as it would appear in the .k file"""
