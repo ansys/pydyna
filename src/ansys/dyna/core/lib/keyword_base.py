@@ -27,7 +27,7 @@ import warnings
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.format_type import format_type
-from ansys.dyna.core.lib.option_card import OptionsAPI
+from ansys.dyna.core.lib.option_card import OptionsAPI, OptionSpec
 from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
@@ -122,6 +122,18 @@ class KeywordBase(Cards):
             return
         title_list = title.split("_")
         self._try_activate_options(title_list)
+
+    def get_option_spec(self, name: str) -> OptionSpec:
+        for card in self._cards:
+            if hasattr(card, "option_spec"):
+                option_spec = card.option_spec
+                if option_spec.name == name:
+                    return option_spec
+            elif hasattr(card, "option_specs"):
+                for option_spec in card.option_specs:
+                    if option_spec.name == name:
+                        return option_spec
+        raise Exception(f"No option spec with name `{name}` found")
 
     def __repr__(self) -> str:
         """Returns a console-friendly representation of the keyword data as it would appear in the .k file"""
