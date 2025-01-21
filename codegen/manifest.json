@@ -112,8 +112,8 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": 1,
-                    "title-order": 0,
+                    "card-order": -1,
+                    "title-order": 1,
                     "cards": [
                         {
                             "source": "kwd-data",
@@ -122,6 +122,18 @@
                         }
                     ],
                     "option-name": "ID"
+                },
+                {
+                    "card-order": -1,
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "kwd-data",
+                            "keyword-name": "CONSTRAINED_BEAM_IN_SOLID",
+                            "card-index": 0
+                        }
+                    ],
+                    "option-name": "TITLE"
                 }
             ],
             "skip-card": 0,

@@ -61,6 +61,10 @@ class OptionSpec:
     def title_order(self, value: int) -> None:
         self._title_order = value
 
+    def __repr__(self) -> str:
+        return f"OptionSpec(name={self.name}, card_order={self.card_order}, title_order={self.title_order})"
+
+
 
 class OptionCardSet(CardInterface):
     def __init__(
