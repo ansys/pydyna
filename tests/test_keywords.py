@@ -206,6 +206,27 @@ def test_read_keyword_no_defaults():
 
 
 @pytest.mark.keywords
+def test_boundary_prescribed_motion_set(ref_string):
+    b = kwd.BoundaryPrescribedMotionSet()
+    assert(b.write() == ref_string.test_boundary_prescribed_motion_set)
+
+
+@pytest.mark.keywords
+def test_constrained_beam_in_solid(ref_string):
+    b = kwd.ConstrainedBeamInSolid(ncoup=1)
+    b.coupid=12
+    assert b.write() == ref_string.test_constrained_beam_in_solid
+    b.options["ID"].active = True
+    assert b.options["ID"].active == True
+    assert b.options["TITLE"].active == False
+    assert b.write() == ref_string.test_constrained_beam_in_solid_id
+    b.options["TITLE"].active = True
+    assert b.options["TITLE"].active == True
+    assert b.options["ID"].active == False
+    assert b.write() == ref_string.test_constrained_beam_in_solid_title
+
+
+@pytest.mark.keywords
 def test_hourglass(ref_string):
     h = kwd.Hourglass()
     h.options["TITLE"].active = True

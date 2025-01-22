@@ -23,6 +23,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedBeamInSolid(KeywordBase):
@@ -30,28 +31,15 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "BEAM_IN_SOLID"
+    option_specs = [
+        OptionSpec("ID", -1, 1),
+        OptionSpec("TITLE", -1, 1),
+    ]
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "coupid",
-                        int,
-                        0,
-                        10,
-                        kwargs.get("coupid")
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        kwargs.get("title")
-                    ),
-                ],
-            ),
             Card(
                 [
                     Field(
@@ -97,11 +85,11 @@ class ConstrainedBeamInSolid(KeywordBase):
                         kwargs.get("unused")
                     ),
                     Field(
-                        "ncoup ",
+                        "ncoup",
                         int,
                         60,
                         10,
-                        kwargs.get("ncoup ")
+                        kwargs.get("ncoup")
                     ),
                     Field(
                         "cdir",
@@ -172,47 +160,75 @@ class ConstrainedBeamInSolid(KeywordBase):
                     ),
                 ],
             ),
+            OptionCardSet(
+                option_spec = ConstrainedBeamInSolid.option_specs[0],
+                cards = [
+                    Card(
+                        [
+                            Field(
+                                "coupid",
+                                int,
+                                0,
+                                10,
+                                kwargs.get("coupid")
+                            ),
+                            Field(
+                                "title",
+                                str,
+                                10,
+                                70,
+                                kwargs.get("title")
+                            ),
+                        ],
+                    ),
+                ],
+                **kwargs
+            ),
+            OptionCardSet(
+                option_spec = ConstrainedBeamInSolid.option_specs[1],
+                cards = [
+                    Card(
+                        [
+                            Field(
+                                "coupid",
+                                int,
+                                0,
+                                10,
+                                kwargs.get("coupid")
+                            ),
+                            Field(
+                                "title",
+                                str,
+                                10,
+                                70,
+                                kwargs.get("title")
+                            ),
+                        ],
+                    ),
+                ],
+                **kwargs
+            ),
         ]
-
-    @property
-    def coupid(self) -> typing.Optional[int]:
-        """Get or set the Coupling card ID number
-        """ # nopep8
-        return self._cards[0].get_value("coupid")
-
-    @coupid.setter
-    def coupid(self, value: int) -> None:
-        self._cards[0].set_value("coupid", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the A description of this coupling definition
-        """ # nopep8
-        return self._cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        self._cards[0].set_value("title", value)
 
     @property
     def bside(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID of the Lagrangian beam structure(see *PART,* SET_PART)
         """ # nopep8
-        return self._cards[1].get_value("bside")
+        return self._cards[0].get_value("bside")
 
     @bside.setter
     def bside(self, value: int) -> None:
-        self._cards[1].set_value("bside", value)
+        self._cards[0].set_value("bside", value)
 
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID of the Lagrangian solid elements or thick shell element(see *PART,* SET_PART)
         """ # nopep8
-        return self._cards[1].get_value("ssid")
+        return self._cards[0].get_value("ssid")
 
     @ssid.setter
     def ssid(self, value: int) -> None:
-        self._cards[1].set_value("ssid", value)
+        self._cards[0].set_value("ssid", value)
 
     @property
     def bstyp(self) -> int:
@@ -220,13 +236,13 @@ class ConstrainedBeamInSolid(KeywordBase):
         EQ.0: part set ID (PSID).
         EQ.1: part ID (PID).
         """ # nopep8
-        return self._cards[1].get_value("bstyp")
+        return self._cards[0].get_value("bstyp")
 
     @bstyp.setter
     def bstyp(self, value: int) -> None:
         if value not in [0, 1]:
             raise Exception("""bstyp must be one of {0,1}""")
-        self._cards[1].set_value("bstyp", value)
+        self._cards[0].set_value("bstyp", value)
 
     @property
     def sstyp(self) -> int:
@@ -234,23 +250,23 @@ class ConstrainedBeamInSolid(KeywordBase):
         EQ.0: part set ID (PSID).
         EQ.1: part ID (PID).
         """ # nopep8
-        return self._cards[1].get_value("sstyp")
+        return self._cards[0].get_value("sstyp")
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
         if value not in [0, 1]:
             raise Exception("""sstyp must be one of {0,1}""")
-        self._cards[1].set_value("sstyp", value)
+        self._cards[0].set_value("sstyp", value)
 
     @property
-    def ncoup_(self) -> typing.Optional[int]:
+    def ncoup(self) -> typing.Optional[int]:
         """Get or set the Number of coupling points generated in one beam element. If set to 0, coupling only happens at beam nodes. Otherwise, coupling is done at both the beam nodes and those automatically generated coupling points
         """ # nopep8
-        return self._cards[1].get_value("ncoup ")
+        return self._cards[0].get_value("ncoup")
 
-    @ncoup_.setter
-    def ncoup_(self, value: int) -> None:
-        self._cards[1].set_value("ncoup ", value)
+    @ncoup.setter
+    def ncoup(self, value: int) -> None:
+        self._cards[0].set_value("ncoup", value)
 
     @property
     def cdir(self) -> typing.Optional[int]:
@@ -258,11 +274,11 @@ class ConstrainedBeamInSolid(KeywordBase):
         EQ.0: default, constraint applied along all directions.
         EQ.1: Constraint only applied along normal directions; along the beam axial direction there is no constraint
         """ # nopep8
-        return self._cards[1].get_value("cdir")
+        return self._cards[0].get_value("cdir")
 
     @cdir.setter
     def cdir(self, value: int) -> None:
-        self._cards[1].set_value("cdir", value)
+        self._cards[0].set_value("cdir", value)
 
     @property
     def start(self) -> float:
@@ -270,11 +286,11 @@ class ConstrainedBeamInSolid(KeywordBase):
         LT.0:	Start time is set to |START|.  When negative, start time is followed during the dynamic relaxation phase of the calculation.  After dynamic relaxation has completed, coupling is activated regardless of the value of END.EQ.0:	Start time is inactive, meaning coupling is always active
         GT.0 : If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start - time and end - time.Otherwise, if END > 0, start time applies both duringand after dynamic relaxation.
         """ # nopep8
-        return self._cards[2].get_value("start")
+        return self._cards[1].get_value("start")
 
     @start.setter
     def start(self, value: float) -> None:
-        self._cards[2].set_value("start", value)
+        self._cards[1].set_value("start", value)
 
     @property
     def end(self) -> float:
@@ -282,11 +298,11 @@ class ConstrainedBeamInSolid(KeywordBase):
         LT.0:	If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start-time and end-time.  Otherwise, negative END indicates that coupling is inactive during dynamic relaxation.  After dynamic relaxation the start and end times are followed and set to |START| and |END|, respectively.EQ.0:	END defaults to 1020.
         GT.0 : END sets the time at which the coupling is deactivated.
         """ # nopep8
-        return self._cards[2].get_value("end")
+        return self._cards[1].get_value("end")
 
     @end.setter
     def end(self, value: float) -> None:
-        self._cards[2].set_value("end", value)
+        self._cards[1].set_value("end", value)
 
     @property
     def axfor_(self) -> typing.Optional[int]:
@@ -294,21 +310,21 @@ class ConstrainedBeamInSolid(KeywordBase):
         GE.0: OFF
         EQ.-n: n is the function ID in *DEFINE_FUNCTION
         """ # nopep8
-        return self._cards[2].get_value("axfor ")
+        return self._cards[1].get_value("axfor ")
 
     @axfor_.setter
     def axfor_(self, value: int) -> None:
-        self._cards[2].set_value("axfor ", value)
+        self._cards[1].set_value("axfor ", value)
 
     @property
     def pssf(self) -> float:
         """Get or set the Penalty spring stiffness scale factor. Only available in penalty form.
         """ # nopep8
-        return self._cards[2].get_value("pssf")
+        return self._cards[1].get_value("pssf")
 
     @pssf.setter
     def pssf(self, value: float) -> None:
-        self._cards[2].set_value("pssf", value)
+        self._cards[1].set_value("pssf", value)
 
     @property
     def xint(self) -> typing.Optional[int]:
@@ -319,9 +335,31 @@ class ConstrainedBeamInSolid(KeywordBase):
         This field can be used together with NCOUP.
         In that case, in each element, we will take the larger number of coupling points from these two options.
         """ # nopep8
-        return self._cards[2].get_value("xint")
+        return self._cards[1].get_value("xint")
 
     @xint.setter
     def xint(self, value: int) -> None:
-        self._cards[2].set_value("xint", value)
+        self._cards[1].set_value("xint", value)
+
+    @property
+    def coupid(self) -> typing.Optional[int]:
+        """Get or set the Coupling card ID number
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("coupid")
+
+    @coupid.setter
+    def coupid(self, value: int) -> None:
+        self._cards[2].cards[0].set_value("coupid", value)
+        self._cards[3].cards[0].set_value("coupid", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the A description of this coupling definition
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        self._cards[2].cards[0].set_value("title", value)
+        self._cards[3].cards[0].set_value("title", value)
 

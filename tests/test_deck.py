@@ -268,9 +268,6 @@ def test_deck_kwlist(ref_string):
 def test_deck_load_title(ref_string):
     deck = Deck()
     deck.loads(ref_string.test_title_string)
-    print(type(deck))
-    print(type(kwd.DefineCurve()))
-    print(type(deck.keywords[0]))
     assert isinstance(deck.keywords[0], kwd.DefineCurve)
     assert deck.keywords[0].title == "title"
     assert deck.keywords[0].options["TITLE"].active

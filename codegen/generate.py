@@ -34,6 +34,10 @@ import typing
 
 from jinja2 import Environment, FileSystemLoader
 
+from keyword_generation.handlers.shared_field import SharedFieldHandler
+from keyword_generation.handlers.handler_base import KeywordHandler
+
+
 SKIPPED_KEYWORDS = set(
     [
         # defined manually because of the variable length text card
@@ -100,12 +104,17 @@ class Insertion:
     card: typing.Dict = None
 
 
-def get_card(source: str, identity: str):
-    if source != "additional-cards":
-        # TODO - allow getting option from elsewhere, like a given keywords/card index
-        #        or a new location entirely
-        raise Exception()
-    return ADDITIONAL_CARDS[identity]
+def get_card(setting: typing.Dict[str, str]):
+    source = setting["source"]
+    if source == "kwd-data":
+        data = KWDM_INSTANCE.get_keyword_data_dict(setting["keyword-name"])
+        card = data[setting["card-index"]]
+        return card
+
+    if source == "additional-cards":
+        return ADDITIONAL_CARDS[setting["card-name"]]
+
+    raise Exception()
 
 
 def get_classname(keyword: str):
@@ -190,7 +199,7 @@ def handle_card_sets(kwd_data, settings):
 def handle_replace_cards(kwd_data, settings):
     for card_settings in settings:
         index = card_settings["index"]
-        replacement = get_card(card_settings["card"]["source"], card_settings["card"]["card-name"])
+        replacement = get_card(card_settings["card"])
         replacement["index"] = index
         kwd_data["cards"][index] = replacement
 
@@ -198,7 +207,7 @@ def handle_replace_cards(kwd_data, settings):
 def handle_insert_cards(kwd_data, settings):
     for card_settings in settings:
         index = card_settings["index"]
-        card = get_card(card_settings["card"]["source"], card_settings["card"]["card-name"])
+        card = get_card(card_settings["card"])
         insertion = Insertion(index, "", card)
         kwd_data["card_insertions"].append(insertion)
 
@@ -280,6 +289,9 @@ def handle_override_field(kwd_data, settings):
                     field["default"] = setting["default"]
                 if "options" in setting:
                     field["options"] = setting["options"]
+                if "new-name" in setting:
+                    field["name"] = setting["new-name"]
+
 
 def handle_rename_property(kwd_data, settings):
     for setting in settings:
@@ -292,26 +304,13 @@ def handle_rename_property(kwd_data, settings):
                 field["property_name"] = property_name
 
 
-def handle_shared_field(kwd_data, settings):
-    for setting in settings:
-        fields = []
-        for card in kwd_data["cards"]:
-            for field in card["fields"]:
-                if field["name"] == setting["name"]:
-                    fields.append(field)
-        assert len(fields) > 1
-        fields[0]["card_indices"] = setting["cards"]
-        for field in fields[1:]:
-            field["redundant"] = True
-
-
 def handle_override_subkeyword(kwd_data, settings) -> None:
     kwd_data["subkeyword"] = settings
 
 
 def handle_add_option(kwd_data, settings):
     def expand(card):
-        card = get_card(card["source"], card["card-name"])
+        card = get_card(card)
         if "active" in card:
             card["func"] = card["active"]
         return card
@@ -344,7 +343,7 @@ HANDLERS = collections.OrderedDict(
         "rename-property": handle_rename_property,
         "skip-card": handle_skipped_cards,
         "duplicate-card-group": handle_duplicate_card_group,
-        "shared-field": handle_shared_field,
+        "shared-field": SharedFieldHandler(),
         "override-subkeyword": handle_override_subkeyword,
     }
 )
@@ -379,7 +378,6 @@ def add_option_indices(kwd_data):
         for card in options["cards"]:
             card["index"] = index
         index += 1
-
 
 def add_indices(kwd_data):
     # handlers might point to cards by a specific index.
@@ -428,6 +426,9 @@ def after_handle(kwd_data):
     do_insertions(kwd_data)
     delete_marked_indices(kwd_data)
     add_option_indices(kwd_data)
+    for handler_name, handler in HANDLERS.items():
+        if isinstance(handler, KeywordHandler):
+            handler.post_process(kwd_data)
 
 
 def before_handle(kwd_data):
@@ -439,11 +440,16 @@ def handle_keyword_data(kwd_data, settings):
     before_handle(kwd_data)
     # we have to iterate in the order of the handlers because right now the order still matters
     # right now this is only true for reorder_card
-    for handler_name, handler_func in HANDLERS.items():
+    for handler_name, handler in HANDLERS.items():
         handler_settings = settings.get(handler_name)
         if handler_settings == None:
             continue
-        handler_func(kwd_data, handler_settings)
+        # handler can be a KeywordHandler object or a function pointer
+        # TODO - change all handlers to objects
+        if isinstance(handler, KeywordHandler):
+            handler.handle(kwd_data, handler_settings)
+        else:
+            handler(kwd_data, handler_settings)
     after_handle(kwd_data)
 
 
@@ -672,7 +678,10 @@ def get_loader():
 
 def match_wildcard(keyword, wildcard):
     assert wildcard["type"] == "prefix"
+    exclusions = set(wildcard.get("exclusions", []))
     for pattern in wildcard["patterns"]:
+        if keyword in exclusions:
+            continue
         if keyword.startswith(f"{pattern}"):
             return True
     return False
