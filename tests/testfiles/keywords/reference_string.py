@@ -165,6 +165,22 @@ $#   bside      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
 $#   start       end    unused    axfor     unused      pssf    unused      xint
        0.0     1e+21                                     0.1                    """
 
+test_constrained_beam_in_solid_title = """*CONSTRAINED_BEAM_IN_SOLID_TITLE
+$#  coupid                                                                 title
+        12                                                                      
+$#   bside      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
+                             0         0                             1          
+$#   start       end    unused    axfor     unused      pssf    unused      xint
+       0.0     1e+21                                     0.1                    """
+
+test_constrained_beam_in_solid_id = """*CONSTRAINED_BEAM_IN_SOLID_ID
+$#  coupid                                                                 title
+        12                                                                      
+$#   bside      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
+                             0         0                             1          
+$#   start       end    unused    axfor     unused      pssf    unused      xint
+       0.0     1e+21                                     0.1                    """
+
 test_hourglass_title = """*HOURGLASS_TITLE
 $#                                                                         title
 hello                                                                           

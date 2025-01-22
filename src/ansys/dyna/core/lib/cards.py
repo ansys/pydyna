@@ -28,20 +28,65 @@ from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.card_writer import write_cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
-from ansys.dyna.core.lib.option_card import OptionCardSet, OptionsAPI
+from ansys.dyna.core.lib.option_card import OptionCardSet, Options, OptionsInterface, OptionSpec
 from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
-class Cards:
+class Cards(OptionsInterface):
     def __init__(self, keyword):
         self._cards = []
-        self._kw = keyword
-        self._options_api = OptionsAPI(keyword)
+
+        # The instance of "Cards" may be part of a card set or it may be the keyword itself
+        # Though OptionsInterface is implemented here, the API for options should come from
+        # The keyword if it is a card set. # TODO - can this be improved?
+        self._options = Options(keyword)
+        self._active_options: typing.Set[str] = set()
+
+    # options API interface implementation
 
     @property
-    def options(self) -> OptionsAPI:
+    def options(self) -> Options:
         """Gets the options_api of this keyword, if any"""
-        return self._options_api
+        return self._options
+
+    def is_option_active(self, option: str) -> bool:
+        return option in self._active_options
+
+    def activate_option(self, option: str) -> None:
+        self._active_options.add(option)
+
+    def deactivate_option(self, option: str) -> None:
+        if option in self._active_options:
+            self._active_options.remove(option)
+
+    def _try_activate_options(self, names: typing.List[str]) -> None:
+        for option in self.option_specs:
+            if option.name in names:
+                self.activate_option(option.name)
+
+    def _activate_options(self, title: str) -> None:
+        if self.options is None:
+            return
+        title_list = title.split("_")
+        self._try_activate_options(title_list)
+
+    def get_option_spec(self, name: str) -> OptionSpec:
+        for option_spec in self.option_specs:
+            if option_spec.name == name:
+                return option_spec
+        raise Exception(f"No option spec with name `{name}` found")
+
+    @property
+    def option_specs(self) -> typing.Iterable[OptionSpec]:
+        for card in self._cards:
+            if hasattr(card, "option_spec"):
+                option_spec = card.option_spec
+                yield option_spec
+            elif hasattr(card, "option_specs"):
+                for option_spec in card.option_specs:
+                    yield option_spec
+
+    # end options API interface implementation
 
     @property
     def _cards(self) -> typing.List[CardInterface]:
@@ -68,7 +113,8 @@ class Cards:
     def _get_active_options(self) -> typing.List[OptionCardSet]:
         """Return all active option card sets, sorted by card order."""
         option_cards = self._get_sorted_option_cards()
-        active_option_cards = [o for o in option_cards if self._kw.is_option_active(o.name)]
+
+        active_option_cards = [o for o in option_cards if self.options.api.is_option_active(o.name)]
         return active_option_cards
 
     def _flatten_2d_card_list(self, card_list: typing.List[typing.List[CardInterface]]) -> typing.List[CardInterface]:
@@ -126,17 +172,17 @@ class Cards:
         pos = buf.tell()
         any_options_read = False
         cards = self._get_post_options_with_no_title_order()
-        exit = False
+        exit_loop = False
         while True:
             if len(cards) == 0:
                 break
             linepos = buf.tell()
-            _, exit = read_line(buf)
-            if exit:
+            _, exit_loop = read_line(buf)
+            if exit_loop:
                 break
             buf.seek(linepos)
             card = cards.pop(0)
-            self._kw.activate_option(card.name)
+            self.options.api.activate_option(card.name)
             any_options_read = True
             card.read(buf)
         if not any_options_read:

@@ -27,7 +27,6 @@ import warnings
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.format_type import format_type
-from ansys.dyna.core.lib.option_card import OptionsAPI
 from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
@@ -43,9 +42,7 @@ class KeywordBase(Cards):
     def __init__(self, **kwargs):
         super().__init__(self)
         self.user_comment = kwargs.get("user_comment", "")
-        self._options_api: OptionsAPI = OptionsAPI(self)
         self._format_type: format_type = kwargs.get("format", format_type.default)
-        self._active_options: typing.Set[str] = set()
 
     @property
     def format(self) -> format_type:
@@ -70,7 +67,7 @@ class KeywordBase(Cards):
         base_title = self._get_base_title()
         titles = [base_title]
         if self.options != None:
-            options_specs = self.options.option_specs
+            options_specs = self.option_specs
             title_suffix_options = [o for o in options_specs if self.is_option_active(o.name) and o.title_order > 0]
             title_suffix_options.sort(key=lambda option: option.title_order)
             suffix_names = [op.name for op in title_suffix_options]
@@ -101,27 +98,6 @@ class KeywordBase(Cards):
 
     def _is_valid(self) -> typing.Tuple[bool, str]:
         return True, ""
-
-    def is_option_active(self, option: str) -> bool:
-        return option in self._active_options
-
-    def activate_option(self, option: str) -> None:
-        self._active_options.add(option)
-
-    def deactivate_option(self, option: str) -> None:
-        if option in self._active_options:
-            self._active_options.remove(option)
-
-    def _try_activate_options(self, names: typing.List[str]) -> None:
-        for option in self.options.option_specs:
-            if option.name in names:
-                self.activate_option(option.name)
-
-    def _activate_options(self, title: str) -> None:
-        if self.options is None:
-            return
-        title_list = title.split("_")
-        self._try_activate_options(title_list)
 
     def __repr__(self) -> str:
         """Returns a console-friendly representation of the keyword data as it would appear in the .k file"""

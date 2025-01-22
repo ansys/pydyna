@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from dataclasses import dataclass
+import abc
 import io
 import typing
 
@@ -31,11 +31,38 @@ from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.parameter_set import ParameterSet
 
 
-@dataclass
 class OptionSpec:
-    name: str
-    card_order: int
-    title_order: int
+    def __init__(self, name: str, card_order: int, title_order: int):
+        self._name = name
+        self._card_order = card_order
+        self._title_order = title_order
+
+    @property
+    def name(self) -> str:
+        return self._name
+
+    @name.setter
+    def name(self, value: str) -> None:
+        self._name = value
+
+    @property
+    def card_order(self) -> int:
+        return self._card_order
+
+    @card_order.setter
+    def card_order(self, value: int) -> None:
+        self._card_order = value
+
+    @property
+    def title_order(self) -> int:
+        return self._title_order
+
+    @title_order.setter
+    def title_order(self, value: int) -> None:
+        self._title_order = value
+
+    def __repr__(self) -> str:
+        return f"OptionSpec(name={self.name}, card_order={self.card_order}, title_order={self.title_order})"
 
 
 class OptionCardSet(CardInterface):
@@ -121,56 +148,84 @@ class OptionCardSet(CardInterface):
         return write_or_return(buf, _write)
 
 
+class OptionsInterface(metaclass=abc.ABCMeta):
+    """Abstract base class for option card api interface."""
+
+    @abc.abstractmethod
+    def get_option_spec(self, name: str) -> OptionSpec:
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def deactivate_option(self, name: str) -> None:
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def activate_option(self, name: str) -> None:
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def is_option_active(self, name: str) -> bool:
+        raise NotImplementedError
+
+    @property
+    @abc.abstractmethod
+    def option_specs(self) -> typing.Iterable[OptionSpec]:
+        """Get the card format type."""
+        raise NotImplementedError
+
+
 class OptionAPI:
     """API for an individual option associated with a keyword."""
 
-    def __init__(self, kw, name):
-        self._kw = kw
+    def __init__(self, options_api: OptionsInterface, name: str):
+        self._options_api = options_api
         self._name = name
 
     @property
     def active(self) -> bool:
-        return self._kw.is_option_active(self._name)
+        return self._options_api.is_option_active(self._name)
 
     @active.setter
     def active(self, value: bool) -> None:
+        option_spec: OptionSpec = self._options_api.get_option_spec(self._name)
         if value:
-            self._kw.activate_option(self._name)
+            self._options_api.activate_option(self._name)
+            # deactivate all other options with the same card order and title order
+            # since they will be mutually exclusive
+            for any_option_spec in self._options_api.option_specs:
+                if any_option_spec.name == self._name:
+                    continue
+                if (
+                    any_option_spec.title_order == option_spec.title_order
+                    and any_option_spec.card_order == option_spec.card_order
+                ):
+                    self._options_api.deactivate_option(any_option_spec.name)
         else:
-            self._kw.deactivate_option(self._name)
+            self._options_api.deactivate_option(self._name)
 
 
-class OptionsAPI:
-    """API for options associated with a keyword."""
+class Options:
+    """Option collection associated with an options API."""
 
-    def __init__(self, kw):
-        self._kw = kw
+    def __init__(self, api: OptionsInterface):
+        self._api = api
 
     def __getitem__(self, name: str) -> OptionAPI:
         """Gets the option with the given name."""
-        return OptionAPI(self._kw, name)
+        return OptionAPI(self._api, name)
 
     def __repr__(self) -> str:
-        option_card_specs = self.option_specs
-        if len(option_card_specs) == 0:
+        option_specs = self._api.option_specs
+        if len(option_specs) == 0:
             return ""
         sio = io.StringIO()
         sio.write("Options:")
-        for option in option_card_specs:
-            active = self._kw.is_option_active(option.name)
+        for option_spec in option_specs:
+            active = self._api.is_option_active(option_spec.name)
             active_string = "active" if active else "not active"
-            sio.write(f"\n    {option.name} option is {active_string}.")
+            sio.write(f"\n    {option_name} option is {active_string}.")
         return sio.getvalue()
 
-    def _get_option_specs(self, cards: typing.List[CardInterface]) -> typing.List[OptionSpec]:
-        option_specs: typing.List[OptionSpec] = []
-        for card in cards:
-            if hasattr(card, "option_spec"):
-                option_specs.append(card.option_spec)
-            elif hasattr(card, "option_specs"):
-                option_specs.extend(card.option_specs)
-        return option_specs
-
     @property
-    def option_specs(self) -> typing.List[OptionSpec]:
-        return self._get_option_specs(self._kw._cards)
+    def api(self) -> OptionsInterface:
+        return self._api

@@ -214,7 +214,16 @@ def test_boundary_prescribed_motion_set(ref_string):
 @pytest.mark.keywords
 def test_constrained_beam_in_solid(ref_string):
     b = kwd.ConstrainedBeamInSolid(ncoup=1)
-    assert(b.write() == ref_string.test_constrained_beam_in_solid)
+    b.coupid=12
+    assert b.write() == ref_string.test_constrained_beam_in_solid
+    b.options["ID"].active = True
+    assert b.options["ID"].active == True
+    assert b.options["TITLE"].active == False
+    assert b.write() == ref_string.test_constrained_beam_in_solid_id
+    b.options["TITLE"].active = True
+    assert b.options["TITLE"].active == True
+    assert b.options["ID"].active == False
+    assert b.write() == ref_string.test_constrained_beam_in_solid_title
 
 
 @pytest.mark.keywords
