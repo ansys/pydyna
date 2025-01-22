@@ -136,6 +136,16 @@
                     "option-name": "TITLE"
                 }
             ],
+            "shared-field": [
+                {
+                    "name": "COUPID",
+                    "cards": [-2, -3]
+                },
+                {
+                    "name": "TITLE",
+                    "cards": [-2, -3]
+                }
+            ],
             "skip-card": 0,
             "override-field": [
                 {
@@ -144,8 +154,7 @@
                     "new-name": "ncoup"
                 }
             ]
-        },
-        "comment": "TODO - the option name is either ID or TITLE, but there is no way in pydyna to have a union option"
+        }
     },
     "DEFINE_TRANSFORMATION": {
         "generation-options": {

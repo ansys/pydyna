@@ -350,6 +350,7 @@ class ConstrainedBeamInSolid(KeywordBase):
     @coupid.setter
     def coupid(self, value: int) -> None:
         self._cards[2].cards[0].set_value("coupid", value)
+        self._cards[3].cards[0].set_value("coupid", value)
 
     @property
     def title(self) -> typing.Optional[str]:
@@ -360,24 +361,5 @@ class ConstrainedBeamInSolid(KeywordBase):
     @title.setter
     def title(self, value: str) -> None:
         self._cards[2].cards[0].set_value("title", value)
-
-    @property
-    def coupid(self) -> typing.Optional[int]:
-        """Get or set the Coupling card ID number
-        """ # nopep8
-        return self._cards[3].cards[0].get_value("coupid")
-
-    @coupid.setter
-    def coupid(self, value: int) -> None:
-        self._cards[3].cards[0].set_value("coupid", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the A description of this coupling definition
-        """ # nopep8
-        return self._cards[3].cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
         self._cards[3].cards[0].set_value("title", value)
 
