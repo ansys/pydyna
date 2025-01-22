@@ -65,7 +65,6 @@ class OptionSpec:
         return f"OptionSpec(name={self.name}, card_order={self.card_order}, title_order={self.title_order})"
 
 
-
 class OptionCardSet(CardInterface):
     def __init__(
         self,
