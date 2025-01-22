@@ -69,7 +69,7 @@ doc = [
     "sphinx-autodoc-typehints==2.5.0",
     "ansys-sphinx-theme==1.2.6",
     "pypandoc==1.14",
-    "nbsphinx==0.9.5",
+    "nbsphinx==0.9.6",
     "ipywidgets==8.1.5",
     "joblib==1.4.2",
     "scikit-learn==1.6.0",
