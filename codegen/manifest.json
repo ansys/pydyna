@@ -112,8 +112,8 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": 1,
-                    "title-order": 0,
+                    "card-order": -1,
+                    "title-order": 1,
                     "cards": [
                         {
                             "source": "kwd-data",
@@ -122,6 +122,28 @@
                         }
                     ],
                     "option-name": "ID"
+                },
+                {
+                    "card-order": -1,
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "kwd-data",
+                            "keyword-name": "CONSTRAINED_BEAM_IN_SOLID",
+                            "card-index": 0
+                        }
+                    ],
+                    "option-name": "TITLE"
+                }
+            ],
+            "shared-field": [
+                {
+                    "name": "COUPID",
+                    "cards": [-2, -3]
+                },
+                {
+                    "name": "TITLE",
+                    "cards": [-2, -3]
                 }
             ],
             "skip-card": 0,
@@ -132,8 +154,7 @@
                     "new-name": "ncoup"
                 }
             ]
-        },
-        "comment": "TODO - the option name is either ID or TITLE, but there is no way in pydyna to have a union option"
+        }
     },
     "DEFINE_TRANSFORMATION": {
         "generation-options": {

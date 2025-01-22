@@ -34,6 +34,10 @@ import typing
 
 from jinja2 import Environment, FileSystemLoader
 
+from keyword_generation.handlers.shared_field import SharedFieldHandler
+from keyword_generation.handlers.handler_base import KeywordHandler
+
+
 SKIPPED_KEYWORDS = set(
     [
         # defined manually because of the variable length text card
@@ -288,6 +292,7 @@ def handle_override_field(kwd_data, settings):
                 if "new-name" in setting:
                     field["name"] = setting["new-name"]
 
+
 def handle_rename_property(kwd_data, settings):
     for setting in settings:
         index = setting["index"]
@@ -297,19 +302,6 @@ def handle_rename_property(kwd_data, settings):
         for field in card["fields"]:
             if field["name"].lower() == name:
                 field["property_name"] = property_name
-
-
-def handle_shared_field(kwd_data, settings):
-    for setting in settings:
-        fields = []
-        for card in kwd_data["cards"]:
-            for field in card["fields"]:
-                if field["name"] == setting["name"]:
-                    fields.append(field)
-        assert len(fields) > 1
-        fields[0]["card_indices"] = setting["cards"]
-        for field in fields[1:]:
-            field["redundant"] = True
 
 
 def handle_override_subkeyword(kwd_data, settings) -> None:
@@ -351,7 +343,7 @@ HANDLERS = collections.OrderedDict(
         "rename-property": handle_rename_property,
         "skip-card": handle_skipped_cards,
         "duplicate-card-group": handle_duplicate_card_group,
-        "shared-field": handle_shared_field,
+        "shared-field": SharedFieldHandler(),
         "override-subkeyword": handle_override_subkeyword,
     }
 )
@@ -386,7 +378,6 @@ def add_option_indices(kwd_data):
         for card in options["cards"]:
             card["index"] = index
         index += 1
-
 
 def add_indices(kwd_data):
     # handlers might point to cards by a specific index.
@@ -435,6 +426,9 @@ def after_handle(kwd_data):
     do_insertions(kwd_data)
     delete_marked_indices(kwd_data)
     add_option_indices(kwd_data)
+    for handler_name, handler in HANDLERS.items():
+        if isinstance(handler, KeywordHandler):
+            handler.post_process(kwd_data)
 
 
 def before_handle(kwd_data):
@@ -446,11 +440,16 @@ def handle_keyword_data(kwd_data, settings):
     before_handle(kwd_data)
     # we have to iterate in the order of the handlers because right now the order still matters
     # right now this is only true for reorder_card
-    for handler_name, handler_func in HANDLERS.items():
+    for handler_name, handler in HANDLERS.items():
         handler_settings = settings.get(handler_name)
         if handler_settings == None:
             continue
-        handler_func(kwd_data, handler_settings)
+        # handler can be a KeywordHandler object or a function pointer
+        # TODO - change all handlers to objects
+        if isinstance(handler, KeywordHandler):
+            handler.handle(kwd_data, handler_settings)
+        else:
+            handler(kwd_data, handler_settings)
     after_handle(kwd_data)
 
 

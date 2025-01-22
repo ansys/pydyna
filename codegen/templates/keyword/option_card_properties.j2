@@ -2,6 +2,7 @@
 {% set card_loop = loop %}
 {% for field in card.fields %}
 {% if field.used %}
+{% if not field.redundant %}
     @property
     def {{field.property_name}}(self) -> {%- if field.default is none %} typing.Optional[
                 {%- else %} {% endif %}{{field.property_type}}{%- if field.default is none %}]{%- endif %}:
@@ -17,9 +18,17 @@
         if value not in [{{ field.options|join(', ')}}]:
             raise Exception("""{{field.property_name}} must be one of {{openbrace}}{{ field.options|join(',')}}{{closebrace}}""")
         {% endif %}
+{% if field.card_indices %}
+{# This is COMPLETELY wrong but it works for CONSTRAINED_BEAM_IN_SOLID. REVISIT! #}
+{% for card_index in field.card_indices %}
+        self._cards[{{card_index}}].cards[{{card_loop.index-1}}].set_value("{{field.name}}", value)
+{% endfor %}{# card_index in field.card_indices #}
+{% else %}
         self._cards[{{card.index}}].cards[{{card_loop.index-1}}].set_value("{{field.name}}", value)
+{% endif %}{# card.indices #}
 
 {% endif %}{# not field.readonly #}
+{% endif %}{# not field.redundant #}
 {% endif %}{# field.used #}
 {% endfor %}{# field in card.fields #}
 {% endfor %}{# card in option.cards #}

@@ -32,7 +32,8 @@ class ConstrainedBeamInSolid(KeywordBase):
     keyword = "CONSTRAINED"
     subkeyword = "BEAM_IN_SOLID"
     option_specs = [
-        OptionSpec("ID", 1, 0),
+        OptionSpec("ID", -1, 1),
+        OptionSpec("TITLE", -1, 1),
     ]
 
     def __init__(self, **kwargs):
@@ -161,6 +162,30 @@ class ConstrainedBeamInSolid(KeywordBase):
             ),
             OptionCardSet(
                 option_spec = ConstrainedBeamInSolid.option_specs[0],
+                cards = [
+                    Card(
+                        [
+                            Field(
+                                "coupid",
+                                int,
+                                0,
+                                10,
+                                kwargs.get("coupid")
+                            ),
+                            Field(
+                                "title",
+                                str,
+                                10,
+                                70,
+                                kwargs.get("title")
+                            ),
+                        ],
+                    ),
+                ],
+                **kwargs
+            ),
+            OptionCardSet(
+                option_spec = ConstrainedBeamInSolid.option_specs[1],
                 cards = [
                     Card(
                         [
@@ -325,6 +350,7 @@ class ConstrainedBeamInSolid(KeywordBase):
     @coupid.setter
     def coupid(self, value: int) -> None:
         self._cards[2].cards[0].set_value("coupid", value)
+        self._cards[3].cards[0].set_value("coupid", value)
 
     @property
     def title(self) -> typing.Optional[str]:
@@ -335,4 +361,5 @@ class ConstrainedBeamInSolid(KeywordBase):
     @title.setter
     def title(self, value: str) -> None:
         self._cards[2].cards[0].set_value("title", value)
+        self._cards[3].cards[0].set_value("title", value)
 
