@@ -47,7 +47,7 @@ tests = [
     "openpyxl==3.1.5",
     "scikit-learn==1.6.0",
     "pytest-xdist==3.6.1",
-    "ipython==8.29.0",
+    "ipython==8.31.0",
     "pyvista==0.44.2",
 ]
 codegen = [
@@ -73,7 +73,7 @@ doc = [
     "ipywidgets==8.1.5",
     "joblib==1.4.2",
     "scikit-learn==1.6.0",
-    "ipython==8.29.0",
+    "ipython==8.31.0",
     "jupyterlab==4.3.4",
     "sphinx-jinja==2.0.2",
     "sphinx-autoapi==3.4.0",
