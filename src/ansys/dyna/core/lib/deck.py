@@ -91,6 +91,17 @@ class Deck:
         else:
             self._keywords.append(keyword)
 
+    def remove(self, index: int) -> None:
+        """Remove a keyword from the collection by index.
+        Parameters
+        ----------
+        index : int, mandatory
+        """
+        try:
+            del self._keywords[index]
+        except IndexError:
+            raise IndexError(f"Index {index} is out of range for the keywords list.")
+
     def _formatstring(self, string, check=False):
         """Format a string to be appended to the deck."""
         linelist = string.split("\n")
