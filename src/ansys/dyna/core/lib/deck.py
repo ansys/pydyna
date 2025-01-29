@@ -91,16 +91,23 @@ class Deck:
         else:
             self._keywords.append(keyword)
 
-    def remove(self, index: int) -> None:
+    def remove(self, index: int | list[int]) -> None:
         """Remove a keyword from the collection by index.
+
         Parameters
         ----------
-        index : int, mandatory
+        index : int or list of int, mandatory
         """
         try:
-            del self._keywords[index]
+            if isinstance(index, int):
+                del self._keywords[index]
+            elif isinstance(index, list):
+                for i in sorted(index, reverse=True):
+                    del self._keywords[i]
+            else:
+                raise TypeError("Input must be an integer or a list of integers.")
         except IndexError:
-            raise IndexError(f"Index {index} is out of range for the keywords list.")
+            raise IndexError(f"One or more indices {index} are out of range for the keywords list.")
 
     def _formatstring(self, string, check=False):
         """Format a string to be appended to the deck."""
