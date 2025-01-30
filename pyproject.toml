@@ -68,7 +68,7 @@ doc = [
     "sphinx-gallery==0.18.0",
     "sphinx-autodoc-typehints==3.0.1",
     "ansys-sphinx-theme==1.2.6",
-    "pypandoc==1.14",
+    "pypandoc==1.15",
     "nbsphinx==0.9.6",
     "ipywidgets==8.1.5",
     "joblib==1.4.2",
