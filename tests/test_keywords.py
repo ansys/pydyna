@@ -721,6 +721,13 @@ def test_mat295_read(ref_string):
 
 
 @pytest.mark.keywords
+def test_constrained_adaptivity(ref_string):
+    ca = kwd.ConstrainedAdaptivity()
+    ca.loads(ref_string.test_constrained_adaptivity)
+    assert ca.constrains.shape == (5, 3)
+
+
+@pytest.mark.keywords
 def test_constrained_nodal_rigid_body_inertia_title(ref_string):
     c = kwd.ConstrainedNodalRigidBodyInertia()
     c.loads(ref_string.test_constrained_nodal_rigid_body_inertia_title)
