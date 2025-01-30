@@ -23,6 +23,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
+from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedAdaptivity(KeywordBase):
@@ -34,60 +35,23 @@ class ConstrainedAdaptivity(KeywordBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._cards = [
-            Card(
+            DuplicateCard(
                 [
-                    Field(
-                        "dnid",
-                        int,
-                        0,
-                        10,
-                        kwargs.get("dnid")
-                    ),
-                    Field(
-                        "nid1",
-                        int,
-                        10,
-                        10,
-                        kwargs.get("nid1")
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        20,
-                        10,
-                        kwargs.get("nid2")
-                    ),
+                    Field("dnid", int, 0, 10),
+                    Field("nid1", int, 10, 10),
+                    Field("nid2", int, 20, 10),
                 ],
-            ),
+                None,
+                data = kwargs.get("constrains")),
         ]
 
     @property
-    def dnid(self) -> typing.Optional[int]:
-        """Get or set the Dependent node. This is the node constrained at the midpoint of an edge of an element.
-        """ # nopep8
-        return self._cards[0].get_value("dnid")
+    def constrains(self):
+        '''Gets the table of constrains'''
+        return self._cards[0].table
 
-    @dnid.setter
-    def dnid(self, value: int) -> None:
-        self._cards[0].set_value("dnid", value)
-
-    @property
-    def nid1(self) -> typing.Optional[int]:
-        """Get or set the Node at one end of an element edge
-        """ # nopep8
-        return self._cards[0].get_value("nid1")
-
-    @nid1.setter
-    def nid1(self, value: int) -> None:
-        self._cards[0].set_value("nid1", value)
-
-    @property
-    def nid2(self) -> typing.Optional[int]:
-        """Get or set the Node at the other end of that same element edge.
-        """ # nopep8
-        return self._cards[0].get_value("nid2")
-
-    @nid2.setter
-    def nid2(self, value: int) -> None:
-        self._cards[0].set_value("nid2", value)
+    @constrains.setter
+    def constrains(self, df):
+        '''sets constrains from the dataframe df'''
+        self._cards[0].table = df
 

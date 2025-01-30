@@ -128,6 +128,15 @@ mat24
         0.        0.        0.        0.        0.        0.        0.        0.
         0.        0.        0.        0.        0.        0.        0.        0."""
 
+test_constrained_adaptivity = """*CONSTRAINED_ADAPTIVITY
+$#    dnid      nid1      nid2
+   4002345       400       381
+   4002378       419       400
+   4007434   4002346       401
+   4007433   4002377   4002346
+   4007430   4002379   4002377"""
+
+
 test_constrained_nodal_rigid_body_inertia_title = """*CONSTRAINED_NODAL_RIGID_BODY_INERTIA_TITLE
 Rigid Body Connection Element
   69002781            69000269                   0         0         0
