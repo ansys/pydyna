@@ -397,14 +397,17 @@ def test_deck_remove():
     for i in range(0, 5):
         deck.append(kwd.SectionSolid(secid=i))
         deck.loads(f"*NOT_A_KEYWORD_{i}")
+    assert len(deck.all_keywords) == 10
 
     """remove keyword in the middle of the deck"""
     rm_individual = int(len(deck.all_keywords)/2)
     deck.remove(rm_individual)
+    assert len(deck.all_keywords) == 9
 
     """beginning/remove keyword at end of the deck"""
     deck.remove(0)
     deck.remove(-1)
+    assert len(deck.all_keywords) == 7
 
     """remove rest of keywords and string_keywords"""
     rm_list = list(range(len(deck.all_keywords)))
