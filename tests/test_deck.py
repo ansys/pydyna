@@ -387,3 +387,31 @@ def test_deck_with_contacts_and_ids(ref_string):
     deck.loads(ref_string.test_deck_contact_tied_shell_edge_to_surface_id3)
     assert len(deck.keywords) == 1
     assert deck.write() == ref_string.test_deck_contact_tied_shell_edge_to_surface_id3
+
+
+@pytest.mark.keywords
+def test_deck_remove():
+    """a deck is created afterward individual und multiple string_keywords/keywords are removed
+    the deck should be empty again in the end"""
+    deck = Deck()
+    for i in range(0, 5):
+        deck.append(kwd.SectionSolid(secid=i))
+        deck.loads(f"*NOT_A_KEYWORD_{i}")
+    assert len(deck.all_keywords) == 10
+
+    """remove keyword in the middle of the deck"""
+    rm_individual = int(len(deck.all_keywords)/2)
+    deck.remove(rm_individual)
+    assert len(deck.all_keywords) == 9
+
+    """beginning/remove keyword at end of the deck"""
+    deck.remove(0)
+    deck.remove(-1)
+    assert len(deck.all_keywords) == 7
+
+    """remove rest of keywords and string_keywords"""
+    rm_list = list(range(len(deck.all_keywords)))
+    deck.remove(rm_list)
+
+    """deck should be empty"""
+    assert len(deck.all_keywords) == 0
