@@ -21,9 +21,9 @@
 # SOFTWARE.
 
 import typing
-from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
+from ansys.dyna.core.lib.cards_.special.include_card import IncludeCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
 
 class Include(KeywordBase):
     """DYNA INCLUDE keyword"""
@@ -33,19 +33,7 @@ class Include(KeywordBase):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        kwargs.get("filename")
-                    ),
-                ],
-            ),
-        ]
+        self._cards = [IncludeCard(kwargs.get("filename"))]
 
     @property
     def filename(self) -> typing.Optional[str]:

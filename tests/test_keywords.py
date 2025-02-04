@@ -902,6 +902,40 @@ def test_em_randles_batmac_rdltype(ref_string):
 
 
 @pytest.mark.keywords
+def test_multiline_include_keyword(ref_string):
+    i = kwd.Include()
+    filename = "a"*60 + ".k"
+    i.filename = filename
+    assert i.write() == ref_string.test_one_line_include1
+    assert kwd.Include().loads(ref_string.test_one_line_include1).filename == filename
+    filename = "a"*78 + ".k"
+    i.filename = filename
+    assert i.write() == ref_string.test_one_line_include2
+    assert kwd.Include().loads(ref_string.test_one_line_include2).filename == filename
+    filename = "a"*80 + ".k"
+    i.filename = filename
+    assert i.write() == ref_string.test_two_line_include1
+    assert kwd.Include().loads(ref_string.test_two_line_include1).filename == filename
+    filename = "a"*156 + ".k"
+    i.filename = filename
+    assert i.write() == ref_string.test_two_line_include2
+    assert kwd.Include().loads(ref_string.test_two_line_include2).filename == filename
+    filename = "a"*160 + ".k"
+    i.filename = filename
+    assert i.write() == ref_string.test_three_line_include1
+    assert kwd.Include().loads(ref_string.test_three_line_include1).filename == filename
+    filename = "a"*234 + ".k"
+    i.filename = filename
+    assert i.write() == ref_string.test_three_line_include2
+    assert kwd.Include().loads(ref_string.test_three_line_include2).filename == filename
+    with pytest.raises(Exception):
+        i.filename = "a"*300 + ".k"
+        i.write()
+
+
+
+
+@pytest.mark.keywords
 def test_em_randles_solid_rdltype(ref_string):
     s = kwd.EmRandlesSolid(rdltype=1)
     assert s.write() == ref_string.test_em_randles_solid_rdltype_0_1
