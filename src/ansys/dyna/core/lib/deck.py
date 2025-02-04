@@ -156,29 +156,54 @@ class Deck:
         for kw in kwlist:
             self.append(kw)
 
-    def _expand_helper(self, kwd_list, cwd) -> typing.List[KeywordBase]:
+    def _expand_helper(self, search_paths: typing.List[str], recurse: bool) -> typing.List[KeywordBase]:
         """Recursively outputs a list of keywords within Includes."""
-        if len(list(self.get_kwds_by_type("INCLUDE"))) == 0:
-            return kwd_list
-        for kwd in self.get_kwds_by_type("INCLUDE"):
-            try:
-                temp_deck = Deck(format=kwd.format)
-                temp_deck.import_file(os.path.join(cwd, kwd.filename))
-                self._keywords.remove(kwd)
-            except FileNotFoundError:
-                temp_deck = Deck()
-            temp_list = temp_deck.all_keywords
-            return kwd_list + temp_deck._expand_helper(temp_list, cwd)
+        keywords = []
+        for keyword in self.all_keywords:
+            if isinstance(keyword, str):
+                keywords.append(keyword)
+                continue
+            if keyword.keyword != "INCLUDE":
+                keywords.append(keyword)
+                continue
+            if keyword.subkeyword == "PATH":
+                search_paths.append(keyword.path)
+                keywords.append(keyword)
+                continue
+            success = False
+            for search_path in search_paths:
+                include_file = os.path.join(search_path, keyword.filename)
+                include_deck = Deck(format=keyword.format)
+                try:
+                    include_deck.import_file(include_file)
+                    success = True
+                    break
+                except FileNotFoundError:
+                    pass
+            if success:
+                if recurse:
+                    expanded = include_deck._expand_helper(search_paths, True)
+                    keywords.extend(expanded)
+                else:
+                    keywords.extend(include_deck.all_keywords)
+            else:
+                keywords.append(keyword)
+        return keywords
 
-    def expand(self, cwd=None):
-        """Get a new deck that is flat.
+    def expand(self, cwd=None, recurse=True):
+        """Get a new deck that is flattened copy of `self`.
 
-        This method makes the ``include`` method obsolete.
+        A flattened deck is one where the *INCLUDE keywords are replaced
+        by the contents of the file that is included.
+        `cwd` is a working directory used to resolve the filename
+        If `recurse` is true, *INCLUDE keywords within included decks
+        are expanded, recursively.
         """
         cwd = cwd or os.getcwd()
         new_deck = Deck(title=self.title)
         new_deck.comment_header = self.comment_header
-        new_deck.extend(self._expand_helper(self.all_keywords, cwd))
+        search_paths = [cwd]
+        new_deck.extend(self._expand_helper(search_paths, recurse))
         return new_deck
 
     def _get_title_lines(self) -> typing.List[str]:
