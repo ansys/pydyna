@@ -3,12 +3,13 @@ import typing
 import keyword_generation.handlers.handler_base
 
 """
-                    "index": 0,
-                    "card": {
-                        "source": "include_card",
-                        "card-name": "IncludeCard"
-                    },
-                    "mixin": "IncludeCardMixin"
+SCHEMA example:
+"index": 0,
+"card": {
+    "source": "include_card",
+    "card-name": "IncludeCard"
+},
+"mixin": "IncludeCardMixin"
 """
 class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
 
