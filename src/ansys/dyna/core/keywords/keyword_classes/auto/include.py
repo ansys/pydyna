@@ -20,11 +20,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import typing
 from ansys.dyna.core.lib.cards_.special.include_card import IncludeCard, IncludeCardMixin
+from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
-
-class Include(KeywordBase, IncludeCardMixin):
+class Include(
+    KeywordBase
+    , IncludeCardMixin
+    ):
     """DYNA INCLUDE keyword"""
 
     keyword = "INCLUDE"
@@ -32,4 +37,7 @@ class Include(KeywordBase, IncludeCardMixin):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._cards = [IncludeCard(**kwargs)]
+        self._cards = [
+            IncludeCard(**kwargs)
+        ]
+

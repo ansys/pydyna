@@ -102,7 +102,7 @@ $#       x         y         z
 
 test_one_line_include1 = """*INCLUDE
 $#                                                                      filename
-                  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.k"""
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.k                  """
 
 test_one_line_include2 = """*INCLUDE
 $#                                                                      filename
