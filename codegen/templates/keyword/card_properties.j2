@@ -34,6 +34,7 @@
         '''sets {{card.overall_name}} from the dataframe df'''
         self._cards[{{card.index}}].table = df
 
+{% elif card.external %}
 {% else %}
 {% for field in card.fields %}
 {% if field.used %}
