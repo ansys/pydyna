@@ -21,27 +21,24 @@
 # SOFTWARE.
 
 import typing
+
 from ansys.dyna.core.lib.card import Card, Field
-from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.field_writer import write_comment_line
 from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
-
 
 ## TODO codegen - add a codegen option to use a custom card
 #                 provide the class name, filename and mixin name
 
+
 class IncludeCard(Card):
     def __init__(self, **kwargs):
-        super().__init__([
-            Field(
-                "filename",
-                str,
-                0,
-                80,
-                kwargs.get("filename")
-            ),
-        ],)
+        super().__init__(
+            [
+                Field("filename", str, 0, 80, kwargs.get("filename")),
+            ],
+        )
 
     def _read_line(self, buf: typing.TextIO) -> str:
         line, to_exit = read_line(buf)
@@ -67,7 +64,10 @@ class IncludeCard(Card):
         return False
 
     def write(
-        self, format: typing.Optional[format_type], buf: typing.Optional[typing.TextIO], comment: typing.Optional[bool]
+        self,
+        format: typing.Optional[format_type] = None,
+        buf: typing.Optional[typing.TextIO] = None,
+        comment: typing.Optional[bool] = True,
     ) -> typing.Union[str, None]:
         if format == None:
             format = self._format_type
@@ -81,7 +81,7 @@ class IncludeCard(Card):
                 if len(filename) > 236:
                     raise Exception("Maximum filename length is 236 characters")
                 if len(filename) <= 80:
-                    right_justified_filename= f"{{0:<80}}".format(filename)
+                    right_justified_filename = f"{{0:<80}}".format(filename)
                     buf.write(right_justified_filename)
                 else:
                     buf.write(filename[0:78])
@@ -95,12 +95,14 @@ class IncludeCard(Card):
 
         return write_or_return(buf, _write)
 
-class IncludeCardMixin():
+
+class IncludeCardMixin:
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of file to be included in this keyword file.
-        Maximum 80 charcters. If the STAMPED_PART option is active, this is the DYNAIN file containing the results from metal stamping.
-        """ # nopep8
+        Maximum 80 characters. If the STAMPED_PART option is active, this is the
+        DYNAIN file containing the results from metal stamping.
+        """  # nopep8
         return self._cards[0].get_value("filename")
 
     @filename.setter
