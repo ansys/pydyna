@@ -27,15 +27,19 @@ from ansys.dyna.core.lib.field_writer import write_comment_line
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
 
+
+## TODO codegen - add a codegen option to use a custom card
+#                 provide the class name, filename and mixin name
+
 class IncludeCard(Card):
-    def __init__(self, filename: typing.Optional[str]):
+    def __init__(self, **kwargs):
         super().__init__([
             Field(
                 "filename",
                 str,
                 0,
                 80,
-                filename
+                kwargs.get("filename")
             ),
         ],)
 
@@ -90,3 +94,15 @@ class IncludeCard(Card):
                         buf.write(filename[156:])
 
         return write_or_return(buf, _write)
+
+class IncludeCardMixin():
+    @property
+    def filename(self) -> typing.Optional[str]:
+        """Get or set the File name of file to be included in this keyword file.
+        Maximum 80 charcters. If the STAMPED_PART option is active, this is the DYNAIN file containing the results from metal stamping.
+        """ # nopep8
+        return self._cards[0].get_value("filename")
+
+    @filename.setter
+    def filename(self, value: str) -> None:
+        self._cards[0].set_value("filename", value)

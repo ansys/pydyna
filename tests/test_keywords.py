@@ -903,9 +903,8 @@ def test_em_randles_batmac_rdltype(ref_string):
 
 @pytest.mark.keywords
 def test_multiline_include_keyword(ref_string):
-    i = kwd.Include()
     filename = "a"*60 + ".k"
-    i.filename = filename
+    i = kwd.Include(filename=filename)
     assert i.write() == ref_string.test_one_line_include1
     assert kwd.Include().loads(ref_string.test_one_line_include1).filename == filename
     filename = "a"*78 + ".k"
