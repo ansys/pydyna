@@ -21,11 +21,15 @@
 # SOFTWARE.
 
 import typing
+from ansys.dyna.core.lib.cards_.special.include_card import IncludeCard, IncludeCardMixin
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
-class Include(KeywordBase):
+class Include(
+    KeywordBase
+    , IncludeCardMixin
+    ):
     """DYNA INCLUDE keyword"""
 
     keyword = "INCLUDE"
@@ -34,27 +38,6 @@ class Include(KeywordBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        kwargs.get("filename")
-                    ),
-                ],
-            ),
+            IncludeCard(**kwargs)
         ]
-
-    @property
-    def filename(self) -> typing.Optional[str]:
-        """Get or set the File name of file to be included in this keyword file.
-        Maximum 80 charcters. If the STAMPED_PART option is active, this is the DYNAIN file containing the results from metal stamping.
-        """ # nopep8
-        return self._cards[0].get_value("filename")
-
-    @filename.setter
-    def filename(self, value: str) -> None:
-        self._cards[0].set_value("filename", value)
 

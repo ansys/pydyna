@@ -35,6 +35,7 @@ import typing
 from jinja2 import Environment, FileSystemLoader
 
 from keyword_generation.handlers.shared_field import SharedFieldHandler
+from keyword_generation.handlers.external_card import ExternalCardHandler
 from keyword_generation.handlers.handler_base import KeywordHandler
 
 
@@ -343,6 +344,7 @@ HANDLERS = collections.OrderedDict(
         "rename-property": handle_rename_property,
         "skip-card": handle_skipped_cards,
         "duplicate-card-group": handle_duplicate_card_group,
+        "external-card-implementation": ExternalCardHandler(),
         "shared-field": SharedFieldHandler(),
         "override-subkeyword": handle_override_subkeyword,
     }
