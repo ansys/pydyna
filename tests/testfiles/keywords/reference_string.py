@@ -1098,9 +1098,20 @@ $#             secid                area               thick
                                                             
 *END"""
 
-test_variable_card_string = """$#                bi                  bi                  bi                  bi                  bi                  bi                  bi                  bi
+test_variable_card_string = """
+$#                bi                  bi                  bi                  bi                  bi                  bi                  bi                  bi
                  0.0                 1.0                 2.0                 3.0                 4.0                 5.0                 6.0                 7.0
                  8.0                 9.0"""
+
+test_variable_card_struct_string = """$#     foo       bar       foo       bar       foo       bar       foo       bar
+       1.0       0.5       2.0       1.0       3.0       1.5       4.0       2.0
+       5.0       2.5       6.0       3.0       7.0       3.5       8.0       4.0
+       9.0       4.5"""
+
+test_variable_card_struct_string_long = """$#               foo                 bar                 foo                 bar                 foo                 bar                 foo                 bar
+                 1.0                 0.5                 2.0                 1.0                 3.0                 1.5                 4.0                 2.0
+                 5.0                 2.5                 6.0                 3.0                 7.0                 3.5                 8.0                 4.0
+                 9.0                 4.5"""
 
 test_deck_with_unknown_keywords = """*KEYWORD
 *NOT_REAL_KEYWORD

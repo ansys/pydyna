@@ -122,7 +122,6 @@ class VariableCard(CardInterface):
         return start_index, end_index
 
     def _get_comment_struct(self, count: int, format: format_type) -> str:
-        num_fields_per_value = self._num_fields()
         s = io.StringIO()
         comment_fields = []
         width = self._get_width(format)
@@ -144,11 +143,12 @@ class VariableCard(CardInterface):
         return "$#" + array[2:]
 
     def _get_comment(self, format: format_type) -> str:
+        fields_per_card = self._get_fields_per_card()
         if not self._is_last_card(0):
-            count = self._fields_per_card
+            count = fields_per_card
         else:
             # TODO test case when amount == card_size
-            count = self._length_func() % self._fields_per_card or self._fields_per_card
+            count = self._length_func() % fields_per_card or fields_per_card
 
         if dataclasses.is_dataclass(self._type):
             return self._get_comment_struct(count, format)
@@ -188,18 +188,29 @@ class VariableCard(CardInterface):
         assert end > start, err_string
         return [self.__get_value(i) for i in range(start, end)]
 
+    def _wrap_value(self, value):
+        if (isinstance(value, self._type)):
+            return value
+        else:
+            if self._uses_structure():
+                # allow setting struct with tuple or list
+                return self._type(*value)
+            else:
+                return self._type(value)
+
     def __setitem__(self, index: int, value):
         # first resize up to index.  TODO this should be on an Array class
         while len(self._data) <= index:
             self._data.append(self.__get_null_value())
         # then set value at the specified index
-        self._data[index] = value
+        self._data[index] = self._wrap_value(value)
 
     def append(self, value) -> None:
-        self._data.append(value)
+        self._data.append(self._wrap_value(value))
 
-    def extend(self, valuelist) -> None:
-        self._data.extend(valuelist)
+    def extend(self, valuelist: typing.Iterable) -> None:
+        values = [self._wrap_value(value) for value in valuelist]
+        self._data.extend(values)
 
     def _num_fields(self):
         if dataclasses.is_dataclass(self._type):
@@ -333,6 +344,3 @@ class VariableCard(CardInterface):
     def data(self, vallist: typing.List) -> None:
         self._initialize_data(0)
         self._data.extend(vallist)
-
-    def extend(self, values: typing.List) -> None:
-        self._data.extend(values)
