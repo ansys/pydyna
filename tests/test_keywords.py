@@ -754,6 +754,14 @@ def test_set_node_title(ref_string):
 
 
 @pytest.mark.keywords
+def test_set_node_list(ref_string):
+    s = kwd.SetNodeList()
+    with pytest.warns(UserWarning, match="Detected out of bound card characters"):
+        s.loads(ref_string.test_set_node_list)
+    assert len(s.nodes) == 8
+
+
+@pytest.mark.keywords
 def test_contact_1d(ref_string):
     c = kwd.Contact1D()
     c.options["ID"].active = True

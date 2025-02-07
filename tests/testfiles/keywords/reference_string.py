@@ -150,6 +150,12 @@ nodeset
   70540871  70540875  70540887  70540888  70540890  70563790  70563792  70563794
   70573162"""
 
+test_set_node_list = """*SET_NODE_LIST
+$#     sid       da1       da2       da3       da4    solver       its         -
+        96                                        MECH      1                   
+$#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
+      3224      3225      3226      3324      3325      3326      3327      3227		"""
+
 test_mat_piecewise_linear_plasticity_title = """*MAT_PIECEWISE_LINEAR_PLASTICITY_TITLE
 mat24
   690000022.24507E-6        1.       0.3       0.1        0.     1.E30          

@@ -187,7 +187,8 @@ class VariableCard(CardInterface):
             if trailing_spaces > 0:
                 print("Trailing spaces, TODO - write a test!")
                 line = line + " " * trailing_spaces
-            read_format = [(i * width, width, self._type) for i in range(size)]
+            max_amount = min(size, self._card_size)
+            read_format = [(i * width, width, self._type) for i in range(max_amount)]
             values = load_dataline(read_format, line)
             self.extend(values)
 
