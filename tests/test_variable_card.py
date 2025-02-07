@@ -20,9 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import dataclasses
 import math
 
-from ansys.dyna.core import Deck
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.variable_card import VariableCard
 
@@ -118,3 +118,35 @@ def test_variable_card_read_long(string_utils):
     assert v[0] == 1.0
     assert v[1] == 2.0
     assert math.isnan(v[2])
+
+@pytest.mark.keywords
+def test_variable_card_struct(string_utils):
+    """Test a variable card using the struct type definition."""
+    @dataclasses.dataclass
+    class bi:
+        foo: float = None
+        bar: float = None
+    v = VariableCard("bi", 8, 10, bi)
+    string = "     113.2    -50.01"
+    # TODO - read multiple lines, unbounded and bounded, corner cases
+    if False:
+        v.read(string_utils.as_buffer(string))
+        assert len(v) == 1
+        assert v[0].foo == 113.2
+        assert v[0].bar == -50.01
+
+    string = "       1.0       2.0       3.0"
+    v = VariableCard("bi", 8, 10, bi, lambda: 2)
+    v.read(string_utils.as_buffer(string))
+    assert len(v) == 2
+    assert v[0].foo == 1.0
+    assert v[0].bar == 2.0
+    assert v[1].foo == 3.0
+    assert math.isnan(v[1].bar)
+    assert v._num_rows() == 1
+    result = v.write(comment=False)
+    string = "       1.0       2.0       3.0          "
+    assert result == string
+    result = v.write(comment=True)
+    string = "$#     foo       bar       foo       bar\n       1.0       2.0       3.0          "
+    assert result == string

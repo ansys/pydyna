@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import dataclasses
 import io
 import math
 import typing
@@ -27,7 +28,7 @@ import typing
 import ansys.dyna.core.lib.array as arr
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.field import Field
-from ansys.dyna.core.lib.field_writer import write_fields
+from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline, read_line
 from ansys.dyna.core.lib.parameter_set import ParameterSet
@@ -39,19 +40,23 @@ class VariableCard(CardInterface):
     def __init__(
         self,
         name: str,
-        card_size: int,
+        fields_per_card: int,
         element_width: int,
-        type: type,
+        input_type: typing.Union[type, typing.List[type]],
         length_func: typing.Callable = None,
         active_fn: typing.Callable = None,
-        data=None,
+        type_names: typing.Optional[typing.List[str]] = None,
+        data = None,
         format: format_type = format_type.default,
     ):
         self._name = name
-        self._card_size = card_size
+        self._fields_per_card = fields_per_card
         self._element_width = element_width
         self._active_func = active_fn
-        self._type = type
+        if (isinstance(input_type, list)):
+            self._type = self._make_struct_datatype(type_names, input_type)
+        else:
+            self._type = input_type
         self._initialize_data(0)
         if isinstance(data, list):
             self.data = data
@@ -63,6 +68,14 @@ class VariableCard(CardInterface):
             self._length_func = length_func
         self._format_type = format
 
+    def _make_struct_datatype(self, type_names, type_types):
+        assert type_names is not None, "Type names are required if a list of types is used!"
+        assert len(type_types) == len(type_names), "The `type_names` and `input_type` lists have to be the same length"
+        dataclass_spec = []
+        for type_name, type_type in zip(type_names, type_types):
+            dataclass_spec.append((type_name, type_type))
+        return dataclasses.make_dataclass(self._name, dataclass_spec)
+
     @property
     def format(self) -> format_type:
         return self._format_type
@@ -71,40 +84,76 @@ class VariableCard(CardInterface):
     def format(self, value: format_type) -> None:
         self._format_type = value
 
-    def _initialize_data(self, length):
+    def _uses_structure(self):
+        return dataclasses.is_dataclass(self._type)
+
+    def _initialize_data(self, length: int) -> None:
         self._data = arr.array(self._type, length)
 
-    def _is_last_card(self, card_index: int):
-        count = self._length_func()
-        start = card_index * self._card_size
-        end = start + self._card_size
-        return end >= count
+    def _get_element_width(self) -> int:
+        return self._element_width * self._num_fields()
 
-    def _get_card_range(self, card_index: int):
-        start_index = self._card_size * card_index
+    def _get_fields_per_card(self) -> int:
+        num = self._fields_per_card / self._num_fields()
+        int_num = int(num)
+        assert num - int_num == 0, "Error"
+        return int_num
+
+    def _is_last_card(self, card_index: int) -> bool:
+        count = self._length_func()
+        fields_per_card = self._get_fields_per_card()
+        start = card_index * fields_per_card
+        end = start + fields_per_card
+        result = end >= count
+        return result
+
+    def _get_card_range(self, card_index: int) -> typing.Tuple[int, int]:
+        fields_per_card = self._get_fields_per_card()
+        start_index = fields_per_card * card_index
         if self._is_last_card(card_index):
             # last card, only use the remainder for number of fields
-            remainder = self._length_func() % self._card_size
+            remainder = self._length_func() % fields_per_card
             if remainder == 0:
-                remainder = self._card_size
+                remainder = fields_per_card
             end_index = start_index + remainder
         else:
             # not last card, use all fields
-            end_index = start_index + self._card_size
+            end_index = start_index + fields_per_card
         return start_index, end_index
 
-    def _get_comment(self, format: format_type) -> str:
-        if not self._is_last_card(0):
-            count = self._card_size
-        else:
-            # TODO test case when amount == card_size
-            count = self._length_func() % self._card_size or self._card_size
+    def _get_comment_struct(self, count: int, format: format_type) -> str:
+        num_fields_per_value = self._num_fields()
+        s = io.StringIO()
+        comment_fields = []
+        width = self._get_width(format)
+        offset = 0
+        for _ in range(count):
+            for field in dataclasses.fields(self._type):
+                comment_fields.append(Field(field.name, field.type, offset, width))
+                offset += width
+        write_comment_line(s, comment_fields, format)
+        return s.getvalue()
+
+
+    def _get_comment_scalar(self, count: int, format: format_type) -> str:
         element_width = self._get_width(format)
         element = " " * element_width
         assert len(self._name) <= element_width - 2, "name of variable field is too long"
         element = element[: -len(self._name)] + self._name
         array = element * count
         return "$#" + array[2:]
+
+    def _get_comment(self, format: format_type) -> str:
+        if not self._is_last_card(0):
+            count = self._fields_per_card
+        else:
+            # TODO test case when amount == card_size
+            count = self._length_func() % self._fields_per_card or self._fields_per_card
+
+        if dataclasses.is_dataclass(self._type):
+            return self._get_comment_struct(count, format)
+        else:
+            return self._get_comment_scalar(count, format)
 
     def __get_value(self, index: int):
         if index < len(self._data):
@@ -123,7 +172,8 @@ class VariableCard(CardInterface):
         return self._active_func()
 
     def _num_rows(self):
-        return math.ceil(self._length_func() / self._card_size)
+        fields_per_card = self._get_fields_per_card()
+        return math.ceil(self._length_func() / fields_per_card)
 
     def __getitem__(self, index):
         err_string = f"get indexer for VariableCard must be of the form [index] or [start:end].  End must be greater than start"  # noqa : E501
@@ -151,6 +201,11 @@ class VariableCard(CardInterface):
     def extend(self, valuelist) -> None:
         self._data.extend(valuelist)
 
+    def _num_fields(self):
+        if dataclasses.is_dataclass(self._type):
+            return len(dataclasses.fields(self._type))
+        return 1
+
     def _get_width(self, format: typing.Optional[format_type] = None):
         if format == None:
             format = self.format
@@ -159,8 +214,14 @@ class VariableCard(CardInterface):
             width = 20
         return width
 
-    def _load_bounded_from_buffer(self, buf: typing.TextIO) -> None:
+    def _read_line(self, size, line):
+        num_fields = self._num_fields()
         width = self._get_width()
+        read_format = [(i * width * num_fields, width, self._type) for i in range(size)]
+        values = load_dataline(read_format, line)
+        return values
+
+    def _load_bounded_from_buffer(self, buf: typing.TextIO) -> None:
         num_lines = self._num_rows()
         for index in range(num_lines):
             line, exit_loop = read_line(buf)
@@ -168,8 +229,7 @@ class VariableCard(CardInterface):
                 break
             start, end = self._get_card_range(index)
             size = end - start
-            read_format = [(i * width, width, self._type) for i in range(size)]
-            values = load_dataline(read_format, line)
+            values =  self._read_line(size, line)
             for j, value in zip(range(start, end), values):
                 self[j] = value
 
@@ -182,14 +242,15 @@ class VariableCard(CardInterface):
                 break
             # this is going to be slower... because we don't know how many
             # lines there are going to be.
-            size = math.ceil(len(line) / width)
-            trailing_spaces = len(line) - width * size
+            num_fields = self._num_fields()
+            text_width = width * num_fields
+            size = math.ceil(len(line) / (text_width))
+            trailing_spaces = len(line) - text_width * size
             if trailing_spaces > 0:
                 print("Trailing spaces, TODO - write a test!")
                 line = line + " " * trailing_spaces
-            max_amount = min(size, self._card_size)
-            read_format = [(i * width, width, self._type) for i in range(max_amount)]
-            values = load_dataline(read_format, line)
+            max_amount = min(size, self._get_fields_per_card())
+            values =  self._read_line(max_amount, line)
             self.extend(values)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
@@ -234,9 +295,13 @@ class VariableCard(CardInterface):
         but its an easy way to reuse the code in write_fields so we create fields
         on the fly here. TODO - reuse less of the code without creating fields on the fly"""
         row_values = self[start_index:end_index]
-        width = self._element_width
+        field_width = self._get_element_width()
+        element_width = self._element_width
         size = end_index - start_index
-        row_fields = [Field(self._name, self._type, i * width, width) for i in range(size)]
+
+        # the field writer uses the element width, not the struct width, for structured types
+        # the offset, however, takes into account the struct width.
+        row_fields = [Field(self._name, self._type, i * field_width, element_width) for i in range(size)]
         s = io.StringIO()
         write_fields(s, row_fields, row_values, format)
         return s.getvalue()
