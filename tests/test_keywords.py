@@ -437,6 +437,14 @@ def test_element_solid_ortho(ref_string):
 
 
 @pytest.mark.keywords
+def test_control_mpp_decomposition_transformation(ref_string):
+    """Read CONTROL_MPP_DECOMPOSITION_TRANSFORMATION"""
+    c = kwd.ControlMppDecompositionTransformation()
+    c.loads(ref_string.test_control_mpp_decomposition_transformation_string_read)
+    assert ref_string.test_control_mpp_decomposition_transformation_string_write == c.write()
+
+
+@pytest.mark.keywords
 def test_control_time_step_read(ref_string):
     """Read CONTROL_TIME_STEP"""
     c = kwd.ControlTimeStep()

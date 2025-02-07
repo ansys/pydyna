@@ -23,6 +23,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryPrescribedMotionSet(KeywordBase):
@@ -30,9 +31,13 @@ class BoundaryPrescribedMotionSet(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_MOTION_SET"
+    option_specs = [
+        OptionSpec("ID", -2, 1),
+    ]
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card(
                 [
@@ -133,6 +138,30 @@ class BoundaryPrescribedMotionSet(KeywordBase):
                     ),
                 ],
                 lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
+            ),
+            OptionCardSet(
+                option_spec = BoundaryPrescribedMotionSet.option_specs[0],
+                cards = [
+                    Card(
+                        [
+                            Field(
+                                "id",
+                                int,
+                                0,
+                                10,
+                                kwargs.get("id")
+                            ),
+                            Field(
+                                "heading",
+                                str,
+                                10,
+                                70,
+                                kwargs.get("heading")
+                            ),
+                        ],
+                    ),
+                ],
+                **kwargs
             ),
         ]
 
@@ -292,4 +321,24 @@ class BoundaryPrescribedMotionSet(KeywordBase):
     @node2.setter
     def node2(self, value: int) -> None:
         self._cards[1].set_value("node2", value)
+
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the ID keyword option
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        self._cards[2].cards[0].set_value("id", value)
+
+    @property
+    def heading(self) -> typing.Optional[str]:
+        """Get or set the Descriptor. We suggest using unique descriptions.
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("heading")
+
+    @heading.setter
+    def heading(self, value: str) -> None:
+        self._cards[2].cards[0].set_value("heading", value)
 
