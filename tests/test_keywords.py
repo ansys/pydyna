@@ -830,15 +830,16 @@ def test_set_part_list(ref_string):
     ref = ref_string.test_set_part_list_ref
     assert s.write() == ref
 
+
 @pytest.mark.keywords
-def test_set_part_list_generate():
-    ref = """*SET_PART_LIST_GENERATE
-         3       0.0       0.0       0.0       0.0
-   2000000   2000025   2000100   2000200   2000500   2000600
-   2000700   2000800   2000900   2001000"""
+def test_set_part_list_generate(ref_string):
     s = kwd.SetPartListGenerate()
-    s.loads(ref)
-    assert s.b1beg == 2000000
+    s.loads(ref_string.test_set_part_list_generate_ref1)
+    assert len(s.block_ranges) == 3
+
+    s.loads(ref_string.test_set_part_list_generate_ref2)
+    assert len(s.block_ranges) == 5
+    print(s.block_ranges.data)
 
 
 @pytest.mark.keywords
