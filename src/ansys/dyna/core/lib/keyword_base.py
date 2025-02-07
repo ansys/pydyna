@@ -256,10 +256,14 @@ class KeywordBase(Cards):
         # maybe after the keyword but before any $#
         self._read_data(buf, parameters)
 
-    def loads(self, value: str, parameters: ParameterSet = None) -> None:
-        """Load the keyword from string."""
+    def loads(self, value: str, parameters: ParameterSet = None) -> typing.Any:
+        """Load the keyword from string.
+
+        Return `self` to support chaining
+        """
         # TODO - add a method to load from a buffer.
         s = io.StringIO()
         s.write(value)
         s.seek(0)
         self.read(s, parameters)
+        return self
