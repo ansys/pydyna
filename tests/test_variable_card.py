@@ -135,8 +135,6 @@ def test_variable_card_append_value_struct():
     assert v[1] == bi(0.1,1.2)
     assert v[2] == bi(math.nan,0.2)
 
-
-
 @pytest.mark.keywords
 def test_variable_car_write_long(ref_string):
     """test writing unbounded long variable card with two rows."""
@@ -178,7 +176,7 @@ def test_variable_card_read_long(string_utils):
     assert math.isnan(v[2])
 
 @pytest.mark.keywords
-def test_variable_card_read_long_struct(string_utils):
+def test_variable_card_read_long_struct(ref_string, string_utils):
     """Test a variable card using the struct type definition."""
     v = VariableCard("bi", 8, 10, bi)
     v.format = format_type.long
@@ -190,10 +188,18 @@ def test_variable_card_read_long_struct(string_utils):
     assert math.isnan(v[1].foo)
     assert math.isnan(v[1].bar)
 
+    v = VariableCard("bi", 8, 10, bi)
+    v.read(string_utils.as_buffer(ref_string.test_variable_card_struct_string))
+    assert len(v) == 9
+
+    v = VariableCard("bi", 8, 10, bi)
+    v.format = format_type.long
+    v.read(string_utils.as_buffer(ref_string.test_variable_card_struct_string_long))
+    assert len(v) == 9
+
 @pytest.mark.keywords
 def test_variable_card_write_struct(string_utils):
     """Test a variable card using the struct type definition."""
-    # TODO - read multiple lines, unbounded and bounded, corner cases
 
     string = "       1.0       2.0       3.0"
     v = VariableCard("bi", 8, 10, bi, lambda: 2)
