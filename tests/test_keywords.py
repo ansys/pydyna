@@ -830,6 +830,16 @@ def test_set_part_list(ref_string):
     ref = ref_string.test_set_part_list_ref
     assert s.write() == ref
 
+@pytest.mark.keywords
+def test_set_part_list_generate():
+    ref = """*SET_PART_LIST_GENERATE
+         3       0.0       0.0       0.0       0.0
+   2000000   2000025   2000100   2000200   2000500   2000600
+   2000700   2000800   2000900   2001000"""
+    s = kwd.SetPartListGenerate()
+    s.loads(ref)
+    assert s.b1beg == 2000000
+
 
 @pytest.mark.keywords
 def test_contact_tied_shell_edge_to_surface_id(ref_string):

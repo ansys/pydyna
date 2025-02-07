@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import copy
+import dataclasses
 import io
 import typing
 
@@ -62,8 +64,19 @@ def _field_iterator(fields: typing.List[Field], long_format: bool) -> typing.Ite
             yield Field(name=None, type=None, offset=offset, width=empty_width)
             offset += empty_width
         assert pos == offset
-        yield field
-        offset += width
+        if (dataclasses.is_dataclass(field.type)):
+            field_offset = field.offset
+            for member in dataclasses.fields(field.type):
+                if field.value != None:
+                    value = getattr(field.value, member.name)
+                else:
+                    value = None
+                yield Field(name=member.name, type=member.type, offset=field_offset, width=field.width, value=value)
+                field_offset += field.width
+            offset += field_offset
+        else:
+            yield field
+            offset += width
 
 
 def check_field_type(field_type: type):
@@ -146,16 +159,16 @@ def write_fields(
     >>> s.getvalue()
     '         1     hello'
     """
-    index = 0
+    if values != None:
+        fields = copy.deepcopy(fields)
+        for field, value in zip(fields, values):
+            field.value = value
 
     for field in _field_iterator(fields, format == format_type.long):
         if field.type is None:
             buf.write(_write_null(field.width))
         else:
             field_value, field_type = field.io_info()
-            if values != None:
-                field_value = values[index]
-                index += 1
             write_field(buf, field_type, field_value, field.width)
 
 

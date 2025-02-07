@@ -20,7 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import dataclasses
 import io
+import math
 import typing
 
 from ansys.dyna.core.lib.field import Field
@@ -29,6 +31,12 @@ from ansys.dyna.core.lib.format_type import format_type
 
 
 import pytest
+
+
+@dataclasses.dataclass
+class bi:
+    foo: float = None
+    bar: float = None
 
 def _get_comment_line(fields: typing.List[Field]) -> str:
     s = io.StringIO()
@@ -46,10 +54,17 @@ def _get_field_value(fields: typing.List[Field], long: bool = False) -> str:
 
 @pytest.mark.keywords
 def test_comment():
+    """Test writing the comment line."""
     fields = [Field("a", int, 0, 10, 1), Field("b", str, 10, 10, "hello")]
     result = _get_comment_line(fields)
     assert result == "$#       a         b"
 
+@pytest.mark.keywords
+def test_comment_struct():
+    """Test writing the comment line for a struct type."""
+    fields = [Field("a", bi, 0, 10, None), Field("a", bi, 20, 10, None)]
+    result = _get_comment_line(fields)
+    assert result == "$#     foo       bar       foo       bar"
 
 @pytest.mark.keywords
 def test_comment_with_gap():
@@ -85,6 +100,15 @@ def test_field_values_int_string():
     result = _get_field_value(fields)
     assert result == "         1hello     "
 
+@pytest.mark.keywords
+def test_field_values_struct_single():
+    """Test writing fields with a single struct value type"""
+
+    # single value
+    bi1 = bi(1.0, 2.0)
+    fields = [Field("a", bi, 0, 10, bi1)]
+    result = _get_field_value(fields)
+    assert result == "       1.0       2.0"
 
 @pytest.mark.keywords
 def test_field_values_int_string_gap():
@@ -106,6 +130,14 @@ def test_field_values_with_nan():
     fields = [Field("a", int, 0, 10, 1), Field("b", float, 10, 10, float("nan")), Field("c", str, 20, 10, "hello")]
     result = _get_field_value(fields)
     assert result == "         1          hello     "
+
+@pytest.mark.keywords
+def test_field_write_struct_multiple_missing_value():
+    """Test writing fields with multiple values of struct type with a missing value."""
+    bi1, bi2 = bi(1.0, 2.0), bi(1.3, math.nan)
+    fields = [Field("a", bi, 0, 10, bi1), Field("a", bi, 20, 10, bi2)]
+    result = _get_field_value(fields)
+    assert result == "       1.0       2.0       1.3          "
 
 
 @pytest.mark.keywords
@@ -134,3 +166,29 @@ def test_field_values_int_string_long():
     fields = [Field("a", int, 0, 10, 1), Field("b", str, 10, 10, "hello")]
     result = _get_field_value(fields, True)
     assert result == "                   1hello               "
+
+@pytest.mark.keywords
+def test_field_write_struct_multiple():
+    """Test writing fields with multiple values of struct type."""
+    bi1, bi2 = bi(1.0, 2.0), bi(1.3, 2.9)
+    fields = [Field("a", bi, 0, 10, bi1), Field("a", bi, 20, 10, bi2)]
+    result = _get_field_value(fields)
+    assert result == "       1.0       2.0       1.3       2.9"
+
+@pytest.mark.keywords
+def test_field_write_struct_overridden_value():
+    #overriden struct values
+    s = io.StringIO()
+    values = [bi(1.8, math.nan), bi(0.1, 3.14)]
+    fields = [Field("a", bi, 0, 10, None), Field("a", bi, 20, 10, None)]
+    field_writer.write_fields(s, fields, values)
+    result = s.getvalue()
+    assert result == "       1.8                 0.1      3.14"
+
+
+@pytest.mark.keywords
+def test_field_write_struct_comment():
+    # comment line
+    fields = [Field("a", bi, 0, 10, None), Field("a", bi, 20, 10, None)]
+    result = _get_comment_line(fields)
+    assert result == "$#     foo       bar       foo       bar"
