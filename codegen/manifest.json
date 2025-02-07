@@ -517,6 +517,22 @@
         },
         "comment": "a mix of conditional, variable length, and duplicate cards"
     },
+    "CONTROL_MPP_DECOMPOSITION_TRANSFORMATION" : {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT']"
+                }
+            ],
+            "duplicate-card-group": [
+                {
+                    "indices": [0, 1],
+                    "overall-name": "transformation"
+                }
+            ]
+        }
+    },
     "CONTROL_REFERENCE_CONFIGURAION": {
         "type": "multiple",
         "generations": [

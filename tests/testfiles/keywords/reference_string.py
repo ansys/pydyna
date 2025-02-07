@@ -360,6 +360,47 @@ $#   nid               x               y               z      tc      rc
       59             0.1             0.2             0.3                
 ...console output truncated at 60 rows"""
 
+
+test_control_mpp_decomposition_transformation_string_read = """*CONTROL_MPP_DECOMPOSITION_TRANSFORMATION
+$#    type        v1        v2        v3        v4        v5        v6
+VEC3             0.0       0.0       0.0       0.0       0.0       0.0
+$#      v7        v8        v9
+       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+SY               0.0       0.0       0.0       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+MAT              0.0       0.0       0.0       0.0       0.0       0.0
+$#      v7        v8        v9
+       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+RX               0.0       0.0       0.0       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+S2R              0.0       0.0       0.0       0.0       0.0       0.0
+$#      v7        v8        v9
+       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+RZ               0.0       0.0       0.0       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+VEC3             0.0       0.0       0.0       0.0       0.0       0.0
+$#      v7        v8        v9
+       0.0       0.0       0.0"""
+
+
+test_control_mpp_decomposition_transformation_string_write = """*CONTROL_MPP_DECOMPOSITION_TRANSFORMATION
+$#    type        v1        v2        v3        v4        v5        v6
+VEC3             0.0       0.0       0.0       0.0       0.0       0.0
+0.0              0.0       0.0                                        
+SY               0.0       0.0       0.0       0.0       0.0       0.0
+MAT              0.0       0.0       0.0       0.0       0.0       0.0
+0.0              0.0       0.0                                        
+RX               0.0       0.0       0.0       0.0       0.0       0.0
+S2R              0.0       0.0       0.0       0.0       0.0       0.0
+0.0              0.0       0.0                                        
+RZ               0.0       0.0       0.0       0.0       0.0       0.0
+VEC3             0.0       0.0       0.0       0.0       0.0       0.0
+0.0              0.0       0.0                                        """
+
+
 test_control_time_step_string = """*CONTROL_TIME_STEP
 $#  dtinit    tssfac      isdo    tslimt     dt2ms      lctm     erode     ms1st
      0.000  1.000000         0     0.000         1         0         0         0
