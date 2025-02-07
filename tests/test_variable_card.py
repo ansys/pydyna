@@ -136,15 +136,16 @@ def test_variable_card_append_value_struct():
     assert v[2] == bi(math.nan,0.2)
 
 @pytest.mark.keywords
-def test_variable_car_write_long(ref_string):
+def test_variable_card_write_long(ref_string):
     """test writing unbounded long variable card with two rows."""
     v = VariableCard("bi", 8, 10, float)
     for i in range(10):
         v.append(i)
     assert v._num_rows() == 2
-    assert v.write(format_type.long) == ref_string.test_variable_card_string
-    v.format_type = format_type.long
-    assert v.write() == ref_string.test_variable_card_string
+    assert v.write(format_type.long) == ref_string.test_variable_card_string_long
+    v.format = format_type.long
+    assert v.write() == ref_string.test_variable_card_string_long
+    assert v.write(format_type.default) == ref_string.test_variable_card_string
 
 @pytest.mark.keywords
 def test_variable_card_write_long_struct(ref_string):

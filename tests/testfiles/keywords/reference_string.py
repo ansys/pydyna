@@ -1098,8 +1098,10 @@ $#             secid                area               thick
                                                             
 *END"""
 
-test_variable_card_string = """
-$#                bi                  bi                  bi                  bi                  bi                  bi                  bi                  bi
+test_variable_card_string = """$#      bi        bi        bi        bi        bi        bi        bi        bi
+       0.0       1.0       2.0       3.0       4.0       5.0       6.0       7.0
+       8.0       9.0"""
+test_variable_card_string_long = """$#                bi                  bi                  bi                  bi                  bi                  bi                  bi                  bi
                  0.0                 1.0                 2.0                 3.0                 4.0                 5.0                 6.0                 7.0
                  8.0                 9.0"""
 
