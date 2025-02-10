@@ -87,7 +87,7 @@ mesh.fill(
 # Set the initial conditions
 mesh.initial_detonation(Point(0, 0, 19.33))
 
-# set output datebase
+# set output database
 efp_solution.set_output_database(matsum=0.2, glstat=0.2)
 
 # save file on server end
