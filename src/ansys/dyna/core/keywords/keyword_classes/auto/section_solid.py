@@ -24,7 +24,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
-from ansys.dyna.core.lib.variable_card import VariableCard
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -158,7 +158,7 @@ class SectionSolid(KeywordBase):
                 lambda: self.nip,
                 lambda: self.nip and self.elform in [101, 102, 103, 104, 105],
                 data = kwargs.get("integration_points")),
-            VariableCard(
+            SeriesCard(
                 "pi",
                 8,
                 10,
@@ -369,7 +369,7 @@ class SectionSolid(KeywordBase):
         self._cards[2].table = df
 
     @property
-    def pi(self) -> VariableCard:
+    def pi(self) -> SeriesCard:
         """dynamic array of LMC property parameters."""
         return self._cards[3]
 

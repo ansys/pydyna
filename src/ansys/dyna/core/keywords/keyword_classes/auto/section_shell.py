@@ -24,7 +24,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
-from ansys.dyna.core.lib.variable_card import VariableCard
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -161,7 +161,7 @@ class SectionShell(KeywordBase):
                     ),
                 ],
             ),
-            VariableCard(
+            SeriesCard(
                 "angle",
                 8,
                 10,
@@ -239,7 +239,7 @@ class SectionShell(KeywordBase):
                 lambda: self.nipp,
                 lambda: self.elform in [101, 102, 103, 104, 105],
                 data = kwargs.get("integration_points")),
-            VariableCard(
+            SeriesCard(
                 "pi",
                 8,
                 10,
@@ -513,7 +513,7 @@ class SectionShell(KeywordBase):
         self._cards[1].set_value("edgset", value)
 
     @property
-    def angle(self) -> VariableCard:
+    def angle(self) -> SeriesCard:
         """dynamic array of beta-i: material angle at ith-integration point."""
         return self._cards[2]
 
@@ -616,7 +616,7 @@ class SectionShell(KeywordBase):
         self._cards[4].table = df
 
     @property
-    def pi(self) -> VariableCard:
+    def pi(self) -> SeriesCard:
         """dynamic array of LMC property parameters."""
         return self._cards[5]
 
