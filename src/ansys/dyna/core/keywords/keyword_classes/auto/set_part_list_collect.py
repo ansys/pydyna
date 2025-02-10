@@ -181,6 +181,10 @@ class SetPartListCollect(KeywordBase):
         """dynamic array of part ids."""
         return self._cards[1]
 
+    @parts.setter
+    def parts(self, value: typing.List) -> None:
+        self._cards[1].data = value
+
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line

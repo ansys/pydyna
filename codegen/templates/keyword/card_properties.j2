@@ -15,6 +15,10 @@
         """{{card.variable.help}}"""
         return self._cards[{{card.index}}]
 
+    @{{card.variable.name}}.setter
+    def {{card.variable.name}}(self, value: typing.List) -> None:
+        self._cards[{{card.index}}].data = value
+
 {% elif card.set %}
     @property
     def sets(self) -> typing.List[{{card.set.name}}]:

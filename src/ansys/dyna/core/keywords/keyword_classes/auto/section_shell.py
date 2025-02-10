@@ -517,6 +517,10 @@ class SectionShell(KeywordBase):
         """dynamic array of beta-i: material angle at ith-integration point."""
         return self._cards[2]
 
+    @angle.setter
+    def angle(self, value: typing.List) -> None:
+        self._cards[2].data = value
+
     @property
     def nipp(self) -> int:
         """Get or set the Number of in-plane integration points for user-defined shell (0 if resultant/discrete element).
@@ -619,6 +623,10 @@ class SectionShell(KeywordBase):
     def pi(self) -> SeriesCard:
         """dynamic array of LMC property parameters."""
         return self._cards[5]
+
+    @pi.setter
+    def pi(self, value: typing.List) -> None:
+        self._cards[5].data = value
 
     @property
     def title(self) -> typing.Optional[str]:

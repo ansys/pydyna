@@ -236,6 +236,10 @@ class SectionTShell(KeywordBase):
         """dynamic array of beta-i: material angle at ith-integration point."""
         return self._cards[1]
 
+    @bi.setter
+    def bi(self, value: typing.List) -> None:
+        self._cards[1].data = value
+
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
