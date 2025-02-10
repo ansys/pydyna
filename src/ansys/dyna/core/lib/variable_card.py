@@ -76,6 +76,9 @@ class VariableCard(CardInterface):
             dataclass_spec.append((type_name, type_type))
         return dataclasses.make_dataclass(self._name, dataclass_spec)
 
+    def __iter__(self) -> typing.Iterable:
+        return iter(self._data)
+
     @property
     def format(self) -> format_type:
         return self._format_type

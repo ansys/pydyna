@@ -848,7 +848,6 @@ def test_set_part_list_generate(ref_string):
 
     s.block_ranges.data = [(0,2), [2,3]]
     assert len(s.block_ranges) == 2
-    print(s.block_ranges[0])
     assert s.block_ranges[0] == kwd.SetPartListGenerate.BlockRange(0,2)
     with pytest.raises(TypeError):
         s.block_ranges.append((0,3,2))
@@ -859,6 +858,10 @@ def test_set_part_list_generate(ref_string):
         _ = s.block_ranges[4]
     assert s.block_ranges[2].bbeg == 200
     assert pd.isna(s.block_ranges[2].bend)
+
+    s.block_ranges[2].bend = 201
+    for block_range in s.block_ranges:
+        assert block_range.bbeg < block_range.bend
 
 
 @pytest.mark.keywords
