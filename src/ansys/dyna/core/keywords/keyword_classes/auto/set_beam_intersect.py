@@ -92,6 +92,10 @@ class SetBeamIntersect(KeywordBase):
         """dynamic array of beam set ids."""
         return self._cards[1]
 
+    @beams.setter
+    def beams(self, value: typing.List) -> None:
+        self._cards[1].data = value
+
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line

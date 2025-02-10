@@ -92,6 +92,10 @@ class SetSegmentAdd(KeywordBase):
         """dynamic array of set segment ids."""
         return self._cards[1]
 
+    @sets.setter
+    def sets(self, value: typing.List) -> None:
+        self._cards[1].data = value
+
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line

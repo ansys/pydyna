@@ -187,6 +187,10 @@ class SetPartListGenerate(KeywordBase):
         """Block ranges."""
         return self._cards[1]
 
+    @block_ranges.setter
+    def block_ranges(self, value: typing.List) -> None:
+        self._cards[1].data = value
+
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line

@@ -189,6 +189,10 @@ class InitialStressShellThicknessLargeCardSet(Cards):
         """dynamic array of history variables"""
         return self._cards[1]
 
+    @hisv.setter
+    def hisv(self, value: typing.List) -> None:
+        self._cards[1].data = value
+
     @property
     def parent(self) -> KeywordBase:
         return self._parent
