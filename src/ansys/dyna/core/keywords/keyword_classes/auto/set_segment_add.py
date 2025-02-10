@@ -23,7 +23,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
-from ansys.dyna.core.lib.variable_card import VariableCard
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -51,7 +51,7 @@ class SetSegmentAdd(KeywordBase):
                     ),
                 ],
             ),
-            VariableCard(
+            SeriesCard(
                 "sets",
                 8,
                 10,
@@ -88,7 +88,7 @@ class SetSegmentAdd(KeywordBase):
         self._cards[0].set_value("sid", value)
 
     @property
-    def sets(self) -> VariableCard:
+    def sets(self) -> SeriesCard:
         """dynamic array of set segment ids."""
         return self._cards[1]
 

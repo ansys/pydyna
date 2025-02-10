@@ -25,7 +25,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.card_set import CardSet
 from ansys.dyna.core.lib.cards import Cards
-from ansys.dyna.core.lib.variable_card import VariableCard
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialStressShellThicknessLargeCardSet(Cards):
@@ -95,7 +95,7 @@ class InitialStressShellThicknessLargeCardSet(Cards):
                     ),
                 ],
             ),
-            VariableCard(
+            SeriesCard(
                 "hisv",
                 8,
                 10,
@@ -185,7 +185,7 @@ class InitialStressShellThicknessLargeCardSet(Cards):
         self._cards[0].set_value("eps", value)
 
     @property
-    def hisv(self) -> VariableCard:
+    def hisv(self) -> SeriesCard:
         """dynamic array of history variables"""
         return self._cards[1]
 

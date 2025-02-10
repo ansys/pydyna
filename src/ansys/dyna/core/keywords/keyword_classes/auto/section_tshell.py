@@ -23,7 +23,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
-from ansys.dyna.core.lib.variable_card import VariableCard
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -100,7 +100,7 @@ class SectionTShell(KeywordBase):
                     ),
                 ],
             ),
-            VariableCard(
+            SeriesCard(
                 "bi",
                 8,
                 10,
@@ -232,7 +232,7 @@ class SectionTShell(KeywordBase):
         self._cards[0].set_value("tshear", value)
 
     @property
-    def bi(self) -> VariableCard:
+    def bi(self) -> SeriesCard:
         """dynamic array of beta-i: material angle at ith-integration point."""
         return self._cards[1]
 
