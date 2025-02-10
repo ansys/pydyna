@@ -826,7 +826,7 @@ def test_set_part_list(ref_string):
     """Test formatting of set part list (uses variable card with ints)."""
     s = kwd.SetPartList()
     s.sid = 1
-    s.parts._data = [1, 2, 3]
+    s.parts = [1, 2, 3]
     ref = ref_string.test_set_part_list_ref
     assert s.write() == ref
 
