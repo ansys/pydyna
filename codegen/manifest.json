@@ -34,6 +34,56 @@
         },
         {
             "type": "prefix",
+            "patterns": ["BOUNDARY_PRESCRIBED_MOTION_NODE",
+                "BOUNDARY_PRESCRIBED_MOTION_SET",
+                "BOUNDARY_PRESCRIBED_MOTION_SET_SEGMENT",
+                "BOUNDARY_PRESCRIBED_MOTION_RIGID",
+                "BOUNDARY_PRESCRIBED_MOTION_RIGID_LOCAL"
+            ],
+            "exclusions": ["BOUNDARY_PRESCRIBED_MOTION_SET_BOX",
+                "BOUNDARY_PRESCRIBED_MOTION_SET_EDGE_UVW",
+                "BOUNDARY_PRESCRIBED_MOTION_SET_FACE_XYZ",
+                "BOUNDARY_PRESCRIBED_MOTION_SET_LINE",
+                "BOUNDARY_PRESCRIBED_MOTION_SET_POINT_UVW",
+                "BOUNDARY_PRESCRIBED_MOTION_SET_LINE"
+            ],
+            "generation-options": {
+                "add-option": [
+                    {
+                        "card-order": -2,
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "ID_HEADING"
+                            }
+                        ],
+                        "option-name": "ID"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "prefix",
+            "patterns": ["BOUNDARY_SPC_NODE", "BOUNDARY_SPC_SET"],
+            "generation-options": {
+                "add-option": [
+                    {
+                        "card-order": -2,
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "ID_HEADING"
+                            }
+                        ],
+                        "option-name": "ID"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "prefix",
             "patterns": ["CONSTRAINED_NODAL_RIGID_BODY"],
             "generation-options": {
                 "add-option": [
@@ -202,6 +252,20 @@
                 {
                     "index": 0,
                     "property-name": "parameters"
+                }
+            ]
+        }
+    },
+    "INCLUDE_INCLUDE": {
+        "generation-options": {
+            "external-card-implementation": [
+                {
+                    "index": 0,
+                    "card": {
+                        "source": "include_card",
+                        "card-name": "IncludeCard"
+                    },
+                    "mixin": "IncludeCardMixin"
                 }
             ]
         }
@@ -466,6 +530,22 @@
             ]
         },
         "comment": "a mix of conditional, variable length, and duplicate cards"
+    },
+    "CONTROL_MPP_DECOMPOSITION_TRANSFORMATION" : {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT']"
+                }
+            ],
+            "duplicate-card-group": [
+                {
+                    "indices": [0, 1],
+                    "overall-name": "transformation"
+                }
+            ]
+        }
     },
     "CONTROL_REFERENCE_CONFIGURAION": {
         "type": "multiple",
@@ -1678,6 +1758,27 @@
                     "element-width": 10,
                     "type": "int",
                     "help": "dynamic array of part ids."
+                }
+            ]
+        }
+    },
+    "SET_PART_LIST_GENERATE": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "block_ranges",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "struct",
+                    "struct-info": {
+                        "name": "BlockRange",
+                        "fields": [
+                            {"name": "bbeg", "type": "int"},
+                            {"name": "bend", "type": "int"}
+                        ]
+                    },
+                    "help": "Block ranges."
                 }
             ]
         }

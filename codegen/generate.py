@@ -35,6 +35,7 @@ import typing
 from jinja2 import Environment, FileSystemLoader
 
 from keyword_generation.handlers.shared_field import SharedFieldHandler
+from keyword_generation.handlers.external_card import ExternalCardHandler
 from keyword_generation.handlers.handler_base import KeywordHandler
 
 
@@ -214,8 +215,21 @@ def handle_insert_cards(kwd_data, settings):
 
 def handle_variable_cards(kwd_data, settings):
     kwd_data["variable"] = True
+    dataclasses = []
     for card_settings in settings:
-        variable_card = kwd_data["cards"][card_settings["index"]]
+        card_index = card_settings["index"]
+        type_name = card_settings["type"]
+        variable_card = kwd_data["cards"][card_index]
+        if type_name == "struct":
+            struct_info = card_settings["struct-info"]
+            struct_name = struct_info["name"]
+            dataclass = {
+                "name": struct_name,
+                "fields": struct_info["fields"]
+            }
+            dataclasses.append(dataclass)
+            type_name = f"self.{struct_name}"
+
         # use abbreviations for some fields to make the jinja template more concise
         variable_card["variable"] = {
             "name": card_settings["name"],
@@ -223,9 +237,11 @@ def handle_variable_cards(kwd_data, settings):
             "width": card_settings["element-width"],
             "length_func": card_settings.get("length-func", ""),
             "active_func": card_settings.get("active-func", ""),
-            "type": card_settings["type"],
+            "type": type_name,
             "help": card_settings["help"],
         }
+    if len(dataclasses) > 0:
+        kwd_data["dataclasses"] = dataclasses
 
 
 def handle_conditional_cards(kwd_data, settings):
@@ -343,6 +359,7 @@ HANDLERS = collections.OrderedDict(
         "rename-property": handle_rename_property,
         "skip-card": handle_skipped_cards,
         "duplicate-card-group": handle_duplicate_card_group,
+        "external-card-implementation": ExternalCardHandler(),
         "shared-field": SharedFieldHandler(),
         "override-subkeyword": handle_override_subkeyword,
     }

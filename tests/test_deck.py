@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import os
+
 import pandas as pd
 
 from ansys.dyna.core import Deck
@@ -346,6 +348,18 @@ def test_deck_expand(file_utils):
     assert len(expanded_deck.keywords) == 12
     assert expanded_deck.keywords[1].format == format_type.standard
 
+@pytest.mark.keywords
+def test_deck_expand_recursive_include_path(file_utils):
+    deck = Deck()
+    include_path1 = file_utils.get_asset_file_path("expand_test")
+    include_path2 = os.path.join(include_path1, "fol")
+    deck.append(kwd.IncludePath(path=include_path1))
+    deck.append(kwd.IncludePath(path=include_path2))
+    deck.append(kwd.Include(filename='bird_B.k'))
+    deck = deck.expand(recurse=True)
+    print(deck)
+    assert len(deck.all_keywords) == 40
+    assert len(deck.keywords) == 36
 
 @pytest.mark.keywords
 def test_deck_unprocessed(ref_string):

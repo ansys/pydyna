@@ -11,7 +11,7 @@
 
 {% elif card.variable %}
     @property
-    def {{card.variable.name}}(self) -> VariableCard:
+    def {{card.variable.name}}(self) -> SeriesCard:
         """{{card.variable.help}}"""
         return self._cards[{{card.index}}]
 
@@ -34,6 +34,7 @@
         '''sets {{card.overall_name}} from the dataframe df'''
         self._cards[{{card.index}}].table = df
 
+{% elif card.external %}
 {% else %}
 {% for field in card.fields %}
 {% if field.used %}

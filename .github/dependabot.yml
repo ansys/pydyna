@@ -5,6 +5,21 @@ updates:
     insecure-external-code-execution: allow
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: "chore"
+    labels:
+      - "maintenance"
+      - "dependencies"
+      - "dependabot"
+    groups:
+      doc:
+        patterns:
+          - "*sphinx*"
+          - "jupyter*"
+          - "imageio*"
+          - "ipython"
+          - "numpydoc"
+
 
   - package-ecosystem: "github-actions"
     directory: "/"

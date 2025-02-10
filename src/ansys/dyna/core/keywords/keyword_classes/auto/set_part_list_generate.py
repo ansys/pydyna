@@ -20,9 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import dataclasses
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -34,6 +36,11 @@ class SetPartListGenerate(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+
+    @dataclasses.dataclass
+    class BlockRange:
+        bbeg: int = None
+        bend: int = None
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -85,66 +92,13 @@ class SetPartListGenerate(KeywordBase):
                     ),
                 ],
             ),
-            Card(
-                [
-                    Field(
-                        "b1beg",
-                        int,
-                        0,
-                        10,
-                        kwargs.get("b1beg")
-                    ),
-                    Field(
-                        "b1end",
-                        int,
-                        10,
-                        10,
-                        kwargs.get("b1end")
-                    ),
-                    Field(
-                        "b2beg",
-                        int,
-                        20,
-                        10,
-                        kwargs.get("b2beg")
-                    ),
-                    Field(
-                        "b2end",
-                        int,
-                        30,
-                        10,
-                        kwargs.get("b2end")
-                    ),
-                    Field(
-                        "b3beg",
-                        int,
-                        40,
-                        10,
-                        kwargs.get("b3beg")
-                    ),
-                    Field(
-                        "b3end",
-                        int,
-                        50,
-                        10,
-                        kwargs.get("b3end")
-                    ),
-                    Field(
-                        "b4beg",
-                        int,
-                        60,
-                        10,
-                        kwargs.get("b4beg")
-                    ),
-                    Field(
-                        "b4end",
-                        int,
-                        70,
-                        10,
-                        kwargs.get("b4end")
-                    ),
-                ],
-            ),
+            SeriesCard(
+                "block_ranges",
+                8,
+                10,
+                self.BlockRange,
+                None,
+                data = kwargs.get("block_ranges")),
             OptionCardSet(
                 option_spec = SetPartListGenerate.option_specs[0],
                 cards = [
@@ -229,84 +183,9 @@ class SetPartListGenerate(KeywordBase):
         self._cards[0].set_value("solver", value)
 
     @property
-    def b1beg(self) -> typing.Optional[int]:
-        """Get or set the First part ID in the first block.
-        """ # nopep8
-        return self._cards[1].get_value("b1beg")
-
-    @b1beg.setter
-    def b1beg(self, value: int) -> None:
-        self._cards[1].set_value("b1beg", value)
-
-    @property
-    def b1end(self) -> typing.Optional[int]:
-        """Get or set the Last part ID in the first block.
-        """ # nopep8
-        return self._cards[1].get_value("b1end")
-
-    @b1end.setter
-    def b1end(self, value: int) -> None:
-        self._cards[1].set_value("b1end", value)
-
-    @property
-    def b2beg(self) -> typing.Optional[int]:
-        """Get or set the First part ID in the second block.
-        """ # nopep8
-        return self._cards[1].get_value("b2beg")
-
-    @b2beg.setter
-    def b2beg(self, value: int) -> None:
-        self._cards[1].set_value("b2beg", value)
-
-    @property
-    def b2end(self) -> typing.Optional[int]:
-        """Get or set the Last part ID in the second block.
-        """ # nopep8
-        return self._cards[1].get_value("b2end")
-
-    @b2end.setter
-    def b2end(self, value: int) -> None:
-        self._cards[1].set_value("b2end", value)
-
-    @property
-    def b3beg(self) -> typing.Optional[int]:
-        """Get or set the First part ID in the third block.
-        """ # nopep8
-        return self._cards[1].get_value("b3beg")
-
-    @b3beg.setter
-    def b3beg(self, value: int) -> None:
-        self._cards[1].set_value("b3beg", value)
-
-    @property
-    def b3end(self) -> typing.Optional[int]:
-        """Get or set the Last part ID in the third block.
-        """ # nopep8
-        return self._cards[1].get_value("b3end")
-
-    @b3end.setter
-    def b3end(self, value: int) -> None:
-        self._cards[1].set_value("b3end", value)
-
-    @property
-    def b4beg(self) -> typing.Optional[int]:
-        """Get or set the First part ID in the fourth block.
-        """ # nopep8
-        return self._cards[1].get_value("b4beg")
-
-    @b4beg.setter
-    def b4beg(self, value: int) -> None:
-        self._cards[1].set_value("b4beg", value)
-
-    @property
-    def b4end(self) -> typing.Optional[int]:
-        """Get or set the Last part ID in the fourth block.
-        """ # nopep8
-        return self._cards[1].get_value("b4end")
-
-    @b4end.setter
-    def b4end(self, value: int) -> None:
-        self._cards[1].set_value("b4end", value)
+    def block_ranges(self) -> SeriesCard:
+        """Block ranges."""
+        return self._cards[1]
 
     @property
     def title(self) -> typing.Optional[str]:

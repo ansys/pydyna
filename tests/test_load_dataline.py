@@ -20,12 +20,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import dataclasses
 import math
 
 import pytest
 
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline
 from ansys.dyna.core.lib.parameter_set import ParameterSet
+
+@dataclasses.dataclass
+class bi:
+    foo: float = None
+    bar: float = None
 
 @pytest.mark.keywords
 def test_load_dataline_001():
@@ -79,3 +85,37 @@ def test_load_dataline_007():
     parameter_set.add("vdct", 1.12)
     res = load_dataline(spec, dataline, parameter_set)
     assert res[4] == 1.12
+
+@pytest.mark.keywords
+def test_load_dataline_008():
+    """Test loading a data line with a struct type."""
+    spec = [(0, 10, bi)]
+    dataline = "         2        50"
+    res = load_dataline(spec, dataline)
+    assert len(res) == 1
+    assert res[0].foo == 2
+    assert res[0].bar == 50
+
+@pytest.mark.keywords
+def test_load_dataline_009():
+    """Test loading a data line with two struct types."""
+    dataline = "         2        50         1       3.1"
+    spec = [(0, 10, bi), (20, 10, bi)]
+    res = load_dataline(spec, dataline)
+    assert len(res) == 2
+    assert res[0].foo == 2
+    assert res[0].bar == 50
+    assert res[1].foo == 1
+    assert res[1].bar == 3.1
+
+@pytest.mark.keywords
+def test_load_dataline_010():
+    """Test loading a data line with two struct types and a missing value."""
+    dataline = "         2        50         1"
+    spec = [(0, 10, bi), (20, 10, bi)]
+    res = load_dataline(spec, dataline)
+    assert len(res) == 2
+    assert res[0].foo == 2
+    assert res[0].bar == 50
+    assert res[1].foo == 1
+    assert math.isnan(res[1].bar)

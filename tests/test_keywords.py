@@ -437,6 +437,14 @@ def test_element_solid_ortho(ref_string):
 
 
 @pytest.mark.keywords
+def test_control_mpp_decomposition_transformation(ref_string):
+    """Read CONTROL_MPP_DECOMPOSITION_TRANSFORMATION"""
+    c = kwd.ControlMppDecompositionTransformation()
+    c.loads(ref_string.test_control_mpp_decomposition_transformation_string_read)
+    assert ref_string.test_control_mpp_decomposition_transformation_string_write == c.write()
+
+
+@pytest.mark.keywords
 def test_control_time_step_read(ref_string):
     """Read CONTROL_TIME_STEP"""
     c = kwd.ControlTimeStep()
@@ -746,6 +754,14 @@ def test_set_node_title(ref_string):
 
 
 @pytest.mark.keywords
+def test_set_node_list(ref_string):
+    s = kwd.SetNodeList()
+    with pytest.warns(UserWarning, match="Detected out of bound card characters"):
+        s.loads(ref_string.test_set_node_list)
+    assert len(s.nodes) == 8
+
+
+@pytest.mark.keywords
 def test_contact_1d(ref_string):
     c = kwd.Contact1D()
     c.options["ID"].active = True
@@ -813,6 +829,39 @@ def test_set_part_list(ref_string):
     s.parts._data = [1, 2, 3]
     ref = ref_string.test_set_part_list_ref
     assert s.write() == ref
+
+
+@pytest.mark.keywords
+def test_set_part_list_generate(ref_string):
+    s = kwd.SetPartListGenerate()
+    s.loads(ref_string.test_set_part_list_generate_ref1)
+    assert len(s.block_ranges) == 3
+    assert s.block_ranges[1].bend == 2000200
+
+    s.loads(ref_string.test_set_part_list_generate_ref2)
+    assert len(s.block_ranges) == 5
+    assert s.block_ranges[3].bbeg == 2000700
+
+    s.block_ranges.append((10,12))
+    assert len(s.block_ranges) == 6
+    assert s.block_ranges[5].bbeg == 10
+
+    s.block_ranges.data = [(0,2), [2,3]]
+    assert len(s.block_ranges) == 2
+    assert s.block_ranges[0] == kwd.SetPartListGenerate.BlockRange(0,2)
+    with pytest.raises(TypeError):
+        s.block_ranges.append((0,3,2))
+
+    s.block_ranges.append([200])
+    assert len(s.block_ranges) == 3
+    with pytest.raises(IndexError):
+        _ = s.block_ranges[4]
+    assert s.block_ranges[2].bbeg == 200
+    assert pd.isna(s.block_ranges[2].bend)
+
+    s.block_ranges[2].bend = 201
+    for block_range in s.block_ranges:
+        assert block_range.bbeg < block_range.bend
 
 
 @pytest.mark.keywords
@@ -899,6 +948,39 @@ def test_em_randles_batmac_rdltype(ref_string):
     assert s.write() == ref_string.test_em_randles_batmac_rdltype_0_1
     s = kwd.EmRandlesBatmac(rdltype=3)
     assert s.write() == ref_string.test_em_randles_batmac_rdltype_2_3
+
+
+@pytest.mark.keywords
+def test_multiline_include_keyword(ref_string):
+    filename = "a"*60 + ".k"
+    i = kwd.Include(filename=filename)
+    assert i.write() == ref_string.test_one_line_include1
+    assert kwd.Include().loads(ref_string.test_one_line_include1).filename == filename
+    filename = "a"*78 + ".k"
+    i.filename = filename
+    assert i.write() == ref_string.test_one_line_include2
+    assert kwd.Include().loads(ref_string.test_one_line_include2).filename == filename
+    filename = "a"*80 + ".k"
+    i.filename = filename
+    assert i.write() == ref_string.test_two_line_include1
+    assert kwd.Include().loads(ref_string.test_two_line_include1).filename == filename
+    filename = "a"*156 + ".k"
+    i.filename = filename
+    assert i.write() == ref_string.test_two_line_include2
+    assert kwd.Include().loads(ref_string.test_two_line_include2).filename == filename
+    filename = "a"*160 + ".k"
+    i.filename = filename
+    assert i.write() == ref_string.test_three_line_include1
+    assert kwd.Include().loads(ref_string.test_three_line_include1).filename == filename
+    filename = "a"*234 + ".k"
+    i.filename = filename
+    assert i.write() == ref_string.test_three_line_include2
+    assert kwd.Include().loads(ref_string.test_three_line_include2).filename == filename
+    with pytest.raises(Exception):
+        i.filename = "a"*300 + ".k"
+        i.write()
+
+
 
 
 @pytest.mark.keywords

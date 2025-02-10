@@ -100,6 +100,35 @@ $#     pid     ctype        np
 $#       x         y         z
                               """]
 
+test_one_line_include1 = """*INCLUDE
+$#                                                                      filename
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.k                  """
+
+test_one_line_include2 = """*INCLUDE
+$#                                                                      filename
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.k"""
+
+test_two_line_include1 = """*INCLUDE
+$#                                                                      filename
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa +
+aa.k"""
+
+test_two_line_include2 = """*INCLUDE
+$#                                                                      filename
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa +
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.k"""
+
+test_three_line_include1 = """*INCLUDE
+$#                                                                      filename
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa +
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa +
+aaaa.k"""
+
+test_three_line_include2 = """*INCLUDE
+$#                                                                      filename
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa +
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa +
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.k"""
 
 test_title_string = """*Keyword
 *DEFINE_CURVE_TITLE
@@ -120,6 +149,12 @@ nodeset
   70332693  70540826  70540837  70540840  70540846  70540853  70540857  70540869
   70540871  70540875  70540887  70540888  70540890  70563790  70563792  70563794
   70573162"""
+
+test_set_node_list = """*SET_NODE_LIST
+$#     sid       da1       da2       da3       da4    solver       its         -
+        96                                        MECH      1                   
+$#    nid1      nid2      nid3      nid4      nid5      nid6      nid7      nid8
+      3224      3225      3226      3324      3325      3326      3327      3227		"""
 
 test_mat_piecewise_linear_plasticity_title = """*MAT_PIECEWISE_LINEAR_PLASTICITY_TITLE
 mat24
@@ -359,6 +394,47 @@ $#   nid               x               y               z      tc      rc
       58             0.1             0.2             0.3                
       59             0.1             0.2             0.3                
 ...console output truncated at 60 rows"""
+
+
+test_control_mpp_decomposition_transformation_string_read = """*CONTROL_MPP_DECOMPOSITION_TRANSFORMATION
+$#    type        v1        v2        v3        v4        v5        v6
+VEC3             0.0       0.0       0.0       0.0       0.0       0.0
+$#      v7        v8        v9
+       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+SY               0.0       0.0       0.0       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+MAT              0.0       0.0       0.0       0.0       0.0       0.0
+$#      v7        v8        v9
+       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+RX               0.0       0.0       0.0       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+S2R              0.0       0.0       0.0       0.0       0.0       0.0
+$#      v7        v8        v9
+       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+RZ               0.0       0.0       0.0       0.0       0.0       0.0
+$#    type        v1        v2        v3        v4        v5        v6
+VEC3             0.0       0.0       0.0       0.0       0.0       0.0
+$#      v7        v8        v9
+       0.0       0.0       0.0"""
+
+
+test_control_mpp_decomposition_transformation_string_write = """*CONTROL_MPP_DECOMPOSITION_TRANSFORMATION
+$#    type        v1        v2        v3        v4        v5        v6
+VEC3             0.0       0.0       0.0       0.0       0.0       0.0
+0.0              0.0       0.0                                        
+SY               0.0       0.0       0.0       0.0       0.0       0.0
+MAT              0.0       0.0       0.0       0.0       0.0       0.0
+0.0              0.0       0.0                                        
+RX               0.0       0.0       0.0       0.0       0.0       0.0
+S2R              0.0       0.0       0.0       0.0       0.0       0.0
+0.0              0.0       0.0                                        
+RZ               0.0       0.0       0.0       0.0       0.0       0.0
+VEC3             0.0       0.0       0.0       0.0       0.0       0.0
+0.0              0.0       0.0                                        """
+
 
 test_control_time_step_string = """*CONTROL_TIME_STEP
 $#  dtinit    tssfac      isdo    tslimt     dt2ms      lctm     erode     ms1st
@@ -976,6 +1052,17 @@ $#     sid       da1       da2       da3       da4    solver
 $#   parts     parts     parts
          1         2         3"""
 
+test_set_part_list_generate_ref1 = """*SET_PART_LIST_GENERATE
+$#     sid       da1       da2       da3       da4    solver
+         1       0.0       0.0       0.0       0.0MECH      
+$#    bbeg      bend      bbeg      bend      bbeg      bend
+   2000000   2000025   2000100   2000200   2000500   2000600"""
+   
+test_set_part_list_generate_ref2 = """*SET_PART_LIST_GENERATE
+         3       0.0       0.0       0.0       0.0
+   2000000   2000025   2000100   2000200   2000500   2000600
+   2000700   2000800   2000900   2001000"""
+
 test_contact_1d_id_mpp1_mpp2 = """*CONTACT_1D_ID_MPP
 $#     cid                                                               heading
                                                                                 
@@ -1022,9 +1109,22 @@ $#             secid                area               thick
                                                             
 *END"""
 
-test_variable_card_string = """$#                bi                  bi                  bi                  bi                  bi                  bi                  bi                  bi
+test_variable_card_string = """$#      bi        bi        bi        bi        bi        bi        bi        bi
+       0.0       1.0       2.0       3.0       4.0       5.0       6.0       7.0
+       8.0       9.0"""
+test_variable_card_string_long = """$#                bi                  bi                  bi                  bi                  bi                  bi                  bi                  bi
                  0.0                 1.0                 2.0                 3.0                 4.0                 5.0                 6.0                 7.0
                  8.0                 9.0"""
+
+test_variable_card_struct_string = """$#     foo       bar       foo       bar       foo       bar       foo       bar
+       1.0       0.5       2.0       1.0       3.0       1.5       4.0       2.0
+       5.0       2.5       6.0       3.0       7.0       3.5       8.0       4.0
+       9.0       4.5"""
+
+test_variable_card_struct_string_long = """$#               foo                 bar                 foo                 bar                 foo                 bar                 foo                 bar
+                 1.0                 0.5                 2.0                 1.0                 3.0                 1.5                 4.0                 2.0
+                 5.0                 2.5                 6.0                 3.0                 7.0                 3.5                 8.0                 4.0
+                 9.0                 4.5"""
 
 test_deck_with_unknown_keywords = """*KEYWORD
 *NOT_REAL_KEYWORD

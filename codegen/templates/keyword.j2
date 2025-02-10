@@ -1,6 +1,15 @@
 {{license}}
+{% if keyword_data.dataclasses %}
+import dataclasses
+{% endif %}
 import typing
 {# TODO - only do this if there's a keyword without a default #}
+{% if keyword_data.mixin_imports %}
+{% for mixin_import in keyword_data.mixin_imports %}
+from ansys.dyna.core.lib.cards_.special.{{mixin_import.source}} import{% for name in mixin_import.names %}{{ ", " if not loop.first else " " }}{{name}}{% endfor %}
+{% endfor %}
+
+{% endif %}
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
 {% if keyword_data.duplicate %}
@@ -14,7 +23,7 @@ from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.duplicate_card_group import DuplicateCardGroup
 {% endif %}
 {% if keyword_data.variable %}
-from ansys.dyna.core.lib.variable_card import VariableCard
+from ansys.dyna.core.lib.series_card import SeriesCard
 {% endif %}
 {% if keyword_data.options %}
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -71,7 +80,18 @@ class {{card_set.name}}(Cards):
 
 {% endfor %}{# card_set in keyword_data.card_sets.sets #}
 {% endif %}{# keyword_data.card_sets #}
+{% if keyword_data.mixins %}
+class {{keyword_data.classname}}(
+    KeywordBase
+    {% if keyword_data.mixins %}
+{% for mixin in keyword_data.mixins %}
+    , {{mixin}}
+{% endfor %}
+    {% endif %}
+    ):
+{% else %}
 class {{keyword_data.classname}}(KeywordBase):
+{% endif %}
     """DYNA {{keyword_data.title}} keyword"""
 
     keyword = "{{keyword_data.keyword}}"
@@ -83,6 +103,14 @@ class {{keyword_data.classname}}(KeywordBase):
 {% endfor %}
     ]
 {% endif %}
+{% for dataclass in keyword_data.dataclasses %}
+
+    @dataclasses.dataclass
+    class {{ dataclass.name }}:
+{% for field in dataclass.fields %}
+        {{ field.name }}: {{field.type}} = None
+{% endfor %}
+{% endfor %}
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
