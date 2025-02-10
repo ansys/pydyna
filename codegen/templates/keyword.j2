@@ -103,8 +103,8 @@ class {{keyword_data.classname}}(KeywordBase):
 {% endfor %}
     ]
 {% endif %}
-
 {% for dataclass in keyword_data.dataclasses %}
+
     @dataclasses.dataclass
     class {{ dataclass.name }}:
 {% for field in dataclass.fields %}
