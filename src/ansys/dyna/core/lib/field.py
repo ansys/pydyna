@@ -24,6 +24,8 @@ import copy
 import dataclasses
 import typing
 
+import pandas as pd
+
 
 @dataclasses.dataclass
 class Flag:
@@ -39,6 +41,9 @@ class Field:
         self._offset = offset
         self._width = width
         self._value = value
+
+    def __repr__(self) -> str:
+        return f"Field({self.name}, {self.type}, {self.offset}, {self.width}, {self.value})"
 
     @property
     def name(self) -> str:
@@ -74,20 +79,30 @@ class Field:
 
     @property
     def value(self) -> typing.Any:
-        if self._value and type(self._value) == Flag:
+        if self._truthy_value(self._value) and type(self._value) == Flag:
             return self._value.value
         return self._value
 
+    def _truthy_value(self, value) -> bool:
+        if pd.isna(value):
+            return False
+        return True if value else False
+
+    def _no_value_flag(self, value) -> bool:
+        return self._truthy_value(value) and type(value) is Flag
+
     @value.setter
     def value(self, value: typing.Any) -> None:
-        if self._value and type(self._value) == Flag:
+        no_value_flag = self._no_value_flag(value)
+        if no_value_flag:
             self._value.value = value
         else:
             self._value = value
 
     def io_info(self) -> typing.Tuple[str, typing.Type]:
         """Return the value and type used for io."""
-        if self._value and type(self._value) == Flag:
+        no_value_flag = self._no_value_flag(self._value)
+        if no_value_flag:
             value = self._value.true_value if self._value.value else self._value.false_value
             return value, str
         return self.value, self.type

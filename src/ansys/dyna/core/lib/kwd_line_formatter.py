@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import dataclasses
 import typing
 import warnings
 
@@ -82,7 +83,37 @@ def buffer_to_lines(buf: typing.TextIO, max_num_lines: int = -1) -> typing.List[
     return data_lines
 
 
-def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None) -> tuple:
+def _expand_spec(spec: typing.List[tuple]) -> typing.List[tuple]:
+    specs = []
+    for item in spec:
+        position, width, item_type = item
+        if dataclasses.is_dataclass(item_type):
+            offset = position
+            for field in dataclasses.fields(item_type):
+                item_spec = (offset, width, field.type)
+                offset = offset + width
+                specs.append(item_spec)
+        else:
+            specs.append(item)
+    return specs
+
+
+def _contract_data(spec: typing.List[tuple], data: typing.List) -> typing.Iterable:
+    iterspec = iter(spec)
+    iterdata = iter(data)
+    while True:
+        try:
+            _, _, item_type = next(iterspec)
+            if dataclasses.is_dataclass(item_type):
+                args = [next(iterdata) for f in dataclasses.fields(item_type)]
+                yield item_type(*args)
+            else:
+                yield next(iterdata)
+        except StopIteration:
+            return
+
+
+def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None) -> typing.List:
     """loads a keyword card line with fixed column offsets and width from string
     spec: list of tuples representing the (offset, width, type) of each field
     line_data: string with keyword data
@@ -126,9 +157,10 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         assert type(value) == item_type
         return value
 
+    expanded_spec = _expand_spec(spec)
     data = []
     end_position = 0
-    for item_spec in spec:
+    for item_spec in expanded_spec:
         position, width, item_type = item_spec
         end_position, text_block = seek_text_block(line_data, position, width)
         if not has_value(text_block):
@@ -150,4 +182,5 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         warning_message = f'Detected out of bound card characters:\n"{line_data[end_position:]}"\n"Ignoring.'
         warnings.warn(warning_message)
 
+    data = list(_contract_data(spec, data))
     return tuple(data)

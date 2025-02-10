@@ -754,6 +754,14 @@ def test_set_node_title(ref_string):
 
 
 @pytest.mark.keywords
+def test_set_node_list(ref_string):
+    s = kwd.SetNodeList()
+    with pytest.warns(UserWarning, match="Detected out of bound card characters"):
+        s.loads(ref_string.test_set_node_list)
+    assert len(s.nodes) == 8
+
+
+@pytest.mark.keywords
 def test_contact_1d(ref_string):
     c = kwd.Contact1D()
     c.options["ID"].active = True
@@ -821,6 +829,39 @@ def test_set_part_list(ref_string):
     s.parts._data = [1, 2, 3]
     ref = ref_string.test_set_part_list_ref
     assert s.write() == ref
+
+
+@pytest.mark.keywords
+def test_set_part_list_generate(ref_string):
+    s = kwd.SetPartListGenerate()
+    s.loads(ref_string.test_set_part_list_generate_ref1)
+    assert len(s.block_ranges) == 3
+    assert s.block_ranges[1].bend == 2000200
+
+    s.loads(ref_string.test_set_part_list_generate_ref2)
+    assert len(s.block_ranges) == 5
+    assert s.block_ranges[3].bbeg == 2000700
+
+    s.block_ranges.append((10,12))
+    assert len(s.block_ranges) == 6
+    assert s.block_ranges[5].bbeg == 10
+
+    s.block_ranges.data = [(0,2), [2,3]]
+    assert len(s.block_ranges) == 2
+    assert s.block_ranges[0] == kwd.SetPartListGenerate.BlockRange(0,2)
+    with pytest.raises(TypeError):
+        s.block_ranges.append((0,3,2))
+
+    s.block_ranges.append([200])
+    assert len(s.block_ranges) == 3
+    with pytest.raises(IndexError):
+        _ = s.block_ranges[4]
+    assert s.block_ranges[2].bbeg == 200
+    assert pd.isna(s.block_ranges[2].bend)
+
+    s.block_ranges[2].bend = 201
+    for block_range in s.block_ranges:
+        assert block_range.bbeg < block_range.bend
 
 
 @pytest.mark.keywords

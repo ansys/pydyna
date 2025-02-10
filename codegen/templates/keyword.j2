@@ -1,4 +1,7 @@
 {{license}}
+{% if keyword_data.dataclasses %}
+import dataclasses
+{% endif %}
 import typing
 {# TODO - only do this if there's a keyword without a default #}
 {% if keyword_data.mixin_imports %}
@@ -100,6 +103,14 @@ class {{keyword_data.classname}}(KeywordBase):
 {% endfor %}
     ]
 {% endif %}
+{% for dataclass in keyword_data.dataclasses %}
+
+    @dataclasses.dataclass
+    class {{ dataclass.name }}:
+{% for field in dataclass.fields %}
+        {{ field.name }}: {{field.type}} = None
+{% endfor %}
+{% endfor %}
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
