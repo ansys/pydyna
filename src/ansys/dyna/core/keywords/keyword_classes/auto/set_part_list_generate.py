@@ -24,9 +24,9 @@ import dataclasses
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
+from ansys.dyna.core.lib.variable_card import VariableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.variable_card import VariableCard
 
 class SetPartListGenerate(KeywordBase):
     """DYNA SET_PART_LIST_GENERATE keyword"""
@@ -92,7 +92,13 @@ class SetPartListGenerate(KeywordBase):
                     ),
                 ],
             ),
-            VariableCard("block_ranges", 8, 10, SetPartListGenerate.BlockRange),
+            VariableCard(
+                "block_ranges",
+                8,
+                10,
+                self.BlockRange,
+                None,
+                data = kwargs.get("block_ranges")),
             OptionCardSet(
                 option_spec = SetPartListGenerate.option_specs[0],
                 cards = [

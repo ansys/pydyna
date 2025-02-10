@@ -839,7 +839,9 @@ def test_set_part_list_generate(ref_string):
 
     s.loads(ref_string.test_set_part_list_generate_ref2)
     assert len(s.block_ranges) == 5
-    print(s.block_ranges.data)
+
+    #TODO -assign a list of tuples to it. check for throws if the any of the tuples are the wrong size
+
 
 
 @pytest.mark.keywords
