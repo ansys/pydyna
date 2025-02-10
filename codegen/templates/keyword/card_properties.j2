@@ -11,7 +11,7 @@
 
 {% elif card.variable %}
     @property
-    def {{card.variable.name}}(self) -> VariableCard:
+    def {{card.variable.name}}(self) -> SeriesCard:
         """{{card.variable.help}}"""
         return self._cards[{{card.index}}]
 
