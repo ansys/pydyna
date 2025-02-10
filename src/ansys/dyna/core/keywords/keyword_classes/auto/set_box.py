@@ -92,6 +92,10 @@ class SetBox(KeywordBase):
         """dynamic array of box set ids."""
         return self._cards[1]
 
+    @box.setter
+    def box(self, value: typing.List) -> None:
+        self._cards[1].data = value
+
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line

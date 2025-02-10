@@ -373,6 +373,10 @@ class SectionSolid(KeywordBase):
         """dynamic array of LMC property parameters."""
         return self._cards[3]
 
+    @pi.setter
+    def pi(self, value: typing.List) -> None:
+        self._cards[3].data = value
+
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line

@@ -183,7 +183,6 @@ class SetPartList(KeywordBase):
 
     @parts.setter
     def parts(self, value: typing.List) -> None:
-        """dynamic array of part ids."""
         self._cards[1].data = value
 
     @property

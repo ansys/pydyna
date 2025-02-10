@@ -181,6 +181,10 @@ class SetNodeAdd(KeywordBase):
         """dynamic array of node ids."""
         return self._cards[1]
 
+    @nodes.setter
+    def nodes(self, value: typing.List) -> None:
+        self._cards[1].data = value
+
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line

@@ -70,3 +70,7 @@ class MeshEmbedshell(KeywordBase):
         """dynamic array of surface element ids."""
         return self._cards[1]
 
+    @elements.setter
+    def elements(self, value: typing.List) -> None:
+        self._cards[1].data = value
+
