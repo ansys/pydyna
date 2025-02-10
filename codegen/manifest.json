@@ -1762,6 +1762,27 @@
             ]
         }
     },
+    "SET_PART_LIST_GENERATE": {
+        "generation-options": {
+            "variable-card": [
+                {
+                    "index": 1,
+                    "name": "block_ranges",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "struct",
+                    "struct-info": {
+                        "name": "BlockRange",
+                        "fields": [
+                            {"name": "bbeg", "type": "int"},
+                            {"name": "bend", "type": "int"}
+                        ]
+                    },
+                    "help": "Block ranges."
+                }
+            ]
+        }
+    },
     "SET_BEAM": {
         "generation-options": {
             "variable-card": [
