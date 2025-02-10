@@ -26,6 +26,7 @@ import typing
 import ansys.dyna.core
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 
 
 class IterState:
@@ -84,7 +85,13 @@ def _get_kwd_class_and_format(keyword_name: str) -> str:
     return keyword_object_type, format
 
 
-def _try_load_deck(deck: "ansys.dyna.core.deck.Deck", text: str, result: DeckLoaderResult) -> None:
+def _try_load_deck(
+    deck: "ansys.dyna.core.deck.Deck",
+    text: str,
+    result: DeckLoaderResult,
+    context: typing.Optional[ImportContext],
+    import_handlers: typing.List[ImportHandler]
+    ) -> None:
     lines = text.splitlines()
     iterator = iter(lines)
     iterstate = IterState.USERCOMMENT
@@ -127,13 +134,36 @@ def _try_load_deck(deck: "ansys.dyna.core.deck.Deck", text: str, result: DeckLoa
         assert len(block) == 2, "Title block can only have one line"
         deck.title = block[1]
 
+    def before_import(block: typing.List[str], keyword: str, keyword_data: str) -> bool:
+        if len(import_handlers) == 0:
+            return True
+
+        assert context != None
+        s = io.StringIO()
+        s.write(keyword_data)
+        s.seek(0)
+
+        for handler in import_handlers:
+            if not handler.before_import(context, keyword, s):
+                return False
+            s.seek(0)
+        return True
+
+    def after_import(keyword):
+        for handler in import_handlers:
+            handler.after_import(context, keyword)
+
     def handle_keyword(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
         keyword = block[0].strip()
         keyword_data = "\n".join(block)
+        do_import = before_import(block, keyword, keyword_data)
+        if not do_import:
+            return
         keyword_object_type, format = _get_kwd_class_and_format(keyword)
         if keyword_object_type == None:
             result.add_unprocessed_keyword(keyword)
             deck.append(keyword_data)
+            after_import(keyword_data)
         else:
             import ansys.dyna.core.keywords
 
@@ -144,9 +174,11 @@ def _try_load_deck(deck: "ansys.dyna.core.deck.Deck", text: str, result: DeckLoa
             try:
                 keyword_object.loads(keyword_data, deck.parameters)
                 deck.append(keyword_object)
+                after_import(keyword_object)
             except Exception as e:
                 result.add_unprocessed_keyword(keyword)
                 deck.append(keyword_data)
+                after_import(keyword_data)
 
     def handle_block(iterstate: int, block: typing.List[str]) -> bool:
         if iterstate == IterState.END:
@@ -185,7 +217,12 @@ def _try_load_deck(deck: "ansys.dyna.core.deck.Deck", text: str, result: DeckLoa
             return
 
 
-def load_deck(deck: "ansys.dyna.core.deck.Deck", text: str) -> DeckLoaderResult:
+def load_deck(
+    deck: "ansys.dyna.core.deck.Deck",
+    text: str,
+    context: typing.Optional[ImportContext],
+    import_handlers: typing.List[ImportHandler]
+    ) -> DeckLoaderResult:
     result = DeckLoaderResult()
-    _try_load_deck(deck, text, result)
+    _try_load_deck(deck, text, result, context, import_handlers)
     return result

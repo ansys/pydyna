@@ -26,6 +26,7 @@ import pandas as pd
 
 from ansys.dyna.core import Deck
 from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.import_handler import ImportHandler
 from ansys.dyna.core import keywords as kwd
 
 import pytest
@@ -74,11 +75,32 @@ def test_deck_002():
 
 @pytest.mark.keywords
 def test_deck_003(file_utils):
+    """Import the deck with a custom handler.
+
+    The custom handler skips all BOUNDARY_PRECRACK
+    and sets the nid1 property on ALE_SMOOTHING."""
     deck = Deck()
-    keyword_string = file_utils.read_file(file_utils.assets_folder / "test.k")
-    deck.loads(keyword_string)
+    filepath = file_utils.assets_folder / "test.k"
+    class TestImportHandler(ImportHandler):
+        def __init__(self):
+            self._num_keywords = 0
+        def before_import(self, context, keyword, buffer):
+            self._num_keywords += 1
+            if keyword == "*BOUNDARY_PRECRACK":
+                return False
+            return True
+        def after_import(self, context, keyword):
+            if isinstance(keyword, kwd.AleSmoothing):
+                keyword.nid1 = 1
+    import_handler = TestImportHandler()
+    deck.register_import_handler(import_handler)
+    deck.import_file(filepath)
     assert deck.title == "Basic 001"
-    assert len(deck._keywords) == 12
+    assert import_handler._num_keywords == 12
+    assert len(deck.keywords) == 11
+    assert len(deck.all_keywords) == 11
+    assert deck.get(type="ALE")[0].nid1 == 1
+
 
 
 @pytest.mark.keywords
@@ -357,9 +379,20 @@ def test_deck_expand_recursive_include_path(file_utils):
     deck.append(kwd.IncludePath(path=include_path2))
     deck.append(kwd.Include(filename='bird_B.k'))
     deck = deck.expand(recurse=True)
-    print(deck)
     assert len(deck.all_keywords) == 40
     assert len(deck.keywords) == 36
+
+@pytest.mark.keywords
+def test_deck_expand_transform(file_utils):
+    deck = Deck()
+    include_path = file_utils.get_asset_file_path("transform")
+    xform = kwd.IncludeTransform(filename = os.path.join(include_path, "test.k"))
+    xform.idnoff = 10
+    xform.ideoff = 40
+    deck.append(xform)
+    deck = deck.expand(recurse=True)
+    assert len(deck.keywords) == 3
+
 
 @pytest.mark.keywords
 def test_deck_unprocessed(ref_string):

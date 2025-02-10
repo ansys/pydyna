@@ -31,6 +31,7 @@ from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.parameter_set import ParameterSet
+from ansys.dyna.core.lib.import_handler import ImportHandler, ImportContext, FileImportContext
 
 
 class Deck:
@@ -43,6 +44,7 @@ class Deck:
         self.comment_header: str = None
         self.title: str = title
         self.format: format_type = kwargs.get("format", format_type.default)
+        self._import_handlers: typing.List[ImportHandler] = list()
 
     def __add__(self, other):
         """Add two decks together."""
@@ -57,6 +59,10 @@ class Deck:
         self.comment_header = None
         self.title = None
         self.format = format_type.default
+
+    def register_import_handler(self, import_handler: ImportHandler) -> None:
+        """Registers an ImportHandler object"""
+        self._import_handlers.append(import_handler)
 
     @property
     def parameters(self) -> ParameterSet:
@@ -295,7 +301,7 @@ class Deck:
 
         return write_or_return(buf, _write)
 
-    def loads(self, value: str) -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821
+    def loads(self, value: str, context: typing.Optional[ImportContext] = None) -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821
         """Load all keywords from the keyword file as a string.
 
         When adding all keywords from the file, this method
@@ -304,15 +310,17 @@ class Deck:
         Parameters
         ----------
         value : str
+        context: ImportContext
+            the context
 
         """
-        # import this only when loading to avoid the circular
-        # imports
-        # ansys.dyna.keywords imports deck, deck imports deck_loader,
-        # deck_loader imports ansys.dyna.keywords
-        from .deck_loader import load_deck
+        # import deck_loader only when loading to avoid circular imports
 
-        result = load_deck(self, value)
+        # ansys.dyna.keywords imports deck, deck imports deck_loader
+        # deck_loader imports ansys.dyna.keywords
+        from ansys.dyna.core.lib.deck_loader import load_deck
+
+        result = load_deck(self, value, context, self._import_handlers)
         return result
 
     def _check_unique(self, type: str, field: str) -> None:
@@ -413,9 +421,12 @@ class Deck:
         ----------
         path : str
             Full path for the keyword file.
+        encoding: str
+            String encoding used to read the keyword file.
         """
+        context = FileImportContext(self, path)
         with open(path, encoding=encoding) as f:
-            return self.loads(f.read())
+            return self.loads(f.read(), context)
 
     def export_file(self, path: str, encoding="utf-8") -> None:
         """Export the keyword file to a new keyword file.
