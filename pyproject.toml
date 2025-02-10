@@ -28,7 +28,6 @@ classifiers = [
 dependencies = ["ansys-dpf-core>=0.7.2",
                 "ansys-api-dyna==0.4.2",
                 "ansys-tools-path>=0.6.0",
-                "ansys-platform-instancemanagement~=1.0",
                 "pyvista>=0.43.4",
                 "hollerith>=0.6.0",
                 "numpy>=1",
@@ -37,6 +36,9 @@ dependencies = ["ansys-dpf-core>=0.7.2",
 ]
 
 [project.optional-dependencies]
+pim = [
+    "ansys-platform-instancemanagement~=1.0",
+]
 tests = [
     "matplotlib==3.10.0",
     "numpy==2.2.2",
