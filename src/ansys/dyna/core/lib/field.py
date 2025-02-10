@@ -22,8 +22,9 @@
 
 import copy
 import dataclasses
-import pandas as pd
 import typing
+
+import pandas as pd
 
 
 @dataclasses.dataclass

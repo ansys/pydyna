@@ -46,14 +46,14 @@ class VariableCard(CardInterface):
         length_func: typing.Callable = None,
         active_fn: typing.Callable = None,
         type_names: typing.Optional[typing.List[str]] = None,
-        data = None,
+        data=None,
         format: format_type = format_type.default,
     ):
         self._name = name
         self._fields_per_card = fields_per_card
         self._element_width = element_width
         self._active_func = active_fn
-        if (isinstance(input_type, list)):
+        if isinstance(input_type, list):
             self._type = self._make_struct_datatype(type_names, input_type)
         else:
             self._type = input_type
@@ -133,7 +133,6 @@ class VariableCard(CardInterface):
         write_comment_line(s, comment_fields, format)
         return s.getvalue()
 
-
     def _get_comment_scalar(self, count: int, format: format_type) -> str:
         element_width = self._get_width(format)
         element = " " * element_width
@@ -158,7 +157,10 @@ class VariableCard(CardInterface):
     def __get_value(self, index: int):
         if index < len(self._data):
             return self._data[index]
-        return self.__get_null_value()
+        if self._bounded:
+            return self.__get_null_value()
+        else:
+            raise IndexError(f"Accessing index {index} out of bound")
 
     # TODO this should be on an Array class
     def __get_null_value(self):
@@ -189,7 +191,7 @@ class VariableCard(CardInterface):
         return [self.__get_value(i) for i in range(start, end)]
 
     def _wrap_value(self, value):
-        if (isinstance(value, self._type)):
+        if isinstance(value, self._type):
             return value
         else:
             if self._uses_structure():
@@ -240,7 +242,7 @@ class VariableCard(CardInterface):
                 break
             start, end = self._get_card_range(index)
             size = end - start
-            values =  self._read_line(size, line)
+            values = self._read_line(size, line)
             for j, value in zip(range(start, end), values):
                 self[j] = value
 
@@ -261,7 +263,7 @@ class VariableCard(CardInterface):
                 print("Trailing spaces, TODO - write a test!")
                 line = line + " " * trailing_spaces
             max_amount = min(size, self._get_fields_per_card())
-            values =  self._read_line(max_amount, line)
+            values = self._read_line(max_amount, line)
             self.extend(values)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
@@ -343,4 +345,4 @@ class VariableCard(CardInterface):
     @data.setter
     def data(self, vallist: typing.List) -> None:
         self._initialize_data(0)
-        self._data.extend(vallist)
+        self.extend(vallist)

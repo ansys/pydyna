@@ -64,7 +64,7 @@ def _field_iterator(fields: typing.List[Field], long_format: bool) -> typing.Ite
             yield Field(name=None, type=None, offset=offset, width=empty_width)
             offset += empty_width
         assert pos == offset
-        if (dataclasses.is_dataclass(field.type)):
+        if dataclasses.is_dataclass(field.type):
             field_offset = field.offset
             total_width = 0
             for member in dataclasses.fields(field.type):

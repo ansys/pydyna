@@ -836,12 +836,29 @@ def test_set_part_list_generate(ref_string):
     s = kwd.SetPartListGenerate()
     s.loads(ref_string.test_set_part_list_generate_ref1)
     assert len(s.block_ranges) == 3
+    assert s.block_ranges[1].bend == 2000200
 
     s.loads(ref_string.test_set_part_list_generate_ref2)
     assert len(s.block_ranges) == 5
+    assert s.block_ranges[3].bbeg == 2000700
 
-    #TODO -assign a list of tuples to it. check for throws if the any of the tuples are the wrong size
+    s.block_ranges.append((10,12))
+    assert len(s.block_ranges) == 6
+    assert s.block_ranges[5].bbeg == 10
 
+    s.block_ranges.data = [(0,2), [2,3]]
+    assert len(s.block_ranges) == 2
+    print(s.block_ranges[0])
+    assert s.block_ranges[0] == kwd.SetPartListGenerate.BlockRange(0,2)
+    with pytest.raises(TypeError):
+        s.block_ranges.append((0,3,2))
+
+    s.block_ranges.append([200])
+    assert len(s.block_ranges) == 3
+    with pytest.raises(IndexError):
+        _ = s.block_ranges[4]
+    assert s.block_ranges[2].bbeg == 200
+    assert pd.isna(s.block_ranges[2].bend)
 
 
 @pytest.mark.keywords
