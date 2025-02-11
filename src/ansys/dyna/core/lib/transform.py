@@ -20,4 +20,43 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Transformation handler for INCLUDE_TRANSFORM"""
+"""Transformation handler for INCLUDE_TRANSFORM."""
+import typing
+import warnings
+
+from ansys.dyna.core import keywords as kwd
+from ansys.dyna.core.lib.import_handler import ImportHandler, ImportContext
+from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.transforms.base_transform import Transform
+from ansys.dyna.core.lib.transforms.node_transform import TransformNode
+from ansys.dyna.core.lib.transforms.element_transform import TransformElement
+
+class TransformHandler(ImportHandler):
+    def __init__(self):
+        self._handlers: typing.Dict[typing.Union[str, typing.Tuple[str,str]], Transform] = {
+            "NODE": TransformNode,
+            "ELEMENT": TransformElement,
+        }
+
+    def register_transform_handler(self, identity: typing.Union[str, typing.Tuple[str,str]], handler: Transform) -> None:
+        self._handlers[identity] = handler
+
+    def after_import(self, context: ImportContext, keyword: typing.Union[KeywordBase, str]) -> None:
+        if isinstance(keyword, str):
+            return
+        if context.xform is None:
+            return
+        # first try to get the specialized handler for the keyword + subkeyword
+        identity = (keyword.keyword, keyword.subkeyword)
+        handler = self._handlers.get(identity, None)
+        if handler is None:
+            # then try to get the handler for the keyword
+            identity = keyword.keyword
+            handler = self._handlers.get(identity, None)
+            if handler is None:
+                warnings.warn()
+                return
+
+        # if a handler was found, initialize it with the xform from the context
+        # and transform the keyword with it
+        handler(context.xform).transform(keyword)

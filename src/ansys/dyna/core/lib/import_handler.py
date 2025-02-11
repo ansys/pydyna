@@ -22,35 +22,25 @@
 
 """Import handler used by the import deck feature"""
 
-import abc
+import dataclasses
 import typing
+import warnings
 
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.parameter_set import ParameterSet
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
-class ImportContextType:
-    FROM_FILE = 0
-    FROM_EXPAND = 1
-
+@dataclasses.dataclass
 class ImportContext:
-    @property
-    def context_type(self) -> ImportContextType:
-        return self._context_type
+    """Optional transformation to apply, using type `IncludeTransform`"""
+    xform: typing.Any = None
 
-class FileImportContext(ImportContext):
-    def __init__(self, deck, path: str):
-        self._context_type = ImportContextType.FROM_FILE
-        self._deck = deck
-        self._path = path
+    """Deck into which the import is occuring."""
+    deck: typing.Any = None
 
-    @property
-    def deck(self):
-        return self._deck
+    """Path of file that is importing."""
+    path: str = None
 
-    @property
-    def path(self):
-        return self._path
 
 class ImportHandler():
     """Base class for import handlers."""
@@ -75,3 +65,7 @@ class ImportHandler():
         Depending on the `context` is a
         """
         pass
+
+    def on_error(self, error):
+        # TODO - use logging
+        warnings.warn(f"error in importhandler {self}: {error}")

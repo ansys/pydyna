@@ -149,6 +149,10 @@ def _try_load_deck(
             s.seek(0)
         return True
 
+    def on_error(error):
+        for handler in import_handlers:
+            handler.on_error(error)
+
     def after_import(keyword):
         for handler in import_handlers:
             handler.after_import(context, keyword)
@@ -176,6 +180,7 @@ def _try_load_deck(
                 deck.append(keyword_object)
                 after_import(keyword_object)
             except Exception as e:
+                on_error(e)
                 result.add_unprocessed_keyword(keyword)
                 deck.append(keyword_data)
                 after_import(keyword_data)

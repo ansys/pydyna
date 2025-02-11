@@ -31,8 +31,8 @@ from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.parameter_set import ParameterSet
-from ansys.dyna.core.lib.import_handler import ImportHandler, ImportContext, FileImportContext
-
+from ansys.dyna.core.lib.import_handler import ImportHandler, ImportContext
+from ansys.dyna.core.lib.transform import TransformHandler
 
 class Deck:
     """Provides a collection of keywords that can read and write to a keyword file."""
@@ -45,6 +45,7 @@ class Deck:
         self.title: str = title
         self.format: format_type = kwargs.get("format", format_type.default)
         self._import_handlers: typing.List[ImportHandler] = list()
+        self._transform_handler = TransformHandler()
 
     def __add__(self, other):
         """Add two decks together."""
@@ -59,6 +60,10 @@ class Deck:
         self.comment_header = None
         self.title = None
         self.format = format_type.default
+
+    @property
+    def transform_handler(self) -> TransformHandler:
+        return self._transform_handler
 
     def register_import_handler(self, import_handler: ImportHandler) -> None:
         """Registers an ImportHandler object"""
@@ -180,8 +185,16 @@ class Deck:
             for search_path in search_paths:
                 include_file = os.path.join(search_path, keyword.filename)
                 include_deck = Deck(format=keyword.format)
+                for import_handler in self._import_handlers:
+                    include_deck.register_import_handler(import_handler)
                 try:
-                    include_deck.import_file(include_file)
+                    xform = None
+                    if keyword.subkeyword == "TRANSFORM":
+                        xform = keyword
+                        include_deck.register_import_handler(self.transform_handler)
+                    context = ImportContext(xform, self, include_file)
+                    encoding = "utf-8" # TODO - how to control encoding in expand?
+                    include_deck._import_file(include_file, "utf-8", context)
                     success = True
                     break
                 except FileNotFoundError:
@@ -412,8 +425,13 @@ class Deck:
             return [kwd for kwd in kwds if kwargs["filter"](kwd)]
         return kwds
 
+    def _import_file(self, path: str, encoding: str, context: ImportContext):
+        with open(path, encoding=encoding) as f:
+            return self.loads(f.read(), context)
+
+
     def import_file(
-        self, path: str, encoding="utf-8"
+        self, path: str, encoding: str="utf-8"
     ) -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821
         """Import a keyword file.
 
@@ -424,9 +442,8 @@ class Deck:
         encoding: str
             String encoding used to read the keyword file.
         """
-        context = FileImportContext(self, path)
-        with open(path, encoding=encoding) as f:
-            return self.loads(f.read(), context)
+        context = ImportContext(None, self, path)
+        self._import_file(path, encoding, context)
 
     def export_file(self, path: str, encoding="utf-8") -> None:
         """Export the keyword file to a new keyword file.
