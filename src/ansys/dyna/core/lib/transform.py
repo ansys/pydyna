@@ -24,21 +24,23 @@
 import typing
 import warnings
 
-from ansys.dyna.core import keywords as kwd
-from ansys.dyna.core.lib.import_handler import ImportHandler, ImportContext
+from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.transforms.base_transform import Transform
-from ansys.dyna.core.lib.transforms.node_transform import TransformNode
 from ansys.dyna.core.lib.transforms.element_transform import TransformElement
+from ansys.dyna.core.lib.transforms.node_transform import TransformNode
+
 
 class TransformHandler(ImportHandler):
     def __init__(self):
-        self._handlers: typing.Dict[typing.Union[str, typing.Tuple[str,str]], Transform] = {
+        self._handlers: typing.Dict[typing.Union[str, typing.Tuple[str, str]], Transform] = {
             "NODE": TransformNode,
             "ELEMENT": TransformElement,
         }
 
-    def register_transform_handler(self, identity: typing.Union[str, typing.Tuple[str,str]], handler: Transform) -> None:
+    def register_transform_handler(
+        self, identity: typing.Union[str, typing.Tuple[str, str]], handler: Transform
+    ) -> None:
         self._handlers[identity] = handler
 
     def after_import(self, context: ImportContext, keyword: typing.Union[KeywordBase, str]) -> None:

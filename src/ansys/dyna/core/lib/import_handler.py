@@ -26,23 +26,23 @@ import dataclasses
 import typing
 import warnings
 
-from ansys.dyna.core.lib.format_type import format_type
-from ansys.dyna.core.lib.parameter_set import ParameterSet
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
 
 @dataclasses.dataclass
 class ImportContext:
     """Optional transformation to apply, using type `IncludeTransform`"""
+
     xform: typing.Any = None
 
-    """Deck into which the import is occuring."""
+    """Deck into which the import is occurring."""
     deck: typing.Any = None
 
     """Path of file that is importing."""
     path: str = None
 
 
-class ImportHandler():
+class ImportHandler:
     """Base class for import handlers."""
 
     def before_import(self, context: ImportContext, keyword: str, buffer: typing.TextIO):

@@ -25,8 +25,8 @@ import typing
 
 import ansys.dyna.core
 from ansys.dyna.core.lib.format_type import format_type
-from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
+from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 
 class IterState:
@@ -90,8 +90,8 @@ def _try_load_deck(
     text: str,
     result: DeckLoaderResult,
     context: typing.Optional[ImportContext],
-    import_handlers: typing.List[ImportHandler]
-    ) -> None:
+    import_handlers: typing.List[ImportHandler],
+) -> None:
     lines = text.splitlines()
     iterator = iter(lines)
     iterstate = IterState.USERCOMMENT
@@ -226,8 +226,8 @@ def load_deck(
     deck: "ansys.dyna.core.deck.Deck",
     text: str,
     context: typing.Optional[ImportContext],
-    import_handlers: typing.List[ImportHandler]
-    ) -> DeckLoaderResult:
+    import_handlers: typing.List[ImportHandler],
+) -> DeckLoaderResult:
     result = DeckLoaderResult()
     _try_load_deck(deck, text, result, context, import_handlers)
     return result

@@ -25,9 +25,10 @@
 from ansys.dyna.core import keywords as kwd
 from ansys.dyna.core.lib.transforms.base_transform import Transform
 
+
 class TransformNode(Transform):
     def transform(self, keyword: kwd.Node) -> None:
         offset = self._xform.idnoff
         if offset is None or offset == 0:
             return
-        keyword.nodes['nid'] = keyword.nodes['nid'] + offset
+        keyword.nodes["nid"] = keyword.nodes["nid"] + offset

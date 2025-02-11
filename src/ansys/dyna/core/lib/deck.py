@@ -28,11 +28,12 @@ from typing import Union
 import warnings
 
 from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.parameter_set import ParameterSet
-from ansys.dyna.core.lib.import_handler import ImportHandler, ImportContext
 from ansys.dyna.core.lib.transform import TransformHandler
+
 
 class Deck:
     """Provides a collection of keywords that can read and write to a keyword file."""
@@ -193,7 +194,7 @@ class Deck:
                         xform = keyword
                         include_deck.register_import_handler(self.transform_handler)
                     context = ImportContext(xform, self, include_file)
-                    encoding = "utf-8" # TODO - how to control encoding in expand?
+                    encoding = "utf-8"  # TODO - how to control encoding in expand?
                     include_deck._import_file(include_file, "utf-8", context)
                     success = True
                     break
@@ -314,7 +315,9 @@ class Deck:
 
         return write_or_return(buf, _write)
 
-    def loads(self, value: str, context: typing.Optional[ImportContext] = None) -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821
+    def loads(
+        self, value: str, context: typing.Optional[ImportContext] = None
+    ) -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821
         """Load all keywords from the keyword file as a string.
 
         When adding all keywords from the file, this method
@@ -429,9 +432,8 @@ class Deck:
         with open(path, encoding=encoding) as f:
             return self.loads(f.read(), context)
 
-
     def import_file(
-        self, path: str, encoding: str="utf-8"
+        self, path: str, encoding: str = "utf-8"
     ) -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821
         """Import a keyword file.
 
