@@ -389,10 +389,48 @@ def test_deck_expand_transform(file_utils):
     xform = kwd.IncludeTransform(filename = os.path.join(include_path, "test.k"))
     xform.idnoff = 10
     xform.ideoff = 40
+    xform.idpoff = 100
     deck.append(xform)
     deck = deck.expand(recurse=True)
     assert len(deck.keywords) == 3
+    assert deck.keywords[0].elements["eid"][2] == 47
+    assert deck.keywords[0].elements["pid"][5] == 101
+    assert deck.keywords[0].elements["n1"][1] == 11
+    assert deck.keywords[0].elements["n8"][2] == 0
+    assert deck.keywords[0].elements["n5"][3] == 15
+    assert deck.keywords[1].elements["eid"][3] == 45043
+    assert deck.keywords[1].elements["pid"][0] == 145
+    assert deck.keywords[1].elements["n1"][1] == 31
+    assert pd.isna(deck.keywords[1].elements["n2"][2])
+    assert deck.keywords[1].elements["n3"][0] == 22
+    assert deck.keywords[2].nodes["nid"][0] == 11
+    assert deck.keywords[2].nodes["nid"][20] == 31
 
+@pytest.mark.keywords
+def test_deck_expand_transform_custom_handler(file_utils):
+    """Test using a custom transform handler as an override."""
+    deck = Deck()
+    include_path = file_utils.get_asset_file_path("transform")
+    xform = kwd.IncludeTransform(filename = os.path.join(include_path, "test.k"))
+    xform.idnoff = 10
+    xform.ideoff = 40
+    xform.idpoff = 100
+    deck.append(xform)
+
+    from ansys.dyna.core.lib.transform import Transform
+
+    class TransformElementBeam(Transform):
+        def transform(self, keyword):
+            self._transform_part_ids(keyword.elements)
+        def _transform_part_ids(self, elements: pd.DataFrame):
+            offset = -1
+            elements['pid'] = elements['pid'] + offset
+
+    deck.transform_handler.register_transform_handler(("ELEMENT", "BEAM"), TransformElementBeam)
+    deck = deck.expand(recurse=True)
+    assert len(deck.keywords) == 3
+    assert deck.keywords[1].elements["pid"][0] == 44
+    assert deck.keywords[1].elements["pid"][3] == 44
 
 @pytest.mark.keywords
 def test_deck_unprocessed(ref_string):
