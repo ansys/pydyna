@@ -1022,6 +1022,45 @@ $#       k     gama1     gama2        eh
 $#  lcunld        hu     shape      stol     visco    hisout
          0       1.0       0.0       0.0       0.0       0.0"""
 
+
+test_mat_196_ref_in = """*MAT_GENERAL_SPRING_DISCRETE_BEAM_TITLE
+Default MAT196 MAT_GENERAL_SPRING_DISCRETE_BEAM
+  59000001        1.
+         1         0     1000.      0.01                    
+                                                            
+         2         0       10.      0.01                    
+                                                            
+         3         0       10.      0.01                    
+                                                            
+         4         0     0.001     1.E-8                    
+                                                            
+         5         0  1000000.        1.                    
+                                                            
+         6         0  1000000.        1.                    
+                                             """
+
+
+test_mat_196_ref_out = """*MAT_GENERAL_SPRING_DISCRETE_BEAM_TITLE
+$#                                                                         title
+Default MAT196 MAT_GENERAL_SPRING_DISCRETE_BEAM                                 
+$#     mid        ro    unused    unused    unused    unused    unused    dospot
+  59000001       1.0                                                            
+$#     dof      type         k         d       cdf       tdf
+         1         0    1000.0      0.01                    
+$#   flcid     hlcid        c1        c2       dle     glcid
+                                                            
+         2         0      10.0      0.01                    
+                                                            
+         3         0      10.0      0.01                    
+                                                            
+         4         0     0.001     1e-08                    
+                                                            
+         5         0 1000000.0       1.0                    
+                                                            
+         6         0 1000000.0       1.0                    
+                                                            """
+
+
 test_mat_295_ref = """*MAT_295
 $#     mid       rho      aopt
          1     0.001       2.0
