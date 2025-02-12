@@ -84,6 +84,107 @@ def _get_kwd_class_and_format(keyword_name: str) -> str:
         keyword_object_type = TypeMapping.get(keyword_name, None)
     return keyword_object_type, format
 
+def _update_iterstate(line: str):
+    if line.startswith("*KEYWORD"):
+        return IterState.KEYWORD_BLOCK
+    if line.startswith("*TITLE"):
+        return IterState.TITLE
+    if line.startswith("*END"):
+        return IterState.END
+    return IterState.KEYWORDS
+
+def _update_deck_format(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
+    assert len(block) == 1
+    line = block[0].upper()
+    if "LONG" in line:
+        format_setter = line[line.find("LONG") + 4 :].strip()
+        tokens = format_setter.split("=")
+        assert len(tokens) >= 2
+        format = tokens[1]
+        if format == "S":
+            deck.format = format_type.default
+        if format == "K":
+            deck.format = format_type.standard
+        if format == "Y":
+            deck.format = format_type.long
+
+def _update_deck_comment(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
+    def remove_comment_symbol(line: str):
+        if not line.startswith("$"):
+            raise Exception("Only comments can precede *KEYWORD")
+        return line[1:]
+
+    block_without_comment_symbol = [remove_comment_symbol(line) for line in block]
+    deck.comment_header = "\n".join(block_without_comment_symbol)
+
+def _before_import(block: typing.List[str], keyword: str, keyword_data: str, import_handlers: typing.List[ImportHandler], context: ImportContext) -> bool:
+    if len(import_handlers) == 0:
+        return True
+
+    assert context != None
+    s = io.StringIO()
+    s.write(keyword_data)
+    s.seek(0)
+
+    for handler in import_handlers:
+        if not handler.before_import(context, keyword, s):
+            return False
+        s.seek(0)
+    return True
+
+def _update_deck_title(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
+    block = [line for line in block if not line.startswith("$")]
+    assert len(block) == 2, "Title block can only have one line"
+    deck.title = block[1]
+
+def _on_error(error, import_handlers: typing.List[ImportHandler]):
+    for handler in import_handlers:
+        handler.on_error(error)
+
+def _after_import(keyword, import_handlers: typing.List[ImportHandler], context: ImportContext):
+    for handler in import_handlers:
+        handler.after_import(context, keyword)
+
+def _handle_keyword(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck", import_handlers: typing.List[ImportHandler], result: DeckLoaderResult, context: ImportContext) -> None:
+    keyword = block[0].strip()
+    keyword_data = "\n".join(block)
+    do_import = _before_import(block, keyword, keyword_data, import_handlers, context)
+    if not do_import:
+        return
+    keyword_object_type, format = _get_kwd_class_and_format(keyword)
+    if keyword_object_type == None:
+        result.add_unprocessed_keyword(keyword)
+        deck.append(keyword_data)
+        _after_import(keyword_data, import_handlers, context)
+    else:
+        import ansys.dyna.core.keywords
+
+        keyword_object: KeywordBase = getattr(ansys.dyna.core.keywords, keyword_object_type)()
+        if format == format_type.default:
+            format = deck.format
+        keyword_object.format = format
+        try:
+            keyword_object.loads(keyword_data, deck.parameters)
+            deck.append(keyword_object)
+            _after_import(keyword_object, import_handlers, context)
+        except Exception as e:
+            _on_error(e, import_handlers)
+            result.add_unprocessed_keyword(keyword)
+            deck.append(keyword_data)
+            _after_import(keyword_data, import_handlers, context)
+
+def _handle_block(iterstate: int, deck: "ansys.dyna.core.deck.Deck", block: typing.List[str], import_handlers: typing.List[ImportHandler], result: DeckLoaderResult, context: ImportContext) -> bool:
+    if iterstate == IterState.END:
+        return True
+    if iterstate == IterState.USERCOMMENT:
+        _update_deck_comment(block, deck)
+    elif iterstate == IterState.KEYWORD_BLOCK:
+        _update_deck_format(block, deck)
+    elif iterstate == IterState.TITLE:
+        _update_deck_title(block, deck)
+    else:
+        _handle_keyword(block, deck, import_handlers, result, context)
+    return False
 
 def _try_load_deck(
     deck: "ansys.dyna.core.deck.Deck",
@@ -92,123 +193,24 @@ def _try_load_deck(
     context: typing.Optional[ImportContext],
     import_handlers: typing.List[ImportHandler],
 ) -> None:
+
     lines = text.splitlines()
     iterator = iter(lines)
     iterstate = IterState.USERCOMMENT
-
-    def update_iterstate(line: str):
-        if line.startswith("*KEYWORD"):
-            return IterState.KEYWORD_BLOCK
-        if line.startswith("*TITLE"):
-            return IterState.TITLE
-        if line.startswith("*END"):
-            return IterState.END
-        return IterState.KEYWORDS
-
-    def update_deck_format(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
-        assert len(block) == 1
-        line = block[0].upper()
-        if "LONG" in line:
-            format_setter = line[line.find("LONG") + 4 :].strip()
-            tokens = format_setter.split("=")
-            assert len(tokens) >= 2
-            format = tokens[1]
-            if format == "S":
-                deck.format = format_type.default
-            if format == "K":
-                deck.format = format_type.standard
-            if format == "Y":
-                deck.format = format_type.long
-
-    def update_deck_comment(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
-        def remove_comment_symbol(line: str):
-            if not line.startswith("$"):
-                raise Exception("Only comments can precede *KEYWORD")
-            return line[1:]
-
-        block_without_comment_symbol = [remove_comment_symbol(line) for line in block]
-        deck.comment_header = "\n".join(block_without_comment_symbol)
-
-    def update_deck_title(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
-        block = [line for line in block if not line.startswith("$")]
-        assert len(block) == 2, "Title block can only have one line"
-        deck.title = block[1]
-
-    def before_import(block: typing.List[str], keyword: str, keyword_data: str) -> bool:
-        if len(import_handlers) == 0:
-            return True
-
-        assert context != None
-        s = io.StringIO()
-        s.write(keyword_data)
-        s.seek(0)
-
-        for handler in import_handlers:
-            if not handler.before_import(context, keyword, s):
-                return False
-            s.seek(0)
-        return True
-
-    def on_error(error):
-        for handler in import_handlers:
-            handler.on_error(error)
-
-    def after_import(keyword):
-        for handler in import_handlers:
-            handler.after_import(context, keyword)
-
-    def handle_keyword(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
-        keyword = block[0].strip()
-        keyword_data = "\n".join(block)
-        do_import = before_import(block, keyword, keyword_data)
-        if not do_import:
-            return
-        keyword_object_type, format = _get_kwd_class_and_format(keyword)
-        if keyword_object_type == None:
-            result.add_unprocessed_keyword(keyword)
-            deck.append(keyword_data)
-            after_import(keyword_data)
-        else:
-            import ansys.dyna.core.keywords
-
-            keyword_object: KeywordBase = getattr(ansys.dyna.core.keywords, keyword_object_type)()
-            if format == format_type.default:
-                format = deck.format
-            keyword_object.format = format
-            try:
-                keyword_object.loads(keyword_data, deck.parameters)
-                deck.append(keyword_object)
-                after_import(keyword_object)
-            except Exception as e:
-                on_error(e)
-                result.add_unprocessed_keyword(keyword)
-                deck.append(keyword_data)
-                after_import(keyword_data)
-
-    def handle_block(iterstate: int, block: typing.List[str]) -> bool:
-        if iterstate == IterState.END:
-            return True
-        if iterstate == IterState.USERCOMMENT:
-            update_deck_comment(block, deck)
-        elif iterstate == IterState.KEYWORD_BLOCK:
-            update_deck_format(block, deck)
-        elif iterstate == IterState.TITLE:
-            update_deck_title(block, deck)
-        else:
-            handle_keyword(block, deck)
-        return False
-
     block = []
     while True:
+        close_previous_block = False
         try:
             line = next(iterator)
             if line.startswith("*"):
+                close_previous_block = True
+            if close_previous_block:
                 # handle the previous block
-                end = handle_block(iterstate, block)
+                end = _handle_block(iterstate, deck, block, import_handlers, result, context)
                 if end:
                     return
                 # set the new iterstate, start building the next block
-                iterstate = update_iterstate(line)
+                iterstate = _update_iterstate(line)
                 block = [line]
             else:
                 if iterstate == IterState.KEYWORD_BLOCK:
@@ -218,9 +220,8 @@ def _try_load_deck(
                 else:
                     block.append(line)
         except StopIteration:
-            handle_block(iterstate, block)
+            _handle_block(iterstate, deck, block, import_handlers, result, context)
             return
-
 
 def load_deck(
     deck: "ansys.dyna.core.deck.Deck",
