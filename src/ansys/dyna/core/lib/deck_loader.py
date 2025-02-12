@@ -186,22 +186,25 @@ def _handle_block(iterstate: int, deck: "ansys.dyna.core.deck.Deck", block: typi
         _handle_keyword(block, deck, import_handlers, result, context)
     return False
 
-def _try_load_deck(
+
+def _try_load_deck_from_buffer(
     deck: "ansys.dyna.core.deck.Deck",
-    text: str,
+    buffer: typing.TextIO,
     result: DeckLoaderResult,
     context: typing.Optional[ImportContext],
     import_handlers: typing.List[ImportHandler],
 ) -> None:
 
-    lines = text.splitlines()
-    iterator = iter(lines)
     iterstate = IterState.USERCOMMENT
     block = []
     while True:
         close_previous_block = False
         try:
-            line = next(iterator)
+            line = buffer.readline()
+            if len(line) == 0:
+                _handle_block(iterstate, deck, block, import_handlers, result, context)
+                return
+            line = line.rstrip('\n')
             if line.startswith("*"):
                 close_previous_block = True
             if close_previous_block:
@@ -230,5 +233,18 @@ def load_deck(
     import_handlers: typing.List[ImportHandler],
 ) -> DeckLoaderResult:
     result = DeckLoaderResult()
-    _try_load_deck(deck, text, result, context, import_handlers)
+    buffer = io.StringIO()
+    buffer.write(text)
+    buffer.seek(0)
+    _try_load_deck_from_buffer(deck, buffer, result, context, import_handlers)
+    return result
+
+def load_deck_from_buffer(
+    deck: "ansys.dyna.core.deck.Deck",
+    buffer: typing.TextIO,
+    context: typing.Optional[ImportContext],
+    import_handlers: typing.List[ImportHandler],
+) -> DeckLoaderResult:
+    result = DeckLoaderResult()
+    _try_load_deck_from_buffer(deck, buffer, result, context, import_handlers)
     return result

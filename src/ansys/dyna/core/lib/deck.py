@@ -429,8 +429,10 @@ class Deck:
         return kwds
 
     def _import_file(self, path: str, encoding: str, context: ImportContext):
+        from ansys.dyna.core.lib.deck_loader import load_deck_from_buffer
+
         with open(path, encoding=encoding) as f:
-            return self.loads(f.read(), context)
+            return load_deck_from_buffer(self, f, context, self._import_handlers)
 
     def import_file(
         self, path: str, encoding: str = "utf-8"
