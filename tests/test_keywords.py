@@ -714,14 +714,13 @@ def test_mat_simplified_rubber_foam_with_failure_log_log_interpolation_read(ref_
 
 
 def test_mat_196_read(ref_string):
-    ref_mat_196_in = ref_string.test_mat_196_ref_in
     m = kwd.Mat196()
     m_alias = kwd.MatGeneralSpringDiscreteBeam()
-    m.loads(ref_mat_196_in)
-    m_alias.loads(ref_mat_196_in)
+    m.loads(ref_string.test_mat_196_ref_in)
+    m_alias.loads(ref_string.test_mat_general_spring_discrete_beam_ref_in)
     assert (m.springs['dof'] == m_alias.springs['dof']).all() == True
-    assert m.write() == ref_string.ref_mat_196_out
-    assert m_alias.write() == ref_string.ref_mat_196_out
+    assert m.write() == ref_string.test_mat_196_ref_out
+    assert m_alias.write() == ref_string.test_mat_general_spring_discrete_beam_ref_out
 
 
 @pytest.mark.keywords
