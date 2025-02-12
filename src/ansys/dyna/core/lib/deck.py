@@ -178,7 +178,8 @@ class Deck:
         """Recursively outputs a list of keywords within Includes."""
         keywords = []
         for keyword in self.all_keywords:
-            if isinstance(keyword, str):
+            if not isinstance(keyword, KeywordBase):
+                print(keyword)
                 keywords.append(keyword)
                 continue
             if keyword.keyword != "INCLUDE":

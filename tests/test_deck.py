@@ -451,18 +451,17 @@ def _verify_encrypted_deck(deck):
 def test_deck_encrypted_import(file_utils):
     """Import an encrypted file as a deck."""
     deck = Deck()
-    filepath = file_utils.assets_folder / "test_input_deck_1_1024bit.asc"
-    deck.import_file(filepath)
+    filename = file_utils.assets_folder / "test_input_deck_1_1024bit.asc"
+    deck.import_file(filename)
     _verify_encrypted_deck(deck)
 
 @pytest.mark.keywords
 def test_deck_encrypted_import_expand(file_utils):
     """Import an encrypted file as a deck."""
-    assert len(expanded_deck.keywords) == 12
-    assert expanded_deck.keywords[1].format == format_type.standard
     deck = Deck()
-    filepath = file_utils.assets_folder / "test_input_deck_1_1024bit.asc"
-    expanded_deck = deck.expand()
+    filename = file_utils.assets_folder / "test_input_deck_1_1024bit.asc"
+    deck.append(kwd.Include(filename=filename))
+    deck = deck.expand()
     _verify_encrypted_deck(deck)
 
 @pytest.mark.keywords
