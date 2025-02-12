@@ -24,10 +24,10 @@ import io
 import typing
 
 import ansys.dyna.core
+from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 
 
 class IterState:
@@ -86,6 +86,7 @@ def _get_kwd_class_and_format(keyword_name: str) -> str:
         keyword_object_type = TypeMapping.get(keyword_name, None)
     return keyword_object_type, format
 
+
 def _update_iterstate(line: str):
     if line.startswith("*KEYWORD"):
         return IterState.KEYWORD_BLOCK
@@ -96,6 +97,7 @@ def _update_iterstate(line: str):
     if "BEGIN PGP MESSAGE" in line:
         return IterState.ENCRYPTED
     return IterState.KEYWORDS
+
 
 def _update_deck_format(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
     assert len(block) == 1
@@ -112,6 +114,7 @@ def _update_deck_format(block: typing.List[str], deck: "ansys.dyna.core.deck.Dec
         if format == "Y":
             deck.format = format_type.long
 
+
 def _update_deck_comment(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
     def remove_comment_symbol(line: str):
         if not line.startswith("$"):
@@ -121,7 +124,14 @@ def _update_deck_comment(block: typing.List[str], deck: "ansys.dyna.core.deck.De
     block_without_comment_symbol = [remove_comment_symbol(line) for line in block]
     deck.comment_header = "\n".join(block_without_comment_symbol)
 
-def _before_import(block: typing.List[str], keyword: str, keyword_data: str, import_handlers: typing.List[ImportHandler], context: ImportContext) -> bool:
+
+def _before_import(
+    block: typing.List[str],
+    keyword: str,
+    keyword_data: str,
+    import_handlers: typing.List[ImportHandler],
+    context: ImportContext,
+) -> bool:
     if len(import_handlers) == 0:
         return True
 
@@ -136,20 +146,30 @@ def _before_import(block: typing.List[str], keyword: str, keyword_data: str, imp
         s.seek(0)
     return True
 
+
 def _update_deck_title(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
     block = [line for line in block if not line.startswith("$")]
     assert len(block) == 2, "Title block can only have one line"
     deck.title = block[1]
 
+
 def _on_error(error, import_handlers: typing.List[ImportHandler]):
     for handler in import_handlers:
         handler.on_error(error)
+
 
 def _after_import(keyword, import_handlers: typing.List[ImportHandler], context: ImportContext):
     for handler in import_handlers:
         handler.after_import(context, keyword)
 
-def _handle_keyword(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck", import_handlers: typing.List[ImportHandler], result: DeckLoaderResult, context: ImportContext) -> None:
+
+def _handle_keyword(
+    block: typing.List[str],
+    deck: "ansys.dyna.core.deck.Deck",
+    import_handlers: typing.List[ImportHandler],
+    result: DeckLoaderResult,
+    context: ImportContext,
+) -> None:
     keyword = block[0].strip()
     keyword_data = "\n".join(block)
     do_import = _before_import(block, keyword, keyword_data, import_handlers, context)
@@ -177,7 +197,15 @@ def _handle_keyword(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck", 
             deck.append(keyword_data)
             _after_import(keyword_data, import_handlers, context)
 
-def _handle_block(iterstate: int, deck: "ansys.dyna.core.deck.Deck", block: typing.List[str], import_handlers: typing.List[ImportHandler], result: DeckLoaderResult, context: ImportContext) -> bool:
+
+def _handle_block(
+    iterstate: int,
+    deck: "ansys.dyna.core.deck.Deck",
+    block: typing.List[str],
+    import_handlers: typing.List[ImportHandler],
+    result: DeckLoaderResult,
+    context: ImportContext,
+) -> bool:
     if iterstate == IterState.END:
         return True
     if iterstate == IterState.USERCOMMENT:
@@ -209,7 +237,7 @@ def _try_load_deck_from_buffer(
             if len(line) == 0:
                 _handle_block(iterstate, deck, block, import_handlers, result, context)
                 return
-            line = line.rstrip('\n')
+            line = line.rstrip("\n")
             if line.startswith("*"):
                 close_previous_block = True
             if "BEGIN PGP MESSAGE" in line:
@@ -244,6 +272,7 @@ def _try_load_deck_from_buffer(
             _handle_block(iterstate, deck, block, import_handlers, result, context)
             return
 
+
 def load_deck(
     deck: "ansys.dyna.core.deck.Deck",
     text: str,
@@ -256,6 +285,7 @@ def load_deck(
     buffer.seek(0)
     _try_load_deck_from_buffer(deck, buffer, result, context, import_handlers)
     return result
+
 
 def load_deck_from_buffer(
     deck: "ansys.dyna.core.deck.Deck",

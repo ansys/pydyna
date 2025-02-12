@@ -22,5 +22,6 @@
 
 """Module provides an encrypted keyword class."""
 
+
 class EncryptedKeyword:
     data: str = None

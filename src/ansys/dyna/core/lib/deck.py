@@ -27,13 +27,14 @@ import typing
 from typing import Union
 import warnings
 
+from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 from ansys.dyna.core.lib.parameter_set import ParameterSet
 from ansys.dyna.core.lib.transform import TransformHandler
+
 
 class Deck:
     """Provides a collection of keywords that can read and write to a keyword file."""
@@ -95,9 +96,9 @@ class Deck:
         check : bool, optional
             The default is ``False``.
         """
-        assert isinstance(keyword, KeywordBase) or isinstance(
-            keyword, str
-        ) or isinstance(keyword, EncryptedKeyword), "Only keywords, encrypted keywords, or strings can be included in a deck."
+        assert (
+            isinstance(keyword, KeywordBase) or isinstance(keyword, str) or isinstance(keyword, EncryptedKeyword)
+        ), "Only keywords, encrypted keywords, or strings can be included in a deck."
         if isinstance(keyword, str):
             self._keywords.append(self._formatstring(keyword, check))
         else:
@@ -274,7 +275,9 @@ class Deck:
         warnings.warn("The 'dumps()' method is deprecated. Use the 'write()' method instead.")
         return self.write()
 
-    def _write_keyword(self, buf: typing.TextIO, kwd: typing.Union[str, KeywordBase, EncryptedKeyword], format: format_type) -> None:
+    def _write_keyword(
+        self, buf: typing.TextIO, kwd: typing.Union[str, KeywordBase, EncryptedKeyword], format: format_type
+    ) -> None:
         """Write a keyword to the buffer."""
         if isinstance(kwd, KeywordBase):
             kwd.write(buf, None, format)
