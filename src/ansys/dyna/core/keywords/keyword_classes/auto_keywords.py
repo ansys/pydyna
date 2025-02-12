@@ -2586,7 +2586,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.mat_generalized_phase_change 
 from ansys.dyna.core.keywords.keyword_classes.auto.mat_general_joint_discrete_beam import MatGeneralJointDiscreteBeam
 from ansys.dyna.core.keywords.keyword_classes.auto.mat_general_nonlinear_1dof_discrete_beam import MatGeneralNonlinear1DofDiscreteBeam
 from ansys.dyna.core.keywords.keyword_classes.auto.mat_general_nonlinear_6dof_discrete_beam import MatGeneralNonlinear6DofDiscreteBeam
-from ansys.dyna.core.keywords.keyword_classes.auto.mat_general_spring_discrete_beam import MatGeneralSpringDiscreteBeam
+from ansys.dyna.core.keywords.keyword_classes.auto.mat_196 import MatGeneralSpringDiscreteBeam
 from ansys.dyna.core.keywords.keyword_classes.auto.mat_general_viscoelastic import MatGeneralViscoelastic
 from ansys.dyna.core.keywords.keyword_classes.auto.mat_general_viscoelastic_moisture import MatGeneralViscoelasticMoisture
 from ansys.dyna.core.keywords.keyword_classes.auto.mat_geologic_cap_model import MatGeologicCapModel

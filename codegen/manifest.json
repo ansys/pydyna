@@ -877,6 +877,17 @@
             ]
         }
     },
+    "MAT_196" : {
+        "alias": "MAT_GENERAL_SPRING_DISCRETE_BEAM",
+        "generation-options": {
+            "duplicate-card-group": [
+                {
+                    "indices": [1, 2],
+                    "overall-name": "springs"
+                }
+            ]
+        }
+    },
     "MAT_295": {
         "alias": "MAT_ANISOTROPIC_HYPERELASTIC",
         "generation-options": {
