@@ -441,6 +441,19 @@ def test_deck_unprocessed(ref_string):
 
 
 @pytest.mark.keywords
+def test_deck_encrypted_import(file_utils):
+    """Import an encrypted file as a deck."""
+    deck = Deck()
+    filepath = file_utils.assets_folder / "test_input_deck_1_1024bit.asc"
+    deck.import_file(filepath)
+    assert len(deck.encrypted_keywords) == 1
+    s = deck.write()
+    assert "-----BEGIN PGP MESSAGE-----" in s
+    s = deck.encrypted_keywords[0].data
+    assert s.startswith("\nhQEOA7Xd7ZA651ZYEAP+OgA+NS90p")
+
+
+@pytest.mark.keywords
 def test_deck_remove_superfluous_newlines(ref_string):
     deck = Deck()
     deck.loads(ref_string.test_section_solid_title_deck_string)

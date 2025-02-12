@@ -27,6 +27,7 @@ import ansys.dyna.core
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 
 
 class IterState:
@@ -35,6 +36,7 @@ class IterState:
     TITLE = 2
     KEYWORDS = 3
     END = 4
+    ENCRYPTED = 5
 
 
 class DeckLoaderResult:
@@ -91,6 +93,8 @@ def _update_iterstate(line: str):
         return IterState.TITLE
     if line.startswith("*END"):
         return IterState.END
+    if "BEGIN PGP MESSAGE" in line:
+        return IterState.ENCRYPTED
     return IterState.KEYWORDS
 
 def _update_deck_format(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
@@ -197,6 +201,7 @@ def _try_load_deck_from_buffer(
 
     iterstate = IterState.USERCOMMENT
     block = []
+    encrypted_section = None
     while True:
         close_previous_block = False
         try:
@@ -207,6 +212,16 @@ def _try_load_deck_from_buffer(
             line = line.rstrip('\n')
             if line.startswith("*"):
                 close_previous_block = True
+            if "BEGIN PGP MESSAGE" in line:
+                close_previous_block = True
+                encrypted_section = io.StringIO()
+            if "END PGP MESSAGE" in line:
+                kwd = EncryptedKeyword()
+                kwd.data = encrypted_section.getvalue()
+                encrypted_section = None
+                deck.append(kwd)
+                _after_import(kwd, import_handlers, context)
+                break
             if close_previous_block:
                 # handle the previous block
                 end = _handle_block(iterstate, deck, block, import_handlers, result, context)
@@ -216,6 +231,9 @@ def _try_load_deck_from_buffer(
                 iterstate = _update_iterstate(line)
                 block = [line]
             else:
+                if iterstate == IterState.ENCRYPTED:
+                    encrypted_section.write(line)
+                    encrypted_section.write("\n")
                 if iterstate == IterState.KEYWORD_BLOCK:
                     # reset back to user comment after the keyword line?
                     iterstate = IterState.USERCOMMENT

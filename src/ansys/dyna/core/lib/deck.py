@@ -31,9 +31,9 @@ from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 from ansys.dyna.core.lib.parameter_set import ParameterSet
 from ansys.dyna.core.lib.transform import TransformHandler
-
 
 class Deck:
     """Provides a collection of keywords that can read and write to a keyword file."""
@@ -89,15 +89,15 @@ class Deck:
 
         Parameters
         ----------
-        keyword : Union[KeywordBase, str]
-            Keyword. The keyword can be either an implementation of the ``KeywordBase``
-            instance or a string.
+        keyword : Union[KeywordBase, EncryptedKeyword, str]
+            Keyword. The keyword can be ``KeywordBase``, ``EncryptedKeyword``,
+            or a string.
         check : bool, optional
             The default is ``False``.
         """
         assert isinstance(keyword, KeywordBase) or isinstance(
             keyword, str
-        ), "Keywords or strings can only be appended to the deck."
+        ) or isinstance(keyword, EncryptedKeyword), "Only keywords, encrypted keywords, or strings can be included in a deck."
         if isinstance(keyword, str):
             self._keywords.append(self._formatstring(keyword, check))
         else:
@@ -143,7 +143,7 @@ class Deck:
         return string
 
     @property
-    def all_keywords(self) -> typing.List[typing.Union[str, KeywordBase]]:
+    def all_keywords(self) -> typing.List[typing.Union[str, KeywordBase, EncryptedKeyword]]:
         """List of all keywords."""
         return self._keywords
 
@@ -151,6 +151,11 @@ class Deck:
     def string_keywords(self) -> typing.List[str]:
         """List of keywords as a raw string."""
         return [kw for kw in self._keywords if isinstance(kw, str)]
+
+    @property
+    def encrypted_keywords(self) -> typing.List[str]:
+        """List of keywords as a raw string."""
+        return [kw for kw in self._keywords if isinstance(kw, EncryptedKeyword)]
 
     @property
     def keywords(self):
@@ -269,12 +274,16 @@ class Deck:
         warnings.warn("The 'dumps()' method is deprecated. Use the 'write()' method instead.")
         return self.write()
 
-    def _write_keyword(self, buf: typing.TextIO, kwd: typing.Union[str, KeywordBase], format: format_type) -> None:
+    def _write_keyword(self, buf: typing.TextIO, kwd: typing.Union[str, KeywordBase, EncryptedKeyword], format: format_type) -> None:
         """Write a keyword to the buffer."""
         if isinstance(kwd, KeywordBase):
             kwd.write(buf, None, format)
         elif isinstance(kwd, str):
             buf.write(kwd)
+        elif isinstance(kwd, EncryptedKeyword):
+            buf.write("-----BEGIN PGP MESSAGE-----\n")
+            buf.write(kwd.data)
+            buf.write("\n-----END PGP MESSAGE-----\n")
 
     def _remove_trailing_newline(self, buf: typing.TextIO) -> None:
         """If the last character is a newline, seek back so that it can be overwritten.
@@ -496,6 +505,8 @@ class Deck:
                     content_lines.append(f"kwd: {kw.get_title()}")
                 elif isinstance(kw, str):
                     content_lines.append("str: " + kw.split("\n")[0] + "...")
+                elif isinstance(kw, EncryptedKeyword):
+                    content_lines.append("encrypted keyword...")
 
         output = "\n".join(content_lines)
         return output
