@@ -293,8 +293,8 @@ class MatT08(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0, 4.0]:
-            raise Exception("""aopt must be one of {0.0,1.0,2.0,3.0,4.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, 4.0, None]:
+            raise Exception("""aopt must be `None` or one of {0.0,1.0,2.0,3.0,4.0}""")
         self._cards[0].set_value("aopt", value)
 
     @property

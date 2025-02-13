@@ -146,8 +146,8 @@ class ControlCoupling(KeywordBase):
 
     @flipx.setter
     def flipx(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""flipx must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""flipx must be `None` or one of {0,1}""")
         self._cards[0].set_value("flipx", value)
 
     @property
@@ -160,8 +160,8 @@ class ControlCoupling(KeywordBase):
 
     @flipy.setter
     def flipy(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""flipy must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""flipy must be `None` or one of {0,1}""")
         self._cards[0].set_value("flipy", value)
 
     @property
@@ -174,8 +174,8 @@ class ControlCoupling(KeywordBase):
 
     @flipz.setter
     def flipz(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""flipz must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""flipz must be `None` or one of {0,1}""")
         self._cards[0].set_value("flipz", value)
 
     @property

@@ -353,8 +353,8 @@ class MatGeologicCapModel(KeywordBase):
 
     @plot.setter
     def plot(self, value: float) -> None:
-        if value not in [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]:
-            raise Exception("""plot must be one of {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0}""")
+        if value not in [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, None]:
+            raise Exception("""plot must be `None` or one of {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0}""")
         self._cards[2].set_value("plot", value)
 
     @property
@@ -367,8 +367,8 @@ class MatGeologicCapModel(KeywordBase):
 
     @ftype.setter
     def ftype(self, value: float) -> None:
-        if value not in [1.0, 2.0]:
-            raise Exception("""ftype must be one of {1.0,2.0}""")
+        if value not in [1.0, 2.0, None]:
+            raise Exception("""ftype must be `None` or one of {1.0,2.0}""")
         self._cards[2].set_value("ftype", value)
 
     @property
@@ -382,8 +382,8 @@ class MatGeologicCapModel(KeywordBase):
 
     @vec.setter
     def vec(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""vec must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""vec must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("vec", value)
 
     @property

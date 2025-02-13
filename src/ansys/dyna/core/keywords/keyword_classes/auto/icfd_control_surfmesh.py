@@ -66,8 +66,8 @@ class IcfdControlSurfmesh(KeywordBase):
 
     @rsrf.setter
     def rsrf(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""rsrf must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""rsrf must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("rsrf", value)
 
     @property
@@ -81,7 +81,7 @@ class IcfdControlSurfmesh(KeywordBase):
 
     @sadapt.setter
     def sadapt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sadapt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sadapt must be `None` or one of {0,1}""")
         self._cards[0].set_value("sadapt", value)
 

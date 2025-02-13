@@ -141,8 +141,8 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @sbprty.setter
     def sbprty(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
-            raise Exception("""sbprty must be one of {1,2,3,4,5,6,7,8,9}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, None]:
+            raise Exception("""sbprty must be `None` or one of {1,2,3,4,5,6,7,8,9}""")
         self._cards[0].set_value("sbprty", value)
 
     @property

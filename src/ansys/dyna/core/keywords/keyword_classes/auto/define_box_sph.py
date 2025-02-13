@@ -272,8 +272,8 @@ class DefineBoxSph(KeywordBase):
 
     @vd.setter
     def vd(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""vd must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""vd must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("vd", value)
 
     @property
@@ -296,8 +296,8 @@ class DefineBoxSph(KeywordBase):
 
     @ireact.setter
     def ireact(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ireact must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ireact must be `None` or one of {0,1}""")
         self._cards[1].set_value("ireact", value)
 
     @property
@@ -311,8 +311,8 @@ class DefineBoxSph(KeywordBase):
 
     @ibuff.setter
     def ibuff(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibuff must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibuff must be `None` or one of {0,1}""")
         self._cards[1].set_value("ibuff", value)
 
     @property
@@ -325,8 +325,8 @@ class DefineBoxSph(KeywordBase):
 
     @ishow.setter
     def ishow(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ishow must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ishow must be `None` or one of {0,1}""")
         self._cards[1].set_value("ishow", value)
 
     @property

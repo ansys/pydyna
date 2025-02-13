@@ -172,8 +172,8 @@ class EmEosMeadon(KeywordBase):
 
     @temuni.setter
     def temuni(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""temuni must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""temuni must be `None` or one of {1,2}""")
         self._cards[0].set_value("temuni", value)
 
     @property
@@ -237,7 +237,7 @@ class EmEosMeadon(KeywordBase):
 
     @adjust.setter
     def adjust(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""adjust must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""adjust must be `None` or one of {0,1}""")
         self._cards[1].set_value("adjust", value)
 

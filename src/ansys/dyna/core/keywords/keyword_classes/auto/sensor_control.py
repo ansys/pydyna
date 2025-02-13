@@ -207,8 +207,8 @@ class SensorControl(KeywordBase):
 
     @type.setter
     def type(self, value: str) -> None:
-        if value not in ["AIRBAG", "BAGVENTPOP", "BELTPRET", "BELTRETRA", "BELTSLIP", "CONTACT", "CONTACT2D", "CONSTRL", "CNRB", "CPM", "DEF2RIG", "ELESET", "EM", "FUNCTION", "JOINT", "JOINTSTIF", "MPRESSURE", "POREAIR", "PRESC-MOT", "PRESC-ORI", "PRESSURE", "PZBC", "RWALL", "SPC", "SPOTWELD", "BPWPN"]:
-            raise Exception("""type must be one of {"AIRBAG","BAGVENTPOP","BELTPRET","BELTRETRA","BELTSLIP","CONTACT","CONTACT2D","CONSTRL","CNRB","CPM","DEF2RIG","ELESET","EM","FUNCTION","JOINT","JOINTSTIF","MPRESSURE","POREAIR","PRESC-MOT","PRESC-ORI","PRESSURE","PZBC","RWALL","SPC","SPOTWELD","BPWPN"}""")
+        if value not in ["AIRBAG", "BAGVENTPOP", "BELTPRET", "BELTRETRA", "BELTSLIP", "CONTACT", "CONTACT2D", "CONSTRL", "CNRB", "CPM", "DEF2RIG", "ELESET", "EM", "FUNCTION", "JOINT", "JOINTSTIF", "MPRESSURE", "POREAIR", "PRESC-MOT", "PRESC-ORI", "PRESSURE", "PZBC", "RWALL", "SPC", "SPOTWELD", "BPWPN", None]:
+            raise Exception("""type must be `None` or one of {"AIRBAG","BAGVENTPOP","BELTPRET","BELTRETRA","BELTSLIP","CONTACT","CONTACT2D","CONSTRL","CNRB","CPM","DEF2RIG","ELESET","EM","FUNCTION","JOINT","JOINTSTIF","MPRESSURE","POREAIR","PRESC-MOT","PRESC-ORI","PRESSURE","PZBC","RWALL","SPC","SPOTWELD","BPWPN"}""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -233,8 +233,8 @@ class SensorControl(KeywordBase):
 
     @timeoff.setter
     def timeoff(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""timeoff must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""timeoff must be `None` or one of {0,1}""")
         self._cards[0].set_value("timeoff", value)
 
     @property
@@ -264,8 +264,8 @@ class SensorControl(KeywordBase):
 
     @estyp.setter
     def estyp(self, value: str) -> None:
-        if value not in ["BEAM", "DISC", "SHELL", "SOLID", "TSHELL"]:
-            raise Exception("""estyp must be one of {"BEAM","DISC","SHELL","SOLID","TSHELL"}""")
+        if value not in ["BEAM", "DISC", "SHELL", "SOLID", "TSHELL", None]:
+            raise Exception("""estyp must be `None` or one of {"BEAM","DISC","SHELL","SOLID","TSHELL"}""")
         self._cards[0].set_value("estyp", value)
 
     @property
@@ -278,8 +278,8 @@ class SensorControl(KeywordBase):
 
     @initstt.setter
     def initstt(self, value: str) -> None:
-        if value not in ["ON", "OFF"]:
-            raise Exception("""initstt must be one of {"ON","OFF"}""")
+        if value not in ["ON", "OFF", None]:
+            raise Exception("""initstt must be `None` or one of {"ON","OFF"}""")
         self._cards[1].set_value("initstt", value)
 
     @property

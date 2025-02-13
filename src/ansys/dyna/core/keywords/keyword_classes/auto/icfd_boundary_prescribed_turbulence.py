@@ -104,8 +104,8 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
 
     @vtype.setter
     def vtype(self, value: int) -> None:
-        if value not in [1, 2, 3, 4]:
-            raise Exception("""vtype must be one of {1,2,3,4}""")
+        if value not in [1, 2, 3, 4, None]:
+            raise Exception("""vtype must be `None` or one of {1,2,3,4}""")
         self._cards[0].set_value("vtype", value)
 
     @property
@@ -119,8 +119,8 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
 
     @imp.setter
     def imp(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""imp must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""imp must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("imp", value)
 
     @property

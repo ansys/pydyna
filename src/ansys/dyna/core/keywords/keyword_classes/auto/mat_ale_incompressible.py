@@ -203,8 +203,8 @@ class MatAleIncompressible(KeywordBase):
 
     @meth.setter
     def meth(self, value: int) -> None:
-        if value not in [-7, -6]:
-            raise Exception("""meth must be one of {-7,-6}""")
+        if value not in [-7, -6, None]:
+            raise Exception("""meth must be `None` or one of {-7,-6}""")
         self._cards[1].set_value("meth", value)
 
     @property

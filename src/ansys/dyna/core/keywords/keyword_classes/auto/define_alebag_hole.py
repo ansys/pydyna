@@ -148,8 +148,8 @@ class DefineAlebagHole(KeywordBase):
 
     @sidtype.setter
     def sidtype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sidtype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sidtype must be `None` or one of {0,1}""")
         self._cards[0].set_value("sidtype", value)
 
     @property
@@ -202,8 +202,8 @@ class DefineAlebagHole(KeywordBase):
 
     @int_ext.setter
     def int_ext(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""int_ext must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""int_ext must be `None` or one of {0,1}""")
         self._cards[0].set_value("int/ext", value)
 
     @property

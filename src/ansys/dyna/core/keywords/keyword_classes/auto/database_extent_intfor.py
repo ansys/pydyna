@@ -152,8 +152,8 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @nglbv.setter
     def nglbv(self, value: int) -> None:
-        if value not in [1, -1]:
-            raise Exception("""nglbv must be one of {1,-1}""")
+        if value not in [1, -1, None]:
+            raise Exception("""nglbv must be `None` or one of {1,-1}""")
         self._cards[0].set_value("nglbv", value)
 
     @property
@@ -166,8 +166,8 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @nvelo.setter
     def nvelo(self, value: int) -> None:
-        if value not in [1, -1]:
-            raise Exception("""nvelo must be one of {1,-1}""")
+        if value not in [1, -1, None]:
+            raise Exception("""nvelo must be `None` or one of {1,-1}""")
         self._cards[0].set_value("nvelo", value)
 
     @property
@@ -182,8 +182,8 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @npresu.setter
     def npresu(self, value: int) -> None:
-        if value not in [1, -1, 2, 3]:
-            raise Exception("""npresu must be one of {1,-1,2,3}""")
+        if value not in [1, -1, 2, 3, None]:
+            raise Exception("""npresu must be `None` or one of {1,-1,2,3}""")
         self._cards[0].set_value("npresu", value)
 
     @property
@@ -196,8 +196,8 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @nshear.setter
     def nshear(self, value: int) -> None:
-        if value not in [1, -1]:
-            raise Exception("""nshear must be one of {1,-1}""")
+        if value not in [1, -1, None]:
+            raise Exception("""nshear must be `None` or one of {1,-1}""")
         self._cards[0].set_value("nshear", value)
 
     @property
@@ -210,8 +210,8 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @nforce.setter
     def nforce(self, value: int) -> None:
-        if value not in [1, -1]:
-            raise Exception("""nforce must be one of {1,-1}""")
+        if value not in [1, -1, None]:
+            raise Exception("""nforce must be `None` or one of {1,-1}""")
         self._cards[0].set_value("nforce", value)
 
     @property
@@ -224,8 +224,8 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @ngapc.setter
     def ngapc(self, value: int) -> None:
-        if value not in [1, -1]:
-            raise Exception("""ngapc must be one of {1,-1}""")
+        if value not in [1, -1, None]:
+            raise Exception("""ngapc must be `None` or one of {1,-1}""")
         self._cards[0].set_value("ngapc", value)
 
     @property
@@ -238,8 +238,8 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @nfail.setter
     def nfail(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""nfail must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""nfail must be `None` or one of {0,1}""")
         self._cards[0].set_value("nfail", value)
 
     @property
@@ -252,8 +252,8 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @ieverf.setter
     def ieverf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ieverf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ieverf must be `None` or one of {0,1}""")
         self._cards[0].set_value("ieverf", value)
 
     @property
@@ -267,8 +267,8 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @nwear.setter
     def nwear(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""nwear must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""nwear must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("nwear", value)
 
     @property
@@ -303,8 +303,8 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @ntied.setter
     def ntied(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ntied must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ntied must be `None` or one of {0,1}""")
         self._cards[1].set_value("ntied", value)
 
     @property
@@ -317,8 +317,8 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @neng.setter
     def neng(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""neng must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""neng must be `None` or one of {0,1}""")
         self._cards[1].set_value("neng", value)
 
     @property
@@ -334,7 +334,7 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @npen.setter
     def npen(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""npen must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""npen must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("npen", value)
 

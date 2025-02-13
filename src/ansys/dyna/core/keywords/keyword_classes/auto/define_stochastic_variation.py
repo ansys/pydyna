@@ -215,8 +215,8 @@ class DefineStochasticVariation(KeywordBase):
 
     @pid_typ.setter
     def pid_typ(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""pid_typ must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""pid_typ must be `None` or one of {0,1}""")
         self._cards[0].set_value("pid_typ", value)
 
     @property
@@ -229,8 +229,8 @@ class DefineStochasticVariation(KeywordBase):
 
     @icor.setter
     def icor(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""icor must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""icor must be `None` or one of {0,1}""")
         self._cards[0].set_value("icor", value)
 
     @property
@@ -246,8 +246,8 @@ class DefineStochasticVariation(KeywordBase):
 
     @var_s.setter
     def var_s(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""var_s must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""var_s must be `None` or one of {0,1,2,3,4}""")
         self._cards[0].set_value("var_s", value)
 
     @property
@@ -263,8 +263,8 @@ class DefineStochasticVariation(KeywordBase):
 
     @var_f.setter
     def var_f(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""var_f must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""var_f must be `None` or one of {0,1,2,3,4}""")
         self._cards[0].set_value("var_f", value)
 
     @property
@@ -277,8 +277,8 @@ class DefineStochasticVariation(KeywordBase):
 
     @irng.setter
     def irng(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""irng must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""irng must be `None` or one of {0,1}""")
         self._cards[0].set_value("irng", value)
 
     @property

@@ -234,8 +234,8 @@ class SectionIgaShell(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 5, 6]:
-            raise Exception("""elform must be one of {0,1,2,3,5,6}""")
+        if value not in [0, 1, 2, 3, 5, 6, None]:
+            raise Exception("""elform must be `None` or one of {0,1,2,3,5,6}""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -270,8 +270,8 @@ class SectionIgaShell(KeywordBase):
 
     @irl.setter
     def irl(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""irl must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""irl must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("irl", value)
 
     @property

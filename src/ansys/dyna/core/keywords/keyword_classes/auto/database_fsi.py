@@ -129,8 +129,8 @@ class DatabaseFsi(KeywordBase):
 
     @binary.setter
     def binary(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""binary must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""binary must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("binary", value)
 
     @property
@@ -164,8 +164,8 @@ class DatabaseFsi(KeywordBase):
 
     @stdype.setter
     def stdype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""stdype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""stdype must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("stdype", value)
 
     @property

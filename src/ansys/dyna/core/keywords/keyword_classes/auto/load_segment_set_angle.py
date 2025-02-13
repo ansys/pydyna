@@ -162,8 +162,8 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @ioptp.setter
     def ioptp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ioptp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ioptp must be `None` or one of {0,1}""")
         self._cards[0].set_value("ioptp", value)
 
     @property
@@ -174,8 +174,8 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @ioptd.setter
     def ioptd(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ioptd must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ioptd must be `None` or one of {0,1}""")
         self._cards[0].set_value("ioptd", value)
 
     @property

@@ -71,8 +71,8 @@ class ControlImplicitJoints(KeywordBase):
 
     @ispher.setter
     def ispher(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""ispher must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""ispher must be `None` or one of {1,2}""")
         self._cards[0].set_value("ispher", value)
 
     @property
@@ -85,8 +85,8 @@ class ControlImplicitJoints(KeywordBase):
 
     @irevol.setter
     def irevol(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""irevol must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""irevol must be `None` or one of {1,2}""")
         self._cards[0].set_value("irevol", value)
 
     @property
@@ -99,7 +99,7 @@ class ControlImplicitJoints(KeywordBase):
 
     @icylin.setter
     def icylin(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""icylin must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""icylin must be `None` or one of {1,2}""")
         self._cards[0].set_value("icylin", value)
 

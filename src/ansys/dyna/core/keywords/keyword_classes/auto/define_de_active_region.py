@@ -139,8 +139,8 @@ class DefineDeActiveRegion(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""type must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""type must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("type", value)
 
     @property

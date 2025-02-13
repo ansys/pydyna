@@ -253,8 +253,8 @@ class DefineDeFlowDrag(KeywordBase):
 
     @dflag.setter
     def dflag(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""dflag must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""dflag must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("dflag", value)
 
     @property

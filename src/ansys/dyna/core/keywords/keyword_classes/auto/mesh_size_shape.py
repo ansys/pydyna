@@ -235,8 +235,8 @@ class MeshSizeShape(KeywordBase):
 
     @sname.setter
     def sname(self, value: str) -> None:
-        if value not in ["BOX", "CYLINDER", "POL", "SPHERE"]:
-            raise Exception("""sname must be one of {"BOX","CYLINDER","POL","SPHERE"}""")
+        if value not in ["BOX", "CYLINDER", "POL", "SPHERE", None]:
+            raise Exception("""sname must be `None` or one of {"BOX","CYLINDER","POL","SPHERE"}""")
         self._cards[0].set_value("sname", value)
 
     @property
@@ -249,8 +249,8 @@ class MeshSizeShape(KeywordBase):
 
     @force.setter
     def force(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""force must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""force must be `None` or one of {0,1}""")
         self._cards[0].set_value("force", value)
 
     @property
@@ -263,8 +263,8 @@ class MeshSizeShape(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""method must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""method must be `None` or one of {0,1}""")
         self._cards[0].set_value("method", value)
 
     @property

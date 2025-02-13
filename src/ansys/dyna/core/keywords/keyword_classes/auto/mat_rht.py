@@ -395,8 +395,8 @@ class MatRht(KeywordBase):
 
     @onempa.setter
     def onempa(self, value: float) -> None:
-        if value not in [0, -1, -2, -3, -4]:
-            raise Exception("""onempa must be one of {0,-1,-2,-3,-4}""")
+        if value not in [0, -1, -2, -3, -4, None]:
+            raise Exception("""onempa must be `None` or one of {0,-1,-2,-3,-4}""")
         self._cards[0].set_value("onempa", value)
 
     @property

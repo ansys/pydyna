@@ -554,8 +554,8 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
 
     @nda.setter
     def nda(self, value: int) -> None:
-        if value not in [0, 1, -1]:
-            raise Exception("""nda must be one of {0,1,-1}""")
+        if value not in [0, 1, -1, None]:
+            raise Exception("""nda must be `None` or one of {0,1,-1}""")
         self._cards[1].set_value("nda", value)
 
     @property
@@ -569,8 +569,8 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
 
     @ndb.setter
     def ndb(self, value: int) -> None:
-        if value not in [0, 1, -1]:
-            raise Exception("""ndb must be one of {0,1,-1}""")
+        if value not in [0, 1, -1, None]:
+            raise Exception("""ndb must be `None` or one of {0,1,-1}""")
         self._cards[1].set_value("ndb", value)
 
     @property
@@ -583,8 +583,8 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
 
     @cof.setter
     def cof(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cof must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cof must be `None` or one of {0,1}""")
         self._cards[1].set_value("cof", value)
 
     @property
@@ -597,8 +597,8 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
 
     @init.setter
     def init(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""init must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""init must be `None` or one of {0,1}""")
         self._cards[1].set_value("init", value)
 
     @property
@@ -677,8 +677,8 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
 
     @bc_flag.setter
     def bc_flag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""bc_flag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""bc_flag must be `None` or one of {0,1}""")
         self._cards[2].set_value("bc_flag", value)
 
     @property
@@ -711,8 +711,8 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
 
     @ipf.setter
     def ipf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ipf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ipf must be `None` or one of {0,1}""")
         self._cards[3].set_value("ipf", value)
 
     @property
@@ -725,8 +725,8 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
 
     @slide.setter
     def slide(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""slide must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""slide must be `None` or one of {0,1}""")
         self._cards[3].set_value("slide", value)
 
     @property
@@ -740,8 +740,8 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
 
     @istiff.setter
     def istiff(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""istiff must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""istiff must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("istiff", value)
 
     @property
@@ -767,8 +767,8 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
 
     @igapcl.setter
     def igapcl(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""igapcl must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""igapcl must be `None` or one of {0,1}""")
         self._cards[3].set_value("igapcl", value)
 
     @property
@@ -781,8 +781,8 @@ class Contact2DAutomaticNodeToSurfaceThermal(KeywordBase):
 
     @tietyp.setter
     def tietyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""tietyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""tietyp must be `None` or one of {0,1}""")
         self._cards[3].set_value("tietyp", value)
 
     @property

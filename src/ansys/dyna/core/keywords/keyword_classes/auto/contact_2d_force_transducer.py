@@ -416,8 +416,8 @@ class Contact2DForceTransducer(KeywordBase):
 
     @nda.setter
     def nda(self, value: int) -> None:
-        if value not in [0, 1, -1]:
-            raise Exception("""nda must be one of {0,1,-1}""")
+        if value not in [0, 1, -1, None]:
+            raise Exception("""nda must be `None` or one of {0,1,-1}""")
         self._cards[1].set_value("nda", value)
 
     @property
@@ -431,8 +431,8 @@ class Contact2DForceTransducer(KeywordBase):
 
     @ndb.setter
     def ndb(self, value: int) -> None:
-        if value not in [0, 1, -1]:
-            raise Exception("""ndb must be one of {0,1,-1}""")
+        if value not in [0, 1, -1, None]:
+            raise Exception("""ndb must be `None` or one of {0,1,-1}""")
         self._cards[1].set_value("ndb", value)
 
     @property
@@ -445,8 +445,8 @@ class Contact2DForceTransducer(KeywordBase):
 
     @cof.setter
     def cof(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cof must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cof must be `None` or one of {0,1}""")
         self._cards[1].set_value("cof", value)
 
     @property
@@ -459,8 +459,8 @@ class Contact2DForceTransducer(KeywordBase):
 
     @init.setter
     def init(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""init must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""init must be `None` or one of {0,1}""")
         self._cards[1].set_value("init", value)
 
     @property

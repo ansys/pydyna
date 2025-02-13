@@ -388,8 +388,8 @@ class ContactAutomaticSingleSurface(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""sstyp must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""sstyp must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("sstyp", value)
 
     @property
@@ -407,8 +407,8 @@ class ContactAutomaticSingleSurface(KeywordBase):
 
     @mstyp.setter
     def mstyp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 5, 6, 7]:
-            raise Exception("""mstyp must be one of {0,1,2,3,5,6,7}""")
+        if value not in [0, 1, 2, 3, 5, 6, 7, None]:
+            raise Exception("""mstyp must be `None` or one of {0,1,2,3,5,6,7}""")
         self._cards[0].set_value("mstyp", value)
 
     @property
@@ -442,8 +442,8 @@ class ContactAutomaticSingleSurface(KeywordBase):
 
     @spr.setter
     def spr(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""spr must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""spr must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("spr", value)
 
     @property
@@ -457,8 +457,8 @@ class ContactAutomaticSingleSurface(KeywordBase):
 
     @mpr.setter
     def mpr(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""mpr must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""mpr must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("mpr", value)
 
     @property

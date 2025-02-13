@@ -138,8 +138,8 @@ class SensorSwitch(KeywordBase):
 
     @type.setter
     def type(self, value: str) -> None:
-        if value not in ["SENSOR", "TIME"]:
-            raise Exception("""type must be one of {"SENSOR","TIME"}""")
+        if value not in ["SENSOR", "TIME", None]:
+            raise Exception("""type must be `None` or one of {"SENSOR","TIME"}""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -162,8 +162,8 @@ class SensorSwitch(KeywordBase):
 
     @logic.setter
     def logic(self, value: str) -> None:
-        if value not in ["LT", "GT"]:
-            raise Exception("""logic must be one of {"LT","GT"}""")
+        if value not in ["LT", "GT", None]:
+            raise Exception("""logic must be `None` or one of {"LT","GT"}""")
         self._cards[0].set_value("logic", value)
 
     @property

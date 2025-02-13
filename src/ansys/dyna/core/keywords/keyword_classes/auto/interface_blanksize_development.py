@@ -165,8 +165,8 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @ioption.setter
     def ioption(self, value: int) -> None:
-        if value not in [1, 2, -2]:
-            raise Exception("""ioption must be one of {1,2,-2}""")
+        if value not in [1, 2, -2, None]:
+            raise Exception("""ioption must be `None` or one of {1,2,-2}""")
         self._cards[0].set_value("ioption", value)
 
     @property
@@ -201,8 +201,8 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @referenc.setter
     def referenc(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""referenc must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""referenc must be `None` or one of {0,1}""")
         self._cards[0].set_value("referenc", value)
 
     @property

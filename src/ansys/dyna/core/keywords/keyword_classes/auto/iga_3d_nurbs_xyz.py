@@ -377,8 +377,8 @@ class Iga3DNurbsXyz(KeywordBase):
 
     @unir.setter
     def unir(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""unir must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""unir must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("unir", value)
 
     @property
@@ -392,8 +392,8 @@ class Iga3DNurbsXyz(KeywordBase):
 
     @unis.setter
     def unis(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""unis must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""unis must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("unis", value)
 
     @property
@@ -407,8 +407,8 @@ class Iga3DNurbsXyz(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""unit must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""unit must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("unit", value)
 
     @property

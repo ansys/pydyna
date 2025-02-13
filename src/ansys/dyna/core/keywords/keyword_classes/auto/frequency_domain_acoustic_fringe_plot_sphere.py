@@ -107,8 +107,8 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
 
     @center.setter
     def center(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""center must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""center must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("center", value)
 
     @property
@@ -178,8 +178,8 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
 
     @half1.setter
     def half1(self, value: int) -> None:
-        if value not in [0, 1, -1, 2, -2, 3, -3]:
-            raise Exception("""half1 must be one of {0,1,-1,2,-2,3,-3}""")
+        if value not in [0, 1, -1, 2, -2, 3, -3, None]:
+            raise Exception("""half1 must be `None` or one of {0,1,-1,2,-2,3,-3}""")
         self._cards[0].set_value("half1", value)
 
     @property
@@ -197,7 +197,7 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
 
     @half2.setter
     def half2(self, value: int) -> None:
-        if value not in [0, 1, -1, 2, -2, 3, -3]:
-            raise Exception("""half2 must be one of {0,1,-1,2,-2,3,-3}""")
+        if value not in [0, 1, -1, 2, -2, 3, -3, None]:
+            raise Exception("""half2 must be `None` or one of {0,1,-1,2,-2,3,-3}""")
         self._cards[0].set_value("half2", value)
 

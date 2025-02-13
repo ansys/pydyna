@@ -658,8 +658,8 @@ class MatWtmStm(KeywordBase):
 
     @flg.setter
     def flg(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""flg must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""flg must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("flg", value)
 
     @property

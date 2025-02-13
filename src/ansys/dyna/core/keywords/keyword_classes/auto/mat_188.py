@@ -639,8 +639,8 @@ class Mat188(KeywordBase):
 
     @crplaw.setter
     def crplaw(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""crplaw must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""crplaw must be `None` or one of {0.0,1.0}""")
         self._cards[4].set_value("crplaw", value)
 
     @property

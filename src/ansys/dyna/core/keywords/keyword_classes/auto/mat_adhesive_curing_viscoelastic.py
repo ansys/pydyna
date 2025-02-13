@@ -505,8 +505,8 @@ class MatAdhesiveCuringViscoelastic(KeywordBase):
 
     @incr.setter
     def incr(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""incr must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""incr must be `None` or one of {0,1}""")
         self._cards[2].set_value("incr", value)
 
     @property

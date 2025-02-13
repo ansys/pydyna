@@ -112,8 +112,8 @@ class EmControl(KeywordBase):
 
     @emsol.setter
     def emsol(self, value: int) -> None:
-        if value not in [-1, 1, 2, 3, 11, 12, 13]:
-            raise Exception("""emsol must be one of {-1,1,2,3,11,12,13}""")
+        if value not in [-1, 1, 2, 3, 11, 12, 13, None]:
+            raise Exception("""emsol must be `None` or one of {-1,1,2,3,11,12,13}""")
         self._cards[0].set_value("emsol", value)
 
     @property
@@ -147,8 +147,8 @@ class EmControl(KeywordBase):
 
     @dimtype.setter
     def dimtype(self, value: int) -> None:
-        if value not in [0, 1, 3]:
-            raise Exception("""dimtype must be one of {0,1,3}""")
+        if value not in [0, 1, 3, None]:
+            raise Exception("""dimtype must be `None` or one of {0,1,3}""")
         self._cards[0].set_value("dimtype", value)
 
     @property

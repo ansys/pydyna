@@ -204,8 +204,8 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @irelal.setter
     def irelal(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""irelal must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""irelal must be `None` or one of {0,1}""")
         self._cards[0].set_value("irelal", value)
 
     @property
@@ -236,8 +236,8 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @idrflg.setter
     def idrflg(self, value: int) -> None:
-        if value not in [0, -999, -3, -1, 1, 2, 3, 5, 6]:
-            raise Exception("""idrflg must be one of {0,-999,-3,-1,1,2,3,5,6}""")
+        if value not in [0, -999, -3, -1, 1, 2, 3, 5, 6, None]:
+            raise Exception("""idrflg must be `None` or one of {0,-999,-3,-1,1,2,3,5,6}""")
         self._cards[0].set_value("idrflg", value)
 
     @property

@@ -169,8 +169,8 @@ class ChemistryControl0D(KeywordBase):
 
     @soltyp.setter
     def soltyp(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""soltyp must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""soltyp must be `None` or one of {1,2}""")
         self._cards[0].set_value("soltyp", value)
 
     @property

@@ -166,8 +166,8 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @typm.setter
     def typm(self, value: int) -> None:
-        if value not in [1, 2, 3, 4]:
-            raise Exception("""typm must be one of {1,2,3,4}""")
+        if value not in [1, 2, 3, 4, None]:
+            raise Exception("""typm must be `None` or one of {1,2,3,4}""")
         self._cards[0].set_value("typm", value)
 
     @property
@@ -181,8 +181,8 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @move.setter
     def move(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""move must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""move must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("move", value)
 
     @property
@@ -208,8 +208,8 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @typs.setter
     def typs(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""typs must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""typs must be `None` or one of {0,1,2,3,4}""")
         self._cards[0].set_value("typs", value)
 
     @property
@@ -290,7 +290,7 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @varepl.setter
     def varepl(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""varepl must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""varepl must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[2].set_value("varepl", value)
 

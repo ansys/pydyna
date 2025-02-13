@@ -278,8 +278,8 @@ class ContactGebodLeftUpperLeg(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""sstyp must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""sstyp must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("sstyp", value)
 
     @property
@@ -330,8 +330,8 @@ class ContactGebodLeftUpperLeg(KeywordBase):
 
     @intord.setter
     def intord(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""intord must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""intord must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("intord", value)
 
     @property

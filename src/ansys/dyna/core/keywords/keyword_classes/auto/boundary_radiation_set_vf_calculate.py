@@ -151,8 +151,8 @@ class BoundaryRadiationSetVfCalculate(KeywordBase):
 
     @block.setter
     def block(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""block must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""block must be `None` or one of {0,1}""")
         self._cards[0].set_value("block", value)
 
     @property
@@ -165,8 +165,8 @@ class BoundaryRadiationSetVfCalculate(KeywordBase):
 
     @nint.setter
     def nint(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
-            raise Exception("""nint must be one of {0,1,2,3,4,5,6,7,8,9,10}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, None]:
+            raise Exception("""nint must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10}""")
         self._cards[0].set_value("nint", value)
 
     @property

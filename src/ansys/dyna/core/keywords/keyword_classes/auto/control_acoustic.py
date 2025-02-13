@@ -57,7 +57,7 @@ class ControlAcoustic(KeywordBase):
 
     @macdvp.setter
     def macdvp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""macdvp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""macdvp must be `None` or one of {0,1}""")
         self._cards[0].set_value("macdvp", value)
 

@@ -108,8 +108,8 @@ class InterfaceCompensation(KeywordBase):
 
     @stage.setter
     def stage(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""stage must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""stage must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("stage", value)
 
     @property
@@ -145,8 +145,8 @@ class InterfaceCompensation(KeywordBase):
 
     @smooth.setter
     def smooth(self, value: int) -> None:
-        if value not in [3, 1, 2, 4, 5]:
-            raise Exception("""smooth must be one of {3,1,2,4,5}""")
+        if value not in [3, 1, 2, 4, 5, None]:
+            raise Exception("""smooth must be `None` or one of {3,1,2,4,5}""")
         self._cards[0].set_value("smooth", value)
 
     @property

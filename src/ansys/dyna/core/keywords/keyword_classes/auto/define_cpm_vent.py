@@ -292,8 +292,8 @@ class DefineCpmVent(KeywordBase):
 
     @enh_v.setter
     def enh_v(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""enh_v must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""enh_v must be `None` or one of {0,1}""")
         self._cards[0].set_value("enh_v", value)
 
     @property
@@ -345,8 +345,8 @@ class DefineCpmVent(KeywordBase):
 
     @jt.setter
     def jt(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""jt must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""jt must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("jt", value)
 
     @property

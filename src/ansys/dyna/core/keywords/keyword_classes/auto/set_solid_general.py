@@ -156,8 +156,8 @@ class SetSolidGeneral(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
-        if value not in ["MECH", "CESE", "ICFD"]:
-            raise Exception("""solver must be one of {"MECH","CESE","ICFD"}""")
+        if value not in ["MECH", "CESE", "ICFD", None]:
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -176,8 +176,8 @@ class SetSolidGeneral(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
-        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", "SALECPT", "SALEFAC"]:
-            raise Exception("""option must be one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SALECPT","SALEFAC"}""")
+        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", "SALECPT", "SALEFAC", None]:
+            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SALECPT","SALEFAC"}""")
         self._cards[1].set_value("option", value)
 
     @property

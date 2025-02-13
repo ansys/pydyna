@@ -115,8 +115,8 @@ class EmSolverBem(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
-        if value not in [2, 1, 3]:
-            raise Exception("""stype must be one of {2,1,3}""")
+        if value not in [2, 1, 3, None]:
+            raise Exception("""stype must be `None` or one of {2,1,3}""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -133,8 +133,8 @@ class EmSolverBem(KeywordBase):
 
     @precon.setter
     def precon(self, value: int) -> None:
-        if value not in [2, 0, 1, 3, 4]:
-            raise Exception("""precon must be one of {2,0,1,3,4}""")
+        if value not in [2, 0, 1, 3, 4, None]:
+            raise Exception("""precon must be `None` or one of {2,0,1,3,4}""")
         self._cards[0].set_value("precon", value)
 
     @property
@@ -148,8 +148,8 @@ class EmSolverBem(KeywordBase):
 
     @uselast.setter
     def uselast(self, value: int) -> None:
-        if value not in [1, -1]:
-            raise Exception("""uselast must be one of {1,-1}""")
+        if value not in [1, -1, None]:
+            raise Exception("""uselast must be `None` or one of {1,-1}""")
         self._cards[0].set_value("uselast", value)
 
     @property

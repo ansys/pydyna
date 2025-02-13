@@ -445,8 +445,8 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sidtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sidtyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("sidtyp", value)
 
     @property
@@ -557,8 +557,8 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @data.setter
     def data(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""data must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""data must be `None` or one of {0,1,2,3}""")
         self._cards[2].set_value("data", value)
 
     @property

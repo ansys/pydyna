@@ -197,8 +197,8 @@ class BoundaryPrescribedMotionSetFaceXyz(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, -4, 5, 6, 7, 8, -8, 9, -9, 10, -10, 11, -11, 12]:
-            raise Exception("""dof must be one of {0,1,2,3,4,-4,5,6,7,8,-8,9,-9,10,-10,11,-11,12}""")
+        if value not in [0, 1, 2, 3, 4, -4, 5, 6, 7, 8, -8, 9, -9, 10, -10, 11, -11, 12, None]:
+            raise Exception("""dof must be `None` or one of {0,1,2,3,4,-4,5,6,7,8,-8,9,-9,10,-10,11,-11,12}""")
         self._cards[0].set_value("dof", value)
 
     @property
@@ -214,8 +214,8 @@ class BoundaryPrescribedMotionSetFaceXyz(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""vad must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""vad must be `None` or one of {0,1,2,3,4}""")
         self._cards[0].set_value("vad", value)
 
     @property

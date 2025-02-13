@@ -550,8 +550,8 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, -4]:
-            raise Exception("""elform must be one of {0,1,2,3,4,-4}""")
+        if value not in [0, 1, 2, 3, 4, -4, None]:
+            raise Exception("""elform must be `None` or one of {0,1,2,3,4,-4}""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -564,8 +564,8 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @int_.setter
     def int_(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""int_ must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""int_ must be `None` or one of {0,1}""")
         self._cards[1].set_value("int", value)
 
     @property
@@ -598,8 +598,8 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""imass must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""imass must be `None` or one of {0,1}""")
         self._cards[1].set_value("imass", value)
 
     @property

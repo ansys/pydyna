@@ -216,8 +216,8 @@ class LoadMovingPressure(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""idir must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""idir must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("idir", value)
 
     @property
@@ -230,8 +230,8 @@ class LoadMovingPressure(KeywordBase):
 
     @lsflg.setter
     def lsflg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""lsflg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""lsflg must be `None` or one of {0,1}""")
         self._cards[1].set_value("lsflg", value)
 
     @property
@@ -256,8 +256,8 @@ class LoadMovingPressure(KeywordBase):
 
     @idtype.setter
     def idtype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""idtype must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""idtype must be `None` or one of {0,1,2,3}""")
         self._cards[2].set_value("idtype", value)
 
     @property

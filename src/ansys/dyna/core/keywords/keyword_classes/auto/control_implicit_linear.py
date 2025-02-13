@@ -173,8 +173,8 @@ class ControlImplicitLinear(KeywordBase):
 
     @lsolvr.setter
     def lsolvr(self, value: int) -> None:
-        if value not in [2, 22, 23, 24, 25, 26, 30, 90, 6]:
-            raise Exception("""lsolvr must be one of {2,22,23,24,25,26,30,90,6}""")
+        if value not in [2, 22, 23, 24, 25, 26, 30, 90, 6, None]:
+            raise Exception("""lsolvr must be `None` or one of {2,22,23,24,25,26,30,90,6}""")
         self._cards[0].set_value("lsolvr", value)
 
     @property
@@ -190,8 +190,8 @@ class ControlImplicitLinear(KeywordBase):
 
     @lprint.setter
     def lprint(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""lprint must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""lprint must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("lprint", value)
 
     @property
@@ -204,8 +204,8 @@ class ControlImplicitLinear(KeywordBase):
 
     @negev.setter
     def negev(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""negev must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""negev must be `None` or one of {2,1}""")
         self._cards[0].set_value("negev", value)
 
     @property
@@ -220,8 +220,8 @@ class ControlImplicitLinear(KeywordBase):
 
     @order.setter
     def order(self, value: int) -> None:
-        if value not in [0, 1, 2, 4]:
-            raise Exception("""order must be one of {0,1,2,4}""")
+        if value not in [0, 1, 2, 4, None]:
+            raise Exception("""order must be `None` or one of {0,1,2,4}""")
         self._cards[0].set_value("order", value)
 
     @property
@@ -236,8 +236,8 @@ class ControlImplicitLinear(KeywordBase):
 
     @drcm.setter
     def drcm(self, value: int) -> None:
-        if value not in [4, 1, 2, 3]:
-            raise Exception("""drcm must be one of {4,1,2,3}""")
+        if value not in [4, 1, 2, 3, None]:
+            raise Exception("""drcm must be `None` or one of {4,1,2,3}""")
         self._cards[0].set_value("drcm", value)
 
     @property
@@ -265,8 +265,8 @@ class ControlImplicitLinear(KeywordBase):
 
     @autospc.setter
     def autospc(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""autospc must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""autospc must be `None` or one of {1,2}""")
         self._cards[0].set_value("autospc", value)
 
     @property
@@ -291,8 +291,8 @@ class ControlImplicitLinear(KeywordBase):
 
     @lcpack.setter
     def lcpack(self, value: int) -> None:
-        if value not in [2, 3]:
-            raise Exception("""lcpack must be one of {2,3}""")
+        if value not in [2, 3, None]:
+            raise Exception("""lcpack must be `None` or one of {2,3}""")
         self._cards[1].set_value("lcpack", value)
 
     @property

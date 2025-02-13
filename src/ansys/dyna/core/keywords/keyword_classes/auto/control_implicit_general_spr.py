@@ -134,8 +134,8 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @imform.setter
     def imform(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""imform must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""imform must be `None` or one of {2,1}""")
         self._cards[0].set_value("imform", value)
 
     @property
@@ -159,8 +159,8 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @igs.setter
     def igs(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""igs must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""igs must be `None` or one of {2,1}""")
         self._cards[0].set_value("igs", value)
 
     @property
@@ -173,8 +173,8 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @cnstn.setter
     def cnstn(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cnstn must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cnstn must be `None` or one of {0,1}""")
         self._cards[0].set_value("cnstn", value)
 
     @property
@@ -187,8 +187,8 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""form must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""form must be `None` or one of {0,1}""")
         self._cards[0].set_value("form", value)
 
     @property
@@ -201,7 +201,7 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @zero_v.setter
     def zero_v(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""zero_v must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""zero_v must be `None` or one of {0,1}""")
         self._cards[0].set_value("zero_v", value)
 

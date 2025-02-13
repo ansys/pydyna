@@ -130,8 +130,8 @@ class ComponentGebodFemale(KeywordBase):
 
     @units.setter
     def units(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5]:
-            raise Exception("""units must be one of {1,2,3,4,5}""")
+        if value not in [1, 2, 3, 4, 5, None]:
+            raise Exception("""units must be `None` or one of {1,2,3,4,5}""")
         self._cards[0].set_value("units", value)
 
     @property

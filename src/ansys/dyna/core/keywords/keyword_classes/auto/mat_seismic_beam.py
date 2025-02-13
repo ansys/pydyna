@@ -410,8 +410,8 @@ class MatSeismicBeam(KeywordBase):
 
     @asflag.setter
     def asflag(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0]:
-            raise Exception("""asflag must be one of {0.0,1.0,2.0,3.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, None]:
+            raise Exception("""asflag must be `None` or one of {0.0,1.0,2.0,3.0}""")
         self._cards[0].set_value("asflag", value)
 
     @property
@@ -426,8 +426,8 @@ class MatSeismicBeam(KeywordBase):
 
     @ftype.setter
     def ftype(self, value: int) -> None:
-        if value not in [1, 2, 4, 5]:
-            raise Exception("""ftype must be one of {1,2,4,5}""")
+        if value not in [1, 2, 4, 5, None]:
+            raise Exception("""ftype must be `None` or one of {1,2,4,5}""")
         self._cards[0].set_value("ftype", value)
 
     @property
@@ -441,8 +441,8 @@ class MatSeismicBeam(KeywordBase):
 
     @degrad.setter
     def degrad(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""degrad must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""degrad must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("degrad", value)
 
     @property
@@ -456,8 +456,8 @@ class MatSeismicBeam(KeywordBase):
 
     @ifema.setter
     def ifema(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ifema must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ifema must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("ifema", value)
 
     @property

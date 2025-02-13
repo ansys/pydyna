@@ -551,8 +551,8 @@ class MatFabric(KeywordBase):
 
     @cse.setter
     def cse(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""cse must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""cse must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("cse", value)
 
     @property
@@ -655,8 +655,8 @@ class MatFabric(KeywordBase):
 
     @lnrc.setter
     def lnrc(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""lnrc must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""lnrc must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("lnrc", value)
 
     @property
@@ -675,8 +675,8 @@ class MatFabric(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 12, 13, 14, -14, 24]:
-            raise Exception("""form must be one of {0,1,2,3,4,12,13,14,-14,24}""")
+        if value not in [0, 1, 2, 3, 4, 12, 13, 14, -14, 24, None]:
+            raise Exception("""form must be `None` or one of {0,1,2,3,4,12,13,14,-14,24}""")
         self._cards[2].set_value("form", value)
 
     @property
@@ -733,8 +733,8 @@ class MatFabric(KeywordBase):
 
     @a0ref.setter
     def a0ref(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""a0ref must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""a0ref must be `None` or one of {0,1}""")
         self._cards[3].set_value("a0ref", value)
 
     @property
@@ -837,8 +837,8 @@ class MatFabric(KeywordBase):
 
     @isrefg.setter
     def isrefg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""isrefg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""isrefg must be `None` or one of {0,1}""")
         self._cards[4].set_value("isrefg", value)
 
     @property

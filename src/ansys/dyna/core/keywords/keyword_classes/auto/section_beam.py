@@ -418,8 +418,8 @@ class SectionBeam(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14]:
-            raise Exception("""elform must be one of {1,2,3,4,5,6,7,8,9,11,12,13,14}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, None]:
+            raise Exception("""elform must be `None` or one of {1,2,3,4,5,6,7,8,9,11,12,13,14}""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -459,8 +459,8 @@ class SectionBeam(KeywordBase):
 
     @cst.setter
     def cst(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""cst must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""cst must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("cst", value)
 
     @property
@@ -474,8 +474,8 @@ class SectionBeam(KeywordBase):
 
     @scoor.setter
     def scoor(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0, 12.0, 13.0, -13.0, -12.0, -3.0, -2.0, -1.0]:
-            raise Exception("""scoor must be one of {0.0,1.0,2.0,3.0,12.0,13.0,-13.0,-12.0,-3.0,-2.0,-1.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, 12.0, 13.0, -13.0, -12.0, -3.0, -2.0, -1.0, None]:
+            raise Exception("""scoor must be `None` or one of {0.0,1.0,2.0,3.0,12.0,13.0,-13.0,-12.0,-3.0,-2.0,-1.0}""")
         self._cards[0].set_value("scoor", value)
 
     @property
@@ -498,8 +498,8 @@ class SectionBeam(KeywordBase):
 
     @naupd.setter
     def naupd(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""naupd must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""naupd must be `None` or one of {0,1}""")
         self._cards[0].set_value("naupd", value)
 
     @property
@@ -758,8 +758,8 @@ class SectionBeam(KeywordBase):
 
     @rrcon.setter
     def rrcon(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""rrcon must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""rrcon must be `None` or one of {0.0,1.0}""")
         self._cards[5].set_value("rrcon", value)
 
     @property
@@ -772,8 +772,8 @@ class SectionBeam(KeywordBase):
 
     @srcon.setter
     def srcon(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""srcon must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""srcon must be `None` or one of {0.0,1.0}""")
         self._cards[5].set_value("srcon", value)
 
     @property
@@ -786,8 +786,8 @@ class SectionBeam(KeywordBase):
 
     @trcon.setter
     def trcon(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""trcon must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""trcon must be `None` or one of {0.0,1.0}""")
         self._cards[5].set_value("trcon", value)
 
     @property

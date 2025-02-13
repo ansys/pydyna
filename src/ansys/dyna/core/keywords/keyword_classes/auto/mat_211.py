@@ -338,8 +338,8 @@ class Mat211(KeywordBase):
 
     @helas.setter
     def helas(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""helas must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""helas must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("helas", value)
 
     @property
@@ -352,8 +352,8 @@ class Mat211(KeywordBase):
 
     @telas.setter
     def telas(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""telas must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""telas must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("telas", value)
 
     @property

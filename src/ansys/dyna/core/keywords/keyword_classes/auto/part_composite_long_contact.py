@@ -267,8 +267,8 @@ class PartCompositeLongContact(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 16, -16]:
-            raise Exception("""elform must be one of {2,1,3,4,5,6,7,8,9,10,11,16,-16}""")
+        if value not in [2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 16, -16, None]:
+            raise Exception("""elform must be `None` or one of {2,1,3,4,5,6,7,8,9,10,11,16,-16}""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -326,8 +326,8 @@ class PartCompositeLongContact(KeywordBase):
 
     @adpopt.setter
     def adpopt(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""adpopt must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""adpopt must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("adpopt", value)
 
     @property
@@ -340,8 +340,8 @@ class PartCompositeLongContact(KeywordBase):
 
     @thshel.setter
     def thshel(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""thshel must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""thshel must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("thshel", value)
 
     @property

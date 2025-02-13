@@ -300,8 +300,8 @@ class ControlFormingTemplate(KeywordBase):
 
     @idtemp.setter
     def idtemp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""idtemp must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""idtemp must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("idtemp", value)
 
     @property
@@ -363,8 +363,8 @@ class ControlFormingTemplate(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""type must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""type must be `None` or one of {0,1}""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -397,8 +397,8 @@ class ControlFormingTemplate(KeywordBase):
 
     @al_fe.setter
     def al_fe(self, value: str) -> None:
-        if value not in ["F", "A"]:
-            raise Exception("""al_fe must be one of {"F","A"}""")
+        if value not in ["F", "A", None]:
+            raise Exception("""al_fe must be `None` or one of {"F","A"}""")
         self._cards[1].set_value("al/fe", value)
 
     @property
@@ -531,8 +531,8 @@ class ControlFormingTemplate(KeywordBase):
 
     @patern.setter
     def patern(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""patern must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""patern must be `None` or one of {1,2}""")
         self._cards[3].set_value("patern", value)
 
     @property

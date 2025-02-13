@@ -446,8 +446,8 @@ class Mat145(KeywordBase):
 
     @pore.setter
     def pore(self, value: float) -> None:
-        if value not in [1.0, 0.0]:
-            raise Exception("""pore must be one of {1.0,0.0}""")
+        if value not in [1.0, 0.0, None]:
+            raise Exception("""pore must be `None` or one of {1.0,0.0}""")
         self._cards[0].set_value("pore", value)
 
     @property
@@ -559,8 +559,8 @@ class Mat145(KeywordBase):
 
     @irock.setter
     def irock(self, value: float) -> None:
-        if value not in [0, 1]:
-            raise Exception("""irock must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""irock must be `None` or one of {0,1}""")
         self._cards[2].set_value("irock", value)
 
     @property
@@ -693,8 +693,8 @@ class Mat145(KeywordBase):
 
     @failfg.setter
     def failfg(self, value: float) -> None:
-        if value not in [1, 0]:
-            raise Exception("""failfg must be one of {1,0}""")
+        if value not in [1, 0, None]:
+            raise Exception("""failfg must be `None` or one of {1,0}""")
         self._cards[4].set_value("failfg", value)
 
     @property

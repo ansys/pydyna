@@ -252,8 +252,8 @@ class PerturbationShellThickness(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 8]:
-            raise Exception("""type must be one of {1,2,3,4,8}""")
+        if value not in [1, 2, 3, 4, 8, None]:
+            raise Exception("""type must be `None` or one of {1,2,3,4,8}""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -292,8 +292,8 @@ class PerturbationShellThickness(KeywordBase):
 
     @cmp.setter
     def cmp(self, value: int) -> None:
-        if value not in [ 7, 1, 2, 3, 4, 5, 6]:
-            raise Exception("""cmp must be one of { 7,1,2,3,4,5,6}""")
+        if value not in [ 7, 1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""cmp must be `None` or one of { 7,1,2,3,4,5,6}""")
         self._cards[0].set_value("cmp", value)
 
     @property
@@ -310,8 +310,8 @@ class PerturbationShellThickness(KeywordBase):
 
     @icoord.setter
     def icoord(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, -2, -3]:
-            raise Exception("""icoord must be one of {0,1,2,3,-2,-3}""")
+        if value not in [0, 1, 2, 3, -2, -3, None]:
+            raise Exception("""icoord must be `None` or one of {0,1,2,3,-2,-3}""")
         self._cards[0].set_value("icoord", value)
 
     @property
@@ -431,8 +431,8 @@ class PerturbationShellThickness(KeywordBase):
 
     @cstype.setter
     def cstype(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
-            raise Exception("""cstype must be one of {1,2,3,4,5,6,7,8,9}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, None]:
+            raise Exception("""cstype must be `None` or one of {1,2,3,4,5,6,7,8,9}""")
         self._cards[4].set_value("cstype", value)
 
     @property
@@ -480,8 +480,8 @@ class PerturbationShellThickness(KeywordBase):
 
     @cftype.setter
     def cftype(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5]:
-            raise Exception("""cftype must be one of {1,2,3,4,5}""")
+        if value not in [1, 2, 3, 4, 5, None]:
+            raise Exception("""cftype must be `None` or one of {1,2,3,4,5}""")
         self._cards[5].set_value("cftype", value)
 
     @property

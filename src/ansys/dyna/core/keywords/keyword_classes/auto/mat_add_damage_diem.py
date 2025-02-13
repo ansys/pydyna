@@ -219,8 +219,8 @@ class MatAddDamageDiem(KeywordBase):
 
     @dinit.setter
     def dinit(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""dinit must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""dinit must be `None` or one of {0,1}""")
         self._cards[0].set_value("dinit", value)
 
     @property
@@ -259,8 +259,8 @@ class MatAddDamageDiem(KeywordBase):
 
     @dityp.setter
     def dityp(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0, 4.0]:
-            raise Exception("""dityp must be one of {0.0,1.0,2.0,3.0,4.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, 4.0, None]:
+            raise Exception("""dityp must be `None` or one of {0.0,1.0,2.0,3.0,4.0}""")
         self._cards[1].set_value("dityp", value)
 
     @property
@@ -348,8 +348,8 @@ class MatAddDamageDiem(KeywordBase):
 
     @detyp.setter
     def detyp(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""detyp must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""detyp must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("detyp", value)
 
     @property
@@ -363,8 +363,8 @@ class MatAddDamageDiem(KeywordBase):
 
     @dctyp.setter
     def dctyp(self, value: float) -> None:
-        if value not in [0.0, -1.0, 1.0]:
-            raise Exception("""dctyp must be one of {0.0,-1.0,1.0}""")
+        if value not in [0.0, -1.0, 1.0, None]:
+            raise Exception("""dctyp must be `None` or one of {0.0,-1.0,1.0}""")
         self._cards[2].set_value("dctyp", value)
 
     @property

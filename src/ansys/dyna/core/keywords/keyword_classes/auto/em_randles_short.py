@@ -65,8 +65,8 @@ class EmRandlesShort(KeywordBase):
 
     @areatype.setter
     def areatype(self, value: int) -> None:
-        if value not in [2, 1, 3]:
-            raise Exception("""areatype must be one of {2,1,3}""")
+        if value not in [2, 1, 3, None]:
+            raise Exception("""areatype must be `None` or one of {2,1,3}""")
         self._cards[0].set_value("areatype", value)
 
     @property

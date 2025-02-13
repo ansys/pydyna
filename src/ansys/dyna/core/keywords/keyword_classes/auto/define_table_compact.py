@@ -414,8 +414,8 @@ class DefineTableCompact(KeywordBase):
 
     @mathis.setter
     def mathis(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""mathis must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""mathis must be `None` or one of {0,1}""")
         self._cards[0].set_value("mathis", value)
 
     @property
@@ -428,8 +428,8 @@ class DefineTableCompact(KeywordBase):
 
     @inexect.setter
     def inexect(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""inexect must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""inexect must be `None` or one of {0,1}""")
         self._cards[0].set_value("inexect", value)
 
     @property

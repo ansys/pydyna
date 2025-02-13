@@ -709,8 +709,8 @@ class MatHystereticBeam(KeywordBase):
 
     @iax.setter
     def iax(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""iax must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""iax must be `None` or one of {1,2}""")
         self._cards[0].set_value("iax", value)
 
     @property
@@ -724,8 +724,8 @@ class MatHystereticBeam(KeywordBase):
 
     @isurf.setter
     def isurf(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""isurf must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""isurf must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("isurf", value)
 
     @property
@@ -740,8 +740,8 @@ class MatHystereticBeam(KeywordBase):
 
     @ihard.setter
     def ihard(self, value: int) -> None:
-        if value not in [2, 1, 3, 4]:
-            raise Exception("""ihard must be one of {2,1,3,4}""")
+        if value not in [2, 1, 3, 4, None]:
+            raise Exception("""ihard must be `None` or one of {2,1,3,4}""")
         self._cards[0].set_value("ihard", value)
 
     @property
@@ -756,8 +756,8 @@ class MatHystereticBeam(KeywordBase):
 
     @ifema.setter
     def ifema(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""ifema must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""ifema must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("ifema", value)
 
     @property

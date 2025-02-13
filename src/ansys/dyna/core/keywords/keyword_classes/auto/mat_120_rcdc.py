@@ -598,8 +598,8 @@ class Mat120Rcdc(KeywordBase):
 
     @atyp.setter
     def atyp(self, value: float) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""atyp must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""atyp must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("atyp", value)
 
     @property

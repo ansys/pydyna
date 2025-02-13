@@ -112,8 +112,8 @@ class SectionAle2D(KeywordBase):
 
     @aleform.setter
     def aleform(self, value: int) -> None:
-        if value not in [6, 7, 11]:
-            raise Exception("""aleform must be one of {6,7,11}""")
+        if value not in [6, 7, 11, None]:
+            raise Exception("""aleform must be `None` or one of {6,7,11}""")
         self._cards[0].set_value("aleform", value)
 
     @property
@@ -139,8 +139,8 @@ class SectionAle2D(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [13, 14]:
-            raise Exception("""elform must be one of {13,14}""")
+        if value not in [13, 14, None]:
+            raise Exception("""elform must be `None` or one of {13,14}""")
         self._cards[0].set_value("elform", value)
 
     @property

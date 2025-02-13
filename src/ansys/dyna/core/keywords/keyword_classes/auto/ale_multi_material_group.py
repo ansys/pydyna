@@ -74,7 +74,7 @@ class AleMultiMaterialGroup(KeywordBase):
 
     @idtype.setter
     def idtype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""idtype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""idtype must be `None` or one of {0,1}""")
         self._cards[0].set_value("idtype", value)
 

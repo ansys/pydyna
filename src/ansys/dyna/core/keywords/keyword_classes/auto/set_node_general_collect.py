@@ -238,8 +238,8 @@ class SetNodeGeneralCollect(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
-        if value not in ["MECH", "CESE", "ICFD"]:
-            raise Exception("""solver must be one of {"MECH","CESE","ICFD"}""")
+        if value not in ["MECH", "CESE", "ICFD", None]:
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -252,8 +252,8 @@ class SetNodeGeneralCollect(KeywordBase):
 
     @its.setter
     def its(self, value: str) -> None:
-        if value not in ["1", "2"]:
-            raise Exception("""its must be one of {"1","2"}""")
+        if value not in ["1", "2", None]:
+            raise Exception("""its must be `None` or one of {"1","2"}""")
         self._cards[0].set_value("its", value)
 
     @property
@@ -286,8 +286,8 @@ class SetNodeGeneralCollect(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
-        if value not in ["ALL", "NODE", "DNODE", "PART", "DPART", "BOX", "DBOX", "VOL", "DVOL", "SET_SOLID", "SET_SLDIO", "SET_SHELL", "SALECPT", "SALEFAC"]:
-            raise Exception("""option must be one of {"ALL","NODE","DNODE","PART","DPART","BOX","DBOX","VOL","DVOL","SET_SOLID","SET_SLDIO","SET_SHELL","SALECPT","SALEFAC"}""")
+        if value not in ["ALL", "NODE", "DNODE", "PART", "DPART", "BOX", "DBOX", "VOL", "DVOL", "SET_SOLID", "SET_SLDIO", "SET_SHELL", "SALECPT", "SALEFAC", None]:
+            raise Exception("""option must be `None` or one of {"ALL","NODE","DNODE","PART","DPART","BOX","DBOX","VOL","DVOL","SET_SOLID","SET_SLDIO","SET_SHELL","SALECPT","SALEFAC"}""")
         self._cards[1].set_value("option", value)
 
     @property

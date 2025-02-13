@@ -318,8 +318,8 @@ class Mat122(KeywordBase):
 
     @hr.setter
     def hr(self, value: float) -> None:
-        if value not in [1.0, 2.0, 3.0]:
-            raise Exception("""hr must be one of {1.0,2.0,3.0}""")
+        if value not in [1.0, 2.0, 3.0, None]:
+            raise Exception("""hr must be `None` or one of {1.0,2.0,3.0}""")
         self._cards[0].set_value("hr", value)
 
     @property

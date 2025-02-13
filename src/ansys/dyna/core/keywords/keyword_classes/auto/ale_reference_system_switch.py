@@ -315,8 +315,8 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type1.setter
     def type1(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 7]:
-            raise Exception("""type1 must be one of {0,1,2,3,4,5,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 7, None]:
+            raise Exception("""type1 must be `None` or one of {0,1,2,3,4,5,7}""")
         self._cards[2].set_value("type1", value)
 
     @property
@@ -334,8 +334,8 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type2.setter
     def type2(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 7]:
-            raise Exception("""type2 must be one of {0,1,2,3,4,5,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 7, None]:
+            raise Exception("""type2 must be `None` or one of {0,1,2,3,4,5,7}""")
         self._cards[2].set_value("type2", value)
 
     @property
@@ -353,8 +353,8 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type3.setter
     def type3(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 7]:
-            raise Exception("""type3 must be one of {0,1,2,3,4,5,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 7, None]:
+            raise Exception("""type3 must be `None` or one of {0,1,2,3,4,5,7}""")
         self._cards[2].set_value("type3", value)
 
     @property
@@ -372,8 +372,8 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type4.setter
     def type4(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 7]:
-            raise Exception("""type4 must be one of {0,1,2,3,4,5,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 7, None]:
+            raise Exception("""type4 must be `None` or one of {0,1,2,3,4,5,7}""")
         self._cards[2].set_value("type4", value)
 
     @property
@@ -391,8 +391,8 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type5.setter
     def type5(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 7]:
-            raise Exception("""type5 must be one of {0,1,2,3,4,5,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 7, None]:
+            raise Exception("""type5 must be `None` or one of {0,1,2,3,4,5,7}""")
         self._cards[2].set_value("type5", value)
 
     @property
@@ -410,8 +410,8 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type6.setter
     def type6(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 7]:
-            raise Exception("""type6 must be one of {0,1,2,3,4,5,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 7, None]:
+            raise Exception("""type6 must be `None` or one of {0,1,2,3,4,5,7}""")
         self._cards[2].set_value("type6", value)
 
     @property
@@ -429,8 +429,8 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type7.setter
     def type7(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 7]:
-            raise Exception("""type7 must be one of {0,1,2,3,4,5,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 7, None]:
+            raise Exception("""type7 must be `None` or one of {0,1,2,3,4,5,7}""")
         self._cards[2].set_value("type7", value)
 
     @property
@@ -448,8 +448,8 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type8.setter
     def type8(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 7]:
-            raise Exception("""type8 must be one of {0,1,2,3,4,5,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 7, None]:
+            raise Exception("""type8 must be `None` or one of {0,1,2,3,4,5,7}""")
         self._cards[2].set_value("type8", value)
 
     @property

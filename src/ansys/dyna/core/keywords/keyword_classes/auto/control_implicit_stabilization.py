@@ -78,8 +78,8 @@ class ControlImplicitStabilization(KeywordBase):
 
     @ias.setter
     def ias(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""ias must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""ias must be `None` or one of {2,1}""")
         self._cards[0].set_value("ias", value)
 
     @property

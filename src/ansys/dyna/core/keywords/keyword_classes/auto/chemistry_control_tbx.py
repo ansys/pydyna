@@ -74,7 +74,7 @@ class ChemistryControlTbx(KeywordBase):
 
     @usepar.setter
     def usepar(self, value: int) -> None:
-        if value not in [1, 0]:
-            raise Exception("""usepar must be one of {1,0}""")
+        if value not in [1, 0, None]:
+            raise Exception("""usepar must be `None` or one of {1,0}""")
         self._cards[0].set_value("usepar", value)
 

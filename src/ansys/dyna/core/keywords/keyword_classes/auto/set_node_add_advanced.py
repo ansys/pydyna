@@ -225,8 +225,8 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @type1.setter
     def type1(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""type1 must be one of {1,2,3,4,5,6,7}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""type1 must be `None` or one of {1,2,3,4,5,6,7}""")
         self._cards[1].set_value("type1", value)
 
     @property
@@ -247,8 +247,8 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @type2.setter
     def type2(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""type2 must be one of {1,2,3,4,5,6,7}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""type2 must be `None` or one of {1,2,3,4,5,6,7}""")
         self._cards[1].set_value("type2", value)
 
     @property
@@ -269,8 +269,8 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @type3.setter
     def type3(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""type3 must be one of {1,2,3,4,5,6,7}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""type3 must be `None` or one of {1,2,3,4,5,6,7}""")
         self._cards[1].set_value("type3", value)
 
     @property
@@ -291,8 +291,8 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @type4.setter
     def type4(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""type4 must be one of {1,2,3,4,5,6,7}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""type4 must be `None` or one of {1,2,3,4,5,6,7}""")
         self._cards[1].set_value("type4", value)
 
     @property

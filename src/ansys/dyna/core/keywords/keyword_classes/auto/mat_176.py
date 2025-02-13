@@ -495,8 +495,8 @@ class Mat176(KeywordBase):
 
     @so.setter
     def so(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0]:
-            raise Exception("""so must be one of {0.0,1.0,2.0}""")
+        if value not in [0.0, 1.0, 2.0, None]:
+            raise Exception("""so must be `None` or one of {0.0,1.0,2.0}""")
         self._cards[1].set_value("so", value)
 
     @property

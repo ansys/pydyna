@@ -500,8 +500,8 @@ class Mat1222D(KeywordBase):
 
     @hr.setter
     def hr(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""hr must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""hr must be `None` or one of {1,2}""")
         self._cards[2].set_value("hr", value)
 
     @property

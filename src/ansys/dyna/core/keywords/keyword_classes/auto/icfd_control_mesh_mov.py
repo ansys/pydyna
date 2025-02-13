@@ -76,8 +76,8 @@ class IcfdControlMeshMov(KeywordBase):
 
     @mmsh.setter
     def mmsh(self, value: int) -> None:
-        if value not in [2, -1, 1, 3, 4, 11, 20]:
-            raise Exception("""mmsh must be one of {2,-1,1,3,4,11,20}""")
+        if value not in [2, -1, 1, 3, 4, 11, 20, None]:
+            raise Exception("""mmsh must be `None` or one of {2,-1,1,3,4,11,20}""")
         self._cards[0].set_value("mmsh", value)
 
     @property

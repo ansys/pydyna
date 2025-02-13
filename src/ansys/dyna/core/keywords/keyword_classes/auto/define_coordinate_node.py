@@ -162,8 +162,8 @@ class DefineCoordinateNode(KeywordBase):
 
     @dir.setter
     def dir(self, value: str) -> None:
-        if value not in ["X", "Y", "Z"]:
-            raise Exception("""dir must be one of {"X","Y","Z"}""")
+        if value not in ["X", "Y", "Z", None]:
+            raise Exception("""dir must be `None` or one of {"X","Y","Z"}""")
         self._cards[0].set_value("dir", value)
 
     @property

@@ -224,8 +224,8 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @bstyp.setter
     def bstyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""bstyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""bstyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("bstyp", value)
 
     @property
@@ -238,8 +238,8 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sstyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sstyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("sstyp", value)
 
     @property

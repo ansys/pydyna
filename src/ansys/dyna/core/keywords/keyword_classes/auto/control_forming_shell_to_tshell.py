@@ -106,8 +106,8 @@ class ControlFormingShellToTshell(KeywordBase):
 
     @midsf.setter
     def midsf(self, value: float) -> None:
-        if value not in [0, 1, -1]:
-            raise Exception("""midsf must be one of {0,1,-1}""")
+        if value not in [0, 1, -1, None]:
+            raise Exception("""midsf must be `None` or one of {0,1,-1}""")
         self._cards[0].set_value("midsf", value)
 
     @property

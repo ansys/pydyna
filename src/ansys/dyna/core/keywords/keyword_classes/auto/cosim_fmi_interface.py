@@ -127,8 +127,8 @@ class CosimFmiInterface(KeywordBase):
 
     @impexp.setter
     def impexp(self, value: str) -> None:
-        if value not in ["IMP", "EXP"]:
-            raise Exception("""impexp must be one of {"IMP","EXP"}""")
+        if value not in ["IMP", "EXP", None]:
+            raise Exception("""impexp must be `None` or one of {"IMP","EXP"}""")
         self._cards[1].set_value("impexp", value)
 
     @property
@@ -147,8 +147,8 @@ class CosimFmiInterface(KeywordBase):
 
     @regtyp.setter
     def regtyp(self, value: str) -> None:
-        if value not in ["NODE", "NSET", "SSET", "PART", "FUNC", "CURV", "SESW", "BAG"]:
-            raise Exception("""regtyp must be one of {"NODE","NSET","SSET","PART","FUNC","CURV","SESW","BAG"}""")
+        if value not in ["NODE", "NSET", "SSET", "PART", "FUNC", "CURV", "SESW", "BAG", None]:
+            raise Exception("""regtyp must be `None` or one of {"NODE","NSET","SSET","PART","FUNC","CURV","SESW","BAG"}""")
         self._cards[1].set_value("regtyp", value)
 
     @property
@@ -213,7 +213,7 @@ class CosimFmiInterface(KeywordBase):
 
     @ref.setter
     def ref(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ref must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ref must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("ref", value)
 

@@ -439,8 +439,8 @@ class ControlDiscreteElement(KeywordBase):
 
     @parallel.setter
     def parallel(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""parallel must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""parallel must be `None` or one of {0,1}""")
         self._cards[1].set_value("parallel", value)
 
     @property

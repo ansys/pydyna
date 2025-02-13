@@ -545,8 +545,8 @@ class Mat172(KeywordBase):
 
     @typec.setter
     def typec(self, value: float) -> None:
-        if value not in [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]:
-            raise Exception("""typec must be one of {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0}""")
+        if value not in [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, None]:
+            raise Exception("""typec must be `None` or one of {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0}""")
         self._cards[0].set_value("typec", value)
 
     @property
@@ -706,8 +706,8 @@ class Mat172(KeywordBase):
 
     @typer.setter
     def typer(self, value: float) -> None:
-        if value not in [1.0, 2.0, 3.0, 4.0, 5.0]:
-            raise Exception("""typer must be one of {1.0,2.0,3.0,4.0,5.0}""")
+        if value not in [1.0, 2.0, 3.0, 4.0, 5.0, None]:
+            raise Exception("""typer must be `None` or one of {1.0,2.0,3.0,4.0,5.0}""")
         self._cards[2].set_value("typer", value)
 
     @property
@@ -823,8 +823,8 @@ class Mat172(KeywordBase):
 
     @ishchk.setter
     def ishchk(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ishchk must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ishchk must be `None` or one of {0,1}""")
         self._cards[3].set_value("ishchk", value)
 
     @property
@@ -979,8 +979,8 @@ class Mat172(KeywordBase):
 
     @typesc.setter
     def typesc(self, value: float) -> None:
-        if value not in [1, 2, 11, 12]:
-            raise Exception("""typesc must be one of {1,2,11,12}""")
+        if value not in [1, 2, 11, 12, None]:
+            raise Exception("""typesc must be `None` or one of {1,2,11,12}""")
         self._cards[6].set_value("typesc", value)
 
     @property

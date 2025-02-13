@@ -175,8 +175,8 @@ class DefineElementGeneralizedSolid(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""imass must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""imass must be `None` or one of {0,1}""")
         self._cards[0].set_value("imass", value)
 
     @property

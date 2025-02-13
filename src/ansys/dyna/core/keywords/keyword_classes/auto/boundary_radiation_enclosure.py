@@ -252,8 +252,8 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @outopt.setter
     def outopt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""outopt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""outopt must be `None` or one of {0,1}""")
         self._cards[1].set_value("outopt", value)
 
     @property
@@ -287,8 +287,8 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @smflag.setter
     def smflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""smflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""smflag must be `None` or one of {0,1}""")
         self._cards[3].set_value("smflag", value)
 
     @property
@@ -374,8 +374,8 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @slmlev.setter
     def slmlev(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""slmlev must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""slmlev must be `None` or one of {0,1,2,3}""")
         self._cards[4].set_value("slmlev", value)
 
     @property

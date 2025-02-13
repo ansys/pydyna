@@ -324,8 +324,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @restmd.setter
     def restmd(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""restmd must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""restmd must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("restmd", value)
 
     @property
@@ -338,8 +338,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @restdp.setter
     def restdp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""restdp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""restdp must be `None` or one of {0,1}""")
         self._cards[0].set_value("restdp", value)
 
     @property
@@ -352,8 +352,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @lcflag.setter
     def lcflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""lcflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""lcflag must be `None` or one of {0,1}""")
         self._cards[0].set_value("lcflag", value)
 
     @property
@@ -366,8 +366,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @relatv.setter
     def relatv(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""relatv must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""relatv must be `None` or one of {0,1}""")
         self._cards[0].set_value("relatv", value)
 
     @property
@@ -432,8 +432,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @dmpflg.setter
     def dmpflg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""dmpflg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""dmpflg must be `None` or one of {0,1}""")
         self._cards[1].set_value("dmpflg", value)
 
     @property
@@ -456,8 +456,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @memory.setter
     def memory(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""memory must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""memory must be `None` or one of {0,1}""")
         self._cards[2].set_value("memory", value)
 
     @property
@@ -481,8 +481,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @strtyp.setter
     def strtyp(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""strtyp must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""strtyp must be `None` or one of {0,1,2}""")
         self._cards[2].set_value("strtyp", value)
 
     @property
@@ -508,8 +508,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @notyp.setter
     def notyp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, -2]:
-            raise Exception("""notyp must be one of {0,1,2,3,-2}""")
+        if value not in [0, 1, 2, 3, -2, None]:
+            raise Exception("""notyp must be `None` or one of {0,1,2,3,-2}""")
         self._cards[2].set_value("notyp", value)
 
     @property
@@ -522,8 +522,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @nova.setter
     def nova(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""nova must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""nova must be `None` or one of {0,1}""")
         self._cards[2].set_value("nova", value)
 
     @property
@@ -547,8 +547,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @ntyp.setter
     def ntyp(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ntyp must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ntyp must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("ntyp", value)
 
     @property
@@ -563,8 +563,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
-        if value not in [1, 2, 3, 4]:
-            raise Exception("""dof must be one of {1,2,3,4}""")
+        if value not in [1, 2, 3, 4, None]:
+            raise Exception("""dof must be `None` or one of {1,2,3,4}""")
         self._cards[3].set_value("dof", value)
 
     @property
@@ -590,8 +590,8 @@ class FrequencyDomainSsdFatigue(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]:
-            raise Exception("""vad must be one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, None]:
+            raise Exception("""vad must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14}""")
         self._cards[3].set_value("vad", value)
 
     @property

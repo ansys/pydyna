@@ -278,8 +278,8 @@ class ControlSph(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15, 16]:
-            raise Exception("""form must be one of {0,1,2,3,4,5,6,7,8,9,10,12,13,15,16}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15, 16, None]:
+            raise Exception("""form must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,12,13,15,16}""")
         self._cards[0].set_value("form", value)
 
     @property
@@ -312,8 +312,8 @@ class ControlSph(KeywordBase):
 
     @cont.setter
     def cont(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cont must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cont must be `None` or one of {0,1}""")
         self._cards[1].set_value("cont", value)
 
     @property
@@ -324,8 +324,8 @@ class ControlSph(KeywordBase):
 
     @deriv.setter
     def deriv(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""deriv must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""deriv must be `None` or one of {0,1}""")
         self._cards[1].set_value("deriv", value)
 
     @property
@@ -339,8 +339,8 @@ class ControlSph(KeywordBase):
 
     @ini.setter
     def ini(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ini must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ini must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("ini", value)
 
     @property
@@ -353,8 +353,8 @@ class ControlSph(KeywordBase):
 
     @ishow.setter
     def ishow(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ishow must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ishow must be `None` or one of {0,1}""")
         self._cards[1].set_value("ishow", value)
 
     @property
@@ -369,8 +369,8 @@ class ControlSph(KeywordBase):
 
     @ierod.setter
     def ierod(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""ierod must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""ierod must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("ierod", value)
 
     @property
@@ -383,8 +383,8 @@ class ControlSph(KeywordBase):
 
     @icont.setter
     def icont(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""icont must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""icont must be `None` or one of {0,1}""")
         self._cards[1].set_value("icont", value)
 
     @property
@@ -397,8 +397,8 @@ class ControlSph(KeywordBase):
 
     @iavis.setter
     def iavis(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iavis must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iavis must be `None` or one of {0,1}""")
         self._cards[1].set_value("iavis", value)
 
     @property
@@ -422,8 +422,8 @@ class ControlSph(KeywordBase):
 
     @ithk.setter
     def ithk(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ithk must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ithk must be `None` or one of {0,1}""")
         self._cards[2].set_value("ithk", value)
 
     @property
@@ -436,8 +436,8 @@ class ControlSph(KeywordBase):
 
     @istab.setter
     def istab(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""istab must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""istab must be `None` or one of {0,1}""")
         self._cards[2].set_value("istab", value)
 
     @property
@@ -460,8 +460,8 @@ class ControlSph(KeywordBase):
 
     @sphsort.setter
     def sphsort(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sphsort must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sphsort must be `None` or one of {0,1}""")
         self._cards[2].set_value("sphsort", value)
 
     @property
@@ -474,7 +474,7 @@ class ControlSph(KeywordBase):
 
     @ishift.setter
     def ishift(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ishift must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ishift must be `None` or one of {0,1}""")
         self._cards[2].set_value("ishift", value)
 

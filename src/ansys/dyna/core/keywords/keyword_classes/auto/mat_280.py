@@ -317,8 +317,8 @@ class Mat280(KeywordBase):
 
     @imod.setter
     def imod(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 10.0, 11.0, 12.0]:
-            raise Exception("""imod must be one of {0.0,1.0,2.0,10.0,11.0,12.0}""")
+        if value not in [0.0, 1.0, 2.0, 10.0, 11.0, 12.0, None]:
+            raise Exception("""imod must be `None` or one of {0.0,1.0,2.0,10.0,11.0,12.0}""")
         self._cards[0].set_value("imod", value)
 
     @property
@@ -331,8 +331,8 @@ class Mat280(KeywordBase):
 
     @ilaw.setter
     def ilaw(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""ilaw must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""ilaw must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("ilaw", value)
 
     @property
@@ -346,8 +346,8 @@ class Mat280(KeywordBase):
 
     @fmod.setter
     def fmod(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0]:
-            raise Exception("""fmod must be one of {0.0,1.0,2.0}""")
+        if value not in [0.0, 1.0, 2.0, None]:
+            raise Exception("""fmod must be `None` or one of {0.0,1.0,2.0}""")
         self._cards[1].set_value("fmod", value)
 
     @property
@@ -455,8 +455,8 @@ class Mat280(KeywordBase):
 
     @crin.setter
     def crin(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""crin must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""crin must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("crin", value)
 
     @property

@@ -515,8 +515,8 @@ class MatDamage1(KeywordBase):
 
     @flag.setter
     def flag(self, value: int) -> None:
-        if value not in [0, -1, 1]:
-            raise Exception("""flag must be one of {0,-1,1}""")
+        if value not in [0, -1, 1, None]:
+            raise Exception("""flag must be `None` or one of {0,-1,1}""")
         self._cards[1].set_value("flag", value)
 
     @property
@@ -634,8 +634,8 @@ class MatDamage1(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, -4, -3, -2]:
-            raise Exception("""macf must be one of {1,2,3,4,-4,-3,-2}""")
+        if value not in [1, 2, 3, 4, -4, -3, -2, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
         self._cards[3].set_value("macf", value)
 
     @property

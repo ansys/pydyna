@@ -208,8 +208,8 @@ class InterfaceSpringbackNike3DThickness(KeywordBase):
 
     @ftype.setter
     def ftype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 10, 11, 12]:
-            raise Exception("""ftype must be one of {0,1,2,3,10,11,12}""")
+        if value not in [0, 1, 2, 3, 10, 11, 12, None]:
+            raise Exception("""ftype must be `None` or one of {0,1,2,3,10,11,12}""")
         self._cards[0].set_value("ftype", value)
 
     @property
@@ -223,8 +223,8 @@ class InterfaceSpringbackNike3DThickness(KeywordBase):
 
     @ftensr.setter
     def ftensr(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ftensr must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ftensr must be `None` or one of {0,1}""")
         self._cards[0].set_value("ftensr", value)
 
     @property
@@ -267,8 +267,8 @@ class InterfaceSpringbackNike3DThickness(KeywordBase):
 
     @optc.setter
     def optc(self, value: str) -> None:
-        if value not in ["OPTCARD"]:
-            raise Exception("""optc must be one of {"OPTCARD"}""")
+        if value not in ["OPTCARD", None]:
+            raise Exception("""optc must be `None` or one of {"OPTCARD"}""")
         self._cards[1].set_value("optc", value)
 
     @property
@@ -281,8 +281,8 @@ class InterfaceSpringbackNike3DThickness(KeywordBase):
 
     @sldo.setter
     def sldo(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sldo must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sldo must be `None` or one of {0,1}""")
         self._cards[1].set_value("sldo", value)
 
     @property
@@ -305,8 +305,8 @@ class InterfaceSpringbackNike3DThickness(KeywordBase):
 
     @fsplit.setter
     def fsplit(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""fsplit must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""fsplit must be `None` or one of {0,1}""")
         self._cards[1].set_value("fsplit", value)
 
     @property
@@ -319,8 +319,8 @@ class InterfaceSpringbackNike3DThickness(KeywordBase):
 
     @ndflag.setter
     def ndflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ndflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ndflag must be `None` or one of {0,1}""")
         self._cards[1].set_value("ndflag", value)
 
     @property
@@ -333,8 +333,8 @@ class InterfaceSpringbackNike3DThickness(KeywordBase):
 
     @cflag.setter
     def cflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cflag must be `None` or one of {0,1}""")
         self._cards[1].set_value("cflag", value)
 
     @property
@@ -375,8 +375,8 @@ class InterfaceSpringbackNike3DThickness(KeywordBase):
 
     @tc.setter
     def tc(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""tc must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""tc must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[2].set_value("tc", value)
 
     @property
@@ -395,7 +395,7 @@ class InterfaceSpringbackNike3DThickness(KeywordBase):
 
     @rc.setter
     def rc(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rc must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rc must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[2].set_value("rc", value)
 

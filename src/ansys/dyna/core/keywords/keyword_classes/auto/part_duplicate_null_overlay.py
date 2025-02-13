@@ -97,8 +97,8 @@ class PartDuplicateNullOverlay(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: str) -> None:
-        if value not in ["PART", "PSET"]:
-            raise Exception("""ptype must be one of {"PART","PSET"}""")
+        if value not in ["PART", "PSET", None]:
+            raise Exception("""ptype must be `None` or one of {"PART","PSET"}""")
         self._cards[0].set_value("ptype", value)
 
     @property

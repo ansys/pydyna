@@ -278,8 +278,8 @@ class ContactNurbsTiedEdgeToSurface(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
-        if value not in [0, 2, 3, 4]:
-            raise Exception("""sstyp must be one of {0,2,3,4}""")
+        if value not in [0, 2, 3, 4, None]:
+            raise Exception("""sstyp must be `None` or one of {0,2,3,4}""")
         self._cards[1].set_value("sstyp", value)
 
     @property
@@ -294,8 +294,8 @@ class ContactNurbsTiedEdgeToSurface(KeywordBase):
 
     @mstyp.setter
     def mstyp(self, value: int) -> None:
-        if value not in [0, 2, 3, 4]:
-            raise Exception("""mstyp must be one of {0,2,3,4}""")
+        if value not in [0, 2, 3, 4, None]:
+            raise Exception("""mstyp must be `None` or one of {0,2,3,4}""")
         self._cards[1].set_value("mstyp", value)
 
     @property
@@ -309,8 +309,8 @@ class ContactNurbsTiedEdgeToSurface(KeywordBase):
 
     @cform.setter
     def cform(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cform must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cform must be `None` or one of {0,1}""")
         self._cards[1].set_value("cform", value)
 
     @property

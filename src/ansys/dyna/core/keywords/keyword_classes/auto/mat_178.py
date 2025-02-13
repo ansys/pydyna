@@ -351,8 +351,8 @@ class Mat178(KeywordBase):
 
     @fittype.setter
     def fittype(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""fittype must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""fittype must be `None` or one of {1,2}""")
         self._cards[0].set_value("fittype", value)
 
     @property
@@ -393,8 +393,8 @@ class Mat178(KeywordBase):
 
     @gstart.setter
     def gstart(self, value: float) -> None:
-        if value not in [1, TMAX]:
-            raise Exception("""gstart must be one of {1,TMAX}""")
+        if value not in [1, TMAX, None]:
+            raise Exception("""gstart must be `None` or one of {1,TMAX}""")
         self._cards[1].set_value("gstart", value)
 
     @property

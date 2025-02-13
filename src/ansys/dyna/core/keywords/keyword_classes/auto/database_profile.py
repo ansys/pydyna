@@ -123,8 +123,8 @@ class DatabaseProfile(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6]:
-            raise Exception("""stype must be one of {1,2,3,4,5,6}""")
+        if value not in [1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""stype must be `None` or one of {1,2,3,4,5,6}""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -162,8 +162,8 @@ class DatabaseProfile(KeywordBase):
 
     @data.setter
     def data(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]:
-            raise Exception("""data must be one of {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, None]:
+            raise Exception("""data must be `None` or one of {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27}""")
         self._cards[0].set_value("data", value)
 
     @property
@@ -178,8 +178,8 @@ class DatabaseProfile(KeywordBase):
 
     @dir.setter
     def dir(self, value: int) -> None:
-        if value not in [1, 2, 3, 4]:
-            raise Exception("""dir must be one of {1,2,3,4}""")
+        if value not in [1, 2, 3, 4, None]:
+            raise Exception("""dir must be `None` or one of {1,2,3,4}""")
         self._cards[0].set_value("dir", value)
 
     @property
@@ -192,8 +192,8 @@ class DatabaseProfile(KeywordBase):
 
     @updloc.setter
     def updloc(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""updloc must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""updloc must be `None` or one of {0,1}""")
         self._cards[0].set_value("updloc", value)
 
     @property

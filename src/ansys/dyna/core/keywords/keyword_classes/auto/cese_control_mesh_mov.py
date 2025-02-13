@@ -78,8 +78,8 @@ class CeseControlMeshMov(KeywordBase):
 
     @mmsh.setter
     def mmsh(self, value: int) -> None:
-        if value not in [1, 9]:
-            raise Exception("""mmsh must be one of {1,9}""")
+        if value not in [1, 9, None]:
+            raise Exception("""mmsh must be `None` or one of {1,9}""")
         self._cards[0].set_value("mmsh", value)
 
     @property

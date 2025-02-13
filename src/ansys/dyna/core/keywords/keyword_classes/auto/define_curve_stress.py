@@ -203,8 +203,8 @@ class DefineCurveStress(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 11]:
-            raise Exception("""itype must be one of {1,2,3,4,5,11}""")
+        if value not in [1, 2, 3, 4, 5, 11, None]:
+            raise Exception("""itype must be `None` or one of {1,2,3,4,5,11}""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -328,8 +328,8 @@ class DefineCurveStress(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 11]:
-            raise Exception("""itype must be one of {1,2,3,4,5,11}""")
+        if value not in [1, 2, 3, 4, 5, 11, None]:
+            raise Exception("""itype must be `None` or one of {1,2,3,4,5,11}""")
         self._cards[1].set_value("itype", value)
 
     @property

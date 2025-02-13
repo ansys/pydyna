@@ -410,8 +410,8 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @type.setter
     def type(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0]:
-            raise Exception("""type must be one of {0.0,1.0,2.0,3.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, None]:
+            raise Exception("""type must be `None` or one of {0.0,1.0,2.0,3.0}""")
         self._cards[2].set_value("type", value)
 
     @property
@@ -464,8 +464,8 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @strflg.setter
     def strflg(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""strflg must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""strflg must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("strflg", value)
 
     @property

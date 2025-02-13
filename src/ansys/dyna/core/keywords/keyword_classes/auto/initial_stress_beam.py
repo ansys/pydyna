@@ -509,8 +509,8 @@ class InitialStressBeam(KeywordBase):
 
     @rule.setter
     def rule(self, value: int) -> None:
-        if value not in [2, 1, 3, 4, 5]:
-            raise Exception("""rule must be one of {2,1,3,4,5}""")
+        if value not in [2, 1, 3, 4, 5, None]:
+            raise Exception("""rule must be `None` or one of {2,1,3,4,5}""")
         self._cards[0].set_value("rule", value)
 
     @property
@@ -533,8 +533,8 @@ class InitialStressBeam(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""local must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""local must be `None` or one of {0,1}""")
         self._cards[0].set_value("local", value)
 
     @property
@@ -547,8 +547,8 @@ class InitialStressBeam(KeywordBase):
 
     @large.setter
     def large(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""large must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""large must be `None` or one of {0,1}""")
         self._cards[0].set_value("large", value)
 
     @property
@@ -569,8 +569,8 @@ class InitialStressBeam(KeywordBase):
 
     @naxes.setter
     def naxes(self, value: int) -> None:
-        if value not in [0, 12]:
-            raise Exception("""naxes must be one of {0,12}""")
+        if value not in [0, 12, None]:
+            raise Exception("""naxes must be `None` or one of {0,12}""")
         self._cards[0].set_value("naxes", value)
 
     @property

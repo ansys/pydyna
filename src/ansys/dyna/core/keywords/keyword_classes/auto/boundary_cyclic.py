@@ -151,8 +151,8 @@ class BoundaryCyclic(KeywordBase):
 
     @iglobal.setter
     def iglobal(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""iglobal must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""iglobal must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("iglobal", value)
 
     @property
@@ -165,7 +165,7 @@ class BoundaryCyclic(KeywordBase):
 
     @isort.setter
     def isort(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""isort must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""isort must be `None` or one of {0,1}""")
         self._cards[0].set_value("isort", value)
 

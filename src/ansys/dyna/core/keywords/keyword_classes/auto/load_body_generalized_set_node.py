@@ -300,7 +300,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @angtyp.setter
     def angtyp(self, value: str) -> None:
-        if value not in ["CENT", "CORI", "ROTA"]:
-            raise Exception("""angtyp must be one of {"CENT","CORI","ROTA"}""")
+        if value not in ["CENT", "CORI", "ROTA", None]:
+            raise Exception("""angtyp must be `None` or one of {"CENT","CORI","ROTA"}""")
         self._cards[1].set_value("angtyp", value)
 

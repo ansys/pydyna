@@ -139,8 +139,8 @@ class EmPermanentMagnet(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
-        if value not in [0, 1, 3, 4]:
-            raise Exception("""mtype must be one of {0,1,3,4}""")
+        if value not in [0, 1, 3, 4, None]:
+            raise Exception("""mtype must be `None` or one of {0,1,3,4}""")
         self._cards[0].set_value("mtype", value)
 
     @property

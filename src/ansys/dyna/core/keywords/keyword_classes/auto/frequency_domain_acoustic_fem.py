@@ -326,8 +326,8 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @fftwin.setter
     def fftwin(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""fftwin must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""fftwin must be `None` or one of {0,1,2,3,4}""")
         self._cards[1].set_value("fftwin", value)
 
     @property
@@ -340,8 +340,8 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @mixdmp.setter
     def mixdmp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""mixdmp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""mixdmp must be `None` or one of {0,1}""")
         self._cards[1].set_value("mixdmp", value)
 
     @property
@@ -364,8 +364,8 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @ptyp.setter
     def ptyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ptyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ptyp must be `None` or one of {0,1}""")
         self._cards[2].set_value("ptyp", value)
 
     @property
@@ -390,8 +390,8 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @styp.setter
     def styp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""styp must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""styp must be `None` or one of {0,1,2,3}""")
         self._cards[3].set_value("styp", value)
 
     @property
@@ -415,8 +415,8 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
-        if value not in [0, 1, 2, 11, 12, 21, 22, 31, 32, 41, 42, 51, 52]:
-            raise Exception("""vad must be one of {0,1,2,11,12,21,22,31,32,41,42,51,52}""")
+        if value not in [0, 1, 2, 11, 12, 21, 22, 31, 32, 41, 42, 51, 52, None]:
+            raise Exception("""vad must be `None` or one of {0,1,2,11,12,21,22,31,32,41,42,51,52}""")
         self._cards[3].set_value("vad", value)
 
     @property
@@ -433,8 +433,8 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""dof must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""dof must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[3].set_value("dof", value)
 
     @property
@@ -497,8 +497,8 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @ntyp.setter
     def ntyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ntyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ntyp must be `None` or one of {0,1}""")
         self._cards[4].set_value("ntyp", value)
 
     @property
@@ -511,8 +511,8 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @ipfile.setter
     def ipfile(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ipfile must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ipfile must be `None` or one of {0,1}""")
         self._cards[4].set_value("ipfile", value)
 
     @property
@@ -528,7 +528,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @dba.setter
     def dba(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""dba must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""dba must be `None` or one of {0,1,2,3,4}""")
         self._cards[4].set_value("dba", value)
 

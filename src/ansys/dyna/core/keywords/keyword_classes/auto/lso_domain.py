@@ -141,8 +141,8 @@ class LsoDomain(KeywordBase):
 
     @domain_type.setter
     def domain_type(self, value: str) -> None:
-        if value not in ["ROGO", "CIRCUIT", "THIST_POINT", "TRACER_POINT", "NODE", "PART", "SEGMENT", "SURF_NODE", "SURF_ELEMENT", "VOLUME_ELEMENT", "SURFACE_PART", "VOLUME_PART"]:
-            raise Exception("""domain_type must be one of {"ROGO","CIRCUIT","THIST_POINT","TRACER_POINT","NODE","PART","SEGMENT","SURF_NODE","SURF_ELEMENT","VOLUME_ELEMENT","SURFACE_PART","VOLUME_PART"}""")
+        if value not in ["ROGO", "CIRCUIT", "THIST_POINT", "TRACER_POINT", "NODE", "PART", "SEGMENT", "SURF_NODE", "SURF_ELEMENT", "VOLUME_ELEMENT", "SURFACE_PART", "VOLUME_PART", None]:
+            raise Exception("""domain_type must be `None` or one of {"ROGO","CIRCUIT","THIST_POINT","TRACER_POINT","NODE","PART","SEGMENT","SURF_NODE","SURF_ELEMENT","VOLUME_ELEMENT","SURFACE_PART","VOLUME_PART"}""")
         self._cards[0].set_value("domain_type", value)
 
     @property
@@ -154,8 +154,8 @@ class LsoDomain(KeywordBase):
 
     @solver_name.setter
     def solver_name(self, value: str) -> None:
-        if value not in ["MECH", "EM", "CESE", "ICFD"]:
-            raise Exception("""solver_name must be one of {"MECH","EM","CESE","ICFD"}""")
+        if value not in ["MECH", "EM", "CESE", "ICFD", None]:
+            raise Exception("""solver_name must be `None` or one of {"MECH","EM","CESE","ICFD"}""")
         self._cards[1].set_value("solver_name", value)
 
     @property
@@ -234,8 +234,8 @@ class LsoDomain(KeywordBase):
 
     @override.setter
     def override(self, value: int) -> None:
-        if value not in [1, 2, 3, 4]:
-            raise Exception("""override must be one of {1,2,3,4}""")
+        if value not in [1, 2, 3, 4, None]:
+            raise Exception("""override must be `None` or one of {1,2,3,4}""")
         self._cards[3].set_value("override", value)
 
     @property

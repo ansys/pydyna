@@ -237,8 +237,8 @@ class ConstrainedNodalRigidBodySpcOverride(KeywordBase):
 
     @drflag.setter
     def drflag(self, value: int) -> None:
-        if value not in [0, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""drflag must be one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}""")
+        if value not in [0, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""drflag must be `None` or one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("drflag", value)
 
     @property
@@ -264,8 +264,8 @@ class ConstrainedNodalRigidBodySpcOverride(KeywordBase):
 
     @rrflag.setter
     def rrflag(self, value: int) -> None:
-        if value not in [0, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rrflag must be one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}""")
+        if value not in [0, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rrflag must be `None` or one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("rrflag", value)
 
     @property
@@ -279,8 +279,8 @@ class ConstrainedNodalRigidBodySpcOverride(KeywordBase):
 
     @cmo.setter
     def cmo(self, value: float) -> None:
-        if value not in [0.0, -1.0, 1.0]:
-            raise Exception("""cmo must be one of {0.0,-1.0,1.0}""")
+        if value not in [0.0, -1.0, 1.0, None]:
+            raise Exception("""cmo must be `None` or one of {0.0,-1.0,1.0}""")
         self._cards[1].set_value("cmo", value)
 
     @property
@@ -342,8 +342,8 @@ class ConstrainedNodalRigidBodySpcOverride(KeywordBase):
 
     @icnt.setter
     def icnt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""icnt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""icnt must be `None` or one of {0,1}""")
         self._cards[2].set_value("icnt", value)
 
     @property
@@ -359,8 +359,8 @@ class ConstrainedNodalRigidBodySpcOverride(KeywordBase):
 
     @ibag.setter
     def ibag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibag must be `None` or one of {0,1}""")
         self._cards[2].set_value("ibag", value)
 
     @property
@@ -378,8 +378,8 @@ class ConstrainedNodalRigidBodySpcOverride(KeywordBase):
 
     @ipsm.setter
     def ipsm(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ipsm must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ipsm must be `None` or one of {0,1,2}""")
         self._cards[2].set_value("ipsm", value)
 
     @property

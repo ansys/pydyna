@@ -105,8 +105,8 @@ class ConstrainedGlobal(KeywordBase):
 
     @tc.setter
     def tc(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""tc must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""tc must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("tc", value)
 
     @property
@@ -125,8 +125,8 @@ class ConstrainedGlobal(KeywordBase):
 
     @rc.setter
     def rc(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rc must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rc must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("rc", value)
 
     @property
@@ -141,8 +141,8 @@ class ConstrainedGlobal(KeywordBase):
 
     @dir.setter
     def dir(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""dir must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""dir must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("dir", value)
 
     @property

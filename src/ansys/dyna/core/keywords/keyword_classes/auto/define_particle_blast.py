@@ -347,8 +347,8 @@ class DefineParticleBlast(KeywordBase):
 
     @lagstype.setter
     def lagstype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""lagstype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""lagstype must be `None` or one of {0,1}""")
         self._cards[0].set_value("lagstype", value)
 
     @property
@@ -373,8 +373,8 @@ class DefineParticleBlast(KeywordBase):
 
     @nodtype.setter
     def nodtype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""nodtype must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""nodtype must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("nodtype", value)
 
     @property
@@ -398,8 +398,8 @@ class DefineParticleBlast(KeywordBase):
 
     @hectype.setter
     def hectype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""hectype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""hectype must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("hectype", value)
 
     @property
@@ -447,8 +447,8 @@ class DefineParticleBlast(KeywordBase):
 
     @iunit.setter
     def iunit(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""iunit must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""iunit must be `None` or one of {0,1,2,3,4}""")
         self._cards[1].set_value("iunit", value)
 
     @property
@@ -462,8 +462,8 @@ class DefineParticleBlast(KeywordBase):
 
     @ihetype.setter
     def ihetype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ihetype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ihetype must be `None` or one of {0,1,2}""")
         self._cards[2].set_value("ihetype", value)
 
     @property

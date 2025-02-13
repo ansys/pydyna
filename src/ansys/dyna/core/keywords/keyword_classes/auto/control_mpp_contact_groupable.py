@@ -59,7 +59,7 @@ class ControlMppContactGroupable(KeywordBase):
 
     @grp.setter
     def grp(self, value: int) -> None:
-        if value not in [1, 2, 4, 8]:
-            raise Exception("""grp must be one of {1,2,4,8}""")
+        if value not in [1, 2, 4, 8, None]:
+            raise Exception("""grp must be `None` or one of {1,2,4,8}""")
         self._cards[0].set_value("grp", value)
 

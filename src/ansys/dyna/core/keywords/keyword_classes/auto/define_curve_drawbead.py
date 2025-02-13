@@ -153,8 +153,8 @@ class DefineCurveDrawbead(KeywordBase):
 
     @tcype.setter
     def tcype(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""tcype must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""tcype must be `None` or one of {1,2}""")
         self._cards[0].set_value("tcype", value)
 
     @property

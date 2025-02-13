@@ -93,7 +93,7 @@ class InitialTemperatureSet(KeywordBase):
 
     @loc.setter
     def loc(self, value: int) -> None:
-        if value not in [0, -1, 1]:
-            raise Exception("""loc must be one of {0,-1,1}""")
+        if value not in [0, -1, 1, None]:
+            raise Exception("""loc must be `None` or one of {0,-1,1}""")
         self._cards[0].set_value("loc", value)
 

@@ -68,8 +68,8 @@ class FrequencyDomainAccelerationUnit(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, -1]:
-            raise Exception("""unit must be one of {0,1,2,3,4,-1}""")
+        if value not in [0, 1, 2, 3, 4, -1, None]:
+            raise Exception("""unit must be `None` or one of {0,1,2,3,4,-1}""")
         self._cards[0].set_value("unit", value)
 
     @property

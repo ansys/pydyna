@@ -233,8 +233,8 @@ class MatAddDamageGissmo(KeywordBase):
 
     @dtyp.setter
     def dtyp(self, value: float) -> None:
-        if value not in [0, 1]:
-            raise Exception("""dtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""dtyp must be `None` or one of {0,1}""")
         self._cards[0].set_value("dtyp", value)
 
     @property

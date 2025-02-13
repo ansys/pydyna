@@ -847,8 +847,8 @@ class Mat264(KeywordBase):
 
     @macf.setter
     def macf(self, value: float) -> None:
-        if value not in [1, 2, 3, 4, -4, -3, -2, -1]:
-            raise Exception("""macf must be one of {1,2,3,4,-4,-3,-2,-1}""")
+        if value not in [1, 2, 3, 4, -4, -3, -2, -1, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2,-1}""")
         self._cards[5].set_value("macf", value)
 
     @property

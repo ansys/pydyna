@@ -199,8 +199,8 @@ class MatAddFatigue(KeywordBase):
 
     @ltype.setter
     def ltype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ltype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ltype must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("ltype", value)
 
     @property
@@ -250,8 +250,8 @@ class MatAddFatigue(KeywordBase):
 
     @snlimt.setter
     def snlimt(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""snlimt must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""snlimt must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("snlimt", value)
 
     @property
@@ -264,8 +264,8 @@ class MatAddFatigue(KeywordBase):
 
     @sntype.setter
     def sntype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sntype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sntype must be `None` or one of {0,1}""")
         self._cards[0].set_value("sntype", value)
 
     @property

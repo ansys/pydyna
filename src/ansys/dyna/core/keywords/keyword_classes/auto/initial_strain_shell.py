@@ -150,8 +150,8 @@ class InitialStrainShellCardSet(Cards):
 
     @large.setter
     def large(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""large must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""large must be `None` or one of {0,1}""")
         self._cards[0].set_value("large", value)
 
     @property
@@ -164,8 +164,8 @@ class InitialStrainShellCardSet(Cards):
 
     @ilocal.setter
     def ilocal(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ilocal must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ilocal must be `None` or one of {0,1}""")
         self._cards[0].set_value("ilocal", value)
 
     @property

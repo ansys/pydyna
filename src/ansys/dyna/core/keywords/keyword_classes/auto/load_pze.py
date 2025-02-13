@@ -108,7 +108,7 @@ class LoadPze(KeywordBase):
 
     @setyp.setter
     def setyp(self, value: str) -> None:
-        if value not in ["NSET", "SEGSET"]:
-            raise Exception("""setyp must be one of {"NSET","SEGSET"}""")
+        if value not in ["NSET", "SEGSET", None]:
+            raise Exception("""setyp must be `None` or one of {"NSET","SEGSET"}""")
         self._cards[0].set_value("setyp", value)
 

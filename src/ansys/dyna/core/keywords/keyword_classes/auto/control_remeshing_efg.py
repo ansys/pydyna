@@ -252,8 +252,8 @@ class ControlRemeshingEfg(KeywordBase):
 
     @ivt.setter
     def ivt(self, value: int) -> None:
-        if value not in [1, -1, 2, -2]:
-            raise Exception("""ivt must be one of {1,-1,2,-2}""")
+        if value not in [1, -1, 2, -2, None]:
+            raise Exception("""ivt must be `None` or one of {1,-1,2,-2}""")
         self._cards[1].set_value("ivt", value)
 
     @property
@@ -268,8 +268,8 @@ class ControlRemeshingEfg(KeywordBase):
 
     @iat.setter
     def iat(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""iat must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""iat must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("iat", value)
 
     @property
@@ -282,8 +282,8 @@ class ControlRemeshingEfg(KeywordBase):
 
     @iaat.setter
     def iaat(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iaat must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iaat must be `None` or one of {0,1}""")
         self._cards[1].set_value("iaat", value)
 
     @property

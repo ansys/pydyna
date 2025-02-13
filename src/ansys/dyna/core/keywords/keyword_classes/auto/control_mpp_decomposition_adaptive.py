@@ -97,8 +97,8 @@ class ControlMppDecompositionAdaptive(KeywordBase):
 
     @defgeo.setter
     def defgeo(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""defgeo must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""defgeo must be `None` or one of {1,2}""")
         self._cards[0].set_value("defgeo", value)
 
     @property

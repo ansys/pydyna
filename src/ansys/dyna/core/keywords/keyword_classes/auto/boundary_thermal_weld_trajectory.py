@@ -261,8 +261,8 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @ptyp.setter
     def ptyp(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""ptyp must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""ptyp must be `None` or one of {1,2}""")
         self._cards[0].set_value("ptyp", value)
 
     @property
@@ -332,8 +332,8 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @relvel.setter
     def relvel(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""relvel must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""relvel must be `None` or one of {0,1}""")
         self._cards[0].set_value("relvel", value)
 
     @property
@@ -349,8 +349,8 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @iform.setter
     def iform(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5]:
-            raise Exception("""iform must be one of {1,2,3,4,5}""")
+        if value not in [1, 2, 3, 4, 5, None]:
+            raise Exception("""iform must be `None` or one of {1,2,3,4,5}""")
         self._cards[1].set_value("iform", value)
 
     @property

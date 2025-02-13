@@ -315,8 +315,8 @@ class ControlAdaptive(KeywordBase):
 
     @adptyp.setter
     def adptyp(self, value: int) -> None:
-        if value not in [1, 2, 4, 7, 8, -8]:
-            raise Exception("""adptyp must be one of {1,2,4,7,8,-8}""")
+        if value not in [1, 2, 4, 7, 8, -8, None]:
+            raise Exception("""adptyp must be `None` or one of {1,2,4,7,8,-8}""")
         self._cards[0].set_value("adptyp", value)
 
     @property
@@ -370,8 +370,8 @@ class ControlAdaptive(KeywordBase):
 
     @ioflag.setter
     def ioflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ioflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ioflag must be `None` or one of {0,1}""")
         self._cards[0].set_value("ioflag", value)
 
     @property
@@ -394,8 +394,8 @@ class ControlAdaptive(KeywordBase):
 
     @adpass.setter
     def adpass(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""adpass must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""adpass must be `None` or one of {0,1}""")
         self._cards[1].set_value("adpass", value)
 
     @property
@@ -451,8 +451,8 @@ class ControlAdaptive(KeywordBase):
 
     @orient.setter
     def orient(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""orient must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""orient must be `None` or one of {0,1}""")
         self._cards[1].set_value("orient", value)
 
     @property

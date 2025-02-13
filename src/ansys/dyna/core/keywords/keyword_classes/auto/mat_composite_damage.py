@@ -482,8 +482,8 @@ class MatCompositeDamage(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, -4, -3, -2]:
-            raise Exception("""macf must be one of {1,2,3,4,-4,-3,-2}""")
+        if value not in [1, 2, 3, 4, -4, -3, -2, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
         self._cards[1].set_value("macf", value)
 
     @property
@@ -496,8 +496,8 @@ class MatCompositeDamage(KeywordBase):
 
     @atrack.setter
     def atrack(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""atrack must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""atrack must be `None` or one of {0,1}""")
         self._cards[1].set_value("atrack", value)
 
     @property

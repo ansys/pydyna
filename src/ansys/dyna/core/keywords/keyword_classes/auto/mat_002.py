@@ -505,8 +505,8 @@ class Mat002(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, -4, -3, -2, 2, 3, 4]:
-            raise Exception("""macf must be one of {1,-4,-3,-2,2,3,4}""")
+        if value not in [1, -4, -3, -2, 2, 3, 4, None]:
+            raise Exception("""macf must be `None` or one of {1,-4,-3,-2,2,3,4}""")
         self._cards[2].set_value("macf", value)
 
     @property
@@ -601,8 +601,8 @@ class Mat002(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""ref must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
         self._cards[3].set_value("ref", value)
 
     @property

@@ -132,8 +132,8 @@ class ControlVibroAcoustic(KeywordBase):
 
     @vaflag.setter
     def vaflag(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]:
-            raise Exception("""vaflag must be one of {0,1,2,3,4,5,6,7,8,9}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, None]:
+            raise Exception("""vaflag must be `None` or one of {0,1,2,3,4,5,6,7,8,9}""")
         self._cards[0].set_value("vaflag", value)
 
     @property
@@ -148,8 +148,8 @@ class ControlVibroAcoustic(KeywordBase):
 
     @vaprld.setter
     def vaprld(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""vaprld must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""vaprld must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("vaprld", value)
 
     @property
@@ -162,8 +162,8 @@ class ControlVibroAcoustic(KeywordBase):
 
     @vastrs.setter
     def vastrs(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""vastrs must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""vastrs must be `None` or one of {0,1}""")
         self._cards[0].set_value("vastrs", value)
 
     @property
@@ -176,8 +176,8 @@ class ControlVibroAcoustic(KeywordBase):
 
     @vapsd.setter
     def vapsd(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""vapsd must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""vapsd must be `None` or one of {0,1}""")
         self._cards[0].set_value("vapsd", value)
 
     @property
@@ -190,8 +190,8 @@ class ControlVibroAcoustic(KeywordBase):
 
     @varms.setter
     def varms(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""varms must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""varms must be `None` or one of {0,1}""")
         self._cards[0].set_value("varms", value)
 
     @property
@@ -204,8 +204,8 @@ class ControlVibroAcoustic(KeywordBase):
 
     @vaplot.setter
     def vaplot(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""vaplot must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""vaplot must be `None` or one of {0,1}""")
         self._cards[0].set_value("vaplot", value)
 
     @property
@@ -239,8 +239,8 @@ class ControlVibroAcoustic(KeywordBase):
 
     @restart.setter
     def restart(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""restart must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""restart must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("restart", value)
 
     @property

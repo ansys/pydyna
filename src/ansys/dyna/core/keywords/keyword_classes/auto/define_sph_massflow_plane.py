@@ -122,8 +122,8 @@ class DefineSphMassflowPlane(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""ptype must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""ptype must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -136,8 +136,8 @@ class DefineSphMassflowPlane(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""stype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""stype must be `None` or one of {0,1}""")
         self._cards[0].set_value("stype", value)
 
     @property

@@ -145,8 +145,8 @@ class ControlRigid(KeywordBase):
 
     @lmf.setter
     def lmf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""lmf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""lmf must be `None` or one of {0,1}""")
         self._cards[0].set_value("lmf", value)
 
     @property
@@ -160,8 +160,8 @@ class ControlRigid(KeywordBase):
 
     @jntf.setter
     def jntf(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""jntf must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""jntf must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("jntf", value)
 
     @property
@@ -174,8 +174,8 @@ class ControlRigid(KeywordBase):
 
     @orthmd.setter
     def orthmd(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""orthmd must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""orthmd must be `None` or one of {0,1}""")
         self._cards[0].set_value("orthmd", value)
 
     @property
@@ -188,8 +188,8 @@ class ControlRigid(KeywordBase):
 
     @partm.setter
     def partm(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""partm must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""partm must be `None` or one of {0,1}""")
         self._cards[0].set_value("partm", value)
 
     @property
@@ -202,8 +202,8 @@ class ControlRigid(KeywordBase):
 
     @sparse.setter
     def sparse(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sparse must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sparse must be `None` or one of {0,1}""")
         self._cards[0].set_value("sparse", value)
 
     @property
@@ -216,8 +216,8 @@ class ControlRigid(KeywordBase):
 
     @metalf.setter
     def metalf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""metalf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""metalf must be `None` or one of {0,1}""")
         self._cards[0].set_value("metalf", value)
 
     @property
@@ -231,8 +231,8 @@ class ControlRigid(KeywordBase):
 
     @plotel.setter
     def plotel(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""plotel must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""plotel must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("plotel", value)
 
     @property
@@ -245,8 +245,8 @@ class ControlRigid(KeywordBase):
 
     @rbsms.setter
     def rbsms(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""rbsms must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""rbsms must be `None` or one of {0,1}""")
         self._cards[0].set_value("rbsms", value)
 
     @property
@@ -259,8 +259,8 @@ class ControlRigid(KeywordBase):
 
     @norbic.setter
     def norbic(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""norbic must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""norbic must be `None` or one of {0,1}""")
         self._cards[1].set_value("norbic", value)
 
     @property

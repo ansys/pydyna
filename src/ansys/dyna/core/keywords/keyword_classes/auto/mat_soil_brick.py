@@ -347,8 +347,8 @@ class MatSoilBrick(KeywordBase):
 
     @theory.setter
     def theory(self, value: int) -> None:
-        if value not in [0, 4, 7, 104, 107, 204, 304]:
-            raise Exception("""theory must be one of {0,4,7,104,107,204,304}""")
+        if value not in [0, 4, 7, 104, 107, 204, 304, None]:
+            raise Exception("""theory must be `None` or one of {0,4,7,104,107,204,304}""")
         self._cards[1].set_value("theory", value)
 
     @property

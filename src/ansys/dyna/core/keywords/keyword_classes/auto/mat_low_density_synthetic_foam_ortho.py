@@ -279,8 +279,8 @@ class MatLowDensitySyntheticFoamOrtho(KeywordBase):
 
     @fail.setter
     def fail(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""fail must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""fail must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("fail", value)
 
     @property
@@ -293,8 +293,8 @@ class MatLowDensitySyntheticFoamOrtho(KeywordBase):
 
     @bvflag.setter
     def bvflag(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""bvflag must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""bvflag must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("bvflag", value)
 
     @property
@@ -337,8 +337,8 @@ class MatLowDensitySyntheticFoamOrtho(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""ref must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("ref", value)
 
     @property

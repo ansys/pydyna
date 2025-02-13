@@ -99,8 +99,8 @@ class EfToggles(KeywordBase):
 
     @iprint1.setter
     def iprint1(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iprint1 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iprint1 must be `None` or one of {0,1}""")
         self._cards[0].set_value("iprint1", value)
 
     @property
@@ -112,8 +112,8 @@ class EfToggles(KeywordBase):
 
     @iprint2.setter
     def iprint2(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iprint2 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iprint2 must be `None` or one of {0,1}""")
         self._cards[0].set_value("iprint2", value)
 
     @property
@@ -126,8 +126,8 @@ class EfToggles(KeywordBase):
 
     @iprint3.setter
     def iprint3(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iprint3 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iprint3 must be `None` or one of {0,1}""")
         self._cards[0].set_value("iprint3", value)
 
     @property
@@ -140,8 +140,8 @@ class EfToggles(KeywordBase):
 
     @iprint4.setter
     def iprint4(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iprint4 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iprint4 must be `None` or one of {0,1}""")
         self._cards[0].set_value("iprint4", value)
 
     @property
@@ -154,8 +154,8 @@ class EfToggles(KeywordBase):
 
     @idata.setter
     def idata(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""idata must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""idata must be `None` or one of {0,1}""")
         self._cards[0].set_value("idata", value)
 
     @property
@@ -168,8 +168,8 @@ class EfToggles(KeywordBase):
 
     @itraces.setter
     def itraces(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""itraces must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""itraces must be `None` or one of {0,1}""")
         self._cards[0].set_value("itraces", value)
 
     @property

@@ -216,8 +216,8 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @code.setter
     def code(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""code must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""code must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("code", value)
 
     @property
@@ -283,8 +283,8 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @paired.setter
     def paired(self, value: int) -> None:
-        if value not in [0, -1, 1]:
-            raise Exception("""paired must be one of {0,-1,1}""")
+        if value not in [0, -1, 1, None]:
+            raise Exception("""paired must be `None` or one of {0,-1,1}""")
         self._cards[0].set_value("paired", value)
 
     @property
@@ -299,8 +299,8 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @nrbf.setter
     def nrbf(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""nrbf must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""nrbf must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("nrbf", value)
 
     @property
@@ -315,8 +315,8 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @ncsf.setter
     def ncsf(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ncsf must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ncsf must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("ncsf", value)
 
     @property
@@ -330,8 +330,8 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @rwf.setter
     def rwf(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""rwf must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""rwf must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("rwf", value)
 
     @property
@@ -406,8 +406,8 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: str) -> None:
-        if value not in ["PART", "PSET"]:
-            raise Exception("""ptype must be one of {"PART","PSET"}""")
+        if value not in ["PART", "PSET", None]:
+            raise Exception("""ptype must be `None` or one of {"PART","PSET"}""")
         self._cards[2].set_value("ptype", value)
 
     @property
@@ -430,7 +430,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: str) -> None:
-        if value not in ["PART", "PSET"]:
-            raise Exception("""ptype must be one of {"PART","PSET"}""")
+        if value not in ["PART", "PSET", None]:
+            raise Exception("""ptype must be `None` or one of {"PART","PSET"}""")
         self._cards[3].set_value("ptype", value)
 

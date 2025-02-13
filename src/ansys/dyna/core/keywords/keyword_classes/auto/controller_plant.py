@@ -494,8 +494,8 @@ class ControllerPlant(KeywordBase):
 
     @dofi1.setter
     def dofi1(self, value: int) -> None:
-        if value not in [1, 2, 3, 7]:
-            raise Exception("""dofi1 must be one of {1,2,3,7}""")
+        if value not in [1, 2, 3, 7, None]:
+            raise Exception("""dofi1 must be `None` or one of {1,2,3,7}""")
         self._cards[2].set_value("dofi1", value)
 
     @property
@@ -522,8 +522,8 @@ class ControllerPlant(KeywordBase):
 
     @dofi2.setter
     def dofi2(self, value: int) -> None:
-        if value not in [1, 2, 3, 7]:
-            raise Exception("""dofi2 must be one of {1,2,3,7}""")
+        if value not in [1, 2, 3, 7, None]:
+            raise Exception("""dofi2 must be `None` or one of {1,2,3,7}""")
         self._cards[2].set_value("dofi2", value)
 
     @property
@@ -550,8 +550,8 @@ class ControllerPlant(KeywordBase):
 
     @dofi3.setter
     def dofi3(self, value: int) -> None:
-        if value not in [1, 2, 3, 7]:
-            raise Exception("""dofi3 must be one of {1,2,3,7}""")
+        if value not in [1, 2, 3, 7, None]:
+            raise Exception("""dofi3 must be `None` or one of {1,2,3,7}""")
         self._cards[2].set_value("dofi3", value)
 
     @property
@@ -578,8 +578,8 @@ class ControllerPlant(KeywordBase):
 
     @dofi4.setter
     def dofi4(self, value: int) -> None:
-        if value not in [1, 2, 3, 7]:
-            raise Exception("""dofi4 must be one of {1,2,3,7}""")
+        if value not in [1, 2, 3, 7, None]:
+            raise Exception("""dofi4 must be `None` or one of {1,2,3,7}""")
         self._cards[2].set_value("dofi4", value)
 
     @property
@@ -604,8 +604,8 @@ class ControllerPlant(KeywordBase):
 
     @dofo1.setter
     def dofo1(self, value: int) -> None:
-        if value not in [1, 2, 3, 7]:
-            raise Exception("""dofo1 must be one of {1,2,3,7}""")
+        if value not in [1, 2, 3, 7, None]:
+            raise Exception("""dofo1 must be `None` or one of {1,2,3,7}""")
         self._cards[3].set_value("dofo1", value)
 
     @property
@@ -630,8 +630,8 @@ class ControllerPlant(KeywordBase):
 
     @dofo2.setter
     def dofo2(self, value: int) -> None:
-        if value not in [1, 2, 3, 7]:
-            raise Exception("""dofo2 must be one of {1,2,3,7}""")
+        if value not in [1, 2, 3, 7, None]:
+            raise Exception("""dofo2 must be `None` or one of {1,2,3,7}""")
         self._cards[3].set_value("dofo2", value)
 
     @property
@@ -656,8 +656,8 @@ class ControllerPlant(KeywordBase):
 
     @dofo3.setter
     def dofo3(self, value: int) -> None:
-        if value not in [1, 2, 3, 7]:
-            raise Exception("""dofo3 must be one of {1,2,3,7}""")
+        if value not in [1, 2, 3, 7, None]:
+            raise Exception("""dofo3 must be `None` or one of {1,2,3,7}""")
         self._cards[3].set_value("dofo3", value)
 
     @property
@@ -682,8 +682,8 @@ class ControllerPlant(KeywordBase):
 
     @dofo4.setter
     def dofo4(self, value: int) -> None:
-        if value not in [1, 2, 3, 7]:
-            raise Exception("""dofo4 must be one of {1,2,3,7}""")
+        if value not in [1, 2, 3, 7, None]:
+            raise Exception("""dofo4 must be `None` or one of {1,2,3,7}""")
         self._cards[3].set_value("dofo4", value)
 
     @property

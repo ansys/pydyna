@@ -311,8 +311,8 @@ class Contact2DTiedSliding(KeywordBase):
 
     @ext_pas.setter
     def ext_pas(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ext_pas must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ext_pas must be `None` or one of {0,1}""")
         self._cards[1].set_value("ext_pas", value)
 
     @property

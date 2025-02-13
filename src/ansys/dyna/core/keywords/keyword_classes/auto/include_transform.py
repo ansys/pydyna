@@ -355,8 +355,8 @@ class IncludeTransform(KeywordBase):
 
     @incout1.setter
     def incout1(self, value: int) -> None:
-        if value not in [1, 0]:
-            raise Exception("""incout1 must be one of {1,0}""")
+        if value not in [1, 0, None]:
+            raise Exception("""incout1 must be `None` or one of {1,0}""")
         self._cards[3].set_value("incout1", value)
 
     @property

@@ -127,7 +127,7 @@ class MeshBl(KeywordBase):
 
     @blst.setter
     def blst(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""blst must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""blst must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("blst", value)
 

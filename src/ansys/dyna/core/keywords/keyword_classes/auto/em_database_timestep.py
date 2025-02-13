@@ -57,7 +57,7 @@ class EmDatabaseTimestep(KeywordBase):
 
     @outlv.setter
     def outlv(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""outlv must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""outlv must be `None` or one of {0,1}""")
         self._cards[0].set_value("outlv", value)
 

@@ -167,8 +167,8 @@ class SensorDefineNodeSet(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: str) -> None:
-        if value not in ["ACC", "VEL", "COORD", "TEMP"]:
-            raise Exception("""ctype must be one of {"ACC","VEL","COORD","TEMP"}""")
+        if value not in ["ACC", "VEL", "COORD", "TEMP", None]:
+            raise Exception("""ctype must be `None` or one of {"ACC","VEL","COORD","TEMP"}""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -183,8 +183,8 @@ class SensorDefineNodeSet(KeywordBase):
 
     @setopt.setter
     def setopt(self, value: str) -> None:
-        if value not in ["AVG", "MAX", "MIN", "SUM"]:
-            raise Exception("""setopt must be one of {"AVG","MAX","MIN","SUM"}""")
+        if value not in ["AVG", "MAX", "MIN", "SUM", None]:
+            raise Exception("""setopt must be `None` or one of {"AVG","MAX","MIN","SUM"}""")
         self._cards[0].set_value("setopt", value)
 
     @property

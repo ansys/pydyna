@@ -410,8 +410,8 @@ class LoadNurbsShell(KeywordBase):
 
     @ltype.setter
     def ltype(self, value: str) -> None:
-        if value not in ["PRESS", "CRV", "CRVS", "CRVT", "CRVN", "TRACT"]:
-            raise Exception("""ltype must be one of {"PRESS","CRV","CRVS","CRVT","CRVN","TRACT"}""")
+        if value not in ["PRESS", "CRV", "CRVS", "CRVT", "CRVN", "TRACT", None]:
+            raise Exception("""ltype must be `None` or one of {"PRESS","CRV","CRVS","CRVT","CRVN","TRACT"}""")
         self._cards[1].set_value("ltype", value)
 
     @property
@@ -422,8 +422,8 @@ class LoadNurbsShell(KeywordBase):
 
     @regdef.setter
     def regdef(self, value: str) -> None:
-        if value not in ["RS", "NBEW", "NBEP"]:
-            raise Exception("""regdef must be one of {"RS","NBEW","NBEP"}""")
+        if value not in ["RS", "NBEW", "NBEP", None]:
+            raise Exception("""regdef must be `None` or one of {"RS","NBEW","NBEP"}""")
         self._cards[1].set_value("regdef", value)
 
     @property

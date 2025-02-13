@@ -134,8 +134,8 @@ class IcfdControlAdapt(KeywordBase):
 
     @mth.setter
     def mth(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""mth must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""mth must be `None` or one of {0,1}""")
         self._cards[0].set_value("mth", value)
 
     @property
@@ -163,8 +163,8 @@ class IcfdControlAdapt(KeywordBase):
 
     @var.setter
     def var(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""var must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""var must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("var", value)
 
     @property
@@ -177,7 +177,7 @@ class IcfdControlAdapt(KeywordBase):
 
     @kis.setter
     def kis(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""kis must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""kis must be `None` or one of {0,1}""")
         self._cards[0].set_value("kis", value)
 

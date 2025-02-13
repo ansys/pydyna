@@ -152,8 +152,8 @@ class DefineBoxDrawbead(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""idir must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""idir must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("idir", value)
 
     @property
@@ -167,8 +167,8 @@ class DefineBoxDrawbead(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
-        if value not in [4, 2, 3, 0]:
-            raise Exception("""stype must be one of {4,2,3,0}""")
+        if value not in [4, 2, 3, 0, None]:
+            raise Exception("""stype must be `None` or one of {4,2,3,0}""")
         self._cards[0].set_value("stype", value)
 
     @property

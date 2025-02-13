@@ -462,8 +462,8 @@ class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
 
     @vp.setter
     def vp(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""vp must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""vp must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("vp", value)
 
     @property
@@ -701,8 +701,8 @@ class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
 
     @ips.setter
     def ips(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ips must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ips must be `None` or one of {0,1}""")
         self._cards[4].set_value("ips", value)
 
     @property

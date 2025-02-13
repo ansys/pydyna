@@ -201,8 +201,8 @@ class BoundaryThermalWeld(KeywordBase):
 
     @ptyp.setter
     def ptyp(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""ptyp must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""ptyp must be `None` or one of {1,2}""")
         self._cards[0].set_value("ptyp", value)
 
     @property
@@ -226,8 +226,8 @@ class BoundaryThermalWeld(KeywordBase):
 
     @nflag.setter
     def nflag(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""nflag must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""nflag must be `None` or one of {1,2}""")
         self._cards[0].set_value("nflag", value)
 
     @property

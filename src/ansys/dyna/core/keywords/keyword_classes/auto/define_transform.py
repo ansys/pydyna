@@ -174,8 +174,8 @@ class DefineTransform(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
-        if value not in ["MIRROR", "SCALE", "ROTATE", "ROTATE3NA", "TRANSL", "TRANSL2ND", "POINT", "POS6P", "POS6N"]:
-            raise Exception("""option must be one of {"MIRROR","SCALE","ROTATE","ROTATE3NA","TRANSL","TRANSL2ND","POINT","POS6P","POS6N"}""")
+        if value not in ["MIRROR", "SCALE", "ROTATE", "ROTATE3NA", "TRANSL", "TRANSL2ND", "POINT", "POS6P", "POS6N", None]:
+            raise Exception("""option must be `None` or one of {"MIRROR","SCALE","ROTATE","ROTATE3NA","TRANSL","TRANSL2ND","POINT","POS6P","POS6N"}""")
         self._cards[1].set_value("option", value)
 
     @property

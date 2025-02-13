@@ -550,8 +550,8 @@ class Mat161(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, -4, -3, -2]:
-            raise Exception("""macf must be one of {1,2,3,4,-4,-3,-2}""")
+        if value not in [1, 2, 3, 4, -4, -3, -2, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
         self._cards[1].set_value("macf", value)
 
     @property
@@ -804,8 +804,8 @@ class Mat161(KeywordBase):
 
     @amodel.setter
     def amodel(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""amodel must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""amodel must be `None` or one of {1,2}""")
         self._cards[5].set_value("amodel", value)
 
     @property
