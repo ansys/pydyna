@@ -106,8 +106,8 @@ class ControlEnergy(KeywordBase):
 
     @hgen.setter
     def hgen(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""hgen must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""hgen must be `None` or one of {1,2}""")
         self._cards[0].set_value("hgen", value)
 
     @property
@@ -120,8 +120,8 @@ class ControlEnergy(KeywordBase):
 
     @rwen.setter
     def rwen(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""rwen must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""rwen must be `None` or one of {2,1}""")
         self._cards[0].set_value("rwen", value)
 
     @property
@@ -134,8 +134,8 @@ class ControlEnergy(KeywordBase):
 
     @slnten.setter
     def slnten(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""slnten must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""slnten must be `None` or one of {1,2}""")
         self._cards[0].set_value("slnten", value)
 
     @property
@@ -148,8 +148,8 @@ class ControlEnergy(KeywordBase):
 
     @rylen.setter
     def rylen(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""rylen must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""rylen must be `None` or one of {1,2}""")
         self._cards[0].set_value("rylen", value)
 
     @property
@@ -162,8 +162,8 @@ class ControlEnergy(KeywordBase):
 
     @irgen.setter
     def irgen(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""irgen must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""irgen must be `None` or one of {2,1}""")
         self._cards[0].set_value("irgen", value)
 
     @property
@@ -176,8 +176,8 @@ class ControlEnergy(KeywordBase):
 
     @maten.setter
     def maten(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""maten must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""maten must be `None` or one of {1,2}""")
         self._cards[0].set_value("maten", value)
 
     @property
@@ -190,8 +190,8 @@ class ControlEnergy(KeywordBase):
 
     @drlen.setter
     def drlen(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""drlen must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""drlen must be `None` or one of {1,2}""")
         self._cards[0].set_value("drlen", value)
 
     @property
@@ -204,7 +204,7 @@ class ControlEnergy(KeywordBase):
 
     @disen.setter
     def disen(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""disen must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""disen must be `None` or one of {1,2}""")
         self._cards[0].set_value("disen", value)
 

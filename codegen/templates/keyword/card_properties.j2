@@ -55,8 +55,8 @@
     @{{field.property_name}}.setter
     def {{field.property_name}}(self, value: {{field.type}}) -> None:
         {% if field.options is defined %}
-        if value not in [{{ field.options|join(', ')}}]:
-            raise Exception("""{{field.property_name}} must be one of {{openbrace}}{{ field.options|join(',')}}{{closebrace}}""")
+        if value not in [{{ field.options|join(', ')}}, None]:
+            raise Exception("""{{field.property_name}} must be `None` or one of {{openbrace}}{{ field.options|join(',')}}{{closebrace}}""")
         {% endif %}
 {% if field.card_indices %}
 {% for card_index in field.card_indices %}
