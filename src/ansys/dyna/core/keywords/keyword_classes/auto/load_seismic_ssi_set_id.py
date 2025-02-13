@@ -259,8 +259,8 @@ class LoadSeismicSsiSetId(KeywordBase):
 
     @isg.setter
     def isg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""isg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""isg must be `None` or one of {0,1}""")
         self._cards[2].set_value("isg", value)
 
     @property
@@ -274,7 +274,7 @@ class LoadSeismicSsiSetId(KeywordBase):
 
     @igm.setter
     def igm(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""igm must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""igm must be `None` or one of {0,1}""")
         self._cards[2].set_value("igm", value)
 

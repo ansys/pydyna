@@ -180,8 +180,8 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""stype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""stype must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("stype", value)
 
     @property

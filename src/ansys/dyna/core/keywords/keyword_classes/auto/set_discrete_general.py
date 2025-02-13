@@ -153,8 +153,8 @@ class SetDiscreteGeneral(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
-        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX"]:
-            raise Exception("""option must be one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX"}""")
+        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", None]:
+            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX"}""")
         self._cards[1].set_value("option", value)
 
     @property

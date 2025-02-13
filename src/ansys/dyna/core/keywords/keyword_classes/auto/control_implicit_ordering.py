@@ -66,8 +66,8 @@ class ControlImplicitOrdering(KeywordBase):
 
     @order.setter
     def order(self, value: int) -> None:
-        if value not in [0, 1, 2, 4]:
-            raise Exception("""order must be one of {0,1,2,4}""")
+        if value not in [0, 1, 2, 4, None]:
+            raise Exception("""order must be `None` or one of {0,1,2,4}""")
         self._cards[0].set_value("order", value)
 
     @property

@@ -137,8 +137,8 @@ class AleFsiProjection(KeywordBase):
 
     @lsidtyp.setter
     def lsidtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""lsidtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""lsidtyp must be `None` or one of {0,1}""")
         self._cards[0].set_value("lsidtyp", value)
 
     @property
@@ -151,8 +151,8 @@ class AleFsiProjection(KeywordBase):
 
     @asidtyp.setter
     def asidtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""asidtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""asidtyp must be `None` or one of {0,1}""")
         self._cards[0].set_value("asidtyp", value)
 
     @property

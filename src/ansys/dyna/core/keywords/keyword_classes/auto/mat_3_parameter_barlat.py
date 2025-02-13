@@ -500,8 +500,8 @@ class Mat3ParameterBarlat(KeywordBase):
 
     @hr.setter
     def hr(self, value: float) -> None:
-        if value not in [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]:
-            raise Exception("""hr must be one of {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0}""")
+        if value not in [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, None]:
+            raise Exception("""hr must be `None` or one of {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0}""")
         self._cards[0].set_value("hr", value)
 
     @property
@@ -539,8 +539,8 @@ class Mat3ParameterBarlat(KeywordBase):
 
     @iter.setter
     def iter(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""iter must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""iter must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("iter", value)
 
     @property
@@ -958,8 +958,8 @@ class Mat3ParameterBarlat(KeywordBase):
 
     @usrfail.setter
     def usrfail(self, value: float) -> None:
-        if value not in [0, 1]:
-            raise Exception("""usrfail must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""usrfail must be `None` or one of {0,1}""")
         self._cards[6].set_value("usrfail", value)
 
     @property

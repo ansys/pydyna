@@ -165,8 +165,8 @@ class ConstrainedNodalRigidbody(KeywordBase):
 
     @drflag.setter
     def drflag(self, value: int) -> None:
-        if value not in [0, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""drflag must be one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}""")
+        if value not in [0, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""drflag must be `None` or one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("drflag", value)
 
     @property
@@ -192,7 +192,7 @@ class ConstrainedNodalRigidbody(KeywordBase):
 
     @rrflag.setter
     def rrflag(self, value: int) -> None:
-        if value not in [0, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rrflag must be one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}""")
+        if value not in [0, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rrflag must be `None` or one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("rrflag", value)
 

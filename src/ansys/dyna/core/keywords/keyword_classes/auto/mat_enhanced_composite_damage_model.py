@@ -852,8 +852,8 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @crit.setter
     def crit(self, value: float) -> None:
-        if value not in [54.0, 55.0]:
-            raise Exception("""crit must be one of {54.0,55.0}""")
+        if value not in [54.0, 55.0, None]:
+            raise Exception("""crit must be `None` or one of {54.0,55.0}""")
         self._cards[5].set_value("crit", value)
 
     @property

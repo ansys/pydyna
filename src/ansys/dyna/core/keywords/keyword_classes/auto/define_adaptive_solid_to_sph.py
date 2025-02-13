@@ -176,8 +176,8 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""itype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""itype must be `None` or one of {0,1}""")
         self._cards[1].set_value("itype", value)
 
     @property
@@ -192,8 +192,8 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @nq.setter
     def nq(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""nq must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""nq must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("nq", value)
 
     @property
@@ -227,8 +227,8 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @icpl.setter
     def icpl(self, value: int) -> None:
-        if value not in [0, 1, 3]:
-            raise Exception("""icpl must be one of {0,1,3}""")
+        if value not in [0, 1, 3, None]:
+            raise Exception("""icpl must be `None` or one of {0,1,3}""")
         self._cards[1].set_value("icpl", value)
 
     @property
@@ -241,8 +241,8 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @iopt.setter
     def iopt(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""iopt must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""iopt must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("iopt", value)
 
     @property

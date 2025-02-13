@@ -244,8 +244,8 @@ class DefinePblastAirgeo(KeywordBase):
 
     @gtype1.setter
     def gtype1(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5]:
-            raise Exception("""gtype1 must be one of {1,2,3,4,5}""")
+        if value not in [1, 2, 3, 4, 5, None]:
+            raise Exception("""gtype1 must be `None` or one of {1,2,3,4,5}""")
         self._cards[0].set_value("gtype1", value)
 
     @property
@@ -261,8 +261,8 @@ class DefinePblastAirgeo(KeywordBase):
 
     @gtype2.setter
     def gtype2(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5]:
-            raise Exception("""gtype2 must be one of {1,2,3,4,5}""")
+        if value not in [1, 2, 3, 4, 5, None]:
+            raise Exception("""gtype2 must be `None` or one of {1,2,3,4,5}""")
         self._cards[0].set_value("gtype2", value)
 
     @property

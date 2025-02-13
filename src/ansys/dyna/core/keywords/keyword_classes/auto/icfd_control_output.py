@@ -105,8 +105,8 @@ class IcfdControlOutput(KeywordBase):
 
     @msgl.setter
     def msgl(self, value: int) -> None:
-        if value not in [0, 1, 2, 4]:
-            raise Exception("""msgl must be one of {0,1,2,4}""")
+        if value not in [0, 1, 2, 4, None]:
+            raise Exception("""msgl must be `None` or one of {0,1,2,4}""")
         self._cards[0].set_value("msgl", value)
 
     @property
@@ -121,8 +121,8 @@ class IcfdControlOutput(KeywordBase):
 
     @outl.setter
     def outl(self, value: int) -> None:
-        if value not in [0, 2, 6, 7]:
-            raise Exception("""outl must be one of {0,2,6,7}""")
+        if value not in [0, 2, 6, 7, None]:
+            raise Exception("""outl must be `None` or one of {0,2,6,7}""")
         self._cards[0].set_value("outl", value)
 
     @property
@@ -144,8 +144,8 @@ class IcfdControlOutput(KeywordBase):
 
     @lsppout.setter
     def lsppout(self, value: int) -> None:
-        if value not in [1, 3]:
-            raise Exception("""lsppout must be one of {1,3}""")
+        if value not in [1, 3, None]:
+            raise Exception("""lsppout must be `None` or one of {1,3}""")
         self._cards[0].set_value("lsppout", value)
 
     @property

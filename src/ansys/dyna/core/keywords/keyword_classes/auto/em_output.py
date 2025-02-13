@@ -102,8 +102,8 @@ class EmOutput(KeywordBase):
 
     @mats.setter
     def mats(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""mats must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""mats must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("mats", value)
 
     @property
@@ -119,8 +119,8 @@ class EmOutput(KeywordBase):
 
     @matf.setter
     def matf(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""matf must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""matf must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("matf", value)
 
     @property
@@ -135,8 +135,8 @@ class EmOutput(KeywordBase):
 
     @sols.setter
     def sols(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""sols must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""sols must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("sols", value)
 
     @property
@@ -151,8 +151,8 @@ class EmOutput(KeywordBase):
 
     @solf.setter
     def solf(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""solf must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""solf must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("solf", value)
 
     @property
@@ -166,8 +166,8 @@ class EmOutput(KeywordBase):
 
     @mesh.setter
     def mesh(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""mesh must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""mesh must be `None` or one of {0,1}""")
         self._cards[0].set_value("mesh", value)
 
     @property
@@ -181,8 +181,8 @@ class EmOutput(KeywordBase):
 
     @mem.setter
     def mem(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""mem must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""mem must be `None` or one of {0,1}""")
         self._cards[0].set_value("mem", value)
 
     @property
@@ -196,7 +196,7 @@ class EmOutput(KeywordBase):
 
     @timing.setter
     def timing(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""timing must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""timing must be `None` or one of {0,1}""")
         self._cards[0].set_value("timing", value)
 

@@ -176,8 +176,8 @@ class EmDatabaseFieldline(KeywordBase):
 
     @integ.setter
     def integ(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""integ must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""integ must be `None` or one of {2,1}""")
         self._cards[1].set_value("integ", value)
 
     @property
@@ -243,7 +243,7 @@ class EmDatabaseFieldline(KeywordBase):
 
     @btype.setter
     def btype(self, value: int) -> None:
-        if value not in [2, 1, 3]:
-            raise Exception("""btype must be one of {2,1,3}""")
+        if value not in [2, 1, 3, None]:
+            raise Exception("""btype must be `None` or one of {2,1,3}""")
         self._cards[2].set_value("btype", value)
 

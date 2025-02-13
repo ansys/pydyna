@@ -199,8 +199,8 @@ class PartCompositeIgaShell(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""elform must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""elform must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("elform", value)
 
     @property

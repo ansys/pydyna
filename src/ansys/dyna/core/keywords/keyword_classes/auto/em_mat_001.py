@@ -119,8 +119,8 @@ class EmMat001(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""mtype must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""mtype must be `None` or one of {0,1,2,3,4}""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -167,7 +167,7 @@ class EmMat001(KeywordBase):
 
     @rdltype.setter
     def rdltype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""rdltype must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""rdltype must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("rdltype", value)
 

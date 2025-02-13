@@ -205,8 +205,8 @@ class ControlThermalSolver(KeywordBase):
 
     @atype.setter
     def atype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""atype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""atype must be `None` or one of {0,1}""")
         self._cards[0].set_value("atype", value)
 
     @property
@@ -220,8 +220,8 @@ class ControlThermalSolver(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ptype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ptype must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -242,8 +242,8 @@ class ControlThermalSolver(KeywordBase):
 
     @solver.setter
     def solver(self, value: int) -> None:
-        if value not in [11, 12, 13, 14, 15, 16, 17, 18, 19, 30]:
-            raise Exception("""solver must be one of {11,12,13,14,15,16,17,18,19,30}""")
+        if value not in [11, 12, 13, 14, 15, 16, 17, 18, 19, 30, None]:
+            raise Exception("""solver must be `None` or one of {11,12,13,14,15,16,17,18,19,30}""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -299,8 +299,8 @@ class ControlThermalSolver(KeywordBase):
 
     @msglvl.setter
     def msglvl(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""msglvl must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""msglvl must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("msglvl", value)
 
     @property
@@ -394,8 +394,8 @@ class ControlThermalSolver(KeywordBase):
 
     @varden.setter
     def varden(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""varden must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""varden must be `None` or one of {0,1,2}""")
         self._cards[2].set_value("varden", value)
 
     @property

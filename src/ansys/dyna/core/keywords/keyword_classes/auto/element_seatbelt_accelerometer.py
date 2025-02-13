@@ -145,8 +145,8 @@ class ElementSeatbeltAccelerometer(KeywordBase):
 
     @igrav.setter
     def igrav(self, value: int) -> None:
-        if value not in [0, -6, -5, -5, -3, -1, 1]:
-            raise Exception("""igrav must be one of {0,-6,-5,-5,-3,-1,1}""")
+        if value not in [0, -6, -5, -5, -3, -1, 1, None]:
+            raise Exception("""igrav must be `None` or one of {0,-6,-5,-5,-3,-1,1}""")
         self._cards[0].set_value("igrav", value)
 
     @property
@@ -159,8 +159,8 @@ class ElementSeatbeltAccelerometer(KeywordBase):
 
     @intopt.setter
     def intopt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""intopt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""intopt must be `None` or one of {0,1}""")
         self._cards[0].set_value("intopt", value)
 
     @property

@@ -165,8 +165,8 @@ class BoundaryPwpTableSet(KeywordBase):
 
     @itotex.setter
     def itotex(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""itotex must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""itotex must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("itotex", value)
 
     @property

@@ -508,8 +508,8 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @fmidtyp.setter
     def fmidtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""fmidtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""fmidtyp must be `None` or one of {0,1}""")
         self._cards[0].set_value("fmidtyp", value)
 
     @property
@@ -549,8 +549,8 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @conttyp.setter
     def conttyp(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""conttyp must be one of {1,2,3,4,5,6,7}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""conttyp must be `None` or one of {1,2,3,4,5,6,7}""")
         self._cards[1].set_value("conttyp", value)
 
     @property
@@ -563,8 +563,8 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @fillopt.setter
     def fillopt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""fillopt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""fillopt must be `None` or one of {0,1}""")
         self._cards[1].set_value("fillopt", value)
 
     @property
@@ -628,8 +628,8 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""stype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""stype must be `None` or one of {0,1}""")
         self._cards[2].set_value("stype", value)
 
     @property

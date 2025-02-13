@@ -217,8 +217,8 @@ class LoadBlastEnhanced(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
-        if value not in [2, 1, 3, 4, 5, 6, 7, 8]:
-            raise Exception("""unit must be one of {2,1,3,4,5,6,7,8}""")
+        if value not in [2, 1, 3, 4, 5, 6, 7, 8, None]:
+            raise Exception("""unit must be `None` or one of {2,1,3,4,5,6,7,8}""")
         self._cards[0].set_value("unit", value)
 
     @property
@@ -229,8 +229,8 @@ class LoadBlastEnhanced(KeywordBase):
 
     @blast.setter
     def blast(self, value: int) -> None:
-        if value not in [2, 1, 3, 4]:
-            raise Exception("""blast must be one of {2,1,3,4}""")
+        if value not in [2, 1, 3, 4, None]:
+            raise Exception("""blast must be `None` or one of {2,1,3,4}""")
         self._cards[0].set_value("blast", value)
 
     @property
@@ -303,7 +303,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @negphs.setter
     def negphs(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""negphs must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""negphs must be `None` or one of {0,1}""")
         self._cards[1].set_value("negphs", value)
 

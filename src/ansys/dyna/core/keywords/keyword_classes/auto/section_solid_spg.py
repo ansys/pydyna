@@ -444,8 +444,8 @@ class SectionSolidSpg(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [1, -1, -2, -18, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 41, 42, 43, 45, 47, 60, 62, 98, 99, 101, 102, 103, 104, 105, 115, 201, 1000]:
-            raise Exception("""elform must be one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}""")
+        if value not in [1, -1, -2, -18, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 41, 42, 43, 45, 47, 60, 62, 98, 99, 101, 102, 103, 104, 105, 115, 201, 1000, None]:
+            raise Exception("""elform must be `None` or one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -461,8 +461,8 @@ class SectionSolidSpg(KeywordBase):
 
     @aet.setter
     def aet(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""aet must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""aet must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("aet", value)
 
     @property
@@ -526,8 +526,8 @@ class SectionSolidSpg(KeywordBase):
 
     @ispline.setter
     def ispline(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ispline must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ispline must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("ispline", value)
 
     @property
@@ -541,8 +541,8 @@ class SectionSolidSpg(KeywordBase):
 
     @kernel.setter
     def kernel(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""kernel must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""kernel must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("kernel", value)
 
     @property
@@ -697,8 +697,8 @@ class SectionSolidSpg(KeywordBase):
 
     @ihgf.setter
     def ihgf(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""ihgf must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""ihgf must be `None` or one of {0,1,2,3}""")
         self._cards[3].set_value("ihgf", value)
 
     @property
@@ -709,8 +709,8 @@ class SectionSolidSpg(KeywordBase):
 
     @itaj.setter
     def itaj(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""itaj must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""itaj must be `None` or one of {0,1}""")
         self._cards[3].set_value("itaj", value)
 
     @property

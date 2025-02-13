@@ -488,8 +488,8 @@ class MatWood(KeywordBase):
 
     @nplot.setter
     def nplot(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""nplot must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""nplot must be `None` or one of {1,2}""")
         self._cards[0].set_value("nplot", value)
 
     @property
@@ -515,8 +515,8 @@ class MatWood(KeywordBase):
 
     @irate.setter
     def irate(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""irate must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""irate must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("irate", value)
 
     @property
@@ -539,8 +539,8 @@ class MatWood(KeywordBase):
 
     @ifail.setter
     def ifail(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ifail must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ifail must be `None` or one of {0,1}""")
         self._cards[0].set_value("ifail", value)
 
     @property
@@ -553,8 +553,8 @@ class MatWood(KeywordBase):
 
     @ivol.setter
     def ivol(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ivol must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ivol must be `None` or one of {0,1}""")
         self._cards[0].set_value("ivol", value)
 
     @property
@@ -879,8 +879,8 @@ class MatWood(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, -4, -3, -2]:
-            raise Exception("""macf must be one of {1,2,3,4,-4,-3,-2}""")
+        if value not in [1, 2, 3, 4, -4, -3, -2, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
         self._cards[6].set_value("macf", value)
 
     @property

@@ -110,8 +110,8 @@ class EmMat006(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
-        if value not in [0, 1, 5]:
-            raise Exception("""mtype must be one of {0,1,5}""")
+        if value not in [0, 1, 5, None]:
+            raise Exception("""mtype must be `None` or one of {0,1,5}""")
         self._cards[0].set_value("mtype", value)
 
     @property

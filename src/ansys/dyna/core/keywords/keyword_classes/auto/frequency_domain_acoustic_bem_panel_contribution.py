@@ -457,8 +457,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @typext.setter
     def typext(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""typext must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""typext must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("typext", value)
 
     @property
@@ -482,8 +482,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @typint.setter
     def typint(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""typint must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""typint must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("typint", value)
 
     @property
@@ -500,8 +500,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @fftwin.setter
     def fftwin(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""fftwin must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""fftwin must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[1].set_value("fftwin", value)
 
     @property
@@ -514,8 +514,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @trslt.setter
     def trslt(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""trslt must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""trslt must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("trslt", value)
 
     @property
@@ -538,8 +538,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @ipfile.setter
     def ipfile(self, value: int) -> None:
-        if value not in [0, 1, 10, 11, 20, 21, 31, 41]:
-            raise Exception("""ipfile must be one of {0,1,10,11,20,21,31,41}""")
+        if value not in [0, 1, 10, 11, 20, 21, 31, 41, None]:
+            raise Exception("""ipfile must be `None` or one of {0,1,10,11,20,21,31,41}""")
         self._cards[1].set_value("ipfile", value)
 
     @property
@@ -558,8 +558,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @iunits.setter
     def iunits(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""iunits must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""iunits must be `None` or one of {0,1,2,3,4}""")
         self._cards[1].set_value("iunits", value)
 
     @property
@@ -577,8 +577,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""method must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""method must be `None` or one of {0,1,2,3,4}""")
         self._cards[2].set_value("method", value)
 
     @property
@@ -679,8 +679,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, -3, 4, 5]:
-            raise Exception("""restrt must be one of {0,1,2,3,-3,4,5}""")
+        if value not in [0, 1, 2, 3, -3, 4, 5, None]:
+            raise Exception("""restrt must be `None` or one of {0,1,2,3,-3,4,5}""")
         self._cards[3].set_value("restrt", value)
 
     @property
@@ -695,8 +695,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @iedge.setter
     def iedge(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""iedge must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""iedge must be `None` or one of {0,1,2,3}""")
         self._cards[3].set_value("iedge", value)
 
     @property
@@ -709,8 +709,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @noel.setter
     def noel(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""noel must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""noel must be `None` or one of {0,1}""")
         self._cards[3].set_value("noel", value)
 
     @property
@@ -736,8 +736,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @velout.setter
     def velout(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""velout must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""velout must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("velout", value)
 
     @property
@@ -753,8 +753,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @dba.setter
     def dba(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""dba must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""dba must be `None` or one of {0,1,2,3,4}""")
         self._cards[3].set_value("dba", value)
 
     @property
@@ -778,8 +778,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @sstype.setter
     def sstype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""sstype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""sstype must be `None` or one of {0,1,2}""")
         self._cards[4].set_value("sstype", value)
 
     @property
@@ -792,8 +792,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
 
     @norm.setter
     def norm(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""norm must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""norm must be `None` or one of {0,1}""")
         self._cards[4].set_value("norm", value)
 
     @property

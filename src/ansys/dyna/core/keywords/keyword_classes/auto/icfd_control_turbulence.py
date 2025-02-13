@@ -314,8 +314,8 @@ class IcfdControlTurbulence(KeywordBase):
 
     @tmod.setter
     def tmod(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""tmod must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""tmod must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("tmod", value)
 
     @property
@@ -333,8 +333,8 @@ class IcfdControlTurbulence(KeywordBase):
 
     @submod.setter
     def submod(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""submod must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""submod must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("submod", value)
 
     @property
@@ -349,8 +349,8 @@ class IcfdControlTurbulence(KeywordBase):
 
     @wlaw.setter
     def wlaw(self, value: int) -> None:
-        if value not in [0, 1, 2, 4, 5]:
-            raise Exception("""wlaw must be one of {0,1,2,4,5}""")
+        if value not in [0, 1, 2, 4, 5, None]:
+            raise Exception("""wlaw must be `None` or one of {0,1,2,4,5}""")
         self._cards[0].set_value("wlaw", value)
 
     @property

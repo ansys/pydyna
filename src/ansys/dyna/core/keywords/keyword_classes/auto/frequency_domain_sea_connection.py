@@ -240,8 +240,8 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
-        if value not in [1, 2, 3, 4]:
-            raise Exception("""ctype must be one of {1,2,3,4}""")
+        if value not in [1, 2, 3, 4, None]:
+            raise Exception("""ctype must be `None` or one of {1,2,3,4}""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -264,8 +264,8 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ibeam.setter
     def ibeam(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibeam must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibeam must be `None` or one of {0,1}""")
         self._cards[0].set_value("ibeam", value)
 
     @property

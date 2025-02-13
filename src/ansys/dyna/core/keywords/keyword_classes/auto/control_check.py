@@ -112,8 +112,8 @@ class ControlCheck(KeywordBase):
 
     @ifauto.setter
     def ifauto(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ifauto must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ifauto must be `None` or one of {0,1}""")
         self._cards[0].set_value("ifauto", value)
 
     @property
@@ -126,8 +126,8 @@ class ControlCheck(KeywordBase):
 
     @convex.setter
     def convex(self, value: int) -> None:
-        if value not in [1, 0]:
-            raise Exception("""convex must be one of {1,0}""")
+        if value not in [1, 0, None]:
+            raise Exception("""convex must be `None` or one of {1,0}""")
         self._cards[0].set_value("convex", value)
 
     @property
@@ -140,8 +140,8 @@ class ControlCheck(KeywordBase):
 
     @adpt.setter
     def adpt(self, value: int) -> None:
-        if value not in [1, 0]:
-            raise Exception("""adpt must be one of {1,0}""")
+        if value not in [1, 0, None]:
+            raise Exception("""adpt must be `None` or one of {1,0}""")
         self._cards[0].set_value("adpt", value)
 
     @property

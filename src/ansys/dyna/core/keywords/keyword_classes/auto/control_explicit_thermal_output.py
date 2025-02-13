@@ -88,8 +88,8 @@ class ControlExplicitThermalOutput(KeywordBase):
 
     @dtoutyp.setter
     def dtoutyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""dtoutyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""dtoutyp must be `None` or one of {0,1}""")
         self._cards[0].set_value("dtoutyp", value)
 
     @property
@@ -114,7 +114,7 @@ class ControlExplicitThermalOutput(KeywordBase):
 
     @setyp.setter
     def setyp(self, value: int) -> None:
-        if value not in [1, 2, 3, 4]:
-            raise Exception("""setyp must be one of {1,2,3,4}""")
+        if value not in [1, 2, 3, 4, None]:
+            raise Exception("""setyp must be `None` or one of {1,2,3,4}""")
         self._cards[0].set_value("setyp", value)
 

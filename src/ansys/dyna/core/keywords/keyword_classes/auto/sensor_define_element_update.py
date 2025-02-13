@@ -167,8 +167,8 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @etype.setter
     def etype(self, value: str) -> None:
-        if value not in ["BEAM", "SHELL", "SOLID", "DISC-ELE", "SEATBELT", "TSHELL"]:
-            raise Exception("""etype must be one of {"BEAM","SHELL","SOLID","DISC-ELE","SEATBELT","TSHELL"}""")
+        if value not in ["BEAM", "SHELL", "SOLID", "DISC-ELE", "SEATBELT", "TSHELL", None]:
+            raise Exception("""etype must be `None` or one of {"BEAM","SHELL","SOLID","DISC-ELE","SEATBELT","TSHELL"}""")
         self._cards[0].set_value("etype", value)
 
     @property
@@ -200,8 +200,8 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @comp.setter
     def comp(self, value: str) -> None:
-        if value not in ["XX", "YY", "ZZ", "XY", "YZ", "ZX", "AXIAL", "  ", "SHEARS", "SHEART"]:
-            raise Exception("""comp must be one of {"XX","YY","ZZ","XY","YZ","ZX","AXIAL","  ","SHEARS","SHEART"}""")
+        if value not in ["XX", "YY", "ZZ", "XY", "YZ", "ZX", "AXIAL", "  ", "SHEARS", "SHEART", None]:
+            raise Exception("""comp must be `None` or one of {"XX","YY","ZZ","XY","YZ","ZX","AXIAL","  ","SHEARS","SHEART"}""")
         self._cards[0].set_value("comp", value)
 
     @property
@@ -219,8 +219,8 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: str) -> None:
-        if value not in ["STRAIN", "STRESS", "FORCE", "MOMENT", "DLEN", "FAIL"]:
-            raise Exception("""ctype must be one of {"STRAIN","STRESS","FORCE","MOMENT","DLEN","FAIL"}""")
+        if value not in ["STRAIN", "STRESS", "FORCE", "MOMENT", "DLEN", "FAIL", None]:
+            raise Exception("""ctype must be `None` or one of {"STRAIN","STRESS","FORCE","MOMENT","DLEN","FAIL"}""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -233,8 +233,8 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @layer.setter
     def layer(self, value: str) -> None:
-        if value not in ["BOT", "TOP"]:
-            raise Exception("""layer must be one of {"BOT","TOP"}""")
+        if value not in ["BOT", "TOP", None]:
+            raise Exception("""layer must be `None` or one of {"BOT","TOP"}""")
         self._cards[0].set_value("layer", value)
 
     @property

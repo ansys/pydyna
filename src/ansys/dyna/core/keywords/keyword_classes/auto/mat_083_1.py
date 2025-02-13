@@ -296,8 +296,8 @@ class Mat0831(KeywordBase):
 
     @fail.setter
     def fail(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""fail must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""fail must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("fail", value)
 
     @property
@@ -342,8 +342,8 @@ class Mat0831(KeywordBase):
 
     @sflag.setter
     def sflag(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""sflag must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""sflag must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("sflag", value)
 
     @property
@@ -357,8 +357,8 @@ class Mat0831(KeywordBase):
 
     @rflag.setter
     def rflag(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0]:
-            raise Exception("""rflag must be one of {0.0,1.0,2.0}""")
+        if value not in [0.0, 1.0, 2.0, None]:
+            raise Exception("""rflag must be `None` or one of {0.0,1.0,2.0}""")
         self._cards[1].set_value("rflag", value)
 
     @property
@@ -371,8 +371,8 @@ class Mat0831(KeywordBase):
 
     @tflag.setter
     def tflag(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""tflag must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""tflag must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("tflag", value)
 
     @property
@@ -407,8 +407,8 @@ class Mat0831(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""ref must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("ref", value)
 
     @property
@@ -491,8 +491,8 @@ class Mat0831(KeywordBase):
 
     @riuld.setter
     def riuld(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""riuld must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""riuld must be `None` or one of {0.0,1.0}""")
         self._cards[3].set_value("riuld", value)
 
     @property

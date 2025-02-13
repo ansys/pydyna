@@ -99,8 +99,8 @@ class ControlPzelectric(KeywordBase):
 
     @solver.setter
     def solver(self, value: int) -> None:
-        if value not in [11, 12]:
-            raise Exception("""solver must be one of {11,12}""")
+        if value not in [11, 12, None]:
+            raise Exception("""solver must be `None` or one of {11,12}""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -113,8 +113,8 @@ class ControlPzelectric(KeywordBase):
 
     @msgitr.setter
     def msgitr(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""msgitr must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""msgitr must be `None` or one of {0,1}""")
         self._cards[0].set_value("msgitr", value)
 
     @property

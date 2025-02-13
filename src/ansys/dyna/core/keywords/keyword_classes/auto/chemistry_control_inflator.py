@@ -115,8 +115,8 @@ class ChemistryControlInflator(KeywordBase):
 
     @model.setter
     def model(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""model must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""model must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("model", value)
 
     @property
@@ -131,8 +131,8 @@ class ChemistryControlInflator(KeywordBase):
 
     @out_type.setter
     def out_type(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""out_type must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""out_type must be `None` or one of {0,1,2,3,4}""")
         self._cards[0].set_value("out_type", value)
 
     @property

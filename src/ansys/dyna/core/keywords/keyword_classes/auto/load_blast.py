@@ -191,8 +191,8 @@ class LoadBlast(KeywordBase):
 
     @iunit.setter
     def iunit(self, value: int) -> None:
-        if value not in [2, 1, 3, 4, 5]:
-            raise Exception("""iunit must be one of {2,1,3,4,5}""")
+        if value not in [2, 1, 3, 4, 5, None]:
+            raise Exception("""iunit must be `None` or one of {2,1,3,4,5}""")
         self._cards[0].set_value("iunit", value)
 
     @property
@@ -205,8 +205,8 @@ class LoadBlast(KeywordBase):
 
     @isurf.setter
     def isurf(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""isurf must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""isurf must be `None` or one of {2,1}""")
         self._cards[0].set_value("isurf", value)
 
     @property

@@ -153,8 +153,8 @@ class EmCircuitSource(KeywordBase):
 
     @circtyp.setter
     def circtyp(self, value: int) -> None:
-        if value not in [1, 2, 3, 11, 12, 21, 22]:
-            raise Exception("""circtyp must be one of {1,2,3,11,12,21,22}""")
+        if value not in [1, 2, 3, 11, 12, 21, 22, None]:
+            raise Exception("""circtyp must be `None` or one of {1,2,3,11,12,21,22}""")
         self._cards[0].set_value("circtyp", value)
 
     @property

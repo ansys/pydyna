@@ -836,8 +836,8 @@ class Mat213(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, -2, -3, -4]:
-            raise Exception("""macf must be one of {1,2,3,4,-2,-3,-4}""")
+        if value not in [1, 2, 3, 4, -2, -3, -4, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-2,-3,-4}""")
         self._cards[1].set_value("macf", value)
 
     @property
@@ -861,8 +861,8 @@ class Mat213(KeywordBase):
 
     @vevp.setter
     def vevp(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""vevp must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""vevp must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("vevp", value)
 
     @property
@@ -1009,8 +1009,8 @@ class Mat213(KeywordBase):
 
     @tcsym.setter
     def tcsym(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""tcsym must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""tcsym must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[3].set_value("tcsym", value)
 
     @property
@@ -1255,8 +1255,8 @@ class Mat213(KeywordBase):
 
     @dflag.setter
     def dflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""dflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""dflag must be `None` or one of {0,1}""")
         self._cards[6].set_value("dflag", value)
 
     @property
@@ -1283,8 +1283,8 @@ class Mat213(KeywordBase):
 
     @ftype.setter
     def ftype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""ftype must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""ftype must be `None` or one of {0,1,2,3}""")
         self._cards[7].set_value("ftype", value)
 
     @property

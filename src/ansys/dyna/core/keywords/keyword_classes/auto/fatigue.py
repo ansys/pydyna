@@ -140,8 +140,8 @@ class Fatigue(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""ptype must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""ptype must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -164,8 +164,8 @@ class Fatigue(KeywordBase):
 
     @strsn.setter
     def strsn(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""strsn must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""strsn must be `None` or one of {0,1}""")
         self._cards[2].set_value("strsn", value)
 
     @property
@@ -179,8 +179,8 @@ class Fatigue(KeywordBase):
 
     @index.setter
     def index(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""index must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""index must be `None` or one of {0,1,2}""")
         self._cards[2].set_value("index", value)
 
     @property
@@ -195,8 +195,8 @@ class Fatigue(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""restrt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""restrt must be `None` or one of {0,1}""")
         self._cards[2].set_value("restrt", value)
 
     @property

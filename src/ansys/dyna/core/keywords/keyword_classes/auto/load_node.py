@@ -123,8 +123,8 @@ class LoadNode(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
-            raise Exception("""dof must be one of {0,1,2,3,4,5,6,7,8}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, None]:
+            raise Exception("""dof must be `None` or one of {0,1,2,3,4,5,6,7,8}""")
         self._cards[0].set_value("dof", value)
 
     @property

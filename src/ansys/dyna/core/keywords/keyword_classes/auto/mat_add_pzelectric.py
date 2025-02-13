@@ -386,8 +386,8 @@ class MatAddPzelectric(KeywordBase):
 
     @dtype.setter
     def dtype(self, value: str) -> None:
-        if value not in ["S", "E"]:
-            raise Exception("""dtype must be one of {"S","E"}""")
+        if value not in ["S", "E", None]:
+            raise Exception("""dtype must be `None` or one of {"S","E"}""")
         self._cards[0].set_value("dtype", value)
 
     @property
@@ -413,8 +413,8 @@ class MatAddPzelectric(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""aopt must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""aopt must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("aopt", value)
 
     @property

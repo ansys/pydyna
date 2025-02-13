@@ -318,8 +318,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @sigflg.setter
     def sigflg(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""sigflg must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""sigflg must be `None` or one of {1,2}""")
         self._cards[0].set_value("sigflg", value)
 
     @property
@@ -332,8 +332,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @epsflg.setter
     def epsflg(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""epsflg must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""epsflg must be `None` or one of {1,2}""")
         self._cards[0].set_value("epsflg", value)
 
     @property
@@ -346,8 +346,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @rltflg.setter
     def rltflg(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""rltflg must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""rltflg must be `None` or one of {1,2}""")
         self._cards[0].set_value("rltflg", value)
 
     @property
@@ -360,8 +360,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @engflg.setter
     def engflg(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""engflg must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""engflg must be `None` or one of {1,2}""")
         self._cards[0].set_value("engflg", value)
 
     @property
@@ -374,8 +374,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @cmpflg.setter
     def cmpflg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cmpflg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cmpflg must be `None` or one of {0,1}""")
         self._cards[1].set_value("cmpflg", value)
 
     @property
@@ -388,8 +388,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @ieverp.setter
     def ieverp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ieverp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ieverp must be `None` or one of {0,1}""")
         self._cards[1].set_value("ieverp", value)
 
     @property
@@ -416,8 +416,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @dcomp.setter
     def dcomp(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6]:
-            raise Exception("""dcomp must be one of {1,2,3,4,5,6}""")
+        if value not in [1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""dcomp must be `None` or one of {1,2,3,4,5,6}""")
         self._cards[1].set_value("dcomp", value)
 
     @property
@@ -430,8 +430,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @shge.setter
     def shge(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""shge must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""shge must be `None` or one of {1,2}""")
         self._cards[1].set_value("shge", value)
 
     @property
@@ -446,8 +446,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @stssz.setter
     def stssz(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""stssz must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""stssz must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("stssz", value)
 
     @property
@@ -460,8 +460,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @n3thdt.setter
     def n3thdt(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""n3thdt must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""n3thdt must be `None` or one of {2,1}""")
         self._cards[1].set_value("n3thdt", value)
 
     @property
@@ -474,8 +474,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @ialemat.setter
     def ialemat(self, value: int) -> None:
-        if value not in [1, 0]:
-            raise Exception("""ialemat must be one of {1,0}""")
+        if value not in [1, 0, None]:
+            raise Exception("""ialemat must be `None` or one of {1,0}""")
         self._cards[1].set_value("ialemat", value)
 
     @property
@@ -486,8 +486,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @nintsld.setter
     def nintsld(self, value: int) -> None:
-        if value not in [0, 1, 8]:
-            raise Exception("""nintsld must be one of {0,1,8}""")
+        if value not in [0, 1, 8, None]:
+            raise Exception("""nintsld must be `None` or one of {0,1,8}""")
         self._cards[2].set_value("nintsld", value)
 
     @property
@@ -500,8 +500,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @pkp_sen.setter
     def pkp_sen(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""pkp_sen must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""pkp_sen must be `None` or one of {0,1}""")
         self._cards[2].set_value("pkp_sen", value)
 
     @property
@@ -539,8 +539,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @msscl.setter
     def msscl(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""msscl must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""msscl must be `None` or one of {0,1,2}""")
         self._cards[2].set_value("msscl", value)
 
     @property
@@ -555,8 +555,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @therm.setter
     def therm(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""therm must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""therm must be `None` or one of {0,1,2,3}""")
         self._cards[2].set_value("therm", value)
 
     @property
@@ -570,8 +570,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @intout.setter
     def intout(self, value: str) -> None:
-        if value not in [" ", "STRESS", "STRAIN", "ALL"]:
-            raise Exception("""intout must be one of {" ","STRESS","STRAIN","ALL"}""")
+        if value not in [" ", "STRESS", "STRAIN", "ALL", None]:
+            raise Exception("""intout must be `None` or one of {" ","STRESS","STRAIN","ALL"}""")
         self._cards[2].set_value("intout", value)
 
     @property
@@ -588,8 +588,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @nodout.setter
     def nodout(self, value: str) -> None:
-        if value not in [" ", "STRESS", "STRAIN", "ALL", "STRESS_GL", "STRAIN_GL", "ALL_GL"]:
-            raise Exception("""nodout must be one of {" ","STRESS","STRAIN","ALL","STRESS_GL","STRAIN_GL","ALL_GL"}""")
+        if value not in [" ", "STRESS", "STRAIN", "ALL", "STRESS_GL", "STRAIN_GL", "ALL_GL", None]:
+            raise Exception("""nodout must be `None` or one of {" ","STRESS","STRAIN","ALL","STRESS_GL","STRAIN_GL","ALL_GL"}""")
         self._cards[2].set_value("nodout", value)
 
     @property
@@ -602,8 +602,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @dtdt.setter
     def dtdt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""dtdt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""dtdt must be `None` or one of {0,1}""")
         self._cards[3].set_value("dtdt", value)
 
     @property
@@ -616,8 +616,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @resplt.setter
     def resplt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""resplt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""resplt must be `None` or one of {0,1}""")
         self._cards[3].set_value("resplt", value)
 
     @property
@@ -639,8 +639,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @quadsld.setter
     def quadsld(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""quadsld must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""quadsld must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("quadsld", value)
 
     @property
@@ -652,8 +652,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @cubsld.setter
     def cubsld(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""cubsld must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""cubsld must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("cubsld", value)
 
     @property
@@ -666,7 +666,7 @@ class DatabaseExtentBinary(KeywordBase):
 
     @deleres.setter
     def deleres(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""deleres must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""deleres must be `None` or one of {0,1}""")
         self._cards[3].set_value("deleres", value)
 

@@ -62,8 +62,8 @@ class ControlSubcycle(KeywordBase):
 
     @k.setter
     def k(self, value: int) -> None:
-        if value not in [16, 1, 2, 4, 8, 32, 64]:
-            raise Exception("""k must be one of {16,1,2,4,8,32,64}""")
+        if value not in [16, 1, 2, 4, 8, 32, 64, None]:
+            raise Exception("""k must be `None` or one of {16,1,2,4,8,32,64}""")
         self._cards[0].set_value("k", value)
 
     @property
@@ -74,7 +74,7 @@ class ControlSubcycle(KeywordBase):
 
     @l.setter
     def l(self, value: int) -> None:
-        if value not in [1, 2, 4, 8, 16, 32, 64]:
-            raise Exception("""l must be one of {1,2,4,8,16,32,64}""")
+        if value not in [1, 2, 4, 8, 16, 32, 64, None]:
+            raise Exception("""l must be `None` or one of {1,2,4,8,16,32,64}""")
         self._cards[0].set_value("l", value)
 

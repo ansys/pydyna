@@ -114,8 +114,8 @@ class FrequencyDomainSeaInput(KeywordBase):
 
     @subtyp.setter
     def subtyp(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""subtyp must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""subtyp must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("subtyp", value)
 
     @property
@@ -132,8 +132,8 @@ class FrequencyDomainSeaInput(KeywordBase):
 
     @loadtyp.setter
     def loadtyp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""loadtyp must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""loadtyp must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("loadtyp", value)
 
     @property

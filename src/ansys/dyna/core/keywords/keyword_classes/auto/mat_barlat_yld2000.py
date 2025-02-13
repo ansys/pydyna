@@ -744,8 +744,8 @@ class MatBarlatYld2000(KeywordBase):
 
     @fit.setter
     def fit(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""fit must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""fit must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("fit", value)
 
     @property
@@ -768,8 +768,8 @@ class MatBarlatYld2000(KeywordBase):
 
     @iter.setter
     def iter(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""iter must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""iter must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("iter", value)
 
     @property
@@ -782,8 +782,8 @@ class MatBarlatYld2000(KeywordBase):
 
     @iscale.setter
     def iscale(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""iscale must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""iscale must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("iscale", value)
 
     @property
@@ -1202,8 +1202,8 @@ class MatBarlatYld2000(KeywordBase):
 
     @htflag.setter
     def htflag(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""htflag must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""htflag must be `None` or one of {0,1,2}""")
         self._cards[6].set_value("htflag", value)
 
     @property
@@ -1346,8 +1346,8 @@ class MatBarlatYld2000(KeywordBase):
 
     @usrfail.setter
     def usrfail(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""usrfail must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""usrfail must be `None` or one of {0,1}""")
         self._cards[8].set_value("usrfail", value)
 
     @property

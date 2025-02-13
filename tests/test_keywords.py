@@ -29,6 +29,7 @@ import math
 import numpy as np
 import pandas as pd
 
+from ansys.dyna.core.lib.config import disable_lspp_defaults
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core import keywords as kwd
 
@@ -198,8 +199,6 @@ def test_read_keyword_no_defaults():
     m = kwd.MatHyperelasticRubber()
     assert m.n == 0 # LSPP default for `n` is 0.
     assert m.pr is None # No LSPP default for `pr`
-
-    from ansys.dyna.core.lib.config import disable_lspp_defaults
     with disable_lspp_defaults():
         m = kwd.MatHyperelasticRubber()
         assert m.n == None # LSPP default for `n` is 0.
@@ -880,6 +879,19 @@ def test_contact_tied_shell_edge_to_surface_id(ref_string):
     s = kwd.ContactTiedShellEdgeToSurface()
     ref = ref_string.test_contact_tied_shell_edge_to_surface_id
     s.loads(ref)
+
+
+@pytest.mark.keywords
+def test_control_energy_no_hgen():
+    """Test the three ways to remove the hgen field from *CONTROL_ENERGY"""
+    with disable_lspp_defaults():
+        c = kwd.ControlEnergy()
+    assert c.hgen is None
+    c = kwd.ControlEnergy(hgen=None)
+    assert c.hgen is None
+    c = kwd.ControlEnergy()
+    c.hgen = None
+    assert c.hgen is None
 
 
 @pytest.mark.keywords

@@ -370,8 +370,8 @@ class MatBoltBeam(KeywordBase):
 
     @axshel.setter
     def axshel(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""axshel must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""axshel must be `None` or one of {0,1}""")
         self._cards[2].set_value("axshel", value)
 
     @property
@@ -384,8 +384,8 @@ class MatBoltBeam(KeywordBase):
 
     @holshr.setter
     def holshr(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""holshr must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""holshr must be `None` or one of {0,1}""")
         self._cards[2].set_value("holshr", value)
 
     @property

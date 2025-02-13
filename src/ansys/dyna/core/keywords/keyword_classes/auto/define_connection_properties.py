@@ -255,8 +255,8 @@ class DefineConnectionProperties(KeywordBase):
 
     @areaeq.setter
     def areaeq(self, value: int) -> None:
-        if value not in [0, 1, -1]:
-            raise Exception("""areaeq must be one of {0,1,-1}""")
+        if value not in [0, 1, -1, None]:
+            raise Exception("""areaeq must be `None` or one of {0,1,-1}""")
         self._cards[0].set_value("areaeq", value)
 
     @property
@@ -272,8 +272,8 @@ class DefineConnectionProperties(KeywordBase):
 
     @dgtyp.setter
     def dgtyp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""dgtyp must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""dgtyp must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("dgtyp", value)
 
     @property
@@ -286,8 +286,8 @@ class DefineConnectionProperties(KeywordBase):
 
     @moarfl.setter
     def moarfl(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""moarfl must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""moarfl must be `None` or one of {0,1}""")
         self._cards[0].set_value("moarfl", value)
 
     @property

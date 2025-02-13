@@ -79,8 +79,8 @@ class RigidDeformableControl(KeywordBase):
 
     @nrbf.setter
     def nrbf(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""nrbf must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""nrbf must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("nrbf", value)
 
     @property
@@ -94,8 +94,8 @@ class RigidDeformableControl(KeywordBase):
 
     @ncsf.setter
     def ncsf(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ncsf must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ncsf must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("ncsf", value)
 
     @property
@@ -109,8 +109,8 @@ class RigidDeformableControl(KeywordBase):
 
     @rwf.setter
     def rwf(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""rwf must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""rwf must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("rwf", value)
 
     @property

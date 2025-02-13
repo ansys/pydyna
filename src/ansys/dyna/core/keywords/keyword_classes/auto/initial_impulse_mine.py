@@ -230,8 +230,8 @@ class InitialImpulseMine(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6]:
-            raise Exception("""unit must be one of {1,2,3,4,5,6}""")
+        if value not in [1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""unit must be `None` or one of {1,2,3,4,5,6}""")
         self._cards[0].set_value("unit", value)
 
     @property

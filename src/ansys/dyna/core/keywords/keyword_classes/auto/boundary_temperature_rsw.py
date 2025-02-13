@@ -194,8 +194,8 @@ class BoundaryTemperatureRsw(KeywordBase):
 
     @option.setter
     def option(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""option must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""option must be `None` or one of {0,1}""")
         self._cards[0].set_value("option", value)
 
     @property
@@ -255,8 +255,8 @@ class BoundaryTemperatureRsw(KeywordBase):
 
     @loc.setter
     def loc(self, value: int) -> None:
-        if value not in [0, -1, 1]:
-            raise Exception("""loc must be one of {0,-1,1}""")
+        if value not in [0, -1, 1, None]:
+            raise Exception("""loc must be `None` or one of {0,-1,1}""")
         self._cards[0].set_value("loc", value)
 
     @property

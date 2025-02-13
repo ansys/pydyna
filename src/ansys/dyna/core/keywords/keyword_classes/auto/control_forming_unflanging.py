@@ -217,8 +217,8 @@ class ControlFormingUnflanging(KeywordBase):
 
     @ilinear.setter
     def ilinear(self, value: int) -> None:
-        if value not in [2, 0, 1]:
-            raise Exception("""ilinear must be one of {2,0,1}""")
+        if value not in [2, 0, 1, None]:
+            raise Exception("""ilinear must be `None` or one of {2,0,1}""")
         self._cards[0].set_value("ilinear", value)
 
     @property

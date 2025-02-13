@@ -268,8 +268,8 @@ class Mat060C(KeywordBase):
 
     @v_log.setter
     def v_log(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""v_log must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""v_log must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("v_log", value)
 
     @property

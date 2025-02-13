@@ -108,8 +108,8 @@ class IcfdInitialLevelset(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""stype must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""stype must be `None` or one of {0,1,2,3,4}""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -182,7 +182,7 @@ class IcfdInitialLevelset(KeywordBase):
 
     @invert.setter
     def invert(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""invert must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""invert must be `None` or one of {0,1}""")
         self._cards[0].set_value("invert", value)
 

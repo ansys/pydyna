@@ -689,8 +689,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @stype1.setter
     def stype1(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""stype1 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""stype1 must be `None` or one of {0,1}""")
         self._cards[0].set_value("stype1", value)
 
     @property
@@ -714,8 +714,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @stype2.setter
     def stype2(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""stype2 must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""stype2 must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("stype2", value)
 
     @property
@@ -769,8 +769,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @irdp.setter
     def irdp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""irdp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""irdp must be `None` or one of {0,1}""")
         self._cards[0].set_value("irdp", value)
 
     @property
@@ -805,8 +805,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""unit must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""unit must be `None` or one of {0,1,2,3}""")
         self._cards[2].set_value("unit", value)
 
     @property
@@ -822,8 +822,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @visflg.setter
     def visflg(self, value: int) -> None:
-        if value not in [1, 0, 2, 3]:
-            raise Exception("""visflg must be one of {1,0,2,3}""")
+        if value not in [1, 0, 2, 3, None]:
+            raise Exception("""visflg must be `None` or one of {1,0,2,3}""")
         self._cards[2].set_value("visflg", value)
 
     @property
@@ -920,8 +920,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @rebl.setter
     def rebl(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""rebl must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""rebl must be `None` or one of {0,1}""")
         self._cards[3].set_value("rebl", value)
 
     @property
@@ -985,8 +985,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @idfric.setter
     def idfric(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""idfric must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""idfric must be `None` or one of {0,1}""")
         self._cards[4].set_value("idfric", value)
 
     @property
@@ -1131,8 +1131,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @styup.setter
     def styup(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""styup must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""styup must be `None` or one of {0,1}""")
         self._cards[7].set_value("styup", value)
 
     @property
@@ -1179,8 +1179,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @stypeh.setter
     def stypeh(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""stypeh must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""stypeh must be `None` or one of {0,1,2,3}""")
         self._cards[8].set_value("stypeh", value)
 
     @property
@@ -1237,8 +1237,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @inip.setter
     def inip(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""inip must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""inip must be `None` or one of {0,1}""")
         self._cards[8].set_value("inip", value)
 
     @property
@@ -1272,8 +1272,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @stype3.setter
     def stype3(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""stype3 must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""stype3 must be `None` or one of {0,1,2}""")
         self._cards[9].set_value("stype3", value)
 
     @property
@@ -1318,8 +1318,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @enh_v.setter
     def enh_v(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""enh_v must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""enh_v must be `None` or one of {0,1,2}""")
         self._cards[9].set_value("enh_v", value)
 
     @property
@@ -1552,8 +1552,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @imom.setter
     def imom(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""imom must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""imom must be `None` or one of {0,1}""")
         self._cards[12].set_value("imom", value)
 
     @property
@@ -1566,8 +1566,8 @@ class AirbagParticleDecompositionInflationSegment(KeywordBase):
 
     @iang.setter
     def iang(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iang must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iang must be `None` or one of {0,1}""")
         self._cards[12].set_value("iang", value)
 
     @property

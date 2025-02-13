@@ -369,8 +369,8 @@ class Mat174(KeywordBase):
 
     @output.setter
     def output(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""output must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""output must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("output", value)
 
     @property

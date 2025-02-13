@@ -361,8 +361,8 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @failopt.setter
     def failopt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""failopt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""failopt must be `None` or one of {0,1}""")
         self._cards[2].set_value("failopt", value)
 
     @property
@@ -395,8 +395,8 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @erode.setter
     def erode(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""erode must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""erode must be `None` or one of {0,1}""")
         self._cards[2].set_value("erode", value)
 
     @property

@@ -473,8 +473,8 @@ class MatFabricMap(KeywordBase):
 
     @isrefg.setter
     def isrefg(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""isrefg must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""isrefg must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("isrefg", value)
 
     @property
@@ -487,8 +487,8 @@ class MatFabricMap(KeywordBase):
 
     @cse.setter
     def cse(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""cse must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""cse must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("cse", value)
 
     @property

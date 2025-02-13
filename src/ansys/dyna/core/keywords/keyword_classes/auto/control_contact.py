@@ -416,8 +416,8 @@ class ControlContact(KeywordBase):
 
     @islchk.setter
     def islchk(self, value: int) -> None:
-        if value not in [1, 0, 2]:
-            raise Exception("""islchk must be one of {1,0,2}""")
+        if value not in [1, 0, 2, None]:
+            raise Exception("""islchk must be `None` or one of {1,0,2}""")
         self._cards[0].set_value("islchk", value)
 
     @property
@@ -431,8 +431,8 @@ class ControlContact(KeywordBase):
 
     @shlthk.setter
     def shlthk(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""shlthk must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""shlthk must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("shlthk", value)
 
     @property
@@ -450,8 +450,8 @@ class ControlContact(KeywordBase):
 
     @penopt.setter
     def penopt(self, value: int) -> None:
-        if value not in [1, 0, 2, 3, 4, 5]:
-            raise Exception("""penopt must be one of {1,0,2,3,4,5}""")
+        if value not in [1, 0, 2, 3, 4, 5, None]:
+            raise Exception("""penopt must be `None` or one of {1,0,2,3,4,5}""")
         self._cards[0].set_value("penopt", value)
 
     @property
@@ -464,8 +464,8 @@ class ControlContact(KeywordBase):
 
     @thkchg.setter
     def thkchg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""thkchg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""thkchg must be `None` or one of {0,1}""")
         self._cards[0].set_value("thkchg", value)
 
     @property
@@ -481,8 +481,8 @@ class ControlContact(KeywordBase):
 
     @orien.setter
     def orien(self, value: int) -> None:
-        if value not in [1, 0, 2, 3, 4]:
-            raise Exception("""orien must be one of {1,0,2,3,4}""")
+        if value not in [1, 0, 2, 3, 4, None]:
+            raise Exception("""orien must be `None` or one of {1,0,2,3,4}""")
         self._cards[0].set_value("orien", value)
 
     @property
@@ -496,8 +496,8 @@ class ControlContact(KeywordBase):
 
     @enmass.setter
     def enmass(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""enmass must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""enmass must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("enmass", value)
 
     @property
@@ -540,8 +540,8 @@ class ControlContact(KeywordBase):
 
     @interm.setter
     def interm(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""interm must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""interm must be `None` or one of {0,1}""")
         self._cards[1].set_value("interm", value)
 
     @property
@@ -564,8 +564,8 @@ class ControlContact(KeywordBase):
 
     @ssthk.setter
     def ssthk(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ssthk must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ssthk must be `None` or one of {0,1}""")
         self._cards[1].set_value("ssthk", value)
 
     @property
@@ -578,8 +578,8 @@ class ControlContact(KeywordBase):
 
     @ecdt.setter
     def ecdt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ecdt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ecdt must be `None` or one of {0,1}""")
         self._cards[1].set_value("ecdt", value)
 
     @property
@@ -593,8 +593,8 @@ class ControlContact(KeywordBase):
 
     @tiedprj.setter
     def tiedprj(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""tiedprj must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""tiedprj must be `None` or one of {0,1}""")
         self._cards[1].set_value("tiedprj", value)
 
     @property
@@ -678,8 +678,8 @@ class ControlContact(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ignore must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ignore must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("ignore", value)
 
     @property
@@ -692,8 +692,8 @@ class ControlContact(KeywordBase):
 
     @frceng.setter
     def frceng(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""frceng must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""frceng must be `None` or one of {0,1}""")
         self._cards[3].set_value("frceng", value)
 
     @property
@@ -706,8 +706,8 @@ class ControlContact(KeywordBase):
 
     @skiprwg.setter
     def skiprwg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""skiprwg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""skiprwg must be `None` or one of {0,1}""")
         self._cards[3].set_value("skiprwg", value)
 
     @property
@@ -720,8 +720,8 @@ class ControlContact(KeywordBase):
 
     @outseg.setter
     def outseg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""outseg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""outseg must be `None` or one of {0,1}""")
         self._cards[3].set_value("outseg", value)
 
     @property
@@ -736,8 +736,8 @@ class ControlContact(KeywordBase):
 
     @spotstp.setter
     def spotstp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""spotstp must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""spotstp must be `None` or one of {0,1,2,3}""")
         self._cards[3].set_value("spotstp", value)
 
     @property
@@ -787,8 +787,8 @@ class ControlContact(KeywordBase):
 
     @nserod.setter
     def nserod(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""nserod must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""nserod must be `None` or one of {0,1}""")
         self._cards[4].set_value("nserod", value)
 
     @property
@@ -801,8 +801,8 @@ class ControlContact(KeywordBase):
 
     @rwgaps.setter
     def rwgaps(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""rwgaps must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""rwgaps must be `None` or one of {1,2}""")
         self._cards[4].set_value("rwgaps", value)
 
     @property
@@ -833,8 +833,8 @@ class ControlContact(KeywordBase):
 
     @icov.setter
     def icov(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""icov must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""icov must be `None` or one of {0,1}""")
         self._cards[4].set_value("icov", value)
 
     @property
@@ -857,8 +857,8 @@ class ControlContact(KeywordBase):
 
     @ithoff.setter
     def ithoff(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ithoff must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ithoff must be `None` or one of {0,1}""")
         self._cards[4].set_value("ithoff", value)
 
     @property
@@ -872,8 +872,8 @@ class ControlContact(KeywordBase):
 
     @shledg.setter
     def shledg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""shledg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""shledg must be `None` or one of {0,1}""")
         self._cards[5].set_value("shledg", value)
 
     @property
@@ -887,8 +887,8 @@ class ControlContact(KeywordBase):
 
     @pstiff.setter
     def pstiff(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""pstiff must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""pstiff must be `None` or one of {0,1}""")
         self._cards[5].set_value("pstiff", value)
 
     @property
@@ -919,8 +919,8 @@ class ControlContact(KeywordBase):
 
     @tdcnof.setter
     def tdcnof(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""tdcnof must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""tdcnof must be `None` or one of {0,1}""")
         self._cards[5].set_value("tdcnof", value)
 
     @property
@@ -934,8 +934,8 @@ class ControlContact(KeywordBase):
 
     @ftall.setter
     def ftall(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ftall must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ftall must be `None` or one of {0,1}""")
         self._cards[5].set_value("ftall", value)
 
     @property
@@ -960,7 +960,7 @@ class ControlContact(KeywordBase):
 
     @igactc.setter
     def igactc(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""igactc must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""igactc must be `None` or one of {0,1}""")
         self._cards[5].set_value("igactc", value)
 

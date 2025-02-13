@@ -597,8 +597,8 @@ class AirbagAle(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sidtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sidtyp must be `None` or one of {0,1}""")
         self._cards[0].set_value("sidtyp", value)
 
     @property
@@ -752,8 +752,8 @@ class AirbagAle(KeywordBase):
 
     @normtyp.setter
     def normtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""normtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""normtyp must be `None` or one of {0,1}""")
         self._cards[2].set_value("normtyp", value)
 
     @property
@@ -797,8 +797,8 @@ class AirbagAle(KeywordBase):
 
     @ivtype.setter
     def ivtype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ivtype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ivtype must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("ivtype", value)
 
     @property

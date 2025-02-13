@@ -148,8 +148,8 @@ class BoundaryPap(KeywordBase):
 
     @block.setter
     def block(self, value: float) -> None:
-        if value not in [0.0, -1]:
-            raise Exception("""block must be one of {0.0,-1}""")
+        if value not in [0.0, -1, None]:
+            raise Exception("""block must be `None` or one of {0.0,-1}""")
         self._cards[0].set_value("block", value)
 
     @property

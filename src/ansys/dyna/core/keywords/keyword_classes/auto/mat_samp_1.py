@@ -450,8 +450,8 @@ class MatSamp1(KeywordBase):
 
     @incdam.setter
     def incdam(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""incdam must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""incdam must be `None` or one of {0,1}""")
         self._cards[1].set_value("incdam", value)
 
     @property
@@ -532,8 +532,8 @@ class MatSamp1(KeywordBase):
 
     @incfail.setter
     def incfail(self, value: int) -> None:
-        if value not in [0, 1, -1]:
-            raise Exception("""incfail must be one of {0,1,-1}""")
+        if value not in [0, 1, -1, None]:
+            raise Exception("""incfail must be `None` or one of {0,1,-1}""")
         self._cards[3].set_value("incfail", value)
 
     @property
@@ -547,8 +547,8 @@ class MatSamp1(KeywordBase):
 
     @iconv.setter
     def iconv(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iconv must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iconv must be `None` or one of {0,1}""")
         self._cards[3].set_value("iconv", value)
 
     @property

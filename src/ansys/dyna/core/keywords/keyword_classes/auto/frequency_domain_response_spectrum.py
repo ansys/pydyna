@@ -292,8 +292,8 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""restrt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""restrt must be `None` or one of {0,1}""")
         self._cards[0].set_value("restrt", value)
 
     @property
@@ -326,8 +326,8 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @relatv.setter
     def relatv(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""relatv must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""relatv must be `None` or one of {0,1}""")
         self._cards[0].set_value("relatv", value)
 
     @property
@@ -341,8 +341,8 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @mprs.setter
     def mprs(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""mprs must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""mprs must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("mprs", value)
 
     @property
@@ -425,8 +425,8 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @ldtyp.setter
     def ldtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ldtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ldtyp must be `None` or one of {0,1}""")
         self._cards[4].set_value("ldtyp", value)
 
     @property
@@ -470,8 +470,8 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @lctyp.setter
     def lctyp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]:
-            raise Exception("""lctyp must be one of {0,1,2,3,4,5,6,7,8,9,10,11,12}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, None]:
+            raise Exception("""lctyp must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11,12}""")
         self._cards[5].set_value("lctyp", value)
 
     @property
@@ -486,8 +486,8 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
-        if value not in [1, 2, 3, 4]:
-            raise Exception("""dof must be one of {1,2,3,4}""")
+        if value not in [1, 2, 3, 4, None]:
+            raise Exception("""dof must be `None` or one of {1,2,3,4}""")
         self._cards[5].set_value("dof", value)
 
     @property
@@ -543,8 +543,8 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @lntyp.setter
     def lntyp(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5]:
-            raise Exception("""lntyp must be one of {1,2,3,4,5}""")
+        if value not in [1, 2, 3, 4, 5, None]:
+            raise Exception("""lntyp must be `None` or one of {1,2,3,4,5}""")
         self._cards[5].set_value("lntyp", value)
 
     @property
@@ -558,7 +558,7 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @inflag.setter
     def inflag(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""inflag must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""inflag must be `None` or one of {0,1,2}""")
         self._cards[5].set_value("inflag", value)
 

@@ -502,8 +502,8 @@ class Mat169(KeywordBase):
 
     @thkdir.setter
     def thkdir(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""thkdir must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""thkdir must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("thkdir", value)
 
     @property
@@ -704,8 +704,8 @@ class Mat169(KeywordBase):
 
     @outfail.setter
     def outfail(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""outfail must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""outfail must be `None` or one of {0.0,1.0}""")
         self._cards[5].set_value("outfail", value)
 
     @property
@@ -740,8 +740,8 @@ class Mat169(KeywordBase):
 
     @ele2ns.setter
     def ele2ns(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""ele2ns must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""ele2ns must be `None` or one of {0.0,1.0}""")
         self._cards[5].set_value("ele2ns", value)
 
     @property

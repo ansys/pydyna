@@ -89,8 +89,8 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
 
     @dofx.setter
     def dofx(self, value: int) -> None:
-        if value not in [1, 0]:
-            raise Exception("""dofx must be one of {1,0}""")
+        if value not in [1, 0, None]:
+            raise Exception("""dofx must be `None` or one of {1,0}""")
         self._cards[0].set_value("dofx", value)
 
     @property
@@ -104,8 +104,8 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
 
     @dofy.setter
     def dofy(self, value: int) -> None:
-        if value not in [1, 0]:
-            raise Exception("""dofy must be one of {1,0}""")
+        if value not in [1, 0, None]:
+            raise Exception("""dofy must be `None` or one of {1,0}""")
         self._cards[0].set_value("dofy", value)
 
     @property
@@ -119,7 +119,7 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
 
     @dofz.setter
     def dofz(self, value: int) -> None:
-        if value not in [1, 0]:
-            raise Exception("""dofz must be one of {1,0}""")
+        if value not in [1, 0, None]:
+            raise Exception("""dofz must be `None` or one of {1,0}""")
         self._cards[0].set_value("dofz", value)
 

@@ -89,8 +89,8 @@ class LoadBeamSet(KeywordBase):
 
     @dal.setter
     def dal(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""dal must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""dal must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("dal", value)
 
     @property

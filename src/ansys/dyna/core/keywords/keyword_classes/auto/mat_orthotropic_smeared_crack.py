@@ -437,8 +437,8 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @ind.setter
     def ind(self, value: float) -> None:
-        if value not in [1.0, 2.0, 3.0]:
-            raise Exception("""ind must be one of {1.0,2.0,3.0}""")
+        if value not in [1.0, 2.0, 3.0, None]:
+            raise Exception("""ind must be `None` or one of {1.0,2.0,3.0}""")
         self._cards[1].set_value("ind", value)
 
     @property
@@ -449,8 +449,8 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @isd.setter
     def isd(self, value: float) -> None:
-        if value not in [4.0, 5.0, 6.0]:
-            raise Exception("""isd must be one of {4.0,5.0,6.0}""")
+        if value not in [4.0, 5.0, 6.0, None]:
+            raise Exception("""isd must be `None` or one of {4.0,5.0,6.0}""")
         self._cards[1].set_value("isd", value)
 
     @property
@@ -575,8 +575,8 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, -4, -3, -2]:
-            raise Exception("""macf must be one of {1,2,3,4,-4,-3,-2}""")
+        if value not in [1, 2, 3, 4, -4, -3, -2, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
         self._cards[3].set_value("macf", value)
 
     @property
@@ -659,8 +659,8 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""ref must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
         self._cards[4].set_value("ref", value)
 
     @property

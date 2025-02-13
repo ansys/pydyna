@@ -294,8 +294,8 @@ class EmRandlesBatmac(KeywordBase):
 
     @rdltype.setter
     def rdltype(self, value: int) -> None:
-        if value not in [0, -1, 1, 2, 3]:
-            raise Exception("""rdltype must be one of {0,-1,1,2,3}""")
+        if value not in [0, -1, 1, 2, 3, None]:
+            raise Exception("""rdltype must be `None` or one of {0,-1,1,2,3}""")
         self._cards[0].set_value("rdltype", value)
 
     @property
@@ -309,8 +309,8 @@ class EmRandlesBatmac(KeywordBase):
 
     @rdlarea.setter
     def rdlarea(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""rdlarea must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""rdlarea must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("rdlarea", value)
 
     @property
@@ -541,8 +541,8 @@ class EmRandlesBatmac(KeywordBase):
 
     @frther.setter
     def frther(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""frther must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""frther must be `None` or one of {0,1}""")
         self._cards[4].set_value("frther", value)
 
     @property
@@ -555,8 +555,8 @@ class EmRandlesBatmac(KeywordBase):
 
     @r0toth.setter
     def r0toth(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""r0toth must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""r0toth must be `None` or one of {0,1}""")
         self._cards[4].set_value("r0toth", value)
 
     @property
@@ -579,8 +579,8 @@ class EmRandlesBatmac(KeywordBase):
 
     @tempu.setter
     def tempu(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""tempu must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""tempu must be `None` or one of {0,1}""")
         self._cards[4].set_value("tempu", value)
 
     @property
@@ -593,8 +593,8 @@ class EmRandlesBatmac(KeywordBase):
 
     @usesocs.setter
     def usesocs(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""usesocs must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""usesocs must be `None` or one of {0,1}""")
         self._cards[5].set_value("usesocs", value)
 
     @property

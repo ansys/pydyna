@@ -360,8 +360,8 @@ class Mat077O(KeywordBase):
 
     @n.setter
     def n(self, value: int) -> None:
-        if value not in [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8]:
-            raise Exception("""n must be one of {-1,0,1,2,3,4,5,6,7,8}""")
+        if value not in [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, None]:
+            raise Exception("""n must be `None` or one of {-1,0,1,2,3,4,5,6,7,8}""")
         self._cards[0].set_value("n", value)
 
     @property
@@ -406,8 +406,8 @@ class Mat077O(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""ref must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("ref", value)
 
     @property
@@ -471,8 +471,8 @@ class Mat077O(KeywordBase):
 
     @data.setter
     def data(self, value: float) -> None:
-        if value not in [1.0, 2.0, 3.0]:
-            raise Exception("""data must be one of {1.0,2.0,3.0}""")
+        if value not in [1.0, 2.0, 3.0, None]:
+            raise Exception("""data must be `None` or one of {1.0,2.0,3.0}""")
         self._cards[2].set_value("data", value)
 
     @property

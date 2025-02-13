@@ -203,8 +203,8 @@ class InitialVehicleKinematics(KeywordBase):
 
     @grav.setter
     def grav(self, value: int) -> None:
-        if value not in [1, -1, 2, -2, 3, -3]:
-            raise Exception("""grav must be one of {1,-1,2,-2,3,-3}""")
+        if value not in [1, -1, 2, -2, 3, -3, None]:
+            raise Exception("""grav must be `None` or one of {1,-1,2,-2,3,-3}""")
         self._cards[0].set_value("grav", value)
 
     @property
@@ -318,8 +318,8 @@ class InitialVehicleKinematics(KeywordBase):
 
     @aaxis.setter
     def aaxis(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""aaxis must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""aaxis must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("aaxis", value)
 
     @property
@@ -333,8 +333,8 @@ class InitialVehicleKinematics(KeywordBase):
 
     @baxis.setter
     def baxis(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""baxis must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""baxis must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("baxis", value)
 
     @property
@@ -348,8 +348,8 @@ class InitialVehicleKinematics(KeywordBase):
 
     @caxis.setter
     def caxis(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""caxis must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""caxis must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("caxis", value)
 
     @property

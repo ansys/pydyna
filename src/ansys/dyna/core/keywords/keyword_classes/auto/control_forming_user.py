@@ -235,8 +235,8 @@ class ControlFormingUser(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""type must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""type must be `None` or one of {0,1}""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -289,8 +289,8 @@ class ControlFormingUser(KeywordBase):
 
     @al_fe.setter
     def al_fe(self, value: str) -> None:
-        if value not in ["F", "A"]:
-            raise Exception("""al_fe must be one of {"F","A"}""")
+        if value not in ["F", "A", None]:
+            raise Exception("""al_fe must be `None` or one of {"F","A"}""")
         self._cards[0].set_value("al/fe", value)
 
     @property

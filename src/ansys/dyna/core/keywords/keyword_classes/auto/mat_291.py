@@ -660,8 +660,8 @@ class Mat291(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""stype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""stype must be `None` or one of {0,1}""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -980,8 +980,8 @@ class Mat291(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, -2, -3, -4]:
-            raise Exception("""macf must be one of {1,2,3,4,-2,-3,-4}""")
+        if value not in [1, 2, 3, 4, -2, -3, -4, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-2,-3,-4}""")
         self._cards[5].set_value("macf", value)
 
     @property

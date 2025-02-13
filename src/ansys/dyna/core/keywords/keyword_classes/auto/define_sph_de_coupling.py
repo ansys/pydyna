@@ -179,8 +179,8 @@ class DefineSphDeCoupling(KeywordBase):
 
     @sphtyp.setter
     def sphtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sphtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sphtyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("sphtyp", value)
 
     @property
@@ -193,8 +193,8 @@ class DefineSphDeCoupling(KeywordBase):
 
     @destyp.setter
     def destyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""destyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""destyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("destyp", value)
 
     @property

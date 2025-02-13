@@ -200,8 +200,8 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @center.setter
     def center(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""center must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""center must be `None` or one of {0,1}""")
         self._cards[0].set_value("center", value)
 
     @property
@@ -245,8 +245,8 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @plane.setter
     def plane(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""plane must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""plane must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("plane", value)
 
     @property

@@ -223,8 +223,8 @@ class PartModes(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""form must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""form must be `None` or one of {0,1}""")
         self._cards[0].set_value("form", value)
 
     @property
@@ -251,8 +251,8 @@ class PartModes(KeywordBase):
 
     @format.setter
     def format(self, value: int) -> None:
-        if value not in [0, 2, 3, 4, 5]:
-            raise Exception("""format must be one of {0,2,3,4,5}""")
+        if value not in [0, 2, 3, 4, 5, None]:
+            raise Exception("""format must be `None` or one of {0,2,3,4,5}""")
         self._cards[0].set_value("format", value)
 
     @property
@@ -265,8 +265,8 @@ class PartModes(KeywordBase):
 
     @kmflag.setter
     def kmflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""kmflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""kmflag must be `None` or one of {0,1}""")
         self._cards[0].set_value("kmflag", value)
 
     @property
@@ -280,8 +280,8 @@ class PartModes(KeywordBase):
 
     @nupdf.setter
     def nupdf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""nupdf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""nupdf must be `None` or one of {0,1}""")
         self._cards[0].set_value("nupdf", value)
 
     @property
@@ -294,8 +294,8 @@ class PartModes(KeywordBase):
 
     @sigrec.setter
     def sigrec(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sigrec must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sigrec must be `None` or one of {0,1}""")
         self._cards[0].set_value("sigrec", value)
 
     @property

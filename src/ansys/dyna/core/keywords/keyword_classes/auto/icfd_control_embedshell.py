@@ -71,8 +71,8 @@ class IcfdControlEmbedshell(KeywordBase):
 
     @gtype.setter
     def gtype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""gtype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""gtype must be `None` or one of {0,1}""")
         self._cards[0].set_value("gtype", value)
 
     @property
@@ -95,7 +95,7 @@ class IcfdControlEmbedshell(KeywordBase):
 
     @tps.setter
     def tps(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""tps must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""tps must be `None` or one of {0,1}""")
         self._cards[0].set_value("tps", value)
 

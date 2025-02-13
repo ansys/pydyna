@@ -222,8 +222,8 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
-        if value not in ["MECH", "CESE", "ICFD"]:
-            raise Exception("""solver must be one of {"MECH","CESE","ICFD"}""")
+        if value not in ["MECH", "CESE", "ICFD", None]:
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
         self._cards[0].set_value("solver", value)
 
     @property

@@ -178,8 +178,8 @@ class ChangeVelocityGeneration(KeywordBase):
 
     @styp.setter
     def styp(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""styp must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""styp must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("styp", value)
 
     @property
@@ -231,8 +231,8 @@ class ChangeVelocityGeneration(KeywordBase):
 
     @ivatn.setter
     def ivatn(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ivatn must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ivatn must be `None` or one of {0,1}""")
         self._cards[0].set_value("ivatn", value)
 
     @property
@@ -315,8 +315,8 @@ class ChangeVelocityGeneration(KeywordBase):
 
     @phase.setter
     def phase(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""phase must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""phase must be `None` or one of {0,1}""")
         self._cards[1].set_value("phase", value)
 
     @property

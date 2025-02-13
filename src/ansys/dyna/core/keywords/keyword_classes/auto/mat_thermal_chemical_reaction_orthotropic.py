@@ -675,8 +675,8 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @mf.setter
     def mf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""mf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""mf must be `None` or one of {0,1}""")
         self._cards[0].set_value("mf", value)
 
     @property
@@ -691,8 +691,8 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: int) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0, 4.0]:
-            raise Exception("""aopt must be one of {0.0,1.0,2.0,3.0,4.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, 4.0, None]:
+            raise Exception("""aopt must be `None` or one of {0.0,1.0,2.0,3.0,4.0}""")
         self._cards[1].set_value("aopt", value)
 
     @property

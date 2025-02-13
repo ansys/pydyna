@@ -487,8 +487,8 @@ class SectionShellMisc(KeywordBase):
 
     @propt.setter
     def propt(self, value: float) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""propt must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""propt must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("propt", value)
 
     @property
@@ -514,8 +514,8 @@ class SectionShellMisc(KeywordBase):
 
     @icomp.setter
     def icomp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""icomp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""icomp must be `None` or one of {0,1}""")
         self._cards[0].set_value("icomp", value)
 
     @property
@@ -529,8 +529,8 @@ class SectionShellMisc(KeywordBase):
 
     @setyp.setter
     def setyp(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""setyp must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""setyp must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("setyp", value)
 
     @property
@@ -637,8 +637,8 @@ class SectionShellMisc(KeywordBase):
 
     @iunf.setter
     def iunf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iunf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iunf must be `None` or one of {0,1}""")
         self._cards[3].set_value("iunf", value)
 
     @property
@@ -649,8 +649,8 @@ class SectionShellMisc(KeywordBase):
 
     @ihgf.setter
     def ihgf(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""ihgf must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""ihgf must be `None` or one of {0,1,2,3}""")
         self._cards[3].set_value("ihgf", value)
 
     @property
@@ -661,8 +661,8 @@ class SectionShellMisc(KeywordBase):
 
     @itaj.setter
     def itaj(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""itaj must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""itaj must be `None` or one of {0,1}""")
         self._cards[3].set_value("itaj", value)
 
     @property
@@ -693,8 +693,8 @@ class SectionShellMisc(KeywordBase):
 
     @iloc.setter
     def iloc(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iloc must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iloc must be `None` or one of {0,1}""")
         self._cards[3].set_value("iloc", value)
 
     @property

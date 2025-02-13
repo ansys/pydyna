@@ -279,8 +279,8 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @tension.setter
     def tension(self, value: float) -> None:
-        if value not in [-1.0, 0.0, 1.0]:
-            raise Exception("""tension must be one of {-1.0,0.0,1.0}""")
+        if value not in [-1.0, 0.0, 1.0, None]:
+            raise Exception("""tension must be `None` or one of {-1.0,0.0,1.0}""")
         self._cards[1].set_value("tension", value)
 
     @property
@@ -293,8 +293,8 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @rtype.setter
     def rtype(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""rtype must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""rtype must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("rtype", value)
 
     @property
@@ -307,8 +307,8 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @avgopt.setter
     def avgopt(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""avgopt must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""avgopt must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("avgopt", value)
 
     @property

@@ -140,8 +140,8 @@ class BoundaryPoreFluidSet(KeywordBase):
 
     @atype.setter
     def atype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""atype must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""atype must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("atype", value)
 
     @property

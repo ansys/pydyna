@@ -256,8 +256,8 @@ class FrequencyDomainFrf(KeywordBase):
 
     @n1typ.setter
     def n1typ(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""n1typ must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""n1typ must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("n1typ", value)
 
     @property
@@ -272,8 +272,8 @@ class FrequencyDomainFrf(KeywordBase):
 
     @dof1.setter
     def dof1(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""dof1 must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""dof1 must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("dof1", value)
 
     @property
@@ -296,8 +296,8 @@ class FrequencyDomainFrf(KeywordBase):
 
     @vad1.setter
     def vad1(self, value: int) -> None:
-        if value not in [3, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11]:
-            raise Exception("""vad1 must be one of {3,0,1,2,4,5,6,7,8,9,10,11}""")
+        if value not in [3, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, None]:
+            raise Exception("""vad1 must be `None` or one of {3,0,1,2,4,5,6,7,8,9,10,11}""")
         self._cards[0].set_value("vad1", value)
 
     @property
@@ -370,8 +370,8 @@ class FrequencyDomainFrf(KeywordBase):
 
     @lctyp.setter
     def lctyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""lctyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""lctyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("lctyp", value)
 
     @property
@@ -415,8 +415,8 @@ class FrequencyDomainFrf(KeywordBase):
 
     @n2typ.setter
     def n2typ(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""n2typ must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""n2typ must be `None` or one of {0,1,2}""")
         self._cards[2].set_value("n2typ", value)
 
     @property
@@ -436,8 +436,8 @@ class FrequencyDomainFrf(KeywordBase):
 
     @dof2.setter
     def dof2(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
-            raise Exception("""dof2 must be one of {0,1,2,3,4,5,6,7,8}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, None]:
+            raise Exception("""dof2 must be `None` or one of {0,1,2,3,4,5,6,7,8}""")
         self._cards[2].set_value("dof2", value)
 
     @property
@@ -452,8 +452,8 @@ class FrequencyDomainFrf(KeywordBase):
 
     @vad2.setter
     def vad2(self, value: int) -> None:
-        if value not in [2, 0, 1, 3]:
-            raise Exception("""vad2 must be one of {2,0,1,3}""")
+        if value not in [2, 0, 1, 3, None]:
+            raise Exception("""vad2 must be `None` or one of {2,0,1,3}""")
         self._cards[2].set_value("vad2", value)
 
     @property
@@ -476,8 +476,8 @@ class FrequencyDomainFrf(KeywordBase):
 
     @relatv.setter
     def relatv(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""relatv must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""relatv must be `None` or one of {0,1}""")
         self._cards[2].set_value("relatv", value)
 
     @property
@@ -521,8 +521,8 @@ class FrequencyDomainFrf(KeywordBase):
 
     @fspace.setter
     def fspace(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""fspace must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""fspace must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("fspace", value)
 
     @property
@@ -547,8 +547,8 @@ class FrequencyDomainFrf(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""restrt must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""restrt must be `None` or one of {0,1,2,3}""")
         self._cards[3].set_value("restrt", value)
 
     @property
@@ -561,7 +561,7 @@ class FrequencyDomainFrf(KeywordBase):
 
     @output.setter
     def output(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""output must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""output must be `None` or one of {0,1}""")
         self._cards[3].set_value("output", value)
 

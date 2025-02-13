@@ -156,8 +156,8 @@ class ComponentHybridiii(KeywordBase):
 
     @size.setter
     def size(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""size must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""size must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("size", value)
 
     @property
@@ -173,8 +173,8 @@ class ComponentHybridiii(KeywordBase):
 
     @units.setter
     def units(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5]:
-            raise Exception("""units must be one of {1,2,3,4,5}""")
+        if value not in [1, 2, 3, 4, 5, None]:
+            raise Exception("""units must be `None` or one of {1,2,3,4,5}""")
         self._cards[0].set_value("units", value)
 
     @property
@@ -193,8 +193,8 @@ class ComponentHybridiii(KeywordBase):
 
     @defrm.setter
     def defrm(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7, 8]:
-            raise Exception("""defrm must be one of {1,2,3,4,5,6,7,8}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, 8, None]:
+            raise Exception("""defrm must be `None` or one of {1,2,3,4,5,6,7,8}""")
         self._cards[0].set_value("defrm", value)
 
     @property

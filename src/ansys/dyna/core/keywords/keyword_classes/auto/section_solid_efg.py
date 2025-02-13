@@ -444,8 +444,8 @@ class SectionSolidEfg(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [1, -1, -2, -18, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 41, 42, 43, 45, 47, 60, 62, 98, 99, 101, 102, 103, 104, 105, 115, 201, 1000]:
-            raise Exception("""elform must be one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}""")
+        if value not in [1, -1, -2, -18, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 41, 42, 43, 45, 47, 60, 62, 98, 99, 101, 102, 103, 104, 105, 115, 201, 1000, None]:
+            raise Exception("""elform must be `None` or one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -461,8 +461,8 @@ class SectionSolidEfg(KeywordBase):
 
     @aet.setter
     def aet(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""aet must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""aet must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("aet", value)
 
     @property
@@ -526,8 +526,8 @@ class SectionSolidEfg(KeywordBase):
 
     @ispline.setter
     def ispline(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ispline must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ispline must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("ispline", value)
 
     @property
@@ -540,8 +540,8 @@ class SectionSolidEfg(KeywordBase):
 
     @idila.setter
     def idila(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""idila must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""idila must be `None` or one of {0,1}""")
         self._cards[1].set_value("idila", value)
 
     @property
@@ -560,8 +560,8 @@ class SectionSolidEfg(KeywordBase):
 
     @iebt.setter
     def iebt(self, value: int) -> None:
-        if value not in [3, -1, 1, 2, 4, -4, 5, 7]:
-            raise Exception("""iebt must be one of {3,-1,1,2,4,-4,5,7}""")
+        if value not in [3, -1, 1, 2, 4, -4, 5, 7, None]:
+            raise Exception("""iebt must be `None` or one of {3,-1,1,2,4,-4,5,7}""")
         self._cards[1].set_value("iebt", value)
 
     @property
@@ -577,8 +577,8 @@ class SectionSolidEfg(KeywordBase):
 
     @idim.setter
     def idim(self, value: int) -> None:
-        if value not in [2, 1, 3, -1, -2]:
-            raise Exception("""idim must be one of {2,1,3,-1,-2}""")
+        if value not in [2, 1, 3, -1, -2, None]:
+            raise Exception("""idim must be `None` or one of {2,1,3,-1,-2}""")
         self._cards[1].set_value("idim", value)
 
     @property
@@ -603,8 +603,8 @@ class SectionSolidEfg(KeywordBase):
 
     @ips.setter
     def ips(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ips must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ips must be `None` or one of {0,1}""")
         self._cards[2].set_value("ips", value)
 
     @property
@@ -626,8 +626,8 @@ class SectionSolidEfg(KeywordBase):
 
     @iken.setter
     def iken(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iken must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iken must be `None` or one of {0,1}""")
         self._cards[2].set_value("iken", value)
 
     @property
@@ -661,8 +661,8 @@ class SectionSolidEfg(KeywordBase):
 
     @ibr.setter
     def ibr(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""ibr must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""ibr must be `None` or one of {1,2}""")
         self._cards[2].set_value("ibr", value)
 
     @property
@@ -713,8 +713,8 @@ class SectionSolidEfg(KeywordBase):
 
     @ihgf.setter
     def ihgf(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""ihgf must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""ihgf must be `None` or one of {0,1,2,3}""")
         self._cards[3].set_value("ihgf", value)
 
     @property
@@ -725,8 +725,8 @@ class SectionSolidEfg(KeywordBase):
 
     @itaj.setter
     def itaj(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""itaj must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""itaj must be `None` or one of {0,1}""")
         self._cards[3].set_value("itaj", value)
 
     @property

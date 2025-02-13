@@ -617,8 +617,8 @@ class AirbagWangNefskeJettingPopCmId(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sidtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sidtyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("sidtyp", value)
 
     @property
@@ -921,8 +921,8 @@ class AirbagWangNefskeJettingPopCmId(KeywordBase):
 
     @opt.setter
     def opt(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7, 8]:
-            raise Exception("""opt must be one of {1,2,3,4,5,6,7,8}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, 8, None]:
+            raise Exception("""opt must be `None` or one of {1,2,3,4,5,6,7,8}""")
         self._cards[4].set_value("opt", value)
 
     @property

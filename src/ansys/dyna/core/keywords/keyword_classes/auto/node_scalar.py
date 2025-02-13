@@ -76,7 +76,7 @@ class NodeScalar(KeywordBase):
 
     @ndof.setter
     def ndof(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""ndof must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""ndof must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("ndof", value)
 

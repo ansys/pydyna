@@ -91,8 +91,8 @@ class ControlMppDecompositionArrangeParts(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
-        if value not in [0, 1, 10, 11, 20, 21]:
-            raise Exception("""type must be one of {0,1,10,11,20,21}""")
+        if value not in [0, 1, 10, 11, 20, 21, None]:
+            raise Exception("""type must be `None` or one of {0,1,10,11,20,21}""")
         self._cards[0].set_value("type", value)
 
     @property

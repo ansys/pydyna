@@ -270,8 +270,8 @@ class MatSampLight(KeywordBase):
 
     @ctflg.setter
     def ctflg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ctflg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ctflg must be `None` or one of {0,1}""")
         self._cards[1].set_value("ctflg", value)
 
     @property
@@ -284,8 +284,8 @@ class MatSampLight(KeywordBase):
 
     @rateop.setter
     def rateop(self, value: int) -> None:
-        if value not in [0, 2]:
-            raise Exception("""rateop must be one of {0,2}""")
+        if value not in [0, 2, None]:
+            raise Exception("""rateop must be `None` or one of {0,2}""")
         self._cards[1].set_value("rateop", value)
 
     @property

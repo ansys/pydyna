@@ -541,8 +541,8 @@ class Mat215(KeywordBase):
 
     @mmopt.setter
     def mmopt(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""mmopt must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""mmopt must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("mmopt", value)
 
     @property
@@ -580,8 +580,8 @@ class Mat215(KeywordBase):
 
     @failf.setter
     def failf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""failf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""failf must be `None` or one of {0,1}""")
         self._cards[0].set_value("failf", value)
 
     @property
@@ -630,8 +630,8 @@ class Mat215(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, 2, -2, 3, -3, 4, -4]:
-            raise Exception("""macf must be one of {1,2,-2,3,-3,4,-4}""")
+        if value not in [1, 2, -2, 3, -3, 4, -4, None]:
+            raise Exception("""macf must be `None` or one of {1,2,-2,3,-3,4,-4}""")
         self._cards[1].set_value("macf", value)
 
     @property

@@ -216,8 +216,8 @@ class ControlFormingTipping(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""itype must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""itype must be `None` or one of {1,2}""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -262,8 +262,8 @@ class ControlFormingTipping(KeywordBase):
 
     @rot_tran.setter
     def rot_tran(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""rot_tran must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""rot_tran must be `None` or one of {1,2}""")
         self._cards[1].set_value("rot/tran", value)
 
     @property
@@ -346,8 +346,8 @@ class ControlFormingTipping(KeywordBase):
 
     @rot_tran.setter
     def rot_tran(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""rot_tran must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""rot_tran must be `None` or one of {1,2}""")
         self._cards[2].set_value("rot/tran", value)
 
     @property

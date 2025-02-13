@@ -620,8 +620,8 @@ class Mat242(KeywordBase):
 
     @iopt.setter
     def iopt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iopt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iopt must be `None` or one of {0,1}""")
         self._cards[5].set_value("iopt", value)
 
     @property

@@ -540,8 +540,8 @@ class Mat244(KeywordBase):
 
     @crsh.setter
     def crsh(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""crsh must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""crsh must be `None` or one of {0,1}""")
         self._cards[0].set_value("crsh", value)
 
     @property
@@ -558,8 +558,8 @@ class Mat244(KeywordBase):
 
     @phase.setter
     def phase(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""phase must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""phase must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("phase", value)
 
     @property
@@ -813,8 +813,8 @@ class Mat244(KeywordBase):
 
     @cwm.setter
     def cwm(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cwm must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cwm must be `None` or one of {0,1}""")
         self._cards[3].set_value("cwm", value)
 
     @property
@@ -1071,8 +1071,8 @@ class Mat244(KeywordBase):
 
     @react.setter
     def react(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""react must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""react must be `None` or one of {0,1}""")
         self._cards[6].set_value("react", value)
 
     @property
@@ -1085,8 +1085,8 @@ class Mat244(KeywordBase):
 
     @temper.setter
     def temper(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""temper must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""temper must be `None` or one of {0,1}""")
         self._cards[6].set_value("temper", value)
 
     @property

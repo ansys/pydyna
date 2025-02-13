@@ -209,8 +209,8 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @sbstyp.setter
     def sbstyp(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5]:
-            raise Exception("""sbstyp must be one of {1,2,3,4,5}""")
+        if value not in [1, 2, 3, 4, 5, None]:
+            raise Exception("""sbstyp must be `None` or one of {1,2,3,4,5}""")
         self._cards[0].set_value("sbstyp", value)
 
     @property
@@ -223,8 +223,8 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @sbsfl.setter
     def sbsfl(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sbsfl must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sbsfl must be `None` or one of {0,1}""")
         self._cards[0].set_value("sbsfl", value)
 
     @property
@@ -248,8 +248,8 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""dof must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""dof must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("dof", value)
 
     @property

@@ -80,8 +80,8 @@ class FatigueMeanStressCorrection(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 11, 12]:
-            raise Exception("""method must be one of {0,1,2,3,4,11,12}""")
+        if value not in [0, 1, 2, 3, 4, 11, 12, None]:
+            raise Exception("""method must be `None` or one of {0,1,2,3,4,11,12}""")
         self._cards[0].set_value("method", value)
 
     @property

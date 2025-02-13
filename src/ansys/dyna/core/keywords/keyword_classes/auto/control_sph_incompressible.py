@@ -92,8 +92,8 @@ class ControlSphIncompressible(KeywordBase):
 
     @ibndp.setter
     def ibndp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibndp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibndp must be `None` or one of {0,1}""")
         self._cards[0].set_value("ibndp", value)
 
     @property
@@ -136,8 +136,8 @@ class ControlSphIncompressible(KeywordBase):
 
     @ihtc.setter
     def ihtc(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ihtc must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ihtc must be `None` or one of {0,1}""")
         self._cards[0].set_value("ihtc", value)
 
     @property
@@ -150,7 +150,7 @@ class ControlSphIncompressible(KeywordBase):
 
     @imat.setter
     def imat(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""imat must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""imat must be `None` or one of {0,1}""")
         self._cards[0].set_value("imat", value)
 

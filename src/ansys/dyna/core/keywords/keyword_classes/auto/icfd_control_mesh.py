@@ -106,8 +106,8 @@ class IcfdControlMesh(KeywordBase):
 
     @mstrat.setter
     def mstrat(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""mstrat must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""mstrat must be `None` or one of {0,1}""")
         self._cards[0].set_value("mstrat", value)
 
     @property
@@ -119,8 +119,8 @@ class IcfdControlMesh(KeywordBase):
 
     @_2dstruc.setter
     def _2dstruc(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""_2dstruc must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""_2dstruc must be `None` or one of {0,1}""")
         self._cards[0].set_value("2dstruc", value)
 
     @property
@@ -133,8 +133,8 @@ class IcfdControlMesh(KeywordBase):
 
     @nrmsh.setter
     def nrmsh(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""nrmsh must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""nrmsh must be `None` or one of {0,1}""")
         self._cards[0].set_value("nrmsh", value)
 
     @property

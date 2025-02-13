@@ -58,7 +58,7 @@ class ControlConstranined(KeywordBase):
 
     @sprchk.setter
     def sprchk(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""sprchk must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""sprchk must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("sprchk", value)
 

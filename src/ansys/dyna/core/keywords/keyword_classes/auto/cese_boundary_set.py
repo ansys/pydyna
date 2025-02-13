@@ -97,8 +97,8 @@ class CeseBoundarySet(KeywordBase):
 
     @dof_.setter
     def dof_(self, value: int) -> None:
-        if value not in [101, 102, 103, 104, 105, 106, 201, 202, 203, 204]:
-            raise Exception("""dof_ must be one of {101,102,103,104,105,106,201,202,203,204}""")
+        if value not in [101, 102, 103, 104, 105, 106, 201, 202, 203, 204, None]:
+            raise Exception("""dof_ must be `None` or one of {101,102,103,104,105,106,201,202,203,204}""")
         self._cards[0].set_value("dof ", value)
 
     @property

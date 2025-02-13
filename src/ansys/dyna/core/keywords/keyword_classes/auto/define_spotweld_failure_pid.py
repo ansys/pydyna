@@ -211,8 +211,8 @@ class DefineSpotweldFailurePid(KeywordBase):
 
     @tflag.setter
     def tflag(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""tflag must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""tflag must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("tflag", value)
 
     @property

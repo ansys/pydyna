@@ -560,8 +560,8 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUserMortar(KeywordBase):
 
     @surfatyp.setter
     def surfatyp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""surfatyp must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""surfatyp must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("surfatyp", value)
 
     @property
@@ -579,8 +579,8 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUserMortar(KeywordBase):
 
     @surfbtyp.setter
     def surfbtyp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 5, 6, 7]:
-            raise Exception("""surfbtyp must be one of {0,1,2,3,5,6,7}""")
+        if value not in [0, 1, 2, 3, 5, 6, 7, None]:
+            raise Exception("""surfbtyp must be `None` or one of {0,1,2,3,5,6,7}""")
         self._cards[0].set_value("surfbtyp", value)
 
     @property
@@ -614,8 +614,8 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUserMortar(KeywordBase):
 
     @sapr.setter
     def sapr(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""sapr must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""sapr must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("sapr", value)
 
     @property
@@ -629,8 +629,8 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUserMortar(KeywordBase):
 
     @sbpr.setter
     def sbpr(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""sbpr must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""sbpr must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("sbpr", value)
 
     @property
@@ -812,8 +812,8 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUserMortar(KeywordBase):
 
     @option.setter
     def option(self, value: int) -> None:
-        if value not in [101, 102, 103, 104, 105]:
-            raise Exception("""option must be one of {101,102,103,104,105}""")
+        if value not in [101, 102, 103, 104, 105, None]:
+            raise Exception("""option must be `None` or one of {101,102,103,104,105}""")
         self._cards[3].set_value("option", value)
 
     @property
@@ -859,8 +859,8 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUserMortar(KeywordBase):
 
     @offset.setter
     def offset(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""offset must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""offset must be `None` or one of {0,1}""")
         self._cards[3].set_value("offset", value)
 
     @property

@@ -544,8 +544,8 @@ class Mat261(KeywordBase):
 
     @daf.setter
     def daf(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""daf must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""daf must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("daf", value)
 
     @property
@@ -558,8 +558,8 @@ class Mat261(KeywordBase):
 
     @dkf.setter
     def dkf(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""dkf must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""dkf must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("dkf", value)
 
     @property
@@ -572,8 +572,8 @@ class Mat261(KeywordBase):
 
     @dmf.setter
     def dmf(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""dmf must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""dmf must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("dmf", value)
 
     @property
@@ -907,8 +907,8 @@ class Mat261(KeywordBase):
 
     @puck.setter
     def puck(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""puck must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""puck must be `None` or one of {0.0,1.0}""")
         self._cards[6].set_value("puck", value)
 
     @property

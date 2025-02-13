@@ -99,8 +99,8 @@ class EmCircuitRogo(KeywordBase):
 
     @settype.setter
     def settype(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""settype must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""settype must be `None` or one of {1,2}""")
         self._cards[0].set_value("settype", value)
 
     @property
@@ -114,7 +114,7 @@ class EmCircuitRogo(KeywordBase):
 
     @curtyp.setter
     def curtyp(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""curtyp must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""curtyp must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("curtyp", value)
 

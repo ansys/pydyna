@@ -279,8 +279,8 @@ class Eos002Afterburn(KeywordBase):
 
     @opt.setter
     def opt(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0]:
-            raise Exception("""opt must be one of {0.0,1.0,2.0,3.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, None]:
+            raise Exception("""opt must be `None` or one of {0.0,1.0,2.0,3.0}""")
         self._cards[1].set_value("opt", value)
 
     @property
@@ -324,8 +324,8 @@ class Eos002Afterburn(KeywordBase):
 
     @opt.setter
     def opt(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0]:
-            raise Exception("""opt must be one of {0.0,1.0,2.0,3.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, None]:
+            raise Exception("""opt must be `None` or one of {0.0,1.0,2.0,3.0}""")
         self._cards[2].set_value("opt", value)
 
     @property

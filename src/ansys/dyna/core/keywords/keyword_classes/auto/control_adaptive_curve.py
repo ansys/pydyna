@@ -94,8 +94,8 @@ class ControlAdaptiveCurve(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""itype must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""itype must be `None` or one of {1,2}""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -130,7 +130,7 @@ class ControlAdaptiveCurve(KeywordBase):
 
     @itriop.setter
     def itriop(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""itriop must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""itriop must be `None` or one of {0,1}""")
         self._cards[0].set_value("itriop", value)
 

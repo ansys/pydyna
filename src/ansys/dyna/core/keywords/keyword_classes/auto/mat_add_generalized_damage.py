@@ -368,8 +368,8 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @idam.setter
     def idam(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""idam must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""idam must be `None` or one of {0,1}""")
         self._cards[0].set_value("idam", value)
 
     @property
@@ -382,8 +382,8 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @dtyp.setter
     def dtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""dtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""dtyp must be `None` or one of {0,1}""")
         self._cards[0].set_value("dtyp", value)
 
     @property
@@ -422,8 +422,8 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @pddt.setter
     def pddt(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""pddt must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""pddt must be `None` or one of {0,1,2,3,4}""")
         self._cards[0].set_value("pddt", value)
 
     @property
@@ -499,8 +499,8 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @iflg1.setter
     def iflg1(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""iflg1 must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""iflg1 must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("iflg1", value)
 
     @property
@@ -515,8 +515,8 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @iflg2.setter
     def iflg2(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""iflg2 must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""iflg2 must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("iflg2", value)
 
     @property
@@ -532,8 +532,8 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @iflg3.setter
     def iflg3(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iflg3 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iflg3 must be `None` or one of {0,1}""")
         self._cards[1].set_value("iflg3", value)
 
     @property
@@ -779,8 +779,8 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @midfail.setter
     def midfail(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0, 4.0]:
-            raise Exception("""midfail must be one of {0.0,1.0,2.0,3.0,4.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, 4.0, None]:
+            raise Exception("""midfail must be `None` or one of {0.0,1.0,2.0,3.0,4.0}""")
         self._cards[5].set_value("midfail", value)
 
     @property

@@ -207,8 +207,8 @@ class AirbagLoadCurveId(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sidtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sidtyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("sidtyp", value)
 
     @property

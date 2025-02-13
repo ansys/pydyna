@@ -116,8 +116,8 @@ class ControlFormingProjection(KeywordBase):
 
     @nrbst.setter
     def nrbst(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""nrbst must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""nrbst must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("nrbst", value)
 
     @property
@@ -130,7 +130,7 @@ class ControlFormingProjection(KeywordBase):
 
     @nrtst.setter
     def nrtst(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""nrtst must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""nrtst must be `None` or one of {0,1}""")
         self._cards[0].set_value("nrtst", value)
 

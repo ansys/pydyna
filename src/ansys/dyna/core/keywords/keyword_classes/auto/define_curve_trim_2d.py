@@ -167,8 +167,8 @@ class DefineCurveTrim2D(KeywordBase):
 
     @tctype.setter
     def tctype(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""tctype must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""tctype must be `None` or one of {1,2}""")
         self._cards[0].set_value("tctype", value)
 
     @property
@@ -181,8 +181,8 @@ class DefineCurveTrim2D(KeywordBase):
 
     @tflg.setter
     def tflg(self, value: int) -> None:
-        if value not in [-1, 1]:
-            raise Exception("""tflg must be one of {-1,1}""")
+        if value not in [-1, 1, None]:
+            raise Exception("""tflg must be `None` or one of {-1,1}""")
         self._cards[0].set_value("tflg", value)
 
     @property

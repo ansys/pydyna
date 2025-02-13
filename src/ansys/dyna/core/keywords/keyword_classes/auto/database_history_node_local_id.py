@@ -103,8 +103,8 @@ class DatabaseHistoryNodeLocalId(KeywordBase):
 
     @ref.setter
     def ref(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ref must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ref must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("ref", value)
 
     @property

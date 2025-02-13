@@ -181,8 +181,8 @@ class ControlStagedConstruction(KeywordBase):
 
     @dordel.setter
     def dordel(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""dordel must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""dordel must be `None` or one of {0,1}""")
         self._cards[0].set_value("dordel", value)
 
     @property
@@ -195,8 +195,8 @@ class ControlStagedConstruction(KeywordBase):
 
     @nopdel.setter
     def nopdel(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""nopdel must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""nopdel must be `None` or one of {0,1}""")
         self._cards[0].set_value("nopdel", value)
 
     @property
@@ -209,8 +209,8 @@ class ControlStagedConstruction(KeywordBase):
 
     @itime.setter
     def itime(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""itime must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""itime must be `None` or one of {0,1}""")
         self._cards[1].set_value("itime", value)
 
     @property
@@ -223,7 +223,7 @@ class ControlStagedConstruction(KeywordBase):
 
     @idynain.setter
     def idynain(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""idynain must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""idynain must be `None` or one of {0,1}""")
         self._cards[1].set_value("idynain", value)
 

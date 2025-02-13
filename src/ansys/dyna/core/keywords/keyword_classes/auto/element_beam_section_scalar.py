@@ -269,8 +269,8 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @rt1.setter
     def rt1(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rt1 must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rt1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("rt1", value)
 
     @property
@@ -290,8 +290,8 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @rr1.setter
     def rr1(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rr1 must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rr1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("rr1", value)
 
     @property
@@ -311,8 +311,8 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @rt2.setter
     def rt2(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rt2 must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rt2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("rt2", value)
 
     @property
@@ -332,8 +332,8 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @rr2.setter
     def rr2(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rr2 must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rr2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("rr2", value)
 
     @property
@@ -346,8 +346,8 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""local must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""local must be `None` or one of {2,1}""")
         self._cards[0].set_value("local", value)
 
     @property
@@ -369,8 +369,8 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @stype.setter
     def stype(self, value: str) -> None:
-        if value not in ["SECTION_01", "SECTION_02", "SECTION_03", "SECTION_04", "SECTION_05", "SECTION_06", "SECTION_07", "SECTION_08", "SECTION_09", "SECTION_10", "SECTION_11", "SECTION_12", "SECTION_13", "SECTION_14", "SECTION_15", "SECTION_16", "SECTION_17", "SECTION_18", "SECTION_19", "SECTION_20", "SECTION_21", "SECTION_22"]:
-            raise Exception("""stype must be one of {"SECTION_01","SECTION_02","SECTION_03","SECTION_04","SECTION_05","SECTION_06","SECTION_07","SECTION_08","SECTION_09","SECTION_10","SECTION_11","SECTION_12","SECTION_13","SECTION_14","SECTION_15","SECTION_16","SECTION_17","SECTION_18","SECTION_19","SECTION_20","SECTION_21","SECTION_22"}""")
+        if value not in ["SECTION_01", "SECTION_02", "SECTION_03", "SECTION_04", "SECTION_05", "SECTION_06", "SECTION_07", "SECTION_08", "SECTION_09", "SECTION_10", "SECTION_11", "SECTION_12", "SECTION_13", "SECTION_14", "SECTION_15", "SECTION_16", "SECTION_17", "SECTION_18", "SECTION_19", "SECTION_20", "SECTION_21", "SECTION_22", None]:
+            raise Exception("""stype must be `None` or one of {"SECTION_01","SECTION_02","SECTION_03","SECTION_04","SECTION_05","SECTION_06","SECTION_07","SECTION_08","SECTION_09","SECTION_10","SECTION_11","SECTION_12","SECTION_13","SECTION_14","SECTION_15","SECTION_16","SECTION_17","SECTION_18","SECTION_19","SECTION_20","SECTION_21","SECTION_22"}""")
         self._cards[1].set_value("stype", value)
 
     @property
@@ -471,8 +471,8 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @dofn1.setter
     def dofn1(self, value: float) -> None:
-        if value not in [1, 2, 3, 4, 5, 6]:
-            raise Exception("""dofn1 must be one of {1,2,3,4,5,6}""")
+        if value not in [1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""dofn1 must be `None` or one of {1,2,3,4,5,6}""")
         self._cards[2].set_value("dofn1", value)
 
     @property
@@ -483,7 +483,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @dofn2.setter
     def dofn2(self, value: float) -> None:
-        if value not in [1, 2, 3, 4, 5, 6]:
-            raise Exception("""dofn2 must be one of {1,2,3,4,5,6}""")
+        if value not in [1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""dofn2 must be `None` or one of {1,2,3,4,5,6}""")
         self._cards[2].set_value("dofn2", value)
 

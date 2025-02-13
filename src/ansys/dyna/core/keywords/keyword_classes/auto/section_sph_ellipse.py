@@ -247,8 +247,8 @@ class SectionSphEllipse(KeywordBase):
 
     @sphkern.setter
     def sphkern(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sphkern must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sphkern must be `None` or one of {0,1}""")
         self._cards[0].set_value("sphkern", value)
 
     @property

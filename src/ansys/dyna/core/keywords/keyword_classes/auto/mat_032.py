@@ -324,8 +324,8 @@ class Mat032(KeywordBase):
 
     @f1.setter
     def f1(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""f1 must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""f1 must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("f1", value)
 
     @property
@@ -339,8 +339,8 @@ class Mat032(KeywordBase):
 
     @f2.setter
     def f2(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""f2 must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""f2 must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("f2", value)
 
     @property
@@ -354,8 +354,8 @@ class Mat032(KeywordBase):
 
     @f3.setter
     def f3(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""f3 must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""f3 must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("f3", value)
 
     @property
@@ -369,8 +369,8 @@ class Mat032(KeywordBase):
 
     @f4.setter
     def f4(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""f4 must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""f4 must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("f4", value)
 
     @property
@@ -384,8 +384,8 @@ class Mat032(KeywordBase):
 
     @f5.setter
     def f5(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""f5 must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""f5 must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("f5", value)
 
     @property
@@ -399,8 +399,8 @@ class Mat032(KeywordBase):
 
     @f6.setter
     def f6(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""f6 must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""f6 must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("f6", value)
 
     @property
@@ -414,8 +414,8 @@ class Mat032(KeywordBase):
 
     @f7.setter
     def f7(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""f7 must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""f7 must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("f7", value)
 
     @property
@@ -429,8 +429,8 @@ class Mat032(KeywordBase):
 
     @f8.setter
     def f8(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""f8 must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""f8 must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("f8", value)
 
     @property

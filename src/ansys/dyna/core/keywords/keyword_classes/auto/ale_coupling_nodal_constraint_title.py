@@ -198,8 +198,8 @@ class AleCouplingNodalConstraintTitle(KeywordBase):
 
     @strsty.setter
     def strsty(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""strsty must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""strsty must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("strsty", value)
 
     @property
@@ -212,8 +212,8 @@ class AleCouplingNodalConstraintTitle(KeywordBase):
 
     @alesty.setter
     def alesty(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""alesty must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""alesty must be `None` or one of {0,1}""")
         self._cards[1].set_value("alesty", value)
 
     @property
@@ -226,8 +226,8 @@ class AleCouplingNodalConstraintTitle(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ctype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ctype must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("ctype", value)
 
     @property

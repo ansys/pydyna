@@ -107,8 +107,8 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
 
     @norm.setter
     def norm(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""norm must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""norm must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("norm", value)
 
     @property

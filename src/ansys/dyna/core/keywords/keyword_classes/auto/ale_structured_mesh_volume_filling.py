@@ -210,8 +210,8 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @geom.setter
     def geom(self, value: str) -> None:
-        if value not in ["ALL", "PARTSET", "PART", "SEGSET", "PLANE", "CYLINDER", "BOXCOR", "BOXCPT", "ELLIPSOID"]:
-            raise Exception("""geom must be one of {"ALL","PARTSET","PART","SEGSET","PLANE","CYLINDER","BOXCOR","BOXCPT","ELLIPSOID"}""")
+        if value not in ["ALL", "PARTSET", "PART", "SEGSET", "PLANE", "CYLINDER", "BOXCOR", "BOXCPT", "ELLIPSOID", None]:
+            raise Exception("""geom must be `None` or one of {"ALL","PARTSET","PART","SEGSET","PLANE","CYLINDER","BOXCOR","BOXCPT","ELLIPSOID"}""")
         self._cards[1].set_value("geom", value)
 
     @property
@@ -224,8 +224,8 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @in_out.setter
     def in_out(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""in_out must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""in_out must be `None` or one of {0,1}""")
         self._cards[1].set_value("in/out", value)
 
     @property

@@ -79,8 +79,8 @@ class IcfdControlGeneral(KeywordBase):
 
     @atype.setter
     def atype(self, value: int) -> None:
-        if value not in [0, -1, 1]:
-            raise Exception("""atype must be one of {0,-1,1}""")
+        if value not in [0, -1, 1, None]:
+            raise Exception("""atype must be `None` or one of {0,-1,1}""")
         self._cards[0].set_value("atype", value)
 
     @property
@@ -94,8 +94,8 @@ class IcfdControlGeneral(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""mtype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""mtype must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -110,8 +110,8 @@ class IcfdControlGeneral(KeywordBase):
 
     @dvcl.setter
     def dvcl(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""dvcl must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""dvcl must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("dvcl", value)
 
     @property
@@ -124,7 +124,7 @@ class IcfdControlGeneral(KeywordBase):
 
     @rdvcl.setter
     def rdvcl(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""rdvcl must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""rdvcl must be `None` or one of {0,1}""")
         self._cards[0].set_value("rdvcl", value)
 

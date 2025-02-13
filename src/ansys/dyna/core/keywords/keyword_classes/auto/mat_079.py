@@ -553,8 +553,8 @@ class Mat079(KeywordBase):
 
     @pinit.setter
     def pinit(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""pinit must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""pinit must be `None` or one of {0,1,2,3}""")
         self._cards[2].set_value("pinit", value)
 
     @property

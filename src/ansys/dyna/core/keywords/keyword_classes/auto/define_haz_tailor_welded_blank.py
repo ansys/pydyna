@@ -137,8 +137,8 @@ class DefineHazTailorWeldedBlank(KeywordBase):
 
     @ipflag.setter
     def ipflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ipflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ipflag must be `None` or one of {0,1}""")
         self._cards[0].set_value("ipflag", value)
 
     @property
@@ -151,8 +151,8 @@ class DefineHazTailorWeldedBlank(KeywordBase):
 
     @imonflag.setter
     def imonflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""imonflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""imonflag must be `None` or one of {0,1}""")
         self._cards[0].set_value("imonflag", value)
 
     @property

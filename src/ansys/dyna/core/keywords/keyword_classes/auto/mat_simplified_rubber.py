@@ -319,8 +319,8 @@ class MatSimplifiedRubber(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""ref must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("ref", value)
 
     @property
@@ -384,8 +384,8 @@ class MatSimplifiedRubber(KeywordBase):
 
     @tension.setter
     def tension(self, value: float) -> None:
-        if value not in [-1.0, 0.0, 1.0]:
-            raise Exception("""tension must be one of {-1.0,0.0,1.0}""")
+        if value not in [-1.0, 0.0, 1.0, None]:
+            raise Exception("""tension must be `None` or one of {-1.0,0.0,1.0}""")
         self._cards[1].set_value("tension", value)
 
     @property
@@ -398,8 +398,8 @@ class MatSimplifiedRubber(KeywordBase):
 
     @rtype.setter
     def rtype(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""rtype must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""rtype must be `None` or one of {0.0,1.0}""")
         self._cards[1].set_value("rtype", value)
 
     @property
@@ -484,8 +484,8 @@ class MatSimplifiedRubber(KeywordBase):
 
     @visco.setter
     def visco(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""visco must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""visco must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("visco", value)
 
     @property
@@ -498,8 +498,8 @@ class MatSimplifiedRubber(KeywordBase):
 
     @hisout.setter
     def hisout(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""hisout must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""hisout must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("hisout", value)
 
     @property
@@ -533,8 +533,8 @@ class MatSimplifiedRubber(KeywordBase):
 
     @vflag.setter
     def vflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""vflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""vflag must be `None` or one of {0,1}""")
         self._cards[3].set_value("vflag", value)
 
     @property

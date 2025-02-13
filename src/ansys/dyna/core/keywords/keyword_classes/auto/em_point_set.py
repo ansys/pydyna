@@ -216,7 +216,7 @@ class EmPointSet(KeywordBase):
 
     @pos.setter
     def pos(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""pos must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""pos must be `None` or one of {0,1}""")
         self._cards[1].set_value("pos", value)
 

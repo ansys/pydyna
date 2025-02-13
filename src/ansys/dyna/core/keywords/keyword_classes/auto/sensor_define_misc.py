@@ -161,8 +161,8 @@ class SensorDefineMisc(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: str) -> None:
-        if value not in ["ANGLE", "BNDOUT", "CURVE", "CVBAG", "ICVOL", "MATSUM", "NFAILE", "RETRACTOR", "RIGIDBODY", "TIME"]:
-            raise Exception("""mtype must be one of {"ANGLE","BNDOUT","CURVE","CVBAG","ICVOL","MATSUM","NFAILE","RETRACTOR","RIGIDBODY","TIME"}""")
+        if value not in ["ANGLE", "BNDOUT", "CURVE", "CVBAG", "ICVOL", "MATSUM", "NFAILE", "RETRACTOR", "RIGIDBODY", "TIME", None]:
+            raise Exception("""mtype must be `None` or one of {"ANGLE","BNDOUT","CURVE","CVBAG","ICVOL","MATSUM","NFAILE","RETRACTOR","RIGIDBODY","TIME"}""")
         self._cards[0].set_value("mtype", value)
 
     @property

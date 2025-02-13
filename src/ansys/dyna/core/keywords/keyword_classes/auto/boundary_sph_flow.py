@@ -135,8 +135,8 @@ class BoundarySphFlow(KeywordBase):
 
     @styp.setter
     def styp(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""styp must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""styp must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("styp", value)
 
     @property
@@ -152,8 +152,8 @@ class BoundarySphFlow(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""dof must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""dof must be `None` or one of {0,1,2,3,4}""")
         self._cards[0].set_value("dof", value)
 
     @property
@@ -167,8 +167,8 @@ class BoundarySphFlow(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""vad must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""vad must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("vad", value)
 
     @property

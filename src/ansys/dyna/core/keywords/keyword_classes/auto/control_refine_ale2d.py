@@ -212,8 +212,8 @@ class ControlRefineAle2D(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""type must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""type must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -298,8 +298,8 @@ class ControlRefineAle2D(KeywordBase):
 
     @critrf.setter
     def critrf(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 5]:
-            raise Exception("""critrf must be one of {0,1,2,3,5}""")
+        if value not in [0, 1, 2, 3, 5, None]:
+            raise Exception("""critrf must be `None` or one of {0,1,2,3,5}""")
         self._cards[1].set_value("critrf", value)
 
     @property
@@ -380,8 +380,8 @@ class ControlRefineAle2D(KeywordBase):
 
     @critrm.setter
     def critrm(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""critrm must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""critrm must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[2].set_value("critrm", value)
 
     @property

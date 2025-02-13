@@ -138,8 +138,8 @@ class EmControlCoupling(KeywordBase):
 
     @thcoupl.setter
     def thcoupl(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""thcoupl must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""thcoupl must be `None` or one of {0,1}""")
         self._cards[0].set_value("thcoupl", value)
 
     @property
@@ -154,8 +154,8 @@ class EmControlCoupling(KeywordBase):
 
     @smcoupl.setter
     def smcoupl(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""smcoupl must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""smcoupl must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("smcoupl", value)
 
     @property
@@ -200,8 +200,8 @@ class EmControlCoupling(KeywordBase):
 
     @smcplfl.setter
     def smcplfl(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""smcplfl must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""smcplfl must be `None` or one of {0,1}""")
         self._cards[0].set_value("smcplfl", value)
 
     @property
@@ -235,8 +235,8 @@ class EmControlCoupling(KeywordBase):
 
     @smmod.setter
     def smmod(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""smmod must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""smmod must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("smmod", value)
 
     @property

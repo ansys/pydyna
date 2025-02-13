@@ -209,8 +209,8 @@ class IcfdModelPorous(KeywordBase):
 
     @pmid.setter
     def pmid(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 10, 11]:
-            raise Exception("""pmid must be one of {1,2,3,4,5,6,7,8,10,11}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, None]:
+            raise Exception("""pmid must be `None` or one of {1,2,3,4,5,6,7,8,10,11}""")
         self._cards[0].set_value("pmid", value)
 
     @property

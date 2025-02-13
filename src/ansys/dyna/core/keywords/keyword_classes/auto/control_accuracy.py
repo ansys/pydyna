@@ -85,8 +85,8 @@ class ControlAccuracy(KeywordBase):
 
     @osu.setter
     def osu(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""osu must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""osu must be `None` or one of {0,1}""")
         self._cards[0].set_value("osu", value)
 
     @property
@@ -103,8 +103,8 @@ class ControlAccuracy(KeywordBase):
 
     @inn.setter
     def inn(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, -2, -4]:
-            raise Exception("""inn must be one of {1,2,3,4,-2,-4}""")
+        if value not in [1, 2, 3, 4, -2, -4, None]:
+            raise Exception("""inn must be `None` or one of {1,2,3,4,-2,-4}""")
         self._cards[0].set_value("inn", value)
 
     @property

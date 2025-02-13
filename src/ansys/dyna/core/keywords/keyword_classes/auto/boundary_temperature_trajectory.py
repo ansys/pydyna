@@ -261,8 +261,8 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @pype.setter
     def pype(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""pype must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""pype must be `None` or one of {1,2}""")
         self._cards[0].set_value("pype", value)
 
     @property
@@ -340,8 +340,8 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @iform.setter
     def iform(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""iform must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""iform must be `None` or one of {1,2}""")
         self._cards[1].set_value("iform", value)
 
     @property

@@ -232,8 +232,8 @@ class ControlThermalForming(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ptype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ptype must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -262,8 +262,8 @@ class ControlThermalForming(KeywordBase):
 
     @thshel.setter
     def thshel(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""thshel must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""thshel must be `None` or one of {0,1}""")
         self._cards[0].set_value("thshel", value)
 
     @property
@@ -279,8 +279,8 @@ class ControlThermalForming(KeywordBase):
 
     @ithoff.setter
     def ithoff(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ithoff must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ithoff must be `None` or one of {0,1}""")
         self._cards[0].set_value("ithoff", value)
 
     @property
@@ -305,8 +305,8 @@ class ControlThermalForming(KeywordBase):
 
     @solver.setter
     def solver(self, value: int) -> None:
-        if value not in [3, 1, 2, 4, 5, 11, 12, 13, 14, 15, 16, 17]:
-            raise Exception("""solver must be one of {3,1,2,4,5,11,12,13,14,15,16,17}""")
+        if value not in [3, 1, 2, 4, 5, 11, 12, 13, 14, 15, 16, 17, None]:
+            raise Exception("""solver must be `None` or one of {3,1,2,4,5,11,12,13,14,15,16,17}""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -394,8 +394,8 @@ class ControlThermalForming(KeywordBase):
 
     @bc_flg.setter
     def bc_flg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""bc_flg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""bc_flg must be `None` or one of {0,1}""")
         self._cards[1].set_value("bc_flg", value)
 
     @property
@@ -409,8 +409,8 @@ class ControlThermalForming(KeywordBase):
 
     @algo.setter
     def algo(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""algo must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""algo must be `None` or one of {0,1}""")
         self._cards[1].set_value("algo", value)
 
     @property
@@ -445,8 +445,8 @@ class ControlThermalForming(KeywordBase):
 
     @formula.setter
     def formula(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5]:
-            raise Exception("""formula must be one of {1,2,3,4,5}""")
+        if value not in [1, 2, 3, 4, 5, None]:
+            raise Exception("""formula must be `None` or one of {1,2,3,4,5}""")
         self._cards[2].set_value("formula", value)
 
     @property

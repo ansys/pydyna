@@ -90,8 +90,8 @@ class ControlAcousticSpectral(KeywordBase):
 
     @masehrf.setter
     def masehrf(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""masehrf must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""masehrf must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("masehrf", value)
 
     @property
@@ -117,7 +117,7 @@ class ControlAcousticSpectral(KeywordBase):
 
     @maseigx.setter
     def maseigx(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""maseigx must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""maseigx must be `None` or one of {1,2}""")
         self._cards[0].set_value("maseigx", value)
 

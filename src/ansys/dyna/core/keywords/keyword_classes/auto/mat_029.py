@@ -415,8 +415,8 @@ class Mat029(KeywordBase):
 
     @iaflc.setter
     def iaflc(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iaflc must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iaflc must be `None` or one of {0,1}""")
         self._cards[0].set_value("iaflc", value)
 
     @property
@@ -429,8 +429,8 @@ class Mat029(KeywordBase):
 
     @ytflag.setter
     def ytflag(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""ytflag must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""ytflag must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("ytflag", value)
 
     @property

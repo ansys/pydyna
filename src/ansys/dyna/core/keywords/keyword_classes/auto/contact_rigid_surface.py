@@ -510,8 +510,8 @@ class ContactRigidSurface(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ctype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ctype must be `None` or one of {0,1}""")
         self._cards[2].set_value("ctype", value)
 
     @property

@@ -284,8 +284,8 @@ class ControlAle(KeywordBase):
 
     @meth.setter
     def meth(self, value: int) -> None:
-        if value not in [2, 1, -2, 3, 6]:
-            raise Exception("""meth must be one of {2,1,-2,3,6}""")
+        if value not in [2, 1, -2, 3, 6, None]:
+            raise Exception("""meth must be `None` or one of {2,1,-2,3,6}""")
         self._cards[0].set_value("meth", value)
 
     @property
@@ -389,8 +389,8 @@ class ControlAle(KeywordBase):
 
     @prit.setter
     def prit(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""prit must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""prit must be `None` or one of {0,1}""")
         self._cards[1].set_value("prit", value)
 
     @property
@@ -404,8 +404,8 @@ class ControlAle(KeywordBase):
 
     @ebc.setter
     def ebc(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ebc must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ebc must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("ebc", value)
 
     @property
@@ -459,8 +459,8 @@ class ControlAle(KeywordBase):
 
     @imascl.setter
     def imascl(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""imascl must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""imascl must be `None` or one of {0,1,2}""")
         self._cards[2].set_value("imascl", value)
 
     @property
@@ -484,8 +484,8 @@ class ControlAle(KeywordBase):
 
     @beamin.setter
     def beamin(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""beamin must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""beamin must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("beamin", value)
 
     @property

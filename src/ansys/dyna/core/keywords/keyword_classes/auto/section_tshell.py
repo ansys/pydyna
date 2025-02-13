@@ -151,8 +151,8 @@ class SectionTShell(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [1, 2, 3, 5, 6, 7]:
-            raise Exception("""elform must be one of {1,2,3,5,6,7}""")
+        if value not in [1, 2, 3, 5, 6, 7, None]:
+            raise Exception("""elform must be `None` or one of {1,2,3,5,6,7}""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -186,8 +186,8 @@ class SectionTShell(KeywordBase):
 
     @propt.setter
     def propt(self, value: float) -> None:
-        if value not in [1.0, 2.0, 3.0]:
-            raise Exception("""propt must be one of {1.0,2.0,3.0}""")
+        if value not in [1.0, 2.0, 3.0, None]:
+            raise Exception("""propt must be `None` or one of {1.0,2.0,3.0}""")
         self._cards[0].set_value("propt", value)
 
     @property
@@ -213,8 +213,8 @@ class SectionTShell(KeywordBase):
 
     @icomp.setter
     def icomp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""icomp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""icomp must be `None` or one of {0,1}""")
         self._cards[0].set_value("icomp", value)
 
     @property
@@ -227,8 +227,8 @@ class SectionTShell(KeywordBase):
 
     @tshear.setter
     def tshear(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""tshear must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""tshear must be `None` or one of {0,1}""")
         self._cards[0].set_value("tshear", value)
 
     @property

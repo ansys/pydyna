@@ -222,8 +222,8 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""itype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""itype must be `None` or one of {0,1}""")
         self._cards[1].set_value("itype", value)
 
     @property
@@ -238,8 +238,8 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @nq.setter
     def nq(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""nq must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""nq must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("nq", value)
 
     @property
@@ -282,8 +282,8 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @outdes.setter
     def outdes(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""outdes must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""outdes must be `None` or one of {0,1}""")
         self._cards[1].set_value("outdes", value)
 
     @property
@@ -296,8 +296,8 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @ibond.setter
     def ibond(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibond must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibond must be `None` or one of {0,1}""")
         self._cards[1].set_value("ibond", value)
 
     @property
