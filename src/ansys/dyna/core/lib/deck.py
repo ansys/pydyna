@@ -27,6 +27,7 @@ import typing
 from typing import Union
 import warnings
 
+from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 from ansys.dyna.core.lib.io_utils import write_or_return
@@ -89,15 +90,15 @@ class Deck:
 
         Parameters
         ----------
-        keyword : Union[KeywordBase, str]
-            Keyword. The keyword can be either an implementation of the ``KeywordBase``
-            instance or a string.
+        keyword : Union[KeywordBase, EncryptedKeyword, str]
+            Keyword. The keyword can be ``KeywordBase``, ``EncryptedKeyword``,
+            or a string.
         check : bool, optional
             The default is ``False``.
         """
-        assert isinstance(keyword, KeywordBase) or isinstance(
-            keyword, str
-        ), "Keywords or strings can only be appended to the deck."
+        assert (
+            isinstance(keyword, KeywordBase) or isinstance(keyword, str) or isinstance(keyword, EncryptedKeyword)
+        ), "Only keywords, encrypted keywords, or strings can be included in a deck."
         if isinstance(keyword, str):
             self._keywords.append(self._formatstring(keyword, check))
         else:
@@ -143,7 +144,7 @@ class Deck:
         return string
 
     @property
-    def all_keywords(self) -> typing.List[typing.Union[str, KeywordBase]]:
+    def all_keywords(self) -> typing.List[typing.Union[str, KeywordBase, EncryptedKeyword]]:
         """List of all keywords."""
         return self._keywords
 
@@ -151,6 +152,11 @@ class Deck:
     def string_keywords(self) -> typing.List[str]:
         """List of keywords as a raw string."""
         return [kw for kw in self._keywords if isinstance(kw, str)]
+
+    @property
+    def encrypted_keywords(self) -> typing.List[str]:
+        """List of keywords as a raw string."""
+        return [kw for kw in self._keywords if isinstance(kw, EncryptedKeyword)]
 
     @property
     def keywords(self):
@@ -172,7 +178,8 @@ class Deck:
         """Recursively outputs a list of keywords within Includes."""
         keywords = []
         for keyword in self.all_keywords:
-            if isinstance(keyword, str):
+            if not isinstance(keyword, KeywordBase):
+                print(keyword)
                 keywords.append(keyword)
                 continue
             if keyword.keyword != "INCLUDE":
@@ -269,12 +276,18 @@ class Deck:
         warnings.warn("The 'dumps()' method is deprecated. Use the 'write()' method instead.")
         return self.write()
 
-    def _write_keyword(self, buf: typing.TextIO, kwd: typing.Union[str, KeywordBase], format: format_type) -> None:
+    def _write_keyword(
+        self, buf: typing.TextIO, kwd: typing.Union[str, KeywordBase, EncryptedKeyword], format: format_type
+    ) -> None:
         """Write a keyword to the buffer."""
         if isinstance(kwd, KeywordBase):
             kwd.write(buf, None, format)
         elif isinstance(kwd, str):
             buf.write(kwd)
+        elif isinstance(kwd, EncryptedKeyword):
+            buf.write("-----BEGIN PGP MESSAGE-----\n")
+            buf.write(kwd.data)
+            buf.write("\n-----END PGP MESSAGE-----\n")
 
     def _remove_trailing_newline(self, buf: typing.TextIO) -> None:
         """If the last character is a newline, seek back so that it can be overwritten.
@@ -429,8 +442,10 @@ class Deck:
         return kwds
 
     def _import_file(self, path: str, encoding: str, context: ImportContext):
+        from ansys.dyna.core.lib.deck_loader import load_deck_from_buffer
+
         with open(path, encoding=encoding) as f:
-            return self.loads(f.read(), context)
+            return load_deck_from_buffer(self, f, context, self._import_handlers)
 
     def import_file(
         self, path: str, encoding: str = "utf-8"
@@ -494,6 +509,8 @@ class Deck:
                     content_lines.append(f"kwd: {kw.get_title()}")
                 elif isinstance(kw, str):
                     content_lines.append("str: " + kw.split("\n")[0] + "...")
+                elif isinstance(kw, EncryptedKeyword):
+                    content_lines.append("encrypted keyword...")
 
         output = "\n".join(content_lines)
         return output

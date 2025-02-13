@@ -48,7 +48,6 @@ class TransformHandler(ImportHandler):
             return
         if context.xform is None:
             return
-        print(self._handlers.keys())
         # first try to get the specialized handler for the keyword + subkeyword
         identity = (keyword.keyword, keyword.subkeyword)
         handler = self._handlers.get(identity, None)
