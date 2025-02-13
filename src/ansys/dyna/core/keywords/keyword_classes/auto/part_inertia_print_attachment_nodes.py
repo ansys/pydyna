@@ -391,8 +391,8 @@ class PartInertiaPrintAttachmentNodes(KeywordBase):
 
     @grav.setter
     def grav(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""grav must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""grav must be `None` or one of {0,1}""")
         self._cards[1].set_value("grav", value)
 
     @property
@@ -472,8 +472,8 @@ class PartInertiaPrintAttachmentNodes(KeywordBase):
 
     @ircs.setter
     def ircs(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ircs must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ircs must be `None` or one of {0,1}""")
         self._cards[2].set_value("ircs", value)
 
     @property
@@ -689,8 +689,8 @@ class PartInertiaPrintAttachmentNodes(KeywordBase):
 
     @prbf.setter
     def prbf(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""prbf must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""prbf must be `None` or one of {0,1,2,3}""")
         self._cards[6].set_value("prbf", value)
 
     @property

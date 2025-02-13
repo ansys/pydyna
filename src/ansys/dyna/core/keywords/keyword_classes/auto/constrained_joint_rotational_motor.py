@@ -239,8 +239,8 @@ class ConstrainedJointRotationalMotor(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""type must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""type must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("type", value)
 
     @property

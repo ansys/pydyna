@@ -213,8 +213,8 @@ class IntegrationBeam(KeywordBase):
 
     @icst.setter
     def icst(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]:
-            raise Exception("""icst must be one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, None]:
+            raise Exception("""icst must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22}""")
         self._cards[0].set_value("icst", value)
 
     @property

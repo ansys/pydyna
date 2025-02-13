@@ -188,8 +188,8 @@ class InterfaceLinkingNodeSetLocal(KeywordBase):
 
     @usec.setter
     def usec(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""usec must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""usec must be `None` or one of {0,1}""")
         self._cards[1].set_value("usec", value)
 
     @property
@@ -203,7 +203,7 @@ class InterfaceLinkingNodeSetLocal(KeywordBase):
 
     @usen.setter
     def usen(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""usen must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""usen must be `None` or one of {0,1}""")
         self._cards[1].set_value("usen", value)
 

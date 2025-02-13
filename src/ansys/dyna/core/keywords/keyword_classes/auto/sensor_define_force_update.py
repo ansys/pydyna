@@ -140,8 +140,8 @@ class SensorDefineForceUpdate(KeywordBase):
 
     @ftype.setter
     def ftype(self, value: str) -> None:
-        if value not in ["AIRBAG", "CONTACT", "CONTACT2D", "CPM", "JOINT", "JOINTSTIF", "PRESC-MOT", "RWALL", "SPC", "SPOTWELD", "XSECTION"]:
-            raise Exception("""ftype must be one of {"AIRBAG","CONTACT","CONTACT2D","CPM","JOINT","JOINTSTIF","PRESC-MOT","RWALL","SPC","SPOTWELD","XSECTION"}""")
+        if value not in ["AIRBAG", "CONTACT", "CONTACT2D", "CPM", "JOINT", "JOINTSTIF", "PRESC-MOT", "RWALL", "SPC", "SPOTWELD", "XSECTION", None]:
+            raise Exception("""ftype must be `None` or one of {"AIRBAG","CONTACT","CONTACT2D","CPM","JOINT","JOINTSTIF","PRESC-MOT","RWALL","SPC","SPOTWELD","XSECTION"}""")
         self._cards[0].set_value("ftype", value)
 
     @property

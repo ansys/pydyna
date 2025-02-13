@@ -155,8 +155,8 @@ class SectionAle1D(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [7, 8, -8]:
-            raise Exception("""elform must be one of {7,8,-8}""")
+        if value not in [7, 8, -8, None]:
+            raise Exception("""elform must be `None` or one of {7,8,-8}""")
         self._cards[0].set_value("elform", value)
 
     @property

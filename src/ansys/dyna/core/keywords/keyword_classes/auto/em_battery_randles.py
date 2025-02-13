@@ -269,8 +269,8 @@ class EmBatteryRandles(KeywordBase):
 
     @rdlarea.setter
     def rdlarea(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""rdlarea must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""rdlarea must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("rdlarea", value)
 
     @property
@@ -455,8 +455,8 @@ class EmBatteryRandles(KeywordBase):
 
     @frtherm.setter
     def frtherm(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""frtherm must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""frtherm must be `None` or one of {0,1}""")
         self._cards[3].set_value("frtherm", value)
 
     @property
@@ -469,8 +469,8 @@ class EmBatteryRandles(KeywordBase):
 
     @r0toth.setter
     def r0toth(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""r0toth must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""r0toth must be `None` or one of {0,1}""")
         self._cards[3].set_value("r0toth", value)
 
     @property
@@ -493,8 +493,8 @@ class EmBatteryRandles(KeywordBase):
 
     @tempu.setter
     def tempu(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""tempu must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""tempu must be `None` or one of {0,1}""")
         self._cards[3].set_value("tempu", value)
 
     @property
@@ -507,8 +507,8 @@ class EmBatteryRandles(KeywordBase):
 
     @usesocs.setter
     def usesocs(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""usesocs must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""usesocs must be `None` or one of {0,1}""")
         self._cards[4].set_value("usesocs", value)
 
     @property

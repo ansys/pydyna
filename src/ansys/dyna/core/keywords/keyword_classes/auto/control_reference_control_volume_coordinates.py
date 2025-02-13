@@ -85,8 +85,8 @@ class ControlReferenceControlVolumeCoordinates(KeywordBase):
 
     @opt.setter
     def opt(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""opt must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""opt must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("opt", value)
 
     @property

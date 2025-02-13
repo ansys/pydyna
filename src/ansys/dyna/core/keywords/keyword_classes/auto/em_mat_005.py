@@ -336,8 +336,8 @@ class EmMat005(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
-        if value not in [0, 1, 2, 4, 5]:
-            raise Exception("""mtype must be one of {0,1,2,4,5}""")
+        if value not in [0, 1, 2, 4, 5, None]:
+            raise Exception("""mtype must be `None` or one of {0,1,2,4,5}""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -534,8 +534,8 @@ class EmMat005(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""aopt must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""aopt must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[4].set_value("aopt", value)
 
     @property

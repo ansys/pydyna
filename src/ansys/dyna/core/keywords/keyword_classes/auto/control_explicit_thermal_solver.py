@@ -72,7 +72,7 @@ class ControlExplicitThermalSolver(KeywordBase):
 
     @dtfac.setter
     def dtfac(self, value: float) -> None:
-        if value not in [0, 1]:
-            raise Exception("""dtfac must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""dtfac must be `None` or one of {0,1}""")
         self._cards[0].set_value("dtfac", value)
 

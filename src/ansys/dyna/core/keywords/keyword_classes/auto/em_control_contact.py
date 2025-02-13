@@ -106,8 +106,8 @@ class EmControlContact(KeywordBase):
 
     @emct.setter
     def emct(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""emct must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""emct must be `None` or one of {0,1}""")
         self._cards[0].set_value("emct", value)
 
     @property
@@ -120,8 +120,8 @@ class EmControlContact(KeywordBase):
 
     @cconly.setter
     def cconly(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cconly must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cconly must be `None` or one of {0,1}""")
         self._cards[0].set_value("cconly", value)
 
     @property
@@ -136,8 +136,8 @@ class EmControlContact(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
-        if value not in [0, -1, 1, 2]:
-            raise Exception("""ctype must be one of {0,-1,1,2}""")
+        if value not in [0, -1, 1, 2, None]:
+            raise Exception("""ctype must be `None` or one of {0,-1,1,2}""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -150,8 +150,8 @@ class EmControlContact(KeywordBase):
 
     @cotype.setter
     def cotype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cotype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cotype must be `None` or one of {0,1}""")
         self._cards[0].set_value("cotype", value)
 
     @property

@@ -454,8 +454,8 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @ifunc.setter
     def ifunc(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ifunc must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ifunc must be `None` or one of {0,1}""")
         self._cards[2].set_value("ifunc", value)
 
     @property

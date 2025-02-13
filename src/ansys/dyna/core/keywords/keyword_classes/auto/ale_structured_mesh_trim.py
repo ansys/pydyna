@@ -115,8 +115,8 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
-        if value not in ["PARTSET", "SEGSET", "PLANE", "CYLINDER", "BOXCOR", "BOXCPT", "SPHERE"]:
-            raise Exception("""option must be one of {"PARTSET","SEGSET","PLANE","CYLINDER","BOXCOR","BOXCPT","SPHERE"}""")
+        if value not in ["PARTSET", "SEGSET", "PLANE", "CYLINDER", "BOXCOR", "BOXCPT", "SPHERE", None]:
+            raise Exception("""option must be `None` or one of {"PARTSET","SEGSET","PLANE","CYLINDER","BOXCOR","BOXCPT","SPHERE"}""")
         self._cards[0].set_value("option", value)
 
     @property
@@ -129,8 +129,8 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @oper.setter
     def oper(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""oper must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""oper must be `None` or one of {0,1}""")
         self._cards[0].set_value("oper", value)
 
     @property
@@ -144,8 +144,8 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @ioutin.setter
     def ioutin(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ioutin must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ioutin must be `None` or one of {0,1}""")
         self._cards[0].set_value("ioutin", value)
 
     @property

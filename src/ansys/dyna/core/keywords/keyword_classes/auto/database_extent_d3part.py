@@ -226,8 +226,8 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @sigflg.setter
     def sigflg(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""sigflg must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""sigflg must be `None` or one of {1,2}""")
         self._cards[0].set_value("sigflg", value)
 
     @property
@@ -240,8 +240,8 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @epsflg.setter
     def epsflg(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""epsflg must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""epsflg must be `None` or one of {1,2}""")
         self._cards[0].set_value("epsflg", value)
 
     @property
@@ -254,8 +254,8 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @rltflg.setter
     def rltflg(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""rltflg must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""rltflg must be `None` or one of {1,2}""")
         self._cards[0].set_value("rltflg", value)
 
     @property
@@ -268,8 +268,8 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @engflg.setter
     def engflg(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""engflg must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""engflg must be `None` or one of {1,2}""")
         self._cards[0].set_value("engflg", value)
 
     @property
@@ -282,8 +282,8 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @ieverp.setter
     def ieverp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ieverp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ieverp must be `None` or one of {0,1}""")
         self._cards[1].set_value("ieverp", value)
 
     @property
@@ -296,8 +296,8 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @shge.setter
     def shge(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""shge must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""shge must be `None` or one of {1,2}""")
         self._cards[1].set_value("shge", value)
 
     @property
@@ -312,8 +312,8 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @stssz.setter
     def stssz(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""stssz must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""stssz must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("stssz", value)
 
     @property

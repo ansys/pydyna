@@ -237,8 +237,8 @@ class Mat265(KeywordBase):
 
     @model.setter
     def model(self, value: int) -> None:
-        if value not in [1, 2, 11, 12, 21, 22]:
-            raise Exception("""model must be one of {1,2,11,12,21,22}""")
+        if value not in [1, 2, 11, 12, 21, 22, None]:
+            raise Exception("""model must be `None` or one of {1,2,11,12,21,22}""")
         self._cards[0].set_value("model", value)
 
     @property

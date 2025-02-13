@@ -540,8 +540,8 @@ class MatAddInelasticity(KeywordBase):
 
     @law.setter
     def law(self, value: int) -> None:
-        if value not in [3, 5, 6]:
-            raise Exception("""law must be one of {3,5,6}""")
+        if value not in [3, 5, 6, None]:
+            raise Exception("""law must be `None` or one of {3,5,6}""")
         self._cards[4].set_value("law", value)
 
     @property

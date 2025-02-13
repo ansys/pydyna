@@ -414,8 +414,8 @@ class MatPiecewiseLinearPlasticity2D(KeywordBase):
 
     @vp.setter
     def vp(self, value: float) -> None:
-        if value not in [0.0, 1.0, -1.0, 3.0]:
-            raise Exception("""vp must be one of {0.0,1.0,-1.0,3.0}""")
+        if value not in [0.0, 1.0, -1.0, 3.0, None]:
+            raise Exception("""vp must be `None` or one of {0.0,1.0,-1.0,3.0}""")
         self._cards[1].set_value("vp", value)
 
     @property

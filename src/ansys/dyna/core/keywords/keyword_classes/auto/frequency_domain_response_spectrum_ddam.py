@@ -324,8 +324,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""restrt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""restrt must be `None` or one of {0,1}""")
         self._cards[0].set_value("restrt", value)
 
     @property
@@ -358,8 +358,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @relatv.setter
     def relatv(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""relatv must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""relatv must be `None` or one of {0,1}""")
         self._cards[0].set_value("relatv", value)
 
     @property
@@ -373,8 +373,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @mprs.setter
     def mprs(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""mprs must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""mprs must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("mprs", value)
 
     @property
@@ -457,8 +457,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @ldtyp.setter
     def ldtyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ldtyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ldtyp must be `None` or one of {0,1}""")
         self._cards[4].set_value("ldtyp", value)
 
     @property
@@ -491,8 +491,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @std.setter
     def std(self, value: int) -> None:
-        if value not in [1, -1]:
-            raise Exception("""std must be one of {1,-1}""")
+        if value not in [1, -1, None]:
+            raise Exception("""std must be `None` or one of {1,-1}""")
         self._cards[5].set_value("std", value)
 
     @property
@@ -509,8 +509,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6]:
-            raise Exception("""unit must be one of {1,2,3,4,5,6}""")
+        if value not in [1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""unit must be `None` or one of {1,2,3,4,5,6}""")
         self._cards[5].set_value("unit", value)
 
     @property
@@ -587,8 +587,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @shptyp.setter
     def shptyp(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""shptyp must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""shptyp must be `None` or one of {1,2}""")
         self._cards[6].set_value("shptyp", value)
 
     @property
@@ -602,8 +602,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @mount.setter
     def mount(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""mount must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""mount must be `None` or one of {1,2,3}""")
         self._cards[6].set_value("mount", value)
 
     @property
@@ -617,8 +617,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @movemt.setter
     def movemt(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""movemt must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""movemt must be `None` or one of {1,2,3}""")
         self._cards[6].set_value("movemt", value)
 
     @property
@@ -631,7 +631,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @mattyp.setter
     def mattyp(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""mattyp must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""mattyp must be `None` or one of {1,2}""")
         self._cards[6].set_value("mattyp", value)
 

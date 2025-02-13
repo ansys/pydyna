@@ -88,8 +88,8 @@ class ControlParallel(KeywordBase):
 
     @numrhs.setter
     def numrhs(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""numrhs must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""numrhs must be `None` or one of {0,1}""")
         self._cards[0].set_value("numrhs", value)
 
     @property
@@ -102,8 +102,8 @@ class ControlParallel(KeywordBase):
 
     @const.setter
     def const(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""const must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""const must be `None` or one of {2,1}""")
         self._cards[0].set_value("const", value)
 
     @property
@@ -117,7 +117,7 @@ class ControlParallel(KeywordBase):
 
     @para.setter
     def para(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""para must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""para must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("para", value)
 

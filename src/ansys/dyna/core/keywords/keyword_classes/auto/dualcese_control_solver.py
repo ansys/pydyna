@@ -118,8 +118,8 @@ class DualceseControlSolver(KeywordBase):
 
     @iframe.setter
     def iframe(self, value: str) -> None:
-        if value not in ["FIXED", "ROT", "ROTATING"]:
-            raise Exception("""iframe must be one of {"FIXED","ROT","ROTATING"}""")
+        if value not in ["FIXED", "ROT", "ROTATING", None]:
+            raise Exception("""iframe must be `None` or one of {"FIXED","ROT","ROTATING"}""")
         self._cards[0].set_value("iframe", value)
 
     @property
@@ -155,7 +155,7 @@ class DualceseControlSolver(KeywordBase):
 
     @isnan.setter
     def isnan(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""isnan must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""isnan must be `None` or one of {0,1}""")
         self._cards[0].set_value("isnan", value)
 

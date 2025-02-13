@@ -172,8 +172,8 @@ class LsoTimeSequence(KeywordBase):
 
     @solver_name.setter
     def solver_name(self, value: str) -> None:
-        if value not in ["MECH", "EM", "CESE", "ICFD"]:
-            raise Exception("""solver_name must be one of {"MECH","EM","CESE","ICFD"}""")
+        if value not in ["MECH", "EM", "CESE", "ICFD", None]:
+            raise Exception("""solver_name must be `None` or one of {"MECH","EM","CESE","ICFD"}""")
         self._cards[0].set_value("solver_name", value)
 
     @property
@@ -207,8 +207,8 @@ class LsoTimeSequence(KeywordBase):
 
     @lcopt.setter
     def lcopt(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""lcopt must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""lcopt must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("lcopt", value)
 
     @property

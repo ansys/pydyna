@@ -325,8 +325,8 @@ class ParticleBlast(KeywordBase):
 
     @lagstype.setter
     def lagstype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""lagstype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""lagstype must be `None` or one of {0,1}""")
         self._cards[0].set_value("lagstype", value)
 
     @property
@@ -349,8 +349,8 @@ class ParticleBlast(KeywordBase):
 
     @dodtype.setter
     def dodtype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""dodtype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""dodtype must be `None` or one of {0,1}""")
         self._cards[0].set_value("dodtype", value)
 
     @property
@@ -374,8 +374,8 @@ class ParticleBlast(KeywordBase):
 
     @hectype.setter
     def hectype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""hectype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""hectype must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("hectype", value)
 
     @property
@@ -422,8 +422,8 @@ class ParticleBlast(KeywordBase):
 
     @iunit.setter
     def iunit(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""iunit must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""iunit must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("iunit", value)
 
     @property
@@ -437,8 +437,8 @@ class ParticleBlast(KeywordBase):
 
     @ihetype.setter
     def ihetype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ihetype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ihetype must be `None` or one of {0,1,2}""")
         self._cards[2].set_value("ihetype", value)
 
     @property
@@ -621,8 +621,8 @@ class ParticleBlast(KeywordBase):
 
     @ibcx0.setter
     def ibcx0(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibcx0 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibcx0 must be `None` or one of {0,1}""")
         self._cards[5].set_value("ibcx0", value)
 
     @property
@@ -635,8 +635,8 @@ class ParticleBlast(KeywordBase):
 
     @ibcx1.setter
     def ibcx1(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibcx1 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibcx1 must be `None` or one of {0,1}""")
         self._cards[5].set_value("ibcx1", value)
 
     @property
@@ -649,8 +649,8 @@ class ParticleBlast(KeywordBase):
 
     @ibcy0.setter
     def ibcy0(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibcy0 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibcy0 must be `None` or one of {0,1}""")
         self._cards[5].set_value("ibcy0", value)
 
     @property
@@ -663,8 +663,8 @@ class ParticleBlast(KeywordBase):
 
     @ibcy1.setter
     def ibcy1(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibcy1 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibcy1 must be `None` or one of {0,1}""")
         self._cards[5].set_value("ibcy1", value)
 
     @property
@@ -677,8 +677,8 @@ class ParticleBlast(KeywordBase):
 
     @ibcz0.setter
     def ibcz0(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibcz0 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibcz0 must be `None` or one of {0,1}""")
         self._cards[5].set_value("ibcz0", value)
 
     @property
@@ -691,8 +691,8 @@ class ParticleBlast(KeywordBase):
 
     @ibcz1.setter
     def ibcz1(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibcz1 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibcz1 must be `None` or one of {0,1}""")
         self._cards[5].set_value("ibcz1", value)
 
     @property
@@ -705,7 +705,7 @@ class ParticleBlast(KeywordBase):
 
     @bc_p.setter
     def bc_p(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""bc_p must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""bc_p must be `None` or one of {0,1}""")
         self._cards[5].set_value("bc_p", value)
 

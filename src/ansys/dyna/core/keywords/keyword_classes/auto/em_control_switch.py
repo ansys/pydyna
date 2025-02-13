@@ -81,8 +81,8 @@ class EmControlSwitch(KeywordBase):
 
     @femcomp.setter
     def femcomp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""femcomp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""femcomp must be `None` or one of {0,1}""")
         self._cards[0].set_value("femcomp", value)
 
     @property
@@ -95,7 +95,7 @@ class EmControlSwitch(KeywordBase):
 
     @bemcomp.setter
     def bemcomp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""bemcomp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""bemcomp must be `None` or one of {0,1}""")
         self._cards[0].set_value("bemcomp", value)
 

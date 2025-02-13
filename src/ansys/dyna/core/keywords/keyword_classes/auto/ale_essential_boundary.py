@@ -89,8 +89,8 @@ class AleEssentialBoundary(KeywordBase):
 
     @idtype.setter
     def idtype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""idtype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""idtype must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("idtype", value)
 
     @property
@@ -103,8 +103,8 @@ class AleEssentialBoundary(KeywordBase):
 
     @ictype.setter
     def ictype(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""ictype must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""ictype must be `None` or one of {1,2}""")
         self._cards[0].set_value("ictype", value)
 
     @property

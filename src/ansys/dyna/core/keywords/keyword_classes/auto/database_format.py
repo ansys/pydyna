@@ -65,8 +65,8 @@ class DatabaseFormat(KeywordBase):
 
     @iform.setter
     def iform(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""iform must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""iform must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("iform", value)
 
     @property
@@ -79,7 +79,7 @@ class DatabaseFormat(KeywordBase):
 
     @ibinary.setter
     def ibinary(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibinary must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibinary must be `None` or one of {0,1}""")
         self._cards[0].set_value("ibinary", value)
 

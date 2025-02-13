@@ -526,8 +526,8 @@ class MatSteinbergLund(KeywordBase):
 
     @spall.setter
     def spall(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0]:
-            raise Exception("""spall must be one of {0.0,1.0,2.0,3.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, None]:
+            raise Exception("""spall must be `None` or one of {0.0,1.0,2.0,3.0}""")
         self._cards[2].set_value("spall", value)
 
     @property

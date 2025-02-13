@@ -517,8 +517,8 @@ class ElementShellBextPatch(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
-        if value not in [0, 1, 2, 4]:
-            raise Exception("""form must be one of {0,1,2,4}""")
+        if value not in [0, 1, 2, 4, None]:
+            raise Exception("""form must be `None` or one of {0,1,2,4}""")
         self._cards[1].set_value("form", value)
 
     @property
@@ -535,8 +535,8 @@ class ElementShellBextPatch(KeywordBase):
 
     @int_.setter
     def int_(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""int_ must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""int_ must be `None` or one of {0,1}""")
         self._cards[1].set_value("int", value)
 
     @property
@@ -569,8 +569,8 @@ class ElementShellBextPatch(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""imass must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""imass must be `None` or one of {0,1}""")
         self._cards[1].set_value("imass", value)
 
     @property
@@ -595,8 +595,8 @@ class ElementShellBextPatch(KeywordBase):
 
     @shpe.setter
     def shpe(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""shpe must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""shpe must be `None` or one of {0,1}""")
         self._cards[2].set_value("shpe", value)
 
     @property

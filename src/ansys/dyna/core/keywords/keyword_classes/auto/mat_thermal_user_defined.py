@@ -217,8 +217,8 @@ class MatThermalUserDefined(KeywordBase):
 
     @mt.setter
     def mt(self, value: int) -> None:
-        if value not in [11, 12, 13, 14, 15]:
-            raise Exception("""mt must be one of {11,12,13,14,15}""")
+        if value not in [11, 12, 13, 14, 15, None]:
+            raise Exception("""mt must be `None` or one of {11,12,13,14,15}""")
         self._cards[0].set_value("mt", value)
 
     @property
@@ -267,8 +267,8 @@ class MatThermalUserDefined(KeywordBase):
 
     @iortho.setter
     def iortho(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iortho must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iortho must be `None` or one of {0,1}""")
         self._cards[0].set_value("iortho", value)
 
     @property

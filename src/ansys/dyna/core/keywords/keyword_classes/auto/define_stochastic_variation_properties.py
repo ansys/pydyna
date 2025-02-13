@@ -199,8 +199,8 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @pid_typ.setter
     def pid_typ(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""pid_typ must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""pid_typ must be `None` or one of {0,1}""")
         self._cards[0].set_value("pid_typ", value)
 
     @property
@@ -214,8 +214,8 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @irng.setter
     def irng(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""irng must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""irng must be `None` or one of {0,1}""")
         self._cards[0].set_value("irng", value)
 
     @property
@@ -251,8 +251,8 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @vartyp.setter
     def vartyp(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""vartyp must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""vartyp must be `None` or one of {0,1,2,3,4}""")
         self._cards[1].set_value("vartyp", value)
 
     @property

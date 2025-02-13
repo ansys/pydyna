@@ -253,8 +253,8 @@ class SectionSolid(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [1, -1, -2, -18, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 41, 42, 43, 45, 47, 60, 62, 98, 99, 101, 102, 103, 104, 105, 115, 201, 1000]:
-            raise Exception("""elform must be one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}""")
+        if value not in [1, -1, -2, -18, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 41, 42, 43, 45, 47, 60, 62, 98, 99, 101, 102, 103, 104, 105, 115, 201, 1000, None]:
+            raise Exception("""elform must be `None` or one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -270,8 +270,8 @@ class SectionSolid(KeywordBase):
 
     @aet.setter
     def aet(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""aet must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""aet must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("aet", value)
 
     @property
@@ -322,8 +322,8 @@ class SectionSolid(KeywordBase):
 
     @ihgf.setter
     def ihgf(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""ihgf must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""ihgf must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("ihgf", value)
 
     @property
@@ -334,8 +334,8 @@ class SectionSolid(KeywordBase):
 
     @itaj.setter
     def itaj(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""itaj must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""itaj must be `None` or one of {0,1}""")
         self._cards[1].set_value("itaj", value)
 
     @property

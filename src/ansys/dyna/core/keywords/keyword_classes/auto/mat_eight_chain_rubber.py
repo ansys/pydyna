@@ -642,8 +642,8 @@ class MatEightChainRubber(KeywordBase):
 
     @mull.setter
     def mull(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""mull must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""mull must be `None` or one of {1,2}""")
         self._cards[0].set_value("mull", value)
 
     @property
@@ -659,8 +659,8 @@ class MatEightChainRubber(KeywordBase):
 
     @vispl.setter
     def vispl(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""vispl must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""vispl must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("vispl", value)
 
     @property
@@ -674,8 +674,8 @@ class MatEightChainRubber(KeywordBase):
 
     @visel.setter
     def visel(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""visel must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""visel must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("visel", value)
 
     @property
@@ -1013,8 +1013,8 @@ class MatEightChainRubber(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0, 4.0]:
-            raise Exception("""aopt must be one of {0.0,1.0,2.0,3.0,4.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, 4.0, None]:
+            raise Exception("""aopt must be `None` or one of {0.0,1.0,2.0,3.0,4.0}""")
         self._cards[5].set_value("aopt", value)
 
     @property
@@ -1033,8 +1033,8 @@ class MatEightChainRubber(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, -2, -3, -4]:
-            raise Exception("""macf must be one of {1,2,3,4,-2,-3,-4}""")
+        if value not in [1, 2, 3, 4, -2, -3, -4, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-2,-3,-4}""")
         self._cards[5].set_value("macf", value)
 
     @property

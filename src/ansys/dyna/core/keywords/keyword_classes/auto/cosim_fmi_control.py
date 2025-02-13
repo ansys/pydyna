@@ -99,8 +99,8 @@ class CosimFmiControl(KeywordBase):
 
     @opt.setter
     def opt(self, value: str) -> None:
-        if value not in ["G", "C"]:
-            raise Exception("""opt must be one of {"G","C"}""")
+        if value not in ["G", "C", None]:
+            raise Exception("""opt must be `None` or one of {"G","C"}""")
         self._cards[0].set_value("opt", value)
 
     @property
@@ -113,8 +113,8 @@ class CosimFmiControl(KeywordBase):
 
     @mode.setter
     def mode(self, value: str) -> None:
-        if value not in ["P", "S"]:
-            raise Exception("""mode must be one of {"P","S"}""")
+        if value not in ["P", "S", None]:
+            raise Exception("""mode must be `None` or one of {"P","S"}""")
         self._cards[0].set_value("mode", value)
 
     @property

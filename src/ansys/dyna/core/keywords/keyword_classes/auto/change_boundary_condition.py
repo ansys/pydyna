@@ -79,7 +79,7 @@ class ChangeBoundaryCondition(KeywordBase):
 
     @bcc.setter
     def bcc(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""bcc must be one of {1,2,3,4,5,6,7}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""bcc must be `None` or one of {1,2,3,4,5,6,7}""")
         self._cards[0].set_value("bcc", value)
 

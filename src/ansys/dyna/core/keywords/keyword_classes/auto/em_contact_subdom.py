@@ -140,8 +140,8 @@ class EmContactSubdom(KeywordBase):
 
     @sdtype.setter
     def sdtype(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""sdtype must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""sdtype must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("sdtype", value)
 
     @property
@@ -156,8 +156,8 @@ class EmContactSubdom(KeywordBase):
 
     @mvtype.setter
     def mvtype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""mvtype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""mvtype must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("mvtype", value)
 
     @property

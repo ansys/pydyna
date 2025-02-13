@@ -341,8 +341,8 @@ class Mat252(KeywordBase):
 
     @flg.setter
     def flg(self, value: int) -> None:
-        if value not in [0.0, 2.0]:
-            raise Exception("""flg must be one of {0.0,2.0}""")
+        if value not in [0.0, 2.0, None]:
+            raise Exception("""flg must be `None` or one of {0.0,2.0}""")
         self._cards[0].set_value("flg", value)
 
     @property
@@ -355,8 +355,8 @@ class Mat252(KeywordBase):
 
     @jcfl.setter
     def jcfl(self, value: int) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""jcfl must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""jcfl must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("jcfl", value)
 
     @property

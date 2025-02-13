@@ -59,7 +59,7 @@ class ControlMppDecompositionElcost(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
-        if value not in [1, 2, 3, 4]:
-            raise Exception("""itype must be one of {1,2,3,4}""")
+        if value not in [1, 2, 3, 4, None]:
+            raise Exception("""itype must be `None` or one of {1,2,3,4}""")
         self._cards[0].set_value("itype", value)
 

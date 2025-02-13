@@ -169,8 +169,8 @@ class MatHighExplosiveBurn(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0]:
-            raise Exception("""beta must be one of {0.0,1.0,2.0}""")
+        if value not in [0.0, 1.0, 2.0, None]:
+            raise Exception("""beta must be `None` or one of {0.0,1.0,2.0}""")
         self._cards[0].set_value("beta", value)
 
     @property

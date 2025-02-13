@@ -307,8 +307,8 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @isg.setter
     def isg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""isg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""isg must be `None` or one of {0,1}""")
         self._cards[2].set_value("isg", value)
 
     @property
@@ -322,8 +322,8 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @igm.setter
     def igm(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""igm must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""igm must be `None` or one of {0,1}""")
         self._cards[2].set_value("igm", value)
 
     @property
@@ -350,7 +350,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @vdir.setter
     def vdir(self, value: int) -> None:
-        if value not in [3, -1, -2, -3, 1, 2]:
-            raise Exception("""vdir must be one of {3,-1,-2,-3,1,2}""")
+        if value not in [3, -1, -2, -3, 1, 2, None]:
+            raise Exception("""vdir must be `None` or one of {3,-1,-2,-3,1,2}""")
         self._cards[2].set_value("vdir", value)
 

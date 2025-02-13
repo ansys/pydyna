@@ -108,8 +108,8 @@ class BoundarySaleMeshFace(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
-        if value not in ["FIXED", "NOEFLOW", "SYMM", "NONREFL"]:
-            raise Exception("""option must be one of {"FIXED","NOEFLOW","SYMM","NONREFL"}""")
+        if value not in ["FIXED", "NOEFLOW", "SYMM", "NONREFL", None]:
+            raise Exception("""option must be `None` or one of {"FIXED","NOEFLOW","SYMM","NONREFL"}""")
         self._cards[0].set_value("option", value)
 
     @property

@@ -484,8 +484,8 @@ class Mat041050(KeywordBase):
 
     @iortho.setter
     def iortho(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""iortho must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""iortho must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("iortho", value)
 
     @property
@@ -518,8 +518,8 @@ class Mat041050(KeywordBase):
 
     @ivect.setter
     def ivect(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ivect must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ivect must be `None` or one of {0,1}""")
         self._cards[1].set_value("ivect", value)
 
     @property
@@ -543,8 +543,8 @@ class Mat041050(KeywordBase):
 
     @itherm.setter
     def itherm(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""itherm must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""itherm must be `None` or one of {0,1}""")
         self._cards[1].set_value("itherm", value)
 
     @property
@@ -555,8 +555,8 @@ class Mat041050(KeywordBase):
 
     @ihyper.setter
     def ihyper(self, value: int) -> None:
-        if value not in [0, 1, -1, -2]:
-            raise Exception("""ihyper must be one of {0,1,-1,-2}""")
+        if value not in [0, 1, -1, -2, None]:
+            raise Exception("""ihyper must be `None` or one of {0,1,-1,-2}""")
         self._cards[1].set_value("ihyper", value)
 
     @property
@@ -567,8 +567,8 @@ class Mat041050(KeywordBase):
 
     @ieos.setter
     def ieos(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ieos must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ieos must be `None` or one of {0,1}""")
         self._cards[1].set_value("ieos", value)
 
     @property
@@ -612,8 +612,8 @@ class Mat041050(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""macf must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3}""")
         self._cards[2].set_value("macf", value)
 
     @property

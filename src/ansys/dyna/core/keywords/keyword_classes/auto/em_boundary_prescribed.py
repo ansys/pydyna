@@ -123,8 +123,8 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @bptype.setter
     def bptype(self, value: int) -> None:
-        if value not in [1, 2, 3, 4]:
-            raise Exception("""bptype must be one of {1,2,3,4}""")
+        if value not in [1, 2, 3, 4, None]:
+            raise Exception("""bptype must be `None` or one of {1,2,3,4}""")
         self._cards[0].set_value("bptype", value)
 
     @property
@@ -138,8 +138,8 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @settype.setter
     def settype(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""settype must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""settype must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("settype", value)
 
     @property

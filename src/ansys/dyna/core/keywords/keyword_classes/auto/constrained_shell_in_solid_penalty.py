@@ -182,8 +182,8 @@ class ConstrainedShellInSolidPenalty(KeywordBase):
 
     @shstyp.setter
     def shstyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""shstyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""shstyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("shstyp", value)
 
     @property
@@ -196,8 +196,8 @@ class ConstrainedShellInSolidPenalty(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sstyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sstyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("sstyp", value)
 
     @property

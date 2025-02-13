@@ -64,8 +64,8 @@ class IcfdControlTransient(KeywordBase):
 
     @tord.setter
     def tord(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""tord must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""tord must be `None` or one of {0,1}""")
         self._cards[0].set_value("tord", value)
 
     @property
@@ -78,7 +78,7 @@ class IcfdControlTransient(KeywordBase):
 
     @fsord.setter
     def fsord(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""fsord must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""fsord must be `None` or one of {0,1}""")
         self._cards[0].set_value("fsord", value)
 

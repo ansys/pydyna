@@ -258,8 +258,8 @@ class ElementBearing(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""itype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""itype must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -453,8 +453,8 @@ class ElementBearing(KeywordBase):
 
     @ipflag.setter
     def ipflag(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ipflag must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ipflag must be `None` or one of {0,1,2}""")
         self._cards[4].set_value("ipflag", value)
 
     @property

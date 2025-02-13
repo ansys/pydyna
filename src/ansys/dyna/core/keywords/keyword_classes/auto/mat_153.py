@@ -414,8 +414,8 @@ class Mat153(KeywordBase):
 
     @idamage.setter
     def idamage(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""idamage must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""idamage must be `None` or one of {0,1}""")
         self._cards[2].set_value("idamage", value)
 
     @property
@@ -428,8 +428,8 @@ class Mat153(KeywordBase):
 
     @ids.setter
     def ids(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ids must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ids must be `None` or one of {0,1}""")
         self._cards[2].set_value("ids", value)
 
     @property
@@ -442,8 +442,8 @@ class Mat153(KeywordBase):
 
     @idep.setter
     def idep(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""idep must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""idep must be `None` or one of {0,1}""")
         self._cards[2].set_value("idep", value)
 
     @property
@@ -499,8 +499,8 @@ class Mat153(KeywordBase):
 
     @khflg.setter
     def khflg(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""khflg must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""khflg must be `None` or one of {0,1,2,3,4}""")
         self._cards[2].set_value("khflg", value)
 
     @property

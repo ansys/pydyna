@@ -252,8 +252,8 @@ class Mat078(KeywordBase):
 
     @out.setter
     def out(self, value: float) -> None:
-        if value not in [0, 1]:
-            raise Exception("""out must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""out must be `None` or one of {0,1}""")
         self._cards[1].set_value("out", value)
 
     @property
@@ -277,8 +277,8 @@ class Mat078(KeywordBase):
 
     @fail.setter
     def fail(self, value: float) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""fail must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""fail must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("fail", value)
 
     @property

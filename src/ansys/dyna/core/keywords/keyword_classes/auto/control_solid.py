@@ -194,8 +194,8 @@ class ControlSolid(KeywordBase):
 
     @esort.setter
     def esort(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""esort must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""esort must be `None` or one of {0,1,2,3,4}""")
         self._cards[0].set_value("esort", value)
 
     @property
@@ -230,8 +230,8 @@ class ControlSolid(KeywordBase):
 
     @swlocl.setter
     def swlocl(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""swlocl must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""swlocl must be `None` or one of {1,2}""")
         self._cards[0].set_value("swlocl", value)
 
     @property
@@ -279,8 +279,8 @@ class ControlSolid(KeywordBase):
 
     @tet13k.setter
     def tet13k(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""tet13k must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""tet13k must be `None` or one of {0,1}""")
         self._cards[0].set_value("tet13k", value)
 
     @property

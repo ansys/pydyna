@@ -182,8 +182,8 @@ class ControlPoreFluid(KeywordBase):
 
     @atype.setter
     def atype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6]:
-            raise Exception("""atype must be one of {0,1,2,3,4,5,6}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""atype must be `None` or one of {0,1,2,3,4,5,6}""")
         self._cards[0].set_value("atype", value)
 
     @property
@@ -236,8 +236,8 @@ class ControlPoreFluid(KeywordBase):
 
     @output.setter
     def output(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""output must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""output must be `None` or one of {0,1}""")
         self._cards[0].set_value("output", value)
 
     @property
@@ -344,7 +344,7 @@ class ControlPoreFluid(KeywordBase):
 
     @etfag.setter
     def etfag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""etfag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""etfag must be `None` or one of {0,1}""")
         self._cards[2].set_value("etfag", value)
 

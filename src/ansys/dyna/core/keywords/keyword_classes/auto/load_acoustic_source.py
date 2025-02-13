@@ -123,8 +123,8 @@ class LoadAcousticSource(KeywordBase):
 
     @srctyp.setter
     def srctyp(self, value: int) -> None:
-        if value not in [1, 5, 11, 12]:
-            raise Exception("""srctyp must be one of {1,5,11,12}""")
+        if value not in [1, 5, 11, 12, None]:
+            raise Exception("""srctyp must be `None` or one of {1,5,11,12}""")
         self._cards[0].set_value("srctyp", value)
 
     @property

@@ -543,8 +543,8 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @nfspace.setter
     def nfspace(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""nfspace must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""nfspace must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("nfspace", value)
 
     @property
@@ -567,8 +567,8 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @iread.setter
     def iread(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iread must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iread must be `None` or one of {0,1}""")
         self._cards[0].set_value("iread", value)
 
     @property
@@ -592,8 +592,8 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @subtyp.setter
     def subtyp(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""subtyp must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""subtyp must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("subtyp", value)
 
     @property
@@ -636,8 +636,8 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @output.setter
     def output(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""output must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""output must be `None` or one of {0,1}""")
         self._cards[1].set_value("output", value)
 
     @property

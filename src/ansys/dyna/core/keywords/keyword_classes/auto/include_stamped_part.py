@@ -316,8 +316,8 @@ class IncludeStampedPart(KeywordBase):
 
     @thick.setter
     def thick(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""thick must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""thick must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("thick", value)
 
     @property
@@ -331,8 +331,8 @@ class IncludeStampedPart(KeywordBase):
 
     @pstrn.setter
     def pstrn(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""pstrn must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""pstrn must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("pstrn", value)
 
     @property
@@ -345,8 +345,8 @@ class IncludeStampedPart(KeywordBase):
 
     @strain.setter
     def strain(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""strain must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""strain must be `None` or one of {0,1}""")
         self._cards[1].set_value("strain", value)
 
     @property
@@ -362,8 +362,8 @@ class IncludeStampedPart(KeywordBase):
 
     @stress.setter
     def stress(self, value: int) -> None:
-        if value not in [0, 1, 2, -1, -3]:
-            raise Exception("""stress must be one of {0,1,2,-1,-3}""")
+        if value not in [0, 1, 2, -1, -3, None]:
+            raise Exception("""stress must be `None` or one of {0,1,2,-1,-3}""")
         self._cards[1].set_value("stress", value)
 
     @property
@@ -377,8 +377,8 @@ class IncludeStampedPart(KeywordBase):
 
     @incout.setter
     def incout(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""incout must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""incout must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("incout", value)
 
     @property
@@ -461,8 +461,8 @@ class IncludeStampedPart(KeywordBase):
 
     @tensor.setter
     def tensor(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""tensor must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""tensor must be `None` or one of {0,1}""")
         self._cards[2].set_value("tensor", value)
 
     @property
@@ -488,8 +488,8 @@ class IncludeStampedPart(KeywordBase):
 
     @isym.setter
     def isym(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""isym must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""isym must be `None` or one of {0,1,2,3,4}""")
         self._cards[3].set_value("isym", value)
 
     @property
@@ -502,8 +502,8 @@ class IncludeStampedPart(KeywordBase):
 
     @iafter.setter
     def iafter(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iafter must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iafter must be `None` or one of {0,1}""")
         self._cards[3].set_value("iafter", value)
 
     @property

@@ -404,8 +404,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""restrt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""restrt must be `None` or one of {0,1}""")
         self._cards[0].set_value("restrt", value)
 
     @property
@@ -438,8 +438,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @lctyp.setter
     def lctyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""lctyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""lctyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("lctyp", value)
 
     @property
@@ -472,8 +472,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @dmptyp.setter
     def dmptyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""dmptyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""dmptyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("dmptyp", value)
 
     @property
@@ -493,8 +493,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @vaflag.setter
     def vaflag(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
-            raise Exception("""vaflag must be one of {0,1,2,3,4,5,6,7,8}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, None]:
+            raise Exception("""vaflag must be `None` or one of {0,1,2,3,4,5,6,7,8}""")
         self._cards[2].set_value("vaflag", value)
 
     @property
@@ -509,8 +509,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""method must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""method must be `None` or one of {0,1,2,3}""")
         self._cards[2].set_value("method", value)
 
     @property
@@ -530,8 +530,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, -1]:
-            raise Exception("""unit must be one of {0,1,2,3,4,-1}""")
+        if value not in [0, 1, 2, 3, 4, -1, None]:
+            raise Exception("""unit must be `None` or one of {0,1,2,3,4,-1}""")
         self._cards[2].set_value("unit", value)
 
     @property
@@ -554,8 +554,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @vapsd.setter
     def vapsd(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""vapsd must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""vapsd must be `None` or one of {0,1}""")
         self._cards[2].set_value("vapsd", value)
 
     @property
@@ -568,8 +568,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @varms.setter
     def varms(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""varms must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""varms must be `None` or one of {0,1}""")
         self._cards[2].set_value("varms", value)
 
     @property
@@ -603,8 +603,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @ldtyp.setter
     def ldtyp(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ldtyp must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ldtyp must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("ldtyp", value)
 
     @property
@@ -649,8 +649,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @ldflag.setter
     def ldflag(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ldflag must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ldflag must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("ldflag", value)
 
     @property
@@ -664,8 +664,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @icoarse.setter
     def icoarse(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""icoarse must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""icoarse must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("icoarse", value)
 
     @property
@@ -717,8 +717,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""dof must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""dof must be `None` or one of {0,1,2,3}""")
         self._cards[4].set_value("dof", value)
 
     @property
@@ -803,8 +803,8 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @lctyp2.setter
     def lctyp2(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""lctyp2 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""lctyp2 must be `None` or one of {0,1}""")
         self._cards[5].set_value("lctyp2", value)
 
     @property

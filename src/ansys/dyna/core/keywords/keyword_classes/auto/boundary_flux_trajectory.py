@@ -330,8 +330,8 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @relvel.setter
     def relvel(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""relvel must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""relvel must be `None` or one of {0,1}""")
         self._cards[0].set_value("relvel", value)
 
     @property
@@ -345,8 +345,8 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @erod.setter
     def erod(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""erod must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""erod must be `None` or one of {0,1}""")
         self._cards[1].set_value("erod", value)
 
     @property

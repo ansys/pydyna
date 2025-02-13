@@ -238,8 +238,8 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
-        if value not in ["MECH", "CESE", "ICFD"]:
-            raise Exception("""solver must be one of {"MECH","CESE","ICFD"}""")
+        if value not in ["MECH", "CESE", "ICFD", None]:
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -314,8 +314,8 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
-        if value not in ["ALL", "BOX", "BOX_SHELL", "BOX_SLDIO", "BOX_SOLID", "PART", "PART_IO", "PSLDFi", "SEG", "VOL", "VOL_SHELL", "VOL_SLDIO", "VOL_SOLID", "SET_SHELL", "SET_SOLID", "SET_SLDIO", "SET_SLDFi", "SET_TSHELL", "SET_TSHIO", "SHELL", "DBOX", "DBOX_SHELL", "DBOX_SOLID", "DPART", "DSEG", "DVOL", "DVOL_SHELL", "DVOL_SOLID", "SALECPT", "SALEFAC"]:
-            raise Exception("""option must be one of {"ALL","BOX","BOX_SHELL","BOX_SLDIO","BOX_SOLID","PART","PART_IO","PSLDFi","SEG","VOL","VOL_SHELL","VOL_SLDIO","VOL_SOLID","SET_SHELL","SET_SOLID","SET_SLDIO","SET_SLDFi","SET_TSHELL","SET_TSHIO","SHELL","DBOX","DBOX_SHELL","DBOX_SOLID","DPART","DSEG","DVOL","DVOL_SHELL","DVOL_SOLID","SALECPT","SALEFAC"}""")
+        if value not in ["ALL", "BOX", "BOX_SHELL", "BOX_SLDIO", "BOX_SOLID", "PART", "PART_IO", "PSLDFi", "SEG", "VOL", "VOL_SHELL", "VOL_SLDIO", "VOL_SOLID", "SET_SHELL", "SET_SOLID", "SET_SLDIO", "SET_SLDFi", "SET_TSHELL", "SET_TSHIO", "SHELL", "DBOX", "DBOX_SHELL", "DBOX_SOLID", "DPART", "DSEG", "DVOL", "DVOL_SHELL", "DVOL_SOLID", "SALECPT", "SALEFAC", None]:
+            raise Exception("""option must be `None` or one of {"ALL","BOX","BOX_SHELL","BOX_SLDIO","BOX_SOLID","PART","PART_IO","PSLDFi","SEG","VOL","VOL_SHELL","VOL_SLDIO","VOL_SOLID","SET_SHELL","SET_SOLID","SET_SLDIO","SET_SLDFi","SET_TSHELL","SET_TSHIO","SHELL","DBOX","DBOX_SHELL","DBOX_SOLID","DPART","DSEG","DVOL","DVOL_SHELL","DVOL_SOLID","SALECPT","SALEFAC"}""")
         self._cards[1].set_value("option", value)
 
     @property

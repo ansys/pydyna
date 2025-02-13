@@ -529,8 +529,8 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""form must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""form must be `None` or one of {0,1,2,3,4}""")
         self._cards[1].set_value("form", value)
 
     @property
@@ -543,8 +543,8 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @int_.setter
     def int_(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""int_ must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""int_ must be `None` or one of {0,1}""")
         self._cards[1].set_value("int", value)
 
     @property
@@ -577,8 +577,8 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""imass must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""imass must be `None` or one of {0,1}""")
         self._cards[1].set_value("imass", value)
 
     @property

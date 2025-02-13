@@ -435,8 +435,8 @@ class ContactEntity(KeywordBase):
 
     @geotyp.setter
     def geotyp(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]:
-            raise Exception("""geotyp must be one of {1,2,3,4,5,6,7,8,9,10,11}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, None]:
+            raise Exception("""geotyp must be `None` or one of {1,2,3,4,5,6,7,8,9,10,11}""")
         self._cards[0].set_value("geotyp", value)
 
     @property
@@ -460,8 +460,8 @@ class ContactEntity(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""sstyp must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""sstyp must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("sstyp", value)
 
     @property
@@ -512,8 +512,8 @@ class ContactEntity(KeywordBase):
 
     @intord.setter
     def intord(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5]:
-            raise Exception("""intord must be one of {0,1,2,3,4,5}""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""intord must be `None` or one of {0,1,2,3,4,5}""")
         self._cards[0].set_value("intord", value)
 
     @property
@@ -559,8 +559,8 @@ class ContactEntity(KeywordBase):
 
     @go.setter
     def go(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""go must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""go must be `None` or one of {0,1}""")
         self._cards[1].set_value("go", value)
 
     @property
@@ -574,8 +574,8 @@ class ContactEntity(KeywordBase):
 
     @ithk.setter
     def ithk(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ithk must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ithk must be `None` or one of {0,1}""")
         self._cards[1].set_value("ithk", value)
 
     @property
@@ -699,8 +699,8 @@ class ContactEntity(KeywordBase):
 
     @inout.setter
     def inout(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""inout must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""inout must be `None` or one of {0,1}""")
         self._cards[4].set_value("inout", value)
 
     @property

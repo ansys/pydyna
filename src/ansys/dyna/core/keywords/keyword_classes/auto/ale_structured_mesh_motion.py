@@ -114,8 +114,8 @@ class AleStructuredMeshMotion(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
-        if value not in ["FOLLOW_GC", "COVER_LAG"]:
-            raise Exception("""option must be one of {"FOLLOW_GC","COVER_LAG"}""")
+        if value not in ["FOLLOW_GC", "COVER_LAG", None]:
+            raise Exception("""option must be `None` or one of {"FOLLOW_GC","COVER_LAG"}""")
         self._cards[0].set_value("option", value)
 
     @property

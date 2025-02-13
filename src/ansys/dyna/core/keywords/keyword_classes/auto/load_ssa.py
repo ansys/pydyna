@@ -211,8 +211,8 @@ class LoadSsa(KeywordBase):
 
     @refl.setter
     def refl(self, value: float) -> None:
-        if value not in [0, 1]:
-            raise Exception("""refl must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""refl must be `None` or one of {0,1}""")
         self._cards[0].set_value("refl", value)
 
     @property

@@ -256,8 +256,8 @@ class MatRigid(KeywordBase):
 
     @couple.setter
     def couple(self, value: float) -> None:
-        if value not in [0, -1, 1, 2]:
-            raise Exception("""couple must be one of {0,-1,1,2}""")
+        if value not in [0, -1, 1, 2, None]:
+            raise Exception("""couple must be `None` or one of {0,-1,1,2}""")
         self._cards[0].set_value("couple", value)
 
     @property
@@ -293,8 +293,8 @@ class MatRigid(KeywordBase):
 
     @cmo.setter
     def cmo(self, value: float) -> None:
-        if value not in [0.0, -1.0, 1.0]:
-            raise Exception("""cmo must be one of {0.0,-1.0,1.0}""")
+        if value not in [0.0, -1.0, 1.0, None]:
+            raise Exception("""cmo must be `None` or one of {0.0,-1.0,1.0}""")
         self._cards[1].set_value("cmo", value)
 
     @property

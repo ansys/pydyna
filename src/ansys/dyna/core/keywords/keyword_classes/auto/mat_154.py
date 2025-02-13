@@ -274,8 +274,8 @@ class Mat154(KeywordBase):
 
     @derfi.setter
     def derfi(self, value: float) -> None:
-        if value not in [0, 1]:
-            raise Exception("""derfi must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""derfi must be `None` or one of {0,1}""")
         self._cards[1].set_value("derfi", value)
 
     @property

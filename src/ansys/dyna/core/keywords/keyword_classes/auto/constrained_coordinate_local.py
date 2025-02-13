@@ -120,8 +120,8 @@ class ConstrainedCoordinateLocal(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""idir must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""idir must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("idir", value)
 
     @property

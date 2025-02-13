@@ -104,8 +104,8 @@ class ControlMppDecompositionRedecompositionOnce(KeywordBase):
 
     @defgeo.setter
     def defgeo(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""defgeo must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""defgeo must be `None` or one of {1,2}""")
         self._cards[0].set_value("defgeo", value)
 
     @property
@@ -130,8 +130,8 @@ class ControlMppDecompositionRedecompositionOnce(KeywordBase):
 
     @remsph.setter
     def remsph(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""remsph must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""remsph must be `None` or one of {0,1}""")
         self._cards[0].set_value("remsph", value)
 
     @property

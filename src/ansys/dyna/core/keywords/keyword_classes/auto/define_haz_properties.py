@@ -168,8 +168,8 @@ class DefineHazProperties(KeywordBase):
 
     @iop.setter
     def iop(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iop must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iop must be `None` or one of {0,1}""")
         self._cards[0].set_value("iop", value)
 
     @property
@@ -190,8 +190,8 @@ class DefineHazProperties(KeywordBase):
 
     @pid_typ.setter
     def pid_typ(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""pid_typ must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""pid_typ must be `None` or one of {0,1}""")
         self._cards[0].set_value("pid_typ", value)
 
     @property

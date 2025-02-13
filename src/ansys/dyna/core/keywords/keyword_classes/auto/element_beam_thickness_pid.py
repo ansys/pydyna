@@ -234,8 +234,8 @@ class ElementBeamThicknessPid(KeywordBase):
 
     @rt1.setter
     def rt1(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rt1 must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rt1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("rt1", value)
 
     @property
@@ -255,8 +255,8 @@ class ElementBeamThicknessPid(KeywordBase):
 
     @rr1.setter
     def rr1(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rr1 must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rr1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("rr1", value)
 
     @property
@@ -276,8 +276,8 @@ class ElementBeamThicknessPid(KeywordBase):
 
     @rt2.setter
     def rt2(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rt2 must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rt2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("rt2", value)
 
     @property
@@ -297,8 +297,8 @@ class ElementBeamThicknessPid(KeywordBase):
 
     @rr2.setter
     def rr2(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""rr2 must be one of {0,1,2,3,4,5,6,7}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rr2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
         self._cards[0].set_value("rr2", value)
 
     @property
@@ -311,8 +311,8 @@ class ElementBeamThicknessPid(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""local must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""local must be `None` or one of {2,1}""")
         self._cards[0].set_value("local", value)
 
     @property

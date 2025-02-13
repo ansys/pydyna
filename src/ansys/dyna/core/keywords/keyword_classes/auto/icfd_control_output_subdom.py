@@ -186,8 +186,8 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @sname.setter
     def sname(self, value: str) -> None:
-        if value not in ["BOX", "CYLINDER", "SPHERE"]:
-            raise Exception("""sname must be one of {"BOX","CYLINDER","SPHERE"}""")
+        if value not in ["BOX", "CYLINDER", "SPHERE", None]:
+            raise Exception("""sname must be `None` or one of {"BOX","CYLINDER","SPHERE"}""")
         self._cards[0].set_value("sname", value)
 
     @property

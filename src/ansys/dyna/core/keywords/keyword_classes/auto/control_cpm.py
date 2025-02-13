@@ -101,8 +101,8 @@ class ControlCpm(KeywordBase):
 
     @cpmout.setter
     def cpmout(self, value: int) -> None:
-        if value not in [11, 21, 22, 23]:
-            raise Exception("""cpmout must be one of {11,21,22,23}""")
+        if value not in [11, 21, 22, 23, None]:
+            raise Exception("""cpmout must be `None` or one of {11,21,22,23}""")
         self._cards[0].set_value("cpmout", value)
 
     @property
@@ -125,8 +125,8 @@ class ControlCpm(KeywordBase):
 
     @ncpmts.setter
     def ncpmts(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ncpmts must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ncpmts must be `None` or one of {0,1}""")
         self._cards[0].set_value("ncpmts", value)
 
     @property
@@ -142,8 +142,8 @@ class ControlCpm(KeywordBase):
 
     @cpmerr.setter
     def cpmerr(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cpmerr must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cpmerr must be `None` or one of {0,1}""")
         self._cards[0].set_value("cpmerr", value)
 
     @property
@@ -166,7 +166,7 @@ class ControlCpm(KeywordBase):
 
     @cpmmf.setter
     def cpmmf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cpmmf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cpmmf must be `None` or one of {0,1}""")
         self._cards[0].set_value("cpmmf", value)
 

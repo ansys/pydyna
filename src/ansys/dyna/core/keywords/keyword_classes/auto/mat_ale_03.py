@@ -464,8 +464,8 @@ class MatAle03(KeywordBase):
 
     @iadiab.setter
     def iadiab(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iadiab must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iadiab must be `None` or one of {0,1}""")
         self._cards[0].set_value("iadiab", value)
 
     @property

@@ -443,8 +443,8 @@ class MatCscm(KeywordBase):
 
     @nplot.setter
     def nplot(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6, 7]:
-            raise Exception("""nplot must be one of {1,2,3,4,5,6,7}""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""nplot must be `None` or one of {1,2,3,4,5,6,7}""")
         self._cards[0].set_value("nplot", value)
 
     @property
@@ -467,8 +467,8 @@ class MatCscm(KeywordBase):
 
     @irate.setter
     def irate(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""irate must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""irate must be `None` or one of {0,1}""")
         self._cards[0].set_value("irate", value)
 
     @property
@@ -503,8 +503,8 @@ class MatCscm(KeywordBase):
 
     @itretrc.setter
     def itretrc(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""itretrc must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""itretrc must be `None` or one of {0,1}""")
         self._cards[0].set_value("itretrc", value)
 
     @property

@@ -330,8 +330,8 @@ class ControlImplicitSolutionDyn(KeywordBase):
 
     @nsolvr.setter
     def nsolvr(self, value: int) -> None:
-        if value not in [12, -1, 1, 6, 7, 8, 9]:
-            raise Exception("""nsolvr must be one of {12,-1,1,6,7,8,9}""")
+        if value not in [12, -1, 1, 6, 7, 8, 9, None]:
+            raise Exception("""nsolvr must be `None` or one of {12,-1,1,6,7,8,9}""")
         self._cards[0].set_value("nsolvr", value)
 
     @property
@@ -435,8 +435,8 @@ class ControlImplicitSolutionDyn(KeywordBase):
 
     @diverg.setter
     def diverg(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""diverg must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""diverg must be `None` or one of {1,2}""")
         self._cards[1].set_value("diverg", value)
 
     @property
@@ -464,8 +464,8 @@ class ControlImplicitSolutionDyn(KeywordBase):
 
     @nlprint.setter
     def nlprint(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""nlprint must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""nlprint must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("nlprint", value)
 
     @property
@@ -504,8 +504,8 @@ class ControlImplicitSolutionDyn(KeywordBase):
 
     @cpchk.setter
     def cpchk(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cpchk must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cpchk must be `None` or one of {0,1}""")
         self._cards[1].set_value("cpchk", value)
 
     @property
@@ -600,8 +600,8 @@ class ControlImplicitSolutionDyn(KeywordBase):
 
     @arcdir.setter
     def arcdir(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""arcdir must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""arcdir must be `None` or one of {0,1,2,3}""")
         self._cards[3].set_value("arcdir", value)
 
     @property
@@ -627,8 +627,8 @@ class ControlImplicitSolutionDyn(KeywordBase):
 
     @arcmth.setter
     def arcmth(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""arcmth must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""arcmth must be `None` or one of {1,2,3}""")
         self._cards[3].set_value("arcmth", value)
 
     @property
@@ -641,8 +641,8 @@ class ControlImplicitSolutionDyn(KeywordBase):
 
     @arcdmp.setter
     def arcdmp(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""arcdmp must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""arcdmp must be `None` or one of {2,1}""")
         self._cards[3].set_value("arcdmp", value)
 
     @property
@@ -692,8 +692,8 @@ class ControlImplicitSolutionDyn(KeywordBase):
 
     @lsmtd.setter
     def lsmtd(self, value: int) -> None:
-        if value not in [4, 1, 2, 3, 5, 6]:
-            raise Exception("""lsmtd must be one of {4,1,2,3,5,6}""")
+        if value not in [4, 1, 2, 3, 5, 6, None]:
+            raise Exception("""lsmtd must be `None` or one of {4,1,2,3,5,6}""")
         self._cards[4].set_value("lsmtd", value)
 
     @property
@@ -708,8 +708,8 @@ class ControlImplicitSolutionDyn(KeywordBase):
 
     @lsdir.setter
     def lsdir(self, value: int) -> None:
-        if value not in [2, 1, 3, 4]:
-            raise Exception("""lsdir must be one of {2,1,3,4}""")
+        if value not in [2, 1, 3, 4, None]:
+            raise Exception("""lsdir must be `None` or one of {2,1,3,4}""")
         self._cards[4].set_value("lsdir", value)
 
     @property

@@ -270,8 +270,8 @@ class ContactExcludeInteraction(KeywordBase):
 
     @type2.setter
     def type2(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""type2 must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""type2 must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("type2", value)
 
     @property
@@ -285,8 +285,8 @@ class ContactExcludeInteraction(KeywordBase):
 
     @type1.setter
     def type1(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""type1 must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""type1 must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("type1", value)
 
     @property

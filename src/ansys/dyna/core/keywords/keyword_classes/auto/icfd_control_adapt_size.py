@@ -64,8 +64,8 @@ class IcfdControlAdaptSize(KeywordBase):
 
     @asize.setter
     def asize(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""asize must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""asize must be `None` or one of {0,1}""")
         self._cards[0].set_value("asize", value)
 
     @property

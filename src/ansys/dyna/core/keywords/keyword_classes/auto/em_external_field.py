@@ -103,8 +103,8 @@ class EmExternalField(KeywordBase):
 
     @ftype.setter
     def ftype(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""ftype must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""ftype must be `None` or one of {1,2,3}""")
         self._cards[0].set_value("ftype", value)
 
     @property
@@ -117,8 +117,8 @@ class EmExternalField(KeywordBase):
 
     @fdef.setter
     def fdef(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""fdef must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""fdef must be `None` or one of {1,2}""")
         self._cards[0].set_value("fdef", value)
 
     @property

@@ -110,8 +110,8 @@ class ControlFormingBestfit(KeywordBase):
 
     @ifit.setter
     def ifit(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ifit must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ifit must be `None` or one of {0,1}""")
         self._cards[0].set_value("ifit", value)
 
     @property
@@ -135,8 +135,8 @@ class ControlFormingBestfit(KeywordBase):
 
     @gaponly.setter
     def gaponly(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""gaponly must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""gaponly must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("gaponly", value)
 
     @property
@@ -149,8 +149,8 @@ class ControlFormingBestfit(KeywordBase):
 
     @ifast.setter
     def ifast(self, value: int) -> None:
-        if value not in [1, 0]:
-            raise Exception("""ifast must be one of {1,0}""")
+        if value not in [1, 0, None]:
+            raise Exception("""ifast must be `None` or one of {1,0}""")
         self._cards[0].set_value("ifast", value)
 
     @property

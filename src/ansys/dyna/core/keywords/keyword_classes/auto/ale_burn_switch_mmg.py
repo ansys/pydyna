@@ -289,8 +289,8 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @ignivf.setter
     def ignivf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ignivf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ignivf must be `None` or one of {0,1}""")
         self._cards[2].set_value("ignivf", value)
 
     @property

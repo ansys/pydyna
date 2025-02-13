@@ -179,8 +179,8 @@ class DefineRegion(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""type must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""type must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("type", value)
 
     @property
@@ -204,8 +204,8 @@ class DefineRegion(KeywordBase):
 
     @move.setter
     def move(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""move must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""move must be `None` or one of {0,1}""")
         self._cards[1].set_value("move", value)
 
     @property

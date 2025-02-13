@@ -338,8 +338,8 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""sstyp must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""sstyp must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("sstyp", value)
 
     @property
@@ -352,8 +352,8 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @mstyp.setter
     def mstyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""mstyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""mstyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("mstyp", value)
 
     @property
@@ -383,8 +383,8 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
-        if value not in [2, 1, 3, 4, 5, 6, 11, 12]:
-            raise Exception("""ctype must be one of {2,1,3,4,5,6,11,12}""")
+        if value not in [2, 1, 3, 4, 5, 6, 11, 12, None]:
+            raise Exception("""ctype must be `None` or one of {2,1,3,4,5,6,11,12}""")
         self._cards[1].set_value("ctype", value)
 
     @property
@@ -398,8 +398,8 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @direc.setter
     def direc(self, value: int) -> None:
-        if value not in [1, 2, 3]:
-            raise Exception("""direc must be one of {1,2,3}""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""direc must be `None` or one of {1,2,3}""")
         self._cards[1].set_value("direc", value)
 
     @property
@@ -540,8 +540,8 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @ileak.setter
     def ileak(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ileak must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ileak must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("ileak", value)
 
     @property
@@ -584,8 +584,8 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @blockage.setter
     def blockage(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""blockage must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""blockage must be `None` or one of {0,1}""")
         self._cards[3].set_value("blockage", value)
 
     @property
@@ -606,8 +606,8 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @ipenchk.setter
     def ipenchk(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ipenchk must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ipenchk must be `None` or one of {0,1}""")
         self._cards[4].set_value("ipenchk", value)
 
     @property
@@ -618,8 +618,8 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @intforc.setter
     def intforc(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""intforc must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""intforc must be `None` or one of {0,1}""")
         self._cards[4].set_value("intforc", value)
 
     @property
@@ -630,8 +630,8 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @ialesof.setter
     def ialesof(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ialesof must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ialesof must be `None` or one of {0,1}""")
         self._cards[4].set_value("ialesof", value)
 
     @property
@@ -652,8 +652,8 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @pfacmm.setter
     def pfacmm(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""pfacmm must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""pfacmm must be `None` or one of {0,1,2,3}""")
         self._cards[4].set_value("pfacmm", value)
 
     @property

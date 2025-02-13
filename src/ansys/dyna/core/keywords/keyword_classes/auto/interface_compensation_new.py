@@ -135,8 +135,8 @@ class InterfaceCompensationNew(KeywordBase):
 
     @elref.setter
     def elref(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""elref must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""elref must be `None` or one of {1,2}""")
         self._cards[0].set_value("elref", value)
 
     @property
@@ -157,8 +157,8 @@ class InterfaceCompensationNew(KeywordBase):
 
     @undct.setter
     def undct(self, value: float) -> None:
-        if value not in [0, 1]:
-            raise Exception("""undct must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""undct must be `None` or one of {0,1}""")
         self._cards[0].set_value("undct", value)
 
     @property

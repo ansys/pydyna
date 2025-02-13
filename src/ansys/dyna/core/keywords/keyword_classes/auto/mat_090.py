@@ -207,8 +207,8 @@ class Mat090(KeywordBase):
 
     @cf.setter
     def cf(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""cf must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""cf must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("cf", value)
 
     @property

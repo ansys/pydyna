@@ -108,8 +108,8 @@ class LsoVariableGroup(KeywordBase):
 
     @domain_type.setter
     def domain_type(self, value: str) -> None:
-        if value not in ["NODE", "BEAM_ELEMENT", "SHELL_ELEMENT", "THICK_SHELL_ELEMENT", "SOLID_ELEMENT", "SEGMENT", "PART", "GLOBAL", "SURFACE_ELEMENT", "VOLUME_ELEMENT"]:
-            raise Exception("""domain_type must be one of {"NODE","BEAM_ELEMENT","SHELL_ELEMENT","THICK_SHELL_ELEMENT","SOLID_ELEMENT","SEGMENT","PART","GLOBAL","SURFACE_ELEMENT","VOLUME_ELEMENT"}""")
+        if value not in ["NODE", "BEAM_ELEMENT", "SHELL_ELEMENT", "THICK_SHELL_ELEMENT", "SOLID_ELEMENT", "SEGMENT", "PART", "GLOBAL", "SURFACE_ELEMENT", "VOLUME_ELEMENT", None]:
+            raise Exception("""domain_type must be `None` or one of {"NODE","BEAM_ELEMENT","SHELL_ELEMENT","THICK_SHELL_ELEMENT","SOLID_ELEMENT","SEGMENT","PART","GLOBAL","SURFACE_ELEMENT","VOLUME_ELEMENT"}""")
         self._cards[1].set_value("domain_type", value)
 
     @property

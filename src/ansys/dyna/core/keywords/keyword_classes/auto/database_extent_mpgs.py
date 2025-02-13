@@ -67,8 +67,8 @@ class DatabaseExtentMpgs(KeywordBase):
 
     @vtype.setter
     def vtype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""vtype must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""vtype must be `None` or one of {0,1,2,3,4}""")
         self._cards[0].set_value("vtype", value)
 
     @property

@@ -311,8 +311,8 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     @lflag.setter
     def lflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""lflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""lflag must be `None` or one of {0,1}""")
         self._cards[0].set_value("lflag", value)
 
     @property
@@ -335,8 +335,8 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     @rflag.setter
     def rflag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""rflag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""rflag must be `None` or one of {0,1}""")
         self._cards[0].set_value("rflag", value)
 
     @property
@@ -364,8 +364,8 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     @eigmth.setter
     def eigmth(self, value: int) -> None:
-        if value not in [2, 3, 5, 6, 101, 102, 111]:
-            raise Exception("""eigmth must be one of {2,3,5,6,101,102,111}""")
+        if value not in [2, 3, 5, 6, 101, 102, 111, None]:
+            raise Exception("""eigmth must be `None` or one of {2,3,5,6,101,102,111}""")
         self._cards[0].set_value("eigmth", value)
 
     @property
@@ -428,8 +428,8 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     @mstres.setter
     def mstres(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""mstres must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""mstres must be `None` or one of {0,1}""")
         self._cards[1].set_value("mstres", value)
 
     @property

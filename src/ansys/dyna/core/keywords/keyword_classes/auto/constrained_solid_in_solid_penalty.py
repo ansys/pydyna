@@ -182,8 +182,8 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
 
     @bstypb.setter
     def bstypb(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""bstypb must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""bstypb must be `None` or one of {0,1}""")
         self._cards[1].set_value("bstypb", value)
 
     @property
@@ -196,8 +196,8 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
 
     @sstypa.setter
     def sstypa(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sstypa must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sstypa must be `None` or one of {0,1}""")
         self._cards[1].set_value("sstypa", value)
 
     @property

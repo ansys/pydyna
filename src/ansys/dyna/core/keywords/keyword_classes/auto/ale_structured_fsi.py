@@ -211,8 +211,8 @@ class AleStructuredFsi(KeywordBase):
 
     @lstrstyp.setter
     def lstrstyp(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""lstrstyp must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""lstrstyp must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("lstrstyp", value)
 
     @property
@@ -225,8 +225,8 @@ class AleStructuredFsi(KeywordBase):
 
     @alestyp.setter
     def alestyp(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""alestyp must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""alestyp must be `None` or one of {0,1}""")
         self._cards[1].set_value("alestyp", value)
 
     @property
@@ -295,7 +295,7 @@ class AleStructuredFsi(KeywordBase):
 
     @flip.setter
     def flip(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""flip must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""flip must be `None` or one of {0,1}""")
         self._cards[2].set_value("flip", value)
 

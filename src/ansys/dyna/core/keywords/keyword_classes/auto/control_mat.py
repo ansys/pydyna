@@ -70,8 +70,8 @@ class ControlMat(KeywordBase):
 
     @maef.setter
     def maef(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""maef must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""maef must be `None` or one of {0,1}""")
         self._cards[0].set_value("maef", value)
 
     @property
@@ -84,7 +84,7 @@ class ControlMat(KeywordBase):
 
     @umchk.setter
     def umchk(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""umchk must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""umchk must be `None` or one of {0,1}""")
         self._cards[0].set_value("umchk", value)
 

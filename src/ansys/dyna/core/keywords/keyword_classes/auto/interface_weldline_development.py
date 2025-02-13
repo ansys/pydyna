@@ -57,7 +57,7 @@ class InterfaceWeldlineDevelopment(KeywordBase):
 
     @ioption.setter
     def ioption(self, value: int) -> None:
-        if value not in [1, -1]:
-            raise Exception("""ioption must be one of {1,-1}""")
+        if value not in [1, -1, None]:
+            raise Exception("""ioption must be `None` or one of {1,-1}""")
         self._cards[0].set_value("ioption", value)
 

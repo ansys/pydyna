@@ -400,8 +400,8 @@ class MatCazacuBarlat(KeywordBase):
 
     @hr.setter
     def hr(self, value: float) -> None:
-        if value not in [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]:
-            raise Exception("""hr must be one of {1.0,2.0,3.0,4.0,5.0,6.0}""")
+        if value not in [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, None]:
+            raise Exception("""hr must be `None` or one of {1.0,2.0,3.0,4.0,5.0,6.0}""")
         self._cards[0].set_value("hr", value)
 
     @property
@@ -444,8 +444,8 @@ class MatCazacuBarlat(KeywordBase):
 
     @iter.setter
     def iter(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""iter must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""iter must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("iter", value)
 
     @property
@@ -721,8 +721,8 @@ class MatCazacuBarlat(KeywordBase):
 
     @fit.setter
     def fit(self, value: int) -> None:
-        if value not in [0.1, 1.0, 2.0]:
-            raise Exception("""fit must be one of {0.1,1.0,2.0}""")
+        if value not in [0.1, 1.0, 2.0, None]:
+            raise Exception("""fit must be `None` or one of {0.1,1.0,2.0}""")
         self._cards[4].set_value("fit", value)
 
     @property

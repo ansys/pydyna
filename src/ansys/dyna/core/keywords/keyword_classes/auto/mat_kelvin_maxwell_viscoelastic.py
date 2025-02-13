@@ -189,8 +189,8 @@ class MatKelvinMaxwellViscoelastic(KeywordBase):
 
     @fo.setter
     def fo(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""fo must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""fo must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("fo", value)
 
     @property
@@ -204,8 +204,8 @@ class MatKelvinMaxwellViscoelastic(KeywordBase):
 
     @so.setter
     def so(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0]:
-            raise Exception("""so must be one of {0.0,1.0,2.0}""")
+        if value not in [0.0, 1.0, 2.0, None]:
+            raise Exception("""so must be `None` or one of {0.0,1.0,2.0}""")
         self._cards[0].set_value("so", value)
 
     @property

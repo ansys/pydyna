@@ -769,8 +769,8 @@ class MatCodam2(KeywordBase):
 
     @macf.setter
     def macf(self, value: float) -> None:
-        if value not in [1, 2, 3, 4, -2, -3, -4]:
-            raise Exception("""macf must be one of {1,2,3,4,-2,-3,-4}""")
+        if value not in [1, 2, 3, 4, -2, -3, -4, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-2,-3,-4}""")
         self._cards[3].set_value("macf", value)
 
     @property
@@ -1029,8 +1029,8 @@ class MatCodam2(KeywordBase):
 
     @erode.setter
     def erode(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""erode must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""erode must be `None` or one of {0,1,2,3}""")
         self._cards[7].set_value("erode", value)
 
     @property

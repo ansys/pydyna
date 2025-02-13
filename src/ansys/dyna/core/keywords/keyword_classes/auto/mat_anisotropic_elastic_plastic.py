@@ -968,8 +968,8 @@ class MatAnisotropicElasticPlastic(KeywordBase):
 
     @vp.setter
     def vp(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""vp must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""vp must be `None` or one of {0.0,1.0}""")
         self._cards[4].set_value("vp", value)
 
     @property
@@ -988,8 +988,8 @@ class MatAnisotropicElasticPlastic(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, -4, -3, -2]:
-            raise Exception("""macf must be one of {1,2,3,4,-4,-3,-2}""")
+        if value not in [1, 2, 3, 4, -4, -3, -2, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
         self._cards[4].set_value("macf", value)
 
     @property

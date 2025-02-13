@@ -155,8 +155,8 @@ class InterfaceDeHbond(KeywordBase):
 
     @ptype1.setter
     def ptype1(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ptype1 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ptype1 must be `None` or one of {0,1}""")
         self._cards[1].set_value("ptype1", value)
 
     @property
@@ -169,8 +169,8 @@ class InterfaceDeHbond(KeywordBase):
 
     @ptype2.setter
     def ptype2(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ptype2 must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ptype2 must be `None` or one of {0,1}""")
         self._cards[1].set_value("ptype2", value)
 
     @property

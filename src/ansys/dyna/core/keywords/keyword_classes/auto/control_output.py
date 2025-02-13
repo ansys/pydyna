@@ -318,8 +318,8 @@ class ControlOutput(KeywordBase):
 
     @npopt.setter
     def npopt(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""npopt must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""npopt must be `None` or one of {0,1}""")
         self._cards[0].set_value("npopt", value)
 
     @property
@@ -334,8 +334,8 @@ class ControlOutput(KeywordBase):
 
     @neecho.setter
     def neecho(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""neecho must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""neecho must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("neecho", value)
 
     @property
@@ -348,8 +348,8 @@ class ControlOutput(KeywordBase):
 
     @nrefup.setter
     def nrefup(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""nrefup must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""nrefup must be `None` or one of {0,1}""")
         self._cards[0].set_value("nrefup", value)
 
     @property
@@ -363,8 +363,8 @@ class ControlOutput(KeywordBase):
 
     @iaccop.setter
     def iaccop(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""iaccop must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""iaccop must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("iaccop", value)
 
     @property
@@ -387,8 +387,8 @@ class ControlOutput(KeywordBase):
 
     @ipnint.setter
     def ipnint(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ipnint must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ipnint must be `None` or one of {0,1}""")
         self._cards[0].set_value("ipnint", value)
 
     @property
@@ -423,8 +423,8 @@ class ControlOutput(KeywordBase):
 
     @iprtf.setter
     def iprtf(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""iprtf must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""iprtf must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("iprtf", value)
 
     @property
@@ -437,8 +437,8 @@ class ControlOutput(KeywordBase):
 
     @ierode.setter
     def ierode(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ierode must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ierode must be `None` or one of {0,1}""")
         self._cards[1].set_value("ierode", value)
 
     @property
@@ -451,8 +451,8 @@ class ControlOutput(KeywordBase):
 
     @tet10s8.setter
     def tet10s8(self, value: int) -> None:
-        if value not in [2, 1]:
-            raise Exception("""tet10s8 must be one of {2,1}""")
+        if value not in [2, 1, None]:
+            raise Exception("""tet10s8 must be `None` or one of {2,1}""")
         self._cards[1].set_value("tet10s8", value)
 
     @property
@@ -475,8 +475,8 @@ class ControlOutput(KeywordBase):
 
     @ipcurv.setter
     def ipcurv(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ipcurv must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ipcurv must be `None` or one of {0,1}""")
         self._cards[1].set_value("ipcurv", value)
 
     @property
@@ -500,8 +500,8 @@ class ControlOutput(KeywordBase):
 
     @ip1dblt.setter
     def ip1dblt(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ip1dblt must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ip1dblt must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("ip1dblt", value)
 
     @property
@@ -515,8 +515,8 @@ class ControlOutput(KeywordBase):
 
     @eocs.setter
     def eocs(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""eocs must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""eocs must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("eocs", value)
 
     @property
@@ -539,8 +539,8 @@ class ControlOutput(KeywordBase):
 
     @newleg.setter
     def newleg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""newleg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""newleg must be `None` or one of {0,1}""")
         self._cards[2].set_value("newleg", value)
 
     @property
@@ -563,8 +563,8 @@ class ControlOutput(KeywordBase):
 
     @minfo.setter
     def minfo(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""minfo must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""minfo must be `None` or one of {0,1,2}""")
         self._cards[2].set_value("minfo", value)
 
     @property
@@ -580,8 +580,8 @@ class ControlOutput(KeywordBase):
 
     @solsig.setter
     def solsig(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""solsig must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""solsig must be `None` or one of {0,1,2,3,4}""")
         self._cards[2].set_value("solsig", value)
 
     @property
@@ -594,8 +594,8 @@ class ControlOutput(KeywordBase):
 
     @msgflg.setter
     def msgflg(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""msgflg must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""msgflg must be `None` or one of {0,1}""")
         self._cards[2].set_value("msgflg", value)
 
     @property
@@ -618,8 +618,8 @@ class ControlOutput(KeywordBase):
 
     @phschng.setter
     def phschng(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""phschng must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""phschng must be `None` or one of {0,1}""")
         self._cards[3].set_value("phschng", value)
 
     @property
@@ -632,8 +632,8 @@ class ControlOutput(KeywordBase):
 
     @demden.setter
     def demden(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""demden must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""demden must be `None` or one of {0,1}""")
         self._cards[3].set_value("demden", value)
 
     @property
@@ -647,8 +647,8 @@ class ControlOutput(KeywordBase):
 
     @icrfile.setter
     def icrfile(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""icrfile must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""icrfile must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("icrfile", value)
 
     @property
@@ -688,8 +688,8 @@ class ControlOutput(KeywordBase):
 
     @shlsig.setter
     def shlsig(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""shlsig must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""shlsig must be `None` or one of {0,1}""")
         self._cards[3].set_value("shlsig", value)
 
     @property
@@ -703,8 +703,8 @@ class ControlOutput(KeywordBase):
 
     @hisnout.setter
     def hisnout(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""hisnout must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""hisnout must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("hisnout", value)
 
     @property
@@ -729,8 +729,8 @@ class ControlOutput(KeywordBase):
 
     @insf.setter
     def insf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""insf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""insf must be `None` or one of {0,1}""")
         self._cards[4].set_value("insf", value)
 
     @property
@@ -743,8 +743,8 @@ class ControlOutput(KeywordBase):
 
     @isolsf.setter
     def isolsf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""isolsf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""isolsf must be `None` or one of {0,1}""")
         self._cards[4].set_value("isolsf", value)
 
     @property
@@ -757,8 +757,8 @@ class ControlOutput(KeywordBase):
 
     @ibsf.setter
     def ibsf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ibsf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ibsf must be `None` or one of {0,1}""")
         self._cards[4].set_value("ibsf", value)
 
     @property
@@ -771,8 +771,8 @@ class ControlOutput(KeywordBase):
 
     @issf.setter
     def issf(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""issf must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""issf must be `None` or one of {0,1}""")
         self._cards[4].set_value("issf", value)
 
     @property
@@ -785,7 +785,7 @@ class ControlOutput(KeywordBase):
 
     @mlkbag.setter
     def mlkbag(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""mlkbag must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""mlkbag must be `None` or one of {0,1}""")
         self._cards[4].set_value("mlkbag", value)
 

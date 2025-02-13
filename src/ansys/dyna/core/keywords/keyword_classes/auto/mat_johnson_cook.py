@@ -361,8 +361,8 @@ class MatJohnsonCook(KeywordBase):
 
     @vp.setter
     def vp(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""vp must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""vp must be `None` or one of {0.0,1.0}""")
         self._cards[0].set_value("vp", value)
 
     @property
@@ -379,8 +379,8 @@ class MatJohnsonCook(KeywordBase):
 
     @rateop.setter
     def rateop(self, value: float) -> None:
-        if value not in [0.0, 1.0, 2.0, 3.0, 4.0, 5.0]:
-            raise Exception("""rateop must be one of {0.0,1.0,2.0,3.0,4.0,5.0}""")
+        if value not in [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, None]:
+            raise Exception("""rateop must be `None` or one of {0.0,1.0,2.0,3.0,4.0,5.0}""")
         self._cards[0].set_value("rateop", value)
 
     @property
@@ -507,8 +507,8 @@ class MatJohnsonCook(KeywordBase):
 
     @it.setter
     def it(self, value: float) -> None:
-        if value not in [0.0, 1.0]:
-            raise Exception("""it must be one of {0.0,1.0}""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""it must be `None` or one of {0.0,1.0}""")
         self._cards[2].set_value("it", value)
 
     @property

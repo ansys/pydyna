@@ -188,8 +188,8 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @ioopt.setter
     def ioopt(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""ioopt must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""ioopt must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("ioopt", value)
 
     @property
@@ -237,8 +237,8 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""type must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""type must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("type", value)
 
     @property

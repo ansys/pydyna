@@ -199,8 +199,8 @@ class PartCompositeTshell(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [1, 2, 3, 5]:
-            raise Exception("""elform must be one of {1,2,3,5}""")
+        if value not in [1, 2, 3, 5, None]:
+            raise Exception("""elform must be `None` or one of {1,2,3,5}""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -234,8 +234,8 @@ class PartCompositeTshell(KeywordBase):
 
     @tshear.setter
     def tshear(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""tshear must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""tshear must be `None` or one of {0,1}""")
         self._cards[1].set_value("tshear", value)
 
     @property

@@ -134,8 +134,8 @@ class DefineBeamSolidCoupling(KeywordBase):
 
     @lstrtype.setter
     def lstrtype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""lstrtype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""lstrtype must be `None` or one of {0,1}""")
         self._cards[0].set_value("lstrtype", value)
 
     @property
@@ -148,8 +148,8 @@ class DefineBeamSolidCoupling(KeywordBase):
 
     @soltype.setter
     def soltype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""soltype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""soltype must be `None` or one of {0,1}""")
         self._cards[0].set_value("soltype", value)
 
     @property
@@ -162,8 +162,8 @@ class DefineBeamSolidCoupling(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""form must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""form must be `None` or one of {0,1}""")
         self._cards[0].set_value("form", value)
 
     @property

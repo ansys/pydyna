@@ -145,8 +145,8 @@ class CeseDatabasePointout(KeywordBase):
 
     @pstype.setter
     def pstype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""pstype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""pstype must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("pstype", value)
 
     @property

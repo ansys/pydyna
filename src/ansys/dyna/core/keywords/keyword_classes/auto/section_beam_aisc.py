@@ -260,8 +260,8 @@ class SectionBeamAisc(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 11, 12]:
-            raise Exception("""elform must be one of {1,2,3,4,5,11,12}""")
+        if value not in [1, 2, 3, 4, 5, 11, 12, None]:
+            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -338,8 +338,8 @@ class SectionBeamAisc(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 11, 12]:
-            raise Exception("""elform must be one of {1,2,3,4,5,11,12}""")
+        if value not in [1, 2, 3, 4, 5, 11, 12, None]:
+            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}""")
         self._cards[2].set_value("elform", value)
 
     @property
@@ -380,8 +380,8 @@ class SectionBeamAisc(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 11, 12]:
-            raise Exception("""elform must be one of {1,2,3,4,5,11,12}""")
+        if value not in [1, 2, 3, 4, 5, 11, 12, None]:
+            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}""")
         self._cards[3].set_value("elform", value)
 
     @property
@@ -422,8 +422,8 @@ class SectionBeamAisc(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 11, 12]:
-            raise Exception("""elform must be one of {1,2,3,4,5,11,12}""")
+        if value not in [1, 2, 3, 4, 5, 11, 12, None]:
+            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}""")
         self._cards[4].set_value("elform", value)
 
     @property

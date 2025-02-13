@@ -144,8 +144,8 @@ class LsoIdSet(KeywordBase):
 
     @type.setter
     def type(self, value: str) -> None:
-        if value not in ["SEG_SETS", "CIRCUIT", "SURF_PARTS", "VOL_PARTS", "SURF_ELES"]:
-            raise Exception("""type must be one of {"SEG_SETS","CIRCUIT","SURF_PARTS","VOL_PARTS","SURF_ELES"}""")
+        if value not in ["SEG_SETS", "CIRCUIT", "SURF_PARTS", "VOL_PARTS", "SURF_ELES", None]:
+            raise Exception("""type must be `None` or one of {"SEG_SETS","CIRCUIT","SURF_PARTS","VOL_PARTS","SURF_ELES"}""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -156,8 +156,8 @@ class LsoIdSet(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
-        if value not in ["MECH", "ICFD", "CESE", "EM"]:
-            raise Exception("""solver must be one of {"MECH","ICFD","CESE","EM"}""")
+        if value not in ["MECH", "ICFD", "CESE", "EM", None]:
+            raise Exception("""solver must be `None` or one of {"MECH","ICFD","CESE","EM"}""")
         self._cards[0].set_value("solver", value)
 
     @property

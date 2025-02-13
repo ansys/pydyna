@@ -306,8 +306,8 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @type_ext.setter
     def type_ext(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""type_ext must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""type_ext must be `None` or one of {1,2}""")
         self._cards[1].set_value("type_ext", value)
 
     @property
@@ -330,8 +330,8 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @type_int.setter
     def type_int(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""type_int must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""type_int must be `None` or one of {1,2}""")
         self._cards[1].set_value("type_int", value)
 
     @property
@@ -347,8 +347,8 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @fft_win.setter
     def fft_win(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4]:
-            raise Exception("""fft_win must be one of {0,1,2,3,4}""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""fft_win must be `None` or one of {0,1,2,3,4}""")
         self._cards[1].set_value("fft_win", value)
 
     @property
@@ -362,8 +362,8 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""method must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""method must be `None` or one of {0,1,2}""")
         self._cards[2].set_value("method", value)
 
     @property
@@ -417,8 +417,8 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @sstype.setter
     def sstype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""sstype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""sstype must be `None` or one of {0,1,2}""")
         self._cards[3].set_value("sstype", value)
 
     @property
@@ -431,8 +431,8 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @norm.setter
     def norm(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""norm must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""norm must be `None` or one of {0,1}""")
         self._cards[3].set_value("norm", value)
 
     @property
@@ -458,7 +458,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @restart.setter
     def restart(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""restart must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""restart must be `None` or one of {0,1}""")
         self._cards[3].set_value("restart", value)
 

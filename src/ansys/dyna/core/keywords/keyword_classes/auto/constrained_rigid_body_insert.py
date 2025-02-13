@@ -169,8 +169,8 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
-        if value not in [3, 0, 1, 2]:
-            raise Exception("""idir must be one of {3,0,1,2}""")
+        if value not in [3, 0, 1, 2, None]:
+            raise Exception("""idir must be `None` or one of {3,0,1,2}""")
         self._cards[0].set_value("idir", value)
 
     @property
@@ -185,8 +185,8 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @mflag.setter
     def mflag(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""mflag must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""mflag must be `None` or one of {0,1,2,3}""")
         self._cards[1].set_value("mflag", value)
 
     @property

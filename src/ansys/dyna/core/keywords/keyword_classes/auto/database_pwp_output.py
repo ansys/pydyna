@@ -85,8 +85,8 @@ class DatabasePwpOutput(KeywordBase):
 
     @ivel.setter
     def ivel(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""ivel must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""ivel must be `None` or one of {0,1}""")
         self._cards[0].set_value("ivel", value)
 
     @property
@@ -108,8 +108,8 @@ class DatabasePwpOutput(KeywordBase):
 
     @iaccx.setter
     def iaccx(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 9, 10, 14, 17]:
-            raise Exception("""iaccx must be one of {0,1,2,3,4,5,6,9,10,14,17}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 9, 10, 14, 17, None]:
+            raise Exception("""iaccx must be `None` or one of {0,1,2,3,4,5,6,9,10,14,17}""")
         self._cards[0].set_value("iaccx", value)
 
     @property
@@ -131,8 +131,8 @@ class DatabasePwpOutput(KeywordBase):
 
     @iaccy.setter
     def iaccy(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 9, 10, 14, 17]:
-            raise Exception("""iaccy must be one of {0,1,2,3,4,5,6,9,10,14,17}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 9, 10, 14, 17, None]:
+            raise Exception("""iaccy must be `None` or one of {0,1,2,3,4,5,6,9,10,14,17}""")
         self._cards[0].set_value("iaccy", value)
 
     @property
@@ -154,8 +154,8 @@ class DatabasePwpOutput(KeywordBase):
 
     @iaccz.setter
     def iaccz(self, value: int) -> None:
-        if value not in [0, 1, 2, 3, 4, 5, 6, 9, 10, 14, 17]:
-            raise Exception("""iaccz must be one of {0,1,2,3,4,5,6,9,10,14,17}""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 9, 10, 14, 17, None]:
+            raise Exception("""iaccz must be `None` or one of {0,1,2,3,4,5,6,9,10,14,17}""")
         self._cards[0].set_value("iaccz", value)
 
     @property

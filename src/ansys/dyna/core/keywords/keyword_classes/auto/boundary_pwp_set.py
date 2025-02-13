@@ -217,8 +217,8 @@ class BoundaryPwpSet(KeywordBase):
 
     @itotex.setter
     def itotex(self, value: int) -> None:
-        if value not in [0, 1, 2, 4]:
-            raise Exception("""itotex must be one of {0,1,2,4}""")
+        if value not in [0, 1, 2, 4, None]:
+            raise Exception("""itotex must be `None` or one of {0,1,2,4}""")
         self._cards[1].set_value("itotex", value)
 
     @property
@@ -232,8 +232,8 @@ class BoundaryPwpSet(KeywordBase):
 
     @idrflag.setter
     def idrflag(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""idrflag must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""idrflag must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("idrflag", value)
 
     @property

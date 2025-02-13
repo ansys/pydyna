@@ -233,8 +233,8 @@ class DefineAlebagBag(KeywordBase):
 
     @sidtype.setter
     def sidtype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""sidtype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""sidtype must be `None` or one of {0,1}""")
         self._cards[0].set_value("sidtype", value)
 
     @property
@@ -246,8 +246,8 @@ class DefineAlebagBag(KeywordBase):
 
     @cvbag.setter
     def cvbag(self, value: int) -> None:
-        if value not in [1, 0]:
-            raise Exception("""cvbag must be one of {1,0}""")
+        if value not in [1, 0, None]:
+            raise Exception("""cvbag must be `None` or one of {1,0}""")
         self._cards[0].set_value("cvbag", value)
 
     @property
@@ -258,8 +258,8 @@ class DefineAlebagBag(KeywordBase):
 
     @iblock.setter
     def iblock(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""iblock must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""iblock must be `None` or one of {0,1}""")
         self._cards[0].set_value("iblock", value)
 
     @property
@@ -293,8 +293,8 @@ class DefineAlebagBag(KeywordBase):
 
     @vtype.setter
     def vtype(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""vtype must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""vtype must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("vtype", value)
 
     @property
@@ -324,8 +324,8 @@ class DefineAlebagBag(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
-        if value not in [2, 1, 3, 4, 5, 6]:
-            raise Exception("""ctype must be one of {2,1,3,4,5,6}""")
+        if value not in [2, 1, 3, 4, 5, 6, None]:
+            raise Exception("""ctype must be `None` or one of {2,1,3,4,5,6}""")
         self._cards[1].set_value("ctype", value)
 
     @property
@@ -381,8 +381,8 @@ class DefineAlebagBag(KeywordBase):
 
     @ileak.setter
     def ileak(self, value: int) -> None:
-        if value not in [0, 1, 2]:
-            raise Exception("""ileak must be one of {0,1,2}""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""ileak must be `None` or one of {0,1,2}""")
         self._cards[1].set_value("ileak", value)
 
     @property

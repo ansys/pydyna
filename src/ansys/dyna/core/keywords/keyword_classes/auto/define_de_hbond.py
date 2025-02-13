@@ -204,8 +204,8 @@ class DefineDeHbond(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
-        if value not in [0, 1, 2, 3]:
-            raise Exception("""stype must be one of {0,1,2,3}""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""stype must be `None` or one of {0,1,2,3}""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -218,8 +218,8 @@ class DefineDeHbond(KeywordBase):
 
     @hbdfm.setter
     def hbdfm(self, value: int) -> None:
-        if value not in [1, 2]:
-            raise Exception("""hbdfm must be one of {1,2}""")
+        if value not in [1, 2, None]:
+            raise Exception("""hbdfm must be `None` or one of {1,2}""")
         self._cards[0].set_value("hbdfm", value)
 
     @property
@@ -232,8 +232,8 @@ class DefineDeHbond(KeywordBase):
 
     @idim.setter
     def idim(self, value: int) -> None:
-        if value not in [3, 2]:
-            raise Exception("""idim must be one of {3,2}""")
+        if value not in [3, 2, None]:
+            raise Exception("""idim must be `None` or one of {3,2}""")
         self._cards[0].set_value("idim", value)
 
     @property
@@ -336,8 +336,8 @@ class DefineDeHbond(KeywordBase):
 
     @frmdl.setter
     def frmdl(self, value: int) -> None:
-        if value not in [1, 2, 3, 4, 5, 6]:
-            raise Exception("""frmdl must be one of {1,2,3,4,5,6}""")
+        if value not in [1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""frmdl must be `None` or one of {1,2,3,4,5,6}""")
         self._cards[1].set_value("frmdl", value)
 
     @property
@@ -359,8 +359,8 @@ class DefineDeHbond(KeywordBase):
 
     @cktype.setter
     def cktype(self, value: int) -> None:
-        if value not in [0, 1]:
-            raise Exception("""cktype must be one of {0,1}""")
+        if value not in [0, 1, None]:
+            raise Exception("""cktype must be `None` or one of {0,1}""")
         self._cards[2].set_value("cktype", value)
 
     @property
