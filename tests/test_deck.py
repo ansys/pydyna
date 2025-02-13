@@ -363,7 +363,6 @@ def test_deck_read_long_deck_standard_keyword():
 def test_deck_expand(file_utils):
     """Test that a long deck can read a standard deck."""
     # I think there are more corner cases related to this to iron out..
-    file_utils.get_asset_file_path("test.k")
     deck = Deck(format=format_type.long)
     deck.append(kwd.Include(filename=file_utils.get_asset_file_path("test.k"), format=format_type.standard))
     expanded_deck = deck.expand()
