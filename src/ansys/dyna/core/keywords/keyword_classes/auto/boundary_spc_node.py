@@ -52,7 +52,7 @@ class BoundarySpcNode(KeywordBase):
                     Field("dofrz", int, 70, 10),
                 ],
                 None,
-                "nodes",
+                name="nodes",
                 **kwargs,
             ),
             OptionCardSet(

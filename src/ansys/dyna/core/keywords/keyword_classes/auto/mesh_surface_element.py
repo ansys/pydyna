@@ -45,7 +45,9 @@ class MeshSurfaceElement(KeywordBase):
                     Field("n4", int, 40, 8),
                 ],
                 None,
-                data = kwargs.get("elements")),
+                name="elements",
+                **kwargs,
+            ),
         ]
 
     @property

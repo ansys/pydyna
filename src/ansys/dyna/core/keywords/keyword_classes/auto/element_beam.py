@@ -49,7 +49,9 @@ class ElementBeam(KeywordBase):
                     Field("local", int, 72, 8),
                 ],
                 None,
-                data = kwargs.get("elements")),
+                name="elements",
+                **kwargs,
+            ),
         ]
 
     @property

@@ -47,7 +47,9 @@ class LoadNodePoint(KeywordBase):
                     Field("m3", int, 70, 10),
                 ],
                 None,
-                data = kwargs.get("nodes")),
+                name="nodes",
+                **kwargs,
+            ),
         ]
 
     @property

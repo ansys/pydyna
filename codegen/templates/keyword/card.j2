@@ -41,10 +41,10 @@
 {% else %}{# card.duplicate.length_func #}
                 None,
 {% endif %}
-                "{{card.duplicate.name}}",
 {% if card.duplicate.active_func %}
                 lambda: {{card.duplicate.active_func}},
 {% endif %}
+                name="{{card.duplicate.name}}",
                 **kwargs,
             ),
 {% elif card.duplicate_group %}

@@ -47,8 +47,8 @@ class DuplicateCard(Card):
         self,
         fields: typing.List[Field],
         length_func,
-        name=None,
         active_func=None,
+        name=None,
         format=format_type.default,
         **kwargs
     ):
@@ -62,36 +62,45 @@ class DuplicateCard(Card):
             self._length_func = length_func
 
         self._format_type = format
-        self._initialized = False
-        self._maybe_initialize_data(name, **kwargs)
+        self._initialized = self._maybe_initialize_table(name, **kwargs)
+        self._first_row = self._get_first_row(**kwargs)
 
-    def _maybe_initialize_data(self, name: str, **kwargs):
+    def _maybe_initialize_table(self, name: str, **kwargs):
         if name is not None:
             data = kwargs.get(name, None)
             if data is not None:
                 self.table = data
-                return
-        if self.bounded and self._length_func() == 0:
-            return
-        first_row = False
+                return True
+        return False
+
+    def _get_first_row(self, **kwargs) -> typing.Dict[str, typing.Any]:
+        """Get the first row data from the kwargs."""
+        if self._initialized:
+            return None
+        result = dict()
         for field in self._fields:
             if field.name in kwargs:
-                first_row = True
-        if not first_row:
-            return
-        if not self.bounded:
-            self._initialize_data(1)
-        else:
-            self._initialize()
-        for field in self._fields:
-            if field.name in kwargs:
-                self.table.loc[0, field.name] = kwargs[field.name]
+                result[field.name] = kwargs[field.name]
+        if len(result) == 0:
+            return None
+        return result
 
     def _initialize(self):
+        handle_first_row = self._first_row is not None
         if self._bounded:
-            self._initialize_data(self._length_func())
+            length = self._length_func()
+            self._initialize_data(length)
+            if length == 0:
+                handle_first_row = False
         else:
-            self._initialize_data(0)
+            initial_size = 1 if handle_first_row else 0
+            self._initialize_data(initial_size)
+
+        if handle_first_row:
+            for k,v in self._first_row.items():
+                self._table.loc[0, k] = v
+
+        self._first_row = None
         self._initialized = True
 
     @property

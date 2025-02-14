@@ -63,7 +63,9 @@ class DefineTransformation(KeywordBase):
                     Field("a7", float, 70, 10),
                 ],
                 None,
-                data = kwargs.get("transforms")),
+                name="transforms",
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = DefineTransformation.option_specs[0],
                 cards = [

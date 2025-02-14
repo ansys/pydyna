@@ -41,7 +41,9 @@ class IcfdDatabaseFlux(KeywordBase):
                     Field("dtout", float, 10, 10),
                 ],
                 None,
-                data = kwargs.get("boundaries")),
+                name="boundaries",
+                **kwargs,
+            ),
         ]
 
     @property
