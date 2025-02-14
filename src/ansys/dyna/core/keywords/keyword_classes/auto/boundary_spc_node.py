@@ -52,7 +52,9 @@ class BoundarySpcNode(KeywordBase):
                     Field("dofrz", int, 70, 10),
                 ],
                 None,
-                data = kwargs.get("nodes")),
+                "nodes",
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = BoundarySpcNode.option_specs[0],
                 cards = [
