@@ -44,13 +44,7 @@ def _check_type(value):
 
 class DuplicateCard(Card):
     def __init__(
-        self,
-        fields: typing.List[Field],
-        length_func,
-        active_func=None,
-        name=None,
-        format=format_type.default,
-        **kwargs
+        self, fields: typing.List[Field], length_func, active_func=None, name=None, format=format_type.default, **kwargs
     ):
         super().__init__(fields, active_func)
         self._format = [(field.offset, field.width) for field in self._fields]
@@ -97,7 +91,7 @@ class DuplicateCard(Card):
             self._initialize_data(initial_size)
 
         if handle_first_row:
-            for k,v in self._first_row.items():
+            for k, v in self._first_row.items():
                 self._table.loc[0, k] = v
 
         self._first_row = None
