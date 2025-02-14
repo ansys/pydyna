@@ -214,3 +214,90 @@ def test_write_empty_duplicate_card():
         lambda: True,
     )
     assert card.write() == ""
+
+@pytest.mark.keywords
+def test_duplicate_card_init_data_table():
+    node_ids = np.arange(30) + 1
+    xs = np.zeros(30) + 0.1
+    ys = np.zeros(30) + 0.2
+    zs = np.zeros(30) + 0.3
+    df = pd.DataFrame({"nid": node_ids, "x": xs, "y": ys, "z": zs})
+
+    data = {
+        "foo": df
+    }
+    card = DuplicateCard(
+        [
+            Field("nid", int, 0, 8),
+            Field("x", float, 8, 16),
+            Field("y", float, 24, 16),
+            Field("z", float, 40, 16),
+            Field("tc", int, 56, 8),
+            Field("rc", int, 64, 8),
+        ],
+        lambda: 0,
+        "foo",
+        lambda: True,
+        **data
+    )
+    table = card.table
+    assert (len(table)) == 30
+    for column in ["nid", "x", "y", "z"]:
+        assert len(df[column]) == len(table[column]), f"Length of {column} column doesn't match"
+        assert len(df[column].compare(table[column])) == 0, f"{column} column values don't match"
+
+
+@pytest.mark.keywords
+def test_duplicate_card_init_data_scalar():
+
+    def _verify_dataframe(df):
+        assert (len(df)) == 1
+        assert df["nid"][0] == 1
+        assert df["x"][0] == 0.1
+        assert pd.isna(df["y"][0])
+
+    data = {
+        "nid": 1,
+        "x": 0.1
+    }
+
+    fields = [
+        Field("nid", int, 0, 8),
+        Field("x", float, 8, 16),
+        Field("y", float, 24, 16),
+        Field("z", float, 40, 16),
+        Field("tc", int, 56, 8),
+        Field("rc", int, 64, 8),
+    ]
+
+    # bounded with a length of 0
+    card = DuplicateCard(
+        fields,
+        lambda: 0,
+        "foo",
+        lambda: True,
+        **data
+    )
+
+    assert len(card.table) == 0
+
+    # bounded with a length of 1
+    card = DuplicateCard(
+        fields,
+        lambda: 1,
+        "foo",
+        lambda: True,
+        **data
+    )
+
+    _verify_dataframe(card.table)
+
+    # unbounded
+    card = DuplicateCard(
+        fields,
+        None,
+        "foo",
+        **data
+    )
+
+    _verify_dataframe(card.table)
