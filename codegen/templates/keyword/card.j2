@@ -78,7 +78,9 @@
 {% else %}
                 None,
 {% endif %}
-                data = kwargs.get("{{card.overall_name}}")),
+                "{{card.overall_name}}",
+                **kwargs,
+            ),
 {% elif card.external %}
             {{card.external.name}}(**kwargs)
 {% else %}
