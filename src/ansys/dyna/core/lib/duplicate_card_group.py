@@ -28,7 +28,7 @@ import pandas as pd
 
 from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.card_interface import CardInterface
-from ansys.dyna.core.lib.duplicate_card import DuplicateCard
+from ansys.dyna.core.lib.duplicate_card import DuplicateCard, get_first_row, try_initialize_table
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
@@ -45,8 +45,9 @@ class DuplicateCardGroup(CardInterface):
         cards: typing.List[Card],
         length_func: typing.Callable,
         active_func: typing.Callable = None,
-        data=None,
+        name: str = None,
         format: format_type = format_type.default,
+        **kwargs
     ):
         self._cards = [_to_duplicate_card(card, length_func) for card in cards]
         self._length_func = length_func
@@ -58,14 +59,22 @@ class DuplicateCardGroup(CardInterface):
         else:
             self._bounded = True
             self._length_func = length_func
-        self._initialized = False
-        if data is not None:
-            self.table = data
+        self._initialized = try_initialize_table(self, name, **kwargs)
+        if not self._initialized:
+            first_row = get_first_row(self._get_fields(), **kwargs)
+            for card in self._cards:
+                card._first_row = first_row
+
+    def _get_fields(self):
+        fields = []
+        for card in self._cards:
+            fields.extend(card._fields)
+        return fields
 
     def _initialize(self) -> None:
         if self._initialized:
             return
-        [card._initialize() for card in self._cards]
+        [card._initialize(True) for card in self._cards]
         data = pd.concat([card.table for card in self._cards], axis=1)
         self._table = data
         self._initialized = True

@@ -41,15 +41,34 @@ def _check_type(value):
     if CHECK_TYPE:
         assert isinstance(value, pd.DataFrame), "value must be a DataFrame"
 
+def try_initialize_table(card, name: str, **kwargs):
+    """card is a DuplicateCard or a DuplicateCardGroup"""
+    if name is not None:
+        data = kwargs.get(name, None)
+        if data is not None:
+            card.table = data
+            return True
+    return False
+
+def get_first_row(fields: typing.List[Field], **kwargs) -> typing.Dict[str, typing.Any]:
+    """Get the first row data from the kwargs."""
+    result = dict()
+    for field in fields:
+        if field.name in kwargs:
+            result[field.name] = kwargs[field.name]
+    if len(result) == 0:
+        return None
+    return result
+
 
 class DuplicateCard(Card):
     def __init__(
         self,
         fields: typing.List[Field],
         length_func,
-        active_func=None,
-        name=None,
-        format=format_type.default,
+        active_func:  typing.Callable=None,
+        name: str=None,
+        format: format_type=format_type.default,
         **kwargs
     ):
         super().__init__(fields, active_func)
@@ -62,30 +81,28 @@ class DuplicateCard(Card):
             self._length_func = length_func
 
         self._format_type = format
-        self._initialized = self._maybe_initialize_table(name, **kwargs)
-        self._first_row = self._get_first_row(**kwargs)
+        self._initialized = try_initialize_table(self, name, **kwargs)
+        if not self._initialized:
+            self._first_row = get_first_row(self._fields, **kwargs)
 
-    def _maybe_initialize_table(self, name: str, **kwargs):
-        if name is not None:
-            data = kwargs.get(name, None)
-            if data is not None:
-                self.table = data
-                return True
-        return False
+    def _initialize(self, check: bool = False):
+        """Lazy initialization routine for the data frame.
 
-    def _get_first_row(self, **kwargs) -> typing.Dict[str, typing.Any]:
-        """Get the first row data from the kwargs."""
-        if self._initialized:
-            return None
-        result = dict()
-        for field in self._fields:
-            if field.name in kwargs:
-                result[field.name] = kwargs[field.name]
-        if len(result) == 0:
-            return None
-        return result
+        This can not be done in the constructor because the length function
+        might be unusable until after the keyword is fully initialized.
 
-    def _initialize(self):
+        If the card is bounded, the table should be initialized with the
+        bounded length
+
+        If the card is not bounded, the table should be initialized either
+        using the input data, if it is given, or with exactly one row
+        if the constructor **kwargs included any of the fields used by
+        the table. This is called the "first row"
+
+        Since DuplicateCard is used internally by DuplicateCardGroup,
+        it could be initialized by the duplicate card group, the first
+        row may contain fields used by other tables in the group.
+        """
         handle_first_row = self._first_row is not None
         if self._bounded:
             length = self._length_func()
@@ -98,7 +115,8 @@ class DuplicateCard(Card):
 
         if handle_first_row:
             for k,v in self._first_row.items():
-                self._table.loc[0, k] = v
+                if k in self._table:
+                    self._table.loc[0, k] = v
 
         self._first_row = None
         self._initialized = True
@@ -249,3 +267,4 @@ class DuplicateCard(Card):
         content_lines.append(self._get_comment(self._format_type))
         output = "\n".join(content_lines)
         return "DuplicateCard: \n" + output
+

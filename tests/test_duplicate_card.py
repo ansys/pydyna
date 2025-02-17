@@ -275,7 +275,6 @@ def test_duplicate_card_init_data_scalar():
         fields,
         lambda: 0,
         lambda: True,
-        "foo",
         **data
     )
 
@@ -285,7 +284,6 @@ def test_duplicate_card_init_data_scalar():
     card = DuplicateCard(
         fields,
         lambda: 1,
-        "foo",
         lambda: True,
         **data
     )
@@ -296,7 +294,6 @@ def test_duplicate_card_init_data_scalar():
     card = DuplicateCard(
         fields,
         None,
-        "foo",
         **data
     )
 
