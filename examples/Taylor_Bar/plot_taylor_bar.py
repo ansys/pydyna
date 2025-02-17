@@ -46,7 +46,6 @@ import tempfile
 
 import ansys.dpf.core as dpf
 import matplotlib.pyplot as plt
-import pandas as pd
 
 from ansys.dyna.core import Deck
 from ansys.dyna.core import keywords as kwd
