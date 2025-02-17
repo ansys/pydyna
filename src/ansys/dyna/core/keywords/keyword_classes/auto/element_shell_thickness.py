@@ -166,6 +166,7 @@ class ElementShellThickness(KeywordBase):
                     ),
                 ],
                 None,
+                None,
                 data = kwargs.get("elements")),
         ]
 
