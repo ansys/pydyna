@@ -90,6 +90,7 @@ class ConstrainedNodalRigidBody(KeywordBase):
                     ),
                 ],
                 None,
+                None,
                 data = kwargs.get("constrained_nodal_rigid_bodies")),
             OptionCardSet(
                 option_spec = ConstrainedNodalRigidBody.option_specs[0],
