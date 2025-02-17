@@ -47,7 +47,7 @@ class DuplicateCardGroup(CardInterface):
         active_func: typing.Callable = None,
         name: str = None,
         format: format_type = format_type.default,
-        **kwargs
+        **kwargs,
     ):
         self._cards = [_to_duplicate_card(card, length_func) for card in cards]
         self._length_func = length_func
