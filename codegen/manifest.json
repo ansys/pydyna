@@ -1018,6 +1018,7 @@
                 {
                     "indices": [7, 8, 9],
                     "overall-name": "anisotropic_settings",
+                    "active-finc": "self.atype and abs(self.atype)==1",
                     "length-func": "self.nf or 0"
                 }
             ],
