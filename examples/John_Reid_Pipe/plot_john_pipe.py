@@ -136,8 +136,7 @@ def write_deck(filepath):
     )
 
     # Define bracket parts and materials
-    bracket_parts = kwd.Part()
-    bracket_parts.parts = pd.DataFrame({"heading": ["Bracket"], "pid": [4], "secid": [4], "mid": [4]})
+    bracket_parts = kwd.Part(heading="Bracket", pid=4, secid=4, mid=4)
 
     deck.extend(
         [

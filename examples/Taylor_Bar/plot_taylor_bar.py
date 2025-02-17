@@ -84,8 +84,7 @@ def create_input_deck(initial_velocity):
     sec_1.elform = 1
 
     # Define part
-    part_1 = kwd.Part()
-    part_1.parts = pd.DataFrame({"pid": [1], "mid": [mat_1.mid], "secid": [sec_1.secid]})
+    part_1 = kwd.Part(pid=1, mid=mat_1.mid, secid=sec_1.secid)
 
     # Define coordinate system
     cs_1 = kwd.DefineCoordinateSystem(cid=1)
