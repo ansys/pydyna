@@ -388,7 +388,9 @@ class Mat295(KeywordBase):
                 ],
                 lambda: self.nf or 0,
                 None,
-                data = kwargs.get("anisotropic_settings")),
+                "anisotropic_settings",
+                **kwargs,
+            ),
             Card(
                 [
                     Field(

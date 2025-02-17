@@ -179,7 +179,6 @@ class Deck:
         keywords = []
         for keyword in self.all_keywords:
             if not isinstance(keyword, KeywordBase):
-                print(keyword)
                 keywords.append(keyword)
                 continue
             if keyword.keyword != "INCLUDE":

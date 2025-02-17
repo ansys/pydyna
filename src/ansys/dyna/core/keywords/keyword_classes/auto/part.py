@@ -102,7 +102,9 @@ class Part(KeywordBase):
                 ],
                 None,
                 None,
-                data = kwargs.get("parts")),
+                "parts",
+                **kwargs,
+            ),
         ]
 
     @property

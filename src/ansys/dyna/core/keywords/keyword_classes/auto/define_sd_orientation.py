@@ -51,7 +51,9 @@ class DefineSdOrientation(KeywordBase):
                     Field("nid2", int, 60, 10),
                 ],
                 None,
-                data = kwargs.get("vectors")),
+                name="vectors",
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = DefineSdOrientation.option_specs[0],
                 cards = [

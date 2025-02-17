@@ -44,7 +44,9 @@ class IcfdBoundaryPrescribedPre(KeywordBase):
                     Field("birth", float, 40, 10),
                 ],
                 None,
-                data = kwargs.get("boundaries")),
+                name="boundaries",
+                **kwargs,
+            ),
         ]
 
     @property

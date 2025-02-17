@@ -42,7 +42,9 @@ class ConstrainedAdaptivity(KeywordBase):
                     Field("nid2", int, 20, 10),
                 ],
                 None,
-                data = kwargs.get("constrains")),
+                name="constrains",
+                **kwargs,
+            ),
         ]
 
     @property

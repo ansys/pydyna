@@ -95,33 +95,33 @@ def write_deck(filepath):
         ]
     )
 
-    # Append part keywords
-    can_part = kwd.Part()
-    can_part.parts = pd.DataFrame({"heading": ["Beer Can"], "pid": [1], "secid": [1], "mid": [1], "eosid": [0]})
+    # Part keywords
+    can_part = kwd.Part(heading="Beer Can", pid=1, secid=1, mid=1, eosid=0)
+    floor_part = kwd.Part(heading="Floor", pid=2, secid=2, mid=1)
 
-    floorPart = kwd.Part()
-    floorPart.parts = pd.DataFrame({"heading": ["Floor"], "pid": [2], "secid": [2], "mid": [1]})
-
+    # Material keywords
     mat_elastic = kwd.MatElastic(mid=1, ro=2.59e-4, e=1.0e7, pr=0.33, title="Aluminum")
     mat_elastic.options["TITLE"].active = True
 
+    # Section keywords
     can_shell = kwd.SectionShell(secid=1, elform=-16, shrf=0.8333, nip=3, t1=0.002, propt=0.0, title="Beer Can")
     can_shell.options["TITLE"].active = True
 
     floor_shell = kwd.SectionShell(secid=2, elform=-16, shrf=0.833, t1=0.01, propt=0.0)
     floor_shell.options["TITLE"].active = True
     floor_shell.title = "Floor - Just for Contact (Rigid Wall Would Have Worked Also)"
-    # Append material keywords
+
     deck.extend(
         [
             can_part,
             can_shell,
-            floorPart,
+            floor_part,
             floor_shell,
             mat_elastic,
         ]
     )
 
+    # Load curve
     load_curve = kwd.DefineCurve(lcid=1, curves=pd.DataFrame({"a1": [0.00, 1.00], "o1": [0.0, 1.000]}))
     load_curve.options["TITLE"].active = True
     load_curve.title = "Load vs. Time"
