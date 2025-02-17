@@ -1392,3 +1392,13 @@ $#    temp    frther    r0toth      dudt     tempu
        0.0         0         0       0.0         0
 $# usesocs       tau     flcid
          0                    """
+
+test_mat_295_iso = """*MAT_295
+$#     mid       rho      aopt
+         1      0.01       2.0
+$#   title     itype      beta        nu
+ISO                1       2.0      0.49
+$#     mu1       mu2       mu3       mu4       mu5       mu6       mu7       mu8
+       1.0                                                                      
+$#  alpha1    alpha2    alpha3    alpha4    alpha5    alpha6    alpha7    alpha8
+       2.0                                                                      """
