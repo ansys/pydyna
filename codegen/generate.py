@@ -262,6 +262,7 @@ def handle_duplicate_card_group(kwd_data, settings):
             "sub_cards": [],
             "overall_name": card_settings["overall-name"],
             "length_func": card_settings.get("length-func", ""),
+            "active_func": card_settings.get("active-func", ""),
         }
         for index in indices:
             sub_card = kwd_data["cards"][index]
