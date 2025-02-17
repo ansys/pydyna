@@ -63,6 +63,7 @@ def get_first_row(fields: typing.List[Field], **kwargs) -> typing.Dict[str, typi
 
 class DuplicateCard(Card):
     def __init__(
+<<<<<<< HEAD
         self,
         fields: typing.List[Field],
         length_func,
@@ -70,6 +71,9 @@ class DuplicateCard(Card):
         name: str=None,
         format: format_type=format_type.default,
         **kwargs
+=======
+        self, fields: typing.List[Field], length_func, active_func=None, name=None, format=format_type.default, **kwargs
+>>>>>>> f84ce94d0e91f00fb5d06f20d89fb99bb9b06ec0
     ):
         super().__init__(fields, active_func)
         self._format = [(field.offset, field.width) for field in self._fields]
