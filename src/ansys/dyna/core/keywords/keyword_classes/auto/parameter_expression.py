@@ -41,7 +41,9 @@ class ParameterExpression(KeywordBase):
                     Field("expression", str, 10, 70),
                 ],
                 None,
-                data = kwargs.get("parameters")),
+                name="parameters",
+                **kwargs,
+            ),
         ]
 
     @property

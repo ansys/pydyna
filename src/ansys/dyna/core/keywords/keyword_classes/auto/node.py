@@ -45,7 +45,9 @@ class Node(KeywordBase):
                     Field("rc", int, 64, 8),
                 ],
                 None,
-                data = kwargs.get("nodes")),
+                name="nodes",
+                **kwargs,
+            ),
         ]
 
     @property

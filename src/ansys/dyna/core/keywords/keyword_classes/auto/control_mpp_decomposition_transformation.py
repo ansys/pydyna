@@ -109,7 +109,9 @@ class ControlMppDecompositionTransformation(KeywordBase):
                 ],
                 None,
                 None,
-                data = kwargs.get("transformation")),
+                "transformation",
+                **kwargs,
+            ),
         ]
 
     @property

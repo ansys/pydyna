@@ -131,10 +131,7 @@ def write_deck(filepath):
 
     spherePart = kwd.Part()
     spherePart.parts = pd.DataFrame({"heading": ["sphere1", "sphere2"], "pid": [1, 2], "secid": [1, 2], "mid": [1, 1]})
-    beamPart = kwd.Part()
-    beamPart.parts = pd.DataFrame(
-        {"heading": ["Pendulum Wires - Elastic Beams"], "pid": [45], "secid": [45], "mid": [45]}
-    )
+    beamPart = kwd.Part(heading="Pendulum Wires - Elastic Beams", pid=45, secid=45, mid=45)
 
     deck.extend(
         [

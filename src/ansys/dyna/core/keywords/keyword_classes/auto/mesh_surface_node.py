@@ -43,7 +43,9 @@ class MeshSurfaceNode(KeywordBase):
                     Field("z", float, 40, 16),
                 ],
                 None,
-                data = kwargs.get("nodes")),
+                name="nodes",
+                **kwargs,
+            ),
         ]
 
     @property

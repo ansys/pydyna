@@ -32,9 +32,9 @@ from ansys.dyna.core.lib.format_type import format_type
 import pytest
 
 
-def _get_test_duplicate_group(bounded: bool) -> DuplicateCardGroup:
+def _get_test_duplicate_group(bounded: bool, default_size: int=2, name = None, **kwargs) -> DuplicateCardGroup:
     if bounded:
-        lengthfunc = lambda: 2
+        lengthfunc = lambda: default_size
     else:
         lengthfunc = None
     return DuplicateCardGroup(
@@ -69,6 +69,8 @@ def _get_test_duplicate_group(bounded: bool) -> DuplicateCardGroup:
             ),
         ],
         lengthfunc,
+        name=name,
+        **kwargs
     )
 
 
@@ -226,3 +228,67 @@ def test_write_inactive_duplicate_card_group():
 def test_write_empty_duplicate_card_group():
     d = _get_test_duplicate_group(False)
     assert d.write() == ""
+
+
+@pytest.mark.keywords
+def test_duplicate_card_group_init_data_table():
+    df = pd.DataFrame(
+        {
+            "eid": [1, 1],
+            "pid": [2, 2],
+            "n1": [1, 5],
+            "n2": [2, 6],
+            "n3": [3, 7],
+            "n4": [4, 8],
+            "n5": [5, 1],
+            "n6": [6, 3],
+            "n7": [7, 2],
+            "n8": [8, 4],
+            "a1": [0.1, 0.2],
+            "a2": [0.2, 0.3],
+            "a3": [0.3, 0.4],
+            "d1": [0.3, 0.4],
+            "d2": [0.4, 0.5],
+            "d3": [0.5, 0.6],
+        }
+    )
+
+    data = {
+        "foo": df
+    }
+    card = _get_test_duplicate_group(False, name="foo", **data)
+    table = card.table
+    assert (len(table)) == 2
+    for column in ["eid", "n7", "a1", "d2"]:
+        assert len(df[column]) == len(table[column]), f"Length of {column} column doesn't match"
+        assert len(df[column].compare(table[column])) == 0, f"{column} column values don't match"
+
+@pytest.mark.keywords
+def test_duplicate_card_group_init_data_scalar():
+
+    def _verify_dataframe(df):
+        assert (len(df)) == 1
+        assert df["eid"][0] == 1
+        assert df["n7"][0] == 3
+        assert df["d2"][0] == -0.3
+        assert pd.isna(df["a1"][0])
+
+    data = {
+        "eid": 1,
+        "n7": 3,
+        "d2": -0.3
+    }
+
+    # bounded with a length of 0
+    card = _get_test_duplicate_group(True, default_size=0, **data)
+    assert len(card.table) == 0
+
+    # bounded with a length of 1
+    card = _get_test_duplicate_group(True, default_size=1, **data)
+
+    _verify_dataframe(card.table)
+
+    # unbounded
+    card = _get_test_duplicate_group(False, **data)
+
+    _verify_dataframe(card.table)

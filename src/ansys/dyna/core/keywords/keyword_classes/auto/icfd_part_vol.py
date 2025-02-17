@@ -77,7 +77,9 @@ class IcfdPartVol(KeywordBase):
                     Field("spid8", int, 70, 10),
                 ],
                 None,
-                data = kwargs.get("nodes")),
+                name="nodes",
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = IcfdPartVol.option_specs[0],
                 cards = [

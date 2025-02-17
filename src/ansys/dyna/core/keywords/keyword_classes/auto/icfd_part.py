@@ -47,7 +47,9 @@ class IcfdPart(KeywordBase):
                     Field("mid", int, 20, 10),
                 ],
                 None,
-                data = kwargs.get("nodes")),
+                name="nodes",
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = IcfdPart.option_specs[0],
                 cards = [

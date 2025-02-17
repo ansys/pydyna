@@ -213,7 +213,9 @@ class Mat181(KeywordBase):
                     Field("vflag", int, 20, 10),
                 ],
                 None,
-                data = kwargs.get("constants")),
+                name="constants",
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = Mat181.option_specs[0],
                 cards = [
