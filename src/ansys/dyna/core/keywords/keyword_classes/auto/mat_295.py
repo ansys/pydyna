@@ -388,7 +388,7 @@ class Mat295(KeywordBase):
                     ),
                 ],
                 lambda: self.nf or 0,
-                None,
+                lambda: self.atype and abs(self.atype) == 1,
                 data = kwargs.get("anisotropic_settings")),
             Card(
                 [
