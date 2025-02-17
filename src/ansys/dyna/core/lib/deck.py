@@ -393,7 +393,7 @@ class Deck:
 
         >>>deck.get_kwds_by_type("SECTION")
         """
-        return filter(lambda kwd: not isinstance(kwd, str) and kwd.keyword == type, self._keywords)
+        return filter(lambda kwd: isinstance(kwd, KeywordBase) and kwd.keyword == type, self._keywords)
 
     def get_section_by_id(self, id: int) -> typing.Optional[KeywordBase]:
         """Get the SECTION keyword in the collection for a given section ID.
