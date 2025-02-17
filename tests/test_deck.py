@@ -459,9 +459,11 @@ def test_deck_encrypted_import_expand(file_utils):
     """Import an encrypted file as a deck."""
     deck = Deck()
     filename = file_utils.assets_folder / "test_input_deck_1_1024bit.asc"
+    deck.append(kwd.Node())
     deck.append(kwd.Include(filename=filename))
     deck = deck.expand()
     _verify_encrypted_deck(deck)
+    assert len(deck.get(type="NODE")) == 1
 
 @pytest.mark.keywords
 def test_deck_remove_superfluous_newlines(ref_string):
