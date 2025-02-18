@@ -1177,12 +1177,14 @@ test_em_control_string = """*EM_CONTROL
 $#   emsol     numls   macrodt   dimtype    nperio    unused   ncylfem   ncylbem
         -1       100                   0         2                5000      5000"""
 
+
 test_parametrized_deck_string = """*KEYWORD
 *PARAMETER
 R        x      5e-4
+R        y      5e-6
 *CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET
   99999999  99999998         4         0                             0         0
-                                                &x
+                                      &y        &x
         1.        1.       -2.       -2.        1.        1.        1.        1.
 *END"""
 
