@@ -41,13 +41,13 @@ class DefineSdOrientation(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("vid", int, 0, 10),
-                    Field("iop", int, 10, 10),
-                    Field("xt", float, 20, 10),
-                    Field("yt", float, 30, 10),
-                    Field("zt", float, 40, 10),
-                    Field("nid1", int, 50, 10),
-                    Field("nid2", int, 60, 10),
+                    Field("vid", int, 0, 10, 0),
+                    Field("iop", int, 10, 10, 0),
+                    Field("xt", float, 20, 10, 0.0),
+                    Field("yt", float, 30, 10, 0.0),
+                    Field("zt", float, 40, 10, 0.0),
+                    Field("nid1", int, 50, 10, 0),
+                    Field("nid2", int, 60, 10, 0),
                 ],
                 None,
                 name="vectors",

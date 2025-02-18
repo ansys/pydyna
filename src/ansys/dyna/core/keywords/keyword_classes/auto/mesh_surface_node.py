@@ -36,10 +36,10 @@ class MeshSurfaceNode(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("nid", int, 0, 8),
-                    Field("x", float, 8, 16),
-                    Field("y", float, 24, 16),
-                    Field("z", float, 40, 16),
+                    Field("nid", int, 0, 8, None),
+                    Field("x", float, 8, 16, None),
+                    Field("y", float, 24, 16, None),
+                    Field("z", float, 40, 16, None),
                 ],
                 None,
                 name="nodes",

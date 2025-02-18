@@ -108,8 +108,8 @@ class DefineCurve(KeywordBase):
             ),
             DuplicateCard(
                 [
-                    Field("a1", float, 0, 20),
-                    Field("o1", float, 20, 20),
+                    Field("a1", float, 0, 20, 0.0),
+                    Field("o1", float, 20, 20, 0.0),
                 ],
                 None,
                 name="curves",
