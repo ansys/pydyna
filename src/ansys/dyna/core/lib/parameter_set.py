@@ -20,19 +20,5 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import typing
+from ansys.dyna.core.lib.parameters import ParameterSet
 
-
-class ParameterSet:
-    """Deck parameters."""
-
-    def __init__(self):
-        self._params = dict()
-
-    def get(self, param: str) -> typing.Any:
-        """Get a parameter by name."""
-        return self._params[param]
-
-    def add(self, param: str, value: typing.Any) -> None:
-        """Add a parameter."""
-        self._params[param] = value

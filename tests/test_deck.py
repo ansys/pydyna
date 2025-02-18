@@ -197,6 +197,16 @@ def test_deck_read_parameters():
     assert kwd.vdc == 1.12
 
 @pytest.mark.keywords
+def test_deck_read_parameter_keyword(ref_string):
+    """Test reading a deck with parameters."""
+    deck = Deck()
+    deck.loads(ref_string.test_parametrized_deck_string)
+    assert len(deck.string_keywords) == 0
+    assert len(deck.keywords) == 2
+    kwd = deck.keywords[1]
+    assert kwd.vdc == 5.0e-4
+
+@pytest.mark.keywords
 def test_deck_007():
     "unit testing for .extend"
     deck = Deck()

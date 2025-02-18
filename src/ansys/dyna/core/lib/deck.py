@@ -32,9 +32,8 @@ from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.parameter_set import ParameterSet
 from ansys.dyna.core.lib.transform import TransformHandler
-
+from ansys.dyna.core.lib.parameters import ParameterSet, ParameterHandler
 
 class Deck:
     """Provides a collection of keywords that can read and write to a keyword file."""
@@ -46,7 +45,8 @@ class Deck:
         self.comment_header: str = None
         self.title: str = title
         self.format: format_type = kwargs.get("format", format_type.default)
-        self._import_handlers: typing.List[ImportHandler] = list()
+        self._import_handlers: typing.List[ImportHandler] = [ParameterHandler()]
+        #self._import_handlers: typing.List[ImportHandler] = list()
         self._transform_handler = TransformHandler()
 
     def __add__(self, other):
@@ -347,7 +347,8 @@ class Deck:
         # ansys.dyna.keywords imports deck, deck imports deck_loader
         # deck_loader imports ansys.dyna.keywords
         from ansys.dyna.core.lib.deck_loader import load_deck
-
+        if context is None:
+            context = ImportContext(None, self, None)
         result = load_deck(self, value, context, self._import_handlers)
         return result
 
