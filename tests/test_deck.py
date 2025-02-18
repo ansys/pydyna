@@ -197,6 +197,18 @@ def test_deck_read_parameters():
     assert kwd.vdc == 1.12
 
 @pytest.mark.keywords
+def test_deck_read_parameter_keyword(ref_string):
+    """Test reading a deck with parameters."""
+    deck = Deck()
+    deck.loads(ref_string.test_parametrized_deck_string)
+    assert len(deck.string_keywords) == 0
+    assert len(deck.keywords) == 2
+    kwd = deck.keywords[1]
+    assert kwd.vdc == 5.0e-4
+    assert kwd.vc == 5.0e-6
+    assert kwd.sfsa == -2.65
+
+@pytest.mark.keywords
 def test_deck_007():
     "unit testing for .extend"
     deck = Deck()
@@ -374,8 +386,8 @@ def test_deck_expand_recursive_include_path(file_utils):
     deck = Deck()
     include_path1 = file_utils.get_asset_file_path("expand_test")
     include_path2 = os.path.join(include_path1, "fol")
-    deck.append(kwd.IncludePath(path=include_path1))
-    deck.append(kwd.IncludePath(path=include_path2))
+    deck.append(kwd.IncludePath(filename=include_path1))
+    deck.append(kwd.IncludePath(filename=include_path2))
     deck.append(kwd.Include(filename='bird_B.k'))
     deck = deck.expand(recurse=True)
     assert len(deck.all_keywords) == 40

@@ -34,7 +34,7 @@ from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import at_end_of_keyword
 from ansys.dyna.core.lib.option_card import OptionSpec
-from ansys.dyna.core.lib.parameter_set import ParameterSet
+from ansys.dyna.core.lib.parameters import ParameterSet
 
 
 class CardSet(CardInterface):

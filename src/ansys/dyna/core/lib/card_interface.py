@@ -24,9 +24,7 @@ import abc
 import typing
 
 from ansys.dyna.core.lib.format_type import format_type
-from ansys.dyna.core.lib.parameter_set import ParameterSet
-
-# TODO - implement __repr__ on all cards
+from ansys.dyna.core.lib.parameters import ParameterSet
 
 
 class CardInterface(metaclass=abc.ABCMeta):
