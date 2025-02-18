@@ -20,7 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Parameter classes."""
+
 import typing
+
+from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
+
+if typing.TYPE_CHECKING:
+    from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 
 class ParameterSet:
@@ -36,3 +43,40 @@ class ParameterSet:
     def add(self, param: str, value: typing.Any) -> None:
         """Add a parameter."""
         self._params[param] = value
+
+
+def _unpack_param(param: "kwd.Parameter.Parameter") -> typing.Union[type, str, typing.Any]:
+    """Converts parameter into type, name, and value of the given type."""
+    name_field = param.name
+    type_code = name_field[0]
+    if type_code == "R":
+        t = float
+    elif type_code == "I":
+        t = int
+    elif type_code == "C":
+        t = str
+    else:
+        raise Exception(f"Parameter name {param_name} does not name a type")
+    val = t(param.val.strip())
+    name = name_field[1:].strip()
+    return t, name, val
+
+
+def _load_parameters(deck, parameter: "kwd.Parameter"):
+    for p in parameter.parameters:
+        t, name, val = _unpack_param(p)
+        deck.parameters.add(name, val)
+
+
+class ParameterHandler(ImportHandler):
+    def __init__(self):
+        pass
+
+    def after_import(self, context: ImportContext, keyword: typing.Union["KeywordBase", str]) -> None:
+        from ansys.dyna.core import keywords as kwd
+
+        if isinstance(keyword, kwd.Parameter):
+            _load_parameters(context.deck, keyword)
+
+    def on_error(self, error):
+        pass

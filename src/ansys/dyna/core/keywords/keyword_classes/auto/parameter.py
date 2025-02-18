@@ -20,10 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import dataclasses
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
-from ansys.dyna.core.lib.duplicate_card import DuplicateCard
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Parameter(KeywordBase):
@@ -32,33 +33,29 @@ class Parameter(KeywordBase):
     keyword = "PARAMETER"
     subkeyword = "PARAMETER"
 
+    @dataclasses.dataclass
+    class Parameter:
+        name: str = None
+        val: str = None
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._cards = [
-            DuplicateCard(
-                [
-                    Field("prmr1", str, 0, 10),
-                    Field("val1", str, 10, 10),
-                    Field("prmr2", str, 20, 10),
-                    Field("val2", str, 30, 10),
-                    Field("prmr3", str, 40, 10),
-                    Field("val3", str, 50, 10),
-                    Field("prmr4", str, 60, 10),
-                    Field("val4", str, 70, 10),
-                ],
+            SeriesCard(
+                "parameters",
+                8,
+                10,
+                self.Parameter,
                 None,
-                name="parameters",
-                **kwargs,
-            ),
+                data = kwargs.get("parameters")),
         ]
 
     @property
-    def parameters(self):
-        '''Gets the table of parameters'''
-        return self._cards[0].table
+    def parameters(self) -> SeriesCard:
+        """Parameters."""
+        return self._cards[0]
 
     @parameters.setter
-    def parameters(self, df):
-        '''sets parameters from the dataframe df'''
-        self._cards[0].table = df
+    def parameters(self, value: typing.List) -> None:
+        self._cards[0].data = value
 

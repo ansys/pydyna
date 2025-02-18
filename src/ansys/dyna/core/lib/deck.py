@@ -32,7 +32,7 @@ from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.parameter_set import ParameterSet
+from ansys.dyna.core.lib.parameters import ParameterHandler, ParameterSet
 from ansys.dyna.core.lib.transform import TransformHandler
 
 
@@ -46,7 +46,7 @@ class Deck:
         self.comment_header: str = None
         self.title: str = title
         self.format: format_type = kwargs.get("format", format_type.default)
-        self._import_handlers: typing.List[ImportHandler] = list()
+        self._import_handlers: typing.List[ImportHandler] = [ParameterHandler()]
         self._transform_handler = TransformHandler()
 
     def __add__(self, other):
@@ -185,7 +185,7 @@ class Deck:
                 keywords.append(keyword)
                 continue
             if keyword.subkeyword == "PATH":
-                search_paths.append(keyword.path)
+                search_paths.append(keyword.filename)
                 keywords.append(keyword)
                 continue
             success = False
@@ -208,6 +208,7 @@ class Deck:
                     pass
             if success:
                 if recurse:
+                    # TODO: merge the parameters if the "LOCAL" option is not used!
                     expanded = include_deck._expand_helper(search_paths, True)
                     keywords.extend(expanded)
                 else:
@@ -348,6 +349,8 @@ class Deck:
         # deck_loader imports ansys.dyna.keywords
         from ansys.dyna.core.lib.deck_loader import load_deck
 
+        if context is None:
+            context = ImportContext(None, self, None)
         result = load_deck(self, value, context, self._import_handlers)
         return result
 

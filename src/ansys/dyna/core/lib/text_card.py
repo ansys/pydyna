@@ -25,7 +25,7 @@ import typing
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
-from ansys.dyna.core.lib.parameter_set import ParameterSet
+from ansys.dyna.core.lib.parameters import ParameterSet
 
 # TODO - should TextCard do anything special for long format?
 
