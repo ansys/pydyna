@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementMassMatrixNodeSet(KeywordBase):
@@ -41,21 +40,21 @@ class ElementMassMatrixNodeSet(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "id",
                         int,
                         8,
                         8,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         float,
                         16,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,49 +65,56 @@ class ElementMassMatrixNodeSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("m11", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m21",
                         float,
                         10,
                         10,
-                        kwargs.get("m21", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m22",
                         float,
                         20,
                         10,
-                        kwargs.get("m22", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m31",
                         float,
                         30,
                         10,
-                        kwargs.get("m31", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m32",
                         float,
                         40,
                         10,
-                        kwargs.get("m32", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m33",
                         float,
                         50,
                         10,
-                        kwargs.get("m33", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m41",
                         float,
                         60,
                         10,
-                        kwargs.get("m41", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,49 +125,56 @@ class ElementMassMatrixNodeSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("m41", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m43",
                         float,
                         10,
                         10,
-                        kwargs.get("m43", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m44",
                         float,
                         20,
                         10,
-                        kwargs.get("m44", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m51",
                         float,
                         30,
                         10,
-                        kwargs.get("m51", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m52",
                         float,
                         40,
                         10,
-                        kwargs.get("m52", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m53",
                         float,
                         50,
                         10,
-                        kwargs.get("m53", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m54",
                         float,
                         60,
                         10,
-                        kwargs.get("m54", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -172,49 +185,56 @@ class ElementMassMatrixNodeSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("m55", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m61",
                         float,
                         10,
                         10,
-                        kwargs.get("m61", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m62",
                         float,
                         20,
                         10,
-                        kwargs.get("m62", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m63",
                         float,
                         30,
                         10,
-                        kwargs.get("m63", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m64",
                         float,
                         40,
                         10,
-                        kwargs.get("m64", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m65",
                         float,
                         50,
                         10,
-                        kwargs.get("m65", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m66",
                         float,
                         60,
                         10,
-                        kwargs.get("m66", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

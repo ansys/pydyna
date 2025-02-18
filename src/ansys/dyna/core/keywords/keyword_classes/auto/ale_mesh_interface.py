@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleMeshInterface(KeywordBase):
@@ -41,28 +40,31 @@ class AleMeshInterface(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mmgset")
+                        **kwargs,
                     ),
                     Field(
                         "nowrt",
                         int,
                         10,
                         10,
-                        kwargs.get("nowrt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "volrat",
                         float,
                         20,
                         10,
-                        kwargs.get("volrat", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "interp",
                         int,
                         30,
                         10,
-                        kwargs.get("interp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -73,14 +75,16 @@ class AleMeshInterface(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("edgmin", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "edgmax",
                         float,
                         10,
                         10,
-                        kwargs.get("edgmax", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

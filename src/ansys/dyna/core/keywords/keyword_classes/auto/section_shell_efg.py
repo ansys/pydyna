@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,63 @@ class SectionShellEfg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "elform",
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "shrf",
                         float,
                         20,
                         10,
-                        kwargs.get("shrf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "nip",
                         int,
                         30,
                         10,
-                        kwargs.get("nip", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "propt",
                         float,
                         40,
                         10,
-                        kwargs.get("propt", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "qr/irid",
                         int,
                         50,
                         10,
-                        kwargs.get("qr/irid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "icomp",
                         int,
                         60,
                         10,
-                        kwargs.get("icomp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "setyp",
                         int,
                         70,
                         10,
-                        kwargs.get("setyp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,42 +112,48 @@ class SectionShellEfg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "t2",
                         float,
                         10,
                         10,
-                        kwargs.get("t2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "t3",
                         float,
                         20,
                         10,
-                        kwargs.get("t3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "t4",
                         float,
                         30,
                         10,
-                        kwargs.get("t4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nloc",
                         float,
                         40,
                         10,
-                        kwargs.get("nloc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "marea",
                         float,
                         50,
                         10,
-                        kwargs.get("marea", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -152,42 +164,48 @@ class SectionShellEfg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dx", 1.1 if use_lspp_defaults() else None)
+                        1.1,
+                        **kwargs,
                     ),
                     Field(
                         "dy",
                         float,
                         10,
                         10,
-                        kwargs.get("dy", 1.1 if use_lspp_defaults() else None)
+                        1.1,
+                        **kwargs,
                     ),
                     Field(
                         "ispline",
                         int,
                         20,
                         10,
-                        kwargs.get("ispline", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "idila",
                         int,
                         30,
                         10,
-                        kwargs.get("idila", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iebt",
                         int,
                         40,
                         10,
-                        kwargs.get("iebt", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "idim",
                         int,
                         50,
                         10,
-                        kwargs.get("idim", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -198,56 +216,64 @@ class SectionShellEfg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nipp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nxdof",
                         int,
                         10,
                         10,
-                        kwargs.get("nxdof", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iunf",
                         int,
                         20,
                         10,
-                        kwargs.get("iunf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ihgf",
                         int,
                         30,
                         10,
-                        kwargs.get("ihgf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "itaj",
                         int,
                         40,
                         10,
-                        kwargs.get("itaj", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lmc",
                         int,
                         50,
                         10,
-                        kwargs.get("lmc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nhsv",
                         int,
                         60,
                         10,
-                        kwargs.get("nhsv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iloc",
                         int,
                         70,
                         10,
-                        kwargs.get("iloc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -258,21 +284,21 @@ class SectionShellEfg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xi")
+                        **kwargs,
                     ),
                     Field(
                         "eta",
                         float,
                         10,
                         10,
-                        kwargs.get("eta")
+                        **kwargs,
                     ),
                     Field(
                         "wgt",
                         float,
                         20,
                         10,
-                        kwargs.get("wgt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -283,56 +309,56 @@ class SectionShellEfg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("bi")
+                        **kwargs,
                     ),
                     Field(
                         "bi",
                         float,
                         10,
                         10,
-                        kwargs.get("bi")
+                        **kwargs,
                     ),
                     Field(
                         "bi",
                         float,
                         20,
                         10,
-                        kwargs.get("bi")
+                        **kwargs,
                     ),
                     Field(
                         "bi",
                         float,
                         30,
                         10,
-                        kwargs.get("bi")
+                        **kwargs,
                     ),
                     Field(
                         "bi",
                         float,
                         40,
                         10,
-                        kwargs.get("bi")
+                        **kwargs,
                     ),
                     Field(
                         "bi",
                         float,
                         50,
                         10,
-                        kwargs.get("bi")
+                        **kwargs,
                     ),
                     Field(
                         "bi",
                         float,
                         60,
                         10,
-                        kwargs.get("bi")
+                        **kwargs,
                     ),
                     Field(
                         "bi",
                         float,
                         70,
                         10,
-                        kwargs.get("bi")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -343,56 +369,64 @@ class SectionShellEfg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pi", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pi",
                         float,
                         10,
                         10,
-                        kwargs.get("pi", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pi",
                         float,
                         20,
                         10,
-                        kwargs.get("pi", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pi",
                         float,
                         30,
                         10,
-                        kwargs.get("pi", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pi",
                         float,
                         40,
                         10,
-                        kwargs.get("pi", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pi",
                         float,
                         50,
                         10,
-                        kwargs.get("pi", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pi",
                         float,
                         60,
                         10,
-                        kwargs.get("pi", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pi",
                         float,
                         70,
                         10,
-                        kwargs.get("pi", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagWangNefskePopId(KeywordBase):
@@ -41,14 +40,14 @@ class AirbagWangNefskePopId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,63 @@ class AirbagWangNefskePopId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "sidtyp",
                         int,
                         10,
                         10,
-                        kwargs.get("sidtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rbid",
                         int,
                         20,
                         10,
-                        kwargs.get("rbid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vsca",
                         float,
                         30,
                         10,
-                        kwargs.get("vsca", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "psca",
                         float,
                         40,
                         10,
-                        kwargs.get("psca", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "vini",
                         float,
                         50,
                         10,
-                        kwargs.get("vini", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "mwd",
                         float,
                         60,
                         10,
-                        kwargs.get("mwd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "spsf",
                         float,
                         70,
                         10,
-                        kwargs.get("spsf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,56 +125,61 @@ class AirbagWangNefskePopId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cv")
+                        **kwargs,
                     ),
                     Field(
                         "cp",
                         float,
                         10,
                         10,
-                        kwargs.get("cp")
+                        **kwargs,
                     ),
                     Field(
                         "t",
                         float,
                         20,
                         10,
-                        kwargs.get("t", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lct",
                         int,
                         30,
                         10,
-                        kwargs.get("lct", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcmt",
                         int,
                         40,
                         10,
-                        kwargs.get("lcmt")
+                        **kwargs,
                     ),
                     Field(
                         "tvol",
                         float,
                         50,
                         10,
-                        kwargs.get("tvol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdt",
                         int,
                         60,
                         10,
-                        kwargs.get("lcdt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iabt",
                         float,
                         70,
                         10,
-                        kwargs.get("iabt", not used if use_lspp_defaults() else None)
+                        not used,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -179,56 +190,61 @@ class AirbagWangNefskePopId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c23")
+                        **kwargs,
                     ),
                     Field(
                         "lcc23",
                         int,
                         10,
                         10,
-                        kwargs.get("lcc23", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "a23",
                         float,
                         20,
                         10,
-                        kwargs.get("a23")
+                        **kwargs,
                     ),
                     Field(
                         "lca23",
                         int,
                         30,
                         10,
-                        kwargs.get("lca23", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cp23",
                         float,
                         40,
                         10,
-                        kwargs.get("cp23")
+                        **kwargs,
                     ),
                     Field(
                         "lccp23",
                         int,
                         50,
                         10,
-                        kwargs.get("lccp23", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ap23",
                         float,
                         60,
                         10,
-                        kwargs.get("ap23", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcap23",
                         int,
                         70,
                         10,
-                        kwargs.get("lcap23", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -239,56 +255,61 @@ class AirbagWangNefskePopId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pe")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "gc",
                         float,
                         20,
                         10,
-                        kwargs.get("gc")
+                        **kwargs,
                     ),
                     Field(
                         "lcefr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcefr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pover",
                         float,
                         40,
                         10,
-                        kwargs.get("pover", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ppop",
                         float,
                         50,
                         10,
-                        kwargs.get("ppop", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "opt",
                         int,
                         60,
                         10,
-                        kwargs.get("opt", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "knkdn",
                         int,
                         70,
                         10,
-                        kwargs.get("knkdn", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -299,42 +320,42 @@ class AirbagWangNefskePopId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ioc")
+                        **kwargs,
                     ),
                     Field(
                         "ioa",
                         float,
                         10,
                         10,
-                        kwargs.get("ioa")
+                        **kwargs,
                     ),
                     Field(
                         "ivol",
                         float,
                         20,
                         10,
-                        kwargs.get("ivol")
+                        **kwargs,
                     ),
                     Field(
                         "iro",
                         float,
                         30,
                         10,
-                        kwargs.get("iro")
+                        **kwargs,
                     ),
                     Field(
                         "it",
                         float,
                         40,
                         10,
-                        kwargs.get("it")
+                        **kwargs,
                     ),
                     Field(
                         "lcbf",
                         int,
                         50,
                         10,
-                        kwargs.get("lcbf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -345,42 +366,43 @@ class AirbagWangNefskePopId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("text")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         10,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         20,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "mw",
                         float,
                         30,
                         10,
-                        kwargs.get("mw")
+                        **kwargs,
                     ),
                     Field(
                         "gasc",
                         float,
                         40,
                         10,
-                        kwargs.get("gasc")
+                        **kwargs,
                     ),
                     Field(
                         "hconv",
                         float,
                         50,
                         10,
-                        kwargs.get("hconv", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -391,56 +413,63 @@ class AirbagWangNefskePopId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tdp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "axp",
                         float,
                         10,
                         10,
-                        kwargs.get("axp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ayp",
                         float,
                         20,
                         10,
-                        kwargs.get("ayp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "azp",
                         float,
                         30,
                         10,
-                        kwargs.get("azp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "amagp",
                         float,
                         40,
                         10,
-                        kwargs.get("amagp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tdurp",
                         float,
                         50,
                         10,
-                        kwargs.get("tdurp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tda",
                         float,
                         60,
                         10,
-                        kwargs.get("tda", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rbidp",
                         int,
                         70,
                         10,
-                        kwargs.get("rbidp")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,54 @@ class DefineFormingBlankmesh(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idmsh")
+                        **kwargs,
                     ),
                     Field(
                         "eleng",
                         float,
                         10,
                         10,
-                        kwargs.get("eleng", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xleng",
                         float,
                         20,
                         10,
-                        kwargs.get("xleng", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yleng",
                         float,
                         30,
                         10,
-                        kwargs.get("yleng", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "anglex",
                         float,
                         40,
                         10,
-                        kwargs.get("anglex", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nplane",
                         int,
                         50,
                         10,
-                        kwargs.get("nplane", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         60,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,56 +103,61 @@ class DefineFormingBlankmesh(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pidbk")
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         10,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "eid",
                         int,
                         20,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "xcent",
                         float,
                         30,
                         10,
-                        kwargs.get("xcent", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ycent",
                         float,
                         40,
                         10,
-                        kwargs.get("ycent", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zcent",
                         float,
                         50,
                         10,
-                        kwargs.get("zcent", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xshift",
                         float,
                         60,
                         10,
-                        kwargs.get("xshift", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yshift",
                         float,
                         70,
                         10,
-                        kwargs.get("yshift", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

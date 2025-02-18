@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitAuto(KeywordBase):
@@ -41,56 +40,59 @@ class ControlImplicitAuto(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iauto", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iteopt",
                         int,
                         10,
                         10,
-                        kwargs.get("iteopt", 11 if use_lspp_defaults() else None)
+                        11,
+                        **kwargs,
                     ),
                     Field(
                         "itewin",
                         int,
                         20,
                         10,
-                        kwargs.get("itewin", 5 if use_lspp_defaults() else None)
+                        5,
+                        **kwargs,
                     ),
                     Field(
                         "dtmin",
                         float,
                         30,
                         10,
-                        kwargs.get("dtmin")
+                        **kwargs,
                     ),
                     Field(
                         "dtmax",
                         float,
                         40,
                         10,
-                        kwargs.get("dtmax")
+                        **kwargs,
                     ),
                     Field(
                         "dtexp",
                         float,
                         50,
                         10,
-                        kwargs.get("dtexp")
+                        **kwargs,
                     ),
                     Field(
                         "kfail",
                         int,
                         60,
                         10,
-                        kwargs.get("kfail")
+                        **kwargs,
                     ),
                     Field(
                         "kcycle",
                         int,
                         70,
                         10,
-                        kwargs.get("kcycle")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +103,56 @@ class ControlImplicitAuto(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hcmin")
+                        **kwargs,
                     ),
                     Field(
                         "hcmax",
                         float,
                         10,
                         10,
-                        kwargs.get("hcmax")
+                        **kwargs,
                     ),
                     Field(
                         "hmmin",
                         float,
                         20,
                         10,
-                        kwargs.get("hmmin")
+                        **kwargs,
                     ),
                     Field(
                         "hmmax",
                         float,
                         30,
                         10,
-                        kwargs.get("hmmax")
+                        **kwargs,
                     ),
                     Field(
                         "hntmax",
                         float,
                         40,
                         10,
-                        kwargs.get("hntmax")
+                        **kwargs,
                     ),
                     Field(
                         "hnrmax",
                         float,
                         50,
                         10,
-                        kwargs.get("hnrmax")
+                        **kwargs,
                     ),
                     Field(
                         "hrtmax",
                         float,
                         60,
                         10,
-                        kwargs.get("hrtmax")
+                        **kwargs,
                     ),
                     Field(
                         "hrrmax",
                         float,
                         70,
                         10,
-                        kwargs.get("hrrmax")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.iauto == 3,

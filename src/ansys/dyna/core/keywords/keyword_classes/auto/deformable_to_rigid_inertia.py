@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DeformableToRigidInertia(KeywordBase):
@@ -41,7 +40,7 @@ class DeformableToRigidInertia(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,28 +51,28 @@ class DeformableToRigidInertia(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xc")
+                        **kwargs,
                     ),
                     Field(
                         "yc",
                         float,
                         10,
                         10,
-                        kwargs.get("yc")
+                        **kwargs,
                     ),
                     Field(
                         "zc",
                         float,
                         20,
                         10,
-                        kwargs.get("zc")
+                        **kwargs,
                     ),
                     Field(
                         "tm",
                         float,
                         30,
                         10,
-                        kwargs.get("tm")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -84,42 +83,45 @@ class DeformableToRigidInertia(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ixx")
+                        **kwargs,
                     ),
                     Field(
                         "ixy",
                         float,
                         10,
                         10,
-                        kwargs.get("ixy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ixz",
                         float,
                         20,
                         10,
-                        kwargs.get("ixz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "iyy",
                         float,
                         30,
                         10,
-                        kwargs.get("iyy")
+                        **kwargs,
                     ),
                     Field(
                         "iyz",
                         float,
                         40,
                         10,
-                        kwargs.get("iyz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "izz",
                         float,
                         50,
                         10,
-                        kwargs.get("izz")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,40 @@ class DefineSpotweldFailureResultants(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dsn",
                         float,
                         10,
                         10,
-                        kwargs.get("dsn", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dss",
                         float,
                         20,
                         10,
-                        kwargs.get("dss", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dlcidsn",
                         int,
                         30,
                         10,
-                        kwargs.get("dlcidsn", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dlcidss",
                         int,
                         40,
                         10,
-                        kwargs.get("dlcidss", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,42 +89,46 @@ class DefineSpotweldFailureResultants(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid_i")
+                        **kwargs,
                     ),
                     Field(
                         "pid_j",
                         int,
                         10,
                         10,
-                        kwargs.get("pid_j")
+                        **kwargs,
                     ),
                     Field(
                         "snij",
                         float,
                         20,
                         10,
-                        kwargs.get("snij", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ssij",
                         float,
                         30,
                         10,
-                        kwargs.get("ssij", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcidsnij",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidsnij", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcidssij",
                         int,
                         50,
                         10,
-                        kwargs.get("lcidssij", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

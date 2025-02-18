@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainPathPartition(KeywordBase):
@@ -41,21 +40,21 @@ class FrequencyDomainPathPartition(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fbeg")
+                        **kwargs,
                     ),
                     Field(
                         "fend",
                         float,
                         10,
                         10,
-                        kwargs.get("fend")
+                        **kwargs,
                     ),
                     Field(
                         "filename",
                         str,
                         20,
                         60,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),

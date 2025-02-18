@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,56 +46,60 @@ class ContactForceTransducerPenalty(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("surfa")
+                        **kwargs,
                     ),
                     Field(
                         "surfb",
                         int,
                         10,
                         10,
-                        kwargs.get("surfb")
+                        **kwargs,
                     ),
                     Field(
                         "surfatyp",
                         int,
                         20,
                         10,
-                        kwargs.get("surfatyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "surfbtyp",
                         int,
                         30,
                         10,
-                        kwargs.get("surfbtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "saboxid",
                         int,
                         40,
                         10,
-                        kwargs.get("saboxid")
+                        **kwargs,
                     ),
                     Field(
                         "sbboxid",
                         int,
                         50,
                         10,
-                        kwargs.get("sbboxid")
+                        **kwargs,
                     ),
                     Field(
                         "sapr",
                         int,
                         60,
                         10,
-                        kwargs.get("sapr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sbpr",
                         int,
                         70,
                         10,
-                        kwargs.get("sbpr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,56 +110,56 @@ class ContactForceTransducerPenalty(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -167,56 +170,56 @@ class ContactForceTransducerPenalty(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),

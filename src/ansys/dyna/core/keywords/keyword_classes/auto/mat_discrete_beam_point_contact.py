@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,50 @@ class MatDiscreteBeamPointContact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "stiff",
                         float,
                         20,
                         10,
-                        kwargs.get("stiff")
+                        **kwargs,
                     ),
                     Field(
                         "fric",
                         float,
                         30,
                         10,
-                        kwargs.get("fric")
+                        **kwargs,
                     ),
                     Field(
                         "damp",
                         float,
                         40,
                         10,
-                        kwargs.get("damp")
+                        **kwargs,
                     ),
                     Field(
                         "dmxpz",
                         float,
                         50,
                         10,
-                        kwargs.get("dmxpz", 1.e20 if use_lspp_defaults() else None)
+                        1.e20,
+                        **kwargs,
                     ),
                     Field(
                         "limpz",
                         float,
                         60,
                         10,
-                        kwargs.get("limpz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,56 +99,60 @@ class MatDiscreteBeamPointContact(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dmxpx", 1.e20 if use_lspp_defaults() else None)
+                        1.e20,
+                        **kwargs,
                     ),
                     Field(
                         "dmxnx",
                         float,
                         10,
                         10,
-                        kwargs.get("dmxnx", 1.e20 if use_lspp_defaults() else None)
+                        1.e20,
+                        **kwargs,
                     ),
                     Field(
                         "dmxpy",
                         float,
                         20,
                         10,
-                        kwargs.get("dmxpy", 1.e20 if use_lspp_defaults() else None)
+                        1.e20,
+                        **kwargs,
                     ),
                     Field(
                         "dmxny",
                         float,
                         30,
                         10,
-                        kwargs.get("dmxny", 1.e20 if use_lspp_defaults() else None)
+                        1.e20,
+                        **kwargs,
                     ),
                     Field(
                         "limpx",
                         float,
                         40,
                         10,
-                        kwargs.get("limpx")
+                        **kwargs,
                     ),
                     Field(
                         "limnx",
                         float,
                         50,
                         10,
-                        kwargs.get("limnx")
+                        **kwargs,
                     ),
                     Field(
                         "limpy",
                         float,
                         60,
                         10,
-                        kwargs.get("limpy")
+                        **kwargs,
                     ),
                     Field(
                         "limny",
                         float,
                         70,
                         10,
-                        kwargs.get("limny")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -159,56 +163,58 @@ class MatDiscreteBeamPointContact(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("krotx")
+                        **kwargs,
                     ),
                     Field(
                         "kroty",
                         float,
                         10,
                         10,
-                        kwargs.get("kroty")
+                        **kwargs,
                     ),
                     Field(
                         "krotz",
                         float,
                         20,
                         10,
-                        kwargs.get("krotz")
+                        **kwargs,
                     ),
                     Field(
                         "tkrot",
                         float,
                         30,
                         10,
-                        kwargs.get("tkrot")
+                        **kwargs,
                     ),
                     Field(
                         "fbondh",
                         float,
                         40,
                         10,
-                        kwargs.get("fbondh")
+                        **kwargs,
                     ),
                     Field(
                         "fbondt",
                         float,
                         50,
                         10,
-                        kwargs.get("fbondt")
+                        **kwargs,
                     ),
                     Field(
                         "dbondh",
                         float,
                         60,
                         10,
-                        kwargs.get("dbondh", 1.e20 if use_lspp_defaults() else None)
+                        1.e20,
+                        **kwargs,
                     ),
                     Field(
                         "dbondt",
                         float,
                         70,
                         10,
-                        kwargs.get("dbondt", 1.e20 if use_lspp_defaults() else None)
+                        1.e20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -219,49 +225,51 @@ class MatDiscreteBeamPointContact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcz", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dampz",
                         float,
                         10,
                         10,
-                        kwargs.get("dampz")
+                        **kwargs,
                     ),
                     Field(
                         "stiffh",
                         float,
                         20,
                         10,
-                        kwargs.get("stiffh")
+                        **kwargs,
                     ),
                     Field(
                         "frmax",
                         float,
                         30,
                         10,
-                        kwargs.get("frmax")
+                        **kwargs,
                     ),
                     Field(
                         "damph",
                         float,
                         40,
                         10,
-                        kwargs.get("damph")
+                        **kwargs,
                     ),
                     Field(
                         "gap0",
                         float,
                         50,
                         10,
-                        kwargs.get("gap0")
+                        **kwargs,
                     ),
                     Field(
                         "afac",
                         float,
                         60,
                         10,
-                        kwargs.get("afac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

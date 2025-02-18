@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitInertiaRelief(KeywordBase):
@@ -41,21 +40,24 @@ class ControlImplicitInertiaRelief(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("irflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "thresh",
                         float,
                         10,
                         10,
-                        kwargs.get("thresh", 0.001 if use_lspp_defaults() else None)
+                        0.001,
+                        **kwargs,
                     ),
                     Field(
                         "ircnt",
                         int,
                         20,
                         10,
-                        kwargs.get("ircnt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,56 +68,56 @@ class ControlImplicitInertiaRelief(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mode1")
+                        **kwargs,
                     ),
                     Field(
                         "mode2",
                         int,
                         10,
                         10,
-                        kwargs.get("mode2")
+                        **kwargs,
                     ),
                     Field(
                         "mode3",
                         int,
                         20,
                         10,
-                        kwargs.get("mode3")
+                        **kwargs,
                     ),
                     Field(
                         "mode1",
                         int,
                         30,
                         10,
-                        kwargs.get("mode1")
+                        **kwargs,
                     ),
                     Field(
                         "mode1",
                         int,
                         40,
                         10,
-                        kwargs.get("mode1")
+                        **kwargs,
                     ),
                     Field(
                         "mode1",
                         int,
                         50,
                         10,
-                        kwargs.get("mode1")
+                        **kwargs,
                     ),
                     Field(
                         "mode1",
                         int,
                         60,
                         10,
-                        kwargs.get("mode1")
+                        **kwargs,
                     ),
                     Field(
                         "mode1",
                         int,
                         70,
                         10,
-                        kwargs.get("mode1")
+                        **kwargs,
                     ),
                 ],
             ),

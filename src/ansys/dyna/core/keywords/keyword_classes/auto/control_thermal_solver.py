@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlThermalSolver(KeywordBase):
@@ -41,56 +40,63 @@ class ControlThermalSolver(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("atype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ptype",
                         int,
                         10,
                         10,
-                        kwargs.get("ptype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "solver",
                         int,
                         20,
                         10,
-                        kwargs.get("solver", 11 if use_lspp_defaults() else None)
+                        11,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "gpt",
                         int,
                         40,
                         10,
-                        kwargs.get("gpt", 8 if use_lspp_defaults() else None)
+                        8,
+                        **kwargs,
                     ),
                     Field(
                         "eqheat",
                         float,
                         50,
                         10,
-                        kwargs.get("eqheat", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "fwork",
                         float,
                         60,
                         10,
-                        kwargs.get("fwork", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sbc",
                         float,
                         70,
                         10,
-                        kwargs.get("sbc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +107,62 @@ class ControlThermalSolver(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("msglvl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "maxitr",
                         int,
                         10,
                         10,
-                        kwargs.get("maxitr", 500 if use_lspp_defaults() else None)
+                        500,
+                        **kwargs,
                     ),
                     Field(
                         "abstol",
                         float,
                         20,
                         10,
-                        kwargs.get("abstol", 1.0e-10 if use_lspp_defaults() else None)
+                        1.0e-10,
+                        **kwargs,
                     ),
                     Field(
                         "reltol",
                         float,
                         30,
                         10,
-                        kwargs.get("reltol", 1.0E-06 if use_lspp_defaults() else None)
+                        1.0E-06,
+                        **kwargs,
                     ),
                     Field(
                         "omega",
                         float,
                         40,
                         10,
-                        kwargs.get("omega", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "tsf",
                         float,
                         70,
                         10,
-                        kwargs.get("tsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,35 +173,39 @@ class ControlThermalSolver(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mxdmp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dtvf",
                         float,
                         10,
                         10,
-                        kwargs.get("dtvf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "varden",
                         int,
                         20,
                         10,
-                        kwargs.get("varden", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ncycl",
                         int,
                         40,
                         10,
-                        kwargs.get("ncycl", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),

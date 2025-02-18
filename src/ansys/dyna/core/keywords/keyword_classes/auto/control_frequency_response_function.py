@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFrequencyResponseFunction(KeywordBase):
@@ -41,56 +40,63 @@ class ControlFrequencyResponseFunction(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n1typ",
                         int,
                         10,
                         10,
-                        kwargs.get("n1typ", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dof1",
                         int,
                         20,
                         10,
-                        kwargs.get("dof1", -4 if use_lspp_defaults() else None)
+                        -4,
+                        **kwargs,
                     ),
                     Field(
                         "vad1",
                         int,
                         30,
                         10,
-                        kwargs.get("vad1", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         int,
                         40,
                         10,
-                        kwargs.get("vid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fnmax",
                         float,
                         50,
                         10,
-                        kwargs.get("fnmax", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "mdmin",
                         int,
                         60,
                         10,
-                        kwargs.get("mdmin", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mdmax",
                         int,
                         70,
                         10,
-                        kwargs.get("mdmax", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,35 +107,40 @@ class ControlFrequencyResponseFunction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dampf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdam",
                         int,
                         10,
                         10,
-                        kwargs.get("lcdam", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lctyp",
                         int,
                         20,
                         10,
-                        kwargs.get("lctyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dmpmas",
                         float,
                         30,
                         10,
-                        kwargs.get("dmpmas", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dmpstf",
                         float,
                         40,
                         10,
-                        kwargs.get("dmpstf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,28 +151,31 @@ class ControlFrequencyResponseFunction(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n2typ",
                         int,
                         10,
                         10,
-                        kwargs.get("n2typ", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dof2",
                         int,
                         20,
                         10,
-                        kwargs.get("dof2", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "vad2",
                         int,
                         30,
                         10,
-                        kwargs.get("vad2", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -172,42 +186,45 @@ class ControlFrequencyResponseFunction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fmin")
+                        **kwargs,
                     ),
                     Field(
                         "fmax",
                         float,
                         10,
                         10,
-                        kwargs.get("fmax")
+                        **kwargs,
                     ),
                     Field(
                         "nfreq",
                         int,
                         20,
                         10,
-                        kwargs.get("nfreq", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "fspace",
                         int,
                         30,
                         10,
-                        kwargs.get("fspace", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcfreq",
                         int,
                         40,
                         10,
-                        kwargs.get("lcfreq")
+                        **kwargs,
                     ),
                     Field(
                         "restrt",
                         int,
                         50,
                         10,
-                        kwargs.get("restrt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

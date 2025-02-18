@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BatteryEchemMatElectrolyte(KeywordBase):
@@ -41,49 +40,49 @@ class BatteryEchemMatElectrolyte(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "ielyte",
                         int,
                         10,
                         10,
-                        kwargs.get("ielyte")
+                        **kwargs,
                     ),
                     Field(
                         "etype",
                         int,
                         20,
                         10,
-                        kwargs.get("etype")
+                        **kwargs,
                     ),
                     Field(
                         "rhoe",
                         float,
                         30,
                         10,
-                        kwargs.get("rhoe")
+                        **kwargs,
                     ),
                     Field(
                         "rhop",
                         float,
                         40,
                         10,
-                        kwargs.get("rhop")
+                        **kwargs,
                     ),
                     Field(
                         "rhos",
                         float,
                         50,
                         10,
-                        kwargs.get("rhos")
+                        **kwargs,
                     ),
                     Field(
                         "calmax",
                         float,
                         60,
                         10,
-                        kwargs.get("calmax")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,21 +93,21 @@ class BatteryEchemMatElectrolyte(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vfes")
+                        **kwargs,
                     ),
                     Field(
                         "vfps",
                         float,
                         10,
                         10,
-                        kwargs.get("vfps")
+                        **kwargs,
                     ),
                     Field(
                         "vfgs",
                         float,
                         20,
                         10,
-                        kwargs.get("vfgs")
+                        **kwargs,
                     ),
                 ],
             ),

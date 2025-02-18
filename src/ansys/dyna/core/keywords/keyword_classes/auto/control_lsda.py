@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlLsda(KeywordBase):
@@ -41,7 +40,7 @@ class ControlLsda(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("npexcl")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,56 @@ class ControlLsda(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         int,
                         10,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         int,
                         20,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                     Field(
                         "p4",
                         int,
                         30,
                         10,
-                        kwargs.get("p4")
+                        **kwargs,
                     ),
                     Field(
                         "p5",
                         int,
                         40,
                         10,
-                        kwargs.get("p5")
+                        **kwargs,
                     ),
                     Field(
                         "p6",
                         int,
                         50,
                         10,
-                        kwargs.get("p6")
+                        **kwargs,
                     ),
                     Field(
                         "p7",
                         int,
                         60,
                         10,
-                        kwargs.get("p7")
+                        **kwargs,
                     ),
                     Field(
                         "p8",
                         int,
                         70,
                         10,
-                        kwargs.get("p8")
+                        **kwargs,
                     ),
                 ],
             ),

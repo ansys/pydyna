@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,64 @@ class DefineCoordinateSystem(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "xo",
                         float,
                         10,
                         10,
-                        kwargs.get("xo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yo",
                         float,
                         20,
                         10,
-                        kwargs.get("yo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zo",
                         float,
                         30,
                         10,
-                        kwargs.get("zo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xl",
                         float,
                         40,
                         10,
-                        kwargs.get("xl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yl",
                         float,
                         50,
                         10,
-                        kwargs.get("yl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zl",
                         float,
                         60,
                         10,
-                        kwargs.get("zl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cidl",
                         int,
                         70,
                         10,
-                        kwargs.get("cidl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,21 +113,24 @@ class DefineCoordinateSystem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

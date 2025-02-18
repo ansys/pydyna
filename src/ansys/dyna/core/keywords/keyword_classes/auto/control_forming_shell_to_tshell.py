@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingShellToTshell(KeywordBase):
@@ -41,35 +40,36 @@ class ControlFormingShellToTshell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         float,
                         10,
                         10,
-                        kwargs.get("thick")
+                        **kwargs,
                     ),
                     Field(
                         "midsf",
                         float,
                         20,
                         10,
-                        kwargs.get("midsf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "idsegb",
                         float,
                         30,
                         10,
-                        kwargs.get("idsegb")
+                        **kwargs,
                     ),
                     Field(
                         "idsegt",
                         float,
                         40,
                         10,
-                        kwargs.get("idsegt")
+                        **kwargs,
                     ),
                 ],
             ),

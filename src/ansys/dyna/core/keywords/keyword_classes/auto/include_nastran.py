@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IncludeNastran(KeywordBase):
@@ -41,7 +40,7 @@ class IncludeNastran(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,21 +51,24 @@ class IncludeNastran(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("beamdf", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "shelldf",
                         int,
                         10,
                         10,
-                        kwargs.get("shelldf", 21 if use_lspp_defaults() else None)
+                        21,
+                        **kwargs,
                     ),
                     Field(
                         "soliddf",
                         int,
                         20,
                         10,
-                        kwargs.get("soliddf", 18 if use_lspp_defaults() else None)
+                        18,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,42 @@ class MatT10(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tmid")
+                        **kwargs,
                     ),
                     Field(
                         "tro",
                         float,
                         10,
                         10,
-                        kwargs.get("tro")
+                        **kwargs,
                     ),
                     Field(
                         "tgrlc",
                         int,
                         20,
                         10,
-                        kwargs.get("tgrlc")
+                        **kwargs,
                     ),
                     Field(
                         "tgmult",
                         float,
                         30,
                         10,
-                        kwargs.get("tgmult")
+                        **kwargs,
                     ),
                     Field(
                         "tlat",
                         float,
                         40,
                         10,
-                        kwargs.get("tlat")
+                        **kwargs,
                     ),
                     Field(
                         "hlat",
                         float,
                         50,
                         10,
-                        kwargs.get("hlat")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,35 +91,35 @@ class MatT10(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("hclc")
+                        **kwargs,
                     ),
                     Field(
                         "tclc",
                         int,
                         10,
                         10,
-                        kwargs.get("tclc")
+                        **kwargs,
                     ),
                     Field(
                         "hchsv",
                         float,
                         20,
                         10,
-                        kwargs.get("hchsv")
+                        **kwargs,
                     ),
                     Field(
                         "tchsv",
                         float,
                         30,
                         10,
-                        kwargs.get("tchsv")
+                        **kwargs,
                     ),
                     Field(
                         "tghsv",
                         float,
                         40,
                         10,
-                        kwargs.get("tghsv")
+                        **kwargs,
                     ),
                 ],
             ),

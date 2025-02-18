@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialStressDepthSet(KeywordBase):
@@ -41,49 +40,50 @@ class InitialStressDepthSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "ro_g",
                         float,
                         10,
                         10,
-                        kwargs.get("ro_g")
+                        **kwargs,
                     ),
                     Field(
                         "zdatum",
                         float,
                         20,
                         10,
-                        kwargs.get("zdatum")
+                        **kwargs,
                     ),
                     Field(
                         "kfact",
                         float,
                         30,
                         10,
-                        kwargs.get("kfact", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lc",
                         int,
                         40,
                         10,
-                        kwargs.get("lc")
+                        **kwargs,
                     ),
                     Field(
                         "lch",
                         int,
                         50,
                         10,
-                        kwargs.get("lch")
+                        **kwargs,
                     ),
                     Field(
                         "lck0",
                         int,
                         60,
                         10,
-                        kwargs.get("lck0")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingTipping(KeywordBase):
@@ -41,35 +40,36 @@ class ControlFormingTipping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "itype",
                         int,
                         10,
                         10,
-                        kwargs.get("itype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ifstrn",
                         int,
                         20,
                         10,
-                        kwargs.get("ifstrn")
+                        **kwargs,
                     ),
                     Field(
                         "ifstrs",
                         int,
                         30,
                         10,
-                        kwargs.get("ifstrs")
+                        **kwargs,
                     ),
                     Field(
                         "nmove",
                         int,
                         40,
                         10,
-                        kwargs.get("nmove")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,56 +80,57 @@ class ControlFormingTipping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rot/tran", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "v11",
                         float,
                         10,
                         10,
-                        kwargs.get("v11")
+                        **kwargs,
                     ),
                     Field(
                         "v12",
                         float,
                         20,
                         10,
-                        kwargs.get("v12")
+                        **kwargs,
                     ),
                     Field(
                         "v13",
                         float,
                         30,
                         10,
-                        kwargs.get("v13")
+                        **kwargs,
                     ),
                     Field(
                         "x01",
                         float,
                         40,
                         10,
-                        kwargs.get("x01")
+                        **kwargs,
                     ),
                     Field(
                         "y01",
                         float,
                         50,
                         10,
-                        kwargs.get("y01")
+                        **kwargs,
                     ),
                     Field(
                         "z01",
                         float,
                         60,
                         10,
-                        kwargs.get("z01")
+                        **kwargs,
                     ),
                     Field(
                         "dista1",
                         float,
                         70,
                         10,
-                        kwargs.get("dista1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,56 +141,57 @@ class ControlFormingTipping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rot/tran", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "dx",
                         float,
                         10,
                         10,
-                        kwargs.get("dx")
+                        **kwargs,
                     ),
                     Field(
                         "dy",
                         float,
                         20,
                         10,
-                        kwargs.get("dy")
+                        **kwargs,
                     ),
                     Field(
                         "dz",
                         float,
                         30,
                         10,
-                        kwargs.get("dz")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),

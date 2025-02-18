@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialStrainShellIga(KeywordBase):
@@ -41,28 +40,30 @@ class InitialStrainShellIga(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "nplane",
                         int,
                         10,
                         10,
-                        kwargs.get("nplane")
+                        **kwargs,
                     ),
                     Field(
                         "nthk",
                         int,
                         20,
                         10,
-                        kwargs.get("nthk", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "large",
                         int,
                         30,
                         10,
-                        kwargs.get("large", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -73,21 +74,21 @@ class InitialStrainShellIga(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "s",
                         float,
                         10,
                         10,
-                        kwargs.get("s")
+                        **kwargs,
                     ),
                     Field(
                         "t",
                         float,
                         20,
                         10,
-                        kwargs.get("t")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -98,49 +99,56 @@ class InitialStrainShellIga(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("epsxx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epsyy",
                         float,
                         10,
                         10,
-                        kwargs.get("epsyy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epszz",
                         float,
                         20,
                         10,
-                        kwargs.get("epszz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epsxy",
                         float,
                         30,
                         10,
-                        kwargs.get("epsxy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epsyz",
                         float,
                         40,
                         10,
-                        kwargs.get("epsyz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epszx",
                         float,
                         50,
                         10,
-                        kwargs.get("epszx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "thki",
                         float,
                         60,
                         10,
-                        kwargs.get("thki", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

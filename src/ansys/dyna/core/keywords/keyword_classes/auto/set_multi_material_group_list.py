@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,7 +45,8 @@ class SetMultiMaterialGroupList(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ammsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -57,56 +57,64 @@ class SetMultiMaterialGroupList(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ammgid1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ammgid2",
                         int,
                         10,
                         10,
-                        kwargs.get("ammgid2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ammgid3",
                         int,
                         20,
                         10,
-                        kwargs.get("ammgid3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ammgid4",
                         int,
                         30,
                         10,
-                        kwargs.get("ammgid4", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ammgid5",
                         int,
                         40,
                         10,
-                        kwargs.get("ammgid5", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ammgid6",
                         int,
                         50,
                         10,
-                        kwargs.get("ammgid6", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ammgid7",
                         int,
                         60,
                         10,
-                        kwargs.get("ammgid7", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ammgid8",
                         int,
                         70,
                         10,
-                        kwargs.get("ammgid8", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

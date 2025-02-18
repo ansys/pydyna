@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartCompositeLong(KeywordBase):
@@ -41,7 +40,7 @@ class PartCompositeLong(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,62 @@ class PartCompositeLong(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "elform",
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "shrf",
                         float,
                         20,
                         10,
-                        kwargs.get("shrf")
+                        **kwargs,
                     ),
                     Field(
                         "nloc",
                         float,
                         30,
                         10,
-                        kwargs.get("nloc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "marea",
                         float,
                         40,
                         10,
-                        kwargs.get("marea", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "hgid",
                         int,
                         50,
                         10,
-                        kwargs.get("hgid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "adpopt",
                         int,
                         60,
                         10,
-                        kwargs.get("adpopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "thshel",
                         int,
                         70,
                         10,
-                        kwargs.get("thshel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,56 +117,56 @@ class PartCompositeLong(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid1")
+                        **kwargs,
                     ),
                     Field(
                         "thick1",
                         float,
                         10,
                         10,
-                        kwargs.get("thick1")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         20,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "tmid1",
                         int,
                         30,
                         10,
-                        kwargs.get("tmid1")
+                        **kwargs,
                     ),
                     Field(
                         "plyid",
                         int,
                         40,
                         10,
-                        kwargs.get("plyid")
+                        **kwargs,
                     ),
                     Field(
                         "shrfac",
                         float,
                         50,
                         10,
-                        kwargs.get("shrfac")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),

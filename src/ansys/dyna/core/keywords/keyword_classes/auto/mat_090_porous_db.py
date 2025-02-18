@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,28 @@ class Mat090PorousDb(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "rho0",
                         float,
                         10,
                         10,
-                        kwargs.get("rho0")
+                        **kwargs,
                     ),
                     Field(
                         "cee0",
                         float,
                         20,
                         10,
-                        kwargs.get("cee0")
+                        **kwargs,
                     ),
                     Field(
                         "sigma",
                         float,
                         30,
                         10,
-                        kwargs.get("sigma")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,56 +77,56 @@ class Mat090PorousDb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         10,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         float,
                         20,
                         10,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                     Field(
                         "c4",
                         float,
                         30,
                         10,
-                        kwargs.get("c4")
+                        **kwargs,
                     ),
                     Field(
                         "c5",
                         float,
                         40,
                         10,
-                        kwargs.get("c5")
+                        **kwargs,
                     ),
                     Field(
                         "c6",
                         float,
                         50,
                         10,
-                        kwargs.get("c6")
+                        **kwargs,
                     ),
                     Field(
                         "c7",
                         float,
                         60,
                         10,
-                        kwargs.get("c7")
+                        **kwargs,
                     ),
                     Field(
                         "c8",
                         float,
                         70,
                         10,
-                        kwargs.get("c8")
+                        **kwargs,
                     ),
                 ],
             ),

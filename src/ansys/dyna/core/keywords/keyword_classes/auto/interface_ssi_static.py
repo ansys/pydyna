@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceSsiStatic(KeywordBase):
@@ -41,14 +40,14 @@ class InterfaceSsiStatic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         str,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,28 +58,28 @@ class InterfaceSsiStatic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("strid")
+                        **kwargs,
                     ),
                     Field(
                         "soilid",
                         int,
                         10,
                         10,
-                        kwargs.get("soilid")
+                        **kwargs,
                     ),
                     Field(
                         "spr",
                         int,
                         20,
                         10,
-                        kwargs.get("spr")
+                        **kwargs,
                     ),
                     Field(
                         "mpr",
                         int,
                         30,
                         10,
-                        kwargs.get("mpr")
+                        **kwargs,
                     ),
                 ],
             ),

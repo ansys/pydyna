@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseAleOperation(KeywordBase):
@@ -41,21 +40,22 @@ class DatabaseAleOperation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fct")
+                        **kwargs,
                     ),
                     Field(
                         "hisvn",
                         int,
                         10,
                         10,
-                        kwargs.get("hisvn")
+                        **kwargs,
                     ),
                     Field(
                         "wrt",
                         int,
                         20,
                         10,
-                        kwargs.get("wrt", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,14 +66,14 @@ class DatabaseAleOperation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("dt")
+                        **kwargs,
                     ),
                     Field(
                         "setid",
                         int,
                         10,
                         10,
-                        kwargs.get("setid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -84,56 +84,64 @@ class DatabaseAleOperation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         10,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         20,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         30,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         40,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         50,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         60,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         70,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,48 @@ class DefineFrictionAutomaticNodesToSurface(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fs_d",
                         float,
                         10,
                         10,
-                        kwargs.get("fs_d", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd_d",
                         float,
                         20,
                         10,
-                        kwargs.get("fd_d", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc_d",
                         float,
                         30,
                         10,
-                        kwargs.get("dc_d", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vc_d",
                         float,
                         40,
                         10,
-                        kwargs.get("vc_d", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "icnep",
                         int,
                         50,
                         10,
-                        kwargs.get("icnep", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,56 +97,60 @@ class DefineFrictionAutomaticNodesToSurface(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid_i")
+                        **kwargs,
                     ),
                     Field(
                         "pid_j",
                         int,
                         10,
                         10,
-                        kwargs.get("pid_j")
+                        **kwargs,
                     ),
                     Field(
                         "fs_ij",
                         float,
                         20,
                         10,
-                        kwargs.get("fs_ij", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd_ij",
                         float,
                         30,
                         10,
-                        kwargs.get("fd_ij", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc_ij",
                         float,
                         40,
                         10,
-                        kwargs.get("dc_ij", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vc_ij",
                         float,
                         50,
                         10,
-                        kwargs.get("vc_ij", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ptypei",
                         str,
                         60,
                         10,
-                        kwargs.get("ptypei")
+                        **kwargs,
                     ),
                     Field(
                         "ptypej",
                         str,
                         70,
                         10,
-                        kwargs.get("ptypej")
+                        **kwargs,
                     ),
                 ],
             ),

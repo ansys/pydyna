@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BatteryEchemMatAnode(KeywordBase):
@@ -41,49 +40,49 @@ class BatteryEchemMatAnode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "iocpa",
                         int,
                         10,
                         10,
-                        kwargs.get("iocpa")
+                        **kwargs,
                     ),
                     Field(
                         "capta",
                         float,
                         20,
                         10,
-                        kwargs.get("capta")
+                        **kwargs,
                     ),
                     Field(
                         "s_xa",
                         float,
                         30,
                         10,
-                        kwargs.get("s_xa")
+                        **kwargs,
                     ),
                     Field(
                         "rada",
                         float,
                         40,
                         10,
-                        kwargs.get("rada")
+                        **kwargs,
                     ),
                     Field(
                         "ratea",
                         float,
                         50,
                         10,
-                        kwargs.get("ratea")
+                        **kwargs,
                     ),
                     Field(
                         "ranode",
                         float,
                         60,
                         10,
-                        kwargs.get("ranode")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,35 +93,35 @@ class BatteryEchemMatAnode(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rhoea")
+                        **kwargs,
                     ),
                     Field(
                         "rhofa",
                         float,
                         10,
                         10,
-                        kwargs.get("rhofa")
+                        **kwargs,
                     ),
                     Field(
                         "rhocca",
                         float,
                         20,
                         10,
-                        kwargs.get("rhocca")
+                        **kwargs,
                     ),
                     Field(
                         "diffa",
                         float,
                         30,
                         10,
-                        kwargs.get("diffa")
+                        **kwargs,
                     ),
                     Field(
                         "conda",
                         float,
                         40,
                         10,
-                        kwargs.get("conda")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,28 +132,28 @@ class BatteryEchemMatAnode(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vfea")
+                        **kwargs,
                     ),
                     Field(
                         "vfpa",
                         float,
                         10,
                         10,
-                        kwargs.get("vfpa")
+                        **kwargs,
                     ),
                     Field(
                         "vffa",
                         float,
                         20,
                         10,
-                        kwargs.get("vffa")
+                        **kwargs,
                     ),
                     Field(
                         "vfga",
                         float,
                         30,
                         10,
-                        kwargs.get("vfga")
+                        **kwargs,
                     ),
                 ],
             ),

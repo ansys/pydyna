@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,63 @@ class SectionBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "elform",
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "shrf",
                         float,
                         20,
                         10,
-                        kwargs.get("shrf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "qr/irid",
                         int,
                         30,
                         10,
-                        kwargs.get("qr/irid", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "cst",
                         int,
                         40,
                         10,
-                        kwargs.get("cst", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "scoor",
                         float,
                         50,
                         10,
-                        kwargs.get("scoor", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nsm",
                         float,
                         60,
                         10,
-                        kwargs.get("nsm", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "naupd",
                         int,
                         70,
                         10,
-                        kwargs.get("naupd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,42 +112,42 @@ class SectionBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ts1")
+                        **kwargs,
                     ),
                     Field(
                         "ts2",
                         float,
                         10,
                         10,
-                        kwargs.get("ts2")
+                        **kwargs,
                     ),
                     Field(
                         "tt1",
                         float,
                         20,
                         10,
-                        kwargs.get("tt1")
+                        **kwargs,
                     ),
                     Field(
                         "tt2",
                         float,
                         30,
                         10,
-                        kwargs.get("tt2")
+                        **kwargs,
                     ),
                     Field(
                         "nsloc",
                         float,
                         40,
                         10,
-                        kwargs.get("nsloc")
+                        **kwargs,
                     ),
                     Field(
                         "ntloc",
                         float,
                         50,
                         10,
-                        kwargs.get("ntloc")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.elform in [1,11],
@@ -153,42 +159,42 @@ class SectionBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "iss",
                         float,
                         10,
                         10,
-                        kwargs.get("iss")
+                        **kwargs,
                     ),
                     Field(
                         "itt",
                         float,
                         20,
                         10,
-                        kwargs.get("itt")
+                        **kwargs,
                     ),
                     Field(
                         "j",
                         float,
                         30,
                         10,
-                        kwargs.get("j")
+                        **kwargs,
                     ),
                     Field(
                         "sa",
                         float,
                         40,
                         10,
-                        kwargs.get("sa")
+                        **kwargs,
                     ),
                     Field(
                         "ist",
                         float,
                         50,
                         10,
-                        kwargs.get("ist")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.elform in [2,12,13],
@@ -200,21 +206,21 @@ class SectionBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "rampt",
                         float,
                         10,
                         10,
-                        kwargs.get("rampt")
+                        **kwargs,
                     ),
                     Field(
                         "stress",
                         float,
                         20,
                         10,
-                        kwargs.get("stress")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.elform == 3,
@@ -226,28 +232,28 @@ class SectionBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ts1")
+                        **kwargs,
                     ),
                     Field(
                         "ts2",
                         float,
                         10,
                         10,
-                        kwargs.get("ts2")
+                        **kwargs,
                     ),
                     Field(
                         "tt1",
                         float,
                         20,
                         10,
-                        kwargs.get("tt1")
+                        **kwargs,
                     ),
                     Field(
                         "tt2",
                         float,
                         30,
                         10,
-                        kwargs.get("tt2")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.elform in [4,5],
@@ -259,56 +265,59 @@ class SectionBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vol")
+                        **kwargs,
                     ),
                     Field(
                         "iner",
                         float,
                         10,
                         10,
-                        kwargs.get("iner")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         20,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "ca",
                         float,
                         30,
                         10,
-                        kwargs.get("ca")
+                        **kwargs,
                     ),
                     Field(
                         "offset",
                         float,
                         40,
                         10,
-                        kwargs.get("offset")
+                        **kwargs,
                     ),
                     Field(
                         "rrcon",
                         float,
                         50,
                         10,
-                        kwargs.get("rrcon", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "srcon",
                         float,
                         60,
                         10,
-                        kwargs.get("srcon", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "trcon",
                         float,
                         70,
                         10,
-                        kwargs.get("trcon", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
                 lambda: self.elform == 6,
@@ -320,49 +329,49 @@ class SectionBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ts1")
+                        **kwargs,
                     ),
                     Field(
                         "ts2",
                         float,
                         10,
                         10,
-                        kwargs.get("ts2")
+                        **kwargs,
                     ),
                     Field(
                         "tt1",
                         float,
                         20,
                         10,
-                        kwargs.get("tt1")
+                        **kwargs,
                     ),
                     Field(
                         "tt2",
                         float,
                         30,
                         10,
-                        kwargs.get("tt2")
+                        **kwargs,
                     ),
                     Field(
                         "print",
                         float,
                         40,
                         10,
-                        kwargs.get("print")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "itoff",
                         float,
                         60,
                         10,
-                        kwargs.get("itoff")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.elform == 9,

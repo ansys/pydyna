@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmBatteryRandles(KeywordBase):
@@ -41,56 +40,57 @@ class EmBatteryRandles(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rdlid")
+                        **kwargs,
                     ),
                     Field(
                         "rdltype",
                         int,
                         10,
                         10,
-                        kwargs.get("rdltype")
+                        **kwargs,
                     ),
                     Field(
                         "rdlarea",
                         int,
                         20,
                         10,
-                        kwargs.get("rdlarea", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ccppart",
                         int,
                         30,
                         10,
-                        kwargs.get("ccppart")
+                        **kwargs,
                     ),
                     Field(
                         "ccnpart",
                         int,
                         40,
                         10,
-                        kwargs.get("ccnpart")
+                        **kwargs,
                     ),
                     Field(
                         "seppart",
                         int,
                         50,
                         10,
-                        kwargs.get("seppart")
+                        **kwargs,
                     ),
                     Field(
                         "poselpart",
                         int,
                         60,
                         10,
-                        kwargs.get("poselpart")
+                        **kwargs,
                     ),
                     Field(
                         "negelpart",
                         int,
                         70,
                         10,
-                        kwargs.get("negelpart")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,28 +101,28 @@ class EmBatteryRandles(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("q")
+                        **kwargs,
                     ),
                     Field(
                         "cq",
                         float,
                         10,
                         10,
-                        kwargs.get("cq")
+                        **kwargs,
                     ),
                     Field(
                         "socinit",
                         float,
                         20,
                         10,
-                        kwargs.get("socinit")
+                        **kwargs,
                     ),
                     Field(
                         "soctou",
                         float,
                         30,
                         10,
-                        kwargs.get("soctou")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,42 +133,42 @@ class EmBatteryRandles(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r0cha")
+                        **kwargs,
                     ),
                     Field(
                         "r0dis",
                         float,
                         10,
                         10,
-                        kwargs.get("r0dis")
+                        **kwargs,
                     ),
                     Field(
                         "r10cha",
                         float,
                         20,
                         10,
-                        kwargs.get("r10cha")
+                        **kwargs,
                     ),
                     Field(
                         "r10dis",
                         float,
                         30,
                         10,
-                        kwargs.get("r10dis")
+                        **kwargs,
                     ),
                     Field(
                         "c10cha",
                         float,
                         40,
                         10,
-                        kwargs.get("c10cha")
+                        **kwargs,
                     ),
                     Field(
                         "c10dis",
                         float,
                         50,
                         10,
-                        kwargs.get("c10dis")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -179,35 +179,38 @@ class EmBatteryRandles(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("temp")
+                        **kwargs,
                     ),
                     Field(
                         "frtherm",
                         int,
                         10,
                         10,
-                        kwargs.get("frtherm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "r0toth",
                         int,
                         20,
                         10,
-                        kwargs.get("r0toth", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dudt",
                         float,
                         30,
                         10,
-                        kwargs.get("dudt")
+                        **kwargs,
                     ),
                     Field(
                         "tempu",
                         int,
                         40,
                         10,
-                        kwargs.get("tempu", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -218,21 +221,22 @@ class EmBatteryRandles(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("usesocs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tausocs",
                         float,
                         10,
                         10,
-                        kwargs.get("tausocs")
+                        **kwargs,
                     ),
                     Field(
                         "sicslcid",
                         int,
                         20,
                         10,
-                        kwargs.get("sicslcid")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class MatHoneycomb(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "vf",
                         float,
                         50,
                         10,
-                        kwargs.get("vf")
+                        **kwargs,
                     ),
                     Field(
                         "mu",
                         float,
                         60,
                         10,
-                        kwargs.get("mu", 5.0E-02 if use_lspp_defaults() else None)
+                        5.0E-02,
+                        **kwargs,
                     ),
                     Field(
                         "bulk",
                         float,
                         70,
                         10,
-                        kwargs.get("bulk", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,63 @@ class MatHoneycomb(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lca")
+                        **kwargs,
                     ),
                     Field(
                         "lcb",
                         int,
                         10,
                         10,
-                        kwargs.get("lcb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcc",
                         int,
                         20,
                         10,
-                        kwargs.get("lcc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcs",
                         int,
                         30,
                         10,
-                        kwargs.get("lcs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcab",
                         int,
                         40,
                         10,
-                        kwargs.get("lcab", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcbc",
                         int,
                         50,
                         10,
-                        kwargs.get("lcbc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcca",
                         int,
                         60,
                         10,
-                        kwargs.get("lcca", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcsr",
                         int,
                         70,
                         10,
-                        kwargs.get("lcsr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +174,57 @@ class MatHoneycomb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eaau")
+                        **kwargs,
                     ),
                     Field(
                         "ebbu",
                         float,
                         10,
                         10,
-                        kwargs.get("ebbu")
+                        **kwargs,
                     ),
                     Field(
                         "eccu",
                         float,
                         20,
                         10,
-                        kwargs.get("eccu")
+                        **kwargs,
                     ),
                     Field(
                         "gabu",
                         float,
                         30,
                         10,
-                        kwargs.get("gabu")
+                        **kwargs,
                     ),
                     Field(
                         "gbcu",
                         float,
                         40,
                         10,
-                        kwargs.get("gbcu")
+                        **kwargs,
                     ),
                     Field(
                         "gcau",
                         float,
                         50,
                         10,
-                        kwargs.get("gcau")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         60,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         70,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,42 +235,42 @@ class MatHoneycomb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -272,56 +281,56 @@ class MatHoneycomb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         10,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         20,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "tsef",
                         float,
                         30,
                         10,
-                        kwargs.get("tsef")
+                        **kwargs,
                     ),
                     Field(
                         "ssef",
                         float,
                         40,
                         10,
-                        kwargs.get("ssef")
+                        **kwargs,
                     ),
                     Field(
                         "v1",
                         float,
                         50,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         60,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         70,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                 ],
             ),

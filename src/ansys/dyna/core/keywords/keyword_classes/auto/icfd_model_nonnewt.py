@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdModelNonnewt(KeywordBase):
@@ -41,14 +40,15 @@ class IcfdModelNonnewt(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nnmoid")
+                        **kwargs,
                     ),
                     Field(
                         "nnid",
                         int,
                         10,
                         10,
-                        kwargs.get("nnid", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,42 +59,48 @@ class IcfdModelNonnewt(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         10,
                         10,
-                        kwargs.get("n", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "mumin",
                         float,
                         20,
                         10,
-                        kwargs.get("mumin", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lambda",
                         float,
                         30,
                         10,
-                        kwargs.get("lambda", 1e30 if use_lspp_defaults() else None)
+                        1e30,
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         40,
                         10,
-                        kwargs.get("alpha", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "talpha",
                         float,
                         50,
                         10,
-                        kwargs.get("talpha", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

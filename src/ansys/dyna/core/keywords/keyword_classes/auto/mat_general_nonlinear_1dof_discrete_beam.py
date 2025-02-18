@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,42 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         20,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "iunld",
                         int,
                         30,
                         10,
-                        kwargs.get("iunld")
+                        **kwargs,
                     ),
                     Field(
                         "offset",
                         float,
                         40,
                         10,
-                        kwargs.get("offset")
+                        **kwargs,
                     ),
                     Field(
                         "dampf",
                         float,
                         50,
                         10,
-                        kwargs.get("dampf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,28 +91,28 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidt")
+                        **kwargs,
                     ),
                     Field(
                         "lcidtu",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidtu")
+                        **kwargs,
                     ),
                     Field(
                         "lcidtd",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidtd")
+                        **kwargs,
                     ),
                     Field(
                         "lcidte",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidte")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -124,21 +123,21 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("utfail")
+                        **kwargs,
                     ),
                     Field(
                         "ucfail",
                         float,
                         10,
                         10,
-                        kwargs.get("ucfail")
+                        **kwargs,
                     ),
                     Field(
                         "iu",
                         float,
                         20,
                         10,
-                        kwargs.get("iu")
+                        **kwargs,
                     ),
                 ],
             ),

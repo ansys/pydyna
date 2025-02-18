@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IncludeAutoOffsetUser(KeywordBase):
@@ -41,7 +40,7 @@ class IncludeAutoOffsetUser(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,14 +51,14 @@ class IncludeAutoOffsetUser(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("noffset")
+                        **kwargs,
                     ),
                     Field(
                         "neoffset",
                         int,
                         10,
                         10,
-                        kwargs.get("neoffset")
+                        **kwargs,
                     ),
                 ],
             ),

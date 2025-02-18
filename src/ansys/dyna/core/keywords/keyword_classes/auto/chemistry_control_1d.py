@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryControl1D(KeywordBase):
@@ -41,28 +40,29 @@ class ChemistryControl1D(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "xyzd",
                         float,
                         10,
                         10,
-                        kwargs.get("xyzd")
+                        **kwargs,
                     ),
                     Field(
                         "detdir",
                         int,
                         20,
                         10,
-                        kwargs.get("detdir")
+                        **kwargs,
                     ),
                     Field(
                         "csp_sel",
                         int,
                         30,
                         10,
-                        kwargs.get("csp_sel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -73,7 +73,7 @@ class ChemistryControl1D(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("file")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -84,14 +84,14 @@ class ChemistryControl1D(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ampl")
+                        **kwargs,
                     ),
                     Field(
                         "ycut",
                         float,
                         10,
                         10,
-                        kwargs.get("ycut")
+                        **kwargs,
                     ),
                 ],
             ),

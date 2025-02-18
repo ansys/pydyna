@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedShellInSolid(KeywordBase):
@@ -41,14 +40,14 @@ class ConstrainedShellInSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("coupid")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,28 +58,30 @@ class ConstrainedShellInSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("shsid")
+                        **kwargs,
                     ),
                     Field(
                         "ssid",
                         int,
                         10,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "shstyp",
                         int,
                         20,
                         10,
-                        kwargs.get("shstyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sstyp",
                         int,
                         30,
                         10,
-                        kwargs.get("sstyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,42 +92,45 @@ class ConstrainedShellInSolid(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("start", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "end",
                         float,
                         10,
                         10,
-                        kwargs.get("end", 10E20 if use_lspp_defaults() else None)
+                        10E20,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "pssf",
                         float,
                         50,
                         10,
-                        kwargs.get("pssf", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                 ],
             ),

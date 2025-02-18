@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryElementMethodAcoustic(KeywordBase):
@@ -41,56 +40,56 @@ class BoundaryElementMethodAcoustic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         10,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "fmin",
                         float,
                         20,
                         10,
-                        kwargs.get("fmin")
+                        **kwargs,
                     ),
                     Field(
                         "fmax",
                         float,
                         30,
                         10,
-                        kwargs.get("fmax")
+                        **kwargs,
                     ),
                     Field(
                         "nfreq",
                         int,
                         40,
                         10,
-                        kwargs.get("nfreq")
+                        **kwargs,
                     ),
                     Field(
                         "dt_out",
                         int,
                         50,
                         10,
-                        kwargs.get("dt_out")
+                        **kwargs,
                     ),
                     Field(
                         "t_start",
                         float,
                         60,
                         10,
-                        kwargs.get("t_start")
+                        **kwargs,
                     ),
                     Field(
                         "pref",
                         float,
                         70,
                         10,
-                        kwargs.get("pref")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,35 +100,38 @@ class BoundaryElementMethodAcoustic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsid_ext")
+                        **kwargs,
                     ),
                     Field(
                         "type_ext",
                         int,
                         10,
                         10,
-                        kwargs.get("type_ext", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nsid_int",
                         int,
                         20,
                         10,
-                        kwargs.get("nsid_int")
+                        **kwargs,
                     ),
                     Field(
                         "type_int",
                         int,
                         30,
                         10,
-                        kwargs.get("type_int", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "fft_win",
                         int,
                         40,
                         10,
-                        kwargs.get("fft_win", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,28 +142,29 @@ class BoundaryElementMethodAcoustic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("method", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "maxit",
                         int,
                         10,
                         10,
-                        kwargs.get("maxit")
+                        **kwargs,
                     ),
                     Field(
                         "res",
                         float,
                         20,
                         10,
-                        kwargs.get("res")
+                        **kwargs,
                     ),
                     Field(
                         "ndd",
                         int,
                         30,
                         10,
-                        kwargs.get("ndd")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -172,35 +175,38 @@ class BoundaryElementMethodAcoustic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "sstype",
                         int,
                         10,
                         10,
-                        kwargs.get("sstype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "norm",
                         int,
                         20,
                         10,
-                        kwargs.get("norm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bem_type",
                         int,
                         30,
                         10,
-                        kwargs.get("bem_type")
+                        **kwargs,
                     ),
                     Field(
                         "restart",
                         int,
                         40,
                         10,
-                        kwargs.get("restart", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

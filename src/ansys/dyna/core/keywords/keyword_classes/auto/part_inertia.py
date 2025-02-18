@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartInertia(KeywordBase):
@@ -41,7 +40,7 @@ class PartInertia(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,60 @@ class PartInertia(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "secid",
                         int,
                         10,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "mid",
                         int,
                         20,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "eosid",
                         int,
                         30,
                         10,
-                        kwargs.get("eosid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "hgid",
                         int,
                         40,
                         10,
-                        kwargs.get("hgid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "grav",
                         int,
                         50,
                         10,
-                        kwargs.get("grav", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "adpopt",
                         int,
                         60,
                         10,
-                        kwargs.get("adpopt")
+                        **kwargs,
                     ),
                     Field(
                         "tmid",
                         int,
                         70,
                         10,
-                        kwargs.get("tmid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,42 +115,43 @@ class PartInertia(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xc")
+                        **kwargs,
                     ),
                     Field(
                         "yc",
                         float,
                         10,
                         10,
-                        kwargs.get("yc")
+                        **kwargs,
                     ),
                     Field(
                         "zc",
                         float,
                         20,
                         10,
-                        kwargs.get("zc")
+                        **kwargs,
                     ),
                     Field(
                         "tm",
                         float,
                         30,
                         10,
-                        kwargs.get("tm")
+                        **kwargs,
                     ),
                     Field(
                         "ircs",
                         int,
                         40,
                         10,
-                        kwargs.get("ircs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nodeid",
                         int,
                         50,
                         10,
-                        kwargs.get("nodeid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -158,42 +162,42 @@ class PartInertia(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ixx")
+                        **kwargs,
                     ),
                     Field(
                         "ixy",
                         float,
                         10,
                         10,
-                        kwargs.get("ixy")
+                        **kwargs,
                     ),
                     Field(
                         "ixz",
                         float,
                         20,
                         10,
-                        kwargs.get("ixz")
+                        **kwargs,
                     ),
                     Field(
                         "iyy",
                         float,
                         30,
                         10,
-                        kwargs.get("iyy")
+                        **kwargs,
                     ),
                     Field(
                         "iyz",
                         float,
                         40,
                         10,
-                        kwargs.get("iyz")
+                        **kwargs,
                     ),
                     Field(
                         "izz",
                         float,
                         50,
                         10,
-                        kwargs.get("izz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -204,42 +208,42 @@ class PartInertia(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vtx")
+                        **kwargs,
                     ),
                     Field(
                         "vty",
                         float,
                         10,
                         10,
-                        kwargs.get("vty")
+                        **kwargs,
                     ),
                     Field(
                         "vtz",
                         float,
                         20,
                         10,
-                        kwargs.get("vtz")
+                        **kwargs,
                     ),
                     Field(
                         "vrx",
                         float,
                         30,
                         10,
-                        kwargs.get("vrx")
+                        **kwargs,
                     ),
                     Field(
                         "vry",
                         float,
                         40,
                         10,
-                        kwargs.get("vry")
+                        **kwargs,
                     ),
                     Field(
                         "vrz",
                         float,
                         50,
                         10,
-                        kwargs.get("vrz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -250,49 +254,49 @@ class PartInertia(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xl")
+                        **kwargs,
                     ),
                     Field(
                         "yl",
                         float,
                         10,
                         10,
-                        kwargs.get("yl")
+                        **kwargs,
                     ),
                     Field(
                         "zl",
                         float,
                         20,
                         10,
-                        kwargs.get("zl")
+                        **kwargs,
                     ),
                     Field(
                         "xlip",
                         float,
                         30,
                         10,
-                        kwargs.get("xlip")
+                        **kwargs,
                     ),
                     Field(
                         "ylip",
                         float,
                         40,
                         10,
-                        kwargs.get("ylip")
+                        **kwargs,
                     ),
                     Field(
                         "zlip",
                         float,
                         50,
                         10,
-                        kwargs.get("zlip")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         60,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                 ],
             ),

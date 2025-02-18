@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,42 @@ class MatReinforcedThermoplasticUdfiber(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "em",
                         float,
                         20,
                         10,
-                        kwargs.get("em")
+                        **kwargs,
                     ),
                     Field(
                         "prm",
                         float,
                         30,
                         10,
-                        kwargs.get("prm")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         40,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "ezdef",
                         float,
                         50,
                         10,
-                        kwargs.get("ezdef")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,56 +91,56 @@ class MatReinforcedThermoplasticUdfiber(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nfib")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         10,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "xp",
                         float,
                         20,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         30,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         40,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         50,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         60,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         70,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -152,49 +151,49 @@ class MatReinforcedThermoplasticUdfiber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "mangl",
                         float,
                         60,
                         10,
-                        kwargs.get("mangl")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -205,28 +204,28 @@ class MatReinforcedThermoplasticUdfiber(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idf1")
+                        **kwargs,
                     ),
                     Field(
                         "alph1",
                         float,
                         10,
                         10,
-                        kwargs.get("alph1")
+                        **kwargs,
                     ),
                     Field(
                         "ef1",
                         float,
                         20,
                         10,
-                        kwargs.get("ef1")
+                        **kwargs,
                     ),
                     Field(
                         "kap1",
                         float,
                         30,
                         10,
-                        kwargs.get("kap1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -237,28 +236,28 @@ class MatReinforcedThermoplasticUdfiber(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idf2")
+                        **kwargs,
                     ),
                     Field(
                         "alph2",
                         float,
                         10,
                         10,
-                        kwargs.get("alph2")
+                        **kwargs,
                     ),
                     Field(
                         "ef2",
                         float,
                         20,
                         10,
-                        kwargs.get("ef2")
+                        **kwargs,
                     ),
                     Field(
                         "kap2",
                         float,
                         30,
                         10,
-                        kwargs.get("kap2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -269,28 +268,28 @@ class MatReinforcedThermoplasticUdfiber(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idf3")
+                        **kwargs,
                     ),
                     Field(
                         "alph3",
                         float,
                         10,
                         10,
-                        kwargs.get("alph3")
+                        **kwargs,
                     ),
                     Field(
                         "ef3",
                         float,
                         20,
                         10,
-                        kwargs.get("ef3")
+                        **kwargs,
                     ),
                     Field(
                         "kap3",
                         float,
                         30,
                         10,
-                        kwargs.get("kap3")
+                        **kwargs,
                     ),
                 ],
             ),

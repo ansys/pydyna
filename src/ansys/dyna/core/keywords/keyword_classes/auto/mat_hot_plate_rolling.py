@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,59 @@ class MatHotPlateRolling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "alphat",
                         float,
                         40,
                         10,
-                        kwargs.get("alphat")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         50,
                         10,
-                        kwargs.get("beta", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vp",
                         float,
                         60,
                         10,
-                        kwargs.get("vp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tol",
                         float,
                         70,
                         10,
-                        kwargs.get("tol", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +108,56 @@ class MatHotPlateRolling(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("yb")
+                        **kwargs,
                     ),
                     Field(
                         "qdef",
                         float,
                         10,
                         10,
-                        kwargs.get("qdef")
+                        **kwargs,
                     ),
                     Field(
                         "r",
                         float,
                         20,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         30,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         40,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "minrt",
                         float,
                         50,
                         10,
-                        kwargs.get("minrt")
+                        **kwargs,
                     ),
                     Field(
                         "post",
                         float,
                         60,
                         10,
-                        kwargs.get("post")
+                        **kwargs,
                     ),
                     Field(
                         "odesol",
                         float,
                         70,
                         10,
-                        kwargs.get("odesol")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +168,56 @@ class MatHotPlateRolling(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("asig0")
+                        **kwargs,
                     ),
                     Field(
                         "bsig0",
                         float,
                         10,
                         10,
-                        kwargs.get("bsig0")
+                        **kwargs,
                     ),
                     Field(
                         "asigs",
                         float,
                         20,
                         10,
-                        kwargs.get("asigs")
+                        **kwargs,
                     ),
                     Field(
                         "bsigs",
                         float,
                         30,
                         10,
-                        kwargs.get("bsigs")
+                        **kwargs,
                     ),
                     Field(
                         "asigss",
                         float,
                         40,
                         10,
-                        kwargs.get("asigss")
+                        **kwargs,
                     ),
                     Field(
                         "bsigss",
                         float,
                         50,
                         10,
-                        kwargs.get("bsigss")
+                        **kwargs,
                     ),
                     Field(
                         "aeps",
                         float,
                         60,
                         10,
-                        kwargs.get("aeps")
+                        **kwargs,
                     ),
                     Field(
                         "beps",
                         float,
                         70,
                         10,
-                        kwargs.get("beps")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +228,56 @@ class MatHotPlateRolling(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("thres")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         10,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         20,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "nud",
                         float,
                         30,
                         10,
-                        kwargs.get("nud")
+                        **kwargs,
                     ),
                     Field(
                         "u0",
                         float,
                         40,
                         10,
-                        kwargs.get("u0")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         50,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "nu",
                         float,
                         60,
                         10,
-                        kwargs.get("nu")
+                        **kwargs,
                     ),
                     Field(
                         "bnu",
                         float,
                         70,
                         10,
-                        kwargs.get("bnu")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,56 +288,56 @@ class MatHotPlateRolling(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t50")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         10,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "a50",
                         float,
                         20,
                         10,
-                        kwargs.get("a50")
+                        **kwargs,
                     ),
                     Field(
                         "d",
                         float,
                         30,
                         10,
-                        kwargs.get("d")
+                        **kwargs,
                     ),
                     Field(
                         "gsf",
                         float,
                         40,
                         10,
-                        kwargs.get("gsf")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         50,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "q",
                         float,
                         60,
                         10,
-                        kwargs.get("q")
+                        **kwargs,
                     ),
                     Field(
                         "qrex",
                         float,
                         70,
                         10,
-                        kwargs.get("qrex")
+                        **kwargs,
                     ),
                 ],
             ),

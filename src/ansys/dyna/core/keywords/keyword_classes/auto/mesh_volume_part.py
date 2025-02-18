@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class MeshVolumePart(KeywordBase):
@@ -41,21 +40,21 @@ class MeshVolumePart(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("volprt")
+                        **kwargs,
                     ),
                     Field(
                         "solprt",
                         int,
                         10,
                         10,
-                        kwargs.get("solprt")
+                        **kwargs,
                     ),
                     Field(
                         "solver",
                         str,
                         20,
                         10,
-                        kwargs.get("solver")
+                        **kwargs,
                     ),
                 ],
             ),

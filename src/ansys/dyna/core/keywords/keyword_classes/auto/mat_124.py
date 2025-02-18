@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -47,56 +46,57 @@ class Mat124(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         40,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         50,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "fail",
                         float,
                         60,
                         10,
-                        kwargs.get("fail", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "tdel",
                         float,
                         70,
                         10,
-                        kwargs.get("tdel")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,56 +107,59 @@ class Mat124(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcidt",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcsrc",
                         int,
                         20,
                         10,
-                        kwargs.get("lcsrc")
+                        **kwargs,
                     ),
                     Field(
                         "lcsrt",
                         int,
                         30,
                         10,
-                        kwargs.get("lcsrt")
+                        **kwargs,
                     ),
                     Field(
                         "srflag",
                         float,
                         40,
                         10,
-                        kwargs.get("srflag")
+                        **kwargs,
                     ),
                     Field(
                         "lcfail",
                         int,
                         50,
                         10,
-                        kwargs.get("lcfail", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ec",
                         float,
                         60,
                         10,
-                        kwargs.get("ec")
+                        **kwargs,
                     ),
                     Field(
                         "rpct",
                         float,
                         70,
                         10,
-                        kwargs.get("rpct")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -167,56 +170,56 @@ class Mat124(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pc")
+                        **kwargs,
                     ),
                     Field(
                         "pt",
                         float,
                         10,
                         10,
-                        kwargs.get("pt")
+                        **kwargs,
                     ),
                     Field(
                         "pcutc",
                         float,
                         20,
                         10,
-                        kwargs.get("pcutc")
+                        **kwargs,
                     ),
                     Field(
                         "pcutt",
                         float,
                         30,
                         10,
-                        kwargs.get("pcutt")
+                        **kwargs,
                     ),
                     Field(
                         "pcutf",
                         float,
                         40,
                         10,
-                        kwargs.get("pcutf")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "srfilt",
                         float,
                         70,
                         10,
-                        kwargs.get("srfilt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -227,7 +230,7 @@ class Mat124(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                 ],
             ),

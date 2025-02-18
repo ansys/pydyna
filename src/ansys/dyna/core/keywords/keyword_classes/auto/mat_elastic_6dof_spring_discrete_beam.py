@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatElastic6DofSpringDiscreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "tpidr",
                         int,
                         20,
                         10,
-                        kwargs.get("tpidr")
+                        **kwargs,
                     ),
                     Field(
                         "tpids",
                         int,
                         30,
                         10,
-                        kwargs.get("tpids")
+                        **kwargs,
                     ),
                     Field(
                         "tpidt",
                         int,
                         40,
                         10,
-                        kwargs.get("tpidt")
+                        **kwargs,
                     ),
                     Field(
                         "rpidr",
                         int,
                         50,
                         10,
-                        kwargs.get("rpidr")
+                        **kwargs,
                     ),
                     Field(
                         "rpids",
                         int,
                         60,
                         10,
-                        kwargs.get("rpids")
+                        **kwargs,
                     ),
                     Field(
                         "rpidt",
                         int,
                         70,
                         10,
-                        kwargs.get("rpidt")
+                        **kwargs,
                     ),
                 ],
             ),

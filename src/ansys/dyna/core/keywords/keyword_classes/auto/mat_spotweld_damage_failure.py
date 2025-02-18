@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatSpotweldDamageFailure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "eh",
                         float,
                         50,
                         10,
-                        kwargs.get("eh")
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         60,
                         10,
-                        kwargs.get("dt")
+                        **kwargs,
                     ),
                     Field(
                         "tfail",
                         float,
                         70,
                         10,
-                        kwargs.get("tfail")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class MatSpotweldDamageFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("efail")
+                        **kwargs,
                     ),
                     Field(
                         "nrr",
                         float,
                         10,
                         10,
-                        kwargs.get("nrr")
+                        **kwargs,
                     ),
                     Field(
                         "nrs",
                         float,
                         20,
                         10,
-                        kwargs.get("nrs")
+                        **kwargs,
                     ),
                     Field(
                         "nrt",
                         float,
                         30,
                         10,
-                        kwargs.get("nrt")
+                        **kwargs,
                     ),
                     Field(
                         "mrr",
                         float,
                         40,
                         10,
-                        kwargs.get("mrr")
+                        **kwargs,
                     ),
                     Field(
                         "mss",
                         float,
                         50,
                         10,
-                        kwargs.get("mss")
+                        **kwargs,
                     ),
                     Field(
                         "mtt",
                         float,
                         60,
                         10,
-                        kwargs.get("mtt")
+                        **kwargs,
                     ),
                     Field(
                         "nf",
                         float,
                         70,
                         10,
-                        kwargs.get("nf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +165,56 @@ class MatSpotweldDamageFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("efail")
+                        **kwargs,
                     ),
                     Field(
                         "sigax",
                         float,
                         10,
                         10,
-                        kwargs.get("sigax")
+                        **kwargs,
                     ),
                     Field(
                         "sigtu",
                         float,
                         20,
                         10,
-                        kwargs.get("sigtu")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "nf",
                         float,
                         70,
                         10,
-                        kwargs.get("nf")
+                        **kwargs,
                     ),
                 ],
             ),

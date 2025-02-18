@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryFluxTrajectory(KeywordBase):
@@ -41,49 +40,52 @@ class BoundaryFluxTrajectory(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "pserod",
                         int,
                         10,
                         10,
-                        kwargs.get("pserod")
+                        **kwargs,
                     ),
                     Field(
                         "nsid1",
                         int,
                         20,
                         10,
-                        kwargs.get("nsid1")
+                        **kwargs,
                     ),
                     Field(
                         "spd1",
                         float,
                         30,
                         10,
-                        kwargs.get("spd1", 0. if use_lspp_defaults() else None)
+                        0.,
+                        **kwargs,
                     ),
                     Field(
                         "nsid2",
                         int,
                         40,
                         10,
-                        kwargs.get("nsid2")
+                        **kwargs,
                     ),
                     Field(
                         "spd2",
                         float,
                         50,
                         10,
-                        kwargs.get("spd2", 0. if use_lspp_defaults() else None)
+                        0.,
+                        **kwargs,
                     ),
                     Field(
                         "relvel",
                         int,
                         60,
                         10,
-                        kwargs.get("relvel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,28 +96,29 @@ class BoundaryFluxTrajectory(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("erod", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "loc",
                         int,
                         10,
                         10,
-                        kwargs.get("loc")
+                        **kwargs,
                     ),
                     Field(
                         "lcrot",
                         int,
                         20,
                         10,
-                        kwargs.get("lcrot")
+                        **kwargs,
                     ),
                     Field(
                         "lclat",
                         int,
                         30,
                         10,
-                        kwargs.get("lclat")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -126,35 +129,37 @@ class BoundaryFluxTrajectory(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iform")
+                        **kwargs,
                     ),
                     Field(
                         "lctim",
                         int,
                         10,
                         10,
-                        kwargs.get("lctim")
+                        **kwargs,
                     ),
                     Field(
                         "q",
                         float,
                         20,
                         10,
-                        kwargs.get("q", 0. if use_lspp_defaults() else None)
+                        0.,
+                        **kwargs,
                     ),
                     Field(
                         "lcinc",
                         int,
                         30,
                         10,
-                        kwargs.get("lcinc")
+                        **kwargs,
                     ),
                     Field(
                         "enfor",
                         int,
                         40,
                         10,
-                        kwargs.get("enfor", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -165,56 +170,56 @@ class BoundaryFluxTrajectory(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         10,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         20,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                     Field(
                         "p4",
                         float,
                         30,
                         10,
-                        kwargs.get("p4")
+                        **kwargs,
                     ),
                     Field(
                         "p5",
                         float,
                         40,
                         10,
-                        kwargs.get("p5")
+                        **kwargs,
                     ),
                     Field(
                         "p6",
                         float,
                         50,
                         10,
-                        kwargs.get("p6")
+                        **kwargs,
                     ),
                     Field(
                         "p7",
                         float,
                         60,
                         10,
-                        kwargs.get("p7")
+                        **kwargs,
                     ),
                     Field(
                         "p8",
                         float,
                         70,
                         10,
-                        kwargs.get("p8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -225,21 +230,21 @@ class BoundaryFluxTrajectory(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tx")
+                        **kwargs,
                     ),
                     Field(
                         "ty",
                         float,
                         10,
                         10,
-                        kwargs.get("ty")
+                        **kwargs,
                     ),
                     Field(
                         "tz",
                         float,
                         20,
                         10,
-                        kwargs.get("tz")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,59 @@ class DefineTableCompact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tbid")
+                        **kwargs,
                     ),
                     Field(
                         "nvar",
                         int,
                         10,
                         10,
-                        kwargs.get("nvar")
+                        **kwargs,
                     ),
                     Field(
                         "lcint",
                         int,
                         20,
                         10,
-                        kwargs.get("lcint", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mathis",
                         int,
                         30,
                         10,
-                        kwargs.get("mathis", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "inexect",
                         int,
                         40,
                         10,
-                        kwargs.get("inexect", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +108,56 @@ class DefineTableCompact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "his1",
                         int,
                         10,
                         10,
-                        kwargs.get("his1")
+                        **kwargs,
                     ),
                     Field(
                         "his2",
                         int,
                         20,
                         10,
-                        kwargs.get("his2")
+                        **kwargs,
                     ),
                     Field(
                         "his3",
                         int,
                         30,
                         10,
-                        kwargs.get("his3")
+                        **kwargs,
                     ),
                     Field(
                         "his4",
                         int,
                         40,
                         10,
-                        kwargs.get("his4")
+                        **kwargs,
                     ),
                     Field(
                         "his5",
                         int,
                         50,
                         10,
-                        kwargs.get("his5")
+                        **kwargs,
                     ),
                     Field(
                         "his6",
                         int,
                         60,
                         10,
-                        kwargs.get("his6")
+                        **kwargs,
                     ),
                     Field(
                         "his7",
                         int,
                         70,
                         10,
-                        kwargs.get("his7")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,21 +168,21 @@ class DefineTableCompact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "his8",
                         int,
                         10,
                         10,
-                        kwargs.get("his8")
+                        **kwargs,
                     ),
                     Field(
                         "his9",
                         int,
                         20,
                         10,
-                        kwargs.get("his9")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -191,56 +193,56 @@ class DefineTableCompact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ixe1",
                         int,
                         10,
                         10,
-                        kwargs.get("ixe1")
+                        **kwargs,
                     ),
                     Field(
                         "ixe2",
                         int,
                         20,
                         10,
-                        kwargs.get("ixe2")
+                        **kwargs,
                     ),
                     Field(
                         "ixe3",
                         int,
                         30,
                         10,
-                        kwargs.get("ixe3")
+                        **kwargs,
                     ),
                     Field(
                         "ixe4",
                         int,
                         40,
                         10,
-                        kwargs.get("ixe4")
+                        **kwargs,
                     ),
                     Field(
                         "ixe5",
                         int,
                         50,
                         10,
-                        kwargs.get("ixe5")
+                        **kwargs,
                     ),
                     Field(
                         "ixe6",
                         int,
                         60,
                         10,
-                        kwargs.get("ixe6")
+                        **kwargs,
                     ),
                     Field(
                         "ixe7",
                         int,
                         70,
                         10,
-                        kwargs.get("ixe7")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -251,21 +253,21 @@ class DefineTableCompact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ixe8",
                         int,
                         10,
                         10,
-                        kwargs.get("ixe8")
+                        **kwargs,
                     ),
                     Field(
                         "ixe9",
                         int,
                         20,
                         10,
-                        kwargs.get("ixe9")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -276,56 +278,56 @@ class DefineTableCompact(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("o1")
+                        **kwargs,
                     ),
                     Field(
                         "a1.1",
                         float,
                         10,
                         10,
-                        kwargs.get("a1.1")
+                        **kwargs,
                     ),
                     Field(
                         "a1.2",
                         float,
                         20,
                         10,
-                        kwargs.get("a1.2")
+                        **kwargs,
                     ),
                     Field(
                         "a1.3",
                         float,
                         30,
                         10,
-                        kwargs.get("a1.3")
+                        **kwargs,
                     ),
                     Field(
                         "a1.4",
                         float,
                         40,
                         10,
-                        kwargs.get("a1.4")
+                        **kwargs,
                     ),
                     Field(
                         "a1.5",
                         float,
                         50,
                         10,
-                        kwargs.get("a1.5")
+                        **kwargs,
                     ),
                     Field(
                         "a1.6",
                         float,
                         60,
                         10,
-                        kwargs.get("a1.6")
+                        **kwargs,
                     ),
                     Field(
                         "a1.7",
                         float,
                         70,
                         10,
-                        kwargs.get("a1.7")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -336,21 +338,21 @@ class DefineTableCompact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "a1.8",
                         float,
                         10,
                         10,
-                        kwargs.get("a1.8")
+                        **kwargs,
                     ),
                     Field(
                         "a1.9",
                         float,
                         20,
                         10,
-                        kwargs.get("a1.9")
+                        **kwargs,
                     ),
                 ],
             ),

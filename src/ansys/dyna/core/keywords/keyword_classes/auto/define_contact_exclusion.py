@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,14 +45,14 @@ class DefineContactExclusion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -64,56 +63,56 @@ class DefineContactExclusion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("target")
+                        **kwargs,
                     ),
                     Field(
                         "c1",
                         int,
                         10,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         int,
                         20,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         int,
                         30,
                         10,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                     Field(
                         "c4",
                         int,
                         40,
                         10,
-                        kwargs.get("c4")
+                        **kwargs,
                     ),
                     Field(
                         "c5",
                         int,
                         50,
                         10,
-                        kwargs.get("c5")
+                        **kwargs,
                     ),
                     Field(
                         "c6",
                         int,
                         60,
                         10,
-                        kwargs.get("c6")
+                        **kwargs,
                     ),
                     Field(
                         "c7",
                         int,
                         70,
                         10,
-                        kwargs.get("c7")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -124,56 +123,56 @@ class DefineContactExclusion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("c8")
+                        **kwargs,
                     ),
                     Field(
                         "c9",
                         int,
                         10,
                         10,
-                        kwargs.get("c9")
+                        **kwargs,
                     ),
                     Field(
                         "c10",
                         int,
                         20,
                         10,
-                        kwargs.get("c10")
+                        **kwargs,
                     ),
                     Field(
                         "c11",
                         int,
                         30,
                         10,
-                        kwargs.get("c11")
+                        **kwargs,
                     ),
                     Field(
                         "c12",
                         int,
                         40,
                         10,
-                        kwargs.get("c12")
+                        **kwargs,
                     ),
                     Field(
                         "c13",
                         int,
                         50,
                         10,
-                        kwargs.get("c13")
+                        **kwargs,
                     ),
                     Field(
                         "c14",
                         int,
                         60,
                         10,
-                        kwargs.get("c14")
+                        **kwargs,
                     ),
                     Field(
                         "c15",
                         int,
                         70,
                         10,
-                        kwargs.get("c15")
+                        **kwargs,
                     ),
                 ],
             ),

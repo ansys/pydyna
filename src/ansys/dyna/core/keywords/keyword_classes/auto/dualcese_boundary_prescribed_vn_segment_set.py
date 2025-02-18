@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
@@ -41,35 +40,35 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "idcomp",
                         int,
                         10,
                         10,
-                        kwargs.get("idcomp")
+                        **kwargs,
                     ),
                     Field(
                         "dirx",
                         float,
                         20,
                         10,
-                        kwargs.get("dirx")
+                        **kwargs,
                     ),
                     Field(
                         "diry",
                         float,
                         30,
                         10,
-                        kwargs.get("diry")
+                        **kwargs,
                     ),
                     Field(
                         "dirz",
                         float,
                         40,
                         10,
-                        kwargs.get("dirz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,42 +79,42 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lc_vn")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "lc_rho",
                         int,
                         30,
                         10,
-                        kwargs.get("lc_rho")
+                        **kwargs,
                     ),
                     Field(
                         "lc_p",
                         int,
                         40,
                         10,
-                        kwargs.get("lc_p")
+                        **kwargs,
                     ),
                     Field(
                         "lc_t",
                         int,
                         50,
                         10,
-                        kwargs.get("lc_t")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -126,42 +125,46 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sf_vn", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "sf_rho",
                         float,
                         30,
                         10,
-                        kwargs.get("sf_rho", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_p",
                         float,
                         40,
                         10,
-                        kwargs.get("sf_p", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_t",
                         float,
                         50,
                         10,
-                        kwargs.get("sf_t", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

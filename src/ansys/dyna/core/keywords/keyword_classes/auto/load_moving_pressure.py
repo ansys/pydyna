@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadMovingPressure(KeywordBase):
@@ -41,7 +40,7 @@ class LoadMovingPressure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("loadid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,58 @@ class LoadMovingPressure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("node1")
+                        **kwargs,
                     ),
                     Field(
                         "node2",
                         int,
                         10,
                         10,
-                        kwargs.get("node2")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         20,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "cutoff",
                         float,
                         30,
                         10,
-                        kwargs.get("cutoff")
+                        **kwargs,
                     ),
                     Field(
                         "lcidt",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidt")
+                        **kwargs,
                     ),
                     Field(
                         "lcidd",
                         int,
                         50,
                         10,
-                        kwargs.get("lcidd")
+                        **kwargs,
                     ),
                     Field(
                         "idir",
                         int,
                         60,
                         10,
-                        kwargs.get("idir", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lsflg",
                         int,
                         70,
                         10,
-                        kwargs.get("lsflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,21 +113,22 @@ class LoadMovingPressure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "idtype",
                         int,
                         10,
                         10,
-                        kwargs.get("idtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nip",
                         int,
                         20,
                         10,
-                        kwargs.get("nip")
+                        **kwargs,
                     ),
                 ],
             ),

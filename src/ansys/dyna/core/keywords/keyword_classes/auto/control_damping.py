@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlDamping(KeywordBase):
@@ -41,56 +40,63 @@ class ControlDamping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nrcyck", 250 if use_lspp_defaults() else None)
+                        250,
+                        **kwargs,
                     ),
                     Field(
                         "drtol",
                         float,
                         10,
                         10,
-                        kwargs.get("drtol", 1.0E-03 if use_lspp_defaults() else None)
+                        1.0E-03,
+                        **kwargs,
                     ),
                     Field(
                         "drfctr",
                         float,
                         20,
                         10,
-                        kwargs.get("drfctr", 9.95E-01 if use_lspp_defaults() else None)
+                        9.95E-01,
+                        **kwargs,
                     ),
                     Field(
                         "drterm",
                         float,
                         30,
                         10,
-                        kwargs.get("drterm")
+                        **kwargs,
                     ),
                     Field(
                         "tssfdr",
                         float,
                         40,
                         10,
-                        kwargs.get("tssfdr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "irelal",
                         int,
                         50,
                         10,
-                        kwargs.get("irelal", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "edttl",
                         float,
                         60,
                         10,
-                        kwargs.get("edttl", 4.0E-02 if use_lspp_defaults() else None)
+                        4.0E-02,
+                        **kwargs,
                     ),
                     Field(
                         "idrflg",
                         int,
                         70,
                         10,
-                        kwargs.get("idrflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,7 +107,8 @@ class ControlDamping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("drpset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

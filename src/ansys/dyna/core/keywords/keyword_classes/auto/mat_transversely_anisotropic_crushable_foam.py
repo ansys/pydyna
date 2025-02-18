@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatTransverselyAnisotropicCrushableFoam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e11",
                         float,
                         20,
                         10,
-                        kwargs.get("e11")
+                        **kwargs,
                     ),
                     Field(
                         "e22",
                         float,
                         30,
                         10,
-                        kwargs.get("e22")
+                        **kwargs,
                     ),
                     Field(
                         "e12",
                         float,
                         40,
                         10,
-                        kwargs.get("e12")
+                        **kwargs,
                     ),
                     Field(
                         "e23",
                         float,
                         50,
                         10,
-                        kwargs.get("e23")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         60,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         70,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class MatTransverselyAnisotropicCrushableFoam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("i11")
+                        **kwargs,
                     ),
                     Field(
                         "i22",
                         int,
                         10,
                         10,
-                        kwargs.get("i22")
+                        **kwargs,
                     ),
                     Field(
                         "i12",
                         int,
                         20,
                         10,
-                        kwargs.get("i12")
+                        **kwargs,
                     ),
                     Field(
                         "i23",
                         int,
                         30,
                         10,
-                        kwargs.get("i23")
+                        **kwargs,
                     ),
                     Field(
                         "iaa",
                         int,
                         40,
                         10,
-                        kwargs.get("iaa")
+                        **kwargs,
                     ),
                     Field(
                         "nsym",
                         int,
                         50,
                         10,
-                        kwargs.get("nsym")
+                        **kwargs,
                     ),
                     Field(
                         "ang",
                         float,
                         60,
                         10,
-                        kwargs.get("ang")
+                        **kwargs,
                     ),
                     Field(
                         "mu",
                         float,
                         70,
                         10,
-                        kwargs.get("mu")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,28 +165,29 @@ class MatTransverselyAnisotropicCrushableFoam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "iscl",
                         int,
                         10,
                         10,
-                        kwargs.get("iscl")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         20,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         30,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -198,42 +198,42 @@ class MatTransverselyAnisotropicCrushableFoam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -244,42 +244,42 @@ class MatTransverselyAnisotropicCrushableFoam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         10,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         20,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "v1",
                         float,
                         30,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         40,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         50,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                 ],
             ),

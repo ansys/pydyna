@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSegmentSetNonuniform(KeywordBase):
@@ -41,14 +40,14 @@ class LoadSegmentSetNonuniform(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         str,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,42 +58,45 @@ class LoadSegmentSetNonuniform(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         10,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         20,
                         10,
-                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "at",
                         float,
                         30,
                         10,
-                        kwargs.get("at", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         40,
                         10,
-                        kwargs.get("dt", 1.0e+16 if use_lspp_defaults() else None)
+                        1.0e+16,
+                        **kwargs,
                     ),
                     Field(
                         "eltype",
                         str,
                         50,
                         10,
-                        kwargs.get("eltype")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -105,28 +107,28 @@ class LoadSegmentSetNonuniform(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "v1",
                         float,
                         10,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         20,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         30,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                 ],
             ),

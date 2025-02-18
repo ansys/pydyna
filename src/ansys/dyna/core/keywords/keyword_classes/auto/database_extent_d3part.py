@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseExtentD3Part(KeywordBase):
@@ -41,56 +40,64 @@ class DatabaseExtentD3Part(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("neiph", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "neips",
                         int,
                         10,
                         10,
-                        kwargs.get("neips", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "maxint",
                         int,
                         20,
                         10,
-                        kwargs.get("maxint", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                     Field(
                         "strflg",
                         int,
                         30,
                         10,
-                        kwargs.get("strflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sigflg",
                         int,
                         40,
                         10,
-                        kwargs.get("sigflg", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "epsflg",
                         int,
                         50,
                         10,
-                        kwargs.get("epsflg", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "rltflg",
                         int,
                         60,
                         10,
-                        kwargs.get("rltflg", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "engflg",
                         int,
                         70,
                         10,
-                        kwargs.get("engflg", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,42 +108,45 @@ class DatabaseExtentD3Part(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ieverp",
                         int,
                         10,
                         10,
-                        kwargs.get("ieverp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "shge",
                         int,
                         40,
                         10,
-                        kwargs.get("shge", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "stssz",
                         int,
                         50,
                         10,
-                        kwargs.get("stssz", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -147,7 +157,8 @@ class DatabaseExtentD3Part(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nintsld", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),

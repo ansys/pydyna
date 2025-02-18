@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosGasket(KeywordBase):
@@ -41,35 +40,35 @@ class EosGasket(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "lcid1",
                         int,
                         10,
                         10,
-                        kwargs.get("lcid1")
+                        **kwargs,
                     ),
                     Field(
                         "lcid2",
                         int,
                         20,
                         10,
-                        kwargs.get("lcid2")
+                        **kwargs,
                     ),
                     Field(
                         "lcid3",
                         int,
                         30,
                         10,
-                        kwargs.get("lcid3")
+                        **kwargs,
                     ),
                     Field(
                         "lcid4",
                         int,
                         40,
                         10,
-                        kwargs.get("lcid4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,49 +79,50 @@ class EosGasket(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("unload", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "et",
                         float,
                         10,
                         10,
-                        kwargs.get("et")
+                        **kwargs,
                     ),
                     Field(
                         "dmpf",
                         float,
                         20,
                         10,
-                        kwargs.get("dmpf")
+                        **kwargs,
                     ),
                     Field(
                         "tfs",
                         float,
                         30,
                         10,
-                        kwargs.get("tfs")
+                        **kwargs,
                     ),
                     Field(
                         "cfs",
                         float,
                         40,
                         10,
-                        kwargs.get("cfs")
+                        **kwargs,
                     ),
                     Field(
                         "loffset",
                         float,
                         50,
                         10,
-                        kwargs.get("loffset")
+                        **kwargs,
                     ),
                     Field(
                         "ivs",
                         float,
                         60,
                         10,
-                        kwargs.get("ivs")
+                        **kwargs,
                     ),
                 ],
             ),

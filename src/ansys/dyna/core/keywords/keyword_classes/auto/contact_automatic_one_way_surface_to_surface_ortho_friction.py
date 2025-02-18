@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,56 +46,60 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("surfa")
+                        **kwargs,
                     ),
                     Field(
                         "surfb",
                         int,
                         10,
                         10,
-                        kwargs.get("surfb")
+                        **kwargs,
                     ),
                     Field(
                         "surfatyp",
                         int,
                         20,
                         10,
-                        kwargs.get("surfatyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "surfbtyp",
                         int,
                         30,
                         10,
-                        kwargs.get("surfbtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "saboxid",
                         int,
                         40,
                         10,
-                        kwargs.get("saboxid")
+                        **kwargs,
                     ),
                     Field(
                         "sbboxid",
                         int,
                         50,
                         10,
-                        kwargs.get("sbboxid")
+                        **kwargs,
                     ),
                     Field(
                         "sapr",
                         int,
                         60,
                         10,
-                        kwargs.get("sapr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sbpr",
                         int,
                         70,
                         10,
-                        kwargs.get("sbpr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,56 +110,63 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd",
                         float,
                         10,
                         10,
-                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc",
                         float,
                         20,
                         10,
-                        kwargs.get("dc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vc",
                         float,
                         30,
                         10,
-                        kwargs.get("vc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vdc",
                         float,
                         40,
                         10,
-                        kwargs.get("vdc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "penchk",
                         int,
                         50,
                         10,
-                        kwargs.get("penchk")
+                        **kwargs,
                     ),
                     Field(
                         "bt",
                         float,
                         60,
                         10,
-                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         70,
                         10,
-                        kwargs.get("dt", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -167,56 +177,62 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfsa", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sfsb",
                         float,
                         10,
                         10,
-                        kwargs.get("sfsb", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sast",
                         float,
                         20,
                         10,
-                        kwargs.get("sast")
+                        **kwargs,
                     ),
                     Field(
                         "sbst",
                         float,
                         30,
                         10,
-                        kwargs.get("sbst")
+                        **kwargs,
                     ),
                     Field(
                         "sfsat",
                         float,
                         40,
                         10,
-                        kwargs.get("sfsat", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sfsbt",
                         float,
                         50,
                         10,
-                        kwargs.get("sfsbt", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "fsf",
                         float,
                         60,
                         10,
-                        kwargs.get("fsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "vsf",
                         float,
                         70,
                         10,
-                        kwargs.get("vsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -227,56 +243,60 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs1_sa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd1_sa",
                         float,
                         10,
                         10,
-                        kwargs.get("fd1_sa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc1_sa",
                         float,
                         20,
                         10,
-                        kwargs.get("dc1_sa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vc1_sa",
                         float,
                         30,
                         10,
-                        kwargs.get("vc1_sa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lc1_sa",
                         int,
                         40,
                         10,
-                        kwargs.get("lc1_sa")
+                        **kwargs,
                     ),
                     Field(
                         "oacs_sa",
                         int,
                         50,
                         10,
-                        kwargs.get("oacs_sa")
+                        **kwargs,
                     ),
                     Field(
                         "lcfsa",
                         int,
                         60,
                         10,
-                        kwargs.get("lcfsa")
+                        **kwargs,
                     ),
                     Field(
                         "lcpsa",
                         int,
                         70,
                         10,
-                        kwargs.get("lcpsa")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -287,35 +307,39 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs2_sa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd2_sa",
                         float,
                         10,
                         10,
-                        kwargs.get("fd2_sa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc2_sa",
                         float,
                         20,
                         10,
-                        kwargs.get("dc2_sa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vc2_sa",
                         float,
                         30,
                         10,
-                        kwargs.get("vc2_sa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lc2_sa",
                         int,
                         40,
                         10,
-                        kwargs.get("lc2_sa")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -326,56 +350,60 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs1_sb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd1_sb",
                         float,
                         10,
                         10,
-                        kwargs.get("fd1_sb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc1_sb",
                         float,
                         20,
                         10,
-                        kwargs.get("dc1_sb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vc1_sb",
                         float,
                         30,
                         10,
-                        kwargs.get("vc1_sb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lc1_sb",
                         int,
                         40,
                         10,
-                        kwargs.get("lc1_sb")
+                        **kwargs,
                     ),
                     Field(
                         "oacs_sb",
                         int,
                         50,
                         10,
-                        kwargs.get("oacs_sb")
+                        **kwargs,
                     ),
                     Field(
                         "lcfsb",
                         int,
                         60,
                         10,
-                        kwargs.get("lcfsb")
+                        **kwargs,
                     ),
                     Field(
                         "lcpsb",
                         int,
                         70,
                         10,
-                        kwargs.get("lcpsb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -386,35 +414,39 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs2_sb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd2_sb",
                         float,
                         10,
                         10,
-                        kwargs.get("fd2_sb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc2_sb",
                         float,
                         20,
                         10,
-                        kwargs.get("dc2_sb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vc2_sb",
                         float,
                         30,
                         10,
-                        kwargs.get("vc2_sb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lc2_sb",
                         int,
                         40,
                         10,
-                        kwargs.get("lc2_sb")
+                        **kwargs,
                     ),
                 ],
             ),

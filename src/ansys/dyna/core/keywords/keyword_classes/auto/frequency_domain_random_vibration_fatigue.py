@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainRandomVibrationFatigue(KeywordBase):
@@ -41,49 +40,52 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mdmin", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "mdmax",
                         int,
                         10,
                         10,
-                        kwargs.get("mdmax")
+                        **kwargs,
                     ),
                     Field(
                         "fnmin",
                         float,
                         20,
                         10,
-                        kwargs.get("fnmin", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fnmax",
                         float,
                         30,
                         10,
-                        kwargs.get("fnmax")
+                        **kwargs,
                     ),
                     Field(
                         "restrt",
                         int,
                         40,
                         10,
-                        kwargs.get("restrt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,42 +96,48 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dampf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdam",
                         int,
                         10,
                         10,
-                        kwargs.get("lcdam", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lctyp",
                         int,
                         20,
                         10,
-                        kwargs.get("lctyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dmpmas",
                         float,
                         30,
                         10,
-                        kwargs.get("dmpmas", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dmpstf",
                         float,
                         40,
                         10,
-                        kwargs.get("dmpstf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dmptyp",
                         int,
                         50,
                         10,
-                        kwargs.get("dmptyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,56 +148,63 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("vaflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "method",
                         int,
                         10,
                         10,
-                        kwargs.get("method", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unit",
                         int,
                         20,
                         10,
-                        kwargs.get("unit", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "umlt",
                         float,
                         30,
                         10,
-                        kwargs.get("umlt")
+                        **kwargs,
                     ),
                     Field(
                         "vapsd",
                         int,
                         40,
                         10,
-                        kwargs.get("vapsd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "varms",
                         int,
                         50,
                         10,
-                        kwargs.get("varms", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "napsd",
                         int,
                         60,
                         10,
-                        kwargs.get("napsd", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ncpsd",
                         int,
                         70,
                         10,
-                        kwargs.get("ncpsd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -200,56 +215,61 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ldtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ipanelu",
                         int,
                         10,
                         10,
-                        kwargs.get("ipanelu")
+                        **kwargs,
                     ),
                     Field(
                         "ipanelv",
                         int,
                         20,
                         10,
-                        kwargs.get("ipanelv")
+                        **kwargs,
                     ),
                     Field(
                         "temper",
                         float,
                         30,
                         10,
-                        kwargs.get("temper", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ldflag",
                         int,
                         50,
                         10,
-                        kwargs.get("ldflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "icoarse",
                         int,
                         60,
                         10,
-                        kwargs.get("icoarse", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tcoarse",
                         float,
                         70,
                         10,
-                        kwargs.get("tcoarse", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -260,56 +280,57 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         10,
                         10,
-                        kwargs.get("stype")
+                        **kwargs,
                     ),
                     Field(
                         "dof",
                         int,
                         20,
                         10,
-                        kwargs.get("dof", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ldpsd",
                         int,
                         30,
                         10,
-                        kwargs.get("ldpsd")
+                        **kwargs,
                     ),
                     Field(
                         "ldvel",
                         int,
                         40,
                         10,
-                        kwargs.get("ldvel")
+                        **kwargs,
                     ),
                     Field(
                         "ldflw",
                         int,
                         50,
                         10,
-                        kwargs.get("ldflw")
+                        **kwargs,
                     ),
                     Field(
                         "ldspn",
                         int,
                         60,
                         10,
-                        kwargs.get("ldspn")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         70,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -320,35 +341,36 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("load_i")
+                        **kwargs,
                     ),
                     Field(
                         "load_j",
                         int,
                         10,
                         10,
-                        kwargs.get("load_j")
+                        **kwargs,
                     ),
                     Field(
                         "lctyp2",
                         int,
                         20,
                         10,
-                        kwargs.get("lctyp2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ldpsd1",
                         int,
                         30,
                         10,
-                        kwargs.get("ldpsd1")
+                        **kwargs,
                     ),
                     Field(
                         "ldpsd2",
                         int,
                         40,
                         10,
-                        kwargs.get("ldpsd2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -359,42 +381,47 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mftg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nftg",
                         int,
                         10,
                         10,
-                        kwargs.get("nftg", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "sntype",
                         int,
                         20,
                         10,
-                        kwargs.get("sntype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "texpos",
                         float,
                         30,
                         10,
-                        kwargs.get("texpos", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "strsf",
                         float,
                         40,
                         10,
-                        kwargs.get("strsf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "inftg",
                         int,
                         50,
                         10,
-                        kwargs.get("inftg")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -405,56 +432,60 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         10,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "ptype",
                         int,
                         20,
                         10,
-                        kwargs.get("ptype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ltype",
                         int,
                         30,
                         10,
-                        kwargs.get("ltype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         40,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         50,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "sthres",
                         float,
                         60,
                         10,
-                        kwargs.get("sthres", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "snlimt",
                         int,
                         70,
                         10,
-                        kwargs.get("snlimt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -465,7 +496,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),

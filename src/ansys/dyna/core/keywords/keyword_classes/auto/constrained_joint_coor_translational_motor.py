@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedJointCoorTranslationalMotor(KeywordBase):
@@ -41,42 +40,43 @@ class ConstrainedJointCoorTranslationalMotor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rbid_a")
+                        **kwargs,
                     ),
                     Field(
                         "rbid_b",
                         int,
                         10,
                         10,
-                        kwargs.get("rbid_b")
+                        **kwargs,
                     ),
                     Field(
                         "rps",
                         float,
                         20,
                         10,
-                        kwargs.get("rps", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "damp",
                         float,
                         30,
                         10,
-                        kwargs.get("damp")
+                        **kwargs,
                     ),
                     Field(
                         "tmass",
                         float,
                         40,
                         10,
-                        kwargs.get("tmass")
+                        **kwargs,
                     ),
                     Field(
                         "rmass",
                         float,
                         50,
                         10,
-                        kwargs.get("rmass")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,21 +87,21 @@ class ConstrainedJointCoorTranslationalMotor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x1")
+                        **kwargs,
                     ),
                     Field(
                         "y1",
                         float,
                         10,
                         10,
-                        kwargs.get("y1")
+                        **kwargs,
                     ),
                     Field(
                         "z1",
                         float,
                         20,
                         10,
-                        kwargs.get("z1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,21 +112,21 @@ class ConstrainedJointCoorTranslationalMotor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x2")
+                        **kwargs,
                     ),
                     Field(
                         "y2",
                         float,
                         10,
                         10,
-                        kwargs.get("y2")
+                        **kwargs,
                     ),
                     Field(
                         "z2",
                         float,
                         20,
                         10,
-                        kwargs.get("z2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -137,21 +137,21 @@ class ConstrainedJointCoorTranslationalMotor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x3")
+                        **kwargs,
                     ),
                     Field(
                         "y3",
                         float,
                         10,
                         10,
-                        kwargs.get("y3")
+                        **kwargs,
                     ),
                     Field(
                         "z3",
                         float,
                         20,
                         10,
-                        kwargs.get("z3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -162,21 +162,21 @@ class ConstrainedJointCoorTranslationalMotor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x4")
+                        **kwargs,
                     ),
                     Field(
                         "y4",
                         float,
                         10,
                         10,
-                        kwargs.get("y4")
+                        **kwargs,
                     ),
                     Field(
                         "z4",
                         float,
                         20,
                         10,
-                        kwargs.get("z4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -187,21 +187,21 @@ class ConstrainedJointCoorTranslationalMotor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x5")
+                        **kwargs,
                     ),
                     Field(
                         "y5",
                         float,
                         10,
                         10,
-                        kwargs.get("y5")
+                        **kwargs,
                     ),
                     Field(
                         "z5",
                         float,
                         20,
                         10,
-                        kwargs.get("z5")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -212,21 +212,21 @@ class ConstrainedJointCoorTranslationalMotor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x6")
+                        **kwargs,
                     ),
                     Field(
                         "y6",
                         float,
                         10,
                         10,
-                        kwargs.get("y6")
+                        **kwargs,
                     ),
                     Field(
                         "z6",
                         float,
                         20,
                         10,
-                        kwargs.get("z6")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -237,28 +237,30 @@ class ConstrainedJointCoorTranslationalMotor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("parm")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         10,
                         10,
-                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         int,
                         20,
                         10,
-                        kwargs.get("type", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "r1",
                         float,
                         30,
                         10,
-                        kwargs.get("r1")
+                        **kwargs,
                     ),
                 ],
             ),

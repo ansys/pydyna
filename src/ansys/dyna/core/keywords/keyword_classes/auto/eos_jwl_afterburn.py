@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosJwlAfterburn(KeywordBase):
@@ -41,56 +40,56 @@ class EosJwlAfterburn(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         10,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         20,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "r1",
                         float,
                         30,
                         10,
-                        kwargs.get("r1")
+                        **kwargs,
                     ),
                     Field(
                         "r2",
                         float,
                         40,
                         10,
-                        kwargs.get("r2")
+                        **kwargs,
                     ),
                     Field(
                         "omeg",
                         float,
                         50,
                         10,
-                        kwargs.get("omeg")
+                        **kwargs,
                     ),
                     Field(
                         "e0",
                         float,
                         60,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "vo",
                         float,
                         70,
                         10,
-                        kwargs.get("vo")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,28 +100,29 @@ class EosJwlAfterburn(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("opt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "qt",
                         float,
                         10,
                         10,
-                        kwargs.get("qt")
+                        **kwargs,
                     ),
                     Field(
                         "t1",
                         float,
                         20,
                         10,
-                        kwargs.get("t1")
+                        **kwargs,
                     ),
                     Field(
                         "t2",
                         float,
                         30,
                         10,
-                        kwargs.get("t2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,56 +133,62 @@ class EosJwlAfterburn(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("opt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "q0",
                         float,
                         10,
                         10,
-                        kwargs.get("q0")
+                        **kwargs,
                     ),
                     Field(
                         "qa",
                         float,
                         20,
                         10,
-                        kwargs.get("qa")
+                        **kwargs,
                     ),
                     Field(
                         "qm",
                         float,
                         30,
                         10,
-                        kwargs.get("qm", 0.5 if use_lspp_defaults() else None)
+                        0.5,
+                        **kwargs,
                     ),
                     Field(
                         "qn",
                         float,
                         40,
                         10,
-                        kwargs.get("qn", 0.17 if use_lspp_defaults() else None)
+                        0.17,
+                        **kwargs,
                     ),
                     Field(
                         "conm",
                         float,
                         50,
                         10,
-                        kwargs.get("conm", 1. if use_lspp_defaults() else None)
+                        1.,
+                        **kwargs,
                     ),
                     Field(
                         "conl",
                         float,
                         60,
                         10,
-                        kwargs.get("conl", 1. if use_lspp_defaults() else None)
+                        1.,
+                        **kwargs,
                     ),
                     Field(
                         "cont",
                         float,
                         70,
                         10,
-                        kwargs.get("cont", 1. if use_lspp_defaults() else None)
+                        1.,
+                        **kwargs,
                     ),
                 ],
             ),

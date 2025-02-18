@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEpCellmodelFitzhughnagumo(KeywordBase):
@@ -41,7 +40,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("matid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,42 +51,42 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         10,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         20,
                         10,
-                        kwargs.get("gamma")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         30,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "mu1",
                         float,
                         40,
                         10,
-                        kwargs.get("mu1")
+                        **kwargs,
                     ),
                     Field(
                         "mu2",
                         float,
                         50,
                         10,
-                        kwargs.get("mu2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -98,14 +97,14 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v")
+                        **kwargs,
                     ),
                     Field(
                         "r",
                         float,
                         10,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                 ],
             ),

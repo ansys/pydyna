@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceBlanksizeDevelopment(KeywordBase):
@@ -41,56 +40,61 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ioption", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "iadapt",
                         int,
                         20,
                         10,
-                        kwargs.get("iadapt")
+                        **kwargs,
                     ),
                     Field(
                         "maxsize",
                         float,
                         30,
                         10,
-                        kwargs.get("maxsize", 30.0 if use_lspp_defaults() else None)
+                        30.0,
+                        **kwargs,
                     ),
                     Field(
                         "referenc",
                         int,
                         40,
                         10,
-                        kwargs.get("referenc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "space",
                         float,
                         50,
                         10,
-                        kwargs.get("space", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "maxgap",
                         float,
                         60,
                         10,
-                        kwargs.get("maxgap", 30.0 if use_lspp_defaults() else None)
+                        30.0,
+                        **kwargs,
                     ),
                     Field(
                         "orient",
                         float,
                         70,
                         10,
-                        kwargs.get("orient")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,7 +105,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,7 +116,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -123,7 +127,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -134,7 +138,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -145,7 +149,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename13")
+                        **kwargs,
                     ),
                 ],
             ),

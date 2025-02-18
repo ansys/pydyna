@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,47 @@ class SectionDiscrete(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "dro",
                         int,
                         10,
                         10,
-                        kwargs.get("dro", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "kd",
                         float,
                         20,
                         10,
-                        kwargs.get("kd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "v0",
                         float,
                         30,
                         10,
-                        kwargs.get("v0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cl",
                         float,
                         40,
                         10,
-                        kwargs.get("cl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd",
                         float,
                         50,
                         10,
-                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,14 +96,14 @@ class SectionDiscrete(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cdl")
+                        **kwargs,
                     ),
                     Field(
                         "tdl",
                         float,
                         10,
                         10,
-                        kwargs.get("tdl")
+                        **kwargs,
                     ),
                 ],
             ),

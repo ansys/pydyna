@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,42 @@ class MatViscoplasticMixedHardening(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "lcss",
                         int,
                         40,
                         10,
-                        kwargs.get("lcss")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         50,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,7 +91,8 @@ class MatViscoplasticMixedHardening(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fail", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),

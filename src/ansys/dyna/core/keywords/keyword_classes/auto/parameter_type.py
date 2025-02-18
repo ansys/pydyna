@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ParameterType(KeywordBase):
@@ -41,21 +40,22 @@ class ParameterType(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("prmr")
+                        **kwargs,
                     ),
                     Field(
                         "val",
                         int,
                         10,
                         10,
-                        kwargs.get("val")
+                        **kwargs,
                     ),
                     Field(
                         "prtyp",
                         str,
                         20,
                         10,
-                        kwargs.get("prtyp", "   " if use_lspp_defaults() else None)
+                        "   ",
+                        **kwargs,
                     ),
                 ],
             ),

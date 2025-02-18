@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class Mat189(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "ta1",
                         int,
                         20,
                         10,
-                        kwargs.get("ta1")
+                        **kwargs,
                     ),
                     Field(
                         "ta2",
                         int,
                         30,
                         10,
-                        kwargs.get("ta2")
+                        **kwargs,
                     ),
                     Field(
                         "ta3",
                         int,
                         40,
                         10,
-                        kwargs.get("ta3")
+                        **kwargs,
                     ),
                     Field(
                         "ta4",
                         int,
                         50,
                         10,
-                        kwargs.get("ta4")
+                        **kwargs,
                     ),
                     Field(
                         "ta5",
                         int,
                         60,
                         10,
-                        kwargs.get("ta5")
+                        **kwargs,
                     ),
                     Field(
                         "ta6",
                         int,
                         70,
                         10,
-                        kwargs.get("ta6")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class Mat189(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("c11")
+                        **kwargs,
                     ),
                     Field(
                         "c12",
                         int,
                         10,
                         10,
-                        kwargs.get("c12")
+                        **kwargs,
                     ),
                     Field(
                         "c13",
                         int,
                         20,
                         10,
-                        kwargs.get("c13")
+                        **kwargs,
                     ),
                     Field(
                         "c14",
                         int,
                         30,
                         10,
-                        kwargs.get("c14")
+                        **kwargs,
                     ),
                     Field(
                         "c15",
                         int,
                         40,
                         10,
-                        kwargs.get("c15")
+                        **kwargs,
                     ),
                     Field(
                         "c16",
                         int,
                         50,
                         10,
-                        kwargs.get("c16")
+                        **kwargs,
                     ),
                     Field(
                         "c22",
                         int,
                         60,
                         10,
-                        kwargs.get("c22")
+                        **kwargs,
                     ),
                     Field(
                         "c23",
                         int,
                         70,
                         10,
-                        kwargs.get("c23")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +165,56 @@ class Mat189(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("c24")
+                        **kwargs,
                     ),
                     Field(
                         "c25",
                         int,
                         10,
                         10,
-                        kwargs.get("c25")
+                        **kwargs,
                     ),
                     Field(
                         "c26",
                         int,
                         20,
                         10,
-                        kwargs.get("c26")
+                        **kwargs,
                     ),
                     Field(
                         "c33",
                         int,
                         30,
                         10,
-                        kwargs.get("c33")
+                        **kwargs,
                     ),
                     Field(
                         "c34",
                         int,
                         40,
                         10,
-                        kwargs.get("c34")
+                        **kwargs,
                     ),
                     Field(
                         "c35",
                         int,
                         50,
                         10,
-                        kwargs.get("c35")
+                        **kwargs,
                     ),
                     Field(
                         "c36",
                         int,
                         60,
                         10,
-                        kwargs.get("c36")
+                        **kwargs,
                     ),
                     Field(
                         "c44",
                         int,
                         70,
                         10,
-                        kwargs.get("c44")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +225,56 @@ class Mat189(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("c45")
+                        **kwargs,
                     ),
                     Field(
                         "c46",
                         int,
                         10,
                         10,
-                        kwargs.get("c46")
+                        **kwargs,
                     ),
                     Field(
                         "c55",
                         int,
                         20,
                         10,
-                        kwargs.get("c55")
+                        **kwargs,
                     ),
                     Field(
                         "c56",
                         int,
                         30,
                         10,
-                        kwargs.get("c56")
+                        **kwargs,
                     ),
                     Field(
                         "c66",
                         int,
                         40,
                         10,
-                        kwargs.get("c66")
+                        **kwargs,
                     ),
                     Field(
                         "tge",
                         int,
                         50,
                         10,
-                        kwargs.get("tge")
+                        **kwargs,
                     ),
                     Field(
                         "tref",
                         float,
                         60,
                         10,
-                        kwargs.get("tref")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         70,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,49 +285,50 @@ class Mat189(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         float,
                         60,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -339,56 +339,56 @@ class Mat189(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         10,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         20,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "v1",
                         float,
                         30,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         40,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         50,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "ref",
                         float,
                         70,
                         10,
-                        kwargs.get("ref")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class Mat197(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         20,
                         10,
-                        kwargs.get("a", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         30,
                         10,
-                        kwargs.get("beta", 0.5 if use_lspp_defaults() else None)
+                        0.5,
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         40,
                         10,
-                        kwargs.get("gamma", 0.5 if use_lspp_defaults() else None)
+                        0.5,
+                        **kwargs,
                     ),
                     Field(
                         "dispy",
                         float,
                         50,
                         10,
-                        kwargs.get("dispy")
+                        **kwargs,
                     ),
                     Field(
                         "stiffv",
                         float,
                         60,
                         10,
-                        kwargs.get("stiffv")
+                        **kwargs,
                     ),
                     Field(
                         "itype",
                         int,
                         70,
                         10,
-                        kwargs.get("itype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +109,64 @@ class Mat197(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("preload", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "damp",
                         float,
                         10,
                         10,
-                        kwargs.get("damp", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "mx1",
                         float,
                         20,
                         10,
-                        kwargs.get("mx1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mx2",
                         float,
                         30,
                         10,
-                        kwargs.get("mx2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "my1",
                         float,
                         40,
                         10,
-                        kwargs.get("my1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "my2",
                         float,
                         50,
                         10,
-                        kwargs.get("my2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cde",
                         float,
                         60,
                         10,
-                        kwargs.get("cde", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iextra",
                         int,
                         70,
                         10,
-                        kwargs.get("iextra", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +177,63 @@ class Mat197(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fmax", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "delf",
                         float,
                         10,
                         10,
-                        kwargs.get("delf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "afric",
                         float,
                         20,
                         10,
-                        kwargs.get("afric", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "radx",
                         float,
                         30,
                         10,
-                        kwargs.get("radx", 1.0e20 if use_lspp_defaults() else None)
+                        1.0e20,
+                        **kwargs,
                     ),
                     Field(
                         "rady",
                         float,
                         40,
                         10,
-                        kwargs.get("rady", 1.0e20 if use_lspp_defaults() else None)
+                        1.0e20,
+                        **kwargs,
                     ),
                     Field(
                         "radb",
                         float,
                         50,
                         10,
-                        kwargs.get("radb", 1.0e20 if use_lspp_defaults() else None)
+                        1.0e20,
+                        **kwargs,
                     ),
                     Field(
                         "stiffl",
                         float,
                         60,
                         10,
-                        kwargs.get("stiffl")
+                        **kwargs,
                     ),
                     Field(
                         "stiffts",
                         float,
                         70,
                         10,
-                        kwargs.get("stiffts", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +244,59 @@ class Mat197(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("forcey", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         10,
                         10,
-                        kwargs.get("alpha", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "stifft",
                         float,
                         20,
                         10,
-                        kwargs.get("stifft")
+                        **kwargs,
                     ),
                     Field(
                         "dfail",
                         float,
                         30,
                         10,
-                        kwargs.get("dfail", 1.0e20 if use_lspp_defaults() else None)
+                        1.0e20,
+                        **kwargs,
                     ),
                     Field(
                         "fmaxyc",
                         float,
                         40,
                         10,
-                        kwargs.get("fmaxyc")
+                        **kwargs,
                     ),
                     Field(
                         "fmaxxt",
                         float,
                         50,
                         10,
-                        kwargs.get("fmaxxt")
+                        **kwargs,
                     ),
                     Field(
                         "fmaxyt",
                         float,
                         60,
                         10,
-                        kwargs.get("fmaxyt")
+                        **kwargs,
                     ),
                     Field(
                         "ylock",
                         float,
                         70,
                         10,
-                        kwargs.get("ylock")
+                        **kwargs,
                     ),
                 ],
             ),

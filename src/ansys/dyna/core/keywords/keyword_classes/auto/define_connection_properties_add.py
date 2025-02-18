@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,46 @@ class DefineConnectionPropertiesAdd(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("con_id")
+                        **kwargs,
                     ),
                     Field(
                         "proprul",
                         int,
                         10,
                         10,
-                        kwargs.get("proprul", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "areaeq",
                         int,
                         20,
                         10,
-                        kwargs.get("areaeq", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "dg_typ",
                         int,
                         40,
                         10,
-                        kwargs.get("dg_typ", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "moarfl",
                         int,
                         50,
                         10,
-                        kwargs.get("moarfl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,56 +95,57 @@ class DefineConnectionPropertiesAdd(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "sgiy",
                         float,
                         10,
                         10,
-                        kwargs.get("sgiy")
+                        **kwargs,
                     ),
                     Field(
                         "etan",
                         float,
                         20,
                         10,
-                        kwargs.get("etan")
+                        **kwargs,
                     ),
                     Field(
                         "dgpr",
                         float,
                         30,
                         10,
-                        kwargs.get("dgpr", 1.0E+10 if use_lspp_defaults() else None)
+                        1.0E+10,
+                        **kwargs,
                     ),
                     Field(
                         "rank",
                         float,
                         40,
                         10,
-                        kwargs.get("rank")
+                        **kwargs,
                     ),
                     Field(
                         "sn",
                         float,
                         50,
                         10,
-                        kwargs.get("sn")
+                        **kwargs,
                     ),
                     Field(
                         "sb",
                         float,
                         60,
                         10,
-                        kwargs.get("sb")
+                        **kwargs,
                     ),
                     Field(
                         "ss",
                         float,
                         70,
                         10,
-                        kwargs.get("ss")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -152,56 +156,57 @@ class DefineConnectionPropertiesAdd(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("exsn")
+                        **kwargs,
                     ),
                     Field(
                         "exsb",
                         float,
                         10,
                         10,
-                        kwargs.get("exsb")
+                        **kwargs,
                     ),
                     Field(
                         "exss",
                         float,
                         20,
                         10,
-                        kwargs.get("exss")
+                        **kwargs,
                     ),
                     Field(
                         "lcsn",
                         int,
                         30,
                         10,
-                        kwargs.get("lcsn")
+                        **kwargs,
                     ),
                     Field(
                         "lcsb",
                         int,
                         40,
                         10,
-                        kwargs.get("lcsb")
+                        **kwargs,
                     ),
                     Field(
                         "lcss",
                         int,
                         50,
                         10,
-                        kwargs.get("lcss")
+                        **kwargs,
                     ),
                     Field(
                         "gfad",
                         int,
                         60,
                         10,
-                        kwargs.get("gfad")
+                        **kwargs,
                     ),
                     Field(
                         "sclmrr",
                         float,
                         70,
                         10,
-                        kwargs.get("sclmrr", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

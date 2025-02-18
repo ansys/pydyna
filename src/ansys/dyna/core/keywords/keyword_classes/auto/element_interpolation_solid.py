@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementInterpolationSolid(KeywordBase):
@@ -41,21 +40,21 @@ class ElementInterpolationSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eids")
+                        **kwargs,
                     ),
                     Field(
                         "eidgs",
                         int,
                         10,
                         10,
-                        kwargs.get("eidgs")
+                        **kwargs,
                     ),
                     Field(
                         "ngp",
                         int,
                         20,
                         10,
-                        kwargs.get("ngp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,56 +65,56 @@ class ElementInterpolationSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ip1")
+                        **kwargs,
                     ),
                     Field(
                         "w1",
                         float,
                         10,
                         10,
-                        kwargs.get("w1")
+                        **kwargs,
                     ),
                     Field(
                         "ip2",
                         int,
                         20,
                         10,
-                        kwargs.get("ip2")
+                        **kwargs,
                     ),
                     Field(
                         "w2",
                         float,
                         30,
                         10,
-                        kwargs.get("w2")
+                        **kwargs,
                     ),
                     Field(
                         "ip3",
                         int,
                         40,
                         10,
-                        kwargs.get("ip3")
+                        **kwargs,
                     ),
                     Field(
                         "w3",
                         float,
                         50,
                         10,
-                        kwargs.get("w3")
+                        **kwargs,
                     ),
                     Field(
                         "ip4",
                         int,
                         60,
                         10,
-                        kwargs.get("ip4")
+                        **kwargs,
                     ),
                     Field(
                         "w4",
                         float,
                         70,
                         10,
-                        kwargs.get("w4")
+                        **kwargs,
                     ),
                 ],
             ),

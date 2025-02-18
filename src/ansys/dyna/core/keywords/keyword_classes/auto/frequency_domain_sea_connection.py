@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainSeaConnection(KeywordBase):
@@ -41,28 +40,30 @@ class FrequencyDomainSeaConnection(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("conid")
+                        **kwargs,
                     ),
                     Field(
                         "ctype",
                         int,
                         10,
                         10,
-                        kwargs.get("ctype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nsub",
                         int,
                         20,
                         10,
-                        kwargs.get("nsub")
+                        **kwargs,
                     ),
                     Field(
                         "ibeam",
                         int,
                         30,
                         10,
-                        kwargs.get("ibeam", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -73,56 +74,56 @@ class FrequencyDomainSeaConnection(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sub1")
+                        **kwargs,
                     ),
                     Field(
                         "sub2",
                         int,
                         10,
                         10,
-                        kwargs.get("sub2")
+                        **kwargs,
                     ),
                     Field(
                         "sub3",
                         int,
                         20,
                         10,
-                        kwargs.get("sub3")
+                        **kwargs,
                     ),
                     Field(
                         "sub4",
                         int,
                         30,
                         10,
-                        kwargs.get("sub4")
+                        **kwargs,
                     ),
                     Field(
                         "sub5",
                         int,
                         40,
                         10,
-                        kwargs.get("sub5")
+                        **kwargs,
                     ),
                     Field(
                         "sub6",
                         int,
                         50,
                         10,
-                        kwargs.get("sub6")
+                        **kwargs,
                     ),
                     Field(
                         "sub7",
                         int,
                         60,
                         10,
-                        kwargs.get("sub7")
+                        **kwargs,
                     ),
                     Field(
                         "sub8",
                         int,
                         70,
                         10,
-                        kwargs.get("sub8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,56 +134,56 @@ class FrequencyDomainSeaConnection(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ang1")
+                        **kwargs,
                     ),
                     Field(
                         "ang2",
                         float,
                         10,
                         10,
-                        kwargs.get("ang2")
+                        **kwargs,
                     ),
                     Field(
                         "ang3",
                         float,
                         20,
                         10,
-                        kwargs.get("ang3")
+                        **kwargs,
                     ),
                     Field(
                         "ang4",
                         float,
                         30,
                         10,
-                        kwargs.get("ang4")
+                        **kwargs,
                     ),
                     Field(
                         "ang5",
                         float,
                         40,
                         10,
-                        kwargs.get("ang5")
+                        **kwargs,
                     ),
                     Field(
                         "ang6",
                         float,
                         50,
                         10,
-                        kwargs.get("ang6")
+                        **kwargs,
                     ),
                     Field(
                         "ang7",
                         float,
                         60,
                         10,
-                        kwargs.get("ang7")
+                        **kwargs,
                     ),
                     Field(
                         "ang8",
                         float,
                         70,
                         10,
-                        kwargs.get("ang8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -193,7 +194,8 @@ class FrequencyDomainSeaConnection(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("length", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -204,14 +206,16 @@ class FrequencyDomainSeaConnection(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("absorb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         float,
                         10,
                         10,
-                        kwargs.get("thick", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,56 +46,57 @@ class ContactAddWear(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "wtype",
                         int,
                         10,
                         10,
-                        kwargs.get("wtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "p1",
                         float,
                         20,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         30,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         40,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                     Field(
                         "p4",
                         float,
                         50,
                         10,
-                        kwargs.get("p4")
+                        **kwargs,
                     ),
                     Field(
                         "p5",
                         float,
                         60,
                         10,
-                        kwargs.get("p5")
+                        **kwargs,
                     ),
                     Field(
                         "p6",
                         float,
                         70,
                         10,
-                        kwargs.get("p6")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,56 +107,56 @@ class ContactAddWear(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("w1")
+                        **kwargs,
                     ),
                     Field(
                         "w2",
                         float,
                         10,
                         10,
-                        kwargs.get("w2")
+                        **kwargs,
                     ),
                     Field(
                         "w3",
                         float,
                         20,
                         10,
-                        kwargs.get("w3")
+                        **kwargs,
                     ),
                     Field(
                         "w4",
                         float,
                         30,
                         10,
-                        kwargs.get("w4")
+                        **kwargs,
                     ),
                     Field(
                         "w5",
                         float,
                         40,
                         10,
-                        kwargs.get("w5")
+                        **kwargs,
                     ),
                     Field(
                         "w6",
                         float,
                         50,
                         10,
-                        kwargs.get("w6")
+                        **kwargs,
                     ),
                     Field(
                         "w7",
                         float,
                         60,
                         10,
-                        kwargs.get("w7")
+                        **kwargs,
                     ),
                     Field(
                         "w8",
                         float,
                         70,
                         10,
-                        kwargs.get("w8")
+                        **kwargs,
                     ),
                 ],
             ),

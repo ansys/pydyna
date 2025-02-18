@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEosMeadon(KeywordBase):
@@ -41,56 +40,57 @@ class EmEosMeadon(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "c1",
                         float,
                         10,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         20,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         float,
                         30,
                         10,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                     Field(
                         "temuni",
                         int,
                         40,
                         10,
-                        kwargs.get("temuni", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "v0",
                         float,
                         50,
                         10,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         60,
                         10,
-                        kwargs.get("gamma")
+                        **kwargs,
                     ),
                     Field(
                         "expon",
                         int,
                         70,
                         10,
-                        kwargs.get("expon")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,21 +101,22 @@ class EmEosMeadon(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lgtunit")
+                        **kwargs,
                     ),
                     Field(
                         "timunit",
                         float,
                         10,
                         10,
-                        kwargs.get("timunit")
+                        **kwargs,
                     ),
                     Field(
                         "adjust",
                         int,
                         20,
                         10,
-                        kwargs.get("adjust", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

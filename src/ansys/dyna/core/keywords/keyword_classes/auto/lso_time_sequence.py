@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LsoTimeSequence(KeywordBase):
@@ -41,7 +40,8 @@ class LsoTimeSequence(KeywordBase):
                         str,
                         0,
                         20,
-                        kwargs.get("solver_name", "MECH" if use_lspp_defaults() else None)
+                        "MECH",
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,42 +52,48 @@ class LsoTimeSequence(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdt",
                         int,
                         10,
                         10,
-                        kwargs.get("lcdt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcopt",
                         int,
                         20,
                         10,
-                        kwargs.get("lcopt", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "npltc",
                         int,
                         30,
                         10,
-                        kwargs.get("npltc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tbeg",
                         float,
                         40,
                         10,
-                        kwargs.get("tbeg", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tend",
                         float,
                         50,
                         10,
-                        kwargs.get("tend", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -98,56 +104,56 @@ class LsoTimeSequence(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("domid1")
+                        **kwargs,
                     ),
                     Field(
                         "domid2",
                         int,
                         10,
                         10,
-                        kwargs.get("domid2")
+                        **kwargs,
                     ),
                     Field(
                         "domid3",
                         int,
                         20,
                         10,
-                        kwargs.get("domid3")
+                        **kwargs,
                     ),
                     Field(
                         "domid4",
                         int,
                         30,
                         10,
-                        kwargs.get("domid4")
+                        **kwargs,
                     ),
                     Field(
                         "domid5",
                         int,
                         40,
                         10,
-                        kwargs.get("domid5")
+                        **kwargs,
                     ),
                     Field(
                         "domid6",
                         int,
                         50,
                         10,
-                        kwargs.get("domid6")
+                        **kwargs,
                     ),
                     Field(
                         "domid7",
                         int,
                         60,
                         10,
-                        kwargs.get("domid7")
+                        **kwargs,
                     ),
                     Field(
                         "domid8",
                         int,
                         70,
                         10,
-                        kwargs.get("domid8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -158,7 +164,7 @@ class LsoTimeSequence(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("global_var")
+                        **kwargs,
                     ),
                 ],
             ),

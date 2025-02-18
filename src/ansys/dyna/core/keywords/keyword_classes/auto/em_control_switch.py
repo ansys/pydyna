@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmControlSwitch(KeywordBase):
@@ -41,21 +40,24 @@ class EmControlSwitch(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "femcomp",
                         int,
                         10,
                         10,
-                        kwargs.get("femcomp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bemcomp",
                         int,
                         20,
                         10,
-                        kwargs.get("bemcomp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

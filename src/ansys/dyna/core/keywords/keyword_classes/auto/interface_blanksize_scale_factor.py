@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceBlanksizeScaleFactor(KeywordBase):
@@ -41,35 +40,40 @@ class InterfaceBlanksizeScaleFactor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idcrv", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         10,
                         10,
-                        kwargs.get("sf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "offx",
                         float,
                         20,
                         10,
-                        kwargs.get("offx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "offy",
                         float,
                         30,
                         10,
-                        kwargs.get("offy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "offz",
                         float,
                         40,
                         10,
-                        kwargs.get("offz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

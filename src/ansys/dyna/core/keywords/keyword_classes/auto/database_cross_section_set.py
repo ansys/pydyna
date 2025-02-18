@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseCrossSectionSet(KeywordBase):
@@ -41,14 +40,14 @@ class DatabaseCrossSectionSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("csid")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,63 @@ class DatabaseCrossSectionSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "hsid",
                         int,
                         10,
                         10,
-                        kwargs.get("hsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bsid",
                         int,
                         20,
                         10,
-                        kwargs.get("bsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ssid",
                         int,
                         30,
                         10,
-                        kwargs.get("ssid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tsid",
                         int,
                         40,
                         10,
-                        kwargs.get("tsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dsid",
                         int,
                         50,
                         10,
-                        kwargs.get("dsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "id",
                         int,
                         60,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "itype",
                         int,
                         70,
                         10,
-                        kwargs.get("itype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

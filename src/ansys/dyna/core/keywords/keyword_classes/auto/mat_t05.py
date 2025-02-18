@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,14 +45,14 @@ class MatT05(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tmid")
+                        **kwargs,
                     ),
                     Field(
                         "tro",
                         float,
                         10,
                         10,
-                        kwargs.get("tro")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -64,14 +63,14 @@ class MatT05(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hc")
+                        **kwargs,
                     ),
                     Field(
                         "tc",
                         float,
                         10,
                         10,
-                        kwargs.get("tc")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,56 +46,61 @@ class Contact2DAutomaticSurfaceToSurface(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("surfa")
+                        **kwargs,
                     ),
                     Field(
                         "surfb",
                         int,
                         10,
                         10,
-                        kwargs.get("surfb")
+                        **kwargs,
                     ),
                     Field(
                         "sfact",
                         float,
                         20,
                         10,
-                        kwargs.get("sfact", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "freq",
                         int,
                         30,
                         10,
-                        kwargs.get("freq", 50 if use_lspp_defaults() else None)
+                        50,
+                        **kwargs,
                     ),
                     Field(
                         "fs",
                         float,
                         40,
                         10,
-                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd",
                         float,
                         50,
                         10,
-                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc",
                         float,
                         60,
                         10,
-                        kwargs.get("dc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,56 +111,64 @@ class Contact2DAutomaticSurfaceToSurface(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tdeath",
                         float,
                         10,
                         10,
-                        kwargs.get("tdeath", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "soa",
                         float,
                         20,
                         10,
-                        kwargs.get("soa", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sob",
                         float,
                         30,
                         10,
-                        kwargs.get("sob", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "nda",
                         int,
                         40,
                         10,
-                        kwargs.get("nda", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ndb",
                         int,
                         50,
                         10,
-                        kwargs.get("ndb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cof",
                         int,
                         60,
                         10,
-                        kwargs.get("cof", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "init",
                         int,
                         70,
                         10,
-                        kwargs.get("init", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -167,56 +179,64 @@ class Contact2DAutomaticSurfaceToSurface(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vdc",
                         float,
                         10,
                         10,
-                        kwargs.get("vdc", 10.0 if use_lspp_defaults() else None)
+                        10.0,
+                        **kwargs,
                     ),
                     Field(
                         "ipf",
                         int,
                         20,
                         10,
-                        kwargs.get("ipf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "slide",
                         int,
                         30,
                         10,
-                        kwargs.get("slide", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "istiff",
                         int,
                         40,
                         10,
-                        kwargs.get("istiff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tiedgap",
                         float,
                         50,
                         10,
-                        kwargs.get("tiedgap", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "igapcl",
                         int,
                         60,
                         10,
-                        kwargs.get("igapcl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tietyp",
                         int,
                         70,
                         10,
-                        kwargs.get("tietyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -227,21 +247,24 @@ class Contact2DAutomaticSurfaceToSurface(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sldsoa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sldsob",
                         float,
                         10,
                         10,
-                        kwargs.get("sldsob", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tdpen",
                         float,
                         20,
                         10,
-                        kwargs.get("tdpen", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

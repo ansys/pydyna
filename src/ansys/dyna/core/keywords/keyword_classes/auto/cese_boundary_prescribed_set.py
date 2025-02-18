@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseBoundaryPrescribedSet(KeywordBase):
@@ -41,14 +40,14 @@ class CeseBoundaryPrescribedSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "idcomp",
                         int,
                         10,
                         10,
-                        kwargs.get("idcomp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,42 +58,42 @@ class CeseBoundaryPrescribedSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lc_u")
+                        **kwargs,
                     ),
                     Field(
                         "lc_v ",
                         int,
                         10,
                         10,
-                        kwargs.get("lc_v ")
+                        **kwargs,
                     ),
                     Field(
                         "lc_w",
                         int,
                         20,
                         10,
-                        kwargs.get("lc_w")
+                        **kwargs,
                     ),
                     Field(
                         "lc_rho",
                         int,
                         30,
                         10,
-                        kwargs.get("lc_rho")
+                        **kwargs,
                     ),
                     Field(
                         "lc_p ",
                         int,
                         40,
                         10,
-                        kwargs.get("lc_p ")
+                        **kwargs,
                     ),
                     Field(
                         "lc_t",
                         int,
                         50,
                         10,
-                        kwargs.get("lc_t")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -105,42 +104,48 @@ class CeseBoundaryPrescribedSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sf_u", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_v ",
                         float,
                         10,
                         10,
-                        kwargs.get("sf_v ", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_w",
                         float,
                         20,
                         10,
-                        kwargs.get("sf_w", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_rho",
                         float,
                         30,
                         10,
-                        kwargs.get("sf_rho", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_p ",
                         float,
                         40,
                         10,
-                        kwargs.get("sf_p ", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_t",
                         float,
                         50,
                         10,
-                        kwargs.get("sf_t", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

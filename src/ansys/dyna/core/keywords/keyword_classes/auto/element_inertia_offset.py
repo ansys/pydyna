@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementInertiaOffset(KeywordBase):
@@ -41,21 +40,21 @@ class ElementInertiaOffset(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         8,
                         8,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "csid",
                         int,
                         16,
                         8,
-                        kwargs.get("csid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,49 +65,56 @@ class ElementInertiaOffset(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ixx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ixy",
                         float,
                         10,
                         10,
-                        kwargs.get("ixy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ixz",
                         float,
                         20,
                         10,
-                        kwargs.get("ixz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "iyy",
                         float,
                         30,
                         10,
-                        kwargs.get("iyy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "iyz",
                         float,
                         40,
                         10,
-                        kwargs.get("iyz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "izz",
                         float,
                         50,
                         10,
-                        kwargs.get("izz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "mass",
                         float,
                         60,
                         10,
-                        kwargs.get("mass", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,21 +125,24 @@ class ElementInertiaOffset(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x-off", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "y_off",
                         float,
                         10,
                         10,
-                        kwargs.get("y_off", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "z_off",
                         float,
                         20,
                         10,
-                        kwargs.get("z_off", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

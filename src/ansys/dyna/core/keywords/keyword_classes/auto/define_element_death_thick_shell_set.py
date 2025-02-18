@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,54 @@ class DefineElementDeathThickShellSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "time",
                         float,
                         10,
                         10,
-                        kwargs.get("time", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "boxid",
                         int,
                         20,
                         10,
-                        kwargs.get("boxid")
+                        **kwargs,
                     ),
                     Field(
                         "inout",
                         int,
                         30,
                         10,
-                        kwargs.get("inout", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "idgrp",
                         int,
                         40,
                         10,
-                        kwargs.get("idgrp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         50,
                         10,
-                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "percent",
                         float,
                         60,
                         10,
-                        kwargs.get("percent", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlFsi(KeywordBase):
@@ -41,42 +40,47 @@ class IcfdControlFsi(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("owc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bt",
                         float,
                         10,
                         10,
-                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         20,
                         10,
-                        kwargs.get("dt", 1.0E28 if use_lspp_defaults() else None)
+                        1.0E28,
+                        **kwargs,
                     ),
                     Field(
                         "idc",
                         float,
                         30,
                         10,
-                        kwargs.get("idc", 0.25 if use_lspp_defaults() else None)
+                        0.25,
+                        **kwargs,
                     ),
                     Field(
                         "lcidsf",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidsf")
+                        **kwargs,
                     ),
                     Field(
                         "xproj",
                         int,
                         50,
                         10,
-                        kwargs.get("xproj", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,7 +91,7 @@ class IcfdControlFsi(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsub")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,57 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "kt",
                         float,
                         20,
                         10,
-                        kwargs.get("kt")
+                        **kwargs,
                     ),
                     Field(
                         "kr",
                         float,
                         30,
                         10,
-                        kwargs.get("kr")
+                        **kwargs,
                     ),
                     Field(
                         "iunld",
                         int,
                         40,
                         10,
-                        kwargs.get("iunld")
+                        **kwargs,
                     ),
                     Field(
                         "offset",
                         float,
                         50,
                         10,
-                        kwargs.get("offset")
+                        **kwargs,
                     ),
                     Field(
                         "dampf",
                         float,
                         60,
                         10,
-                        kwargs.get("dampf")
+                        **kwargs,
                     ),
                     Field(
                         "iflag",
                         int,
                         70,
                         10,
-                        kwargs.get("iflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,42 +106,42 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidtr")
+                        **kwargs,
                     ),
                     Field(
                         "lcidts",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidts")
+                        **kwargs,
                     ),
                     Field(
                         "lcidtt",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidtt")
+                        **kwargs,
                     ),
                     Field(
                         "lcidrr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidrr")
+                        **kwargs,
                     ),
                     Field(
                         "lcidrs",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidrs")
+                        **kwargs,
                     ),
                     Field(
                         "lcidrt",
                         int,
                         50,
                         10,
-                        kwargs.get("lcidrt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -152,42 +152,42 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidtur")
+                        **kwargs,
                     ),
                     Field(
                         "lcidtus",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidtus")
+                        **kwargs,
                     ),
                     Field(
                         "lcidtut",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidtut")
+                        **kwargs,
                     ),
                     Field(
                         "lcidrur",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidrur")
+                        **kwargs,
                     ),
                     Field(
                         "lcidrus",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidrus")
+                        **kwargs,
                     ),
                     Field(
                         "lcidrut",
                         int,
                         50,
                         10,
-                        kwargs.get("lcidrut")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -198,42 +198,42 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidtdr")
+                        **kwargs,
                     ),
                     Field(
                         "lcidtds",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidtds")
+                        **kwargs,
                     ),
                     Field(
                         "lcidtdt",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidtdt")
+                        **kwargs,
                     ),
                     Field(
                         "lcidrdr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidrdr")
+                        **kwargs,
                     ),
                     Field(
                         "lcidrds",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidrds")
+                        **kwargs,
                     ),
                     Field(
                         "lcidrdt",
                         int,
                         50,
                         10,
-                        kwargs.get("lcidrdt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -244,42 +244,42 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidter")
+                        **kwargs,
                     ),
                     Field(
                         "lcidtes",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidtes")
+                        **kwargs,
                     ),
                     Field(
                         "lcidtet",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidtet")
+                        **kwargs,
                     ),
                     Field(
                         "lcidrer",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidrer")
+                        **kwargs,
                     ),
                     Field(
                         "lcidres",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidres")
+                        **kwargs,
                     ),
                     Field(
                         "lcidret",
                         int,
                         50,
                         10,
-                        kwargs.get("lcidret")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -290,49 +290,49 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("utfailr")
+                        **kwargs,
                     ),
                     Field(
                         "utfails",
                         float,
                         10,
                         10,
-                        kwargs.get("utfails")
+                        **kwargs,
                     ),
                     Field(
                         "utfailt",
                         float,
                         20,
                         10,
-                        kwargs.get("utfailt")
+                        **kwargs,
                     ),
                     Field(
                         "wtfailr",
                         float,
                         30,
                         10,
-                        kwargs.get("wtfailr")
+                        **kwargs,
                     ),
                     Field(
                         "wtfails",
                         float,
                         40,
                         10,
-                        kwargs.get("wtfails")
+                        **kwargs,
                     ),
                     Field(
                         "wtfailt",
                         float,
                         50,
                         10,
-                        kwargs.get("wtfailt")
+                        **kwargs,
                     ),
                     Field(
                         "fcrit",
                         float,
                         60,
                         10,
-                        kwargs.get("fcrit")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -343,42 +343,42 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ucfailr")
+                        **kwargs,
                     ),
                     Field(
                         "ucfails",
                         float,
                         10,
                         10,
-                        kwargs.get("ucfails")
+                        **kwargs,
                     ),
                     Field(
                         "ucfailt",
                         float,
                         20,
                         10,
-                        kwargs.get("ucfailt")
+                        **kwargs,
                     ),
                     Field(
                         "wcfailr",
                         float,
                         30,
                         10,
-                        kwargs.get("wcfailr")
+                        **kwargs,
                     ),
                     Field(
                         "wcfails",
                         float,
                         40,
                         10,
-                        kwargs.get("wcfails")
+                        **kwargs,
                     ),
                     Field(
                         "wcfailt",
                         float,
                         50,
                         10,
-                        kwargs.get("wcfailt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -389,42 +389,42 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("iur")
+                        **kwargs,
                     ),
                     Field(
                         "ius",
                         float,
                         10,
                         10,
-                        kwargs.get("ius")
+                        **kwargs,
                     ),
                     Field(
                         "iut",
                         float,
                         20,
                         10,
-                        kwargs.get("iut")
+                        **kwargs,
                     ),
                     Field(
                         "iwr",
                         float,
                         30,
                         10,
-                        kwargs.get("iwr")
+                        **kwargs,
                     ),
                     Field(
                         "iws",
                         float,
                         40,
                         10,
-                        kwargs.get("iws")
+                        **kwargs,
                     ),
                     Field(
                         "iwt",
                         float,
                         50,
                         10,
-                        kwargs.get("iwt")
+                        **kwargs,
                     ),
                 ],
             ),

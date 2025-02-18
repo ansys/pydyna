@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialFieldSolid(KeywordBase):
@@ -41,21 +40,21 @@ class InitialFieldSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "nint",
                         int,
                         10,
                         10,
-                        kwargs.get("nint")
+                        **kwargs,
                     ),
                     Field(
                         "nhisv",
                         int,
                         20,
                         10,
-                        kwargs.get("nhisv")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,56 +65,56 @@ class InitialFieldSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fld1")
+                        **kwargs,
                     ),
                     Field(
                         "fld2",
                         int,
                         10,
                         10,
-                        kwargs.get("fld2")
+                        **kwargs,
                     ),
                     Field(
                         "fld3",
                         int,
                         20,
                         10,
-                        kwargs.get("fld3")
+                        **kwargs,
                     ),
                     Field(
                         "fld4",
                         int,
                         30,
                         10,
-                        kwargs.get("fld4")
+                        **kwargs,
                     ),
                     Field(
                         "fld5",
                         int,
                         40,
                         10,
-                        kwargs.get("fld5")
+                        **kwargs,
                     ),
                     Field(
                         "fld6",
                         int,
                         50,
                         10,
-                        kwargs.get("fld6")
+                        **kwargs,
                     ),
                     Field(
                         "fld7",
                         int,
                         60,
                         10,
-                        kwargs.get("fld7")
+                        **kwargs,
                     ),
                     Field(
                         "fld8",
                         int,
                         70,
                         10,
-                        kwargs.get("fld8")
+                        **kwargs,
                     ),
                 ],
             ),

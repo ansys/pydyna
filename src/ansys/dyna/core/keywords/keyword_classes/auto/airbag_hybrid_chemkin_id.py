@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagHybridChemkinId(KeywordBase):
@@ -41,14 +40,14 @@ class AirbagHybridChemkinId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,63 @@ class AirbagHybridChemkinId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "sidtyp",
                         int,
                         10,
                         10,
-                        kwargs.get("sidtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rbid",
                         int,
                         20,
                         10,
-                        kwargs.get("rbid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vsca",
                         float,
                         30,
                         10,
-                        kwargs.get("vsca", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "psca",
                         float,
                         40,
                         10,
-                        kwargs.get("psca", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "vini",
                         float,
                         50,
                         10,
-                        kwargs.get("vini", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "mwd",
                         float,
                         60,
                         10,
-                        kwargs.get("mwd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "spsf",
                         float,
                         70,
                         10,
-                        kwargs.get("spsf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,49 +125,50 @@ class AirbagHybridChemkinId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidm")
+                        **kwargs,
                     ),
                     Field(
                         "lcidt",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidt")
+                        **kwargs,
                     ),
                     Field(
                         "ngas",
                         int,
                         20,
                         10,
-                        kwargs.get("ngas")
+                        **kwargs,
                     ),
                     Field(
                         "data",
                         int,
                         30,
                         10,
-                        kwargs.get("data", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "atmt",
                         float,
                         40,
                         10,
-                        kwargs.get("atmt")
+                        **kwargs,
                     ),
                     Field(
                         "atmp",
                         float,
                         50,
                         10,
-                        kwargs.get("atmp")
+                        **kwargs,
                     ),
                     Field(
                         "rg",
                         float,
                         60,
                         10,
-                        kwargs.get("rg")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -172,7 +179,8 @@ class AirbagHybridChemkinId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hconv", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -183,14 +191,16 @@ class AirbagHybridChemkinId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c23", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a23",
                         float,
                         10,
                         10,
-                        kwargs.get("a23", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -201,35 +211,37 @@ class AirbagHybridChemkinId(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("chname")
+                        **kwargs,
                     ),
                     Field(
                         "mw",
                         float,
                         10,
                         10,
-                        kwargs.get("mw")
+                        **kwargs,
                     ),
                     Field(
                         "lcidn",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidn", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fmole",
                         float,
                         30,
                         10,
-                        kwargs.get("fmole")
+                        **kwargs,
                     ),
                     Field(
                         "fmolet",
                         float,
                         40,
                         10,
-                        kwargs.get("fmolet", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -240,21 +252,21 @@ class AirbagHybridChemkinId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tlow")
+                        **kwargs,
                     ),
                     Field(
                         "tmid",
                         float,
                         10,
                         10,
-                        kwargs.get("tmid")
+                        **kwargs,
                     ),
                     Field(
                         "thigh",
                         float,
                         20,
                         10,
-                        kwargs.get("thigh")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -265,49 +277,49 @@ class AirbagHybridChemkinId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alow")
+                        **kwargs,
                     ),
                     Field(
                         "blow",
                         float,
                         10,
                         10,
-                        kwargs.get("blow")
+                        **kwargs,
                     ),
                     Field(
                         "clow",
                         float,
                         20,
                         10,
-                        kwargs.get("clow")
+                        **kwargs,
                     ),
                     Field(
                         "dlow",
                         float,
                         30,
                         10,
-                        kwargs.get("dlow")
+                        **kwargs,
                     ),
                     Field(
                         "elow",
                         float,
                         40,
                         10,
-                        kwargs.get("elow")
+                        **kwargs,
                     ),
                     Field(
                         "flow",
                         float,
                         50,
                         10,
-                        kwargs.get("flow")
+                        **kwargs,
                     ),
                     Field(
                         "glow",
                         float,
                         60,
                         10,
-                        kwargs.get("glow")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -318,49 +330,49 @@ class AirbagHybridChemkinId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ahigh")
+                        **kwargs,
                     ),
                     Field(
                         "bhigh",
                         float,
                         10,
                         10,
-                        kwargs.get("bhigh")
+                        **kwargs,
                     ),
                     Field(
                         "chigh",
                         float,
                         20,
                         10,
-                        kwargs.get("chigh")
+                        **kwargs,
                     ),
                     Field(
                         "dhigh",
                         float,
                         30,
                         10,
-                        kwargs.get("dhigh")
+                        **kwargs,
                     ),
                     Field(
                         "ehigh",
                         float,
                         40,
                         10,
-                        kwargs.get("ehigh")
+                        **kwargs,
                     ),
                     Field(
                         "fhigh",
                         float,
                         50,
                         10,
-                        kwargs.get("fhigh")
+                        **kwargs,
                     ),
                     Field(
                         "ghigh",
                         float,
                         60,
                         10,
-                        kwargs.get("ghigh")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -371,35 +383,39 @@ class AirbagHybridChemkinId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         10,
                         10,
-                        kwargs.get("b", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         20,
                         10,
-                        kwargs.get("c", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "d",
                         float,
                         30,
                         10,
-                        kwargs.get("d", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         40,
                         10,
-                        kwargs.get("e", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

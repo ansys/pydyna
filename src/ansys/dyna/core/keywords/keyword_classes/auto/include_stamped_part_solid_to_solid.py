@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IncludeStampedPartSolidToSolid(KeywordBase):
@@ -41,7 +40,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,35 +51,39 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         int,
                         10,
                         10,
-                        kwargs.get("thick", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pstrn",
                         int,
                         20,
                         10,
-                        kwargs.get("pstrn", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "strain",
                         int,
                         30,
                         10,
-                        kwargs.get("strain", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "stress",
                         int,
                         40,
                         10,
-                        kwargs.get("stress", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,42 +94,48 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1sorc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "n2sorc",
                         int,
                         10,
                         10,
-                        kwargs.get("n2sorc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "n3sorc",
                         int,
                         20,
                         10,
-                        kwargs.get("n3sorc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "n1trgt",
                         int,
                         30,
                         10,
-                        kwargs.get("n1trgt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "n2trgt",
                         int,
                         40,
                         10,
-                        kwargs.get("n2trgt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "n3trgt",
                         int,
                         50,
                         10,
-                        kwargs.get("n3trgt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

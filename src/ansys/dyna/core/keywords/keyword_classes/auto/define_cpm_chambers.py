@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,14 +45,15 @@ class DefineCpmChambers(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "nchm",
                         int,
                         10,
                         10,
-                        kwargs.get("nchm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -64,28 +64,31 @@ class DefineCpmChambers(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid1")
+                        **kwargs,
                     ),
                     Field(
                         "sid2",
                         int,
                         10,
                         10,
-                        kwargs.get("sid2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ninter",
                         int,
                         20,
                         10,
-                        kwargs.get("ninter", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "chm_id",
                         int,
                         30,
                         10,
-                        kwargs.get("chm_id", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -96,21 +99,22 @@ class DefineCpmChambers(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid3")
+                        **kwargs,
                     ),
                     Field(
                         "itype3",
                         int,
                         10,
                         10,
-                        kwargs.get("itype3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tochm",
                         int,
                         20,
                         10,
-                        kwargs.get("tochm")
+                        **kwargs,
                     ),
                 ],
             ),

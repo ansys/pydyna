@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseExtentBinary(KeywordBase):
@@ -41,56 +40,64 @@ class DatabaseExtentBinary(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("neiph", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "neips",
                         int,
                         10,
                         10,
-                        kwargs.get("neips", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "maxint",
                         int,
                         20,
                         10,
-                        kwargs.get("maxint", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                     Field(
                         "strflg",
                         int,
                         30,
                         10,
-                        kwargs.get("strflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sigflg",
                         int,
                         40,
                         10,
-                        kwargs.get("sigflg", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "epsflg",
                         int,
                         50,
                         10,
-                        kwargs.get("epsflg", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "rltflg",
                         int,
                         60,
                         10,
-                        kwargs.get("rltflg", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "engflg",
                         int,
                         70,
                         10,
-                        kwargs.get("engflg", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +108,64 @@ class DatabaseExtentBinary(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cmpflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ieverp",
                         int,
                         10,
                         10,
-                        kwargs.get("ieverp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "beamip",
                         int,
                         20,
                         10,
-                        kwargs.get("beamip", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dcomp",
                         int,
                         30,
                         10,
-                        kwargs.get("dcomp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "shge",
                         int,
                         40,
                         10,
-                        kwargs.get("shge", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "stssz",
                         int,
                         50,
                         10,
-                        kwargs.get("stssz", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "n3thdt",
                         int,
                         60,
                         10,
-                        kwargs.get("n3thdt", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "ialemat",
                         int,
                         70,
                         10,
-                        kwargs.get("ialemat", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,56 +176,64 @@ class DatabaseExtentBinary(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nintsld", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pkp_sen",
                         int,
                         10,
                         10,
-                        kwargs.get("pkp_sen", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sclp",
                         float,
                         20,
                         10,
-                        kwargs.get("sclp", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "hydro",
                         int,
                         30,
                         10,
-                        kwargs.get("hydro", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "msscl",
                         int,
                         40,
                         10,
-                        kwargs.get("msscl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "therm",
                         int,
                         50,
                         10,
-                        kwargs.get("therm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "intout",
                         str,
                         60,
                         10,
-                        kwargs.get("intout", " " if use_lspp_defaults() else None)
+                        " ",
+                        **kwargs,
                     ),
                     Field(
                         "nodout",
                         str,
                         70,
                         10,
-                        kwargs.get("nodout", " " if use_lspp_defaults() else None)
+                        " ",
+                        **kwargs,
                     ),
                 ],
             ),
@@ -221,42 +244,47 @@ class DatabaseExtentBinary(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("dtdt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "resplt",
                         int,
                         10,
                         10,
-                        kwargs.get("resplt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "neipb",
                         int,
                         20,
                         10,
-                        kwargs.get("neipb")
+                        **kwargs,
                     ),
                     Field(
                         "quadsld",
                         int,
                         30,
                         10,
-                        kwargs.get("quadsld", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cubsld",
                         int,
                         40,
                         10,
-                        kwargs.get("cubsld", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "deleres",
                         int,
                         50,
                         10,
-                        kwargs.get("deleres", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

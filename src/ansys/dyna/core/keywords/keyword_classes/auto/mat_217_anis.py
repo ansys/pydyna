@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class Mat217Anis(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "c111",
                         float,
                         20,
                         10,
-                        kwargs.get("c111")
+                        **kwargs,
                     ),
                     Field(
                         "c121",
                         float,
                         30,
                         10,
-                        kwargs.get("c121")
+                        **kwargs,
                     ),
                     Field(
                         "c221",
                         float,
                         40,
                         10,
-                        kwargs.get("c221")
+                        **kwargs,
                     ),
                     Field(
                         "c131",
                         float,
                         50,
                         10,
-                        kwargs.get("c131")
+                        **kwargs,
                     ),
                     Field(
                         "c231",
                         float,
                         60,
                         10,
-                        kwargs.get("c231")
+                        **kwargs,
                     ),
                     Field(
                         "c331",
                         float,
                         70,
                         10,
-                        kwargs.get("c331")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class Mat217Anis(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c141")
+                        **kwargs,
                     ),
                     Field(
                         "c241",
                         float,
                         10,
                         10,
-                        kwargs.get("c241")
+                        **kwargs,
                     ),
                     Field(
                         "c341",
                         float,
                         20,
                         10,
-                        kwargs.get("c341")
+                        **kwargs,
                     ),
                     Field(
                         "c441",
                         float,
                         30,
                         10,
-                        kwargs.get("c441")
+                        **kwargs,
                     ),
                     Field(
                         "c151",
                         float,
                         40,
                         10,
-                        kwargs.get("c151")
+                        **kwargs,
                     ),
                     Field(
                         "c251",
                         float,
                         50,
                         10,
-                        kwargs.get("c251")
+                        **kwargs,
                     ),
                     Field(
                         "c351",
                         float,
                         60,
                         10,
-                        kwargs.get("c351")
+                        **kwargs,
                     ),
                     Field(
                         "c451",
                         float,
                         70,
                         10,
-                        kwargs.get("c451")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +165,56 @@ class Mat217Anis(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c551")
+                        **kwargs,
                     ),
                     Field(
                         "c161",
                         float,
                         10,
                         10,
-                        kwargs.get("c161")
+                        **kwargs,
                     ),
                     Field(
                         "c261",
                         float,
                         20,
                         10,
-                        kwargs.get("c261")
+                        **kwargs,
                     ),
                     Field(
                         "c361",
                         float,
                         30,
                         10,
-                        kwargs.get("c361")
+                        **kwargs,
                     ),
                     Field(
                         "c461",
                         float,
                         40,
                         10,
-                        kwargs.get("c461")
+                        **kwargs,
                     ),
                     Field(
                         "c561",
                         float,
                         50,
                         10,
-                        kwargs.get("c561")
+                        **kwargs,
                     ),
                     Field(
                         "c661",
                         float,
                         60,
                         10,
-                        kwargs.get("c661")
+                        **kwargs,
                     ),
                     Field(
                         "aopt1",
                         float,
                         70,
                         10,
-                        kwargs.get("aopt1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +225,58 @@ class Mat217Anis(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp1")
+                        **kwargs,
                     ),
                     Field(
                         "yp1",
                         float,
                         10,
                         10,
-                        kwargs.get("yp1")
+                        **kwargs,
                     ),
                     Field(
                         "zp1",
                         float,
                         20,
                         10,
-                        kwargs.get("zp1")
+                        **kwargs,
                     ),
                     Field(
                         "a11",
                         float,
                         30,
                         10,
-                        kwargs.get("a11")
+                        **kwargs,
                     ),
                     Field(
                         "a21",
                         float,
                         40,
                         10,
-                        kwargs.get("a21")
+                        **kwargs,
                     ),
                     Field(
                         "a31",
                         float,
                         50,
                         10,
-                        kwargs.get("a31")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         60,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ihis",
                         int,
                         70,
                         10,
-                        kwargs.get("ihis", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,56 +287,57 @@ class Mat217Anis(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v11")
+                        **kwargs,
                     ),
                     Field(
                         "v21",
                         float,
                         10,
                         10,
-                        kwargs.get("v21")
+                        **kwargs,
                     ),
                     Field(
                         "v31",
                         float,
                         20,
                         10,
-                        kwargs.get("v31")
+                        **kwargs,
                     ),
                     Field(
                         "d11",
                         float,
                         30,
                         10,
-                        kwargs.get("d11")
+                        **kwargs,
                     ),
                     Field(
                         "d21",
                         float,
                         40,
                         10,
-                        kwargs.get("d21")
+                        **kwargs,
                     ),
                     Field(
                         "d31",
                         float,
                         50,
                         10,
-                        kwargs.get("d31")
+                        **kwargs,
                     ),
                     Field(
                         "beta1",
                         float,
                         60,
                         10,
-                        kwargs.get("beta1")
+                        **kwargs,
                     ),
                     Field(
                         "ref",
                         float,
                         70,
                         10,
-                        kwargs.get("ref", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -346,56 +348,56 @@ class Mat217Anis(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "c112",
                         float,
                         20,
                         10,
-                        kwargs.get("c112")
+                        **kwargs,
                     ),
                     Field(
                         "c122",
                         float,
                         30,
                         10,
-                        kwargs.get("c122")
+                        **kwargs,
                     ),
                     Field(
                         "c222",
                         float,
                         40,
                         10,
-                        kwargs.get("c222")
+                        **kwargs,
                     ),
                     Field(
                         "c132",
                         float,
                         50,
                         10,
-                        kwargs.get("c132")
+                        **kwargs,
                     ),
                     Field(
                         "c232",
                         float,
                         60,
                         10,
-                        kwargs.get("c232")
+                        **kwargs,
                     ),
                     Field(
                         "c332",
                         float,
                         70,
                         10,
-                        kwargs.get("c332")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -406,56 +408,56 @@ class Mat217Anis(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c142")
+                        **kwargs,
                     ),
                     Field(
                         "c242",
                         float,
                         10,
                         10,
-                        kwargs.get("c242")
+                        **kwargs,
                     ),
                     Field(
                         "c342",
                         float,
                         20,
                         10,
-                        kwargs.get("c342")
+                        **kwargs,
                     ),
                     Field(
                         "c442",
                         float,
                         30,
                         10,
-                        kwargs.get("c442")
+                        **kwargs,
                     ),
                     Field(
                         "c152",
                         float,
                         40,
                         10,
-                        kwargs.get("c152")
+                        **kwargs,
                     ),
                     Field(
                         "c252",
                         float,
                         50,
                         10,
-                        kwargs.get("c252")
+                        **kwargs,
                     ),
                     Field(
                         "c352",
                         float,
                         60,
                         10,
-                        kwargs.get("c352")
+                        **kwargs,
                     ),
                     Field(
                         "c452",
                         float,
                         70,
                         10,
-                        kwargs.get("c452")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -466,49 +468,49 @@ class Mat217Anis(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c552")
+                        **kwargs,
                     ),
                     Field(
                         "c162",
                         float,
                         10,
                         10,
-                        kwargs.get("c162")
+                        **kwargs,
                     ),
                     Field(
                         "c262",
                         float,
                         20,
                         10,
-                        kwargs.get("c262")
+                        **kwargs,
                     ),
                     Field(
                         "c362",
                         float,
                         30,
                         10,
-                        kwargs.get("c362")
+                        **kwargs,
                     ),
                     Field(
                         "c462",
                         float,
                         40,
                         10,
-                        kwargs.get("c462")
+                        **kwargs,
                     ),
                     Field(
                         "c562",
                         float,
                         50,
                         10,
-                        kwargs.get("c562")
+                        **kwargs,
                     ),
                     Field(
                         "c662",
                         float,
                         60,
                         10,
-                        kwargs.get("c662")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -519,49 +521,49 @@ class Mat217Anis(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp2")
+                        **kwargs,
                     ),
                     Field(
                         "yp2",
                         float,
                         10,
                         10,
-                        kwargs.get("yp2")
+                        **kwargs,
                     ),
                     Field(
                         "zp2",
                         float,
                         20,
                         10,
-                        kwargs.get("zp2")
+                        **kwargs,
                     ),
                     Field(
                         "a12",
                         float,
                         30,
                         10,
-                        kwargs.get("a12")
+                        **kwargs,
                     ),
                     Field(
                         "a22",
                         float,
                         40,
                         10,
-                        kwargs.get("a22")
+                        **kwargs,
                     ),
                     Field(
                         "a32",
                         float,
                         50,
                         10,
-                        kwargs.get("a32")
+                        **kwargs,
                     ),
                     Field(
                         "xp2",
                         float,
                         0,
                         10,
-                        kwargs.get("xp2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -572,49 +574,49 @@ class Mat217Anis(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v12")
+                        **kwargs,
                     ),
                     Field(
                         "v22",
                         float,
                         10,
                         10,
-                        kwargs.get("v22")
+                        **kwargs,
                     ),
                     Field(
                         "v32",
                         float,
                         20,
                         10,
-                        kwargs.get("v32")
+                        **kwargs,
                     ),
                     Field(
                         "d12",
                         float,
                         30,
                         10,
-                        kwargs.get("d12")
+                        **kwargs,
                     ),
                     Field(
                         "d22",
                         float,
                         40,
                         10,
-                        kwargs.get("d22")
+                        **kwargs,
                     ),
                     Field(
                         "d32",
                         float,
                         50,
                         10,
-                        kwargs.get("d32")
+                        **kwargs,
                     ),
                     Field(
                         "beta2",
                         float,
                         60,
                         10,
-                        kwargs.get("beta2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -625,49 +627,50 @@ class Mat217Anis(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x1")
+                        **kwargs,
                     ),
                     Field(
                         "y1",
                         float,
                         10,
                         10,
-                        kwargs.get("y1")
+                        **kwargs,
                     ),
                     Field(
                         "z1",
                         float,
                         20,
                         10,
-                        kwargs.get("z1")
+                        **kwargs,
                     ),
                     Field(
                         "x2",
                         float,
                         30,
                         10,
-                        kwargs.get("x2")
+                        **kwargs,
                     ),
                     Field(
                         "y2",
                         float,
                         40,
                         10,
-                        kwargs.get("y2")
+                        **kwargs,
                     ),
                     Field(
                         "z2",
                         float,
                         50,
                         10,
-                        kwargs.get("z2")
+                        **kwargs,
                     ),
                     Field(
                         "thkfac",
                         float,
                         60,
                         10,
-                        kwargs.get("thkfac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

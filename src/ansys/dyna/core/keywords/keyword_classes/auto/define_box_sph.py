@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,63 @@ class DefineBoxSph(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("boxid")
+                        **kwargs,
                     ),
                     Field(
                         "xmn",
                         float,
                         10,
                         10,
-                        kwargs.get("xmn", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xmx",
                         float,
                         20,
                         10,
-                        kwargs.get("xmx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ymn",
                         float,
                         30,
                         10,
-                        kwargs.get("ymn", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ymx",
                         float,
                         40,
                         10,
-                        kwargs.get("ymx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zmn",
                         float,
                         50,
                         10,
-                        kwargs.get("zmn", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zmx",
                         float,
                         60,
                         10,
-                        kwargs.get("zmx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         int,
                         70,
                         10,
-                        kwargs.get("vid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,49 +112,56 @@ class DefineBoxSph(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vd",
                         int,
                         10,
                         10,
-                        kwargs.get("vd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         20,
                         10,
-                        kwargs.get("nid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ireact",
                         int,
                         30,
                         10,
-                        kwargs.get("ireact", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ibuff",
                         int,
                         40,
                         10,
-                        kwargs.get("ibuff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ishow",
                         int,
                         50,
                         10,
-                        kwargs.get("ishow", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         60,
                         10,
-                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlSolution(KeywordBase):
@@ -41,49 +40,55 @@ class ControlSolution(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("soln", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nlq",
                         int,
                         10,
                         10,
-                        kwargs.get("nlq")
+                        **kwargs,
                     ),
                     Field(
                         "isnan",
                         int,
                         20,
                         10,
-                        kwargs.get("isnan", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcint",
                         int,
                         30,
                         10,
-                        kwargs.get("lcint", 100 if use_lspp_defaults() else None)
+                        100,
+                        **kwargs,
                     ),
                     Field(
                         "lcacc",
                         int,
                         40,
                         10,
-                        kwargs.get("lcacc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ncdcf",
                         int,
                         50,
                         10,
-                        kwargs.get("ncdcf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nocop",
                         int,
                         60,
                         10,
-                        kwargs.get("nocop", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

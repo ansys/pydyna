@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class MatRcBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "eunl",
                         float,
                         20,
                         10,
-                        kwargs.get("eunl")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "fc",
                         float,
                         40,
                         10,
-                        kwargs.get("fc")
+                        **kwargs,
                     ),
                     Field(
                         "ec1",
                         float,
                         50,
                         10,
-                        kwargs.get("ec1", 2.2E-03 if use_lspp_defaults() else None)
+                        2.2E-03,
+                        **kwargs,
                     ),
                     Field(
                         "ec50",
                         float,
                         60,
                         10,
-                        kwargs.get("ec50")
+                        **kwargs,
                     ),
                     Field(
                         "resid",
                         float,
                         70,
                         10,
-                        kwargs.get("resid", 0.2 if use_lspp_defaults() else None)
+                        0.2,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,58 @@ class MatRcBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ft")
+                        **kwargs,
                     ),
                     Field(
                         "unitc",
                         float,
                         10,
                         10,
-                        kwargs.get("unitc", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "esoft",
                         float,
                         50,
                         10,
-                        kwargs.get("esoft")
+                        **kwargs,
                     ),
                     Field(
                         "lchar",
                         float,
                         60,
                         10,
-                        kwargs.get("lchar")
+                        **kwargs,
                     ),
                     Field(
                         "output",
                         float,
                         70,
                         10,
-                        kwargs.get("output", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +169,59 @@ class MatRcBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fracr")
+                        **kwargs,
                     ),
                     Field(
                         "ymreinf",
                         float,
                         10,
                         10,
-                        kwargs.get("ymreinf")
+                        **kwargs,
                     ),
                     Field(
                         "prreinf",
                         float,
                         20,
                         10,
-                        kwargs.get("prreinf")
+                        **kwargs,
                     ),
                     Field(
                         "syreinf",
                         float,
                         30,
                         10,
-                        kwargs.get("syreinf")
+                        **kwargs,
                     ),
                     Field(
                         "sureinf",
                         float,
                         40,
                         10,
-                        kwargs.get("sureinf")
+                        **kwargs,
                     ),
                     Field(
                         "eshr",
                         float,
                         50,
                         10,
-                        kwargs.get("eshr", 0.03 if use_lspp_defaults() else None)
+                        0.03,
+                        **kwargs,
                     ),
                     Field(
                         "eur",
                         float,
                         60,
                         10,
-                        kwargs.get("eur", 0.2  if use_lspp_defaults() else None)
+                        0.2 ,
+                        **kwargs,
                     ),
                     Field(
                         "rreinf",
                         float,
                         70,
                         10,
-                        kwargs.get("rreinf", 4.0 if use_lspp_defaults() else None)
+                        4.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlTurbulence(KeywordBase):
@@ -41,56 +40,63 @@ class IcfdControlTurbulence(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tmod", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "submod",
                         int,
                         10,
                         10,
-                        kwargs.get("submod", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "wlaw",
                         int,
                         20,
                         10,
-                        kwargs.get("wlaw", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ks",
                         float,
                         30,
                         10,
-                        kwargs.get("ks", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cs",
                         float,
                         40,
                         10,
-                        kwargs.get("cs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "lcids1",
                         int,
                         60,
                         10,
-                        kwargs.get("lcids1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcids2",
                         int,
                         70,
                         10,
-                        kwargs.get("lcids2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,42 +107,48 @@ class IcfdControlTurbulence(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ce1", 1.44 if use_lspp_defaults() else None)
+                        1.44,
+                        **kwargs,
                     ),
                     Field(
                         "ce2",
                         float,
                         10,
                         10,
-                        kwargs.get("ce2", 1.92 if use_lspp_defaults() else None)
+                        1.92,
+                        **kwargs,
                     ),
                     Field(
                         "qe",
                         float,
                         20,
                         10,
-                        kwargs.get("qe", 1.3 if use_lspp_defaults() else None)
+                        1.3,
+                        **kwargs,
                     ),
                     Field(
                         "qk",
                         float,
                         30,
                         10,
-                        kwargs.get("qk", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "cu",
                         float,
                         40,
                         10,
-                        kwargs.get("cu", 0.09 if use_lspp_defaults() else None)
+                        0.09,
+                        **kwargs,
                     ),
                     Field(
                         "ccut",
                         float,
                         50,
                         10,
-                        kwargs.get("ccut", -1.0 if use_lspp_defaults() else None)
+                        -1.0,
+                        **kwargs,
                     ),
                 ],
                 lambda: self.tmod==1,
@@ -148,7 +160,8 @@ class IcfdControlTurbulence(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cs", 0.18 if use_lspp_defaults() else None)
+                        0.18,
+                        **kwargs,
                     ),
                 ],
                 lambda: self.tmod==2 or self.tmod==3,
@@ -160,7 +173,8 @@ class IcfdControlTurbulence(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cs", 0.18 if use_lspp_defaults() else None)
+                        0.18,
+                        **kwargs,
                     ),
                 ],
                 lambda: self.tmod==4,
@@ -172,42 +186,48 @@ class IcfdControlTurbulence(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r", 1.44 if use_lspp_defaults() else None)
+                        1.44,
+                        **kwargs,
                     ),
                     Field(
                         "beta-01",
                         float,
                         10,
                         10,
-                        kwargs.get("beta-01", 0.072 if use_lspp_defaults() else None)
+                        0.072,
+                        **kwargs,
                     ),
                     Field(
                         "beta-w1",
                         float,
                         20,
                         10,
-                        kwargs.get("beta-w1", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "sigma-w1",
                         float,
                         30,
                         10,
-                        kwargs.get("sigma-w1", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "sigma-k1",
                         float,
                         40,
                         10,
-                        kwargs.get("sigma-k1", 0.09 if use_lspp_defaults() else None)
+                        0.09,
+                        **kwargs,
                     ),
                     Field(
                         "ccut",
                         float,
                         50,
                         10,
-                        kwargs.get("ccut", -1.0 if use_lspp_defaults() else None)
+                        -1.0,
+                        **kwargs,
                     ),
                 ],
                 lambda: self.tmod==4,
@@ -219,35 +239,40 @@ class IcfdControlTurbulence(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha1", 0.31 if use_lspp_defaults() else None)
+                        0.31,
+                        **kwargs,
                     ),
                     Field(
                         "beta-02",
                         float,
                         10,
                         10,
-                        kwargs.get("beta-02", 0.0828 if use_lspp_defaults() else None)
+                        0.0828,
+                        **kwargs,
                     ),
                     Field(
                         "sigma-w2",
                         float,
                         20,
                         10,
-                        kwargs.get("sigma-w2", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "sigma-k2",
                         float,
                         30,
                         10,
-                        kwargs.get("sigma-k2", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "cl",
                         float,
                         40,
                         10,
-                        kwargs.get("cl", 0.875 if use_lspp_defaults() else None)
+                        0.875,
+                        **kwargs,
                     ),
                 ],
                 lambda: self.tmod==5,
@@ -259,42 +284,48 @@ class IcfdControlTurbulence(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cb1", 0.1355 if use_lspp_defaults() else None)
+                        0.1355,
+                        **kwargs,
                     ),
                     Field(
                         "cb2",
                         float,
                         10,
                         10,
-                        kwargs.get("cb2", 0.622 if use_lspp_defaults() else None)
+                        0.622,
+                        **kwargs,
                     ),
                     Field(
                         "sigma-v",
                         float,
                         20,
                         10,
-                        kwargs.get("sigma-v", 0.66 if use_lspp_defaults() else None)
+                        0.66,
+                        **kwargs,
                     ),
                     Field(
                         "cv1",
                         float,
                         30,
                         10,
-                        kwargs.get("cv1", 7.2 if use_lspp_defaults() else None)
+                        7.2,
+                        **kwargs,
                     ),
                     Field(
                         "cw1",
                         float,
                         40,
                         10,
-                        kwargs.get("cw1", 0.3 if use_lspp_defaults() else None)
+                        0.3,
+                        **kwargs,
                     ),
                     Field(
                         "cw2",
                         float,
                         50,
                         10,
-                        kwargs.get("cw2", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                 ],
             ),

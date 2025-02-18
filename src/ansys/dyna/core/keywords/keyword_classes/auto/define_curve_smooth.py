@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,50 @@ class DefineCurveSmooth(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "sidr",
                         int,
                         10,
                         10,
-                        kwargs.get("sidr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dist",
                         float,
                         20,
                         10,
-                        kwargs.get("dist")
+                        **kwargs,
                     ),
                     Field(
                         "tstart",
                         float,
                         30,
                         10,
-                        kwargs.get("tstart")
+                        **kwargs,
                     ),
                     Field(
                         "tend",
                         float,
                         40,
                         10,
-                        kwargs.get("tend")
+                        **kwargs,
                     ),
                     Field(
                         "trise",
                         float,
                         50,
                         10,
-                        kwargs.get("trise")
+                        **kwargs,
                     ),
                     Field(
                         "vmax",
                         float,
                         60,
                         10,
-                        kwargs.get("vmax")
+                        **kwargs,
                     ),
                 ],
             ),

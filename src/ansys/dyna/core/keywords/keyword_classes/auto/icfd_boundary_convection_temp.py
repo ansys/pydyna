@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdBoundaryConvectionTemp(KeywordBase):
@@ -41,35 +40,37 @@ class IcfdBoundaryConvectionTemp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "hlcid",
                         int,
                         10,
                         10,
-                        kwargs.get("hlcid")
+                        **kwargs,
                     ),
                     Field(
                         "hsf",
                         float,
                         20,
                         10,
-                        kwargs.get("hsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "tblcid",
                         int,
                         30,
                         10,
-                        kwargs.get("tblcid")
+                        **kwargs,
                     ),
                     Field(
                         "tbsf",
                         float,
                         40,
                         10,
-                        kwargs.get("tbsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

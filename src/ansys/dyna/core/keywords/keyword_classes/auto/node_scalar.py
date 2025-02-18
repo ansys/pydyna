@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class NodeScalar(KeywordBase):
@@ -41,14 +40,15 @@ class NodeScalar(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "ndof",
                         int,
                         8,
                         8,
-                        kwargs.get("ndof", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

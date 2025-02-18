@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseMatGas2(KeywordBase):
@@ -41,42 +40,42 @@ class DualceseMatGas2(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "mu0",
                         float,
                         10,
                         10,
-                        kwargs.get("mu0")
+                        **kwargs,
                     ),
                     Field(
                         "smu",
                         float,
                         20,
                         10,
-                        kwargs.get("smu")
+                        **kwargs,
                     ),
                     Field(
                         "k0",
                         float,
                         30,
                         10,
-                        kwargs.get("k0")
+                        **kwargs,
                     ),
                     Field(
                         "sk",
                         float,
                         40,
                         10,
-                        kwargs.get("sk")
+                        **kwargs,
                     ),
                     Field(
                         "t0",
                         float,
                         50,
                         10,
-                        kwargs.get("t0")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,14 +45,14 @@ class SectionFpd(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "elform",
                         int,
                         10,
                         10,
-                        kwargs.get("elform")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -64,35 +63,35 @@ class SectionFpd(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dx")
+                        **kwargs,
                     ),
                     Field(
                         "dy",
                         float,
                         10,
                         10,
-                        kwargs.get("dy")
+                        **kwargs,
                     ),
                     Field(
                         "dz",
                         float,
                         20,
                         10,
-                        kwargs.get("dz")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "kernel",
                         int,
                         40,
                         10,
-                        kwargs.get("kernel")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -103,42 +102,44 @@ class SectionFpd(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "tstart",
                         float,
                         30,
                         10,
-                        kwargs.get("tstart", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt_imp",
                         float,
                         40,
                         10,
-                        kwargs.get("dt_imp")
+                        **kwargs,
                     ),
                     Field(
                         "dtscl",
                         float,
                         50,
                         10,
-                        kwargs.get("dtscl", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                 ],
             ),

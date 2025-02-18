@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class Mat241(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         20,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "p1",
                         float,
                         30,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "s1",
                         float,
                         40,
                         10,
-                        kwargs.get("s1")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         50,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "s2",
                         float,
                         60,
                         10,
-                        kwargs.get("s2")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         70,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,49 +105,49 @@ class Mat241(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("epsi")
+                        **kwargs,
                     ),
                     Field(
                         "t",
                         float,
                         10,
                         10,
-                        kwargs.get("t")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         30,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "sfmax",
                         float,
                         40,
                         10,
-                        kwargs.get("sfmax")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         50,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "dp1",
                         float,
                         60,
                         10,
-                        kwargs.get("dp1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -159,42 +158,42 @@ class Mat241(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("epfmin")
+                        **kwargs,
                     ),
                     Field(
                         "epfmax",
                         float,
                         10,
                         10,
-                        kwargs.get("epfmax")
+                        **kwargs,
                     ),
                     Field(
                         "k1",
                         float,
                         20,
                         10,
-                        kwargs.get("k1")
+                        **kwargs,
                     ),
                     Field(
                         "k2",
                         float,
                         30,
                         10,
-                        kwargs.get("k2")
+                        **kwargs,
                     ),
                     Field(
                         "k3",
                         float,
                         40,
                         10,
-                        kwargs.get("k3")
+                        **kwargs,
                     ),
                     Field(
                         "fs",
                         float,
                         50,
                         10,
-                        kwargs.get("fs")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,56 +46,60 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUser(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("surfa")
+                        **kwargs,
                     ),
                     Field(
                         "surfb",
                         int,
                         10,
                         10,
-                        kwargs.get("surfb")
+                        **kwargs,
                     ),
                     Field(
                         "surfatyp",
                         int,
                         20,
                         10,
-                        kwargs.get("surfatyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "surfbtyp",
                         int,
                         30,
                         10,
-                        kwargs.get("surfbtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "saboxid",
                         int,
                         40,
                         10,
-                        kwargs.get("saboxid")
+                        **kwargs,
                     ),
                     Field(
                         "sbboxid",
                         int,
                         50,
                         10,
-                        kwargs.get("sbboxid")
+                        **kwargs,
                     ),
                     Field(
                         "sapr",
                         int,
                         60,
                         10,
-                        kwargs.get("sapr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sbpr",
                         int,
                         70,
                         10,
-                        kwargs.get("sbpr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,56 +110,63 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUser(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd",
                         float,
                         10,
                         10,
-                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc",
                         float,
                         20,
                         10,
-                        kwargs.get("dc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vc",
                         float,
                         30,
                         10,
-                        kwargs.get("vc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vdc",
                         float,
                         40,
                         10,
-                        kwargs.get("vdc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "penchk",
                         int,
                         50,
                         10,
-                        kwargs.get("penchk")
+                        **kwargs,
                     ),
                     Field(
                         "bt",
                         float,
                         60,
                         10,
-                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         70,
                         10,
-                        kwargs.get("dt", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -167,56 +177,62 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUser(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfsa", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sfsb",
                         float,
                         10,
                         10,
-                        kwargs.get("sfsb", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sast",
                         float,
                         20,
                         10,
-                        kwargs.get("sast")
+                        **kwargs,
                     ),
                     Field(
                         "sbst",
                         float,
                         30,
                         10,
-                        kwargs.get("sbst")
+                        **kwargs,
                     ),
                     Field(
                         "sfsat",
                         float,
                         40,
                         10,
-                        kwargs.get("sfsat", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sfsbt",
                         float,
                         50,
                         10,
-                        kwargs.get("sfsbt", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "fsf",
                         float,
                         60,
                         10,
-                        kwargs.get("fsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "vsf",
                         float,
                         70,
                         10,
-                        kwargs.get("vsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -227,49 +243,56 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUser(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("option", 101 if use_lspp_defaults() else None)
+                        101,
+                        **kwargs,
                     ),
                     Field(
                         "nhv",
                         int,
                         10,
                         10,
-                        kwargs.get("nhv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ct2cn",
                         float,
                         20,
                         10,
-                        kwargs.get("ct2cn", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "cn",
                         float,
                         30,
                         10,
-                        kwargs.get("cn", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "offset",
                         int,
                         40,
                         10,
-                        kwargs.get("offset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nhmat",
                         int,
                         50,
                         10,
-                        kwargs.get("nhmat", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nhwld",
                         int,
                         60,
                         10,
-                        kwargs.get("nhwld", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -280,56 +303,56 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUser(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("up1")
+                        **kwargs,
                     ),
                     Field(
                         "up2",
                         float,
                         10,
                         10,
-                        kwargs.get("up2")
+                        **kwargs,
                     ),
                     Field(
                         "up3",
                         float,
                         20,
                         10,
-                        kwargs.get("up3")
+                        **kwargs,
                     ),
                     Field(
                         "up4",
                         float,
                         30,
                         10,
-                        kwargs.get("up4")
+                        **kwargs,
                     ),
                     Field(
                         "up5",
                         float,
                         40,
                         10,
-                        kwargs.get("up5")
+                        **kwargs,
                     ),
                     Field(
                         "up6",
                         float,
                         50,
                         10,
-                        kwargs.get("up6")
+                        **kwargs,
                     ),
                     Field(
                         "up7",
                         float,
                         60,
                         10,
-                        kwargs.get("up7")
+                        **kwargs,
                     ),
                     Field(
                         "up8",
                         float,
                         70,
                         10,
-                        kwargs.get("up8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -340,56 +363,56 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUser(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("up9")
+                        **kwargs,
                     ),
                     Field(
                         "up10",
                         float,
                         10,
                         10,
-                        kwargs.get("up10")
+                        **kwargs,
                     ),
                     Field(
                         "up11",
                         float,
                         20,
                         10,
-                        kwargs.get("up11")
+                        **kwargs,
                     ),
                     Field(
                         "up12",
                         float,
                         30,
                         10,
-                        kwargs.get("up12")
+                        **kwargs,
                     ),
                     Field(
                         "up13",
                         float,
                         40,
                         10,
-                        kwargs.get("up13")
+                        **kwargs,
                     ),
                     Field(
                         "up14",
                         float,
                         50,
                         10,
-                        kwargs.get("up14")
+                        **kwargs,
                     ),
                     Field(
                         "up15",
                         float,
                         60,
                         10,
-                        kwargs.get("up15")
+                        **kwargs,
                     ),
                     Field(
                         "up16",
                         float,
                         70,
                         10,
-                        kwargs.get("up16")
+                        **kwargs,
                     ),
                 ],
             ),

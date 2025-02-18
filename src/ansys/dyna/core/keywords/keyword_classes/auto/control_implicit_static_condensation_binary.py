@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitStaticCondensationBinary(KeywordBase):
@@ -41,42 +40,43 @@ class ControlImplicitStaticCondensationBinary(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sc_flag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sc_nsid",
                         int,
                         10,
                         10,
-                        kwargs.get("sc_nsid")
+                        **kwargs,
                     ),
                     Field(
                         "sc_psid",
                         int,
                         20,
                         10,
-                        kwargs.get("sc_psid")
+                        **kwargs,
                     ),
                     Field(
                         "se_mass",
                         str,
                         30,
                         10,
-                        kwargs.get("se_mass")
+                        **kwargs,
                     ),
                     Field(
                         "se_stiff",
                         str,
                         40,
                         10,
-                        kwargs.get("se_stiff")
+                        **kwargs,
                     ),
                     Field(
                         "se_inert",
                         str,
                         50,
                         10,
-                        kwargs.get("se_inert")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,7 +87,7 @@ class ControlImplicitStaticCondensationBinary(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),

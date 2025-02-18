@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdModelPorous(KeywordBase):
@@ -41,14 +40,15 @@ class IcfdModelPorous(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pmmoid")
+                        **kwargs,
                     ),
                     Field(
                         "pmid",
                         int,
                         10,
                         10,
-                        kwargs.get("pmid", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,49 +59,53 @@ class IcfdModelPorous(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("por", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "per/thx",
                         float,
                         10,
                         10,
-                        kwargs.get("per/thx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ff/thy",
                         float,
                         20,
                         10,
-                        kwargs.get("ff/thy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "thz",
                         float,
                         30,
                         10,
-                        kwargs.get("thz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pvlcidx",
                         int,
                         40,
                         10,
-                        kwargs.get("pvlcidx")
+                        **kwargs,
                     ),
                     Field(
                         "pvlcidy",
                         int,
                         50,
                         10,
-                        kwargs.get("pvlcidy")
+                        **kwargs,
                     ),
                     Field(
                         "pvlcidz",
                         int,
                         60,
                         10,
-                        kwargs.get("pvlcidz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,21 +116,24 @@ class IcfdModelPorous(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("kxp'", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "kyp'",
                         float,
                         10,
                         10,
-                        kwargs.get("kyp'", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "kzp'",
                         float,
                         20,
                         10,
-                        kwargs.get("kzp'", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -137,42 +144,48 @@ class IcfdModelPorous(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("p-x/pid1r", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "p-y/pid2r",
                         float,
                         10,
                         10,
-                        kwargs.get("p-y/pid2r", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "projxp-z",
                         float,
                         20,
                         10,
-                        kwargs.get("projxp-z", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "projyp-x",
                         float,
                         30,
                         10,
-                        kwargs.get("projyp-x", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "projyp-y",
                         float,
                         40,
                         10,
-                        kwargs.get("projyp-y", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "projyp-z",
                         float,
                         50,
                         10,
-                        kwargs.get("projyp-z", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

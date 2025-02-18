@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class MatS15(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lo",
                         float,
                         10,
                         10,
-                        kwargs.get("lo")
+                        **kwargs,
                     ),
                     Field(
                         "vmax",
                         float,
                         20,
                         10,
-                        kwargs.get("vmax")
+                        **kwargs,
                     ),
                     Field(
                         "sv",
                         float,
                         30,
                         10,
-                        kwargs.get("sv", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         40,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "fmax",
                         float,
                         50,
                         10,
-                        kwargs.get("fmax")
+                        **kwargs,
                     ),
                     Field(
                         "tl",
                         float,
                         60,
                         10,
-                        kwargs.get("tl", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "tv",
                         float,
                         70,
                         10,
-                        kwargs.get("tv", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,21 +109,21 @@ class MatS15(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fpe")
+                        **kwargs,
                     ),
                     Field(
                         "lmax",
                         float,
                         10,
                         10,
-                        kwargs.get("lmax")
+                        **kwargs,
                     ),
                     Field(
                         "ksh",
                         float,
                         20,
                         10,
-                        kwargs.get("ksh")
+                        **kwargs,
                     ),
                 ],
             ),

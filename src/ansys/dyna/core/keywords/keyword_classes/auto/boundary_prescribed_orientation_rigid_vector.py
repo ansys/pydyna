@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryPrescribedOrientationRigidVector(KeywordBase):
@@ -41,42 +40,46 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pidb")
+                        **kwargs,
                     ),
                     Field(
                         "pida",
                         int,
                         10,
                         10,
-                        kwargs.get("pida")
+                        **kwargs,
                     ),
                     Field(
                         "intrp",
                         int,
                         20,
                         10,
-                        kwargs.get("intrp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "birth",
                         float,
                         30,
                         10,
-                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "death",
                         float,
                         40,
                         10,
-                        kwargs.get("death", 1.e20 if use_lspp_defaults() else None)
+                        1.e20,
+                        **kwargs,
                     ),
                     Field(
                         "toffset",
                         int,
                         50,
                         10,
-                        kwargs.get("toffset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,35 +90,35 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidv1")
+                        **kwargs,
                     ),
                     Field(
                         "lcidv2",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidv2")
+                        **kwargs,
                     ),
                     Field(
                         "lcidv3",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidv3")
+                        **kwargs,
                     ),
                     Field(
                         "lcids",
                         int,
                         30,
                         10,
-                        kwargs.get("lcids")
+                        **kwargs,
                     ),
                     Field(
                         "valspin",
                         float,
                         40,
                         10,
-                        kwargs.get("valspin")
+                        **kwargs,
                     ),
                 ],
             ),

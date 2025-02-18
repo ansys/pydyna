@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseCpmSensor(KeywordBase):
@@ -41,14 +40,15 @@ class DatabaseCpmSensor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt")
+                        **kwargs,
                     ),
                     Field(
                         "binary",
                         int,
                         10,
                         10,
-                        kwargs.get("binary", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,35 +59,35 @@ class DatabaseCpmSensor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("segsid")
+                        **kwargs,
                     ),
                     Field(
                         "offset",
                         float,
                         10,
                         10,
-                        kwargs.get("offset")
+                        **kwargs,
                     ),
                     Field(
                         "r/lx",
                         float,
                         20,
                         10,
-                        kwargs.get("r/lx")
+                        **kwargs,
                     ),
                     Field(
                         "len/ly",
                         float,
                         30,
                         10,
-                        kwargs.get("len/ly")
+                        **kwargs,
                     ),
                     Field(
                         "lz",
                         float,
                         40,
                         10,
-                        kwargs.get("lz")
+                        **kwargs,
                     ),
                 ],
             ),

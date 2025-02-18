@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSeismicSsiNodeId(KeywordBase):
@@ -41,14 +40,14 @@ class LoadSeismicSsiNodeId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         str,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,35 +58,35 @@ class LoadSeismicSsiNodeId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "typeid",
                         int,
                         10,
                         10,
-                        kwargs.get("typeid")
+                        **kwargs,
                     ),
                     Field(
                         "gmx",
                         int,
                         20,
                         10,
-                        kwargs.get("gmx")
+                        **kwargs,
                     ),
                     Field(
                         "gmy",
                         int,
                         30,
                         10,
-                        kwargs.get("gmy")
+                        **kwargs,
                     ),
                     Field(
                         "gmz",
                         int,
                         40,
                         10,
-                        kwargs.get("gmz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -98,42 +97,48 @@ class LoadSeismicSsiNodeId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         10,
                         10,
-                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "birth",
                         float,
                         20,
                         10,
-                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "death",
                         float,
                         30,
                         10,
-                        kwargs.get("death", 1.E+28 if use_lspp_defaults() else None)
+                        1.E+28,
+                        **kwargs,
                     ),
                     Field(
                         "isg",
                         int,
                         40,
                         10,
-                        kwargs.get("isg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "igm",
                         int,
                         50,
                         10,
-                        kwargs.get("igm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

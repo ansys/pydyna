@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedSoilPileCurvesSet(KeywordBase):
@@ -41,56 +40,58 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pbsid")
+                        **kwargs,
                     ),
                     Field(
                         "diam",
                         float,
                         10,
                         10,
-                        kwargs.get("diam")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "pidns",
                         int,
                         30,
                         10,
-                        kwargs.get("pidns")
+                        **kwargs,
                     ),
                     Field(
                         "pidnb",
                         int,
                         40,
                         10,
-                        kwargs.get("pidnb")
+                        **kwargs,
                     ),
                     Field(
                         "error",
                         int,
                         50,
                         10,
-                        kwargs.get("error", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nring",
                         int,
                         60,
                         10,
-                        kwargs.get("nring", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nringb",
                         int,
                         70,
                         10,
-                        kwargs.get("nringb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,14 +102,16 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("damp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "local",
                         int,
                         10,
                         10,
-                        kwargs.get("local", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,14 +122,14 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "zref",
                         float,
                         10,
                         10,
-                        kwargs.get("zref")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -137,28 +140,28 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("blcz")
+                        **kwargs,
                     ),
                     Field(
                         "blc",
                         int,
                         10,
                         10,
-                        kwargs.get("blc")
+                        **kwargs,
                     ),
                     Field(
                         "blcsh",
                         int,
                         20,
                         10,
-                        kwargs.get("blcsh")
+                        **kwargs,
                     ),
                     Field(
                         "blcsv",
                         int,
                         30,
                         10,
-                        kwargs.get("blcsv")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -169,28 +172,28 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("vlcz")
+                        **kwargs,
                     ),
                     Field(
                         "vlc",
                         int,
                         10,
                         10,
-                        kwargs.get("vlc")
+                        **kwargs,
                     ),
                     Field(
                         "vlcsh",
                         int,
                         20,
                         10,
-                        kwargs.get("vlcsh")
+                        **kwargs,
                     ),
                     Field(
                         "vlcsv",
                         int,
                         30,
                         10,
-                        kwargs.get("vlcsv")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -201,28 +204,28 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("hlcz")
+                        **kwargs,
                     ),
                     Field(
                         "hlc",
                         int,
                         10,
                         10,
-                        kwargs.get("hlc")
+                        **kwargs,
                     ),
                     Field(
                         "hlcsh",
                         int,
                         20,
                         10,
-                        kwargs.get("hlcsh")
+                        **kwargs,
                     ),
                     Field(
                         "hlcsv",
                         int,
                         30,
                         10,
-                        kwargs.get("hlcsv")
+                        **kwargs,
                     ),
                 ],
             ),

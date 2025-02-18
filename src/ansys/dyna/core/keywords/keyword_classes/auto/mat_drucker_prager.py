@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,57 @@ class MatDruckerPrager(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "gmod",
                         float,
                         20,
                         10,
-                        kwargs.get("gmod")
+                        **kwargs,
                     ),
                     Field(
                         "rnu",
                         float,
                         30,
                         10,
-                        kwargs.get("rnu")
+                        **kwargs,
                     ),
                     Field(
                         "rkf",
                         float,
                         40,
                         10,
-                        kwargs.get("rkf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "phi",
                         float,
                         50,
                         10,
-                        kwargs.get("phi")
+                        **kwargs,
                     ),
                     Field(
                         "cval",
                         float,
                         60,
                         10,
-                        kwargs.get("cval")
+                        **kwargs,
                     ),
                     Field(
                         "psi",
                         float,
                         70,
                         10,
-                        kwargs.get("psi")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,7 +106,8 @@ class MatDruckerPrager(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("str_lim", 5.0E-03 if use_lspp_defaults() else None)
+                        5.0E-03,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -117,56 +118,56 @@ class MatDruckerPrager(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gmoddp")
+                        **kwargs,
                     ),
                     Field(
                         "phidp",
                         float,
                         10,
                         10,
-                        kwargs.get("phidp")
+                        **kwargs,
                     ),
                     Field(
                         "cvaldp",
                         float,
                         20,
                         10,
-                        kwargs.get("cvaldp")
+                        **kwargs,
                     ),
                     Field(
                         "psidp",
                         float,
                         30,
                         10,
-                        kwargs.get("psidp")
+                        **kwargs,
                     ),
                     Field(
                         "gmodgr",
                         float,
                         40,
                         10,
-                        kwargs.get("gmodgr")
+                        **kwargs,
                     ),
                     Field(
                         "phigr",
                         float,
                         50,
                         10,
-                        kwargs.get("phigr")
+                        **kwargs,
                     ),
                     Field(
                         "cvalgr",
                         float,
                         60,
                         10,
-                        kwargs.get("cvalgr")
+                        **kwargs,
                     ),
                     Field(
                         "psigr",
                         float,
                         70,
                         10,
-                        kwargs.get("psigr")
+                        **kwargs,
                     ),
                 ],
             ),

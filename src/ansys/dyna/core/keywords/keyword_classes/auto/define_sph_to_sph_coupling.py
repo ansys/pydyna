@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class DefineSphToSphCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "msid",
                         int,
                         10,
                         10,
-                        kwargs.get("msid")
+                        **kwargs,
                     ),
                     Field(
                         "sstyp",
                         int,
                         20,
                         10,
-                        kwargs.get("sstyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mstyp",
                         int,
                         30,
                         10,
-                        kwargs.get("mstyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ibox1",
                         int,
                         40,
                         10,
-                        kwargs.get("ibox1")
+                        **kwargs,
                     ),
                     Field(
                         "ibox2",
                         int,
                         50,
                         10,
-                        kwargs.get("ibox2")
+                        **kwargs,
                     ),
                     Field(
                         "pfact",
                         float,
                         60,
                         10,
-                        kwargs.get("pfact", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "srad",
                         float,
                         70,
                         10,
-                        kwargs.get("srad", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,14 +109,16 @@ class DefineSphToSphCoupling(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dfact", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "isoft",
                         int,
                         10,
                         10,
-                        kwargs.get("isoft", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

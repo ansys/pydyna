@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class Mat156(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "sno",
                         float,
                         20,
                         10,
-                        kwargs.get("sno")
+                        **kwargs,
                     ),
                     Field(
                         "srm",
                         float,
                         30,
                         10,
-                        kwargs.get("srm")
+                        **kwargs,
                     ),
                     Field(
                         "pis",
                         float,
                         40,
                         10,
-                        kwargs.get("pis")
+                        **kwargs,
                     ),
                     Field(
                         "ssm",
                         float,
                         50,
                         10,
-                        kwargs.get("ssm")
+                        **kwargs,
                     ),
                     Field(
                         "cer",
                         float,
                         60,
                         10,
-                        kwargs.get("cer")
+                        **kwargs,
                     ),
                     Field(
                         "dmp",
                         float,
                         70,
                         10,
-                        kwargs.get("dmp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,35 +105,35 @@ class Mat156(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alm")
+                        **kwargs,
                     ),
                     Field(
                         "sfr",
                         float,
                         10,
                         10,
-                        kwargs.get("sfr")
+                        **kwargs,
                     ),
                     Field(
                         "svs",
                         float,
                         20,
                         10,
-                        kwargs.get("svs")
+                        **kwargs,
                     ),
                     Field(
                         "svr",
                         float,
                         30,
                         10,
-                        kwargs.get("svr")
+                        **kwargs,
                     ),
                     Field(
                         "ssp",
                         float,
                         40,
                         10,
-                        kwargs.get("ssp")
+                        **kwargs,
                     ),
                 ],
             ),

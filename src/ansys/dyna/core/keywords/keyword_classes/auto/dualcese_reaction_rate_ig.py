@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseReactionRateIg(KeywordBase):
@@ -41,56 +40,56 @@ class DualceseReactionRateIg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("react_id")
+                        **kwargs,
                     ),
                     Field(
                         "ign",
                         float,
                         10,
                         10,
-                        kwargs.get("ign")
+                        **kwargs,
                     ),
                     Field(
                         "aa",
                         float,
                         20,
                         10,
-                        kwargs.get("aa")
+                        **kwargs,
                     ),
                     Field(
                         "bb",
                         float,
                         30,
                         10,
-                        kwargs.get("bb")
+                        **kwargs,
                     ),
                     Field(
                         "xx",
                         float,
                         40,
                         10,
-                        kwargs.get("xx")
+                        **kwargs,
                     ),
                     Field(
                         "grow1",
                         float,
                         50,
                         10,
-                        kwargs.get("grow1")
+                        **kwargs,
                     ),
                     Field(
                         "cc",
                         float,
                         60,
                         10,
-                        kwargs.get("cc")
+                        **kwargs,
                     ),
                     Field(
                         "dd",
                         float,
                         70,
                         10,
-                        kwargs.get("dd")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +100,56 @@ class DualceseReactionRateIg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("yy")
+                        **kwargs,
                     ),
                     Field(
                         "grow2",
                         float,
                         10,
                         10,
-                        kwargs.get("grow2")
+                        **kwargs,
                     ),
                     Field(
                         "ee",
                         float,
                         20,
                         10,
-                        kwargs.get("ee")
+                        **kwargs,
                     ),
                     Field(
                         "gg",
                         float,
                         30,
                         10,
-                        kwargs.get("gg")
+                        **kwargs,
                     ),
                     Field(
                         "zz",
                         float,
                         40,
                         10,
-                        kwargs.get("zz")
+                        **kwargs,
                     ),
                     Field(
                         "igmax",
                         float,
                         50,
                         10,
-                        kwargs.get("igmax")
+                        **kwargs,
                     ),
                     Field(
                         "g1max",
                         float,
                         60,
                         10,
-                        kwargs.get("g1max")
+                        **kwargs,
                     ),
                     Field(
                         "g2max",
                         float,
                         70,
                         10,
-                        kwargs.get("g2max")
+                        **kwargs,
                     ),
                 ],
             ),

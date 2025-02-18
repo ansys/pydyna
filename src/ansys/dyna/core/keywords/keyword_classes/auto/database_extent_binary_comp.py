@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseExtentBinaryComp(KeywordBase):
@@ -41,49 +40,56 @@ class DatabaseExtentBinaryComp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iglb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ixyz",
                         int,
                         10,
                         10,
-                        kwargs.get("ixyz", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ivel",
                         int,
                         20,
                         10,
-                        kwargs.get("ivel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iacc",
                         int,
                         30,
                         10,
-                        kwargs.get("iacc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "istrs",
                         int,
                         40,
                         10,
-                        kwargs.get("istrs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "istra",
                         int,
                         50,
                         10,
-                        kwargs.get("istra", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ised",
                         int,
                         60,
                         10,
-                        kwargs.get("ised", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

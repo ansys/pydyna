@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,51 @@ class Mat252(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "flg",
                         int,
                         40,
                         10,
-                        kwargs.get("flg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "jcfl",
                         int,
                         50,
                         10,
-                        kwargs.get("jcfl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dopt",
                         int,
                         60,
                         10,
-                        kwargs.get("dopt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,56 +100,56 @@ class Mat252(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcss")
+                        **kwargs,
                     ),
                     Field(
                         "tau0",
                         float,
                         10,
                         10,
-                        kwargs.get("tau0")
+                        **kwargs,
                     ),
                     Field(
                         "q",
                         float,
                         20,
                         10,
-                        kwargs.get("q")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         30,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "h",
                         float,
                         40,
                         10,
-                        kwargs.get("h")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         50,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "gam0",
                         float,
                         60,
                         10,
-                        kwargs.get("gam0")
+                        **kwargs,
                     ),
                     Field(
                         "gamm",
                         float,
                         70,
                         10,
-                        kwargs.get("gamm")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -159,56 +160,56 @@ class Mat252(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a10")
+                        **kwargs,
                     ),
                     Field(
                         "a20",
                         float,
                         10,
                         10,
-                        kwargs.get("a20")
+                        **kwargs,
                     ),
                     Field(
                         "a1h",
                         float,
                         20,
                         10,
-                        kwargs.get("a1h")
+                        **kwargs,
                     ),
                     Field(
                         "a2h",
                         float,
                         30,
                         10,
-                        kwargs.get("a2h")
+                        **kwargs,
                     ),
                     Field(
                         "a2s",
                         float,
                         40,
                         10,
-                        kwargs.get("a2s")
+                        **kwargs,
                     ),
                     Field(
                         "pow",
                         float,
                         50,
                         10,
-                        kwargs.get("pow")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "srfilt",
                         float,
                         70,
                         10,
-                        kwargs.get("srfilt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -219,56 +220,56 @@ class Mat252(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         20,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         30,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         40,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "d4",
                         float,
                         50,
                         10,
-                        kwargs.get("d4")
+                        **kwargs,
                     ),
                     Field(
                         "d1c",
                         float,
                         60,
                         10,
-                        kwargs.get("d1c")
+                        **kwargs,
                     ),
                     Field(
                         "d2c",
                         float,
                         70,
                         10,
-                        kwargs.get("d2c")
+                        **kwargs,
                     ),
                 ],
             ),

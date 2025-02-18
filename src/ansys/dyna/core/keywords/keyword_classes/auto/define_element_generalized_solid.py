@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,29 @@ class DefineElementGeneralizedSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("elform")
+                        **kwargs,
                     ),
                     Field(
                         "nip",
                         int,
                         10,
                         10,
-                        kwargs.get("nip")
+                        **kwargs,
                     ),
                     Field(
                         "nmnp",
                         int,
                         20,
                         10,
-                        kwargs.get("nmnp")
+                        **kwargs,
                     ),
                     Field(
                         "imass",
                         int,
                         30,
                         10,
-                        kwargs.get("imass", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,7 +78,7 @@ class DefineElementGeneralizedSolid(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("wi")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -89,28 +89,28 @@ class DefineElementGeneralizedSolid(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("nki")
+                        **kwargs,
                     ),
                     Field(
                         "dnkidr",
                         float,
                         20,
                         20,
-                        kwargs.get("dnkidr")
+                        **kwargs,
                     ),
                     Field(
                         "dnkids",
                         float,
                         40,
                         20,
-                        kwargs.get("dnkids")
+                        **kwargs,
                     ),
                     Field(
                         "dnkidt",
                         float,
                         60,
                         20,
-                        kwargs.get("dnkidt")
+                        **kwargs,
                     ),
                 ],
             ),

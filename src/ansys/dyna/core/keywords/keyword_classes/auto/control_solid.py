@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlSolid(KeywordBase):
@@ -41,56 +40,64 @@ class ControlSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("esort", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fmatrix",
                         int,
                         10,
                         10,
-                        kwargs.get("fmatrix", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "niptets",
                         int,
                         20,
                         10,
-                        kwargs.get("niptets", 4 if use_lspp_defaults() else None)
+                        4,
+                        **kwargs,
                     ),
                     Field(
                         "swlocl",
                         int,
                         30,
                         10,
-                        kwargs.get("swlocl", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "psfail",
                         int,
                         40,
                         10,
-                        kwargs.get("psfail", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "t10jtol",
                         float,
                         50,
                         10,
-                        kwargs.get("t10jtol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "icoh",
                         int,
                         60,
                         10,
-                        kwargs.get("icoh", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tet13k",
                         int,
                         70,
                         10,
-                        kwargs.get("tet13k", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,70 +108,70 @@ class ControlSolid(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("pm1")
+                        **kwargs,
                     ),
                     Field(
                         "pm2",
                         int,
                         8,
                         8,
-                        kwargs.get("pm2")
+                        **kwargs,
                     ),
                     Field(
                         "pm3",
                         int,
                         16,
                         8,
-                        kwargs.get("pm3")
+                        **kwargs,
                     ),
                     Field(
                         "pm4",
                         int,
                         24,
                         8,
-                        kwargs.get("pm4")
+                        **kwargs,
                     ),
                     Field(
                         "pm5",
                         int,
                         32,
                         8,
-                        kwargs.get("pm5")
+                        **kwargs,
                     ),
                     Field(
                         "pm6",
                         int,
                         40,
                         8,
-                        kwargs.get("pm6")
+                        **kwargs,
                     ),
                     Field(
                         "pm7",
                         int,
                         48,
                         8,
-                        kwargs.get("pm7")
+                        **kwargs,
                     ),
                     Field(
                         "pm8",
                         int,
                         56,
                         8,
-                        kwargs.get("pm8")
+                        **kwargs,
                     ),
                     Field(
                         "pm9",
                         int,
                         64,
                         8,
-                        kwargs.get("pm9")
+                        **kwargs,
                     ),
                     Field(
                         "pm10",
                         int,
                         72,
                         8,
-                        kwargs.get("pm10")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -175,7 +182,7 @@ class ControlSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tet13v")
+                        **kwargs,
                     ),
                 ],
             ),

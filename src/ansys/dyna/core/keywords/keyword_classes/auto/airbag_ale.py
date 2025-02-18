@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagAle(KeywordBase):
@@ -41,56 +40,59 @@ class AirbagAle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "sidtyp",
                         int,
                         10,
                         10,
-                        kwargs.get("sidtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "mwd",
                         float,
                         60,
                         10,
-                        kwargs.get("mwd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "spsf",
                         float,
                         70,
                         10,
-                        kwargs.get("spsf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,49 +103,54 @@ class AirbagAle(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("atmost", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "atmosp",
                         float,
                         10,
                         10,
-                        kwargs.get("atmosp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "gc",
                         float,
                         30,
                         10,
-                        kwargs.get("gc")
+                        **kwargs,
                     ),
                     Field(
                         "cc",
                         float,
                         40,
                         10,
-                        kwargs.get("cc", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "tnkvol",
                         float,
                         50,
                         10,
-                        kwargs.get("tnkvol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tnkfinp",
                         float,
                         60,
                         10,
-                        kwargs.get("tnkfinp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -154,56 +161,64 @@ class AirbagAle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nquad", 4 if use_lspp_defaults() else None)
+                        4,
+                        **kwargs,
                     ),
                     Field(
                         "ctype",
                         int,
                         10,
                         10,
-                        kwargs.get("ctype", 4 if use_lspp_defaults() else None)
+                        4,
+                        **kwargs,
                     ),
                     Field(
                         "pfac",
                         float,
                         20,
                         10,
-                        kwargs.get("pfac", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                     Field(
                         "fric",
                         float,
                         30,
                         10,
-                        kwargs.get("fric", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "frcmin",
                         float,
                         40,
                         10,
-                        kwargs.get("frcmin", 0.3 if use_lspp_defaults() else None)
+                        0.3,
+                        **kwargs,
                     ),
                     Field(
                         "normtyp",
                         int,
                         50,
                         10,
-                        kwargs.get("normtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ileak",
                         int,
                         60,
                         10,
-                        kwargs.get("ileak", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "pleak",
                         float,
                         70,
                         10,
-                        kwargs.get("pleak", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -214,28 +229,32 @@ class AirbagAle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ivsetid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ivtype",
                         int,
                         10,
                         10,
-                        kwargs.get("ivtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iblock",
                         int,
                         20,
                         10,
-                        kwargs.get("iblock", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vntcof",
                         float,
                         30,
                         10,
-                        kwargs.get("vntcof", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -246,35 +265,38 @@ class AirbagAle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nx/ida")
+                        **kwargs,
                     ),
                     Field(
                         "ny/idg",
                         int,
                         10,
                         10,
-                        kwargs.get("ny/idg")
+                        **kwargs,
                     ),
                     Field(
                         "nz",
                         int,
                         20,
                         10,
-                        kwargs.get("nz", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "movern",
                         int,
                         30,
                         10,
-                        kwargs.get("movern", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "zoom",
                         int,
                         40,
                         10,
-                        kwargs.get("zoom", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -285,42 +307,42 @@ class AirbagAle(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x0")
+                        **kwargs,
                     ),
                     Field(
                         "y0",
                         float,
                         10,
                         10,
-                        kwargs.get("y0")
+                        **kwargs,
                     ),
                     Field(
                         "z0",
                         float,
                         20,
                         10,
-                        kwargs.get("z0")
+                        **kwargs,
                     ),
                     Field(
                         "x1",
                         float,
                         30,
                         10,
-                        kwargs.get("x1")
+                        **kwargs,
                     ),
                     Field(
                         "y1",
                         float,
                         40,
                         10,
-                        kwargs.get("y1")
+                        **kwargs,
                     ),
                     Field(
                         "z1",
                         float,
                         50,
                         10,
-                        kwargs.get("z1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -331,42 +353,42 @@ class AirbagAle(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x2")
+                        **kwargs,
                     ),
                     Field(
                         "y2",
                         float,
                         10,
                         10,
-                        kwargs.get("y2")
+                        **kwargs,
                     ),
                     Field(
                         "z2",
                         float,
                         20,
                         10,
-                        kwargs.get("z2")
+                        **kwargs,
                     ),
                     Field(
                         "x3",
                         float,
                         30,
                         10,
-                        kwargs.get("x3")
+                        **kwargs,
                     ),
                     Field(
                         "y3",
                         float,
                         40,
                         10,
-                        kwargs.get("y3")
+                        **kwargs,
                     ),
                     Field(
                         "z3",
                         float,
                         50,
                         10,
-                        kwargs.get("z3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -377,56 +399,61 @@ class AirbagAle(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("swtime", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "hg",
                         float,
                         20,
                         10,
-                        kwargs.get("hg", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nair",
                         int,
                         30,
                         10,
-                        kwargs.get("nair", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ngas",
                         int,
                         40,
                         10,
-                        kwargs.get("ngas", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "norif",
                         int,
                         50,
                         10,
-                        kwargs.get("norif", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcvel",
                         int,
                         60,
                         10,
-                        kwargs.get("lcvel")
+                        **kwargs,
                     ),
                     Field(
                         "lct",
                         int,
                         70,
                         10,
-                        kwargs.get("lct")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -437,56 +464,61 @@ class AirbagAle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "mwair",
                         float,
                         30,
                         10,
-                        kwargs.get("mwair", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "initm",
                         float,
                         40,
                         10,
-                        kwargs.get("initm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "aira",
                         float,
                         50,
                         10,
-                        kwargs.get("aira", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "airb",
                         float,
                         60,
                         10,
-                        kwargs.get("airb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "airc",
                         float,
                         70,
                         10,
-                        kwargs.get("airc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -497,56 +529,60 @@ class AirbagAle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcmf")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "mwgas",
                         float,
                         30,
                         10,
-                        kwargs.get("mwgas", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "gasa",
                         float,
                         50,
                         10,
-                        kwargs.get("gasa", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "gasb",
                         float,
                         60,
                         10,
-                        kwargs.get("gasb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "gasc",
                         float,
                         70,
                         10,
-                        kwargs.get("gasc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -557,21 +593,24 @@ class AirbagAle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nodeid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vecid",
                         int,
                         10,
                         10,
-                        kwargs.get("vecid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "orifare",
                         float,
                         20,
                         10,
-                        kwargs.get("orifare", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

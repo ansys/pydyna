@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryInflatorProperties(KeywordBase):
@@ -41,35 +40,36 @@ class ChemistryInflatorProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("comp_id", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "pdia",
                         float,
                         10,
                         10,
-                        kwargs.get("pdia")
+                        **kwargs,
                     ),
                     Field(
                         "pheight",
                         float,
                         20,
                         10,
-                        kwargs.get("pheight")
+                        **kwargs,
                     ),
                     Field(
                         "pmass",
                         float,
                         30,
                         10,
-                        kwargs.get("pmass")
+                        **kwargs,
                     ),
                     Field(
                         "totmass",
                         float,
                         40,
                         10,
-                        kwargs.get("totmass")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,35 +80,35 @@ class ChemistryInflatorProperties(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tflame")
+                        **kwargs,
                     ),
                     Field(
                         "pindex",
                         float,
                         10,
                         10,
-                        kwargs.get("pindex")
+                        **kwargs,
                     ),
                     Field(
                         "a0",
                         float,
                         20,
                         10,
-                        kwargs.get("a0")
+                        **kwargs,
                     ),
                     Field(
                         "tdelay",
                         float,
                         30,
                         10,
-                        kwargs.get("tdelay")
+                        **kwargs,
                     ),
                     Field(
                         "risetime",
                         float,
                         40,
                         10,
-                        kwargs.get("risetime")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,56 +119,56 @@ class ChemistryInflatorProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("comp1id")
+                        **kwargs,
                     ),
                     Field(
                         "vol1",
                         float,
                         10,
                         10,
-                        kwargs.get("vol1")
+                        **kwargs,
                     ),
                     Field(
                         "area1",
                         float,
                         20,
                         10,
-                        kwargs.get("area1")
+                        **kwargs,
                     ),
                     Field(
                         "cd1",
                         float,
                         30,
                         10,
-                        kwargs.get("cd1")
+                        **kwargs,
                     ),
                     Field(
                         "p1",
                         float,
                         40,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "t1",
                         float,
                         50,
                         10,
-                        kwargs.get("t1")
+                        **kwargs,
                     ),
                     Field(
                         "delp1",
                         float,
                         60,
                         10,
-                        kwargs.get("delp1")
+                        **kwargs,
                     ),
                     Field(
                         "delt1",
                         float,
                         70,
                         10,
-                        kwargs.get("delt1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -179,56 +179,56 @@ class ChemistryInflatorProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("comp2id")
+                        **kwargs,
                     ),
                     Field(
                         "vol2",
                         float,
                         10,
                         10,
-                        kwargs.get("vol2")
+                        **kwargs,
                     ),
                     Field(
                         "area2",
                         float,
                         20,
                         10,
-                        kwargs.get("area2")
+                        **kwargs,
                     ),
                     Field(
                         "cd2",
                         float,
                         30,
                         10,
-                        kwargs.get("cd2")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         40,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "t2",
                         float,
                         50,
                         10,
-                        kwargs.get("t2")
+                        **kwargs,
                     ),
                     Field(
                         "delp2",
                         float,
                         60,
                         10,
-                        kwargs.get("delp2")
+                        **kwargs,
                     ),
                     Field(
                         "delt2",
                         float,
                         70,
                         10,
-                        kwargs.get("delt2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -239,28 +239,28 @@ class ChemistryInflatorProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("comp3id")
+                        **kwargs,
                     ),
                     Field(
                         "vol3",
                         float,
                         10,
                         10,
-                        kwargs.get("vol3")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         20,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                     Field(
                         "t3",
                         float,
                         30,
                         10,
-                        kwargs.get("t3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -271,56 +271,56 @@ class ChemistryInflatorProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("com42id")
+                        **kwargs,
                     ),
                     Field(
                         "vol4",
                         float,
                         10,
                         10,
-                        kwargs.get("vol4")
+                        **kwargs,
                     ),
                     Field(
                         "area4",
                         float,
                         20,
                         10,
-                        kwargs.get("area4")
+                        **kwargs,
                     ),
                     Field(
                         "cd4",
                         float,
                         30,
                         10,
-                        kwargs.get("cd4")
+                        **kwargs,
                     ),
                     Field(
                         "p4",
                         float,
                         40,
                         10,
-                        kwargs.get("p4")
+                        **kwargs,
                     ),
                     Field(
                         "t4",
                         float,
                         50,
                         10,
-                        kwargs.get("t4")
+                        **kwargs,
                     ),
                     Field(
                         "delp4",
                         float,
                         60,
                         10,
-                        kwargs.get("delp4")
+                        **kwargs,
                     ),
                     Field(
                         "delt4",
                         float,
                         70,
                         10,
-                        kwargs.get("delt4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -331,56 +331,56 @@ class ChemistryInflatorProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("comp5id")
+                        **kwargs,
                     ),
                     Field(
                         "vol5",
                         float,
                         10,
                         10,
-                        kwargs.get("vol5")
+                        **kwargs,
                     ),
                     Field(
                         "area5",
                         float,
                         20,
                         10,
-                        kwargs.get("area5")
+                        **kwargs,
                     ),
                     Field(
                         "cd5",
                         float,
                         30,
                         10,
-                        kwargs.get("cd5")
+                        **kwargs,
                     ),
                     Field(
                         "p5",
                         float,
                         40,
                         10,
-                        kwargs.get("p5")
+                        **kwargs,
                     ),
                     Field(
                         "t5",
                         float,
                         50,
                         10,
-                        kwargs.get("t5")
+                        **kwargs,
                     ),
                     Field(
                         "delp5",
                         float,
                         60,
                         10,
-                        kwargs.get("delp5")
+                        **kwargs,
                     ),
                     Field(
                         "delt5",
                         float,
                         70,
                         10,
-                        kwargs.get("delt5")
+                        **kwargs,
                     ),
                 ],
             ),

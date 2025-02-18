@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class Mat254(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         int,
                         20,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         30,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         40,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "mix",
                         int,
                         50,
                         10,
-                        kwargs.get("mix")
+                        **kwargs,
                     ),
                     Field(
                         "mixr",
                         int,
                         60,
                         10,
-                        kwargs.get("mixr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,49 +98,49 @@ class Mat254(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tastrt")
+                        **kwargs,
                     ),
                     Field(
                         "tend",
                         float,
                         10,
                         10,
-                        kwargs.get("tend")
+                        **kwargs,
                     ),
                     Field(
                         "cte",
                         float,
                         20,
                         10,
-                        kwargs.get("cte")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "epsini",
                         int,
                         50,
                         10,
-                        kwargs.get("epsini")
+                        **kwargs,
                     ),
                     Field(
                         "dtemp",
                         float,
                         60,
                         10,
-                        kwargs.get("dtemp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -152,49 +151,49 @@ class Mat254(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xastr")
+                        **kwargs,
                     ),
                     Field(
                         "xaend",
                         float,
                         10,
                         10,
-                        kwargs.get("xaend")
+                        **kwargs,
                     ),
                     Field(
                         "xa1pa1",
                         int,
                         20,
                         10,
-                        kwargs.get("xa1pa1")
+                        **kwargs,
                     ),
                     Field(
                         "xa1pa2",
                         int,
                         30,
                         10,
-                        kwargs.get("xa1pa2")
+                        **kwargs,
                     ),
                     Field(
                         "xa1pa3",
                         int,
                         40,
                         10,
-                        kwargs.get("xa1pa3")
+                        **kwargs,
                     ),
                     Field(
                         "xafpa",
                         float,
                         50,
                         10,
-                        kwargs.get("xafpa")
+                        **kwargs,
                     ),
                     Field(
                         "cteann",
                         float,
                         60,
                         10,
-                        kwargs.get("cteann")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -205,56 +204,56 @@ class Mat254(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ptlaw")
+                        **kwargs,
                     ),
                     Field(
                         "ptstr",
                         int,
                         10,
                         10,
-                        kwargs.get("ptstr")
+                        **kwargs,
                     ),
                     Field(
                         "ptend",
                         int,
                         20,
                         10,
-                        kwargs.get("ptend")
+                        **kwargs,
                     ),
                     Field(
                         "ptx1",
                         int,
                         30,
                         10,
-                        kwargs.get("ptx1")
+                        **kwargs,
                     ),
                     Field(
                         "ptx2",
                         int,
                         40,
                         10,
-                        kwargs.get("ptx2")
+                        **kwargs,
                     ),
                     Field(
                         "ptx3",
                         int,
                         50,
                         10,
-                        kwargs.get("ptx3")
+                        **kwargs,
                     ),
                     Field(
                         "ptx4",
                         int,
                         60,
                         10,
-                        kwargs.get("ptx4")
+                        **kwargs,
                     ),
                     Field(
                         "ptx5",
                         int,
                         70,
                         10,
-                        kwargs.get("ptx5")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -265,49 +264,49 @@ class Mat254(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pttab1")
+                        **kwargs,
                     ),
                     Field(
                         "pttab2",
                         int,
                         10,
                         10,
-                        kwargs.get("pttab2")
+                        **kwargs,
                     ),
                     Field(
                         "pttab3",
                         int,
                         20,
                         10,
-                        kwargs.get("pttab3")
+                        **kwargs,
                     ),
                     Field(
                         "pttab4",
                         int,
                         30,
                         10,
-                        kwargs.get("pttab4")
+                        **kwargs,
                     ),
                     Field(
                         "pttab5",
                         int,
                         40,
                         10,
-                        kwargs.get("pttab5")
+                        **kwargs,
                     ),
                     Field(
                         "pttab6",
                         int,
                         50,
                         10,
-                        kwargs.get("pttab6")
+                        **kwargs,
                     ),
                     Field(
                         "pttab7",
                         int,
                         60,
                         10,
-                        kwargs.get("pttab7")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -318,56 +317,56 @@ class Mat254(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pteps")
+                        **kwargs,
                     ),
                     Field(
                         "ptrip",
                         int,
                         10,
                         10,
-                        kwargs.get("ptrip")
+                        **kwargs,
                     ),
                     Field(
                         "ptlat",
                         int,
                         20,
                         10,
-                        kwargs.get("ptlat")
+                        **kwargs,
                     ),
                     Field(
                         "postv",
                         int,
                         30,
                         10,
-                        kwargs.get("postv")
+                        **kwargs,
                     ),
                     Field(
                         "nushis",
                         int,
                         40,
                         10,
-                        kwargs.get("nushis")
+                        **kwargs,
                     ),
                     Field(
                         "grai",
                         float,
                         50,
                         10,
-                        kwargs.get("grai")
+                        **kwargs,
                     ),
                     Field(
                         "t1phas",
                         int,
                         60,
                         10,
-                        kwargs.get("t1phas")
+                        **kwargs,
                     ),
                     Field(
                         "t2phas",
                         int,
                         70,
                         10,
-                        kwargs.get("t2phas")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -378,56 +377,56 @@ class Mat254(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fushi1")
+                        **kwargs,
                     ),
                     Field(
                         "fushi2",
                         int,
                         10,
                         10,
-                        kwargs.get("fushi2")
+                        **kwargs,
                     ),
                     Field(
                         "fushi3",
                         int,
                         20,
                         10,
-                        kwargs.get("fushi3")
+                        **kwargs,
                     ),
                     Field(
                         "fushi4",
                         int,
                         30,
                         10,
-                        kwargs.get("fushi4")
+                        **kwargs,
                     ),
                     Field(
                         "fushi5",
                         int,
                         40,
                         10,
-                        kwargs.get("fushi5")
+                        **kwargs,
                     ),
                     Field(
                         "fushi6",
                         int,
                         50,
                         10,
-                        kwargs.get("fushi6")
+                        **kwargs,
                     ),
                     Field(
                         "fushi7",
                         int,
                         60,
                         10,
-                        kwargs.get("fushi7")
+                        **kwargs,
                     ),
                     Field(
                         "fushi8",
                         int,
                         70,
                         10,
-                        kwargs.get("fushi8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -438,56 +437,56 @@ class Mat254(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sigy1")
+                        **kwargs,
                     ),
                     Field(
                         "sigy2",
                         int,
                         10,
                         10,
-                        kwargs.get("sigy2")
+                        **kwargs,
                     ),
                     Field(
                         "sigy3",
                         int,
                         20,
                         10,
-                        kwargs.get("sigy3")
+                        **kwargs,
                     ),
                     Field(
                         "sigy4",
                         int,
                         30,
                         10,
-                        kwargs.get("sigy4")
+                        **kwargs,
                     ),
                     Field(
                         "sigy5",
                         int,
                         40,
                         10,
-                        kwargs.get("sigy5")
+                        **kwargs,
                     ),
                     Field(
                         "sigy6",
                         int,
                         50,
                         10,
-                        kwargs.get("sigy6")
+                        **kwargs,
                     ),
                     Field(
                         "sigy7",
                         int,
                         60,
                         10,
-                        kwargs.get("sigy7")
+                        **kwargs,
                     ),
                     Field(
                         "sigy8",
                         int,
                         70,
                         10,
-                        kwargs.get("sigy8")
+                        **kwargs,
                     ),
                 ],
             ),

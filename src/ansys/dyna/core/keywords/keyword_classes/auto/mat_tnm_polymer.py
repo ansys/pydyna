@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,21 +45,21 @@ class MatTnmPolymer(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "roflg",
                         int,
                         20,
                         10,
-                        kwargs.get("roflg")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -71,56 +70,56 @@ class MatTnmPolymer(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("mua")
+                        **kwargs,
                     ),
                     Field(
                         "thetah",
                         float,
                         10,
                         10,
-                        kwargs.get("thetah")
+                        **kwargs,
                     ),
                     Field(
                         "lambl",
                         float,
                         20,
                         10,
-                        kwargs.get("lambl")
+                        **kwargs,
                     ),
                     Field(
                         "kappa",
                         float,
                         30,
                         10,
-                        kwargs.get("kappa")
+                        **kwargs,
                     ),
                     Field(
                         "tauha",
                         float,
                         40,
                         10,
-                        kwargs.get("tauha")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         50,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "ma",
                         float,
                         60,
                         10,
-                        kwargs.get("ma")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         70,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -131,56 +130,56 @@ class MatTnmPolymer(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("mubi")
+                        **kwargs,
                     ),
                     Field(
                         "mubf",
                         float,
                         10,
                         10,
-                        kwargs.get("mubf")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         20,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "tauhb",
                         float,
                         30,
                         10,
-                        kwargs.get("tauhb")
+                        **kwargs,
                     ),
                     Field(
                         "mb",
                         float,
                         40,
                         10,
-                        kwargs.get("mb")
+                        **kwargs,
                     ),
                     Field(
                         "muc",
                         float,
                         50,
                         10,
-                        kwargs.get("muc")
+                        **kwargs,
                     ),
                     Field(
                         "q",
                         float,
                         60,
                         10,
-                        kwargs.get("q")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         70,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -191,35 +190,35 @@ class MatTnmPolymer(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("theata0")
+                        **kwargs,
                     ),
                     Field(
                         "ibulk",
                         float,
                         10,
                         10,
-                        kwargs.get("ibulk")
+                        **kwargs,
                     ),
                     Field(
                         "ig",
                         float,
                         20,
                         10,
-                        kwargs.get("ig")
+                        **kwargs,
                     ),
                     Field(
                         "tsstif",
                         float,
                         30,
                         10,
-                        kwargs.get("tsstif")
+                        **kwargs,
                     ),
                     Field(
                         "gamma0",
                         float,
                         40,
                         10,
-                        kwargs.get("gamma0")
+                        **kwargs,
                     ),
                 ],
             ),

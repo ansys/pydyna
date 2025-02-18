@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleStructuredMeshMotion(KeywordBase):
@@ -41,56 +40,60 @@ class AleStructuredMeshMotion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mshid")
+                        **kwargs,
                     ),
                     Field(
                         "option",
                         str,
                         10,
                         10,
-                        kwargs.get("option", "FOLLOW_GC" if use_lspp_defaults() else None)
+                        "FOLLOW_GC",
+                        **kwargs,
                     ),
                     Field(
                         "ammgsid",
                         int,
                         20,
                         10,
-                        kwargs.get("ammgsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "explim",
                         float,
                         30,
                         10,
-                        kwargs.get("explim", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "symcod",
                         int,
                         70,
                         10,
-                        kwargs.get("symcod", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

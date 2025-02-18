@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementSeatbeltSlipring(KeywordBase):
@@ -41,56 +40,63 @@ class ElementSeatbeltSlipring(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sbsrid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sbid1",
                         int,
                         10,
                         10,
-                        kwargs.get("sbid1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sbid2",
                         int,
                         20,
                         10,
-                        kwargs.get("sbid2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fc",
                         float,
                         30,
                         10,
-                        kwargs.get("fc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sbrnid",
                         int,
                         40,
                         10,
-                        kwargs.get("sbrnid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ltime",
                         float,
                         50,
                         10,
-                        kwargs.get("ltime", 1.0e20 if use_lspp_defaults() else None)
+                        1.0e20,
+                        **kwargs,
                     ),
                     Field(
                         "fcs",
                         float,
                         60,
                         10,
-                        kwargs.get("fcs", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "onid",
                         int,
                         70,
                         10,
-                        kwargs.get("onid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,49 +107,51 @@ class ElementSeatbeltSlipring(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "funcid ",
                         int,
                         10,
                         10,
-                        kwargs.get("funcid ")
+                        **kwargs,
                     ),
                     Field(
                         "direct",
                         int,
                         20,
                         10,
-                        kwargs.get("direct")
+                        **kwargs,
                     ),
                     Field(
                         "dc",
                         float,
                         30,
                         10,
-                        kwargs.get("dc")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "lcnffd",
                         int,
                         50,
                         10,
-                        kwargs.get("lcnffd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcnffs",
                         int,
                         60,
                         10,
-                        kwargs.get("lcnffs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

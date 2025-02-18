@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainAcousticIncidentWave(KeywordBase):
@@ -41,35 +40,36 @@ class FrequencyDomainAcousticIncidentWave(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("type", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "mag",
                         float,
                         10,
                         10,
-                        kwargs.get("mag")
+                        **kwargs,
                     ),
                     Field(
                         "xc",
                         float,
                         20,
                         10,
-                        kwargs.get("xc")
+                        **kwargs,
                     ),
                     Field(
                         "yc",
                         float,
                         30,
                         10,
-                        kwargs.get("yc")
+                        **kwargs,
                     ),
                     Field(
                         "zc",
                         float,
                         40,
                         10,
-                        kwargs.get("zc")
+                        **kwargs,
                     ),
                 ],
             ),

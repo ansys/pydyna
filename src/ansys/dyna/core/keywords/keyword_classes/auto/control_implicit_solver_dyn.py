@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitSolverDyn(KeywordBase):
@@ -41,56 +40,62 @@ class ControlImplicitSolverDyn(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lsolvr", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "lprint",
                         int,
                         10,
                         10,
-                        kwargs.get("lprint", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "negev",
                         int,
                         20,
                         10,
-                        kwargs.get("negev", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "order",
                         int,
                         30,
                         10,
-                        kwargs.get("order", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "drcm",
                         int,
                         40,
                         10,
-                        kwargs.get("drcm", 4 if use_lspp_defaults() else None)
+                        4,
+                        **kwargs,
                     ),
                     Field(
                         "drcprm",
                         float,
                         50,
                         10,
-                        kwargs.get("drcprm")
+                        **kwargs,
                     ),
                     Field(
                         "autospc",
                         int,
                         60,
                         10,
-                        kwargs.get("autospc", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "autotol",
                         float,
                         70,
                         10,
-                        kwargs.get("autotol")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +106,62 @@ class ControlImplicitSolverDyn(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcpack", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "mtxdmp",
                         int,
                         10,
                         10,
-                        kwargs.get("mtxdmp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iparm1",
                         int,
                         20,
                         10,
-                        kwargs.get("iparm1", 500 if use_lspp_defaults() else None)
+                        500,
+                        **kwargs,
                     ),
                     Field(
                         "rparm1",
                         float,
                         30,
                         10,
-                        kwargs.get("rparm1", 10.0e-10 if use_lspp_defaults() else None)
+                        10.0e-10,
+                        **kwargs,
                     ),
                     Field(
                         "rparm2",
                         float,
                         40,
                         10,
-                        kwargs.get("rparm2", 10.0e-4 if use_lspp_defaults() else None)
+                        10.0e-4,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "rparm5",
                         float,
                         70,
                         10,
-                        kwargs.get("rparm5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,21 +172,23 @@ class ControlImplicitSolverDyn(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("emxdmp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rdcmem",
                         float,
                         10,
                         10,
-                        kwargs.get("rdcmem", 0.85 if use_lspp_defaults() else None)
+                        0.85,
+                        **kwargs,
                     ),
                     Field(
                         "absmem",
                         float,
                         10,
                         10,
-                        kwargs.get("absmem")
+                        **kwargs,
                     ),
                 ],
             ),

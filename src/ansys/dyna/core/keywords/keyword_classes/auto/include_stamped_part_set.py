@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IncludeStampedPartSet(KeywordBase):
@@ -41,7 +40,7 @@ class IncludeStampedPartSet(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,62 @@ class IncludeStampedPartSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         int,
                         10,
                         10,
-                        kwargs.get("thick", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pstrn",
                         int,
                         20,
                         10,
-                        kwargs.get("pstrn", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "strain",
                         int,
                         30,
                         10,
-                        kwargs.get("strain", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "stress",
                         int,
                         40,
                         10,
-                        kwargs.get("stress", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "incout",
                         int,
                         50,
                         10,
-                        kwargs.get("incout", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "rmax",
                         float,
                         70,
                         10,
-                        kwargs.get("rmax", 20. if use_lspp_defaults() else None)
+                        20.,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,56 +117,64 @@ class IncludeStampedPartSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1s", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "n2s",
                         int,
                         10,
                         10,
-                        kwargs.get("n2s", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "n3s",
                         int,
                         20,
                         10,
-                        kwargs.get("n3s", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "n1c",
                         int,
                         30,
                         10,
-                        kwargs.get("n1c", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "n2c",
                         int,
                         40,
                         10,
-                        kwargs.get("n2c", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "n3c",
                         int,
                         50,
                         10,
-                        kwargs.get("n3c", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tensor",
                         int,
                         60,
                         10,
-                        kwargs.get("tensor", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "thkscl",
                         float,
                         70,
                         10,
-                        kwargs.get("thkscl", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -172,42 +185,44 @@ class IncludeStampedPartSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("isym", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iafter",
                         int,
                         10,
                         10,
-                        kwargs.get("iafter", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "percele",
                         float,
                         20,
                         10,
-                        kwargs.get("percele")
+                        **kwargs,
                     ),
                     Field(
                         "iortho",
                         int,
                         30,
                         10,
-                        kwargs.get("iortho")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "isrocut",
                         int,
                         50,
                         10,
-                        kwargs.get("isrocut")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -218,21 +233,21 @@ class IncludeStampedPartSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x01")
+                        **kwargs,
                     ),
                     Field(
                         "y01",
                         float,
                         10,
                         10,
-                        kwargs.get("y01")
+                        **kwargs,
                     ),
                     Field(
                         "z01",
                         float,
                         20,
                         10,
-                        kwargs.get("z01")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -243,42 +258,42 @@ class IncludeStampedPartSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x02")
+                        **kwargs,
                     ),
                     Field(
                         "y02",
                         float,
                         10,
                         10,
-                        kwargs.get("y02")
+                        **kwargs,
                     ),
                     Field(
                         "z02",
                         float,
                         20,
                         10,
-                        kwargs.get("z02")
+                        **kwargs,
                     ),
                     Field(
                         "x03",
                         float,
                         30,
                         10,
-                        kwargs.get("x03")
+                        **kwargs,
                     ),
                     Field(
                         "y03",
                         float,
                         40,
                         10,
-                        kwargs.get("y03")
+                        **kwargs,
                     ),
                     Field(
                         "z03",
                         float,
                         50,
                         10,
-                        kwargs.get("z03")
+                        **kwargs,
                     ),
                 ],
             ),

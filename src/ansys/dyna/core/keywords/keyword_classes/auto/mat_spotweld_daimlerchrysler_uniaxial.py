@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatSpotweldDaimlerchryslerUniaxial(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         60,
                         10,
-                        kwargs.get("dt")
+                        **kwargs,
                     ),
                     Field(
                         "tfail",
                         float,
                         70,
                         10,
-                        kwargs.get("tfail")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class MatSpotweldDaimlerchryslerUniaxial(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("efail")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "nf",
                         float,
                         70,
                         10,
-                        kwargs.get("nf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,49 +165,49 @@ class MatSpotweldDaimlerchryslerUniaxial(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rs")
+                        **kwargs,
                     ),
                     Field(
                         "asff",
                         int,
                         10,
                         10,
-                        kwargs.get("asff")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "true_t",
                         float,
                         30,
                         10,
-                        kwargs.get("true_t")
+                        **kwargs,
                     ),
                     Field(
                         "con_id",
                         int,
                         40,
                         10,
-                        kwargs.get("con_id")
+                        **kwargs,
                     ),
                     Field(
                         "rfiltf",
                         float,
                         50,
                         10,
-                        kwargs.get("rfiltf")
+                        **kwargs,
                     ),
                     Field(
                         "jtol",
                         float,
                         60,
                         10,
-                        kwargs.get("jtol")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmMat006(KeywordBase):
@@ -41,49 +40,51 @@ class EmMat006(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "mtype",
                         int,
                         10,
                         10,
-                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sigp",
                         float,
                         20,
                         10,
-                        kwargs.get("sigp")
+                        **kwargs,
                     ),
                     Field(
                         "eosp",
                         int,
                         30,
                         10,
-                        kwargs.get("eosp")
+                        **kwargs,
                     ),
                     Field(
                         "sign",
                         float,
                         40,
                         10,
-                        kwargs.get("sign")
+                        **kwargs,
                     ),
                     Field(
                         "eosn",
                         int,
                         50,
                         10,
-                        kwargs.get("eosn")
+                        **kwargs,
                     ),
                     Field(
                         "deatht",
                         float,
                         60,
                         10,
-                        kwargs.get("deatht", 1.0E28 if use_lspp_defaults() else None)
+                        1.0E28,
+                        **kwargs,
                     ),
                 ],
             ),

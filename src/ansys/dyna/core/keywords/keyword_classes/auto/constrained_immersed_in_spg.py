@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedImmersedInSpg(KeywordBase):
@@ -41,7 +40,7 @@ class ConstrainedImmersedInSpg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("spgpid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,56 @@ class ConstrainedImmersedInSpg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ipid1")
+                        **kwargs,
                     ),
                     Field(
                         "ipid2",
                         int,
                         10,
                         10,
-                        kwargs.get("ipid2")
+                        **kwargs,
                     ),
                     Field(
                         "ipid3",
                         int,
                         20,
                         10,
-                        kwargs.get("ipid3")
+                        **kwargs,
                     ),
                     Field(
                         "ipid4",
                         int,
                         30,
                         10,
-                        kwargs.get("ipid4")
+                        **kwargs,
                     ),
                     Field(
                         "ipid5",
                         int,
                         40,
                         10,
-                        kwargs.get("ipid5")
+                        **kwargs,
                     ),
                     Field(
                         "ipid6",
                         int,
                         50,
                         10,
-                        kwargs.get("ipid6")
+                        **kwargs,
                     ),
                     Field(
                         "ipid7",
                         int,
                         60,
                         10,
-                        kwargs.get("ipid7")
+                        **kwargs,
                     ),
                     Field(
                         "ipid8",
                         int,
                         70,
                         10,
-                        kwargs.get("ipid8")
+                        **kwargs,
                     ),
                 ],
             ),

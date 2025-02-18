@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatSteelConcentricBrace(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "ym",
                         float,
                         20,
                         10,
-                        kwargs.get("ym")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "lamda",
                         float,
                         50,
                         10,
-                        kwargs.get("lamda")
+                        **kwargs,
                     ),
                     Field(
                         "fbuck",
                         float,
                         60,
                         10,
-                        kwargs.get("fbuck")
+                        **kwargs,
                     ),
                     Field(
                         "fbuck2",
                         float,
                         70,
                         10,
-                        kwargs.get("fbuck2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,14 +105,14 @@ class MatSteelConcentricBrace(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ccbrf")
+                        **kwargs,
                     ),
                     Field(
                         "bcur",
                         float,
                         10,
                         10,
-                        kwargs.get("bcur")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -124,56 +123,64 @@ class MatSteelConcentricBrace(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ts1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ts2",
                         float,
                         10,
                         10,
-                        kwargs.get("ts2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ts3",
                         float,
                         20,
                         10,
-                        kwargs.get("ts3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ts4",
                         float,
                         30,
                         10,
-                        kwargs.get("ts4", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cs1",
                         float,
                         40,
                         10,
-                        kwargs.get("cs1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cs2",
                         float,
                         50,
                         10,
-                        kwargs.get("cs2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cs3",
                         float,
                         60,
                         10,
-                        kwargs.get("cs3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cs4",
                         float,
                         70,
                         10,
-                        kwargs.get("cs4", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

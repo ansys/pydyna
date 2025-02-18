@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class MatNonQuadraticFailure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         50,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "ksi",
                         float,
                         60,
                         10,
-                        kwargs.get("ksi")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,42 +98,42 @@ class MatNonQuadraticFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("theta1")
+                        **kwargs,
                     ),
                     Field(
                         "q1",
                         float,
                         10,
                         10,
-                        kwargs.get("q1")
+                        **kwargs,
                     ),
                     Field(
                         "theta2",
                         float,
                         20,
                         10,
-                        kwargs.get("theta2")
+                        **kwargs,
                     ),
                     Field(
                         "q2",
                         float,
                         30,
                         10,
-                        kwargs.get("q2")
+                        **kwargs,
                     ),
                     Field(
                         "theta3",
                         float,
                         40,
                         10,
-                        kwargs.get("theta3")
+                        **kwargs,
                     ),
                     Field(
                         "q3",
                         float,
                         50,
                         10,
-                        kwargs.get("q3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -145,14 +144,14 @@ class MatNonQuadraticFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cs")
+                        **kwargs,
                     ),
                     Field(
                         "pdots",
                         float,
                         10,
                         10,
-                        kwargs.get("pdots")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -163,56 +162,56 @@ class MatNonQuadraticFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dcrit")
+                        **kwargs,
                     ),
                     Field(
                         "wcb",
                         float,
                         10,
                         10,
-                        kwargs.get("wcb")
+                        **kwargs,
                     ),
                     Field(
                         "wcl",
                         float,
                         20,
                         10,
-                        kwargs.get("wcl")
+                        **kwargs,
                     ),
                     Field(
                         "wcs",
                         float,
                         30,
                         10,
-                        kwargs.get("wcs")
+                        **kwargs,
                     ),
                     Field(
                         "cc",
                         float,
                         40,
                         10,
-                        kwargs.get("cc")
+                        **kwargs,
                     ),
                     Field(
                         "phi",
                         float,
                         50,
                         10,
-                        kwargs.get("phi")
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         60,
                         10,
-                        kwargs.get("gamma")
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         float,
                         70,
                         10,
-                        kwargs.get("thick")
+                        **kwargs,
                     ),
                 ],
             ),

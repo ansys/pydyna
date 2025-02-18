@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IncludeStampedPartMatrixInverse(KeywordBase):
@@ -41,7 +40,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,62 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         int,
                         10,
                         10,
-                        kwargs.get("thick", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pstrn",
                         int,
                         20,
                         10,
-                        kwargs.get("pstrn", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "strain",
                         int,
                         30,
                         10,
-                        kwargs.get("strain", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "stress",
                         int,
                         40,
                         10,
-                        kwargs.get("stress", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "incout",
                         int,
                         50,
                         10,
-                        kwargs.get("incout", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "rmax",
                         float,
                         70,
                         10,
-                        kwargs.get("rmax", 20. if use_lspp_defaults() else None)
+                        20.,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,28 +117,28 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r11")
+                        **kwargs,
                     ),
                     Field(
                         "r12",
                         float,
                         10,
                         10,
-                        kwargs.get("r12")
+                        **kwargs,
                     ),
                     Field(
                         "r13",
                         float,
                         20,
                         10,
-                        kwargs.get("r13")
+                        **kwargs,
                     ),
                     Field(
                         "xp",
                         float,
                         30,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -144,28 +149,28 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r21")
+                        **kwargs,
                     ),
                     Field(
                         "r22",
                         float,
                         10,
                         10,
-                        kwargs.get("r22")
+                        **kwargs,
                     ),
                     Field(
                         "r23",
                         float,
                         20,
                         10,
-                        kwargs.get("r23")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         30,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -176,28 +181,28 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r31")
+                        **kwargs,
                     ),
                     Field(
                         "r32",
                         float,
                         10,
                         10,
-                        kwargs.get("r32")
+                        **kwargs,
                     ),
                     Field(
                         "r33",
                         float,
                         20,
                         10,
-                        kwargs.get("r33")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         30,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -208,42 +213,44 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("isym", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iafter",
                         int,
                         10,
                         10,
-                        kwargs.get("iafter", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "percele",
                         float,
                         20,
                         10,
-                        kwargs.get("percele")
+                        **kwargs,
                     ),
                     Field(
                         "iortho",
                         int,
                         30,
                         10,
-                        kwargs.get("iortho")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "isrocut",
                         int,
                         50,
                         10,
-                        kwargs.get("isrocut")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -254,21 +261,21 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x01")
+                        **kwargs,
                     ),
                     Field(
                         "y01",
                         float,
                         10,
                         10,
-                        kwargs.get("y01")
+                        **kwargs,
                     ),
                     Field(
                         "z01",
                         float,
                         20,
                         10,
-                        kwargs.get("z01")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -279,42 +286,42 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x02")
+                        **kwargs,
                     ),
                     Field(
                         "y02",
                         float,
                         10,
                         10,
-                        kwargs.get("y02")
+                        **kwargs,
                     ),
                     Field(
                         "z02",
                         float,
                         20,
                         10,
-                        kwargs.get("z02")
+                        **kwargs,
                     ),
                     Field(
                         "x03",
                         float,
                         30,
                         10,
-                        kwargs.get("x03")
+                        **kwargs,
                     ),
                     Field(
                         "y03",
                         float,
                         40,
                         10,
-                        kwargs.get("y03")
+                        **kwargs,
                     ),
                     Field(
                         "z03",
                         float,
                         50,
                         10,
-                        kwargs.get("z03")
+                        **kwargs,
                     ),
                 ],
             ),

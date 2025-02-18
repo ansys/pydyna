@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,7 +45,7 @@ class SetDiscreteGeneralCollect(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -57,56 +56,57 @@ class SetDiscreteGeneralCollect(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("option", "ALL" if use_lspp_defaults() else None)
+                        "ALL",
+                        **kwargs,
                     ),
                     Field(
                         "e1",
                         int,
                         10,
                         10,
-                        kwargs.get("e1")
+                        **kwargs,
                     ),
                     Field(
                         "e2",
                         int,
                         20,
                         10,
-                        kwargs.get("e2")
+                        **kwargs,
                     ),
                     Field(
                         "e3",
                         int,
                         30,
                         10,
-                        kwargs.get("e3")
+                        **kwargs,
                     ),
                     Field(
                         "e4",
                         int,
                         40,
                         10,
-                        kwargs.get("e4")
+                        **kwargs,
                     ),
                     Field(
                         "e5",
                         int,
                         50,
                         10,
-                        kwargs.get("e5")
+                        **kwargs,
                     ),
                     Field(
                         "e6",
                         int,
                         60,
                         10,
-                        kwargs.get("e6")
+                        **kwargs,
                     ),
                     Field(
                         "e7",
                         int,
                         70,
                         10,
-                        kwargs.get("e7")
+                        **kwargs,
                     ),
                 ],
             ),

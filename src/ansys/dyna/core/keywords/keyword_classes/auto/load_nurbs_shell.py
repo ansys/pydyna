@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadNurbsShell(KeywordBase):
@@ -41,14 +40,14 @@ class LoadNurbsShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         str,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,49 +58,54 @@ class LoadNurbsShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         10,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         20,
                         10,
-                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "at",
                         float,
                         30,
                         10,
-                        kwargs.get("at", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         40,
                         10,
-                        kwargs.get("dt", 1.0e+16 if use_lspp_defaults() else None)
+                        1.0e+16,
+                        **kwargs,
                     ),
                     Field(
                         "ltype",
                         str,
                         50,
                         10,
-                        kwargs.get("ltype", "PRESS" if use_lspp_defaults() else None)
+                        "PRESS",
+                        **kwargs,
                     ),
                     Field(
                         "regdef",
                         str,
                         60,
                         10,
-                        kwargs.get("regdef", "RS" if use_lspp_defaults() else None)
+                        "RS",
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,28 +116,29 @@ class LoadNurbsShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "v1",
                         float,
                         10,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         20,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         30,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -144,28 +149,28 @@ class LoadNurbsShell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rmin")
+                        **kwargs,
                     ),
                     Field(
                         "smin",
                         float,
                         10,
                         10,
-                        kwargs.get("smin")
+                        **kwargs,
                     ),
                     Field(
                         "rmax",
                         float,
                         20,
                         10,
-                        kwargs.get("rmax")
+                        **kwargs,
                     ),
                     Field(
                         "smax",
                         float,
                         30,
                         10,
-                        kwargs.get("smax")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -176,56 +181,56 @@ class LoadNurbsShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ne1")
+                        **kwargs,
                     ),
                     Field(
                         "ne2",
                         int,
                         10,
                         10,
-                        kwargs.get("ne2")
+                        **kwargs,
                     ),
                     Field(
                         "ne3",
                         int,
                         20,
                         10,
-                        kwargs.get("ne3")
+                        **kwargs,
                     ),
                     Field(
                         "ne4",
                         int,
                         30,
                         10,
-                        kwargs.get("ne4")
+                        **kwargs,
                     ),
                     Field(
                         "ne5",
                         int,
                         40,
                         10,
-                        kwargs.get("ne5")
+                        **kwargs,
                     ),
                     Field(
                         "ne6",
                         int,
                         50,
                         10,
-                        kwargs.get("ne6")
+                        **kwargs,
                     ),
                     Field(
                         "ne7",
                         int,
                         60,
                         10,
-                        kwargs.get("ne7")
+                        **kwargs,
                     ),
                     Field(
                         "ne8",
                         int,
                         70,
                         10,
-                        kwargs.get("ne8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -236,35 +241,35 @@ class LoadNurbsShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nt1")
+                        **kwargs,
                     ),
                     Field(
                         "nt2",
                         int,
                         10,
                         10,
-                        kwargs.get("nt2")
+                        **kwargs,
                     ),
                     Field(
                         "nt3",
                         int,
                         20,
                         10,
-                        kwargs.get("nt3")
+                        **kwargs,
                     ),
                     Field(
                         "nt4",
                         int,
                         30,
                         10,
-                        kwargs.get("nt4")
+                        **kwargs,
                     ),
                     Field(
                         "nte",
                         int,
                         40,
                         10,
-                        kwargs.get("nte")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -275,28 +280,28 @@ class LoadNurbsShell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r1")
+                        **kwargs,
                     ),
                     Field(
                         "s1",
                         float,
                         10,
                         10,
-                        kwargs.get("s1")
+                        **kwargs,
                     ),
                     Field(
                         "r2",
                         float,
                         20,
                         10,
-                        kwargs.get("r2")
+                        **kwargs,
                     ),
                     Field(
                         "s2",
                         float,
                         30,
                         10,
-                        kwargs.get("s2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -307,21 +312,21 @@ class LoadNurbsShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nc1")
+                        **kwargs,
                     ),
                     Field(
                         "nc2",
                         int,
                         10,
                         10,
-                        kwargs.get("nc2")
+                        **kwargs,
                     ),
                     Field(
                         "nce",
                         int,
                         20,
                         10,
-                        kwargs.get("nce")
+                        **kwargs,
                     ),
                 ],
             ),

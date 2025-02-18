@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,35 @@ class Mat090Complex(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "rhor",
                         float,
                         10,
                         10,
-                        kwargs.get("rhor")
+                        **kwargs,
                     ),
                     Field(
                         "bulkr",
                         float,
                         20,
                         10,
-                        kwargs.get("bulkr")
+                        **kwargs,
                     ),
                     Field(
                         "rhoi",
                         float,
                         30,
                         10,
-                        kwargs.get("rhoi")
+                        **kwargs,
                     ),
                     Field(
                         "bulki",
                         float,
                         40,
                         10,
-                        kwargs.get("bulki")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,28 +84,28 @@ class Mat090Complex(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidrr")
+                        **kwargs,
                     ),
                     Field(
                         "lcidkr",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidkr")
+                        **kwargs,
                     ),
                     Field(
                         "lcidri",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidri")
+                        **kwargs,
                     ),
                     Field(
                         "lcidki",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidki")
+                        **kwargs,
                     ),
                 ],
             ),

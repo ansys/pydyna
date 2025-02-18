@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSsa(KeywordBase):
@@ -41,49 +40,54 @@ class LoadSsa(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vs")
+                        **kwargs,
                     ),
                     Field(
                         "ds",
                         float,
                         10,
                         10,
-                        kwargs.get("ds")
+                        **kwargs,
                     ),
                     Field(
                         "refl",
                         float,
                         20,
                         10,
-                        kwargs.get("refl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "zb",
                         float,
                         30,
                         10,
-                        kwargs.get("zb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zsurf",
                         float,
                         40,
                         10,
-                        kwargs.get("zsurf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fpsid",
                         int,
                         50,
                         10,
-                        kwargs.get("fpsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "psid",
                         int,
                         60,
                         10,
-                        kwargs.get("psid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,35 +98,35 @@ class LoadSsa(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         10,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         20,
                         10,
-                        kwargs.get("gamma")
+                        **kwargs,
                     ),
                     Field(
                         "ktheta",
                         float,
                         30,
                         10,
-                        kwargs.get("ktheta")
+                        **kwargs,
                     ),
                     Field(
                         "kappa",
                         float,
                         40,
                         10,
-                        kwargs.get("kappa")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,49 +137,49 @@ class LoadSsa(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xs")
+                        **kwargs,
                     ),
                     Field(
                         "ys",
                         float,
                         10,
                         10,
-                        kwargs.get("ys")
+                        **kwargs,
                     ),
                     Field(
                         "zs",
                         float,
                         20,
                         10,
-                        kwargs.get("zs")
+                        **kwargs,
                     ),
                     Field(
                         "w",
                         float,
                         30,
                         10,
-                        kwargs.get("w")
+                        **kwargs,
                     ),
                     Field(
                         "tdely",
                         float,
                         40,
                         10,
-                        kwargs.get("tdely")
+                        **kwargs,
                     ),
                     Field(
                         "rad",
                         float,
                         50,
                         10,
-                        kwargs.get("rad")
+                        **kwargs,
                     ),
                     Field(
                         "cz",
                         float,
                         60,
                         10,
-                        kwargs.get("cz")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,14 +45,15 @@ class DefineFilter(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -64,56 +64,56 @@ class DefineFilter(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("type")
+                        **kwargs,
                     ),
                     Field(
                         "data1",
                         str,
                         10,
                         10,
-                        kwargs.get("data1")
+                        **kwargs,
                     ),
                     Field(
                         "data2",
                         str,
                         20,
                         10,
-                        kwargs.get("data2")
+                        **kwargs,
                     ),
                     Field(
                         "data3",
                         str,
                         30,
                         10,
-                        kwargs.get("data3")
+                        **kwargs,
                     ),
                     Field(
                         "data4",
                         str,
                         40,
                         10,
-                        kwargs.get("data4")
+                        **kwargs,
                     ),
                     Field(
                         "data5",
                         str,
                         50,
                         10,
-                        kwargs.get("data5")
+                        **kwargs,
                     ),
                     Field(
                         "data6",
                         str,
                         60,
                         10,
-                        kwargs.get("data6")
+                        **kwargs,
                     ),
                     Field(
                         "data7",
                         str,
                         70,
                         10,
-                        kwargs.get("data7")
+                        **kwargs,
                     ),
                 ],
             ),

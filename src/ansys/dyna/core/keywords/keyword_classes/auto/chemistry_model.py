@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryModel(KeywordBase):
@@ -41,21 +40,23 @@ class ChemistryModel(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("modelid")
+                        **kwargs,
                     ),
                     Field(
                         "jacsel",
                         int,
                         10,
                         10,
-                        kwargs.get("jacsel", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "errlim",
                         float,
                         20,
                         10,
-                        kwargs.get("errlim", 1.0e-3 if use_lspp_defaults() else None)
+                        1.0e-3,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,7 +67,7 @@ class ChemistryModel(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("file1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -77,7 +78,7 @@ class ChemistryModel(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("file2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -88,7 +89,7 @@ class ChemistryModel(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("file3")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementSeatbeltRetractor(KeywordBase):
@@ -41,49 +40,53 @@ class ElementSeatbeltRetractor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sbrid")
+                        **kwargs,
                     ),
                     Field(
                         "sbrnid",
                         int,
                         10,
                         10,
-                        kwargs.get("sbrnid")
+                        **kwargs,
                     ),
                     Field(
                         "sbid",
                         int,
                         20,
                         10,
-                        kwargs.get("sbid")
+                        **kwargs,
                     ),
                     Field(
                         "sid1",
                         int,
                         30,
                         10,
-                        kwargs.get("sid1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sid2",
                         int,
                         40,
                         10,
-                        kwargs.get("sid2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sid3",
                         int,
                         50,
                         10,
-                        kwargs.get("sid3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sid4",
                         int,
                         60,
                         10,
-                        kwargs.get("sid4", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,35 +97,40 @@ class ElementSeatbeltRetractor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tdel", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pull",
                         float,
                         10,
                         10,
-                        kwargs.get("pull", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "llcid",
                         int,
                         20,
                         10,
-                        kwargs.get("llcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ulcid",
                         int,
                         30,
                         10,
-                        kwargs.get("ulcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lfed",
                         float,
                         40,
                         10,
-                        kwargs.get("lfed", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

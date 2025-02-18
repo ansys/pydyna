@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlOutputSubdom(KeywordBase):
@@ -41,7 +40,8 @@ class IcfdControlOutputSubdom(KeywordBase):
                         str,
                         0,
                         20,
-                        kwargs.get("sname", "BOX" if use_lspp_defaults() else None)
+                        "BOX",
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,42 +52,42 @@ class IcfdControlOutputSubdom(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pminx")
+                        **kwargs,
                     ),
                     Field(
                         "pminy",
                         float,
                         10,
                         10,
-                        kwargs.get("pminy")
+                        **kwargs,
                     ),
                     Field(
                         "pminz",
                         float,
                         20,
                         10,
-                        kwargs.get("pminz")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxx",
                         float,
                         30,
                         10,
-                        kwargs.get("pmaxx")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxy",
                         float,
                         40,
                         10,
-                        kwargs.get("pmaxy")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxz",
                         float,
                         50,
                         10,
-                        kwargs.get("pmaxz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -98,28 +98,28 @@ class IcfdControlOutputSubdom(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("radius")
+                        **kwargs,
                     ),
                     Field(
                         "centerx",
                         float,
                         10,
                         10,
-                        kwargs.get("centerx")
+                        **kwargs,
                     ),
                     Field(
                         "centery",
                         float,
                         20,
                         10,
-                        kwargs.get("centery")
+                        **kwargs,
                     ),
                     Field(
                         "centerz",
                         float,
                         30,
                         10,
-                        kwargs.get("centerz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -130,49 +130,49 @@ class IcfdControlOutputSubdom(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("radius")
+                        **kwargs,
                     ),
                     Field(
                         "pminx",
                         float,
                         10,
                         10,
-                        kwargs.get("pminx")
+                        **kwargs,
                     ),
                     Field(
                         "pminy",
                         float,
                         20,
                         10,
-                        kwargs.get("pminy")
+                        **kwargs,
                     ),
                     Field(
                         "pminz",
                         float,
                         30,
                         10,
-                        kwargs.get("pminz")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxx",
                         float,
                         40,
                         10,
-                        kwargs.get("pmaxx")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxy",
                         float,
                         50,
                         10,
-                        kwargs.get("pmaxy")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxz",
                         float,
                         60,
                         10,
-                        kwargs.get("pmaxz")
+                        **kwargs,
                     ),
                 ],
             ),

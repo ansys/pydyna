@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChangeVelocityGeneration(KeywordBase):
@@ -41,56 +40,62 @@ class ChangeVelocityGeneration(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsid/pid")
+                        **kwargs,
                     ),
                     Field(
                         "styp",
                         int,
                         10,
                         10,
-                        kwargs.get("styp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "omega",
                         float,
                         20,
                         10,
-                        kwargs.get("omega", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vx",
                         float,
                         30,
                         10,
-                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vy",
                         float,
                         40,
                         10,
-                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vz",
                         float,
                         50,
                         10,
-                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ivatn",
                         int,
                         60,
                         10,
-                        kwargs.get("ivatn", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "icid",
                         int,
                         70,
                         10,
-                        kwargs.get("icid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +106,64 @@ class ChangeVelocityGeneration(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yc",
                         float,
                         10,
                         10,
-                        kwargs.get("yc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zc",
                         float,
                         20,
                         10,
-                        kwargs.get("zc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nx",
                         float,
                         30,
                         10,
-                        kwargs.get("nx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ny",
                         float,
                         40,
                         10,
-                        kwargs.get("ny", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nz",
                         float,
                         50,
                         10,
-                        kwargs.get("nz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "phase",
                         int,
                         60,
                         10,
-                        kwargs.get("phase", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "irigid",
                         int,
                         70,
                         10,
-                        kwargs.get("irigid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

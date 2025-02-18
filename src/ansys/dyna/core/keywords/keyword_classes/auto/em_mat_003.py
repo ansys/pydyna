@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmMat003(KeywordBase):
@@ -41,35 +40,36 @@ class EmMat003(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "mtype",
                         int,
                         10,
                         10,
-                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sigma11",
                         float,
                         20,
                         10,
-                        kwargs.get("sigma11")
+                        **kwargs,
                     ),
                     Field(
                         "sigma22",
                         float,
                         30,
                         10,
-                        kwargs.get("sigma22")
+                        **kwargs,
                     ),
                     Field(
                         "sigma33",
                         float,
                         40,
                         10,
-                        kwargs.get("sigma33")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,56 +80,57 @@ class EmMat003(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sigma12")
+                        **kwargs,
                     ),
                     Field(
                         "sigma13",
                         int,
                         10,
                         10,
-                        kwargs.get("sigma13")
+                        **kwargs,
                     ),
                     Field(
                         "sigma21",
                         float,
                         20,
                         10,
-                        kwargs.get("sigma21")
+                        **kwargs,
                     ),
                     Field(
                         "sigma23",
                         float,
                         30,
                         10,
-                        kwargs.get("sigma23")
+                        **kwargs,
                     ),
                     Field(
                         "sigma31",
                         float,
                         40,
                         10,
-                        kwargs.get("sigma31")
+                        **kwargs,
                     ),
                     Field(
                         "sigma32",
                         float,
                         50,
                         10,
-                        kwargs.get("sigma32")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         int,
                         60,
                         10,
-                        kwargs.get("aopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lambda",
                         float,
                         70,
                         10,
-                        kwargs.get("lambda")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,49 +141,50 @@ class EmMat003(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         60,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -193,42 +195,42 @@ class EmMat003(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                 ],
             ),

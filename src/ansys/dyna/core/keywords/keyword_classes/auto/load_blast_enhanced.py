@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadBlastEnhanced(KeywordBase):
@@ -41,56 +40,63 @@ class LoadBlastEnhanced(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("bid")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         10,
                         10,
-                        kwargs.get("m", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xbo",
                         float,
                         20,
                         10,
-                        kwargs.get("xbo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ybo",
                         float,
                         30,
                         10,
-                        kwargs.get("ybo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zbo",
                         float,
                         40,
                         10,
-                        kwargs.get("zbo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tbo",
                         float,
                         50,
                         10,
-                        kwargs.get("tbo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unit",
                         int,
                         60,
                         10,
-                        kwargs.get("unit", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "blast",
                         int,
                         70,
                         10,
-                        kwargs.get("blast", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,49 +107,55 @@ class LoadBlastEnhanced(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cfm", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cfl",
                         float,
                         10,
                         10,
-                        kwargs.get("cfl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cft",
                         float,
                         20,
                         10,
-                        kwargs.get("cft", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cfp",
                         float,
                         30,
                         10,
-                        kwargs.get("cfp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nidbo",
                         int,
                         40,
                         10,
-                        kwargs.get("nidbo")
+                        **kwargs,
                     ),
                     Field(
                         "death",
                         float,
                         50,
                         10,
-                        kwargs.get("death", 1.e+20 if use_lspp_defaults() else None)
+                        1.e+20,
+                        **kwargs,
                     ),
                     Field(
                         "negphs",
                         int,
                         60,
                         10,
-                        kwargs.get("negphs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

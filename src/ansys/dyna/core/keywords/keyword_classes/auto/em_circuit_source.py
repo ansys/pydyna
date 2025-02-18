@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmCircuitSource(KeywordBase):
@@ -41,56 +40,58 @@ class EmCircuitSource(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("circid")
+                        **kwargs,
                     ),
                     Field(
                         "circtyp",
                         int,
                         10,
                         10,
-                        kwargs.get("circtyp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         20,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "r/f",
                         float,
                         30,
                         10,
-                        kwargs.get("r/f")
+                        **kwargs,
                     ),
                     Field(
                         "l/a",
                         float,
                         40,
                         10,
-                        kwargs.get("l/a")
+                        **kwargs,
                     ),
                     Field(
                         "c/t0",
                         float,
                         50,
                         10,
-                        kwargs.get("c/t0")
+                        **kwargs,
                     ),
                     Field(
                         "v0",
                         float,
                         60,
                         10,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                     Field(
                         "t0",
                         float,
                         70,
                         10,
-                        kwargs.get("t0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,28 +102,28 @@ class EmCircuitSource(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sidcurr")
+                        **kwargs,
                     ),
                     Field(
                         "sidvin",
                         int,
                         10,
                         10,
-                        kwargs.get("sidvin")
+                        **kwargs,
                     ),
                     Field(
                         "sidvout",
                         int,
                         20,
                         10,
-                        kwargs.get("sidvout")
+                        **kwargs,
                     ),
                     Field(
                         "partid",
                         int,
                         30,
                         10,
-                        kwargs.get("partid")
+                        **kwargs,
                     ),
                 ],
             ),

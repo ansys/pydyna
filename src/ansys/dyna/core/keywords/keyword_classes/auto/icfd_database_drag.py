@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdDatabaseDrag(KeywordBase):
@@ -41,49 +40,54 @@ class IcfdDatabaseDrag(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "cpid",
                         int,
                         10,
                         10,
-                        kwargs.get("cpid")
+                        **kwargs,
                     ),
                     Field(
                         "dtout",
                         float,
                         20,
                         10,
-                        kwargs.get("dtout", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "perout",
                         int,
                         30,
                         10,
-                        kwargs.get("perout", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "divi",
                         int,
                         40,
                         10,
-                        kwargs.get("divi", 10 if use_lspp_defaults() else None)
+                        10,
+                        **kwargs,
                     ),
                     Field(
                         "elout",
                         int,
                         50,
                         10,
-                        kwargs.get("elout", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ssout",
                         int,
                         60,
                         10,
-                        kwargs.get("ssout", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

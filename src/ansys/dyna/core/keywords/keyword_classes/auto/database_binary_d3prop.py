@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseBinaryD3Prop(KeywordBase):
@@ -41,21 +40,24 @@ class DatabaseBinaryD3Prop(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ifile", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "imatl",
                         int,
                         10,
                         10,
-                        kwargs.get("imatl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iwall",
                         int,
                         20,
                         10,
-                        kwargs.get("iwall", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

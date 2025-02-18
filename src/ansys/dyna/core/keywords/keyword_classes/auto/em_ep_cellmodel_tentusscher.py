@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEpCellmodelTentusscher(KeywordBase):
@@ -41,7 +40,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,56 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "t",
                         float,
                         10,
                         10,
-                        kwargs.get("t")
+                        **kwargs,
                     ),
                     Field(
                         "f",
                         float,
                         20,
                         10,
-                        kwargs.get("f")
+                        **kwargs,
                     ),
                     Field(
                         "cm",
                         float,
                         30,
                         10,
-                        kwargs.get("cm")
+                        **kwargs,
                     ),
                     Field(
                         "vc",
                         float,
                         40,
                         10,
-                        kwargs.get("vc")
+                        **kwargs,
                     ),
                     Field(
                         "vsr",
                         float,
                         50,
                         10,
-                        kwargs.get("vsr")
+                        **kwargs,
                     ),
                     Field(
                         "vss",
                         float,
                         60,
                         10,
-                        kwargs.get("vss")
+                        **kwargs,
                     ),
                     Field(
                         "pkna",
                         float,
                         70,
                         10,
-                        kwargs.get("pkna")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,21 +111,21 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ko")
+                        **kwargs,
                     ),
                     Field(
                         "nao",
                         float,
                         10,
                         10,
-                        kwargs.get("nao")
+                        **kwargs,
                     ),
                     Field(
                         "cao",
                         float,
                         20,
                         10,
-                        kwargs.get("cao")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -137,56 +136,56 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gk1")
+                        **kwargs,
                     ),
                     Field(
                         "gkr",
                         float,
                         10,
                         10,
-                        kwargs.get("gkr")
+                        **kwargs,
                     ),
                     Field(
                         "gks",
                         float,
                         20,
                         10,
-                        kwargs.get("gks")
+                        **kwargs,
                     ),
                     Field(
                         "gna",
                         float,
                         30,
                         10,
-                        kwargs.get("gna")
+                        **kwargs,
                     ),
                     Field(
                         "gbna",
                         float,
                         40,
                         10,
-                        kwargs.get("gbna")
+                        **kwargs,
                     ),
                     Field(
                         "gcal",
                         float,
                         50,
                         10,
-                        kwargs.get("gcal")
+                        **kwargs,
                     ),
                     Field(
                         "gbca",
                         float,
                         60,
                         10,
-                        kwargs.get("gbca")
+                        **kwargs,
                     ),
                     Field(
                         "gto",
                         float,
                         70,
                         10,
-                        kwargs.get("gto")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -197,14 +196,14 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gpca")
+                        **kwargs,
                     ),
                     Field(
                         "gpk",
                         float,
                         10,
                         10,
-                        kwargs.get("gpk")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -215,56 +214,56 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pnak")
+                        **kwargs,
                     ),
                     Field(
                         "km",
                         float,
                         10,
                         10,
-                        kwargs.get("km")
+                        **kwargs,
                     ),
                     Field(
                         "kmna",
                         float,
                         20,
                         10,
-                        kwargs.get("kmna")
+                        **kwargs,
                     ),
                     Field(
                         "knaca",
                         float,
                         30,
                         10,
-                        kwargs.get("knaca")
+                        **kwargs,
                     ),
                     Field(
                         "ksat",
                         float,
                         40,
                         10,
-                        kwargs.get("ksat")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         60,
                         10,
-                        kwargs.get("gamma")
+                        **kwargs,
                     ),
                     Field(
                         "kmca",
                         float,
                         70,
                         10,
-                        kwargs.get("kmca")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -275,14 +274,14 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("kmnai")
+                        **kwargs,
                     ),
                     Field(
                         "kpca",
                         float,
                         10,
                         10,
-                        kwargs.get("kpca")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -293,49 +292,49 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k1")
+                        **kwargs,
                     ),
                     Field(
                         "k2",
                         float,
                         10,
                         10,
-                        kwargs.get("k2")
+                        **kwargs,
                     ),
                     Field(
                         "k3",
                         float,
                         20,
                         10,
-                        kwargs.get("k3")
+                        **kwargs,
                     ),
                     Field(
                         "k4",
                         float,
                         30,
                         10,
-                        kwargs.get("k4")
+                        **kwargs,
                     ),
                     Field(
                         "ec",
                         float,
                         40,
                         10,
-                        kwargs.get("ec")
+                        **kwargs,
                     ),
                     Field(
                         "maxsr",
                         float,
                         50,
                         10,
-                        kwargs.get("maxsr")
+                        **kwargs,
                     ),
                     Field(
                         "minsr",
                         float,
                         60,
                         10,
-                        kwargs.get("minsr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -346,35 +345,35 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vrel")
+                        **kwargs,
                     ),
                     Field(
                         "vleak",
                         float,
                         10,
                         10,
-                        kwargs.get("vleak")
+                        **kwargs,
                     ),
                     Field(
                         "vxfer",
                         float,
                         20,
                         10,
-                        kwargs.get("vxfer")
+                        **kwargs,
                     ),
                     Field(
                         "vmaxup",
                         float,
                         30,
                         10,
-                        kwargs.get("vmaxup")
+                        **kwargs,
                     ),
                     Field(
                         "kup",
                         float,
                         40,
                         10,
-                        kwargs.get("kup")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -385,42 +384,42 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("bufc")
+                        **kwargs,
                     ),
                     Field(
                         "kbufc",
                         float,
                         10,
                         10,
-                        kwargs.get("kbufc")
+                        **kwargs,
                     ),
                     Field(
                         "bufsr",
                         float,
                         20,
                         10,
-                        kwargs.get("bufsr")
+                        **kwargs,
                     ),
                     Field(
                         "kbufsf",
                         float,
                         30,
                         10,
-                        kwargs.get("kbufsf")
+                        **kwargs,
                     ),
                     Field(
                         "bufss",
                         float,
                         40,
                         10,
-                        kwargs.get("bufss")
+                        **kwargs,
                     ),
                     Field(
                         "kbufss",
                         float,
                         50,
                         10,
-                        kwargs.get("kbufss")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -431,49 +430,49 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v")
+                        **kwargs,
                     ),
                     Field(
                         "ki",
                         float,
                         10,
                         10,
-                        kwargs.get("ki")
+                        **kwargs,
                     ),
                     Field(
                         "nai",
                         float,
                         20,
                         10,
-                        kwargs.get("nai")
+                        **kwargs,
                     ),
                     Field(
                         "cai",
                         float,
                         30,
                         10,
-                        kwargs.get("cai")
+                        **kwargs,
                     ),
                     Field(
                         "cass",
                         float,
                         40,
                         10,
-                        kwargs.get("cass")
+                        **kwargs,
                     ),
                     Field(
                         "casr",
                         float,
                         50,
                         10,
-                        kwargs.get("casr")
+                        **kwargs,
                     ),
                     Field(
                         "rpri",
                         float,
                         60,
                         10,
-                        kwargs.get("rpri")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -484,56 +483,56 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xr1")
+                        **kwargs,
                     ),
                     Field(
                         "xr2",
                         float,
                         10,
                         10,
-                        kwargs.get("xr2")
+                        **kwargs,
                     ),
                     Field(
                         "xs",
                         float,
                         20,
                         10,
-                        kwargs.get("xs")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         30,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "h",
                         float,
                         40,
                         10,
-                        kwargs.get("h")
+                        **kwargs,
                     ),
                     Field(
                         "j",
                         float,
                         50,
                         10,
-                        kwargs.get("j")
+                        **kwargs,
                     ),
                     Field(
                         "d",
                         float,
                         60,
                         10,
-                        kwargs.get("d")
+                        **kwargs,
                     ),
                     Field(
                         "f",
                         float,
                         70,
                         10,
-                        kwargs.get("f")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -544,28 +543,28 @@ class EmEpCellmodelTentusscher(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("f2")
+                        **kwargs,
                     ),
                     Field(
                         "fcass",
                         float,
                         10,
                         10,
-                        kwargs.get("fcass")
+                        **kwargs,
                     ),
                     Field(
                         "s",
                         float,
                         20,
                         10,
-                        kwargs.get("s")
+                        **kwargs,
                     ),
                     Field(
                         "r",
                         float,
                         30,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseFsiSensor(KeywordBase):
@@ -41,14 +40,15 @@ class DatabaseFsiSensor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dtout")
+                        **kwargs,
                     ),
                     Field(
                         "binary",
                         int,
                         10,
                         10,
-                        kwargs.get("binary", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,49 +59,49 @@ class DatabaseFsiSensor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("dbfsi_id")
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         10,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "segmid",
                         int,
                         20,
                         10,
-                        kwargs.get("segmid")
+                        **kwargs,
                     ),
                     Field(
                         "offset",
                         float,
                         30,
                         10,
-                        kwargs.get("offset")
+                        **kwargs,
                     ),
                     Field(
                         "nd1",
                         int,
                         40,
                         10,
-                        kwargs.get("nd1")
+                        **kwargs,
                     ),
                     Field(
                         "nd2",
                         int,
                         50,
                         10,
-                        kwargs.get("nd2")
+                        **kwargs,
                     ),
                     Field(
                         "nd3",
                         int,
                         60,
                         10,
-                        kwargs.get("nd3")
+                        **kwargs,
                     ),
                 ],
             ),

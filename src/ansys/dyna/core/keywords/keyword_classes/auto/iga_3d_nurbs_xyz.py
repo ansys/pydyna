@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Iga3DNurbsXyz(KeywordBase):
@@ -41,49 +40,49 @@ class Iga3DNurbsXyz(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "nr",
                         int,
                         10,
                         10,
-                        kwargs.get("nr")
+                        **kwargs,
                     ),
                     Field(
                         "ns",
                         int,
                         20,
                         10,
-                        kwargs.get("ns")
+                        **kwargs,
                     ),
                     Field(
                         "nt",
                         int,
                         30,
                         10,
-                        kwargs.get("nt")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         int,
                         40,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "ps",
                         int,
                         50,
                         10,
-                        kwargs.get("ps")
+                        **kwargs,
                     ),
                     Field(
                         "pt",
                         int,
                         60,
                         10,
-                        kwargs.get("pt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,21 +93,24 @@ class Iga3DNurbsXyz(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unir", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unis",
                         int,
                         10,
                         10,
-                        kwargs.get("unis", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unit",
                         int,
                         20,
                         10,
-                        kwargs.get("unit", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,28 +121,28 @@ class Iga3DNurbsXyz(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("r1")
+                        **kwargs,
                     ),
                     Field(
                         "r2",
                         float,
                         20,
                         20,
-                        kwargs.get("r2")
+                        **kwargs,
                     ),
                     Field(
                         "r3",
                         float,
                         40,
                         20,
-                        kwargs.get("r3")
+                        **kwargs,
                     ),
                     Field(
                         "r4",
                         float,
                         60,
                         20,
-                        kwargs.get("r4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -151,14 +153,14 @@ class Iga3DNurbsXyz(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("rfirst")
+                        **kwargs,
                     ),
                     Field(
                         "rlast",
                         float,
                         20,
                         20,
-                        kwargs.get("rlast")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -169,28 +171,28 @@ class Iga3DNurbsXyz(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("s1")
+                        **kwargs,
                     ),
                     Field(
                         "s2",
                         float,
                         20,
                         20,
-                        kwargs.get("s2")
+                        **kwargs,
                     ),
                     Field(
                         "s3",
                         float,
                         40,
                         20,
-                        kwargs.get("s3")
+                        **kwargs,
                     ),
                     Field(
                         "s4",
                         float,
                         60,
                         20,
-                        kwargs.get("s4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -201,14 +203,14 @@ class Iga3DNurbsXyz(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("sfirst")
+                        **kwargs,
                     ),
                     Field(
                         "slast",
                         float,
                         20,
                         20,
-                        kwargs.get("slast")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -219,28 +221,28 @@ class Iga3DNurbsXyz(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("t1")
+                        **kwargs,
                     ),
                     Field(
                         "t2",
                         float,
                         20,
                         20,
-                        kwargs.get("t2")
+                        **kwargs,
                     ),
                     Field(
                         "t3",
                         float,
                         40,
                         20,
-                        kwargs.get("t3")
+                        **kwargs,
                     ),
                     Field(
                         "t4",
                         float,
                         60,
                         20,
-                        kwargs.get("t4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -251,14 +253,14 @@ class Iga3DNurbsXyz(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("tfirst")
+                        **kwargs,
                     ),
                     Field(
                         "tlast",
                         float,
                         20,
                         20,
-                        kwargs.get("tlast")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -269,28 +271,29 @@ class Iga3DNurbsXyz(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("x")
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         20,
                         20,
-                        kwargs.get("y")
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         40,
                         20,
-                        kwargs.get("z")
+                        **kwargs,
                     ),
                     Field(
                         "wgt",
                         float,
                         60,
                         20,
-                        kwargs.get("wgt", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceBlanksizeInitialTrim(KeywordBase):
@@ -41,7 +40,7 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename5")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,7 +51,7 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename6")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -63,7 +62,7 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename7")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -74,7 +73,7 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename8")
+                        **kwargs,
                     ),
                 ],
             ),

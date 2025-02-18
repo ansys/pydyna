@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,29 @@ class DefineCurveFeedback(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         10,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "boxid",
                         int,
                         20,
                         10,
-                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fldid",
                         int,
                         30,
                         10,
-                        kwargs.get("fldid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,35 +78,38 @@ class DefineCurveFeedback(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fsl")
+                        **kwargs,
                     ),
                     Field(
                         "tsl",
                         float,
                         10,
                         10,
-                        kwargs.get("tsl")
+                        **kwargs,
                     ),
                     Field(
                         "sff",
                         float,
                         20,
                         10,
-                        kwargs.get("sff", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sft",
                         float,
                         30,
                         10,
-                        kwargs.get("sft", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "bias",
                         float,
                         40,
                         10,
-                        kwargs.get("bias", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

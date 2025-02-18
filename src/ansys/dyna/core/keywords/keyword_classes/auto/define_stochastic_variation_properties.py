@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class DefineStochasticVariationProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id_sv")
+                        **kwargs,
                     ),
                     Field(
                         "mtype",
                         int,
                         10,
                         10,
-                        kwargs.get("mtype")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         20,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "pid_typ",
                         int,
                         30,
                         10,
-                        kwargs.get("pid_typ", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "irng",
                         int,
                         40,
                         10,
-                        kwargs.get("irng", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "numv",
                         int,
                         50,
                         10,
-                        kwargs.get("numv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "num_beg",
                         int,
                         60,
                         10,
-                        kwargs.get("num_beg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,35 +109,36 @@ class DefineStochasticVariationProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("vartyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "corlgr",
                         int,
                         10,
                         10,
-                        kwargs.get("corlgr")
+                        **kwargs,
                     ),
                     Field(
                         "r1",
                         float,
                         20,
                         10,
-                        kwargs.get("r1")
+                        **kwargs,
                     ),
                     Field(
                         "r2",
                         float,
                         30,
                         10,
-                        kwargs.get("r2")
+                        **kwargs,
                     ),
                     Field(
                         "r3",
                         float,
                         40,
                         10,
-                        kwargs.get("r3")
+                        **kwargs,
                     ),
                 ],
             ),

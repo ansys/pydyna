@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseProfile(KeywordBase):
@@ -41,49 +40,53 @@ class DatabaseProfile(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("dt")
+                        **kwargs,
                     ),
                     Field(
                         "sid",
                         int,
                         10,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         20,
                         10,
-                        kwargs.get("stype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "data",
                         int,
                         30,
                         10,
-                        kwargs.get("data", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "dir",
                         int,
                         40,
                         10,
-                        kwargs.get("dir", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "updloc",
                         int,
                         50,
                         10,
-                        kwargs.get("updloc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mmg",
                         int,
                         60,
                         10,
-                        kwargs.get("mmg")
+                        **kwargs,
                     ),
                 ],
             ),

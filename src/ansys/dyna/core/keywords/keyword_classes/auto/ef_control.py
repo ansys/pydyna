@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EfControl(KeywordBase):
@@ -41,49 +40,49 @@ class EfControl(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nphton")
+                        **kwargs,
                     ),
                     Field(
                         "nrefs",
                         int,
                         10,
                         10,
-                        kwargs.get("nrefs")
+                        **kwargs,
                     ),
                     Field(
                         "nwarns",
                         int,
                         20,
                         10,
-                        kwargs.get("nwarns")
+                        **kwargs,
                     ),
                     Field(
                         "nlost",
                         int,
                         30,
                         10,
-                        kwargs.get("nlost")
+                        **kwargs,
                     ),
                     Field(
                         "nloops",
                         int,
                         40,
                         10,
-                        kwargs.get("nloops")
+                        **kwargs,
                     ),
                     Field(
                         "errodef",
                         float,
                         50,
                         10,
-                        kwargs.get("errodef")
+                        **kwargs,
                     ),
                     Field(
                         "inseed",
                         int,
                         60,
                         10,
-                        kwargs.get("inseed")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,28 +93,28 @@ class EfControl(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nphton")
+                        **kwargs,
                     ),
                     Field(
                         "nrefs",
                         int,
                         10,
                         10,
-                        kwargs.get("nrefs")
+                        **kwargs,
                     ),
                     Field(
                         "nwarns",
                         int,
                         20,
                         10,
-                        kwargs.get("nwarns")
+                        **kwargs,
                     ),
                     Field(
                         "nlost",
                         int,
                         30,
                         10,
-                        kwargs.get("nlost")
+                        **kwargs,
                     ),
                 ],
             ),

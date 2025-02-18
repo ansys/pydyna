@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialImpulseMine(KeywordBase):
@@ -41,56 +40,62 @@ class InitialImpulseMine(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "mtnt",
                         float,
                         10,
                         10,
-                        kwargs.get("mtnt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rhos",
                         float,
                         20,
                         10,
-                        kwargs.get("rhos", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "depth",
                         float,
                         30,
                         10,
-                        kwargs.get("depth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "area",
                         float,
                         40,
                         10,
-                        kwargs.get("area", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "scale",
                         float,
                         50,
                         10,
-                        kwargs.get("scale", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unit",
                         int,
                         70,
                         10,
-                        kwargs.get("unit", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +106,63 @@ class InitialImpulseMine(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         10,
                         10,
-                        kwargs.get("y", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         20,
                         10,
-                        kwargs.get("z", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nidmc",
                         int,
                         30,
                         10,
-                        kwargs.get("nidmc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "gvid",
                         int,
                         40,
                         10,
-                        kwargs.get("gvid")
+                        **kwargs,
                     ),
                     Field(
                         "tbirth",
                         float,
                         50,
                         10,
-                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "psid",
                         int,
                         60,
                         10,
-                        kwargs.get("psid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "search",
                         float,
                         70,
                         10,
-                        kwargs.get("search", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

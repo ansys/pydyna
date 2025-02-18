@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseEosInflator2(KeywordBase):
@@ -41,7 +40,7 @@ class DualceseEosInflator2(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,35 +51,40 @@ class DualceseEosInflator2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cp10", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp11",
                         float,
                         10,
                         10,
-                        kwargs.get("cp11", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp12",
                         float,
                         20,
                         10,
-                        kwargs.get("cp12", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp13",
                         float,
                         30,
                         10,
-                        kwargs.get("cp13", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp14",
                         float,
                         40,
                         10,
-                        kwargs.get("cp14", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,35 +95,40 @@ class DualceseEosInflator2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cp20", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp21",
                         float,
                         10,
                         10,
-                        kwargs.get("cp21", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp22",
                         float,
                         20,
                         10,
-                        kwargs.get("cp22", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp23",
                         float,
                         30,
                         10,
-                        kwargs.get("cp23", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp24",
                         float,
                         40,
                         10,
-                        kwargs.get("cp24", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -130,35 +139,40 @@ class DualceseEosInflator2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cv10", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv11",
                         float,
                         10,
                         10,
-                        kwargs.get("cv11", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv12",
                         float,
                         20,
                         10,
-                        kwargs.get("cv12", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv13",
                         float,
                         30,
                         10,
-                        kwargs.get("cv13", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv14",
                         float,
                         40,
                         10,
-                        kwargs.get("cv14", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -169,35 +183,40 @@ class DualceseEosInflator2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cv20", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv21",
                         float,
                         10,
                         10,
-                        kwargs.get("cv21", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv22",
                         float,
                         20,
                         10,
-                        kwargs.get("cv22", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv23",
                         float,
                         30,
                         10,
-                        kwargs.get("cv23", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv24",
                         float,
                         40,
                         10,
-                        kwargs.get("cv24", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

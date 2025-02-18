@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseCrossSectionPlane(KeywordBase):
@@ -41,14 +40,14 @@ class DatabaseCrossSectionPlane(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("csid")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,64 @@ class DatabaseCrossSectionPlane(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "xct",
                         float,
                         10,
                         10,
-                        kwargs.get("xct", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yct",
                         float,
                         20,
                         10,
-                        kwargs.get("yct", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zct",
                         float,
                         30,
                         10,
-                        kwargs.get("zct", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xch",
                         float,
                         40,
                         10,
-                        kwargs.get("xch", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ych",
                         float,
                         50,
                         10,
-                        kwargs.get("ych", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zch",
                         float,
                         60,
                         10,
-                        kwargs.get("zch", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "radius",
                         float,
                         70,
                         10,
-                        kwargs.get("radius", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,49 +126,53 @@ class DatabaseCrossSectionPlane(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xhev", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yhev",
                         float,
                         10,
                         10,
-                        kwargs.get("yhev", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zhev",
                         float,
                         20,
                         10,
-                        kwargs.get("zhev", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lenl",
                         float,
                         30,
                         10,
-                        kwargs.get("lenl")
+                        **kwargs,
                     ),
                     Field(
                         "lenm",
                         float,
                         40,
                         10,
-                        kwargs.get("lenm")
+                        **kwargs,
                     ),
                     Field(
                         "id",
                         int,
                         50,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "itype",
                         int,
                         60,
                         10,
-                        kwargs.get("itype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

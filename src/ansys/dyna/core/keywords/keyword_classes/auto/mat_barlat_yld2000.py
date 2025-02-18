@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,59 @@ class MatBarlatYld2000(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "fit",
                         float,
                         40,
                         10,
-                        kwargs.get("fit", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         50,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "iter",
                         float,
                         60,
                         10,
-                        kwargs.get("iter", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "iscale",
                         float,
                         70,
                         10,
-                        kwargs.get("iscale", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,49 +108,50 @@ class MatBarlatYld2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "e0",
                         float,
                         10,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         20,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         30,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         40,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "hard",
                         float,
                         50,
                         10,
-                        kwargs.get("hard", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         60,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -159,56 +162,56 @@ class MatBarlatYld2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("crc1")
+                        **kwargs,
                     ),
                     Field(
                         "cra1",
                         float,
                         10,
                         10,
-                        kwargs.get("cra1")
+                        **kwargs,
                     ),
                     Field(
                         "crc2",
                         float,
                         20,
                         10,
-                        kwargs.get("crc2")
+                        **kwargs,
                     ),
                     Field(
                         "cra2",
                         float,
                         30,
                         10,
-                        kwargs.get("cra2")
+                        **kwargs,
                     ),
                     Field(
                         "crc3",
                         float,
                         40,
                         10,
-                        kwargs.get("crc3")
+                        **kwargs,
                     ),
                     Field(
                         "cra3",
                         float,
                         50,
                         10,
-                        kwargs.get("cra3")
+                        **kwargs,
                     ),
                     Field(
                         "crc4",
                         float,
                         60,
                         10,
-                        kwargs.get("crc4")
+                        **kwargs,
                     ),
                     Field(
                         "cra4",
                         float,
                         70,
                         10,
-                        kwargs.get("cra4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -219,56 +222,56 @@ class MatBarlatYld2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha1")
+                        **kwargs,
                     ),
                     Field(
                         "alpha2",
                         float,
                         10,
                         10,
-                        kwargs.get("alpha2")
+                        **kwargs,
                     ),
                     Field(
                         "alpha3",
                         float,
                         20,
                         10,
-                        kwargs.get("alpha3")
+                        **kwargs,
                     ),
                     Field(
                         "alpha4",
                         float,
                         30,
                         10,
-                        kwargs.get("alpha4")
+                        **kwargs,
                     ),
                     Field(
                         "alpha5",
                         float,
                         40,
                         10,
-                        kwargs.get("alpha5")
+                        **kwargs,
                     ),
                     Field(
                         "alpha6",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha6")
+                        **kwargs,
                     ),
                     Field(
                         "alpha7",
                         float,
                         60,
                         10,
-                        kwargs.get("alpha7")
+                        **kwargs,
                     ),
                     Field(
                         "alpha8",
                         float,
                         70,
                         10,
-                        kwargs.get("alpha8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -279,42 +282,42 @@ class MatBarlatYld2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sig00")
+                        **kwargs,
                     ),
                     Field(
                         "sig45",
                         float,
                         10,
                         10,
-                        kwargs.get("sig45")
+                        **kwargs,
                     ),
                     Field(
                         "sig90",
                         float,
                         20,
                         10,
-                        kwargs.get("sig90")
+                        **kwargs,
                     ),
                     Field(
                         "r00",
                         float,
                         30,
                         10,
-                        kwargs.get("r00")
+                        **kwargs,
                     ),
                     Field(
                         "r45",
                         float,
                         40,
                         10,
-                        kwargs.get("r45")
+                        **kwargs,
                     ),
                     Field(
                         "r90",
                         float,
                         50,
                         10,
-                        kwargs.get("r90")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -325,42 +328,42 @@ class MatBarlatYld2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sigxx")
+                        **kwargs,
                     ),
                     Field(
                         "sigyy",
                         float,
                         10,
                         10,
-                        kwargs.get("sigyy")
+                        **kwargs,
                     ),
                     Field(
                         "sigxy",
                         float,
                         20,
                         10,
-                        kwargs.get("sigxy")
+                        **kwargs,
                     ),
                     Field(
                         "dxx",
                         float,
                         30,
                         10,
-                        kwargs.get("dxx")
+                        **kwargs,
                     ),
                     Field(
                         "dyy",
                         float,
                         40,
                         10,
-                        kwargs.get("dyy")
+                        **kwargs,
                     ),
                     Field(
                         "dxy",
                         float,
                         50,
                         10,
-                        kwargs.get("dxy")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -371,56 +374,57 @@ class MatBarlatYld2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "offang",
                         float,
                         10,
                         10,
-                        kwargs.get("offang")
+                        **kwargs,
                     ),
                     Field(
                         "p4",
                         float,
                         20,
                         10,
-                        kwargs.get("p4")
+                        **kwargs,
                     ),
                     Field(
                         "htflag",
                         int,
                         30,
                         10,
-                        kwargs.get("htflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "hta",
                         int,
                         40,
                         10,
-                        kwargs.get("hta")
+                        **kwargs,
                     ),
                     Field(
                         "htb",
                         int,
                         50,
                         10,
-                        kwargs.get("htb")
+                        **kwargs,
                     ),
                     Field(
                         "htc",
                         int,
                         60,
                         10,
-                        kwargs.get("htc")
+                        **kwargs,
                     ),
                     Field(
                         "htd",
                         int,
                         70,
                         10,
-                        kwargs.get("htd")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -431,42 +435,42 @@ class MatBarlatYld2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -477,49 +481,50 @@ class MatBarlatYld2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "usrfail",
                         int,
                         60,
                         10,
-                        kwargs.get("usrfail", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -530,28 +535,28 @@ class MatBarlatYld2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cp")
+                        **kwargs,
                     ),
                     Field(
                         "t0",
                         float,
                         10,
                         10,
-                        kwargs.get("t0")
+                        **kwargs,
                     ),
                     Field(
                         "tref",
                         float,
                         20,
                         10,
-                        kwargs.get("tref")
+                        **kwargs,
                     ),
                     Field(
                         "ta0",
                         float,
                         30,
                         10,
-                        kwargs.get("ta0")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -562,56 +567,56 @@ class MatBarlatYld2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         10,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         20,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "d",
                         float,
                         30,
                         10,
-                        kwargs.get("d")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         40,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "q",
                         float,
                         50,
                         10,
-                        kwargs.get("q")
+                        **kwargs,
                     ),
                     Field(
                         "e0mart",
                         float,
                         60,
                         10,
-                        kwargs.get("e0mart")
+                        **kwargs,
                     ),
                     Field(
                         "vm0",
                         float,
                         70,
                         10,
-                        kwargs.get("vm0")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -622,56 +627,56 @@ class MatBarlatYld2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ahs")
+                        **kwargs,
                     ),
                     Field(
                         "bhs",
                         float,
                         10,
                         10,
-                        kwargs.get("bhs")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         20,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         30,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "eps0",
                         float,
                         40,
                         10,
-                        kwargs.get("eps0")
+                        **kwargs,
                     ),
                     Field(
                         "hmart",
                         float,
                         50,
                         10,
-                        kwargs.get("hmart")
+                        **kwargs,
                     ),
                     Field(
                         "k1",
                         float,
                         60,
                         10,
-                        kwargs.get("k1")
+                        **kwargs,
                     ),
                     Field(
                         "k2",
                         float,
                         70,
                         10,
-                        kwargs.get("k2")
+                        **kwargs,
                     ),
                 ],
             ),

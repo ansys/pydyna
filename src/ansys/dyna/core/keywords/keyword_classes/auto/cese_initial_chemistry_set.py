@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseInitialChemistrySet(KeywordBase):
@@ -41,21 +40,21 @@ class CeseInitialChemistrySet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("setid")
+                        **kwargs,
                     ),
                     Field(
                         "chemid",
                         int,
                         10,
                         10,
-                        kwargs.get("chemid")
+                        **kwargs,
                     ),
                     Field(
                         "compid",
                         int,
                         20,
                         10,
-                        kwargs.get("compid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,49 +65,49 @@ class CeseInitialChemistrySet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("uic")
+                        **kwargs,
                     ),
                     Field(
                         "vic",
                         float,
                         10,
                         10,
-                        kwargs.get("vic")
+                        **kwargs,
                     ),
                     Field(
                         "wic",
                         float,
                         20,
                         10,
-                        kwargs.get("wic")
+                        **kwargs,
                     ),
                     Field(
                         "rhoic",
                         float,
                         30,
                         10,
-                        kwargs.get("rhoic")
+                        **kwargs,
                     ),
                     Field(
                         "pic",
                         float,
                         40,
                         10,
-                        kwargs.get("pic")
+                        **kwargs,
                     ),
                     Field(
                         "tic",
                         float,
                         50,
                         10,
-                        kwargs.get("tic")
+                        **kwargs,
                     ),
                     Field(
                         "hic",
                         float,
                         60,
                         10,
-                        kwargs.get("hic")
+                        **kwargs,
                     ),
                 ],
             ),

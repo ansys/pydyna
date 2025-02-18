@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseHistoryNodeId(KeywordBase):
@@ -41,14 +40,14 @@ class DatabaseHistoryNodeId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id1")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         str,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),

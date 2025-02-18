@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmSolverBem(KeywordBase):
@@ -41,42 +40,48 @@ class EmSolverBem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("reltol", 1.e-6 if use_lspp_defaults() else None)
+                        1.e-6,
+                        **kwargs,
                     ),
                     Field(
                         "maxite",
                         int,
                         10,
                         10,
-                        kwargs.get("maxite", 1000 if use_lspp_defaults() else None)
+                        1000,
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         20,
                         10,
-                        kwargs.get("stype", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "precon",
                         int,
                         30,
                         10,
-                        kwargs.get("precon", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "uselast",
                         int,
                         40,
                         10,
-                        kwargs.get("uselast", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ncyclbem",
                         int,
                         50,
                         10,
-                        kwargs.get("ncyclbem", 5000 if use_lspp_defaults() else None)
+                        5000,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseTracerGeneral(KeywordBase):
@@ -41,42 +40,48 @@ class DatabaseTracerGeneral(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("node", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "elem",
                         int,
                         10,
                         10,
-                        kwargs.get("elem", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "typm",
                         int,
                         20,
                         10,
-                        kwargs.get("typm", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "move",
                         int,
                         30,
                         10,
-                        kwargs.get("move", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "set",
                         int,
                         40,
                         10,
-                        kwargs.get("set", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "typs",
                         int,
                         50,
                         10,
-                        kwargs.get("typs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,28 +92,32 @@ class DatabaseTracerGeneral(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tbeg",
                         float,
                         10,
                         10,
-                        kwargs.get("tbeg", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tend",
                         float,
                         20,
                         10,
-                        kwargs.get("tend", 1e20 if use_lspp_defaults() else None)
+                        1e20,
+                        **kwargs,
                     ),
                     Field(
                         "fid",
                         int,
                         30,
                         10,
-                        kwargs.get("fid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,14 +128,16 @@ class DatabaseTracerGeneral(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("varloc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "varepl",
                         int,
                         10,
                         10,
-                        kwargs.get("varepl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

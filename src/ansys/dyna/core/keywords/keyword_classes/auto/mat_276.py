@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class Mat276(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "bulk",
                         float,
                         20,
                         10,
-                        kwargs.get("bulk")
+                        **kwargs,
                     ),
                     Field(
                         "pcf",
                         float,
                         30,
                         10,
-                        kwargs.get("pcf")
+                        **kwargs,
                     ),
                     Field(
                         "ef",
                         float,
                         40,
                         10,
-                        kwargs.get("ef")
+                        **kwargs,
                     ),
                     Field(
                         "tref",
                         float,
                         50,
                         10,
-                        kwargs.get("tref")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         60,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         70,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class Mat276(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "nt",
                         int,
                         10,
                         10,
-                        kwargs.get("nt")
+                        **kwargs,
                     ),
                     Field(
                         "bstart",
                         float,
                         20,
                         10,
-                        kwargs.get("bstart")
+                        **kwargs,
                     ),
                     Field(
                         "tramp",
                         float,
                         30,
                         10,
-                        kwargs.get("tramp")
+                        **kwargs,
                     ),
                     Field(
                         "lcidk",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidk")
+                        **kwargs,
                     ),
                     Field(
                         "ntk",
                         int,
                         50,
                         10,
-                        kwargs.get("ntk")
+                        **kwargs,
                     ),
                     Field(
                         "bstartk",
                         float,
                         60,
                         10,
-                        kwargs.get("bstartk")
+                        **kwargs,
                     ),
                     Field(
                         "trampk",
                         float,
                         70,
                         10,
-                        kwargs.get("trampk")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,28 +165,28 @@ class Mat276(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gi")
+                        **kwargs,
                     ),
                     Field(
                         "betai",
                         float,
                         10,
                         10,
-                        kwargs.get("betai")
+                        **kwargs,
                     ),
                     Field(
                         "ki",
                         float,
                         20,
                         10,
-                        kwargs.get("ki")
+                        **kwargs,
                     ),
                     Field(
                         "betaki",
                         float,
                         30,
                         10,
-                        kwargs.get("betaki")
+                        **kwargs,
                     ),
                 ],
             ),

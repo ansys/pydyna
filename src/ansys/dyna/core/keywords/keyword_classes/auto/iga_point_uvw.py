@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IgaPointUvw(KeywordBase):
@@ -41,35 +40,38 @@ class IgaPointUvw(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         10,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "u",
                         float,
                         20,
                         20,
-                        kwargs.get("u", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "v",
                         float,
                         40,
                         20,
-                        kwargs.get("v", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "w",
                         float,
                         60,
                         20,
-                        kwargs.get("w", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

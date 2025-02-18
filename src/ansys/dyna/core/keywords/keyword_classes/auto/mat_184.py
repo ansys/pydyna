@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,57 @@ class Mat184(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "roflg",
                         int,
                         20,
                         10,
-                        kwargs.get("roflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "intfail",
                         float,
                         30,
                         10,
-                        kwargs.get("intfail")
+                        **kwargs,
                     ),
                     Field(
                         "et",
                         float,
                         40,
                         10,
-                        kwargs.get("et")
+                        **kwargs,
                     ),
                     Field(
                         "en",
                         float,
                         50,
                         10,
-                        kwargs.get("en")
+                        **kwargs,
                     ),
                     Field(
                         "fn_fail",
                         float,
                         60,
                         10,
-                        kwargs.get("fn_fail")
+                        **kwargs,
                     ),
                     Field(
                         "ft_fail",
                         float,
                         70,
                         10,
-                        kwargs.get("ft_fail")
+                        **kwargs,
                     ),
                 ],
             ),

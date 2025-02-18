@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,36 @@ class MatAddPoreAir(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "pa_rho",
                         float,
                         10,
                         10,
-                        kwargs.get("pa_rho")
+                        **kwargs,
                     ),
                     Field(
                         "pa_pre",
                         float,
                         20,
                         10,
-                        kwargs.get("pa_pre")
+                        **kwargs,
                     ),
                     Field(
                         "pore",
                         float,
                         30,
                         10,
-                        kwargs.get("pore", 1. if use_lspp_defaults() else None)
+                        1.,
+                        **kwargs,
                     ),
                     Field(
                         "dvimin",
                         float,
                         40,
                         10,
-                        kwargs.get("dvimin")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,56 +85,60 @@ class MatAddPoreAir(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("perm1", 0. if use_lspp_defaults() else None)
+                        0.,
+                        **kwargs,
                     ),
                     Field(
                         "perm2",
                         float,
                         10,
                         10,
-                        kwargs.get("perm2")
+                        **kwargs,
                     ),
                     Field(
                         "perm3",
                         float,
                         20,
                         10,
-                        kwargs.get("perm3")
+                        **kwargs,
                     ),
                     Field(
                         "cdarcy",
                         float,
                         30,
                         10,
-                        kwargs.get("cdarcy", 1. if use_lspp_defaults() else None)
+                        1.,
+                        **kwargs,
                     ),
                     Field(
                         "cdf",
                         float,
                         40,
                         10,
-                        kwargs.get("cdf", 0. if use_lspp_defaults() else None)
+                        0.,
+                        **kwargs,
                     ),
                     Field(
                         "lcpgd1",
                         int,
                         50,
                         10,
-                        kwargs.get("lcpgd1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcpgd2",
                         int,
                         60,
                         10,
-                        kwargs.get("lcpgd2")
+                        **kwargs,
                     ),
                     Field(
                         "lcpgd3",
                         int,
                         70,
                         10,
-                        kwargs.get("lcpgd3")
+                        **kwargs,
                     ),
                 ],
             ),

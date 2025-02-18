@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryControlPyrptechnic(KeywordBase):
@@ -41,56 +40,56 @@ class ChemistryControlPyrptechnic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("comp1id")
+                        **kwargs,
                     ),
                     Field(
                         "vol1",
                         float,
                         10,
                         10,
-                        kwargs.get("vol1")
+                        **kwargs,
                     ),
                     Field(
                         "area1",
                         float,
                         20,
                         10,
-                        kwargs.get("area1")
+                        **kwargs,
                     ),
                     Field(
                         "cd1",
                         float,
                         30,
                         10,
-                        kwargs.get("cd1")
+                        **kwargs,
                     ),
                     Field(
                         "p1",
                         float,
                         40,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "t1",
                         float,
                         50,
                         10,
-                        kwargs.get("t1")
+                        **kwargs,
                     ),
                     Field(
                         "delp1",
                         float,
                         60,
                         10,
-                        kwargs.get("delp1")
+                        **kwargs,
                     ),
                     Field(
                         "tflame",
                         float,
                         70,
                         10,
-                        kwargs.get("tflame")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +100,56 @@ class ChemistryControlPyrptechnic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("comp2id")
+                        **kwargs,
                     ),
                     Field(
                         "vol2",
                         float,
                         10,
                         10,
-                        kwargs.get("vol2")
+                        **kwargs,
                     ),
                     Field(
                         "area2",
                         float,
                         20,
                         10,
-                        kwargs.get("area2")
+                        **kwargs,
                     ),
                     Field(
                         "cd2",
                         float,
                         30,
                         10,
-                        kwargs.get("cd2")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         40,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "t2",
                         float,
                         50,
                         10,
-                        kwargs.get("t2")
+                        **kwargs,
                     ),
                     Field(
                         "delp2",
                         float,
                         60,
                         10,
-                        kwargs.get("delp2")
+                        **kwargs,
                     ),
                     Field(
                         "truntime",
                         float,
                         70,
                         10,
-                        kwargs.get("truntime")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,35 +160,35 @@ class ChemistryControlPyrptechnic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("comp3id")
+                        **kwargs,
                     ),
                     Field(
                         "vol3",
                         float,
                         10,
                         10,
-                        kwargs.get("vol3")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         20,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                     Field(
                         "t3",
                         float,
                         30,
                         10,
-                        kwargs.get("t3")
+                        **kwargs,
                     ),
                     Field(
                         "ptime",
                         float,
                         40,
                         10,
-                        kwargs.get("ptime")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -200,7 +199,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("file")
+                        **kwargs,
                     ),
                 ],
             ),

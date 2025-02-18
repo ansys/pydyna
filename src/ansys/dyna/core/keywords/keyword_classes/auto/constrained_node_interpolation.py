@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedNodeInterpolation(KeywordBase):
@@ -41,14 +40,14 @@ class ConstrainedNodeInterpolation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "numcn",
                         int,
                         10,
                         10,
-                        kwargs.get("numcn")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,56 @@ class ConstrainedNodeInterpolation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cn1")
+                        **kwargs,
                     ),
                     Field(
                         "w1",
                         float,
                         10,
                         10,
-                        kwargs.get("w1")
+                        **kwargs,
                     ),
                     Field(
                         "cn2",
                         int,
                         20,
                         10,
-                        kwargs.get("cn2")
+                        **kwargs,
                     ),
                     Field(
                         "w2",
                         float,
                         30,
                         10,
-                        kwargs.get("w2")
+                        **kwargs,
                     ),
                     Field(
                         "cn3",
                         int,
                         40,
                         10,
-                        kwargs.get("cn3")
+                        **kwargs,
                     ),
                     Field(
                         "w3",
                         float,
                         50,
                         10,
-                        kwargs.get("w3")
+                        **kwargs,
                     ),
                     Field(
                         "cn4",
                         int,
                         60,
                         10,
-                        kwargs.get("cn4")
+                        **kwargs,
                     ),
                     Field(
                         "w4",
                         float,
                         70,
                         10,
-                        kwargs.get("w4")
+                        **kwargs,
                     ),
                 ],
             ),

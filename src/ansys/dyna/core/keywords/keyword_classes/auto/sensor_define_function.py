@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class SensorDefineFunction(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sensid")
+                        **kwargs,
                     ),
                     Field(
                         "func",
                         int,
                         10,
                         10,
-                        kwargs.get("func")
+                        **kwargs,
                     ),
                     Field(
                         "sens1",
                         int,
                         20,
                         10,
-                        kwargs.get("sens1")
+                        **kwargs,
                     ),
                     Field(
                         "sens2",
                         int,
                         30,
                         10,
-                        kwargs.get("sens2")
+                        **kwargs,
                     ),
                     Field(
                         "sens3",
                         int,
                         40,
                         10,
-                        kwargs.get("sens3")
+                        **kwargs,
                     ),
                     Field(
                         "sens4",
                         int,
                         50,
                         10,
-                        kwargs.get("sens4")
+                        **kwargs,
                     ),
                     Field(
                         "sens5",
                         int,
                         60,
                         10,
-                        kwargs.get("sens5")
+                        **kwargs,
                     ),
                     Field(
                         "sens6",
                         int,
                         70,
                         10,
-                        kwargs.get("sens6")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class SensorDefineFunction(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sensi")
+                        **kwargs,
                     ),
                     Field(
                         "sensi+1",
                         int,
                         10,
                         10,
-                        kwargs.get("sensi+1")
+                        **kwargs,
                     ),
                     Field(
                         "sensi+2",
                         int,
                         20,
                         10,
-                        kwargs.get("sensi+2")
+                        **kwargs,
                     ),
                     Field(
                         "sensi+3",
                         int,
                         30,
                         10,
-                        kwargs.get("sensi+3")
+                        **kwargs,
                     ),
                     Field(
                         "sensi+4",
                         int,
                         40,
                         10,
-                        kwargs.get("sensi+4")
+                        **kwargs,
                     ),
                     Field(
                         "sensi+5",
                         int,
                         50,
                         10,
-                        kwargs.get("sensi+5")
+                        **kwargs,
                     ),
                     Field(
                         "sensi+6",
                         int,
                         60,
                         10,
-                        kwargs.get("sensi+6")
+                        **kwargs,
                     ),
                     Field(
                         "sensi+7",
                         int,
                         70,
                         10,
-                        kwargs.get("sensi+7")
+                        **kwargs,
                     ),
                 ],
             ),

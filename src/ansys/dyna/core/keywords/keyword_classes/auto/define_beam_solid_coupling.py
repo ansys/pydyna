@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,46 @@ class DefineBeamSolidCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lstrid")
+                        **kwargs,
                     ),
                     Field(
                         "msolidm",
                         int,
                         10,
                         10,
-                        kwargs.get("msolidm")
+                        **kwargs,
                     ),
                     Field(
                         "lstrtype",
                         int,
                         20,
                         10,
-                        kwargs.get("lstrtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "soltype",
                         int,
                         30,
                         10,
-                        kwargs.get("soltype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "form",
                         int,
                         40,
                         10,
-                        kwargs.get("form", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "psf",
                         float,
                         50,
                         10,
-                        kwargs.get("psf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

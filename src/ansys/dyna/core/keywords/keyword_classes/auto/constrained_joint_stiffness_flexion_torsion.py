@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
@@ -41,42 +40,43 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("jsid")
+                        **kwargs,
                     ),
                     Field(
                         "pida",
                         int,
                         10,
                         10,
-                        kwargs.get("pida")
+                        **kwargs,
                     ),
                     Field(
                         "pidb",
                         int,
                         20,
                         10,
-                        kwargs.get("pidb")
+                        **kwargs,
                     ),
                     Field(
                         "cida",
                         int,
                         30,
                         10,
-                        kwargs.get("cida")
+                        **kwargs,
                     ),
                     Field(
                         "cidb",
                         int,
                         40,
                         10,
-                        kwargs.get("cidb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "jid",
                         int,
                         50,
                         10,
-                        kwargs.get("jid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,42 +87,48 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidal", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcidg",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcidbt",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidbt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dlcidal",
                         int,
                         30,
                         10,
-                        kwargs.get("dlcidal", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dlcidg",
                         int,
                         40,
                         10,
-                        kwargs.get("dlcidg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dlcidbt",
                         int,
                         50,
                         10,
-                        kwargs.get("dlcidbt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,28 +139,32 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("esal", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fmal",
                         float,
                         10,
                         10,
-                        kwargs.get("fmal", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "esbt",
                         float,
                         20,
                         10,
-                        kwargs.get("esbt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fmbt",
                         float,
                         30,
                         10,
-                        kwargs.get("fmbt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -165,21 +175,24 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("saal", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nsabt",
                         float,
                         10,
                         10,
-                        kwargs.get("nsabt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "psabt",
                         float,
                         20,
                         10,
-                        kwargs.get("psabt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlMeshMov(KeywordBase):
@@ -41,21 +40,24 @@ class IcfdControlMeshMov(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mmsh", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "lim_iter",
                         int,
                         10,
                         10,
-                        kwargs.get("lim_iter", 100 if use_lspp_defaults() else None)
+                        100,
+                        **kwargs,
                     ),
                     Field(
                         "reltol",
                         float,
                         20,
                         10,
-                        kwargs.get("reltol", 1.0e-3 if use_lspp_defaults() else None)
+                        1.0e-3,
+                        **kwargs,
                     ),
                 ],
             ),

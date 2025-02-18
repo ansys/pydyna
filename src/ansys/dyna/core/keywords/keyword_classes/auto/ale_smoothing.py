@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleSmoothing(KeywordBase):
@@ -41,49 +40,53 @@ class AleSmoothing(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("dnid")
+                        **kwargs,
                     ),
                     Field(
                         "nid1",
                         int,
                         10,
                         10,
-                        kwargs.get("nid1")
+                        **kwargs,
                     ),
                     Field(
                         "nid2",
                         int,
                         20,
                         10,
-                        kwargs.get("nid2")
+                        **kwargs,
                     ),
                     Field(
                         "ipre",
                         int,
                         30,
                         10,
-                        kwargs.get("ipre", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "xco",
                         float,
                         40,
                         10,
-                        kwargs.get("xco", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yco",
                         float,
                         50,
                         10,
-                        kwargs.get("yco", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zco",
                         float,
                         60,
                         10,
-                        kwargs.get("zco", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatInvHyperbolicSinThermal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         20,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         30,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         40,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "q",
                         float,
                         50,
                         10,
-                        kwargs.get("q")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         60,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "epso",
                         float,
                         70,
                         10,
-                        kwargs.get("epso")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,21 +105,21 @@ class MatInvHyperbolicSinThermal(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lce")
+                        **kwargs,
                     ),
                     Field(
                         "lcpr",
                         float,
                         10,
                         10,
-                        kwargs.get("lcpr")
+                        **kwargs,
                     ),
                     Field(
                         "lccte",
                         float,
                         20,
                         10,
-                        kwargs.get("lccte")
+                        **kwargs,
                     ),
                 ],
             ),

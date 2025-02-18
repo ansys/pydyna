@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmContactSubdom(KeywordBase):
@@ -41,35 +40,37 @@ class EmContactSubdom(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sdtype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "mvtype",
                         int,
                         10,
                         10,
-                        kwargs.get("mvtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcidx/nid",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidx/nid")
+                        **kwargs,
                     ),
                     Field(
                         "lcidy",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidy")
+                        **kwargs,
                     ),
                     Field(
                         "lcidz",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,49 +81,49 @@ class EmContactSubdom(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "pminx",
                         float,
                         10,
                         10,
-                        kwargs.get("pminx")
+                        **kwargs,
                     ),
                     Field(
                         "pminy",
                         float,
                         20,
                         10,
-                        kwargs.get("pminy")
+                        **kwargs,
                     ),
                     Field(
                         "pminz",
                         float,
                         30,
                         10,
-                        kwargs.get("pminz")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxx",
                         float,
                         40,
                         10,
-                        kwargs.get("pmaxx")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxy",
                         float,
                         50,
                         10,
-                        kwargs.get("pmaxy")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxz",
                         float,
                         60,
                         10,
-                        kwargs.get("pmaxz")
+                        **kwargs,
                     ),
                 ],
             ),

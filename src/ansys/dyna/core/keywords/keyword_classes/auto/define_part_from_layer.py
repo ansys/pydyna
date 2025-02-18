@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,42 @@ class DefinePartFromLayer(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "layer",
                         int,
                         10,
                         10,
-                        kwargs.get("layer")
+                        **kwargs,
                     ),
                     Field(
                         "pidsrc",
                         int,
                         20,
                         10,
-                        kwargs.get("pidsrc")
+                        **kwargs,
                     ),
                     Field(
                         "layold",
                         int,
                         30,
                         10,
-                        kwargs.get("layold")
+                        **kwargs,
                     ),
                     Field(
                         "mid",
                         int,
                         40,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         float,
                         50,
                         10,
-                        kwargs.get("thick")
+                        **kwargs,
                     ),
                 ],
             ),

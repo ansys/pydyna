@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class Mat070(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "co",
                         float,
                         20,
                         10,
-                        kwargs.get("co")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         30,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "p0",
                         float,
                         40,
                         10,
-                        kwargs.get("p0")
+                        **kwargs,
                     ),
                     Field(
                         "pa",
                         float,
                         50,
                         10,
-                        kwargs.get("pa")
+                        **kwargs,
                     ),
                     Field(
                         "ap",
                         float,
                         60,
                         10,
-                        kwargs.get("ap")
+                        **kwargs,
                     ),
                     Field(
                         "kh",
                         float,
                         70,
                         10,
-                        kwargs.get("kh")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,28 +105,29 @@ class Mat070(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "fr",
                         float,
                         10,
                         10,
-                        kwargs.get("fr")
+                        **kwargs,
                     ),
                     Field(
                         "sclf",
                         float,
                         20,
                         10,
-                        kwargs.get("sclf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "clear",
                         float,
                         30,
                         10,
-                        kwargs.get("clear")
+                        **kwargs,
                     ),
                 ],
             ),

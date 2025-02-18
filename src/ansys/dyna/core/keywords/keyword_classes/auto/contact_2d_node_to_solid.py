@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,28 +46,28 @@ class Contact2DNodeToSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sph")
+                        **kwargs,
                     ),
                     Field(
                         "solid",
                         int,
                         10,
                         10,
-                        kwargs.get("solid")
+                        **kwargs,
                     ),
                     Field(
                         "tbirth",
                         int,
                         20,
                         10,
-                        kwargs.get("tbirth")
+                        **kwargs,
                     ),
                     Field(
                         "tdeath",
                         int,
                         30,
                         10,
-                        kwargs.get("tdeath")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -79,56 +78,61 @@ class Contact2DNodeToSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("soft", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "vc",
                         float,
                         20,
                         10,
-                        kwargs.get("vc")
+                        **kwargs,
                     ),
                     Field(
                         "offd",
                         float,
                         30,
                         10,
-                        kwargs.get("offd")
+                        **kwargs,
                     ),
                     Field(
                         "pen",
                         float,
                         40,
                         10,
-                        kwargs.get("pen", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "fs",
                         float,
                         50,
                         10,
-                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd",
                         float,
                         60,
                         10,
-                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc",
                         float,
                         70,
                         10,
-                        kwargs.get("dc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

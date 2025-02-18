@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingPreBending(KeywordBase):
@@ -41,56 +40,56 @@ class ControlFormingPreBending(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pset")
+                        **kwargs,
                     ),
                     Field(
                         "radius",
                         float,
                         10,
                         10,
-                        kwargs.get("radius")
+                        **kwargs,
                     ),
                     Field(
                         "vx",
                         float,
                         20,
                         10,
-                        kwargs.get("vx")
+                        **kwargs,
                     ),
                     Field(
                         "vy",
                         float,
                         30,
                         10,
-                        kwargs.get("vy")
+                        **kwargs,
                     ),
                     Field(
                         "vz",
                         float,
                         40,
                         10,
-                        kwargs.get("vz")
+                        **kwargs,
                     ),
                     Field(
                         "xc",
                         float,
                         50,
                         10,
-                        kwargs.get("xc")
+                        **kwargs,
                     ),
                     Field(
                         "yc",
                         float,
                         60,
                         10,
-                        kwargs.get("yc")
+                        **kwargs,
                     ),
                     Field(
                         "zc",
                         float,
                         70,
                         10,
-                        kwargs.get("zc")
+                        **kwargs,
                     ),
                 ],
             ),

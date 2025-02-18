@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
@@ -41,56 +40,56 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid1")
+                        **kwargs,
                     ),
                     Field(
                         "zeta1",
                         float,
                         10,
                         10,
-                        kwargs.get("zeta1")
+                        **kwargs,
                     ),
                     Field(
                         "mid2",
                         int,
                         20,
                         10,
-                        kwargs.get("mid2")
+                        **kwargs,
                     ),
                     Field(
                         "zeta2",
                         float,
                         30,
                         10,
-                        kwargs.get("zeta2")
+                        **kwargs,
                     ),
                     Field(
                         "mid3",
                         int,
                         40,
                         10,
-                        kwargs.get("mid3")
+                        **kwargs,
                     ),
                     Field(
                         "zeta3",
                         float,
                         50,
                         10,
-                        kwargs.get("zeta3")
+                        **kwargs,
                     ),
                     Field(
                         "mid4",
                         int,
                         60,
                         10,
-                        kwargs.get("mid4")
+                        **kwargs,
                     ),
                     Field(
                         "zeta4",
                         float,
                         70,
                         10,
-                        kwargs.get("zeta4")
+                        **kwargs,
                     ),
                 ],
             ),

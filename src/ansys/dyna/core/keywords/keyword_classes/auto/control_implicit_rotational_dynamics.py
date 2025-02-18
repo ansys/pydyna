@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitRotationalDynamics(KeywordBase):
@@ -41,49 +40,52 @@ class ControlImplicitRotationalDynamics(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         10,
                         10,
-                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "omega",
                         float,
                         20,
                         10,
-                        kwargs.get("omega")
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         int,
                         30,
                         10,
-                        kwargs.get("vid")
+                        **kwargs,
                     ),
                     Field(
                         "nomeg",
                         int,
                         40,
                         10,
-                        kwargs.get("nomeg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iref",
                         int,
                         50,
                         10,
-                        kwargs.get("iref", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "omegadr",
                         float,
                         60,
                         10,
-                        kwargs.get("omegadr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,56 +96,56 @@ class ControlImplicitRotationalDynamics(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("omeg1")
+                        **kwargs,
                     ),
                     Field(
                         "omeg2",
                         float,
                         10,
                         10,
-                        kwargs.get("omeg2")
+                        **kwargs,
                     ),
                     Field(
                         "omeg3",
                         float,
                         20,
                         10,
-                        kwargs.get("omeg3")
+                        **kwargs,
                     ),
                     Field(
                         "omeg4",
                         float,
                         30,
                         10,
-                        kwargs.get("omeg4")
+                        **kwargs,
                     ),
                     Field(
                         "omeg5",
                         float,
                         40,
                         10,
-                        kwargs.get("omeg5")
+                        **kwargs,
                     ),
                     Field(
                         "omeg6",
                         float,
                         50,
                         10,
-                        kwargs.get("omeg6")
+                        **kwargs,
                     ),
                     Field(
                         "omeg7",
                         float,
                         60,
                         10,
-                        kwargs.get("omeg7")
+                        **kwargs,
                     ),
                     Field(
                         "omeg8",
                         float,
                         70,
                         10,
-                        kwargs.get("omeg8")
+                        **kwargs,
                     ),
                 ],
             ),

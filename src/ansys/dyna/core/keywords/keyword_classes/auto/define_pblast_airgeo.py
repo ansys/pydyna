@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,21 +45,24 @@ class DefinePblastAirgeo(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("gid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "gtype1",
                         int,
                         10,
                         10,
-                        kwargs.get("gtype1", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "gtype2",
                         int,
                         20,
                         10,
-                        kwargs.get("gtype2", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -71,42 +73,48 @@ class DefinePblastAirgeo(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ya",
                         float,
                         10,
                         10,
-                        kwargs.get("ya", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "za",
                         float,
                         20,
                         10,
-                        kwargs.get("za", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xb",
                         float,
                         30,
                         10,
-                        kwargs.get("xb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yb",
                         float,
                         40,
                         10,
-                        kwargs.get("yb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zb",
                         float,
                         50,
                         10,
-                        kwargs.get("zb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -117,42 +125,48 @@ class DefinePblastAirgeo(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "y0",
                         float,
                         10,
                         10,
-                        kwargs.get("y0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "z0",
                         float,
                         20,
                         10,
-                        kwargs.get("z0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "g1",
                         float,
                         30,
                         10,
-                        kwargs.get("g1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "g2",
                         float,
                         40,
                         10,
-                        kwargs.get("g2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "g3",
                         float,
                         50,
                         10,
-                        kwargs.get("g3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -163,42 +177,48 @@ class DefinePblastAirgeo(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yc",
                         float,
                         10,
                         10,
-                        kwargs.get("yc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zc",
                         float,
                         20,
                         10,
-                        kwargs.get("zc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "g4",
                         float,
                         30,
                         10,
-                        kwargs.get("g4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "g5",
                         float,
                         40,
                         10,
-                        kwargs.get("g5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "g6",
                         float,
                         50,
                         10,
-                        kwargs.get("g6", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

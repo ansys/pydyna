@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DeformableToRigidAutomatic(KeywordBase):
@@ -41,56 +40,63 @@ class DeformableToRigidAutomatic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("swset")
+                        **kwargs,
                     ),
                     Field(
                         "code",
                         int,
                         10,
                         10,
-                        kwargs.get("code", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "time1",
                         float,
                         20,
                         10,
-                        kwargs.get("time1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "time2",
                         float,
                         30,
                         10,
-                        kwargs.get("time2", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "time3",
                         float,
                         40,
                         10,
-                        kwargs.get("time3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "entno",
                         int,
                         50,
                         10,
-                        kwargs.get("entno", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "relsw",
                         int,
                         60,
                         10,
-                        kwargs.get("relsw", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "paired",
                         int,
                         70,
                         10,
-                        kwargs.get("paired", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,49 +107,56 @@ class DeformableToRigidAutomatic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nrbf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ncsf",
                         int,
                         10,
                         10,
-                        kwargs.get("ncsf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rwf",
                         int,
                         20,
                         10,
-                        kwargs.get("rwf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dtmax",
                         float,
                         30,
                         10,
-                        kwargs.get("dtmax", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "d2r",
                         int,
                         40,
                         10,
-                        kwargs.get("d2r", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "r2d",
                         int,
                         50,
                         10,
-                        kwargs.get("r2d", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "offset",
                         int,
                         60,
                         10,
-                        kwargs.get("offset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -154,21 +167,22 @@ class DeformableToRigidAutomatic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "lrb",
                         int,
                         10,
                         10,
-                        kwargs.get("lrb")
+                        **kwargs,
                     ),
                     Field(
                         "ptype",
                         str,
                         20,
                         10,
-                        kwargs.get("ptype", "PART" if use_lspp_defaults() else None)
+                        "PART",
+                        **kwargs,
                     ),
                 ],
             ),
@@ -179,14 +193,15 @@ class DeformableToRigidAutomatic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "ptype",
                         str,
                         10,
                         10,
-                        kwargs.get("ptype", "PART" if use_lspp_defaults() else None)
+                        "PART",
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseFrequencyBinaryD3Ssd(KeywordBase):
@@ -41,7 +40,8 @@ class DatabaseFrequencyBinaryD3Ssd(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("binary", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,35 +52,40 @@ class DatabaseFrequencyBinaryD3Ssd(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fmin", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fmax",
                         float,
                         10,
                         10,
-                        kwargs.get("fmax", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nfreq",
                         int,
                         20,
                         10,
-                        kwargs.get("nfreq", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fspace",
                         int,
                         30,
                         10,
-                        kwargs.get("fspace", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcfreq",
                         int,
                         40,
                         10,
-                        kwargs.get("lcfreq", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

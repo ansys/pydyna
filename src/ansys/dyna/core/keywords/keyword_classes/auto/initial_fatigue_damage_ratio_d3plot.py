@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialFatigueDamageRatioD3Plot(KeywordBase):
@@ -41,7 +40,7 @@ class InitialFatigueDamageRatioD3Plot(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,21 +51,21 @@ class InitialFatigueDamageRatioD3Plot(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nstate")
+                        **kwargs,
                     ),
                     Field(
                         "neiphd",
                         int,
                         10,
                         10,
-                        kwargs.get("neiphd")
+                        **kwargs,
                     ),
                     Field(
                         "neipsd",
                         int,
                         20,
                         10,
-                        kwargs.get("neipsd")
+                        **kwargs,
                     ),
                 ],
             ),

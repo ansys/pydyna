@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlImposedMove(KeywordBase):
@@ -41,35 +40,36 @@ class IcfdControlImposedMove(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "lcvx",
                         int,
                         10,
                         10,
-                        kwargs.get("lcvx")
+                        **kwargs,
                     ),
                     Field(
                         "lcvy",
                         int,
                         20,
                         10,
-                        kwargs.get("lcvy")
+                        **kwargs,
                     ),
                     Field(
                         "lcvz",
                         int,
                         30,
                         10,
-                        kwargs.get("lcvz")
+                        **kwargs,
                     ),
                     Field(
                         "vadt",
                         int,
                         40,
                         10,
-                        kwargs.get("vadt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,49 +80,50 @@ class IcfdControlImposedMove(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("alphal")
+                        **kwargs,
                     ),
                     Field(
                         "betal",
                         int,
                         10,
                         10,
-                        kwargs.get("betal")
+                        **kwargs,
                     ),
                     Field(
                         "gammal",
                         int,
                         20,
                         10,
-                        kwargs.get("gammal")
+                        **kwargs,
                     ),
                     Field(
                         "alphag",
                         int,
                         30,
                         10,
-                        kwargs.get("alphag")
+                        **kwargs,
                     ),
                     Field(
                         "betag",
                         int,
                         40,
                         10,
-                        kwargs.get("betag")
+                        **kwargs,
                     ),
                     Field(
                         "gammag",
                         int,
                         50,
                         10,
-                        kwargs.get("gammag")
+                        **kwargs,
                     ),
                     Field(
                         "vadr",
                         int,
                         60,
                         10,
-                        kwargs.get("vadr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,49 +134,56 @@ class IcfdControlImposedMove(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ptid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "x1",
                         float,
                         10,
                         10,
-                        kwargs.get("x1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "y1",
                         float,
                         20,
                         10,
-                        kwargs.get("y1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "z1",
                         float,
                         30,
                         10,
-                        kwargs.get("z1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "x2",
                         float,
                         40,
                         10,
-                        kwargs.get("x2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "y2",
                         float,
                         50,
                         10,
-                        kwargs.get("y2", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "z2",
                         float,
                         60,
                         10,
-                        kwargs.get("z2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -186,21 +194,24 @@ class IcfdControlImposedMove(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ptido", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "axe",
                         int,
                         10,
                         10,
-                        kwargs.get("axe", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ptidv",
                         int,
                         20,
                         10,
-                        kwargs.get("ptidv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

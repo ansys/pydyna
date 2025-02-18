@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialTemperatureNode(KeywordBase):
@@ -41,21 +40,23 @@ class InitialTemperatureNode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "temp",
                         float,
                         10,
                         10,
-                        kwargs.get("temp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "loc",
                         int,
                         20,
                         10,
-                        kwargs.get("loc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

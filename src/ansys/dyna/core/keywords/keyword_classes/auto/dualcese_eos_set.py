@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseEosSet(KeywordBase):
@@ -41,28 +40,28 @@ class DualceseEosSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eossid")
+                        **kwargs,
                     ),
                     Field(
                         "eosinid",
                         int,
                         10,
                         10,
-                        kwargs.get("eosinid")
+                        **kwargs,
                     ),
                     Field(
                         "eosrctid",
                         int,
                         20,
                         10,
-                        kwargs.get("eosrctid")
+                        **kwargs,
                     ),
                     Field(
                         "eosprdi",
                         int,
                         30,
                         10,
-                        kwargs.get("eosprdi")
+                        **kwargs,
                     ),
                 ],
             ),

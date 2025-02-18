@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartStackedElements(KeywordBase):
@@ -41,7 +40,7 @@ class PartStackedElements(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,28 +51,32 @@ class PartStackedElements(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pidref", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "numlay",
                         int,
                         10,
                         10,
-                        kwargs.get("numlay", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "adpopt",
                         int,
                         20,
                         10,
-                        kwargs.get("adpopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "inplcmp",
                         int,
                         30,
                         10,
-                        kwargs.get("inplcmp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -84,49 +87,51 @@ class PartStackedElements(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pidi")
+                        **kwargs,
                     ),
                     Field(
                         "sidi",
                         int,
                         10,
                         10,
-                        kwargs.get("sidi")
+                        **kwargs,
                     ),
                     Field(
                         "midi",
                         int,
                         20,
                         10,
-                        kwargs.get("midi")
+                        **kwargs,
                     ),
                     Field(
                         "hgidi",
                         int,
                         30,
                         10,
-                        kwargs.get("hgidi", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tmidi",
                         int,
                         40,
                         10,
-                        kwargs.get("tmidi", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "thki",
                         float,
                         50,
                         10,
-                        kwargs.get("thki")
+                        **kwargs,
                     ),
                     Field(
                         "nsldi",
                         int,
                         60,
                         10,
-                        kwargs.get("nsldi")
+                        **kwargs,
                     ),
                 ],
             ),

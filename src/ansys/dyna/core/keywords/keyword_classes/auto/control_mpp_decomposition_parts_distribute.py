@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlMppDecompositionPartsDistribute(KeywordBase):
@@ -41,56 +40,56 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id1")
+                        **kwargs,
                     ),
                     Field(
                         "id2",
                         int,
                         10,
                         10,
-                        kwargs.get("id2")
+                        **kwargs,
                     ),
                     Field(
                         "id3",
                         int,
                         20,
                         10,
-                        kwargs.get("id3")
+                        **kwargs,
                     ),
                     Field(
                         "id4",
                         int,
                         30,
                         10,
-                        kwargs.get("id4")
+                        **kwargs,
                     ),
                     Field(
                         "id5",
                         int,
                         40,
                         10,
-                        kwargs.get("id5")
+                        **kwargs,
                     ),
                     Field(
                         "id6",
                         int,
                         50,
                         10,
-                        kwargs.get("id6")
+                        **kwargs,
                     ),
                     Field(
                         "id7",
                         int,
                         60,
                         10,
-                        kwargs.get("id7")
+                        **kwargs,
                     ),
                     Field(
                         "id8",
                         int,
                         70,
                         10,
-                        kwargs.get("id8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +100,56 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id9")
+                        **kwargs,
                     ),
                     Field(
                         "id10",
                         int,
                         10,
                         10,
-                        kwargs.get("id10")
+                        **kwargs,
                     ),
                     Field(
                         "id11",
                         int,
                         20,
                         10,
-                        kwargs.get("id11")
+                        **kwargs,
                     ),
                     Field(
                         "id12",
                         int,
                         30,
                         10,
-                        kwargs.get("id12")
+                        **kwargs,
                     ),
                     Field(
                         "id13",
                         int,
                         40,
                         10,
-                        kwargs.get("id13")
+                        **kwargs,
                     ),
                     Field(
                         "id14",
                         int,
                         50,
                         10,
-                        kwargs.get("id14")
+                        **kwargs,
                     ),
                     Field(
                         "id15",
                         int,
                         60,
                         10,
-                        kwargs.get("id15")
+                        **kwargs,
                     ),
                     Field(
                         "id16",
                         int,
                         70,
                         10,
-                        kwargs.get("id16")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceCompensation3DFlange(KeywordBase):
@@ -41,28 +40,28 @@ class InterfaceCompensation3DFlange(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "vx",
                         float,
                         0,
                         10,
-                        kwargs.get("vx")
+                        **kwargs,
                     ),
                     Field(
                         "vy",
                         float,
                         0,
                         10,
-                        kwargs.get("vy")
+                        **kwargs,
                     ),
                     Field(
                         "vz",
                         float,
                         0,
                         10,
-                        kwargs.get("vz")
+                        **kwargs,
                     ),
                 ],
             ),
