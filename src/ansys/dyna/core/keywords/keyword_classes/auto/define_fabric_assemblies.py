@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class DefineFabricAssemblies(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("spid1")
+                        **kwargs,
                     ),
                     Field(
                         "spid2",
                         int,
                         10,
                         10,
-                        kwargs.get("spid2")
+                        **kwargs,
                     ),
                     Field(
                         "spid3",
                         int,
                         20,
                         10,
-                        kwargs.get("spid3")
+                        **kwargs,
                     ),
                     Field(
                         "spid4",
                         int,
                         30,
                         10,
-                        kwargs.get("spid4")
+                        **kwargs,
                     ),
                     Field(
                         "spid5",
                         int,
                         40,
                         10,
-                        kwargs.get("spid5")
+                        **kwargs,
                     ),
                     Field(
                         "spid6",
                         int,
                         50,
                         10,
-                        kwargs.get("spid6")
+                        **kwargs,
                     ),
                     Field(
                         "spid7",
                         int,
                         60,
                         10,
-                        kwargs.get("spid7")
+                        **kwargs,
                     ),
                     Field(
                         "spid8",
                         int,
                         70,
                         10,
-                        kwargs.get("spid8")
+                        **kwargs,
                     ),
                 ],
             ),

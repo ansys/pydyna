@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatViscoelasticLooseFabric(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e1",
                         float,
                         20,
                         10,
-                        kwargs.get("e1")
+                        **kwargs,
                     ),
                     Field(
                         "e2",
                         float,
                         30,
                         10,
-                        kwargs.get("e2")
+                        **kwargs,
                     ),
                     Field(
                         "g12",
                         float,
                         40,
                         10,
-                        kwargs.get("g12")
+                        **kwargs,
                     ),
                     Field(
                         "eu",
                         float,
                         50,
                         10,
-                        kwargs.get("eu")
+                        **kwargs,
                     ),
                     Field(
                         "thl",
                         float,
                         60,
                         10,
-                        kwargs.get("thl")
+                        **kwargs,
                     ),
                     Field(
                         "thi",
                         float,
                         70,
                         10,
-                        kwargs.get("thi")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class MatViscoelasticLooseFabric(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ta")
+                        **kwargs,
                     ),
                     Field(
                         "w",
                         float,
                         10,
                         10,
-                        kwargs.get("w")
+                        **kwargs,
                     ),
                     Field(
                         "s",
                         float,
                         20,
                         10,
-                        kwargs.get("s")
+                        **kwargs,
                     ),
                     Field(
                         "t",
                         float,
                         30,
                         10,
-                        kwargs.get("t")
+                        **kwargs,
                     ),
                     Field(
                         "h",
                         float,
                         40,
                         10,
-                        kwargs.get("h")
+                        **kwargs,
                     ),
                     Field(
                         "s",
                         float,
                         50,
                         10,
-                        kwargs.get("s")
+                        **kwargs,
                     ),
                     Field(
                         "eka",
                         float,
                         60,
                         10,
-                        kwargs.get("eka")
+                        **kwargs,
                     ),
                     Field(
                         "eua",
                         float,
                         70,
                         10,
-                        kwargs.get("eua")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,35 +165,35 @@ class MatViscoelasticLooseFabric(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vmb")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         10,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "g23",
                         float,
                         20,
                         10,
-                        kwargs.get("g23")
+                        **kwargs,
                     ),
                     Field(
                         "ekb",
                         float,
                         30,
                         10,
-                        kwargs.get("ekb")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         40,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -205,42 +204,42 @@ class MatViscoelasticLooseFabric(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -251,42 +250,42 @@ class MatViscoelasticLooseFabric(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                 ],
             ),

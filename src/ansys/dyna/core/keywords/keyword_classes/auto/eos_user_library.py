@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosUserLibrary(KeywordBase):
@@ -41,14 +40,14 @@ class EosUserLibrary(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "sesmid",
                         int,
                         10,
                         10,
-                        kwargs.get("sesmid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,14 +58,14 @@ class EosUserLibrary(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "v0",
                         float,
                         10,
                         10,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                 ],
             ),

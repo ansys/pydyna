@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseBoundaryPrescribedHybridSegmentSet(KeywordBase):
@@ -41,35 +40,35 @@ class DualceseBoundaryPrescribedHybridSegmentSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "idcomp",
                         int,
                         10,
                         10,
-                        kwargs.get("idcomp")
+                        **kwargs,
                     ),
                     Field(
                         "dirx",
                         float,
                         20,
                         10,
-                        kwargs.get("dirx")
+                        **kwargs,
                     ),
                     Field(
                         "diry",
                         float,
                         30,
                         10,
-                        kwargs.get("diry")
+                        **kwargs,
                     ),
                     Field(
                         "dirz",
                         float,
                         40,
                         10,
-                        kwargs.get("dirz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,56 +79,56 @@ class DualceseBoundaryPrescribedHybridSegmentSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lc_z1")
+                        **kwargs,
                     ),
                     Field(
                         "lc_ra",
                         int,
                         10,
                         10,
-                        kwargs.get("lc_ra")
+                        **kwargs,
                     ),
                     Field(
                         "lc_u",
                         int,
                         20,
                         10,
-                        kwargs.get("lc_u")
+                        **kwargs,
                     ),
                     Field(
                         "lc_v",
                         int,
                         30,
                         10,
-                        kwargs.get("lc_v")
+                        **kwargs,
                     ),
                     Field(
                         "lc_w",
                         int,
                         40,
                         10,
-                        kwargs.get("lc_w")
+                        **kwargs,
                     ),
                     Field(
                         "lc_d1",
                         int,
                         50,
                         10,
-                        kwargs.get("lc_d1")
+                        **kwargs,
                     ),
                     Field(
                         "lc_da",
                         int,
                         60,
                         10,
-                        kwargs.get("lc_da")
+                        **kwargs,
                     ),
                     Field(
                         "lc_db",
                         int,
                         70,
                         10,
-                        kwargs.get("lc_db")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,14 +139,14 @@ class DualceseBoundaryPrescribedHybridSegmentSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lc_p")
+                        **kwargs,
                     ),
                     Field(
                         "lc_t",
                         float,
                         10,
                         10,
-                        kwargs.get("lc_t")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -158,56 +157,64 @@ class DualceseBoundaryPrescribedHybridSegmentSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sf_z1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_ra",
                         float,
                         10,
                         10,
-                        kwargs.get("sf_ra", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_u",
                         float,
                         20,
                         10,
-                        kwargs.get("sf_u", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_v",
                         float,
                         30,
                         10,
-                        kwargs.get("sf_v", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_w",
                         float,
                         40,
                         10,
-                        kwargs.get("sf_w", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_d1",
                         float,
                         50,
                         10,
-                        kwargs.get("sf_d1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_da",
                         float,
                         60,
                         10,
-                        kwargs.get("sf_da", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf_db",
                         float,
                         70,
                         10,
-                        kwargs.get("sf_db", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -218,14 +225,14 @@ class DualceseBoundaryPrescribedHybridSegmentSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lc_p")
+                        **kwargs,
                     ),
                     Field(
                         "lc_t",
                         float,
                         10,
                         10,
-                        kwargs.get("lc_t")
+                        **kwargs,
                     ),
                 ],
             ),

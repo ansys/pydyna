@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseTracerGenerate(KeywordBase):
@@ -41,56 +40,59 @@ class DatabaseTracerGenerate(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt")
+                        **kwargs,
                     ),
                     Field(
                         "valow",
                         float,
                         10,
                         10,
-                        kwargs.get("valow", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "valup",
                         float,
                         20,
                         10,
-                        kwargs.get("valup", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "valtype1",
                         int,
                         30,
                         10,
-                        kwargs.get("valtype1")
+                        **kwargs,
                     ),
                     Field(
                         "set",
                         int,
                         40,
                         10,
-                        kwargs.get("set")
+                        **kwargs,
                     ),
                     Field(
                         "setype",
                         int,
                         50,
                         10,
-                        kwargs.get("setype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mmgset",
                         int,
                         60,
                         10,
-                        kwargs.get("mmgset")
+                        **kwargs,
                     ),
                     Field(
                         "updt",
                         float,
                         70,
                         10,
-                        kwargs.get("updt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,21 +103,24 @@ class DatabaseTracerGenerate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("varloc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "valtype2",
                         int,
                         10,
                         10,
-                        kwargs.get("valtype2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mmgset",
                         int,
                         20,
                         10,
-                        kwargs.get("mmgset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

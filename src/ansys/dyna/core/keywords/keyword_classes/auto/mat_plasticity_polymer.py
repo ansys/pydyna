@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,28 @@ class MatPlasticityPolymer(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,28 +77,30 @@ class MatPlasticityPolymer(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         10,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "lcss",
                         int,
                         20,
                         10,
-                        kwargs.get("lcss", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcsr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcsr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -110,35 +111,38 @@ class MatPlasticityPolymer(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eftx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "damp",
                         float,
                         10,
                         10,
-                        kwargs.get("damp")
+                        **kwargs,
                     ),
                     Field(
                         "ratefac",
                         float,
                         20,
                         10,
-                        kwargs.get("ratefac")
+                        **kwargs,
                     ),
                     Field(
                         "lcfail",
                         int,
                         30,
                         10,
-                        kwargs.get("lcfail", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "numint",
                         float,
                         40,
                         10,
-                        kwargs.get("numint", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

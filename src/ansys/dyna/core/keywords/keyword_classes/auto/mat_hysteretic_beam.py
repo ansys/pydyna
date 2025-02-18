@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class MatHystereticBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "iax",
                         int,
                         40,
                         10,
-                        kwargs.get("iax", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "isurf",
                         int,
                         50,
                         10,
-                        kwargs.get("isurf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ihard",
                         int,
                         60,
                         10,
-                        kwargs.get("ihard", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "ifema",
                         int,
                         70,
                         10,
-                        kwargs.get("ifema", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +109,60 @@ class MatHystereticBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcpms")
+                        **kwargs,
                     ),
                     Field(
                         "sfs",
                         float,
                         10,
                         10,
-                        kwargs.get("sfs", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcpmt",
                         int,
                         20,
                         10,
-                        kwargs.get("lcpmt")
+                        **kwargs,
                     ),
                     Field(
                         "sft",
                         float,
                         30,
                         10,
-                        kwargs.get("sft", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcat",
                         int,
                         40,
                         10,
-                        kwargs.get("lcat")
+                        **kwargs,
                     ),
                     Field(
                         "sfat",
                         float,
                         50,
                         10,
-                        kwargs.get("sfat", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcac",
                         int,
                         60,
                         10,
-                        kwargs.get("lcac")
+                        **kwargs,
                     ),
                     Field(
                         "sfac",
                         float,
                         70,
                         10,
-                        kwargs.get("sfac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +173,61 @@ class MatHystereticBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         10,
                         10,
-                        kwargs.get("beta", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         20,
                         10,
-                        kwargs.get("gamma", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "f0",
                         float,
                         30,
                         10,
-                        kwargs.get("f0")
+                        **kwargs,
                     ),
                     Field(
                         "pinm",
                         float,
                         40,
                         10,
-                        kwargs.get("pinm", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "pins",
                         float,
                         50,
                         10,
-                        kwargs.get("pins", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "hloc1",
                         float,
                         60,
                         10,
-                        kwargs.get("hloc1")
+                        **kwargs,
                     ),
                     Field(
                         "hloc2",
                         float,
                         70,
                         10,
-                        kwargs.get("hloc2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +238,58 @@ class MatHystereticBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("deltas")
+                        **kwargs,
                     ),
                     Field(
                         "kappas",
                         float,
                         10,
                         10,
-                        kwargs.get("kappas")
+                        **kwargs,
                     ),
                     Field(
                         "deltat",
                         float,
                         20,
                         10,
-                        kwargs.get("deltat")
+                        **kwargs,
                     ),
                     Field(
                         "kappat",
                         float,
                         30,
                         10,
-                        kwargs.get("kappat")
+                        **kwargs,
                     ),
                     Field(
                         "lcshs",
                         int,
                         40,
                         10,
-                        kwargs.get("lcshs")
+                        **kwargs,
                     ),
                     Field(
                         "sfshs",
                         float,
                         50,
                         10,
-                        kwargs.get("sfshs", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcsht",
                         int,
                         60,
                         10,
-                        kwargs.get("lcsht")
+                        **kwargs,
                     ),
                     Field(
                         "sfsht",
                         float,
                         70,
                         10,
-                        kwargs.get("sfsht", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,56 +300,56 @@ class MatHystereticBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hardms")
+                        **kwargs,
                     ),
                     Field(
                         "gamms",
                         float,
                         10,
                         10,
-                        kwargs.get("gamms")
+                        **kwargs,
                     ),
                     Field(
                         "hardmt",
                         float,
                         20,
                         10,
-                        kwargs.get("hardmt")
+                        **kwargs,
                     ),
                     Field(
                         "gammt",
                         float,
                         30,
                         10,
-                        kwargs.get("gammt")
+                        **kwargs,
                     ),
                     Field(
                         "hardat",
                         float,
                         40,
                         10,
-                        kwargs.get("hardat")
+                        **kwargs,
                     ),
                     Field(
                         "gamat",
                         float,
                         50,
                         10,
-                        kwargs.get("gamat")
+                        **kwargs,
                     ),
                     Field(
                         "hardac",
                         float,
                         60,
                         10,
-                        kwargs.get("hardac")
+                        **kwargs,
                     ),
                     Field(
                         "gamac",
                         float,
                         70,
                         10,
-                        kwargs.get("gamac")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -346,56 +360,60 @@ class MatHystereticBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("omgms1")
+                        **kwargs,
                     ),
                     Field(
                         "omgms2",
                         float,
                         10,
                         10,
-                        kwargs.get("omgms2")
+                        **kwargs,
                     ),
                     Field(
                         "omgmt1",
                         float,
                         20,
                         10,
-                        kwargs.get("omgmt1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "omgmt2",
                         float,
                         30,
                         10,
-                        kwargs.get("omgmt2", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "omgat1",
                         float,
                         40,
                         10,
-                        kwargs.get("omgat1")
+                        **kwargs,
                     ),
                     Field(
                         "omgat2",
                         float,
                         50,
                         10,
-                        kwargs.get("omgat2")
+                        **kwargs,
                     ),
                     Field(
                         "omgac1",
                         float,
                         60,
                         10,
-                        kwargs.get("omgac1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "omgac2",
                         float,
                         70,
                         10,
-                        kwargs.get("omgac2", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -406,56 +424,62 @@ class MatHystereticBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rums", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "rumt",
                         float,
                         10,
                         10,
-                        kwargs.get("rumt", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "duat",
                         float,
                         20,
                         10,
-                        kwargs.get("duat", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "duac",
                         float,
                         30,
                         10,
-                        kwargs.get("duac", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "lam1",
                         float,
                         40,
                         10,
-                        kwargs.get("lam1")
+                        **kwargs,
                     ),
                     Field(
                         "lam2",
                         float,
                         50,
                         10,
-                        kwargs.get("lam2")
+                        **kwargs,
                     ),
                     Field(
                         "soft1",
                         float,
                         60,
                         10,
-                        kwargs.get("soft1", 3.0 if use_lspp_defaults() else None)
+                        3.0,
+                        **kwargs,
                     ),
                     Field(
                         "soft2",
                         float,
                         70,
                         10,
-                        kwargs.get("soft2", 4.0 if use_lspp_defaults() else None)
+                        4.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -466,56 +490,64 @@ class MatHystereticBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("prs1", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "prs2",
                         float,
                         10,
                         10,
-                        kwargs.get("prs2", 2.0E+20 if use_lspp_defaults() else None)
+                        2.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "prs3",
                         float,
                         20,
                         10,
-                        kwargs.get("prs3", 3.0E+20 if use_lspp_defaults() else None)
+                        3.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "prs4",
                         float,
                         30,
                         10,
-                        kwargs.get("prs4", 4.0E+20 if use_lspp_defaults() else None)
+                        4.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "prt1",
                         float,
                         40,
                         10,
-                        kwargs.get("prt1", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "prt2",
                         float,
                         50,
                         10,
-                        kwargs.get("prt2", 2.0E+20 if use_lspp_defaults() else None)
+                        2.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "prt3",
                         float,
                         60,
                         10,
-                        kwargs.get("prt3", 3.0E+20 if use_lspp_defaults() else None)
+                        3.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "prt4",
                         float,
                         70,
                         10,
-                        kwargs.get("prt4", 4.0E+20 if use_lspp_defaults() else None)
+                        4.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -526,56 +558,64 @@ class MatHystereticBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ts1", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "ts2",
                         float,
                         10,
                         10,
-                        kwargs.get("ts2", 2.0E+20 if use_lspp_defaults() else None)
+                        2.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "ts3",
                         float,
                         20,
                         10,
-                        kwargs.get("ts3", 3.0E+20 if use_lspp_defaults() else None)
+                        3.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "ts4",
                         float,
                         30,
                         10,
-                        kwargs.get("ts4", 4.0E+20 if use_lspp_defaults() else None)
+                        4.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "cs1",
                         float,
                         40,
                         10,
-                        kwargs.get("cs1", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "cs2",
                         float,
                         50,
                         10,
-                        kwargs.get("cs2", 2.0E+20 if use_lspp_defaults() else None)
+                        2.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "cs3",
                         float,
                         60,
                         10,
-                        kwargs.get("cs3", 3.0E+20 if use_lspp_defaults() else None)
+                        3.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "cs4",
                         float,
                         70,
                         10,
-                        kwargs.get("cs4", 4.0E+20 if use_lspp_defaults() else None)
+                        4.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -586,56 +626,64 @@ class MatHystereticBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ss1", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "ss2",
                         float,
                         10,
                         10,
-                        kwargs.get("ss2", 2.0E+20 if use_lspp_defaults() else None)
+                        2.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "ss3",
                         float,
                         20,
                         10,
-                        kwargs.get("ss3", 3.0E+20 if use_lspp_defaults() else None)
+                        3.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "ss4",
                         float,
                         30,
                         10,
-                        kwargs.get("ss4", 4.0E+20 if use_lspp_defaults() else None)
+                        4.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "st1",
                         float,
                         40,
                         10,
-                        kwargs.get("st1", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "st2",
                         float,
                         50,
                         10,
-                        kwargs.get("st2", 2.0E+20 if use_lspp_defaults() else None)
+                        2.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "st3",
                         float,
                         60,
                         10,
-                        kwargs.get("st3", 3.0E+20 if use_lspp_defaults() else None)
+                        3.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "st4",
                         float,
                         70,
                         10,
-                        kwargs.get("st4", 4.0E+20 if use_lspp_defaults() else None)
+                        4.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),

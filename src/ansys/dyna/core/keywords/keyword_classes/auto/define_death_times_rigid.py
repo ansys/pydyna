@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,28 @@ class DefineDeathTimesRigid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("geo")
+                        **kwargs,
                     ),
                     Field(
                         "n1",
                         int,
                         10,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         20,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n3",
                         int,
                         30,
                         10,
-                        kwargs.get("n3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,56 +77,56 @@ class DefineDeathTimesRigid(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x_t")
+                        **kwargs,
                     ),
                     Field(
                         "y_t",
                         float,
                         10,
                         10,
-                        kwargs.get("y_t")
+                        **kwargs,
                     ),
                     Field(
                         "z_t",
                         float,
                         20,
                         10,
-                        kwargs.get("z_t")
+                        **kwargs,
                     ),
                     Field(
                         "x_h",
                         float,
                         30,
                         10,
-                        kwargs.get("x_h")
+                        **kwargs,
                     ),
                     Field(
                         "y_h",
                         float,
                         40,
                         10,
-                        kwargs.get("y_h")
+                        **kwargs,
                     ),
                     Field(
                         "x_h",
                         float,
                         50,
                         10,
-                        kwargs.get("x_h")
+                        **kwargs,
                     ),
                     Field(
                         "r",
                         float,
                         60,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "flag",
                         int,
                         70,
                         10,
-                        kwargs.get("flag")
+                        **kwargs,
                     ),
                 ],
             ),

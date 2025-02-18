@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryElementMethodControl(KeywordBase):
@@ -41,28 +40,32 @@ class BoundaryElementMethodControl(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lwake", 50 if use_lspp_defaults() else None)
+                        50,
+                        **kwargs,
                     ),
                     Field(
                         "dtbem",
                         float,
                         10,
                         10,
-                        kwargs.get("dtbem", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "iupbem",
                         int,
                         20,
                         10,
-                        kwargs.get("iupbem", 100 if use_lspp_defaults() else None)
+                        100,
+                        **kwargs,
                     ),
                     Field(
                         "farbem",
                         float,
                         30,
                         10,
-                        kwargs.get("farbem", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                 ],
             ),

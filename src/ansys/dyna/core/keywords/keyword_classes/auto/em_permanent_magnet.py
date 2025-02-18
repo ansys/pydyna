@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmPermanentMagnet(KeywordBase):
@@ -41,42 +40,43 @@ class EmPermanentMagnet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "partid",
                         int,
                         10,
                         10,
-                        kwargs.get("partid")
+                        **kwargs,
                     ),
                     Field(
                         "mtype",
                         int,
                         20,
                         10,
-                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "north",
                         int,
                         30,
                         10,
-                        kwargs.get("north")
+                        **kwargs,
                     ),
                     Field(
                         "south",
                         int,
                         40,
                         10,
-                        kwargs.get("south")
+                        **kwargs,
                     ),
                     Field(
                         "hc",
                         float,
                         50,
                         10,
-                        kwargs.get("hc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,21 +87,21 @@ class EmPermanentMagnet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x/nid1")
+                        **kwargs,
                     ),
                     Field(
                         "y/nid2",
                         float,
                         10,
                         10,
-                        kwargs.get("y/nid2")
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         20,
                         10,
-                        kwargs.get("z")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,59 @@ class DefineQuasarCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("node")
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         int,
                         10,
                         10,
-                        kwargs.get("type", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "romid",
                         int,
                         20,
                         10,
-                        kwargs.get("romid")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         30,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "ptype",
                         int,
                         40,
                         10,
-                        kwargs.get("ptype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iopt",
                         int,
                         50,
                         10,
-                        kwargs.get("iopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         60,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "ex_id",
                         int,
                         70,
                         10,
-                        kwargs.get("ex_id")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,7 +108,7 @@ class DefineQuasarCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("frcfrq")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -117,7 +119,7 @@ class DefineQuasarCoupling(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("encname1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -128,7 +130,7 @@ class DefineQuasarCoupling(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("encname2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -139,56 +141,56 @@ class DefineQuasarCoupling(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("var1")
+                        **kwargs,
                     ),
                     Field(
                         "var2",
                         float,
                         10,
                         10,
-                        kwargs.get("var2")
+                        **kwargs,
                     ),
                     Field(
                         "var3",
                         float,
                         20,
                         10,
-                        kwargs.get("var3")
+                        **kwargs,
                     ),
                     Field(
                         "var4",
                         float,
                         30,
                         10,
-                        kwargs.get("var4")
+                        **kwargs,
                     ),
                     Field(
                         "var5",
                         float,
                         40,
                         10,
-                        kwargs.get("var5")
+                        **kwargs,
                     ),
                     Field(
                         "var6",
                         float,
                         50,
                         10,
-                        kwargs.get("var6")
+                        **kwargs,
                     ),
                     Field(
                         "var7",
                         float,
                         60,
                         10,
-                        kwargs.get("var7")
+                        **kwargs,
                     ),
                     Field(
                         "var8",
                         float,
                         70,
                         10,
-                        kwargs.get("var8")
+                        **kwargs,
                     ),
                 ],
             ),

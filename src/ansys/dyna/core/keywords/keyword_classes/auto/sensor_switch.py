@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class SensorSwitch(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("switid")
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         str,
                         10,
                         10,
-                        kwargs.get("type", "SENSOR" if use_lspp_defaults() else None)
+                        "SENSOR",
+                        **kwargs,
                     ),
                     Field(
                         "sensid",
                         int,
                         20,
                         10,
-                        kwargs.get("sensid")
+                        **kwargs,
                     ),
                     Field(
                         "logic",
                         str,
                         30,
                         10,
-                        kwargs.get("logic", "LT" if use_lspp_defaults() else None)
+                        "LT",
+                        **kwargs,
                     ),
                     Field(
                         "value",
                         float,
                         40,
                         10,
-                        kwargs.get("value")
+                        **kwargs,
                     ),
                     Field(
                         "filtrid",
                         int,
                         50,
                         10,
-                        kwargs.get("filtrid")
+                        **kwargs,
                     ),
                     Field(
                         "timwin",
                         float,
                         60,
                         10,
-                        kwargs.get("timwin")
+                        **kwargs,
                     ),
                     Field(
                         "tdelay",
                         float,
                         70,
                         10,
-                        kwargs.get("tdelay")
+                        **kwargs,
                     ),
                 ],
             ),

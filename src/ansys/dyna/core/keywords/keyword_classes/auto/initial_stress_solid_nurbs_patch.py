@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialStressSolidNurbsPatch(KeywordBase):
@@ -41,28 +40,31 @@ class InitialStressSolidNurbsPatch(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "nint",
                         int,
                         10,
                         10,
-                        kwargs.get("nint", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nhisv",
                         int,
                         20,
                         10,
-                        kwargs.get("nhisv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "large",
                         int,
                         30,
                         10,
-                        kwargs.get("large", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -73,21 +75,21 @@ class InitialStressSolidNurbsPatch(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "s",
                         float,
                         10,
                         10,
-                        kwargs.get("s")
+                        **kwargs,
                     ),
                     Field(
                         "t",
                         float,
                         20,
                         10,
-                        kwargs.get("t")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -98,49 +100,56 @@ class InitialStressSolidNurbsPatch(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sigxx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigyy",
                         float,
                         10,
                         10,
-                        kwargs.get("sigyy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigzz",
                         float,
                         20,
                         10,
-                        kwargs.get("sigzz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigxy",
                         float,
                         30,
                         10,
-                        kwargs.get("sigxy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigyz",
                         float,
                         40,
                         10,
-                        kwargs.get("sigyz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigzx",
                         float,
                         50,
                         10,
-                        kwargs.get("sigzx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "eps",
                         float,
                         60,
                         10,
-                        kwargs.get("eps", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -151,56 +160,56 @@ class InitialStressSolidNurbsPatch(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hisv1")
+                        **kwargs,
                     ),
                     Field(
                         "hisv2",
                         float,
                         10,
                         10,
-                        kwargs.get("hisv2")
+                        **kwargs,
                     ),
                     Field(
                         "hisv3",
                         float,
                         20,
                         10,
-                        kwargs.get("hisv3")
+                        **kwargs,
                     ),
                     Field(
                         "hisv4",
                         float,
                         30,
                         10,
-                        kwargs.get("hisv4")
+                        **kwargs,
                     ),
                     Field(
                         "hisv5",
                         float,
                         40,
                         10,
-                        kwargs.get("hisv5")
+                        **kwargs,
                     ),
                     Field(
                         "hisv6",
                         float,
                         50,
                         10,
-                        kwargs.get("hisv6")
+                        **kwargs,
                     ),
                     Field(
                         "hisv7",
                         float,
                         60,
                         10,
-                        kwargs.get("hisv7")
+                        **kwargs,
                     ),
                     Field(
                         "hisv8",
                         float,
                         70,
                         10,
-                        kwargs.get("hisv8")
+                        **kwargs,
                     ),
                 ],
             ),

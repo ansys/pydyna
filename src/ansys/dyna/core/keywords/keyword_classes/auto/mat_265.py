@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,21 +45,22 @@ class Mat265(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "model",
                         int,
                         20,
                         10,
-                        kwargs.get("model", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -71,56 +71,56 @@ class Mat265(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("stiff")
+                        **kwargs,
                     ),
                     Field(
                         "rn",
                         float,
                         10,
                         10,
-                        kwargs.get("rn")
+                        **kwargs,
                     ),
                     Field(
                         "rs",
                         float,
                         20,
                         10,
-                        kwargs.get("rs")
+                        **kwargs,
                     ),
                     Field(
                         "alpha1",
                         float,
                         30,
                         10,
-                        kwargs.get("alpha1")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         40,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "lcf",
                         int,
                         50,
                         10,
-                        kwargs.get("lcf")
+                        **kwargs,
                     ),
                     Field(
                         "lcupf",
                         int,
                         60,
                         10,
-                        kwargs.get("lcupf")
+                        **kwargs,
                     ),
                     Field(
                         "lcupr",
                         int,
                         70,
                         10,
-                        kwargs.get("lcupr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -131,56 +131,56 @@ class Mat265(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("upfn")
+                        **kwargs,
                     ),
                     Field(
                         "upfs",
                         float,
                         10,
                         10,
-                        kwargs.get("upfs")
+                        **kwargs,
                     ),
                     Field(
                         "alpha2",
                         float,
                         20,
                         10,
-                        kwargs.get("alpha2")
+                        **kwargs,
                     ),
                     Field(
                         "beta2",
                         float,
                         30,
                         10,
-                        kwargs.get("beta2")
+                        **kwargs,
                     ),
                     Field(
                         "uprn",
                         float,
                         40,
                         10,
-                        kwargs.get("uprn")
+                        **kwargs,
                     ),
                     Field(
                         "uprs",
                         float,
                         50,
                         10,
-                        kwargs.get("uprs")
+                        **kwargs,
                     ),
                     Field(
                         "alpha3",
                         float,
                         60,
                         10,
-                        kwargs.get("alpha3")
+                        **kwargs,
                     ),
                     Field(
                         "beta3",
                         float,
                         70,
                         10,
-                        kwargs.get("beta3")
+                        **kwargs,
                     ),
                 ],
             ),

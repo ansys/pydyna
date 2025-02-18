@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class MeshSizeShape(KeywordBase):
@@ -41,35 +40,40 @@ class MeshSizeShape(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("sname", "BOX" if use_lspp_defaults() else None)
+                        "BOX",
+                        **kwargs,
                     ),
                     Field(
                         "force",
                         int,
                         10,
                         10,
-                        kwargs.get("force", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "method",
                         int,
                         20,
                         10,
-                        kwargs.get("method", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bt",
                         float,
                         30,
                         10,
-                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         40,
                         10,
-                        kwargs.get("dt", 1.E12 if use_lspp_defaults() else None)
+                        1.E12,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,49 +84,49 @@ class MeshSizeShape(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("msize")
+                        **kwargs,
                     ),
                     Field(
                         "pminx",
                         float,
                         10,
                         10,
-                        kwargs.get("pminx")
+                        **kwargs,
                     ),
                     Field(
                         "pminy",
                         float,
                         20,
                         10,
-                        kwargs.get("pminy")
+                        **kwargs,
                     ),
                     Field(
                         "pminz",
                         float,
                         30,
                         10,
-                        kwargs.get("pminz")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxx",
                         float,
                         40,
                         10,
-                        kwargs.get("pmaxx")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxy",
                         float,
                         50,
                         10,
-                        kwargs.get("pmaxy")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxz",
                         float,
                         60,
                         10,
-                        kwargs.get("pmaxz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,35 +137,35 @@ class MeshSizeShape(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("msize")
+                        **kwargs,
                     ),
                     Field(
                         "radius",
                         float,
                         10,
                         10,
-                        kwargs.get("radius")
+                        **kwargs,
                     ),
                     Field(
                         "centerx",
                         float,
                         20,
                         10,
-                        kwargs.get("centerx")
+                        **kwargs,
                     ),
                     Field(
                         "centery",
                         float,
                         30,
                         10,
-                        kwargs.get("centery")
+                        **kwargs,
                     ),
                     Field(
                         "centerz",
                         float,
                         40,
                         10,
-                        kwargs.get("centerz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -172,56 +176,56 @@ class MeshSizeShape(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("msize")
+                        **kwargs,
                     ),
                     Field(
                         "radius",
                         float,
                         10,
                         10,
-                        kwargs.get("radius")
+                        **kwargs,
                     ),
                     Field(
                         "pminx",
                         float,
                         20,
                         10,
-                        kwargs.get("pminx")
+                        **kwargs,
                     ),
                     Field(
                         "pminy",
                         float,
                         30,
                         10,
-                        kwargs.get("pminy")
+                        **kwargs,
                     ),
                     Field(
                         "pminz",
                         float,
                         40,
                         10,
-                        kwargs.get("pminz")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxx",
                         float,
                         50,
                         10,
-                        kwargs.get("pmaxx")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxy",
                         float,
                         60,
                         10,
-                        kwargs.get("pmaxy")
+                        **kwargs,
                     ),
                     Field(
                         "pmaxz",
                         float,
                         70,
                         10,
-                        kwargs.get("pmaxz")
+                        **kwargs,
                     ),
                 ],
             ),

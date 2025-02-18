@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadHeatController(KeywordBase):
@@ -41,49 +40,49 @@ class LoadHeatController(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("node")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         10,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "load",
                         float,
                         20,
                         10,
-                        kwargs.get("load")
+                        **kwargs,
                     ),
                     Field(
                         "tset",
                         float,
                         30,
                         10,
-                        kwargs.get("tset")
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         int,
                         40,
                         10,
-                        kwargs.get("type")
+                        **kwargs,
                     ),
                     Field(
                         "gp",
                         float,
                         50,
                         10,
-                        kwargs.get("gp")
+                        **kwargs,
                     ),
                     Field(
                         "gi",
                         float,
                         60,
                         10,
-                        kwargs.get("gi")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleFailSwitchMmg(KeywordBase):
@@ -41,14 +40,14 @@ class AleFailSwitchMmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,14 +58,14 @@ class AleFailSwitchMmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fr_mmg")
+                        **kwargs,
                     ),
                     Field(
                         "to_mmg",
                         int,
                         10,
                         10,
-                        kwargs.get("to_mmg")
+                        **kwargs,
                     ),
                 ],
             ),

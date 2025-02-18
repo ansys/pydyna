@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatGursonRcdc(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         50,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "q1",
                         float,
                         60,
                         10,
-                        kwargs.get("q1")
+                        **kwargs,
                     ),
                     Field(
                         "q2",
                         float,
                         70,
                         10,
-                        kwargs.get("q2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,57 @@ class MatGursonRcdc(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fc")
+                        **kwargs,
                     ),
                     Field(
                         "f0",
                         float,
                         10,
                         10,
-                        kwargs.get("f0")
+                        **kwargs,
                     ),
                     Field(
                         "en",
                         float,
                         20,
                         10,
-                        kwargs.get("en")
+                        **kwargs,
                     ),
                     Field(
                         "sn",
                         float,
                         30,
                         10,
-                        kwargs.get("sn")
+                        **kwargs,
                     ),
                     Field(
                         "fn",
                         float,
                         40,
                         10,
-                        kwargs.get("fn")
+                        **kwargs,
                     ),
                     Field(
                         "etan",
                         float,
                         50,
                         10,
-                        kwargs.get("etan")
+                        **kwargs,
                     ),
                     Field(
                         "atyp",
                         float,
                         60,
                         10,
-                        kwargs.get("atyp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ff0",
                         float,
                         70,
                         10,
-                        kwargs.get("ff0")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +166,56 @@ class MatGursonRcdc(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eps1")
+                        **kwargs,
                     ),
                     Field(
                         "eps2",
                         float,
                         10,
                         10,
-                        kwargs.get("eps2")
+                        **kwargs,
                     ),
                     Field(
                         "eps3",
                         float,
                         20,
                         10,
-                        kwargs.get("eps3")
+                        **kwargs,
                     ),
                     Field(
                         "eps4",
                         float,
                         30,
                         10,
-                        kwargs.get("eps4")
+                        **kwargs,
                     ),
                     Field(
                         "eps5",
                         float,
                         40,
                         10,
-                        kwargs.get("eps5")
+                        **kwargs,
                     ),
                     Field(
                         "eps6",
                         float,
                         50,
                         10,
-                        kwargs.get("eps6")
+                        **kwargs,
                     ),
                     Field(
                         "eps7",
                         float,
                         60,
                         10,
-                        kwargs.get("eps7")
+                        **kwargs,
                     ),
                     Field(
                         "eps8",
                         float,
                         70,
                         10,
-                        kwargs.get("eps8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +226,56 @@ class MatGursonRcdc(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("es1")
+                        **kwargs,
                     ),
                     Field(
                         "es2",
                         float,
                         10,
                         10,
-                        kwargs.get("es2")
+                        **kwargs,
                     ),
                     Field(
                         "es3",
                         float,
                         20,
                         10,
-                        kwargs.get("es3")
+                        **kwargs,
                     ),
                     Field(
                         "es4",
                         float,
                         30,
                         10,
-                        kwargs.get("es4")
+                        **kwargs,
                     ),
                     Field(
                         "es5",
                         float,
                         40,
                         10,
-                        kwargs.get("es5")
+                        **kwargs,
                     ),
                     Field(
                         "es6",
                         float,
                         50,
                         10,
-                        kwargs.get("es6")
+                        **kwargs,
                     ),
                     Field(
                         "es7",
                         float,
                         60,
                         10,
-                        kwargs.get("es7")
+                        **kwargs,
                     ),
                     Field(
                         "es8",
                         float,
                         70,
                         10,
-                        kwargs.get("es8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,56 +286,56 @@ class MatGursonRcdc(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("l1")
+                        **kwargs,
                     ),
                     Field(
                         "l2",
                         float,
                         10,
                         10,
-                        kwargs.get("l2")
+                        **kwargs,
                     ),
                     Field(
                         "l3",
                         float,
                         20,
                         10,
-                        kwargs.get("l3")
+                        **kwargs,
                     ),
                     Field(
                         "l4",
                         float,
                         30,
                         10,
-                        kwargs.get("l4")
+                        **kwargs,
                     ),
                     Field(
                         "ff1",
                         float,
                         40,
                         10,
-                        kwargs.get("ff1")
+                        **kwargs,
                     ),
                     Field(
                         "ff2",
                         float,
                         50,
                         10,
-                        kwargs.get("ff2")
+                        **kwargs,
                     ),
                     Field(
                         "ff3",
                         float,
                         60,
                         10,
-                        kwargs.get("ff3")
+                        **kwargs,
                     ),
                     Field(
                         "ff4",
                         float,
                         70,
                         10,
-                        kwargs.get("ff4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -346,21 +346,24 @@ class MatGursonRcdc(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcss", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lclf",
                         int,
                         10,
                         10,
-                        kwargs.get("lclf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "numint",
                         float,
                         20,
                         10,
-                        kwargs.get("numint", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -371,56 +374,56 @@ class MatGursonRcdc(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         10,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         20,
                         10,
-                        kwargs.get("gamma")
+                        **kwargs,
                     ),
                     Field(
                         "d0",
                         float,
                         30,
                         10,
-                        kwargs.get("d0")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         40,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "lambda",
                         float,
                         50,
                         10,
-                        kwargs.get("lambda")
+                        **kwargs,
                     ),
                     Field(
                         "ds",
                         float,
                         60,
                         10,
-                        kwargs.get("ds")
+                        **kwargs,
                     ),
                     Field(
                         "l",
                         float,
                         70,
                         10,
-                        kwargs.get("l")
+                        **kwargs,
                     ),
                 ],
             ),

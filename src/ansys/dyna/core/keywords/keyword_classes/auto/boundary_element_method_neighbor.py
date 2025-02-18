@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryElementMethodNeighbor(KeywordBase):
@@ -41,35 +40,35 @@ class BoundaryElementMethodNeighbor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nelem")
+                        **kwargs,
                     ),
                     Field(
                         "nabor1",
                         int,
                         10,
                         10,
-                        kwargs.get("nabor1")
+                        **kwargs,
                     ),
                     Field(
                         "nabor2",
                         int,
                         20,
                         10,
-                        kwargs.get("nabor2")
+                        **kwargs,
                     ),
                     Field(
                         "nabor3",
                         int,
                         30,
                         10,
-                        kwargs.get("nabor3")
+                        **kwargs,
                     ),
                     Field(
                         "nabor4",
                         int,
                         40,
                         10,
-                        kwargs.get("nabor4")
+                        **kwargs,
                     ),
                 ],
             ),

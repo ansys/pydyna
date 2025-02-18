@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -48,56 +47,63 @@ class SectionShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "elform",
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "shrf",
                         float,
                         20,
                         10,
-                        kwargs.get("shrf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "nip",
                         int,
                         30,
                         10,
-                        kwargs.get("nip", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "propt",
                         float,
                         40,
                         10,
-                        kwargs.get("propt", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "qr/irid",
                         int,
                         50,
                         10,
-                        kwargs.get("qr/irid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "icomp",
                         int,
                         60,
                         10,
-                        kwargs.get("icomp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "setyp",
                         int,
                         70,
                         10,
-                        kwargs.get("setyp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -108,56 +114,64 @@ class SectionShell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "t2",
                         float,
                         10,
                         10,
-                        kwargs.get("t2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "t3",
                         float,
                         20,
                         10,
-                        kwargs.get("t3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "t4",
                         float,
                         30,
                         10,
-                        kwargs.get("t4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nloc",
                         float,
                         40,
                         10,
-                        kwargs.get("nloc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "marea",
                         float,
                         50,
                         10,
-                        kwargs.get("marea", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "idof",
                         float,
                         60,
                         10,
-                        kwargs.get("idof", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "edgset",
                         int,
                         70,
                         10,
-                        kwargs.get("edgset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -176,56 +190,64 @@ class SectionShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nipp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nxdof",
                         int,
                         10,
                         10,
-                        kwargs.get("nxdof", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iunf",
                         int,
                         20,
                         10,
-                        kwargs.get("iunf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ihgf",
                         int,
                         30,
                         10,
-                        kwargs.get("ihgf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "itaj",
                         int,
                         40,
                         10,
-                        kwargs.get("itaj", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lmc",
                         int,
                         50,
                         10,
-                        kwargs.get("lmc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nhsv",
                         int,
                         60,
                         10,
-                        kwargs.get("nhsv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iloc",
                         int,
                         70,
                         10,
-                        kwargs.get("iloc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
                 lambda: self.elform in [101, 102, 103, 104, 105],

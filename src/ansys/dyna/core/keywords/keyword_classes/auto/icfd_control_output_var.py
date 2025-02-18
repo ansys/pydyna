@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlOutputVar(KeywordBase):
@@ -41,21 +40,24 @@ class IcfdControlOutputVar(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("vel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "avgvel",
                         int,
                         10,
                         10,
-                        kwargs.get("avgvel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vort",
                         int,
                         20,
                         10,
-                        kwargs.get("vort", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,35 +68,40 @@ class IcfdControlOutputVar(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pre", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "preavg",
                         int,
                         10,
                         10,
-                        kwargs.get("preavg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lset",
                         int,
                         20,
                         10,
-                        kwargs.get("lset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "oc",
                         int,
                         30,
                         10,
-                        kwargs.get("oc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cfl",
                         int,
                         40,
                         10,
-                        kwargs.get("cfl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -105,14 +112,16 @@ class IcfdControlOutputVar(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("temp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tempavg",
                         int,
                         10,
                         10,
-                        kwargs.get("tempavg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -123,35 +132,40 @@ class IcfdControlOutputVar(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("kp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ep",
                         int,
                         10,
                         10,
-                        kwargs.get("ep", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mut",
                         int,
                         20,
                         10,
-                        kwargs.get("mut", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "int",
                         int,
                         30,
                         10,
-                        kwargs.get("int", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cmu",
                         int,
                         40,
                         10,
-                        kwargs.get("cmu", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

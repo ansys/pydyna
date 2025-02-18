@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,7 +45,7 @@ class SetDiscreteAdd(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -57,56 +56,56 @@ class SetDiscreteAdd(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("dsid1")
+                        **kwargs,
                     ),
                     Field(
                         "dsid2",
                         int,
                         10,
                         10,
-                        kwargs.get("dsid2")
+                        **kwargs,
                     ),
                     Field(
                         "dsid3",
                         int,
                         20,
                         10,
-                        kwargs.get("dsid3")
+                        **kwargs,
                     ),
                     Field(
                         "dsid4",
                         int,
                         30,
                         10,
-                        kwargs.get("dsid4")
+                        **kwargs,
                     ),
                     Field(
                         "dsid5",
                         int,
                         40,
                         10,
-                        kwargs.get("dsid5")
+                        **kwargs,
                     ),
                     Field(
                         "dsid6",
                         int,
                         50,
                         10,
-                        kwargs.get("dsid6")
+                        **kwargs,
                     ),
                     Field(
                         "dsid7",
                         int,
                         60,
                         10,
-                        kwargs.get("dsid7")
+                        **kwargs,
                     ),
                     Field(
                         "dsid8",
                         int,
                         70,
                         10,
-                        kwargs.get("dsid8")
+                        **kwargs,
                     ),
                 ],
             ),

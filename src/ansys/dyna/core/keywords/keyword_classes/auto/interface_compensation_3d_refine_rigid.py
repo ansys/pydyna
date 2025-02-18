@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceCompensation3DRefineRigid(KeywordBase):
@@ -41,7 +40,7 @@ class InterfaceCompensation3DRefineRigid(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,7 +51,7 @@ class InterfaceCompensation3DRefineRigid(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename2")
+                        **kwargs,
                     ),
                 ],
             ),

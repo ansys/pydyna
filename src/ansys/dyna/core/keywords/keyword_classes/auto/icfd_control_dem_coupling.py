@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlDemCoupling(KeywordBase):
@@ -41,42 +40,46 @@ class IcfdControlDemCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ctype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bt",
                         float,
                         10,
                         10,
-                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         20,
                         10,
-                        kwargs.get("dt", 1E+28 if use_lspp_defaults() else None)
+                        1E+28,
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         30,
                         10,
-                        kwargs.get("sf", 1. if use_lspp_defaults() else None)
+                        1.,
+                        **kwargs,
                     ),
                     Field(
                         "maxvel",
                         float,
                         40,
                         10,
-                        kwargs.get("maxvel")
+                        **kwargs,
                     ),
                     Field(
                         "dtype",
                         int,
                         50,
                         10,
-                        kwargs.get("dtype")
+                        **kwargs,
                     ),
                 ],
             ),

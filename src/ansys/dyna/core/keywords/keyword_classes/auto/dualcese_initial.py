@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseInitial(KeywordBase):
@@ -41,56 +40,62 @@ class DualceseInitial(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("u", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "v",
                         float,
                         10,
                         10,
-                        kwargs.get("v", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "w",
                         float,
                         20,
                         10,
-                        kwargs.get("w", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rh",
                         float,
                         30,
                         10,
-                        kwargs.get("rh", 1.225 if use_lspp_defaults() else None)
+                        1.225,
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         40,
                         10,
-                        kwargs.get("p", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "t",
                         float,
                         50,
                         10,
-                        kwargs.get("t", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ifunc",
                         int,
                         70,
                         10,
-                        kwargs.get("ifunc")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,31 @@ class DefineDeHbond(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         10,
                         10,
-                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "hbdfm",
                         int,
                         20,
                         10,
-                        kwargs.get("hbdfm", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "idim",
                         int,
                         30,
                         10,
-                        kwargs.get("idim", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,56 +80,61 @@ class DefineDeHbond(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pbk_sf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "pbs_sf",
                         float,
                         10,
                         10,
-                        kwargs.get("pbs_sf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "frgk",
                         float,
                         20,
                         10,
-                        kwargs.get("frgk")
+                        **kwargs,
                     ),
                     Field(
                         "frgs",
                         float,
                         30,
                         10,
-                        kwargs.get("frgs")
+                        **kwargs,
                     ),
                     Field(
                         "bondr",
                         float,
                         40,
                         10,
-                        kwargs.get("bondr")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dmg",
                         float,
                         60,
                         10,
-                        kwargs.get("dmg", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "frmdl",
                         int,
                         70,
                         10,
-                        kwargs.get("frmdl", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -138,28 +145,30 @@ class DefineDeHbond(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("precrk")
+                        **kwargs,
                     ),
                     Field(
                         "cktype",
                         int,
                         10,
                         10,
-                        kwargs.get("cktype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "itfid",
                         int,
                         30,
                         10,
-                        kwargs.get("itfid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

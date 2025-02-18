@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,59 @@ class MatCazacuBarlatMagnesium(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "hr",
                         float,
                         40,
                         10,
-                        kwargs.get("hr", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "p1",
                         float,
                         50,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         60,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "iter",
                         float,
                         70,
                         10,
-                        kwargs.get("iter", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +108,57 @@ class MatCazacuBarlatMagnesium(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "c11",
                         float,
                         10,
                         10,
-                        kwargs.get("c11")
+                        **kwargs,
                     ),
                     Field(
                         "c22",
                         float,
                         20,
                         10,
-                        kwargs.get("c22")
+                        **kwargs,
                     ),
                     Field(
                         "c33",
                         float,
                         30,
                         10,
-                        kwargs.get("c33", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         40,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "e0",
                         float,
                         50,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         60,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         70,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +169,56 @@ class MatCazacuBarlatMagnesium(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "c12",
                         float,
                         40,
                         10,
-                        kwargs.get("c12")
+                        **kwargs,
                     ),
                     Field(
                         "c13",
                         float,
                         50,
                         10,
-                        kwargs.get("c13")
+                        **kwargs,
                     ),
                     Field(
                         "c23",
                         float,
                         60,
                         10,
-                        kwargs.get("c23")
+                        **kwargs,
                     ),
                     Field(
                         "c44",
                         float,
                         70,
                         10,
-                        kwargs.get("c44")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,42 +229,43 @@ class MatCazacuBarlatMagnesium(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("xp ")
+                        **kwargs,
                     ),
                     Field(
                         "yp ",
                         int,
                         10,
                         10,
-                        kwargs.get("yp ")
+                        **kwargs,
                     ),
                     Field(
                         "zp ",
                         int,
                         20,
                         10,
-                        kwargs.get("zp ")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -272,56 +276,57 @@ class MatCazacuBarlatMagnesium(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "fit",
                         int,
                         70,
                         10,
-                        kwargs.get("fit", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -332,56 +337,56 @@ class MatCazacuBarlatMagnesium(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lc1id")
+                        **kwargs,
                     ),
                     Field(
                         "lc2id",
                         int,
                         10,
                         10,
-                        kwargs.get("lc2id")
+                        **kwargs,
                     ),
                     Field(
                         "numint",
                         int,
                         20,
                         10,
-                        kwargs.get("numint")
+                        **kwargs,
                     ),
                     Field(
                         "lccid",
                         int,
                         30,
                         10,
-                        kwargs.get("lccid")
+                        **kwargs,
                     ),
                     Field(
                         "icflag",
                         int,
                         40,
                         10,
-                        kwargs.get("icflag")
+                        **kwargs,
                     ),
                     Field(
                         "idflag",
                         int,
                         50,
                         10,
-                        kwargs.get("idflag")
+                        **kwargs,
                     ),
                     Field(
                         "lc3id",
                         int,
                         60,
                         10,
-                        kwargs.get("lc3id")
+                        **kwargs,
                     ),
                     Field(
                         "epsfg",
                         float,
                         70,
                         10,
-                        kwargs.get("epsfg")
+                        **kwargs,
                     ),
                 ],
             ),

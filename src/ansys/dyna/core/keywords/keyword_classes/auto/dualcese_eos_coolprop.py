@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseEosCoolprop(KeywordBase):
@@ -41,35 +40,36 @@ class DualceseEosCoolprop(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "ncomp",
                         int,
                         10,
                         10,
-                        kwargs.get("ncomp")
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         str,
                         20,
                         10,
-                        kwargs.get("type")
+                        **kwargs,
                     ),
                     Field(
                         "phase",
                         str,
                         30,
                         10,
-                        kwargs.get("phase", "GAS" if use_lspp_defaults() else None)
+                        "GAS",
+                        **kwargs,
                     ),
                     Field(
                         "tabular",
                         str,
                         40,
                         10,
-                        kwargs.get("tabular")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,56 +80,56 @@ class DualceseEosCoolprop(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("mol_fr1")
+                        **kwargs,
                     ),
                     Field(
                         "mol_fr2",
                         float,
                         10,
                         10,
-                        kwargs.get("mol_fr2")
+                        **kwargs,
                     ),
                     Field(
                         "mol_fr3",
                         float,
                         20,
                         10,
-                        kwargs.get("mol_fr3")
+                        **kwargs,
                     ),
                     Field(
                         "mol_fr4",
                         float,
                         30,
                         10,
-                        kwargs.get("mol_fr4")
+                        **kwargs,
                     ),
                     Field(
                         "mol_fr5",
                         float,
                         40,
                         10,
-                        kwargs.get("mol_fr5")
+                        **kwargs,
                     ),
                     Field(
                         "mol_fr6",
                         float,
                         50,
                         10,
-                        kwargs.get("mol_fr6")
+                        **kwargs,
                     ),
                     Field(
                         "mol_fr7",
                         float,
                         60,
                         10,
-                        kwargs.get("mol_fr7")
+                        **kwargs,
                     ),
                     Field(
                         "mol_fr8",
                         float,
                         70,
                         10,
-                        kwargs.get("mol_fr8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,42 +140,42 @@ class DualceseEosCoolprop(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("n_t")
+                        **kwargs,
                     ),
                     Field(
                         "n_den",
                         float,
                         10,
                         10,
-                        kwargs.get("n_den")
+                        **kwargs,
                     ),
                     Field(
                         "den_low",
                         float,
                         20,
                         10,
-                        kwargs.get("den_low")
+                        **kwargs,
                     ),
                     Field(
                         "den_high",
                         float,
                         30,
                         10,
-                        kwargs.get("den_high")
+                        **kwargs,
                     ),
                     Field(
                         "t_low",
                         float,
                         40,
                         10,
-                        kwargs.get("t_low")
+                        **kwargs,
                     ),
                     Field(
                         "t_high",
                         float,
                         50,
                         10,
-                        kwargs.get("t_high")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -186,7 +186,7 @@ class DualceseEosCoolprop(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("fluidname")
+                        **kwargs,
                     ),
                 ],
             ),

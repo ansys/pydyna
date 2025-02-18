@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,28 @@ class MatCellularRubber(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         20,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         int,
                         30,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,28 +77,28 @@ class MatCellularRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sgl")
+                        **kwargs,
                     ),
                     Field(
                         "sw",
                         float,
                         10,
                         10,
-                        kwargs.get("sw")
+                        **kwargs,
                     ),
                     Field(
                         "st",
                         float,
                         20,
                         10,
-                        kwargs.get("st")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         30,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -110,35 +109,35 @@ class MatCellularRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c10")
+                        **kwargs,
                     ),
                     Field(
                         "c01",
                         float,
                         10,
                         10,
-                        kwargs.get("c01")
+                        **kwargs,
                     ),
                     Field(
                         "c11",
                         float,
                         20,
                         10,
-                        kwargs.get("c11")
+                        **kwargs,
                     ),
                     Field(
                         "c20",
                         float,
                         30,
                         10,
-                        kwargs.get("c20")
+                        **kwargs,
                     ),
                     Field(
                         "c02",
                         float,
                         40,
                         10,
-                        kwargs.get("c02")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -149,35 +148,35 @@ class MatCellularRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("p0")
+                        **kwargs,
                     ),
                     Field(
                         "phi",
                         float,
                         10,
                         10,
-                        kwargs.get("phi")
+                        **kwargs,
                     ),
                     Field(
                         "ivs",
                         float,
                         20,
                         10,
-                        kwargs.get("ivs")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         30,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         40,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),

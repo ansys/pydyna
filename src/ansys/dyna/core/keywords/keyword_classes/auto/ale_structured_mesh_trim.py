@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleStructuredMeshTrim(KeywordBase):
@@ -41,56 +40,60 @@ class AleStructuredMeshTrim(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mshid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "option",
                         str,
                         10,
                         10,
-                        kwargs.get("option", "PARTSET" if use_lspp_defaults() else None)
+                        "PARTSET",
+                        **kwargs,
                     ),
                     Field(
                         "oper",
                         int,
                         20,
                         10,
-                        kwargs.get("oper", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ioutin",
                         int,
                         30,
                         10,
-                        kwargs.get("ioutin", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "psid",
                         int,
                         40,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "dist",
                         float,
                         50,
                         10,
-                        kwargs.get("dist")
+                        **kwargs,
                     ),
                     Field(
                         "e3",
                         float,
                         60,
                         10,
-                        kwargs.get("e3")
+                        **kwargs,
                     ),
                     Field(
                         "e4",
                         float,
                         70,
                         10,
-                        kwargs.get("e4")
+                        **kwargs,
                     ),
                 ],
             ),

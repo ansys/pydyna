@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class DefineCpmVent(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "c23",
                         float,
                         10,
                         10,
-                        kwargs.get("c23", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lctc23",
                         int,
                         20,
                         10,
-                        kwargs.get("lctc23")
+                        **kwargs,
                     ),
                     Field(
                         "lcpc23",
                         int,
                         30,
                         10,
-                        kwargs.get("lcpc23")
+                        **kwargs,
                     ),
                     Field(
                         "enh_v",
                         int,
                         40,
                         10,
-                        kwargs.get("enh_v", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ppop",
                         float,
                         50,
                         10,
-                        kwargs.get("ppop")
+                        **kwargs,
                     ),
                     Field(
                         "c23up",
                         float,
                         60,
                         10,
-                        kwargs.get("c23up")
+                        **kwargs,
                     ),
                     Field(
                         "iopt",
                         int,
                         70,
                         10,
-                        kwargs.get("iopt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,58 @@ class DefineCpmVent(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("jt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ids1",
                         int,
                         10,
                         10,
-                        kwargs.get("ids1")
+                        **kwargs,
                     ),
                     Field(
                         "ids2",
                         int,
                         20,
                         10,
-                        kwargs.get("ids2")
+                        **kwargs,
                     ),
                     Field(
                         "iopt1",
                         int,
                         30,
                         10,
-                        kwargs.get("iopt1")
+                        **kwargs,
                     ),
                     Field(
                         "pid1",
                         int,
                         40,
                         10,
-                        kwargs.get("pid1")
+                        **kwargs,
                     ),
                     Field(
                         "pid2",
                         int,
                         50,
                         10,
-                        kwargs.get("pid2")
+                        **kwargs,
                     ),
                     Field(
                         "vang",
                         float,
                         60,
                         10,
-                        kwargs.get("vang", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcred",
                         int,
                         70,
                         10,
-                        kwargs.get("lcred")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,49 +169,49 @@ class DefineCpmVent(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid1")
+                        **kwargs,
                     ),
                     Field(
                         "nid2",
                         int,
                         10,
                         10,
-                        kwargs.get("nid2")
+                        **kwargs,
                     ),
                     Field(
                         "nid2",
                         int,
                         20,
                         10,
-                        kwargs.get("nid2")
+                        **kwargs,
                     ),
                     Field(
                         "lcac23",
                         int,
                         30,
                         10,
-                        kwargs.get("lcac23")
+                        **kwargs,
                     ),
                     Field(
                         "psetpv",
                         int,
                         40,
                         10,
-                        kwargs.get("psetpv")
+                        **kwargs,
                     ),
                     Field(
                         "sfpv",
                         int,
                         50,
                         10,
-                        kwargs.get("sfpv")
+                        **kwargs,
                     ),
                     Field(
                         "lpatm",
                         int,
                         60,
                         10,
-                        kwargs.get("lpatm")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -219,7 +222,7 @@ class DefineCpmVent(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("jtnd")
+                        **kwargs,
                     ),
                 ],
             ),

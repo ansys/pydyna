@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadMotionNode(KeywordBase):
@@ -41,56 +40,62 @@ class LoadMotionNode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("node1")
+                        **kwargs,
                     ),
                     Field(
                         "dof1",
                         int,
                         10,
                         10,
-                        kwargs.get("dof1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         20,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         30,
                         10,
-                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "cid1",
                         int,
                         40,
                         10,
-                        kwargs.get("cid1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "node2",
                         int,
                         50,
                         10,
-                        kwargs.get("node2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dof2",
                         int,
                         60,
                         10,
-                        kwargs.get("dof2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cid2",
                         int,
                         70,
                         10,
-                        kwargs.get("cid2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

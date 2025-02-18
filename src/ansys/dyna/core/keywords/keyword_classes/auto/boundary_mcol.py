@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryMcol(KeywordBase):
@@ -41,35 +40,38 @@ class BoundaryMcol(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nmcol", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "mxstep",
                         int,
                         10,
                         10,
-                        kwargs.get("mxstep")
+                        **kwargs,
                     ),
                     Field(
                         "endtmcol",
                         float,
                         20,
                         10,
-                        kwargs.get("endtmcol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tsubc",
                         float,
                         30,
                         10,
-                        kwargs.get("tsubc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "prtmcol",
                         float,
                         40,
                         10,
-                        kwargs.get("prtmcol")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,14 +82,15 @@ class BoundaryMcol(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rbmcol", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "mcolfile",
                         str,
                         10,
                         60,
-                        kwargs.get("mcolfile")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatConstrainedSpr2(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "fn",
                         float,
                         20,
                         10,
-                        kwargs.get("fn")
+                        **kwargs,
                     ),
                     Field(
                         "ft",
                         float,
                         30,
                         10,
-                        kwargs.get("ft")
+                        **kwargs,
                     ),
                     Field(
                         "dn",
                         float,
                         40,
                         10,
-                        kwargs.get("dn")
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         50,
                         10,
-                        kwargs.get("dt")
+                        **kwargs,
                     ),
                     Field(
                         "xin",
                         float,
                         60,
                         10,
-                        kwargs.get("xin")
+                        **kwargs,
                     ),
                     Field(
                         "xit",
                         float,
                         70,
                         10,
-                        kwargs.get("xit")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,35 +105,37 @@ class MatConstrainedSpr2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha1")
+                        **kwargs,
                     ),
                     Field(
                         "alpha2",
                         float,
                         10,
                         10,
-                        kwargs.get("alpha2")
+                        **kwargs,
                     ),
                     Field(
                         "alpha3",
                         float,
                         20,
                         10,
-                        kwargs.get("alpha3")
+                        **kwargs,
                     ),
                     Field(
                         "expn",
                         float,
                         30,
                         10,
-                        kwargs.get("expn", 8.0 if use_lspp_defaults() else None)
+                        8.0,
+                        **kwargs,
                     ),
                     Field(
                         "expt",
                         float,
                         40,
                         10,
-                        kwargs.get("expt", 8.0 if use_lspp_defaults() else None)
+                        8.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,30 @@ class DefineFpToSurfaceCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fp")
+                        **kwargs,
                     ),
                     Field(
                         "surf",
                         int,
                         10,
                         10,
-                        kwargs.get("surf")
+                        **kwargs,
                     ),
                     Field(
                         "fptype",
                         int,
                         20,
                         10,
-                        kwargs.get("fptype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "surftype",
                         int,
                         30,
                         10,
-                        kwargs.get("surftype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,42 +79,44 @@ class DefineFpToSurfaceCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sbc")
+                        **kwargs,
                     ),
                     Field(
                         "sca",
                         int,
                         10,
                         10,
-                        kwargs.get("sca", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "sfp",
                         int,
                         50,
                         10,
-                        kwargs.get("sfp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

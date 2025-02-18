@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleMappingFromLagrangian(KeywordBase):
@@ -41,14 +40,15 @@ class AleMappingFromLagrangian(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lagpid")
+                        **kwargs,
                     ),
                     Field(
                         "lagpty",
                         int,
                         10,
                         10,
-                        kwargs.get("lagpty", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,49 +59,49 @@ class AleMappingFromLagrangian(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nx")
+                        **kwargs,
                     ),
                     Field(
                         "ny",
                         int,
                         10,
                         10,
-                        kwargs.get("ny")
+                        **kwargs,
                     ),
                     Field(
                         "nx",
                         int,
                         20,
                         10,
-                        kwargs.get("nx")
+                        **kwargs,
                     ),
                     Field(
                         "npx",
                         int,
                         30,
                         10,
-                        kwargs.get("npx")
+                        **kwargs,
                     ),
                     Field(
                         "npy",
                         int,
                         40,
                         10,
-                        kwargs.get("npy")
+                        **kwargs,
                     ),
                     Field(
                         "npz",
                         int,
                         50,
                         10,
-                        kwargs.get("npz")
+                        **kwargs,
                     ),
                     Field(
                         "aleid",
                         int,
                         60,
                         10,
-                        kwargs.get("aleid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,14 +112,14 @@ class AleMappingFromLagrangian(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("method")
+                        **kwargs,
                     ),
                     Field(
                         "div",
                         int,
                         0,
                         10,
-                        kwargs.get("div")
+                        **kwargs,
                     ),
                 ],
             ),

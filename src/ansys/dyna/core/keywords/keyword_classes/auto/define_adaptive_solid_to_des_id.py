@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,14 +45,14 @@ class DefineAdaptiveSolidToDesId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("did")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         str,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -64,56 +63,61 @@ class DefineAdaptiveSolidToDesId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ipid")
+                        **kwargs,
                     ),
                     Field(
                         "itype",
                         int,
                         10,
                         10,
-                        kwargs.get("itype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nq",
                         int,
                         20,
                         10,
-                        kwargs.get("nq", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ipdes",
                         int,
                         30,
                         10,
-                        kwargs.get("ipdes")
+                        **kwargs,
                     ),
                     Field(
                         "isdes",
                         int,
                         40,
                         10,
-                        kwargs.get("isdes")
+                        **kwargs,
                     ),
                     Field(
                         "rsf",
                         float,
                         50,
                         10,
-                        kwargs.get("rsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "outdes",
                         int,
                         60,
                         10,
-                        kwargs.get("outdes", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ibond",
                         int,
                         70,
                         10,
-                        kwargs.get("ibond", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -124,42 +128,44 @@ class DefineAdaptiveSolidToDesId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pbn")
+                        **kwargs,
                     ),
                     Field(
                         "pbs",
                         float,
                         10,
                         10,
-                        kwargs.get("pbs")
+                        **kwargs,
                     ),
                     Field(
                         "pbn_s",
                         float,
                         20,
                         10,
-                        kwargs.get("pbn_s")
+                        **kwargs,
                     ),
                     Field(
                         "pbs_s",
                         float,
                         30,
                         10,
-                        kwargs.get("pbs_s")
+                        **kwargs,
                     ),
                     Field(
                         "sfa",
                         float,
                         40,
                         10,
-                        kwargs.get("sfa", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,42 @@ class Mat084(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid1/unused")
+                        **kwargs,
                     ),
                     Field(
                         "eid2/pid",
                         int,
                         10,
                         10,
-                        kwargs.get("eid2/pid")
+                        **kwargs,
                     ),
                     Field(
                         "inc/axis",
                         int,
                         20,
                         10,
-                        kwargs.get("inc/axis")
+                        **kwargs,
                     ),
                     Field(
                         "xr/coor",
                         float,
                         30,
                         10,
-                        kwargs.get("xr/coor")
+                        **kwargs,
                     ),
                     Field(
                         "yr/rqa",
                         float,
                         40,
                         10,
-                        kwargs.get("yr/rqa")
+                        **kwargs,
                     ),
                     Field(
                         "zr/rqb",
                         float,
                         50,
                         10,
-                        kwargs.get("zr/rqb")
+                        **kwargs,
                     ),
                 ],
             ),

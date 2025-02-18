@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,37 @@ class DefineCurveTrim(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tcid")
+                        **kwargs,
                     ),
                     Field(
                         "tctype",
                         int,
                         10,
                         10,
-                        kwargs.get("tctype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "tctol",
                         float,
                         40,
                         10,
-                        kwargs.get("tctol", 0.25 if use_lspp_defaults() else None)
+                        0.25,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,14 +86,16 @@ class DefineCurveTrim(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("cx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cy",
                         float,
                         20,
                         20,
-                        kwargs.get("cy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -103,7 +106,7 @@ class DefineCurveTrim(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),

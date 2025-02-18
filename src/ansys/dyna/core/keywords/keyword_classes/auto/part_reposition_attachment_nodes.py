@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartRepositionAttachmentNodes(KeywordBase):
@@ -41,7 +40,7 @@ class PartRepositionAttachmentNodes(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,60 @@ class PartRepositionAttachmentNodes(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "secid",
                         int,
                         10,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "mid",
                         int,
                         20,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "eosid",
                         int,
                         30,
                         10,
-                        kwargs.get("eosid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "hgid",
                         int,
                         40,
                         10,
-                        kwargs.get("hgid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "grav",
                         int,
                         50,
                         10,
-                        kwargs.get("grav", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "adpopt",
                         int,
                         60,
                         10,
-                        kwargs.get("adpopt")
+                        **kwargs,
                     ),
                     Field(
                         "tmid",
                         int,
                         70,
                         10,
-                        kwargs.get("tmid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,21 +115,23 @@ class PartRepositionAttachmentNodes(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cmsn")
+                        **kwargs,
                     ),
                     Field(
                         "mdep",
                         int,
                         10,
                         10,
-                        kwargs.get("mdep", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "movopt",
                         int,
                         20,
                         10,
-                        kwargs.get("movopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -137,7 +142,8 @@ class PartRepositionAttachmentNodes(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ansid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

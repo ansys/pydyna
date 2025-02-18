@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,14 +45,14 @@ class DefineSphDeCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("did")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         str,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -64,49 +63,53 @@ class DefineSphDeCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sphid")
+                        **kwargs,
                     ),
                     Field(
                         "desid",
                         int,
                         10,
                         10,
-                        kwargs.get("desid")
+                        **kwargs,
                     ),
                     Field(
                         "sphtyp",
                         int,
                         20,
                         10,
-                        kwargs.get("sphtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "destyp",
                         int,
                         30,
                         10,
-                        kwargs.get("destyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pfact",
                         float,
                         40,
                         10,
-                        kwargs.get("pfact", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "dfact",
                         float,
                         50,
                         10,
-                        kwargs.get("dfact", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sphbox",
                         int,
                         60,
                         10,
-                        kwargs.get("sphbox")
+                        **kwargs,
                     ),
                 ],
             ),

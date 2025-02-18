@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementMassNodeSet(KeywordBase):
@@ -41,28 +40,29 @@ class ElementMassNodeSet(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "nsid",
                         int,
                         8,
                         8,
-                        kwargs.get("nsid")
+                        **kwargs,
                     ),
                     Field(
                         "mass",
                         float,
                         16,
                         16,
-                        kwargs.get("mass", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         32,
                         8,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                 ],
             ),

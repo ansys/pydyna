@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Iga2DBrep(KeywordBase):
@@ -41,7 +40,7 @@ class Iga2DBrep(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("brid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,56 @@ class Iga2DBrep(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fid1")
+                        **kwargs,
                     ),
                     Field(
                         "fid2",
                         int,
                         10,
                         10,
-                        kwargs.get("fid2")
+                        **kwargs,
                     ),
                     Field(
                         "fid3",
                         int,
                         20,
                         10,
-                        kwargs.get("fid3")
+                        **kwargs,
                     ),
                     Field(
                         "fid4",
                         int,
                         30,
                         10,
-                        kwargs.get("fid4")
+                        **kwargs,
                     ),
                     Field(
                         "fid5",
                         int,
                         40,
                         10,
-                        kwargs.get("fid5")
+                        **kwargs,
                     ),
                     Field(
                         "fid6",
                         int,
                         50,
                         10,
-                        kwargs.get("fid6")
+                        **kwargs,
                     ),
                     Field(
                         "fid7",
                         int,
                         60,
                         10,
-                        kwargs.get("fid7")
+                        **kwargs,
                     ),
                     Field(
                         "fid8",
                         int,
                         70,
                         10,
-                        kwargs.get("fid8")
+                        **kwargs,
                     ),
                 ],
             ),

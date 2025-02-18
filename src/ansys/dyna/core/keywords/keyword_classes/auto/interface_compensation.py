@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceCompensation(KeywordBase):
@@ -41,35 +40,38 @@ class InterfaceCompensation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("stage", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "psidt",
                         int,
                         10,
                         10,
-                        kwargs.get("psidt")
+                        **kwargs,
                     ),
                     Field(
                         "psidb",
                         int,
                         20,
                         10,
-                        kwargs.get("psidb")
+                        **kwargs,
                     ),
                     Field(
                         "smooth",
                         int,
                         30,
                         10,
-                        kwargs.get("smooth", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                     Field(
                         "scale",
                         float,
                         40,
                         10,
-                        kwargs.get("scale", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,7 +82,8 @@ class InterfaceCompensation(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("dbname", "lscomp" if use_lspp_defaults() else None)
+                        "lscomp",
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,7 +94,8 @@ class InterfaceCompensation(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("outname", "lstool" if use_lspp_defaults() else None)
+                        "lstool",
+                        **kwargs,
                     ),
                 ],
             ),

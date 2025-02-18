@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
@@ -41,56 +40,59 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("center", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "r",
                         float,
                         10,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "density",
                         int,
                         20,
                         10,
-                        kwargs.get("density")
+                        **kwargs,
                     ),
                     Field(
                         "x",
                         float,
                         30,
                         10,
-                        kwargs.get("x")
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         40,
                         10,
-                        kwargs.get("y")
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         50,
                         10,
-                        kwargs.get("z")
+                        **kwargs,
                     ),
                     Field(
                         "half1",
                         int,
                         60,
                         10,
-                        kwargs.get("half1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "half2",
                         int,
                         70,
                         10,
-                        kwargs.get("half2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BatteryEchemCellGeometry(KeywordBase):
@@ -41,42 +40,42 @@ class BatteryEchemCellGeometry(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("imodel")
+                        **kwargs,
                     ),
                     Field(
                         "alen",
                         float,
                         10,
                         10,
-                        kwargs.get("alen")
+                        **kwargs,
                     ),
                     Field(
                         "slen",
                         float,
                         20,
                         10,
-                        kwargs.get("slen")
+                        **kwargs,
                     ),
                     Field(
                         "clen",
                         float,
                         30,
                         10,
-                        kwargs.get("clen")
+                        **kwargs,
                     ),
                     Field(
                         "acclen",
                         float,
                         40,
                         10,
-                        kwargs.get("acclen")
+                        **kwargs,
                     ),
                     Field(
                         "cclen",
                         float,
                         50,
                         10,
-                        kwargs.get("cclen")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,35 +86,35 @@ class BatteryEchemCellGeometry(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("amesh")
+                        **kwargs,
                     ),
                     Field(
                         "smesh",
                         int,
                         10,
                         10,
-                        kwargs.get("smesh")
+                        **kwargs,
                     ),
                     Field(
                         "cmesh",
                         int,
                         20,
                         10,
-                        kwargs.get("cmesh")
+                        **kwargs,
                     ),
                     Field(
                         "accmesh",
                         int,
                         30,
                         10,
-                        kwargs.get("accmesh")
+                        **kwargs,
                     ),
                     Field(
                         "cccmesh",
                         int,
                         40,
                         10,
-                        kwargs.get("cccmesh")
+                        **kwargs,
                     ),
                 ],
             ),

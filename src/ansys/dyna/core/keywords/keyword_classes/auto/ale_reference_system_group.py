@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleReferenceSystemGroup(KeywordBase):
@@ -41,56 +40,62 @@ class AleReferenceSystemGroup(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         10,
                         10,
-                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "prtype",
                         int,
                         20,
                         10,
-                        kwargs.get("prtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "prid",
                         int,
                         30,
                         10,
-                        kwargs.get("prid")
+                        **kwargs,
                     ),
                     Field(
                         "bctran",
                         int,
                         40,
                         10,
-                        kwargs.get("bctran", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bcexp",
                         int,
                         50,
                         10,
-                        kwargs.get("bcexp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bcrot",
                         int,
                         60,
                         10,
-                        kwargs.get("bcrot", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "icoord",
                         int,
                         70,
                         10,
-                        kwargs.get("icoord", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +106,62 @@ class AleReferenceSystemGroup(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         10,
                         10,
-                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "prtype",
                         int,
                         20,
                         10,
-                        kwargs.get("prtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "prid",
                         int,
                         30,
                         10,
-                        kwargs.get("prid")
+                        **kwargs,
                     ),
                     Field(
                         "bctran",
                         int,
                         40,
                         10,
-                        kwargs.get("bctran", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bcexp",
                         int,
                         50,
                         10,
-                        kwargs.get("bcexp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bcrot",
                         int,
                         60,
                         10,
-                        kwargs.get("bcrot", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "icoord",
                         int,
                         70,
                         10,
-                        kwargs.get("icoord", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,56 +172,62 @@ class AleReferenceSystemGroup(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         10,
                         10,
-                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "prtype",
                         int,
                         20,
                         10,
-                        kwargs.get("prtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "prid",
                         int,
                         30,
                         10,
-                        kwargs.get("prid")
+                        **kwargs,
                     ),
                     Field(
                         "bctran",
                         int,
                         40,
                         10,
-                        kwargs.get("bctran", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bcexp",
                         int,
                         50,
                         10,
-                        kwargs.get("bcexp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bcrot",
                         int,
                         60,
                         10,
-                        kwargs.get("bcrot", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "icoord",
                         int,
                         70,
                         10,
-                        kwargs.get("icoord", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

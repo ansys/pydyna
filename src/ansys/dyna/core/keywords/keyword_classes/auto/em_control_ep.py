@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmControlEp(KeywordBase):
@@ -41,21 +40,21 @@ class EmControlEp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("solvetype")
+                        **kwargs,
                     ),
                     Field(
                         "numspliti",
                         int,
                         10,
                         10,
-                        kwargs.get("numspliti")
+                        **kwargs,
                     ),
                     Field(
                         "actusigma",
                         int,
                         20,
                         10,
-                        kwargs.get("actusigma")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IntegrationBeam(KeywordBase):
@@ -41,35 +40,39 @@ class IntegrationBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("irid")
+                        **kwargs,
                     ),
                     Field(
                         "nip",
                         int,
                         10,
                         10,
-                        kwargs.get("nip", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ra",
                         float,
                         20,
                         10,
-                        kwargs.get("ra", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "icst",
                         int,
                         30,
                         10,
-                        kwargs.get("icst", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         int,
                         40,
                         10,
-                        kwargs.get("k", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,56 +83,58 @@ class IntegrationBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         10,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         20,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "d4",
                         float,
                         30,
                         10,
-                        kwargs.get("d4")
+                        **kwargs,
                     ),
                     Field(
                         "sref",
                         float,
                         40,
                         10,
-                        kwargs.get("sref", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tref",
                         float,
                         50,
                         10,
-                        kwargs.get("tref", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "d5",
                         float,
                         60,
                         10,
-                        kwargs.get("d5")
+                        **kwargs,
                     ),
                     Field(
                         "d6",
                         float,
                         70,
                         10,
-                        kwargs.get("d6")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,28 +145,28 @@ class IntegrationBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("s")
+                        **kwargs,
                     ),
                     Field(
                         "t",
                         float,
                         10,
                         10,
-                        kwargs.get("t")
+                        **kwargs,
                     ),
                     Field(
                         "wf",
                         float,
                         20,
                         10,
-                        kwargs.get("wf")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         30,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                 ],
             ),

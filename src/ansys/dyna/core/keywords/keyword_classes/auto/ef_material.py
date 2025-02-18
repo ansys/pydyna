@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EfMaterial(KeywordBase):
@@ -41,14 +40,14 @@ class EfMaterial(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nmat")
+                        **kwargs,
                     ),
                     Field(
                         "name",
                         str,
                         10,
                         70,
-                        kwargs.get("name")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,28 +58,28 @@ class EfMaterial(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mtyp")
+                        **kwargs,
                     ),
                     Field(
                         "exe",
                         float,
                         10,
                         10,
-                        kwargs.get("exe")
+                        **kwargs,
                     ),
                     Field(
                         "eye",
                         float,
                         20,
                         10,
-                        kwargs.get("eye")
+                        **kwargs,
                     ),
                     Field(
                         "eze",
                         float,
                         30,
                         10,
-                        kwargs.get("eze")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,42 +90,44 @@ class EfMaterial(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rhos")
+                        **kwargs,
                     ),
                     Field(
                         "rhod",
                         float,
                         10,
                         10,
-                        kwargs.get("rhod")
+                        **kwargs,
                     ),
                     Field(
                         "taus",
                         float,
                         20,
                         10,
-                        kwargs.get("taus")
+                        **kwargs,
                     ),
                     Field(
                         "taud",
                         float,
                         30,
                         10,
-                        kwargs.get("taud")
+                        **kwargs,
                     ),
                     Field(
                         "rdiffr",
                         float,
                         40,
                         10,
-                        kwargs.get("rdiffr", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "rdifft",
                         float,
                         50,
                         10,
-                        kwargs.get("rdifft", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,61 @@ class DefineConstructionStages(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("istage")
+                        **kwargs,
                     ),
                     Field(
                         "ats",
                         float,
                         10,
                         10,
-                        kwargs.get("ats", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ate",
                         float,
                         20,
                         10,
-                        kwargs.get("ate", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "atr",
                         float,
                         30,
                         10,
-                        kwargs.get("atr")
+                        **kwargs,
                     ),
                     Field(
                         "rts",
                         float,
                         40,
                         10,
-                        kwargs.get("rts", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rte",
                         float,
                         50,
                         10,
-                        kwargs.get("rte", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "idynain",
                         int,
                         70,
                         10,
-                        kwargs.get("idynain", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

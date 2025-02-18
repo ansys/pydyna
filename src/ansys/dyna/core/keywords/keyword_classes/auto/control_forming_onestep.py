@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingOnestep(KeywordBase):
@@ -41,56 +40,61 @@ class ControlFormingOnestep(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("option", 6 if use_lspp_defaults() else None)
+                        6,
+                        **kwargs,
                     ),
                     Field(
                         "tsclmax",
                         float,
                         10,
                         10,
-                        kwargs.get("tsclmax", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "autobd",
                         float,
                         20,
                         10,
-                        kwargs.get("autobd", 0.3 if use_lspp_defaults() else None)
+                        0.3,
+                        **kwargs,
                     ),
                     Field(
                         "tsclmin",
                         float,
                         30,
                         10,
-                        kwargs.get("tsclmin", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "epsmax",
                         float,
                         40,
                         10,
-                        kwargs.get("epsmax", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "lcsdg",
                         int,
                         60,
                         10,
-                        kwargs.get("lcsdg")
+                        **kwargs,
                     ),
                     Field(
                         "dmgexp",
                         float,
                         70,
                         10,
-                        kwargs.get("dmgexp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,7 +105,7 @@ class ControlFormingOnestep(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("flatname")
+                        **kwargs,
                     ),
                 ],
             ),

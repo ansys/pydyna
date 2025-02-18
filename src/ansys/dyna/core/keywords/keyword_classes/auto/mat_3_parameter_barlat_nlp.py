@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class Mat3ParameterBarlatNlp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "hr",
                         float,
                         40,
                         10,
-                        kwargs.get("hr", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "p1",
                         float,
                         50,
                         10,
-                        kwargs.get("p1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         60,
                         10,
-                        kwargs.get("p2", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "iter",
                         float,
                         70,
                         10,
-                        kwargs.get("iter", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +109,56 @@ class Mat3ParameterBarlatNlp(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "r00",
                         float,
                         10,
                         10,
-                        kwargs.get("r00")
+                        **kwargs,
                     ),
                     Field(
                         "r45",
                         float,
                         20,
                         10,
-                        kwargs.get("r45")
+                        **kwargs,
                     ),
                     Field(
                         "r90",
                         float,
                         30,
                         10,
-                        kwargs.get("r90")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         40,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "e0",
                         float,
                         50,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "spi",
                         float,
                         60,
                         10,
-                        kwargs.get("spi")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         70,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +169,56 @@ class Mat3ParameterBarlatNlp(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("crc1")
+                        **kwargs,
                     ),
                     Field(
                         "cra1",
                         float,
                         10,
                         10,
-                        kwargs.get("cra1")
+                        **kwargs,
                     ),
                     Field(
                         "crc2",
                         float,
                         20,
                         10,
-                        kwargs.get("crc2")
+                        **kwargs,
                     ),
                     Field(
                         "cra2",
                         float,
                         30,
                         10,
-                        kwargs.get("cra2")
+                        **kwargs,
                     ),
                     Field(
                         "crc3",
                         float,
                         40,
                         10,
-                        kwargs.get("crc3")
+                        **kwargs,
                     ),
                     Field(
                         "cra3",
                         float,
                         50,
                         10,
-                        kwargs.get("cra3")
+                        **kwargs,
                     ),
                     Field(
                         "crc4",
                         float,
                         60,
                         10,
-                        kwargs.get("crc4")
+                        **kwargs,
                     ),
                     Field(
                         "cra4",
                         float,
                         70,
                         10,
-                        kwargs.get("cra4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +229,56 @@ class Mat3ParameterBarlatNlp(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         10,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         20,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "vlcid",
                         int,
                         30,
                         10,
-                        kwargs.get("vlcid")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "pb",
                         float,
                         50,
                         10,
-                        kwargs.get("pb")
+                        **kwargs,
                     ),
                     Field(
                         "nlp",
                         int,
                         60,
                         10,
-                        kwargs.get("nlp")
+                        **kwargs,
                     ),
                     Field(
                         "htb",
                         float,
                         70,
                         10,
-                        kwargs.get("htb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,56 +289,56 @@ class Mat3ParameterBarlatNlp(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                     Field(
                         "htc",
                         int,
                         60,
                         10,
-                        kwargs.get("htc")
+                        **kwargs,
                     ),
                     Field(
                         "htd",
                         int,
                         70,
                         10,
-                        kwargs.get("htd")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -346,56 +349,56 @@ class Mat3ParameterBarlatNlp(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "htflag",
                         float,
                         70,
                         10,
-                        kwargs.get("htflag")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -406,21 +409,22 @@ class Mat3ParameterBarlatNlp(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("usrfail", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcbi",
                         float,
                         10,
                         10,
-                        kwargs.get("lcbi")
+                        **kwargs,
                     ),
                     Field(
                         "lcsh",
                         float,
                         20,
                         10,
-                        kwargs.get("lcsh")
+                        **kwargs,
                     ),
                 ],
             ),

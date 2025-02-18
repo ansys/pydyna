@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class NodeRigidSurface(KeywordBase):
@@ -41,28 +40,31 @@ class NodeRigidSurface(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "x",
                         float,
                         8,
                         16,
-                        kwargs.get("x", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         24,
                         16,
-                        kwargs.get("y", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         40,
                         16,
-                        kwargs.get("z", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

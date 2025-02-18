@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,21 +45,22 @@ class MatGasMixture(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "iadiab",
                         int,
                         10,
                         10,
-                        kwargs.get("iadiab", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "runiv",
                         float,
                         20,
                         10,
-                        kwargs.get("runiv")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -71,56 +71,56 @@ class MatGasMixture(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cvmass1")
+                        **kwargs,
                     ),
                     Field(
                         "cvmass2",
                         float,
                         10,
                         10,
-                        kwargs.get("cvmass2")
+                        **kwargs,
                     ),
                     Field(
                         "cvmass3",
                         float,
                         20,
                         10,
-                        kwargs.get("cvmass3")
+                        **kwargs,
                     ),
                     Field(
                         "cvmass4",
                         float,
                         30,
                         10,
-                        kwargs.get("cvmass4")
+                        **kwargs,
                     ),
                     Field(
                         "cvmass5",
                         float,
                         40,
                         10,
-                        kwargs.get("cvmass5")
+                        **kwargs,
                     ),
                     Field(
                         "cvmass6",
                         float,
                         50,
                         10,
-                        kwargs.get("cvmass6")
+                        **kwargs,
                     ),
                     Field(
                         "cvmass7",
                         float,
                         60,
                         10,
-                        kwargs.get("cvmass7")
+                        **kwargs,
                     ),
                     Field(
                         "cvmass8",
                         float,
                         70,
                         10,
-                        kwargs.get("cvmass8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -131,56 +131,56 @@ class MatGasMixture(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cpmass1")
+                        **kwargs,
                     ),
                     Field(
                         "cpmass2",
                         float,
                         10,
                         10,
-                        kwargs.get("cpmass2")
+                        **kwargs,
                     ),
                     Field(
                         "cpmass3",
                         float,
                         20,
                         10,
-                        kwargs.get("cpmass3")
+                        **kwargs,
                     ),
                     Field(
                         "cpmass4",
                         float,
                         30,
                         10,
-                        kwargs.get("cpmass4")
+                        **kwargs,
                     ),
                     Field(
                         "cpmass5",
                         float,
                         40,
                         10,
-                        kwargs.get("cpmass5")
+                        **kwargs,
                     ),
                     Field(
                         "cpmass6",
                         float,
                         50,
                         10,
-                        kwargs.get("cpmass6")
+                        **kwargs,
                     ),
                     Field(
                         "cpmass7",
                         float,
                         60,
                         10,
-                        kwargs.get("cpmass7")
+                        **kwargs,
                     ),
                     Field(
                         "cpmass8",
                         float,
                         70,
                         10,
-                        kwargs.get("cpmass8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -191,56 +191,56 @@ class MatGasMixture(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("molwt1")
+                        **kwargs,
                     ),
                     Field(
                         "molwt2",
                         float,
                         10,
                         10,
-                        kwargs.get("molwt2")
+                        **kwargs,
                     ),
                     Field(
                         "molwt3",
                         float,
                         20,
                         10,
-                        kwargs.get("molwt3")
+                        **kwargs,
                     ),
                     Field(
                         "molwt4",
                         float,
                         30,
                         10,
-                        kwargs.get("molwt4")
+                        **kwargs,
                     ),
                     Field(
                         "molwt5",
                         float,
                         40,
                         10,
-                        kwargs.get("molwt5")
+                        **kwargs,
                     ),
                     Field(
                         "molwt6",
                         float,
                         50,
                         10,
-                        kwargs.get("molwt6")
+                        **kwargs,
                     ),
                     Field(
                         "molwt7",
                         float,
                         60,
                         10,
-                        kwargs.get("molwt7")
+                        **kwargs,
                     ),
                     Field(
                         "molwt8",
                         float,
                         70,
                         10,
-                        kwargs.get("molwt8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -251,56 +251,56 @@ class MatGasMixture(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cpmole1")
+                        **kwargs,
                     ),
                     Field(
                         "cpmole2",
                         float,
                         10,
                         10,
-                        kwargs.get("cpmole2")
+                        **kwargs,
                     ),
                     Field(
                         "cpmole3",
                         float,
                         20,
                         10,
-                        kwargs.get("cpmole3")
+                        **kwargs,
                     ),
                     Field(
                         "cpmole4",
                         float,
                         30,
                         10,
-                        kwargs.get("cpmole4")
+                        **kwargs,
                     ),
                     Field(
                         "cpmole5",
                         float,
                         40,
                         10,
-                        kwargs.get("cpmole5")
+                        **kwargs,
                     ),
                     Field(
                         "cpmole6",
                         float,
                         50,
                         10,
-                        kwargs.get("cpmole6")
+                        **kwargs,
                     ),
                     Field(
                         "cpmole7",
                         float,
                         60,
                         10,
-                        kwargs.get("cpmole7")
+                        **kwargs,
                     ),
                     Field(
                         "cpmole8",
                         float,
                         70,
                         10,
-                        kwargs.get("cpmole8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -311,56 +311,56 @@ class MatGasMixture(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "b2",
                         float,
                         10,
                         10,
-                        kwargs.get("b2")
+                        **kwargs,
                     ),
                     Field(
                         "b3",
                         float,
                         20,
                         10,
-                        kwargs.get("b3")
+                        **kwargs,
                     ),
                     Field(
                         "b4",
                         float,
                         30,
                         10,
-                        kwargs.get("b4")
+                        **kwargs,
                     ),
                     Field(
                         "b5",
                         float,
                         40,
                         10,
-                        kwargs.get("b5")
+                        **kwargs,
                     ),
                     Field(
                         "b6",
                         float,
                         50,
                         10,
-                        kwargs.get("b6")
+                        **kwargs,
                     ),
                     Field(
                         "b7",
                         float,
                         60,
                         10,
-                        kwargs.get("b7")
+                        **kwargs,
                     ),
                     Field(
                         "b8",
                         float,
                         70,
                         10,
-                        kwargs.get("b8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -371,56 +371,56 @@ class MatGasMixture(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         10,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         float,
                         20,
                         10,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                     Field(
                         "c4",
                         float,
                         30,
                         10,
-                        kwargs.get("c4")
+                        **kwargs,
                     ),
                     Field(
                         "c5",
                         float,
                         40,
                         10,
-                        kwargs.get("c5")
+                        **kwargs,
                     ),
                     Field(
                         "c6",
                         float,
                         50,
                         10,
-                        kwargs.get("c6")
+                        **kwargs,
                     ),
                     Field(
                         "c7",
                         float,
                         60,
                         10,
-                        kwargs.get("c7")
+                        **kwargs,
                     ),
                     Field(
                         "c8",
                         float,
                         70,
                         10,
-                        kwargs.get("c8")
+                        **kwargs,
                     ),
                 ],
             ),

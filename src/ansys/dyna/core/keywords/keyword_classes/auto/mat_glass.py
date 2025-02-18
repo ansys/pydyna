@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class MatGlass(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "imod",
                         float,
                         60,
                         10,
-                        kwargs.get("imod", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ilaw",
                         float,
                         70,
                         10,
-                        kwargs.get("ilaw", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,58 @@ class MatGlass(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fmod", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ft",
                         float,
                         10,
                         10,
-                        kwargs.get("ft")
+                        **kwargs,
                     ),
                     Field(
                         "fc",
                         float,
                         20,
                         10,
-                        kwargs.get("fc")
+                        **kwargs,
                     ),
                     Field(
                         "at",
                         float,
                         30,
                         10,
-                        kwargs.get("at")
+                        **kwargs,
                     ),
                     Field(
                         "bt",
                         int,
                         40,
                         10,
-                        kwargs.get("bt")
+                        **kwargs,
                     ),
                     Field(
                         "ac",
                         int,
                         50,
                         10,
-                        kwargs.get("ac")
+                        **kwargs,
                     ),
                     Field(
                         "bc",
                         float,
                         60,
                         10,
-                        kwargs.get("bc")
+                        **kwargs,
                     ),
                     Field(
                         "ftscl",
                         float,
                         70,
                         10,
-                        kwargs.get("ftscl", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,42 +169,43 @@ class MatGlass(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfsti")
+                        **kwargs,
                     ),
                     Field(
                         "sfstr",
                         float,
                         10,
                         10,
-                        kwargs.get("sfstr")
+                        **kwargs,
                     ),
                     Field(
                         "crin",
                         float,
                         20,
                         10,
-                        kwargs.get("crin", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ecrcl",
                         float,
                         30,
                         10,
-                        kwargs.get("ecrcl")
+                        **kwargs,
                     ),
                     Field(
                         "ncycr",
                         float,
                         40,
                         10,
-                        kwargs.get("ncycr")
+                        **kwargs,
                     ),
                     Field(
                         "nipf",
                         float,
                         50,
                         10,
-                        kwargs.get("nipf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -212,35 +216,35 @@ class MatGlass(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("epscr")
+                        **kwargs,
                     ),
                     Field(
                         "engcrt",
                         float,
                         10,
                         10,
-                        kwargs.get("engcrt")
+                        **kwargs,
                     ),
                     Field(
                         "radcrt",
                         float,
                         20,
                         10,
-                        kwargs.get("radcrt")
+                        **kwargs,
                     ),
                     Field(
                         "ratenl",
                         float,
                         30,
                         10,
-                        kwargs.get("ratenl")
+                        **kwargs,
                     ),
                     Field(
                         "rfiltf",
                         float,
                         40,
                         10,
-                        kwargs.get("rfiltf")
+                        **kwargs,
                     ),
                 ],
             ),

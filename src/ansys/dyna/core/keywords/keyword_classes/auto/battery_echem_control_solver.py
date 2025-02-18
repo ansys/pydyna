@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BatteryEchemControlSolver(KeywordBase):
@@ -41,56 +40,61 @@ class BatteryEchemControlSolver(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("imodel")
+                        **kwargs,
                     ),
                     Field(
                         "igeom",
                         int,
                         10,
                         10,
-                        kwargs.get("igeom")
+                        **kwargs,
                     ),
                     Field(
                         "ncycle",
                         int,
                         20,
                         10,
-                        kwargs.get("ncycle", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "aging",
                         int,
                         30,
                         10,
-                        kwargs.get("aging", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "tra",
                         int,
                         40,
                         10,
-                        kwargs.get("tra", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "gas",
                         int,
                         50,
                         10,
-                        kwargs.get("gas", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "esolid",
                         int,
                         60,
                         10,
-                        kwargs.get("esolid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,35 +105,37 @@ class BatteryEchemControlSolver(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("irun")
+                        **kwargs,
                     ),
                     Field(
                         "lcur",
                         int,
                         10,
                         10,
-                        kwargs.get("lcur")
+                        **kwargs,
                     ),
                     Field(
                         "curv",
                         float,
                         20,
                         10,
-                        kwargs.get("curv")
+                        **kwargs,
                     ),
                     Field(
                         "ctime",
                         float,
                         30,
                         10,
-                        kwargs.get("ctime", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vcut",
                         float,
                         40,
                         10,
-                        kwargs.get("vcut", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,42 +146,42 @@ class BatteryEchemControlSolver(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("mws")
+                        **kwargs,
                     ),
                     Field(
                         "dens",
                         float,
                         10,
                         10,
-                        kwargs.get("dens")
+                        **kwargs,
                     ),
                     Field(
                         "brugs",
                         float,
                         20,
                         10,
-                        kwargs.get("brugs")
+                        **kwargs,
                     ),
                     Field(
                         "epss",
                         float,
                         30,
                         10,
-                        kwargs.get("epss")
+                        **kwargs,
                     ),
                     Field(
                         "cseio",
                         float,
                         40,
                         10,
-                        kwargs.get("cseio")
+                        **kwargs,
                     ),
                     Field(
                         "tseio",
                         float,
                         50,
                         10,
-                        kwargs.get("tseio")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -186,28 +192,28 @@ class BatteryEchemControlSolver(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ecdo")
+                        **kwargs,
                     ),
                     Field(
                         "kfs",
                         float,
                         10,
                         10,
-                        kwargs.get("kfs")
+                        **kwargs,
                     ),
                     Field(
                         "ceco",
                         float,
                         20,
                         10,
-                        kwargs.get("ceco")
+                        **kwargs,
                     ),
                     Field(
                         "ecdf",
                         float,
                         30,
                         10,
-                        kwargs.get("ecdf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -218,28 +224,28 @@ class BatteryEchemControlSolver(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("hofeln")
+                        **kwargs,
                     ),
                     Field(
                         "hofli",
                         int,
                         10,
                         10,
-                        kwargs.get("hofli")
+                        **kwargs,
                     ),
                     Field(
                         "hofsei",
                         float,
                         20,
                         10,
-                        kwargs.get("hofsei")
+                        **kwargs,
                     ),
                     Field(
                         "hofc2h4",
                         float,
                         30,
                         10,
-                        kwargs.get("hofc2h4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -250,35 +256,35 @@ class BatteryEchemControlSolver(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("afi")
+                        **kwargs,
                     ),
                     Field(
                         "eat",
                         float,
                         10,
                         10,
-                        kwargs.get("eat")
+                        **kwargs,
                     ),
                     Field(
                         "hoflc",
                         float,
                         20,
                         10,
-                        kwargs.get("hoflc")
+                        **kwargs,
                     ),
                     Field(
                         "hofco2",
                         float,
                         30,
                         10,
-                        kwargs.get("hofco2")
+                        **kwargs,
                     ),
                     Field(
                         "hofo2",
                         float,
                         40,
                         10,
-                        kwargs.get("hofo2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -289,7 +295,7 @@ class BatteryEchemControlSolver(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("file1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -300,7 +306,7 @@ class BatteryEchemControlSolver(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("file2")
+                        **kwargs,
                     ),
                 ],
             ),

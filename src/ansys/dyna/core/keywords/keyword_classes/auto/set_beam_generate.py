@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,7 +45,7 @@ class SetBeamGenerate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -57,56 +56,56 @@ class SetBeamGenerate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("b1beg")
+                        **kwargs,
                     ),
                     Field(
                         "b1end",
                         int,
                         10,
                         10,
-                        kwargs.get("b1end")
+                        **kwargs,
                     ),
                     Field(
                         "b2beg",
                         int,
                         20,
                         10,
-                        kwargs.get("b2beg")
+                        **kwargs,
                     ),
                     Field(
                         "b2end",
                         int,
                         30,
                         10,
-                        kwargs.get("b2end")
+                        **kwargs,
                     ),
                     Field(
                         "b3beg",
                         int,
                         40,
                         10,
-                        kwargs.get("b3beg")
+                        **kwargs,
                     ),
                     Field(
                         "b3end",
                         int,
                         50,
                         10,
-                        kwargs.get("b3end")
+                        **kwargs,
                     ),
                     Field(
                         "b4beg",
                         int,
                         60,
                         10,
-                        kwargs.get("b4beg")
+                        **kwargs,
                     ),
                     Field(
                         "b4end",
                         int,
                         70,
                         10,
-                        kwargs.get("b4end")
+                        **kwargs,
                     ),
                 ],
             ),

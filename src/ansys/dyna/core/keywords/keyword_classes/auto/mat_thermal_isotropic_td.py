@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,42 @@ class MatThermalIsotropicTd(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tmid")
+                        **kwargs,
                     ),
                     Field(
                         "tro",
                         float,
                         10,
                         10,
-                        kwargs.get("tro")
+                        **kwargs,
                     ),
                     Field(
                         "tgrlc",
                         float,
                         20,
                         10,
-                        kwargs.get("tgrlc")
+                        **kwargs,
                     ),
                     Field(
                         "tgmult",
                         float,
                         30,
                         10,
-                        kwargs.get("tgmult")
+                        **kwargs,
                     ),
                     Field(
                         "tlat",
                         float,
                         40,
                         10,
-                        kwargs.get("tlat")
+                        **kwargs,
                     ),
                     Field(
                         "hlat",
                         float,
                         50,
                         10,
-                        kwargs.get("hlat")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,56 +91,56 @@ class MatThermalIsotropicTd(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t1")
+                        **kwargs,
                     ),
                     Field(
                         "t2",
                         float,
                         10,
                         10,
-                        kwargs.get("t2")
+                        **kwargs,
                     ),
                     Field(
                         "t3",
                         float,
                         20,
                         10,
-                        kwargs.get("t3")
+                        **kwargs,
                     ),
                     Field(
                         "t4",
                         float,
                         30,
                         10,
-                        kwargs.get("t4")
+                        **kwargs,
                     ),
                     Field(
                         "t5",
                         float,
                         40,
                         10,
-                        kwargs.get("t5")
+                        **kwargs,
                     ),
                     Field(
                         "t6",
                         float,
                         50,
                         10,
-                        kwargs.get("t6")
+                        **kwargs,
                     ),
                     Field(
                         "t7",
                         float,
                         60,
                         10,
-                        kwargs.get("t7")
+                        **kwargs,
                     ),
                     Field(
                         "t8",
                         float,
                         70,
                         10,
-                        kwargs.get("t8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -152,56 +151,56 @@ class MatThermalIsotropicTd(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         10,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         float,
                         20,
                         10,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                     Field(
                         "c4",
                         float,
                         30,
                         10,
-                        kwargs.get("c4")
+                        **kwargs,
                     ),
                     Field(
                         "c5",
                         float,
                         40,
                         10,
-                        kwargs.get("c5")
+                        **kwargs,
                     ),
                     Field(
                         "c6",
                         float,
                         50,
                         10,
-                        kwargs.get("c6")
+                        **kwargs,
                     ),
                     Field(
                         "c7",
                         float,
                         60,
                         10,
-                        kwargs.get("c7")
+                        **kwargs,
                     ),
                     Field(
                         "c8",
                         float,
                         70,
                         10,
-                        kwargs.get("c8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -212,56 +211,56 @@ class MatThermalIsotropicTd(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k1")
+                        **kwargs,
                     ),
                     Field(
                         "k2",
                         float,
                         10,
                         10,
-                        kwargs.get("k2")
+                        **kwargs,
                     ),
                     Field(
                         "k3",
                         float,
                         20,
                         10,
-                        kwargs.get("k3")
+                        **kwargs,
                     ),
                     Field(
                         "k4",
                         float,
                         30,
                         10,
-                        kwargs.get("k4")
+                        **kwargs,
                     ),
                     Field(
                         "k5",
                         float,
                         40,
                         10,
-                        kwargs.get("k5")
+                        **kwargs,
                     ),
                     Field(
                         "k6",
                         float,
                         50,
                         10,
-                        kwargs.get("k6")
+                        **kwargs,
                     ),
                     Field(
                         "k7",
                         float,
                         60,
                         10,
-                        kwargs.get("k7")
+                        **kwargs,
                     ),
                     Field(
                         "k8",
                         float,
                         70,
                         10,
-                        kwargs.get("k8")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingMaxid(KeywordBase):
@@ -41,35 +40,35 @@ class ControlFormingMaxid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "maxidn",
                         int,
                         10,
                         10,
-                        kwargs.get("maxidn")
+                        **kwargs,
                     ),
                     Field(
                         "maxide",
                         int,
                         20,
                         10,
-                        kwargs.get("maxide")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "i2dynain",
                         int,
                         40,
                         10,
-                        kwargs.get("i2dynain")
+                        **kwargs,
                     ),
                 ],
             ),

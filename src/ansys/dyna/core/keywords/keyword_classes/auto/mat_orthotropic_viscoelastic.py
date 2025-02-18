@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class MatOrthotropicViscoelastic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "ea",
                         float,
                         20,
                         10,
-                        kwargs.get("ea")
+                        **kwargs,
                     ),
                     Field(
                         "eb",
                         float,
                         30,
                         10,
-                        kwargs.get("eb")
+                        **kwargs,
                     ),
                     Field(
                         "ec",
                         float,
                         40,
                         10,
-                        kwargs.get("ec")
+                        **kwargs,
                     ),
                     Field(
                         "vf",
                         float,
                         50,
                         10,
-                        kwargs.get("vf")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         60,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,42 +98,42 @@ class MatOrthotropicViscoelastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("g0")
+                        **kwargs,
                     ),
                     Field(
                         "ginf",
                         float,
                         10,
                         10,
-                        kwargs.get("ginf")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         20,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "prba",
                         float,
                         30,
                         10,
-                        kwargs.get("prba")
+                        **kwargs,
                     ),
                     Field(
                         "prca",
                         float,
                         40,
                         10,
-                        kwargs.get("prca")
+                        **kwargs,
                     ),
                     Field(
                         "prcb",
                         float,
                         50,
                         10,
-                        kwargs.get("prcb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -145,35 +144,35 @@ class MatOrthotropicViscoelastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gab")
+                        **kwargs,
                     ),
                     Field(
                         "gbc",
                         float,
                         10,
                         10,
-                        kwargs.get("gbc")
+                        **kwargs,
                     ),
                     Field(
                         "gca",
                         float,
                         20,
                         10,
-                        kwargs.get("gca")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         30,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "mangle",
                         float,
                         40,
                         10,
-                        kwargs.get("mangle")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -184,42 +183,42 @@ class MatOrthotropicViscoelastic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -230,42 +229,42 @@ class MatOrthotropicViscoelastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                 ],
             ),

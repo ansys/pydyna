@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class SensorDefineElementUpdate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sensid")
+                        **kwargs,
                     ),
                     Field(
                         "etype",
                         str,
                         10,
                         10,
-                        kwargs.get("etype", "BEAM" if use_lspp_defaults() else None)
+                        "BEAM",
+                        **kwargs,
                     ),
                     Field(
                         "elemid",
                         int,
                         20,
                         10,
-                        kwargs.get("elemid")
+                        **kwargs,
                     ),
                     Field(
                         "comp",
                         str,
                         30,
                         10,
-                        kwargs.get("comp", "XX" if use_lspp_defaults() else None)
+                        "XX",
+                        **kwargs,
                     ),
                     Field(
                         "ctype",
                         str,
                         40,
                         10,
-                        kwargs.get("ctype", "STRAIN" if use_lspp_defaults() else None)
+                        "STRAIN",
+                        **kwargs,
                     ),
                     Field(
                         "layer",
                         str,
                         50,
                         10,
-                        kwargs.get("layer", "BOT" if use_lspp_defaults() else None)
+                        "BOT",
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         60,
                         10,
-                        kwargs.get("sf")
+                        **kwargs,
                     ),
                     Field(
                         "pwr",
                         float,
                         70,
                         10,
-                        kwargs.get("pwr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,21 +109,21 @@ class SensorDefineElementUpdate(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("birth")
+                        **kwargs,
                     ),
                     Field(
                         "death",
                         float,
                         10,
                         10,
-                        kwargs.get("death")
+                        **kwargs,
                     ),
                     Field(
                         "dtupd",
                         float,
                         20,
                         10,
-                        kwargs.get("dtupd")
+                        **kwargs,
                     ),
                 ],
             ),

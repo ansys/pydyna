@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlThermalNonlinear(KeywordBase):
@@ -41,49 +40,56 @@ class ControlThermalNonlinear(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("refmax", 10 if use_lspp_defaults() else None)
+                        10,
+                        **kwargs,
                     ),
                     Field(
                         "tol",
                         float,
                         10,
                         10,
-                        kwargs.get("tol", 1.0E-4 if use_lspp_defaults() else None)
+                        1.0E-4,
+                        **kwargs,
                     ),
                     Field(
                         "dcp",
                         float,
                         20,
                         10,
-                        kwargs.get("dcp", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lumpbc",
                         int,
                         30,
                         10,
-                        kwargs.get("lumpbc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "thlstl",
                         float,
                         40,
                         10,
-                        kwargs.get("thlstl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nlthpr",
                         int,
                         50,
                         10,
-                        kwargs.get("nlthpr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "phchpn",
                         float,
                         60,
                         10,
-                        kwargs.get("phchpn", 100.0 if use_lspp_defaults() else None)
+                        100.0,
+                        **kwargs,
                     ),
                 ],
             ),

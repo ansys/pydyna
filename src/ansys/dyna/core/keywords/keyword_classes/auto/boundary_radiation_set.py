@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryRadiationSet(KeywordBase):
@@ -41,49 +40,50 @@ class BoundaryRadiationSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         int,
                         10,
                         10,
-                        kwargs.get("type", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "pserod",
                         int,
                         60,
                         10,
-                        kwargs.get("pserod")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,35 +94,40 @@ class BoundaryRadiationSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rflcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rfmult",
                         float,
                         10,
                         10,
-                        kwargs.get("rfmult", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "tilcid",
                         int,
                         20,
                         10,
-                        kwargs.get("tilcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "timult",
                         float,
                         30,
                         10,
-                        kwargs.get("timult", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "loc",
                         int,
                         40,
                         10,
-                        kwargs.get("loc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

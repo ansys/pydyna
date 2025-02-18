@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlAdapt(KeywordBase):
@@ -41,56 +40,61 @@ class IcfdControlAdapt(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("minh")
+                        **kwargs,
                     ),
                     Field(
                         "maxh",
                         float,
                         10,
                         10,
-                        kwargs.get("maxh")
+                        **kwargs,
                     ),
                     Field(
                         "err",
                         float,
                         20,
                         10,
-                        kwargs.get("err", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "mth",
                         int,
                         30,
                         10,
-                        kwargs.get("mth", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nit",
                         int,
                         40,
                         10,
-                        kwargs.get("nit", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         50,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "kis",
                         int,
                         70,
                         10,
-                        kwargs.get("kis", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

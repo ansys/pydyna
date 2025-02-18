@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartDuplicateNullOverlay(KeywordBase):
@@ -41,49 +40,55 @@ class PartDuplicateNullOverlay(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("ptype", "PART" if use_lspp_defaults() else None)
+                        "PART",
+                        **kwargs,
                     ),
                     Field(
                         "typeid",
                         int,
                         10,
                         10,
-                        kwargs.get("typeid")
+                        **kwargs,
                     ),
                     Field(
                         "idpoff",
                         int,
                         20,
                         10,
-                        kwargs.get("idpoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ideoff",
                         int,
                         30,
                         10,
-                        kwargs.get("ideoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "density",
                         float,
                         40,
                         10,
-                        kwargs.get("density", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         50,
                         10,
-                        kwargs.get("e", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         60,
                         10,
-                        kwargs.get("pr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

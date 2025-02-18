@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatCompositeMscDmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "ea",
                         float,
                         20,
                         10,
-                        kwargs.get("ea")
+                        **kwargs,
                     ),
                     Field(
                         "eb",
                         float,
                         30,
                         10,
-                        kwargs.get("eb")
+                        **kwargs,
                     ),
                     Field(
                         "ec",
                         float,
                         40,
                         10,
-                        kwargs.get("ec")
+                        **kwargs,
                     ),
                     Field(
                         "prba",
                         float,
                         50,
                         10,
-                        kwargs.get("prba")
+                        **kwargs,
                     ),
                     Field(
                         "prca",
                         float,
                         60,
                         10,
-                        kwargs.get("prca")
+                        **kwargs,
                     ),
                     Field(
                         "prcb",
                         float,
                         70,
                         10,
-                        kwargs.get("prcb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,35 +105,36 @@ class MatCompositeMscDmg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gab")
+                        **kwargs,
                     ),
                     Field(
                         "gbc",
                         float,
                         10,
                         10,
-                        kwargs.get("gbc")
+                        **kwargs,
                     ),
                     Field(
                         "gca",
                         float,
                         20,
                         10,
-                        kwargs.get("gca")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         30,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         40,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -145,42 +145,42 @@ class MatCompositeMscDmg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -191,49 +191,49 @@ class MatCompositeMscDmg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -244,56 +244,56 @@ class MatCompositeMscDmg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sat")
+                        **kwargs,
                     ),
                     Field(
                         "sac",
                         float,
                         10,
                         10,
-                        kwargs.get("sac")
+                        **kwargs,
                     ),
                     Field(
                         "sbt",
                         float,
                         20,
                         10,
-                        kwargs.get("sbt")
+                        **kwargs,
                     ),
                     Field(
                         "sbc",
                         float,
                         30,
                         10,
-                        kwargs.get("sbc")
+                        **kwargs,
                     ),
                     Field(
                         "sct",
                         float,
                         40,
                         10,
-                        kwargs.get("sct")
+                        **kwargs,
                     ),
                     Field(
                         "sfc",
                         float,
                         50,
                         10,
-                        kwargs.get("sfc")
+                        **kwargs,
                     ),
                     Field(
                         "sfs",
                         float,
                         60,
                         10,
-                        kwargs.get("sfs")
+                        **kwargs,
                     ),
                     Field(
                         "sab",
                         float,
                         70,
                         10,
-                        kwargs.get("sab")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -304,49 +304,50 @@ class MatCompositeMscDmg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sbc")
+                        **kwargs,
                     ),
                     Field(
                         "sca",
                         float,
                         10,
                         10,
-                        kwargs.get("sca")
+                        **kwargs,
                     ),
                     Field(
                         "sffc",
                         float,
                         20,
                         10,
-                        kwargs.get("sffc")
+                        **kwargs,
                     ),
                     Field(
                         "amodel",
                         int,
                         30,
                         10,
-                        kwargs.get("amodel", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "phic",
                         float,
                         40,
                         10,
-                        kwargs.get("phic")
+                        **kwargs,
                     ),
                     Field(
                         "e_limt",
                         float,
                         50,
                         10,
-                        kwargs.get("e_limt")
+                        **kwargs,
                     ),
                     Field(
                         "s_delm",
                         float,
                         60,
                         10,
-                        kwargs.get("s_delm")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -357,35 +358,35 @@ class MatCompositeMscDmg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("omgmx")
+                        **kwargs,
                     ),
                     Field(
                         "ecrsh",
                         float,
                         10,
                         10,
-                        kwargs.get("ecrsh")
+                        **kwargs,
                     ),
                     Field(
                         "eexpn",
                         float,
                         20,
                         10,
-                        kwargs.get("eexpn")
+                        **kwargs,
                     ),
                     Field(
                         "cerate1",
                         float,
                         30,
                         10,
-                        kwargs.get("cerate1")
+                        **kwargs,
                     ),
                     Field(
                         "am1",
                         float,
                         40,
                         10,
-                        kwargs.get("am1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -396,42 +397,42 @@ class MatCompositeMscDmg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("am2")
+                        **kwargs,
                     ),
                     Field(
                         "am3",
                         float,
                         10,
                         10,
-                        kwargs.get("am3")
+                        **kwargs,
                     ),
                     Field(
                         "am4",
                         float,
                         20,
                         10,
-                        kwargs.get("am4")
+                        **kwargs,
                     ),
                     Field(
                         "cerate2",
                         float,
                         30,
                         10,
-                        kwargs.get("cerate2")
+                        **kwargs,
                     ),
                     Field(
                         "cerate3",
                         float,
                         40,
                         10,
-                        kwargs.get("cerate3")
+                        **kwargs,
                     ),
                     Field(
                         "cerate4",
                         float,
                         50,
                         10,
-                        kwargs.get("cerate4")
+                        **kwargs,
                     ),
                 ],
             ),

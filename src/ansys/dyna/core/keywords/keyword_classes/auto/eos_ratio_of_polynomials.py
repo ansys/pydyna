@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosRatioOfPolynomials(KeywordBase):
@@ -41,7 +40,7 @@ class EosRatioOfPolynomials(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,28 +51,32 @@ class EosRatioOfPolynomials(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a10", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a11",
                         float,
                         20,
                         20,
-                        kwargs.get("a11", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a12",
                         float,
                         40,
                         20,
-                        kwargs.get("a12", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a13",
                         float,
                         60,
                         20,
-                        kwargs.get("a13", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -84,28 +87,32 @@ class EosRatioOfPolynomials(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a20", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a21",
                         float,
                         20,
                         20,
-                        kwargs.get("a21", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a22",
                         float,
                         40,
                         20,
-                        kwargs.get("a22", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a23",
                         float,
                         60,
                         20,
-                        kwargs.get("a23", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -116,28 +123,32 @@ class EosRatioOfPolynomials(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a30", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a31",
                         float,
                         20,
                         20,
-                        kwargs.get("a31", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a32",
                         float,
                         40,
                         20,
-                        kwargs.get("a32", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a33",
                         float,
                         60,
                         20,
-                        kwargs.get("a33", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -148,28 +159,32 @@ class EosRatioOfPolynomials(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a40", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a41",
                         float,
                         20,
                         20,
-                        kwargs.get("a41", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a42",
                         float,
                         40,
                         20,
-                        kwargs.get("a42", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a43",
                         float,
                         60,
                         20,
-                        kwargs.get("a43", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -180,28 +195,32 @@ class EosRatioOfPolynomials(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a50", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a51",
                         float,
                         20,
                         20,
-                        kwargs.get("a51", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a52",
                         float,
                         40,
                         20,
-                        kwargs.get("a52", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a53",
                         float,
                         60,
                         20,
-                        kwargs.get("a53", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -212,28 +231,32 @@ class EosRatioOfPolynomials(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a60", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a61",
                         float,
                         20,
                         20,
-                        kwargs.get("a61", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a62",
                         float,
                         40,
                         20,
-                        kwargs.get("a62", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a63",
                         float,
                         60,
                         20,
-                        kwargs.get("a63", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -244,28 +267,32 @@ class EosRatioOfPolynomials(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a70", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a71",
                         float,
                         20,
                         20,
-                        kwargs.get("a71", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a72",
                         float,
                         40,
                         20,
-                        kwargs.get("a72", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a73",
                         float,
                         60,
                         20,
-                        kwargs.get("a73", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -276,14 +303,14 @@ class EosRatioOfPolynomials(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a14")
+                        **kwargs,
                     ),
                     Field(
                         "a24",
                         float,
                         20,
                         20,
-                        kwargs.get("a24")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -294,28 +321,28 @@ class EosRatioOfPolynomials(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("alph")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         20,
                         20,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "e0",
                         float,
                         40,
                         20,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "v0",
                         float,
                         60,
                         20,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                 ],
             ),

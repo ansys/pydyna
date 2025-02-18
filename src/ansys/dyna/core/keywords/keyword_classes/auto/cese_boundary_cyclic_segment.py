@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseBoundaryCyclicSegment(KeywordBase):
@@ -41,56 +40,56 @@ class CeseBoundaryCyclicSegment(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nd1")
+                        **kwargs,
                     ),
                     Field(
                         "nd2",
                         int,
                         10,
                         10,
-                        kwargs.get("nd2")
+                        **kwargs,
                     ),
                     Field(
                         "nd3",
                         int,
                         20,
                         10,
-                        kwargs.get("nd3")
+                        **kwargs,
                     ),
                     Field(
                         "nd4",
                         int,
                         30,
                         10,
-                        kwargs.get("nd4")
+                        **kwargs,
                     ),
                     Field(
                         "np1",
                         int,
                         40,
                         10,
-                        kwargs.get("np1")
+                        **kwargs,
                     ),
                     Field(
                         "np2",
                         int,
                         50,
                         10,
-                        kwargs.get("np2")
+                        **kwargs,
                     ),
                     Field(
                         "np3",
                         int,
                         60,
                         10,
-                        kwargs.get("np3")
+                        **kwargs,
                     ),
                     Field(
                         "np4",
                         int,
                         70,
                         10,
-                        kwargs.get("np4")
+                        **kwargs,
                     ),
                 ],
             ),

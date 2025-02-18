@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryControl0D(KeywordBase):
@@ -41,35 +40,38 @@ class ChemistryControl0D(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "compid",
                         int,
                         10,
                         10,
-                        kwargs.get("compid")
+                        **kwargs,
                     ),
                     Field(
                         "soltyp",
                         int,
                         20,
                         10,
-                        kwargs.get("soltyp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "plotdt",
                         float,
                         30,
                         10,
-                        kwargs.get("plotdt", 1.0e-6 if use_lspp_defaults() else None)
+                        1.0e-6,
+                        **kwargs,
                     ),
                     Field(
                         "csp_sel",
                         int,
                         40,
                         10,
-                        kwargs.get("csp_sel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,42 +82,42 @@ class ChemistryControl0D(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt")
+                        **kwargs,
                     ),
                     Field(
                         "tlimit",
                         float,
                         10,
                         10,
-                        kwargs.get("tlimit")
+                        **kwargs,
                     ),
                     Field(
                         "tic",
                         float,
                         20,
                         10,
-                        kwargs.get("tic")
+                        **kwargs,
                     ),
                     Field(
                         "pic",
                         float,
                         30,
                         10,
-                        kwargs.get("pic")
+                        **kwargs,
                     ),
                     Field(
                         "ric",
                         float,
                         40,
                         10,
-                        kwargs.get("ric")
+                        **kwargs,
                     ),
                     Field(
                         "eic",
                         float,
                         50,
                         10,
-                        kwargs.get("eic")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -126,14 +128,14 @@ class ChemistryControl0D(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ampl")
+                        **kwargs,
                     ),
                     Field(
                         "ycut",
                         float,
                         10,
                         10,
-                        kwargs.get("ycut")
+                        **kwargs,
                     ),
                 ],
             ),

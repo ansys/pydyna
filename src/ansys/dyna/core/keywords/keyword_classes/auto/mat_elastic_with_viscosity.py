@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,50 @@ class MatElasticWithViscosity(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "v0",
                         float,
                         20,
                         10,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         30,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         40,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         50,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         float,
                         60,
                         10,
-                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,56 +99,56 @@ class MatElasticWithViscosity(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pr1")
+                        **kwargs,
                     ),
                     Field(
                         "pr2",
                         float,
                         10,
                         10,
-                        kwargs.get("pr2")
+                        **kwargs,
                     ),
                     Field(
                         "pr3",
                         float,
                         20,
                         10,
-                        kwargs.get("pr3")
+                        **kwargs,
                     ),
                     Field(
                         "pr4",
                         float,
                         30,
                         10,
-                        kwargs.get("pr4")
+                        **kwargs,
                     ),
                     Field(
                         "pr5",
                         float,
                         40,
                         10,
-                        kwargs.get("pr5")
+                        **kwargs,
                     ),
                     Field(
                         "pr6",
                         float,
                         50,
                         10,
-                        kwargs.get("pr6")
+                        **kwargs,
                     ),
                     Field(
                         "pr7",
                         float,
                         60,
                         10,
-                        kwargs.get("pr7")
+                        **kwargs,
                     ),
                     Field(
                         "pr8",
                         float,
                         70,
                         10,
-                        kwargs.get("pr8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -159,56 +159,56 @@ class MatElasticWithViscosity(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t1")
+                        **kwargs,
                     ),
                     Field(
                         "t2",
                         float,
                         10,
                         10,
-                        kwargs.get("t2")
+                        **kwargs,
                     ),
                     Field(
                         "t3",
                         float,
                         20,
                         10,
-                        kwargs.get("t3")
+                        **kwargs,
                     ),
                     Field(
                         "t4",
                         float,
                         30,
                         10,
-                        kwargs.get("t4")
+                        **kwargs,
                     ),
                     Field(
                         "t5",
                         float,
                         40,
                         10,
-                        kwargs.get("t5")
+                        **kwargs,
                     ),
                     Field(
                         "t6",
                         float,
                         50,
                         10,
-                        kwargs.get("t6")
+                        **kwargs,
                     ),
                     Field(
                         "t7",
                         float,
                         60,
                         10,
-                        kwargs.get("t7")
+                        **kwargs,
                     ),
                     Field(
                         "t8",
                         float,
                         70,
                         10,
-                        kwargs.get("t8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -219,56 +219,56 @@ class MatElasticWithViscosity(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "v4",
                         float,
                         30,
                         10,
-                        kwargs.get("v4")
+                        **kwargs,
                     ),
                     Field(
                         "v5",
                         float,
                         40,
                         10,
-                        kwargs.get("v5")
+                        **kwargs,
                     ),
                     Field(
                         "v6",
                         float,
                         50,
                         10,
-                        kwargs.get("v6")
+                        **kwargs,
                     ),
                     Field(
                         "v7",
                         float,
                         60,
                         10,
-                        kwargs.get("v7")
+                        **kwargs,
                     ),
                     Field(
                         "v8",
                         float,
                         70,
                         10,
-                        kwargs.get("v8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -279,56 +279,56 @@ class MatElasticWithViscosity(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("e1")
+                        **kwargs,
                     ),
                     Field(
                         "e2",
                         float,
                         10,
                         10,
-                        kwargs.get("e2")
+                        **kwargs,
                     ),
                     Field(
                         "e3",
                         float,
                         20,
                         10,
-                        kwargs.get("e3")
+                        **kwargs,
                     ),
                     Field(
                         "e4",
                         float,
                         30,
                         10,
-                        kwargs.get("e4")
+                        **kwargs,
                     ),
                     Field(
                         "e5",
                         float,
                         40,
                         10,
-                        kwargs.get("e5")
+                        **kwargs,
                     ),
                     Field(
                         "e6",
                         float,
                         50,
                         10,
-                        kwargs.get("e6")
+                        **kwargs,
                     ),
                     Field(
                         "e7",
                         float,
                         60,
                         10,
-                        kwargs.get("e7")
+                        **kwargs,
                     ),
                     Field(
                         "e8",
                         float,
                         70,
                         10,
-                        kwargs.get("e8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -339,56 +339,56 @@ class MatElasticWithViscosity(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha1")
+                        **kwargs,
                     ),
                     Field(
                         "alpha2",
                         float,
                         10,
                         10,
-                        kwargs.get("alpha2")
+                        **kwargs,
                     ),
                     Field(
                         "alpha3",
                         float,
                         20,
                         10,
-                        kwargs.get("alpha3")
+                        **kwargs,
                     ),
                     Field(
                         "alpha4",
                         float,
                         30,
                         10,
-                        kwargs.get("alpha4")
+                        **kwargs,
                     ),
                     Field(
                         "alpha5",
                         float,
                         40,
                         10,
-                        kwargs.get("alpha5")
+                        **kwargs,
                     ),
                     Field(
                         "alpha6",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha6")
+                        **kwargs,
                     ),
                     Field(
                         "alpha7",
                         float,
                         60,
                         10,
-                        kwargs.get("alpha7")
+                        **kwargs,
                     ),
                     Field(
                         "alpha8",
                         float,
                         70,
                         10,
-                        kwargs.get("alpha8")
+                        **kwargs,
                     ),
                 ],
             ),

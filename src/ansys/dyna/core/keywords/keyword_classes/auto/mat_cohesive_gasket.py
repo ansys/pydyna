@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,29 @@ class MatCohesiveGasket(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "roflg",
                         int,
                         20,
                         10,
-                        kwargs.get("roflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "intfail",
                         int,
                         30,
                         10,
-                        kwargs.get("intfail")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,21 +78,21 @@ class MatCohesiveGasket(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lc")
+                        **kwargs,
                     ),
                     Field(
                         "uc",
                         int,
                         10,
                         10,
-                        kwargs.get("uc")
+                        **kwargs,
                     ),
                     Field(
                         "eten",
                         float,
                         20,
                         10,
-                        kwargs.get("eten")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -103,7 +103,7 @@ class MatCohesiveGasket(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("etsr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -114,21 +114,22 @@ class MatCohesiveGasket(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("emem")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         10,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "ps",
                         int,
                         20,
                         10,
-                        kwargs.get("ps", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

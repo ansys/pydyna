@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,56 +46,61 @@ class ContactRigidSurface(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "psid",
                         int,
                         10,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "boxid",
                         int,
                         20,
                         10,
-                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "segid",
                         int,
                         30,
                         10,
-                        kwargs.get("segid")
+                        **kwargs,
                     ),
                     Field(
                         "fs",
                         float,
                         40,
                         10,
-                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd",
                         float,
                         50,
                         10,
-                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc",
                         float,
                         60,
                         10,
-                        kwargs.get("dc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vc",
                         float,
                         70,
                         10,
-                        kwargs.get("vc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,35 +111,40 @@ class ContactRigidSurface(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidx", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcidy",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidy", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcidz",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidz", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fslcid",
                         int,
                         30,
                         10,
-                        kwargs.get("fslcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fdlcid",
                         int,
                         40,
                         10,
-                        kwargs.get("fdlcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -146,42 +155,48 @@ class ContactRigidSurface(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfs", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "stthk",
                         float,
                         10,
                         10,
-                        kwargs.get("stthk", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sfthk",
                         float,
                         20,
                         10,
-                        kwargs.get("sfthk", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "xpene",
                         float,
                         30,
                         10,
-                        kwargs.get("xpene", 4.0 if use_lspp_defaults() else None)
+                        4.0,
+                        **kwargs,
                     ),
                     Field(
                         "bsort",
                         float,
                         40,
                         10,
-                        kwargs.get("bsort", 10.0 if use_lspp_defaults() else None)
+                        10.0,
+                        **kwargs,
                     ),
                     Field(
                         "ctype",
                         int,
                         50,
                         10,
-                        kwargs.get("ctype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

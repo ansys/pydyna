@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseInitialHybridSet(KeywordBase):
@@ -41,14 +40,14 @@ class DualceseInitialHybridSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("esid")
+                        **kwargs,
                     ),
                     Field(
                         "ifunc",
                         int,
                         10,
                         10,
-                        kwargs.get("ifunc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,56 @@ class DualceseInitialHybridSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("z1")
+                        **kwargs,
                     ),
                     Field(
                         "ra",
                         float,
                         10,
                         10,
-                        kwargs.get("ra")
+                        **kwargs,
                     ),
                     Field(
                         "uic",
                         float,
                         20,
                         10,
-                        kwargs.get("uic")
+                        **kwargs,
                     ),
                     Field(
                         "vic",
                         float,
                         30,
                         10,
-                        kwargs.get("vic")
+                        **kwargs,
                     ),
                     Field(
                         "wic",
                         float,
                         40,
                         10,
-                        kwargs.get("wic")
+                        **kwargs,
                     ),
                     Field(
                         "rho1",
                         float,
                         50,
                         10,
-                        kwargs.get("rho1")
+                        **kwargs,
                     ),
                     Field(
                         "rho_a",
                         float,
                         60,
                         10,
-                        kwargs.get("rho_a")
+                        **kwargs,
                     ),
                     Field(
                         "rho_b",
                         float,
                         70,
                         10,
-                        kwargs.get("rho_b")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,14 +118,14 @@ class DualceseInitialHybridSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pic")
+                        **kwargs,
                     ),
                     Field(
                         "tic",
                         float,
                         10,
                         10,
-                        kwargs.get("tic")
+                        **kwargs,
                     ),
                 ],
             ),

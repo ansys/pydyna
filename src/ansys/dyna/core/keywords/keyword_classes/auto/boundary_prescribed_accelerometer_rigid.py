@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryPrescribedAccelerometerRigid(KeywordBase):
@@ -41,7 +40,7 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,35 +51,35 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         10,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "lcidx",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidx")
+                        **kwargs,
                     ),
                     Field(
                         "lcidy",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidy")
+                        **kwargs,
                     ),
                     Field(
                         "lcidz",
                         int,
                         40,
                         10,
-                        kwargs.get("lcidz")
+                        **kwargs,
                     ),
                 ],
             ),

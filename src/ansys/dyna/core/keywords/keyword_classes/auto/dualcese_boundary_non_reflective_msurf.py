@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
@@ -41,28 +40,28 @@ class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mspid")
+                        **kwargs,
                     ),
                     Field(
                         "dirx",
                         float,
                         10,
                         10,
-                        kwargs.get("dirx")
+                        **kwargs,
                     ),
                     Field(
                         "diry",
                         float,
                         20,
                         10,
-                        kwargs.get("diry")
+                        **kwargs,
                     ),
                     Field(
                         "dirz",
                         float,
                         30,
                         10,
-                        kwargs.get("dirz")
+                        **kwargs,
                     ),
                 ],
             ),

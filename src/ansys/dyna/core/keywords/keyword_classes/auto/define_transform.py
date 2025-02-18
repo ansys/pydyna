@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,7 +45,7 @@ class DefineTransform(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tranid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -57,56 +56,57 @@ class DefineTransform(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("option", "MIRROR" if use_lspp_defaults() else None)
+                        "MIRROR",
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         10,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         20,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         30,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                     Field(
                         "a4",
                         float,
                         40,
                         10,
-                        kwargs.get("a4")
+                        **kwargs,
                     ),
                     Field(
                         "a5",
                         float,
                         50,
                         10,
-                        kwargs.get("a5")
+                        **kwargs,
                     ),
                     Field(
                         "a6",
                         float,
                         60,
                         10,
-                        kwargs.get("a6")
+                        **kwargs,
                     ),
                     Field(
                         "a7",
                         float,
                         70,
                         10,
-                        kwargs.get("a7")
+                        **kwargs,
                     ),
                 ],
             ),

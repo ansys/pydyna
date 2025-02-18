@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingScrapFall(KeywordBase):
@@ -41,56 +40,56 @@ class ControlFormingScrapFall(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "vectid",
                         int,
                         10,
                         10,
-                        kwargs.get("vectid")
+                        **kwargs,
                     ),
                     Field(
                         "ndset",
                         int,
                         20,
                         10,
-                        kwargs.get("ndset")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         30,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "depth",
                         float,
                         40,
                         10,
-                        kwargs.get("depth")
+                        **kwargs,
                     ),
                     Field(
                         "dist",
                         float,
                         50,
                         10,
-                        kwargs.get("dist")
+                        **kwargs,
                     ),
                     Field(
                         "idrgd",
                         int,
                         60,
                         10,
-                        kwargs.get("idrgd")
+                        **kwargs,
                     ),
                     Field(
                         "ifseed",
                         int,
                         70,
                         10,
-                        kwargs.get("ifseed")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +100,56 @@ class ControlFormingScrapFall(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nobead")
+                        **kwargs,
                     ),
                     Field(
                         "seedx",
                         float,
                         10,
                         10,
-                        kwargs.get("seedx")
+                        **kwargs,
                     ),
                     Field(
                         "seedy",
                         float,
                         20,
                         10,
-                        kwargs.get("seedy")
+                        **kwargs,
                     ),
                     Field(
                         "seedz",
                         float,
                         30,
                         10,
-                        kwargs.get("seedz")
+                        **kwargs,
                     ),
                     Field(
                         "effset",
                         float,
                         40,
                         10,
-                        kwargs.get("effset")
+                        **kwargs,
                     ),
                     Field(
                         "gap",
                         float,
                         50,
                         10,
-                        kwargs.get("gap")
+                        **kwargs,
                     ),
                     Field(
                         "ipset",
                         int,
                         60,
                         10,
-                        kwargs.get("ipset")
+                        **kwargs,
                     ),
                     Field(
                         "extend",
                         int,
                         70,
                         10,
-                        kwargs.get("extend")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,7 +160,7 @@ class ControlFormingScrapFall(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("newid")
+                        **kwargs,
                     ),
                 ],
             ),

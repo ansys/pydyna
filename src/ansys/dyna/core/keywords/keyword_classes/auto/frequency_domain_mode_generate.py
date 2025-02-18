@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainModeGenerate(KeywordBase):
@@ -41,56 +40,56 @@ class FrequencyDomainModeGenerate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("m1beg")
+                        **kwargs,
                     ),
                     Field(
                         "m1end",
                         int,
                         10,
                         10,
-                        kwargs.get("m1end")
+                        **kwargs,
                     ),
                     Field(
                         "m2beg",
                         int,
                         20,
                         10,
-                        kwargs.get("m2beg")
+                        **kwargs,
                     ),
                     Field(
                         "m2end",
                         int,
                         30,
                         10,
-                        kwargs.get("m2end")
+                        **kwargs,
                     ),
                     Field(
                         "m3beg",
                         int,
                         40,
                         10,
-                        kwargs.get("m3beg")
+                        **kwargs,
                     ),
                     Field(
                         "m3end",
                         int,
                         50,
                         10,
-                        kwargs.get("m3end")
+                        **kwargs,
                     ),
                     Field(
                         "m4beg",
                         int,
                         60,
                         10,
-                        kwargs.get("m4beg")
+                        **kwargs,
                     ),
                     Field(
                         "m4end",
                         int,
                         70,
                         10,
-                        kwargs.get("m4end")
+                        **kwargs,
                     ),
                 ],
             ),

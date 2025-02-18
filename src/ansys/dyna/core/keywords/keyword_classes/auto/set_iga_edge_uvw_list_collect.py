@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,47 @@ class SetIgaEdgeUvwListCollect(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "da1",
                         float,
                         10,
                         10,
-                        kwargs.get("da1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "da2",
                         float,
                         20,
                         10,
-                        kwargs.get("da2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "da3",
                         float,
                         30,
                         10,
-                        kwargs.get("da3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "da4",
                         float,
                         40,
                         10,
-                        kwargs.get("da4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "solver",
                         str,
                         50,
                         10,
-                        kwargs.get("solver", "MECH" if use_lspp_defaults() else None)
+                        "MECH",
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,56 +96,56 @@ class SetIgaEdgeUvwListCollect(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid1")
+                        **kwargs,
                     ),
                     Field(
                         "eid2",
                         int,
                         10,
                         10,
-                        kwargs.get("eid2")
+                        **kwargs,
                     ),
                     Field(
                         "eid3",
                         int,
                         20,
                         10,
-                        kwargs.get("eid3")
+                        **kwargs,
                     ),
                     Field(
                         "eid4",
                         int,
                         30,
                         10,
-                        kwargs.get("eid4")
+                        **kwargs,
                     ),
                     Field(
                         "eid5",
                         int,
                         40,
                         10,
-                        kwargs.get("eid5")
+                        **kwargs,
                     ),
                     Field(
                         "eid6",
                         int,
                         50,
                         10,
-                        kwargs.get("eid6")
+                        **kwargs,
                     ),
                     Field(
                         "eid7",
                         int,
                         60,
                         10,
-                        kwargs.get("eid7")
+                        **kwargs,
                     ),
                     Field(
                         "eid8",
                         int,
                         70,
                         10,
-                        kwargs.get("eid8")
+                        **kwargs,
                     ),
                 ],
             ),

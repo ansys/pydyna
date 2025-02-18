@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainSsdDirectFrequencyDependent(KeywordBase):
@@ -41,56 +40,62 @@ class FrequencyDomainSsdDirectFrequencyDependent(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mdmin", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "mdmax",
                         int,
                         10,
                         10,
-                        kwargs.get("mdmax")
+                        **kwargs,
                     ),
                     Field(
                         "fnmin",
                         float,
                         20,
                         10,
-                        kwargs.get("fnmin", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fnmax",
                         float,
                         30,
                         10,
-                        kwargs.get("fnmax")
+                        **kwargs,
                     ),
                     Field(
                         "restmd",
                         int,
                         40,
                         10,
-                        kwargs.get("restmd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "restdp",
                         int,
                         50,
                         10,
-                        kwargs.get("restdp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcflag",
                         int,
                         60,
                         10,
-                        kwargs.get("lcflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "relatv",
                         int,
                         70,
                         10,
-                        kwargs.get("relatv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,42 +106,48 @@ class FrequencyDomainSsdDirectFrequencyDependent(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dampf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdam",
                         int,
                         10,
                         10,
-                        kwargs.get("lcdam", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lctyp",
                         int,
                         20,
                         10,
-                        kwargs.get("lctyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dmpmas",
                         float,
                         30,
                         10,
-                        kwargs.get("dmpmas", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dmpstf",
                         float,
                         40,
                         10,
-                        kwargs.get("dmpstf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dmpflg",
                         int,
                         50,
                         10,
-                        kwargs.get("dmpflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -147,56 +158,62 @@ class FrequencyDomainSsdDirectFrequencyDependent(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "istress",
                         int,
                         10,
                         10,
-                        kwargs.get("istress")
+                        **kwargs,
                     ),
                     Field(
                         "memory",
                         int,
                         20,
                         10,
-                        kwargs.get("memory", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nerp",
                         int,
                         30,
                         10,
-                        kwargs.get("nerp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "strtyp",
                         int,
                         40,
                         10,
-                        kwargs.get("strtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nout",
                         int,
                         50,
                         10,
-                        kwargs.get("nout", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "notyp",
                         int,
                         60,
                         10,
-                        kwargs.get("notyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nova",
                         int,
                         70,
                         10,
-                        kwargs.get("nova", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -207,56 +224,61 @@ class FrequencyDomainSsdDirectFrequencyDependent(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "ntyp",
                         int,
                         10,
                         10,
-                        kwargs.get("ntyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dof",
                         int,
                         20,
                         10,
-                        kwargs.get("dof", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "vad",
                         int,
                         30,
                         10,
-                        kwargs.get("vad", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc1",
                         int,
                         40,
                         10,
-                        kwargs.get("lc1")
+                        **kwargs,
                     ),
                     Field(
                         "lc2",
                         int,
                         50,
                         10,
-                        kwargs.get("lc2")
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         60,
                         10,
-                        kwargs.get("sf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         int,
                         70,
                         10,
-                        kwargs.get("vid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

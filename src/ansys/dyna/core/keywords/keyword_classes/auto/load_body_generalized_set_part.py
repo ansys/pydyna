@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadBodyGeneralizedSetPart(KeywordBase):
@@ -41,49 +40,53 @@ class LoadBodyGeneralizedSetPart(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         10,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         20,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "drlcid",
                         int,
                         30,
                         10,
-                        kwargs.get("drlcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "xc",
                         float,
                         40,
                         10,
-                        kwargs.get("xc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yc",
                         float,
                         50,
                         10,
-                        kwargs.get("yc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zc",
                         float,
                         60,
                         10,
-                        kwargs.get("zc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,56 +97,63 @@ class LoadBodyGeneralizedSetPart(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ax", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ay",
                         float,
                         10,
                         10,
-                        kwargs.get("ay", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "az",
                         float,
                         20,
                         10,
-                        kwargs.get("az", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "omx",
                         float,
                         30,
                         10,
-                        kwargs.get("omx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "omy",
                         float,
                         40,
                         10,
-                        kwargs.get("omy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "omz",
                         float,
                         50,
                         10,
-                        kwargs.get("omz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         60,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "angtyp",
                         str,
                         70,
                         10,
-                        kwargs.get("angtyp", "CENT" if use_lspp_defaults() else None)
+                        "CENT",
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryControlInflator(KeywordBase):
@@ -41,35 +40,37 @@ class ChemistryControlInflator(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("model", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "out_type",
                         int,
                         10,
                         10,
-                        kwargs.get("out_type", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "truntim",
                         float,
                         20,
                         10,
-                        kwargs.get("truntim")
+                        **kwargs,
                     ),
                     Field(
                         "delt",
                         float,
                         30,
                         10,
-                        kwargs.get("delt")
+                        **kwargs,
                     ),
                     Field(
                         "ptime",
                         float,
                         40,
                         10,
-                        kwargs.get("ptime")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,7 +81,7 @@ class ChemistryControlInflator(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("file")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,14 +92,14 @@ class ChemistryControlInflator(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("density")
+                        **kwargs,
                     ),
                     Field(
                         "species name",
                         str,
                         10,
                         70,
-                        kwargs.get("species name")
+                        **kwargs,
                     ),
                 ],
             ),

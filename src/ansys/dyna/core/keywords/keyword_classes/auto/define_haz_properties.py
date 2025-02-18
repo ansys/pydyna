@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,32 @@ class DefineHazProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id_haz", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iop",
                         int,
                         10,
                         10,
-                        kwargs.get("iop", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         20,
                         10,
-                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pid_typ",
                         int,
                         30,
                         10,
-                        kwargs.get("pid_typ", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,56 +81,64 @@ class DefineHazProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iss", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ifs",
                         int,
                         10,
                         10,
-                        kwargs.get("ifs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "isb",
                         int,
                         20,
                         10,
-                        kwargs.get("isb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ifb",
                         int,
                         30,
                         10,
-                        kwargs.get("ifb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "isc",
                         int,
                         40,
                         10,
-                        kwargs.get("isc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ifc",
                         int,
                         50,
                         10,
-                        kwargs.get("ifc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "isw",
                         int,
                         60,
                         10,
-                        kwargs.get("isw", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ifw",
                         int,
                         70,
                         10,
-                        kwargs.get("ifw", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

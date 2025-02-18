@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,31 @@ class MatAddPzelectric(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "dtype",
                         str,
                         10,
                         10,
-                        kwargs.get("dtype", "S" if use_lspp_defaults() else None)
+                        "S",
+                        **kwargs,
                     ),
                     Field(
                         "gpt",
                         int,
                         20,
                         10,
-                        kwargs.get("gpt", 8 if use_lspp_defaults() else None)
+                        8,
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         int,
                         30,
                         10,
-                        kwargs.get("aopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,42 +80,42 @@ class MatAddPzelectric(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dxx")
+                        **kwargs,
                     ),
                     Field(
                         "dyy",
                         float,
                         10,
                         10,
-                        kwargs.get("dyy")
+                        **kwargs,
                     ),
                     Field(
                         "dzz",
                         float,
                         20,
                         10,
-                        kwargs.get("dzz")
+                        **kwargs,
                     ),
                     Field(
                         "dxy",
                         float,
                         30,
                         10,
-                        kwargs.get("dxy")
+                        **kwargs,
                     ),
                     Field(
                         "dxz",
                         float,
                         40,
                         10,
-                        kwargs.get("dxz")
+                        **kwargs,
                     ),
                     Field(
                         "dyz",
                         float,
                         50,
                         10,
-                        kwargs.get("dyz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -124,56 +126,56 @@ class MatAddPzelectric(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("px11")
+                        **kwargs,
                     ),
                     Field(
                         "px22",
                         float,
                         10,
                         10,
-                        kwargs.get("px22")
+                        **kwargs,
                     ),
                     Field(
                         "px33",
                         float,
                         20,
                         10,
-                        kwargs.get("px33")
+                        **kwargs,
                     ),
                     Field(
                         "px12",
                         float,
                         30,
                         10,
-                        kwargs.get("px12")
+                        **kwargs,
                     ),
                     Field(
                         "px13",
                         float,
                         40,
                         10,
-                        kwargs.get("px13")
+                        **kwargs,
                     ),
                     Field(
                         "px23",
                         float,
                         50,
                         10,
-                        kwargs.get("px23")
+                        **kwargs,
                     ),
                     Field(
                         "py11",
                         float,
                         60,
                         10,
-                        kwargs.get("py11")
+                        **kwargs,
                     ),
                     Field(
                         "py22",
                         float,
                         70,
                         10,
-                        kwargs.get("py22")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -184,56 +186,56 @@ class MatAddPzelectric(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("py33")
+                        **kwargs,
                     ),
                     Field(
                         "py12",
                         float,
                         10,
                         10,
-                        kwargs.get("py12")
+                        **kwargs,
                     ),
                     Field(
                         "px13",
                         float,
                         20,
                         10,
-                        kwargs.get("px13")
+                        **kwargs,
                     ),
                     Field(
                         "py23",
                         float,
                         30,
                         10,
-                        kwargs.get("py23")
+                        **kwargs,
                     ),
                     Field(
                         "pz11",
                         float,
                         40,
                         10,
-                        kwargs.get("pz11")
+                        **kwargs,
                     ),
                     Field(
                         "pz22",
                         float,
                         50,
                         10,
-                        kwargs.get("pz22")
+                        **kwargs,
                     ),
                     Field(
                         "pz33",
                         float,
                         60,
                         10,
-                        kwargs.get("pz33")
+                        **kwargs,
                     ),
                     Field(
                         "pz12",
                         float,
                         70,
                         10,
-                        kwargs.get("pz12")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -244,14 +246,14 @@ class MatAddPzelectric(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pz13")
+                        **kwargs,
                     ),
                     Field(
                         "pz23",
                         float,
                         10,
                         10,
-                        kwargs.get("pz23")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -262,42 +264,42 @@ class MatAddPzelectric(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -308,42 +310,42 @@ class MatAddPzelectric(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                 ],
             ),

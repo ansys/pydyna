@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingAutopositionParameterSet(KeywordBase):
@@ -41,56 +40,58 @@ class ControlFormingAutopositionParameterSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         10,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "dir",
                         int,
                         20,
                         10,
-                        kwargs.get("dir", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "mpsid",
                         int,
                         30,
                         10,
-                        kwargs.get("mpsid")
+                        **kwargs,
                     ),
                     Field(
                         "position",
                         int,
                         40,
                         10,
-                        kwargs.get("position", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "premove",
                         float,
                         50,
                         10,
-                        kwargs.get("premove")
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         float,
                         60,
                         10,
-                        kwargs.get("thick")
+                        **kwargs,
                     ),
                     Field(
                         "porder",
                         str,
                         70,
                         10,
-                        kwargs.get("porder")
+                        **kwargs,
                     ),
                 ],
             ),

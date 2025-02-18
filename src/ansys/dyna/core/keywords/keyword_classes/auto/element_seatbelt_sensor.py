@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementSeatbeltSensor(KeywordBase):
@@ -41,21 +40,24 @@ class ElementSeatbeltSensor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sbsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sbstyp",
                         int,
                         10,
                         10,
-                        kwargs.get("sbstyp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "sbsfl",
                         int,
                         20,
                         10,
-                        kwargs.get("sbsfl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,28 +68,32 @@ class ElementSeatbeltSensor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dof",
                         int,
                         10,
                         10,
-                        kwargs.get("dof", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "acc",
                         float,
                         20,
                         10,
-                        kwargs.get("acc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "atime",
                         float,
                         30,
                         10,
-                        kwargs.get("atime", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -98,21 +104,24 @@ class ElementSeatbeltSensor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sbrid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pulrat",
                         float,
                         10,
                         10,
-                        kwargs.get("pulrat", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pultim",
                         float,
                         20,
                         10,
-                        kwargs.get("pultim", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -123,7 +132,8 @@ class ElementSeatbeltSensor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("time", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -134,28 +144,32 @@ class ElementSeatbeltSensor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nid2",
                         int,
                         10,
                         10,
-                        kwargs.get("nid2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dmx",
                         float,
                         20,
                         10,
-                        kwargs.get("dmx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dmn",
                         float,
                         30,
                         10,
-                        kwargs.get("dmn", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,21 +180,24 @@ class ElementSeatbeltSensor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sbrid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pulmx",
                         float,
                         10,
                         10,
-                        kwargs.get("pulmx", 1.0E+16 if use_lspp_defaults() else None)
+                        1.0E+16,
+                        **kwargs,
                     ),
                     Field(
                         "pulmn",
                         float,
                         20,
                         10,
-                        kwargs.get("pulmn", -1.0E+16 if use_lspp_defaults() else None)
+                        -1.0E+16,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseDefineNoninertial(KeywordBase):
@@ -41,42 +40,43 @@ class CeseDefineNoninertial(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("freq")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         10,
                         10,
-                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         20,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "nx",
                         float,
                         30,
                         10,
-                        kwargs.get("nx")
+                        **kwargs,
                     ),
                     Field(
                         "ny",
                         float,
                         40,
                         10,
-                        kwargs.get("ny")
+                        **kwargs,
                     ),
                     Field(
                         "nz",
                         float,
                         50,
                         10,
-                        kwargs.get("nz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,21 +87,22 @@ class CeseDefineNoninertial(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("l")
+                        **kwargs,
                     ),
                     Field(
                         "r",
                         float,
                         10,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "relv",
                         int,
                         20,
                         10,
-                        kwargs.get("relv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

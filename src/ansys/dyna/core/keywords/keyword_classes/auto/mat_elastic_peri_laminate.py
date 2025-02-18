@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,42 @@ class MatElasticPeriLaminate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "em",
                         float,
                         30,
                         10,
-                        kwargs.get("em")
+                        **kwargs,
                     ),
                     Field(
                         "vfm",
                         float,
                         40,
                         10,
-                        kwargs.get("vfm")
+                        **kwargs,
                     ),
                     Field(
                         "gfm",
                         float,
                         50,
                         10,
-                        kwargs.get("gfm")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,42 +91,42 @@ class MatElasticPeriLaminate(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fopt")
+                        **kwargs,
                     ),
                     Field(
                         "fcf",
                         float,
                         10,
                         10,
-                        kwargs.get("fcf")
+                        **kwargs,
                     ),
                     Field(
                         "fcm",
                         float,
                         20,
                         10,
-                        kwargs.get("fcm")
+                        **kwargs,
                     ),
                     Field(
                         "fcfc",
                         float,
                         30,
                         10,
-                        kwargs.get("fcfc")
+                        **kwargs,
                     ),
                     Field(
                         "fcmc",
                         float,
                         40,
                         10,
-                        kwargs.get("fcmc")
+                        **kwargs,
                     ),
                     Field(
                         "fcd",
                         float,
                         50,
                         10,
-                        kwargs.get("fcd")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -138,21 +137,21 @@ class MatElasticPeriLaminate(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingOnestepAutoConstraint(KeywordBase):
@@ -41,28 +40,28 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("icon")
+                        **kwargs,
                     ),
                     Field(
                         "node1",
                         int,
                         10,
                         10,
-                        kwargs.get("node1")
+                        **kwargs,
                     ),
                     Field(
                         "node2",
                         int,
                         20,
                         10,
-                        kwargs.get("node2")
+                        **kwargs,
                     ),
                     Field(
                         "node3",
                         int,
                         30,
                         10,
-                        kwargs.get("node3")
+                        **kwargs,
                     ),
                 ],
             ),

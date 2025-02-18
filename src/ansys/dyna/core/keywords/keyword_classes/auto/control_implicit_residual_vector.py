@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitResidualVector(KeywordBase):
@@ -41,21 +40,24 @@ class ControlImplicitResidualVector(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iresvec", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "neig",
                         int,
                         10,
                         10,
-                        kwargs.get("neig", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iformat",
                         int,
                         20,
                         10,
-                        kwargs.get("iformat", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,7 +68,7 @@ class ControlImplicitResidualVector(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("rv_filenam")
+                        **kwargs,
                     ),
                 ],
             ),

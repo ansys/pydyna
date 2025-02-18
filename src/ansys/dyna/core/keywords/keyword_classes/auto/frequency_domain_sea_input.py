@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainSeaInput(KeywordBase):
@@ -41,21 +40,23 @@ class FrequencyDomainSeaInput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("subid")
+                        **kwargs,
                     ),
                     Field(
                         "subtyp",
                         int,
                         10,
                         10,
-                        kwargs.get("subtyp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "loadtyp",
                         int,
                         20,
                         10,
-                        kwargs.get("loadtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,28 +67,28 @@ class FrequencyDomainSeaInput(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("bwave")
+                        **kwargs,
                     ),
                     Field(
                         "lwave",
                         float,
                         10,
                         10,
-                        kwargs.get("lwave")
+                        **kwargs,
                     ),
                     Field(
                         "swave",
                         float,
                         20,
                         10,
-                        kwargs.get("swave")
+                        **kwargs,
                     ),
                     Field(
                         "twave",
                         float,
                         30,
                         10,
-                        kwargs.get("twave")
+                        **kwargs,
                     ),
                 ],
             ),

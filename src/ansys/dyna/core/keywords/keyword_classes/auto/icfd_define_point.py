@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdDefinePoint(KeywordBase):
@@ -41,35 +40,35 @@ class IcfdDefinePoint(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("poid")
+                        **kwargs,
                     ),
                     Field(
                         "x",
                         float,
                         10,
                         10,
-                        kwargs.get("x")
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         20,
                         10,
-                        kwargs.get("y")
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         30,
                         10,
-                        kwargs.get("z")
+                        **kwargs,
                     ),
                     Field(
                         "constpid",
                         int,
                         40,
                         10,
-                        kwargs.get("constpid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,21 +79,21 @@ class IcfdDefinePoint(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidx")
+                        **kwargs,
                     ),
                     Field(
                         "lcidy",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidy")
+                        **kwargs,
                     ),
                     Field(
                         "lcidz",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -105,49 +104,49 @@ class IcfdDefinePoint(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidw")
+                        **kwargs,
                     ),
                     Field(
                         "xt",
                         float,
                         10,
                         10,
-                        kwargs.get("xt")
+                        **kwargs,
                     ),
                     Field(
                         "yt",
                         float,
                         20,
                         10,
-                        kwargs.get("yt")
+                        **kwargs,
                     ),
                     Field(
                         "zt",
                         float,
                         30,
                         10,
-                        kwargs.get("zt")
+                        **kwargs,
                     ),
                     Field(
                         "xh",
                         float,
                         40,
                         10,
-                        kwargs.get("xh")
+                        **kwargs,
                     ),
                     Field(
                         "yh",
                         float,
                         50,
                         10,
-                        kwargs.get("yh")
+                        **kwargs,
                     ),
                     Field(
                         "zh",
                         float,
                         60,
                         10,
-                        kwargs.get("zh")
+                        **kwargs,
                     ),
                 ],
             ),

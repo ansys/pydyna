@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatMohrCoulomb(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "gmod",
                         float,
                         20,
                         10,
-                        kwargs.get("gmod")
+                        **kwargs,
                     ),
                     Field(
                         "rnu",
                         float,
                         30,
                         10,
-                        kwargs.get("rnu")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "phi",
                         float,
                         50,
                         10,
-                        kwargs.get("phi")
+                        **kwargs,
                     ),
                     Field(
                         "cval",
                         float,
                         60,
                         10,
-                        kwargs.get("cval")
+                        **kwargs,
                     ),
                     Field(
                         "psi",
                         float,
                         70,
                         10,
-                        kwargs.get("psi")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class MatMohrCoulomb(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("novoid ")
+                        **kwargs,
                     ),
                     Field(
                         "nplanes",
                         int,
                         10,
                         10,
-                        kwargs.get("nplanes")
+                        **kwargs,
                     ),
                     Field(
                         "extra",
                         int,
                         20,
                         10,
-                        kwargs.get("extra")
+                        **kwargs,
                     ),
                     Field(
                         "lccpdr",
                         int,
                         30,
                         10,
-                        kwargs.get("lccpdr")
+                        **kwargs,
                     ),
                     Field(
                         "lccpt",
                         int,
                         40,
                         10,
-                        kwargs.get("lccpt")
+                        **kwargs,
                     ),
                     Field(
                         "lccjdr",
                         int,
                         50,
                         10,
-                        kwargs.get("lccjdr")
+                        **kwargs,
                     ),
                     Field(
                         "lccjt",
                         int,
                         60,
                         10,
-                        kwargs.get("lccjt")
+                        **kwargs,
                     ),
                     Field(
                         "lcsfac",
                         int,
                         70,
                         10,
-                        kwargs.get("lcsfac")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +165,57 @@ class MatMohrCoulomb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gmoddp")
+                        **kwargs,
                     ),
                     Field(
                         "gmodgr",
                         float,
                         10,
                         10,
-                        kwargs.get("gmodgr")
+                        **kwargs,
                     ),
                     Field(
                         "lcgmep",
                         int,
                         20,
                         10,
-                        kwargs.get("lcgmep")
+                        **kwargs,
                     ),
                     Field(
                         "lcphiep",
                         int,
                         30,
                         10,
-                        kwargs.get("lcphiep")
+                        **kwargs,
                     ),
                     Field(
                         "lcpsiep",
                         int,
                         40,
                         10,
-                        kwargs.get("lcpsiep")
+                        **kwargs,
                     ),
                     Field(
                         "lcgmst",
                         int,
                         50,
                         10,
-                        kwargs.get("lcgmst")
+                        **kwargs,
                     ),
                     Field(
                         "cvalgr",
                         float,
                         60,
                         10,
-                        kwargs.get("cvalgr")
+                        **kwargs,
                     ),
                     Field(
                         "aniso",
                         float,
                         70,
                         10,
-                        kwargs.get("aniso", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,35 +226,36 @@ class MatMohrCoulomb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lcgmt")
+                        **kwargs,
                     ),
                     Field(
                         "lccvt",
                         float,
                         10,
                         10,
-                        kwargs.get("lccvt")
+                        **kwargs,
                     ),
                     Field(
                         "lcpht",
                         float,
                         20,
                         10,
-                        kwargs.get("lcpht")
+                        **kwargs,
                     ),
                     Field(
                         "epdam1",
                         float,
                         30,
                         10,
-                        kwargs.get("epdam1", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "epdam2",
                         float,
                         40,
                         10,
-                        kwargs.get("epdam2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -265,49 +266,50 @@ class MatMohrCoulomb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dip")
+                        **kwargs,
                     ),
                     Field(
                         "dipang",
                         float,
                         10,
                         10,
-                        kwargs.get("dipang")
+                        **kwargs,
                     ),
                     Field(
                         "cplane",
                         float,
                         20,
                         10,
-                        kwargs.get("cplane")
+                        **kwargs,
                     ),
                     Field(
                         "frplane",
                         float,
                         30,
                         10,
-                        kwargs.get("frplane")
+                        **kwargs,
                     ),
                     Field(
                         "tplane",
                         float,
                         40,
                         10,
-                        kwargs.get("tplane")
+                        **kwargs,
                     ),
                     Field(
                         "shrmax",
                         float,
                         50,
                         10,
-                        kwargs.get("shrmax", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "local",
                         int,
                         60,
                         10,
-                        kwargs.get("local")
+                        **kwargs,
                     ),
                 ],
             ),

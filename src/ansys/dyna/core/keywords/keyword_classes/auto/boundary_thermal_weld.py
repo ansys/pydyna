@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryThermalWeld(KeywordBase):
@@ -41,56 +40,59 @@ class BoundaryThermalWeld(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "ptyp",
                         int,
                         10,
                         10,
-                        kwargs.get("ptyp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         20,
                         10,
-                        kwargs.get("nid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nflag",
                         int,
                         30,
                         10,
-                        kwargs.get("nflag", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "x0",
                         float,
                         40,
                         10,
-                        kwargs.get("x0")
+                        **kwargs,
                     ),
                     Field(
                         "y0",
                         float,
                         50,
                         10,
-                        kwargs.get("y0")
+                        **kwargs,
                     ),
                     Field(
                         "z0",
                         float,
                         60,
                         10,
-                        kwargs.get("z0")
+                        **kwargs,
                     ),
                     Field(
                         "n2id",
                         int,
                         70,
                         10,
-                        kwargs.get("n2id")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +103,56 @@ class BoundaryThermalWeld(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         10,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "cf",
                         float,
                         20,
                         10,
-                        kwargs.get("cf")
+                        **kwargs,
                     ),
                     Field(
                         "cr",
                         float,
                         30,
                         10,
-                        kwargs.get("cr")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         40,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "q",
                         float,
                         50,
                         10,
-                        kwargs.get("q")
+                        **kwargs,
                     ),
                     Field(
                         "ff",
                         float,
                         60,
                         10,
-                        kwargs.get("ff")
+                        **kwargs,
                     ),
                     Field(
                         "fr",
                         float,
                         70,
                         10,
-                        kwargs.get("fr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,21 +163,21 @@ class BoundaryThermalWeld(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tx")
+                        **kwargs,
                     ),
                     Field(
                         "ty",
                         float,
                         10,
                         10,
-                        kwargs.get("ty")
+                        **kwargs,
                     ),
                     Field(
                         "tz",
                         float,
                         20,
                         10,
-                        kwargs.get("tz")
+                        **kwargs,
                     ),
                 ],
             ),

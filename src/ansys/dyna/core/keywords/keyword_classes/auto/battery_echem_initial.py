@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BatteryEchemInitial(KeywordBase):
@@ -41,14 +40,14 @@ class BatteryEchemInitial(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("echemid")
+                        **kwargs,
                     ),
                     Field(
                         "mid",
                         int,
                         10,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,42 +58,42 @@ class BatteryEchemInitial(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lic")
+                        **kwargs,
                     ),
                     Field(
                         "lisic",
                         float,
                         10,
                         10,
-                        kwargs.get("lisic")
+                        **kwargs,
                     ),
                     Field(
                         "phi2ic",
                         float,
                         20,
                         10,
-                        kwargs.get("phi2ic")
+                        **kwargs,
                     ),
                     Field(
                         "phi1ic",
                         float,
                         30,
                         10,
-                        kwargs.get("phi1ic")
+                        **kwargs,
                     ),
                     Field(
                         "curic",
                         float,
                         40,
                         10,
-                        kwargs.get("curic")
+                        **kwargs,
                     ),
                     Field(
                         "fluxic",
                         float,
                         50,
                         10,
-                        kwargs.get("fluxic")
+                        **kwargs,
                     ),
                 ],
             ),

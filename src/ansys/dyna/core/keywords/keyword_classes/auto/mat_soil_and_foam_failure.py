@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatSoilAndFoamFailure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         20,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "bulk",
                         float,
                         30,
                         10,
-                        kwargs.get("bulk")
+                        **kwargs,
                     ),
                     Field(
                         "a0",
                         float,
                         40,
                         10,
-                        kwargs.get("a0")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         50,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         60,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "pc",
                         float,
                         70,
                         10,
-                        kwargs.get("pc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,14 +105,16 @@ class MatSoilAndFoamFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vcr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ref",
                         float,
                         10,
                         10,
-                        kwargs.get("ref", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -124,56 +125,56 @@ class MatSoilAndFoamFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eps1")
+                        **kwargs,
                     ),
                     Field(
                         "eps2",
                         float,
                         10,
                         10,
-                        kwargs.get("eps2")
+                        **kwargs,
                     ),
                     Field(
                         "eps3",
                         float,
                         20,
                         10,
-                        kwargs.get("eps3")
+                        **kwargs,
                     ),
                     Field(
                         "eps4",
                         float,
                         30,
                         10,
-                        kwargs.get("eps4")
+                        **kwargs,
                     ),
                     Field(
                         "eps5",
                         float,
                         40,
                         10,
-                        kwargs.get("eps5")
+                        **kwargs,
                     ),
                     Field(
                         "eps6",
                         float,
                         50,
                         10,
-                        kwargs.get("eps6")
+                        **kwargs,
                     ),
                     Field(
                         "eps7",
                         float,
                         60,
                         10,
-                        kwargs.get("eps7")
+                        **kwargs,
                     ),
                     Field(
                         "eps8",
                         float,
                         70,
                         10,
-                        kwargs.get("eps8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -184,14 +185,14 @@ class MatSoilAndFoamFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eps9")
+                        **kwargs,
                     ),
                     Field(
                         "eps10",
                         float,
                         10,
                         10,
-                        kwargs.get("eps10")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -202,56 +203,56 @@ class MatSoilAndFoamFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         10,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         20,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                     Field(
                         "p4",
                         float,
                         30,
                         10,
-                        kwargs.get("p4")
+                        **kwargs,
                     ),
                     Field(
                         "p5",
                         float,
                         40,
                         10,
-                        kwargs.get("p5")
+                        **kwargs,
                     ),
                     Field(
                         "p6",
                         float,
                         50,
                         10,
-                        kwargs.get("p6")
+                        **kwargs,
                     ),
                     Field(
                         "p7",
                         float,
                         60,
                         10,
-                        kwargs.get("p7")
+                        **kwargs,
                     ),
                     Field(
                         "p8",
                         float,
                         70,
                         10,
-                        kwargs.get("p8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -262,14 +263,14 @@ class MatSoilAndFoamFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("p9")
+                        **kwargs,
                     ),
                     Field(
                         "p10",
                         float,
                         10,
                         10,
-                        kwargs.get("p10")
+                        **kwargs,
                     ),
                 ],
             ),

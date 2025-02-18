@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseBoundaryFsiMsurf(KeywordBase):
@@ -41,14 +40,15 @@ class DualceseBoundaryFsiMsurf(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mspid")
+                        **kwargs,
                     ),
                     Field(
                         "ref_p",
                         float,
                         10,
                         10,
-                        kwargs.get("ref_p", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

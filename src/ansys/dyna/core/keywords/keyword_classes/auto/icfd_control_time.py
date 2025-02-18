@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlTime(KeywordBase):
@@ -41,56 +40,60 @@ class IcfdControlTime(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ttm", 1.E28 if use_lspp_defaults() else None)
+                        1.E28,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         10,
                         10,
-                        kwargs.get("dt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cfl",
                         float,
                         20,
                         10,
-                        kwargs.get("cfl", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcidsf",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidsf")
+                        **kwargs,
                     ),
                     Field(
                         "dtmin",
                         float,
                         40,
                         10,
-                        kwargs.get("dtmin")
+                        **kwargs,
                     ),
                     Field(
                         "dtmax",
                         float,
                         50,
                         10,
-                        kwargs.get("dtmax")
+                        **kwargs,
                     ),
                     Field(
                         "dtinit",
                         float,
                         60,
                         10,
-                        kwargs.get("dtinit")
+                        **kwargs,
                     ),
                     Field(
                         "tdeath",
                         float,
                         70,
                         10,
-                        kwargs.get("tdeath", 1e28 if use_lspp_defaults() else None)
+                        1e28,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,7 +104,7 @@ class IcfdControlTime(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dtt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,7 +115,8 @@ class IcfdControlTime(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("btbl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

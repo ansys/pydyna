@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainSeaSubsystem(KeywordBase):
@@ -41,42 +40,44 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fmin")
+                        **kwargs,
                     ),
                     Field(
                         "fmax",
                         float,
                         10,
                         10,
-                        kwargs.get("fmax")
+                        **kwargs,
                     ),
                     Field(
                         "nfreq",
                         int,
                         20,
                         10,
-                        kwargs.get("nfreq")
+                        **kwargs,
                     ),
                     Field(
                         "nfspace",
                         int,
                         30,
                         10,
-                        kwargs.get("nfspace", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcfreq",
                         int,
                         40,
                         10,
-                        kwargs.get("lcfreq")
+                        **kwargs,
                     ),
                     Field(
                         "iread",
                         int,
                         50,
                         10,
-                        kwargs.get("iread", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,56 +88,58 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("subid")
+                        **kwargs,
                     ),
                     Field(
                         "subtyp",
                         int,
                         10,
                         10,
-                        kwargs.get("subtyp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "density",
                         float,
                         20,
                         10,
-                        kwargs.get("density")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         30,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         40,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "output",
                         int,
                         50,
                         10,
-                        kwargs.get("output", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -147,56 +150,56 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "perim",
                         float,
                         10,
                         10,
-                        kwargs.get("perim")
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         float,
                         20,
                         10,
-                        kwargs.get("thick")
+                        **kwargs,
                     ),
                     Field(
                         "width",
                         float,
                         30,
                         10,
-                        kwargs.get("width")
+                        **kwargs,
                     ),
                     Field(
                         "length",
                         float,
                         40,
                         10,
-                        kwargs.get("length")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -207,56 +210,59 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dampb")
+                        **kwargs,
                     ),
                     Field(
                         "dampl",
                         float,
                         10,
                         10,
-                        kwargs.get("dampl")
+                        **kwargs,
                     ),
                     Field(
                         "damps",
                         float,
                         20,
                         10,
-                        kwargs.get("damps")
+                        **kwargs,
                     ),
                     Field(
                         "lc1",
                         int,
                         30,
                         10,
-                        kwargs.get("lc1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc2",
                         int,
                         40,
                         10,
-                        kwargs.get("lc2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc3",
                         int,
                         50,
                         10,
-                        kwargs.get("lc3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -267,56 +273,56 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "perim",
                         float,
                         10,
                         10,
-                        kwargs.get("perim")
+                        **kwargs,
                     ),
                     Field(
                         "volume",
                         float,
                         20,
                         10,
-                        kwargs.get("volume")
+                        **kwargs,
                     ),
                     Field(
                         "width",
                         float,
                         30,
                         10,
-                        kwargs.get("width")
+                        **kwargs,
                     ),
                     Field(
                         "length",
                         float,
                         40,
                         10,
-                        kwargs.get("length")
+                        **kwargs,
                     ),
                     Field(
                         "height",
                         int,
                         50,
                         10,
-                        kwargs.get("height")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -327,56 +333,56 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dampb")
+                        **kwargs,
                     ),
                     Field(
                         "lc1",
                         int,
                         10,
                         10,
-                        kwargs.get("lc1")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -387,56 +393,56 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "iss",
                         float,
                         10,
                         10,
-                        kwargs.get("iss")
+                        **kwargs,
                     ),
                     Field(
                         "itt",
                         float,
                         20,
                         10,
-                        kwargs.get("itt")
+                        **kwargs,
                     ),
                     Field(
                         "j",
                         float,
                         30,
                         10,
-                        kwargs.get("j")
+                        **kwargs,
                     ),
                     Field(
                         "length",
                         float,
                         40,
                         10,
-                        kwargs.get("length")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -447,56 +453,60 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dampb")
+                        **kwargs,
                     ),
                     Field(
                         "dampl",
                         float,
                         10,
                         10,
-                        kwargs.get("dampl")
+                        **kwargs,
                     ),
                     Field(
                         "damps",
                         float,
                         20,
                         10,
-                        kwargs.get("damps")
+                        **kwargs,
                     ),
                     Field(
                         "dampt",
                         float,
                         30,
                         10,
-                        kwargs.get("dampt")
+                        **kwargs,
                     ),
                     Field(
                         "lc1",
                         int,
                         40,
                         10,
-                        kwargs.get("lc1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc2",
                         int,
                         50,
                         10,
-                        kwargs.get("lc2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc3",
                         int,
                         60,
                         10,
-                        kwargs.get("lc3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc4",
                         int,
                         70,
                         10,
-                        kwargs.get("lc4", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

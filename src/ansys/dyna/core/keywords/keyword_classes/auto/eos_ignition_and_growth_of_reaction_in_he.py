@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
@@ -41,56 +40,56 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         10,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         20,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "xp1",
                         float,
                         30,
                         10,
-                        kwargs.get("xp1")
+                        **kwargs,
                     ),
                     Field(
                         "xp2",
                         float,
                         40,
                         10,
-                        kwargs.get("xp2")
+                        **kwargs,
                     ),
                     Field(
                         "frer",
                         float,
                         50,
                         10,
-                        kwargs.get("frer")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         60,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "r1",
                         float,
                         70,
                         10,
-                        kwargs.get("r1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +100,56 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r2")
+                        **kwargs,
                     ),
                     Field(
                         "r3",
                         float,
                         10,
                         10,
-                        kwargs.get("r3")
+                        **kwargs,
                     ),
                     Field(
                         "r5",
                         float,
                         20,
                         10,
-                        kwargs.get("r5")
+                        **kwargs,
                     ),
                     Field(
                         "r6",
                         float,
                         30,
                         10,
-                        kwargs.get("r6")
+                        **kwargs,
                     ),
                     Field(
                         "fmxig",
                         float,
                         40,
                         10,
-                        kwargs.get("fmxig")
+                        **kwargs,
                     ),
                     Field(
                         "freq",
                         float,
                         50,
                         10,
-                        kwargs.get("freq")
+                        **kwargs,
                     ),
                     Field(
                         "grow1",
                         float,
                         60,
                         10,
-                        kwargs.get("grow1")
+                        **kwargs,
                     ),
                     Field(
                         "em",
                         float,
                         70,
                         10,
-                        kwargs.get("em")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,56 +160,56 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ar1")
+                        **kwargs,
                     ),
                     Field(
                         "es1",
                         float,
                         10,
                         10,
-                        kwargs.get("es1")
+                        **kwargs,
                     ),
                     Field(
                         "cvp",
                         float,
                         20,
                         10,
-                        kwargs.get("cvp")
+                        **kwargs,
                     ),
                     Field(
                         "cvr",
                         float,
                         30,
                         10,
-                        kwargs.get("cvr")
+                        **kwargs,
                     ),
                     Field(
                         "eetal",
                         float,
                         40,
                         10,
-                        kwargs.get("eetal")
+                        **kwargs,
                     ),
                     Field(
                         "ccrit",
                         float,
                         50,
                         10,
-                        kwargs.get("ccrit")
+                        **kwargs,
                     ),
                     Field(
                         "enq",
                         float,
                         60,
                         10,
-                        kwargs.get("enq")
+                        **kwargs,
                     ),
                     Field(
                         "tmp0",
                         float,
                         70,
                         10,
-                        kwargs.get("tmp0")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -221,42 +220,42 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("grow2")
+                        **kwargs,
                     ),
                     Field(
                         "ar2",
                         float,
                         10,
                         10,
-                        kwargs.get("ar2")
+                        **kwargs,
                     ),
                     Field(
                         "es2",
                         float,
                         20,
                         10,
-                        kwargs.get("es2")
+                        **kwargs,
                     ),
                     Field(
                         "en",
                         float,
                         30,
                         10,
-                        kwargs.get("en")
+                        **kwargs,
                     ),
                     Field(
                         "fmxgr",
                         float,
                         40,
                         10,
-                        kwargs.get("fmxgr")
+                        **kwargs,
                     ),
                     Field(
                         "fmngr",
                         float,
                         50,
                         10,
-                        kwargs.get("fmngr")
+                        **kwargs,
                     ),
                 ],
             ),

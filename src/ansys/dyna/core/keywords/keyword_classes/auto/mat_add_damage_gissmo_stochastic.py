@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,37 @@ class MatAddDamageGissmoStochastic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "dtyp",
                         float,
                         20,
                         10,
-                        kwargs.get("dtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "refsz",
                         float,
                         30,
                         10,
-                        kwargs.get("refsz")
+                        **kwargs,
                     ),
                     Field(
                         "numfip",
                         float,
                         40,
                         10,
-                        kwargs.get("numfip", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,49 +86,53 @@ class MatAddDamageGissmoStochastic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcsdg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ecrit",
                         float,
                         10,
                         10,
-                        kwargs.get("ecrit")
+                        **kwargs,
                     ),
                     Field(
                         "dmgexp",
                         float,
                         20,
                         10,
-                        kwargs.get("dmgexp", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "dcrit",
                         float,
                         30,
                         10,
-                        kwargs.get("dcrit")
+                        **kwargs,
                     ),
                     Field(
                         "fadexp",
                         float,
                         40,
                         10,
-                        kwargs.get("fadexp", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcregd",
                         int,
                         50,
                         10,
-                        kwargs.get("lcregd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "instf",
                         int,
                         60,
                         10,
-                        kwargs.get("instf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -138,56 +143,57 @@ class MatAddDamageGissmoStochastic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcsrs")
+                        **kwargs,
                     ),
                     Field(
                         "shrf",
                         float,
                         10,
                         10,
-                        kwargs.get("shrf")
+                        **kwargs,
                     ),
                     Field(
                         "biaxf",
                         float,
                         20,
                         10,
-                        kwargs.get("biaxf")
+                        **kwargs,
                     ),
                     Field(
                         "lcdlim",
                         int,
                         30,
                         10,
-                        kwargs.get("lcdlim", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "midfail",
                         float,
                         40,
                         10,
-                        kwargs.get("midfail")
+                        **kwargs,
                     ),
                     Field(
                         "hisvn",
                         float,
                         50,
                         10,
-                        kwargs.get("hisvn")
+                        **kwargs,
                     ),
                     Field(
                         "soft",
                         float,
                         60,
                         10,
-                        kwargs.get("soft")
+                        **kwargs,
                     ),
                     Field(
                         "lp2bi",
                         float,
                         70,
                         10,
-                        kwargs.get("lp2bi")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialVolumeFractionNalegp(KeywordBase):
@@ -41,7 +40,7 @@ class InitialVolumeFractionNalegp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nalegp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,63 @@ class InitialVolumeFractionNalegp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "vf1",
                         float,
                         10,
                         10,
-                        kwargs.get("vf1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf2",
                         float,
                         20,
                         10,
-                        kwargs.get("vf2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf3",
                         float,
                         30,
                         10,
-                        kwargs.get("vf3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf4",
                         float,
                         40,
                         10,
-                        kwargs.get("vf4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf5",
                         float,
                         50,
                         10,
-                        kwargs.get("vf5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf6",
                         float,
                         60,
                         10,
-                        kwargs.get("vf6", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf7",
                         float,
                         70,
                         10,
-                        kwargs.get("vf7", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,56 +118,64 @@ class InitialVolumeFractionNalegp(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf",
                         float,
                         10,
                         10,
-                        kwargs.get("vf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf",
                         float,
                         20,
                         10,
-                        kwargs.get("vf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf",
                         float,
                         30,
                         10,
-                        kwargs.get("vf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf",
                         float,
                         40,
                         10,
-                        kwargs.get("vf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf",
                         float,
                         50,
                         10,
-                        kwargs.get("vf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf",
                         float,
                         60,
                         10,
-                        kwargs.get("vf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vf",
                         float,
                         70,
                         10,
-                        kwargs.get("vf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

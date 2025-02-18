@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class MatNonlocal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idnl")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         10,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         int,
                         20,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "q",
                         int,
                         30,
                         10,
-                        kwargs.get("q")
+                        **kwargs,
                     ),
                     Field(
                         "l",
                         float,
                         40,
                         10,
-                        kwargs.get("l")
+                        **kwargs,
                     ),
                     Field(
                         "nfreq",
                         int,
                         50,
                         10,
-                        kwargs.get("nfreq")
+                        **kwargs,
                     ),
                     Field(
                         "nhv",
                         int,
                         60,
                         10,
-                        kwargs.get("nhv")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,56 +98,56 @@ class MatNonlocal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nl1")
+                        **kwargs,
                     ),
                     Field(
                         "nl2",
                         int,
                         10,
                         10,
-                        kwargs.get("nl2")
+                        **kwargs,
                     ),
                     Field(
                         "nl3",
                         int,
                         20,
                         10,
-                        kwargs.get("nl3")
+                        **kwargs,
                     ),
                     Field(
                         "nl4",
                         int,
                         30,
                         10,
-                        kwargs.get("nl4")
+                        **kwargs,
                     ),
                     Field(
                         "nl5",
                         int,
                         40,
                         10,
-                        kwargs.get("nl5")
+                        **kwargs,
                     ),
                     Field(
                         "nl6",
                         int,
                         50,
                         10,
-                        kwargs.get("nl6")
+                        **kwargs,
                     ),
                     Field(
                         "nl7",
                         int,
                         60,
                         10,
-                        kwargs.get("nl7")
+                        **kwargs,
                     ),
                     Field(
                         "nl8",
                         int,
                         70,
                         10,
-                        kwargs.get("nl8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -159,42 +158,42 @@ class MatNonlocal(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xc1")
+                        **kwargs,
                     ),
                     Field(
                         "yc1",
                         float,
                         10,
                         10,
-                        kwargs.get("yc1")
+                        **kwargs,
                     ),
                     Field(
                         "zc1",
                         float,
                         20,
                         10,
-                        kwargs.get("zc1")
+                        **kwargs,
                     ),
                     Field(
                         "xc2",
                         float,
                         30,
                         10,
-                        kwargs.get("xc2")
+                        **kwargs,
                     ),
                     Field(
                         "yc2",
                         float,
                         40,
                         10,
-                        kwargs.get("yc2")
+                        **kwargs,
                     ),
                     Field(
                         "zc2",
                         float,
                         50,
                         10,
-                        kwargs.get("zc2")
+                        **kwargs,
                     ),
                 ],
             ),

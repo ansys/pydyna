@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceCompensationNewMultiSteps(KeywordBase):
@@ -41,56 +40,63 @@ class InterfaceCompensationNewMultiSteps(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("method", 6 if use_lspp_defaults() else None)
+                        6,
+                        **kwargs,
                     ),
                     Field(
                         "sl",
                         float,
                         10,
                         10,
-                        kwargs.get("sl", 5.0 if use_lspp_defaults() else None)
+                        5.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         20,
                         10,
-                        kwargs.get("sf", 0.75 if use_lspp_defaults() else None)
+                        0.75,
+                        **kwargs,
                     ),
                     Field(
                         "elref",
                         int,
                         30,
                         10,
-                        kwargs.get("elref", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "psidm",
                         float,
                         40,
                         10,
-                        kwargs.get("psidm")
+                        **kwargs,
                     ),
                     Field(
                         "undct",
                         float,
                         50,
                         10,
-                        kwargs.get("undct", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "angle",
                         float,
                         60,
                         10,
-                        kwargs.get("angle", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nlinea",
                         int,
                         70,
                         10,
-                        kwargs.get("nlinea", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),

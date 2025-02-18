@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdDefineTurbsource(KeywordBase):
@@ -41,56 +40,57 @@ class IcfdDefineTurbsource(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "lcidx",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidx")
+                        **kwargs,
                     ),
                     Field(
                         "lcidy",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidy")
+                        **kwargs,
                     ),
                     Field(
                         "lcidz",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidz")
+                        **kwargs,
                     ),
                     Field(
                         "shape",
                         int,
                         40,
                         10,
-                        kwargs.get("shape", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "r",
                         float,
                         50,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "ptid1",
                         int,
                         60,
                         10,
-                        kwargs.get("ptid1")
+                        **kwargs,
                     ),
                     Field(
                         "ptid2",
                         int,
                         70,
                         10,
-                        kwargs.get("ptid2")
+                        **kwargs,
                     ),
                 ],
             ),

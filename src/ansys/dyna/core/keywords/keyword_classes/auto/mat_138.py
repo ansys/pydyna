@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,57 @@ class Mat138(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "roflg",
                         int,
                         20,
                         10,
-                        kwargs.get("roflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "intfail",
                         float,
                         30,
                         10,
-                        kwargs.get("intfail")
+                        **kwargs,
                     ),
                     Field(
                         "en",
                         float,
                         40,
                         10,
-                        kwargs.get("en")
+                        **kwargs,
                     ),
                     Field(
                         "et",
                         float,
                         50,
                         10,
-                        kwargs.get("et")
+                        **kwargs,
                     ),
                     Field(
                         "gic",
                         float,
                         60,
                         10,
-                        kwargs.get("gic")
+                        **kwargs,
                     ),
                     Field(
                         "giic",
                         float,
                         70,
                         10,
-                        kwargs.get("giic")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,42 +106,43 @@ class Mat138(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xmu")
+                        **kwargs,
                     ),
                     Field(
                         "t",
                         float,
                         10,
                         10,
-                        kwargs.get("t")
+                        **kwargs,
                     ),
                     Field(
                         "s",
                         float,
                         20,
                         10,
-                        kwargs.get("s")
+                        **kwargs,
                     ),
                     Field(
                         "und",
                         float,
                         30,
                         10,
-                        kwargs.get("und")
+                        **kwargs,
                     ),
                     Field(
                         "utd",
                         float,
                         40,
                         10,
-                        kwargs.get("utd")
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         50,
                         10,
-                        kwargs.get("gamma", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

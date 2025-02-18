@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleMapping(KeywordBase):
@@ -41,14 +40,15 @@ class AleMapping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ammsid")
+                        **kwargs,
                     ),
                     Field(
                         "rw",
                         int,
                         10,
                         10,
-                        kwargs.get("rw", -1 if use_lspp_defaults() else None)
+                        -1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,21 +59,23 @@ class AleMapping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ntim", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "tbeg",
                         float,
                         10,
                         10,
-                        kwargs.get("tbeg", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tend",
                         float,
                         20,
                         10,
-                        kwargs.get("tend")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -84,35 +86,39 @@ class AleMapping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("vecid")
+                        **kwargs,
                     ),
                     Field(
                         "angle",
                         float,
                         10,
                         10,
-                        kwargs.get("angle", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xp",
                         float,
                         20,
                         10,
-                        kwargs.get("xp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         30,
                         10,
-                        kwargs.get("yp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         40,
                         10,
-                        kwargs.get("zp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -123,21 +129,23 @@ class AleMapping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         int,
                         10,
                         10,
-                        kwargs.get("type", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nvol",
                         int,
                         20,
                         10,
-                        kwargs.get("nvol", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -148,56 +156,63 @@ class AleMapping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("voltyp")
+                        **kwargs,
                     ),
                     Field(
                         "vecid1",
                         int,
                         10,
                         10,
-                        kwargs.get("vecid1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dw1",
                         float,
                         20,
                         10,
-                        kwargs.get("dw1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xl",
                         float,
                         30,
                         10,
-                        kwargs.get("xl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yl",
                         float,
                         40,
                         10,
-                        kwargs.get("yl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zl",
                         float,
                         50,
                         10,
-                        kwargs.get("zl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dw2",
                         float,
                         60,
                         10,
-                        kwargs.get("dw2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dv2",
                         float,
                         70,
                         10,
-                        kwargs.get("dv2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

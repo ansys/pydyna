@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Iga1DNurbsUvw(KeywordBase):
@@ -41,21 +40,21 @@ class Iga1DNurbsUvw(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "nr",
                         int,
                         10,
                         10,
-                        kwargs.get("nr")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         int,
                         20,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,7 +65,8 @@ class Iga1DNurbsUvw(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unir", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -77,28 +77,28 @@ class Iga1DNurbsUvw(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("r1")
+                        **kwargs,
                     ),
                     Field(
                         "r2",
                         float,
                         20,
                         20,
-                        kwargs.get("r2")
+                        **kwargs,
                     ),
                     Field(
                         "r3",
                         float,
                         40,
                         20,
-                        kwargs.get("r3")
+                        **kwargs,
                     ),
                     Field(
                         "r4",
                         float,
                         60,
                         20,
-                        kwargs.get("r4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -109,14 +109,14 @@ class Iga1DNurbsUvw(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("rfirst")
+                        **kwargs,
                     ),
                     Field(
                         "rlast",
                         float,
                         20,
                         20,
-                        kwargs.get("rlast")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -127,28 +127,29 @@ class Iga1DNurbsUvw(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("u")
+                        **kwargs,
                     ),
                     Field(
                         "v",
                         float,
                         20,
                         20,
-                        kwargs.get("v")
+                        **kwargs,
                     ),
                     Field(
                         "w",
                         float,
                         40,
                         20,
-                        kwargs.get("w")
+                        **kwargs,
                     ),
                     Field(
                         "wgt",
                         float,
                         60,
                         20,
-                        kwargs.get("wgt", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleReferenceSystemCurve(KeywordBase):
@@ -41,7 +40,7 @@ class AleReferenceSystemCurve(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,56 @@ class AleReferenceSystemCurve(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lc1")
+                        **kwargs,
                     ),
                     Field(
                         "lc2",
                         int,
                         10,
                         10,
-                        kwargs.get("lc2")
+                        **kwargs,
                     ),
                     Field(
                         "lc3",
                         int,
                         20,
                         10,
-                        kwargs.get("lc3")
+                        **kwargs,
                     ),
                     Field(
                         "lc4",
                         int,
                         30,
                         10,
-                        kwargs.get("lc4")
+                        **kwargs,
                     ),
                     Field(
                         "lc5",
                         int,
                         40,
                         10,
-                        kwargs.get("lc5")
+                        **kwargs,
                     ),
                     Field(
                         "lc6",
                         int,
                         50,
                         10,
-                        kwargs.get("lc6")
+                        **kwargs,
                     ),
                     Field(
                         "lc7",
                         int,
                         60,
                         10,
-                        kwargs.get("lc7")
+                        **kwargs,
                     ),
                     Field(
                         "lc8",
                         int,
                         70,
                         10,
-                        kwargs.get("lc8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,28 +111,28 @@ class AleReferenceSystemCurve(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lc9")
+                        **kwargs,
                     ),
                     Field(
                         "lc10",
                         int,
                         10,
                         10,
-                        kwargs.get("lc10")
+                        **kwargs,
                     ),
                     Field(
                         "lc11",
                         int,
                         20,
                         10,
-                        kwargs.get("lc11")
+                        **kwargs,
                     ),
                     Field(
                         "lc12",
                         int,
                         30,
                         10,
-                        kwargs.get("lc12")
+                        **kwargs,
                     ),
                 ],
             ),

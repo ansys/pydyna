@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Control2DRemeshingRegion(KeywordBase):
@@ -41,56 +40,63 @@ class Control2DRemeshingRegion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ltyp")
+                        **kwargs,
                     ),
                     Field(
                         "par1",
                         float,
                         10,
                         10,
-                        kwargs.get("par1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par2",
                         float,
                         20,
                         10,
-                        kwargs.get("par2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par3",
                         float,
                         30,
                         10,
-                        kwargs.get("par3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par4",
                         float,
                         40,
                         10,
-                        kwargs.get("par4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par5",
                         float,
                         50,
                         10,
-                        kwargs.get("par5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par6",
                         float,
                         60,
                         10,
-                        kwargs.get("par6", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par7",
                         float,
                         70,
                         10,
-                        kwargs.get("par7", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

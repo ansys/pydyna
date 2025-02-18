@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmDatabaseFieldline(KeywordBase):
@@ -41,28 +40,29 @@ class EmDatabaseFieldline(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("flid")
+                        **kwargs,
                     ),
                     Field(
                         "psid",
                         int,
                         10,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "dtout",
                         float,
                         20,
                         10,
-                        kwargs.get("dtout")
+                        **kwargs,
                     ),
                     Field(
                         "npoint",
                         int,
                         30,
                         10,
-                        kwargs.get("npoint", 100 if use_lspp_defaults() else None)
+                        100,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -73,42 +73,48 @@ class EmDatabaseFieldline(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("integ", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "h",
                         float,
                         10,
                         10,
-                        kwargs.get("h", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hmin",
                         float,
                         20,
                         10,
-                        kwargs.get("hmin", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hmax",
                         float,
                         30,
                         10,
-                        kwargs.get("hmax", 1e10 if use_lspp_defaults() else None)
+                        1e10,
+                        **kwargs,
                     ),
                     Field(
                         "tolabs",
                         float,
                         40,
                         10,
-                        kwargs.get("tolabs", 1e-3 if use_lspp_defaults() else None)
+                        1e-3,
+                        **kwargs,
                     ),
                     Field(
                         "tolrel",
                         float,
                         50,
                         10,
-                        kwargs.get("tolrel", 1e-5 if use_lspp_defaults() else None)
+                        1e-5,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,7 +125,8 @@ class EmDatabaseFieldline(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("btype", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                 ],
             ),

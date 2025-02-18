@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedSpotweld(KeywordBase):
@@ -41,7 +40,7 @@ class ConstrainedSpotweld(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("wid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,58 @@ class ConstrainedSpotweld(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         10,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "sn",
                         float,
                         20,
                         10,
-                        kwargs.get("sn")
+                        **kwargs,
                     ),
                     Field(
                         "ss",
                         float,
                         30,
                         10,
-                        kwargs.get("ss")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         40,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         50,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "tf",
                         float,
                         60,
                         10,
-                        kwargs.get("tf", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "ep",
                         float,
                         70,
                         10,
-                        kwargs.get("ep", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),

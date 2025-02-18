@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingOutput(KeywordBase):
@@ -41,56 +40,56 @@ class ControlFormingOutput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "nout",
                         int,
                         10,
                         10,
-                        kwargs.get("nout")
+                        **kwargs,
                     ),
                     Field(
                         "tbeg",
                         float,
                         20,
                         10,
-                        kwargs.get("tbeg")
+                        **kwargs,
                     ),
                     Field(
                         "tend",
                         float,
                         30,
                         10,
-                        kwargs.get("tend")
+                        **kwargs,
                     ),
                     Field(
                         "y1/lcid",
                         float,
                         40,
                         10,
-                        kwargs.get("y1/lcid")
+                        **kwargs,
                     ),
                     Field(
                         "y2/lcid",
                         float,
                         50,
                         10,
-                        kwargs.get("y2/lcid")
+                        **kwargs,
                     ),
                     Field(
                         "y3",
                         float,
                         60,
                         10,
-                        kwargs.get("y3")
+                        **kwargs,
                     ),
                     Field(
                         "y4",
                         float,
                         70,
                         10,
-                        kwargs.get("y4")
+                        **kwargs,
                     ),
                 ],
             ),

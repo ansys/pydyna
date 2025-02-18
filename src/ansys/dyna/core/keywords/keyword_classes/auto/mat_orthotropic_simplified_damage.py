@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "ea",
                         float,
                         20,
                         10,
-                        kwargs.get("ea")
+                        **kwargs,
                     ),
                     Field(
                         "eb",
                         float,
                         30,
                         10,
-                        kwargs.get("eb")
+                        **kwargs,
                     ),
                     Field(
                         "ec",
                         float,
                         40,
                         10,
-                        kwargs.get("ec")
+                        **kwargs,
                     ),
                     Field(
                         "prba",
                         float,
                         50,
                         10,
-                        kwargs.get("prba")
+                        **kwargs,
                     ),
                     Field(
                         "prca",
                         float,
                         60,
                         10,
-                        kwargs.get("prca")
+                        **kwargs,
                     ),
                     Field(
                         "prcb",
                         float,
                         70,
                         10,
-                        kwargs.get("prcb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,42 +105,43 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gab")
+                        **kwargs,
                     ),
                     Field(
                         "gbc",
                         float,
                         10,
                         10,
-                        kwargs.get("gbc")
+                        **kwargs,
                     ),
                     Field(
                         "gca",
                         float,
                         20,
                         10,
-                        kwargs.get("gca")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         40,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         50,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -152,42 +152,42 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -198,49 +198,49 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -251,56 +251,64 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nerode", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ndam",
                         int,
                         10,
                         10,
-                        kwargs.get("ndam", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "eps1tf",
                         float,
                         20,
                         10,
-                        kwargs.get("eps1tf", 1.E20 if use_lspp_defaults() else None)
+                        1.E20,
+                        **kwargs,
                     ),
                     Field(
                         "eps2tf",
                         float,
                         30,
                         10,
-                        kwargs.get("eps2tf", 1.E20 if use_lspp_defaults() else None)
+                        1.E20,
+                        **kwargs,
                     ),
                     Field(
                         "eps3tf",
                         float,
                         40,
                         10,
-                        kwargs.get("eps3tf", 1.E20 if use_lspp_defaults() else None)
+                        1.E20,
+                        **kwargs,
                     ),
                     Field(
                         "eps1cf",
                         float,
                         50,
                         10,
-                        kwargs.get("eps1cf", -1.E20 if use_lspp_defaults() else None)
+                        -1.E20,
+                        **kwargs,
                     ),
                     Field(
                         "eps2cf",
                         float,
                         60,
                         10,
-                        kwargs.get("eps2cf", -1.E20 if use_lspp_defaults() else None)
+                        -1.E20,
+                        **kwargs,
                     ),
                     Field(
                         "eps3cf",
                         float,
                         70,
                         10,
-                        kwargs.get("eps3cf", -1.E20 if use_lspp_defaults() else None)
+                        -1.E20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -311,56 +319,59 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eps12f", 1.E20 if use_lspp_defaults() else None)
+                        1.E20,
+                        **kwargs,
                     ),
                     Field(
                         "eps23f",
                         float,
                         10,
                         10,
-                        kwargs.get("eps23f", 1.E20 if use_lspp_defaults() else None)
+                        1.E20,
+                        **kwargs,
                     ),
                     Field(
                         "eps13f",
                         float,
                         20,
                         10,
-                        kwargs.get("eps13f", 1.E20 if use_lspp_defaults() else None)
+                        1.E20,
+                        **kwargs,
                     ),
                     Field(
                         "epsd1t",
                         float,
                         30,
                         10,
-                        kwargs.get("epsd1t")
+                        **kwargs,
                     ),
                     Field(
                         "epsc1t",
                         float,
                         40,
                         10,
-                        kwargs.get("epsc1t")
+                        **kwargs,
                     ),
                     Field(
                         "cdam1t",
                         float,
                         50,
                         10,
-                        kwargs.get("cdam1t")
+                        **kwargs,
                     ),
                     Field(
                         "epsd2t",
                         float,
                         60,
                         10,
-                        kwargs.get("epsd2t")
+                        **kwargs,
                     ),
                     Field(
                         "epsc2t",
                         float,
                         70,
                         10,
-                        kwargs.get("epsc2t")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -371,56 +382,58 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cdam2t", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "epsd3t",
                         float,
                         10,
                         10,
-                        kwargs.get("epsd3t", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "epsc3t",
                         float,
                         20,
                         10,
-                        kwargs.get("epsc3t")
+                        **kwargs,
                     ),
                     Field(
                         "cdam3t",
                         float,
                         30,
                         10,
-                        kwargs.get("cdam3t")
+                        **kwargs,
                     ),
                     Field(
                         "epsd1c",
                         float,
                         40,
                         10,
-                        kwargs.get("epsd1c")
+                        **kwargs,
                     ),
                     Field(
                         "epsc1c",
                         float,
                         50,
                         10,
-                        kwargs.get("epsc1c")
+                        **kwargs,
                     ),
                     Field(
                         "cdam1c",
                         float,
                         60,
                         10,
-                        kwargs.get("cdam1c")
+                        **kwargs,
                     ),
                     Field(
                         "epsd2c",
                         float,
                         70,
                         10,
-                        kwargs.get("epsd2c")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -431,56 +444,56 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("epsc2c")
+                        **kwargs,
                     ),
                     Field(
                         "cdam2c",
                         float,
                         10,
                         10,
-                        kwargs.get("cdam2c")
+                        **kwargs,
                     ),
                     Field(
                         "epsd3c",
                         float,
                         20,
                         10,
-                        kwargs.get("epsd3c")
+                        **kwargs,
                     ),
                     Field(
                         "epsc3c",
                         float,
                         30,
                         10,
-                        kwargs.get("epsc3c")
+                        **kwargs,
                     ),
                     Field(
                         "cdam3c",
                         float,
                         40,
                         10,
-                        kwargs.get("cdam3c")
+                        **kwargs,
                     ),
                     Field(
                         "epsd12",
                         float,
                         50,
                         10,
-                        kwargs.get("epsd12")
+                        **kwargs,
                     ),
                     Field(
                         "epsc12",
                         float,
                         60,
                         10,
-                        kwargs.get("epsc12")
+                        **kwargs,
                     ),
                     Field(
                         "cdam12",
                         float,
                         70,
                         10,
-                        kwargs.get("cdam12")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -491,42 +504,42 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("epsd23")
+                        **kwargs,
                     ),
                     Field(
                         "epsc23",
                         float,
                         10,
                         10,
-                        kwargs.get("epsc23")
+                        **kwargs,
                     ),
                     Field(
                         "cdam23",
                         float,
                         20,
                         10,
-                        kwargs.get("cdam23")
+                        **kwargs,
                     ),
                     Field(
                         "epsd31",
                         float,
                         30,
                         10,
-                        kwargs.get("epsd31")
+                        **kwargs,
                     ),
                     Field(
                         "epsc31",
                         float,
                         40,
                         10,
-                        kwargs.get("epsc31")
+                        **kwargs,
                     ),
                     Field(
                         "cdam31",
                         float,
                         50,
                         10,
-                        kwargs.get("cdam31")
+                        **kwargs,
                     ),
                 ],
             ),

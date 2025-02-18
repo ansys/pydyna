@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryPwpTableSet(KeywordBase):
@@ -41,42 +40,44 @@ class BoundaryPwpTableSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "lc",
                         float,
                         10,
                         10,
-                        kwargs.get("lc")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "tbirth",
                         float,
                         40,
                         10,
-                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tdeath",
                         float,
                         50,
                         10,
-                        kwargs.get("tdeath", 1.0E20 if use_lspp_defaults() else None)
+                        1.0E20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,28 +88,30 @@ class BoundaryPwpTableSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "itotex",
                         int,
                         10,
                         10,
-                        kwargs.get("itotex", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "table",
                         int,
                         30,
                         10,
-                        kwargs.get("table", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

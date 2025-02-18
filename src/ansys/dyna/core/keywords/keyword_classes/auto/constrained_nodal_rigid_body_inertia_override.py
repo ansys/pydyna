@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,53 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         10,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "nsid",
                         int,
                         20,
                         10,
-                        kwargs.get("nsid")
+                        **kwargs,
                     ),
                     Field(
                         "pnode",
                         int,
                         30,
                         10,
-                        kwargs.get("pnode", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iprt",
                         int,
                         40,
                         10,
-                        kwargs.get("iprt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "drflag",
                         int,
                         50,
                         10,
-                        kwargs.get("drflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rrflag",
                         int,
                         60,
                         10,
-                        kwargs.get("rrflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,42 +102,48 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yc",
                         float,
                         10,
                         10,
-                        kwargs.get("yc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zc",
                         float,
                         20,
                         10,
-                        kwargs.get("zc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tm",
                         float,
                         30,
                         10,
-                        kwargs.get("tm", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ircs",
                         int,
                         40,
                         10,
-                        kwargs.get("ircs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nodeid",
                         int,
                         50,
                         10,
-                        kwargs.get("nodeid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -145,42 +154,46 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ixx")
+                        **kwargs,
                     ),
                     Field(
                         "ixy",
                         float,
                         10,
                         10,
-                        kwargs.get("ixy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ixz",
                         float,
                         20,
                         10,
-                        kwargs.get("ixz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "iyy",
                         float,
                         30,
                         10,
-                        kwargs.get("iyy")
+                        **kwargs,
                     ),
                     Field(
                         "iyz",
                         float,
                         40,
                         10,
-                        kwargs.get("iyz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "izz",
                         float,
                         50,
                         10,
-                        kwargs.get("izz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -191,42 +204,48 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vtx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vty",
                         float,
                         10,
                         10,
-                        kwargs.get("vty", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vtz",
                         float,
                         20,
                         10,
-                        kwargs.get("vtz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vrx",
                         float,
                         30,
                         10,
-                        kwargs.get("vrx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vry",
                         float,
                         40,
                         10,
-                        kwargs.get("vry", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vrz",
                         float,
                         50,
                         10,
-                        kwargs.get("vrz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -237,49 +256,49 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xl")
+                        **kwargs,
                     ),
                     Field(
                         "yl",
                         float,
                         10,
                         10,
-                        kwargs.get("yl")
+                        **kwargs,
                     ),
                     Field(
                         "zl",
                         float,
                         20,
                         10,
-                        kwargs.get("zl")
+                        **kwargs,
                     ),
                     Field(
                         "xlip",
                         float,
                         30,
                         10,
-                        kwargs.get("xlip")
+                        **kwargs,
                     ),
                     Field(
                         "ylip",
                         float,
                         40,
                         10,
-                        kwargs.get("ylip")
+                        **kwargs,
                     ),
                     Field(
                         "zlip",
                         float,
                         50,
                         10,
-                        kwargs.get("zlip")
+                        **kwargs,
                     ),
                     Field(
                         "cid2",
                         int,
                         60,
                         10,
-                        kwargs.get("cid2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -290,21 +309,24 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("icnt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ibag",
                         int,
                         10,
                         10,
-                        kwargs.get("ibag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ipsm",
                         int,
                         20,
                         10,
-                        kwargs.get("ipsm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

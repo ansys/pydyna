@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadGravityPartSet(KeywordBase):
@@ -41,49 +40,52 @@ class LoadGravityPartSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "dof",
                         int,
                         10,
                         10,
-                        kwargs.get("dof")
+                        **kwargs,
                     ),
                     Field(
                         "lc",
                         int,
                         20,
                         10,
-                        kwargs.get("lc")
+                        **kwargs,
                     ),
                     Field(
                         "accel",
                         float,
                         30,
                         10,
-                        kwargs.get("accel", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdr",
                         int,
                         40,
                         10,
-                        kwargs.get("lcdr")
+                        **kwargs,
                     ),
                     Field(
                         "stga",
                         int,
                         50,
                         10,
-                        kwargs.get("stga", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "stgr",
                         int,
                         60,
                         10,
-                        kwargs.get("stgr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

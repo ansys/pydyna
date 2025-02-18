@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingUnflanging(KeywordBase):
@@ -41,56 +40,57 @@ class ControlFormingUnflanging(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("noption")
+                        **kwargs,
                     ),
                     Field(
                         "dvid",
                         int,
                         10,
                         10,
-                        kwargs.get("dvid")
+                        **kwargs,
                     ),
                     Field(
                         "nunbend",
                         int,
                         20,
                         10,
-                        kwargs.get("nunbend")
+                        **kwargs,
                     ),
                     Field(
                         "stfbend",
                         float,
                         30,
                         10,
-                        kwargs.get("stfbend")
+                        **kwargs,
                     ),
                     Field(
                         "stfcnt",
                         float,
                         40,
                         10,
-                        kwargs.get("stfcnt")
+                        **kwargs,
                     ),
                     Field(
                         "iflimit",
                         int,
                         50,
                         10,
-                        kwargs.get("iflimit")
+                        **kwargs,
                     ),
                     Field(
                         "dist",
                         float,
                         60,
                         10,
-                        kwargs.get("dist")
+                        **kwargs,
                     ),
                     Field(
                         "ilinear",
                         int,
                         70,
                         10,
-                        kwargs.get("ilinear", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,35 +101,36 @@ class ControlFormingUnflanging(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nb1")
+                        **kwargs,
                     ),
                     Field(
                         "nb2",
                         int,
                         10,
                         10,
-                        kwargs.get("nb2")
+                        **kwargs,
                     ),
                     Field(
                         "nb3",
                         int,
                         20,
                         10,
-                        kwargs.get("nb3")
+                        **kwargs,
                     ),
                     Field(
                         "charlen",
                         float,
                         30,
                         10,
-                        kwargs.get("charlen", 150.0 if use_lspp_defaults() else None)
+                        150.0,
+                        **kwargs,
                     ),
                     Field(
                         "ndouter",
                         int,
                         40,
                         10,
-                        kwargs.get("ndouter")
+                        **kwargs,
                     ),
                 ],
             ),

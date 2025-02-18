@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "ea",
                         float,
                         40,
                         10,
-                        kwargs.get("ea")
+                        **kwargs,
                     ),
                     Field(
                         "coe",
                         float,
                         50,
                         10,
-                        kwargs.get("coe")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         60,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,56 +98,56 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha1")
+                        **kwargs,
                     ),
                     Field(
                         "alpha2",
                         float,
                         10,
                         10,
-                        kwargs.get("alpha2")
+                        **kwargs,
                     ),
                     Field(
                         "alpha3",
                         float,
                         20,
                         10,
-                        kwargs.get("alpha3")
+                        **kwargs,
                     ),
                     Field(
                         "alpha4",
                         float,
                         30,
                         10,
-                        kwargs.get("alpha4")
+                        **kwargs,
                     ),
                     Field(
                         "alpha5",
                         float,
                         40,
                         10,
-                        kwargs.get("alpha5")
+                        **kwargs,
                     ),
                     Field(
                         "alpha6",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha6")
+                        **kwargs,
                     ),
                     Field(
                         "alpha7",
                         float,
                         60,
                         10,
-                        kwargs.get("alpha7")
+                        **kwargs,
                     ),
                     Field(
                         "alpha8",
                         float,
                         70,
                         10,
-                        kwargs.get("alpha8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -167,49 +166,49 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cb")
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         10,
                         10,
-                        kwargs.get("y")
+                        **kwargs,
                     ),
                     Field(
                         "sc1",
                         float,
                         20,
                         10,
-                        kwargs.get("sc1")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         30,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "rsat",
                         float,
                         40,
                         10,
-                        kwargs.get("rsat")
+                        **kwargs,
                     ),
                     Field(
                         "sb",
                         float,
                         50,
                         10,
-                        kwargs.get("sb")
+                        **kwargs,
                     ),
                     Field(
                         "h",
                         float,
                         60,
                         10,
-                        kwargs.get("h")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -220,35 +219,36 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "iopt",
                         int,
                         20,
                         10,
-                        kwargs.get("iopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "c1",
                         float,
                         30,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         40,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -259,42 +259,42 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -305,42 +305,42 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                 ],
             ),

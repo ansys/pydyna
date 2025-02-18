@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,44 @@ class DefineNurbsCurve(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         int,
                         10,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         int,
                         20,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         int,
                         40,
                         10,
-                        kwargs.get("type", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "wfl",
                         int,
                         50,
                         10,
-                        kwargs.get("wfl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,56 +93,56 @@ class DefineNurbsCurve(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k1")
+                        **kwargs,
                     ),
                     Field(
                         "k2",
                         float,
                         10,
                         10,
-                        kwargs.get("k2")
+                        **kwargs,
                     ),
                     Field(
                         "k3",
                         float,
                         20,
                         10,
-                        kwargs.get("k3")
+                        **kwargs,
                     ),
                     Field(
                         "k4",
                         float,
                         30,
                         10,
-                        kwargs.get("k4")
+                        **kwargs,
                     ),
                     Field(
                         "k5",
                         float,
                         40,
                         10,
-                        kwargs.get("k5")
+                        **kwargs,
                     ),
                     Field(
                         "k6",
                         float,
                         50,
                         10,
-                        kwargs.get("k6")
+                        **kwargs,
                     ),
                     Field(
                         "k7",
                         float,
                         60,
                         10,
-                        kwargs.get("k7")
+                        **kwargs,
                     ),
                     Field(
                         "k8",
                         float,
                         70,
                         10,
-                        kwargs.get("k8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -152,28 +153,28 @@ class DefineNurbsCurve(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x")
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         10,
                         10,
-                        kwargs.get("y")
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         20,
                         10,
-                        kwargs.get("z")
+                        **kwargs,
                     ),
                     Field(
                         "w",
                         float,
                         30,
                         10,
-                        kwargs.get("w")
+                        **kwargs,
                     ),
                 ],
             ),

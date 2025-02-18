@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementLancing(KeywordBase):
@@ -41,49 +40,49 @@ class ElementLancing(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idpt")
+                        **kwargs,
                     ),
                     Field(
                         "idcv",
                         int,
                         10,
                         10,
-                        kwargs.get("idcv")
+                        **kwargs,
                     ),
                     Field(
                         "irefine",
                         int,
                         20,
                         10,
-                        kwargs.get("irefine")
+                        **kwargs,
                     ),
                     Field(
                         "smin",
                         float,
                         30,
                         10,
-                        kwargs.get("smin")
+                        **kwargs,
                     ),
                     Field(
                         "at",
                         float,
                         40,
                         10,
-                        kwargs.get("at")
+                        **kwargs,
                     ),
                     Field(
                         "endt",
                         float,
                         50,
                         10,
-                        kwargs.get("endt")
+                        **kwargs,
                     ),
                     Field(
                         "ntimes",
                         int,
                         60,
                         10,
-                        kwargs.get("ntimes")
+                        **kwargs,
                     ),
                 ],
             ),

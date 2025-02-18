@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatSamp1(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "bulk",
                         float,
                         20,
                         10,
-                        kwargs.get("bulk")
+                        **kwargs,
                     ),
                     Field(
                         "gmod",
                         float,
                         30,
                         10,
-                        kwargs.get("gmod")
+                        **kwargs,
                     ),
                     Field(
                         "emod",
                         float,
                         40,
                         10,
-                        kwargs.get("emod")
+                        **kwargs,
                     ),
                     Field(
                         "nue",
                         float,
                         50,
                         10,
-                        kwargs.get("nue")
+                        **kwargs,
                     ),
                     Field(
                         "rbcfac",
                         float,
                         60,
                         10,
-                        kwargs.get("rbcfac")
+                        **kwargs,
                     ),
                     Field(
                         "numint",
                         int,
                         70,
                         10,
-                        kwargs.get("numint")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,57 @@ class MatSamp1(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid-t")
+                        **kwargs,
                     ),
                     Field(
                         "lcid-c",
                         int,
                         10,
                         10,
-                        kwargs.get("lcid-c")
+                        **kwargs,
                     ),
                     Field(
                         "lcid-s",
                         int,
                         20,
                         10,
-                        kwargs.get("lcid-s")
+                        **kwargs,
                     ),
                     Field(
                         "lcid-b",
                         int,
                         30,
                         10,
-                        kwargs.get("lcid-b")
+                        **kwargs,
                     ),
                     Field(
                         "nuep",
                         float,
                         40,
                         10,
-                        kwargs.get("nuep")
+                        **kwargs,
                     ),
                     Field(
                         "lcid-p",
                         int,
                         50,
                         10,
-                        kwargs.get("lcid-p")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "incdam",
                         int,
                         70,
                         10,
-                        kwargs.get("incdam", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,35 +166,36 @@ class MatSamp1(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid_d")
+                        **kwargs,
                     ),
                     Field(
                         "epfail",
                         float,
                         10,
                         10,
-                        kwargs.get("epfail", 1.0E+5 if use_lspp_defaults() else None)
+                        1.0E+5,
+                        **kwargs,
                     ),
                     Field(
                         "deprpt",
                         float,
                         20,
                         10,
-                        kwargs.get("deprpt")
+                        **kwargs,
                     ),
                     Field(
                         "lcid-tri",
                         int,
                         30,
                         10,
-                        kwargs.get("lcid-tri")
+                        **kwargs,
                     ),
                     Field(
                         "lcid_lc",
                         int,
                         40,
                         10,
-                        kwargs.get("lcid_lc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -205,56 +206,58 @@ class MatSamp1(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("miter")
+                        **kwargs,
                     ),
                     Field(
                         "mipds",
                         int,
                         10,
                         10,
-                        kwargs.get("mipds")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "incfail",
                         int,
                         30,
                         10,
-                        kwargs.get("incfail", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iconv",
                         int,
                         40,
                         10,
-                        kwargs.get("iconv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "asaf",
                         int,
                         50,
                         10,
-                        kwargs.get("asaf")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "nhsv",
                         int,
                         70,
                         10,
-                        kwargs.get("nhsv")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -265,21 +268,21 @@ class MatSamp1(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcemod")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         10,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "filt",
                         float,
                         20,
                         10,
-                        kwargs.get("filt")
+                        **kwargs,
                     ),
                 ],
             ),

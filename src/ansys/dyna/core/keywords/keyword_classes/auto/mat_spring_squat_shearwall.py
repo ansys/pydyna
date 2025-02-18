@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatSpringSquatShearwall(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "a14",
                         float,
                         10,
                         10,
-                        kwargs.get("a14")
+                        **kwargs,
                     ),
                     Field(
                         "b14",
                         float,
                         20,
                         10,
-                        kwargs.get("b14")
+                        **kwargs,
                     ),
                     Field(
                         "c14",
                         float,
                         30,
                         10,
-                        kwargs.get("c14")
+                        **kwargs,
                     ),
                     Field(
                         "d14",
                         float,
                         40,
                         10,
-                        kwargs.get("d14")
+                        **kwargs,
                     ),
                     Field(
                         "e14",
                         float,
                         50,
                         10,
-                        kwargs.get("e14")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         60,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "psd",
                         float,
                         70,
                         10,
-                        kwargs.get("psd")
+                        **kwargs,
                     ),
                 ],
             ),

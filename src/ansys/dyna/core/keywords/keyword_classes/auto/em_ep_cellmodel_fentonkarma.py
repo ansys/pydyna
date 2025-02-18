@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEpCellmodelFentonkarma(KeywordBase):
@@ -41,7 +40,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("matid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,56 @@ class EmEpCellmodelFentonkarma(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("taud")
+                        **kwargs,
                     ),
                     Field(
                         "taur",
                         float,
                         10,
                         10,
-                        kwargs.get("taur")
+                        **kwargs,
                     ),
                     Field(
                         "tausi",
                         float,
                         20,
                         10,
-                        kwargs.get("tausi")
+                        **kwargs,
                     ),
                     Field(
                         "tauo",
                         float,
                         30,
                         10,
-                        kwargs.get("tauo")
+                        **kwargs,
                     ),
                     Field(
                         "tauvp",
                         float,
                         40,
                         10,
-                        kwargs.get("tauvp")
+                        **kwargs,
                     ),
                     Field(
                         "tauvm",
                         float,
                         50,
                         10,
-                        kwargs.get("tauvm")
+                        **kwargs,
                     ),
                     Field(
                         "tauwp",
                         float,
                         60,
                         10,
-                        kwargs.get("tauwp")
+                        **kwargs,
                     ),
                     Field(
                         "tauwm",
                         float,
                         70,
                         10,
-                        kwargs.get("tauwm")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,21 +111,21 @@ class EmEpCellmodelFentonkarma(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("uc")
+                        **kwargs,
                     ),
                     Field(
                         "ucsi",
                         float,
                         10,
                         10,
-                        kwargs.get("ucsi")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         20,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -137,21 +136,21 @@ class EmEpCellmodelFentonkarma(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("u0")
+                        **kwargs,
                     ),
                     Field(
                         "v0",
                         float,
                         10,
                         10,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                     Field(
                         "w0",
                         float,
                         20,
                         10,
-                        kwargs.get("w0")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AlePrescribedMotion(KeywordBase):
@@ -41,21 +40,23 @@ class AlePrescribedMotion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mmsid")
+                        **kwargs,
                     ),
                     Field(
                         "inside",
                         int,
                         10,
                         10,
-                        kwargs.get("inside", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sidr",
                         int,
                         20,
                         10,
-                        kwargs.get("sidr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,21 +67,21 @@ class AlePrescribedMotion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcvtx")
+                        **kwargs,
                     ),
                     Field(
                         "lcvty",
                         int,
                         10,
                         10,
-                        kwargs.get("lcvty")
+                        **kwargs,
                     ),
                     Field(
                         "lcvtz",
                         int,
                         20,
                         10,
-                        kwargs.get("lcvtz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,21 +92,21 @@ class AlePrescribedMotion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcvrx")
+                        **kwargs,
                     ),
                     Field(
                         "lcvry",
                         int,
                         10,
                         10,
-                        kwargs.get("lcvry")
+                        **kwargs,
                     ),
                     Field(
                         "lcvrz",
                         int,
                         20,
                         10,
-                        kwargs.get("lcvrz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -116,21 +117,21 @@ class AlePrescribedMotion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xg")
+                        **kwargs,
                     ),
                     Field(
                         "yg",
                         float,
                         10,
                         10,
-                        kwargs.get("yg")
+                        **kwargs,
                     ),
                     Field(
                         "zg",
                         float,
                         20,
                         10,
-                        kwargs.get("zg")
+                        **kwargs,
                     ),
                 ],
             ),

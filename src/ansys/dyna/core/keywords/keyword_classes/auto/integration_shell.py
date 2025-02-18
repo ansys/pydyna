@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IntegrationShell(KeywordBase):
@@ -41,28 +40,30 @@ class IntegrationShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("irid")
+                        **kwargs,
                     ),
                     Field(
                         "nip",
                         int,
                         10,
                         10,
-                        kwargs.get("nip")
+                        **kwargs,
                     ),
                     Field(
                         "esop",
                         int,
                         20,
                         10,
-                        kwargs.get("esop", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "failopt",
                         int,
                         30,
                         10,
-                        kwargs.get("failopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -73,21 +74,21 @@ class IntegrationShell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("s")
+                        **kwargs,
                     ),
                     Field(
                         "wf",
                         float,
                         10,
                         10,
-                        kwargs.get("wf")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         20,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                 ],
             ),

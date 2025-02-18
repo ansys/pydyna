@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingHomeGap(KeywordBase):
@@ -41,35 +40,36 @@ class ControlFormingHomeGap(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psidu")
+                        **kwargs,
                     ),
                     Field(
                         "psidl",
                         int,
                         10,
                         10,
-                        kwargs.get("psidl")
+                        **kwargs,
                     ),
                     Field(
                         "gap",
                         float,
                         20,
                         10,
-                        kwargs.get("gap")
+                        **kwargs,
                     ),
                     Field(
                         "mvinc",
                         float,
                         30,
                         10,
-                        kwargs.get("mvinc")
+                        **kwargs,
                     ),
                     Field(
                         "istop",
                         int,
                         40,
                         10,
-                        kwargs.get("istop", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

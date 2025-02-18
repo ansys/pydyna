@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseSurfaceMechssidD3Plot(KeywordBase):
@@ -41,14 +40,14 @@ class CeseSurfaceMechssidD3Plot(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "dir",
                         str,
                         10,
                         70,
-                        kwargs.get("dir")
+                        **kwargs,
                     ),
                 ],
             ),

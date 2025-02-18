@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,45 @@ class DefineFormingClamp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("clp1")
+                        **kwargs,
                     ),
                     Field(
                         "clp2",
                         int,
                         10,
                         10,
-                        kwargs.get("clp2")
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         int,
                         20,
                         10,
-                        kwargs.get("vid")
+                        **kwargs,
                     ),
                     Field(
                         "gap",
                         float,
                         30,
                         10,
-                        kwargs.get("gap", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "at",
                         float,
                         40,
                         10,
-                        kwargs.get("at", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         50,
                         10,
-                        kwargs.get("dt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

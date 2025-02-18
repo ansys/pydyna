@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseTracerDe(KeywordBase):
@@ -41,56 +40,62 @@ class DatabaseTracerDe(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("time", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "track",
                         int,
                         10,
                         10,
-                        kwargs.get("track", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "x",
                         float,
                         20,
                         10,
-                        kwargs.get("x", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         30,
                         10,
-                        kwargs.get("y", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         40,
                         10,
-                        kwargs.get("z", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ammgid",
                         int,
                         50,
                         10,
-                        kwargs.get("ammgid")
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         60,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "radius",
                         float,
                         70,
                         10,
-                        kwargs.get("radius", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

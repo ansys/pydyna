@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialStressTshell(KeywordBase):
@@ -41,35 +40,36 @@ class InitialStressTshell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "nplane",
                         int,
                         10,
                         10,
-                        kwargs.get("nplane")
+                        **kwargs,
                     ),
                     Field(
                         "nthick",
                         int,
                         20,
                         10,
-                        kwargs.get("nthick")
+                        **kwargs,
                     ),
                     Field(
                         "nhisv",
                         int,
                         30,
                         10,
-                        kwargs.get("nhisv")
+                        **kwargs,
                     ),
                     Field(
                         "large",
                         int,
                         40,
                         10,
-                        kwargs.get("large", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,56 +80,63 @@ class InitialStressTshell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t")
+                        **kwargs,
                     ),
                     Field(
                         "sigxx",
                         float,
                         10,
                         10,
-                        kwargs.get("sigxx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigyy",
                         float,
                         20,
                         10,
-                        kwargs.get("sigyy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigzz",
                         float,
                         30,
                         10,
-                        kwargs.get("sigzz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigxy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigxy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigyz",
                         float,
                         50,
                         10,
-                        kwargs.get("sigyz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigzx",
                         float,
                         60,
                         10,
-                        kwargs.get("sigzx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "eps",
                         float,
                         70,
                         10,
-                        kwargs.get("eps", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

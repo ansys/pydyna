@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseReactionRatePDepend(KeywordBase):
@@ -41,28 +40,28 @@ class DualceseReactionRatePDepend(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("react_id")
+                        **kwargs,
                     ),
                     Field(
                         "sigma",
                         float,
                         10,
                         10,
-                        kwargs.get("sigma")
+                        **kwargs,
                     ),
                     Field(
                         "nu",
                         float,
                         20,
                         10,
-                        kwargs.get("nu")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         30,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                 ],
             ),

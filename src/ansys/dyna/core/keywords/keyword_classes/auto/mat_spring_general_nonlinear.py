@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,42 @@ class MatSpringGeneralNonlinear(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "lcdl",
                         int,
                         10,
                         10,
-                        kwargs.get("lcdl")
+                        **kwargs,
                     ),
                     Field(
                         "lcdu",
                         int,
                         20,
                         10,
-                        kwargs.get("lcdu")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         30,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "tyi",
                         float,
                         40,
                         10,
-                        kwargs.get("tyi")
+                        **kwargs,
                     ),
                     Field(
                         "cyi",
                         float,
                         50,
                         10,
-                        kwargs.get("cyi")
+                        **kwargs,
                     ),
                 ],
             ),

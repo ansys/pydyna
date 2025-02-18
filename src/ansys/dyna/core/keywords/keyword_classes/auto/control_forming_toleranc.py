@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingToleranc(KeywordBase):
@@ -41,14 +40,14 @@ class ControlFormingToleranc(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt/cycle")
+                        **kwargs,
                     ),
                     Field(
                         "weight",
                         float,
                         10,
                         10,
-                        kwargs.get("weight")
+                        **kwargs,
                     ),
                 ],
             ),

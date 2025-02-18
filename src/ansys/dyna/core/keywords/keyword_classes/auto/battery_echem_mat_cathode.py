@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BatteryEchemMatCathode(KeywordBase):
@@ -41,49 +40,49 @@ class BatteryEchemMatCathode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "iocpa",
                         int,
                         10,
                         10,
-                        kwargs.get("iocpa")
+                        **kwargs,
                     ),
                     Field(
                         "capta",
                         float,
                         20,
                         10,
-                        kwargs.get("capta")
+                        **kwargs,
                     ),
                     Field(
                         "s_yc",
                         float,
                         30,
                         10,
-                        kwargs.get("s_yc")
+                        **kwargs,
                     ),
                     Field(
                         "s_rad",
                         float,
                         40,
                         10,
-                        kwargs.get("s_rad")
+                        **kwargs,
                     ),
                     Field(
                         "ratec",
                         float,
                         50,
                         10,
-                        kwargs.get("ratec")
+                        **kwargs,
                     ),
                     Field(
                         "rcath",
                         float,
                         60,
                         10,
-                        kwargs.get("rcath")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,35 +93,35 @@ class BatteryEchemMatCathode(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rhoec")
+                        **kwargs,
                     ),
                     Field(
                         "rhofc",
                         float,
                         10,
                         10,
-                        kwargs.get("rhofc")
+                        **kwargs,
                     ),
                     Field(
                         "rhoccc",
                         float,
                         20,
                         10,
-                        kwargs.get("rhoccc")
+                        **kwargs,
                     ),
                     Field(
                         "diffc",
                         float,
                         30,
                         10,
-                        kwargs.get("diffc")
+                        **kwargs,
                     ),
                     Field(
                         "condc",
                         float,
                         40,
                         10,
-                        kwargs.get("condc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,28 +132,28 @@ class BatteryEchemMatCathode(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vfec")
+                        **kwargs,
                     ),
                     Field(
                         "vfpc",
                         float,
                         10,
                         10,
-                        kwargs.get("vfpc")
+                        **kwargs,
                     ),
                     Field(
                         "vffc",
                         float,
                         20,
                         10,
-                        kwargs.get("vffc")
+                        **kwargs,
                     ),
                     Field(
                         "vfgc",
                         float,
                         30,
                         10,
-                        kwargs.get("vfgc")
+                        **kwargs,
                     ),
                 ],
             ),

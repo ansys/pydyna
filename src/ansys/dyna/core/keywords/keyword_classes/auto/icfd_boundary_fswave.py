@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdBoundaryFswave(KeywordBase):
@@ -41,56 +40,56 @@ class IcfdBoundaryFswave(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "wtype",
                         int,
                         10,
                         10,
-                        kwargs.get("wtype")
+                        **kwargs,
                     ),
                     Field(
                         "h0",
                         float,
                         20,
                         10,
-                        kwargs.get("h0")
+                        **kwargs,
                     ),
                     Field(
                         "wamp",
                         float,
                         30,
                         10,
-                        kwargs.get("wamp")
+                        **kwargs,
                     ),
                     Field(
                         "wleng",
                         float,
                         40,
                         10,
-                        kwargs.get("wleng")
+                        **kwargs,
                     ),
                     Field(
                         "wmax",
                         float,
                         50,
                         10,
-                        kwargs.get("wmax")
+                        **kwargs,
                     ),
                     Field(
                         "sflcid",
                         int,
                         60,
                         10,
-                        kwargs.get("sflcid")
+                        **kwargs,
                     ),
                     Field(
                         "wang",
                         float,
                         70,
                         10,
-                        kwargs.get("wang")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,7 +100,7 @@ class IcfdBoundaryFswave(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("wpeak")
+                        **kwargs,
                     ),
                 ],
             ),

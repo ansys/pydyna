@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.card_set import CardSet
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -46,56 +45,63 @@ class HourglassCardSet(Cards):
                         int,
                         0,
                         10,
-                        kwargs.get("hgid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ihq",
                         int,
                         10,
                         10,
-                        kwargs.get("ihq", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "qm",
                         float,
                         20,
                         10,
-                        kwargs.get("qm", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                     Field(
                         "ibq",
                         int,
                         30,
                         10,
-                        kwargs.get("ibq")
+                        **kwargs,
                     ),
                     Field(
                         "q1",
                         float,
                         40,
                         10,
-                        kwargs.get("q1", 1.5 if use_lspp_defaults() else None)
+                        1.5,
+                        **kwargs,
                     ),
                     Field(
                         "q2",
                         float,
                         50,
                         10,
-                        kwargs.get("q2", 6.0E-02 if use_lspp_defaults() else None)
+                        6.0E-02,
+                        **kwargs,
                     ),
                     Field(
                         "qb/vdc",
                         float,
                         60,
                         10,
-                        kwargs.get("qb/vdc", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                     Field(
                         "qw",
                         float,
                         70,
                         10,
-                        kwargs.get("qw", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                 ],
             ),

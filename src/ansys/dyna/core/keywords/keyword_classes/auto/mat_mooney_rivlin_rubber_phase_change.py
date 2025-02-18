@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,43 @@ class MatMooneyRivlinRubberPhaseChange(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "pr1",
                         float,
                         20,
                         10,
-                        kwargs.get("pr1")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         40,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "ref",
                         float,
                         50,
                         10,
-                        kwargs.get("ref", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,28 +92,28 @@ class MatMooneyRivlinRubberPhaseChange(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sgl1")
+                        **kwargs,
                     ),
                     Field(
                         "sw1",
                         float,
                         10,
                         10,
-                        kwargs.get("sw1")
+                        **kwargs,
                     ),
                     Field(
                         "st1",
                         float,
                         20,
                         10,
-                        kwargs.get("st1")
+                        **kwargs,
                     ),
                     Field(
                         "lcid1",
                         float,
                         30,
                         10,
-                        kwargs.get("lcid1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -124,35 +124,35 @@ class MatMooneyRivlinRubberPhaseChange(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "pr2",
                         float,
                         20,
                         10,
-                        kwargs.get("pr2")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         30,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "b2",
                         float,
                         40,
                         10,
-                        kwargs.get("b2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -163,28 +163,28 @@ class MatMooneyRivlinRubberPhaseChange(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sgl1")
+                        **kwargs,
                     ),
                     Field(
                         "sw1",
                         float,
                         10,
                         10,
-                        kwargs.get("sw1")
+                        **kwargs,
                     ),
                     Field(
                         "st1",
                         float,
                         20,
                         10,
-                        kwargs.get("st1")
+                        **kwargs,
                     ),
                     Field(
                         "lcid1",
                         float,
                         30,
                         10,
-                        kwargs.get("lcid1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -195,49 +195,50 @@ class MatMooneyRivlinRubberPhaseChange(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x1")
+                        **kwargs,
                     ),
                     Field(
                         "y1",
                         float,
                         10,
                         10,
-                        kwargs.get("y1")
+                        **kwargs,
                     ),
                     Field(
                         "z1",
                         float,
                         20,
                         10,
-                        kwargs.get("z1")
+                        **kwargs,
                     ),
                     Field(
                         "x2",
                         float,
                         30,
                         10,
-                        kwargs.get("x2")
+                        **kwargs,
                     ),
                     Field(
                         "y2",
                         float,
                         40,
                         10,
-                        kwargs.get("y2")
+                        **kwargs,
                     ),
                     Field(
                         "z2",
                         float,
                         50,
                         10,
-                        kwargs.get("z2")
+                        **kwargs,
                     ),
                     Field(
                         "thkfac",
                         float,
                         60,
                         10,
-                        kwargs.get("thkfac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingGenerateBlankmesh(KeywordBase):
@@ -41,56 +40,58 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("gentyp")
+                        **kwargs,
                     ),
                     Field(
                         "eleng",
                         float,
                         10,
                         10,
-                        kwargs.get("eleng")
+                        **kwargs,
                     ),
                     Field(
                         "center",
                         int,
                         20,
                         10,
-                        kwargs.get("center", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "xleng",
                         float,
                         30,
                         10,
-                        kwargs.get("xleng")
+                        **kwargs,
                     ),
                     Field(
                         "yleng",
                         float,
                         40,
                         10,
-                        kwargs.get("yleng")
+                        **kwargs,
                     ),
                     Field(
                         "align",
                         float,
                         50,
                         10,
-                        kwargs.get("align")
+                        **kwargs,
                     ),
                     Field(
                         "plane",
                         int,
                         60,
                         10,
-                        kwargs.get("plane", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         70,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +102,56 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("bpid")
+                        **kwargs,
                     ),
                     Field(
                         "snid",
                         int,
                         10,
                         10,
-                        kwargs.get("snid")
+                        **kwargs,
                     ),
                     Field(
                         "seid",
                         int,
                         20,
                         10,
-                        kwargs.get("seid")
+                        **kwargs,
                     ),
                     Field(
                         "xcent",
                         float,
                         30,
                         10,
-                        kwargs.get("xcent")
+                        **kwargs,
                     ),
                     Field(
                         "ycent",
                         float,
                         40,
                         10,
-                        kwargs.get("ycent")
+                        **kwargs,
                     ),
                     Field(
                         "zcent",
                         float,
                         50,
                         10,
-                        kwargs.get("zcent")
+                        **kwargs,
                     ),
                     Field(
                         "xshift",
                         float,
                         60,
                         10,
-                        kwargs.get("xshift")
+                        **kwargs,
                     ),
                     Field(
                         "yshift",
                         float,
                         70,
                         10,
-                        kwargs.get("yshift")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,7 +162,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),

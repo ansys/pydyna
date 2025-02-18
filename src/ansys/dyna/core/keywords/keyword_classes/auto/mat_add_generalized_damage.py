@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,61 @@ class MatAddGeneralizedDamage(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "idam",
                         int,
                         10,
                         10,
-                        kwargs.get("idam", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dtyp",
                         int,
                         20,
                         10,
-                        kwargs.get("dtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "refsz",
                         float,
                         30,
                         10,
-                        kwargs.get("refsz")
+                        **kwargs,
                     ),
                     Field(
                         "numfip",
                         float,
                         40,
                         10,
-                        kwargs.get("numfip", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "pddt",
                         int,
                         60,
                         10,
-                        kwargs.get("pddt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nhis",
                         int,
                         70,
                         10,
-                        kwargs.get("nhis", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,42 +110,46 @@ class MatAddGeneralizedDamage(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("his1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "his2",
                         int,
                         10,
                         10,
-                        kwargs.get("his2")
+                        **kwargs,
                     ),
                     Field(
                         "his3",
                         int,
                         20,
                         10,
-                        kwargs.get("his3")
+                        **kwargs,
                     ),
                     Field(
                         "iflg1",
                         int,
                         30,
                         10,
-                        kwargs.get("iflg1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iflg2",
                         int,
                         40,
                         10,
-                        kwargs.get("iflg2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iflg3",
                         int,
                         50,
                         10,
-                        kwargs.get("iflg3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -152,42 +160,42 @@ class MatAddGeneralizedDamage(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("d11")
+                        **kwargs,
                     ),
                     Field(
                         "d22",
                         int,
                         10,
                         10,
-                        kwargs.get("d22")
+                        **kwargs,
                     ),
                     Field(
                         "d33",
                         int,
                         20,
                         10,
-                        kwargs.get("d33")
+                        **kwargs,
                     ),
                     Field(
                         "d44",
                         int,
                         30,
                         10,
-                        kwargs.get("d44")
+                        **kwargs,
                     ),
                     Field(
                         "d55",
                         int,
                         40,
                         10,
-                        kwargs.get("d55")
+                        **kwargs,
                     ),
                     Field(
                         "d66",
                         int,
                         50,
                         10,
-                        kwargs.get("d66")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -198,42 +206,42 @@ class MatAddGeneralizedDamage(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("d12")
+                        **kwargs,
                     ),
                     Field(
                         "d21",
                         int,
                         10,
                         10,
-                        kwargs.get("d21")
+                        **kwargs,
                     ),
                     Field(
                         "d24",
                         int,
                         20,
                         10,
-                        kwargs.get("d24")
+                        **kwargs,
                     ),
                     Field(
                         "d42",
                         int,
                         30,
                         10,
-                        kwargs.get("d42")
+                        **kwargs,
                     ),
                     Field(
                         "d14",
                         int,
                         40,
                         10,
-                        kwargs.get("d14")
+                        **kwargs,
                     ),
                     Field(
                         "d41",
                         int,
                         50,
                         10,
-                        kwargs.get("d41")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -244,42 +252,46 @@ class MatAddGeneralizedDamage(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcsdg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ecrit",
                         float,
                         10,
                         10,
-                        kwargs.get("ecrit")
+                        **kwargs,
                     ),
                     Field(
                         "dmgexp",
                         float,
                         20,
                         10,
-                        kwargs.get("dmgexp", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "dcrit",
                         float,
                         30,
                         10,
-                        kwargs.get("dcrit")
+                        **kwargs,
                     ),
                     Field(
                         "fadexp",
                         float,
                         40,
                         10,
-                        kwargs.get("fadexp", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcreg",
                         int,
                         50,
                         10,
-                        kwargs.get("lcreg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -290,42 +302,45 @@ class MatAddGeneralizedDamage(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcsrs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "shrf",
                         float,
                         10,
                         10,
-                        kwargs.get("shrf")
+                        **kwargs,
                     ),
                     Field(
                         "biaxf",
                         float,
                         20,
                         10,
-                        kwargs.get("biaxf")
+                        **kwargs,
                     ),
                     Field(
                         "lcdlim",
                         int,
                         30,
                         10,
-                        kwargs.get("lcdlim", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "midfail",
                         float,
                         40,
                         10,
-                        kwargs.get("midfail", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nfloc",
                         float,
                         50,
                         10,
-                        kwargs.get("nfloc")
+                        **kwargs,
                     ),
                 ],
             ),

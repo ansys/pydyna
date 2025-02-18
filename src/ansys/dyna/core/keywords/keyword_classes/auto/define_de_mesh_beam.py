@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,64 @@ class DefineDeMeshBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         int,
                         10,
                         10,
-                        kwargs.get("type", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nquad",
                         int,
                         20,
                         10,
-                        kwargs.get("nquad", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "despid",
                         int,
                         30,
                         10,
-                        kwargs.get("despid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "desxid",
                         int,
                         40,
                         10,
-                        kwargs.get("desxid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nsid",
                         int,
                         50,
                         10,
-                        kwargs.get("nsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rsf",
                         float,
                         60,
                         10,
-                        kwargs.get("rsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "iactive",
                         int,
                         70,
                         10,
-                        kwargs.get("iactive", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,21 +113,21 @@ class DefineDeMeshBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("mass")
+                        **kwargs,
                     ),
                     Field(
                         "inertia",
                         float,
                         10,
                         10,
-                        kwargs.get("inertia")
+                        **kwargs,
                     ),
                     Field(
                         "radius",
                         float,
                         20,
                         10,
-                        kwargs.get("radius")
+                        **kwargs,
                     ),
                 ],
             ),

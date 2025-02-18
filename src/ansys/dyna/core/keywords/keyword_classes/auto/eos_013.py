@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Eos013(KeywordBase):
@@ -41,56 +40,56 @@ class Eos013(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "rhol",
                         float,
                         10,
                         10,
-                        kwargs.get("rhol")
+                        **kwargs,
                     ),
                     Field(
                         "rhov",
                         float,
                         20,
                         10,
-                        kwargs.get("rhov")
+                        **kwargs,
                     ),
                     Field(
                         "cl",
                         float,
                         30,
                         10,
-                        kwargs.get("cl")
+                        **kwargs,
                     ),
                     Field(
                         "cv",
                         float,
                         40,
                         10,
-                        kwargs.get("cv")
+                        **kwargs,
                     ),
                     Field(
                         "gamal",
                         float,
                         50,
                         10,
-                        kwargs.get("gamal")
+                        **kwargs,
                     ),
                     Field(
                         "pv",
                         float,
                         60,
                         10,
-                        kwargs.get("pv")
+                        **kwargs,
                     ),
                     Field(
                         "kl",
                         float,
                         70,
                         10,
-                        kwargs.get("kl")
+                        **kwargs,
                     ),
                 ],
             ),

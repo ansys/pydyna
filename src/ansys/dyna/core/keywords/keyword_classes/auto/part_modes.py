@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartModes(KeywordBase):
@@ -41,56 +40,61 @@ class PartModes(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "nmfb",
                         int,
                         10,
                         10,
-                        kwargs.get("nmfb")
+                        **kwargs,
                     ),
                     Field(
                         "form",
                         int,
                         20,
                         10,
-                        kwargs.get("form", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ansid",
                         int,
                         30,
                         10,
-                        kwargs.get("ansid")
+                        **kwargs,
                     ),
                     Field(
                         "format",
                         int,
                         40,
                         10,
-                        kwargs.get("format", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "kmflag",
                         int,
                         50,
                         10,
-                        kwargs.get("kmflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nupdf",
                         int,
                         60,
                         10,
-                        kwargs.get("nupdf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sigrec",
                         int,
                         70,
                         10,
-                        kwargs.get("sigrec", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,7 +105,7 @@ class PartModes(KeywordBase):
                         str,
                         0,
                         70,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,56 +116,56 @@ class PartModes(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mode1")
+                        **kwargs,
                     ),
                     Field(
                         "mode2",
                         int,
                         10,
                         10,
-                        kwargs.get("mode2")
+                        **kwargs,
                     ),
                     Field(
                         "mode3",
                         int,
                         20,
                         10,
-                        kwargs.get("mode3")
+                        **kwargs,
                     ),
                     Field(
                         "mode4",
                         int,
                         30,
                         10,
-                        kwargs.get("mode4")
+                        **kwargs,
                     ),
                     Field(
                         "mode5",
                         int,
                         40,
                         10,
-                        kwargs.get("mode5")
+                        **kwargs,
                     ),
                     Field(
                         "mode6",
                         int,
                         50,
                         10,
-                        kwargs.get("mode6")
+                        **kwargs,
                     ),
                     Field(
                         "mode7",
                         int,
                         60,
                         10,
-                        kwargs.get("mode7")
+                        **kwargs,
                     ),
                     Field(
                         "mode8",
                         int,
                         70,
                         10,
-                        kwargs.get("mode8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -172,21 +176,21 @@ class PartModes(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mstart")
+                        **kwargs,
                     ),
                     Field(
                         "mstop",
                         int,
                         10,
                         10,
-                        kwargs.get("mstop")
+                        **kwargs,
                     ),
                     Field(
                         "dampf",
                         float,
                         20,
                         10,
-                        kwargs.get("dampf")
+                        **kwargs,
                     ),
                 ],
             ),

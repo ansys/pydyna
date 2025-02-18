@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "lcss",
                         int,
                         60,
                         10,
-                        kwargs.get("lcss")
+                        **kwargs,
                     ),
                     Field(
                         "reftem",
                         float,
                         70,
                         10,
-                        kwargs.get("reftem")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("qr1")
+                        **kwargs,
                     ),
                     Field(
                         "cr1",
                         float,
                         10,
                         10,
-                        kwargs.get("cr1")
+                        **kwargs,
                     ),
                     Field(
                         "qr2",
                         float,
                         20,
                         10,
-                        kwargs.get("qr2")
+                        **kwargs,
                     ),
                     Field(
                         "cr2",
                         float,
                         30,
                         10,
-                        kwargs.get("cr2")
+                        **kwargs,
                     ),
                     Field(
                         "qx1",
                         float,
                         40,
                         10,
-                        kwargs.get("qx1")
+                        **kwargs,
                     ),
                     Field(
                         "cx1",
                         float,
                         50,
                         10,
-                        kwargs.get("cx1")
+                        **kwargs,
                     ),
                     Field(
                         "qx2",
                         float,
                         60,
                         10,
-                        kwargs.get("qx2")
+                        **kwargs,
                     ),
                     Field(
                         "cx2",
                         float,
                         70,
                         10,
-                        kwargs.get("cx2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +165,56 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         10,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "lce",
                         float,
                         20,
                         10,
-                        kwargs.get("lce")
+                        **kwargs,
                     ),
                     Field(
                         "lcpr",
                         float,
                         30,
                         10,
-                        kwargs.get("lcpr")
+                        **kwargs,
                     ),
                     Field(
                         "lcsigy",
                         float,
                         40,
                         10,
-                        kwargs.get("lcsigy")
+                        **kwargs,
                     ),
                     Field(
                         "lcqr",
                         float,
                         50,
                         10,
-                        kwargs.get("lcqr")
+                        **kwargs,
                     ),
                     Field(
                         "lcqx",
                         float,
                         60,
                         10,
-                        kwargs.get("lcqx")
+                        **kwargs,
                     ),
                     Field(
                         "lcalph",
                         float,
                         70,
                         10,
-                        kwargs.get("lcalph")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +225,56 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lcc")
+                        **kwargs,
                     ),
                     Field(
                         "lcp",
                         float,
                         10,
                         10,
-                        kwargs.get("lcp")
+                        **kwargs,
                     ),
                     Field(
                         "lccr",
                         float,
                         20,
                         10,
-                        kwargs.get("lccr")
+                        **kwargs,
                     ),
                     Field(
                         "lccx",
                         float,
                         30,
                         10,
-                        kwargs.get("lccx")
+                        **kwargs,
                     ),
                     Field(
                         "crpa",
                         float,
                         40,
                         10,
-                        kwargs.get("crpa")
+                        **kwargs,
                     ),
                     Field(
                         "crpb",
                         float,
                         50,
                         10,
-                        kwargs.get("crpb")
+                        **kwargs,
                     ),
                     Field(
                         "crpq",
                         float,
                         60,
                         10,
-                        kwargs.get("crpq")
+                        **kwargs,
                     ),
                     Field(
                         "crpm",
                         float,
                         70,
                         10,
-                        kwargs.get("crpm")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,7 +285,8 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("crplaw", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

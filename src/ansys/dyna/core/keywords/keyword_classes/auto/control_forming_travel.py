@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingTravel(KeywordBase):
@@ -41,49 +40,49 @@ class ControlFormingTravel(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         int,
                         10,
                         10,
-                        kwargs.get("vid")
+                        **kwargs,
                     ),
                     Field(
                         "travel",
                         float,
                         20,
                         10,
-                        kwargs.get("travel")
+                        **kwargs,
                     ),
                     Field(
                         "target",
                         int,
                         30,
                         10,
-                        kwargs.get("target")
+                        **kwargs,
                     ),
                     Field(
                         "gap",
                         float,
                         40,
                         10,
-                        kwargs.get("gap")
+                        **kwargs,
                     ),
                     Field(
                         "phase",
                         int,
                         50,
                         10,
-                        kwargs.get("phase")
+                        **kwargs,
                     ),
                     Field(
                         "follow",
                         int,
                         60,
                         10,
-                        kwargs.get("follow")
+                        **kwargs,
                     ),
                 ],
             ),

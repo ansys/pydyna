@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryCoupled(KeywordBase):
@@ -41,14 +40,14 @@ class BoundaryCoupled(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,21 +58,22 @@ class BoundaryCoupled(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("set")
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         int,
                         10,
                         10,
-                        kwargs.get("type", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "prog",
                         int,
                         20,
                         10,
-                        kwargs.get("prog")
+                        **kwargs,
                     ),
                 ],
             ),

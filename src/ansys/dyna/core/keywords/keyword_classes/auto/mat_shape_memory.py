@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,36 @@ class MatShapeMemory(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "lcss",
                         float,
                         40,
                         10,
-                        kwargs.get("lcss", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,49 +85,49 @@ class MatShapeMemory(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sig_ass")
+                        **kwargs,
                     ),
                     Field(
                         "sig_asf",
                         float,
                         10,
                         10,
-                        kwargs.get("sig_asf")
+                        **kwargs,
                     ),
                     Field(
                         "sig_sas",
                         float,
                         20,
                         10,
-                        kwargs.get("sig_sas")
+                        **kwargs,
                     ),
                     Field(
                         "sig_saf",
                         float,
                         30,
                         10,
-                        kwargs.get("sig_saf")
+                        **kwargs,
                     ),
                     Field(
                         "epsl",
                         float,
                         40,
                         10,
-                        kwargs.get("epsl")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "ymrt",
                         float,
                         60,
                         10,
-                        kwargs.get("ymrt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -138,14 +138,14 @@ class MatShapeMemory(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid_as")
+                        **kwargs,
                     ),
                     Field(
                         "lcid_sa",
                         int,
                         10,
                         10,
-                        kwargs.get("lcid_sa")
+                        **kwargs,
                     ),
                 ],
             ),

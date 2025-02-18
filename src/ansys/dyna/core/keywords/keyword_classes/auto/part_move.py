@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PartMove(KeywordBase):
@@ -41,42 +40,44 @@ class PartMove(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "xmov",
                         float,
                         8,
                         16,
-                        kwargs.get("xmov")
+                        **kwargs,
                     ),
                     Field(
                         "ymov",
                         float,
                         24,
                         16,
-                        kwargs.get("ymov")
+                        **kwargs,
                     ),
                     Field(
                         "zmov",
                         float,
                         40,
                         16,
-                        kwargs.get("zmov")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         56,
                         8,
-                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ifset",
                         int,
                         64,
                         8,
-                        kwargs.get("ifset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

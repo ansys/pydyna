@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,32 @@ class DefineDeToSurfaceTied(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("slave", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "master",
                         int,
                         10,
                         10,
-                        kwargs.get("master", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         20,
                         10,
-                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mtype",
                         int,
                         30,
                         10,
-                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,49 +81,52 @@ class DefineDeToSurfaceTied(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("nflf")
+                        **kwargs,
                     ),
                     Field(
                         "sflf",
                         float,
                         10,
                         10,
-                        kwargs.get("sflf")
+                        **kwargs,
                     ),
                     Field(
                         "nen",
                         float,
                         20,
                         10,
-                        kwargs.get("nen", 2. if use_lspp_defaults() else None)
+                        2.,
+                        **kwargs,
                     ),
                     Field(
                         "mes",
                         float,
                         30,
                         10,
-                        kwargs.get("mes", 2. if use_lspp_defaults() else None)
+                        2.,
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         40,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "nsort",
                         int,
                         50,
                         10,
-                        kwargs.get("nsort", 100 if use_lspp_defaults() else None)
+                        100,
+                        **kwargs,
                     ),
                     Field(
                         "maxgap",
                         float,
                         60,
                         10,
-                        kwargs.get("maxgap")
+                        **kwargs,
                     ),
                 ],
             ),

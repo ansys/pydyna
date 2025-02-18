@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosUserDefined(KeywordBase):
@@ -41,56 +40,56 @@ class EosUserDefined(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "eost",
                         int,
                         10,
                         10,
-                        kwargs.get("eost")
+                        **kwargs,
                     ),
                     Field(
                         "lmc",
                         int,
                         20,
                         10,
-                        kwargs.get("lmc")
+                        **kwargs,
                     ),
                     Field(
                         "nhv",
                         int,
                         30,
                         10,
-                        kwargs.get("nhv")
+                        **kwargs,
                     ),
                     Field(
                         "ivect",
                         int,
                         40,
                         10,
-                        kwargs.get("ivect")
+                        **kwargs,
                     ),
                     Field(
                         "eo",
                         float,
                         50,
                         10,
-                        kwargs.get("eo")
+                        **kwargs,
                     ),
                     Field(
                         "vo",
                         float,
                         60,
                         10,
-                        kwargs.get("vo")
+                        **kwargs,
                     ),
                     Field(
                         "bulk",
                         float,
                         70,
                         10,
-                        kwargs.get("bulk")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +100,56 @@ class EosUserDefined(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         10,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         20,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                     Field(
                         "p4",
                         float,
                         30,
                         10,
-                        kwargs.get("p4")
+                        **kwargs,
                     ),
                     Field(
                         "p5",
                         float,
                         40,
                         10,
-                        kwargs.get("p5")
+                        **kwargs,
                     ),
                     Field(
                         "p6",
                         float,
                         50,
                         10,
-                        kwargs.get("p6")
+                        **kwargs,
                     ),
                     Field(
                         "p7",
                         float,
                         60,
                         10,
-                        kwargs.get("p7")
+                        **kwargs,
                     ),
                     Field(
                         "p8",
                         float,
                         70,
                         10,
-                        kwargs.get("p8")
+                        **kwargs,
                     ),
                 ],
             ),

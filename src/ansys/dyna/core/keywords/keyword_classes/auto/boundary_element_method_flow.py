@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryElementMethodFlow(KeywordBase):
@@ -41,49 +40,51 @@ class BoundaryElementMethodFlow(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "vx",
                         float,
                         10,
                         10,
-                        kwargs.get("vx")
+                        **kwargs,
                     ),
                     Field(
                         "vy",
                         float,
                         20,
                         10,
-                        kwargs.get("vy")
+                        **kwargs,
                     ),
                     Field(
                         "vz",
                         float,
                         30,
                         10,
-                        kwargs.get("vz")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         40,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "pstatic",
                         float,
                         50,
                         10,
-                        kwargs.get("pstatic", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "mach",
                         float,
                         60,
                         10,
-                        kwargs.get("mach", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

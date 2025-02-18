@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class MatAddErosion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "excl",
                         float,
                         10,
                         10,
-                        kwargs.get("excl")
+                        **kwargs,
                     ),
                     Field(
                         "mxpres",
                         float,
                         20,
                         10,
-                        kwargs.get("mxpres")
+                        **kwargs,
                     ),
                     Field(
                         "mneps",
                         float,
                         30,
                         10,
-                        kwargs.get("mneps")
+                        **kwargs,
                     ),
                     Field(
                         "effeps",
                         float,
                         40,
                         10,
-                        kwargs.get("effeps")
+                        **kwargs,
                     ),
                     Field(
                         "voleps",
                         float,
                         50,
                         10,
-                        kwargs.get("voleps")
+                        **kwargs,
                     ),
                     Field(
                         "numfip",
                         float,
                         60,
                         10,
-                        kwargs.get("numfip", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "ncs",
                         float,
                         70,
                         10,
-                        kwargs.get("ncs", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,56 @@ class MatAddErosion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("mnpres")
+                        **kwargs,
                     ),
                     Field(
                         "sigp1",
                         float,
                         10,
                         10,
-                        kwargs.get("sigp1")
+                        **kwargs,
                     ),
                     Field(
                         "sigvm",
                         float,
                         20,
                         10,
-                        kwargs.get("sigvm")
+                        **kwargs,
                     ),
                     Field(
                         "mxeps",
                         float,
                         30,
                         10,
-                        kwargs.get("mxeps")
+                        **kwargs,
                     ),
                     Field(
                         "epssh",
                         float,
                         40,
                         10,
-                        kwargs.get("epssh")
+                        **kwargs,
                     ),
                     Field(
                         "sigth",
                         float,
                         50,
                         10,
-                        kwargs.get("sigth")
+                        **kwargs,
                     ),
                     Field(
                         "impulse",
                         float,
                         60,
                         10,
-                        kwargs.get("impulse")
+                        **kwargs,
                     ),
                     Field(
                         "failtm",
                         float,
                         70,
                         10,
-                        kwargs.get("failtm")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +167,56 @@ class MatAddErosion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idam")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "lcregd",
                         int,
                         70,
                         10,
-                        kwargs.get("lcregd")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +227,57 @@ class MatAddErosion(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcfld")
+                        **kwargs,
                     ),
                     Field(
                         "nsff",
                         int,
                         10,
                         10,
-                        kwargs.get("nsff", 10 if use_lspp_defaults() else None)
+                        10,
+                        **kwargs,
                     ),
                     Field(
                         "epsthin",
                         float,
                         20,
                         10,
-                        kwargs.get("epsthin")
+                        **kwargs,
                     ),
                     Field(
                         "engcrt",
                         float,
                         30,
                         10,
-                        kwargs.get("engcrt")
+                        **kwargs,
                     ),
                     Field(
                         "radcrt",
                         float,
                         40,
                         10,
-                        kwargs.get("radcrt")
+                        **kwargs,
                     ),
                     Field(
                         "lceps12",
                         int,
                         50,
                         10,
-                        kwargs.get("lceps12")
+                        **kwargs,
                     ),
                     Field(
                         "lceps13",
                         int,
                         60,
                         10,
-                        kwargs.get("lceps13")
+                        **kwargs,
                     ),
                     Field(
                         "lcepsmx",
                         int,
                         70,
                         10,
-                        kwargs.get("lcepsmx")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,28 +288,28 @@ class MatAddErosion(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dteflt")
+                        **kwargs,
                     ),
                     Field(
                         "volfrac",
                         float,
                         10,
                         10,
-                        kwargs.get("volfrac")
+                        **kwargs,
                     ),
                     Field(
                         "mxtmp",
                         float,
                         20,
                         10,
-                        kwargs.get("mxtmp")
+                        **kwargs,
                     ),
                     Field(
                         "dtmin",
                         float,
                         30,
                         10,
-                        kwargs.get("dtmin")
+                        **kwargs,
                     ),
                 ],
             ),

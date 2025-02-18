@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialAxialForceBeam(KeywordBase):
@@ -41,28 +40,30 @@ class InitialAxialForceBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("bsid")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         10,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "scale",
                         float,
                         20,
                         10,
-                        kwargs.get("scale", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "kbend",
                         int,
                         30,
                         10,
-                        kwargs.get("kbend", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

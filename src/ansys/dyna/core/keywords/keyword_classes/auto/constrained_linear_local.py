@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedLinearLocal(KeywordBase):
@@ -41,7 +40,7 @@ class ConstrainedLinearLocal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,28 +51,28 @@ class ConstrainedLinearLocal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "dof",
                         int,
                         10,
                         10,
-                        kwargs.get("dof")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         20,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "coef",
                         float,
                         30,
                         10,
-                        kwargs.get("coef")
+                        **kwargs,
                     ),
                 ],
             ),

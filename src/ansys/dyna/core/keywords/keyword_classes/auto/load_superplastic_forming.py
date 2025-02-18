@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSuperplasticForming(KeywordBase):
@@ -41,42 +40,42 @@ class LoadSuperplasticForming(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcp1")
+                        **kwargs,
                     ),
                     Field(
                         "csp1",
                         int,
                         10,
                         10,
-                        kwargs.get("csp1")
+                        **kwargs,
                     ),
                     Field(
                         "ncp1",
                         float,
                         20,
                         10,
-                        kwargs.get("ncp1")
+                        **kwargs,
                     ),
                     Field(
                         "lcp2",
                         int,
                         30,
                         10,
-                        kwargs.get("lcp2")
+                        **kwargs,
                     ),
                     Field(
                         "csp2",
                         int,
                         40,
                         10,
-                        kwargs.get("csp2")
+                        **kwargs,
                     ),
                     Field(
                         "ncp2",
                         float,
                         50,
                         10,
-                        kwargs.get("ncp2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,28 +86,29 @@ class LoadSuperplasticForming(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("erate")
+                        **kwargs,
                     ),
                     Field(
                         "scmin",
                         float,
                         10,
                         10,
-                        kwargs.get("scmin")
+                        **kwargs,
                     ),
                     Field(
                         "scmax",
                         float,
                         20,
                         10,
-                        kwargs.get("scmax")
+                        **kwargs,
                     ),
                     Field(
                         "ncyl",
                         int,
                         30,
                         10,
-                        kwargs.get("ncyl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

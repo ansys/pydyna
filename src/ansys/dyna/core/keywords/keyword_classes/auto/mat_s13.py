@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatS13(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "defl1",
                         float,
                         10,
                         10,
-                        kwargs.get("defl1")
+                        **kwargs,
                     ),
                     Field(
                         "f1",
                         float,
                         20,
                         10,
-                        kwargs.get("f1")
+                        **kwargs,
                     ),
                     Field(
                         "defl2",
                         float,
                         30,
                         10,
-                        kwargs.get("defl2")
+                        **kwargs,
                     ),
                     Field(
                         "f2",
                         float,
                         40,
                         10,
-                        kwargs.get("f2")
+                        **kwargs,
                     ),
                     Field(
                         "defl3",
                         float,
                         50,
                         10,
-                        kwargs.get("defl3")
+                        **kwargs,
                     ),
                     Field(
                         "f3",
                         float,
                         60,
                         10,
-                        kwargs.get("f3")
+                        **kwargs,
                     ),
                     Field(
                         "fflag",
                         float,
                         70,
                         10,
-                        kwargs.get("fflag")
+                        **kwargs,
                     ),
                 ],
             ),

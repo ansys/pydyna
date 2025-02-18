@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatElasticViscoplasticThermal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "lcss",
                         int,
                         60,
                         10,
-                        kwargs.get("lcss")
+                        **kwargs,
                     ),
                     Field(
                         "fail",
                         float,
                         70,
                         10,
-                        kwargs.get("fail")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class MatElasticViscoplasticThermal(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("qr1")
+                        **kwargs,
                     ),
                     Field(
                         "cr1",
                         float,
                         10,
                         10,
-                        kwargs.get("cr1")
+                        **kwargs,
                     ),
                     Field(
                         "qr2",
                         float,
                         20,
                         10,
-                        kwargs.get("qr2")
+                        **kwargs,
                     ),
                     Field(
                         "cr2",
                         float,
                         30,
                         10,
-                        kwargs.get("cr2")
+                        **kwargs,
                     ),
                     Field(
                         "qx1",
                         float,
                         40,
                         10,
-                        kwargs.get("qx1")
+                        **kwargs,
                     ),
                     Field(
                         "cx1",
                         float,
                         50,
                         10,
-                        kwargs.get("cx1")
+                        **kwargs,
                     ),
                     Field(
                         "qx2",
                         float,
                         60,
                         10,
-                        kwargs.get("qx2")
+                        **kwargs,
                     ),
                     Field(
                         "cx2",
                         float,
                         70,
                         10,
-                        kwargs.get("cx2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +165,56 @@ class MatElasticViscoplasticThermal(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         10,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "lce",
                         float,
                         20,
                         10,
-                        kwargs.get("lce")
+                        **kwargs,
                     ),
                     Field(
                         "lcpr",
                         float,
                         30,
                         10,
-                        kwargs.get("lcpr")
+                        **kwargs,
                     ),
                     Field(
                         "lcsigy",
                         float,
                         40,
                         10,
-                        kwargs.get("lcsigy")
+                        **kwargs,
                     ),
                     Field(
                         "lcr",
                         float,
                         50,
                         10,
-                        kwargs.get("lcr")
+                        **kwargs,
                     ),
                     Field(
                         "lcx",
                         float,
                         60,
                         10,
-                        kwargs.get("lcx")
+                        **kwargs,
                     ),
                     Field(
                         "lcalph",
                         float,
                         70,
                         10,
-                        kwargs.get("lcalph")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +225,56 @@ class MatElasticViscoplasticThermal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcc")
+                        **kwargs,
                     ),
                     Field(
                         "lcp",
                         int,
                         10,
                         10,
-                        kwargs.get("lcp")
+                        **kwargs,
                     ),
                     Field(
                         "tref",
                         float,
                         20,
                         10,
-                        kwargs.get("tref")
+                        **kwargs,
                     ),
                     Field(
                         "lcfail",
                         float,
                         30,
                         10,
-                        kwargs.get("lcfail")
+                        **kwargs,
                     ),
                     Field(
                         "nuhis",
                         int,
                         40,
                         10,
-                        kwargs.get("nuhis")
+                        **kwargs,
                     ),
                     Field(
                         "t1phas",
                         float,
                         50,
                         10,
-                        kwargs.get("t1phas")
+                        **kwargs,
                     ),
                     Field(
                         "t2phas",
                         float,
                         60,
                         10,
-                        kwargs.get("t2phas")
+                        **kwargs,
                     ),
                     Field(
                         "tol",
                         float,
                         70,
                         10,
-                        kwargs.get("tol")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,56 +285,56 @@ class MatElasticViscoplasticThermal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fushi1")
+                        **kwargs,
                     ),
                     Field(
                         "fushi2",
                         int,
                         10,
                         10,
-                        kwargs.get("fushi2")
+                        **kwargs,
                     ),
                     Field(
                         "fushi3",
                         int,
                         20,
                         10,
-                        kwargs.get("fushi3")
+                        **kwargs,
                     ),
                     Field(
                         "fushi4",
                         int,
                         30,
                         10,
-                        kwargs.get("fushi4")
+                        **kwargs,
                     ),
                     Field(
                         "fushi5",
                         int,
                         40,
                         10,
-                        kwargs.get("fushi5")
+                        **kwargs,
                     ),
                     Field(
                         "fushi6",
                         int,
                         50,
                         10,
-                        kwargs.get("fushi6")
+                        **kwargs,
                     ),
                     Field(
                         "fushi7",
                         int,
                         60,
                         10,
-                        kwargs.get("fushi7")
+                        **kwargs,
                     ),
                     Field(
                         "fushi8",
                         int,
                         70,
                         10,
-                        kwargs.get("fushi8")
+                        **kwargs,
                     ),
                 ],
             ),

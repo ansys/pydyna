@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,36 @@ class SensorDefineForceUpdate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sensid")
+                        **kwargs,
                     ),
                     Field(
                         "ftype",
                         str,
                         10,
                         10,
-                        kwargs.get("ftype", "AIRBAG" if use_lspp_defaults() else None)
+                        "AIRBAG",
+                        **kwargs,
                     ),
                     Field(
                         "typeid",
                         int,
                         20,
                         10,
-                        kwargs.get("typeid")
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         str,
                         30,
                         10,
-                        kwargs.get("vid")
+                        **kwargs,
                     ),
                     Field(
                         "crd",
                         int,
                         40,
                         10,
-                        kwargs.get("crd")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,21 +85,21 @@ class SensorDefineForceUpdate(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("birth")
+                        **kwargs,
                     ),
                     Field(
                         "death",
                         float,
                         10,
                         10,
-                        kwargs.get("death")
+                        **kwargs,
                     ),
                     Field(
                         "dtupd",
                         float,
                         20,
                         10,
-                        kwargs.get("dtupd")
+                        **kwargs,
                     ),
                 ],
             ),

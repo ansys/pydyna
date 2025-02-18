@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ComponentGebodJointRightElbow(KeywordBase):
@@ -41,49 +40,55 @@ class ComponentGebodJointRightElbow(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("did")
+                        **kwargs,
                     ),
                     Field(
                         "lc1",
                         int,
                         10,
                         10,
-                        kwargs.get("lc1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc2",
                         int,
                         20,
                         10,
-                        kwargs.get("lc2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc3",
                         int,
                         30,
                         10,
-                        kwargs.get("lc3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "scf1",
                         float,
                         40,
                         10,
-                        kwargs.get("scf1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "scf2",
                         float,
                         50,
                         10,
-                        kwargs.get("scf2", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "scf3",
                         float,
                         60,
                         10,
-                        kwargs.get("scf3", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,42 +99,48 @@ class ComponentGebodJointRightElbow(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         10,
                         10,
-                        kwargs.get("c2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         float,
                         20,
                         10,
-                        kwargs.get("c3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "neut1",
                         float,
                         30,
                         10,
-                        kwargs.get("neut1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "neut2",
                         float,
                         40,
                         10,
-                        kwargs.get("neut2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "neut3",
                         float,
                         50,
                         10,
-                        kwargs.get("neut3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,42 +151,48 @@ class ComponentGebodJointRightElbow(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("losa1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisa1",
                         float,
                         10,
                         10,
-                        kwargs.get("hisa1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "losa2",
                         float,
                         20,
                         10,
-                        kwargs.get("losa2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisa2",
                         float,
                         30,
                         10,
-                        kwargs.get("hisa2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "losa3",
                         float,
                         40,
                         10,
-                        kwargs.get("losa3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisa3",
                         float,
                         50,
                         10,
-                        kwargs.get("hisa3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -186,21 +203,24 @@ class ComponentGebodJointRightElbow(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("unk1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unk2",
                         float,
                         10,
                         10,
-                        kwargs.get("unk2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unk3",
                         float,
                         20,
                         10,
-                        kwargs.get("unk3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

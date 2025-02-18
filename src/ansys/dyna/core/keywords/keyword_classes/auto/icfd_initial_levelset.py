@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdInitialLevelset(KeywordBase):
@@ -41,56 +40,58 @@ class IcfdInitialLevelset(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nx",
                         float,
                         10,
                         10,
-                        kwargs.get("nx")
+                        **kwargs,
                     ),
                     Field(
                         "ny",
                         float,
                         20,
                         10,
-                        kwargs.get("ny")
+                        **kwargs,
                     ),
                     Field(
                         "nz",
                         float,
                         30,
                         10,
-                        kwargs.get("nz")
+                        **kwargs,
                     ),
                     Field(
                         "x",
                         float,
                         40,
                         10,
-                        kwargs.get("x")
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         50,
                         10,
-                        kwargs.get("y")
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         60,
                         10,
-                        kwargs.get("z")
+                        **kwargs,
                     ),
                     Field(
                         "invert",
                         int,
                         70,
                         10,
-                        kwargs.get("invert", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

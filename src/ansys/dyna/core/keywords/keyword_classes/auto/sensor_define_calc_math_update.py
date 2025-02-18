@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class SensorDefineCalcMathUpdate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sensid")
+                        **kwargs,
                     ),
                     Field(
                         "calc",
                         str,
                         10,
                         10,
-                        kwargs.get("calc")
+                        **kwargs,
                     ),
                     Field(
                         "sens1",
                         int,
                         20,
                         10,
-                        kwargs.get("sens1")
+                        **kwargs,
                     ),
                     Field(
                         "sens2",
                         int,
                         30,
                         10,
-                        kwargs.get("sens2")
+                        **kwargs,
                     ),
                     Field(
                         "sens3",
                         int,
                         40,
                         10,
-                        kwargs.get("sens3")
+                        **kwargs,
                     ),
                     Field(
                         "sens4",
                         int,
                         50,
                         10,
-                        kwargs.get("sens4")
+                        **kwargs,
                     ),
                     Field(
                         "sens5",
                         int,
                         60,
                         10,
-                        kwargs.get("sens5")
+                        **kwargs,
                     ),
                     Field(
                         "sens6",
                         int,
                         70,
                         10,
-                        kwargs.get("sens6")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,21 +105,21 @@ class SensorDefineCalcMathUpdate(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("birth")
+                        **kwargs,
                     ),
                     Field(
                         "death",
                         float,
                         10,
                         10,
-                        kwargs.get("death")
+                        **kwargs,
                     ),
                     Field(
                         "dtupd",
                         float,
                         20,
                         10,
-                        kwargs.get("dtupd")
+                        **kwargs,
                     ),
                 ],
             ),

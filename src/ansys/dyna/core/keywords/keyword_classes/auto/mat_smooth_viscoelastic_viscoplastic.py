@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,21 +45,21 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         20,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -71,56 +70,56 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a0")
+                        **kwargs,
                     ),
                     Field(
                         "b0",
                         float,
                         10,
                         10,
-                        kwargs.get("b0")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         20,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         30,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         40,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "kapas",
                         float,
                         50,
                         10,
-                        kwargs.get("kapas")
+                        **kwargs,
                     ),
                     Field(
                         "kapa0",
                         float,
                         60,
                         10,
-                        kwargs.get("kapa0")
+                        **kwargs,
                     ),
                     Field(
                         "shear",
                         float,
                         70,
                         10,
-                        kwargs.get("shear")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -131,56 +130,56 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a0")
+                        **kwargs,
                     ),
                     Field(
                         "b0",
                         float,
                         10,
                         10,
-                        kwargs.get("b0")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         20,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         30,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         40,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "kapas",
                         float,
                         50,
                         10,
-                        kwargs.get("kapas")
+                        **kwargs,
                     ),
                     Field(
                         "kapa0",
                         float,
                         60,
                         10,
-                        kwargs.get("kapa0")
+                        **kwargs,
                     ),
                     Field(
                         "shear",
                         float,
                         70,
                         10,
-                        kwargs.get("shear")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -191,56 +190,56 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a0")
+                        **kwargs,
                     ),
                     Field(
                         "b0",
                         float,
                         10,
                         10,
-                        kwargs.get("b0")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         20,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         30,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         40,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "kapas",
                         float,
                         50,
                         10,
-                        kwargs.get("kapas")
+                        **kwargs,
                     ),
                     Field(
                         "kapa0",
                         float,
                         60,
                         10,
-                        kwargs.get("kapa0")
+                        **kwargs,
                     ),
                     Field(
                         "shear",
                         float,
                         70,
                         10,
-                        kwargs.get("shear")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -251,56 +250,56 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a0")
+                        **kwargs,
                     ),
                     Field(
                         "b0",
                         float,
                         10,
                         10,
-                        kwargs.get("b0")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         20,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         30,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         40,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "kapas",
                         float,
                         50,
                         10,
-                        kwargs.get("kapas")
+                        **kwargs,
                     ),
                     Field(
                         "kapa0",
                         float,
                         60,
                         10,
-                        kwargs.get("kapa0")
+                        **kwargs,
                     ),
                     Field(
                         "shear",
                         float,
                         70,
                         10,
-                        kwargs.get("shear")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -311,56 +310,56 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a0")
+                        **kwargs,
                     ),
                     Field(
                         "b0",
                         float,
                         10,
                         10,
-                        kwargs.get("b0")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         20,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         30,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         40,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "kapas",
                         float,
                         50,
                         10,
-                        kwargs.get("kapas")
+                        **kwargs,
                     ),
                     Field(
                         "kapa0",
                         float,
                         60,
                         10,
-                        kwargs.get("kapa0")
+                        **kwargs,
                     ),
                     Field(
                         "shear",
                         float,
                         70,
                         10,
-                        kwargs.get("shear")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -371,56 +370,56 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a0")
+                        **kwargs,
                     ),
                     Field(
                         "b0",
                         float,
                         10,
                         10,
-                        kwargs.get("b0")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         20,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         30,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         40,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "kapas",
                         float,
                         50,
                         10,
-                        kwargs.get("kapas")
+                        **kwargs,
                     ),
                     Field(
                         "kapa0",
                         float,
                         60,
                         10,
-                        kwargs.get("kapa0")
+                        **kwargs,
                     ),
                     Field(
                         "shear",
                         float,
                         70,
                         10,
-                        kwargs.get("shear")
+                        **kwargs,
                     ),
                 ],
             ),

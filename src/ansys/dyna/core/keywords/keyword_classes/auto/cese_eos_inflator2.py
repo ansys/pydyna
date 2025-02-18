@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseEosInflator2(KeywordBase):
@@ -41,7 +40,7 @@ class CeseEosInflator2(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,35 +51,40 @@ class CeseEosInflator2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cp1_0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp1_1",
                         float,
                         10,
                         10,
-                        kwargs.get("cp1_1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp1_2",
                         float,
                         20,
                         10,
-                        kwargs.get("cp1_2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp1_3",
                         float,
                         30,
                         10,
-                        kwargs.get("cp1_3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp1_4",
                         float,
                         40,
                         10,
-                        kwargs.get("cp1_4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,35 +95,40 @@ class CeseEosInflator2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cp2_0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp2_1",
                         float,
                         10,
                         10,
-                        kwargs.get("cp2_1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp2_2",
                         float,
                         20,
                         10,
-                        kwargs.get("cp2_2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp2_3",
                         float,
                         30,
                         10,
-                        kwargs.get("cp2_3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp2_4",
                         float,
                         40,
                         10,
-                        kwargs.get("cp2_4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -130,35 +139,40 @@ class CeseEosInflator2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cv1_0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv1_1",
                         float,
                         10,
                         10,
-                        kwargs.get("cv1_1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv1_2",
                         float,
                         20,
                         10,
-                        kwargs.get("cv1_2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv1_3",
                         float,
                         30,
                         10,
-                        kwargs.get("cv1_3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv1_4",
                         float,
                         40,
                         10,
-                        kwargs.get("cv1_4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -169,35 +183,40 @@ class CeseEosInflator2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cv2_0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv2_1",
                         float,
                         10,
                         10,
-                        kwargs.get("cv2_1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv2_2",
                         float,
                         20,
                         10,
-                        kwargs.get("cv2_2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv2_3",
                         float,
                         30,
                         10,
-                        kwargs.get("cv2_3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv2_4",
                         float,
                         40,
                         10,
-                        kwargs.get("cv2_4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

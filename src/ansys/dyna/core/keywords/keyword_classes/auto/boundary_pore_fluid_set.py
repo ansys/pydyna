@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryPoreFluidSet(KeywordBase):
@@ -41,56 +40,57 @@ class BoundaryPoreFluidSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "wtable",
                         float,
                         10,
                         10,
-                        kwargs.get("wtable")
+                        **kwargs,
                     ),
                     Field(
                         "pf_rho",
                         float,
                         20,
                         10,
-                        kwargs.get("pf_rho")
+                        **kwargs,
                     ),
                     Field(
                         "atype",
                         int,
                         30,
                         10,
-                        kwargs.get("atype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pf_bulk",
                         float,
                         40,
                         10,
-                        kwargs.get("pf_bulk")
+                        **kwargs,
                     ),
                     Field(
                         "acurve",
                         int,
                         50,
                         10,
-                        kwargs.get("acurve")
+                        **kwargs,
                     ),
                     Field(
                         "wtcur",
                         int,
                         60,
                         10,
-                        kwargs.get("wtcur")
+                        **kwargs,
                     ),
                     Field(
                         "suclim",
                         float,
                         70,
                         10,
-                        kwargs.get("suclim")
+                        **kwargs,
                     ),
                 ],
             ),

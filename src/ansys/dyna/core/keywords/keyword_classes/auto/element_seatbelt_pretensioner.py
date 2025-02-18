@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementSeatbeltPretensioner(KeywordBase):
@@ -41,42 +40,48 @@ class ElementSeatbeltPretensioner(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sbprid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sbprty",
                         int,
                         10,
                         10,
-                        kwargs.get("sbprty", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "sbsid1",
                         int,
                         20,
                         10,
-                        kwargs.get("sbsid1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sbsid2",
                         int,
                         30,
                         10,
-                        kwargs.get("sbsid2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sbsid3",
                         int,
                         40,
                         10,
-                        kwargs.get("sbsid3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sbsid4",
                         int,
                         50,
                         10,
-                        kwargs.get("sbsid4", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,28 +92,32 @@ class ElementSeatbeltPretensioner(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sbrid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "time",
                         float,
                         10,
                         10,
-                        kwargs.get("time", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ptlcid",
                         int,
                         20,
                         10,
-                        kwargs.get("ptlcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lmtfrc",
                         float,
                         30,
                         10,
-                        kwargs.get("lmtfrc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

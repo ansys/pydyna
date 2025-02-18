@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class MatConcreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "etan",
                         float,
                         50,
                         10,
-                        kwargs.get("etan")
+                        **kwargs,
                     ),
                     Field(
                         "fail",
                         float,
                         60,
                         10,
-                        kwargs.get("fail", 10.E+20 if use_lspp_defaults() else None)
+                        10.E+20,
+                        **kwargs,
                     ),
                     Field(
                         "tdel",
                         float,
                         70,
                         10,
-                        kwargs.get("tdel", 10.0E+20 if use_lspp_defaults() else None)
+                        10.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,28 +107,30 @@ class MatConcreteBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         10,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "lcss",
                         int,
                         20,
                         10,
-                        kwargs.get("lcss", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcsr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcsr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -138,21 +141,23 @@ class MatConcreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("noten", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tencut",
                         float,
                         10,
                         10,
-                        kwargs.get("tencut", 1.0E+15 if use_lspp_defaults() else None)
+                        1.0E+15,
+                        **kwargs,
                     ),
                     Field(
                         "sdr",
                         float,
                         20,
                         10,
-                        kwargs.get("sdr")
+                        **kwargs,
                     ),
                 ],
             ),

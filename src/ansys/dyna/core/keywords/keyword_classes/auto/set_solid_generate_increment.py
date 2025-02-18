@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,14 +45,15 @@ class SetSolidGenerateIncrement(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "solver",
                         str,
                         10,
                         10,
-                        kwargs.get("solver", "MECH" if use_lspp_defaults() else None)
+                        "MECH",
+                        **kwargs,
                     ),
                 ],
             ),
@@ -64,21 +64,21 @@ class SetSolidGenerateIncrement(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("bbeg")
+                        **kwargs,
                     ),
                     Field(
                         "bend",
                         int,
                         10,
                         10,
-                        kwargs.get("bend")
+                        **kwargs,
                     ),
                     Field(
                         "incr",
                         int,
                         20,
                         10,
-                        kwargs.get("incr")
+                        **kwargs,
                     ),
                 ],
             ),

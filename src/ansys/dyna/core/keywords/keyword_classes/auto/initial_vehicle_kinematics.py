@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialVehicleKinematics(KeywordBase):
@@ -41,56 +40,63 @@ class InitialVehicleKinematics(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("grav", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "psid",
                         int,
                         10,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "xo",
                         float,
                         20,
                         10,
-                        kwargs.get("xo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yo",
                         float,
                         30,
                         10,
-                        kwargs.get("yo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zo",
                         float,
                         40,
                         10,
-                        kwargs.get("zo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xf",
                         float,
                         50,
                         10,
-                        kwargs.get("xf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yf",
                         float,
                         60,
                         10,
-                        kwargs.get("yf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zf",
                         float,
                         70,
                         10,
-                        kwargs.get("zf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,42 +107,48 @@ class InitialVehicleKinematics(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vy",
                         float,
                         10,
                         10,
-                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vz",
                         float,
                         20,
                         10,
-                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "aaxis",
                         int,
                         30,
                         10,
-                        kwargs.get("aaxis", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "baxis",
                         int,
                         40,
                         10,
-                        kwargs.get("baxis", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "caxis",
                         int,
                         50,
                         10,
-                        kwargs.get("caxis", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -147,42 +159,48 @@ class InitialVehicleKinematics(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aang", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bang",
                         float,
                         10,
                         10,
-                        kwargs.get("bang", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cang",
                         float,
                         20,
                         10,
-                        kwargs.get("cang", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "wa",
                         float,
                         30,
                         10,
-                        kwargs.get("wa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "wb",
                         float,
                         40,
                         10,
-                        kwargs.get("wb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "wc",
                         float,
                         50,
                         10,
-                        kwargs.get("wc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitModalDynamic(KeywordBase):
@@ -41,42 +40,44 @@ class ControlImplicitModalDynamic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mdflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "zeta",
                         float,
                         10,
                         10,
-                        kwargs.get("zeta")
+                        **kwargs,
                     ),
                     Field(
                         "md_strs",
                         int,
                         20,
                         10,
-                        kwargs.get("md_strs")
+                        **kwargs,
                     ),
                     Field(
                         "dtout",
                         float,
                         30,
                         10,
-                        kwargs.get("dtout")
+                        **kwargs,
                     ),
                     Field(
                         "integ",
                         int,
                         40,
                         10,
-                        kwargs.get("integ", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nsid",
                         int,
                         50,
                         10,
-                        kwargs.get("nsid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,7 +88,7 @@ class ControlImplicitModalDynamic(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -98,7 +99,7 @@ class ControlImplicitModalDynamic(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename2")
+                        **kwargs,
                     ),
                 ],
             ),

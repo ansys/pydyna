@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class MatJohnsonCook(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         20,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         30,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         40,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "dtf",
                         float,
                         50,
                         10,
-                        kwargs.get("dtf")
+                        **kwargs,
                     ),
                     Field(
                         "vp",
                         float,
                         60,
                         10,
-                        kwargs.get("vp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rateop",
                         float,
                         70,
                         10,
-                        kwargs.get("rateop", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,56 @@ class MatJohnsonCook(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         10,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         20,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         30,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         40,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "tm",
                         float,
                         50,
                         10,
-                        kwargs.get("tm")
+                        **kwargs,
                     ),
                     Field(
                         "tr",
                         float,
                         60,
                         10,
-                        kwargs.get("tr")
+                        **kwargs,
                     ),
                     Field(
                         "epso",
                         float,
                         70,
                         10,
-                        kwargs.get("epso")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +167,58 @@ class MatJohnsonCook(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cp")
+                        **kwargs,
                     ),
                     Field(
                         "pc",
                         float,
                         10,
                         10,
-                        kwargs.get("pc")
+                        **kwargs,
                     ),
                     Field(
                         "spall",
                         float,
                         20,
                         10,
-                        kwargs.get("spall", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "it",
                         float,
                         30,
                         10,
-                        kwargs.get("it", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         40,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         50,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         60,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "d4",
                         float,
                         70,
                         10,
-                        kwargs.get("d4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,49 +229,50 @@ class MatJohnsonCook(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("d5")
+                        **kwargs,
                     ),
                     Field(
                         "c2/p/xnp/d",
                         float,
                         10,
                         10,
-                        kwargs.get("c2/p/xnp/d")
+                        **kwargs,
                     ),
                     Field(
                         "erod",
                         float,
                         20,
                         10,
-                        kwargs.get("erod")
+                        **kwargs,
                     ),
                     Field(
                         "efmin",
                         float,
                         30,
                         10,
-                        kwargs.get("efmin", 0.000001 if use_lspp_defaults() else None)
+                        0.000001,
+                        **kwargs,
                     ),
                     Field(
                         "numint",
                         float,
                         40,
                         10,
-                        kwargs.get("numint")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         50,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "eps1",
                         float,
                         60,
                         10,
-                        kwargs.get("eps1")
+                        **kwargs,
                     ),
                 ],
             ),

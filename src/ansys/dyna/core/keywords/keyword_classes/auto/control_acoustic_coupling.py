@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlAcousticCoupling(KeywordBase):
@@ -41,35 +40,40 @@ class ControlAcousticCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("maccpl", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                     Field(
                         "acecf1",
                         float,
                         10,
                         10,
-                        kwargs.get("acecf1", 1.5 if use_lspp_defaults() else None)
+                        1.5,
+                        **kwargs,
                     ),
                     Field(
                         "acecf2",
                         float,
                         20,
                         10,
-                        kwargs.get("acecf2", 0.79 if use_lspp_defaults() else None)
+                        0.79,
+                        **kwargs,
                     ),
                     Field(
                         "acecf3",
                         float,
                         30,
                         10,
-                        kwargs.get("acecf3", 0.5 if use_lspp_defaults() else None)
+                        0.5,
+                        **kwargs,
                     ),
                     Field(
                         "acecf4",
                         float,
                         40,
                         10,
-                        kwargs.get("acecf4", 0.95 if use_lspp_defaults() else None)
+                        0.95,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,55 @@ class SectionIgaShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "elform",
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "shrf",
                         float,
                         20,
                         10,
-                        kwargs.get("shrf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "nip",
                         int,
                         30,
                         10,
-                        kwargs.get("nip", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "irl",
                         int,
                         40,
                         10,
-                        kwargs.get("irl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "qr/irid",
                         float,
                         50,
                         10,
-                        kwargs.get("qr/irid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "icomp",
                         int,
                         60,
                         10,
-                        kwargs.get("icomp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,35 +104,37 @@ class SectionIgaShell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "nloc",
                         float,
                         40,
                         10,
-                        kwargs.get("nloc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -138,56 +145,56 @@ class SectionIgaShell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "b2",
                         float,
                         10,
                         10,
-                        kwargs.get("b2")
+                        **kwargs,
                     ),
                     Field(
                         "b3",
                         float,
                         20,
                         10,
-                        kwargs.get("b3")
+                        **kwargs,
                     ),
                     Field(
                         "b4",
                         float,
                         30,
                         10,
-                        kwargs.get("b4")
+                        **kwargs,
                     ),
                     Field(
                         "b5",
                         float,
                         40,
                         10,
-                        kwargs.get("b5")
+                        **kwargs,
                     ),
                     Field(
                         "b6",
                         float,
                         50,
                         10,
-                        kwargs.get("b6")
+                        **kwargs,
                     ),
                     Field(
                         "b7",
                         float,
                         60,
                         10,
-                        kwargs.get("b7")
+                        **kwargs,
                     ),
                     Field(
                         "b8",
                         float,
                         70,
                         10,
-                        kwargs.get("b8")
+                        **kwargs,
                     ),
                 ],
             ),

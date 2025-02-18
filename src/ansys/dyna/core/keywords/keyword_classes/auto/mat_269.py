@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class Mat269(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         20,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         30,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "gv",
                         float,
                         40,
                         10,
-                        kwargs.get("gv")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         50,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "nv",
                         float,
                         60,
                         10,
-                        kwargs.get("nv")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,28 +98,28 @@ class Mat269(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         10,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "gam0",
                         float,
                         20,
                         10,
-                        kwargs.get("gam0")
+                        **kwargs,
                     ),
                     Field(
                         "tauh",
                         float,
                         30,
                         10,
-                        kwargs.get("tauh")
+                        **kwargs,
                     ),
                 ],
             ),

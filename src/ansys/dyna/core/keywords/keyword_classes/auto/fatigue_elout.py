@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FatigueElout(KeywordBase):
@@ -41,35 +40,40 @@ class FatigueElout(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("strsn", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "index",
                         int,
                         10,
                         10,
-                        kwargs.get("index", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "restrt",
                         int,
                         20,
                         10,
-                        kwargs.get("restrt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "texpos",
                         float,
                         30,
                         10,
-                        kwargs.get("texpos", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dmgmin",
                         float,
                         40,
                         10,
-                        kwargs.get("dmgmin", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,7 +84,7 @@ class FatigueElout(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),

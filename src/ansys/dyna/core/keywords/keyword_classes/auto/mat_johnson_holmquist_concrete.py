@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatJohnsonHolmquistConcrete(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         20,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         30,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         40,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         50,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         60,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "fc",
                         float,
                         70,
                         10,
-                        kwargs.get("fc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class MatJohnsonHolmquistConcrete(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t")
+                        **kwargs,
                     ),
                     Field(
                         "eps0",
                         float,
                         10,
                         10,
-                        kwargs.get("eps0")
+                        **kwargs,
                     ),
                     Field(
                         "efmin",
                         float,
                         20,
                         10,
-                        kwargs.get("efmin")
+                        **kwargs,
                     ),
                     Field(
                         "sfmax",
                         float,
                         30,
                         10,
-                        kwargs.get("sfmax")
+                        **kwargs,
                     ),
                     Field(
                         "pc",
                         float,
                         40,
                         10,
-                        kwargs.get("pc")
+                        **kwargs,
                     ),
                     Field(
                         "uc",
                         float,
                         50,
                         10,
-                        kwargs.get("uc")
+                        **kwargs,
                     ),
                     Field(
                         "pl",
                         float,
                         60,
                         10,
-                        kwargs.get("pl")
+                        **kwargs,
                     ),
                     Field(
                         "ul",
                         float,
                         70,
                         10,
-                        kwargs.get("ul")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,42 +165,42 @@ class MatJohnsonHolmquistConcrete(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         10,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "k1",
                         float,
                         20,
                         10,
-                        kwargs.get("k1")
+                        **kwargs,
                     ),
                     Field(
                         "k2",
                         float,
                         30,
                         10,
-                        kwargs.get("k2")
+                        **kwargs,
                     ),
                     Field(
                         "k3",
                         float,
                         40,
                         10,
-                        kwargs.get("k3")
+                        **kwargs,
                     ),
                     Field(
                         "fs",
                         float,
                         50,
                         10,
-                        kwargs.get("fs")
+                        **kwargs,
                     ),
                 ],
             ),

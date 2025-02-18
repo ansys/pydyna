@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementDirectMatrixInput(KeywordBase):
@@ -41,14 +40,14 @@ class ElementDirectMatrixInput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "ifrmt",
                         int,
                         10,
                         10,
-                        kwargs.get("ifrmt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,7 +58,7 @@ class ElementDirectMatrixInput(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -70,28 +69,28 @@ class ElementDirectMatrixInput(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("mass")
+                        **kwargs,
                     ),
                     Field(
                         "damp",
                         str,
                         10,
                         10,
-                        kwargs.get("damp")
+                        **kwargs,
                     ),
                     Field(
                         "stif",
                         str,
                         20,
                         10,
-                        kwargs.get("stif")
+                        **kwargs,
                     ),
                     Field(
                         "inert",
                         str,
                         30,
                         10,
-                        kwargs.get("inert")
+                        **kwargs,
                     ),
                 ],
             ),

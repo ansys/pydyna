@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,31 @@ class DefineElementErosionShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "styp",
                         int,
                         10,
                         10,
-                        kwargs.get("styp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "numfip",
                         float,
                         20,
                         10,
-                        kwargs.get("numfip", -100. if use_lspp_defaults() else None)
+                        -100.,
+                        **kwargs,
                     ),
                     Field(
                         "nifp",
                         int,
                         30,
                         10,
-                        kwargs.get("nifp", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),

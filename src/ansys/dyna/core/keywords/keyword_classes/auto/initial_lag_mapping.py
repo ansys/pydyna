@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialLagMapping(KeywordBase):
@@ -41,7 +40,7 @@ class InitialLagMapping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("setid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,42 +51,45 @@ class InitialLagMapping(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vecid",
                         int,
                         30,
                         10,
-                        kwargs.get("vecid")
+                        **kwargs,
                     ),
                     Field(
                         "angle",
                         float,
                         40,
                         10,
-                        kwargs.get("angle")
+                        **kwargs,
                     ),
                     Field(
                         "nelangl",
                         int,
                         50,
                         10,
-                        kwargs.get("nelangl")
+                        **kwargs,
                     ),
                 ],
             ),

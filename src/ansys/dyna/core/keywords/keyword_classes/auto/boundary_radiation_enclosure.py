@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryRadiationEnclosure(KeywordBase):
@@ -41,14 +40,14 @@ class BoundaryRadiationEnclosure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("brencid")
+                        **kwargs,
                     ),
                     Field(
                         "encname",
                         str,
                         10,
                         70,
-                        kwargs.get("encname")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,21 +58,24 @@ class BoundaryRadiationEnclosure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("calopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "outopt",
                         int,
                         10,
                         10,
-                        kwargs.get("outopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "conopt",
                         int,
                         20,
                         10,
-                        kwargs.get("conopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -84,7 +86,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("encname")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -95,28 +97,32 @@ class BoundaryRadiationEnclosure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("smflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "smmaxi",
                         int,
                         10,
                         10,
-                        kwargs.get("smmaxi", 500 if use_lspp_defaults() else None)
+                        500,
+                        **kwargs,
                     ),
                     Field(
                         "smabst",
                         float,
                         20,
                         10,
-                        kwargs.get("smabst", 1.0E-10 if use_lspp_defaults() else None)
+                        1.0E-10,
+                        **kwargs,
                     ),
                     Field(
                         "smrelt",
                         float,
                         30,
                         10,
-                        kwargs.get("smrelt", 1.0E-6 if use_lspp_defaults() else None)
+                        1.0E-6,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -127,35 +133,40 @@ class BoundaryRadiationEnclosure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "slmaxi",
                         int,
                         10,
                         10,
-                        kwargs.get("slmaxi", 500 if use_lspp_defaults() else None)
+                        500,
+                        **kwargs,
                     ),
                     Field(
                         "slabst",
                         float,
                         20,
                         10,
-                        kwargs.get("slabst", 1.0E-10 if use_lspp_defaults() else None)
+                        1.0E-10,
+                        **kwargs,
                     ),
                     Field(
                         "slrelt",
                         float,
                         30,
                         10,
-                        kwargs.get("slrelt", 1.0E-6 if use_lspp_defaults() else None)
+                        1.0E-6,
+                        **kwargs,
                     ),
                     Field(
                         "slmlev",
                         int,
                         40,
                         10,
-                        kwargs.get("slmlev", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,7 +177,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -177,35 +188,39 @@ class BoundaryRadiationEnclosure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nint")
+                        **kwargs,
                     ),
                     Field(
                         "block",
                         int,
                         10,
                         10,
-                        kwargs.get("block", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "selcid",
                         int,
                         20,
                         10,
-                        kwargs.get("selcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "semult",
                         float,
                         30,
                         10,
-                        kwargs.get("semult", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "loc",
                         int,
                         40,
                         10,
-                        kwargs.get("loc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

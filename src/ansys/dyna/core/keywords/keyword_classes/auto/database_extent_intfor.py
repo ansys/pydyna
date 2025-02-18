@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseExtentIntfor(KeywordBase):
@@ -41,56 +40,64 @@ class DatabaseExtentIntfor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nglbv", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nvelo",
                         int,
                         10,
                         10,
-                        kwargs.get("nvelo", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "npresu",
                         int,
                         20,
                         10,
-                        kwargs.get("npresu", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nshear",
                         int,
                         30,
                         10,
-                        kwargs.get("nshear", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nforce",
                         int,
                         40,
                         10,
-                        kwargs.get("nforce", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ngapc",
                         int,
                         50,
                         10,
-                        kwargs.get("ngapc", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nfail",
                         int,
                         60,
                         10,
-                        kwargs.get("nfail", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ieverf",
                         int,
                         70,
                         10,
-                        kwargs.get("ieverf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,42 +108,48 @@ class DatabaseExtentIntfor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nwear", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nwusr",
                         int,
                         10,
                         10,
-                        kwargs.get("nwusr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nhuf",
                         int,
                         20,
                         10,
-                        kwargs.get("nhuf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ntied",
                         int,
                         30,
                         10,
-                        kwargs.get("ntied", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "neng",
                         int,
                         40,
                         10,
-                        kwargs.get("neng", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "npen",
                         int,
                         50,
                         10,
-                        kwargs.get("npen", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,54 @@ class DefineStochasticVariation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id_sv")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         10,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "pid_typ",
                         int,
                         20,
                         10,
-                        kwargs.get("pid_typ", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "icor",
                         int,
                         30,
                         10,
-                        kwargs.get("icor", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var_s",
                         int,
                         40,
                         10,
-                        kwargs.get("var_s", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var_f",
                         int,
                         50,
                         10,
-                        kwargs.get("var_f", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "irng",
                         int,
                         60,
                         10,
-                        kwargs.get("irng", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,21 +103,21 @@ class DefineStochasticVariation(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r1")
+                        **kwargs,
                     ),
                     Field(
                         "r2",
                         float,
                         10,
                         10,
-                        kwargs.get("r2")
+                        **kwargs,
                     ),
                     Field(
                         "r3",
                         float,
                         20,
                         10,
-                        kwargs.get("r3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -124,7 +128,7 @@ class DefineStochasticVariation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -135,21 +139,21 @@ class DefineStochasticVariation(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r1")
+                        **kwargs,
                     ),
                     Field(
                         "r2",
                         float,
                         10,
                         10,
-                        kwargs.get("r2")
+                        **kwargs,
                     ),
                     Field(
                         "r3",
                         float,
                         20,
                         10,
-                        kwargs.get("r3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -160,7 +164,7 @@ class DefineStochasticVariation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                 ],
             ),

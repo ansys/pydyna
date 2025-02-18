@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmControl(KeywordBase):
@@ -41,56 +40,62 @@ class EmControl(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("emsol", -1 if use_lspp_defaults() else None)
+                        -1,
+                        **kwargs,
                     ),
                     Field(
                         "numls",
                         int,
                         10,
                         10,
-                        kwargs.get("numls", 100 if use_lspp_defaults() else None)
+                        100,
+                        **kwargs,
                     ),
                     Field(
                         "macrodt",
                         float,
                         20,
                         10,
-                        kwargs.get("macrodt")
+                        **kwargs,
                     ),
                     Field(
                         "dimtype",
                         int,
                         30,
                         10,
-                        kwargs.get("dimtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nperio",
                         int,
                         40,
                         10,
-                        kwargs.get("nperio", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ncylfem",
                         int,
                         60,
                         10,
-                        kwargs.get("ncylfem", 5000 if use_lspp_defaults() else None)
+                        5000,
+                        **kwargs,
                     ),
                     Field(
                         "ncylbem",
                         int,
                         70,
                         10,
-                        kwargs.get("ncylbem", 5000 if use_lspp_defaults() else None)
+                        5000,
+                        **kwargs,
                     ),
                 ],
             ),

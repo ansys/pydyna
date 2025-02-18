@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlCpm(KeywordBase):
@@ -41,49 +40,55 @@ class ControlCpm(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cpmout", 11 if use_lspp_defaults() else None)
+                        11,
+                        **kwargs,
                     ),
                     Field(
                         "np2p",
                         int,
                         10,
                         10,
-                        kwargs.get("np2p", 5 if use_lspp_defaults() else None)
+                        5,
+                        **kwargs,
                     ),
                     Field(
                         "ncpmts",
                         int,
                         20,
                         10,
-                        kwargs.get("ncpmts", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cpmerr",
                         int,
                         30,
                         10,
-                        kwargs.get("cpmerr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sffdc",
                         float,
                         40,
                         10,
-                        kwargs.get("sffdc", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "cpmmf",
                         int,
                         60,
                         10,
-                        kwargs.get("cpmmf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

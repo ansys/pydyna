@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementSolidH27(KeywordBase):
@@ -41,14 +40,14 @@ class ElementSolidH27(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         8,
                         8,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,70 +58,70 @@ class ElementSolidH27(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         8,
                         8,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n3",
                         int,
                         16,
                         8,
-                        kwargs.get("n3")
+                        **kwargs,
                     ),
                     Field(
                         "n4",
                         int,
                         24,
                         8,
-                        kwargs.get("n4")
+                        **kwargs,
                     ),
                     Field(
                         "n5",
                         int,
                         32,
                         8,
-                        kwargs.get("n5")
+                        **kwargs,
                     ),
                     Field(
                         "n6",
                         int,
                         40,
                         8,
-                        kwargs.get("n6")
+                        **kwargs,
                     ),
                     Field(
                         "n7",
                         int,
                         48,
                         8,
-                        kwargs.get("n7")
+                        **kwargs,
                     ),
                     Field(
                         "n8",
                         int,
                         56,
                         8,
-                        kwargs.get("n8")
+                        **kwargs,
                     ),
                     Field(
                         "n9",
                         int,
                         64,
                         8,
-                        kwargs.get("n9")
+                        **kwargs,
                     ),
                     Field(
                         "n10",
                         int,
                         72,
                         8,
-                        kwargs.get("n10")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,70 +132,70 @@ class ElementSolidH27(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("n11")
+                        **kwargs,
                     ),
                     Field(
                         "n12",
                         int,
                         8,
                         8,
-                        kwargs.get("n12")
+                        **kwargs,
                     ),
                     Field(
                         "n13",
                         int,
                         16,
                         8,
-                        kwargs.get("n13")
+                        **kwargs,
                     ),
                     Field(
                         "n14",
                         int,
                         24,
                         8,
-                        kwargs.get("n14")
+                        **kwargs,
                     ),
                     Field(
                         "n15",
                         int,
                         32,
                         8,
-                        kwargs.get("n15")
+                        **kwargs,
                     ),
                     Field(
                         "n16",
                         int,
                         40,
                         8,
-                        kwargs.get("n16")
+                        **kwargs,
                     ),
                     Field(
                         "n17",
                         int,
                         48,
                         8,
-                        kwargs.get("n17")
+                        **kwargs,
                     ),
                     Field(
                         "n18",
                         int,
                         56,
                         8,
-                        kwargs.get("n18")
+                        **kwargs,
                     ),
                     Field(
                         "n19",
                         int,
                         64,
                         8,
-                        kwargs.get("n19")
+                        **kwargs,
                     ),
                     Field(
                         "n20",
                         int,
                         72,
                         8,
-                        kwargs.get("n20")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -207,49 +206,49 @@ class ElementSolidH27(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("n21")
+                        **kwargs,
                     ),
                     Field(
                         "n22",
                         int,
                         8,
                         8,
-                        kwargs.get("n22")
+                        **kwargs,
                     ),
                     Field(
                         "n23",
                         int,
                         16,
                         8,
-                        kwargs.get("n23")
+                        **kwargs,
                     ),
                     Field(
                         "n24",
                         int,
                         24,
                         8,
-                        kwargs.get("n24")
+                        **kwargs,
                     ),
                     Field(
                         "n25",
                         int,
                         32,
                         8,
-                        kwargs.get("n25")
+                        **kwargs,
                     ),
                     Field(
                         "n26",
                         int,
                         40,
                         8,
-                        kwargs.get("n26")
+                        **kwargs,
                     ),
                     Field(
                         "n27",
                         int,
                         48,
                         8,
-                        kwargs.get("n27")
+                        **kwargs,
                     ),
                 ],
             ),

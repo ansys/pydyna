@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class RigidwallPlanar(KeywordBase):
@@ -41,49 +40,55 @@ class RigidwallPlanar(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsid")
+                        **kwargs,
                     ),
                     Field(
                         "nsidex",
                         int,
                         10,
                         10,
-                        kwargs.get("nsidex", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "boxid",
                         int,
                         20,
                         10,
-                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "offset",
                         float,
                         30,
                         10,
-                        kwargs.get("offset", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "birth",
                         float,
                         40,
                         10,
-                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "death",
                         float,
                         50,
                         10,
-                        kwargs.get("death", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "rwksf",
                         float,
                         60,
                         10,
-                        kwargs.get("rwksf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,56 +99,64 @@ class RigidwallPlanar(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yt",
                         float,
                         10,
                         10,
-                        kwargs.get("yt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zt",
                         float,
                         20,
                         10,
-                        kwargs.get("zt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xh",
                         float,
                         30,
                         10,
-                        kwargs.get("xh", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yh",
                         float,
                         40,
                         10,
-                        kwargs.get("yh", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zh",
                         float,
                         50,
                         10,
-                        kwargs.get("zh", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fric",
                         float,
                         60,
                         10,
-                        kwargs.get("fric", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "wvel",
                         float,
                         70,
                         10,
-                        kwargs.get("wvel", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

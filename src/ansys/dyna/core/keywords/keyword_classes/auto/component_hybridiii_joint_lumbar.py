@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ComponentHybridiiiJointLumbar(KeywordBase):
@@ -41,35 +40,39 @@ class ComponentHybridiiiJointLumbar(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("did")
+                        **kwargs,
                     ),
                     Field(
                         "q1",
                         float,
                         10,
                         10,
-                        kwargs.get("q1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "q2",
                         float,
                         20,
                         10,
-                        kwargs.get("q2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "q3",
                         float,
                         30,
                         10,
-                        kwargs.get("q3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fric",
                         float,
                         40,
                         10,
-                        kwargs.get("fric", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,56 +83,64 @@ class ComponentHybridiiiJointLumbar(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "alo1",
                         float,
                         10,
                         10,
-                        kwargs.get("alo1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "blo1",
                         float,
                         20,
                         10,
-                        kwargs.get("blo1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ahi1",
                         float,
                         30,
                         10,
-                        kwargs.get("ahi1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bhi1",
                         float,
                         40,
                         10,
-                        kwargs.get("bhi1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "qlo1",
                         float,
                         50,
                         10,
-                        kwargs.get("qlo1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "qhi1",
                         float,
                         60,
                         10,
-                        kwargs.get("qhi1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sclk1",
                         float,
                         70,
                         10,
-                        kwargs.get("sclk1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,56 +151,64 @@ class ComponentHybridiiiJointLumbar(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "alo2",
                         float,
                         10,
                         10,
-                        kwargs.get("alo2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "blo2",
                         float,
                         20,
                         10,
-                        kwargs.get("blo2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ahi2",
                         float,
                         30,
                         10,
-                        kwargs.get("ahi2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bhi2",
                         float,
                         40,
                         10,
-                        kwargs.get("bhi2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "qlo2",
                         float,
                         50,
                         10,
-                        kwargs.get("qlo2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "qhi2",
                         float,
                         60,
                         10,
-                        kwargs.get("qhi2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sclk2",
                         float,
                         70,
                         10,
-                        kwargs.get("sclk2", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -200,56 +219,64 @@ class ComponentHybridiiiJointLumbar(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "alo3",
                         float,
                         10,
                         10,
-                        kwargs.get("alo3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "blo3",
                         float,
                         20,
                         10,
-                        kwargs.get("blo3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ahi3",
                         float,
                         30,
                         10,
-                        kwargs.get("ahi3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bhi3",
                         float,
                         40,
                         10,
-                        kwargs.get("bhi3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "qlo3",
                         float,
                         50,
                         10,
-                        kwargs.get("qlo3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "qhi3",
                         float,
                         60,
                         10,
-                        kwargs.get("qhi3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sclk3",
                         float,
                         70,
                         10,
-                        kwargs.get("sclk3", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

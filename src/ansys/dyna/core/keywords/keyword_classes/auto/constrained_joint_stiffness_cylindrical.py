@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedJointStiffnessCylindrical(KeywordBase):
@@ -41,42 +40,43 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("jsid")
+                        **kwargs,
                     ),
                     Field(
                         "pida",
                         int,
                         10,
                         10,
-                        kwargs.get("pida")
+                        **kwargs,
                     ),
                     Field(
                         "pidb",
                         int,
                         20,
                         10,
-                        kwargs.get("pidb")
+                        **kwargs,
                     ),
                     Field(
                         "cida",
                         int,
                         30,
                         10,
-                        kwargs.get("cida")
+                        **kwargs,
                     ),
                     Field(
                         "cidb",
                         int,
                         40,
                         10,
-                        kwargs.get("cidb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "jid",
                         int,
                         50,
                         10,
-                        kwargs.get("jid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,56 +87,63 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "lcidz",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidz", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dlcidr",
                         int,
                         30,
                         10,
-                        kwargs.get("dlcidr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dlcidp",
                         int,
                         40,
                         10,
-                        kwargs.get("dlcidp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dlcidz",
                         int,
                         50,
                         10,
-                        kwargs.get("dlcidz", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcidt",
                         int,
                         60,
                         10,
-                        kwargs.get("lcidt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dlcidt",
                         int,
                         70,
                         10,
-                        kwargs.get("dlcidt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -147,56 +154,62 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("esr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ffr",
                         float,
                         10,
                         10,
-                        kwargs.get("ffr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "esz",
                         float,
                         40,
                         10,
-                        kwargs.get("esz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ffz",
                         float,
                         50,
                         10,
-                        kwargs.get("ffz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rad1",
                         float,
                         60,
                         10,
-                        kwargs.get("rad1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rad2",
                         float,
                         70,
                         10,
-                        kwargs.get("rad2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -207,42 +220,45 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "psdr",
                         float,
                         10,
                         10,
-                        kwargs.get("psdr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "nsdz",
                         float,
                         40,
                         10,
-                        kwargs.get("nsdz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "psdz",
                         float,
                         50,
                         10,
-                        kwargs.get("psdz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

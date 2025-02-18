@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagInteraction(KeywordBase):
@@ -41,49 +40,52 @@ class AirbagInteraction(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ab1")
+                        **kwargs,
                     ),
                     Field(
                         "ab2",
                         int,
                         10,
                         10,
-                        kwargs.get("ab2")
+                        **kwargs,
                     ),
                     Field(
                         "area",
                         float,
                         20,
                         10,
-                        kwargs.get("area")
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         30,
                         10,
-                        kwargs.get("sf")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         40,
                         10,
-                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         50,
                         10,
-                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iflow",
                         int,
                         60,
                         10,
-                        kwargs.get("iflow", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatBilkhuDuboisFoam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "ym",
                         float,
                         20,
                         10,
-                        kwargs.get("ym")
+                        **kwargs,
                     ),
                     Field(
                         "lcpy",
                         int,
                         30,
                         10,
-                        kwargs.get("lcpy")
+                        **kwargs,
                     ),
                     Field(
                         "lcuys",
                         int,
                         40,
                         10,
-                        kwargs.get("lcuys")
+                        **kwargs,
                     ),
                     Field(
                         "vc",
                         float,
                         50,
                         10,
-                        kwargs.get("vc")
+                        **kwargs,
                     ),
                     Field(
                         "pc",
                         float,
                         60,
                         10,
-                        kwargs.get("pc")
+                        **kwargs,
                     ),
                     Field(
                         "vpc",
                         float,
                         70,
                         10,
-                        kwargs.get("vpc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,49 +105,50 @@ class MatBilkhuDuboisFoam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tsc")
+                        **kwargs,
                     ),
                     Field(
                         "vtsc",
                         float,
                         10,
                         10,
-                        kwargs.get("vtsc")
+                        **kwargs,
                     ),
                     Field(
                         "lcrate",
                         int,
                         20,
                         10,
-                        kwargs.get("lcrate")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "kcon",
                         float,
                         40,
                         10,
-                        kwargs.get("kcon")
+                        **kwargs,
                     ),
                     Field(
                         "isflg",
                         int,
                         50,
                         10,
-                        kwargs.get("isflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ncycle",
                         float,
                         60,
                         10,
-                        kwargs.get("ncycle")
+                        **kwargs,
                     ),
                 ],
             ),

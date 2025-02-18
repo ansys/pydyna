@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IgaEdgeUvw(KeywordBase):
@@ -41,42 +40,43 @@ class IgaEdgeUvw(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "exyzid",
                         int,
                         10,
                         10,
-                        kwargs.get("exyzid")
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         20,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "sense",
                         int,
                         30,
                         10,
-                        kwargs.get("sense", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rstart",
                         float,
                         40,
                         20,
-                        kwargs.get("rstart")
+                        **kwargs,
                     ),
                     Field(
                         "rend",
                         float,
                         60,
                         20,
-                        kwargs.get("rend")
+                        **kwargs,
                     ),
                 ],
             ),

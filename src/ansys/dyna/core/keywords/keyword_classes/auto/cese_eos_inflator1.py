@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseEosInflator1(KeywordBase):
@@ -41,7 +40,7 @@ class CeseEosInflator1(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,35 +51,40 @@ class CeseEosInflator1(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cp0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp1",
                         float,
                         10,
                         10,
-                        kwargs.get("cp1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp2",
                         float,
                         20,
                         10,
-                        kwargs.get("cp2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp3",
                         float,
                         30,
                         10,
-                        kwargs.get("cp3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cp4",
                         float,
                         40,
                         10,
-                        kwargs.get("cp4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,35 +95,40 @@ class CeseEosInflator1(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cv0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv1",
                         float,
                         10,
                         10,
-                        kwargs.get("cv1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv2",
                         float,
                         20,
                         10,
-                        kwargs.get("cv2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv3",
                         float,
                         30,
                         10,
-                        kwargs.get("cv3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cv4",
                         float,
                         40,
                         10,
-                        kwargs.get("cv4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

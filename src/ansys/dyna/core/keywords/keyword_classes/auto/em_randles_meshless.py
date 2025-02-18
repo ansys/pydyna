@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmRandlesMeshless(KeywordBase):
@@ -41,14 +40,15 @@ class EmRandlesMeshless(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rdlid")
+                        **kwargs,
                     ),
                     Field(
                         "rdltype",
                         int,
                         10,
                         10,
-                        kwargs.get("rdltype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,28 +59,28 @@ class EmRandlesMeshless(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("q")
+                        **kwargs,
                     ),
                     Field(
                         "cq",
                         float,
                         10,
                         10,
-                        kwargs.get("cq")
+                        **kwargs,
                     ),
                     Field(
                         "socinit",
                         float,
                         20,
                         10,
-                        kwargs.get("socinit")
+                        **kwargs,
                     ),
                     Field(
                         "soctou",
                         float,
                         30,
                         10,
-                        kwargs.get("soctou")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,42 +91,42 @@ class EmRandlesMeshless(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r0cha")
+                        **kwargs,
                     ),
                     Field(
                         "r0dis",
                         float,
                         10,
                         10,
-                        kwargs.get("r0dis")
+                        **kwargs,
                     ),
                     Field(
                         "r10cha",
                         float,
                         20,
                         10,
-                        kwargs.get("r10cha")
+                        **kwargs,
                     ),
                     Field(
                         "r10dis",
                         float,
                         30,
                         10,
-                        kwargs.get("r10dis")
+                        **kwargs,
                     ),
                     Field(
                         "c10cha",
                         float,
                         40,
                         10,
-                        kwargs.get("c10cha")
+                        **kwargs,
                     ),
                     Field(
                         "c10dis",
                         float,
                         50,
                         10,
-                        kwargs.get("c10dis")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -137,56 +137,56 @@ class EmRandlesMeshless(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r20cha")
+                        **kwargs,
                     ),
                     Field(
                         "r20dis",
                         float,
                         10,
                         10,
-                        kwargs.get("r20dis")
+                        **kwargs,
                     ),
                     Field(
                         "c20cha",
                         float,
                         20,
                         10,
-                        kwargs.get("c20cha")
+                        **kwargs,
                     ),
                     Field(
                         "c20dis",
                         float,
                         30,
                         10,
-                        kwargs.get("c20dis")
+                        **kwargs,
                     ),
                     Field(
                         "r30cha",
                         float,
                         40,
                         10,
-                        kwargs.get("r30cha")
+                        **kwargs,
                     ),
                     Field(
                         "r30dis",
                         float,
                         50,
                         10,
-                        kwargs.get("r30dis")
+                        **kwargs,
                     ),
                     Field(
                         "c30cha",
                         float,
                         60,
                         10,
-                        kwargs.get("c30cha")
+                        **kwargs,
                     ),
                     Field(
                         "c30dis",
                         float,
                         70,
                         10,
-                        kwargs.get("c30dis")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -197,35 +197,36 @@ class EmRandlesMeshless(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("temp")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "dudt",
                         float,
                         30,
                         10,
-                        kwargs.get("dudt")
+                        **kwargs,
                     ),
                     Field(
                         "tempu",
                         int,
                         40,
                         10,
-                        kwargs.get("tempu", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -236,21 +237,22 @@ class EmRandlesMeshless(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("usesocs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tau",
                         float,
                         10,
                         10,
-                        kwargs.get("tau")
+                        **kwargs,
                     ),
                     Field(
                         "flcid",
                         int,
                         20,
                         10,
-                        kwargs.get("flcid")
+                        **kwargs,
                     ),
                 ],
             ),

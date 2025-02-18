@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitEigenvalues(KeywordBase):
@@ -41,56 +40,64 @@ class ControlImplicitEigenvalues(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("neig", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "center",
                         float,
                         10,
                         10,
-                        kwargs.get("center", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lflag",
                         int,
                         20,
                         10,
-                        kwargs.get("lflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lftend",
                         float,
                         30,
                         10,
-                        kwargs.get("lftend", -1E29 if use_lspp_defaults() else None)
+                        -1E29,
+                        **kwargs,
                     ),
                     Field(
                         "rflag",
                         int,
                         40,
                         10,
-                        kwargs.get("rflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rhtend",
                         float,
                         50,
                         10,
-                        kwargs.get("rhtend", +1E29 if use_lspp_defaults() else None)
+                        +1E29,
+                        **kwargs,
                     ),
                     Field(
                         "eigmth",
                         int,
                         60,
                         10,
-                        kwargs.get("eigmth", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "shfscl",
                         float,
                         70,
                         10,
-                        kwargs.get("shfscl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,49 +108,55 @@ class ControlImplicitEigenvalues(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("isolid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ibeam",
                         int,
                         10,
                         10,
-                        kwargs.get("ibeam", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ishell",
                         int,
                         20,
                         10,
-                        kwargs.get("ishell", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "itshell",
                         int,
                         30,
                         10,
-                        kwargs.get("itshell", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mstres",
                         int,
                         40,
                         10,
-                        kwargs.get("mstres", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "evdump",
                         int,
                         50,
                         10,
-                        kwargs.get("evdump")
+                        **kwargs,
                     ),
                     Field(
                         "mstrscl",
                         float,
                         60,
                         10,
-                        kwargs.get("mstrscl", 0.001 if use_lspp_defaults() else None)
+                        0.001,
+                        **kwargs,
                     ),
                 ],
             ),
