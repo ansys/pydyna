@@ -34,9 +34,10 @@ import typing
 
 from jinja2 import Environment, FileSystemLoader
 
-from keyword_generation.handlers.shared_field import SharedFieldHandler
-from keyword_generation.handlers.external_card import ExternalCardHandler
 from keyword_generation.handlers.handler_base import KeywordHandler
+from keyword_generation.handlers.external_card import ExternalCardHandler
+from keyword_generation.handlers.series_card import SeriesCardHandler
+from keyword_generation.handlers.shared_field import SharedFieldHandler
 
 
 SKIPPED_KEYWORDS = set(
@@ -213,37 +214,6 @@ def handle_insert_cards(kwd_data, settings):
         kwd_data["card_insertions"].append(insertion)
 
 
-def handle_variable_cards(kwd_data, settings):
-    kwd_data["variable"] = True
-    dataclasses = []
-    for card_settings in settings:
-        card_index = card_settings["index"]
-        type_name = card_settings["type"]
-        variable_card = kwd_data["cards"][card_index]
-        if type_name == "struct":
-            struct_info = card_settings["struct-info"]
-            struct_name = struct_info["name"]
-            dataclass = {
-                "name": struct_name,
-                "fields": struct_info["fields"]
-            }
-            dataclasses.append(dataclass)
-            type_name = f"self.{struct_name}"
-
-        # use abbreviations for some fields to make the jinja template more concise
-        variable_card["variable"] = {
-            "name": card_settings["name"],
-            "size": card_settings["card-size"],
-            "width": card_settings["element-width"],
-            "length_func": card_settings.get("length-func", ""),
-            "active_func": card_settings.get("active-func", ""),
-            "type": type_name,
-            "help": card_settings["help"],
-        }
-    if len(dataclasses) > 0:
-        kwd_data["dataclasses"] = dataclasses
-
-
 def handle_conditional_cards(kwd_data, settings):
     for setting in settings:
         index = setting["index"]
@@ -353,7 +323,7 @@ HANDLERS = collections.OrderedDict(
         "override-field": handle_override_field,
         "replace-card": handle_replace_cards,
         "insert-card": handle_insert_cards,
-        "variable-card": handle_variable_cards,
+        "variable-card": SeriesCardHandler(),
         "add-option": handle_add_option,
         "card-set": handle_card_sets,
         "conditional-card": handle_conditional_cards,

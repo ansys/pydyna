@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline, read_line
-from ansys.dyna.core.lib.parameter_set import ParameterSet
+from ansys.dyna.core.lib.parameters import ParameterSet
 
 
 class Card(CardInterface):

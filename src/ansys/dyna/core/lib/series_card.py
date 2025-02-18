@@ -31,7 +31,7 @@ from ansys.dyna.core.lib.field import Field
 from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline, read_line
-from ansys.dyna.core.lib.parameter_set import ParameterSet
+from ansys.dyna.core.lib.parameters import ParameterSet
 
 
 class SeriesCard(CardInterface):

@@ -32,7 +32,7 @@ from ansys.dyna.core.lib.duplicate_card import DuplicateCard, get_first_row, try
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
-from ansys.dyna.core.lib.parameter_set import ParameterSet
+from ansys.dyna.core.lib.parameters import ParameterSet
 
 
 def _to_duplicate_card(card: Card, length_func: typing.Callable) -> DuplicateCard:
