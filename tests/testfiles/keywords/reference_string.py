@@ -1181,11 +1181,11 @@ $#   emsol     numls   macrodt   dimtype    nperio    unused   ncylfem   ncylbem
 test_parametrized_deck_string = """*KEYWORD
 *PARAMETER
 R        x      5e-4
-R        y      5e-6
+R        y      5e-6R        z      2.65
 *CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET
   99999999  99999998         4         0                             0         0
                                       &y        &x
-        1.        1.       -2.       -2.        1.        1.        1.        1.
+       -&z        1.       -2.       -2.        1.        1.        1.        1.
 *END"""
 
 test_long_deck_standard_keyword_string = """*KEYWORD LONG=Y

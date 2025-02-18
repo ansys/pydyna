@@ -206,6 +206,7 @@ def test_deck_read_parameter_keyword(ref_string):
     kwd = deck.keywords[1]
     assert kwd.vdc == 5.0e-4
     assert kwd.vc == 5.0e-6
+    assert kwd.sfsa == -2.65
 
 @pytest.mark.keywords
 def test_deck_007():

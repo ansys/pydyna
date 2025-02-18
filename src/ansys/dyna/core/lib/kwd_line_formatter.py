@@ -150,11 +150,17 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         return "&" in text_block
 
     def get_parameter(text_block: str, item_type: type) -> typing.Any:
-        stripped_text_block = text_block.strip()
-        assert stripped_text_block.startswith("&")
-        param_name = stripped_text_block[1:]
+        text_block = text_block.strip()
+        negative = False
+        if text_block.startswith("-&"):
+            negative = True
+            text_block = text_block[1:]
+        assert text_block.startswith("&")
+        param_name = text_block[1:]
         value = parameter_set.get(param_name)
         assert type(value) == item_type
+        if negative:
+            value *= -1.0
         return value
 
     expanded_spec = _expand_spec(spec)
