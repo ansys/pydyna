@@ -36,8 +36,8 @@ class ParameterExpressionLocal(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("prmr", str, 0, 10),
-                    Field("expression", str, 10, 70),
+                    Field("prmr", str, 0, 10, None),
+                    Field("expression", str, 10, 70, None),
                 ],
                 None,
                 name="parameters",

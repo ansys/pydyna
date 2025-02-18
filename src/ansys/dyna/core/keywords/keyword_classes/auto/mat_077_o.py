@@ -300,9 +300,9 @@ class Mat077O(KeywordBase):
             ),
             DuplicateCard(
                 [
-                    Field("gi", float, 0, 10),
-                    Field("betai", float, 10, 10),
-                    Field("vflag", int, 20, 10),
+                    Field("gi", float, 0, 10, None),
+                    Field("betai", float, 10, 10, None),
+                    Field("vflag", int, 20, 10, None),
                 ],
                 None,
                 name="constants",

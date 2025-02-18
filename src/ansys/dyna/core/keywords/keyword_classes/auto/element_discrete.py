@@ -36,14 +36,14 @@ class ElementDiscrete(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("eid", int, 0, 8),
-                    Field("pid", int, 8, 8),
-                    Field("n1", int, 16, 8),
-                    Field("n2", int, 24, 8),
-                    Field("vid", int, 32, 8),
-                    Field("s", float, 40, 16),
-                    Field("pf", int, 56, 8),
-                    Field("offset", float, 64, 16),
+                    Field("eid", int, 0, 8, None),
+                    Field("pid", int, 8, 8, None),
+                    Field("n1", int, 16, 8, None),
+                    Field("n2", int, 24, 8, None),
+                    Field("vid", int, 32, 8, 0),
+                    Field("s", float, 40, 16, 1.0),
+                    Field("pf", int, 56, 8, 0),
+                    Field("offset", float, 64, 16, 0.0),
                 ],
                 None,
                 name="elements",

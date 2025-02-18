@@ -218,6 +218,22 @@ def test_boundary_prescribed_motion_set(ref_string):
 
 
 @pytest.mark.keywords
+def test_define_curve_defaults():
+    curve = kwd.DefineCurve()
+    curve.curves = pd.DataFrame({"o1": [2, 4, 6]})
+    table = curve.curves
+    assert len(table) == 3
+    assert table["o1"][0] == 2
+    assert table["a1"][0] == 0.0
+
+    with disable_lspp_defaults():
+        curve = kwd.DefineCurve()
+        curve.curves = pd.DataFrame({"o1": [2, 4, 6]})
+        table = curve.curves
+        assert pd.isna(table["a1"][0])
+
+
+@pytest.mark.keywords
 def test_constrained_beam_in_solid(ref_string):
     b = kwd.ConstrainedBeamInSolid(ncoup=1)
     b.coupid = 12

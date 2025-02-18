@@ -36,9 +36,9 @@ class ConstrainedAdaptivity(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("dnid", int, 0, 10),
-                    Field("nid1", int, 10, 10),
-                    Field("nid2", int, 20, 10),
+                    Field("dnid", int, 0, 10, None),
+                    Field("nid1", int, 10, 10, None),
+                    Field("nid2", int, 20, 10, None),
                 ],
                 None,
                 name="constrains",

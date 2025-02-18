@@ -36,14 +36,14 @@ class LoadNodePoint(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("nid", int, 0, 10),
-                    Field("dof", int, 10, 10),
-                    Field("lcid", int, 20, 10),
-                    Field("sf", float, 30, 10),
-                    Field("cid", int, 40, 10),
-                    Field("m1", int, 50, 10),
-                    Field("m2", int, 60, 10),
-                    Field("m3", int, 70, 10),
+                    Field("nid", int, 0, 10, None),
+                    Field("dof", int, 10, 10, 0),
+                    Field("lcid", int, 20, 10, None),
+                    Field("sf", float, 30, 10, 1.0),
+                    Field("cid", int, 40, 10, 0),
+                    Field("m1", int, 50, 10, 0),
+                    Field("m2", int, 60, 10, 0),
+                    Field("m3", int, 70, 10, 0),
                 ],
                 None,
                 name="nodes",

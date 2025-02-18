@@ -33,7 +33,7 @@
             DuplicateCard(
                 [
 {% for field in card.fields %}
-                    Field("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}),
+                    Field("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {{field.default}}),
 {% endfor %}{# field in card.fields #}
                 ],
 {% if card.duplicate.length_func %}

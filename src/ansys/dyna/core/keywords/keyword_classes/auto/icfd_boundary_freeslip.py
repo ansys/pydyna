@@ -36,7 +36,7 @@ class IcfdBoundaryFreeslip(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("pid", int, 0, 10),
+                    Field("pid", int, 0, 10, None),
                 ],
                 None,
                 name="boundaries",
