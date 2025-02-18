@@ -384,8 +384,8 @@ def test_deck_expand_recursive_include_path(file_utils):
     deck = Deck()
     include_path1 = file_utils.get_asset_file_path("expand_test")
     include_path2 = os.path.join(include_path1, "fol")
-    deck.append(kwd.IncludePath(path=include_path1))
-    deck.append(kwd.IncludePath(path=include_path2))
+    deck.append(kwd.IncludePath(filename=include_path1))
+    deck.append(kwd.IncludePath(filename=include_path2))
     deck.append(kwd.Include(filename='bird_B.k'))
     deck = deck.expand(recurse=True)
     assert len(deck.all_keywords) == 40

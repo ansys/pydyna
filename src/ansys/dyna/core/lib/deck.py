@@ -185,7 +185,7 @@ class Deck:
                 keywords.append(keyword)
                 continue
             if keyword.subkeyword == "PATH":
-                search_paths.append(keyword.path)
+                search_paths.append(keyword.filename)
                 keywords.append(keyword)
                 continue
             success = False
@@ -208,6 +208,7 @@ class Deck:
                     pass
             if success:
                 if recurse:
+                    # TODO: merge the parameters if the "LOCAL" option is not used!
                     expanded = include_deck._expand_helper(search_paths, True)
                     keywords.extend(expanded)
                 else:
