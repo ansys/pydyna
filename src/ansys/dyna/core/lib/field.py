@@ -42,7 +42,7 @@ class Field:
     class ReadOnlyValue:
         value: typing.Any = None
 
-    def __init__(self, name: str, type: type, offset: int, width: int, /,  value: typing.Any = None, **kwargs):
+    def __init__(self, name: str, type: type, offset: int, width: int, /, value: typing.Any = None, **kwargs):
         self._name = name
         self._type = type
         self._offset = offset
