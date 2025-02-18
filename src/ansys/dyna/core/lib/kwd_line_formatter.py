@@ -24,7 +24,7 @@ import dataclasses
 import typing
 import warnings
 
-from ansys.dyna.core.lib.parameter_set import ParameterSet
+from ansys.dyna.core.lib.parameters import ParameterSet
 
 
 def read_line(buf: typing.TextIO, skip_comment=True) -> typing.Tuple[str, bool]:
