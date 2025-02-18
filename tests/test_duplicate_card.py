@@ -98,7 +98,7 @@ def test_duplicate_card_assign():
             Field("y", float, 24, 16),
             Field("z", float, 40, 16),
             Field("tc", int, 56, 8),
-            Field("rc", int, 64, 8),
+            Field("rc", int, 64, 8, 0.0),
         ],
         None,
     )
@@ -114,6 +114,10 @@ def test_duplicate_card_assign():
     for column in ["nid", "x", "y", "z"]:
         assert len(df[column]) == len(table[column]), f"Length of {column} column doesn't match"
         assert len(df[column].compare(table[column])) == 0, f"{column} column values don't match"
+    assert table["nid"][4] == 5
+    assert table["z"][4] == 0.3
+    assert pd.isna(table["tc"][4])
+    assert table["rc"][4] == 0.0
 
 
 @pytest.mark.keywords

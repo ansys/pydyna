@@ -142,7 +142,7 @@ class DuplicateCard(Card):
                     field_type = pd.Int32Dtype()
                 self._table[field.name] = value[field.name].astype(field_type)
             else:
-                self._table[field.name] = self._make_column(field.type, len(value))
+                self._table[field.name] = self._make_column(field, len(value))
         self._initialized = True
 
     @property
@@ -153,15 +153,23 @@ class DuplicateCard(Card):
     def format(self, value: format_type) -> None:
         self._format_type = value
 
-    def _make_column(self, type, length):
-        if type == float:
+    def _get_default_value(self, field: Field) -> typing.Optional[typing.Any]:
+        if field.value is not None:
+            return field.value
+        if field.type == float:
+            return np.nan
+        return None
+
+    def _make_column(self, field, length):
+        default_value = self._get_default_value(field)
+        if field.type == float:
             arr = np.empty((length,))
-            arr[:] = np.nan
+            arr[:] = default_value
             return arr
-        elif type == str:
-            return [None] * length
-        elif type == int:
-            return pd.Series([None] * length, dtype=pd.Int32Dtype())
+        elif field.type == str:
+            return [default_value] * length
+        elif field.type == int:
+            return pd.Series([default_value] * length, dtype=pd.Int32Dtype())
         raise Exception("unexpected type")
 
     def _initialize_data(self, length):
@@ -170,7 +178,7 @@ class DuplicateCard(Card):
         column_names = np.ndarray(num_fields, "object")
         for index in range(num_fields):
             field = self._fields[index]
-            value = self._make_column(field.type, length)
+            value = self._make_column(field, length)
             column_names[index] = field.name
             data[field.name] = value
         self._table = pd.DataFrame(data, columns=column_names)
