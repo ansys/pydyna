@@ -26,7 +26,7 @@ import math
 import pytest
 
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline
-from ansys.dyna.core.lib.parameter_set import ParameterSet
+from ansys.dyna.core.lib.parameters import ParameterSet
 
 @dataclasses.dataclass
 class bi:

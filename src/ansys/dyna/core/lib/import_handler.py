@@ -26,7 +26,8 @@ import dataclasses
 import typing
 import warnings
 
-from ansys.dyna.core.lib.keyword_base import KeywordBase
+if typing.TYPE_CHECKING:
+    from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 
 @dataclasses.dataclass
@@ -57,7 +58,7 @@ class ImportHandler:
         """
         return True
 
-    def after_import(self, context: ImportContext, keyword: typing.Union[str, KeywordBase]):
+    def after_import(self, context: ImportContext, keyword: typing.Union[str, "KeywordBase"]):
         """Event called after a keyword is imported.
 
         `keyword` is the imported keyword. It could be a string or a keyword object
