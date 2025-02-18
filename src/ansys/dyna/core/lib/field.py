@@ -42,13 +42,13 @@ class Field:
     class ReadOnlyValue:
         value: typing.Any = None
 
-    def __init__(self, name: str, type: type, offset: int, width: int, value: typing.Any = None, **kwargs):
+    def __init__(self, name: str, type: type, offset: int, width: int, /,  value: typing.Any = None, **kwargs):
         self._name = name
         self._type = type
         self._offset = offset
         self._width = width
         if isinstance(value, self.ReadOnlyValue):
-            self._value = value
+            self._value = value.value
         else:
             self._value = kwargs.get(name, value) if use_lspp_defaults() else None
 
