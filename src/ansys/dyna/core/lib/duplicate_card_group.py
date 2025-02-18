@@ -136,8 +136,9 @@ class DuplicateCardGroup(CardInterface):
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
     ) -> str:
-        self._initialize()
-        self._propagate()
+        if self._is_active():
+            self._initialize()
+            self._propagate()
 
         if format == None:
             format = self.format
