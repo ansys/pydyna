@@ -47,56 +47,58 @@ class Mat077H(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         20,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         int,
                         30,
                         10,
-                        kwargs.get("n", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nv",
                         int,
                         40,
                         10,
-                        kwargs.get("nv")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         50,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "sigf",
                         float,
                         60,
                         10,
-                        kwargs.get("sigf")
+                        **kwargs,
                     ),
                     Field(
                         "ref",
                         float,
                         70,
                         10,
-                        kwargs.get("ref", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,7 +109,7 @@ class Mat077H(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tbhys")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.pr and self.pr < 0,
@@ -119,56 +121,56 @@ class Mat077H(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sgl")
+                        **kwargs,
                     ),
                     Field(
                         "sw",
                         float,
                         10,
                         10,
-                        kwargs.get("sw")
+                        **kwargs,
                     ),
                     Field(
                         "st",
                         float,
                         20,
                         10,
-                        kwargs.get("st")
+                        **kwargs,
                     ),
                     Field(
                         "lcid1",
                         int,
                         30,
                         10,
-                        kwargs.get("lcid1")
+                        **kwargs,
                     ),
                     Field(
                         "data",
                         float,
                         40,
                         10,
-                        kwargs.get("data")
+                        **kwargs,
                     ),
                     Field(
                         "lcid2",
                         int,
                         50,
                         10,
-                        kwargs.get("lcid2")
+                        **kwargs,
                     ),
                     Field(
                         "bstart",
                         float,
                         60,
                         10,
-                        kwargs.get("bstart")
+                        **kwargs,
                     ),
                     Field(
                         "tramp",
                         float,
                         70,
                         10,
-                        kwargs.get("tramp")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.n > 0,
@@ -180,49 +182,49 @@ class Mat077H(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c10")
+                        **kwargs,
                     ),
                     Field(
                         "c01",
                         float,
                         10,
                         10,
-                        kwargs.get("c01")
+                        **kwargs,
                     ),
                     Field(
                         "c11",
                         float,
                         20,
                         10,
-                        kwargs.get("c11")
+                        **kwargs,
                     ),
                     Field(
                         "c20",
                         float,
                         30,
                         10,
-                        kwargs.get("c20")
+                        **kwargs,
                     ),
                     Field(
                         "c02",
                         float,
                         40,
                         10,
-                        kwargs.get("c02")
+                        **kwargs,
                     ),
                     Field(
                         "c30",
                         float,
                         50,
                         10,
-                        kwargs.get("c30")
+                        **kwargs,
                     ),
                     Field(
                         "therml",
                         float,
                         60,
                         10,
-                        kwargs.get("therml")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.n == 0,

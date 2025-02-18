@@ -37,12 +37,20 @@ class Flag:
 
 
 class Field:
+
+    @dataclasses.dataclass
+    class ReadOnlyValue:
+        value: typing.Any = None
+
     def __init__(self, name: str, type: type, offset: int, width: int, value: typing.Any = None, **kwargs):
         self._name = name
         self._type = type
         self._offset = offset
         self._width = width
-        self._value = kwargs.get(name, value) if use_lspp_defaults() else None
+        if isinstance(value, ReadOnlyValue):
+            self._value = value
+        else:
+            self._value = kwargs.get(name, value) if use_lspp_defaults() else None
 
     def __repr__(self) -> str:
         return f"Field({self.name}, {self.type}, {self.offset}, {self.width}, {self.value})"
