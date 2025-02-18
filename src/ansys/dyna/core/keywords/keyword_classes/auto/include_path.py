@@ -21,11 +21,15 @@
 # SOFTWARE.
 
 import typing
+from ansys.dyna.core.lib.cards_.special.include_card import IncludeCard, IncludeCardMixin
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
-class IncludePath(KeywordBase):
+class IncludePath(
+    KeywordBase
+    , IncludeCardMixin
+    ):
     """DYNA INCLUDE_PATH keyword"""
 
     keyword = "INCLUDE"
@@ -34,28 +38,6 @@ class IncludePath(KeywordBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "path",
-                        str,
-                        0,
-                        512,
-                        kwargs.get("path")
-                    ),
-                ],
-            ),
+            IncludeCard(**kwargs)
         ]
-
-    @property
-    def path(self) -> typing.Optional[str]:
-        """Get or set the define a directory in which to look for the include files.
-        If path length is greater then 80 chareaters, put space and '+' to continue on next line.
-        Lsprepost will output that format automatically
-        """ # nopep8
-        return self._cards[0].get_value("path")
-
-    @path.setter
-    def path(self, value: str) -> None:
-        self._cards[0].set_value("path", value)
 

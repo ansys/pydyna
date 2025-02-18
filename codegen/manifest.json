@@ -281,6 +281,20 @@
             ]
         }
     },
+    "INCLUDE_PATH": {
+        "generation-options": {
+            "external-card-implementation": [
+                {
+                    "index": 0,
+                    "card": {
+                        "source": "include_card",
+                        "card-name": "IncludeCard"
+                    },
+                    "mixin": "IncludeCardMixin"
+                }
+            ]
+        }
+    },
     "PART_PART": {
         "generation-options": {
             "replace-card": [
