@@ -36,11 +36,11 @@ class IcfdBoundaryPrescribedPre(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("pid", int, 0, 10),
-                    Field("lcid", int, 10, 10),
-                    Field("sf", float, 20, 10),
-                    Field("death", float, 30, 10),
-                    Field("birth", float, 40, 10),
+                    Field("pid", int, 0, 10, None),
+                    Field("lcid", int, 10, 10, None),
+                    Field("sf", float, 20, 10, 1.0),
+                    Field("death", float, 30, 10, 1.E+28),
+                    Field("birth", float, 40, 10, 0.0),
                 ],
                 None,
                 name="boundaries",

@@ -41,9 +41,9 @@ class IcfdPart(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("pid", int, 0, 10),
-                    Field("secid", int, 10, 10),
-                    Field("mid", int, 20, 10),
+                    Field("pid", int, 0, 10, None),
+                    Field("secid", int, 10, 10, None),
+                    Field("mid", int, 20, 10, None),
                 ],
                 None,
                 name="nodes",

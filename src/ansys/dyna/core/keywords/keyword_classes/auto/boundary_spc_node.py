@@ -41,14 +41,14 @@ class BoundarySpcNode(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("nid", int, 0, 10),
-                    Field("cid", int, 10, 10),
-                    Field("dofx", int, 20, 10),
-                    Field("dofy", int, 30, 10),
-                    Field("dofz", int, 40, 10),
-                    Field("dofrx", int, 50, 10),
-                    Field("dofry", int, 60, 10),
-                    Field("dofrz", int, 70, 10),
+                    Field("nid", int, 0, 10, None),
+                    Field("cid", int, 10, 10, 0),
+                    Field("dofx", int, 20, 10, 0),
+                    Field("dofy", int, 30, 10, 0),
+                    Field("dofz", int, 40, 10, 0),
+                    Field("dofrx", int, 50, 10, 0),
+                    Field("dofry", int, 60, 10, 0),
+                    Field("dofrz", int, 70, 10, 0),
                 ],
                 None,
                 name="nodes",

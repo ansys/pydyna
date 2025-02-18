@@ -36,14 +36,14 @@ class ParameterLocal(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("prmr1", str, 0, 10),
-                    Field("val1", str, 10, 10),
-                    Field("prmr2", str, 20, 10),
-                    Field("val2", str, 30, 10),
-                    Field("prmr3", str, 40, 10),
-                    Field("val3", str, 50, 10),
-                    Field("prmr4", str, 60, 10),
-                    Field("val4", str, 70, 10),
+                    Field("prmr1", str, 0, 10, None),
+                    Field("val1", str, 10, 10, None),
+                    Field("prmr2", str, 20, 10, None),
+                    Field("val2", str, 30, 10, None),
+                    Field("prmr3", str, 40, 10, None),
+                    Field("val3", str, 50, 10, None),
+                    Field("prmr4", str, 60, 10, None),
+                    Field("val4", str, 70, 10, None),
                 ],
                 None,
                 name="parameters",

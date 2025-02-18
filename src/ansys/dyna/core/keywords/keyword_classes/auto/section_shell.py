@@ -254,9 +254,9 @@ class SectionShell(KeywordBase):
             ),
             DuplicateCard(
                 [
-                    Field("xi", float, 0, 10),
-                    Field("eta", float, 10, 10),
-                    Field("wgt", float, 20, 10),
+                    Field("xi", float, 0, 10, None),
+                    Field("eta", float, 10, 10, None),
+                    Field("wgt", float, 20, 10, None),
                 ],
                 lambda: self.nipp,
                 lambda: self.elform in [101, 102, 103, 104, 105],

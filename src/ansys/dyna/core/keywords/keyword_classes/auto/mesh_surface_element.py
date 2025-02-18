@@ -36,12 +36,12 @@ class MeshSurfaceElement(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("eid", int, 0, 8),
-                    Field("pid", int, 8, 8),
-                    Field("n1", int, 16, 8),
-                    Field("n2", int, 24, 8),
-                    Field("n3", int, 32, 8),
-                    Field("n4", int, 40, 8),
+                    Field("eid", int, 0, 8, None),
+                    Field("pid", int, 8, 8, None),
+                    Field("n1", int, 16, 8, None),
+                    Field("n2", int, 24, 8, None),
+                    Field("n3", int, 32, 8, None),
+                    Field("n4", int, 40, 8, None),
                 ],
                 None,
                 name="elements",

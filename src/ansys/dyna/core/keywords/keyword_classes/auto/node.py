@@ -36,12 +36,12 @@ class Node(KeywordBase):
         self._cards = [
             DuplicateCard(
                 [
-                    Field("nid", int, 0, 8),
-                    Field("x", float, 8, 16),
-                    Field("y", float, 24, 16),
-                    Field("z", float, 40, 16),
-                    Field("tc", int, 56, 8),
-                    Field("rc", int, 64, 8),
+                    Field("nid", int, 0, 8, None),
+                    Field("x", float, 8, 16, 0.0),
+                    Field("y", float, 24, 16, 0.0),
+                    Field("z", float, 40, 16, 0.0),
+                    Field("tc", int, 56, 8, 0),
+                    Field("rc", int, 64, 8, 0),
                 ],
                 None,
                 name="nodes",
