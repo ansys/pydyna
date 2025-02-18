@@ -962,6 +962,10 @@
                     "func": "self.atype and abs(self.atype) == 1"
                 },
                 {
+                    "index": 7,
+                    "func": "self.atype and abs(self.atype) == 1"
+                },
+                {
                     "index": 8,
                     "func": "self.atype and abs(self.atype) == 1 and self.ftype == 1"
                 },
@@ -1018,7 +1022,7 @@
                 {
                     "indices": [7, 8, 9],
                     "overall-name": "anisotropic_settings",
-                    "active-finc": "self.atype and abs(self.atype)==1",
+                    "active-func": "self.atype and abs(self.atype) == 1",
                     "length-func": "self.nf or 0"
                 }
             ],
