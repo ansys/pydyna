@@ -892,6 +892,22 @@ def test_set_part_list(ref_string):
     assert s.write() == ref
 
 
+# uncomment when duplicate card groups can be assigned in this way
+#@pytest.mark.keywords
+#def test_part_assign(ref_string):
+#    """Test formatting of set part list (uses variable card with ints)."""
+#    part = kwd.Part(heading="My part", pid=1, secid=1, mid=1, eosid=0)
+#    ref = ref_string.test_part_assign_ref
+#    test = part.write()
+#    assert test == ref
+
+@pytest.mark.keywords
+def test_element_beam_assign(ref_string):
+    """Test formatting of set part list (uses variable card with ints)."""
+    beam = kwd.ElementBeam(pid=1, n1=1, n2=0, local=1)
+    ref = ref_string.test_element_beam_assign_ref
+    assert beam.write() == ref
+
 @pytest.mark.keywords
 def test_set_part_list_generate(ref_string):
     s = kwd.SetPartListGenerate()

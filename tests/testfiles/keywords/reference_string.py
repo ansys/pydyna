@@ -1122,6 +1122,16 @@ $#      xp        yp        zp        a1        a2        a3      macf    unused
 $#      v1        v2        v3        d1        d2        d3      beta       ref
                                      0.0       1.0       0.0                    """
 
+test_element_beam_assign_ref = """*ELEMENT_BEAM
+$#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
+               1       1       0                                               1"""
+
+test_part_assign_ref = """*PART
+$#                                                             heading
+My part                                                               
+$#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
+         1         1         1         0                                        """
+
 test_set_part_list_ref = """*SET_PART_LIST
 $#     sid       da1       da2       da3       da4    solver
          1       0.0       0.0       0.0       0.0MECH      

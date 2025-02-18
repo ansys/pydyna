@@ -106,7 +106,9 @@ class DefineCurve(KeywordBase):
                     Field("o1", float, 20, 20),
                 ],
                 None,
-                data = kwargs.get("curves")),
+                name="curves",
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = DefineCurve.option_specs[0],
                 cards = [

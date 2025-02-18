@@ -107,7 +107,9 @@ class InitialStrainShellCardSet(Cards):
                 ],
                 lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 0,
                 lambda: self.large == None or self.large == 0,
-                data = kwargs.get("strains")),
+                name="strains",
+                **kwargs,
+            ),
         ]
 
     @property

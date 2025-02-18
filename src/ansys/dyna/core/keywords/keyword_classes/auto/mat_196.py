@@ -185,7 +185,9 @@ class Mat196(KeywordBase):
                 ],
                 None,
                 None,
-                data = kwargs.get("springs")),
+                "springs",
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = Mat196.option_specs[0],
                 cards = [

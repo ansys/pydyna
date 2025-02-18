@@ -47,7 +47,9 @@ class ElementDiscrete(KeywordBase):
                     Field("offset", float, 64, 16),
                 ],
                 None,
-                data = kwargs.get("elements")),
+                name="elements",
+                **kwargs,
+            ),
         ]
 
     @property

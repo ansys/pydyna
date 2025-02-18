@@ -44,7 +44,9 @@
 {% if card.duplicate.active_func %}
                 lambda: {{card.duplicate.active_func}},
 {% endif %}
-                data = kwargs.get("{{card.duplicate.name}}")),
+                name="{{card.duplicate.name}}",
+                **kwargs,
+            ),
 {% elif card.duplicate_group %}
             DuplicateCardGroup(
                 [
@@ -76,7 +78,9 @@
 {% else %}
                 None,
 {% endif %}
-                data = kwargs.get("{{card.overall_name}}")),
+                "{{card.overall_name}}",
+                **kwargs,
+            ),
 {% elif card.external %}
             {{card.external.name}}(**kwargs)
 {% else %}

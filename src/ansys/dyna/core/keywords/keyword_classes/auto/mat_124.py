@@ -237,7 +237,9 @@ class Mat124(KeywordBase):
                     Field("betai", float, 10, 10),
                 ],
                 None,
-                data = kwargs.get("constants")),
+                name="constants",
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = Mat124.option_specs[0],
                 cards = [

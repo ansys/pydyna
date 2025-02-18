@@ -213,7 +213,9 @@ class MatSimplifiedRubberFoamLogLogInterpolation(KeywordBase):
                     Field("vflag", int, 20, 10),
                 ],
                 None,
-                data = kwargs.get("constants")),
+                name="constants",
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = MatSimplifiedRubberFoamLogLogInterpolation.option_specs[0],
                 cards = [

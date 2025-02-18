@@ -47,7 +47,9 @@ class Parameter(KeywordBase):
                     Field("val4", str, 70, 10),
                 ],
                 None,
-                data = kwargs.get("parameters")),
+                name="parameters",
+                **kwargs,
+            ),
         ]
 
     @property

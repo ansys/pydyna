@@ -40,7 +40,9 @@ class IcfdBoundaryFsiExclude(KeywordBase):
                     Field("pid", int, 0, 10),
                 ],
                 None,
-                data = kwargs.get("boundaries")),
+                name="boundaries",
+                **kwargs,
+            ),
         ]
 
     @property

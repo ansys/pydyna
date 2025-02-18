@@ -238,7 +238,9 @@ class SectionShell(KeywordBase):
                 ],
                 lambda: self.nipp,
                 lambda: self.elform in [101, 102, 103, 104, 105],
-                data = kwargs.get("integration_points")),
+                name="integration_points",
+                **kwargs,
+            ),
             SeriesCard(
                 "pi",
                 8,

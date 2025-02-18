@@ -112,7 +112,9 @@ class SetSegment(KeywordBase):
                     Field("a4", float, 70, 10),
                 ],
                 None,
-                data = kwargs.get("segments")),
+                name="segments",
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = SetSegment.option_specs[0],
                 cards = [

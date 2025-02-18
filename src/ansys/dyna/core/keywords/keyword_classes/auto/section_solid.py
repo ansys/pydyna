@@ -157,7 +157,9 @@ class SectionSolid(KeywordBase):
                 ],
                 lambda: self.nip,
                 lambda: self.nip and self.elform in [101, 102, 103, 104, 105],
-                data = kwargs.get("integration_points")),
+                name="integration_points",
+                **kwargs,
+            ),
             SeriesCard(
                 "pi",
                 8,
