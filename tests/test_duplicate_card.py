@@ -259,6 +259,7 @@ def test_duplicate_card_init_data_scalar():
         assert df["nid"][0] == 1
         assert df["x"][0] == 0.1
         assert pd.isna(df["y"][0])
+        assert df["rc"][0] == 0.0
 
     data = {
         "nid": 1,
@@ -271,7 +272,7 @@ def test_duplicate_card_init_data_scalar():
         Field("y", float, 24, 16),
         Field("z", float, 40, 16),
         Field("tc", int, 56, 8),
-        Field("rc", int, 64, 8),
+        Field("rc", int, 64, 8, 0.0),
     ]
 
     # bounded with a length of 0
