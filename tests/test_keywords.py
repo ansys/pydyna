@@ -213,6 +213,8 @@ def test_read_keyword_no_defaults():
 def test_boundary_prescribed_motion_set(ref_string):
     b = kwd.BoundaryPrescribedMotionSet()
     assert b.write() == ref_string.test_boundary_prescribed_motion_set
+    b.loads(ref_string.test_boundary_prescribed_motion_set2)
+    assert b.lcid == 100
 
 
 @pytest.mark.keywords
