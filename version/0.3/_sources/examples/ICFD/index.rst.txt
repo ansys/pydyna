@@ -1,0 +1,296 @@
+
+
+.. _sphx_glr_examples_ICFD:
+
+ICFD examples
+~~~~~~~~~~~~~~
+
+These examples show how to create and use ICFD
+incompressible computational fluid dynamics) models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to create a simple ICFD cylinder flow input deck. The executable file fo...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_cylinderflow_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_cylinderflow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Cylinder flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to use the ICFD solver on a simple free surface. A column of water colla...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_dam_break_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_dam_break.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Dam break</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to couple the ICFD fluid solver with DEM particles. The executable file ...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_dem_coupling_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_dem_coupling.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">DEM coupling</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows the universally famous driven-cavity case tested with the second-order stead...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_driven_cavity_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_driven_cavity.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Driven cavity</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD forced-convection input deck with a coarse mesh. The executabl...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_free_convection_flow_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_free_convection_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Thermal flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to impose displacements on fluid nodes through the use of the ICFD_CONTR...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_imposed_move_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_imposed_move.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Imposed move</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple 3D ICFD problem.  The executable file for LS-DYNA is ls-dyna_smp_d_...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_internal_3d_flow_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_internal_3d_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Internal 3D flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD problem with adaptivity. The executable file for LS-DYNA is ls...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_mesh_adaptivity_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_mesh_adaptivity.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mesh adaptivity</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD problem with mesh morphing. The executable file for LS-DYNA is...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_mesh_morphing_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_mesh_morphing.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mesh morphing</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD input deck with a coarse mesh. The executable file for LS-DYNA...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_mesh_size_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_mesh_size.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mesh size</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD input deck with a coarse mesh. The executable file for LS-DYNA...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_plate_flow_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_plate_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Plate flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to directly impose a displacement of the entire volume mesh through the ...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_sloshing_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_sloshing.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Sloshing</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple FSI (fluid-structure interaction) coupling problem using strong FSI...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_strong_fsi_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_strong_fsi.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Strong FSI</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD forced-convection input deck with a coarse mesh. The executabl...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_thermal_flow_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_thermal_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Thermal flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple FSI (fluid-structure interaction) coupling problem using weak/loose...">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_weak_fsi_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_weak_fsi.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Weak FSI</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/ICFD/icfd_cylinderflow
+   /examples/ICFD/icfd_dam_break
+   /examples/ICFD/icfd_dem_coupling
+   /examples/ICFD/icfd_driven_cavity
+   /examples/ICFD/icfd_free_convection_flow
+   /examples/ICFD/icfd_imposed_move
+   /examples/ICFD/icfd_internal_3d_flow
+   /examples/ICFD/icfd_mesh_adaptivity
+   /examples/ICFD/icfd_mesh_morphing
+   /examples/ICFD/icfd_mesh_size
+   /examples/ICFD/icfd_plate_flow
+   /examples/ICFD/icfd_sloshing
+   /examples/ICFD/icfd_strong_fsi
+   /examples/ICFD/icfd_thermal_flow
+   /examples/ICFD/icfd_weak_fsi
+

@@ -1,0 +1,1327 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ansys.dyna.core.pre.dynaicfd &#8212; PyDYNA</title>
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css?v=e5fbc548" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/ansys_sphinx_theme.css?v=068850c2" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+ 
+<link href="../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js?v=e83b937b"></script>
+    <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../../../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ansys/dyna/core/pre/dynaicfd';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.3';
+        </script>
+    <link rel="icon" href="../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_modules/ansys/dyna/core/pre/dynaicfd.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+<!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../../../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../getting-started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../user-guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../autoapi/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../contributing.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>   <div class="container-xl">
+  <div class="row">
+    <div class="col-12 col-md-3" id="breadcrumbs-spacer"></div>
+    <div class="col-12 col-md-11 col-xl-9" id="breadcrumbs">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul> 
+<li class="nav-item nav-item-additional-breadcrumb">
+  <a href="https://docs.pyansys.com/">PyAnsys</a> » 
+</li>
+ 
+<li class="nav-item nav-item-0">
+  <a href="../../../../../index.html">PyDYNA</a> » 
+</li>
+ 
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> » </li>
+          <li class="nav-item nav-item-2"><a href="../../core.html" >ansys.dyna.core</a> » </li>
+          <li class="nav-item nav-item-3"><a href="../pre.html" accesskey="U">ansys.dyna.core.pre</a> » </li>
+        <li class="nav-item nav-item-this"><a href="">ansys.dyna.core.pre.dynaicfd</a></li> 
+      </ul>
+    </div></div>
+  </div>
+</div>
+ 
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../getting-started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../user-guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../autoapi/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../contributing.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for ansys.dyna.core.pre.dynaicfd</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">ICFD API</span>
+<span class="sd">========</span>
+
+<span class="sd">Module for creating an ICFD (incompressible computational fluid dynamics) DYNA input deck.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">.dynabase</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa : F403</span>
+
+
+<div class="viewcode-block" id="DynaICFD"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD">[docs]</a><span class="k">class</span> <span class="nc">DynaICFD</span><span class="p">(</span><span class="n">DynaBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Contains methods for create a keyword related to an ICFD analysis.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">DynaBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_section_icfd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestep</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">termination</span> <span class="o">=</span> <span class="mf">1e28</span>
+
+<div class="viewcode-block" id="DynaICFD.set_termination"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD.set_termination">[docs]</a>    <span class="k">def</span> <span class="nf">set_termination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">termination_time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the total time of the simulation for the fluid problem.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        termination_time : float</span>
+<span class="sd">            Total time of the simulation for the fluid problem.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">termination</span> <span class="o">=</span> <span class="n">termination_time</span></div>
+
+<div class="viewcode-block" id="DynaICFD.create_control_general"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD.create_control_general">[docs]</a>    <span class="k">def</span> <span class="nf">create_control_general</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atype</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dvcl</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rdvcl</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Specify the type of CFD analysis.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        atype : int, optional</span>
+<span class="sd">            Analysis type. The default is ``0``.</span>
+<span class="sd">        mtype : int, optional</span>
+<span class="sd">            Solving method type. The default is ``0``.</span>
+<span class="sd">        dvcl : int, optional</span>
+<span class="sd">            Flag for divergence cleaning. The default is ``0``.</span>
+<span class="sd">        rdvcl : int, optional</span>
+<span class="sd">            Flag for remeshing divergence cleaning. The default is ``0``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlGeneral</span><span class="p">(</span>
+            <span class="n">ICFDControlGeneralRequest</span><span class="p">(</span><span class="n">atype</span><span class="o">=</span><span class="n">atype</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="n">mtype</span><span class="p">,</span> <span class="n">dvcl</span><span class="o">=</span><span class="n">dvcl</span><span class="p">,</span> <span class="n">rdvcl</span><span class="o">=</span><span class="n">rdvcl</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD control general Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="DynaICFD.create_control_output"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD.create_control_output">[docs]</a>    <span class="k">def</span> <span class="nf">create_control_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msgl</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Modify default values for screen and file outputs related to the fluid solver only.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        msgl : int</span>
+<span class="sd">            Message level.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlOutput</span><span class="p">(</span><span class="n">ICFDControlOutputRequest</span><span class="p">(</span><span class="n">msgl</span><span class="o">=</span><span class="n">msgl</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD control output Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="DynaICFD.create_control_turbulence"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD.create_control_turbulence">[docs]</a>    <span class="k">def</span> <span class="nf">create_control_turbulence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tmod</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Modify the default values for the turbulence model.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        tmod : int</span>
+<span class="sd">            Turbulence model to use.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlTurbulence</span><span class="p">(</span><span class="n">ICFDControlTurbulenceRequest</span><span class="p">(</span><span class="n">tmod</span><span class="o">=</span><span class="n">tmod</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD control turbulence Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="DynaICFD.create_control_dem_coupling"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD.create_control_dem_coupling">[docs]</a>    <span class="k">def</span> <span class="nf">create_control_dem_coupling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctype</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e28</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Activate coupling between the ICFD and DEM solvers.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ctype : int, optional</span>
+<span class="sd">            Coupling direction to the solver. The default is ``0``.</span>
+<span class="sd">        bt : float, optional</span>
+<span class="sd">            Birth time for the DEM coupling. The default is ``0``.</span>
+<span class="sd">        dt : float, optional</span>
+<span class="sd">            Death time for the DEM coupling. The default is ``1e28``.</span>
+<span class="sd">        sf : float, optional</span>
+<span class="sd">            Scale factor to apply to the force transmitted by the fluid to the structure.</span>
+<span class="sd">            The default is ``1``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlDEMCoupling</span><span class="p">(</span><span class="n">ICFDControlDEMCouplingRequest</span><span class="p">(</span><span class="n">ctype</span><span class="o">=</span><span class="n">ctype</span><span class="p">,</span> <span class="n">bt</span><span class="o">=</span><span class="n">bt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD control dem coupling Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="DynaICFD.create_section_icfd"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD.create_section_icfd">[docs]</a>    <span class="k">def</span> <span class="nf">create_section_icfd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sid</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define a section for the ICFD solver.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sid : int</span>
+<span class="sd">            Section ID.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateSection</span><span class="p">(</span><span class="n">ICFDSectionRequest</span><span class="p">(</span><span class="n">sid</span><span class="o">=</span><span class="n">sid</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD Section Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="DynaICFD.create_part_icfd"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD.create_part_icfd">[docs]</a>    <span class="k">def</span> <span class="nf">create_part_icfd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">secid</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define parts for the ICFD solver.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pid : int</span>
+<span class="sd">            Part ID for fluid surfaces.</span>
+<span class="sd">        secid : int</span>
+<span class="sd">            Section ID defined with the ``\*ICFD_SECTION`` card.</span>
+<span class="sd">        mid : int</span>
+<span class="sd">            Material ID defined with the ``\*ICFD_MAT`` card.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreatePart</span><span class="p">(</span><span class="n">ICFDPartRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="n">pid</span><span class="p">,</span> <span class="n">secid</span><span class="o">=</span><span class="n">secid</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="n">mid</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD part Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="DynaICFD.create_solver_tol_mmov"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD.create_solver_tol_mmov">[docs]</a>    <span class="k">def</span> <span class="nf">create_solver_tol_mmov</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Change the default tolerance values for the mesh movement algorithm.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        atol : float, optional</span>
+<span class="sd">            Absolute convergence criteria. The default is ``1e-8``.</span>
+<span class="sd">        rtol : float, optional</span>
+<span class="sd">            Relative convergence criteria. The default is ``1e-8``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateSolverTolMMOV</span><span class="p">(</span><span class="n">ICFDSolverTolMMOVRequest</span><span class="p">(</span><span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;tolerance values for the mesh movement algorithm changed...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="DynaICFD.set_initial"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD.set_initial">[docs]</a>    <span class="k">def</span> <span class="nf">set_initial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">velocity</span><span class="o">=</span><span class="n">Velocity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assign the initial condition to all nodes at once.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        velocity : Velocity, optional</span>
+<span class="sd">            Initial velocity. The default is ``(0, 0, 0)``,</span>
+<span class="sd">        temperature : float, optional</span>
+<span class="sd">            Initial temperature. The default is ``0``.</span>
+<span class="sd">        pressure : float, optional</span>
+<span class="sd">            Initial pressure. The default is ``0``.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateInit</span><span class="p">(</span>
+            <span class="n">ICFDInitRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vx</span><span class="o">=</span><span class="n">velocity</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">vy</span><span class="o">=</span><span class="n">velocity</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">vz</span><span class="o">=</span><span class="n">velocity</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">pressure</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD_INIT Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="DynaICFD.set_imposed_move"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD.set_imposed_move">[docs]</a>    <span class="k">def</span> <span class="nf">set_imposed_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vz</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Impose a velocity on the whole volume mesh.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vx :</span>
+<span class="sd">        vy :</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lcvx</span><span class="p">,</span> <span class="n">lcvy</span><span class="p">,</span> <span class="n">lcvz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">vx</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vx</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="n">lcvx</span> <span class="o">=</span> <span class="n">vx</span><span class="o">.</span><span class="n">id</span>
+        <span class="k">if</span> <span class="n">vy</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vy</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="n">lcvy</span> <span class="o">=</span> <span class="n">vy</span><span class="o">.</span><span class="n">id</span>
+        <span class="k">if</span> <span class="n">vz</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vz</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="n">lcvz</span> <span class="o">=</span> <span class="n">vz</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlImposedMove</span><span class="p">(</span>
+            <span class="n">ICFDControlImposedMoveRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lcvx</span><span class="o">=</span><span class="n">lcvx</span><span class="p">,</span> <span class="n">lcvy</span><span class="o">=</span><span class="n">lcvy</span><span class="p">,</span> <span class="n">lcvz</span><span class="o">=</span><span class="n">lcvz</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="DynaICFD.save_file"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.DynaICFD.save_file">[docs]</a>    <span class="k">def</span> <span class="nf">save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save keyword files.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_section_icfd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">DynaBase</span><span class="o">.</span><span class="n">save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ICFD_SurfRemeshMethod"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_SurfRemeshMethod">[docs]</a><span class="k">class</span> <span class="nc">ICFD_SurfRemeshMethod</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="ICFD_SurfRemeshMethod.LAPLACIAN_SMOOTHING"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_SurfRemeshMethod.LAPLACIAN_SMOOTHING">[docs]</a>    <span class="n">LAPLACIAN_SMOOTHING</span> <span class="o">=</span> <span class="mi">1</span></div>
+<div class="viewcode-block" id="ICFD_SurfRemeshMethod.CURVATURE_PRESERVING"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_SurfRemeshMethod.CURVATURE_PRESERVING">[docs]</a>    <span class="n">CURVATURE_PRESERVING</span> <span class="o">=</span> <span class="mi">2</span></div></div>
+
+
+<div class="viewcode-block" id="ICFD_AnalysisType"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_AnalysisType">[docs]</a><span class="k">class</span> <span class="nc">ICFD_AnalysisType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="ICFD_AnalysisType.TURNOFF_ICFD_SOLVER"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_AnalysisType.TURNOFF_ICFD_SOLVER">[docs]</a>    <span class="n">TURNOFF_ICFD_SOLVER</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></div>
+<div class="viewcode-block" id="ICFD_AnalysisType.TRANSIENT_ANALYSIS"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_AnalysisType.TRANSIENT_ANALYSIS">[docs]</a>    <span class="n">TRANSIENT_ANALYSIS</span> <span class="o">=</span> <span class="mi">0</span></div>
+<div class="viewcode-block" id="ICFD_AnalysisType.STEADY_STATE_ANALYSIS"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_AnalysisType.STEADY_STATE_ANALYSIS">[docs]</a>    <span class="n">STEADY_STATE_ANALYSIS</span> <span class="o">=</span> <span class="mi">1</span></div></div>
+
+
+<div class="viewcode-block" id="ICFD_MessageLevel"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_MessageLevel">[docs]</a><span class="k">class</span> <span class="nc">ICFD_MessageLevel</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="ICFD_MessageLevel.TIMESTEP_INFORMATION"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_MessageLevel.TIMESTEP_INFORMATION">[docs]</a>    <span class="n">TIMESTEP_INFORMATION</span> <span class="o">=</span> <span class="mi">0</span></div>
+<div class="viewcode-block" id="ICFD_MessageLevel.FULL_OUTPUT_INFORMATION"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_MessageLevel.FULL_OUTPUT_INFORMATION">[docs]</a>    <span class="n">FULL_OUTPUT_INFORMATION</span> <span class="o">=</span> <span class="mi">4</span></div></div>
+
+
+<div class="viewcode-block" id="ICFD_CouplingForm"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_CouplingForm">[docs]</a><span class="k">class</span> <span class="nc">ICFD_CouplingForm</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="ICFD_CouplingForm.FORCE_BASED_ON_VELOCITY_DRAG_VALUE"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_CouplingForm.FORCE_BASED_ON_VELOCITY_DRAG_VALUE">[docs]</a>    <span class="n">FORCE_BASED_ON_VELOCITY_DRAG_VALUE</span> <span class="o">=</span> <span class="mi">0</span></div>
+<div class="viewcode-block" id="ICFD_CouplingForm.FORCE_USING_FLUID_PRESSURE_GRADIENT"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_CouplingForm.FORCE_USING_FLUID_PRESSURE_GRADIENT">[docs]</a>    <span class="n">FORCE_USING_FLUID_PRESSURE_GRADIENT</span> <span class="o">=</span> <span class="mi">1</span></div></div>
+
+
+<div class="viewcode-block" id="ICFD_CouplingDirection"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_CouplingDirection">[docs]</a><span class="k">class</span> <span class="nc">ICFD_CouplingDirection</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="ICFD_CouplingDirection.TWO_WAY_COUPLING"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_CouplingDirection.TWO_WAY_COUPLING">[docs]</a>    <span class="n">TWO_WAY_COUPLING</span> <span class="o">=</span> <span class="mi">0</span></div>
+<div class="viewcode-block" id="ICFD_CouplingDirection.ONE_WAY_COUPLING_MECHANICS_TRANS_DISPLACEMENT_TO_FLUID"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_CouplingDirection.ONE_WAY_COUPLING_MECHANICS_TRANS_DISPLACEMENT_TO_FLUID">[docs]</a>    <span class="n">ONE_WAY_COUPLING_MECHANICS_TRANS_DISPLACEMENT_TO_FLUID</span> <span class="o">=</span> <span class="mi">1</span></div>
+<div class="viewcode-block" id="ICFD_CouplingDirection.ONE_WAY_COUPLING_FLUID_TRANS_STRESS_TO_SOLID"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_CouplingDirection.ONE_WAY_COUPLING_FLUID_TRANS_STRESS_TO_SOLID">[docs]</a>    <span class="n">ONE_WAY_COUPLING_FLUID_TRANS_STRESS_TO_SOLID</span> <span class="o">=</span> <span class="mi">2</span></div>
+<div class="viewcode-block" id="ICFD_CouplingDirection.TWO_WAY_WEAK_COUPLING"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFD_CouplingDirection.TWO_WAY_WEAK_COUPLING">[docs]</a>    <span class="n">TWO_WAY_WEAK_COUPLING</span> <span class="o">=</span> <span class="mi">3</span></div></div>
+
+
+<div class="viewcode-block" id="ICFDAnalysis"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDAnalysis">[docs]</a><span class="k">class</span> <span class="nc">ICFDAnalysis</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Activates an ICFD analysis and defines associated control parameters.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_timestep</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_volumemesh</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_surfmesh</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_type</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_output</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_fsi</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_steady_state</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_coupling_dem</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_mesh_adapt</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span>
+
+<div class="viewcode-block" id="ICFDAnalysis.set_type"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_type">[docs]</a>    <span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">analysis_type</span><span class="o">=</span><span class="n">ICFD_AnalysisType</span><span class="o">.</span><span class="n">TRANSIENT_ANALYSIS</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the type of the CFD analysis.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        analysis_type : ICFD_AnalysisType</span>
+<span class="sd">            Analysis type. The default is ``TRANSIENT_ANALYSIS``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_type</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atype</span> <span class="o">=</span> <span class="n">analysis_type</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="ICFDAnalysis.set_output"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_output">[docs]</a>    <span class="k">def</span> <span class="nf">set_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messagelevel</span><span class="o">=</span><span class="n">ICFD_MessageLevel</span><span class="o">.</span><span class="n">TIMESTEP_INFORMATION</span><span class="p">,</span> <span class="n">iteration_interval</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Modify default values for screen and file outputs related to the fluid solver only.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        messagelevel : ICFD_MessageLevel, optional</span>
+<span class="sd">            Message level. The default is ``TIMESTEP_INFORMATION``.</span>
+<span class="sd">        iteration_interval : int, optional</span>
+<span class="sd">            Iteration interval to print the output at. The default is ``0``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_output</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msgl</span> <span class="o">=</span> <span class="n">messagelevel</span><span class="o">.</span><span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">itout</span> <span class="o">=</span> <span class="n">iteration_interval</span></div>
+
+<div class="viewcode-block" id="ICFDAnalysis.set_fsi"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_fsi">[docs]</a>    <span class="k">def</span> <span class="nf">set_fsi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">couplingdir</span><span class="o">=</span><span class="n">ICFD_CouplingDirection</span><span class="o">.</span><span class="n">TWO_WAY_COUPLING</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Modify default values for the fluid-structure interaction coupling algorithm.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        couplingdir : ICFD_CouplingDirection, optional</span>
+<span class="sd">            Coupling direction to the solver. The default is ``TWO_WAY_COUPLING``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_fsi</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">owc</span> <span class="o">=</span> <span class="n">couplingdir</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="ICFDAnalysis.set_steady_state"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_steady_state">[docs]</a>    <span class="k">def</span> <span class="nf">set_steady_state</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">max_iteration</span><span class="o">=</span><span class="mf">1e6</span><span class="p">,</span>
+        <span class="n">momentum_tol_limit</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">pressure_tol_limit</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">temperature_tol_limit</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">velocity_relax_param</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+        <span class="n">pressure_relax_param</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set convergence options for the steady state solver.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        max_iteration : int, optional</span>
+<span class="sd">            Maximum number of iterations to reach convergence. The default is</span>
+<span class="sd">            ``1000000.0``.</span>
+<span class="sd">        momentum_tol_limit : float, optional</span>
+<span class="sd">            Tolerance limits for the momentum equations. The default is ``0.001``.</span>
+<span class="sd">        pressure_tol_limit : float, optional</span>
+<span class="sd">            Tolerance limits for the pressure equations. The default is ``0.001``.</span>
+<span class="sd">        temperature_tol_limit : float, optional</span>
+<span class="sd">            Tolerance limits for the temperature equations. The default is ``0.001``.</span>
+<span class="sd">        velocity_relax_param : float, optional</span>
+<span class="sd">            Relaxation parameters for the velocity.  The default is ``0.3``.</span>
+<span class="sd">        pressure_relax_param : float, optional</span>
+<span class="sd">            Relaxation parameters for the pressure.  The default is ``0.7``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_steady_state</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">its</span> <span class="o">=</span> <span class="n">max_iteration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tol1</span> <span class="o">=</span> <span class="n">momentum_tol_limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tol2</span> <span class="o">=</span> <span class="n">pressure_tol_limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tol3</span> <span class="o">=</span> <span class="n">temperature_tol_limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rel1</span> <span class="o">=</span> <span class="n">velocity_relax_param</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rel2</span> <span class="o">=</span> <span class="n">pressure_relax_param</span></div>
+
+<div class="viewcode-block" id="ICFDAnalysis.set_timestep"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_timestep">[docs]</a>    <span class="k">def</span> <span class="nf">set_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestep</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the time step for the fluid problem.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dt : float, optional</span>
+<span class="sd">            Time step for the fluid problem. The default is ``0``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_timestep</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestep</span> <span class="o">=</span> <span class="n">timestep</span></div>
+
+<div class="viewcode-block" id="ICFDAnalysis.set_volume_mesh"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_volume_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">set_volume_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh_growth_scale_factor</span><span class="o">=</span><span class="mf">1.41</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Modify the default value for automatic volume mesh generation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mesh_growth_scale_factor : float, optional</span>
+<span class="sd">            Maximum mesh size that the volume mesher is allowed to use when generating</span>
+<span class="sd">            the volume mesh. The default is ``1.41``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_volumemesh</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mgsf</span> <span class="o">=</span> <span class="n">mesh_growth_scale_factor</span></div>
+
+<div class="viewcode-block" id="ICFDAnalysis.set_mesh_adaptivity"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_mesh_adaptivity">[docs]</a>    <span class="k">def</span> <span class="nf">set_mesh_adaptivity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_mesh_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_mesh_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_perceptual_error</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_iteration</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Activate the adaptive mesh refinement feature.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        min_mesh_size : float, optional</span>
+<span class="sd">            Minimum mesh size for the mesh generator. The default is ``0``.</span>
+<span class="sd">        max_mesh_size : float, optional</span>
+<span class="sd">            Maximum mesh size. The default is ``0``.</span>
+<span class="sd">        max_perceptual_error : float, optional</span>
+<span class="sd">            Maximum perceptual error allowed in the whole domain. The default</span>
+<span class="sd">            is ``0``.</span>
+<span class="sd">        num_iteration : int, optional</span>
+<span class="sd">            Number of iterations before a forced remeshing. The default is</span>
+<span class="sd">            ``0``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_mesh_adapt</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minh</span> <span class="o">=</span> <span class="n">min_mesh_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxh</span> <span class="o">=</span> <span class="n">max_mesh_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">err</span> <span class="o">=</span> <span class="n">max_perceptual_error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nit</span> <span class="o">=</span> <span class="n">num_iteration</span></div>
+
+<div class="viewcode-block" id="ICFDAnalysis.set_surface_mesh"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_surface_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">set_surface_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remesh_method</span><span class="o">=</span><span class="n">ICFD_SurfRemeshMethod</span><span class="o">.</span><span class="n">LAPLACIAN_SMOOTHING</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enable automatic surface remeshing.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        remesh_method : ICFD_SurfRemeshMethod, optional</span>
+<span class="sd">            Whether to perform a surface remeshing. The default is ``LAPLACIAN_SMOOTHING``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_surfmesh</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rsrf</span> <span class="o">=</span> <span class="n">remesh_method</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="ICFDAnalysis.set_coupling_dem"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.set_coupling_dem">[docs]</a>    <span class="k">def</span> <span class="nf">set_coupling_dem</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">coupling_type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">birth_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">death_time</span><span class="o">=</span><span class="mf">1e28</span><span class="p">,</span>
+        <span class="n">scale_factor</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">formulation</span><span class="o">=</span><span class="n">ICFD_CouplingForm</span><span class="o">.</span><span class="n">FORCE_BASED_ON_VELOCITY_DRAG_VALUE</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Activate coupling between the ICFD and DEM solvers.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        coupling_type : int, optional</span>
+<span class="sd">            Coupling direction to the solver. The default is ``0``.</span>
+<span class="sd">        birth_time : float, optional</span>
+<span class="sd">            Birth time for the DEM coupling. The default is ``0``.</span>
+<span class="sd">        death_time : float, optional</span>
+<span class="sd">            Death time for the DEM coupling.  The default is ``1e+28``.</span>
+<span class="sd">        scale_factor : float, optional</span>
+<span class="sd">            Scale factor applied to the force transmitted by the fluid to</span>
+<span class="sd">            the structure. The default is ``1``.</span>
+<span class="sd">        formulation : int, optional</span>
+<span class="sd">            Type of formulation to use in the coupling. The default is</span>
+<span class="sd">            ``FORCE_BASED_ON_VELOCITY_DRAG_VALUE``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_coupling_dem</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctype</span> <span class="o">=</span> <span class="n">coupling_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bt</span> <span class="o">=</span> <span class="n">birth_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">death_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sf</span> <span class="o">=</span> <span class="n">scale_factor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="n">formulation</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="ICFDAnalysis.create"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDAnalysis.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create ICFD analysis.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_timestep</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlTime</span><span class="p">(</span><span class="n">ICFDControlTimeRequest</span><span class="p">(</span><span class="n">tim</span><span class="o">=</span><span class="n">DynaSolution</span><span class="o">.</span><span class="n">termination_time</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timestep</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_volumemesh</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlMesh</span><span class="p">(</span><span class="n">ICFDControlMeshRequest</span><span class="p">(</span><span class="n">mgsf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mgsf</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_surfmesh</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlSurfMesh</span><span class="p">(</span><span class="n">ICFDControlSurfMeshRequest</span><span class="p">(</span><span class="n">rsrf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rsrf</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_type</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlGeneral</span><span class="p">(</span><span class="n">ICFDControlGeneralRequest</span><span class="p">(</span><span class="n">atype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atype</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dvcl</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rdvcl</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_output</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlOutput</span><span class="p">(</span><span class="n">ICFDControlOutputRequest</span><span class="p">(</span><span class="n">msgl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">msgl</span><span class="p">,</span> <span class="n">itout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">itout</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_fsi</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlFSI</span><span class="p">(</span><span class="n">ICFDControlFSIRequest</span><span class="p">(</span><span class="n">owc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">owc</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_steady_state</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlSteady</span><span class="p">(</span>
+                <span class="n">ICFDControlSteadyRequest</span><span class="p">(</span>
+                    <span class="n">its</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">its</span><span class="p">,</span> <span class="n">tol1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tol1</span><span class="p">,</span> <span class="n">tol2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tol2</span><span class="p">,</span> <span class="n">tol3</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tol3</span><span class="p">,</span> <span class="n">rel1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rel1</span><span class="p">,</span> <span class="n">rel2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rel2</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_coupling_dem</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlDEMCoupling</span><span class="p">(</span>
+                <span class="n">ICFDControlDEMCouplingRequest</span><span class="p">(</span><span class="n">ctype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ctype</span><span class="p">,</span> <span class="n">bt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_mesh_adapt</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlAdapt</span><span class="p">(</span>
+                <span class="n">ICFDControlAdaptRequest</span><span class="p">(</span><span class="n">minh</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minh</span><span class="p">,</span> <span class="n">maxh</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">maxh</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">err</span><span class="p">,</span> <span class="n">nit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nit</span><span class="p">)</span>
+            <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Compressible"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.Compressible">[docs]</a><span class="k">class</span> <span class="nc">Compressible</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="Compressible.VACUUM"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.Compressible.VACUUM">[docs]</a>    <span class="n">VACUUM</span> <span class="o">=</span> <span class="mi">0</span></div>
+<div class="viewcode-block" id="Compressible.FULLY_INCOMPRESSIBLE_FLUID"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.Compressible.FULLY_INCOMPRESSIBLE_FLUID">[docs]</a>    <span class="n">FULLY_INCOMPRESSIBLE_FLUID</span> <span class="o">=</span> <span class="mi">1</span></div></div>
+
+
+<div class="viewcode-block" id="MatICFD"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.MatICFD">[docs]</a><span class="k">class</span> <span class="nc">MatICFD</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines physical properties for the fluid material.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        flag : int</span>
+<span class="sd">            Flag for chooseing between fully incompressible, slightly compressible, or barotropic flows.</span>
+<span class="sd">            The default is ``FULLY_INCOMPRESSIBLE_FLUID``. Options are:</span>
+
+<span class="sd">            - EQ.0: Vacuum (free surface problems only)</span>
+<span class="sd">            - EQ.1: Fully incompressible fluid</span>
+
+<span class="sd">        flow_density : float, optional</span>
+<span class="sd">            Flow density. The default is ``0``.</span>
+<span class="sd">        dynamic_viscosity : float, optional</span>
+<span class="sd">            Dynamic viscosity. The default is ``0``.</span>
+<span class="sd">        heat_capacity :</span>
+<span class="sd">        thermal_conductivity :</span>
+<span class="sd">        thremal_expansion_coefficent :</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">flag</span><span class="o">=</span><span class="n">Compressible</span><span class="o">.</span><span class="n">FULLY_INCOMPRESSIBLE_FLUID</span><span class="p">,</span>
+        <span class="n">flow_density</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">dynamic_viscosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">heat_capacity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">thermal_conductivity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">thermal_expansion_coefficient</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="n">flag</span><span class="o">.</span><span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flow_density</span> <span class="o">=</span> <span class="n">flow_density</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamic_viscosity</span> <span class="o">=</span> <span class="n">dynamic_viscosity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hc</span> <span class="o">=</span> <span class="n">heat_capacity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span> <span class="o">=</span> <span class="n">thermal_conductivity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">thermal_expansion_coefficient</span>
+
+<div class="viewcode-block" id="MatICFD.create"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.MatICFD.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stub</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an ICFD material.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateMat</span><span class="p">(</span>
+            <span class="n">ICFDMatRequest</span><span class="p">(</span>
+                <span class="n">flg</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flag</span><span class="p">,</span> <span class="n">ro</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flow_density</span><span class="p">,</span> <span class="n">vis</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamic_viscosity</span><span class="p">,</span> <span class="n">hc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hc</span><span class="p">,</span> <span class="n">tc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">material_id</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ICFD material </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">material_id</span><span class="si">}</span><span class="s2"> Created...&quot;</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ICFDDOF"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDDOF">[docs]</a><span class="k">class</span> <span class="nc">ICFDDOF</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="ICFDDOF.X"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDDOF.X">[docs]</a>    <span class="n">X</span> <span class="o">=</span> <span class="mi">1</span></div>
+<div class="viewcode-block" id="ICFDDOF.Y"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDDOF.Y">[docs]</a>    <span class="n">Y</span> <span class="o">=</span> <span class="mi">2</span></div>
+<div class="viewcode-block" id="ICFDDOF.Z"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDDOF.Z">[docs]</a>    <span class="n">Z</span> <span class="o">=</span> <span class="mi">3</span></div></div>
+
+
+<div class="viewcode-block" id="Vel"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.Vel">[docs]</a><span class="k">class</span> <span class="nc">Vel</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="Vel.LINEAR_VELOCITY"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.Vel.LINEAR_VELOCITY">[docs]</a>    <span class="n">LINEAR_VELOCITY</span> <span class="o">=</span> <span class="mi">1</span></div>
+<div class="viewcode-block" id="Vel.ANGULAR_VELOCITY"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.Vel.ANGULAR_VELOCITY">[docs]</a>    <span class="n">ANGULAR_VELOCITY</span> <span class="o">=</span> <span class="mi">2</span></div></div>
+
+
+<div class="viewcode-block" id="ICFDPart"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart">[docs]</a><span class="k">class</span> <span class="nc">ICFDPart</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines a part for the ICFD solver.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;ICFD&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">secid</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="ICFDPart.set_material"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.set_material">[docs]</a>    <span class="k">def</span> <span class="nf">set_material</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mat</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a material.&quot;&quot;&quot;</span>
+        <span class="n">mat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">material_id</span></div>
+
+<div class="viewcode-block" id="ICFDPart.set_prescribed_velocity"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.set_prescribed_velocity">[docs]</a>    <span class="k">def</span> <span class="nf">set_prescribed_velocity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motion</span><span class="p">,</span> <span class="n">dof</span><span class="o">=</span><span class="n">ICFDDOF</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">velocity_flag</span><span class="o">=</span><span class="n">Vel</span><span class="o">.</span><span class="n">LINEAR_VELOCITY</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Impose the fluid velocity on the boundary.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dof : int, optional</span>
+<span class="sd">            Applicable degrees of freedom. The default is ``ICFDDOF.X``.</span>
+<span class="sd">            Options are:</span>
+
+<span class="sd">            - EQ.1: x-degree of freedom</span>
+<span class="sd">            - EQ.2: y-degree of freedom</span>
+<span class="sd">            - EQ.3: z-degree of freedom</span>
+<span class="sd">            - EQ.4: Normal direction degree of freedom</span>
+
+<span class="sd">        velocity_flag : int, optional</span>
+<span class="sd">            Velocity flag. The default is ``LINEAR_VELOCITY``. Options are:</span>
+
+<span class="sd">            - EQ.1: Linear velocity</span>
+<span class="sd">            - EQ.2: Angular velocity</span>
+<span class="sd">            - EQ.3: Parabolic velocity profile</span>
+<span class="sd">            - EQ.4: Activates synthetic turbulent field on part</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">motion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+        <span class="n">lcid</span> <span class="o">=</span> <span class="n">motion</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateBdyPrescribedVel</span><span class="p">(</span>
+            <span class="n">ICFDBdyPrescribedVelRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">dof</span><span class="o">=</span><span class="n">dof</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">vad</span><span class="o">=</span><span class="n">velocity_flag</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">lcid</span><span class="o">=</span><span class="n">lcid</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD boundary prescribed velocity Created...&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ICFDPart.set_prescribed_pressure"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.set_prescribed_pressure">[docs]</a>    <span class="k">def</span> <span class="nf">set_prescribed_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pressure</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Impose a fluid pressure on the boundary.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pressure : Curve</span>
+<span class="sd">            Load curve to describe the pressure value versus time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pressure</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+        <span class="n">lcid</span> <span class="o">=</span> <span class="n">pressure</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateBdyPrescribedPre</span><span class="p">(</span><span class="n">ICFDBdyPrescribedPreRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">lcid</span><span class="o">=</span><span class="n">lcid</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD boundary prescribed pressure Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ICFDPart.set_prescribed_temperature"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.set_prescribed_temperature">[docs]</a>    <span class="k">def</span> <span class="nf">set_prescribed_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Impose a fluid temperature on the boundary.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        temperature : Curve</span>
+<span class="sd">            Load curve to describe the temperature value versus time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">temperature</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+        <span class="n">lcid</span> <span class="o">=</span> <span class="n">temperature</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateBdyPrescribedTemp</span><span class="p">(</span><span class="n">ICFDBdyPrescribedTempRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">lcid</span><span class="o">=</span><span class="n">lcid</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD boundary prescribed temperature Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ICFDPart.set_free_slip"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.set_free_slip">[docs]</a>    <span class="k">def</span> <span class="nf">set_free_slip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Specify the fluid boundary with a free-slip boundary condition.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateBdyFreeSlip</span><span class="p">(</span><span class="n">ICFDBdyFreeSlipRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD boundary freeslip Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ICFDPart.set_non_slip"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.set_non_slip">[docs]</a>    <span class="k">def</span> <span class="nf">set_non_slip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Specify the fluid boundary with a non-slip boundary condition.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateBdyNonSlip</span><span class="p">(</span><span class="n">ICFDBdyNonSlipRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD boundary nonslip Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ICFDPart.set_fsi"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.set_fsi">[docs]</a>    <span class="k">def</span> <span class="nf">set_fsi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the fluid surface to consider in contact with the solid surfaces</span>
+<span class="sd">        for fluid-structure interaction (FSI) analysis.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateBdyFSI</span><span class="p">(</span><span class="n">ICFDBdyFSIRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD boundary FSI Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ICFDPart.compute_drag_force"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.compute_drag_force">[docs]</a>    <span class="k">def</span> <span class="nf">compute_drag_force</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enable the computation of drag forces over given surface parts of the model.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateDBDrag</span><span class="p">(</span><span class="n">ICFDDBDragRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD database drag Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ICFDPart.compute_flux"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.compute_flux">[docs]</a>    <span class="k">def</span> <span class="nf">compute_flux</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enable the computation of the flow rate and average pressure over given parts of the model.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateDBFlux</span><span class="p">(</span><span class="n">ICFDDBFluxRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD database flux Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ICFDPart.compute_temperature"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.compute_temperature">[docs]</a>    <span class="k">def</span> <span class="nf">compute_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enable the computation of the average temperature and the heat flux over given parts of the model.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateDBTemp</span><span class="p">(</span><span class="n">ICFDDBTempRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ICFD database temperature Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ICFDPart.set_boundary_layer"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.set_boundary_layer">[docs]</a>    <span class="k">def</span> <span class="nf">set_boundary_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define a boundary layer mesh as a refinement on the volume mesh.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        number : int, optional</span>
+<span class="sd">            Number of elements normal to the surface (in the boundary layer).</span>
+<span class="sd">            The default is ``3.``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">MESHCreateBl</span><span class="p">(</span><span class="n">MeshBlRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">nelth</span><span class="o">=</span><span class="n">number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MESH boundary-layer Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ICFDPart.set_boundary_layer_symmetry_condition"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.set_boundary_layer_symmetry_condition">[docs]</a>    <span class="k">def</span> <span class="nf">set_boundary_layer_symmetry_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Specify the part that is to have symmetry conditions for the boundary layer.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">MESHCreateBlSym</span><span class="p">(</span><span class="n">MeshBlSymRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ICFDPart.set_imposed_move"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.set_imposed_move">[docs]</a>    <span class="k">def</span> <span class="nf">set_imposed_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vz</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Impose a velocity on a specific ICFD part.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vx :</span>
+<span class="sd">        vy :</span>
+<span class="sd">        vz :</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lcvx</span><span class="p">,</span> <span class="n">lcvy</span><span class="p">,</span> <span class="n">lcvz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">vx</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vx</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="n">lcvx</span> <span class="o">=</span> <span class="n">vx</span><span class="o">.</span><span class="n">id</span>
+        <span class="k">if</span> <span class="n">vy</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vy</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="n">lcvy</span> <span class="o">=</span> <span class="n">vy</span><span class="o">.</span><span class="n">id</span>
+        <span class="k">if</span> <span class="n">vz</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vz</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="n">lcvz</span> <span class="o">=</span> <span class="n">vz</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlImposedMove</span><span class="p">(</span>
+            <span class="n">ICFDControlImposedMoveRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">lcvx</span><span class="o">=</span><span class="n">lcvx</span><span class="p">,</span> <span class="n">lcvy</span><span class="o">=</span><span class="n">lcvy</span><span class="p">,</span> <span class="n">lcvz</span><span class="o">=</span><span class="n">lcvz</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ICFDPart.set_property"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDPart.set_property">[docs]</a>    <span class="k">def</span> <span class="nf">set_property</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set properties for an ICFD part.&quot;&quot;&quot;</span>
+        <span class="n">secid</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">SetICFDPartProperty</span><span class="p">(</span><span class="n">ICFDPartPropertyRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">secid</span><span class="o">=</span><span class="n">secid</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mid</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="ICFDVolumePart"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDVolumePart">[docs]</a><span class="k">class</span> <span class="nc">ICFDVolumePart</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assigns material properties to the nodes enclosed by surface ICFD parts.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    surfaces : list</span>
+<span class="sd">        List of part IDs for the surface elements that define the volume mesh.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">surfaces</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;ICFDVOLUME&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">secid</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surfaces</span> <span class="o">=</span> <span class="n">surfaces</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_imposed_move</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="ICFDVolumePart.set_material"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDVolumePart.set_material">[docs]</a>    <span class="k">def</span> <span class="nf">set_material</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mat</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a material.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mid</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">material_id</span></div>
+
+<div class="viewcode-block" id="ICFDVolumePart.set_imposed_move"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDVolumePart.set_imposed_move">[docs]</a>    <span class="k">def</span> <span class="nf">set_imposed_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vz</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Impose a velocity on a specific ICFD part.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vx :</span>
+<span class="sd">        vy :</span>
+<span class="sd">        vz :</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_imposed_move</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vx</span> <span class="o">=</span> <span class="n">vx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="n">vy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vz</span> <span class="o">=</span> <span class="n">vz</span></div>
+
+<div class="viewcode-block" id="ICFDVolumePart.create"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.ICFDVolumePart.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an ICFD volume part.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreatePartVol</span><span class="p">(</span><span class="n">ICFDPartVolRequest</span><span class="p">(</span><span class="n">secid</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mid</span><span class="p">,</span> <span class="n">spids</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">surfaces</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">id</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_imposed_move</span><span class="p">:</span>
+            <span class="n">lcvx</span><span class="p">,</span> <span class="n">lcvy</span><span class="p">,</span> <span class="n">lcvz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vx</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vx</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+                <span class="n">lcvx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vx</span><span class="o">.</span><span class="n">id</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vy</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vy</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+                <span class="n">lcvy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vy</span><span class="o">.</span><span class="n">id</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vz</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vz</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+                <span class="n">lcvz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vz</span><span class="o">.</span><span class="n">id</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">ICFDCreateControlImposedMove</span><span class="p">(</span>
+                <span class="n">ICFDControlImposedMoveRequest</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">lcvx</span><span class="o">=</span><span class="n">lcvx</span><span class="p">,</span> <span class="n">lcvy</span><span class="o">=</span><span class="n">lcvy</span><span class="p">,</span> <span class="n">lcvz</span><span class="o">=</span><span class="n">lcvz</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ICFD part volume </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div></div>
+
+
+<div class="viewcode-block" id="MeshedVolume"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.MeshedVolume">[docs]</a><span class="k">class</span> <span class="nc">MeshedVolume</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines the volume space to mesh.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    surfaces : list</span>
+<span class="sd">        List of part IDs for the surface elements to use to define the volume.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">surfaces</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surfaces</span> <span class="o">=</span> <span class="n">surfaces</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meshsizeshape</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embeded_surf</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meshsize_surf</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fluid_interfaces</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="MeshedVolume.embed_shell"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.MeshedVolume.embed_shell">[docs]</a>    <span class="k">def</span> <span class="nf">embed_shell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embeded</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define surfaces that the mesher is to embed inside the volume mesh.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        embeded : list</span>
+<span class="sd">            List of part IDs for the surface elements.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embeded_surf</span> <span class="o">=</span> <span class="n">embeded</span></div>
+
+<div class="viewcode-block" id="MeshedVolume.meshsize_box"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.MeshedVolume.meshsize_box">[docs]</a>    <span class="k">def</span> <span class="nf">meshsize_box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">min_point</span><span class="p">,</span> <span class="n">max_point</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define a local mesh size in specific zones corresponding to given geometrical shapes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        size : float</span>
+<span class="sd">            Mesh size to apply in the zone of the shape defined by ``SNAME``.</span>
+<span class="sd">        parameter : list</span>
+<span class="sd">            List of the parameters that define the shape.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parameter</span> <span class="o">=</span> <span class="p">[</span><span class="n">min_point</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">min_point</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">min_point</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">max_point</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">max_point</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">max_point</span><span class="o">.</span><span class="n">z</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meshsizeshape</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s2">&quot;BOX&quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">parameter</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="MeshedVolume.set_meshsize"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.MeshedVolume.set_meshsize">[docs]</a>    <span class="k">def</span> <span class="nf">set_meshsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">surfaces</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the surfaces that the mesher is to use to specify a local mesh size inside the volume.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        surfaces : list</span>
+<span class="sd">            List of part IDs for the surface elements.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meshsize_surf</span> <span class="o">=</span> <span class="n">surfaces</span></div>
+
+<div class="viewcode-block" id="MeshedVolume.set_fluid_interfaces"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.MeshedVolume.set_fluid_interfaces">[docs]</a>    <span class="k">def</span> <span class="nf">set_fluid_interfaces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">surfaces</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the surfaces that the mesher is to use to specify fluid interfaces in multi-fluid simulations.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        surfaces : list</span>
+<span class="sd">            List of part IDs for the surface elements.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fluid_interfaces</span> <span class="o">=</span> <span class="n">surfaces</span></div>
+
+<div class="viewcode-block" id="MeshedVolume.create"><a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaicfd/index.html#ansys.dyna.core.pre.dynaicfd.MeshedVolume.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create mesh volume.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">MESHCreateVolume</span><span class="p">(</span><span class="n">MeshVolumeRequest</span><span class="p">(</span><span class="n">pids</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">surfaces</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MESH volume </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> Created...&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embeded_surf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">MESHCreateEmbedShell</span><span class="p">(</span><span class="n">MeshEmbedShellRequest</span><span class="p">(</span><span class="n">volid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">pids</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">embeded_surf</span><span class="p">))</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Embed surfaces Created...&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meshsize_surf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">MESHCreateSize</span><span class="p">(</span><span class="n">MeshSizeRequest</span><span class="p">(</span><span class="n">volid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">pids</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meshsize_surf</span><span class="p">))</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Mesh size surfaces Created...&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fluid_interfaces</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">MESHCreateInterf</span><span class="p">(</span><span class="n">MeshInterfRequest</span><span class="p">(</span><span class="n">volid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">pids</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fluid_interfaces</span><span class="p">))</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Mesh fluid interfaces Created...&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meshsizeshape</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">MESHCreateSizeShape</span><span class="p">(</span>
+                <span class="n">MeshSizeShapeRequest</span><span class="p">(</span>
+                    <span class="n">sname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meshsizeshape</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">force</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">method</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">msize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meshsizeshape</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">parameter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meshsizeshape</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MESH size shape Created...&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright (c) 2023 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  0.10.2. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

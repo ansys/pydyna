@@ -1,0 +1,19 @@
+ansys.dyna.core.lib.variable_card
+=================================
+
+.. py:module:: ansys.dyna.core.lib.variable_card
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.variable_card.VariableCard
+
+
+Module Contents
+---------------
+
+.. py:data:: VariableCard
+
