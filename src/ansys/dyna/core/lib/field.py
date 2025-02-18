@@ -47,7 +47,7 @@ class Field:
         self._type = type
         self._offset = offset
         self._width = width
-        if isinstance(value, ReadOnlyValue):
+        if isinstance(value, self.ReadOnlyValue):
             self._value = value
         else:
             self._value = kwargs.get(name, value) if use_lspp_defaults() else None
