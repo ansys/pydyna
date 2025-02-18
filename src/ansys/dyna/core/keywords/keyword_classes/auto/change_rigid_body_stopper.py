@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChangeRigidBodyStopper(KeywordBase):
@@ -41,56 +40,63 @@ class ChangeRigidBodyStopper(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "lcmax",
                         int,
                         10,
                         10,
-                        kwargs.get("lcmax", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcmin",
                         int,
                         20,
                         10,
-                        kwargs.get("lcmin", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "psidmx",
                         int,
                         30,
                         10,
-                        kwargs.get("psidmx", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "psidmn",
                         int,
                         40,
                         10,
-                        kwargs.get("psidmn", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcvmnx",
                         int,
                         50,
                         10,
-                        kwargs.get("lcvmnx", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dir",
                         int,
                         60,
                         10,
-                        kwargs.get("dir", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         int,
                         70,
                         10,
-                        kwargs.get("vid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,14 +107,16 @@ class ChangeRigidBodyStopper(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("birth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "death",
                         float,
                         10,
                         10,
-                        kwargs.get("death", 1.0E+28 if use_lspp_defaults() else None)
+                        1.0E+28,
+                        **kwargs,
                     ),
                 ],
             ),

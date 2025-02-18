@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseEosJwl(KeywordBase):
@@ -41,56 +40,56 @@ class DualceseEosJwl(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         10,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         20,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "eps1",
                         float,
                         30,
                         10,
-                        kwargs.get("eps1")
+                        **kwargs,
                     ),
                     Field(
                         "eps2",
                         float,
                         40,
                         10,
-                        kwargs.get("eps2")
+                        **kwargs,
                     ),
                     Field(
                         "gammao",
                         float,
                         50,
                         10,
-                        kwargs.get("gammao")
+                        **kwargs,
                     ),
                     Field(
                         "rhoo",
                         float,
                         60,
                         10,
-                        kwargs.get("rhoo")
+                        **kwargs,
                     ),
                     Field(
                         "eo",
                         float,
                         70,
                         10,
-                        kwargs.get("eo")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,7 +100,7 @@ class DualceseEosJwl(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cv")
+                        **kwargs,
                     ),
                 ],
             ),

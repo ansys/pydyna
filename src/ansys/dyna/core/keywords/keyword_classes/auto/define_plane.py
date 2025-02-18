@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,64 @@ class DefinePlane(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "x1",
                         float,
                         10,
                         10,
-                        kwargs.get("x1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "y1",
                         float,
                         20,
                         10,
-                        kwargs.get("y1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "z1",
                         float,
                         30,
                         10,
-                        kwargs.get("z1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "x2",
                         float,
                         40,
                         10,
-                        kwargs.get("x2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "y2",
                         float,
                         50,
                         10,
-                        kwargs.get("y2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "z2",
                         float,
                         60,
                         10,
-                        kwargs.get("z2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         70,
                         10,
-                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,21 +113,24 @@ class DefinePlane(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "y3",
                         float,
                         10,
                         10,
-                        kwargs.get("y3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "z3",
                         float,
                         20,
                         10,
-                        kwargs.get("z3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

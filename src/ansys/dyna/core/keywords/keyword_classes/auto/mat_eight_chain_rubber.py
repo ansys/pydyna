@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class MatEightChainRubber(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         20,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "mu",
                         float,
                         30,
                         10,
-                        kwargs.get("mu")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         int,
                         40,
                         10,
-                        kwargs.get("n", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mull",
                         int,
                         50,
                         10,
-                        kwargs.get("mull", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "vispl",
                         int,
                         60,
                         10,
-                        kwargs.get("vispl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "visel",
                         int,
                         70,
                         10,
-                        kwargs.get("visel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +109,56 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("yld0")
+                        **kwargs,
                     ),
                     Field(
                         "fp",
                         float,
                         10,
                         10,
-                        kwargs.get("fp")
+                        **kwargs,
                     ),
                     Field(
                         "gp",
                         float,
                         20,
                         10,
-                        kwargs.get("gp")
+                        **kwargs,
                     ),
                     Field(
                         "hp",
                         float,
                         30,
                         10,
-                        kwargs.get("hp")
+                        **kwargs,
                     ),
                     Field(
                         "lp",
                         float,
                         40,
                         10,
-                        kwargs.get("lp")
+                        **kwargs,
                     ),
                     Field(
                         "mp",
                         float,
                         50,
                         10,
-                        kwargs.get("mp")
+                        **kwargs,
                     ),
                     Field(
                         "np",
                         float,
                         60,
                         10,
-                        kwargs.get("np")
+                        **kwargs,
                     ),
                     Field(
                         "pmu",
                         float,
                         70,
                         10,
-                        kwargs.get("pmu")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,49 +169,50 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("m1")
+                        **kwargs,
                     ),
                     Field(
                         "m2",
                         float,
                         10,
                         10,
-                        kwargs.get("m2")
+                        **kwargs,
                     ),
                     Field(
                         "m3",
                         float,
                         20,
                         10,
-                        kwargs.get("m3")
+                        **kwargs,
                     ),
                     Field(
                         "m4",
                         float,
                         30,
                         10,
-                        kwargs.get("m4")
+                        **kwargs,
                     ),
                     Field(
                         "m5",
                         float,
                         40,
                         10,
-                        kwargs.get("m5")
+                        **kwargs,
                     ),
                     Field(
                         "time",
                         float,
                         50,
                         10,
-                        kwargs.get("time")
+                        **kwargs,
                     ),
                     Field(
                         "vcon",
                         float,
                         60,
                         10,
-                        kwargs.get("vcon", 9.0 if use_lspp_defaults() else None)
+                        9.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -219,56 +223,56 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("q1")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         10,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "q2",
                         float,
                         20,
                         10,
-                        kwargs.get("q2")
+                        **kwargs,
                     ),
                     Field(
                         "b2",
                         float,
                         30,
                         10,
-                        kwargs.get("b2")
+                        **kwargs,
                     ),
                     Field(
                         "q3",
                         float,
                         40,
                         10,
-                        kwargs.get("q3")
+                        **kwargs,
                     ),
                     Field(
                         "b3",
                         float,
                         50,
                         10,
-                        kwargs.get("b3")
+                        **kwargs,
                     ),
                     Field(
                         "q4",
                         float,
                         60,
                         10,
-                        kwargs.get("q4")
+                        **kwargs,
                     ),
                     Field(
                         "b4",
                         float,
                         70,
                         10,
-                        kwargs.get("b4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -279,42 +283,42 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k1")
+                        **kwargs,
                     ),
                     Field(
                         "s1",
                         float,
                         10,
                         10,
-                        kwargs.get("s1")
+                        **kwargs,
                     ),
                     Field(
                         "k2",
                         float,
                         20,
                         10,
-                        kwargs.get("k2")
+                        **kwargs,
                     ),
                     Field(
                         "s2",
                         float,
                         30,
                         10,
-                        kwargs.get("s2")
+                        **kwargs,
                     ),
                     Field(
                         "k3",
                         float,
                         40,
                         10,
-                        kwargs.get("k3")
+                        **kwargs,
                     ),
                     Field(
                         "s3",
                         float,
                         50,
                         10,
-                        kwargs.get("s3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -325,56 +329,58 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         10,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "xp",
                         float,
                         20,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         30,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         40,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         50,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         60,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         70,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -385,49 +391,49 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -438,14 +444,14 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("taui")
+                        **kwargs,
                     ),
                     Field(
                         "betai/gammai",
                         float,
                         10,
                         10,
-                        kwargs.get("betai/gammai")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -456,14 +462,14 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("taui")
+                        **kwargs,
                     ),
                     Field(
                         "betai/gammai",
                         float,
                         10,
                         10,
-                        kwargs.get("betai/gammai")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -474,14 +480,14 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("taui")
+                        **kwargs,
                     ),
                     Field(
                         "betai/gammai",
                         float,
                         10,
                         10,
-                        kwargs.get("betai/gammai")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -492,14 +498,14 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("taui")
+                        **kwargs,
                     ),
                     Field(
                         "betai/gammai",
                         float,
                         10,
                         10,
-                        kwargs.get("betai/gammai")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -510,14 +516,14 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("taui")
+                        **kwargs,
                     ),
                     Field(
                         "betai/gammai",
                         float,
                         10,
                         10,
-                        kwargs.get("betai/gammai")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -528,14 +534,14 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("taui")
+                        **kwargs,
                     ),
                     Field(
                         "betai/gammai",
                         float,
                         10,
                         10,
-                        kwargs.get("betai/gammai")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -546,14 +552,14 @@ class MatEightChainRubber(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("taui")
+                        **kwargs,
                     ),
                     Field(
                         "betai/gammai",
                         float,
                         10,
                         10,
-                        kwargs.get("betai/gammai")
+                        **kwargs,
                     ),
                 ],
             ),

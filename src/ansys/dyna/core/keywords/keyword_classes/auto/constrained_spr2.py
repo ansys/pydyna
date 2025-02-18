@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedSpr2(KeywordBase):
@@ -41,56 +40,56 @@ class ConstrainedSpr2(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("upid")
+                        **kwargs,
                     ),
                     Field(
                         "lpid",
                         int,
                         10,
                         10,
-                        kwargs.get("lpid")
+                        **kwargs,
                     ),
                     Field(
                         "nsid",
                         int,
                         20,
                         10,
-                        kwargs.get("nsid")
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         float,
                         30,
                         10,
-                        kwargs.get("thick")
+                        **kwargs,
                     ),
                     Field(
                         "d",
                         float,
                         40,
                         10,
-                        kwargs.get("d")
+                        **kwargs,
                     ),
                     Field(
                         "fn",
                         float,
                         50,
                         10,
-                        kwargs.get("fn")
+                        **kwargs,
                     ),
                     Field(
                         "ft",
                         float,
                         60,
                         10,
-                        kwargs.get("ft")
+                        **kwargs,
                     ),
                     Field(
                         "dn",
                         float,
                         70,
                         10,
-                        kwargs.get("dn")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +100,57 @@ class ConstrainedSpr2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt")
+                        **kwargs,
                     ),
                     Field(
                         "xin",
                         float,
                         10,
                         10,
-                        kwargs.get("xin")
+                        **kwargs,
                     ),
                     Field(
                         "xit",
                         float,
                         20,
                         10,
-                        kwargs.get("xit")
+                        **kwargs,
                     ),
                     Field(
                         "alpha1",
                         float,
                         30,
                         10,
-                        kwargs.get("alpha1")
+                        **kwargs,
                     ),
                     Field(
                         "alpha2",
                         float,
                         40,
                         10,
-                        kwargs.get("alpha2")
+                        **kwargs,
                     ),
                     Field(
                         "alpha3",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha3")
+                        **kwargs,
                     ),
                     Field(
                         "dens",
                         float,
                         60,
                         10,
-                        kwargs.get("dens")
+                        **kwargs,
                     ),
                     Field(
                         "intp",
                         int,
                         70,
                         10,
-                        kwargs.get("intp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,21 +161,23 @@ class ConstrainedSpr2(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("expn", 8.0 if use_lspp_defaults() else None)
+                        8.0,
+                        **kwargs,
                     ),
                     Field(
                         "expt",
                         float,
                         10,
                         10,
-                        kwargs.get("expt", 8.0 if use_lspp_defaults() else None)
+                        8.0,
+                        **kwargs,
                     ),
                     Field(
                         "pidvb",
                         int,
                         20,
                         10,
-                        kwargs.get("pidvb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -186,28 +188,28 @@ class ConstrainedSpr2(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("xpid1")
+                        **kwargs,
                     ),
                     Field(
                         "xpid2",
                         int,
                         10,
                         10,
-                        kwargs.get("xpid2")
+                        **kwargs,
                     ),
                     Field(
                         "xpid3",
                         int,
                         20,
                         10,
-                        kwargs.get("xpid3")
+                        **kwargs,
                     ),
                     Field(
                         "xpid4",
                         int,
                         30,
                         10,
-                        kwargs.get("xpid4")
+                        **kwargs,
                     ),
                 ],
             ),

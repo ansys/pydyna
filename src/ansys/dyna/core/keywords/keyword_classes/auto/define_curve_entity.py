@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,55 @@ class DefineCurveEntity(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "sfa",
                         float,
                         10,
                         10,
-                        kwargs.get("sfa", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sfo",
                         float,
                         20,
                         10,
-                        kwargs.get("sfo", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sfr",
                         float,
                         30,
                         10,
-                        kwargs.get("sfr", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "offa",
                         float,
                         40,
                         10,
-                        kwargs.get("offa", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "offo",
                         float,
                         50,
                         10,
-                        kwargs.get("offo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "offr",
                         float,
                         60,
                         10,
-                        kwargs.get("offr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,28 +104,32 @@ class DefineCurveEntity(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("ai", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "oi",
                         float,
                         20,
                         20,
-                        kwargs.get("oi", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ri",
                         float,
                         40,
                         20,
-                        kwargs.get("ri", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "iflag",
                         int,
                         60,
                         20,
-                        kwargs.get("iflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

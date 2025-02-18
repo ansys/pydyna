@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class SectionPointSource(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "lcidt",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidt")
+                        **kwargs,
                     ),
                     Field(
                         "lcidvolr",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidvolr")
+                        **kwargs,
                     ),
                     Field(
                         "lcidvel",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidvel")
+                        **kwargs,
                     ),
                     Field(
                         "nlc001",
                         int,
                         40,
                         10,
-                        kwargs.get("nlc001")
+                        **kwargs,
                     ),
                     Field(
                         "nlc002",
                         int,
                         50,
                         10,
-                        kwargs.get("nlc002")
+                        **kwargs,
                     ),
                     Field(
                         "nlc003",
                         int,
                         60,
                         10,
-                        kwargs.get("nlc003")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,21 +98,21 @@ class SectionPointSource(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nodeid")
+                        **kwargs,
                     ),
                     Field(
                         "vecid",
                         int,
                         10,
                         10,
-                        kwargs.get("vecid")
+                        **kwargs,
                     ),
                     Field(
                         "orifarea",
                         float,
                         20,
                         10,
-                        kwargs.get("orifarea")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleBurnSwitchMmg(KeywordBase):
@@ -41,21 +40,22 @@ class AleBurnSwitchMmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mmgfr")
+                        **kwargs,
                     ),
                     Field(
                         "mmgto",
                         int,
                         10,
                         10,
-                        kwargs.get("mmgto")
+                        **kwargs,
                     ),
                     Field(
                         "nvarline",
                         int,
                         20,
                         10,
-                        kwargs.get("nvarline", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,7 +66,8 @@ class AleBurnSwitchMmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("react", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -77,21 +78,24 @@ class AleBurnSwitchMmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("igni", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "igniv",
                         int,
                         10,
                         10,
-                        kwargs.get("igniv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ignivf",
                         int,
                         20,
                         10,
-                        kwargs.get("ignivf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -102,56 +106,64 @@ class AleBurnSwitchMmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         10,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         20,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         30,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         40,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         50,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         60,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var",
                         int,
                         70,
                         10,
-                        kwargs.get("var", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -162,56 +174,64 @@ class AleBurnSwitchMmg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("par", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par",
                         float,
                         10,
                         10,
-                        kwargs.get("par", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par",
                         float,
                         20,
                         10,
-                        kwargs.get("par", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par",
                         float,
                         30,
                         10,
-                        kwargs.get("par", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par",
                         float,
                         40,
                         10,
-                        kwargs.get("par", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par",
                         float,
                         50,
                         10,
-                        kwargs.get("par", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par",
                         float,
                         60,
                         10,
-                        kwargs.get("par", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "par",
                         float,
                         70,
                         10,
-                        kwargs.get("par", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleStructuredMeshVolumeFilling(KeywordBase):
@@ -41,56 +40,60 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mshid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ammgto",
                         str,
                         20,
                         10,
-                        kwargs.get("ammgto", "0" if use_lspp_defaults() else None)
+                        "0",
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "nsample",
                         int,
                         40,
                         10,
-                        kwargs.get("nsample", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused-",
                         int,
                         60,
                         10,
-                        kwargs.get("unused-")
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         int,
                         70,
                         10,
-                        kwargs.get("vid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,49 +104,51 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("geom", "ALL" if use_lspp_defaults() else None)
+                        "ALL",
+                        **kwargs,
                     ),
                     Field(
                         "in/out",
                         int,
                         10,
                         10,
-                        kwargs.get("in/out", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "e1",
                         float,
                         20,
                         10,
-                        kwargs.get("e1")
+                        **kwargs,
                     ),
                     Field(
                         "e2",
                         float,
                         30,
                         10,
-                        kwargs.get("e2")
+                        **kwargs,
                     ),
                     Field(
                         "e3",
                         float,
                         40,
                         10,
-                        kwargs.get("e3")
+                        **kwargs,
                     ),
                     Field(
                         "e4",
                         float,
                         50,
                         10,
-                        kwargs.get("e4")
+                        **kwargs,
                     ),
                     Field(
                         "e5",
                         float,
                         60,
                         10,
-                        kwargs.get("e5")
+                        **kwargs,
                     ),
                 ],
             ),

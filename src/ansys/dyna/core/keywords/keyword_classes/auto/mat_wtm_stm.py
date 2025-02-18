@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatWtmStm(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "numfi",
                         float,
                         40,
                         10,
-                        kwargs.get("numfi")
+                        **kwargs,
                     ),
                     Field(
                         "npsc",
                         float,
                         50,
                         10,
-                        kwargs.get("npsc")
+                        **kwargs,
                     ),
                     Field(
                         "wc",
                         float,
                         60,
                         10,
-                        kwargs.get("wc")
+                        **kwargs,
                     ),
                     Field(
                         "tauc",
                         float,
                         70,
                         10,
-                        kwargs.get("tauc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,57 @@ class MatWtmStm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sigma0")
+                        **kwargs,
                     ),
                     Field(
                         "qr1",
                         float,
                         10,
                         10,
-                        kwargs.get("qr1")
+                        **kwargs,
                     ),
                     Field(
                         "cr1",
                         float,
                         20,
                         10,
-                        kwargs.get("cr1")
+                        **kwargs,
                     ),
                     Field(
                         "qr2",
                         float,
                         30,
                         10,
-                        kwargs.get("qr2")
+                        **kwargs,
                     ),
                     Field(
                         "cr2",
                         float,
                         40,
                         10,
-                        kwargs.get("cr2")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         50,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "lc",
                         float,
                         60,
                         10,
-                        kwargs.get("lc")
+                        **kwargs,
                     ),
                     Field(
                         "flg",
                         int,
                         70,
                         10,
-                        kwargs.get("flg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +166,56 @@ class MatWtmStm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         10,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         20,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                     Field(
                         "a4",
                         float,
                         30,
                         10,
-                        kwargs.get("a4")
+                        **kwargs,
                     ),
                     Field(
                         "a5",
                         float,
                         40,
                         10,
-                        kwargs.get("a5")
+                        **kwargs,
                     ),
                     Field(
                         "a6",
                         float,
                         50,
                         10,
-                        kwargs.get("a6")
+                        **kwargs,
                     ),
                     Field(
                         "a7",
                         float,
                         60,
                         10,
-                        kwargs.get("a7")
+                        **kwargs,
                     ),
                     Field(
                         "a8",
                         float,
                         70,
                         10,
-                        kwargs.get("a8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +226,56 @@ class MatWtmStm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("s00")
+                        **kwargs,
                     ),
                     Field(
                         "s45",
                         float,
                         10,
                         10,
-                        kwargs.get("s45")
+                        **kwargs,
                     ),
                     Field(
                         "s90",
                         float,
                         20,
                         10,
-                        kwargs.get("s90")
+                        **kwargs,
                     ),
                     Field(
                         "sbb",
                         float,
                         30,
                         10,
-                        kwargs.get("sbb")
+                        **kwargs,
                     ),
                     Field(
                         "r00",
                         float,
                         40,
                         10,
-                        kwargs.get("r00")
+                        **kwargs,
                     ),
                     Field(
                         "r45",
                         float,
                         50,
                         10,
-                        kwargs.get("r45")
+                        **kwargs,
                     ),
                     Field(
                         "r90",
                         float,
                         60,
                         10,
-                        kwargs.get("r90")
+                        **kwargs,
                     ),
                     Field(
                         "rbb",
                         float,
                         70,
                         10,
-                        kwargs.get("rbb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,28 +286,28 @@ class MatWtmStm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         10,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "h",
                         float,
                         20,
                         10,
-                        kwargs.get("h")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         30,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -318,56 +318,56 @@ class MatWtmStm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("qx1")
+                        **kwargs,
                     ),
                     Field(
                         "cx1",
                         float,
                         10,
                         10,
-                        kwargs.get("cx1")
+                        **kwargs,
                     ),
                     Field(
                         "qx2",
                         float,
                         20,
                         10,
-                        kwargs.get("qx2")
+                        **kwargs,
                     ),
                     Field(
                         "cx2",
                         float,
                         30,
                         10,
-                        kwargs.get("cx2")
+                        **kwargs,
                     ),
                     Field(
                         "edot",
                         float,
                         40,
                         10,
-                        kwargs.get("edot")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         50,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "emin",
                         float,
                         60,
                         10,
-                        kwargs.get("emin")
+                        **kwargs,
                     ),
                     Field(
                         "s100",
                         float,
                         70,
                         10,
-                        kwargs.get("s100")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -378,14 +378,14 @@ class MatWtmStm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         10,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -396,42 +396,42 @@ class MatWtmStm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -442,42 +442,42 @@ class MatWtmStm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                 ],
             ),

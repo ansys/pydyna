@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class DefineMultiscale(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "bset",
                         int,
                         10,
                         10,
-                        kwargs.get("bset")
+                        **kwargs,
                     ),
                     Field(
                         "id",
                         int,
                         20,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "bset",
                         int,
                         30,
                         10,
-                        kwargs.get("bset")
+                        **kwargs,
                     ),
                     Field(
                         "id",
                         int,
                         40,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "bset",
                         int,
                         50,
                         10,
-                        kwargs.get("bset")
+                        **kwargs,
                     ),
                     Field(
                         "id",
                         int,
                         60,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "bset",
                         int,
                         70,
                         10,
-                        kwargs.get("bset")
+                        **kwargs,
                     ),
                 ],
             ),

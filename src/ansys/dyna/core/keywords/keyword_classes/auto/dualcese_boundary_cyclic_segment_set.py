@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseBoundaryCyclicSegmentSet(KeywordBase):
@@ -41,21 +40,22 @@ class DualceseBoundaryCyclicSegmentSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid1")
+                        **kwargs,
                     ),
                     Field(
                         "ssid2",
                         int,
                         0,
                         10,
-                        kwargs.get("ssid2")
+                        **kwargs,
                     ),
                     Field(
                         "cyctyp",
                         int,
                         20,
                         10,
-                        kwargs.get("cyctyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

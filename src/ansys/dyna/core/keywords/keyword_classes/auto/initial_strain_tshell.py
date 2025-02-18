@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialStrainTshell(KeywordBase):
@@ -41,7 +40,7 @@ class InitialStrainTshell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,42 +51,48 @@ class InitialStrainTshell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("epsxx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epsyy",
                         float,
                         10,
                         10,
-                        kwargs.get("epsyy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epszz",
                         float,
                         20,
                         10,
-                        kwargs.get("epszz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epsxy",
                         float,
                         30,
                         10,
-                        kwargs.get("epsxy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epsyz",
                         float,
                         40,
                         10,
-                        kwargs.get("epsyz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epszx",
                         float,
                         50,
                         10,
-                        kwargs.get("epszx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -98,42 +103,48 @@ class InitialStrainTshell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("epsxx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epsyy",
                         float,
                         10,
                         10,
-                        kwargs.get("epsyy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epszz",
                         float,
                         20,
                         10,
-                        kwargs.get("epszz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epsxy",
                         float,
                         30,
                         10,
-                        kwargs.get("epsxy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epsyz",
                         float,
                         40,
                         10,
-                        kwargs.get("epsyz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "epszx",
                         float,
                         50,
                         10,
-                        kwargs.get("epszx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

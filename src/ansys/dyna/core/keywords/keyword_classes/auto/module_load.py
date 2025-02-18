@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ModuleLoad(KeywordBase):
@@ -41,14 +40,14 @@ class ModuleLoad(KeywordBase):
                         int,
                         0,
                         20,
-                        kwargs.get("mdlid")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         20,
                         60,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,7 +58,7 @@ class ModuleLoad(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),

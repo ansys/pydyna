@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,53 @@ class ConstrainedNodalRigidBodySpc(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         10,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "nsid",
                         int,
                         20,
                         10,
-                        kwargs.get("nsid")
+                        **kwargs,
                     ),
                     Field(
                         "pnode",
                         int,
                         30,
                         10,
-                        kwargs.get("pnode", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iprt",
                         int,
                         40,
                         10,
-                        kwargs.get("iprt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "drflag",
                         int,
                         50,
                         10,
-                        kwargs.get("drflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rrflag",
                         int,
                         60,
                         10,
-                        kwargs.get("rrflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,21 +102,24 @@ class ConstrainedNodalRigidBodySpc(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cmo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "con1",
                         float,
                         10,
                         10,
-                        kwargs.get("con1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "con2",
                         float,
                         20,
                         10,
-                        kwargs.get("con2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

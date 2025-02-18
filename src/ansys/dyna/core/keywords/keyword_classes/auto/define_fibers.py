@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,57 @@ class DefineFibers(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idf")
+                        **kwargs,
                     ),
                     Field(
                         "idp",
                         int,
                         10,
                         10,
-                        kwargs.get("idp")
+                        **kwargs,
                     ),
                     Field(
                         "numf",
                         int,
                         20,
                         10,
-                        kwargs.get("numf")
+                        **kwargs,
                     ),
                     Field(
                         "n1",
                         int,
                         30,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         40,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "efb",
                         float,
                         50,
                         10,
-                        kwargs.get("efb")
+                        **kwargs,
                     ),
                     Field(
                         "shr",
                         float,
                         50,
                         10,
-                        kwargs.get("shr")
+                        **kwargs,
                     ),
                     Field(
                         "hrgls",
                         float,
                         50,
                         10,
-                        kwargs.get("hrgls", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,21 +106,21 @@ class DefineFibers(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha1")
+                        **kwargs,
                     ),
                     Field(
                         "alpha2",
                         float,
                         10,
                         10,
-                        kwargs.get("alpha2")
+                        **kwargs,
                     ),
                     Field(
                         "alpha3",
                         float,
                         20,
                         10,
-                        kwargs.get("alpha3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -131,42 +131,42 @@ class DefineFibers(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x1")
+                        **kwargs,
                     ),
                     Field(
                         "y1",
                         float,
                         10,
                         10,
-                        kwargs.get("y1")
+                        **kwargs,
                     ),
                     Field(
                         "z1",
                         float,
                         20,
                         10,
-                        kwargs.get("z1")
+                        **kwargs,
                     ),
                     Field(
                         "x2",
                         float,
                         30,
                         10,
-                        kwargs.get("x2")
+                        **kwargs,
                     ),
                     Field(
                         "y2",
                         float,
                         40,
                         10,
-                        kwargs.get("y2")
+                        **kwargs,
                     ),
                     Field(
                         "z2",
                         float,
                         50,
                         10,
-                        kwargs.get("z2")
+                        **kwargs,
                     ),
                 ],
             ),

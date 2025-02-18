@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlSubcycle(KeywordBase):
@@ -41,14 +40,16 @@ class ControlSubcycle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("k", 16 if use_lspp_defaults() else None)
+                        16,
+                        **kwargs,
                     ),
                     Field(
                         "l",
                         int,
                         10,
                         10,
-                        kwargs.get("l", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),

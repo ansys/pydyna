@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,40 @@ class DefinePressureTube(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ws",
                         float,
                         10,
                         10,
-                        kwargs.get("ws", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         20,
                         10,
-                        kwargs.get("pr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "mtd",
                         int,
                         30,
                         10,
-                        kwargs.get("mtd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         int,
                         40,
                         10,
-                        kwargs.get("type", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,56 +89,64 @@ class DefinePressureTube(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("visc", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "cfl",
                         float,
                         10,
                         10,
-                        kwargs.get("cfl", 0.9 if use_lspp_defaults() else None)
+                        0.9,
+                        **kwargs,
                     ),
                     Field(
                         "damp",
                         float,
                         20,
                         10,
-                        kwargs.get("damp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bndl",
                         float,
                         30,
                         10,
-                        kwargs.get("bndl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bndr",
                         float,
                         40,
                         10,
-                        kwargs.get("bndr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cavl",
                         float,
                         50,
                         10,
-                        kwargs.get("cavl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cavr",
                         float,
                         60,
                         10,
-                        kwargs.get("cavr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "snode",
                         int,
                         70,
                         10,
-                        kwargs.get("snode", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -145,35 +157,39 @@ class DefinePressureTube(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nshl", 12 if use_lspp_defaults() else None)
+                        12,
+                        **kwargs,
                     ),
                     Field(
                         "elform",
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 16 if use_lspp_defaults() else None)
+                        16,
+                        **kwargs,
                     ),
                     Field(
                         "nip",
                         int,
                         20,
                         10,
-                        kwargs.get("nip", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                     Field(
                         "shrf",
                         float,
                         30,
                         10,
-                        kwargs.get("shrf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "bpid",
                         int,
                         40,
                         10,
-                        kwargs.get("bpid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -184,35 +200,38 @@ class DefinePressureTube(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsld", 12 if use_lspp_defaults() else None)
+                        12,
+                        **kwargs,
                     ),
                     Field(
                         "elform",
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nthk",
                         int,
                         20,
                         10,
-                        kwargs.get("nthk", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "bpid",
                         int,
                         40,
                         10,
-                        kwargs.get("bpid")
+                        **kwargs,
                     ),
                 ],
             ),

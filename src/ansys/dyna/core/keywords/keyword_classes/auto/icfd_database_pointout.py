@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdDatabasePointout(KeywordBase):
@@ -41,42 +40,48 @@ class IcfdDatabasePointout(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dtout",
                         float,
                         10,
                         10,
-                        kwargs.get("dtout", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pstype",
                         int,
                         20,
                         10,
-                        kwargs.get("pstype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vx",
                         float,
                         30,
                         10,
-                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vy",
                         float,
                         40,
                         10,
-                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vz",
                         float,
                         50,
                         10,
-                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,28 +92,28 @@ class IcfdDatabasePointout(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "x",
                         float,
                         10,
                         10,
-                        kwargs.get("x")
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         20,
                         10,
-                        kwargs.get("y")
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         30,
                         10,
-                        kwargs.get("z")
+                        **kwargs,
                     ),
                 ],
             ),

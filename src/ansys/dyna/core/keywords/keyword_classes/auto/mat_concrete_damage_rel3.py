@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,21 +45,21 @@ class MatConcreteDamageRel3(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         20,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -71,49 +70,49 @@ class MatConcreteDamageRel3(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ft")
+                        **kwargs,
                     ),
                     Field(
                         "a0",
                         float,
                         10,
                         10,
-                        kwargs.get("a0")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         20,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         30,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         40,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "omega",
                         float,
                         50,
                         10,
-                        kwargs.get("omega")
+                        **kwargs,
                     ),
                     Field(
                         "a1f",
                         float,
                         60,
                         10,
-                        kwargs.get("a1f")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -124,56 +123,56 @@ class MatConcreteDamageRel3(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("slambda")
+                        **kwargs,
                     ),
                     Field(
                         "nout",
                         float,
                         10,
                         10,
-                        kwargs.get("nout")
+                        **kwargs,
                     ),
                     Field(
                         "edrop",
                         float,
                         20,
                         10,
-                        kwargs.get("edrop")
+                        **kwargs,
                     ),
                     Field(
                         "rsize",
                         float,
                         30,
                         10,
-                        kwargs.get("rsize")
+                        **kwargs,
                     ),
                     Field(
                         "ucf",
                         float,
                         40,
                         10,
-                        kwargs.get("ucf")
+                        **kwargs,
                     ),
                     Field(
                         "lcrate",
                         int,
                         50,
                         10,
-                        kwargs.get("lcrate")
+                        **kwargs,
                     ),
                     Field(
                         "locwidth",
                         float,
                         60,
                         10,
-                        kwargs.get("locwidth")
+                        **kwargs,
                     ),
                     Field(
                         "npts",
                         float,
                         70,
                         10,
-                        kwargs.get("npts")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -184,56 +183,56 @@ class MatConcreteDamageRel3(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lambda1")
+                        **kwargs,
                     ),
                     Field(
                         "lambda2",
                         float,
                         10,
                         10,
-                        kwargs.get("lambda2")
+                        **kwargs,
                     ),
                     Field(
                         "lambda3",
                         float,
                         20,
                         10,
-                        kwargs.get("lambda3")
+                        **kwargs,
                     ),
                     Field(
                         "lambda4",
                         float,
                         30,
                         10,
-                        kwargs.get("lambda4")
+                        **kwargs,
                     ),
                     Field(
                         "lambda5",
                         float,
                         40,
                         10,
-                        kwargs.get("lambda5")
+                        **kwargs,
                     ),
                     Field(
                         "lambda6",
                         float,
                         50,
                         10,
-                        kwargs.get("lambda6")
+                        **kwargs,
                     ),
                     Field(
                         "lambda7",
                         float,
                         60,
                         10,
-                        kwargs.get("lambda7")
+                        **kwargs,
                     ),
                     Field(
                         "lambda8",
                         float,
                         70,
                         10,
-                        kwargs.get("lambda8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -244,56 +243,56 @@ class MatConcreteDamageRel3(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lambda09")
+                        **kwargs,
                     ),
                     Field(
                         "lambda10",
                         float,
                         10,
                         10,
-                        kwargs.get("lambda10")
+                        **kwargs,
                     ),
                     Field(
                         "lambda11",
                         float,
                         20,
                         10,
-                        kwargs.get("lambda11")
+                        **kwargs,
                     ),
                     Field(
                         "lambda12",
                         float,
                         30,
                         10,
-                        kwargs.get("lambda12")
+                        **kwargs,
                     ),
                     Field(
                         "lambda13",
                         float,
                         40,
                         10,
-                        kwargs.get("lambda13")
+                        **kwargs,
                     ),
                     Field(
                         "b3",
                         float,
                         50,
                         10,
-                        kwargs.get("b3")
+                        **kwargs,
                     ),
                     Field(
                         "a0y",
                         float,
                         60,
                         10,
-                        kwargs.get("a0y")
+                        **kwargs,
                     ),
                     Field(
                         "a1y",
                         float,
                         70,
                         10,
-                        kwargs.get("a1y")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -304,56 +303,56 @@ class MatConcreteDamageRel3(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eta1")
+                        **kwargs,
                     ),
                     Field(
                         "eta2",
                         float,
                         10,
                         10,
-                        kwargs.get("eta2")
+                        **kwargs,
                     ),
                     Field(
                         "eta3",
                         float,
                         20,
                         10,
-                        kwargs.get("eta3")
+                        **kwargs,
                     ),
                     Field(
                         "eta4",
                         float,
                         30,
                         10,
-                        kwargs.get("eta4")
+                        **kwargs,
                     ),
                     Field(
                         "eta5",
                         float,
                         40,
                         10,
-                        kwargs.get("eta5")
+                        **kwargs,
                     ),
                     Field(
                         "eta6",
                         float,
                         50,
                         10,
-                        kwargs.get("eta6")
+                        **kwargs,
                     ),
                     Field(
                         "eta7",
                         float,
                         60,
                         10,
-                        kwargs.get("eta7")
+                        **kwargs,
                     ),
                     Field(
                         "eta8",
                         float,
                         70,
                         10,
-                        kwargs.get("eta8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -364,56 +363,56 @@ class MatConcreteDamageRel3(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eta09")
+                        **kwargs,
                     ),
                     Field(
                         "eta10",
                         float,
                         10,
                         10,
-                        kwargs.get("eta10")
+                        **kwargs,
                     ),
                     Field(
                         "eta11",
                         float,
                         20,
                         10,
-                        kwargs.get("eta11")
+                        **kwargs,
                     ),
                     Field(
                         "eta12",
                         float,
                         30,
                         10,
-                        kwargs.get("eta12")
+                        **kwargs,
                     ),
                     Field(
                         "eta13",
                         float,
                         40,
                         10,
-                        kwargs.get("eta13")
+                        **kwargs,
                     ),
                     Field(
                         "b2",
                         float,
                         50,
                         10,
-                        kwargs.get("b2")
+                        **kwargs,
                     ),
                     Field(
                         "a2f",
                         float,
                         60,
                         10,
-                        kwargs.get("a2f")
+                        **kwargs,
                     ),
                     Field(
                         "a2y",
                         float,
                         70,
                         10,
-                        kwargs.get("a2y")
+                        **kwargs,
                     ),
                 ],
             ),

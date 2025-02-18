@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryControlHgiPart(KeywordBase):
@@ -41,21 +40,21 @@ class ChemistryControlHgiPart(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "compid",
                         int,
                         10,
                         10,
-                        kwargs.get("compid")
+                        **kwargs,
                     ),
                     Field(
                         "exit_bc",
                         int,
                         20,
                         10,
-                        kwargs.get("exit_bc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,7 +65,7 @@ class ChemistryControlHgiPart(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("file")
+                        **kwargs,
                     ),
                 ],
             ),

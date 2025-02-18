@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,42 @@ class MatSphImplicitFluid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "mu",
                         float,
                         20,
                         10,
-                        kwargs.get("mu")
+                        **kwargs,
                     ),
                     Field(
                         "gamma1",
                         float,
                         30,
                         10,
-                        kwargs.get("gamma1")
+                        **kwargs,
                     ),
                     Field(
                         "gamma2",
                         float,
                         40,
                         10,
-                        kwargs.get("gamma2")
+                        **kwargs,
                     ),
                     Field(
                         "stens",
                         float,
                         50,
                         10,
-                        kwargs.get("stens")
+                        **kwargs,
                     ),
                 ],
             ),

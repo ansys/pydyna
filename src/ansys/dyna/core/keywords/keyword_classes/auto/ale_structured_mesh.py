@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleStructuredMesh(KeywordBase):
@@ -41,56 +40,60 @@ class AleStructuredMesh(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mshid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dpid",
                         int,
                         10,
                         10,
-                        kwargs.get("dpid")
+                        **kwargs,
                     ),
                     Field(
                         "nbid",
                         int,
                         20,
                         10,
-                        kwargs.get("nbid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ebid",
                         int,
                         30,
                         10,
-                        kwargs.get("ebid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "tdeath",
                         float,
                         70,
                         10,
-                        kwargs.get("tdeath", 1.0E16 if use_lspp_defaults() else None)
+                        1.0E16,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,35 +104,35 @@ class AleStructuredMesh(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cpidx")
+                        **kwargs,
                     ),
                     Field(
                         "cpidy",
                         int,
                         10,
                         10,
-                        kwargs.get("cpidy")
+                        **kwargs,
                     ),
                     Field(
                         "cpidz",
                         int,
                         20,
                         10,
-                        kwargs.get("cpidz")
+                        **kwargs,
                     ),
                     Field(
                         "nid0",
                         int,
                         30,
                         10,
-                        kwargs.get("nid0")
+                        **kwargs,
                     ),
                     Field(
                         "lcsid",
                         int,
                         40,
                         10,
-                        kwargs.get("lcsid")
+                        **kwargs,
                     ),
                 ],
             ),

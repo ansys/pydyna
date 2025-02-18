@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedRigidBodiesSet(KeywordBase):
@@ -41,21 +40,21 @@ class ConstrainedRigidBodiesSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pidl")
+                        **kwargs,
                     ),
                     Field(
                         "pidc",
                         int,
                         10,
                         10,
-                        kwargs.get("pidc")
+                        **kwargs,
                     ),
                     Field(
                         "iflag",
                         int,
                         20,
                         10,
-                        kwargs.get("iflag")
+                        **kwargs,
                     ),
                 ],
             ),

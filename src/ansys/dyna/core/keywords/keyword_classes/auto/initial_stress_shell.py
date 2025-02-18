@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.card_set import CardSet
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.series_card import SeriesCard
@@ -42,56 +41,63 @@ class InitialStressShellThicknessLargeCardSet(Cards):
                         float,
                         0,
                         10,
-                        kwargs.get("t")
+                        **kwargs,
                     ),
                     Field(
                         "sigxx",
                         float,
                         10,
                         10,
-                        kwargs.get("sigxx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigyy",
                         float,
                         20,
                         10,
-                        kwargs.get("sigyy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigzz",
                         float,
                         30,
                         10,
-                        kwargs.get("sigzz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigxy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigxy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigyz",
                         float,
                         50,
                         10,
-                        kwargs.get("sigyz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sigzx",
                         float,
                         60,
                         10,
-                        kwargs.get("sigzx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "eps",
                         float,
                         70,
                         10,
-                        kwargs.get("eps", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -212,56 +218,63 @@ class InitialStressShellCardSet(Cards):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "nplane",
                         int,
                         10,
                         10,
-                        kwargs.get("nplane", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nthick",
                         int,
                         20,
                         10,
-                        kwargs.get("nthick", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nhisv",
                         int,
                         30,
                         10,
-                        kwargs.get("nhisv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ntensr",
                         int,
                         40,
                         10,
-                        kwargs.get("ntensr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "large",
                         int,
                         50,
                         10,
-                        kwargs.get("large", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nthint",
                         int,
                         60,
                         10,
-                        kwargs.get("nthint", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nthhsv",
                         int,
                         70,
                         10,
-                        kwargs.get("nthhsv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

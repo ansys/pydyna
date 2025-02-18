@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ComponentGebodMale(KeywordBase):
@@ -41,21 +40,22 @@ class ComponentGebodMale(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("did")
+                        **kwargs,
                     ),
                     Field(
                         "units",
                         int,
                         10,
                         10,
-                        kwargs.get("units", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "size",
                         float,
                         20,
                         10,
-                        kwargs.get("size")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,42 +66,48 @@ class ComponentGebodMale(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vy",
                         float,
                         10,
                         10,
-                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vz",
                         float,
                         20,
                         10,
-                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "gx",
                         float,
                         30,
                         10,
-                        kwargs.get("gx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "gy",
                         float,
                         40,
                         10,
-                        kwargs.get("gy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "gz",
                         float,
                         50,
                         10,
-                        kwargs.get("gz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

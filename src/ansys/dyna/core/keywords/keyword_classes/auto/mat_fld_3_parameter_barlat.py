@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class MatFld3ParameterBarlat(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "hr",
                         float,
                         40,
                         10,
-                        kwargs.get("hr", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "p1",
                         float,
                         50,
                         10,
-                        kwargs.get("p1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         60,
                         10,
-                        kwargs.get("p2", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "iter",
                         float,
                         70,
                         10,
-                        kwargs.get("iter", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +109,56 @@ class MatFld3ParameterBarlat(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "r00",
                         float,
                         10,
                         10,
-                        kwargs.get("r00")
+                        **kwargs,
                     ),
                     Field(
                         "r45",
                         float,
                         20,
                         10,
-                        kwargs.get("r45")
+                        **kwargs,
                     ),
                     Field(
                         "r90",
                         float,
                         30,
                         10,
-                        kwargs.get("r90")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         40,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "e0",
                         float,
                         50,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "spi",
                         float,
                         60,
                         10,
-                        kwargs.get("spi")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         70,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +169,56 @@ class MatFld3ParameterBarlat(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         10,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         20,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "fldcid",
                         int,
                         30,
                         10,
-                        kwargs.get("fldcid")
+                        **kwargs,
                     ),
                     Field(
                         "rn",
                         float,
                         40,
                         10,
-                        kwargs.get("rn")
+                        **kwargs,
                     ),
                     Field(
                         "rt",
                         float,
                         50,
                         10,
-                        kwargs.get("rt")
+                        **kwargs,
                     ),
                     Field(
                         "fldsafe",
                         float,
                         60,
                         10,
-                        kwargs.get("fldsafe")
+                        **kwargs,
                     ),
                     Field(
                         "fldnipf",
                         int,
                         70,
                         10,
-                        kwargs.get("fldnipf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,42 +229,42 @@ class MatFld3ParameterBarlat(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -272,49 +275,49 @@ class MatFld3ParameterBarlat(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),

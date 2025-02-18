@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceLinkingNodeSet(KeywordBase):
@@ -41,35 +40,35 @@ class InterfaceLinkingNodeSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsid")
+                        **kwargs,
                     ),
                     Field(
                         "ifid",
                         int,
                         10,
                         10,
-                        kwargs.get("ifid")
+                        **kwargs,
                     ),
                     Field(
                         "fx",
                         int,
                         20,
                         10,
-                        kwargs.get("fx")
+                        **kwargs,
                     ),
                     Field(
                         "fy",
                         int,
                         30,
                         10,
-                        kwargs.get("fy")
+                        **kwargs,
                     ),
                     Field(
                         "fz",
                         int,
                         40,
                         10,
-                        kwargs.get("fz")
+                        **kwargs,
                     ),
                 ],
             ),

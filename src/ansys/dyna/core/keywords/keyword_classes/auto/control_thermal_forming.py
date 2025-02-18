@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlThermalForming(KeywordBase):
@@ -41,49 +40,55 @@ class ControlThermalForming(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("its")
+                        **kwargs,
                     ),
                     Field(
                         "ptype",
                         int,
                         10,
                         10,
-                        kwargs.get("ptype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tsf",
                         float,
                         20,
                         10,
-                        kwargs.get("tsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "thshel",
                         int,
                         30,
                         10,
-                        kwargs.get("thshel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ithoff",
                         int,
                         40,
                         10,
-                        kwargs.get("ithoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "solver",
                         int,
                         50,
                         10,
-                        kwargs.get("solver", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                     Field(
                         "fwork",
                         float,
                         60,
                         10,
-                        kwargs.get("fwork", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,56 +99,59 @@ class ControlThermalForming(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "frad",
                         float,
                         10,
                         10,
-                        kwargs.get("frad")
+                        **kwargs,
                     ),
                     Field(
                         "h0",
                         float,
                         20,
                         10,
-                        kwargs.get("h0")
+                        **kwargs,
                     ),
                     Field(
                         "lmin",
                         float,
                         30,
                         10,
-                        kwargs.get("lmin")
+                        **kwargs,
                     ),
                     Field(
                         "lmax",
                         float,
                         40,
                         10,
-                        kwargs.get("lmax")
+                        **kwargs,
                     ),
                     Field(
                         "ftoslv",
                         float,
                         50,
                         10,
-                        kwargs.get("ftoslv", 0.5 if use_lspp_defaults() else None)
+                        0.5,
+                        **kwargs,
                     ),
                     Field(
                         "bc_flg",
                         int,
                         60,
                         10,
-                        kwargs.get("bc_flg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "algo",
                         int,
                         70,
                         10,
-                        kwargs.get("algo", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -154,56 +162,57 @@ class ControlThermalForming(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcfst")
+                        **kwargs,
                     ),
                     Field(
                         "lcfdt",
                         int,
                         10,
                         10,
-                        kwargs.get("lcfdt")
+                        **kwargs,
                     ),
                     Field(
                         "formula",
                         int,
                         20,
                         10,
-                        kwargs.get("formula", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         int,
                         30,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         int,
                         40,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         int,
                         50,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "d",
                         int,
                         60,
                         10,
-                        kwargs.get("d")
+                        **kwargs,
                     ),
                     Field(
                         "lch",
                         int,
                         70,
                         10,
-                        kwargs.get("lch")
+                        **kwargs,
                     ),
                 ],
             ),

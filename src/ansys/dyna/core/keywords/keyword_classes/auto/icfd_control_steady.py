@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdControlSteady(KeywordBase):
@@ -41,56 +40,64 @@ class IcfdControlSteady(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("its", 1000000 if use_lspp_defaults() else None)
+                        1000000,
+                        **kwargs,
                     ),
                     Field(
                         "tol1",
                         float,
                         10,
                         10,
-                        kwargs.get("tol1", 1.e-3 if use_lspp_defaults() else None)
+                        1.e-3,
+                        **kwargs,
                     ),
                     Field(
                         "tol2",
                         float,
                         20,
                         10,
-                        kwargs.get("tol2", 1.e-3 if use_lspp_defaults() else None)
+                        1.e-3,
+                        **kwargs,
                     ),
                     Field(
                         "tol3",
                         float,
                         30,
                         10,
-                        kwargs.get("tol3", 1.e-3 if use_lspp_defaults() else None)
+                        1.e-3,
+                        **kwargs,
                     ),
                     Field(
                         "rel1",
                         float,
                         40,
                         10,
-                        kwargs.get("rel1", 0.3 if use_lspp_defaults() else None)
+                        0.3,
+                        **kwargs,
                     ),
                     Field(
                         "rel2",
                         float,
                         50,
                         10,
-                        kwargs.get("rel2", 0.7 if use_lspp_defaults() else None)
+                        0.7,
+                        **kwargs,
                     ),
                     Field(
                         "urel",
                         float,
                         60,
                         10,
-                        kwargs.get("urel", 1. if use_lspp_defaults() else None)
+                        1.,
+                        **kwargs,
                     ),
                     Field(
                         "order",
                         int,
                         70,
                         10,
-                        kwargs.get("order", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

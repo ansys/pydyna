@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,64 @@ class DefineDePatternOutput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ptype",
                         int,
                         10,
                         10,
-                        kwargs.get("ptype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "xo",
                         float,
                         20,
                         10,
-                        kwargs.get("xo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yo",
                         float,
                         30,
                         10,
-                        kwargs.get("yo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zo",
                         float,
                         40,
                         10,
-                        kwargs.get("zo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xh",
                         float,
                         50,
                         10,
-                        kwargs.get("xh", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yh",
                         float,
                         60,
                         10,
-                        kwargs.get("yh", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zh",
                         float,
                         70,
                         10,
-                        kwargs.get("zh", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,7 +113,8 @@ class DefineDePatternOutput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -117,56 +125,64 @@ class DefineDePatternOutput(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dist1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dist2",
                         float,
                         10,
                         10,
-                        kwargs.get("dist2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dist3",
                         float,
                         20,
                         10,
-                        kwargs.get("dist3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dist4",
                         float,
                         30,
                         10,
-                        kwargs.get("dist4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dist5",
                         float,
                         40,
                         10,
-                        kwargs.get("dist5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dist6",
                         float,
                         50,
                         10,
-                        kwargs.get("dist6", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dist7",
                         float,
                         60,
                         10,
-                        kwargs.get("dist7", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dist8",
                         float,
                         70,
                         10,
-                        kwargs.get("dist8", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

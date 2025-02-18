@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryCyclic(KeywordBase):
@@ -41,49 +40,51 @@ class BoundaryCyclic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xc")
+                        **kwargs,
                     ),
                     Field(
                         "yc",
                         float,
                         10,
                         10,
-                        kwargs.get("yc")
+                        **kwargs,
                     ),
                     Field(
                         "zc",
                         float,
                         20,
                         10,
-                        kwargs.get("zc")
+                        **kwargs,
                     ),
                     Field(
                         "nsid1",
                         int,
                         30,
                         10,
-                        kwargs.get("nsid1")
+                        **kwargs,
                     ),
                     Field(
                         "nsid2",
                         int,
                         40,
                         10,
-                        kwargs.get("nsid2")
+                        **kwargs,
                     ),
                     Field(
                         "iglobal",
                         int,
                         50,
                         10,
-                        kwargs.get("iglobal", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "isort",
                         int,
                         60,
                         10,
-                        kwargs.get("isort", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

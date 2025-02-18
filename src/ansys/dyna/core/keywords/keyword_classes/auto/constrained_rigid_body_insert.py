@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedRigidBodyInsert(KeywordBase):
@@ -41,35 +40,36 @@ class ConstrainedRigidBodyInsert(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "pidl",
                         int,
                         10,
                         10,
-                        kwargs.get("pidl")
+                        **kwargs,
                     ),
                     Field(
                         "pidc",
                         int,
                         20,
                         10,
-                        kwargs.get("pidc")
+                        **kwargs,
                     ),
                     Field(
                         "coordid",
                         int,
                         30,
                         10,
-                        kwargs.get("coordid")
+                        **kwargs,
                     ),
                     Field(
                         "idir",
                         int,
                         40,
                         10,
-                        kwargs.get("idir", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,21 +80,23 @@ class ConstrainedRigidBodyInsert(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mcid",
                         int,
                         10,
                         10,
-                        kwargs.get("mcid")
+                        **kwargs,
                     ),
                     Field(
                         "deathm",
                         float,
                         20,
                         10,
-                        kwargs.get("deathm", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -105,14 +107,15 @@ class ConstrainedRigidBodyInsert(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("partb")
+                        **kwargs,
                     ),
                     Field(
                         "deathb",
                         float,
                         10,
                         10,
-                        kwargs.get("deathb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

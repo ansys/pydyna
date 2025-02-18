@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEpPurkinjeNetwork(KeywordBase):
@@ -41,56 +40,56 @@ class EmEpPurkinjeNetwork(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("purkid")
+                        **kwargs,
                     ),
                     Field(
                         "buildnet",
                         int,
                         10,
                         10,
-                        kwargs.get("buildnet")
+                        **kwargs,
                     ),
                     Field(
                         "ssid",
                         int,
                         20,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "mid",
                         int,
                         30,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "pointstx",
                         float,
                         40,
                         10,
-                        kwargs.get("pointstx")
+                        **kwargs,
                     ),
                     Field(
                         "pointsty",
                         float,
                         50,
                         10,
-                        kwargs.get("pointsty")
+                        **kwargs,
                     ),
                     Field(
                         "pointstz",
                         float,
                         60,
                         10,
-                        kwargs.get("pointstz")
+                        **kwargs,
                     ),
                     Field(
                         "edgetlen",
                         float,
                         70,
                         10,
-                        kwargs.get("edgetlen")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,35 +100,35 @@ class EmEpPurkinjeNetwork(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("numgen")
+                        **kwargs,
                     ),
                     Field(
                         "numbrinit",
                         int,
                         10,
                         10,
-                        kwargs.get("numbrinit")
+                        **kwargs,
                     ),
                     Field(
                         "numsplit",
                         int,
                         20,
                         10,
-                        kwargs.get("numsplit")
+                        **kwargs,
                     ),
                     Field(
                         "inodestld",
                         int,
                         30,
                         10,
-                        kwargs.get("inodestld")
+                        **kwargs,
                     ),
                     Field(
                         "iedgestld",
                         int,
                         40,
                         10,
-                        kwargs.get("iedgestld")
+                        **kwargs,
                     ),
                 ],
             ),

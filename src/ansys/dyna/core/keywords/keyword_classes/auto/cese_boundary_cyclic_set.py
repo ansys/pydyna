@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseBoundaryCyclicSet(KeywordBase):
@@ -41,21 +40,22 @@ class CeseBoundaryCyclicSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid1")
+                        **kwargs,
                     ),
                     Field(
                         "ssid2",
                         int,
                         10,
                         10,
-                        kwargs.get("ssid2")
+                        **kwargs,
                     ),
                     Field(
                         "cyctyp",
                         int,
                         20,
                         10,
-                        kwargs.get("cyctyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,49 +66,52 @@ class CeseBoundaryCyclicSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("axisx1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "axisy1",
                         float,
                         10,
                         10,
-                        kwargs.get("axisy1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "axisz1",
                         float,
                         20,
                         10,
-                        kwargs.get("axisz1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dirx",
                         float,
                         30,
                         10,
-                        kwargs.get("dirx")
+                        **kwargs,
                     ),
                     Field(
                         "diry",
                         float,
                         40,
                         10,
-                        kwargs.get("diry")
+                        **kwargs,
                     ),
                     Field(
                         "dirz",
                         float,
                         50,
                         10,
-                        kwargs.get("dirz")
+                        **kwargs,
                     ),
                     Field(
                         "rotang",
                         float,
                         60,
                         10,
-                        kwargs.get("rotang")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,21 +122,21 @@ class CeseBoundaryCyclicSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("transx")
+                        **kwargs,
                     ),
                     Field(
                         "transy",
                         float,
                         10,
                         10,
-                        kwargs.get("transy")
+                        **kwargs,
                     ),
                     Field(
                         "transz",
                         float,
                         20,
                         10,
-                        kwargs.get("transz")
+                        **kwargs,
                     ),
                 ],
             ),

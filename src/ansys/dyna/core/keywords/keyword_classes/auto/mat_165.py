@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class Mat165(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "h",
                         float,
                         50,
                         10,
-                        kwargs.get("h")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         60,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         70,
                         10,
-                        kwargs.get("gamma")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,7 +105,8 @@ class Mat165(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs", 1.E+16 if use_lspp_defaults() else None)
+                        1.E+16,
+                        **kwargs,
                     ),
                 ],
             ),

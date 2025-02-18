@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class DefineAlebagBag(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("bagid")
+                        **kwargs,
                     ),
                     Field(
                         "sid",
                         int,
                         10,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "sidtype",
                         int,
                         20,
                         10,
-                        kwargs.get("sidtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cvbag",
                         int,
                         30,
                         10,
-                        kwargs.get("cvbag", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "iblock",
                         int,
                         40,
                         10,
-                        kwargs.get("iblock", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vcof",
                         float,
                         50,
                         10,
-                        kwargs.get("vcof")
+                        **kwargs,
                     ),
                     Field(
                         "vset",
                         int,
                         60,
                         10,
-                        kwargs.get("vset")
+                        **kwargs,
                     ),
                     Field(
                         "vtype",
                         int,
                         70,
                         10,
-                        kwargs.get("vtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +109,64 @@ class DefineAlebagBag(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nquad", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ctype",
                         int,
                         10,
                         10,
-                        kwargs.get("ctype", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "pfac",
                         float,
                         20,
                         10,
-                        kwargs.get("pfac", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                     Field(
                         "fric",
                         float,
                         30,
                         10,
-                        kwargs.get("fric", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "frcmin",
                         float,
                         40,
                         10,
-                        kwargs.get("frcmin", 0.5 if use_lspp_defaults() else None)
+                        0.5,
+                        **kwargs,
                     ),
                     Field(
                         "normtyp",
                         int,
                         50,
                         10,
-                        kwargs.get("normtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ileak",
                         int,
                         60,
                         10,
-                        kwargs.get("ileak", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pleak",
                         float,
                         70,
                         10,
-                        kwargs.get("pleak", 0.01 if use_lspp_defaults() else None)
+                        0.01,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,21 +177,24 @@ class DefineAlebagBag(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("norm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "start",
                         float,
                         10,
                         10,
-                        kwargs.get("start", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "end",
                         float,
                         20,
                         10,
-                        kwargs.get("end", 1.0E+10 if use_lspp_defaults() else None)
+                        1.0E+10,
+                        **kwargs,
                     ),
                 ],
             ),

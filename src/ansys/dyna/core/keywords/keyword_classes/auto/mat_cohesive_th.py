@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,57 @@ class MatCohesiveTh(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "roflg",
                         float,
                         20,
                         10,
-                        kwargs.get("roflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "intfail",
                         float,
                         30,
                         10,
-                        kwargs.get("intfail")
+                        **kwargs,
                     ),
                     Field(
                         "sigmax",
                         float,
                         40,
                         10,
-                        kwargs.get("sigmax")
+                        **kwargs,
                     ),
                     Field(
                         "nls",
                         float,
                         50,
                         10,
-                        kwargs.get("nls")
+                        **kwargs,
                     ),
                     Field(
                         "tls",
                         float,
                         60,
                         10,
-                        kwargs.get("tls")
+                        **kwargs,
                     ),
                     Field(
                         "tls2",
                         float,
                         70,
                         10,
-                        kwargs.get("tls2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,49 +106,50 @@ class MatCohesiveTh(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lamda1")
+                        **kwargs,
                     ),
                     Field(
                         "lamda2",
                         float,
                         10,
                         10,
-                        kwargs.get("lamda2")
+                        **kwargs,
                     ),
                     Field(
                         "lamdaf",
                         float,
                         20,
                         10,
-                        kwargs.get("lamdaf")
+                        **kwargs,
                     ),
                     Field(
                         "stfsf",
                         float,
                         30,
                         10,
-                        kwargs.get("stfsf")
+                        **kwargs,
                     ),
                     Field(
                         "isw",
                         int,
                         40,
                         10,
-                        kwargs.get("isw", -1 if use_lspp_defaults() else None)
+                        -1,
+                        **kwargs,
                     ),
                     Field(
                         "alpha1",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha1")
+                        **kwargs,
                     ),
                     Field(
                         "alpha2",
                         float,
                         60,
                         10,
-                        kwargs.get("alpha2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -159,14 +160,14 @@ class MatCohesiveTh(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dr")
+                        **kwargs,
                     ),
                     Field(
                         "alpha3",
                         float,
                         10,
                         10,
-                        kwargs.get("alpha3")
+                        **kwargs,
                     ),
                 ],
             ),

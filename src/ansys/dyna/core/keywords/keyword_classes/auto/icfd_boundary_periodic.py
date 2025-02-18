@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdBoundaryPeriodic(KeywordBase):
@@ -41,49 +40,50 @@ class IcfdBoundaryPeriodic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "ptype",
                         int,
                         10,
                         10,
-                        kwargs.get("ptype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "pid2",
                         int,
                         20,
                         10,
-                        kwargs.get("pid2")
+                        **kwargs,
                     ),
                     Field(
                         "pdlcid",
                         int,
                         30,
                         10,
-                        kwargs.get("pdlcid")
+                        **kwargs,
                     ),
                     Field(
                         "axe",
                         int,
                         40,
                         10,
-                        kwargs.get("axe")
+                        **kwargs,
                     ),
                     Field(
                         "ptid",
                         int,
                         50,
                         10,
-                        kwargs.get("ptid")
+                        **kwargs,
                     ),
                     Field(
                         "angle",
                         int,
                         60,
                         10,
-                        kwargs.get("angle")
+                        **kwargs,
                     ),
                 ],
             ),

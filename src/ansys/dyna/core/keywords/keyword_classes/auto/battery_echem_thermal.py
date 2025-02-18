@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BatteryEchemThermal(KeywordBase):
@@ -41,49 +40,49 @@ class BatteryEchemThermal(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("thame")
+                        **kwargs,
                     ),
                     Field(
                         "tid",
                         int,
                         10,
                         10,
-                        kwargs.get("tid")
+                        **kwargs,
                     ),
                     Field(
                         "iprt",
                         int,
                         20,
                         10,
-                        kwargs.get("iprt")
+                        **kwargs,
                     ),
                     Field(
                         "cp",
                         float,
                         30,
                         10,
-                        kwargs.get("cp")
+                        **kwargs,
                     ),
                     Field(
                         "hconv",
                         float,
                         40,
                         10,
-                        kwargs.get("hconv")
+                        **kwargs,
                     ),
                     Field(
                         "temp",
                         float,
                         50,
                         10,
-                        kwargs.get("temp")
+                        **kwargs,
                     ),
                     Field(
                         "dudt",
                         float,
                         60,
                         10,
-                        kwargs.get("dudt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,7 +93,7 @@ class BatteryEchemThermal(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),

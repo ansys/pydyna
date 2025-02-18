@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualcesePartMultiphase(KeywordBase):
@@ -41,42 +40,42 @@ class DualcesePartMultiphase(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "react_id",
                         int,
                         10,
                         10,
-                        kwargs.get("react_id")
+                        **kwargs,
                     ),
                     Field(
                         "eossid",
                         int,
                         20,
                         10,
-                        kwargs.get("eossid")
+                        **kwargs,
                     ),
                     Field(
                         "mid",
                         int,
                         30,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "fsitype",
                         str,
                         40,
                         10,
-                        kwargs.get("fsitype")
+                        **kwargs,
                     ),
                     Field(
                         "mmshid",
                         int,
                         50,
                         10,
-                        kwargs.get("mmshid")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlContact(KeywordBase):
@@ -41,56 +40,63 @@ class ControlContact(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("slsfac", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                     Field(
                         "rwpnal",
                         float,
                         10,
                         10,
-                        kwargs.get("rwpnal")
+                        **kwargs,
                     ),
                     Field(
                         "islchk",
                         int,
                         20,
                         10,
-                        kwargs.get("islchk", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "shlthk",
                         int,
                         30,
                         10,
-                        kwargs.get("shlthk", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "penopt",
                         int,
                         40,
                         10,
-                        kwargs.get("penopt", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "thkchg",
                         int,
                         50,
                         10,
-                        kwargs.get("thkchg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "orien",
                         int,
                         60,
                         10,
-                        kwargs.get("orien", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "enmass",
                         int,
                         70,
                         10,
-                        kwargs.get("enmass", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +107,64 @@ class ControlContact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("usrstr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "usrfrc",
                         int,
                         10,
                         10,
-                        kwargs.get("usrfrc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nsbcs",
                         int,
                         20,
                         10,
-                        kwargs.get("nsbcs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "interm",
                         int,
                         30,
                         10,
-                        kwargs.get("interm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "xpene",
                         float,
                         40,
                         10,
-                        kwargs.get("xpene", 4.0 if use_lspp_defaults() else None)
+                        4.0,
+                        **kwargs,
                     ),
                     Field(
                         "ssthk",
                         int,
                         50,
                         10,
-                        kwargs.get("ssthk", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ecdt",
                         int,
                         60,
                         10,
-                        kwargs.get("ecdt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tiedprj",
                         int,
                         70,
                         10,
-                        kwargs.get("tiedprj", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,49 +175,56 @@ class ControlContact(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfric", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dfric",
                         float,
                         10,
                         10,
-                        kwargs.get("dfric", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "edc",
                         float,
                         20,
                         10,
-                        kwargs.get("edc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vfc",
                         float,
                         30,
                         10,
-                        kwargs.get("vfc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "th",
                         float,
                         40,
                         10,
-                        kwargs.get("th", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "th_sf",
                         float,
                         50,
                         10,
-                        kwargs.get("th_sf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pen_sf",
                         float,
                         60,
                         10,
-                        kwargs.get("pen_sf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -214,49 +235,55 @@ class ControlContact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ignore", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "frceng",
                         int,
                         10,
                         10,
-                        kwargs.get("frceng", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "skiprwg",
                         int,
                         20,
                         10,
-                        kwargs.get("skiprwg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "outseg",
                         int,
                         30,
                         10,
-                        kwargs.get("outseg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "spotstp",
                         int,
                         40,
                         10,
-                        kwargs.get("spotstp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "spotdel",
                         int,
                         50,
                         10,
-                        kwargs.get("spotdel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "spothin",
                         float,
                         60,
                         10,
-                        kwargs.get("spothin")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -267,56 +294,64 @@ class ControlContact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("isym", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nserod",
                         int,
                         10,
                         10,
-                        kwargs.get("nserod", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rwgaps",
                         int,
                         20,
                         10,
-                        kwargs.get("rwgaps", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "rwgdth",
                         float,
                         30,
                         10,
-                        kwargs.get("rwgdth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rwksf",
                         float,
                         40,
                         10,
-                        kwargs.get("rwksf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "icov",
                         int,
                         50,
                         10,
-                        kwargs.get("icov", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "swradf",
                         float,
                         60,
                         10,
-                        kwargs.get("swradf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ithoff",
                         int,
                         70,
                         10,
-                        kwargs.get("ithoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -327,56 +362,63 @@ class ControlContact(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("shledg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pstiff",
                         int,
                         10,
                         10,
-                        kwargs.get("pstiff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ithcnt",
                         int,
                         20,
                         10,
-                        kwargs.get("ithcnt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tdcnof",
                         int,
                         30,
                         10,
-                        kwargs.get("tdcnof", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ftall",
                         int,
                         40,
                         10,
-                        kwargs.get("ftall", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "shltrw",
                         float,
                         60,
                         10,
-                        kwargs.get("shltrw", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "igactc",
                         int,
                         70,
                         10,
-                        kwargs.get("igactc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

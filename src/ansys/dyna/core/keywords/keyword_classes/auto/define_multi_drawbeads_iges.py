@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,7 +45,7 @@ class DefineMultiDrawbeadsIges(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -57,35 +56,35 @@ class DefineMultiDrawbeadsIges(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("dbid")
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         int,
                         10,
                         10,
-                        kwargs.get("vid")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         20,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "blkid",
                         int,
                         30,
                         10,
-                        kwargs.get("blkid")
+                        **kwargs,
                     ),
                     Field(
                         "ncur",
                         int,
                         40,
                         10,
-                        kwargs.get("ncur")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -96,14 +95,15 @@ class DefineMultiDrawbeadsIges(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("crvid")
+                        **kwargs,
                     ),
                     Field(
                         "bforce",
                         float,
                         10,
                         10,
-                        kwargs.get("bforce", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

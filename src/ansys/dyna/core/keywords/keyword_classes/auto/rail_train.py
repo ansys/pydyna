@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class RailTrain(KeywordBase):
@@ -41,56 +40,59 @@ class RailTrain(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "nsetid",
                         int,
                         10,
                         10,
-                        kwargs.get("nsetid")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "finit",
                         float,
                         30,
                         10,
-                        kwargs.get("finit", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "trid",
                         int,
                         50,
                         10,
-                        kwargs.get("trid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcur",
                         int,
                         60,
                         10,
-                        kwargs.get("lcur")
+                        **kwargs,
                     ),
                     Field(
                         "offs",
                         float,
                         70,
                         10,
-                        kwargs.get("offs", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +103,64 @@ class RailTrain(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vertstf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "latstf",
                         float,
                         10,
                         10,
-                        kwargs.get("latstf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         20,
                         10,
-                        kwargs.get("v2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         30,
                         10,
-                        kwargs.get("v3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "l2",
                         float,
                         40,
                         10,
-                        kwargs.get("l2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "l3",
                         float,
                         50,
                         10,
-                        kwargs.get("l3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "latdir",
                         float,
                         60,
                         10,
-                        kwargs.get("latdir", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fric",
                         float,
                         70,
                         10,
-                        kwargs.get("fric", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

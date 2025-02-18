@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class Mat191(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "asflag",
                         float,
                         40,
                         10,
-                        kwargs.get("asflag", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ftype",
                         int,
                         50,
                         10,
-                        kwargs.get("ftype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "degrad",
                         int,
                         60,
                         10,
-                        kwargs.get("degrad", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ifema",
                         int,
                         70,
                         10,
-                        kwargs.get("ifema", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +109,60 @@ class Mat191(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcpms")
+                        **kwargs,
                     ),
                     Field(
                         "sfs",
                         float,
                         10,
                         10,
-                        kwargs.get("sfs", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcpmt",
                         int,
                         20,
                         10,
-                        kwargs.get("lcpmt")
+                        **kwargs,
                     ),
                     Field(
                         "sft",
                         float,
                         30,
                         10,
-                        kwargs.get("sft", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcat",
                         int,
                         40,
                         10,
-                        kwargs.get("lcat")
+                        **kwargs,
                     ),
                     Field(
                         "sfat",
                         float,
                         50,
                         10,
-                        kwargs.get("sfat", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcac",
                         int,
                         60,
                         10,
-                        kwargs.get("lcac")
+                        **kwargs,
                     ),
                     Field(
                         "sfac",
                         float,
                         70,
                         10,
-                        kwargs.get("sfac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +173,62 @@ class Mat191(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         10,
                         10,
-                        kwargs.get("beta", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         20,
                         10,
-                        kwargs.get("gamma", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "delta",
                         float,
                         30,
                         10,
-                        kwargs.get("delta", 4.0 if use_lspp_defaults() else None)
+                        4.0,
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         40,
                         10,
-                        kwargs.get("a", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         50,
                         10,
-                        kwargs.get("b", -1.0 if use_lspp_defaults() else None)
+                        -1.0,
+                        **kwargs,
                     ),
                     Field(
                         "foffs",
                         float,
                         60,
                         10,
-                        kwargs.get("foffs")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +239,56 @@ class Mat191(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "d",
                         float,
                         10,
                         10,
-                        kwargs.get("d")
+                        **kwargs,
                     ),
                     Field(
                         "w",
                         float,
                         20,
                         10,
-                        kwargs.get("w")
+                        **kwargs,
                     ),
                     Field(
                         "tf",
                         float,
                         30,
                         10,
-                        kwargs.get("tf")
+                        **kwargs,
                     ),
                     Field(
                         "tw",
                         float,
                         40,
                         10,
-                        kwargs.get("tw")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,56 +299,59 @@ class Mat191(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("phi_t", 0.8 if use_lspp_defaults() else None)
+                        0.8,
+                        **kwargs,
                     ),
                     Field(
                         "phi_c",
                         float,
                         10,
                         10,
-                        kwargs.get("phi_c", 0.85 if use_lspp_defaults() else None)
+                        0.85,
+                        **kwargs,
                     ),
                     Field(
                         "phi_b",
                         float,
                         20,
                         10,
-                        kwargs.get("phi_b", 0.9 if use_lspp_defaults() else None)
+                        0.9,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),

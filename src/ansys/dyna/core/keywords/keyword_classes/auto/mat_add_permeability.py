@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,50 @@ class MatAddPermeability(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "perm",
                         float,
                         10,
                         10,
-                        kwargs.get("perm")
+                        **kwargs,
                     ),
                     Field(
                         "permy",
                         int,
                         20,
                         10,
-                        kwargs.get("permy")
+                        **kwargs,
                     ),
                     Field(
                         "permz",
                         int,
                         30,
                         10,
-                        kwargs.get("permz")
+                        **kwargs,
                     ),
                     Field(
                         "thexp",
                         float,
                         40,
                         10,
-                        kwargs.get("thexp")
+                        **kwargs,
                     ),
                     Field(
                         "lckz",
                         int,
                         50,
                         10,
-                        kwargs.get("lckz")
+                        **kwargs,
                     ),
                     Field(
                         "pmtyp",
                         int,
                         60,
                         10,
-                        kwargs.get("pmtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

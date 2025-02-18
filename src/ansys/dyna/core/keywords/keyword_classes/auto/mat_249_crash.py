@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class Mat249Crash(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "em",
                         float,
                         20,
                         10,
-                        kwargs.get("em")
+                        **kwargs,
                     ),
                     Field(
                         "prm",
                         float,
                         30,
                         10,
-                        kwargs.get("prm")
+                        **kwargs,
                     ),
                     Field(
                         "lcsigy",
                         int,
                         40,
                         10,
-                        kwargs.get("lcsigy")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         50,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "pfl",
                         float,
                         60,
                         10,
-                        kwargs.get("pfl")
+                        **kwargs,
                     ),
                     Field(
                         "visc",
                         float,
                         70,
                         10,
-                        kwargs.get("visc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class Mat249Crash(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nfib")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         10,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         50,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         60,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         70,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +165,56 @@ class Mat249Crash(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "mangl",
                         float,
                         60,
                         10,
-                        kwargs.get("mangl")
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         float,
                         70,
                         10,
-                        kwargs.get("thick")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +225,56 @@ class Mat249Crash(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vg1")
+                        **kwargs,
                     ),
                     Field(
                         "vb1",
                         float,
                         10,
                         10,
-                        kwargs.get("vb1")
+                        **kwargs,
                     ),
                     Field(
                         "vg2",
                         float,
                         20,
                         10,
-                        kwargs.get("vg2")
+                        **kwargs,
                     ),
                     Field(
                         "vb2",
                         float,
                         30,
                         10,
-                        kwargs.get("vb2")
+                        **kwargs,
                     ),
                     Field(
                         "vg3",
                         float,
                         40,
                         10,
-                        kwargs.get("vg3")
+                        **kwargs,
                     ),
                     Field(
                         "vb3",
                         float,
                         50,
                         10,
-                        kwargs.get("vb3")
+                        **kwargs,
                     ),
                     Field(
                         "vg4",
                         float,
                         40,
                         10,
-                        kwargs.get("vg4")
+                        **kwargs,
                     ),
                     Field(
                         "vb4",
                         float,
                         50,
                         10,
-                        kwargs.get("vb4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,56 +285,56 @@ class Mat249Crash(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idf1")
+                        **kwargs,
                     ),
                     Field(
                         "alph1",
                         int,
                         10,
                         10,
-                        kwargs.get("alph1")
+                        **kwargs,
                     ),
                     Field(
                         "ef1",
                         int,
                         20,
                         10,
-                        kwargs.get("ef1")
+                        **kwargs,
                     ),
                     Field(
                         "lcef1",
                         int,
                         30,
                         10,
-                        kwargs.get("lcef1")
+                        **kwargs,
                     ),
                     Field(
                         "g23_1",
                         int,
                         40,
                         10,
-                        kwargs.get("g23_1")
+                        **kwargs,
                     ),
                     Field(
                         "g31_1",
                         int,
                         50,
                         10,
-                        kwargs.get("g31_1")
+                        **kwargs,
                     ),
                     Field(
                         "daf1",
                         int,
                         60,
                         10,
-                        kwargs.get("daf1")
+                        **kwargs,
                     ),
                     Field(
                         "dam1",
                         int,
                         70,
                         10,
-                        kwargs.get("dam1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -346,42 +345,42 @@ class Mat249Crash(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("g12")
+                        **kwargs,
                     ),
                     Field(
                         "lcg12",
                         int,
                         10,
                         10,
-                        kwargs.get("lcg12")
+                        **kwargs,
                     ),
                     Field(
                         "aloc12",
                         int,
                         20,
                         10,
-                        kwargs.get("aloc12")
+                        **kwargs,
                     ),
                     Field(
                         "gloc12",
                         int,
                         30,
                         10,
-                        kwargs.get("gloc12")
+                        **kwargs,
                     ),
                     Field(
                         "meth12",
                         int,
                         40,
                         10,
-                        kwargs.get("meth12")
+                        **kwargs,
                     ),
                     Field(
                         "dam12",
                         int,
                         50,
                         10,
-                        kwargs.get("dam12")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -392,56 +391,56 @@ class Mat249Crash(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idf2")
+                        **kwargs,
                     ),
                     Field(
                         "alph2",
                         float,
                         10,
                         10,
-                        kwargs.get("alph2")
+                        **kwargs,
                     ),
                     Field(
                         "ef2",
                         float,
                         20,
                         10,
-                        kwargs.get("ef2")
+                        **kwargs,
                     ),
                     Field(
                         "lcef2",
                         int,
                         30,
                         10,
-                        kwargs.get("lcef2")
+                        **kwargs,
                     ),
                     Field(
                         "g23_2",
                         float,
                         40,
                         10,
-                        kwargs.get("g23_2")
+                        **kwargs,
                     ),
                     Field(
                         "g31_2",
                         float,
                         50,
                         10,
-                        kwargs.get("g31_2")
+                        **kwargs,
                     ),
                     Field(
                         "daf2",
                         int,
                         60,
                         10,
-                        kwargs.get("daf2")
+                        **kwargs,
                     ),
                     Field(
                         "dam2",
                         int,
                         70,
                         10,
-                        kwargs.get("dam2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -452,42 +451,42 @@ class Mat249Crash(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("g23")
+                        **kwargs,
                     ),
                     Field(
                         "lcg23",
                         int,
                         10,
                         10,
-                        kwargs.get("lcg23")
+                        **kwargs,
                     ),
                     Field(
                         "aloc23",
                         float,
                         20,
                         10,
-                        kwargs.get("aloc23")
+                        **kwargs,
                     ),
                     Field(
                         "gloc23",
                         float,
                         30,
                         10,
-                        kwargs.get("gloc23")
+                        **kwargs,
                     ),
                     Field(
                         "meth23",
                         int,
                         40,
                         10,
-                        kwargs.get("meth23")
+                        **kwargs,
                     ),
                     Field(
                         "dam23",
                         int,
                         50,
                         10,
-                        kwargs.get("dam23")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -498,56 +497,56 @@ class Mat249Crash(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idf3")
+                        **kwargs,
                     ),
                     Field(
                         "alph3",
                         float,
                         10,
                         10,
-                        kwargs.get("alph3")
+                        **kwargs,
                     ),
                     Field(
                         "ef3",
                         float,
                         20,
                         10,
-                        kwargs.get("ef3")
+                        **kwargs,
                     ),
                     Field(
                         "lcef3",
                         int,
                         30,
                         10,
-                        kwargs.get("lcef3")
+                        **kwargs,
                     ),
                     Field(
                         "g23_3",
                         float,
                         40,
                         10,
-                        kwargs.get("g23_3")
+                        **kwargs,
                     ),
                     Field(
                         "g31_3",
                         float,
                         50,
                         10,
-                        kwargs.get("g31_3")
+                        **kwargs,
                     ),
                     Field(
                         "daf3",
                         int,
                         60,
                         10,
-                        kwargs.get("daf3")
+                        **kwargs,
                     ),
                     Field(
                         "dam3",
                         int,
                         70,
                         10,
-                        kwargs.get("dam3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -558,21 +557,21 @@ class Mat249Crash(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("postv")
+                        **kwargs,
                     ),
                     Field(
                         "viscs",
                         float,
                         10,
                         10,
-                        kwargs.get("viscs")
+                        **kwargs,
                     ),
                     Field(
                         "ihis",
                         float,
                         20,
                         10,
-                        kwargs.get("ihis")
+                        **kwargs,
                     ),
                 ],
             ),

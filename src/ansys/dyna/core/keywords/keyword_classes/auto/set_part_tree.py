@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,7 +45,7 @@ class SetPartTree(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("brid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -57,7 +56,7 @@ class SetPartTree(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -68,56 +67,56 @@ class SetPartTree(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("compi")
+                        **kwargs,
                     ),
                     Field(
                         "compi",
                         int,
                         10,
                         10,
-                        kwargs.get("compi")
+                        **kwargs,
                     ),
                     Field(
                         "compi",
                         int,
                         20,
                         10,
-                        kwargs.get("compi")
+                        **kwargs,
                     ),
                     Field(
                         "compi",
                         int,
                         30,
                         10,
-                        kwargs.get("compi")
+                        **kwargs,
                     ),
                     Field(
                         "compi",
                         int,
                         40,
                         10,
-                        kwargs.get("compi")
+                        **kwargs,
                     ),
                     Field(
                         "compi",
                         int,
                         50,
                         10,
-                        kwargs.get("compi")
+                        **kwargs,
                     ),
                     Field(
                         "compi",
                         int,
                         60,
                         10,
-                        kwargs.get("compi")
+                        **kwargs,
                     ),
                     Field(
                         "compi",
                         int,
                         70,
                         10,
-                        kwargs.get("compi")
+                        **kwargs,
                     ),
                 ],
             ),

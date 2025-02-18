@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,56 +46,58 @@ class ConstrainedBeamInSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("bside")
+                        **kwargs,
                     ),
                     Field(
                         "ssid",
                         int,
                         10,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "bstyp",
                         int,
                         20,
                         10,
-                        kwargs.get("bstyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sstyp",
                         int,
                         30,
                         10,
-                        kwargs.get("sstyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ncoup",
                         int,
                         60,
                         10,
-                        kwargs.get("ncoup")
+                        **kwargs,
                     ),
                     Field(
                         "cdir",
                         int,
                         70,
                         10,
-                        kwargs.get("cdir")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,56 +108,59 @@ class ConstrainedBeamInSolid(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("start", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "end",
                         float,
                         10,
                         10,
-                        kwargs.get("end", 10E20 if use_lspp_defaults() else None)
+                        10E20,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "axfor ",
                         int,
                         30,
                         10,
-                        kwargs.get("axfor ")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "pssf",
                         float,
                         50,
                         10,
-                        kwargs.get("pssf", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "xint",
                         int,
                         70,
                         10,
-                        kwargs.get("xint")
+                        **kwargs,
                     ),
                 ],
             ),

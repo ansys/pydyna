@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class Mat277(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "k1",
                         float,
                         20,
                         10,
-                        kwargs.get("k1")
+                        **kwargs,
                     ),
                     Field(
                         "k2",
                         float,
                         30,
                         10,
-                        kwargs.get("k2")
+                        **kwargs,
                     ),
                     Field(
                         "c1",
                         float,
                         40,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         50,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         60,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         70,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class Mat277(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("chexp1")
+                        **kwargs,
                     ),
                     Field(
                         "chexp2",
                         float,
                         10,
                         10,
-                        kwargs.get("chexp2")
+                        **kwargs,
                     ),
                     Field(
                         "chexp3",
                         float,
                         20,
                         10,
-                        kwargs.get("chexp3")
+                        **kwargs,
                     ),
                     Field(
                         "lcchexp",
                         int,
                         30,
                         10,
-                        kwargs.get("lcchexp")
+                        **kwargs,
                     ),
                     Field(
                         "lcthexp",
                         int,
                         40,
                         10,
-                        kwargs.get("lcthexp")
+                        **kwargs,
                     ),
                     Field(
                         "r",
                         float,
                         50,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "trefexp",
                         float,
                         60,
                         10,
-                        kwargs.get("trefexp")
+                        **kwargs,
                     ),
                     Field(
                         "docrefexp",
                         float,
                         70,
                         10,
-                        kwargs.get("docrefexp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +165,57 @@ class Mat277(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("wlftref")
+                        **kwargs,
                     ),
                     Field(
                         "wlfa",
                         float,
                         10,
                         10,
-                        kwargs.get("wlfa")
+                        **kwargs,
                     ),
                     Field(
                         "wlfb",
                         float,
                         20,
                         10,
-                        kwargs.get("wlfb")
+                        **kwargs,
                     ),
                     Field(
                         "lcg0",
                         int,
                         30,
                         10,
-                        kwargs.get("lcg0")
+                        **kwargs,
                     ),
                     Field(
                         "lck0",
                         int,
                         40,
                         10,
-                        kwargs.get("lck0")
+                        **kwargs,
                     ),
                     Field(
                         "idoc",
                         float,
                         50,
                         10,
-                        kwargs.get("idoc")
+                        **kwargs,
                     ),
                     Field(
                         "incr",
                         int,
                         60,
                         10,
-                        kwargs.get("incr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "qcure",
                         float,
                         70,
                         10,
-                        kwargs.get("qcure")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,28 +226,28 @@ class Mat277(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gi")
+                        **kwargs,
                     ),
                     Field(
                         "betagi",
                         float,
                         10,
                         10,
-                        kwargs.get("betagi")
+                        **kwargs,
                     ),
                     Field(
                         "ki",
                         float,
                         20,
                         10,
-                        kwargs.get("ki")
+                        **kwargs,
                     ),
                     Field(
                         "betaki",
                         float,
                         30,
                         10,
-                        kwargs.get("betaki")
+                        **kwargs,
                     ),
                 ],
             ),

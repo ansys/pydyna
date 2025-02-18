@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,47 @@ class DefinePorousLagrangian(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eidbeg")
+                        **kwargs,
                     ),
                     Field(
                         "eidend",
                         int,
                         10,
                         10,
-                        kwargs.get("eidend", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "local",
                         int,
                         20,
                         10,
-                        kwargs.get("local", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vecid1",
                         int,
                         30,
                         10,
-                        kwargs.get("vecid1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vecid2",
                         int,
                         40,
                         10,
-                        kwargs.get("vecid2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "userdef",
                         int,
                         50,
                         10,
-                        kwargs.get("userdef", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,42 +96,48 @@ class DefinePorousLagrangian(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("axx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "axy",
                         float,
                         10,
                         10,
-                        kwargs.get("axy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "axz",
                         float,
                         20,
                         10,
-                        kwargs.get("axz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bxx",
                         float,
                         30,
                         10,
-                        kwargs.get("bxx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bxy",
                         float,
                         40,
                         10,
-                        kwargs.get("bxy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bxz",
                         float,
                         50,
                         10,
-                        kwargs.get("bxz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -138,42 +148,48 @@ class DefinePorousLagrangian(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ayx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ayy",
                         float,
                         10,
                         10,
-                        kwargs.get("ayy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ayz",
                         float,
                         20,
                         10,
-                        kwargs.get("ayz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "byx",
                         float,
                         30,
                         10,
-                        kwargs.get("byx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "byy",
                         float,
                         40,
                         10,
-                        kwargs.get("byy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "byz",
                         float,
                         50,
                         10,
-                        kwargs.get("byz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -184,42 +200,48 @@ class DefinePorousLagrangian(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("azx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "azy",
                         float,
                         10,
                         10,
-                        kwargs.get("azy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "azz",
                         float,
                         20,
                         10,
-                        kwargs.get("azz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bzx",
                         float,
                         30,
                         10,
-                        kwargs.get("bzx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bzy",
                         float,
                         40,
                         10,
-                        kwargs.get("bzy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bzz",
                         float,
                         50,
                         10,
-                        kwargs.get("bzz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseFsi(KeywordBase):
@@ -41,14 +40,15 @@ class DatabaseFsi(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dtout")
+                        **kwargs,
                     ),
                     Field(
                         "binary",
                         int,
                         10,
                         10,
-                        kwargs.get("binary", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,49 +59,50 @@ class DatabaseFsi(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("dbsfi_id")
+                        **kwargs,
                     ),
                     Field(
                         "sid",
                         int,
                         10,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "stdype",
                         int,
                         20,
                         10,
-                        kwargs.get("stdype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "swid",
                         int,
                         30,
                         10,
-                        kwargs.get("swid")
+                        **kwargs,
                     ),
                     Field(
                         "convid",
                         int,
                         40,
                         10,
-                        kwargs.get("convid")
+                        **kwargs,
                     ),
                     Field(
                         "ndsetid",
                         int,
                         50,
                         10,
-                        kwargs.get("ndsetid")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         60,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                 ],
             ),

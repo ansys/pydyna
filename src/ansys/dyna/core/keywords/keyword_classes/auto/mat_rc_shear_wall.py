@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,35 @@ class MatRcShearWall(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "tmax",
                         float,
                         40,
                         10,
-                        kwargs.get("tmax")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,56 +84,56 @@ class MatRcShearWall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fc'")
+                        **kwargs,
                     ),
                     Field(
                         "pref",
                         float,
                         10,
                         10,
-                        kwargs.get("pref")
+                        **kwargs,
                     ),
                     Field(
                         "fyield",
                         float,
                         20,
                         10,
-                        kwargs.get("fyield")
+                        **kwargs,
                     ),
                     Field(
                         "sig0",
                         float,
                         30,
                         10,
-                        kwargs.get("sig0")
+                        **kwargs,
                     ),
                     Field(
                         "unconv",
                         float,
                         40,
                         10,
-                        kwargs.get("unconv")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "ft",
                         float,
                         60,
                         10,
-                        kwargs.get("ft")
+                        **kwargs,
                     ),
                     Field(
                         "erienf",
                         float,
                         70,
                         10,
-                        kwargs.get("erienf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -145,42 +144,48 @@ class MatRcShearWall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a", 0.05 if use_lspp_defaults() else None)
+                        0.05,
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         10,
                         10,
-                        kwargs.get("b", 0.55 if use_lspp_defaults() else None)
+                        0.55,
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         20,
                         10,
-                        kwargs.get("c", 0.125 if use_lspp_defaults() else None)
+                        0.125,
+                        **kwargs,
                     ),
                     Field(
                         "d",
                         float,
                         30,
                         10,
-                        kwargs.get("d", 0.66 if use_lspp_defaults() else None)
+                        0.66,
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         40,
                         10,
-                        kwargs.get("e", 0.25 if use_lspp_defaults() else None)
+                        0.25,
+                        **kwargs,
                     ),
                     Field(
                         "f",
                         float,
                         50,
                         10,
-                        kwargs.get("f", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -191,35 +196,35 @@ class MatRcShearWall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("y1")
+                        **kwargs,
                     ),
                     Field(
                         "y2",
                         float,
                         10,
                         10,
-                        kwargs.get("y2")
+                        **kwargs,
                     ),
                     Field(
                         "y3",
                         float,
                         20,
                         10,
-                        kwargs.get("y3")
+                        **kwargs,
                     ),
                     Field(
                         "y4",
                         float,
                         30,
                         10,
-                        kwargs.get("y4")
+                        **kwargs,
                     ),
                     Field(
                         "y5",
                         float,
                         40,
                         10,
-                        kwargs.get("y5")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -230,35 +235,35 @@ class MatRcShearWall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t1")
+                        **kwargs,
                     ),
                     Field(
                         "t2",
                         float,
                         10,
                         10,
-                        kwargs.get("t2")
+                        **kwargs,
                     ),
                     Field(
                         "t3",
                         float,
                         20,
                         10,
-                        kwargs.get("t3")
+                        **kwargs,
                     ),
                     Field(
                         "t4",
                         float,
                         30,
                         10,
-                        kwargs.get("t4")
+                        **kwargs,
                     ),
                     Field(
                         "t5",
                         float,
                         40,
                         10,
-                        kwargs.get("t5")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -269,7 +274,7 @@ class MatRcShearWall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -280,42 +285,42 @@ class MatRcShearWall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -326,49 +331,49 @@ class MatRcShearWall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),

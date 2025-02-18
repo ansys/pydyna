@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEosBurgess(KeywordBase):
@@ -41,56 +40,56 @@ class EmEosBurgess(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "v0",
                         float,
                         10,
                         10,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         20,
                         10,
-                        kwargs.get("gamma")
+                        **kwargs,
                     ),
                     Field(
                         "theta",
                         float,
                         30,
                         10,
-                        kwargs.get("theta")
+                        **kwargs,
                     ),
                     Field(
                         "lf",
                         float,
                         40,
                         10,
-                        kwargs.get("lf")
+                        **kwargs,
                     ),
                     Field(
                         "c1",
                         float,
                         50,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         60,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         float,
                         70,
                         10,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,49 +100,51 @@ class EmEosBurgess(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c4")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         10,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "expon",
                         int,
                         20,
                         10,
-                        kwargs.get("expon")
+                        **kwargs,
                     ),
                     Field(
                         "lgtunit",
                         float,
                         30,
                         10,
-                        kwargs.get("lgtunit")
+                        **kwargs,
                     ),
                     Field(
                         "timunit",
                         float,
                         40,
                         10,
-                        kwargs.get("timunit")
+                        **kwargs,
                     ),
                     Field(
                         "temuni",
                         int,
                         50,
                         10,
-                        kwargs.get("temuni", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "adjust",
                         int,
                         60,
                         10,
-                        kwargs.get("adjust", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

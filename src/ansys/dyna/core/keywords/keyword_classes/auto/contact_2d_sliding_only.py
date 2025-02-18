@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,28 +46,30 @@ class Contact2DSlidingOnly(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("surfa")
+                        **kwargs,
                     ),
                     Field(
                         "surfb",
                         int,
                         10,
                         10,
-                        kwargs.get("surfb")
+                        **kwargs,
                     ),
                     Field(
                         "tbirth",
                         float,
                         20,
                         10,
-                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tdeath",
                         float,
                         30,
                         10,
-                        kwargs.get("tdeath", 1.0E20 if use_lspp_defaults() else None)
+                        1.0E20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -79,56 +80,64 @@ class Contact2DSlidingOnly(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ext_pas", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "theta1",
                         float,
                         10,
                         10,
-                        kwargs.get("theta1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "theta2",
                         float,
                         20,
                         10,
-                        kwargs.get("theta2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tol_ig",
                         float,
                         30,
                         10,
-                        kwargs.get("tol_ig", 1.0E-03 if use_lspp_defaults() else None)
+                        1.0E-03,
+                        **kwargs,
                     ),
                     Field(
                         "pen",
                         float,
                         40,
                         10,
-                        kwargs.get("pen", 1.0E-01 if use_lspp_defaults() else None)
+                        1.0E-01,
+                        **kwargs,
                     ),
                     Field(
                         "toloff",
                         float,
                         50,
                         10,
-                        kwargs.get("toloff", 0.25 if use_lspp_defaults() else None)
+                        0.25,
+                        **kwargs,
                     ),
                     Field(
                         "frcscl",
                         float,
                         60,
                         10,
-                        kwargs.get("frcscl", 1.0E-01 if use_lspp_defaults() else None)
+                        1.0E-01,
+                        **kwargs,
                     ),
                     Field(
                         "oneway",
                         float,
                         70,
                         10,
-                        kwargs.get("oneway", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

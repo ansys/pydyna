@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,7 +45,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -57,56 +56,56 @@ class DefineSpotweldRuptureParameter(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c11")
+                        **kwargs,
                     ),
                     Field(
                         "c12",
                         float,
                         10,
                         10,
-                        kwargs.get("c12")
+                        **kwargs,
                     ),
                     Field(
                         "c13",
                         float,
                         20,
                         10,
-                        kwargs.get("c13")
+                        **kwargs,
                     ),
                     Field(
                         "n11",
                         float,
                         30,
                         10,
-                        kwargs.get("n11")
+                        **kwargs,
                     ),
                     Field(
                         "n12",
                         float,
                         40,
                         10,
-                        kwargs.get("n12")
+                        **kwargs,
                     ),
                     Field(
                         "n13",
                         float,
                         50,
                         10,
-                        kwargs.get("n13")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "sig_pf",
                         float,
                         70,
                         10,
-                        kwargs.get("sig_pf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -117,56 +116,56 @@ class DefineSpotweldRuptureParameter(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c21")
+                        **kwargs,
                     ),
                     Field(
                         "c22",
                         float,
                         10,
                         10,
-                        kwargs.get("c22")
+                        **kwargs,
                     ),
                     Field(
                         "c23",
                         float,
                         20,
                         10,
-                        kwargs.get("c23")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         float,
                         30,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "sig_nf",
                         float,
                         70,
                         10,
-                        kwargs.get("sig_nf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -177,56 +176,63 @@ class DefineSpotweldRuptureParameter(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcdpa", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdpm",
                         int,
                         10,
                         10,
-                        kwargs.get("lcdpm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdps",
                         int,
                         20,
                         10,
-                        kwargs.get("lcdps", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdna",
                         int,
                         30,
                         10,
-                        kwargs.get("lcdna", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdnm",
                         int,
                         40,
                         10,
-                        kwargs.get("lcdnm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdns",
                         int,
                         50,
                         10,
-                        kwargs.get("lcdns", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "nsmt",
                         int,
                         70,
                         10,
-                        kwargs.get("nsmt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSurfaceStressSet(KeywordBase):
@@ -41,7 +40,7 @@ class LoadSurfaceStressSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,56 +51,56 @@ class LoadSurfaceStressSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lscid1")
+                        **kwargs,
                     ),
                     Field(
                         "lscid2",
                         int,
                         10,
                         10,
-                        kwargs.get("lscid2")
+                        **kwargs,
                     ),
                     Field(
                         "lscid3",
                         int,
                         20,
                         10,
-                        kwargs.get("lscid3")
+                        **kwargs,
                     ),
                     Field(
                         "lscid4",
                         int,
                         30,
                         10,
-                        kwargs.get("lscid4")
+                        **kwargs,
                     ),
                     Field(
                         "lscid5",
                         int,
                         40,
                         10,
-                        kwargs.get("lscid5")
+                        **kwargs,
                     ),
                     Field(
                         "lscid6",
                         int,
                         50,
                         10,
-                        kwargs.get("lscid6")
+                        **kwargs,
                     ),
                     Field(
                         "lscid7",
                         int,
                         60,
                         10,
-                        kwargs.get("lscid7")
+                        **kwargs,
                     ),
                     Field(
                         "lscid8",
                         int,
                         70,
                         10,
-                        kwargs.get("lscid8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,56 +111,56 @@ class LoadSurfaceStressSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("uscid1")
+                        **kwargs,
                     ),
                     Field(
                         "uscid2",
                         int,
                         10,
                         10,
-                        kwargs.get("uscid2")
+                        **kwargs,
                     ),
                     Field(
                         "uscid3",
                         int,
                         20,
                         10,
-                        kwargs.get("uscid3")
+                        **kwargs,
                     ),
                     Field(
                         "uscid4",
                         int,
                         30,
                         10,
-                        kwargs.get("uscid4")
+                        **kwargs,
                     ),
                     Field(
                         "uscid5",
                         int,
                         40,
                         10,
-                        kwargs.get("uscid5")
+                        **kwargs,
                     ),
                     Field(
                         "uscid6",
                         int,
                         50,
                         10,
-                        kwargs.get("uscid6")
+                        **kwargs,
                     ),
                     Field(
                         "uscid7",
                         int,
                         60,
                         10,
-                        kwargs.get("uscid7")
+                        **kwargs,
                     ),
                     Field(
                         "uscid8",
                         int,
                         70,
                         10,
-                        kwargs.get("uscid8")
+                        **kwargs,
                     ),
                 ],
             ),

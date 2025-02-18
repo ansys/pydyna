@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,14 +45,14 @@ class DefineTableMatrix(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tbid")
+                        **kwargs,
                     ),
                     Field(
                         "filename",
                         str,
                         10,
                         70,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -64,56 +63,59 @@ class DefineTableMatrix(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nrow")
+                        **kwargs,
                     ),
                     Field(
                         "ncol",
                         int,
                         10,
                         10,
-                        kwargs.get("ncol")
+                        **kwargs,
                     ),
                     Field(
                         "srow",
                         float,
                         20,
                         10,
-                        kwargs.get("srow", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "scol",
                         float,
                         30,
                         10,
-                        kwargs.get("scol", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sval",
                         float,
                         40,
                         10,
-                        kwargs.get("sval", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "orow",
                         float,
                         50,
                         10,
-                        kwargs.get("orow")
+                        **kwargs,
                     ),
                     Field(
                         "ocol",
                         float,
                         60,
                         10,
-                        kwargs.get("ocol")
+                        **kwargs,
                     ),
                     Field(
                         "oval",
                         float,
                         70,
                         10,
-                        kwargs.get("oval")
+                        **kwargs,
                     ),
                 ],
             ),

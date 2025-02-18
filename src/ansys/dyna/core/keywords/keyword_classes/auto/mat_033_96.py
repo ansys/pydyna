@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,35 @@ class Mat03396(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         40,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,42 +84,43 @@ class Mat03396(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         10,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "esr0",
                         float,
                         20,
                         10,
-                        kwargs.get("esr0")
+                        **kwargs,
                     ),
                     Field(
                         "m",
                         float,
                         30,
                         10,
-                        kwargs.get("m")
+                        **kwargs,
                     ),
                     Field(
                         "hard",
                         int,
                         40,
                         10,
-                        kwargs.get("hard", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         50,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -131,56 +131,56 @@ class Mat03396(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         10,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         float,
                         20,
                         10,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                     Field(
                         "c4",
                         float,
                         30,
                         10,
-                        kwargs.get("c4")
+                        **kwargs,
                     ),
                     Field(
                         "ax",
                         float,
                         40,
                         10,
-                        kwargs.get("ax")
+                        **kwargs,
                     ),
                     Field(
                         "ay",
                         float,
                         50,
                         10,
-                        kwargs.get("ay")
+                        **kwargs,
                     ),
                     Field(
                         "az0",
                         float,
                         60,
                         10,
-                        kwargs.get("az0")
+                        **kwargs,
                     ),
                     Field(
                         "az1",
                         float,
                         70,
                         10,
-                        kwargs.get("az1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -191,14 +191,14 @@ class Mat03396(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "offang",
                         float,
                         10,
                         10,
-                        kwargs.get("offang")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -209,42 +209,42 @@ class Mat03396(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -255,42 +255,42 @@ class Mat03396(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                 ],
             ),

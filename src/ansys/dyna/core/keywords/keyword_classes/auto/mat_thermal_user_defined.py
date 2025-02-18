@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class MatThermalUserDefined(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tmid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "mt",
                         int,
                         20,
                         10,
-                        kwargs.get("mt", 11 if use_lspp_defaults() else None)
+                        11,
+                        **kwargs,
                     ),
                     Field(
                         "lmc",
                         int,
                         30,
                         10,
-                        kwargs.get("lmc")
+                        **kwargs,
                     ),
                     Field(
                         "nhv",
                         int,
                         40,
                         10,
-                        kwargs.get("nhv")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         50,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "iortho",
                         int,
                         60,
                         10,
-                        kwargs.get("iortho", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ihve",
                         int,
                         70,
                         10,
-                        kwargs.get("ihve")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,42 +107,42 @@ class MatThermalUserDefined(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -152,21 +153,21 @@ class MatThermalUserDefined(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         10,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         20,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                 ],
             ),

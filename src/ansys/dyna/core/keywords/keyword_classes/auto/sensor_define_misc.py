@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,57 @@ class SensorDefineMisc(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sensid")
+                        **kwargs,
                     ),
                     Field(
                         "mtype",
                         str,
                         10,
                         10,
-                        kwargs.get("mtype", "ANGLE" if use_lspp_defaults() else None)
+                        "ANGLE",
+                        **kwargs,
                     ),
                     Field(
                         "i0",
                         str,
                         20,
                         10,
-                        kwargs.get("i0")
+                        **kwargs,
                     ),
                     Field(
                         "i1",
                         str,
                         30,
                         10,
-                        kwargs.get("i1")
+                        **kwargs,
                     ),
                     Field(
                         "i2",
                         str,
                         40,
                         10,
-                        kwargs.get("i2")
+                        **kwargs,
                     ),
                     Field(
                         "i3",
                         str,
                         50,
                         10,
-                        kwargs.get("i3")
+                        **kwargs,
                     ),
                     Field(
                         "i4",
                         str,
                         60,
                         10,
-                        kwargs.get("i4")
+                        **kwargs,
                     ),
                     Field(
                         "i5",
                         str,
                         70,
                         10,
-                        kwargs.get("i5")
+                        **kwargs,
                     ),
                 ],
             ),

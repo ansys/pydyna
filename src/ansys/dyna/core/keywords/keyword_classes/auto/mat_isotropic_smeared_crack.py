@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatIsotropicSmearedCrack(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "ispl",
                         int,
                         40,
                         10,
-                        kwargs.get("ispl")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         50,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "gk",
                         float,
                         60,
                         10,
-                        kwargs.get("gk")
+                        **kwargs,
                     ),
                     Field(
                         "sr",
                         float,
                         70,
                         10,
-                        kwargs.get("sr")
+                        **kwargs,
                     ),
                 ],
             ),

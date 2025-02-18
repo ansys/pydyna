@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmOutput(KeywordBase):
@@ -41,49 +40,56 @@ class EmOutput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mats", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "matf",
                         int,
                         10,
                         10,
-                        kwargs.get("matf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sols",
                         int,
                         20,
                         10,
-                        kwargs.get("sols", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "solf",
                         int,
                         30,
                         10,
-                        kwargs.get("solf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mesh",
                         int,
                         40,
                         10,
-                        kwargs.get("mesh", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mem",
                         int,
                         50,
                         10,
-                        kwargs.get("mem", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "timing",
                         int,
                         60,
                         10,
-                        kwargs.get("timing", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControllerPlant(KeywordBase):
@@ -41,56 +40,56 @@ class ControllerPlant(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("plntid")
+                        **kwargs,
                     ),
                     Field(
                         "nin",
                         int,
                         10,
                         10,
-                        kwargs.get("nin")
+                        **kwargs,
                     ),
                     Field(
                         "nout",
                         int,
                         20,
                         10,
-                        kwargs.get("nout")
+                        **kwargs,
                     ),
                     Field(
                         "nmode",
                         int,
                         30,
                         10,
-                        kwargs.get("nmode")
+                        **kwargs,
                     ),
                     Field(
                         "mtxq",
                         int,
                         40,
                         10,
-                        kwargs.get("mtxq")
+                        **kwargs,
                     ),
                     Field(
                         "mtxr",
                         int,
                         50,
                         10,
-                        kwargs.get("mtxr")
+                        **kwargs,
                     ),
                     Field(
                         "mopt",
                         int,
                         60,
                         10,
-                        kwargs.get("mopt")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,28 +100,28 @@ class ControllerPlant(KeywordBase):
                         str,
                         0,
                         20,
-                        kwargs.get("fscilab")
+                        **kwargs,
                     ),
                     Field(
                         "flsdyna",
                         str,
                         20,
                         20,
-                        kwargs.get("flsdyna")
+                        **kwargs,
                     ),
                     Field(
                         "fmatlab",
                         str,
                         40,
                         20,
-                        kwargs.get("fmatlab")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         str,
                         60,
                         20,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,56 +132,60 @@ class ControllerPlant(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nodi1")
+                        **kwargs,
                     ),
                     Field(
                         "dofi1",
                         int,
                         10,
                         10,
-                        kwargs.get("dofi1", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nodi2",
                         int,
                         20,
                         10,
-                        kwargs.get("nodi2")
+                        **kwargs,
                     ),
                     Field(
                         "dofi2",
                         int,
                         30,
                         10,
-                        kwargs.get("dofi2", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nodi3",
                         int,
                         40,
                         10,
-                        kwargs.get("nodi3")
+                        **kwargs,
                     ),
                     Field(
                         "dofi3",
                         int,
                         50,
                         10,
-                        kwargs.get("dofi3", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nodi4",
                         int,
                         60,
                         10,
-                        kwargs.get("nodi4")
+                        **kwargs,
                     ),
                     Field(
                         "dofi4",
                         int,
                         70,
                         10,
-                        kwargs.get("dofi4", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -193,56 +196,60 @@ class ControllerPlant(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nodo1")
+                        **kwargs,
                     ),
                     Field(
                         "dofo1",
                         int,
                         10,
                         10,
-                        kwargs.get("dofo1", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nodo2",
                         int,
                         20,
                         10,
-                        kwargs.get("nodo2")
+                        **kwargs,
                     ),
                     Field(
                         "dofo2",
                         int,
                         30,
                         10,
-                        kwargs.get("dofo2", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nodo3",
                         int,
                         40,
                         10,
-                        kwargs.get("nodo3")
+                        **kwargs,
                     ),
                     Field(
                         "dofo3",
                         int,
                         50,
                         10,
-                        kwargs.get("dofo3", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nodo4",
                         int,
                         60,
                         10,
-                        kwargs.get("nodo4")
+                        **kwargs,
                     ),
                     Field(
                         "dofo4",
                         int,
                         70,
                         10,
-                        kwargs.get("dofo4", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -253,56 +260,58 @@ class ControllerPlant(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nfeq", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "deftol",
                         float,
                         10,
                         10,
-                        kwargs.get("deftol", 1.0e-9 if use_lspp_defaults() else None)
+                        1.0e-9,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -313,56 +322,56 @@ class ControllerPlant(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mod1")
+                        **kwargs,
                     ),
                     Field(
                         "mod2",
                         int,
                         10,
                         10,
-                        kwargs.get("mod2")
+                        **kwargs,
                     ),
                     Field(
                         "mod3",
                         int,
                         20,
                         10,
-                        kwargs.get("mod3")
+                        **kwargs,
                     ),
                     Field(
                         "mod4",
                         int,
                         30,
                         10,
-                        kwargs.get("mod4")
+                        **kwargs,
                     ),
                     Field(
                         "mod5",
                         int,
                         40,
                         10,
-                        kwargs.get("mod5")
+                        **kwargs,
                     ),
                     Field(
                         "mod6",
                         int,
                         50,
                         10,
-                        kwargs.get("mod6")
+                        **kwargs,
                     ),
                     Field(
                         "mod7",
                         int,
                         60,
                         10,
-                        kwargs.get("mod7")
+                        **kwargs,
                     ),
                     Field(
                         "mod8",
                         int,
                         70,
                         10,
-                        kwargs.get("mod8")
+                        **kwargs,
                     ),
                 ],
             ),

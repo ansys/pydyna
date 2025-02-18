@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedLocal(KeywordBase):
@@ -41,14 +40,14 @@ class ConstrainedLocal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         int,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,60 @@ class ConstrainedLocal(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tc", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "rc",
                         int,
                         10,
                         10,
-                        kwargs.get("rc", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "dir",
                         int,
                         20,
                         10,
-                        kwargs.get("dir", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "x",
                         float,
                         30,
                         10,
-                        kwargs.get("x")
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         40,
                         10,
-                        kwargs.get("y")
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         50,
                         10,
-                        kwargs.get("z")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         60,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "tol",
                         float,
                         70,
                         10,
-                        kwargs.get("tol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

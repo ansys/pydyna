@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DampingRelative(KeywordBase):
@@ -41,42 +40,48 @@ class DampingRelative(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cdamp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "freq",
                         float,
                         10,
                         10,
-                        kwargs.get("freq", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pidrb",
                         int,
                         20,
                         10,
-                        kwargs.get("pidrb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "psid",
                         int,
                         30,
                         10,
-                        kwargs.get("psid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dv2",
                         float,
                         40,
                         10,
-                        kwargs.get("dv2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         50,
                         10,
-                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

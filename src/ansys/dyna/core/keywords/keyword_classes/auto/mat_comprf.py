@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatComprf(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "et",
                         float,
                         20,
                         10,
-                        kwargs.get("et")
+                        **kwargs,
                     ),
                     Field(
                         "ec",
                         float,
                         30,
                         10,
-                        kwargs.get("ec")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         40,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "g121",
                         float,
                         50,
                         10,
-                        kwargs.get("g121")
+                        **kwargs,
                     ),
                     Field(
                         "g122",
                         float,
                         60,
                         10,
-                        kwargs.get("g122")
+                        **kwargs,
                     ),
                     Field(
                         "g123",
                         float,
                         70,
                         10,
-                        kwargs.get("g123")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class MatComprf(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("g124")
+                        **kwargs,
                     ),
                     Field(
                         "g125",
                         float,
                         10,
                         10,
-                        kwargs.get("g125")
+                        **kwargs,
                     ),
                     Field(
                         "g126",
                         float,
                         20,
                         10,
-                        kwargs.get("g126")
+                        **kwargs,
                     ),
                     Field(
                         "gammal",
                         float,
                         30,
                         10,
-                        kwargs.get("gammal")
+                        **kwargs,
                     ),
                     Field(
                         "vf",
                         float,
                         40,
                         10,
-                        kwargs.get("vf")
+                        **kwargs,
                     ),
                     Field(
                         "ef3",
                         float,
                         50,
                         10,
-                        kwargs.get("ef3")
+                        **kwargs,
                     ),
                     Field(
                         "vf23",
                         float,
                         60,
                         10,
-                        kwargs.get("vf23")
+                        **kwargs,
                     ),
                     Field(
                         "em",
                         float,
                         70,
                         10,
-                        kwargs.get("em")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,35 +165,35 @@ class MatComprf(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vm")
+                        **kwargs,
                     ),
                     Field(
                         "epsilon",
                         float,
                         10,
                         10,
-                        kwargs.get("epsilon")
+                        **kwargs,
                     ),
                     Field(
                         "theta",
                         float,
                         20,
                         10,
-                        kwargs.get("theta")
+                        **kwargs,
                     ),
                     Field(
                         "bulk",
                         float,
                         30,
                         10,
-                        kwargs.get("bulk")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         40,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                 ],
             ),

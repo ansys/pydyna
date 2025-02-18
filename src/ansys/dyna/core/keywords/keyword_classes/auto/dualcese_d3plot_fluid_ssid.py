@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseD3PlotFluidSsid(KeywordBase):
@@ -41,7 +40,7 @@ class DualceseD3PlotFluidSsid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,7 +51,7 @@ class DualceseD3PlotFluidSsid(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("flow_var")
+                        **kwargs,
                     ),
                 ],
             ),

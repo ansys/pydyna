@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceThicknessChangeCompensation(KeywordBase):
@@ -41,14 +40,14 @@ class InterfaceThicknessChangeCompensation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iflg")
+                        **kwargs,
                     ),
                     Field(
                         "thk0",
                         float,
                         10,
                         10,
-                        kwargs.get("thk0")
+                        **kwargs,
                     ),
                 ],
             ),

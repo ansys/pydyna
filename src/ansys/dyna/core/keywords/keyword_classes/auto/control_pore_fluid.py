@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlPoreFluid(KeywordBase):
@@ -41,56 +40,60 @@ class ControlPoreFluid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("atype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "wtable",
                         float,
                         20,
                         10,
-                        kwargs.get("wtable", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pf_rho",
                         float,
                         30,
                         10,
-                        kwargs.get("pf_rho")
+                        **kwargs,
                     ),
                     Field(
                         "grav",
                         float,
                         40,
                         10,
-                        kwargs.get("grav")
+                        **kwargs,
                     ),
                     Field(
                         "pf_bulk",
                         float,
                         50,
                         10,
-                        kwargs.get("pf_bulk")
+                        **kwargs,
                     ),
                     Field(
                         "output",
                         int,
                         60,
                         10,
-                        kwargs.get("output", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tmf",
                         float,
                         70,
                         10,
-                        kwargs.get("tmf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +104,64 @@ class ControlPoreFluid(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("targ", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fmin",
                         float,
                         10,
                         10,
-                        kwargs.get("fmin", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fmax",
                         float,
                         20,
                         10,
-                        kwargs.get("fmax", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ftied ",
                         float,
                         30,
                         10,
-                        kwargs.get("ftied ", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "conv",
                         float,
                         40,
                         10,
-                        kwargs.get("conv", 1.0E-4 if use_lspp_defaults() else None)
+                        1.0E-4,
+                        **kwargs,
                     ),
                     Field(
                         "conmax",
                         float,
                         50,
                         10,
-                        kwargs.get("conmax", 1.0E20 if use_lspp_defaults() else None)
+                        1.0E20,
+                        **kwargs,
                     ),
                     Field(
                         "eterm",
                         float,
                         60,
                         10,
-                        kwargs.get("eterm", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "therm",
                         float,
                         70,
                         10,
-                        kwargs.get("therm", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,7 +172,8 @@ class ControlPoreFluid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("etfag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

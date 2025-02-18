@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryConvectionSegment(KeywordBase):
@@ -41,28 +40,28 @@ class BoundaryConvectionSegment(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         10,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n3",
                         int,
                         20,
                         10,
-                        kwargs.get("n3")
+                        **kwargs,
                     ),
                     Field(
                         "n4",
                         int,
                         30,
                         10,
-                        kwargs.get("n4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -73,35 +72,38 @@ class BoundaryConvectionSegment(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("hlcid")
+                        **kwargs,
                     ),
                     Field(
                         "hmult",
                         float,
                         10,
                         10,
-                        kwargs.get("hmult", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "tlcid",
                         int,
                         20,
                         10,
-                        kwargs.get("tlcid")
+                        **kwargs,
                     ),
                     Field(
                         "tmult",
                         float,
                         30,
                         10,
-                        kwargs.get("tmult", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "loc",
                         int,
                         40,
                         10,
-                        kwargs.get("loc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

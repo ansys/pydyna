@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -42,7 +41,7 @@ class MeshVolume(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("volid")
+                        **kwargs,
                     ),
                 ],
             ),

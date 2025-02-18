@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementBearing(KeywordBase):
@@ -41,49 +40,50 @@ class ElementBearing(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "itype",
                         int,
                         10,
                         10,
-                        kwargs.get("itype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "n1",
                         int,
                         20,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "cid1",
                         int,
                         30,
                         10,
-                        kwargs.get("cid1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         40,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "ci2",
                         int,
                         50,
                         10,
-                        kwargs.get("ci2")
+                        **kwargs,
                     ),
                     Field(
                         "nb",
                         int,
                         60,
                         10,
-                        kwargs.get("nb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,35 +94,40 @@ class ElementBearing(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eball", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "prball",
                         float,
                         10,
                         10,
-                        kwargs.get("prball", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "erace",
                         float,
                         20,
                         10,
-                        kwargs.get("erace", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "prrace",
                         float,
                         30,
                         10,
-                        kwargs.get("prrace", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "stresl",
                         float,
                         40,
                         10,
-                        kwargs.get("stresl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,28 +138,32 @@ class ElementBearing(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("d", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "di",
                         float,
                         10,
                         10,
-                        kwargs.get("di", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "do",
                         float,
                         20,
                         10,
-                        kwargs.get("do", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dm",
                         float,
                         30,
                         10,
-                        kwargs.get("dm", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -165,28 +174,32 @@ class ElementBearing(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ao", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ai",
                         float,
                         10,
                         10,
-                        kwargs.get("ai", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bo",
                         float,
                         20,
                         10,
-                        kwargs.get("bo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pd",
                         float,
                         30,
                         10,
-                        kwargs.get("pd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -197,42 +210,48 @@ class ElementBearing(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ipflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "xtran",
                         float,
                         10,
                         10,
-                        kwargs.get("xtran", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ytran",
                         float,
                         20,
                         10,
-                        kwargs.get("ytran", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ztran",
                         float,
                         30,
                         10,
-                        kwargs.get("ztran", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xrot",
                         float,
                         40,
                         10,
-                        kwargs.get("xrot", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yrot",
                         float,
                         50,
                         10,
-                        kwargs.get("yrot", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

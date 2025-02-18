@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,59 @@ class Mat147(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "nplot",
                         int,
                         20,
                         10,
-                        kwargs.get("nplot", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "spgrav",
                         float,
                         30,
                         10,
-                        kwargs.get("spgrav")
+                        **kwargs,
                     ),
                     Field(
                         "rhowat",
                         float,
                         40,
                         10,
-                        kwargs.get("rhowat", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "vn",
                         float,
                         50,
                         10,
-                        kwargs.get("vn")
+                        **kwargs,
                     ),
                     Field(
                         "gammar",
                         float,
                         60,
                         10,
-                        kwargs.get("gammar")
+                        **kwargs,
                     ),
                     Field(
                         "intrmx",
                         int,
                         70,
                         10,
-                        kwargs.get("intrmx", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +108,56 @@ class Mat147(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         10,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "phimax",
                         float,
                         20,
                         10,
-                        kwargs.get("phimax")
+                        **kwargs,
                     ),
                     Field(
                         "ahyp",
                         float,
                         30,
                         10,
-                        kwargs.get("ahyp")
+                        **kwargs,
                     ),
                     Field(
                         "coh",
                         float,
                         40,
                         10,
-                        kwargs.get("coh")
+                        **kwargs,
                     ),
                     Field(
                         "eccen",
                         float,
                         50,
                         10,
-                        kwargs.get("eccen")
+                        **kwargs,
                     ),
                     Field(
                         "an",
                         float,
                         60,
                         10,
-                        kwargs.get("an")
+                        **kwargs,
                     ),
                     Field(
                         "et",
                         float,
                         70,
                         10,
-                        kwargs.get("et")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +168,56 @@ class Mat147(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("mcont")
+                        **kwargs,
                     ),
                     Field(
                         "pwd1",
                         float,
                         10,
                         10,
-                        kwargs.get("pwd1")
+                        **kwargs,
                     ),
                     Field(
                         "pwksk",
                         float,
                         20,
                         10,
-                        kwargs.get("pwksk")
+                        **kwargs,
                     ),
                     Field(
                         "pwd2",
                         float,
                         30,
                         10,
-                        kwargs.get("pwd2")
+                        **kwargs,
                     ),
                     Field(
                         "phires",
                         float,
                         40,
                         10,
-                        kwargs.get("phires")
+                        **kwargs,
                     ),
                     Field(
                         "dint",
                         float,
                         50,
                         10,
-                        kwargs.get("dint")
+                        **kwargs,
                     ),
                     Field(
                         "vdfm",
                         float,
                         60,
                         10,
-                        kwargs.get("vdfm")
+                        **kwargs,
                     ),
                     Field(
                         "damlev",
                         float,
                         70,
                         10,
-                        kwargs.get("damlev")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,7 +228,7 @@ class Mat147(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("epsmax")
+                        **kwargs,
                     ),
                 ],
             ),

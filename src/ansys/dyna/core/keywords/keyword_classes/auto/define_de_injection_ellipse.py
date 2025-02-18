@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,62 @@ class DefineDeInjectionEllipse(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "sid",
                         int,
                         10,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "xc",
                         float,
                         20,
                         10,
-                        kwargs.get("xc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yc",
                         float,
                         30,
                         10,
-                        kwargs.get("yc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zc",
                         float,
                         40,
                         10,
-                        kwargs.get("zc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xl",
                         float,
                         50,
                         10,
-                        kwargs.get("xl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yl",
                         float,
                         60,
                         10,
-                        kwargs.get("yl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         70,
                         10,
-                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +111,61 @@ class DefineDeInjectionEllipse(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rmass")
+                        **kwargs,
                     ),
                     Field(
                         "rmin",
                         float,
                         10,
                         10,
-                        kwargs.get("rmin")
+                        **kwargs,
                     ),
                     Field(
                         "rmax",
                         float,
                         20,
                         10,
-                        kwargs.get("rmax")
+                        **kwargs,
                     ),
                     Field(
                         "vx",
                         float,
                         30,
                         10,
-                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vy",
                         float,
                         40,
                         10,
-                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vz",
                         float,
                         50,
                         10,
-                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tbeg",
                         float,
                         60,
                         10,
-                        kwargs.get("tbeg", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tend",
                         float,
                         70,
                         10,
-                        kwargs.get("tend", 1.0E20 if use_lspp_defaults() else None)
+                        1.0E20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,42 +176,43 @@ class DefineDeInjectionEllipse(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ifunc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         10,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "imulti",
                         int,
                         20,
                         10,
-                        kwargs.get("imulti")
+                        **kwargs,
                     ),
                     Field(
                         "lcvx",
                         int,
                         30,
                         10,
-                        kwargs.get("lcvx")
+                        **kwargs,
                     ),
                     Field(
                         "lcvy",
                         int,
                         40,
                         10,
-                        kwargs.get("lcvy")
+                        **kwargs,
                     ),
                     Field(
                         "lcvz",
                         int,
                         50,
                         10,
-                        kwargs.get("lcvz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -212,56 +223,64 @@ class DefineDeInjectionEllipse(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "p1",
                         float,
                         10,
                         10,
-                        kwargs.get("p1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "r2",
                         float,
                         20,
                         10,
-                        kwargs.get("r2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         30,
                         10,
-                        kwargs.get("p2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "r3",
                         float,
                         40,
                         10,
-                        kwargs.get("r3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         50,
                         10,
-                        kwargs.get("p3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "r4",
                         float,
                         60,
                         10,
-                        kwargs.get("r4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "p4",
                         float,
                         70,
                         10,
-                        kwargs.get("p4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

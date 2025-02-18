@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseAleMat(KeywordBase):
@@ -41,28 +40,28 @@ class DatabaseAleMat(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dtout")
+                        **kwargs,
                     ),
                     Field(
                         "boxlow",
                         int,
                         10,
                         10,
-                        kwargs.get("boxlow")
+                        **kwargs,
                     ),
                     Field(
                         "boxup",
                         int,
                         20,
                         10,
-                        kwargs.get("boxup")
+                        **kwargs,
                     ),
                     Field(
                         "dtxy",
                         float,
                         30,
                         10,
-                        kwargs.get("dtxy")
+                        **kwargs,
                     ),
                 ],
             ),

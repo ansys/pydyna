@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementBeamScalarOrientation(KeywordBase):
@@ -41,70 +40,75 @@ class ElementBeamScalarOrientation(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         8,
                         8,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "n1",
                         int,
                         16,
                         8,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         24,
                         8,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n3",
                         int,
                         32,
                         8,
-                        kwargs.get("n3")
+                        **kwargs,
                     ),
                     Field(
                         "rt1",
                         int,
                         40,
                         8,
-                        kwargs.get("rt1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rr1",
                         int,
                         48,
                         8,
-                        kwargs.get("rr1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rt2",
                         int,
                         56,
                         8,
-                        kwargs.get("rt2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rr2",
                         int,
                         64,
                         8,
-                        kwargs.get("rr2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "local",
                         int,
                         72,
                         8,
-                        kwargs.get("local", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -115,35 +119,37 @@ class ElementBeamScalarOrientation(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("vol")
+                        **kwargs,
                     ),
                     Field(
                         "iner",
                         float,
                         16,
                         16,
-                        kwargs.get("iner")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         32,
                         16,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "dofn1",
                         float,
                         48,
                         16,
-                        kwargs.get("dofn1", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "dofn2",
                         float,
                         64,
                         16,
-                        kwargs.get("dofn2", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -154,21 +160,24 @@ class ElementBeamScalarOrientation(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("vx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vy",
                         float,
                         10,
                         10,
-                        kwargs.get("vy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vz",
                         float,
                         20,
                         10,
-                        kwargs.get("vz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

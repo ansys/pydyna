@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,56 +46,60 @@ class ContactAutomaticOneWaySurfaceToSurfaceTiebreakDamping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("surfa")
+                        **kwargs,
                     ),
                     Field(
                         "surfb",
                         int,
                         10,
                         10,
-                        kwargs.get("surfb")
+                        **kwargs,
                     ),
                     Field(
                         "surfatyp",
                         int,
                         20,
                         10,
-                        kwargs.get("surfatyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "surfbtyp",
                         int,
                         30,
                         10,
-                        kwargs.get("surfbtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "saboxid",
                         int,
                         40,
                         10,
-                        kwargs.get("saboxid")
+                        **kwargs,
                     ),
                     Field(
                         "sbboxid",
                         int,
                         50,
                         10,
-                        kwargs.get("sbboxid")
+                        **kwargs,
                     ),
                     Field(
                         "sapr",
                         int,
                         60,
                         10,
-                        kwargs.get("sapr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sbpr",
                         int,
                         70,
                         10,
-                        kwargs.get("sbpr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,56 +110,63 @@ class ContactAutomaticOneWaySurfaceToSurfaceTiebreakDamping(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fd",
                         float,
                         10,
                         10,
-                        kwargs.get("fd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dc",
                         float,
                         20,
                         10,
-                        kwargs.get("dc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vc",
                         float,
                         30,
                         10,
-                        kwargs.get("vc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vdc",
                         float,
                         40,
                         10,
-                        kwargs.get("vdc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "penchk",
                         int,
                         50,
                         10,
-                        kwargs.get("penchk")
+                        **kwargs,
                     ),
                     Field(
                         "bt",
                         float,
                         60,
                         10,
-                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         70,
                         10,
-                        kwargs.get("dt", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -167,56 +177,62 @@ class ContactAutomaticOneWaySurfaceToSurfaceTiebreakDamping(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfsa", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sfsb",
                         float,
                         10,
                         10,
-                        kwargs.get("sfsb", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sast",
                         float,
                         20,
                         10,
-                        kwargs.get("sast")
+                        **kwargs,
                     ),
                     Field(
                         "sbst",
                         float,
                         30,
                         10,
-                        kwargs.get("sbst")
+                        **kwargs,
                     ),
                     Field(
                         "sfsat",
                         float,
                         40,
                         10,
-                        kwargs.get("sfsat", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sfsbt",
                         float,
                         50,
                         10,
-                        kwargs.get("sfsbt", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "fsf",
                         float,
                         60,
                         10,
-                        kwargs.get("fsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "vsf",
                         float,
                         70,
                         10,
-                        kwargs.get("vsf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -227,56 +243,57 @@ class ContactAutomaticOneWaySurfaceToSurfaceTiebreakDamping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("option", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nfls",
                         float,
                         10,
                         10,
-                        kwargs.get("nfls")
+                        **kwargs,
                     ),
                     Field(
                         "sfls",
                         float,
                         20,
                         10,
-                        kwargs.get("sfls")
+                        **kwargs,
                     ),
                     Field(
                         "param",
                         float,
                         30,
                         10,
-                        kwargs.get("param")
+                        **kwargs,
                     ),
                     Field(
                         "eraten",
                         float,
                         40,
                         10,
-                        kwargs.get("eraten")
+                        **kwargs,
                     ),
                     Field(
                         "erates",
                         float,
                         50,
                         10,
-                        kwargs.get("erates")
+                        **kwargs,
                     ),
                     Field(
                         "ct2cn",
                         float,
                         60,
                         10,
-                        kwargs.get("ct2cn")
+                        **kwargs,
                     ),
                     Field(
                         "cn",
                         float,
                         70,
                         10,
-                        kwargs.get("cn")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -287,21 +304,21 @@ class ContactAutomaticOneWaySurfaceToSurfaceTiebreakDamping(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dmp_1")
+                        **kwargs,
                     ),
                     Field(
                         "dmp_2",
                         float,
                         10,
                         10,
-                        kwargs.get("dmp_2")
+                        **kwargs,
                     ),
                     Field(
                         "dmp_3",
                         float,
                         20,
                         10,
-                        kwargs.get("dmp_3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -312,56 +329,56 @@ class ContactAutomaticOneWaySurfaceToSurfaceTiebreakDamping(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("g1c_0")
+                        **kwargs,
                     ),
                     Field(
                         "g1c_inf",
                         float,
                         10,
                         10,
-                        kwargs.get("g1c_inf")
+                        **kwargs,
                     ),
                     Field(
                         "edot_g1",
                         float,
                         20,
                         10,
-                        kwargs.get("edot_g1")
+                        **kwargs,
                     ),
                     Field(
                         "t0",
                         float,
                         30,
                         10,
-                        kwargs.get("t0")
+                        **kwargs,
                     ),
                     Field(
                         "t1",
                         float,
                         40,
                         10,
-                        kwargs.get("t1")
+                        **kwargs,
                     ),
                     Field(
                         "edot_t",
                         float,
                         50,
                         10,
-                        kwargs.get("edot_t")
+                        **kwargs,
                     ),
                     Field(
                         "fg1",
                         float,
                         60,
                         10,
-                        kwargs.get("fg1")
+                        **kwargs,
                     ),
                     Field(
                         "lcg1c",
                         float,
                         70,
                         10,
-                        kwargs.get("lcg1c")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -372,56 +389,56 @@ class ContactAutomaticOneWaySurfaceToSurfaceTiebreakDamping(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("g2c_0")
+                        **kwargs,
                     ),
                     Field(
                         "g2c_inf",
                         float,
                         10,
                         10,
-                        kwargs.get("g2c_inf")
+                        **kwargs,
                     ),
                     Field(
                         "edot_g2",
                         float,
                         20,
                         10,
-                        kwargs.get("edot_g2")
+                        **kwargs,
                     ),
                     Field(
                         "s0",
                         float,
                         30,
                         10,
-                        kwargs.get("s0")
+                        **kwargs,
                     ),
                     Field(
                         "s1",
                         float,
                         40,
                         10,
-                        kwargs.get("s1")
+                        **kwargs,
                     ),
                     Field(
                         "edot_s",
                         float,
                         50,
                         10,
-                        kwargs.get("edot_s")
+                        **kwargs,
                     ),
                     Field(
                         "fg2",
                         float,
                         60,
                         10,
-                        kwargs.get("fg2")
+                        **kwargs,
                     ),
                     Field(
                         "lcg2c",
                         float,
                         70,
                         10,
-                        kwargs.get("lcg2c")
+                        **kwargs,
                     ),
                 ],
             ),

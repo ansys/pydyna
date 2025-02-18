@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class Mat270(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "lcem",
                         int,
                         20,
                         10,
-                        kwargs.get("lcem")
+                        **kwargs,
                     ),
                     Field(
                         "lcpr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcpr")
+                        **kwargs,
                     ),
                     Field(
                         "lcsy",
                         int,
                         40,
                         10,
-                        kwargs.get("lcsy")
+                        **kwargs,
                     ),
                     Field(
                         "lchr",
                         int,
                         50,
                         10,
-                        kwargs.get("lchr")
+                        **kwargs,
                     ),
                     Field(
                         "lcat",
                         int,
                         60,
                         10,
-                        kwargs.get("lcat")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         70,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,49 +105,49 @@ class Mat270(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tastart")
+                        **kwargs,
                     ),
                     Field(
                         "taend",
                         float,
                         10,
                         10,
-                        kwargs.get("taend")
+                        **kwargs,
                     ),
                     Field(
                         "tlstart",
                         float,
                         20,
                         10,
-                        kwargs.get("tlstart")
+                        **kwargs,
                     ),
                     Field(
                         "tlend",
                         float,
                         30,
                         10,
-                        kwargs.get("tlend")
+                        **kwargs,
                     ),
                     Field(
                         "eghost",
                         float,
                         40,
                         10,
-                        kwargs.get("eghost")
+                        **kwargs,
                     ),
                     Field(
                         "pghost",
                         float,
                         50,
                         10,
-                        kwargs.get("pghost")
+                        **kwargs,
                     ),
                     Field(
                         "aghost",
                         float,
                         60,
                         10,
-                        kwargs.get("aghost")
+                        **kwargs,
                     ),
                 ],
             ),

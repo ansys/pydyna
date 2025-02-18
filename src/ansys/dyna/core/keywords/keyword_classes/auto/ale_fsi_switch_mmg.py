@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleFsiSwitchMmg(KeywordBase):
@@ -41,14 +40,14 @@ class AleFsiSwitchMmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,63 @@ class AleFsiSwitchMmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         10,
                         10,
-                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nquad",
                         int,
                         20,
                         10,
-                        kwargs.get("nquad", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "xoff",
                         float,
                         30,
                         10,
-                        kwargs.get("xoff", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "btime",
                         float,
                         40,
                         10,
-                        kwargs.get("btime", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dtime",
                         float,
                         50,
                         10,
-                        kwargs.get("dtime", 1.0e20 if use_lspp_defaults() else None)
+                        1.0e20,
+                        **kwargs,
                     ),
                     Field(
                         "nfreq",
                         int,
                         60,
                         10,
-                        kwargs.get("nfreq", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nfold",
                         int,
                         70,
                         10,
-                        kwargs.get("nfold", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,21 +125,22 @@ class AleFsiSwitchMmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fr_mmg")
+                        **kwargs,
                     ),
                     Field(
                         "to_mmg",
                         int,
                         10,
                         10,
-                        kwargs.get("to_mmg")
+                        **kwargs,
                     ),
                     Field(
                         "xclen",
                         float,
                         20,
                         10,
-                        kwargs.get("xclen", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

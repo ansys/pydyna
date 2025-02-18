@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class PerturbationNode(KeywordBase):
@@ -41,42 +40,48 @@ class PerturbationNode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("type", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nsid",
                         int,
                         10,
                         10,
-                        kwargs.get("nsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "scl",
                         float,
                         20,
                         10,
-                        kwargs.get("scl", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "cmp",
                         int,
                         30,
                         10,
-                        kwargs.get("cmp", 7 if use_lspp_defaults() else None)
+                        7,
+                        **kwargs,
                     ),
                     Field(
                         "icoord",
                         int,
                         40,
                         10,
-                        kwargs.get("icoord", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         50,
                         10,
-                        kwargs.get("cid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,49 +92,56 @@ class PerturbationNode(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ampl", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "xwl",
                         float,
                         10,
                         10,
-                        kwargs.get("xwl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "xoff",
                         float,
                         20,
                         10,
-                        kwargs.get("xoff", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ywl",
                         float,
                         30,
                         10,
-                        kwargs.get("ywl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yoff",
                         float,
                         40,
                         10,
-                        kwargs.get("yoff", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zwl",
                         float,
                         50,
                         10,
-                        kwargs.get("zwl", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zoff",
                         float,
                         60,
                         10,
-                        kwargs.get("zoff", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,7 +152,8 @@ class PerturbationNode(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fade", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -151,7 +164,7 @@ class PerturbationNode(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("fname")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -162,28 +175,32 @@ class PerturbationNode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cstype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ellip1",
                         float,
                         10,
                         10,
-                        kwargs.get("ellip1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ellip2",
                         float,
                         20,
                         10,
-                        kwargs.get("ellip2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rnd",
                         int,
                         30,
                         10,
-                        kwargs.get("rnd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -194,28 +211,32 @@ class PerturbationNode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cftype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "cfc1",
                         float,
                         10,
                         10,
-                        kwargs.get("cfc1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "cfc2",
                         float,
                         20,
                         10,
-                        kwargs.get("cfc2", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "cfc3",
                         float,
                         30,
                         10,
-                        kwargs.get("cfc3", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,14 +247,16 @@ class PerturbationNode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ampl", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "dtype",
                         float,
                         10,
                         10,
-                        kwargs.get("dtype", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

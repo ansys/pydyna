@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class DefineCpmGasProperties(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "xmm",
                         float,
                         10,
                         10,
-                        kwargs.get("xmm")
+                        **kwargs,
                     ),
                     Field(
                         "cp0",
                         float,
                         20,
                         10,
-                        kwargs.get("cp0")
+                        **kwargs,
                     ),
                     Field(
                         "cp1",
                         float,
                         30,
                         10,
-                        kwargs.get("cp1")
+                        **kwargs,
                     ),
                     Field(
                         "cp2",
                         float,
                         40,
                         10,
-                        kwargs.get("cp2")
+                        **kwargs,
                     ),
                     Field(
                         "cp3",
                         float,
                         50,
                         10,
-                        kwargs.get("cp3")
+                        **kwargs,
                     ),
                     Field(
                         "cp4",
                         float,
                         60,
                         10,
-                        kwargs.get("cp4")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,49 +98,50 @@ class DefineCpmGasProperties(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("mut0")
+                        **kwargs,
                     ),
                     Field(
                         "mut1",
                         float,
                         10,
                         10,
-                        kwargs.get("mut1")
+                        **kwargs,
                     ),
                     Field(
                         "mut2",
                         float,
                         20,
                         10,
-                        kwargs.get("mut2")
+                        **kwargs,
                     ),
                     Field(
                         "mut3",
                         float,
                         30,
                         10,
-                        kwargs.get("mut3")
+                        **kwargs,
                     ),
                     Field(
                         "mut4",
                         float,
                         40,
                         10,
-                        kwargs.get("mut4")
+                        **kwargs,
                     ),
                     Field(
                         "chm_id",
                         int,
                         50,
                         10,
-                        kwargs.get("chm_id")
+                        **kwargs,
                     ),
                     Field(
                         "vini",
                         float,
                         60,
                         10,
-                        kwargs.get("vini", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

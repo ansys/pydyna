@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatVegter2017(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "fbi",
                         float,
                         50,
                         10,
-                        kwargs.get("fbi")
+                        **kwargs,
                     ),
                     Field(
                         "rbi0",
                         float,
                         60,
                         10,
-                        kwargs.get("rbi0")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         float,
                         70,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class MatVegter2017(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sys")
+                        **kwargs,
                     ),
                     Field(
                         "sip",
                         float,
                         10,
                         10,
-                        kwargs.get("sip")
+                        **kwargs,
                     ),
                     Field(
                         "shs",
                         float,
                         20,
                         10,
-                        kwargs.get("shs")
+                        **kwargs,
                     ),
                     Field(
                         "shl",
                         float,
                         30,
                         10,
-                        kwargs.get("shl")
+                        **kwargs,
                     ),
                     Field(
                         "esh",
                         float,
                         40,
                         10,
-                        kwargs.get("esh")
+                        **kwargs,
                     ),
                     Field(
                         "e0",
                         float,
                         50,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         60,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "lcid2",
                         float,
                         70,
                         10,
-                        kwargs.get("lcid2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,42 +165,42 @@ class MatVegter2017(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "dys",
                         float,
                         20,
                         10,
-                        kwargs.get("dys")
+                        **kwargs,
                     ),
                     Field(
                         "raten",
                         float,
                         30,
                         10,
-                        kwargs.get("raten")
+                        **kwargs,
                     ),
                     Field(
                         "srn0",
                         float,
                         40,
                         10,
-                        kwargs.get("srn0")
+                        **kwargs,
                     ),
                     Field(
                         "exsr",
                         float,
                         50,
                         10,
-                        kwargs.get("exsr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -212,42 +211,42 @@ class MatVegter2017(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -258,49 +257,49 @@ class MatVegter2017(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -311,42 +310,42 @@ class MatVegter2017(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rm-0")
+                        **kwargs,
                     ),
                     Field(
                         "rm-45",
                         float,
                         10,
                         10,
-                        kwargs.get("rm-45")
+                        **kwargs,
                     ),
                     Field(
                         "rm-90",
                         float,
                         20,
                         10,
-                        kwargs.get("rm-90")
+                        **kwargs,
                     ),
                     Field(
                         "ag-0",
                         float,
                         30,
                         10,
-                        kwargs.get("ag-0")
+                        **kwargs,
                     ),
                     Field(
                         "ag-45",
                         float,
                         40,
                         10,
-                        kwargs.get("ag-45")
+                        **kwargs,
                     ),
                     Field(
                         "ag-90",
                         float,
                         50,
                         10,
-                        kwargs.get("ag-90")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -357,21 +356,21 @@ class MatVegter2017(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r00")
+                        **kwargs,
                     ),
                     Field(
                         "r45",
                         float,
                         10,
                         10,
-                        kwargs.get("r45")
+                        **kwargs,
                     ),
                     Field(
                         "r90",
                         float,
                         20,
                         10,
-                        kwargs.get("r90")
+                        **kwargs,
                     ),
                 ],
             ),

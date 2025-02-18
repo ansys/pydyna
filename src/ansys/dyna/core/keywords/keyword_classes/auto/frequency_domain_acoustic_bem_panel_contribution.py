@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
@@ -41,56 +40,60 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         10,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "fmin",
                         float,
                         20,
                         10,
-                        kwargs.get("fmin")
+                        **kwargs,
                     ),
                     Field(
                         "fmax",
                         float,
                         30,
                         10,
-                        kwargs.get("fmax")
+                        **kwargs,
                     ),
                     Field(
                         "nfreq",
                         int,
                         40,
                         10,
-                        kwargs.get("nfreq", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dtout",
                         float,
                         50,
                         10,
-                        kwargs.get("dtout", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tstart",
                         float,
                         60,
                         10,
-                        kwargs.get("tstart", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pref",
                         float,
                         70,
                         10,
-                        kwargs.get("pref", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +104,64 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsidext", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "typext",
                         int,
                         10,
                         10,
-                        kwargs.get("typext", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nsidint",
                         int,
                         20,
                         10,
-                        kwargs.get("nsidint", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "typint",
                         int,
                         30,
                         10,
-                        kwargs.get("typint", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fftwin",
                         int,
                         40,
                         10,
-                        kwargs.get("fftwin", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "trslt",
                         int,
                         50,
                         10,
-                        kwargs.get("trslt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ipfile",
                         int,
                         60,
                         10,
-                        kwargs.get("ipfile", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iunits",
                         int,
                         70,
                         10,
-                        kwargs.get("iunits", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,56 +172,64 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("method", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "maxit",
                         int,
                         10,
                         10,
-                        kwargs.get("maxit", 100 if use_lspp_defaults() else None)
+                        100,
+                        **kwargs,
                     ),
                     Field(
                         "tolitr",
                         float,
                         20,
                         10,
-                        kwargs.get("tolitr", 1E-4 if use_lspp_defaults() else None)
+                        1E-4,
+                        **kwargs,
                     ),
                     Field(
                         "ndd",
                         int,
                         30,
                         10,
-                        kwargs.get("ndd", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "tollr",
                         float,
                         40,
                         10,
-                        kwargs.get("tollr", 1E-6 if use_lspp_defaults() else None)
+                        1E-6,
+                        **kwargs,
                     ),
                     Field(
                         "tolfct",
                         float,
                         50,
                         10,
-                        kwargs.get("tolfct", 1E-6 if use_lspp_defaults() else None)
+                        1E-6,
+                        **kwargs,
                     ),
                     Field(
                         "ibdim",
                         int,
                         60,
                         10,
-                        kwargs.get("ibdim", 1000 if use_lspp_defaults() else None)
+                        1000,
+                        **kwargs,
                     ),
                     Field(
                         "npg",
                         int,
                         70,
                         10,
-                        kwargs.get("npg", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -221,56 +240,63 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "nbc",
                         int,
                         10,
                         10,
-                        kwargs.get("nbc", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "restrt",
                         int,
                         20,
                         10,
-                        kwargs.get("restrt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iedge",
                         int,
                         30,
                         10,
-                        kwargs.get("iedge", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "noel",
                         int,
                         40,
                         10,
-                        kwargs.get("noel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nfrup",
                         int,
                         50,
                         10,
-                        kwargs.get("nfrup", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "velout",
                         int,
                         60,
                         10,
-                        kwargs.get("velout", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dba",
                         int,
                         70,
                         10,
-                        kwargs.get("dba", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -281,42 +307,46 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sstype",
                         int,
                         10,
                         10,
-                        kwargs.get("sstype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "norm",
                         int,
                         20,
                         10,
-                        kwargs.get("norm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bemtype",
                         int,
                         30,
                         10,
-                        kwargs.get("bemtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc1",
                         int,
                         40,
                         10,
-                        kwargs.get("lc1")
+                        **kwargs,
                     ),
                     Field(
                         "lc2",
                         int,
                         50,
                         10,
-                        kwargs.get("lc2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -327,7 +357,8 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsidpc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -338,14 +369,16 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t_hold", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "decay",
                         float,
                         10,
                         10,
-                        kwargs.get("decay", 0.02 if use_lspp_defaults() else None)
+                        0.02,
+                        **kwargs,
                     ),
                 ],
             ),

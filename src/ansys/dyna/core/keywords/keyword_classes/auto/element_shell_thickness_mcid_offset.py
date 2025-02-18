@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementShellThicknessMcidOffset(KeywordBase):
@@ -41,70 +40,70 @@ class ElementShellThicknessMcidOffset(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         8,
                         8,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "n1",
                         int,
                         16,
                         8,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         24,
                         8,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n3",
                         int,
                         32,
                         8,
-                        kwargs.get("n3")
+                        **kwargs,
                     ),
                     Field(
                         "n4",
                         int,
                         40,
                         8,
-                        kwargs.get("n4")
+                        **kwargs,
                     ),
                     Field(
                         "n5",
                         int,
                         48,
                         8,
-                        kwargs.get("n5")
+                        **kwargs,
                     ),
                     Field(
                         "n6",
                         int,
                         56,
                         8,
-                        kwargs.get("n6")
+                        **kwargs,
                     ),
                     Field(
                         "n7",
                         int,
                         64,
                         8,
-                        kwargs.get("n7")
+                        **kwargs,
                     ),
                     Field(
                         "n8",
                         int,
                         72,
                         8,
-                        kwargs.get("n8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -115,35 +114,40 @@ class ElementShellThicknessMcidOffset(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("thic1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "thic2",
                         float,
                         16,
                         16,
-                        kwargs.get("thic2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "thic3",
                         float,
                         32,
                         16,
-                        kwargs.get("thic3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "thic4",
                         float,
                         48,
                         16,
-                        kwargs.get("thic4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "mcid",
                         int,
                         64,
                         16,
-                        kwargs.get("mcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -154,28 +158,32 @@ class ElementShellThicknessMcidOffset(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("thic5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "thic6",
                         float,
                         16,
                         16,
-                        kwargs.get("thic6", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "thic7",
                         float,
                         32,
                         16,
-                        kwargs.get("thic7", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "thic8",
                         float,
                         48,
                         16,
-                        kwargs.get("thic8", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -186,7 +194,8 @@ class ElementShellThicknessMcidOffset(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("offset", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

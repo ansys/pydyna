@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseInitialTwophase(KeywordBase):
@@ -41,56 +40,56 @@ class DualceseInitialTwophase(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("z1")
+                        **kwargs,
                     ),
                     Field(
                         "uic",
                         float,
                         10,
                         10,
-                        kwargs.get("uic")
+                        **kwargs,
                     ),
                     Field(
                         "vic",
                         float,
                         20,
                         10,
-                        kwargs.get("vic")
+                        **kwargs,
                     ),
                     Field(
                         "wic",
                         float,
                         30,
                         10,
-                        kwargs.get("wic")
+                        **kwargs,
                     ),
                     Field(
                         "rho_1",
                         float,
                         40,
                         10,
-                        kwargs.get("rho_1")
+                        **kwargs,
                     ),
                     Field(
                         "rho_2",
                         float,
                         50,
                         10,
-                        kwargs.get("rho_2")
+                        **kwargs,
                     ),
                     Field(
                         "pic",
                         float,
                         60,
                         10,
-                        kwargs.get("pic")
+                        **kwargs,
                     ),
                     Field(
                         "tic",
                         float,
                         70,
                         10,
-                        kwargs.get("tic")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,7 +100,7 @@ class DualceseInitialTwophase(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ifunc")
+                        **kwargs,
                     ),
                 ],
             ),

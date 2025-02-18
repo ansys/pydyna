@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InterfaceEnsight(KeywordBase):
@@ -41,21 +40,21 @@ class InterfaceEnsight(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nset")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "nlfile",
                         int,
                         20,
                         10,
-                        kwargs.get("nlfile")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,7 +65,7 @@ class InterfaceEnsight(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("gfile")
+                        **kwargs,
                     ),
                 ],
             ),

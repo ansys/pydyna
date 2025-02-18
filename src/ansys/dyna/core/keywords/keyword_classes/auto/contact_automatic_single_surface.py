@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,56 +46,56 @@ class ContactAutomaticSingleSurface(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "msid",
                         int,
                         10,
                         10,
-                        kwargs.get("msid")
+                        **kwargs,
                     ),
                     Field(
                         "sstyp",
                         int,
                         20,
                         10,
-                        kwargs.get("sstyp")
+                        **kwargs,
                     ),
                     Field(
                         "mstyp",
                         int,
                         30,
                         10,
-                        kwargs.get("mstyp")
+                        **kwargs,
                     ),
                     Field(
                         "sboxid",
                         int,
                         40,
                         10,
-                        kwargs.get("sboxid")
+                        **kwargs,
                     ),
                     Field(
                         "mboxid",
                         int,
                         50,
                         10,
-                        kwargs.get("mboxid")
+                        **kwargs,
                     ),
                     Field(
                         "spr",
                         int,
                         60,
                         10,
-                        kwargs.get("spr")
+                        **kwargs,
                     ),
                     Field(
                         "mpr",
                         int,
                         70,
                         10,
-                        kwargs.get("mpr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,56 +106,64 @@ class ContactAutomaticSingleSurface(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fd",
                         float,
                         10,
                         10,
-                        kwargs.get("fd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dc",
                         float,
                         20,
                         10,
-                        kwargs.get("dc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vc",
                         float,
                         30,
                         10,
-                        kwargs.get("vc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vdc",
                         float,
                         40,
                         10,
-                        kwargs.get("vdc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "penchk",
                         int,
                         50,
                         10,
-                        kwargs.get("penchk", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bt",
                         float,
                         60,
                         10,
-                        kwargs.get("bt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         70,
                         10,
-                        kwargs.get("dt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -167,56 +174,62 @@ class ContactAutomaticSingleSurface(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfs", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "sfm",
                         float,
                         10,
                         10,
-                        kwargs.get("sfm", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "sst",
                         float,
                         20,
                         10,
-                        kwargs.get("sst")
+                        **kwargs,
                     ),
                     Field(
                         "mst",
                         float,
                         30,
                         10,
-                        kwargs.get("mst")
+                        **kwargs,
                     ),
                     Field(
                         "sfst",
                         float,
                         40,
                         10,
-                        kwargs.get("sfst", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "sfmt",
                         float,
                         50,
                         10,
-                        kwargs.get("sfmt", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "fsf",
                         float,
                         60,
                         10,
-                        kwargs.get("fsf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "vsf",
                         float,
                         70,
                         10,
-                        kwargs.get("vsf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),

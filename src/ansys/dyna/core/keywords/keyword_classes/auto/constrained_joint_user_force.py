@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedJointUserForce(KeywordBase):
@@ -41,21 +40,22 @@ class ConstrainedJointUserForce(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fid")
+                        **kwargs,
                     ),
                     Field(
                         "jid",
                         int,
                         10,
                         10,
-                        kwargs.get("jid")
+                        **kwargs,
                     ),
                     Field(
                         "nhisv",
                         int,
                         20,
                         10,
-                        kwargs.get("nhisv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,56 +66,56 @@ class ConstrainedJointUserForce(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("const1")
+                        **kwargs,
                     ),
                     Field(
                         "const2",
                         int,
                         10,
                         10,
-                        kwargs.get("const2")
+                        **kwargs,
                     ),
                     Field(
                         "const3",
                         int,
                         20,
                         10,
-                        kwargs.get("const3")
+                        **kwargs,
                     ),
                     Field(
                         "const4",
                         int,
                         30,
                         10,
-                        kwargs.get("const4")
+                        **kwargs,
                     ),
                     Field(
                         "const5",
                         int,
                         40,
                         10,
-                        kwargs.get("const5")
+                        **kwargs,
                     ),
                     Field(
                         "const6",
                         int,
                         50,
                         10,
-                        kwargs.get("const6")
+                        **kwargs,
                     ),
                     Field(
                         "const7",
                         int,
                         60,
                         10,
-                        kwargs.get("const7")
+                        **kwargs,
                     ),
                     Field(
                         "const8",
                         int,
                         70,
                         10,
-                        kwargs.get("const8")
+                        **kwargs,
                     ),
                 ],
             ),

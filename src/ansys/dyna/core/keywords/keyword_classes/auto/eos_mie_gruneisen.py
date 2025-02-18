@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosMieGruneisen(KeywordBase):
@@ -41,56 +40,56 @@ class EosMieGruneisen(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         10,
                         10,
-                        kwargs.get("gamma")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         20,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         30,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         40,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                     Field(
                         "pel",
                         float,
                         50,
                         10,
-                        kwargs.get("pel")
+                        **kwargs,
                     ),
                     Field(
                         "pco",
                         float,
                         60,
                         10,
-                        kwargs.get("pco")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         70,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,21 +100,21 @@ class EosMieGruneisen(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha0")
+                        **kwargs,
                     ),
                     Field(
                         "e0",
                         float,
                         10,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "v0",
                         float,
                         20,
                         10,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryControlBlast1D(KeywordBase):
@@ -41,28 +40,28 @@ class ChemistryControlBlast1D(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("blastid")
+                        **kwargs,
                     ),
                     Field(
                         "x0",
                         float,
                         10,
                         10,
-                        kwargs.get("x0")
+                        **kwargs,
                     ),
                     Field(
                         "y0",
                         float,
                         20,
                         10,
-                        kwargs.get("y0")
+                        **kwargs,
                     ),
                     Field(
                         "z0",
                         float,
                         30,
                         10,
-                        kwargs.get("z0")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -73,7 +72,7 @@ class ChemistryControlBlast1D(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("file")
+                        **kwargs,
                     ),
                 ],
             ),

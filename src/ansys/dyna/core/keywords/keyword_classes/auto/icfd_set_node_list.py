@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdSetNodeList(KeywordBase):
@@ -41,14 +40,14 @@ class IcfdSetNodeList(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         10,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,56 @@ class IcfdSetNodeList(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid1")
+                        **kwargs,
                     ),
                     Field(
                         "nid2",
                         int,
                         10,
                         10,
-                        kwargs.get("nid2")
+                        **kwargs,
                     ),
                     Field(
                         "nid3",
                         int,
                         20,
                         10,
-                        kwargs.get("nid3")
+                        **kwargs,
                     ),
                     Field(
                         "nid4",
                         int,
                         30,
                         10,
-                        kwargs.get("nid4")
+                        **kwargs,
                     ),
                     Field(
                         "nid5",
                         int,
                         40,
                         10,
-                        kwargs.get("nid5")
+                        **kwargs,
                     ),
                     Field(
                         "nid6",
                         int,
                         50,
                         10,
-                        kwargs.get("nid6")
+                        **kwargs,
                     ),
                     Field(
                         "nid7",
                         int,
                         60,
                         10,
-                        kwargs.get("nid7")
+                        **kwargs,
                     ),
                     Field(
                         "nid8",
                         int,
                         70,
                         10,
-                        kwargs.get("nid8")
+                        **kwargs,
                     ),
                 ],
             ),

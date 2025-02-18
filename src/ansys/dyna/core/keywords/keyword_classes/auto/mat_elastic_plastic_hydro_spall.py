@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatElasticPlasticHydroSpall(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         20,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "sig0",
                         float,
                         30,
                         10,
-                        kwargs.get("sig0")
+                        **kwargs,
                     ),
                     Field(
                         "eh",
                         float,
                         40,
                         10,
-                        kwargs.get("eh")
+                        **kwargs,
                     ),
                     Field(
                         "pc",
                         float,
                         50,
                         10,
-                        kwargs.get("pc")
+                        **kwargs,
                     ),
                     Field(
                         "fs",
                         float,
                         60,
                         10,
-                        kwargs.get("fs")
+                        **kwargs,
                     ),
                     Field(
                         "charl",
                         float,
                         70,
                         10,
-                        kwargs.get("charl")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,21 +105,22 @@ class MatElasticPlasticHydroSpall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         10,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "spall",
                         float,
                         20,
                         10,
-                        kwargs.get("spall", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -131,56 +131,56 @@ class MatElasticPlasticHydroSpall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eps1")
+                        **kwargs,
                     ),
                     Field(
                         "eps2",
                         float,
                         10,
                         10,
-                        kwargs.get("eps2")
+                        **kwargs,
                     ),
                     Field(
                         "eps3",
                         float,
                         20,
                         10,
-                        kwargs.get("eps3")
+                        **kwargs,
                     ),
                     Field(
                         "eps4",
                         float,
                         30,
                         10,
-                        kwargs.get("eps4")
+                        **kwargs,
                     ),
                     Field(
                         "eps5",
                         float,
                         40,
                         10,
-                        kwargs.get("eps5")
+                        **kwargs,
                     ),
                     Field(
                         "eps6",
                         float,
                         50,
                         10,
-                        kwargs.get("eps6")
+                        **kwargs,
                     ),
                     Field(
                         "eps7",
                         float,
                         60,
                         10,
-                        kwargs.get("eps7")
+                        **kwargs,
                     ),
                     Field(
                         "eps8",
                         float,
                         70,
                         10,
-                        kwargs.get("eps8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -191,56 +191,56 @@ class MatElasticPlasticHydroSpall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eps9")
+                        **kwargs,
                     ),
                     Field(
                         "eps10",
                         float,
                         10,
                         10,
-                        kwargs.get("eps10")
+                        **kwargs,
                     ),
                     Field(
                         "eps11",
                         float,
                         20,
                         10,
-                        kwargs.get("eps11")
+                        **kwargs,
                     ),
                     Field(
                         "eps12",
                         float,
                         30,
                         10,
-                        kwargs.get("eps12")
+                        **kwargs,
                     ),
                     Field(
                         "eps13",
                         float,
                         40,
                         10,
-                        kwargs.get("eps13")
+                        **kwargs,
                     ),
                     Field(
                         "eps14",
                         float,
                         50,
                         10,
-                        kwargs.get("eps14")
+                        **kwargs,
                     ),
                     Field(
                         "eps15",
                         float,
                         60,
                         10,
-                        kwargs.get("eps15")
+                        **kwargs,
                     ),
                     Field(
                         "eps16",
                         float,
                         70,
                         10,
-                        kwargs.get("eps16")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -251,56 +251,56 @@ class MatElasticPlasticHydroSpall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("es1")
+                        **kwargs,
                     ),
                     Field(
                         "es2",
                         float,
                         10,
                         10,
-                        kwargs.get("es2")
+                        **kwargs,
                     ),
                     Field(
                         "es3",
                         float,
                         20,
                         10,
-                        kwargs.get("es3")
+                        **kwargs,
                     ),
                     Field(
                         "es4",
                         float,
                         30,
                         10,
-                        kwargs.get("es4")
+                        **kwargs,
                     ),
                     Field(
                         "es5",
                         float,
                         40,
                         10,
-                        kwargs.get("es5")
+                        **kwargs,
                     ),
                     Field(
                         "es6",
                         float,
                         50,
                         10,
-                        kwargs.get("es6")
+                        **kwargs,
                     ),
                     Field(
                         "es7",
                         float,
                         60,
                         10,
-                        kwargs.get("es7")
+                        **kwargs,
                     ),
                     Field(
                         "es8",
                         float,
                         70,
                         10,
-                        kwargs.get("es8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -311,56 +311,56 @@ class MatElasticPlasticHydroSpall(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("es9")
+                        **kwargs,
                     ),
                     Field(
                         "es10",
                         float,
                         10,
                         10,
-                        kwargs.get("es10")
+                        **kwargs,
                     ),
                     Field(
                         "es11",
                         float,
                         20,
                         10,
-                        kwargs.get("es11")
+                        **kwargs,
                     ),
                     Field(
                         "es12",
                         float,
                         30,
                         10,
-                        kwargs.get("es12")
+                        **kwargs,
                     ),
                     Field(
                         "es13",
                         float,
                         40,
                         10,
-                        kwargs.get("es13")
+                        **kwargs,
                     ),
                     Field(
                         "es14",
                         float,
                         50,
                         10,
-                        kwargs.get("es14")
+                        **kwargs,
                     ),
                     Field(
                         "es15",
                         float,
                         60,
                         10,
-                        kwargs.get("es15")
+                        **kwargs,
                     ),
                     Field(
                         "es16",
                         float,
                         70,
                         10,
-                        kwargs.get("es16")
+                        **kwargs,
                     ),
                 ],
             ),

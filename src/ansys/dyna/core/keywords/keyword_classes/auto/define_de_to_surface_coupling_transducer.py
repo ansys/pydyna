@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,30 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("slave")
+                        **kwargs,
                     ),
                     Field(
                         "master",
                         int,
                         10,
                         10,
-                        kwargs.get("master")
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         20,
                         10,
-                        kwargs.get("stype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mtype",
                         int,
                         30,
                         10,
-                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,56 +79,61 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("frics")
+                        **kwargs,
                     ),
                     Field(
                         "fricd",
                         float,
                         10,
                         10,
-                        kwargs.get("fricd")
+                        **kwargs,
                     ),
                     Field(
                         "damp",
                         float,
                         20,
                         10,
-                        kwargs.get("damp")
+                        **kwargs,
                     ),
                     Field(
                         "bsort",
                         int,
                         30,
                         10,
-                        kwargs.get("bsort", 100 if use_lspp_defaults() else None)
+                        100,
+                        **kwargs,
                     ),
                     Field(
                         "lcvx",
                         int,
                         40,
                         10,
-                        kwargs.get("lcvx", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcvy",
                         int,
                         50,
                         10,
-                        kwargs.get("lcvy", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcvz",
                         int,
                         60,
                         10,
-                        kwargs.get("lcvz", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "wearc",
                         float,
                         70,
                         10,
-                        kwargs.get("wearc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -138,56 +144,56 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("w1")
+                        **kwargs,
                     ),
                     Field(
                         "w2",
                         float,
                         10,
                         10,
-                        kwargs.get("w2")
+                        **kwargs,
                     ),
                     Field(
                         "w3",
                         float,
                         20,
                         10,
-                        kwargs.get("w3")
+                        **kwargs,
                     ),
                     Field(
                         "w4",
                         float,
                         30,
                         10,
-                        kwargs.get("w4")
+                        **kwargs,
                     ),
                     Field(
                         "w5",
                         float,
                         40,
                         10,
-                        kwargs.get("w5")
+                        **kwargs,
                     ),
                     Field(
                         "w6",
                         float,
                         50,
                         10,
-                        kwargs.get("w6")
+                        **kwargs,
                     ),
                     Field(
                         "w7",
                         float,
                         60,
                         10,
-                        kwargs.get("w7")
+                        **kwargs,
                     ),
                     Field(
                         "w8",
                         float,
                         70,
                         10,
-                        kwargs.get("w8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -198,56 +204,61 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sfp", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sft",
                         float,
                         10,
                         10,
-                        kwargs.get("sft", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "cid_rcf",
                         int,
                         50,
                         10,
-                        kwargs.get("cid_rcf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bt",
                         float,
                         60,
                         10,
-                        kwargs.get("bt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         70,
                         10,
-                        kwargs.get("dt", 1.E20 if use_lspp_defaults() else None)
+                        1.E20,
+                        **kwargs,
                     ),
                 ],
             ),

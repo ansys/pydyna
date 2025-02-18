@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseBinaryIntforFile(KeywordBase):
@@ -41,7 +40,7 @@ class DatabaseBinaryIntforFile(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,35 +51,36 @@ class DatabaseBinaryIntforFile(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt")
+                        **kwargs,
                     ),
                     Field(
                         "lcdt",
                         int,
                         10,
                         10,
-                        kwargs.get("lcdt")
+                        **kwargs,
                     ),
                     Field(
                         "beam",
                         int,
                         20,
                         10,
-                        kwargs.get("beam", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "npltc",
                         int,
                         30,
                         10,
-                        kwargs.get("npltc")
+                        **kwargs,
                     ),
                     Field(
                         "psetid",
                         int,
                         40,
                         10,
-                        kwargs.get("psetid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,7 +91,8 @@ class DatabaseBinaryIntforFile(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ioopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

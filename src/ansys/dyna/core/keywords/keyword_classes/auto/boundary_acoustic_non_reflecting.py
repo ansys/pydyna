@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryAcousticNonReflecting(KeywordBase):
@@ -41,42 +40,42 @@ class BoundaryAcousticNonReflecting(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "nrbtyp",
                         int,
                         10,
                         10,
-                        kwargs.get("nrbtyp")
+                        **kwargs,
                     ),
                     Field(
                         "crvopt",
                         int,
                         20,
                         10,
-                        kwargs.get("crvopt")
+                        **kwargs,
                     ),
                     Field(
                         "data1",
                         float,
                         30,
                         10,
-                        kwargs.get("data1")
+                        **kwargs,
                     ),
                     Field(
                         "data2",
                         float,
                         40,
                         10,
-                        kwargs.get("data2")
+                        **kwargs,
                     ),
                     Field(
                         "data3",
                         float,
                         50,
                         10,
-                        kwargs.get("data3")
+                        **kwargs,
                     ),
                 ],
             ),

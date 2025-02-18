@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseFsiExclude(KeywordBase):
@@ -41,56 +40,56 @@ class CeseFsiExclude(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid1")
+                        **kwargs,
                     ),
                     Field(
                         "pid2",
                         int,
                         10,
                         10,
-                        kwargs.get("pid2")
+                        **kwargs,
                     ),
                     Field(
                         "pid3",
                         int,
                         20,
                         10,
-                        kwargs.get("pid3")
+                        **kwargs,
                     ),
                     Field(
                         "pid4",
                         int,
                         30,
                         10,
-                        kwargs.get("pid4")
+                        **kwargs,
                     ),
                     Field(
                         "pid5",
                         int,
                         40,
                         10,
-                        kwargs.get("pid5")
+                        **kwargs,
                     ),
                     Field(
                         "pid6",
                         int,
                         50,
                         10,
-                        kwargs.get("pid6")
+                        **kwargs,
                     ),
                     Field(
                         "pid7",
                         int,
                         60,
                         10,
-                        kwargs.get("pid7")
+                        **kwargs,
                     ),
                     Field(
                         "pid8",
                         int,
                         70,
                         10,
-                        kwargs.get("pid8")
+                        **kwargs,
                     ),
                 ],
             ),

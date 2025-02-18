@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdDefineSource(KeywordBase):
@@ -41,42 +40,43 @@ class IcfdDefineSource(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "lcidk",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidk")
+                        **kwargs,
                     ),
                     Field(
                         "shape",
                         int,
                         20,
                         10,
-                        kwargs.get("shape", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "r",
                         float,
                         30,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "pid1",
                         int,
                         40,
                         10,
-                        kwargs.get("pid1")
+                        **kwargs,
                     ),
                     Field(
                         "pid2",
                         int,
                         50,
                         10,
-                        kwargs.get("pid2")
+                        **kwargs,
                     ),
                 ],
             ),

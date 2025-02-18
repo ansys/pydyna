@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedGeneralizedWeldCombined(KeywordBase):
@@ -41,7 +40,7 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("wid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,42 +51,44 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsid")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         10,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "filter",
                         int,
                         20,
                         10,
-                        kwargs.get("filter")
+                        **kwargs,
                     ),
                     Field(
                         "window",
                         float,
                         30,
                         10,
-                        kwargs.get("window", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "npr",
                         int,
                         40,
                         10,
-                        kwargs.get("npr")
+                        **kwargs,
                     ),
                     Field(
                         "nprt",
                         int,
                         50,
                         10,
-                        kwargs.get("nprt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class MatCableDiscreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         30,
                         10,
-                        kwargs.get("lcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "f0",
                         float,
                         40,
                         10,
-                        kwargs.get("f0")
+                        **kwargs,
                     ),
                     Field(
                         "tmaxf0",
                         float,
                         50,
                         10,
-                        kwargs.get("tmaxf0")
+                        **kwargs,
                     ),
                     Field(
                         "tramp",
                         float,
                         60,
                         10,
-                        kwargs.get("tramp")
+                        **kwargs,
                     ),
                     Field(
                         "iread",
                         int,
                         70,
                         10,
-                        kwargs.get("iread", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,35 +107,40 @@ class MatCableDiscreteBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("output", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tstart",
                         float,
                         10,
                         10,
-                        kwargs.get("tstart", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fracl0",
                         float,
                         20,
                         10,
-                        kwargs.get("fracl0", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mxeps",
                         float,
                         30,
                         10,
-                        kwargs.get("mxeps", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "mxfrc",
                         float,
                         40,
                         10,
-                        kwargs.get("mxfrc", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlDiscreteElement(KeywordBase):
@@ -41,56 +40,64 @@ class ControlDiscreteElement(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ndamp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tdamp",
                         float,
                         10,
                         10,
-                        kwargs.get("tdamp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "frics",
                         float,
                         20,
                         10,
-                        kwargs.get("frics", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fricr",
                         float,
                         30,
                         10,
-                        kwargs.get("fricr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "normk",
                         float,
                         40,
                         10,
-                        kwargs.get("normk", 0.01 if use_lspp_defaults() else None)
+                        0.01,
+                        **kwargs,
                     ),
                     Field(
                         "sheark",
                         float,
                         50,
                         10,
-                        kwargs.get("sheark", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cap",
                         int,
                         60,
                         10,
-                        kwargs.get("cap", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vtk",
                         int,
                         70,
                         10,
-                        kwargs.get("vtk", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +108,63 @@ class ControlDiscreteElement(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gamma", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vol",
                         float,
                         10,
                         10,
-                        kwargs.get("vol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ang",
                         float,
                         20,
                         10,
-                        kwargs.get("ang", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "gap",
                         float,
                         30,
                         10,
-                        kwargs.get("gap", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ignore",
                         int,
                         50,
                         10,
-                        kwargs.get("ignore", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nbuf",
                         int,
                         60,
                         10,
-                        kwargs.get("nbuf", 6 if use_lspp_defaults() else None)
+                        6,
+                        **kwargs,
                     ),
                     Field(
                         "parallel",
                         int,
                         70,
                         10,
-                        kwargs.get("parallel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,56 +175,63 @@ class ControlDiscreteElement(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lnorm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lshear",
                         int,
                         10,
                         10,
-                        kwargs.get("lshear", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "fricd",
                         float,
                         30,
                         10,
-                        kwargs.get("fricd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dc",
                         float,
                         40,
                         10,
-                        kwargs.get("dc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ncrb",
                         int,
                         50,
                         10,
-                        kwargs.get("ncrb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bt",
                         float,
                         60,
                         10,
-                        kwargs.get("bt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         70,
                         10,
-                        kwargs.get("dt", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -221,21 +242,24 @@ class ControlDiscreteElement(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tc",
                         float,
                         10,
                         10,
-                        kwargs.get("tc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tfac",
                         float,
                         20,
                         10,
-                        kwargs.get("tfac", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -246,35 +270,39 @@ class ControlDiscreteElement(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idesoft", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sofscl",
                         float,
                         10,
                         10,
-                        kwargs.get("sofscl", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "iskip",
                         int,
                         30,
                         10,
-                        kwargs.get("iskip", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "maxnei",
                         int,
                         40,
                         10,
-                        kwargs.get("maxnei", 20 if use_lspp_defaults() else None)
+                        20,
+                        **kwargs,
                     ),
                 ],
             ),

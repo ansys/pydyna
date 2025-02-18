@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryControlCsp(KeywordBase):
@@ -41,14 +40,14 @@ class ChemistryControlCsp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "ierropt",
                         int,
                         10,
                         10,
-                        kwargs.get("ierropt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,14 +58,14 @@ class ChemistryControlCsp(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ampl")
+                        **kwargs,
                     ),
                     Field(
                         "ycut",
                         float,
                         10,
                         10,
-                        kwargs.get("ycut")
+                        **kwargs,
                     ),
                 ],
             ),

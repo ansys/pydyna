@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlFormingParameterRead(KeywordBase):
@@ -41,7 +40,7 @@ class ControlFormingParameterRead(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,42 +51,42 @@ class ControlFormingParameterRead(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("paraname")
+                        **kwargs,
                     ),
                     Field(
                         "imethod",
                         int,
                         10,
                         10,
-                        kwargs.get("imethod")
+                        **kwargs,
                     ),
                     Field(
                         "line",
                         int,
                         20,
                         10,
-                        kwargs.get("line")
+                        **kwargs,
                     ),
                     Field(
                         "nbegpa",
                         int,
                         30,
                         10,
-                        kwargs.get("nbegpa")
+                        **kwargs,
                     ),
                     Field(
                         "nendpa ",
                         int,
                         40,
                         10,
-                        kwargs.get("nendpa ")
+                        **kwargs,
                     ),
                     Field(
                         "value ",
                         float,
                         50,
                         10,
-                        kwargs.get("value ")
+                        **kwargs,
                     ),
                 ],
             ),

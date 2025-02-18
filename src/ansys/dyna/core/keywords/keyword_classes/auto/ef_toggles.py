@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EfToggles(KeywordBase):
@@ -41,49 +40,55 @@ class EfToggles(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iprint1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iprint2",
                         int,
                         10,
                         10,
-                        kwargs.get("iprint2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iprint3",
                         int,
                         20,
                         10,
-                        kwargs.get("iprint3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iprint4",
                         int,
                         30,
                         10,
-                        kwargs.get("iprint4", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "idata",
                         int,
                         40,
                         10,
-                        kwargs.get("idata", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "itraces",
                         int,
                         50,
                         10,
-                        kwargs.get("itraces", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "irstrt",
                         int,
                         60,
                         10,
-                        kwargs.get("irstrt")
+                        **kwargs,
                     ),
                 ],
             ),

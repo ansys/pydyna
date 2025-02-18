@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSegmentNonuniform(KeywordBase):
@@ -41,14 +40,14 @@ class LoadSegmentNonuniform(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         str,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,59 @@ class LoadSegmentNonuniform(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         10,
                         10,
-                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "at",
                         float,
                         20,
                         10,
-                        kwargs.get("at", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         30,
                         10,
-                        kwargs.get("dt", 1E+16 if use_lspp_defaults() else None)
+                        1E+16,
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         40,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "v1",
                         float,
                         50,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         60,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         70,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,56 +121,56 @@ class LoadSegmentNonuniform(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         10,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n3",
                         int,
                         20,
                         10,
-                        kwargs.get("n3")
+                        **kwargs,
                     ),
                     Field(
                         "n4",
                         int,
                         30,
                         10,
-                        kwargs.get("n4")
+                        **kwargs,
                     ),
                     Field(
                         "n5",
                         int,
                         40,
                         10,
-                        kwargs.get("n5")
+                        **kwargs,
                     ),
                     Field(
                         "n6",
                         int,
                         50,
                         10,
-                        kwargs.get("n6")
+                        **kwargs,
                     ),
                     Field(
                         "n7",
                         int,
                         60,
                         10,
-                        kwargs.get("n7")
+                        **kwargs,
                     ),
                     Field(
                         "n8",
                         int,
                         70,
                         10,
-                        kwargs.get("n8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -179,56 +181,56 @@ class LoadSegmentNonuniform(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         10,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         20,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                     Field(
                         "p4",
                         float,
                         30,
                         10,
-                        kwargs.get("p4")
+                        **kwargs,
                     ),
                     Field(
                         "p5",
                         float,
                         40,
                         10,
-                        kwargs.get("p5")
+                        **kwargs,
                     ),
                     Field(
                         "p6",
                         float,
                         50,
                         10,
-                        kwargs.get("p6")
+                        **kwargs,
                     ),
                     Field(
                         "p7",
                         float,
                         60,
                         10,
-                        kwargs.get("p7")
+                        **kwargs,
                     ),
                     Field(
                         "p8",
                         float,
                         70,
                         10,
-                        kwargs.get("p8")
+                        **kwargs,
                     ),
                 ],
             ),

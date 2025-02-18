@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class Mat4AMicromec(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "mmopt",
                         float,
                         10,
                         10,
-                        kwargs.get("mmopt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bupd",
                         float,
                         20,
                         10,
-                        kwargs.get("bupd", 0.01 if use_lspp_defaults() else None)
+                        0.01,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "failm",
                         float,
                         50,
                         10,
-                        kwargs.get("failm")
+                        **kwargs,
                     ),
                     Field(
                         "failf",
                         int,
                         60,
                         10,
-                        kwargs.get("failf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "numint",
                         float,
                         70,
                         10,
-                        kwargs.get("numint", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +109,57 @@ class Mat4AMicromec(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         10,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "xp",
                         float,
                         20,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         30,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         40,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         50,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         60,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         70,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,49 +170,49 @@ class Mat4AMicromec(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -219,49 +223,51 @@ class Mat4AMicromec(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fvf")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "fl",
                         float,
                         20,
                         10,
-                        kwargs.get("fl")
+                        **kwargs,
                     ),
                     Field(
                         "fd",
                         float,
                         30,
                         10,
-                        kwargs.get("fd", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "a11",
                         float,
                         50,
                         10,
-                        kwargs.get("a11", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "a22",
                         float,
                         60,
                         10,
-                        kwargs.get("a22")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -272,42 +278,42 @@ class Mat4AMicromec(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rof")
+                        **kwargs,
                     ),
                     Field(
                         "el",
                         float,
                         10,
                         10,
-                        kwargs.get("el")
+                        **kwargs,
                     ),
                     Field(
                         "et",
                         float,
                         20,
                         10,
-                        kwargs.get("et")
+                        **kwargs,
                     ),
                     Field(
                         "glt",
                         float,
                         30,
                         10,
-                        kwargs.get("glt")
+                        **kwargs,
                     ),
                     Field(
                         "prtl",
                         float,
                         40,
                         10,
-                        kwargs.get("prtl")
+                        **kwargs,
                     ),
                     Field(
                         "prtt",
                         float,
                         50,
                         10,
-                        kwargs.get("prtt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -318,56 +324,57 @@ class Mat4AMicromec(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xt")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "slimxt",
                         float,
                         60,
                         10,
-                        kwargs.get("slimxt")
+                        **kwargs,
                     ),
                     Field(
                         "ncyred",
                         float,
                         70,
                         10,
-                        kwargs.get("ncyred", 10.0 if use_lspp_defaults() else None)
+                        10.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -378,21 +385,21 @@ class Mat4AMicromec(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rom")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         10,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         20,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -403,42 +410,42 @@ class Mat4AMicromec(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sigyt")
+                        **kwargs,
                     ),
                     Field(
                         "etant",
                         float,
                         10,
                         10,
-                        kwargs.get("etant")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "eps0",
                         float,
                         40,
                         10,
-                        kwargs.get("eps0")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         50,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -449,56 +456,57 @@ class Mat4AMicromec(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidt")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "lcdi",
                         int,
                         40,
                         10,
-                        kwargs.get("lcdi")
+                        **kwargs,
                     ),
                     Field(
                         "upf",
                         float,
                         50,
                         10,
-                        kwargs.get("upf")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ncyred2",
                         float,
                         70,
                         10,
-                        kwargs.get("ncyred2", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),

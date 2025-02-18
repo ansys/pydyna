@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class SensorCpmAirbag(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cpmid")
+                        **kwargs,
                     ),
                     Field(
                         "switid",
                         int,
                         10,
                         10,
-                        kwargs.get("switid")
+                        **kwargs,
                     ),
                     Field(
                         "tbirth",
                         float,
                         20,
                         10,
-                        kwargs.get("tbirth")
+                        **kwargs,
                     ),
                     Field(
                         "tdeath",
                         float,
                         30,
                         10,
-                        kwargs.get("tdeath")
+                        **kwargs,
                     ),
                     Field(
                         "tdr",
                         float,
                         40,
                         10,
-                        kwargs.get("tdr")
+                        **kwargs,
                     ),
                     Field(
                         "defps",
                         int,
                         50,
                         10,
-                        kwargs.get("defps")
+                        **kwargs,
                     ),
                     Field(
                         "rbpid",
                         int,
                         60,
                         10,
-                        kwargs.get("rbpid")
+                        **kwargs,
                     ),
                 ],
             ),

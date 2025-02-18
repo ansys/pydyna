@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmBoundaryPrescribed(KeywordBase):
@@ -41,42 +40,45 @@ class EmBoundaryPrescribed(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("bpid")
+                        **kwargs,
                     ),
                     Field(
                         "bptype",
                         int,
                         10,
                         10,
-                        kwargs.get("bptype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "settype",
                         int,
                         20,
                         10,
-                        kwargs.get("settype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "setid",
                         int,
                         30,
                         10,
-                        kwargs.get("setid")
+                        **kwargs,
                     ),
                     Field(
                         "val",
                         float,
                         40,
                         10,
-                        kwargs.get("val", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         50,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,14 +89,16 @@ class EmBoundaryPrescribed(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("birtht", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "deatht",
                         float,
                         10,
                         10,
-                        kwargs.get("deatht", 1e28 if use_lspp_defaults() else None)
+                        1e28,
+                        **kwargs,
                     ),
                 ],
             ),

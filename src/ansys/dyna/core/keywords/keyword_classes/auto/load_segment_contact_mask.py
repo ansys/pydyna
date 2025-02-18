@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSegmentContactMask(KeywordBase):
@@ -41,14 +40,14 @@ class LoadSegmentContactMask(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         str,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,56 @@ class LoadSegmentContactMask(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lsid")
+                        **kwargs,
                     ),
                     Field(
                         "p1",
                         float,
                         10,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         20,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "cid1",
                         int,
                         30,
                         10,
-                        kwargs.get("cid1")
+                        **kwargs,
                     ),
                     Field(
                         "cid2",
                         int,
                         40,
                         10,
-                        kwargs.get("cid2")
+                        **kwargs,
                     ),
                     Field(
                         "cid3",
                         int,
                         50,
                         10,
-                        kwargs.get("cid3")
+                        **kwargs,
                     ),
                     Field(
                         "cid4",
                         int,
                         60,
                         10,
-                        kwargs.get("cid4")
+                        **kwargs,
                     ),
                     Field(
                         "cid5",
                         int,
                         70,
                         10,
-                        kwargs.get("cid5")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,56 +118,56 @@ class LoadSegmentContactMask(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cid1")
+                        **kwargs,
                     ),
                     Field(
                         "cid2",
                         int,
                         10,
                         10,
-                        kwargs.get("cid2")
+                        **kwargs,
                     ),
                     Field(
                         "cid3",
                         int,
                         20,
                         10,
-                        kwargs.get("cid3")
+                        **kwargs,
                     ),
                     Field(
                         "cid4",
                         int,
                         30,
                         10,
-                        kwargs.get("cid4")
+                        **kwargs,
                     ),
                     Field(
                         "cid5",
                         int,
                         40,
                         10,
-                        kwargs.get("cid5")
+                        **kwargs,
                     ),
                     Field(
                         "cid6",
                         int,
                         50,
                         10,
-                        kwargs.get("cid6")
+                        **kwargs,
                     ),
                     Field(
                         "cid7",
                         int,
                         60,
                         10,
-                        kwargs.get("cid7")
+                        **kwargs,
                     ),
                     Field(
                         "cid8",
                         int,
                         70,
                         10,
-                        kwargs.get("cid8")
+                        **kwargs,
                     ),
                 ],
             ),

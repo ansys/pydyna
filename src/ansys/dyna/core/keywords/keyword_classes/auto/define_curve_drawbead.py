@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,43 @@ class DefineCurveDrawbead(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "tcype",
                         int,
                         10,
                         10,
-                        kwargs.get("tcype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         int,
                         20,
                         10,
-                        kwargs.get("vid")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         30,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "blkid",
                         int,
                         40,
                         10,
-                        kwargs.get("blkid")
+                        **kwargs,
                     ),
                     Field(
                         "perct",
                         int,
                         50,
                         10,
-                        kwargs.get("perct")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,14 +92,16 @@ class DefineCurveDrawbead(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("cx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cy",
                         float,
                         20,
                         20,
-                        kwargs.get("cy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -110,7 +112,7 @@ class DefineCurveDrawbead(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),

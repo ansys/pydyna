@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "df",
                         float,
                         40,
                         10,
-                        kwargs.get("df")
+                        **kwargs,
                     ),
                     Field(
                         "iaflc",
                         int,
                         50,
                         10,
-                        kwargs.get("iaflc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ytflag",
                         float,
                         60,
                         10,
-                        kwargs.get("ytflag", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "asoft",
                         float,
                         70,
                         10,
-                        kwargs.get("asoft")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,56 @@ class Mat139(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("m1")
+                        **kwargs,
                     ),
                     Field(
                         "m2",
                         float,
                         10,
                         10,
-                        kwargs.get("m2")
+                        **kwargs,
                     ),
                     Field(
                         "m3",
                         float,
                         20,
                         10,
-                        kwargs.get("m3")
+                        **kwargs,
                     ),
                     Field(
                         "m4",
                         float,
                         30,
                         10,
-                        kwargs.get("m4")
+                        **kwargs,
                     ),
                     Field(
                         "m5",
                         float,
                         40,
                         10,
-                        kwargs.get("m5")
+                        **kwargs,
                     ),
                     Field(
                         "m6",
                         float,
                         50,
                         10,
-                        kwargs.get("m6")
+                        **kwargs,
                     ),
                     Field(
                         "m7",
                         float,
                         60,
                         10,
-                        kwargs.get("m7")
+                        **kwargs,
                     ),
                     Field(
                         "m8",
                         float,
                         70,
                         10,
-                        kwargs.get("m8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +167,63 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lc1")
+                        **kwargs,
                     ),
                     Field(
                         "lc2",
                         int,
                         10,
                         10,
-                        kwargs.get("lc2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc3",
                         int,
                         20,
                         10,
-                        kwargs.get("lc3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc4",
                         int,
                         30,
                         10,
-                        kwargs.get("lc4", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc5",
                         int,
                         40,
                         10,
-                        kwargs.get("lc5", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc6",
                         int,
                         50,
                         10,
-                        kwargs.get("lc6", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc7",
                         int,
                         60,
                         10,
-                        kwargs.get("lc7", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lc8",
                         int,
                         70,
                         10,
-                        kwargs.get("lc8", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,42 +234,48 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lps1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sfs1",
                         float,
                         10,
                         10,
-                        kwargs.get("sfs1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lps2",
                         int,
                         20,
                         10,
-                        kwargs.get("lps2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sfs2",
                         float,
                         30,
                         10,
-                        kwargs.get("sfs2", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "yms1",
                         float,
                         40,
                         10,
-                        kwargs.get("yms1", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "yms2",
                         float,
                         50,
                         10,
-                        kwargs.get("yms2", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -272,42 +286,48 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lpt1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sft1",
                         float,
                         10,
                         10,
-                        kwargs.get("sft1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lpt2",
                         int,
                         20,
                         10,
-                        kwargs.get("lpt2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sft2",
                         float,
                         30,
                         10,
-                        kwargs.get("sft2", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "ymt1",
                         float,
                         40,
                         10,
-                        kwargs.get("ymt1", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "ymt2",
                         float,
                         50,
                         10,
-                        kwargs.get("ymt2", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -318,21 +338,24 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lpr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sfr",
                         float,
                         10,
                         10,
-                        kwargs.get("sfr", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "ymr",
                         float,
                         20,
                         10,
-                        kwargs.get("ymr", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -343,56 +366,64 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lys1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sys1",
                         float,
                         10,
                         10,
-                        kwargs.get("sys1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lys2",
                         int,
                         20,
                         10,
-                        kwargs.get("lys2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sys2",
                         float,
                         30,
                         10,
-                        kwargs.get("sys2", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lyt1",
                         int,
                         40,
                         10,
-                        kwargs.get("lyt1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "syt1",
                         float,
                         50,
                         10,
-                        kwargs.get("syt1", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lyt2",
                         int,
                         60,
                         10,
-                        kwargs.get("lyt2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "syt2",
                         float,
                         70,
                         10,
-                        kwargs.get("syt2", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -403,14 +434,16 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lyr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "syr",
                         float,
                         10,
                         10,
-                        kwargs.get("syr", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -421,56 +454,56 @@ class Mat139(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hms1_1")
+                        **kwargs,
                     ),
                     Field(
                         "hms1_2",
                         float,
                         10,
                         10,
-                        kwargs.get("hms1_2")
+                        **kwargs,
                     ),
                     Field(
                         "hms1_3",
                         float,
                         20,
                         10,
-                        kwargs.get("hms1_3")
+                        **kwargs,
                     ),
                     Field(
                         "hms1_4",
                         float,
                         30,
                         10,
-                        kwargs.get("hms1_4")
+                        **kwargs,
                     ),
                     Field(
                         "hms1_5",
                         float,
                         40,
                         10,
-                        kwargs.get("hms1_5")
+                        **kwargs,
                     ),
                     Field(
                         "hms1_6",
                         float,
                         50,
                         10,
-                        kwargs.get("hms1_6")
+                        **kwargs,
                     ),
                     Field(
                         "hms1_7",
                         float,
                         60,
                         10,
-                        kwargs.get("hms1_7")
+                        **kwargs,
                     ),
                     Field(
                         "hms1_8",
                         float,
                         70,
                         10,
-                        kwargs.get("hms1_8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -481,56 +514,56 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lpms1_1")
+                        **kwargs,
                     ),
                     Field(
                         "lpms1_2",
                         int,
                         10,
                         10,
-                        kwargs.get("lpms1_2")
+                        **kwargs,
                     ),
                     Field(
                         "lpms1_3",
                         int,
                         20,
                         10,
-                        kwargs.get("lpms1_3")
+                        **kwargs,
                     ),
                     Field(
                         "lpms1_4",
                         int,
                         30,
                         10,
-                        kwargs.get("lpms1_4")
+                        **kwargs,
                     ),
                     Field(
                         "lpms1_5",
                         int,
                         40,
                         10,
-                        kwargs.get("lpms1_5")
+                        **kwargs,
                     ),
                     Field(
                         "lpms1_6",
                         int,
                         50,
                         10,
-                        kwargs.get("lpms1_6")
+                        **kwargs,
                     ),
                     Field(
                         "lpms1_7",
                         int,
                         60,
                         10,
-                        kwargs.get("lpms1_7")
+                        **kwargs,
                     ),
                     Field(
                         "lpms1_8",
                         int,
                         70,
                         10,
-                        kwargs.get("lpms1_8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -541,56 +574,56 @@ class Mat139(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hms2_1")
+                        **kwargs,
                     ),
                     Field(
                         "hms2_2",
                         float,
                         10,
                         10,
-                        kwargs.get("hms2_2")
+                        **kwargs,
                     ),
                     Field(
                         "hms2_3",
                         float,
                         20,
                         10,
-                        kwargs.get("hms2_3")
+                        **kwargs,
                     ),
                     Field(
                         "hms2_4",
                         float,
                         30,
                         10,
-                        kwargs.get("hms2_4")
+                        **kwargs,
                     ),
                     Field(
                         "hms2_5",
                         float,
                         40,
                         10,
-                        kwargs.get("hms2_5")
+                        **kwargs,
                     ),
                     Field(
                         "hms2_6",
                         float,
                         50,
                         10,
-                        kwargs.get("hms2_6")
+                        **kwargs,
                     ),
                     Field(
                         "hms2_7",
                         float,
                         60,
                         10,
-                        kwargs.get("hms2_7")
+                        **kwargs,
                     ),
                     Field(
                         "hms2_8",
                         float,
                         70,
                         10,
-                        kwargs.get("hms2_8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -601,56 +634,56 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lpms2_1")
+                        **kwargs,
                     ),
                     Field(
                         "lpms2_2",
                         int,
                         10,
                         10,
-                        kwargs.get("lpms2_2")
+                        **kwargs,
                     ),
                     Field(
                         "lpms2_3",
                         int,
                         20,
                         10,
-                        kwargs.get("lpms2_3")
+                        **kwargs,
                     ),
                     Field(
                         "lpms2_4",
                         int,
                         30,
                         10,
-                        kwargs.get("lpms2_4")
+                        **kwargs,
                     ),
                     Field(
                         "lpms2_5",
                         int,
                         40,
                         10,
-                        kwargs.get("lpms2_5")
+                        **kwargs,
                     ),
                     Field(
                         "lpms2_6",
                         int,
                         50,
                         10,
-                        kwargs.get("lpms2_6")
+                        **kwargs,
                     ),
                     Field(
                         "lpms2_7",
                         int,
                         60,
                         10,
-                        kwargs.get("lpms2_7")
+                        **kwargs,
                     ),
                     Field(
                         "lpms2_8",
                         int,
                         70,
                         10,
-                        kwargs.get("lpms2_8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -661,56 +694,56 @@ class Mat139(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hmt1_1")
+                        **kwargs,
                     ),
                     Field(
                         "hmt1_2",
                         float,
                         10,
                         10,
-                        kwargs.get("hmt1_2")
+                        **kwargs,
                     ),
                     Field(
                         "hmt1_3",
                         float,
                         20,
                         10,
-                        kwargs.get("hmt1_3")
+                        **kwargs,
                     ),
                     Field(
                         "hmt1_4",
                         float,
                         30,
                         10,
-                        kwargs.get("hmt1_4")
+                        **kwargs,
                     ),
                     Field(
                         "hmt1_5",
                         float,
                         40,
                         10,
-                        kwargs.get("hmt1_5")
+                        **kwargs,
                     ),
                     Field(
                         "hmt1_6",
                         float,
                         50,
                         10,
-                        kwargs.get("hmt1_6")
+                        **kwargs,
                     ),
                     Field(
                         "hmt1_7",
                         float,
                         60,
                         10,
-                        kwargs.get("hmt1_7")
+                        **kwargs,
                     ),
                     Field(
                         "hmt1_8",
                         float,
                         70,
                         10,
-                        kwargs.get("hmt1_8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -721,56 +754,56 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lpmt1_1")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt1_2",
                         int,
                         10,
                         10,
-                        kwargs.get("lpmt1_2")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt1_3",
                         int,
                         20,
                         10,
-                        kwargs.get("lpmt1_3")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt1_4",
                         int,
                         30,
                         10,
-                        kwargs.get("lpmt1_4")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt1_5",
                         int,
                         40,
                         10,
-                        kwargs.get("lpmt1_5")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt1_6",
                         int,
                         50,
                         10,
-                        kwargs.get("lpmt1_6")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt1_7",
                         int,
                         60,
                         10,
-                        kwargs.get("lpmt1_7")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt1_8",
                         int,
                         70,
                         10,
-                        kwargs.get("lpmt1_8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -781,56 +814,56 @@ class Mat139(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hmt2_1")
+                        **kwargs,
                     ),
                     Field(
                         "hmt2_2",
                         float,
                         10,
                         10,
-                        kwargs.get("hmt2_2")
+                        **kwargs,
                     ),
                     Field(
                         "hmt2_3",
                         float,
                         20,
                         10,
-                        kwargs.get("hmt2_3")
+                        **kwargs,
                     ),
                     Field(
                         "hmt2_4",
                         float,
                         30,
                         10,
-                        kwargs.get("hmt2_4")
+                        **kwargs,
                     ),
                     Field(
                         "hmt2_5",
                         float,
                         40,
                         10,
-                        kwargs.get("hmt2_5")
+                        **kwargs,
                     ),
                     Field(
                         "hmt2_6",
                         float,
                         50,
                         10,
-                        kwargs.get("hmt2_6")
+                        **kwargs,
                     ),
                     Field(
                         "hmt2_7",
                         float,
                         60,
                         10,
-                        kwargs.get("hmt2_7")
+                        **kwargs,
                     ),
                     Field(
                         "hmt2_8",
                         float,
                         70,
                         10,
-                        kwargs.get("hmt2_8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -841,56 +874,56 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lpmt2_1")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt2_2",
                         int,
                         10,
                         10,
-                        kwargs.get("lpmt2_2")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt2_3",
                         int,
                         20,
                         10,
-                        kwargs.get("lpmt2_3")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt2_4",
                         int,
                         30,
                         10,
-                        kwargs.get("lpmt2_4")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt2_5",
                         int,
                         40,
                         10,
-                        kwargs.get("lpmt2_5")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt2_6",
                         int,
                         50,
                         10,
-                        kwargs.get("lpmt2_6")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt2_7",
                         int,
                         60,
                         10,
-                        kwargs.get("lpmt2_7")
+                        **kwargs,
                     ),
                     Field(
                         "lpmt2_8",
                         int,
                         70,
                         10,
-                        kwargs.get("lpmt2_8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -901,56 +934,56 @@ class Mat139(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hmr_1")
+                        **kwargs,
                     ),
                     Field(
                         "hmr_2",
                         float,
                         10,
                         10,
-                        kwargs.get("hmr_2")
+                        **kwargs,
                     ),
                     Field(
                         "hmr_3",
                         float,
                         20,
                         10,
-                        kwargs.get("hmr_3")
+                        **kwargs,
                     ),
                     Field(
                         "hmr_4",
                         float,
                         30,
                         10,
-                        kwargs.get("hmr_4")
+                        **kwargs,
                     ),
                     Field(
                         "hmr_5",
                         float,
                         40,
                         10,
-                        kwargs.get("hmr_5")
+                        **kwargs,
                     ),
                     Field(
                         "hmr_6",
                         float,
                         50,
                         10,
-                        kwargs.get("hmr_6")
+                        **kwargs,
                     ),
                     Field(
                         "hmr_7",
                         float,
                         60,
                         10,
-                        kwargs.get("hmr_7")
+                        **kwargs,
                     ),
                     Field(
                         "hmr_8",
                         float,
                         70,
                         10,
-                        kwargs.get("hmr_8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -961,56 +994,64 @@ class Mat139(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lpmr_1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lpmr_2",
                         int,
                         10,
                         10,
-                        kwargs.get("lpmr_2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lpmr_3",
                         int,
                         20,
                         10,
-                        kwargs.get("lpmr_3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lpmr_4",
                         int,
                         30,
                         10,
-                        kwargs.get("lpmr_4", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lpmr_5",
                         int,
                         40,
                         10,
-                        kwargs.get("lpmr_5", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lpmr_6",
                         int,
                         50,
                         10,
-                        kwargs.get("lpmr_6", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lpmr_7",
                         int,
                         60,
                         10,
-                        kwargs.get("lpmr_7", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lpmr_8",
                         int,
                         70,
                         10,
-                        kwargs.get("lpmr_8", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

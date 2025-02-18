@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosJwlb(KeywordBase):
@@ -41,42 +40,47 @@ class EosJwlb(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         10,
                         10,
-                        kwargs.get("a1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         20,
                         10,
-                        kwargs.get("a2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         30,
                         10,
-                        kwargs.get("a3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a4",
                         float,
                         40,
                         10,
-                        kwargs.get("a4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a5",
                         float,
                         50,
                         10,
-                        kwargs.get("a5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,35 +91,40 @@ class EosJwlb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "r2",
                         float,
                         10,
                         10,
-                        kwargs.get("r2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "r3",
                         float,
                         20,
                         10,
-                        kwargs.get("r3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "r4",
                         float,
                         30,
                         10,
-                        kwargs.get("r4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "r5",
                         float,
                         40,
                         10,
-                        kwargs.get("r5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -126,35 +135,40 @@ class EosJwlb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("al1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "al2",
                         float,
                         10,
                         10,
-                        kwargs.get("al2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "al3",
                         float,
                         20,
                         10,
-                        kwargs.get("al3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "al4",
                         float,
                         30,
                         10,
-                        kwargs.get("al4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "al5",
                         float,
                         40,
                         10,
-                        kwargs.get("al5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -165,35 +179,40 @@ class EosJwlb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("bl1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bl2",
                         float,
                         10,
                         10,
-                        kwargs.get("bl2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bl3",
                         float,
                         20,
                         10,
-                        kwargs.get("bl3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bl4",
                         float,
                         30,
                         10,
-                        kwargs.get("bl4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bl5",
                         float,
                         40,
                         10,
-                        kwargs.get("bl5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -204,35 +223,40 @@ class EosJwlb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rl1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rl2",
                         float,
                         10,
                         10,
-                        kwargs.get("rl2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rl3",
                         float,
                         20,
                         10,
-                        kwargs.get("rl3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rl4",
                         float,
                         30,
                         10,
-                        kwargs.get("rl4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rl5",
                         float,
                         40,
                         10,
-                        kwargs.get("rl5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -243,28 +267,28 @@ class EosJwlb(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "omega",
                         float,
                         10,
                         10,
-                        kwargs.get("omega")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "v0",
                         float,
                         30,
                         10,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                 ],
             ),

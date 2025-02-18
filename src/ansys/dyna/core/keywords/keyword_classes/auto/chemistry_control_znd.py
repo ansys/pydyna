@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryControlZnd(KeywordBase):
@@ -41,7 +40,7 @@ class ChemistryControlZnd(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,42 +51,42 @@ class ChemistryControlZnd(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("f")
+                        **kwargs,
                     ),
                     Field(
                         "eplus",
                         float,
                         10,
                         10,
-                        kwargs.get("eplus")
+                        **kwargs,
                     ),
                     Field(
                         "q0",
                         float,
                         20,
                         10,
-                        kwargs.get("q0")
+                        **kwargs,
                     ),
                     Field(
                         "gam",
                         float,
                         30,
                         10,
-                        kwargs.get("gam")
+                        **kwargs,
                     ),
                     Field(
                         "xyzd",
                         float,
                         40,
                         10,
-                        kwargs.get("xyzd")
+                        **kwargs,
                     ),
                     Field(
                         "detdir",
                         int,
                         50,
                         10,
-                        kwargs.get("detdir")
+                        **kwargs,
                     ),
                 ],
             ),

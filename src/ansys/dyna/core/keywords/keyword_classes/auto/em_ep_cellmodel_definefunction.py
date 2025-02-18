@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEpCellmodelDefinefunction(KeywordBase):
@@ -41,21 +40,22 @@ class EmEpCellmodelDefinefunction(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "nstate",
                         int,
                         10,
                         10,
-                        kwargs.get("nstate")
+                        **kwargs,
                     ),
                     Field(
                         "fswitch",
                         int,
                         20,
                         10,
-                        kwargs.get("fswitch", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,56 +66,56 @@ class EmEpCellmodelDefinefunction(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("dvdt")
+                        **kwargs,
                     ),
                     Field(
                         "du1dt",
                         int,
                         10,
                         10,
-                        kwargs.get("du1dt")
+                        **kwargs,
                     ),
                     Field(
                         "du2dt",
                         int,
                         20,
                         10,
-                        kwargs.get("du2dt")
+                        **kwargs,
                     ),
                     Field(
                         "du3dt",
                         int,
                         30,
                         10,
-                        kwargs.get("du3dt")
+                        **kwargs,
                     ),
                     Field(
                         "du4dt",
                         int,
                         40,
                         10,
-                        kwargs.get("du4dt")
+                        **kwargs,
                     ),
                     Field(
                         "du5dt",
                         int,
                         50,
                         10,
-                        kwargs.get("du5dt")
+                        **kwargs,
                     ),
                     Field(
                         "du6dt",
                         int,
                         60,
                         10,
-                        kwargs.get("du6dt")
+                        **kwargs,
                     ),
                     Field(
                         "du7dt",
                         int,
                         70,
                         10,
-                        kwargs.get("du7dt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -126,56 +126,56 @@ class EmEpCellmodelDefinefunction(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                     Field(
                         "u1",
                         int,
                         10,
                         10,
-                        kwargs.get("u1")
+                        **kwargs,
                     ),
                     Field(
                         "u2",
                         int,
                         20,
                         10,
-                        kwargs.get("u2")
+                        **kwargs,
                     ),
                     Field(
                         "u3",
                         int,
                         30,
                         10,
-                        kwargs.get("u3")
+                        **kwargs,
                     ),
                     Field(
                         "u4",
                         int,
                         40,
                         10,
-                        kwargs.get("u4")
+                        **kwargs,
                     ),
                     Field(
                         "u5",
                         int,
                         50,
                         10,
-                        kwargs.get("u5")
+                        **kwargs,
                     ),
                     Field(
                         "u6",
                         int,
                         60,
                         10,
-                        kwargs.get("u6")
+                        **kwargs,
                     ),
                     Field(
                         "u7",
                         int,
                         70,
                         10,
-                        kwargs.get("u7")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class MatFuChangFoamLogLogInterpolation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "kcon",
                         float,
                         30,
                         10,
-                        kwargs.get("kcon")
+                        **kwargs,
                     ),
                     Field(
                         "tc",
                         float,
                         40,
                         10,
-                        kwargs.get("tc", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "fail",
                         float,
                         50,
                         10,
-                        kwargs.get("fail", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "damp",
                         float,
                         60,
                         10,
-                        kwargs.get("damp")
+                        **kwargs,
                     ),
                     Field(
                         "tbid",
                         int,
                         70,
                         10,
-                        kwargs.get("tbid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,64 @@ class MatFuChangFoamLogLogInterpolation(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("bvflag", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sflag",
                         float,
                         10,
                         10,
-                        kwargs.get("sflag", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rflag",
                         float,
                         20,
                         10,
-                        kwargs.get("rflag", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tflag",
                         float,
                         30,
                         10,
-                        kwargs.get("tflag", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "pvid",
                         int,
                         40,
                         10,
-                        kwargs.get("pvid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sraf",
                         float,
                         50,
                         10,
-                        kwargs.get("sraf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ref",
                         float,
                         60,
                         10,
-                        kwargs.get("ref", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hu",
                         float,
                         70,
                         10,
-                        kwargs.get("hu", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +175,56 @@ class MatFuChangFoamLogLogInterpolation(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("d0")
+                        **kwargs,
                     ),
                     Field(
                         "n0",
                         float,
                         10,
                         10,
-                        kwargs.get("n0")
+                        **kwargs,
                     ),
                     Field(
                         "n1",
                         float,
                         20,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         float,
                         30,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n3",
                         float,
                         40,
                         10,
-                        kwargs.get("n3")
+                        **kwargs,
                     ),
                     Field(
                         "c0",
                         float,
                         50,
                         10,
-                        kwargs.get("c0")
+                        **kwargs,
                     ),
                     Field(
                         "c1",
                         float,
                         60,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         70,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +235,56 @@ class MatFuChangFoamLogLogInterpolation(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                     Field(
                         "c4",
                         float,
                         10,
                         10,
-                        kwargs.get("c4")
+                        **kwargs,
                     ),
                     Field(
                         "c5",
                         float,
                         20,
                         10,
-                        kwargs.get("c5")
+                        **kwargs,
                     ),
                     Field(
                         "aij",
                         float,
                         30,
                         10,
-                        kwargs.get("aij")
+                        **kwargs,
                     ),
                     Field(
                         "sij",
                         float,
                         40,
                         10,
-                        kwargs.get("sij")
+                        **kwargs,
                     ),
                     Field(
                         "minr",
                         float,
                         50,
                         10,
-                        kwargs.get("minr")
+                        **kwargs,
                     ),
                     Field(
                         "maxr",
                         float,
                         60,
                         10,
-                        kwargs.get("maxr")
+                        **kwargs,
                     ),
                     Field(
                         "shape",
                         float,
                         70,
                         10,
-                        kwargs.get("shape")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,14 +295,16 @@ class MatFuChangFoamLogLogInterpolation(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("expon", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "riuld",
                         float,
                         10,
                         10,
-                        kwargs.get("riuld", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

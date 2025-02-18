@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatAnisotropicElastic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "c11",
                         float,
                         20,
                         10,
-                        kwargs.get("c11")
+                        **kwargs,
                     ),
                     Field(
                         "c12",
                         float,
                         30,
                         10,
-                        kwargs.get("c12")
+                        **kwargs,
                     ),
                     Field(
                         "c22",
                         float,
                         40,
                         10,
-                        kwargs.get("c22")
+                        **kwargs,
                     ),
                     Field(
                         "c13",
                         float,
                         50,
                         10,
-                        kwargs.get("c13")
+                        **kwargs,
                     ),
                     Field(
                         "c23",
                         float,
                         60,
                         10,
-                        kwargs.get("c23")
+                        **kwargs,
                     ),
                     Field(
                         "c33",
                         float,
                         70,
                         10,
-                        kwargs.get("c33")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class MatAnisotropicElastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c14")
+                        **kwargs,
                     ),
                     Field(
                         "c24",
                         float,
                         10,
                         10,
-                        kwargs.get("c24")
+                        **kwargs,
                     ),
                     Field(
                         "c34",
                         float,
                         20,
                         10,
-                        kwargs.get("c34")
+                        **kwargs,
                     ),
                     Field(
                         "c44",
                         float,
                         30,
                         10,
-                        kwargs.get("c44")
+                        **kwargs,
                     ),
                     Field(
                         "c15",
                         float,
                         40,
                         10,
-                        kwargs.get("c15")
+                        **kwargs,
                     ),
                     Field(
                         "c25",
                         float,
                         50,
                         10,
-                        kwargs.get("c25")
+                        **kwargs,
                     ),
                     Field(
                         "c35",
                         float,
                         60,
                         10,
-                        kwargs.get("c35")
+                        **kwargs,
                     ),
                     Field(
                         "c45",
                         float,
                         70,
                         10,
-                        kwargs.get("c45")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +165,56 @@ class MatAnisotropicElastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c55")
+                        **kwargs,
                     ),
                     Field(
                         "c16",
                         float,
                         10,
                         10,
-                        kwargs.get("c16")
+                        **kwargs,
                     ),
                     Field(
                         "c26",
                         float,
                         20,
                         10,
-                        kwargs.get("c26")
+                        **kwargs,
                     ),
                     Field(
                         "c36",
                         float,
                         30,
                         10,
-                        kwargs.get("c36")
+                        **kwargs,
                     ),
                     Field(
                         "c46",
                         float,
                         40,
                         10,
-                        kwargs.get("c46")
+                        **kwargs,
                     ),
                     Field(
                         "c56",
                         float,
                         50,
                         10,
-                        kwargs.get("c56")
+                        **kwargs,
                     ),
                     Field(
                         "c66",
                         float,
                         60,
                         10,
-                        kwargs.get("c66")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         70,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,56 +225,58 @@ class MatAnisotropicElastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         60,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ihis",
                         int,
                         70,
                         10,
-                        kwargs.get("ihis", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -286,56 +287,57 @@ class MatAnisotropicElastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "ref",
                         float,
                         70,
                         10,
-                        kwargs.get("ref", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

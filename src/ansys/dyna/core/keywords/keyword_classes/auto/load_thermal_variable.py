@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadThermalVariable(KeywordBase):
@@ -41,21 +40,23 @@ class LoadThermalVariable(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsid")
+                        **kwargs,
                     ),
                     Field(
                         "nsidex",
                         int,
                         10,
                         10,
-                        kwargs.get("nsidex", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "boxid",
                         int,
                         20,
                         10,
-                        kwargs.get("boxid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,56 +67,60 @@ class LoadThermalVariable(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ts", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tb",
                         float,
                         10,
                         10,
-                        kwargs.get("tb", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         20,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "tse",
                         float,
                         30,
                         10,
-                        kwargs.get("tse", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tbe",
                         float,
                         40,
                         10,
-                        kwargs.get("tbe", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcide",
                         int,
                         50,
                         10,
-                        kwargs.get("lcide")
+                        **kwargs,
                     ),
                     Field(
                         "lcidr",
                         int,
                         60,
                         10,
-                        kwargs.get("lcidr")
+                        **kwargs,
                     ),
                     Field(
                         "lcidedr",
                         int,
                         70,
                         10,
-                        kwargs.get("lcidedr")
+                        **kwargs,
                     ),
                 ],
             ),

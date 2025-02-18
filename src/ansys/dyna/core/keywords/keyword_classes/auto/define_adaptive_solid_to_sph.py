@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,14 +45,14 @@ class DefineAdaptiveSolidToSph(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("did")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         str,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -64,56 +63,60 @@ class DefineAdaptiveSolidToSph(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ipid")
+                        **kwargs,
                     ),
                     Field(
                         "itype",
                         int,
                         10,
                         10,
-                        kwargs.get("itype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nq",
                         int,
                         20,
                         10,
-                        kwargs.get("nq", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ipsph",
                         int,
                         30,
                         10,
-                        kwargs.get("ipsph")
+                        **kwargs,
                     ),
                     Field(
                         "issph",
                         int,
                         40,
                         10,
-                        kwargs.get("issph")
+                        **kwargs,
                     ),
                     Field(
                         "icpl",
                         int,
                         50,
                         10,
-                        kwargs.get("icpl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iopt",
                         int,
                         60,
                         10,
-                        kwargs.get("iopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cpcd",
                         float,
                         70,
                         10,
-                        kwargs.get("cpcd")
+                        **kwargs,
                     ),
                 ],
             ),

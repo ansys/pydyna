@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatOrthoElasticPlastic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e11",
                         float,
                         20,
                         10,
-                        kwargs.get("e11")
+                        **kwargs,
                     ),
                     Field(
                         "e22",
                         float,
                         30,
                         10,
-                        kwargs.get("e22")
+                        **kwargs,
                     ),
                     Field(
                         "g12",
                         float,
                         40,
                         10,
-                        kwargs.get("g12")
+                        **kwargs,
                     ),
                     Field(
                         "pr12",
                         float,
                         50,
                         10,
-                        kwargs.get("pr12")
+                        **kwargs,
                     ),
                     Field(
                         "pr23",
                         float,
                         60,
                         10,
-                        kwargs.get("pr23")
+                        **kwargs,
                     ),
                     Field(
                         "pr31",
                         float,
                         70,
                         10,
-                        kwargs.get("pr31")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,42 +105,42 @@ class MatOrthoElasticPlastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sigma0")
+                        **kwargs,
                     ),
                     Field(
                         "lc",
                         int,
                         10,
                         10,
-                        kwargs.get("lc")
+                        **kwargs,
                     ),
                     Field(
                         "qr1",
                         float,
                         20,
                         10,
-                        kwargs.get("qr1")
+                        **kwargs,
                     ),
                     Field(
                         "cr1",
                         float,
                         30,
                         10,
-                        kwargs.get("cr1")
+                        **kwargs,
                     ),
                     Field(
                         "qr2",
                         float,
                         40,
                         10,
-                        kwargs.get("qr2")
+                        **kwargs,
                     ),
                     Field(
                         "cr2",
                         float,
                         50,
                         10,
-                        kwargs.get("cr2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -152,28 +151,28 @@ class MatOrthoElasticPlastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r11")
+                        **kwargs,
                     ),
                     Field(
                         "r22",
                         float,
                         10,
                         10,
-                        kwargs.get("r22")
+                        **kwargs,
                     ),
                     Field(
                         "r33",
                         float,
                         20,
                         10,
-                        kwargs.get("r33")
+                        **kwargs,
                     ),
                     Field(
                         "r12",
                         float,
                         30,
                         10,
-                        kwargs.get("r12")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -184,14 +183,14 @@ class MatOrthoElasticPlastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         10,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -202,42 +201,42 @@ class MatOrthoElasticPlastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -248,42 +247,42 @@ class MatOrthoElasticPlastic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                 ],
             ),

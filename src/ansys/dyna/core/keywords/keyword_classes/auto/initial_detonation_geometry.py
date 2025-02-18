@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialDetonationGeometry(KeywordBase):
@@ -41,21 +40,23 @@ class InitialDetonationGeometry(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("heid")
+                        **kwargs,
                     ),
                     Field(
                         "hetyp",
                         float,
                         10,
                         10,
-                        kwargs.get("hetyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "mmgse",
                         float,
                         20,
                         10,
-                        kwargs.get("mmgse", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,21 +67,24 @@ class InitialDetonationGeometry(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("geotyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lt",
                         float,
                         10,
                         10,
-                        kwargs.get("lt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dgeo",
                         float,
                         20,
                         10,
-                        kwargs.get("dgeo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -91,28 +95,28 @@ class InitialDetonationGeometry(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         int,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         int,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "v4",
                         int,
                         30,
                         10,
-                        kwargs.get("v4")
+                        **kwargs,
                     ),
                 ],
             ),

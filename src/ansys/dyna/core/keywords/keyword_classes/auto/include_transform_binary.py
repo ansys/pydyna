@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IncludeTransformBinary(KeywordBase):
@@ -41,7 +40,7 @@ class IncludeTransformBinary(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,49 +51,56 @@ class IncludeTransformBinary(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idnoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ideoff",
                         int,
                         10,
                         10,
-                        kwargs.get("ideoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "idpoff",
                         int,
                         20,
                         10,
-                        kwargs.get("idpoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "idmoff",
                         int,
                         30,
                         10,
-                        kwargs.get("idmoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "idsoff",
                         int,
                         40,
                         10,
-                        kwargs.get("idsoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "idfoff",
                         int,
                         50,
                         10,
-                        kwargs.get("idfoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iddoff",
                         int,
                         60,
                         10,
-                        kwargs.get("iddoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -105,28 +111,29 @@ class IncludeTransformBinary(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("idroff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "prefix",
                         str,
                         20,
                         10,
-                        kwargs.get("prefix")
+                        **kwargs,
                     ),
                     Field(
                         "suffix",
                         str,
                         30,
                         10,
-                        kwargs.get("suffix")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -137,42 +144,47 @@ class IncludeTransformBinary(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fctmas", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "fcttim",
                         float,
                         10,
                         10,
-                        kwargs.get("fcttim", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "fctlen",
                         float,
                         20,
                         10,
-                        kwargs.get("fctlen", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "fcttem",
                         str,
                         30,
                         10,
-                        kwargs.get("fcttem", "1.0" if use_lspp_defaults() else None)
+                        "1.0",
+                        **kwargs,
                     ),
                     Field(
                         "incout1",
                         int,
                         40,
                         10,
-                        kwargs.get("incout1", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "fctchg",
                         float,
                         50,
                         10,
-                        kwargs.get("fctchg")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -183,7 +195,8 @@ class IncludeTransformBinary(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tranid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

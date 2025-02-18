@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleStructuredFsi(KeywordBase):
@@ -41,14 +40,14 @@ class AleStructuredFsi(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("coupid")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,58 @@ class AleStructuredFsi(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lstrsid")
+                        **kwargs,
                     ),
                     Field(
                         "alesid",
                         int,
                         10,
                         10,
-                        kwargs.get("alesid")
+                        **kwargs,
                     ),
                     Field(
                         "lstrstyp",
                         int,
                         20,
                         10,
-                        kwargs.get("lstrstyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "alestyp",
                         int,
                         30,
                         10,
-                        kwargs.get("alestyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "mcoup",
                         int,
                         70,
                         10,
-                        kwargs.get("mcoup")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,42 +120,47 @@ class AleStructuredFsi(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("start", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "end",
                         float,
                         10,
                         10,
-                        kwargs.get("end", 1.0e10 if use_lspp_defaults() else None)
+                        1.0e10,
+                        **kwargs,
                     ),
                     Field(
                         "pfac",
                         float,
                         20,
                         10,
-                        kwargs.get("pfac", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                     Field(
                         "fric",
                         float,
                         30,
                         10,
-                        kwargs.get("fric", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "flip",
                         int,
                         50,
                         10,
-                        kwargs.get("flip", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class MeshBl(KeywordBase):
@@ -41,35 +40,38 @@ class MeshBl(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "nelth",
                         int,
                         10,
                         10,
-                        kwargs.get("nelth")
+                        **kwargs,
                     ),
                     Field(
                         "blth",
                         float,
                         20,
                         10,
-                        kwargs.get("blth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "blfe",
                         float,
                         30,
                         10,
-                        kwargs.get("blfe", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "blst",
                         int,
                         40,
                         10,
-                        kwargs.get("blst", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

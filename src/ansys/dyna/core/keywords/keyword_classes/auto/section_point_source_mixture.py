@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class SectionPointSourceMixture(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "lcidt",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidt")
+                        **kwargs,
                     ),
                     Field(
                         "notused",
                         int,
                         20,
                         10,
-                        kwargs.get("notused")
+                        **kwargs,
                     ),
                     Field(
                         "lcidvel",
                         int,
                         30,
                         10,
-                        kwargs.get("lcidvel")
+                        **kwargs,
                     ),
                     Field(
                         "nidlc001",
                         int,
                         40,
                         10,
-                        kwargs.get("nidlc001")
+                        **kwargs,
                     ),
                     Field(
                         "nidlc002",
                         int,
                         50,
                         10,
-                        kwargs.get("nidlc002")
+                        **kwargs,
                     ),
                     Field(
                         "nidlc003",
                         int,
                         60,
                         10,
-                        kwargs.get("nidlc003")
+                        **kwargs,
                     ),
                     Field(
                         "idir",
                         int,
                         70,
                         10,
-                        kwargs.get("idir")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,64 @@ class SectionPointSourceMixture(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcmdot1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcmdot2",
                         int,
                         10,
                         10,
-                        kwargs.get("lcmdot2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcmdot3",
                         int,
                         20,
                         10,
-                        kwargs.get("lcmdot3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcmdot4",
                         int,
                         30,
                         10,
-                        kwargs.get("lcmdot4", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcmdot5",
                         int,
                         40,
                         10,
-                        kwargs.get("lcmdot5", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcmdot6",
                         int,
                         50,
                         10,
-                        kwargs.get("lcmdot6", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcmdot7",
                         int,
                         60,
                         10,
-                        kwargs.get("lcmdot7", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcmdot8",
                         int,
                         70,
                         10,
-                        kwargs.get("lcmdot8", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,21 +173,24 @@ class SectionPointSourceMixture(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nodeid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vecid",
                         int,
                         10,
                         10,
-                        kwargs.get("vecid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "orifarea",
                         float,
                         20,
                         10,
-                        kwargs.get("orifarea", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

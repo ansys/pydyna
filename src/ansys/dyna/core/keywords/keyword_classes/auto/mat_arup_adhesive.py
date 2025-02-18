@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class MatArupAdhesive(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "tenmax",
                         float,
                         40,
                         10,
-                        kwargs.get("tenmax", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "gcten",
                         float,
                         50,
                         10,
-                        kwargs.get("gcten", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "shrmax",
                         float,
                         60,
                         10,
-                        kwargs.get("shrmax", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "gcshr",
                         float,
                         70,
                         10,
-                        kwargs.get("gcshr", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +109,60 @@ class MatArupAdhesive(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pwrt", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "pwrs",
                         float,
                         10,
                         10,
-                        kwargs.get("pwrs", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "shrp",
                         float,
                         20,
                         10,
-                        kwargs.get("shrp")
+                        **kwargs,
                     ),
                     Field(
                         "sht_sl",
                         float,
                         30,
                         10,
-                        kwargs.get("sht_sl")
+                        **kwargs,
                     ),
                     Field(
                         "edot0",
                         float,
                         40,
                         10,
-                        kwargs.get("edot0", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "edot2",
                         float,
                         50,
                         10,
-                        kwargs.get("edot2")
+                        **kwargs,
                     ),
                     Field(
                         "thkdir",
                         float,
                         60,
                         10,
-                        kwargs.get("thkdir", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "extra",
                         float,
                         70,
                         10,
-                        kwargs.get("extra")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,42 +173,48 @@ class MatArupAdhesive(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tmaxe", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "gcte",
                         float,
                         10,
                         10,
-                        kwargs.get("gcte", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "smaxe",
                         float,
                         20,
                         10,
-                        kwargs.get("smaxe", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "gcse",
                         float,
                         30,
                         10,
-                        kwargs.get("gcse", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "pwrte",
                         float,
                         40,
                         10,
-                        kwargs.get("pwrte", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "pwrse",
                         float,
                         50,
                         10,
-                        kwargs.get("pwrse", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -212,42 +225,48 @@ class MatArupAdhesive(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("facet", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "facct",
                         float,
                         10,
                         10,
-                        kwargs.get("facct", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "faces",
                         float,
                         20,
                         10,
-                        kwargs.get("faces", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "faccs",
                         float,
                         30,
                         10,
-                        kwargs.get("faccs", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "softt",
                         float,
                         40,
                         10,
-                        kwargs.get("softt", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "softs",
                         float,
                         50,
                         10,
-                        kwargs.get("softs", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -258,28 +277,32 @@ class MatArupAdhesive(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sdfac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sgfac",
                         float,
                         10,
                         10,
-                        kwargs.get("sgfac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sdefac",
                         float,
                         20,
                         10,
-                        kwargs.get("sdefac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "sgefac",
                         float,
                         30,
                         10,
-                        kwargs.get("sgefac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -290,35 +313,37 @@ class MatArupAdhesive(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("bthk")
+                        **kwargs,
                     ),
                     Field(
                         "outfail",
                         float,
                         10,
                         10,
-                        kwargs.get("outfail", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "fsip",
                         float,
                         20,
                         10,
-                        kwargs.get("fsip")
+                        **kwargs,
                     ),
                     Field(
                         "fbr713",
                         float,
                         30,
                         10,
-                        kwargs.get("fbr713")
+                        **kwargs,
                     ),
                     Field(
                         "ele2ns",
                         float,
                         40,
                         10,
-                        kwargs.get("ele2ns", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

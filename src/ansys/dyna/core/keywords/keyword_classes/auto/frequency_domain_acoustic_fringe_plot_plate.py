@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
@@ -41,56 +40,59 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("norm", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "len_x",
                         float,
                         10,
                         10,
-                        kwargs.get("len_x")
+                        **kwargs,
                     ),
                     Field(
                         "len_y",
                         float,
                         20,
                         10,
-                        kwargs.get("len_y")
+                        **kwargs,
                     ),
                     Field(
                         "x",
                         float,
                         30,
                         10,
-                        kwargs.get("x")
+                        **kwargs,
                     ),
                     Field(
                         "y",
                         float,
                         40,
                         10,
-                        kwargs.get("y")
+                        **kwargs,
                     ),
                     Field(
                         "z",
                         float,
                         50,
                         10,
-                        kwargs.get("z")
+                        **kwargs,
                     ),
                     Field(
                         "nelm_x",
                         int,
                         60,
                         10,
-                        kwargs.get("nelm_x", 10 if use_lspp_defaults() else None)
+                        10,
+                        **kwargs,
                     ),
                     Field(
                         "nelm_y",
                         int,
                         70,
                         10,
-                        kwargs.get("nelm_y", 10 if use_lspp_defaults() else None)
+                        10,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmMat002(KeywordBase):
@@ -41,49 +40,51 @@ class EmMat002(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "mtype",
                         int,
                         10,
                         10,
-                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sigma",
                         float,
                         20,
                         10,
-                        kwargs.get("sigma")
+                        **kwargs,
                     ),
                     Field(
                         "eosid",
                         int,
                         30,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "murel",
                         float,
                         40,
                         10,
-                        kwargs.get("murel")
+                        **kwargs,
                     ),
                     Field(
                         "eosmu",
                         int,
                         50,
                         10,
-                        kwargs.get("eosmu")
+                        **kwargs,
                     ),
                     Field(
                         "deatht",
                         float,
                         60,
                         10,
-                        kwargs.get("deatht", 1e28 if use_lspp_defaults() else None)
+                        1e28,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,14 +95,14 @@ class EmMat002(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "eosid2",
                         int,
                         10,
                         10,
-                        kwargs.get("eosid2")
+                        **kwargs,
                     ),
                 ],
             ),

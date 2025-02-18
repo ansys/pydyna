@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class Mat240Functions(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "roflg",
                         int,
                         20,
                         10,
-                        kwargs.get("roflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "intfail",
                         float,
                         30,
                         10,
-                        kwargs.get("intfail")
+                        **kwargs,
                     ),
                     Field(
                         "emod",
                         int,
                         40,
                         10,
-                        kwargs.get("emod")
+                        **kwargs,
                     ),
                     Field(
                         "gmod",
                         int,
                         50,
                         10,
-                        kwargs.get("gmod")
+                        **kwargs,
                     ),
                     Field(
                         "thick",
                         float,
                         60,
                         10,
-                        kwargs.get("thick")
+                        **kwargs,
                     ),
                     Field(
                         "inicrt",
                         float,
                         70,
                         10,
-                        kwargs.get("inicrt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,56 @@ class Mat240Functions(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("g1c_0")
+                        **kwargs,
                     ),
                     Field(
                         "g1c_inf",
                         float,
                         10,
                         10,
-                        kwargs.get("g1c_inf")
+                        **kwargs,
                     ),
                     Field(
                         "edot_g1",
                         float,
                         20,
                         10,
-                        kwargs.get("edot_g1")
+                        **kwargs,
                     ),
                     Field(
                         "t0",
                         int,
                         30,
                         10,
-                        kwargs.get("t0")
+                        **kwargs,
                     ),
                     Field(
                         "t1",
                         float,
                         40,
                         10,
-                        kwargs.get("t1")
+                        **kwargs,
                     ),
                     Field(
                         "edot_t",
                         float,
                         50,
                         10,
-                        kwargs.get("edot_t")
+                        **kwargs,
                     ),
                     Field(
                         "fg1",
                         int,
                         60,
                         10,
-                        kwargs.get("fg1")
+                        **kwargs,
                     ),
                     Field(
                         "lcg1c",
                         int,
                         70,
                         10,
-                        kwargs.get("lcg1c")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +167,56 @@ class Mat240Functions(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("g2c_0")
+                        **kwargs,
                     ),
                     Field(
                         "g2c_inf",
                         float,
                         10,
                         10,
-                        kwargs.get("g2c_inf")
+                        **kwargs,
                     ),
                     Field(
                         "edot_g2",
                         float,
                         20,
                         10,
-                        kwargs.get("edot_g2")
+                        **kwargs,
                     ),
                     Field(
                         "s0",
                         int,
                         30,
                         10,
-                        kwargs.get("s0")
+                        **kwargs,
                     ),
                     Field(
                         "s1",
                         float,
                         40,
                         10,
-                        kwargs.get("s1")
+                        **kwargs,
                     ),
                     Field(
                         "edot_s",
                         float,
                         50,
                         10,
-                        kwargs.get("edot_s")
+                        **kwargs,
                     ),
                     Field(
                         "fg2",
                         int,
                         60,
                         10,
-                        kwargs.get("fg2")
+                        **kwargs,
                     ),
                     Field(
                         "lcg2c",
                         int,
                         70,
                         10,
-                        kwargs.get("lcg2c")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,7 +227,7 @@ class Mat240Functions(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rfiltf")
+                        **kwargs,
                     ),
                 ],
             ),

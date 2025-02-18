@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadThermalVariableShellSet(KeywordBase):
@@ -41,14 +40,14 @@ class LoadThermalVariableShellSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "sid",
                         int,
                         10,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,35 +58,35 @@ class LoadThermalVariableShellSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tbase")
+                        **kwargs,
                     ),
                     Field(
                         "tscale",
                         float,
                         10,
                         10,
-                        kwargs.get("tscale")
+                        **kwargs,
                     ),
                     Field(
                         "tcurve",
                         int,
                         20,
                         10,
-                        kwargs.get("tcurve")
+                        **kwargs,
                     ),
                     Field(
                         "tcurdr",
                         int,
                         30,
                         10,
-                        kwargs.get("tcurdr")
+                        **kwargs,
                     ),
                     Field(
                         "zco",
                         float,
                         40,
                         10,
-                        kwargs.get("zco")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialStressBeam(KeywordBase):
@@ -41,49 +40,54 @@ class InitialStressBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "rule",
                         int,
                         10,
                         10,
-                        kwargs.get("rule", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "npts",
                         int,
                         20,
                         10,
-                        kwargs.get("npts", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "local",
                         int,
                         30,
                         10,
-                        kwargs.get("local", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "large",
                         int,
                         40,
                         10,
-                        kwargs.get("large", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nhisv",
                         int,
                         50,
                         10,
-                        kwargs.get("nhisv")
+                        **kwargs,
                     ),
                     Field(
                         "naxes",
                         int,
                         60,
                         10,
-                        kwargs.get("naxes", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,49 +98,56 @@ class InitialStressBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("f11", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "t11",
                         float,
                         10,
                         10,
-                        kwargs.get("t11", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m12",
                         float,
                         20,
                         10,
-                        kwargs.get("m12", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m13",
                         float,
                         30,
                         10,
-                        kwargs.get("m13", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m22",
                         float,
                         40,
                         10,
-                        kwargs.get("m22", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m23",
                         float,
                         50,
                         10,
-                        kwargs.get("m23", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "parm",
                         float,
                         60,
                         10,
-                        kwargs.get("parm", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -147,35 +158,40 @@ class InitialStressBeam(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("f11", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "t11",
                         float,
                         16,
                         16,
-                        kwargs.get("t11", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m12",
                         float,
                         32,
                         16,
-                        kwargs.get("m12", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m13",
                         float,
                         48,
                         16,
-                        kwargs.get("m13", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "m22",
                         float,
                         64,
                         16,
-                        kwargs.get("m22", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -186,35 +202,40 @@ class InitialStressBeam(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("m23", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "parm",
                         float,
                         16,
                         16,
-                        kwargs.get("parm", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisv1",
                         float,
                         32,
                         16,
-                        kwargs.get("hisv1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisv2",
                         float,
                         48,
                         16,
-                        kwargs.get("hisv2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisv3",
                         float,
                         64,
                         16,
-                        kwargs.get("hisv3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -225,49 +246,56 @@ class InitialStressBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sig11", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sig22",
                         float,
                         10,
                         10,
-                        kwargs.get("sig22", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sig33",
                         float,
                         20,
                         10,
-                        kwargs.get("sig33", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sig12",
                         float,
                         30,
                         10,
-                        kwargs.get("sig12", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sig23",
                         float,
                         40,
                         10,
-                        kwargs.get("sig23", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sig31",
                         float,
                         50,
                         10,
-                        kwargs.get("sig31", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "eps",
                         float,
                         60,
                         10,
-                        kwargs.get("eps", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -278,35 +306,40 @@ class InitialStressBeam(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("sig11", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sig22",
                         float,
                         16,
                         16,
-                        kwargs.get("sig22", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sig33",
                         float,
                         32,
                         16,
-                        kwargs.get("sig33", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sig12",
                         float,
                         48,
                         16,
-                        kwargs.get("sig12", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sig23",
                         float,
                         64,
                         16,
-                        kwargs.get("sig23", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -317,35 +350,40 @@ class InitialStressBeam(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("sig31", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "eps",
                         float,
                         16,
                         16,
-                        kwargs.get("eps", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisv1",
                         float,
                         32,
                         16,
-                        kwargs.get("hisv1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisv2",
                         float,
                         48,
                         16,
-                        kwargs.get("hisv2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisv3",
                         float,
                         64,
                         16,
-                        kwargs.get("hisv3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -356,35 +394,40 @@ class InitialStressBeam(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("hisv4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisv5",
                         float,
                         16,
                         16,
-                        kwargs.get("hisv5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisv6",
                         float,
                         32,
                         16,
-                        kwargs.get("hisv6", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisv7",
                         float,
                         48,
                         16,
-                        kwargs.get("hisv7", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisv8",
                         float,
                         64,
                         16,
-                        kwargs.get("hisv8", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -395,35 +438,40 @@ class InitialStressBeam(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("ax1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ax2",
                         float,
                         16,
                         16,
-                        kwargs.get("ax2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ax3",
                         float,
                         32,
                         16,
-                        kwargs.get("ax3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ax4",
                         float,
                         48,
                         16,
-                        kwargs.get("ax4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ax5",
                         float,
                         64,
                         16,
-                        kwargs.get("ax5", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -434,35 +482,40 @@ class InitialStressBeam(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("ax6", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ax7",
                         float,
                         16,
                         16,
-                        kwargs.get("ax7", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ax8",
                         float,
                         32,
                         16,
-                        kwargs.get("ax8", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ax9",
                         float,
                         48,
                         16,
-                        kwargs.get("ax9", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ax10",
                         float,
                         64,
                         16,
-                        kwargs.get("ax10", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -473,14 +526,16 @@ class InitialStressBeam(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("ax11", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ax12",
                         float,
                         16,
                         16,
-                        kwargs.get("ax12", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

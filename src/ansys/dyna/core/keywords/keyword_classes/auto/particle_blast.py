@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ParticleBlast(KeywordBase):
@@ -41,49 +40,56 @@ class ParticleBlast(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lagsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lagstype",
                         int,
                         10,
                         10,
-                        kwargs.get("lagstype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dodid",
                         int,
                         20,
                         10,
-                        kwargs.get("dodid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dodtype",
                         int,
                         30,
                         10,
-                        kwargs.get("dodtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "hecid",
                         int,
                         40,
                         10,
-                        kwargs.get("hecid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "hectype",
                         int,
                         50,
                         10,
-                        kwargs.get("hectype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "aircid",
                         int,
                         60,
                         10,
-                        kwargs.get("aircid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,21 +100,24 @@ class ParticleBlast(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nphe", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "npair",
                         int,
                         10,
                         10,
-                        kwargs.get("npair", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iunit",
                         int,
                         20,
                         10,
-                        kwargs.get("iunit", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,42 +128,48 @@ class ParticleBlast(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ihetype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "densit",
                         float,
                         10,
                         10,
-                        kwargs.get("densit", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "energy",
                         float,
                         20,
                         10,
-                        kwargs.get("energy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "gamma",
                         float,
                         30,
                         10,
-                        kwargs.get("gamma", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "covol",
                         float,
                         40,
                         10,
-                        kwargs.get("covol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "deto_v",
                         float,
                         50,
                         10,
-                        kwargs.get("deto_v", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -165,42 +180,48 @@ class ParticleBlast(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("detx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dety",
                         float,
                         10,
                         10,
-                        kwargs.get("dety", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "detz",
                         float,
                         20,
                         10,
-                        kwargs.get("detz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tdet",
                         float,
                         30,
                         10,
-                        kwargs.get("tdet", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "btend",
                         float,
                         40,
                         10,
-                        kwargs.get("btend", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         50,
                         10,
-                        kwargs.get("nid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -211,42 +232,48 @@ class ParticleBlast(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("bcxo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bcx1",
                         float,
                         10,
                         10,
-                        kwargs.get("bcx1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bcy0",
                         float,
                         20,
                         10,
-                        kwargs.get("bcy0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bcy1",
                         float,
                         30,
                         10,
-                        kwargs.get("bcy1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bcz0",
                         float,
                         40,
                         10,
-                        kwargs.get("bcz0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bcz1",
                         float,
                         50,
                         10,
-                        kwargs.get("bcz1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -257,49 +284,56 @@ class ParticleBlast(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ibcx0", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ibcx1",
                         int,
                         10,
                         10,
-                        kwargs.get("ibcx1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ibcy0",
                         int,
                         20,
                         10,
-                        kwargs.get("ibcy0", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ibcy1",
                         int,
                         30,
                         10,
-                        kwargs.get("ibcy1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ibcz0",
                         int,
                         40,
                         10,
-                        kwargs.get("ibcz0", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ibcz1",
                         int,
                         50,
                         10,
-                        kwargs.get("ibcz1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "bc_p",
                         int,
                         60,
                         10,
-                        kwargs.get("bc_p", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

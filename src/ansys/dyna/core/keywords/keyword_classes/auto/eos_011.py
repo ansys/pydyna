@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Eos011(KeywordBase):
@@ -41,49 +40,53 @@ class Eos011(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "nld",
                         int,
                         10,
                         10,
-                        kwargs.get("nld")
+                        **kwargs,
                     ),
                     Field(
                         "ncr",
                         int,
                         20,
                         10,
-                        kwargs.get("ncr")
+                        **kwargs,
                     ),
                     Field(
                         "mu1",
                         float,
                         30,
                         10,
-                        kwargs.get("mu1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "mu2",
                         float,
                         40,
                         10,
-                        kwargs.get("mu2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ie0",
                         float,
                         50,
                         10,
-                        kwargs.get("ie0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ec0",
                         float,
                         60,
                         10,
-                        kwargs.get("ec0", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

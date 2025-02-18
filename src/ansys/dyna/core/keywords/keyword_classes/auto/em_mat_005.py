@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmMat005(KeywordBase):
@@ -41,35 +40,36 @@ class EmMat005(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "mtype",
                         int,
                         10,
                         10,
-                        kwargs.get("mtype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sigmaxxa",
                         float,
                         20,
                         10,
-                        kwargs.get("sigmaxxa")
+                        **kwargs,
                     ),
                     Field(
                         "sigmayya",
                         float,
                         30,
                         10,
-                        kwargs.get("sigmayya")
+                        **kwargs,
                     ),
                     Field(
                         "sigmazza",
                         float,
                         40,
                         10,
-                        kwargs.get("sigmazza")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,42 +80,42 @@ class EmMat005(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sigmaxya")
+                        **kwargs,
                     ),
                     Field(
                         "sigmaxza",
                         float,
                         10,
                         10,
-                        kwargs.get("sigmaxza")
+                        **kwargs,
                     ),
                     Field(
                         "sigmayxa",
                         float,
                         20,
                         10,
-                        kwargs.get("sigmayxa")
+                        **kwargs,
                     ),
                     Field(
                         "sigmayza",
                         float,
                         30,
                         10,
-                        kwargs.get("sigmayza")
+                        **kwargs,
                     ),
                     Field(
                         "sigmazxa",
                         float,
                         40,
                         10,
-                        kwargs.get("sigmazxa")
+                        **kwargs,
                     ),
                     Field(
                         "sigmazya",
                         float,
                         50,
                         10,
-                        kwargs.get("sigmazya")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -126,35 +126,35 @@ class EmMat005(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "sigmaxxb",
                         float,
                         20,
                         10,
-                        kwargs.get("sigmaxxb")
+                        **kwargs,
                     ),
                     Field(
                         "sigmayyb",
                         float,
                         30,
                         10,
-                        kwargs.get("sigmayyb")
+                        **kwargs,
                     ),
                     Field(
                         "sigmazzb",
                         float,
                         40,
                         10,
-                        kwargs.get("sigmazzb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -165,42 +165,42 @@ class EmMat005(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sigmaxyb")
+                        **kwargs,
                     ),
                     Field(
                         "sigmaxzb",
                         float,
                         10,
                         10,
-                        kwargs.get("sigmaxzb")
+                        **kwargs,
                     ),
                     Field(
                         "sigmayxb",
                         float,
                         20,
                         10,
-                        kwargs.get("sigmayxb")
+                        **kwargs,
                     ),
                     Field(
                         "sigmayzb",
                         float,
                         30,
                         10,
-                        kwargs.get("sigmayzb")
+                        **kwargs,
                     ),
                     Field(
                         "sigmazxb",
                         float,
                         40,
                         10,
-                        kwargs.get("sigmazxb")
+                        **kwargs,
                     ),
                     Field(
                         "sigmazyb",
                         float,
                         50,
                         10,
-                        kwargs.get("sigmazyb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -211,56 +211,58 @@ class EmMat005(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("aopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "xp",
                         float,
                         10,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         20,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         30,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         40,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         50,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         60,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         70,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -271,42 +273,42 @@ class EmMat005(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                 ],
             ),

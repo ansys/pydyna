@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EosTabulated(KeywordBase):
@@ -41,28 +40,28 @@ class EosTabulated(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "gama",
                         float,
                         10,
                         10,
-                        kwargs.get("gama")
+                        **kwargs,
                     ),
                     Field(
                         "e0",
                         float,
                         20,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "vo",
                         float,
                         30,
                         10,
-                        kwargs.get("vo")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -73,35 +72,35 @@ class EosTabulated(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("ev1")
+                        **kwargs,
                     ),
                     Field(
                         "ev2",
                         float,
                         16,
                         16,
-                        kwargs.get("ev2")
+                        **kwargs,
                     ),
                     Field(
                         "ev3",
                         float,
                         32,
                         16,
-                        kwargs.get("ev3")
+                        **kwargs,
                     ),
                     Field(
                         "ev4",
                         float,
                         48,
                         16,
-                        kwargs.get("ev4")
+                        **kwargs,
                     ),
                     Field(
                         "ev5",
                         float,
                         64,
                         16,
-                        kwargs.get("ev5")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,35 +111,35 @@ class EosTabulated(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("ev6")
+                        **kwargs,
                     ),
                     Field(
                         "ev7",
                         float,
                         16,
                         16,
-                        kwargs.get("ev7")
+                        **kwargs,
                     ),
                     Field(
                         "ev8",
                         float,
                         32,
                         16,
-                        kwargs.get("ev8")
+                        **kwargs,
                     ),
                     Field(
                         "ev9",
                         float,
                         48,
                         16,
-                        kwargs.get("ev9")
+                        **kwargs,
                     ),
                     Field(
                         "ev10",
                         float,
                         64,
                         16,
-                        kwargs.get("ev10")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -151,35 +150,35 @@ class EosTabulated(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         16,
                         16,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         float,
                         32,
                         16,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                     Field(
                         "c4",
                         float,
                         48,
                         16,
-                        kwargs.get("c4")
+                        **kwargs,
                     ),
                     Field(
                         "c5",
                         float,
                         64,
                         16,
-                        kwargs.get("c5")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -190,35 +189,35 @@ class EosTabulated(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("c6")
+                        **kwargs,
                     ),
                     Field(
                         "c7",
                         float,
                         16,
                         16,
-                        kwargs.get("c7")
+                        **kwargs,
                     ),
                     Field(
                         "c8",
                         float,
                         32,
                         16,
-                        kwargs.get("c8")
+                        **kwargs,
                     ),
                     Field(
                         "c9",
                         float,
                         48,
                         16,
-                        kwargs.get("c9")
+                        **kwargs,
                     ),
                     Field(
                         "c10",
                         float,
                         64,
                         16,
-                        kwargs.get("c10")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -229,35 +228,35 @@ class EosTabulated(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("t1")
+                        **kwargs,
                     ),
                     Field(
                         "t2",
                         float,
                         16,
                         16,
-                        kwargs.get("t2")
+                        **kwargs,
                     ),
                     Field(
                         "t3",
                         float,
                         32,
                         16,
-                        kwargs.get("t3")
+                        **kwargs,
                     ),
                     Field(
                         "t4",
                         float,
                         48,
                         16,
-                        kwargs.get("t4")
+                        **kwargs,
                     ),
                     Field(
                         "t5",
                         float,
                         64,
                         16,
-                        kwargs.get("t5")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -268,35 +267,35 @@ class EosTabulated(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("t6")
+                        **kwargs,
                     ),
                     Field(
                         "t7",
                         float,
                         16,
                         16,
-                        kwargs.get("t7")
+                        **kwargs,
                     ),
                     Field(
                         "t8",
                         float,
                         32,
                         16,
-                        kwargs.get("t8")
+                        **kwargs,
                     ),
                     Field(
                         "t9",
                         float,
                         48,
                         16,
-                        kwargs.get("t9")
+                        **kwargs,
                     ),
                     Field(
                         "t10",
                         float,
                         64,
                         16,
-                        kwargs.get("t10")
+                        **kwargs,
                     ),
                 ],
             ),

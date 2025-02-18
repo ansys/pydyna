@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdBoundaryPrescribedMovemesh(KeywordBase):
@@ -41,28 +40,31 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "dofx",
                         int,
                         10,
                         10,
-                        kwargs.get("dofx", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "dofy",
                         int,
                         20,
                         10,
-                        kwargs.get("dofy", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "dofz",
                         int,
                         30,
                         10,
-                        kwargs.get("dofz", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),

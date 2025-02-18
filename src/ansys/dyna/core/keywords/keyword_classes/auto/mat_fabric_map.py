@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class MatFabricMap(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "pxx",
                         float,
                         20,
                         10,
-                        kwargs.get("pxx")
+                        **kwargs,
                     ),
                     Field(
                         "pyy",
                         float,
                         30,
                         10,
-                        kwargs.get("pyy")
+                        **kwargs,
                     ),
                     Field(
                         "sxy",
                         float,
                         40,
                         10,
-                        kwargs.get("sxy")
+                        **kwargs,
                     ),
                     Field(
                         "damp",
                         float,
                         50,
                         10,
-                        kwargs.get("damp")
+                        **kwargs,
                     ),
                     Field(
                         "th",
                         float,
                         60,
                         10,
-                        kwargs.get("th")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,35 +98,35 @@ class MatFabricMap(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fvopt")
+                        **kwargs,
                     ),
                     Field(
                         "x0",
                         float,
                         10,
                         10,
-                        kwargs.get("x0")
+                        **kwargs,
                     ),
                     Field(
                         "x1",
                         float,
                         20,
                         10,
-                        kwargs.get("x1")
+                        **kwargs,
                     ),
                     Field(
                         "flc/x2",
                         float,
                         30,
                         10,
-                        kwargs.get("flc/x2")
+                        **kwargs,
                     ),
                     Field(
                         "fac/x3",
                         float,
                         40,
                         10,
-                        kwargs.get("fac/x3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -138,56 +137,58 @@ class MatFabricMap(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("isrefg", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "cse",
                         float,
                         10,
                         10,
-                        kwargs.get("cse", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "srfac",
                         int,
                         20,
                         10,
-                        kwargs.get("srfac")
+                        **kwargs,
                     ),
                     Field(
                         "bulkc",
                         float,
                         30,
                         10,
-                        kwargs.get("bulkc")
+                        **kwargs,
                     ),
                     Field(
                         "jacc",
                         float,
                         40,
                         10,
-                        kwargs.get("jacc")
+                        **kwargs,
                     ),
                     Field(
                         "fxx",
                         int,
                         50,
                         10,
-                        kwargs.get("fxx")
+                        **kwargs,
                     ),
                     Field(
                         "fyy",
                         int,
                         60,
                         10,
-                        kwargs.get("fyy")
+                        **kwargs,
                     ),
                     Field(
                         "dt",
                         float,
                         70,
                         10,
-                        kwargs.get("dt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -198,28 +199,28 @@ class MatFabricMap(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "ecoat",
                         float,
                         10,
                         10,
-                        kwargs.get("ecoat")
+                        **kwargs,
                     ),
                     Field(
                         "scoat",
                         float,
                         20,
                         10,
-                        kwargs.get("scoat")
+                        **kwargs,
                     ),
                     Field(
                         "tcoat",
                         float,
                         30,
                         10,
-                        kwargs.get("tcoat")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -230,42 +231,42 @@ class MatFabricMap(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -276,49 +277,49 @@ class MatFabricMap(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlImplicitSolutionSpr(KeywordBase):
@@ -41,56 +40,64 @@ class ControlImplicitSolutionSpr(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsolvr", 12 if use_lspp_defaults() else None)
+                        12,
+                        **kwargs,
                     ),
                     Field(
                         "ilimit",
                         int,
                         10,
                         10,
-                        kwargs.get("ilimit", 11 if use_lspp_defaults() else None)
+                        11,
+                        **kwargs,
                     ),
                     Field(
                         "maxref",
                         int,
                         20,
                         10,
-                        kwargs.get("maxref", 15 if use_lspp_defaults() else None)
+                        15,
+                        **kwargs,
                     ),
                     Field(
                         "dctol",
                         float,
                         30,
                         10,
-                        kwargs.get("dctol", 0.001 if use_lspp_defaults() else None)
+                        0.001,
+                        **kwargs,
                     ),
                     Field(
                         "ectol",
                         float,
                         40,
                         10,
-                        kwargs.get("ectol", 0.01 if use_lspp_defaults() else None)
+                        0.01,
+                        **kwargs,
                     ),
                     Field(
                         "rctol",
                         float,
                         50,
                         10,
-                        kwargs.get("rctol", 1.0E+10 if use_lspp_defaults() else None)
+                        1.0E+10,
+                        **kwargs,
                     ),
                     Field(
                         "lstol",
                         float,
                         60,
                         10,
-                        kwargs.get("lstol", 0.9 if use_lspp_defaults() else None)
+                        0.9,
+                        **kwargs,
                     ),
                     Field(
                         "abstol",
                         float,
                         70,
                         10,
-                        kwargs.get("abstol", 1.0E-10 if use_lspp_defaults() else None)
+                        1.0E-10,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,49 +108,56 @@ class ControlImplicitSolutionSpr(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("dnorm", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "diverg",
                         int,
                         10,
                         10,
-                        kwargs.get("diverg", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "istif",
                         int,
                         20,
                         10,
-                        kwargs.get("istif", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nlprint",
                         int,
                         30,
                         10,
-                        kwargs.get("nlprint", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nlnorm",
                         float,
                         40,
                         10,
-                        kwargs.get("nlnorm", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "d3itctl",
                         int,
                         50,
                         10,
-                        kwargs.get("d3itctl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cpchk",
                         int,
                         60,
                         10,
-                        kwargs.get("cpchk", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -154,56 +168,63 @@ class ControlImplicitSolutionSpr(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dmtol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "emtol",
                         float,
                         10,
                         10,
-                        kwargs.get("emtol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rmtol",
                         float,
                         20,
                         10,
-                        kwargs.get("rmtol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         str,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "nttol",
                         float,
                         40,
                         10,
-                        kwargs.get("nttol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "nrtol",
                         float,
                         50,
                         10,
-                        kwargs.get("nrtol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rttol",
                         float,
                         60,
                         10,
-                        kwargs.get("rttol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "rrtol",
                         float,
                         70,
                         10,
-                        kwargs.get("rrtol", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -214,56 +235,64 @@ class ControlImplicitSolutionSpr(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("arcctl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "arcdir",
                         int,
                         10,
                         10,
-                        kwargs.get("arcdir", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "arclen",
                         float,
                         20,
                         10,
-                        kwargs.get("arclen", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "arcmth",
                         int,
                         30,
                         10,
-                        kwargs.get("arcmth", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "arcdmp",
                         int,
                         40,
                         10,
-                        kwargs.get("arcdmp", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "arcpsi",
                         float,
                         50,
                         10,
-                        kwargs.get("arcpsi", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "arcalf",
                         float,
                         60,
                         10,
-                        kwargs.get("arcalf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "arctim",
                         float,
                         70,
                         10,
-                        kwargs.get("arctim", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -274,42 +303,48 @@ class ControlImplicitSolutionSpr(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lsmtd", 4 if use_lspp_defaults() else None)
+                        4,
+                        **kwargs,
                     ),
                     Field(
                         "lsdir",
                         int,
                         10,
                         10,
-                        kwargs.get("lsdir", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "irad",
                         float,
                         20,
                         10,
-                        kwargs.get("irad", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "srad",
                         float,
                         30,
                         10,
-                        kwargs.get("srad", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "awgt",
                         float,
                         40,
                         10,
-                        kwargs.get("awgt", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sred",
                         float,
                         50,
                         10,
-                        kwargs.get("sred", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

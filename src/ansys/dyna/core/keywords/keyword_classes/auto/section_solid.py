@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -48,56 +47,58 @@ class SectionSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "elform",
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "aet",
                         int,
                         20,
                         10,
-                        kwargs.get("aet", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "cohoff",
                         float,
                         60,
                         10,
-                        kwargs.get("cohoff")
+                        **kwargs,
                     ),
                     Field(
                         "gaskeit",
                         float,
                         70,
                         10,
-                        kwargs.get("gaskeit")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -108,42 +109,48 @@ class SectionSolid(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nip", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nxdof",
                         int,
                         10,
                         10,
-                        kwargs.get("nxdof", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ihgf",
                         int,
                         20,
                         10,
-                        kwargs.get("ihgf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "itaj",
                         int,
                         30,
                         10,
-                        kwargs.get("itaj", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lmc",
                         int,
                         40,
                         10,
-                        kwargs.get("lmc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nhsv",
                         int,
                         50,
                         10,
-                        kwargs.get("nhsv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
                 lambda: self.elform in [101, 102, 103, 104, 105],

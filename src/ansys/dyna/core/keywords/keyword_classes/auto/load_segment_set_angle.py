@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class LoadSegmentSetAngle(KeywordBase):
@@ -41,42 +40,45 @@ class LoadSegmentSetAngle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "ssid",
                         int,
                         10,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         20,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         30,
                         10,
-                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "ioptp",
                         int,
                         40,
                         10,
-                        kwargs.get("ioptp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ioptd",
                         int,
                         50,
                         10,
-                        kwargs.get("ioptd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,28 +89,28 @@ class LoadSegmentSetAngle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         10,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "na",
                         int,
                         20,
                         10,
-                        kwargs.get("na")
+                        **kwargs,
                     ),
                     Field(
                         "ni",
                         int,
                         30,
                         10,
-                        kwargs.get("ni")
+                        **kwargs,
                     ),
                 ],
             ),

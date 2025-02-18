@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialPwpNodalData(KeywordBase):
@@ -41,21 +40,23 @@ class InitialPwpNodalData(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "nhisv",
                         int,
                         10,
                         10,
-                        kwargs.get("nhisv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         20,
                         10,
-                        kwargs.get("pid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,35 +67,35 @@ class InitialPwpNodalData(KeywordBase):
                         float,
                         0,
                         16,
-                        kwargs.get("hisv1")
+                        **kwargs,
                     ),
                     Field(
                         "hisv2",
                         float,
                         16,
                         16,
-                        kwargs.get("hisv2")
+                        **kwargs,
                     ),
                     Field(
                         "hisv3",
                         float,
                         32,
                         16,
-                        kwargs.get("hisv3")
+                        **kwargs,
                     ),
                     Field(
                         "hisv4",
                         float,
                         48,
                         16,
-                        kwargs.get("hisv4")
+                        **kwargs,
                     ),
                     Field(
                         "hisv5",
                         float,
                         64,
                         16,
-                        kwargs.get("hisv5")
+                        **kwargs,
                     ),
                 ],
             ),

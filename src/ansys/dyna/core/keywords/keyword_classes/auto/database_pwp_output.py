@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabasePwpOutput(KeywordBase):
@@ -41,35 +40,40 @@ class DatabasePwpOutput(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ivel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iaccx",
                         int,
                         10,
                         10,
-                        kwargs.get("iaccx", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iaccy",
                         int,
                         20,
                         10,
-                        kwargs.get("iaccy", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "iaccz",
                         int,
                         30,
                         10,
-                        kwargs.get("iaccz", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ncyout",
                         int,
                         40,
                         10,
-                        kwargs.get("ncyout", 100 if use_lspp_defaults() else None)
+                        100,
+                        **kwargs,
                     ),
                 ],
             ),

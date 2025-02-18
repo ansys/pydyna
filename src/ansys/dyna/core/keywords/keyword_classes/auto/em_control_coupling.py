@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmControlCoupling(KeywordBase):
@@ -41,56 +40,62 @@ class EmControlCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("thcoupl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "smcoupl",
                         int,
                         10,
                         10,
-                        kwargs.get("smcoupl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "thlcid",
                         int,
                         20,
                         10,
-                        kwargs.get("thlcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "smlcid",
                         int,
                         30,
                         10,
-                        kwargs.get("smlcid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "thcplfl",
                         int,
                         40,
                         10,
-                        kwargs.get("thcplfl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "smcplfl",
                         int,
                         50,
                         10,
-                        kwargs.get("smcplfl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cflag",
                         int,
                         60,
                         10,
-                        kwargs.get("cflag")
+                        **kwargs,
                     ),
                     Field(
                         "nflag",
                         int,
                         70,
                         10,
-                        kwargs.get("nflag")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,28 +106,29 @@ class EmControlCoupling(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("smmod", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dfx",
                         int,
                         10,
                         10,
-                        kwargs.get("dfx")
+                        **kwargs,
                     ),
                     Field(
                         "dfy",
                         int,
                         20,
                         10,
-                        kwargs.get("dfy")
+                        **kwargs,
                     ),
                     Field(
                         "dfz",
                         int,
                         30,
                         10,
-                        kwargs.get("dfz")
+                        **kwargs,
                     ),
                 ],
             ),

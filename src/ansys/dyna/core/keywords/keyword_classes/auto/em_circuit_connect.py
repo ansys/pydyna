@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmCircuitConnect(KeywordBase):
@@ -41,42 +40,42 @@ class EmCircuitConnect(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("conid")
+                        **kwargs,
                     ),
                     Field(
                         "contype",
                         int,
                         10,
                         10,
-                        kwargs.get("contype")
+                        **kwargs,
                     ),
                     Field(
                         "circ1",
                         int,
                         20,
                         10,
-                        kwargs.get("circ1")
+                        **kwargs,
                     ),
                     Field(
                         "circ2",
                         int,
                         30,
                         10,
-                        kwargs.get("circ2")
+                        **kwargs,
                     ),
                     Field(
                         "c1",
                         float,
                         40,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         50,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                 ],
             ),

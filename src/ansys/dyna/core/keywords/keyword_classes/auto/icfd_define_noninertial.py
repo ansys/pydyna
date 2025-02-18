@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdDefineNoninertial(KeywordBase):
@@ -41,56 +40,57 @@ class IcfdDefineNoninertial(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("w1")
+                        **kwargs,
                     ),
                     Field(
                         "w2",
                         float,
                         10,
                         10,
-                        kwargs.get("w2")
+                        **kwargs,
                     ),
                     Field(
                         "w3",
                         float,
                         20,
                         10,
-                        kwargs.get("w3")
+                        **kwargs,
                     ),
                     Field(
                         "r",
                         float,
                         30,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "ptid",
                         int,
                         40,
                         10,
-                        kwargs.get("ptid")
+                        **kwargs,
                     ),
                     Field(
                         "l",
                         float,
                         50,
                         10,
-                        kwargs.get("l")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         60,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "relv",
                         int,
                         70,
                         10,
-                        kwargs.get("relv", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

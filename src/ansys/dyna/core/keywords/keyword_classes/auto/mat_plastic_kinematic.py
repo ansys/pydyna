@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class MatPlasticKinematic(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "etan",
                         float,
                         50,
                         10,
-                        kwargs.get("etan")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,28 +98,29 @@ class MatPlasticKinematic(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("src")
+                        **kwargs,
                     ),
                     Field(
                         "srp",
                         float,
                         10,
                         10,
-                        kwargs.get("srp")
+                        **kwargs,
                     ),
                     Field(
                         "fs",
                         float,
                         20,
                         10,
-                        kwargs.get("fs")
+                        **kwargs,
                     ),
                     Field(
                         "vp",
                         float,
                         30,
                         10,
-                        kwargs.get("vp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

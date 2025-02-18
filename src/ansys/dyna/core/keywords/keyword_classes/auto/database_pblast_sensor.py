@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabasePblastSensor(KeywordBase):
@@ -41,14 +40,16 @@ class DatabasePblastSensor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "binary",
                         int,
                         10,
                         10,
-                        kwargs.get("binary", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,28 +60,32 @@ class DatabasePblastSensor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "itype",
                         int,
                         10,
                         10,
-                        kwargs.get("itype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "offset",
                         float,
                         20,
                         10,
-                        kwargs.get("offset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "radius",
                         float,
                         30,
                         10,
-                        kwargs.get("radius", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ParameterNoecho(KeywordBase):
@@ -41,56 +40,56 @@ class ParameterNoecho(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("prmr1")
+                        **kwargs,
                     ),
                     Field(
                         "val1",
                         str,
                         10,
                         10,
-                        kwargs.get("val1")
+                        **kwargs,
                     ),
                     Field(
                         "prmr2",
                         str,
                         20,
                         10,
-                        kwargs.get("prmr2")
+                        **kwargs,
                     ),
                     Field(
                         "val2",
                         str,
                         30,
                         10,
-                        kwargs.get("val2")
+                        **kwargs,
                     ),
                     Field(
                         "prmr3",
                         str,
                         40,
                         10,
-                        kwargs.get("prmr3")
+                        **kwargs,
                     ),
                     Field(
                         "val3",
                         str,
                         50,
                         10,
-                        kwargs.get("val3")
+                        **kwargs,
                     ),
                     Field(
                         "prmr4",
                         str,
                         60,
                         10,
-                        kwargs.get("prmr4")
+                        **kwargs,
                     ),
                     Field(
                         "val4",
                         str,
                         70,
                         10,
-                        kwargs.get("val4")
+                        **kwargs,
                     ),
                 ],
             ),

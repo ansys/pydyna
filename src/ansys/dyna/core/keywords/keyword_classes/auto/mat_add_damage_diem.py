@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,39 @@ class MatAddDamageDiem(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ndiemc",
                         float,
                         10,
                         10,
-                        kwargs.get("ndiemc", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dinit",
                         int,
                         20,
                         10,
-                        kwargs.get("dinit", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "deps",
                         float,
                         30,
                         10,
-                        kwargs.get("deps", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "numfip",
                         float,
                         40,
                         10,
-                        kwargs.get("numfip", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,42 +88,43 @@ class MatAddDamageDiem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dityp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "p1",
                         float,
                         10,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         20,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         30,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                     Field(
                         "p4",
                         float,
                         40,
                         10,
-                        kwargs.get("p4")
+                        **kwargs,
                     ),
                     Field(
                         "p5",
                         float,
                         50,
                         10,
-                        kwargs.get("p5")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -131,42 +135,44 @@ class MatAddDamageDiem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("detyp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "dctyp",
                         float,
                         10,
                         10,
-                        kwargs.get("dctyp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "q1",
                         float,
                         20,
                         10,
-                        kwargs.get("q1")
+                        **kwargs,
                     ),
                     Field(
                         "q2",
                         float,
                         30,
                         10,
-                        kwargs.get("q2")
+                        **kwargs,
                     ),
                     Field(
                         "q3",
                         float,
                         40,
                         10,
-                        kwargs.get("q3")
+                        **kwargs,
                     ),
                     Field(
                         "q4",
                         float,
                         50,
                         10,
-                        kwargs.get("q4")
+                        **kwargs,
                     ),
                 ],
             ),

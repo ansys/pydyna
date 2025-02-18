@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Eos004(KeywordBase):
@@ -41,56 +40,56 @@ class Eos004(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("eosid")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         10,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "s1",
                         float,
                         20,
                         10,
-                        kwargs.get("s1")
+                        **kwargs,
                     ),
                     Field(
                         "s2",
                         float,
                         30,
                         10,
-                        kwargs.get("s2")
+                        **kwargs,
                     ),
                     Field(
                         "s3",
                         float,
                         40,
                         10,
-                        kwargs.get("s3")
+                        **kwargs,
                     ),
                     Field(
                         "gamao",
                         float,
                         50,
                         10,
-                        kwargs.get("gamao")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         60,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "e0",
                         float,
                         70,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,21 +100,21 @@ class Eos004(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         20,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                 ],
             ),

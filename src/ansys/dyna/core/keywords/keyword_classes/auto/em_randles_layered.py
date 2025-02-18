@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmRandlesLayered(KeywordBase):
@@ -41,28 +40,28 @@ class EmRandlesLayered(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("rdlid")
+                        **kwargs,
                     ),
                     Field(
                         "rdltype",
                         int,
                         10,
                         10,
-                        kwargs.get("rdltype")
+                        **kwargs,
                     ),
                     Field(
                         "psid",
                         int,
                         20,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "rdlarea ",
                         int,
                         30,
                         10,
-                        kwargs.get("rdlarea ")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -73,28 +72,28 @@ class EmRandlesLayered(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("q")
+                        **kwargs,
                     ),
                     Field(
                         "cq",
                         float,
                         10,
                         10,
-                        kwargs.get("cq")
+                        **kwargs,
                     ),
                     Field(
                         "socinit",
                         float,
                         20,
                         10,
-                        kwargs.get("socinit")
+                        **kwargs,
                     ),
                     Field(
                         "soctou",
                         float,
                         30,
                         10,
-                        kwargs.get("soctou")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -105,42 +104,42 @@ class EmRandlesLayered(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r0cha")
+                        **kwargs,
                     ),
                     Field(
                         "r0dis",
                         float,
                         10,
                         10,
-                        kwargs.get("r0dis")
+                        **kwargs,
                     ),
                     Field(
                         "r10cha",
                         float,
                         20,
                         10,
-                        kwargs.get("r10cha")
+                        **kwargs,
                     ),
                     Field(
                         "r10dis",
                         float,
                         30,
                         10,
-                        kwargs.get("r10dis")
+                        **kwargs,
                     ),
                     Field(
                         "c10cha",
                         float,
                         40,
                         10,
-                        kwargs.get("c10cha")
+                        **kwargs,
                     ),
                     Field(
                         "c10dis",
                         float,
                         50,
                         10,
-                        kwargs.get("c10dis")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -151,35 +150,35 @@ class EmRandlesLayered(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r20cha")
+                        **kwargs,
                     ),
                     Field(
                         "r20dis",
                         float,
                         10,
                         10,
-                        kwargs.get("r20dis")
+                        **kwargs,
                     ),
                     Field(
                         "c20cha",
                         float,
                         20,
                         10,
-                        kwargs.get("c20cha")
+                        **kwargs,
                     ),
                     Field(
                         "c20dis",
                         float,
                         30,
                         10,
-                        kwargs.get("c20dis")
+                        **kwargs,
                     ),
                     Field(
                         "r30cha",
                         float,
                         40,
                         10,
-                        kwargs.get("r30cha")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -190,21 +189,21 @@ class EmRandlesLayered(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("temp")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmIsopotentialConnect(KeywordBase):
@@ -41,49 +40,50 @@ class EmIsopotentialConnect(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("conid")
+                        **kwargs,
                     ),
                     Field(
                         "contype",
                         int,
                         10,
                         10,
-                        kwargs.get("contype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "isoid1",
                         int,
                         20,
                         10,
-                        kwargs.get("isoid1")
+                        **kwargs,
                     ),
                     Field(
                         "isoid2",
                         int,
                         30,
                         10,
-                        kwargs.get("isoid2")
+                        **kwargs,
                     ),
                     Field(
                         "val",
                         float,
                         40,
                         10,
-                        kwargs.get("val")
+                        **kwargs,
                     ),
                     Field(
                         "lcid/rdlid",
                         int,
                         50,
                         10,
-                        kwargs.get("lcid/rdlid")
+                        **kwargs,
                     ),
                     Field(
                         "psid",
                         int,
                         60,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,21 +94,21 @@ class EmIsopotentialConnect(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("l")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         10,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "v0",
                         float,
                         20,
                         10,
-                        kwargs.get("v0")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.contype == 6,

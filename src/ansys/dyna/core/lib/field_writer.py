@@ -49,7 +49,7 @@ def _field_iterator(fields: typing.List[Field], long_format: bool) -> typing.Ite
         return []
     if fields[0].offset > 0:
         # insert a blank field in the beginning up to the offset
-        blank_field = Field(name=None, type=None, offset=0, width=fields[0].offset)
+        blank_field = Field(None, None, 0, fields[0].offset)
         fields = [blank_field] + fields
 
     offset = 0
@@ -61,7 +61,7 @@ def _field_iterator(fields: typing.List[Field], long_format: bool) -> typing.Ite
         assert pos >= offset
         if pos != offset:
             empty_width = pos - offset
-            yield Field(name=None, type=None, offset=offset, width=empty_width)
+            yield Field(None, None, offset, empty_width)
             offset += empty_width
         assert pos == offset
         if dataclasses.is_dataclass(field.type):
@@ -72,7 +72,7 @@ def _field_iterator(fields: typing.List[Field], long_format: bool) -> typing.Ite
                     value = getattr(field.value, member.name)
                 else:
                     value = None
-                yield Field(name=member.name, type=member.type, offset=field_offset, width=field.width, value=value)
+                yield Field(member.name, member.type, field_offset, field.width, value=value)
                 total_width += field.width
                 field_offset += field.width
             offset += total_width

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedJointStiffnessTranslational(KeywordBase):
@@ -41,42 +40,43 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("jsid")
+                        **kwargs,
                     ),
                     Field(
                         "pida",
                         int,
                         10,
                         10,
-                        kwargs.get("pida")
+                        **kwargs,
                     ),
                     Field(
                         "pidb",
                         int,
                         20,
                         10,
-                        kwargs.get("pidb")
+                        **kwargs,
                     ),
                     Field(
                         "cida",
                         int,
                         30,
                         10,
-                        kwargs.get("cida")
+                        **kwargs,
                     ),
                     Field(
                         "cidb",
                         int,
                         40,
                         10,
-                        kwargs.get("cidb", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "jid",
                         int,
                         50,
                         10,
-                        kwargs.get("jid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,42 +87,42 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcidx")
+                        **kwargs,
                     ),
                     Field(
                         "lcidy",
                         int,
                         10,
                         10,
-                        kwargs.get("lcidy")
+                        **kwargs,
                     ),
                     Field(
                         "lcidz",
                         int,
                         20,
                         10,
-                        kwargs.get("lcidz")
+                        **kwargs,
                     ),
                     Field(
                         "dlcidx",
                         int,
                         30,
                         10,
-                        kwargs.get("dlcidx")
+                        **kwargs,
                     ),
                     Field(
                         "dlcidy",
                         int,
                         40,
                         10,
-                        kwargs.get("dlcidy")
+                        **kwargs,
                     ),
                     Field(
                         "dlcidz",
                         int,
                         50,
                         10,
-                        kwargs.get("dlcidz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -133,42 +133,48 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("esx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ffx",
                         float,
                         10,
                         10,
-                        kwargs.get("ffx", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "esy",
                         float,
                         20,
                         10,
-                        kwargs.get("esy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ffy",
                         float,
                         30,
                         10,
-                        kwargs.get("ffy", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "esz",
                         float,
                         40,
                         10,
-                        kwargs.get("esz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "ffz",
                         float,
                         50,
                         10,
-                        kwargs.get("ffz", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -179,42 +185,42 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("nsdx")
+                        **kwargs,
                     ),
                     Field(
                         "psdx",
                         float,
                         10,
                         10,
-                        kwargs.get("psdx")
+                        **kwargs,
                     ),
                     Field(
                         "nsdy",
                         float,
                         20,
                         10,
-                        kwargs.get("nsdy")
+                        **kwargs,
                     ),
                     Field(
                         "psdy",
                         float,
                         30,
                         10,
-                        kwargs.get("psdy")
+                        **kwargs,
                     ),
                     Field(
                         "nsdz",
                         float,
                         40,
                         10,
-                        kwargs.get("nsdz")
+                        **kwargs,
                     ),
                     Field(
                         "psdz",
                         float,
                         50,
                         10,
-                        kwargs.get("psdz")
+                        **kwargs,
                     ),
                 ],
             ),

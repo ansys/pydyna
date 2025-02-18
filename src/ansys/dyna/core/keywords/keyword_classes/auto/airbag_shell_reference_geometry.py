@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagShellReferenceGeometry(KeywordBase):
@@ -41,42 +40,42 @@ class AirbagShellReferenceGeometry(KeywordBase):
                         int,
                         0,
                         8,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         8,
                         8,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "n1",
                         int,
                         16,
                         8,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         24,
                         8,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n3",
                         int,
                         32,
                         8,
-                        kwargs.get("n3")
+                        **kwargs,
                     ),
                     Field(
                         "n4",
                         int,
                         40,
                         8,
-                        kwargs.get("n4")
+                        **kwargs,
                     ),
                 ],
             ),

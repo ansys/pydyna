@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class MatRht(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "shear",
                         float,
                         20,
                         10,
-                        kwargs.get("shear")
+                        **kwargs,
                     ),
                     Field(
                         "onempa",
                         float,
                         30,
                         10,
-                        kwargs.get("onempa", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "epsf",
                         float,
                         40,
                         10,
-                        kwargs.get("epsf", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "b0",
                         float,
                         50,
                         10,
-                        kwargs.get("b0")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         60,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "t1",
                         float,
                         70,
                         10,
-                        kwargs.get("t1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,56 @@ class MatRht(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         10,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "fc",
                         float,
                         20,
                         10,
-                        kwargs.get("fc")
+                        **kwargs,
                     ),
                     Field(
                         "fs*",
                         float,
                         30,
                         10,
-                        kwargs.get("fs*")
+                        **kwargs,
                     ),
                     Field(
                         "ft*",
                         float,
                         40,
                         10,
-                        kwargs.get("ft*")
+                        **kwargs,
                     ),
                     Field(
                         "q0",
                         float,
                         50,
                         10,
-                        kwargs.get("q0")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         60,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "t2",
                         float,
                         70,
                         10,
-                        kwargs.get("t2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,49 +167,50 @@ class MatRht(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("e0c")
+                        **kwargs,
                     ),
                     Field(
                         "e0t",
                         float,
                         10,
                         10,
-                        kwargs.get("e0t")
+                        **kwargs,
                     ),
                     Field(
                         "ec",
                         float,
                         20,
                         10,
-                        kwargs.get("ec")
+                        **kwargs,
                     ),
                     Field(
                         "et",
                         float,
                         30,
                         10,
-                        kwargs.get("et")
+                        **kwargs,
                     ),
                     Field(
                         "betac",
                         float,
                         40,
                         10,
-                        kwargs.get("betac")
+                        **kwargs,
                     ),
                     Field(
                         "betat",
                         float,
                         50,
                         10,
-                        kwargs.get("betat")
+                        **kwargs,
                     ),
                     Field(
                         "ptf",
                         float,
                         60,
                         10,
-                        kwargs.get("ptf", 0.001 if use_lspp_defaults() else None)
+                        0.001,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -219,56 +221,56 @@ class MatRht(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gc*")
+                        **kwargs,
                     ),
                     Field(
                         "gt*",
                         float,
                         10,
                         10,
-                        kwargs.get("gt*")
+                        **kwargs,
                     ),
                     Field(
                         "xi",
                         float,
                         20,
                         10,
-                        kwargs.get("xi")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "epm",
                         float,
                         50,
                         10,
-                        kwargs.get("epm")
+                        **kwargs,
                     ),
                     Field(
                         "af",
                         float,
                         60,
                         10,
-                        kwargs.get("af")
+                        **kwargs,
                     ),
                     Field(
                         "nf",
                         float,
                         70,
                         10,
-                        kwargs.get("nf")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -279,56 +281,56 @@ class MatRht(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gamma")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         10,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         20,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         30,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                     Field(
                         "pel",
                         float,
                         40,
                         10,
-                        kwargs.get("pel")
+                        **kwargs,
                     ),
                     Field(
                         "pco",
                         float,
                         50,
                         10,
-                        kwargs.get("pco")
+                        **kwargs,
                     ),
                     Field(
                         "np",
                         float,
                         60,
                         10,
-                        kwargs.get("np")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         70,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                 ],
             ),

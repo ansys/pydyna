@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,51 @@ class SensorDefineNodeSetUpdate(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sensid")
+                        **kwargs,
                     ),
                     Field(
                         "node1",
                         int,
                         10,
                         10,
-                        kwargs.get("node1")
+                        **kwargs,
                     ),
                     Field(
                         "node2",
                         int,
                         20,
                         10,
-                        kwargs.get("node2")
+                        **kwargs,
                     ),
                     Field(
                         "vid",
                         str,
                         30,
                         10,
-                        kwargs.get("vid")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ctype",
                         str,
                         50,
                         10,
-                        kwargs.get("ctype", "ACC" if use_lspp_defaults() else None)
+                        "ACC",
+                        **kwargs,
                     ),
                     Field(
                         "setopt",
                         str,
                         60,
                         10,
-                        kwargs.get("setopt", "AVG" if use_lspp_defaults() else None)
+                        "AVG",
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,21 +100,21 @@ class SensorDefineNodeSetUpdate(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("birth")
+                        **kwargs,
                     ),
                     Field(
                         "death",
                         float,
                         10,
                         10,
-                        kwargs.get("death")
+                        **kwargs,
                     ),
                     Field(
                         "dtupd",
                         float,
                         20,
                         10,
-                        kwargs.get("dtupd")
+                        **kwargs,
                     ),
                 ],
             ),

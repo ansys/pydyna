@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class Mat128(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "c",
                         float,
                         20,
                         10,
-                        kwargs.get("c")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         30,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "b2",
                         float,
                         40,
                         10,
-                        kwargs.get("b2")
+                        **kwargs,
                     ),
                     Field(
                         "b3",
                         float,
                         50,
                         10,
-                        kwargs.get("b3")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         60,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         70,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,56 @@ class Mat128(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("l0")
+                        **kwargs,
                     ),
                     Field(
                         "ca0max",
                         int,
                         10,
                         10,
-                        kwargs.get("ca0max")
+                        **kwargs,
                     ),
                     Field(
                         "lr",
                         float,
                         20,
                         10,
-                        kwargs.get("lr")
+                        **kwargs,
                     ),
                     Field(
                         "mm",
                         float,
                         30,
                         10,
-                        kwargs.get("mm")
+                        **kwargs,
                     ),
                     Field(
                         "bb",
                         float,
                         40,
                         10,
-                        kwargs.get("bb")
+                        **kwargs,
                     ),
                     Field(
                         "ca0",
                         float,
                         50,
                         10,
-                        kwargs.get("ca0")
+                        **kwargs,
                     ),
                     Field(
                         "tmax",
                         float,
                         60,
                         10,
-                        kwargs.get("tmax")
+                        **kwargs,
                     ),
                     Field(
                         "tact",
                         float,
                         70,
                         10,
-                        kwargs.get("tact")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,14 +165,15 @@ class Mat128(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         10,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -184,42 +184,42 @@ class Mat128(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -230,49 +230,49 @@ class Mat128(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),

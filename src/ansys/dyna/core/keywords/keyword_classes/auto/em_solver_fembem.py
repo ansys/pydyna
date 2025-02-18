@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmSolverFembem(KeywordBase):
@@ -41,21 +40,24 @@ class EmSolverFembem(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("reltol", 1.e-2 if use_lspp_defaults() else None)
+                        1.e-2,
+                        **kwargs,
                     ),
                     Field(
                         "maxite",
                         int,
                         10,
                         10,
-                        kwargs.get("maxite", 50 if use_lspp_defaults() else None)
+                        50,
+                        **kwargs,
                     ),
                     Field(
                         "forcon",
                         int,
                         20,
                         10,
-                        kwargs.get("forcon", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

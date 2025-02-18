@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class MatCdpm(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr", 0.2 if use_lspp_defaults() else None)
+                        0.2,
+                        **kwargs,
                     ),
                     Field(
                         "ecc",
                         float,
                         40,
                         10,
-                        kwargs.get("ecc")
+                        **kwargs,
                     ),
                     Field(
                         "qh0",
                         float,
                         50,
                         10,
-                        kwargs.get("qh0", 0.3 if use_lspp_defaults() else None)
+                        0.3,
+                        **kwargs,
                     ),
                     Field(
                         "ft",
                         float,
                         60,
                         10,
-                        kwargs.get("ft")
+                        **kwargs,
                     ),
                     Field(
                         "fc",
                         float,
                         70,
                         10,
-                        kwargs.get("fc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,63 @@ class MatCdpm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("hp", 0.5 if use_lspp_defaults() else None)
+                        0.5,
+                        **kwargs,
                     ),
                     Field(
                         "ah",
                         float,
                         10,
                         10,
-                        kwargs.get("ah", 0.08 if use_lspp_defaults() else None)
+                        0.08,
+                        **kwargs,
                     ),
                     Field(
                         "bh",
                         float,
                         20,
                         10,
-                        kwargs.get("bh", 0.003 if use_lspp_defaults() else None)
+                        0.003,
+                        **kwargs,
                     ),
                     Field(
                         "ch",
                         float,
                         30,
                         10,
-                        kwargs.get("ch", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "dh",
                         float,
                         40,
                         10,
-                        kwargs.get("dh", 1.0E-6 if use_lspp_defaults() else None)
+                        1.0E-6,
+                        **kwargs,
                     ),
                     Field(
                         "as",
                         float,
                         50,
                         10,
-                        kwargs.get("as", 15.0 if use_lspp_defaults() else None)
+                        15.0,
+                        **kwargs,
                     ),
                     Field(
                         "df",
                         float,
                         60,
                         10,
-                        kwargs.get("df", 0.85 if use_lspp_defaults() else None)
+                        0.85,
+                        **kwargs,
                     ),
                     Field(
                         "fc0",
                         float,
                         70,
                         10,
-                        kwargs.get("fc0")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +174,60 @@ class MatCdpm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("type", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "bs",
                         float,
                         10,
                         10,
-                        kwargs.get("bs", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "wf",
                         float,
                         20,
                         10,
-                        kwargs.get("wf")
+                        **kwargs,
                     ),
                     Field(
                         "wf1",
                         float,
                         30,
                         10,
-                        kwargs.get("wf1")
+                        **kwargs,
                     ),
                     Field(
                         "ft1",
                         float,
                         40,
                         10,
-                        kwargs.get("ft1")
+                        **kwargs,
                     ),
                     Field(
                         "strflg",
                         float,
                         50,
                         10,
-                        kwargs.get("strflg", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "failflg",
                         float,
                         60,
                         10,
-                        kwargs.get("failflg")
+                        **kwargs,
                     ),
                     Field(
                         "efc",
                         float,
                         70,
                         10,
-                        kwargs.get("efc", 1.0E-4 if use_lspp_defaults() else None)
+                        1.0E-4,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlShell(KeywordBase):
@@ -41,56 +40,64 @@ class ControlShell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("wrpang", 20.0 if use_lspp_defaults() else None)
+                        20.0,
+                        **kwargs,
                     ),
                     Field(
                         "esort",
                         int,
                         10,
                         10,
-                        kwargs.get("esort", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "irnxx",
                         int,
                         20,
                         10,
-                        kwargs.get("irnxx", -1 if use_lspp_defaults() else None)
+                        -1,
+                        **kwargs,
                     ),
                     Field(
                         "istupd",
                         int,
                         30,
                         10,
-                        kwargs.get("istupd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "theory",
                         int,
                         40,
                         10,
-                        kwargs.get("theory", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "bwc",
                         int,
                         50,
                         10,
-                        kwargs.get("bwc", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "miter",
                         int,
                         60,
                         10,
-                        kwargs.get("miter", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "proj",
                         int,
                         70,
                         10,
-                        kwargs.get("proj", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,35 +108,40 @@ class ControlShell(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rotascl", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "intgrd",
                         int,
                         10,
                         10,
-                        kwargs.get("intgrd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lamsht",
                         int,
                         20,
                         10,
-                        kwargs.get("lamsht", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cstyp6",
                         int,
                         30,
                         10,
-                        kwargs.get("cstyp6", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "thshel",
                         int,
                         40,
                         10,
-                        kwargs.get("thshel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -140,56 +152,62 @@ class ControlShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psstupd", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sidt4tu",
                         int,
                         10,
                         10,
-                        kwargs.get("sidt4tu", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cntco",
                         int,
                         20,
                         10,
-                        kwargs.get("cntco", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "itsflg",
                         int,
                         30,
                         10,
-                        kwargs.get("itsflg", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "irquad",
                         int,
                         40,
                         10,
-                        kwargs.get("irquad", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                     Field(
                         "w-mode",
                         float,
                         50,
                         10,
-                        kwargs.get("w-mode")
+                        **kwargs,
                     ),
                     Field(
                         "stretch",
                         float,
                         60,
                         10,
-                        kwargs.get("stretch")
+                        **kwargs,
                     ),
                     Field(
                         "icrq",
                         int,
                         70,
                         10,
-                        kwargs.get("icrq", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -200,56 +218,62 @@ class ControlShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nfail1")
+                        **kwargs,
                     ),
                     Field(
                         "nfail4",
                         int,
                         10,
                         10,
-                        kwargs.get("nfail4")
+                        **kwargs,
                     ),
                     Field(
                         "psnfail",
                         int,
                         20,
                         10,
-                        kwargs.get("psnfail", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "keepcs",
                         int,
                         30,
                         10,
-                        kwargs.get("keepcs", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "delfr",
                         int,
                         40,
                         10,
-                        kwargs.get("delfr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "drcpsid",
                         int,
                         50,
                         10,
-                        kwargs.get("drcpsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "drcprm",
                         float,
                         60,
                         10,
-                        kwargs.get("drcprm", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "intperr",
                         int,
                         70,
                         10,
-                        kwargs.get("intperr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -260,21 +284,24 @@ class ControlShell(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("drcmth", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lispsid",
                         int,
                         10,
                         10,
-                        kwargs.get("lispsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nlocdt",
                         int,
                         20,
                         10,
-                        kwargs.get("nlocdt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

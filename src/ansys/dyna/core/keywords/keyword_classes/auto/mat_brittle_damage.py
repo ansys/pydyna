@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatBrittleDamage(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "tlimit",
                         float,
                         40,
                         10,
-                        kwargs.get("tlimit")
+                        **kwargs,
                     ),
                     Field(
                         "slimit",
                         float,
                         50,
                         10,
-                        kwargs.get("slimit")
+                        **kwargs,
                     ),
                     Field(
                         "ftough",
                         float,
                         60,
                         10,
-                        kwargs.get("ftough")
+                        **kwargs,
                     ),
                     Field(
                         "sreten",
                         float,
                         70,
                         10,
-                        kwargs.get("sreten")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,49 +105,49 @@ class MatBrittleDamage(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("visc")
+                        **kwargs,
                     ),
                     Field(
                         "fra_rf",
                         float,
                         10,
                         10,
-                        kwargs.get("fra_rf")
+                        **kwargs,
                     ),
                     Field(
                         "e_rf",
                         float,
                         20,
                         10,
-                        kwargs.get("e_rf")
+                        **kwargs,
                     ),
                     Field(
                         "ys_rf",
                         float,
                         30,
                         10,
-                        kwargs.get("ys_rf")
+                        **kwargs,
                     ),
                     Field(
                         "eh_rf",
                         float,
                         40,
                         10,
-                        kwargs.get("eh_rf")
+                        **kwargs,
                     ),
                     Field(
                         "fs_rf",
                         float,
                         50,
                         10,
-                        kwargs.get("fs_rf")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         60,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                 ],
             ),

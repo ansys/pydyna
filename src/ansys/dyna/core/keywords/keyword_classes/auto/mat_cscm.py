@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class MatCscm(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "nplot",
                         int,
                         20,
                         10,
-                        kwargs.get("nplot", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "incre",
                         float,
                         30,
                         10,
-                        kwargs.get("incre")
+                        **kwargs,
                     ),
                     Field(
                         "irate",
                         int,
                         40,
                         10,
-                        kwargs.get("irate", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "erode",
                         float,
                         50,
                         10,
-                        kwargs.get("erode")
+                        **kwargs,
                     ),
                     Field(
                         "recov",
                         float,
                         60,
                         10,
-                        kwargs.get("recov", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "itretrc",
                         int,
                         70,
                         10,
-                        kwargs.get("itretrc", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,7 +109,7 @@ class MatCscm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pred")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -117,56 +120,56 @@ class MatCscm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "k",
                         float,
                         10,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         20,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "theta",
                         float,
                         30,
                         10,
-                        kwargs.get("theta")
+                        **kwargs,
                     ),
                     Field(
                         "lamda",
                         float,
                         40,
                         10,
-                        kwargs.get("lamda")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         50,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "nh",
                         float,
                         60,
                         10,
-                        kwargs.get("nh")
+                        **kwargs,
                     ),
                     Field(
                         "ch",
                         float,
                         70,
                         10,
-                        kwargs.get("ch")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -177,56 +180,56 @@ class MatCscm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha1")
+                        **kwargs,
                     ),
                     Field(
                         "theta1",
                         float,
                         10,
                         10,
-                        kwargs.get("theta1")
+                        **kwargs,
                     ),
                     Field(
                         "lamda1",
                         float,
                         20,
                         10,
-                        kwargs.get("lamda1")
+                        **kwargs,
                     ),
                     Field(
                         "beta1",
                         float,
                         30,
                         10,
-                        kwargs.get("beta1")
+                        **kwargs,
                     ),
                     Field(
                         "alpha2",
                         float,
                         40,
                         10,
-                        kwargs.get("alpha2")
+                        **kwargs,
                     ),
                     Field(
                         "theta2",
                         float,
                         50,
                         10,
-                        kwargs.get("theta2")
+                        **kwargs,
                     ),
                     Field(
                         "lamda2",
                         float,
                         60,
                         10,
-                        kwargs.get("lamda2")
+                        **kwargs,
                     ),
                     Field(
                         "beta2",
                         float,
                         70,
                         10,
-                        kwargs.get("beta2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -237,35 +240,35 @@ class MatCscm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("r")
+                        **kwargs,
                     ),
                     Field(
                         "xd",
                         float,
                         10,
                         10,
-                        kwargs.get("xd")
+                        **kwargs,
                     ),
                     Field(
                         "w",
                         float,
                         20,
                         10,
-                        kwargs.get("w")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -276,56 +279,56 @@ class MatCscm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "gfc",
                         float,
                         10,
                         10,
-                        kwargs.get("gfc")
+                        **kwargs,
                     ),
                     Field(
                         "d",
                         float,
                         20,
                         10,
-                        kwargs.get("d")
+                        **kwargs,
                     ),
                     Field(
                         "gft",
                         float,
                         30,
                         10,
-                        kwargs.get("gft")
+                        **kwargs,
                     ),
                     Field(
                         "gfs",
                         float,
                         40,
                         10,
-                        kwargs.get("gfs")
+                        **kwargs,
                     ),
                     Field(
                         "pwrc",
                         float,
                         50,
                         10,
-                        kwargs.get("pwrc")
+                        **kwargs,
                     ),
                     Field(
                         "pwrt",
                         float,
                         60,
                         10,
-                        kwargs.get("pwrt")
+                        **kwargs,
                     ),
                     Field(
                         "pmod",
                         float,
                         70,
                         10,
-                        kwargs.get("pmod")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -336,56 +339,56 @@ class MatCscm(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("eta0c")
+                        **kwargs,
                     ),
                     Field(
                         "nc",
                         float,
                         10,
                         10,
-                        kwargs.get("nc")
+                        **kwargs,
                     ),
                     Field(
                         "etaot",
                         float,
                         20,
                         10,
-                        kwargs.get("etaot")
+                        **kwargs,
                     ),
                     Field(
                         "nt",
                         float,
                         30,
                         10,
-                        kwargs.get("nt")
+                        **kwargs,
                     ),
                     Field(
                         "overc",
                         float,
                         40,
                         10,
-                        kwargs.get("overc")
+                        **kwargs,
                     ),
                     Field(
                         "overt",
                         float,
                         50,
                         10,
-                        kwargs.get("overt")
+                        **kwargs,
                     ),
                     Field(
                         "srate",
                         float,
                         60,
                         10,
-                        kwargs.get("srate")
+                        **kwargs,
                     ),
                     Field(
                         "rep0w",
                         float,
                         70,
                         10,
-                        kwargs.get("rep0w")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -47,56 +46,56 @@ class ContactSpg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid1")
+                        **kwargs,
                     ),
                     Field(
                         "pid2",
                         int,
                         10,
                         10,
-                        kwargs.get("pid2")
+                        **kwargs,
                     ),
                     Field(
                         "pid3",
                         int,
                         20,
                         10,
-                        kwargs.get("pid3")
+                        **kwargs,
                     ),
                     Field(
                         "pid4",
                         int,
                         30,
                         10,
-                        kwargs.get("pid4")
+                        **kwargs,
                     ),
                     Field(
                         "pid5",
                         int,
                         40,
                         10,
-                        kwargs.get("pid5")
+                        **kwargs,
                     ),
                     Field(
                         "pid6",
                         int,
                         50,
                         10,
-                        kwargs.get("pid6")
+                        **kwargs,
                     ),
                     Field(
                         "pid7",
                         int,
                         60,
                         10,
-                        kwargs.get("pid7")
+                        **kwargs,
                     ),
                     Field(
                         "pid8",
                         int,
                         70,
                         10,
-                        kwargs.get("pid8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,56 +106,56 @@ class ContactSpg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iself1")
+                        **kwargs,
                     ),
                     Field(
                         "iself2",
                         int,
                         10,
                         10,
-                        kwargs.get("iself2")
+                        **kwargs,
                     ),
                     Field(
                         "iself3",
                         int,
                         20,
                         10,
-                        kwargs.get("iself3")
+                        **kwargs,
                     ),
                     Field(
                         "iself4",
                         int,
                         30,
                         10,
-                        kwargs.get("iself4")
+                        **kwargs,
                     ),
                     Field(
                         "iself5",
                         int,
                         40,
                         10,
-                        kwargs.get("iself5")
+                        **kwargs,
                     ),
                     Field(
                         "iself6",
                         int,
                         50,
                         10,
-                        kwargs.get("iself6")
+                        **kwargs,
                     ),
                     Field(
                         "iself7",
                         int,
                         60,
                         10,
-                        kwargs.get("iself7")
+                        **kwargs,
                     ),
                     Field(
                         "iself8",
                         int,
                         70,
                         10,
-                        kwargs.get("iself8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -167,56 +166,56 @@ class ContactSpg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("pfac1")
+                        **kwargs,
                     ),
                     Field(
                         "pfac2",
                         float,
                         10,
                         10,
-                        kwargs.get("pfac2")
+                        **kwargs,
                     ),
                     Field(
                         "pfac3",
                         float,
                         20,
                         10,
-                        kwargs.get("pfac3")
+                        **kwargs,
                     ),
                     Field(
                         "pfac4",
                         float,
                         30,
                         10,
-                        kwargs.get("pfac4")
+                        **kwargs,
                     ),
                     Field(
                         "pfac5",
                         float,
                         40,
                         10,
-                        kwargs.get("pfac5")
+                        **kwargs,
                     ),
                     Field(
                         "pfac6",
                         float,
                         50,
                         10,
-                        kwargs.get("pfac6")
+                        **kwargs,
                     ),
                     Field(
                         "pfac7",
                         float,
                         60,
                         10,
-                        kwargs.get("pfac7")
+                        **kwargs,
                     ),
                     Field(
                         "pfac8",
                         float,
                         70,
                         10,
-                        kwargs.get("pfac8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -227,28 +226,28 @@ class ContactSpg(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("fs")
+                        **kwargs,
                     ),
                     Field(
                         "fd",
                         float,
                         10,
                         10,
-                        kwargs.get("fd")
+                        **kwargs,
                     ),
                     Field(
                         "dc",
                         float,
                         20,
                         10,
-                        kwargs.get("dc")
+                        **kwargs,
                     ),
                     Field(
                         "nfreq",
                         float,
                         30,
                         10,
-                        kwargs.get("nfreq")
+                        **kwargs,
                     ),
                 ],
             ),

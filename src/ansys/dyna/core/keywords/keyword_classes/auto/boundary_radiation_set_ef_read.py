@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryRadiationSetEfRead(KeywordBase):
@@ -41,28 +40,30 @@ class BoundaryRadiationSetEfRead(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ssid")
+                        **kwargs,
                     ),
                     Field(
                         "nmat",
                         int,
                         10,
                         10,
-                        kwargs.get("nmat")
+                        **kwargs,
                     ),
                     Field(
                         "npht",
                         int,
                         20,
                         10,
-                        kwargs.get("npht", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "errmax",
                         int,
                         30,
                         10,
-                        kwargs.get("errmax", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

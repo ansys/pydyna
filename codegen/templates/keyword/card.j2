@@ -94,12 +94,13 @@
                         {{field.width}},
 {% if field.default is not none %}
 {% if field.readonly %}
-                        {{field.default}}
+                        Field.ReadOnlyValue({{field.default}}),
 {% else %}
-                        kwargs.get("{{field.name}}", {{field.default}} if use_lspp_defaults() else None)
+                        {{field.default}},
 {% endif %}
+                        **kwargs,
 {% else %}
-                        kwargs.get("{{field.name}}")
+                        **kwargs,
 {% endif %}
                     ),
 {% endfor %}

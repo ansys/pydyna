@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryDetInitiation(KeywordBase):
@@ -41,56 +40,56 @@ class ChemistryDetInitiation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "compid",
                         int,
                         10,
                         10,
-                        kwargs.get("compid")
+                        **kwargs,
                     ),
                     Field(
                         "nmesh",
                         int,
                         20,
                         10,
-                        kwargs.get("nmesh")
+                        **kwargs,
                     ),
                     Field(
                         "dlen",
                         float,
                         30,
                         10,
-                        kwargs.get("dlen")
+                        **kwargs,
                     ),
                     Field(
                         "cfl",
                         float,
                         40,
                         10,
-                        kwargs.get("cfl")
+                        **kwargs,
                     ),
                     Field(
                         "tlimit",
                         float,
                         50,
                         10,
-                        kwargs.get("tlimit")
+                        **kwargs,
                     ),
                     Field(
                         "xyzd",
                         float,
                         60,
                         10,
-                        kwargs.get("xyzd")
+                        **kwargs,
                     ),
                     Field(
                         "detdir",
                         int,
                         70,
                         10,
-                        kwargs.get("detdir")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,7 +100,7 @@ class ChemistryDetInitiation(KeywordBase):
                         str,
                         0,
                         256,
-                        kwargs.get("file")
+                        **kwargs,
                     ),
                 ],
             ),

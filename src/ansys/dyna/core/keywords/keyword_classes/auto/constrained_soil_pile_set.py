@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedSoilPileSet(KeywordBase):
@@ -41,56 +40,58 @@ class ConstrainedSoilPileSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pbsid")
+                        **kwargs,
                     ),
                     Field(
                         "diam",
                         float,
                         10,
                         10,
-                        kwargs.get("diam")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "pidns",
                         int,
                         30,
                         10,
-                        kwargs.get("pidns")
+                        **kwargs,
                     ),
                     Field(
                         "pidnb",
                         int,
                         40,
                         10,
-                        kwargs.get("pidnb")
+                        **kwargs,
                     ),
                     Field(
                         "error",
                         int,
                         50,
                         10,
-                        kwargs.get("error", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nring",
                         int,
                         60,
                         10,
-                        kwargs.get("nring", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nringb",
                         int,
                         70,
                         10,
-                        kwargs.get("nringb")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +102,56 @@ class ConstrainedSoilPileSet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "acu",
                         float,
                         10,
                         10,
-                        kwargs.get("acu")
+                        **kwargs,
                     ),
                     Field(
                         "bcu",
                         float,
                         20,
                         10,
-                        kwargs.get("bcu")
+                        **kwargs,
                     ),
                     Field(
                         "lccu",
                         int,
                         30,
                         10,
-                        kwargs.get("lccu")
+                        **kwargs,
                     ),
                     Field(
                         "astiffs",
                         float,
                         40,
                         10,
-                        kwargs.get("astiffs")
+                        **kwargs,
                     ),
                     Field(
                         "bstiffs",
                         float,
                         50,
                         10,
-                        kwargs.get("bstiffs")
+                        **kwargs,
                     ),
                     Field(
                         "astiffb",
                         float,
                         60,
                         10,
-                        kwargs.get("astiffb")
+                        **kwargs,
                     ),
                     Field(
                         "zref",
                         float,
                         70,
                         10,
-                        kwargs.get("zref")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,56 +162,57 @@ class ConstrainedSoilPileSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("kbcon")
+                        **kwargs,
                     ),
                     Field(
                         "kbcu",
                         float,
                         10,
                         10,
-                        kwargs.get("kbcu")
+                        **kwargs,
                     ),
                     Field(
                         "kbsx",
                         float,
                         20,
                         10,
-                        kwargs.get("kbsx")
+                        **kwargs,
                     ),
                     Field(
                         "kbsy",
                         float,
                         30,
                         10,
-                        kwargs.get("kbsy")
+                        **kwargs,
                     ),
                     Field(
                         "kbsz",
                         float,
                         40,
                         10,
-                        kwargs.get("kbsz")
+                        **kwargs,
                     ),
                     Field(
                         "bstfac",
                         float,
                         50,
                         10,
-                        kwargs.get("bstfac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "bhyper",
                         float,
                         60,
                         10,
-                        kwargs.get("bhyper")
+                        **kwargs,
                     ),
                     Field(
                         "blc",
                         int,
                         70,
                         10,
-                        kwargs.get("blc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -221,56 +223,57 @@ class ConstrainedSoilPileSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("kvcon")
+                        **kwargs,
                     ),
                     Field(
                         "kvcu",
                         float,
                         10,
                         10,
-                        kwargs.get("kvcu")
+                        **kwargs,
                     ),
                     Field(
                         "kvsx",
                         float,
                         20,
                         10,
-                        kwargs.get("kvsx")
+                        **kwargs,
                     ),
                     Field(
                         "kvsy",
                         float,
                         30,
                         10,
-                        kwargs.get("kvsy")
+                        **kwargs,
                     ),
                     Field(
                         "kvsz",
                         float,
                         40,
                         10,
-                        kwargs.get("kvsz")
+                        **kwargs,
                     ),
                     Field(
                         "vstfac",
                         float,
                         50,
                         10,
-                        kwargs.get("vstfac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "vhyper",
                         float,
                         60,
                         10,
-                        kwargs.get("vhyper")
+                        **kwargs,
                     ),
                     Field(
                         "vlc",
                         int,
                         70,
                         10,
-                        kwargs.get("vlc")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -281,56 +284,57 @@ class ConstrainedSoilPileSet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("khcon")
+                        **kwargs,
                     ),
                     Field(
                         "khcu",
                         float,
                         10,
                         10,
-                        kwargs.get("khcu")
+                        **kwargs,
                     ),
                     Field(
                         "khsx",
                         float,
                         20,
                         10,
-                        kwargs.get("khsx")
+                        **kwargs,
                     ),
                     Field(
                         "khsy",
                         float,
                         30,
                         10,
-                        kwargs.get("khsy")
+                        **kwargs,
                     ),
                     Field(
                         "khsz",
                         float,
                         40,
                         10,
-                        kwargs.get("khsz")
+                        **kwargs,
                     ),
                     Field(
                         "hstfac",
                         float,
                         50,
                         10,
-                        kwargs.get("hstfac", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "hhyper",
                         float,
                         60,
                         10,
-                        kwargs.get("hhyper")
+                        **kwargs,
                     ),
                     Field(
                         "hlc",
                         int,
                         70,
                         10,
-                        kwargs.get("hlc")
+                        **kwargs,
                     ),
                 ],
             ),

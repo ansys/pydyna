@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,42 +45,46 @@ class SensorControl(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cntlid")
+                        **kwargs,
                     ),
                     Field(
                         "type",
                         str,
                         10,
                         10,
-                        kwargs.get("type", "AIRBAG" if use_lspp_defaults() else None)
+                        "AIRBAG",
+                        **kwargs,
                     ),
                     Field(
                         "typeid",
                         int,
                         20,
                         10,
-                        kwargs.get("typeid")
+                        **kwargs,
                     ),
                     Field(
                         "timeoff",
                         int,
                         30,
                         10,
-                        kwargs.get("timeoff", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nrep",
                         int,
                         40,
                         10,
-                        kwargs.get("nrep", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "estyp",
                         str,
                         50,
                         10,
-                        kwargs.get("estyp", "BEAM" if use_lspp_defaults() else None)
+                        "BEAM",
+                        **kwargs,
                     ),
                 ],
             ),
@@ -92,56 +95,57 @@ class SensorControl(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("initstt", "ON" if use_lspp_defaults() else None)
+                        "ON",
+                        **kwargs,
                     ),
                     Field(
                         "swit1",
                         int,
                         10,
                         10,
-                        kwargs.get("swit1")
+                        **kwargs,
                     ),
                     Field(
                         "swit2",
                         int,
                         20,
                         10,
-                        kwargs.get("swit2")
+                        **kwargs,
                     ),
                     Field(
                         "swit3",
                         int,
                         30,
                         10,
-                        kwargs.get("swit3")
+                        **kwargs,
                     ),
                     Field(
                         "swit4",
                         int,
                         40,
                         10,
-                        kwargs.get("swit4")
+                        **kwargs,
                     ),
                     Field(
                         "swit5",
                         int,
                         50,
                         10,
-                        kwargs.get("swit5")
+                        **kwargs,
                     ),
                     Field(
                         "swit6",
                         int,
                         60,
                         10,
-                        kwargs.get("swit6")
+                        **kwargs,
                     ),
                     Field(
                         "swit7",
                         int,
                         70,
                         10,
-                        kwargs.get("swit7")
+                        **kwargs,
                     ),
                 ],
             ),

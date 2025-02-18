@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class CeseInitialChemistryElement(KeywordBase):
@@ -41,14 +40,14 @@ class CeseInitialChemistryElement(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("chemid")
+                        **kwargs,
                     ),
                     Field(
                         "compid",
                         int,
                         10,
                         10,
-                        kwargs.get("compid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,49 +58,49 @@ class CeseInitialChemistryElement(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("uic")
+                        **kwargs,
                     ),
                     Field(
                         "vic",
                         float,
                         10,
                         10,
-                        kwargs.get("vic")
+                        **kwargs,
                     ),
                     Field(
                         "wic",
                         float,
                         20,
                         10,
-                        kwargs.get("wic")
+                        **kwargs,
                     ),
                     Field(
                         "rhoic",
                         float,
                         30,
                         10,
-                        kwargs.get("rhoic")
+                        **kwargs,
                     ),
                     Field(
                         "pic",
                         float,
                         40,
                         10,
-                        kwargs.get("pic")
+                        **kwargs,
                     ),
                     Field(
                         "tic",
                         float,
                         50,
                         10,
-                        kwargs.get("tic")
+                        **kwargs,
                     ),
                     Field(
                         "hic",
                         float,
                         60,
                         10,
-                        kwargs.get("hic")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -112,56 +111,56 @@ class CeseInitialChemistryElement(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ele1")
+                        **kwargs,
                     ),
                     Field(
                         "ele2",
                         int,
                         10,
                         10,
-                        kwargs.get("ele2")
+                        **kwargs,
                     ),
                     Field(
                         "ele3",
                         int,
                         20,
                         10,
-                        kwargs.get("ele3")
+                        **kwargs,
                     ),
                     Field(
                         "ele4",
                         int,
                         30,
                         10,
-                        kwargs.get("ele4")
+                        **kwargs,
                     ),
                     Field(
                         "ele5",
                         int,
                         40,
                         10,
-                        kwargs.get("ele5")
+                        **kwargs,
                     ),
                     Field(
                         "ele6",
                         int,
                         50,
                         10,
-                        kwargs.get("ele6")
+                        **kwargs,
                     ),
                     Field(
                         "ele7",
                         int,
                         60,
                         10,
-                        kwargs.get("ele7")
+                        **kwargs,
                     ),
                     Field(
                         "ele8",
                         int,
                         70,
                         10,
-                        kwargs.get("ele8")
+                        **kwargs,
                     ),
                 ],
             ),

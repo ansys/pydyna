@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,7 +45,8 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("ammsid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -57,56 +57,56 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("ammgid1")
+                        **kwargs,
                     ),
                     Field(
                         "ammgid2",
                         str,
                         10,
                         10,
-                        kwargs.get("ammgid2")
+                        **kwargs,
                     ),
                     Field(
                         "ammgid3",
                         str,
                         20,
                         10,
-                        kwargs.get("ammgid3")
+                        **kwargs,
                     ),
                     Field(
                         "ammgid4",
                         str,
                         30,
                         10,
-                        kwargs.get("ammgid4")
+                        **kwargs,
                     ),
                     Field(
                         "ammgid5",
                         str,
                         40,
                         10,
-                        kwargs.get("ammgid5")
+                        **kwargs,
                     ),
                     Field(
                         "ammgid6",
                         str,
                         50,
                         10,
-                        kwargs.get("ammgid6")
+                        **kwargs,
                     ),
                     Field(
                         "ammgid7",
                         str,
                         60,
                         10,
-                        kwargs.get("ammgid7")
+                        **kwargs,
                     ),
                     Field(
                         "ammgid8",
                         str,
                         70,
                         10,
-                        kwargs.get("ammgid8")
+                        **kwargs,
                     ),
                 ],
             ),

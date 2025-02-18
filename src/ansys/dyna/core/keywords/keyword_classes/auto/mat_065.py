@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,57 @@ class Mat065(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         20,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "e0",
                         float,
                         30,
                         10,
-                        kwargs.get("e0")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         40,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "troom",
                         float,
                         50,
                         10,
-                        kwargs.get("troom")
+                        **kwargs,
                     ),
                     Field(
                         "pc",
                         float,
                         60,
                         10,
-                        kwargs.get("pc")
+                        **kwargs,
                     ),
                     Field(
                         "spall",
                         float,
                         70,
                         10,
-                        kwargs.get("spall", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +106,57 @@ class Mat065(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         10,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         float,
                         20,
                         10,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                     Field(
                         "c4",
                         float,
                         30,
                         10,
-                        kwargs.get("c4")
+                        **kwargs,
                     ),
                     Field(
                         "c5",
                         float,
                         40,
                         10,
-                        kwargs.get("c5")
+                        **kwargs,
                     ),
                     Field(
                         "c6",
                         float,
                         50,
                         10,
-                        kwargs.get("c6")
+                        **kwargs,
                     ),
                     Field(
                         "efail",
                         float,
                         60,
                         10,
-                        kwargs.get("efail")
+                        **kwargs,
                     ),
                     Field(
                         "vp",
                         float,
                         70,
                         10,
-                        kwargs.get("vp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,56 +167,56 @@ class Mat065(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "b2",
                         float,
                         10,
                         10,
-                        kwargs.get("b2")
+                        **kwargs,
                     ),
                     Field(
                         "b3",
                         float,
                         20,
                         10,
-                        kwargs.get("b3")
+                        **kwargs,
                     ),
                     Field(
                         "g1",
                         float,
                         30,
                         10,
-                        kwargs.get("g1")
+                        **kwargs,
                     ),
                     Field(
                         "g2",
                         float,
                         40,
                         10,
-                        kwargs.get("g2")
+                        **kwargs,
                     ),
                     Field(
                         "g3",
                         float,
                         50,
                         10,
-                        kwargs.get("g3")
+                        **kwargs,
                     ),
                     Field(
                         "g4",
                         float,
                         60,
                         10,
-                        kwargs.get("g4")
+                        **kwargs,
                     ),
                     Field(
                         "bulk",
                         float,
                         70,
                         10,
-                        kwargs.get("bulk")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -226,7 +227,8 @@ class Mat065(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("m", 0.5 if use_lspp_defaults() else None)
+                        0.5,
+                        **kwargs,
                     ),
                 ],
             ),

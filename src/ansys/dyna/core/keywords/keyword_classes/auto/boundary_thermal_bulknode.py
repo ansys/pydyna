@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryThermalBulknode(KeywordBase):
@@ -41,56 +40,56 @@ class BoundaryThermalBulknode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         10,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "nbnseg",
                         int,
                         20,
                         10,
-                        kwargs.get("nbnseg")
+                        **kwargs,
                     ),
                     Field(
                         "vol",
                         float,
                         30,
                         10,
-                        kwargs.get("vol")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         40,
                         10,
-                        kwargs.get("lcid")
+                        **kwargs,
                     ),
                     Field(
                         "h",
                         float,
                         50,
                         10,
-                        kwargs.get("h")
+                        **kwargs,
                     ),
                     Field(
                         "aexp",
                         float,
                         60,
                         10,
-                        kwargs.get("aexp")
+                        **kwargs,
                     ),
                     Field(
                         "bexp",
                         float,
                         70,
                         10,
-                        kwargs.get("bexp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,28 +100,28 @@ class BoundaryThermalBulknode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         10,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n3",
                         int,
                         20,
                         10,
-                        kwargs.get("n3")
+                        **kwargs,
                     ),
                     Field(
                         "n4",
                         int,
                         30,
                         10,
-                        kwargs.get("n4")
+                        **kwargs,
                     ),
                 ],
             ),

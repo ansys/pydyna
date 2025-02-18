@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEpFiberinitial(KeywordBase):
@@ -41,35 +40,36 @@ class EmEpFiberinitial(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "partid",
                         int,
                         10,
                         10,
-                        kwargs.get("partid")
+                        **kwargs,
                     ),
                     Field(
                         "stype",
                         int,
                         20,
                         10,
-                        kwargs.get("stype", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "ssid1",
                         int,
                         30,
                         10,
-                        kwargs.get("ssid1")
+                        **kwargs,
                     ),
                     Field(
                         "ssid0",
                         int,
                         40,
                         10,
-                        kwargs.get("ssid0")
+                        **kwargs,
                     ),
                 ],
             ),

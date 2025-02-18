@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,49 +45,49 @@ class Mat101(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "ratesf",
                         float,
                         40,
                         10,
-                        kwargs.get("ratesf")
+                        **kwargs,
                     ),
                     Field(
                         "edot0",
                         float,
                         50,
                         10,
-                        kwargs.get("edot0")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         60,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -99,28 +98,28 @@ class Mat101(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcss")
+                        **kwargs,
                     ),
                     Field(
                         "lcfeps",
                         int,
                         10,
                         10,
-                        kwargs.get("lcfeps")
+                        **kwargs,
                     ),
                     Field(
                         "lcfsig",
                         int,
                         20,
                         10,
-                        kwargs.get("lcfsig")
+                        **kwargs,
                     ),
                     Field(
                         "lce",
                         int,
                         30,
                         10,
-                        kwargs.get("lce")
+                        **kwargs,
                     ),
                 ],
             ),

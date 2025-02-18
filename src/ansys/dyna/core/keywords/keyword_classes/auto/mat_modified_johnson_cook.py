@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class MatModifiedJohnsonCook(KeywordBase):
@@ -41,56 +40,56 @@ class MatModifiedJohnsonCook(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         40,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "xsi",
                         float,
                         50,
                         10,
-                        kwargs.get("xsi")
+                        **kwargs,
                     ),
                     Field(
                         "cp",
                         float,
                         60,
                         10,
-                        kwargs.get("cp")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         70,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,42 +100,42 @@ class MatModifiedJohnsonCook(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("e0dot")
+                        **kwargs,
                     ),
                     Field(
                         "tr",
                         float,
                         10,
                         10,
-                        kwargs.get("tr")
+                        **kwargs,
                     ),
                     Field(
                         "tm",
                         float,
                         20,
                         10,
-                        kwargs.get("tm")
+                        **kwargs,
                     ),
                     Field(
                         "t0",
                         float,
                         30,
                         10,
-                        kwargs.get("t0")
+                        **kwargs,
                     ),
                     Field(
                         "flag1",
                         float,
                         40,
                         10,
-                        kwargs.get("flag1")
+                        **kwargs,
                     ),
                     Field(
                         "flag2",
                         float,
                         50,
                         10,
-                        kwargs.get("flag2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -147,35 +146,35 @@ class MatModifiedJohnsonCook(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("a/siga")
+                        **kwargs,
                     ),
                     Field(
                         "b/b",
                         float,
                         10,
                         10,
-                        kwargs.get("b/b")
+                        **kwargs,
                     ),
                     Field(
                         "n/beta0",
                         float,
                         20,
                         10,
-                        kwargs.get("n/beta0")
+                        **kwargs,
                     ),
                     Field(
                         "c/beta1",
                         float,
                         30,
                         10,
-                        kwargs.get("c/beta1")
+                        **kwargs,
                     ),
                     Field(
                         "m/na",
                         float,
                         40,
                         10,
-                        kwargs.get("m/na")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -186,28 +185,28 @@ class MatModifiedJohnsonCook(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("q1/a")
+                        **kwargs,
                     ),
                     Field(
                         "c1/n",
                         float,
                         10,
                         10,
-                        kwargs.get("c1/n")
+                        **kwargs,
                     ),
                     Field(
                         "q2/alpha0",
                         float,
                         20,
                         10,
-                        kwargs.get("q2/alpha0")
+                        **kwargs,
                     ),
                     Field(
                         "c2/alpha1",
                         float,
                         30,
                         10,
-                        kwargs.get("c2/alpha1")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -218,49 +217,49 @@ class MatModifiedJohnsonCook(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dc/dc")
+                        **kwargs,
                     ),
                     Field(
                         "pd/wc",
                         float,
                         10,
                         10,
-                        kwargs.get("pd/wc")
+                        **kwargs,
                     ),
                     Field(
                         "d1/na",
                         float,
                         20,
                         10,
-                        kwargs.get("d1/na")
+                        **kwargs,
                     ),
                     Field(
                         "d2/na",
                         float,
                         30,
                         10,
-                        kwargs.get("d2/na")
+                        **kwargs,
                     ),
                     Field(
                         "d3/na",
                         float,
                         40,
                         10,
-                        kwargs.get("d3/na")
+                        **kwargs,
                     ),
                     Field(
                         "d4/na",
                         float,
                         50,
                         10,
-                        kwargs.get("d4/na")
+                        **kwargs,
                     ),
                     Field(
                         "d5/na",
                         float,
                         60,
                         10,
-                        kwargs.get("d5/na")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -271,14 +270,14 @@ class MatModifiedJohnsonCook(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tc")
+                        **kwargs,
                     ),
                     Field(
                         "tauc",
                         float,
                         10,
                         10,
-                        kwargs.get("tauc")
+                        **kwargs,
                     ),
                 ],
             ),

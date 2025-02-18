@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseControlSolver(KeywordBase):
@@ -41,42 +40,46 @@ class DualceseControlSolver(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("eqns", "EULER" if use_lspp_defaults() else None)
+                        "EULER",
+                        **kwargs,
                     ),
                     Field(
                         "igeom",
                         str,
                         10,
                         10,
-                        kwargs.get("igeom")
+                        **kwargs,
                     ),
                     Field(
                         "iframe",
                         str,
                         20,
                         10,
-                        kwargs.get("iframe", "FIXED" if use_lspp_defaults() else None)
+                        "FIXED",
+                        **kwargs,
                     ),
                     Field(
                         "mixtype",
                         str,
                         30,
                         10,
-                        kwargs.get("mixtype")
+                        **kwargs,
                     ),
                     Field(
                         "idc",
                         float,
                         40,
                         10,
-                        kwargs.get("idc", 0.25 if use_lspp_defaults() else None)
+                        0.25,
+                        **kwargs,
                     ),
                     Field(
                         "isnan",
                         int,
                         50,
                         10,
-                        kwargs.get("isnan", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

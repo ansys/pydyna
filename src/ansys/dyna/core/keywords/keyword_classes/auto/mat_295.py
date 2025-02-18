@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card_group import DuplicateCardGroup
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -47,21 +46,21 @@ class Mat295(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "rho",
                         float,
                         10,
                         10,
-                        kwargs.get("rho")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         20,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -72,28 +71,29 @@ class Mat295(KeywordBase):
                         str,
                         0,
                         10,
-                        "ISO"
+                        Field.ReadOnlyValue("ISO"),
+                        **kwargs,
                     ),
                     Field(
                         "itype",
                         int,
                         10,
                         10,
-                        kwargs.get("itype")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         20,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "nu",
                         float,
                         30,
                         10,
-                        kwargs.get("nu")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -104,56 +104,56 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("mu1")
+                        **kwargs,
                     ),
                     Field(
                         "mu2",
                         float,
                         10,
                         10,
-                        kwargs.get("mu2")
+                        **kwargs,
                     ),
                     Field(
                         "mu3",
                         float,
                         20,
                         10,
-                        kwargs.get("mu3")
+                        **kwargs,
                     ),
                     Field(
                         "mu4",
                         float,
                         30,
                         10,
-                        kwargs.get("mu4")
+                        **kwargs,
                     ),
                     Field(
                         "mu5",
                         float,
                         40,
                         10,
-                        kwargs.get("mu5")
+                        **kwargs,
                     ),
                     Field(
                         "mu6",
                         float,
                         50,
                         10,
-                        kwargs.get("mu6")
+                        **kwargs,
                     ),
                     Field(
                         "mu7",
                         float,
                         60,
                         10,
-                        kwargs.get("mu7")
+                        **kwargs,
                     ),
                     Field(
                         "mu8",
                         float,
                         70,
                         10,
-                        kwargs.get("mu8")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.itype and abs(self.itype) == 1,
@@ -165,56 +165,56 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("alpha1")
+                        **kwargs,
                     ),
                     Field(
                         "alpha2",
                         float,
                         10,
                         10,
-                        kwargs.get("alpha2")
+                        **kwargs,
                     ),
                     Field(
                         "alpha3",
                         float,
                         20,
                         10,
-                        kwargs.get("alpha3")
+                        **kwargs,
                     ),
                     Field(
                         "alpha4",
                         float,
                         30,
                         10,
-                        kwargs.get("alpha4")
+                        **kwargs,
                     ),
                     Field(
                         "alpha5",
                         float,
                         40,
                         10,
-                        kwargs.get("alpha5")
+                        **kwargs,
                     ),
                     Field(
                         "alpha6",
                         float,
                         50,
                         10,
-                        kwargs.get("alpha6")
+                        **kwargs,
                     ),
                     Field(
                         "alpha7",
                         float,
                         60,
                         10,
-                        kwargs.get("alpha7")
+                        **kwargs,
                     ),
                     Field(
                         "alpha8",
                         float,
                         70,
                         10,
-                        kwargs.get("alpha8")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.itype and abs(self.itype) == 1,
@@ -226,21 +226,21 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         10,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         float,
                         20,
                         10,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.itype and abs(self.itype) == 2,
@@ -252,14 +252,14 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k1")
+                        **kwargs,
                     ),
                     Field(
                         "k2",
                         float,
                         10,
                         10,
-                        kwargs.get("k2")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.itype and abs(self.itype) == 3,
@@ -271,28 +271,29 @@ class Mat295(KeywordBase):
                         str,
                         0,
                         10,
-                        "ANISO"
+                        Field.ReadOnlyValue("ANISO"),
+                        **kwargs,
                     ),
                     Field(
                         "atype",
                         int,
                         10,
                         10,
-                        kwargs.get("atype")
+                        **kwargs,
                     ),
                     Field(
                         "intype",
                         int,
                         20,
                         10,
-                        kwargs.get("intype")
+                        **kwargs,
                     ),
                     Field(
                         "nf",
                         int,
                         30,
                         10,
-                        kwargs.get("nf")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1,
@@ -399,14 +400,14 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k1")
+                        **kwargs,
                     ),
                     Field(
                         "k2",
                         float,
                         10,
                         10,
-                        kwargs.get("k2")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1 and self.intype == 1,
@@ -418,56 +419,62 @@ class Mat295(KeywordBase):
                         str,
                         0,
                         10,
-                        "ACTIVE"
+                        Field.ReadOnlyValue("ACTIVE"),
+                        **kwargs,
                     ),
                     Field(
                         "actype",
                         int,
                         10,
                         10,
-                        kwargs.get("actype")
+                        **kwargs,
                     ),
                     Field(
                         "acdir",
                         int,
                         20,
                         10,
-                        kwargs.get("acdir", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "acid",
                         int,
                         30,
                         10,
-                        kwargs.get("acid")
+                        **kwargs,
                     ),
                     Field(
                         "acthr",
                         float,
                         40,
                         10,
-                        kwargs.get("acthr", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sf",
                         float,
                         50,
                         10,
-                        kwargs.get("sf", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "ss",
                         float,
                         60,
                         10,
-                        kwargs.get("ss", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sn",
                         float,
                         70,
                         10,
-                        kwargs.get("sn", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1 and self.actype in [1,2,3,4,5],
@@ -479,56 +486,56 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t0")
+                        **kwargs,
                     ),
                     Field(
                         "ca2ion",
                         float,
                         10,
                         10,
-                        kwargs.get("ca2ion")
+                        **kwargs,
                     ),
                     Field(
                         "ca2ionm",
                         float,
                         20,
                         10,
-                        kwargs.get("ca2ionm")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         30,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "taumax",
                         float,
                         40,
                         10,
-                        kwargs.get("taumax")
+                        **kwargs,
                     ),
                     Field(
                         "stf",
                         float,
                         50,
                         10,
-                        kwargs.get("stf")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         60,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "l0",
                         float,
                         70,
                         10,
-                        kwargs.get("l0")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1 and self.actype in [1,2],
@@ -540,28 +547,28 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("l")
+                        **kwargs,
                     ),
                     Field(
                         "dtmax",
                         float,
                         10,
                         10,
-                        kwargs.get("dtmax")
+                        **kwargs,
                     ),
                     Field(
                         "mr",
                         float,
                         20,
                         10,
-                        kwargs.get("mr")
+                        **kwargs,
                     ),
                     Field(
                         "tr",
                         float,
                         30,
                         10,
-                        kwargs.get("tr")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1 and self.actype == 1,
@@ -573,14 +580,14 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("l")
+                        **kwargs,
                     ),
                     Field(
                         "eta",
                         float,
                         10,
                         10,
-                        kwargs.get("eta")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1 and self.actype == 2,
@@ -592,56 +599,56 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t0")
+                        **kwargs,
                     ),
                     Field(
                         "ca2ion",
                         float,
                         10,
                         10,
-                        kwargs.get("ca2ion")
+                        **kwargs,
                     ),
                     Field(
                         "ca2ion50",
                         float,
                         20,
                         10,
-                        kwargs.get("ca2ion50")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         30,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "sigmax",
                         float,
                         40,
                         10,
-                        kwargs.get("sigmax")
+                        **kwargs,
                     ),
                     Field(
                         "f",
                         float,
                         50,
                         10,
-                        kwargs.get("f")
+                        **kwargs,
                     ),
                     Field(
                         "l",
                         float,
                         60,
                         10,
-                        kwargs.get("l")
+                        **kwargs,
                     ),
                     Field(
                         "eta",
                         float,
                         70,
                         10,
-                        kwargs.get("eta")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1 and self.actype == 3,
@@ -653,56 +660,56 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("t0")
+                        **kwargs,
                     ),
                     Field(
                         "ca2ion50",
                         float,
                         10,
                         10,
-                        kwargs.get("ca2ion50")
+                        **kwargs,
                     ),
                     Field(
                         "ca2ionmax",
                         float,
                         20,
                         10,
-                        kwargs.get("ca2ionmax")
+                        **kwargs,
                     ),
                     Field(
                         "n",
                         float,
                         30,
                         10,
-                        kwargs.get("n")
+                        **kwargs,
                     ),
                     Field(
                         "sigmax",
                         float,
                         40,
                         10,
-                        kwargs.get("sigmax")
+                        **kwargs,
                     ),
                     Field(
                         "f",
                         float,
                         50,
                         10,
-                        kwargs.get("f")
+                        **kwargs,
                     ),
                     Field(
                         "ca2ion0",
                         float,
                         60,
                         10,
-                        kwargs.get("ca2ion0")
+                        **kwargs,
                     ),
                     Field(
                         "tca",
                         float,
                         70,
                         10,
-                        kwargs.get("tca")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1 and self.actype == 4,
@@ -714,14 +721,14 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("l")
+                        **kwargs,
                     ),
                     Field(
                         "eta",
                         float,
                         10,
                         10,
-                        kwargs.get("eta")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1 and self.actype == 4,
@@ -733,28 +740,28 @@ class Mat295(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fseid")
+                        **kwargs,
                     ),
                     Field(
                         "flid",
                         int,
                         10,
                         10,
-                        kwargs.get("flid")
+                        **kwargs,
                     ),
                     Field(
                         "fvid",
                         int,
                         20,
                         10,
-                        kwargs.get("fvid")
+                        **kwargs,
                     ),
                     Field(
                         "alphaid",
                         int,
                         30,
                         10,
-                        kwargs.get("alphaid")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1 and self.actype == 5,
@@ -766,56 +773,57 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                     Field(
                         "macf",
                         int,
                         60,
                         10,
-                        kwargs.get("macf", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1,
@@ -827,56 +835,56 @@ class Mat295(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "ref",
                         float,
                         70,
                         10,
-                        kwargs.get("ref")
+                        **kwargs,
                     ),
                 ],
                 lambda: self.atype and abs(self.atype) == 1,

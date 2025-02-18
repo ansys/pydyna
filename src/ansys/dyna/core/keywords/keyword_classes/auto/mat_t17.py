@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,57 @@ class MatT17(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("tmid")
+                        **kwargs,
                     ),
                     Field(
                         "nchsp",
                         int,
                         10,
                         10,
-                        kwargs.get("nchsp")
+                        **kwargs,
                     ),
                     Field(
                         "nchrx",
                         int,
                         20,
                         10,
-                        kwargs.get("nchrx")
+                        **kwargs,
                     ),
                     Field(
                         "icend",
                         int,
                         30,
                         10,
-                        kwargs.get("icend")
+                        **kwargs,
                     ),
                     Field(
                         "cend",
                         float,
                         40,
                         10,
-                        kwargs.get("cend")
+                        **kwargs,
                     ),
                     Field(
                         "gasc",
                         float,
                         50,
                         10,
-                        kwargs.get("gasc")
+                        **kwargs,
                     ),
                     Field(
                         "fid",
                         int,
                         60,
                         10,
-                        kwargs.get("fid")
+                        **kwargs,
                     ),
                     Field(
                         "mf",
                         int,
                         70,
                         10,
-                        kwargs.get("mf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,49 +106,50 @@ class MatT17(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("aopt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "xp",
                         float,
                         10,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         20,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         30,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         40,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         50,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         60,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -159,21 +160,21 @@ class MatT17(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         10,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         20,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -184,42 +185,42 @@ class MatT17(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rhof")
+                        **kwargs,
                     ),
                     Field(
                         "lccf",
                         int,
                         10,
                         10,
-                        kwargs.get("lccf")
+                        **kwargs,
                     ),
                     Field(
                         "lck1f",
                         int,
                         20,
                         10,
-                        kwargs.get("lck1f")
+                        **kwargs,
                     ),
                     Field(
                         "lck2f",
                         float,
                         30,
                         10,
-                        kwargs.get("lck2f")
+                        **kwargs,
                     ),
                     Field(
                         "lck3f",
                         float,
                         40,
                         10,
-                        kwargs.get("lck3f")
+                        **kwargs,
                     ),
                     Field(
                         "vff",
                         float,
                         50,
                         10,
-                        kwargs.get("vff")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -230,49 +231,49 @@ class MatT17(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rhoi")
+                        **kwargs,
                     ),
                     Field(
                         "lcci",
                         int,
                         10,
                         10,
-                        kwargs.get("lcci")
+                        **kwargs,
                     ),
                     Field(
                         "lck1i",
                         int,
                         20,
                         10,
-                        kwargs.get("lck1i")
+                        **kwargs,
                     ),
                     Field(
                         "lck2i",
                         int,
                         30,
                         10,
-                        kwargs.get("lck2i")
+                        **kwargs,
                     ),
                     Field(
                         "lck3i",
                         int,
                         40,
                         10,
-                        kwargs.get("lck3i")
+                        **kwargs,
                     ),
                     Field(
                         "vfi",
                         float,
                         50,
                         10,
-                        kwargs.get("vfi")
+                        **kwargs,
                     ),
                     Field(
                         "mwi",
                         float,
                         60,
                         10,
-                        kwargs.get("mwi")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -283,56 +284,56 @@ class MatT17(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rci1")
+                        **kwargs,
                     ),
                     Field(
                         "rci2",
                         float,
                         10,
                         10,
-                        kwargs.get("rci2")
+                        **kwargs,
                     ),
                     Field(
                         "rci3",
                         float,
                         20,
                         10,
-                        kwargs.get("rci3")
+                        **kwargs,
                     ),
                     Field(
                         "rci4",
                         float,
                         30,
                         10,
-                        kwargs.get("rci4")
+                        **kwargs,
                     ),
                     Field(
                         "rci5",
                         float,
                         40,
                         10,
-                        kwargs.get("rci5")
+                        **kwargs,
                     ),
                     Field(
                         "rci6",
                         float,
                         50,
                         10,
-                        kwargs.get("rci6")
+                        **kwargs,
                     ),
                     Field(
                         "rci7",
                         float,
                         60,
                         10,
-                        kwargs.get("rci7")
+                        **kwargs,
                     ),
                     Field(
                         "rci8",
                         float,
                         70,
                         10,
-                        kwargs.get("rci8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -343,56 +344,56 @@ class MatT17(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rxi1")
+                        **kwargs,
                     ),
                     Field(
                         "rxi2",
                         float,
                         10,
                         10,
-                        kwargs.get("rxi2")
+                        **kwargs,
                     ),
                     Field(
                         "rxi3",
                         float,
                         20,
                         10,
-                        kwargs.get("rxi3")
+                        **kwargs,
                     ),
                     Field(
                         "rxi4",
                         float,
                         30,
                         10,
-                        kwargs.get("rxi4")
+                        **kwargs,
                     ),
                     Field(
                         "rxi5",
                         float,
                         40,
                         10,
-                        kwargs.get("rxi5")
+                        **kwargs,
                     ),
                     Field(
                         "rxi6",
                         float,
                         50,
                         10,
-                        kwargs.get("rxi6")
+                        **kwargs,
                     ),
                     Field(
                         "rxi7",
                         float,
                         60,
                         10,
-                        kwargs.get("rxi7")
+                        **kwargs,
                     ),
                     Field(
                         "rxi8",
                         float,
                         70,
                         10,
-                        kwargs.get("rxi8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -403,56 +404,56 @@ class MatT17(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lczi1")
+                        **kwargs,
                     ),
                     Field(
                         "lczi2",
                         float,
                         10,
                         10,
-                        kwargs.get("lczi2")
+                        **kwargs,
                     ),
                     Field(
                         "lczi3",
                         float,
                         20,
                         10,
-                        kwargs.get("lczi3")
+                        **kwargs,
                     ),
                     Field(
                         "lczi4",
                         float,
                         30,
                         10,
-                        kwargs.get("lczi4")
+                        **kwargs,
                     ),
                     Field(
                         "lczi5",
                         float,
                         40,
                         10,
-                        kwargs.get("lczi5")
+                        **kwargs,
                     ),
                     Field(
                         "lczi6",
                         float,
                         50,
                         10,
-                        kwargs.get("lczi6")
+                        **kwargs,
                     ),
                     Field(
                         "lczi7",
                         float,
                         60,
                         10,
-                        kwargs.get("lczi7")
+                        **kwargs,
                     ),
                     Field(
                         "lczi8",
                         float,
                         70,
                         10,
-                        kwargs.get("lczi8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -463,56 +464,56 @@ class MatT17(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lczi1")
+                        **kwargs,
                     ),
                     Field(
                         "lczi2",
                         float,
                         10,
                         10,
-                        kwargs.get("lczi2")
+                        **kwargs,
                     ),
                     Field(
                         "lczi3",
                         float,
                         20,
                         10,
-                        kwargs.get("lczi3")
+                        **kwargs,
                     ),
                     Field(
                         "lczi4",
                         float,
                         30,
                         10,
-                        kwargs.get("lczi4")
+                        **kwargs,
                     ),
                     Field(
                         "lczi5",
                         float,
                         40,
                         10,
-                        kwargs.get("lczi5")
+                        **kwargs,
                     ),
                     Field(
                         "lczi6",
                         float,
                         50,
                         10,
-                        kwargs.get("lczi6")
+                        **kwargs,
                     ),
                     Field(
                         "lczi7",
                         float,
                         60,
                         10,
-                        kwargs.get("lczi7")
+                        **kwargs,
                     ),
                     Field(
                         "lczi8",
                         float,
                         70,
                         10,
-                        kwargs.get("lczi8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -523,56 +524,56 @@ class MatT17(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("lczi1")
+                        **kwargs,
                     ),
                     Field(
                         "lczi2",
                         float,
                         10,
                         10,
-                        kwargs.get("lczi2")
+                        **kwargs,
                     ),
                     Field(
                         "lczi3",
                         float,
                         20,
                         10,
-                        kwargs.get("lczi3")
+                        **kwargs,
                     ),
                     Field(
                         "lczi4",
                         float,
                         30,
                         10,
-                        kwargs.get("lczi4")
+                        **kwargs,
                     ),
                     Field(
                         "lczi5",
                         float,
                         40,
                         10,
-                        kwargs.get("lczi5")
+                        **kwargs,
                     ),
                     Field(
                         "lczi6",
                         float,
                         50,
                         10,
-                        kwargs.get("lczi6")
+                        **kwargs,
                     ),
                     Field(
                         "lczi7",
                         float,
                         60,
                         10,
-                        kwargs.get("lczi7")
+                        **kwargs,
                     ),
                     Field(
                         "lczi8",
                         float,
                         70,
                         10,
-                        kwargs.get("lczi8")
+                        **kwargs,
                     ),
                 ],
             ),

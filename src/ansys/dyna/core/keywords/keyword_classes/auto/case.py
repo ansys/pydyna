@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Case(KeywordBase):
@@ -41,14 +40,14 @@ class Case(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("caseid")
+                        **kwargs,
                     ),
                     Field(
                         "jobid",
                         str,
                         10,
                         70,
-                        kwargs.get("jobid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,7 +58,7 @@ class Case(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("commands")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -70,56 +69,56 @@ class Case(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("scid1")
+                        **kwargs,
                     ),
                     Field(
                         "scid2",
                         int,
                         10,
                         10,
-                        kwargs.get("scid2")
+                        **kwargs,
                     ),
                     Field(
                         "scid3",
                         int,
                         20,
                         10,
-                        kwargs.get("scid3")
+                        **kwargs,
                     ),
                     Field(
                         "scid4",
                         int,
                         30,
                         10,
-                        kwargs.get("scid4")
+                        **kwargs,
                     ),
                     Field(
                         "scid5",
                         int,
                         40,
                         10,
-                        kwargs.get("scid5")
+                        **kwargs,
                     ),
                     Field(
                         "scid6",
                         int,
                         50,
                         10,
-                        kwargs.get("scid6")
+                        **kwargs,
                     ),
                     Field(
                         "scid7",
                         int,
                         60,
                         10,
-                        kwargs.get("scid7")
+                        **kwargs,
                     ),
                     Field(
                         "scid8",
                         int,
                         70,
                         10,
-                        kwargs.get("scid8")
+                        **kwargs,
                     ),
                 ],
             ),

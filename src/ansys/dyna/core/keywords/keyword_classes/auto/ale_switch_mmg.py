@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AleSwitchMmg(KeywordBase):
@@ -41,49 +40,53 @@ class AleSwitchMmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fr_mmg")
+                        **kwargs,
                     ),
                     Field(
                         "to_mmg",
                         int,
                         10,
                         10,
-                        kwargs.get("to_mmg")
+                        **kwargs,
                     ),
                     Field(
                         "idfunc",
                         int,
                         20,
                         10,
-                        kwargs.get("idfunc")
+                        **kwargs,
                     ),
                     Field(
                         "idsegset",
                         int,
                         30,
                         10,
-                        kwargs.get("idsegset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "idsldset",
                         int,
                         40,
                         10,
-                        kwargs.get("idsldset", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ncycseg",
                         int,
                         50,
                         10,
-                        kwargs.get("ncycseg", 50 if use_lspp_defaults() else None)
+                        50,
+                        **kwargs,
                     ),
                     Field(
                         "ncycsld",
                         int,
                         60,
                         10,
-                        kwargs.get("ncycsld", 50 if use_lspp_defaults() else None)
+                        50,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -94,56 +97,64 @@ class AleSwitchMmg(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("var1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var2",
                         int,
                         10,
                         10,
-                        kwargs.get("var2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var3",
                         int,
                         20,
                         10,
-                        kwargs.get("var3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var4",
                         int,
                         30,
                         10,
-                        kwargs.get("var4", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var5",
                         int,
                         40,
                         10,
-                        kwargs.get("var5", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var6",
                         int,
                         50,
                         10,
-                        kwargs.get("var6", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var7",
                         int,
                         60,
                         10,
-                        kwargs.get("var7", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "var8",
                         int,
                         70,
                         10,
-                        kwargs.get("var8", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

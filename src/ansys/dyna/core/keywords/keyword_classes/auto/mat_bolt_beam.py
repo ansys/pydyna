@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatBoltBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "kax",
                         float,
                         20,
                         10,
-                        kwargs.get("kax")
+                        **kwargs,
                     ),
                     Field(
                         "kshr",
                         float,
                         30,
                         10,
-                        kwargs.get("kshr")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         float,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "fpre",
                         float,
                         60,
                         10,
-                        kwargs.get("fpre")
+                        **kwargs,
                     ),
                     Field(
                         "tramp",
                         float,
                         70,
                         10,
-                        kwargs.get("tramp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +105,59 @@ class MatBoltBeam(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcax")
+                        **kwargs,
                     ),
                     Field(
                         "lcshr",
                         int,
                         10,
                         10,
-                        kwargs.get("lcshr")
+                        **kwargs,
                     ),
                     Field(
                         "fric",
                         float,
                         20,
                         10,
-                        kwargs.get("fric")
+                        **kwargs,
                     ),
                     Field(
                         "clear",
                         float,
                         30,
                         10,
-                        kwargs.get("clear")
+                        **kwargs,
                     ),
                     Field(
                         "dafail",
                         float,
                         40,
                         10,
-                        kwargs.get("dafail", 1.E20 if use_lspp_defaults() else None)
+                        1.E20,
+                        **kwargs,
                     ),
                     Field(
                         "drfail",
                         float,
                         50,
                         10,
-                        kwargs.get("drfail", 1.E20 if use_lspp_defaults() else None)
+                        1.E20,
+                        **kwargs,
                     ),
                     Field(
                         "damag",
                         float,
                         60,
                         10,
-                        kwargs.get("damag", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                     Field(
                         "t0pre",
                         float,
                         70,
                         10,
-                        kwargs.get("t0pre")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,21 +168,24 @@ class MatBoltBeam(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dacfail", 1.E20 if use_lspp_defaults() else None)
+                        1.E20,
+                        **kwargs,
                     ),
                     Field(
                         "axshel",
                         int,
                         10,
                         10,
-                        kwargs.get("axshel", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "holshr",
                         int,
                         20,
                         10,
-                        kwargs.get("holshr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

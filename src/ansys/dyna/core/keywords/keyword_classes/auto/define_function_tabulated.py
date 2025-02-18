@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,14 +45,14 @@ class DefineFunctionTabulated(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("fid")
+                        **kwargs,
                     ),
                     Field(
                         "heading",
                         str,
                         10,
                         70,
-                        kwargs.get("heading")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -64,7 +63,7 @@ class DefineFunctionTabulated(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("function")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -75,14 +74,14 @@ class DefineFunctionTabulated(KeywordBase):
                         float,
                         0,
                         20,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "o1",
                         float,
                         20,
                         20,
-                        kwargs.get("o1")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseAle(KeywordBase):
@@ -41,14 +40,14 @@ class DatabaseAle(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("dtout")
+                        **kwargs,
                     ),
                     Field(
                         "setid",
                         int,
                         10,
                         10,
-                        kwargs.get("setid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,56 @@ class DatabaseAle(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("var1")
+                        **kwargs,
                     ),
                     Field(
                         "var2",
                         int,
                         10,
                         10,
-                        kwargs.get("var2")
+                        **kwargs,
                     ),
                     Field(
                         "var3",
                         int,
                         20,
                         10,
-                        kwargs.get("var3")
+                        **kwargs,
                     ),
                     Field(
                         "var4",
                         int,
                         30,
                         10,
-                        kwargs.get("var4")
+                        **kwargs,
                     ),
                     Field(
                         "var5",
                         int,
                         40,
                         10,
-                        kwargs.get("var5")
+                        **kwargs,
                     ),
                     Field(
                         "var6",
                         int,
                         50,
                         10,
-                        kwargs.get("var6")
+                        **kwargs,
                     ),
                     Field(
                         "var7",
                         int,
                         60,
                         10,
-                        kwargs.get("var7")
+                        **kwargs,
                     ),
                     Field(
                         "var8",
                         int,
                         70,
                         10,
-                        kwargs.get("var8")
+                        **kwargs,
                     ),
                 ],
             ),

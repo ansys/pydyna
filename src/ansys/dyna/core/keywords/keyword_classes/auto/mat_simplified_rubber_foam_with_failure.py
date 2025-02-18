@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -47,56 +46,58 @@ class MatSimplifiedRubberFoamWithFailure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "km",
                         float,
                         20,
                         10,
-                        kwargs.get("km")
+                        **kwargs,
                     ),
                     Field(
                         "mu",
                         float,
                         30,
                         10,
-                        kwargs.get("mu", 0.10 if use_lspp_defaults() else None)
+                        0.10,
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         40,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "sigf",
                         float,
                         50,
                         10,
-                        kwargs.get("sigf")
+                        **kwargs,
                     ),
                     Field(
                         "ref",
                         float,
                         60,
                         10,
-                        kwargs.get("ref", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "prten",
                         float,
                         70,
                         10,
-                        kwargs.get("prten")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -107,56 +108,58 @@ class MatSimplifiedRubberFoamWithFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sgl")
+                        **kwargs,
                     ),
                     Field(
                         "sw",
                         float,
                         10,
                         10,
-                        kwargs.get("sw")
+                        **kwargs,
                     ),
                     Field(
                         "st",
                         float,
                         20,
                         10,
-                        kwargs.get("st")
+                        **kwargs,
                     ),
                     Field(
                         "lc/tbid",
                         int,
                         30,
                         10,
-                        kwargs.get("lc/tbid")
+                        **kwargs,
                     ),
                     Field(
                         "tension",
                         float,
                         40,
                         10,
-                        kwargs.get("tension", -1.0 if use_lspp_defaults() else None)
+                        -1.0,
+                        **kwargs,
                     ),
                     Field(
                         "rtype",
                         float,
                         50,
                         10,
-                        kwargs.get("rtype", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "avgopt",
                         float,
                         60,
                         10,
-                        kwargs.get("avgopt")
+                        **kwargs,
                     ),
                     Field(
                         "pra",
                         float,
                         70,
                         10,
-                        kwargs.get("pra")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -167,28 +170,28 @@ class MatSimplifiedRubberFoamWithFailure(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("k")
+                        **kwargs,
                     ),
                     Field(
                         "gama1",
                         float,
                         10,
                         10,
-                        kwargs.get("gama1")
+                        **kwargs,
                     ),
                     Field(
                         "gama2",
                         float,
                         20,
                         10,
-                        kwargs.get("gama2")
+                        **kwargs,
                     ),
                     Field(
                         "eh",
                         float,
                         30,
                         10,
-                        kwargs.get("eh")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -199,42 +202,45 @@ class MatSimplifiedRubberFoamWithFailure(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lcunld")
+                        **kwargs,
                     ),
                     Field(
                         "hu",
                         float,
                         10,
                         10,
-                        kwargs.get("hu", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "shape",
                         float,
                         20,
                         10,
-                        kwargs.get("shape")
+                        **kwargs,
                     ),
                     Field(
                         "stol",
                         float,
                         30,
                         10,
-                        kwargs.get("stol")
+                        **kwargs,
                     ),
                     Field(
                         "visco",
                         float,
                         40,
                         10,
-                        kwargs.get("visco", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "hisout",
                         float,
                         50,
                         10,
-                        kwargs.get("hisout", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialContactWear(KeywordBase):
@@ -41,56 +40,56 @@ class InitialContactWear(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         10,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "wdepth",
                         float,
                         20,
                         10,
-                        kwargs.get("wdepth")
+                        **kwargs,
                     ),
                     Field(
                         "nx",
                         float,
                         30,
                         10,
-                        kwargs.get("nx")
+                        **kwargs,
                     ),
                     Field(
                         "ny",
                         float,
                         40,
                         10,
-                        kwargs.get("ny")
+                        **kwargs,
                     ),
                     Field(
                         "nz",
                         float,
                         50,
                         10,
-                        kwargs.get("nz")
+                        **kwargs,
                     ),
                     Field(
                         "iseq",
                         int,
                         60,
                         10,
-                        kwargs.get("iseq")
+                        **kwargs,
                     ),
                     Field(
                         "ncyc",
                         int,
                         70,
                         10,
-                        kwargs.get("ncyc")
+                        **kwargs,
                     ),
                 ],
             ),

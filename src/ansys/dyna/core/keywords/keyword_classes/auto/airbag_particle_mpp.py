@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagParticleMpp(KeywordBase):
@@ -41,21 +40,21 @@ class AirbagParticleMpp(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sx")
+                        **kwargs,
                     ),
                     Field(
                         "sy",
                         float,
                         10,
                         10,
-                        kwargs.get("sy")
+                        **kwargs,
                     ),
                     Field(
                         "sz",
                         float,
                         20,
                         10,
-                        kwargs.get("sz")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,14 +65,14 @@ class AirbagParticleMpp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -84,56 +83,62 @@ class AirbagParticleMpp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid1")
+                        **kwargs,
                     ),
                     Field(
                         "stype1",
                         int,
                         10,
                         10,
-                        kwargs.get("stype1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sid2",
                         int,
                         20,
                         10,
-                        kwargs.get("sid2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "stype2",
                         int,
                         30,
                         10,
-                        kwargs.get("stype2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "block",
                         int,
                         40,
                         10,
-                        kwargs.get("block")
+                        **kwargs,
                     ),
                     Field(
                         "npdata",
                         int,
                         50,
                         10,
-                        kwargs.get("npdata", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "fric",
                         float,
                         60,
                         10,
-                        kwargs.get("fric", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "irdp",
                         int,
                         70,
                         10,
-                        kwargs.get("irdp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -144,56 +149,64 @@ class AirbagParticleMpp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("np", 200000 if use_lspp_defaults() else None)
+                        200000,
+                        **kwargs,
                     ),
                     Field(
                         "unit",
                         int,
                         10,
                         10,
-                        kwargs.get("unit", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "visflg",
                         int,
                         20,
                         10,
-                        kwargs.get("visflg", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "tatm",
                         float,
                         30,
                         10,
-                        kwargs.get("tatm", 293 if use_lspp_defaults() else None)
+                        293,
+                        **kwargs,
                     ),
                     Field(
                         "patm",
                         float,
                         40,
                         10,
-                        kwargs.get("patm", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "nvent",
                         int,
                         50,
                         10,
-                        kwargs.get("nvent", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tend",
                         float,
                         60,
                         10,
-                        kwargs.get("tend", 1.0E10 if use_lspp_defaults() else None)
+                        1.0E10,
+                        **kwargs,
                     ),
                     Field(
                         "tsw",
                         float,
                         70,
                         10,
-                        kwargs.get("tsw", 1.0E10 if use_lspp_defaults() else None)
+                        1.0E10,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -204,56 +217,61 @@ class AirbagParticleMpp(KeywordBase):
                         float,
                         1,
                         9,
-                        kwargs.get("tstop", 1e11 if use_lspp_defaults() else None)
+                        1e11,
+                        **kwargs,
                     ),
                     Field(
                         "tsmth",
                         float,
                         10,
                         10,
-                        kwargs.get("tsmth", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "occup",
                         float,
                         20,
                         10,
-                        kwargs.get("occup", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                     Field(
                         "rebl",
                         int,
                         30,
                         10,
-                        kwargs.get("rebl", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sidsv",
                         int,
                         40,
                         10,
-                        kwargs.get("sidsv")
+                        **kwargs,
                     ),
                     Field(
                         "psid1",
                         int,
                         50,
                         10,
-                        kwargs.get("psid1")
+                        **kwargs,
                     ),
                     Field(
                         "tsplit",
                         float,
                         60,
                         10,
-                        kwargs.get("tsplit")
+                        **kwargs,
                     ),
                     Field(
                         "sffdc",
                         float,
                         70,
                         10,
-                        kwargs.get("sffdc", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -264,14 +282,16 @@ class AirbagParticleMpp(KeywordBase):
                         float,
                         1,
                         9,
-                        kwargs.get("sfiair4", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "idfric",
                         int,
                         10,
                         10,
-                        kwargs.get("idfric", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -282,42 +302,42 @@ class AirbagParticleMpp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "mass",
                         float,
                         10,
                         10,
-                        kwargs.get("mass")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "time",
                         float,
                         30,
                         10,
-                        kwargs.get("time")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "length",
                         float,
                         50,
                         10,
-                        kwargs.get("length")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -328,56 +348,62 @@ class AirbagParticleMpp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iair", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ngas",
                         int,
                         10,
                         10,
-                        kwargs.get("ngas")
+                        **kwargs,
                     ),
                     Field(
                         "norif",
                         int,
                         20,
                         10,
-                        kwargs.get("norif")
+                        **kwargs,
                     ),
                     Field(
                         "nid1",
                         int,
                         30,
                         10,
-                        kwargs.get("nid1", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nid2",
                         int,
                         40,
                         10,
-                        kwargs.get("nid2", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nid3",
                         int,
                         50,
                         10,
-                        kwargs.get("nid3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "chm",
                         int,
                         60,
                         10,
-                        kwargs.get("chm", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cd_ext",
                         float,
                         70,
                         10,
-                        kwargs.get("cd_ext", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -388,28 +414,30 @@ class AirbagParticleMpp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sidup")
+                        **kwargs,
                     ),
                     Field(
                         "styup",
                         int,
                         10,
                         10,
-                        kwargs.get("styup", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "pfrac",
                         float,
                         20,
                         10,
-                        kwargs.get("pfrac", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "linking",
                         int,
                         30,
                         10,
-                        kwargs.get("linking")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -420,56 +448,61 @@ class AirbagParticleMpp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sidh")
+                        **kwargs,
                     ),
                     Field(
                         "stypeh",
                         int,
                         10,
                         10,
-                        kwargs.get("stypeh", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "hconv",
                         float,
                         20,
                         10,
-                        kwargs.get("hconv")
+                        **kwargs,
                     ),
                     Field(
                         "pfric",
                         float,
                         30,
                         10,
-                        kwargs.get("pfric", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "sdfblk",
                         float,
                         40,
                         10,
-                        kwargs.get("sdfblk", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "kp",
                         float,
                         50,
                         10,
-                        kwargs.get("kp", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "inip",
                         int,
                         60,
                         10,
-                        kwargs.get("inip", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "cp",
                         float,
                         70,
                         10,
-                        kwargs.get("cp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -480,49 +513,53 @@ class AirbagParticleMpp(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid3")
+                        **kwargs,
                     ),
                     Field(
                         "stype3",
                         int,
                         10,
                         10,
-                        kwargs.get("stype3", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "c23",
                         float,
                         20,
                         10,
-                        kwargs.get("c23", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "lctc23",
                         int,
                         30,
                         10,
-                        kwargs.get("lctc23")
+                        **kwargs,
                     ),
                     Field(
                         "lcpc23",
                         int,
                         40,
                         10,
-                        kwargs.get("lcpc23")
+                        **kwargs,
                     ),
                     Field(
                         "enh_v",
                         int,
                         50,
                         10,
-                        kwargs.get("enh_v", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ppop",
                         float,
                         60,
                         10,
-                        kwargs.get("ppop", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

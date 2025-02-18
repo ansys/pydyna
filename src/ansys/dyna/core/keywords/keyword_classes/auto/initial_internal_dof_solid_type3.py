@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialInternalDofSolidType3(KeywordBase):
@@ -41,7 +40,7 @@ class InitialInternalDofSolidType3(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("lid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,21 +51,21 @@ class InitialInternalDofSolidType3(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("valx")
+                        **kwargs,
                     ),
                     Field(
                         "valy",
                         float,
                         10,
                         10,
-                        kwargs.get("valy")
+                        **kwargs,
                     ),
                     Field(
                         "valz",
                         float,
                         20,
                         10,
-                        kwargs.get("valz")
+                        **kwargs,
                     ),
                 ],
             ),

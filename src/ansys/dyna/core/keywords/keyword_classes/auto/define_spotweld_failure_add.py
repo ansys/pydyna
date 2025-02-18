@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,63 @@ class DefineSpotweldFailureAdd(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "tflag",
                         int,
                         10,
                         10,
-                        kwargs.get("tflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "dc1",
                         float,
                         20,
                         10,
-                        kwargs.get("dc1", 1.183 if use_lspp_defaults() else None)
+                        1.183,
+                        **kwargs,
                     ),
                     Field(
                         "dc2",
                         float,
                         30,
                         10,
-                        kwargs.get("dc2", 0.002963 if use_lspp_defaults() else None)
+                        0.002963,
+                        **kwargs,
                     ),
                     Field(
                         "dc3",
                         float,
                         40,
                         10,
-                        kwargs.get("dc3", 0.0458 if use_lspp_defaults() else None)
+                        0.0458,
+                        **kwargs,
                     ),
                     Field(
                         "dc4",
                         float,
                         50,
                         10,
-                        kwargs.get("dc4", 0.1 if use_lspp_defaults() else None)
+                        0.1,
+                        **kwargs,
                     ),
                     Field(
                         "exn",
                         float,
                         60,
                         10,
-                        kwargs.get("exn", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "exs",
                         float,
                         70,
                         10,
-                        kwargs.get("exs", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,21 +112,21 @@ class DefineSpotweldFailureAdd(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "sn",
                         float,
                         10,
                         10,
-                        kwargs.get("sn")
+                        **kwargs,
                     ),
                     Field(
                         "ss",
                         float,
                         20,
                         10,
-                        kwargs.get("ss")
+                        **kwargs,
                     ),
                 ],
             ),

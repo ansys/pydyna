@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class AirbagFluidAndGasId(KeywordBase):
@@ -41,14 +40,14 @@ class AirbagFluidAndGasId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "title",
                         str,
                         10,
                         70,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,56 +58,63 @@ class AirbagFluidAndGasId(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "sidtyp",
                         int,
                         10,
                         10,
-                        kwargs.get("sidtyp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "rbid",
                         int,
                         20,
                         10,
-                        kwargs.get("rbid", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "vsca",
                         float,
                         30,
                         10,
-                        kwargs.get("vsca", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "psca",
                         float,
                         40,
                         10,
-                        kwargs.get("psca", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "vini",
                         float,
                         50,
                         10,
-                        kwargs.get("vini", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "mwd",
                         float,
                         60,
                         10,
-                        kwargs.get("mwd", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "spsf",
                         float,
                         70,
                         10,
-                        kwargs.get("spsf", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -119,56 +125,56 @@ class AirbagFluidAndGasId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xwini")
+                        **kwargs,
                     ),
                     Field(
                         "xwadd",
                         float,
                         10,
                         10,
-                        kwargs.get("xwadd")
+                        **kwargs,
                     ),
                     Field(
                         "xw",
                         float,
                         20,
                         10,
-                        kwargs.get("xw")
+                        **kwargs,
                     ),
                     Field(
                         "p",
                         float,
                         30,
                         10,
-                        kwargs.get("p")
+                        **kwargs,
                     ),
                     Field(
                         "tend",
                         float,
                         40,
                         10,
-                        kwargs.get("tend")
+                        **kwargs,
                     ),
                     Field(
                         "rho",
                         float,
                         50,
                         10,
-                        kwargs.get("rho")
+                        **kwargs,
                     ),
                     Field(
                         "lcxw",
                         int,
                         60,
                         10,
-                        kwargs.get("lcxw")
+                        **kwargs,
                     ),
                     Field(
                         "lcp",
                         int,
                         70,
                         10,
-                        kwargs.get("lcp")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -179,42 +185,44 @@ class AirbagFluidAndGasId(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gdir")
+                        **kwargs,
                     ),
                     Field(
                         "nproj",
                         int,
                         10,
                         10,
-                        kwargs.get("nproj", 3 if use_lspp_defaults() else None)
+                        3,
+                        **kwargs,
                     ),
                     Field(
                         "idir",
                         int,
                         20,
                         10,
-                        kwargs.get("idir")
+                        **kwargs,
                     ),
                     Field(
                         "iidir",
                         int,
                         30,
                         10,
-                        kwargs.get("iidir")
+                        **kwargs,
                     ),
                     Field(
                         "kappa",
                         float,
                         40,
                         10,
-                        kwargs.get("kappa", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "kbm",
                         float,
                         50,
                         10,
-                        kwargs.get("kbm")
+                        **kwargs,
                     ),
                 ],
             ),

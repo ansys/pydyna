@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmRandlesShort(KeywordBase):
@@ -41,14 +40,15 @@ class EmRandlesShort(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("areatype", 2 if use_lspp_defaults() else None)
+                        2,
+                        **kwargs,
                     ),
                     Field(
                         "funcid",
                         int,
                         10,
                         10,
-                        kwargs.get("funcid")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DatabaseExtentSsstat(KeywordBase):
@@ -41,56 +40,56 @@ class DatabaseExtentSsstat(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("psid1")
+                        **kwargs,
                     ),
                     Field(
                         "psid2",
                         int,
                         10,
                         10,
-                        kwargs.get("psid2")
+                        **kwargs,
                     ),
                     Field(
                         "psid3",
                         int,
                         20,
                         10,
-                        kwargs.get("psid3")
+                        **kwargs,
                     ),
                     Field(
                         "psid4",
                         int,
                         30,
                         10,
-                        kwargs.get("psid4")
+                        **kwargs,
                     ),
                     Field(
                         "psid5",
                         int,
                         40,
                         10,
-                        kwargs.get("psid5")
+                        **kwargs,
                     ),
                     Field(
                         "psid6",
                         int,
                         50,
                         10,
-                        kwargs.get("psid6")
+                        **kwargs,
                     ),
                     Field(
                         "psid7",
                         int,
                         60,
                         10,
-                        kwargs.get("psid7")
+                        **kwargs,
                     ),
                     Field(
                         "psid8",
                         int,
                         70,
                         10,
-                        kwargs.get("psid8")
+                        **kwargs,
                     ),
                 ],
             ),

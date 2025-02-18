@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class BoundaryPwpNode(KeywordBase):
@@ -41,42 +40,45 @@ class BoundaryPwpNode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "lc",
                         float,
                         10,
                         10,
-                        kwargs.get("lc")
+                        **kwargs,
                     ),
                     Field(
                         "cmult",
                         float,
                         20,
                         10,
-                        kwargs.get("cmult", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "lcdr",
                         int,
                         30,
                         10,
-                        kwargs.get("lcdr")
+                        **kwargs,
                     ),
                     Field(
                         "tbirth",
                         float,
                         40,
                         10,
-                        kwargs.get("tbirth", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "tdeath",
                         float,
                         50,
                         10,
-                        kwargs.get("tdeath", 1.0E20 if use_lspp_defaults() else None)
+                        1.0E20,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -87,49 +89,52 @@ class BoundaryPwpNode(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("iphre", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "itotex",
                         int,
                         10,
                         10,
-                        kwargs.get("itotex", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "idrflag",
                         int,
                         20,
                         10,
-                        kwargs.get("idrflag", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "lcleak",
                         int,
                         40,
                         10,
-                        kwargs.get("lcleak")
+                        **kwargs,
                     ),
                     Field(
                         "cleak",
                         float,
                         50,
                         10,
-                        kwargs.get("cleak")
+                        **kwargs,
                     ),
                     Field(
                         "lcpum",
                         int,
                         60,
                         10,
-                        kwargs.get("lcpum")
+                        **kwargs,
                     ),
                 ],
             ),

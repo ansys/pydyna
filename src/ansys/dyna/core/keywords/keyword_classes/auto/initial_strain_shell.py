@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.duplicate_card import DuplicateCard
 from ansys.dyna.core.lib.card_set import CardSet
 from ansys.dyna.core.lib.cards import Cards
@@ -42,56 +41,58 @@ class InitialStrainShellCardSet(Cards):
                         int,
                         0,
                         10,
-                        kwargs.get("eid")
+                        **kwargs,
                     ),
                     Field(
                         "nplane",
                         int,
                         10,
                         10,
-                        kwargs.get("nplane")
+                        **kwargs,
                     ),
                     Field(
                         "nthick",
                         int,
                         20,
                         10,
-                        kwargs.get("nthick")
+                        **kwargs,
                     ),
                     Field(
                         "large",
                         int,
                         30,
                         10,
-                        kwargs.get("large", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ilocal",
                         int,
                         70,
                         10,
-                        kwargs.get("ilocal", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),

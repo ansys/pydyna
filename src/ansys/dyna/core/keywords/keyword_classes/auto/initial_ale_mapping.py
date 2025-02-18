@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialAleMapping(KeywordBase):
@@ -41,21 +40,22 @@ class InitialAleMapping(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "typ",
                         int,
                         10,
                         10,
-                        kwargs.get("typ", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "ammsid",
                         int,
                         20,
                         10,
-                        kwargs.get("ammsid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -66,49 +66,54 @@ class InitialAleMapping(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "yo",
                         float,
                         10,
                         10,
-                        kwargs.get("yo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "zo",
                         float,
                         20,
                         10,
-                        kwargs.get("zo", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "vecid",
                         int,
                         30,
                         10,
-                        kwargs.get("vecid")
+                        **kwargs,
                     ),
                     Field(
                         "angle",
                         float,
                         40,
                         10,
-                        kwargs.get("angle")
+                        **kwargs,
                     ),
                     Field(
                         "sym",
                         int,
                         50,
                         10,
-                        kwargs.get("sym", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "tbeg",
                         float,
                         60,
                         10,
-                        kwargs.get("tbeg", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

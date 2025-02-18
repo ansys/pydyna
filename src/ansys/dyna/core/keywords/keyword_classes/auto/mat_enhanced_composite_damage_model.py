@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,56 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "ea",
                         float,
                         20,
                         10,
-                        kwargs.get("ea")
+                        **kwargs,
                     ),
                     Field(
                         "eb",
                         float,
                         30,
                         10,
-                        kwargs.get("eb")
+                        **kwargs,
                     ),
                     Field(
                         "(ec)",
                         float,
                         40,
                         10,
-                        kwargs.get("(ec)")
+                        **kwargs,
                     ),
                     Field(
                         "prba",
                         float,
                         50,
                         10,
-                        kwargs.get("prba")
+                        **kwargs,
                     ),
                     Field(
                         "(prca)",
                         float,
                         60,
                         10,
-                        kwargs.get("(prca)")
+                        **kwargs,
                     ),
                     Field(
                         "(prcb)",
                         float,
                         70,
                         10,
-                        kwargs.get("(prcb)")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,49 +105,49 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("gab")
+                        **kwargs,
                     ),
                     Field(
                         "gbc",
                         float,
                         10,
                         10,
-                        kwargs.get("gbc")
+                        **kwargs,
                     ),
                     Field(
                         "gca",
                         float,
                         20,
                         10,
-                        kwargs.get("gca")
+                        **kwargs,
                     ),
                     Field(
                         "(kf)",
                         float,
                         30,
                         10,
-                        kwargs.get("(kf)")
+                        **kwargs,
                     ),
                     Field(
                         "aopt",
                         float,
                         40,
                         10,
-                        kwargs.get("aopt")
+                        **kwargs,
                     ),
                     Field(
                         "2way",
                         float,
                         50,
                         10,
-                        kwargs.get("2way")
+                        **kwargs,
                     ),
                     Field(
                         "ti",
                         float,
                         60,
                         10,
-                        kwargs.get("ti")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -159,49 +158,49 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xp")
+                        **kwargs,
                     ),
                     Field(
                         "yp",
                         float,
                         10,
                         10,
-                        kwargs.get("yp")
+                        **kwargs,
                     ),
                     Field(
                         "zp",
                         float,
                         20,
                         10,
-                        kwargs.get("zp")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         30,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         40,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         50,
                         10,
-                        kwargs.get("a3")
+                        **kwargs,
                     ),
                     Field(
                         "mangle",
                         float,
                         60,
                         10,
-                        kwargs.get("mangle")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -212,56 +211,56 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("v1")
+                        **kwargs,
                     ),
                     Field(
                         "v2",
                         float,
                         10,
                         10,
-                        kwargs.get("v2")
+                        **kwargs,
                     ),
                     Field(
                         "v3",
                         float,
                         20,
                         10,
-                        kwargs.get("v3")
+                        **kwargs,
                     ),
                     Field(
                         "d1",
                         float,
                         30,
                         10,
-                        kwargs.get("d1")
+                        **kwargs,
                     ),
                     Field(
                         "d2",
                         float,
                         40,
                         10,
-                        kwargs.get("d2")
+                        **kwargs,
                     ),
                     Field(
                         "d3",
                         float,
                         50,
                         10,
-                        kwargs.get("d3")
+                        **kwargs,
                     ),
                     Field(
                         "dfailm",
                         float,
                         60,
                         10,
-                        kwargs.get("dfailm")
+                        **kwargs,
                     ),
                     Field(
                         "dfails",
                         float,
                         70,
                         10,
-                        kwargs.get("dfails")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -272,56 +271,58 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tfail")
+                        **kwargs,
                     ),
                     Field(
                         "alph",
                         float,
                         10,
                         10,
-                        kwargs.get("alph")
+                        **kwargs,
                     ),
                     Field(
                         "soft",
                         float,
                         20,
                         10,
-                        kwargs.get("soft", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "fbrt",
                         float,
                         30,
                         10,
-                        kwargs.get("fbrt")
+                        **kwargs,
                     ),
                     Field(
                         "ycfac",
                         float,
                         40,
                         10,
-                        kwargs.get("ycfac", 2.0 if use_lspp_defaults() else None)
+                        2.0,
+                        **kwargs,
                     ),
                     Field(
                         "dfailt",
                         float,
                         50,
                         10,
-                        kwargs.get("dfailt")
+                        **kwargs,
                     ),
                     Field(
                         "dfailc",
                         float,
                         60,
                         10,
-                        kwargs.get("dfailc")
+                        **kwargs,
                     ),
                     Field(
                         "efs",
                         float,
                         70,
                         10,
-                        kwargs.get("efs")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -332,49 +333,50 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xc")
+                        **kwargs,
                     ),
                     Field(
                         "xt",
                         float,
                         10,
                         10,
-                        kwargs.get("xt")
+                        **kwargs,
                     ),
                     Field(
                         "yc",
                         float,
                         20,
                         10,
-                        kwargs.get("yc")
+                        **kwargs,
                     ),
                     Field(
                         "yt",
                         float,
                         30,
                         10,
-                        kwargs.get("yt")
+                        **kwargs,
                     ),
                     Field(
                         "sc",
                         float,
                         40,
                         10,
-                        kwargs.get("sc")
+                        **kwargs,
                     ),
                     Field(
                         "crit",
                         float,
                         50,
                         10,
-                        kwargs.get("crit", 54.0 if use_lspp_defaults() else None)
+                        54.0,
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         60,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                 ],
             ),

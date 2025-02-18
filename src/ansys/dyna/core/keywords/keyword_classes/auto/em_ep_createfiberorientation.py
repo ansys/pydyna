@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEpCreatefiberorientation(KeywordBase):
@@ -41,49 +40,49 @@ class EmEpCreatefiberorientation(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("parstld")
+                        **kwargs,
                     ),
                     Field(
                         "solvelde",
                         int,
                         10,
                         10,
-                        kwargs.get("solvelde")
+                        **kwargs,
                     ),
                     Field(
                         "solvelde",
                         int,
                         20,
                         10,
-                        kwargs.get("solvelde")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         int,
                         30,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         int,
                         40,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "w_file",
                         int,
                         50,
                         10,
-                        kwargs.get("w_file")
+                        **kwargs,
                     ),
                     Field(
                         "prerun",
                         int,
                         60,
                         10,
-                        kwargs.get("prerun")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlEosUserLibrary(KeywordBase):
@@ -41,7 +40,7 @@ class ControlEosUserLibrary(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("path")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,28 +51,32 @@ class ControlEosUserLibrary(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("conm", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "conl",
                         float,
                         10,
                         10,
-                        kwargs.get("conl", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "cont",
                         float,
                         20,
                         10,
-                        kwargs.get("cont", 1.0 if use_lspp_defaults() else None)
+                        1.0,
+                        **kwargs,
                     ),
                     Field(
                         "conp",
                         float,
                         20,
                         10,
-                        kwargs.get("conp", 100 if use_lspp_defaults() else None)
+                        100,
+                        **kwargs,
                     ),
                 ],
             ),

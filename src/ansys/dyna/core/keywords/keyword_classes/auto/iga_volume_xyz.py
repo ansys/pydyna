@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IgaVolumeXyz(KeywordBase):
@@ -41,35 +40,35 @@ class IgaVolumeXyz(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("vid")
+                        **kwargs,
                     ),
                     Field(
                         "nid",
                         int,
                         10,
                         10,
-                        kwargs.get("nid")
+                        **kwargs,
                     ),
                     Field(
                         "psid",
                         int,
                         20,
                         10,
-                        kwargs.get("psid")
+                        **kwargs,
                     ),
                     Field(
                         "esid",
                         int,
                         30,
                         10,
-                        kwargs.get("esid")
+                        **kwargs,
                     ),
                     Field(
                         "fsid",
                         int,
                         40,
                         10,
-                        kwargs.get("fsid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -80,56 +79,56 @@ class IgaVolumeXyz(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("brid1")
+                        **kwargs,
                     ),
                     Field(
                         "brid2",
                         int,
                         10,
                         10,
-                        kwargs.get("brid2")
+                        **kwargs,
                     ),
                     Field(
                         "brid3",
                         int,
                         20,
                         10,
-                        kwargs.get("brid3")
+                        **kwargs,
                     ),
                     Field(
                         "brid4",
                         int,
                         30,
                         10,
-                        kwargs.get("brid4")
+                        **kwargs,
                     ),
                     Field(
                         "brid5",
                         int,
                         40,
                         10,
-                        kwargs.get("brid5")
+                        **kwargs,
                     ),
                     Field(
                         "brid6",
                         int,
                         50,
                         10,
-                        kwargs.get("brid6")
+                        **kwargs,
                     ),
                     Field(
                         "brid7",
                         int,
                         60,
                         10,
-                        kwargs.get("brid7")
+                        **kwargs,
                     ),
                     Field(
                         "brid8",
                         int,
                         70,
                         10,
-                        kwargs.get("brid8")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,28 +45,28 @@ class MatPseudoTensor(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "g",
                         float,
                         20,
                         10,
-                        kwargs.get("g")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -78,56 +77,56 @@ class MatPseudoTensor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sigf")
+                        **kwargs,
                     ),
                     Field(
                         "a0",
                         float,
                         10,
                         10,
-                        kwargs.get("a0")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         20,
                         10,
-                        kwargs.get("a1")
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         30,
                         10,
-                        kwargs.get("a2")
+                        **kwargs,
                     ),
                     Field(
                         "a0f",
                         float,
                         40,
                         10,
-                        kwargs.get("a0f")
+                        **kwargs,
                     ),
                     Field(
                         "a1f",
                         float,
                         50,
                         10,
-                        kwargs.get("a1f")
+                        **kwargs,
                     ),
                     Field(
                         "b1",
                         float,
                         60,
                         10,
-                        kwargs.get("b1")
+                        **kwargs,
                     ),
                     Field(
                         "per",
                         float,
                         70,
                         10,
-                        kwargs.get("per")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -138,42 +137,44 @@ class MatPseudoTensor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("er")
+                        **kwargs,
                     ),
                     Field(
                         "prr",
                         float,
                         10,
                         10,
-                        kwargs.get("prr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         20,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "etan",
                         float,
                         30,
                         10,
-                        kwargs.get("etan")
+                        **kwargs,
                     ),
                     Field(
                         "lcp",
                         int,
                         40,
                         10,
-                        kwargs.get("lcp", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lcr",
                         int,
                         50,
                         10,
-                        kwargs.get("lcr", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -184,56 +185,56 @@ class MatPseudoTensor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x1")
+                        **kwargs,
                     ),
                     Field(
                         "x2",
                         float,
                         10,
                         10,
-                        kwargs.get("x2")
+                        **kwargs,
                     ),
                     Field(
                         "x3",
                         float,
                         20,
                         10,
-                        kwargs.get("x3")
+                        **kwargs,
                     ),
                     Field(
                         "x4",
                         float,
                         30,
                         10,
-                        kwargs.get("x4")
+                        **kwargs,
                     ),
                     Field(
                         "x5",
                         float,
                         40,
                         10,
-                        kwargs.get("x5")
+                        **kwargs,
                     ),
                     Field(
                         "x6",
                         float,
                         50,
                         10,
-                        kwargs.get("x6")
+                        **kwargs,
                     ),
                     Field(
                         "x7",
                         float,
                         60,
                         10,
-                        kwargs.get("x7")
+                        **kwargs,
                     ),
                     Field(
                         "x8",
                         float,
                         70,
                         10,
-                        kwargs.get("x8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -244,56 +245,56 @@ class MatPseudoTensor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("x9")
+                        **kwargs,
                     ),
                     Field(
                         "x10",
                         float,
                         10,
                         10,
-                        kwargs.get("x10")
+                        **kwargs,
                     ),
                     Field(
                         "x11",
                         float,
                         20,
                         10,
-                        kwargs.get("x11")
+                        **kwargs,
                     ),
                     Field(
                         "x12",
                         float,
                         30,
                         10,
-                        kwargs.get("x12")
+                        **kwargs,
                     ),
                     Field(
                         "x13",
                         float,
                         40,
                         10,
-                        kwargs.get("x13")
+                        **kwargs,
                     ),
                     Field(
                         "x14",
                         float,
                         50,
                         10,
-                        kwargs.get("x14")
+                        **kwargs,
                     ),
                     Field(
                         "x15",
                         float,
                         60,
                         10,
-                        kwargs.get("x15")
+                        **kwargs,
                     ),
                     Field(
                         "x16",
                         float,
                         70,
                         10,
-                        kwargs.get("x16")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -304,56 +305,56 @@ class MatPseudoTensor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ys1")
+                        **kwargs,
                     ),
                     Field(
                         "ys2",
                         float,
                         10,
                         10,
-                        kwargs.get("ys2")
+                        **kwargs,
                     ),
                     Field(
                         "ys3",
                         float,
                         20,
                         10,
-                        kwargs.get("ys3")
+                        **kwargs,
                     ),
                     Field(
                         "ys4",
                         float,
                         30,
                         10,
-                        kwargs.get("ys4")
+                        **kwargs,
                     ),
                     Field(
                         "ys5",
                         float,
                         40,
                         10,
-                        kwargs.get("ys5")
+                        **kwargs,
                     ),
                     Field(
                         "ys6",
                         float,
                         50,
                         10,
-                        kwargs.get("ys6")
+                        **kwargs,
                     ),
                     Field(
                         "ys7",
                         float,
                         60,
                         10,
-                        kwargs.get("ys7")
+                        **kwargs,
                     ),
                     Field(
                         "ys8",
                         float,
                         70,
                         10,
-                        kwargs.get("ys8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -364,56 +365,56 @@ class MatPseudoTensor(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("ys9")
+                        **kwargs,
                     ),
                     Field(
                         "ys10",
                         float,
                         10,
                         10,
-                        kwargs.get("ys10")
+                        **kwargs,
                     ),
                     Field(
                         "ys11",
                         float,
                         20,
                         10,
-                        kwargs.get("ys11")
+                        **kwargs,
                     ),
                     Field(
                         "ys12",
                         float,
                         30,
                         10,
-                        kwargs.get("ys12")
+                        **kwargs,
                     ),
                     Field(
                         "ys13",
                         float,
                         40,
                         10,
-                        kwargs.get("ys13")
+                        **kwargs,
                     ),
                     Field(
                         "ys14",
                         float,
                         50,
                         10,
-                        kwargs.get("ys14")
+                        **kwargs,
                     ),
                     Field(
                         "ys15",
                         float,
                         60,
                         10,
-                        kwargs.get("ys15")
+                        **kwargs,
                     ),
                     Field(
                         "ys16",
                         float,
                         70,
                         10,
-                        kwargs.get("ys16")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,35 +45,35 @@ class MatMccormick(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "ro",
                         float,
                         10,
                         10,
-                        kwargs.get("ro")
+                        **kwargs,
                     ),
                     Field(
                         "e",
                         float,
                         20,
                         10,
-                        kwargs.get("e")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         float,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         40,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -85,28 +84,28 @@ class MatMccormick(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("q1")
+                        **kwargs,
                     ),
                     Field(
                         "c1",
                         float,
                         10,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "q2",
                         float,
                         20,
                         10,
-                        kwargs.get("q2")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         float,
                         30,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -117,42 +116,42 @@ class MatMccormick(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("s")
+                        **kwargs,
                     ),
                     Field(
                         "h",
                         float,
                         10,
                         10,
-                        kwargs.get("h")
+                        **kwargs,
                     ),
                     Field(
                         "omega",
                         float,
                         20,
                         10,
-                        kwargs.get("omega")
+                        **kwargs,
                     ),
                     Field(
                         "td",
                         float,
                         30,
                         10,
-                        kwargs.get("td")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         40,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                     Field(
                         "eps0",
                         float,
                         50,
                         10,
-                        kwargs.get("eps0")
+                        **kwargs,
                     ),
                 ],
             ),

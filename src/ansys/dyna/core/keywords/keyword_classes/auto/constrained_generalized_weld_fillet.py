@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedGeneralizedWeldFillet(KeywordBase):
@@ -41,7 +40,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("wid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -52,42 +51,44 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nsid")
+                        **kwargs,
                     ),
                     Field(
                         "cid",
                         int,
                         10,
                         10,
-                        kwargs.get("cid")
+                        **kwargs,
                     ),
                     Field(
                         "filter",
                         int,
                         20,
                         10,
-                        kwargs.get("filter")
+                        **kwargs,
                     ),
                     Field(
                         "window",
                         float,
                         30,
                         10,
-                        kwargs.get("window", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "npr",
                         int,
                         40,
                         10,
-                        kwargs.get("npr")
+                        **kwargs,
                     ),
                     Field(
                         "nprt",
                         int,
                         50,
                         10,
-                        kwargs.get("nprt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -98,56 +99,57 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("tfail", 1.0E+20 if use_lspp_defaults() else None)
+                        1.0E+20,
+                        **kwargs,
                     ),
                     Field(
                         "epsf",
                         float,
                         10,
                         10,
-                        kwargs.get("epsf")
+                        **kwargs,
                     ),
                     Field(
                         "sigy",
                         float,
                         20,
                         10,
-                        kwargs.get("sigy")
+                        **kwargs,
                     ),
                     Field(
                         "beta",
                         float,
                         30,
                         10,
-                        kwargs.get("beta")
+                        **kwargs,
                     ),
                     Field(
                         "l",
                         float,
                         40,
                         10,
-                        kwargs.get("l")
+                        **kwargs,
                     ),
                     Field(
                         "w",
                         float,
                         50,
                         10,
-                        kwargs.get("w")
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         60,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "alpha",
                         float,
                         70,
                         10,
-                        kwargs.get("alpha")
+                        **kwargs,
                     ),
                 ],
             ),

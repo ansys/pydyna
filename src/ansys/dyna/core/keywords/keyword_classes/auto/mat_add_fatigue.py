@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,60 @@ class MatAddFatigue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("mid")
+                        **kwargs,
                     ),
                     Field(
                         "lcid",
                         int,
                         10,
                         10,
-                        kwargs.get("lcid", -1 if use_lspp_defaults() else None)
+                        -1,
+                        **kwargs,
                     ),
                     Field(
                         "ltype",
                         int,
                         20,
                         10,
-                        kwargs.get("ltype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "a",
                         float,
                         30,
                         10,
-                        kwargs.get("a")
+                        **kwargs,
                     ),
                     Field(
                         "b",
                         float,
                         40,
                         10,
-                        kwargs.get("b")
+                        **kwargs,
                     ),
                     Field(
                         "sthres",
                         float,
                         50,
                         10,
-                        kwargs.get("sthres")
+                        **kwargs,
                     ),
                     Field(
                         "snlimt",
                         int,
                         60,
                         10,
-                        kwargs.get("snlimt", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "sntype",
                         int,
                         70,
                         10,
-                        kwargs.get("sntype", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,42 +109,42 @@ class MatAddFatigue(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "ai",
                         float,
                         30,
                         10,
-                        kwargs.get("ai")
+                        **kwargs,
                     ),
                     Field(
                         "bi",
                         float,
                         40,
                         10,
-                        kwargs.get("bi")
+                        **kwargs,
                     ),
                     Field(
                         "sthresi",
                         float,
                         50,
                         10,
-                        kwargs.get("sthresi")
+                        **kwargs,
                     ),
                 ],
             ),

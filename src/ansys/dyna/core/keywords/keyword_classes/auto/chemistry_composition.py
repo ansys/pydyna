@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ChemistryComposition(KeywordBase):
@@ -41,14 +40,14 @@ class ChemistryComposition(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("id")
+                        **kwargs,
                     ),
                     Field(
                         "modelid",
                         int,
                         10,
                         10,
-                        kwargs.get("modelid")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -59,14 +58,14 @@ class ChemistryComposition(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("molfr")
+                        **kwargs,
                     ),
                     Field(
                         "species",
                         str,
                         10,
                         70,
-                        kwargs.get("species")
+                        **kwargs,
                     ),
                 ],
             ),

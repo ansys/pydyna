@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,61 @@ class SetSegmentCollect(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "da1",
                         float,
                         10,
                         10,
-                        kwargs.get("da1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "da2",
                         float,
                         20,
                         10,
-                        kwargs.get("da2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "da3",
                         float,
                         30,
                         10,
-                        kwargs.get("da3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "da4",
                         float,
                         40,
                         10,
-                        kwargs.get("da4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "solver",
                         str,
                         50,
                         10,
-                        kwargs.get("solver", "MECH" if use_lspp_defaults() else None)
+                        "MECH",
+                        **kwargs,
                     ),
                     Field(
                         "its",
                         int,
                         60,
                         10,
-                        kwargs.get("its")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +110,60 @@ class SetSegmentCollect(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         10,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n3",
                         int,
                         20,
                         10,
-                        kwargs.get("n3")
+                        **kwargs,
                     ),
                     Field(
                         "n4",
                         int,
                         30,
                         10,
-                        kwargs.get("n4")
+                        **kwargs,
                     ),
                     Field(
                         "a1",
                         float,
                         40,
                         10,
-                        kwargs.get("a1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a2",
                         float,
                         50,
                         10,
-                        kwargs.get("a2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a3",
                         float,
                         60,
                         10,
-                        kwargs.get("a3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "a4",
                         float,
                         70,
                         10,
-                        kwargs.get("a4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                 ],
             ),

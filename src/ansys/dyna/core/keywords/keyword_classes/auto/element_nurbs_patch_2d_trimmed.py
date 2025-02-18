@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ElementNurbsPatch2DTrimmed(KeywordBase):
@@ -41,56 +40,56 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("npid")
+                        **kwargs,
                     ),
                     Field(
                         "pid",
                         int,
                         10,
                         10,
-                        kwargs.get("pid")
+                        **kwargs,
                     ),
                     Field(
                         "npr",
                         int,
                         20,
                         10,
-                        kwargs.get("npr")
+                        **kwargs,
                     ),
                     Field(
                         "pr",
                         int,
                         30,
                         10,
-                        kwargs.get("pr")
+                        **kwargs,
                     ),
                     Field(
                         "nps",
                         int,
                         40,
                         10,
-                        kwargs.get("nps")
+                        **kwargs,
                     ),
                     Field(
                         "ps",
                         int,
                         50,
                         10,
-                        kwargs.get("ps")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -101,56 +100,60 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("wfl")
+                        **kwargs,
                     ),
                     Field(
                         "elform",
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "int",
                         int,
                         20,
                         10,
-                        kwargs.get("int", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "nisr",
                         int,
                         30,
                         10,
-                        kwargs.get("nisr")
+                        **kwargs,
                     ),
                     Field(
                         "niss",
                         int,
                         40,
                         10,
-                        kwargs.get("niss")
+                        **kwargs,
                     ),
                     Field(
                         "imass",
                         int,
                         50,
                         10,
-                        kwargs.get("imass", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "idfne",
                         int,
                         70,
                         10,
-                        kwargs.get("idfne", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                 ],
             ),
@@ -161,56 +164,56 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("rk1")
+                        **kwargs,
                     ),
                     Field(
                         "rk2",
                         float,
                         10,
                         10,
-                        kwargs.get("rk2")
+                        **kwargs,
                     ),
                     Field(
                         "rk3",
                         float,
                         20,
                         10,
-                        kwargs.get("rk3")
+                        **kwargs,
                     ),
                     Field(
                         "rk4",
                         float,
                         30,
                         10,
-                        kwargs.get("rk4")
+                        **kwargs,
                     ),
                     Field(
                         "rk5",
                         float,
                         40,
                         10,
-                        kwargs.get("rk5")
+                        **kwargs,
                     ),
                     Field(
                         "rk6",
                         float,
                         50,
                         10,
-                        kwargs.get("rk6")
+                        **kwargs,
                     ),
                     Field(
                         "rk7",
                         float,
                         60,
                         10,
-                        kwargs.get("rk7")
+                        **kwargs,
                     ),
                     Field(
                         "rk8",
                         float,
                         70,
                         10,
-                        kwargs.get("rk8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -221,56 +224,56 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("sk1")
+                        **kwargs,
                     ),
                     Field(
                         "sk2",
                         float,
                         10,
                         10,
-                        kwargs.get("sk2")
+                        **kwargs,
                     ),
                     Field(
                         "sk3",
                         float,
                         20,
                         10,
-                        kwargs.get("sk3")
+                        **kwargs,
                     ),
                     Field(
                         "sk4",
                         float,
                         30,
                         10,
-                        kwargs.get("sk4")
+                        **kwargs,
                     ),
                     Field(
                         "sk5",
                         float,
                         40,
                         10,
-                        kwargs.get("sk5")
+                        **kwargs,
                     ),
                     Field(
                         "sk6",
                         float,
                         50,
                         10,
-                        kwargs.get("sk6")
+                        **kwargs,
                     ),
                     Field(
                         "sk7",
                         float,
                         60,
                         10,
-                        kwargs.get("sk7")
+                        **kwargs,
                     ),
                     Field(
                         "sk8",
                         float,
                         70,
                         10,
-                        kwargs.get("sk8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -281,56 +284,56 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("n1")
+                        **kwargs,
                     ),
                     Field(
                         "n2",
                         int,
                         10,
                         10,
-                        kwargs.get("n2")
+                        **kwargs,
                     ),
                     Field(
                         "n3",
                         int,
                         20,
                         10,
-                        kwargs.get("n3")
+                        **kwargs,
                     ),
                     Field(
                         "n4",
                         int,
                         30,
                         10,
-                        kwargs.get("n4")
+                        **kwargs,
                     ),
                     Field(
                         "n5",
                         int,
                         40,
                         10,
-                        kwargs.get("n5")
+                        **kwargs,
                     ),
                     Field(
                         "n6",
                         int,
                         50,
                         10,
-                        kwargs.get("n6")
+                        **kwargs,
                     ),
                     Field(
                         "n7",
                         int,
                         60,
                         10,
-                        kwargs.get("n7")
+                        **kwargs,
                     ),
                     Field(
                         "n8",
                         int,
                         70,
                         10,
-                        kwargs.get("n8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -341,56 +344,56 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("w1")
+                        **kwargs,
                     ),
                     Field(
                         "w2",
                         float,
                         10,
                         10,
-                        kwargs.get("w2")
+                        **kwargs,
                     ),
                     Field(
                         "w3",
                         float,
                         20,
                         10,
-                        kwargs.get("w3")
+                        **kwargs,
                     ),
                     Field(
                         "w4",
                         float,
                         30,
                         10,
-                        kwargs.get("w4")
+                        **kwargs,
                     ),
                     Field(
                         "w5",
                         float,
                         40,
                         10,
-                        kwargs.get("w5")
+                        **kwargs,
                     ),
                     Field(
                         "w6",
                         float,
                         50,
                         10,
-                        kwargs.get("w6")
+                        **kwargs,
                     ),
                     Field(
                         "w7",
                         float,
                         60,
                         10,
-                        kwargs.get("w7")
+                        **kwargs,
                     ),
                     Field(
                         "w8",
                         float,
                         70,
                         10,
-                        kwargs.get("w8")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -401,7 +404,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
                         str,
                         0,
                         80,
-                        kwargs.get("title")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -412,56 +415,56 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("c1")
+                        **kwargs,
                     ),
                     Field(
                         "c2",
                         int,
                         10,
                         10,
-                        kwargs.get("c2")
+                        **kwargs,
                     ),
                     Field(
                         "c3",
                         int,
                         20,
                         10,
-                        kwargs.get("c3")
+                        **kwargs,
                     ),
                     Field(
                         "c4",
                         int,
                         30,
                         10,
-                        kwargs.get("c4")
+                        **kwargs,
                     ),
                     Field(
                         "c5",
                         int,
                         40,
                         10,
-                        kwargs.get("c5")
+                        **kwargs,
                     ),
                     Field(
                         "c6",
                         int,
                         50,
                         10,
-                        kwargs.get("c6")
+                        **kwargs,
                     ),
                     Field(
                         "c7",
                         int,
                         60,
                         10,
-                        kwargs.get("c7")
+                        **kwargs,
                     ),
                     Field(
                         "c8",
                         int,
                         70,
                         10,
-                        kwargs.get("c8")
+                        **kwargs,
                     ),
                 ],
             ),

@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,62 @@ class SetNodeListCollect(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("sid")
+                        **kwargs,
                     ),
                     Field(
                         "da1",
                         float,
                         10,
                         10,
-                        kwargs.get("da1", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "da2",
                         float,
                         20,
                         10,
-                        kwargs.get("da2", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "da3",
                         float,
                         30,
                         10,
-                        kwargs.get("da3", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "da4",
                         float,
                         40,
                         10,
-                        kwargs.get("da4", 0.0 if use_lspp_defaults() else None)
+                        0.0,
+                        **kwargs,
                     ),
                     Field(
                         "solver",
                         str,
                         50,
                         10,
-                        kwargs.get("solver", "MECH" if use_lspp_defaults() else None)
+                        "MECH",
+                        **kwargs,
                     ),
                     Field(
                         "its",
                         str,
                         60,
                         10,
-                        kwargs.get("its", "1" if use_lspp_defaults() else None)
+                        "1",
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         str,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +111,56 @@ class SetNodeListCollect(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nid1")
+                        **kwargs,
                     ),
                     Field(
                         "nid2",
                         int,
                         10,
                         10,
-                        kwargs.get("nid2")
+                        **kwargs,
                     ),
                     Field(
                         "nid3",
                         int,
                         20,
                         10,
-                        kwargs.get("nid3")
+                        **kwargs,
                     ),
                     Field(
                         "nid4",
                         int,
                         30,
                         10,
-                        kwargs.get("nid4")
+                        **kwargs,
                     ),
                     Field(
                         "nid5",
                         int,
                         40,
                         10,
-                        kwargs.get("nid5")
+                        **kwargs,
                     ),
                     Field(
                         "nid6",
                         int,
                         50,
                         10,
-                        kwargs.get("nid6")
+                        **kwargs,
                     ),
                     Field(
                         "nid7",
                         int,
                         60,
                         10,
-                        kwargs.get("nid7")
+                        **kwargs,
                     ),
                     Field(
                         "nid8",
                         int,
                         70,
                         10,
-                        kwargs.get("nid8")
+                        **kwargs,
                     ),
                 ],
             ),

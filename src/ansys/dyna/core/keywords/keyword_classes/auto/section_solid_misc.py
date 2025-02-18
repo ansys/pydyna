@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -46,56 +45,58 @@ class SectionSolidMisc(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("secid")
+                        **kwargs,
                     ),
                     Field(
                         "elform",
                         int,
                         10,
                         10,
-                        kwargs.get("elform", 1 if use_lspp_defaults() else None)
+                        1,
+                        **kwargs,
                     ),
                     Field(
                         "aet",
                         int,
                         20,
                         10,
-                        kwargs.get("aet", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "cohoff",
                         float,
                         60,
                         10,
-                        kwargs.get("cohoff")
+                        **kwargs,
                     ),
                     Field(
                         "gaskeit",
                         float,
                         70,
                         10,
-                        kwargs.get("gaskeit")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -106,56 +107,56 @@ class SectionSolidMisc(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("cohthk")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         10,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         20,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         30,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         40,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         50,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         60,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                     Field(
                         "unused",
                         int,
                         70,
                         10,
-                        kwargs.get("unused")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -166,42 +167,44 @@ class SectionSolidMisc(KeywordBase):
                         int,
                         0,
                         10,
-                        kwargs.get("nip")
+                        **kwargs,
                     ),
                     Field(
                         "nxdof",
                         int,
                         10,
                         10,
-                        kwargs.get("nxdof")
+                        **kwargs,
                     ),
                     Field(
                         "ihgf",
                         int,
                         20,
                         10,
-                        kwargs.get("ihgf", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "itaj",
                         int,
                         30,
                         10,
-                        kwargs.get("itaj", 0 if use_lspp_defaults() else None)
+                        0,
+                        **kwargs,
                     ),
                     Field(
                         "lmc",
                         int,
                         40,
                         10,
-                        kwargs.get("lmc")
+                        **kwargs,
                     ),
                     Field(
                         "nhsv",
                         int,
                         50,
                         10,
-                        kwargs.get("nhsv")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -212,28 +215,28 @@ class SectionSolidMisc(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("xi")
+                        **kwargs,
                     ),
                     Field(
                         "eta",
                         float,
                         10,
                         10,
-                        kwargs.get("eta")
+                        **kwargs,
                     ),
                     Field(
                         "zeta",
                         float,
                         20,
                         10,
-                        kwargs.get("zeta")
+                        **kwargs,
                     ),
                     Field(
                         "wgt",
                         float,
                         30,
                         10,
-                        kwargs.get("wgt")
+                        **kwargs,
                     ),
                 ],
             ),
@@ -244,56 +247,56 @@ class SectionSolidMisc(KeywordBase):
                         float,
                         0,
                         10,
-                        kwargs.get("p1")
+                        **kwargs,
                     ),
                     Field(
                         "p2",
                         float,
                         10,
                         10,
-                        kwargs.get("p2")
+                        **kwargs,
                     ),
                     Field(
                         "p3",
                         float,
                         20,
                         10,
-                        kwargs.get("p3")
+                        **kwargs,
                     ),
                     Field(
                         "p4",
                         float,
                         30,
                         10,
-                        kwargs.get("p4")
+                        **kwargs,
                     ),
                     Field(
                         "p5",
                         float,
                         40,
                         10,
-                        kwargs.get("p5")
+                        **kwargs,
                     ),
                     Field(
                         "p6",
                         float,
                         50,
                         10,
-                        kwargs.get("p6")
+                        **kwargs,
                     ),
                     Field(
                         "p7",
                         float,
                         60,
                         10,
-                        kwargs.get("p7")
+                        **kwargs,
                     ),
                     Field(
                         "p8",
                         float,
                         70,
                         10,
-                        kwargs.get("p8")
+                        **kwargs,
                     ),
                 ],
             ),

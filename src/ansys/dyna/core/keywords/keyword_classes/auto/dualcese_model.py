@@ -22,7 +22,6 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.config import use_lspp_defaults
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class DualceseModel(KeywordBase):
@@ -41,14 +40,14 @@ class DualceseModel(KeywordBase):
                         str,
                         0,
                         10,
-                        kwargs.get("unitsys")
+                        **kwargs,
                     ),
                     Field(
                         "filename",
                         str,
                         10,
                         70,
-                        kwargs.get("filename")
+                        **kwargs,
                     ),
                 ],
             ),
