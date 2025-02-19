@@ -38,7 +38,18 @@ from keyword_generation.handlers.handler_base import KeywordHandler
 from keyword_generation.handlers.external_card import ExternalCardHandler
 from keyword_generation.handlers.series_card import SeriesCardHandler
 from keyword_generation.handlers.shared_field import SharedFieldHandler
-
+from keyword_generation.handlers.table_card import TableCardHandler
+from keyword_generation.handlers.table_card_group import TableCardGroupHandler
+from keyword_generation.handlers.override_field import OverrideFieldHandler
+from keyword_generation.handlers.rename_property import RenamePropertyHandler
+from keyword_generation.handlers.conditional_card import ConditionalCardHandler
+from keyword_generation.handlers.add_option import AddOptionHandler
+from keyword_generation.handlers.override_subkeyword import OverrideSubkeywordHandler
+from keyword_generation.handlers.skip_card import SkipCardHandler
+from keyword_generation.handlers.insert_card import InsertCardHandler
+from keyword_generation.handlers.replace_card import ReplaceCardHandler
+from keyword_generation.handlers.card_set import CardSetHandler
+from keyword_generation.handlers.reorder_card import ReorderCardHandler
 
 SKIPPED_KEYWORDS = set(
     [
@@ -94,29 +105,9 @@ class AdditionalCards:
         """return a copy of the additional card, since the client may mutate it."""
         return copy.deepcopy(self._cards[name])
 
-
-KWDM_INSTANCE = None
-MANIFEST = None
-ADDITIONAL_CARDS = None
-
-@dataclass
-class Insertion:
-    target_index: int = None
-    target_class: str = None
-    card: typing.Dict = None
-
-
-def get_card(setting: typing.Dict[str, str]):
-    source = setting["source"]
-    if source == "kwd-data":
-        data = KWDM_INSTANCE.get_keyword_data_dict(setting["keyword-name"])
-        card = data[setting["card-index"]]
-        return card
-
-    if source == "additional-cards":
-        return ADDITIONAL_CARDS[setting["card-name"]]
-
-    raise Exception()
+import keyword_generation.data_model as data_model
+from keyword_generation.data_model import get_card
+from keyword_generation.data_model.insertion import Insertion
 
 
 def get_classname(keyword: str):
@@ -135,204 +126,24 @@ def get_duplicate_field_names(cards) -> typing.List[str]:
     return duplicates
 
 
-def handle_reorder_cards(kwd_data, settings):
-    # TODO - mark the reorders and let that get settled after the handlers run
-    order = settings["order"]
-    kwd_data["cards"] = [kwd_data["cards"][i] for i in order]
-
-
-def handle_duplicate_cards(kwd_data, settings):
-    kwd_data["duplicate"] = True
-    for card_settings in settings:
-        duplicate_card = kwd_data["cards"][card_settings["index"]]
-        duplicate_card["duplicate"] = {
-            "name": card_settings["property-name"],
-            "length_func": card_settings.get("length-func", ""),
-            "active_func": card_settings.get("active-func", ""),
-        }
-
-
-def handle_card_sets(kwd_data, settings):
-    card_sets = []
-    has_options = False
-    for card_settings in settings:
-        card_set = {
-            "name": card_settings["name"],
-            "source_cards": []
-        }
-
-        for card_index, source_index in enumerate(card_settings["source-indices"]):
-            source_card = kwd_data["cards"][source_index]
-            source_card["source_index"] = source_card["index"]
-            source_card["index"] = card_index
-            source_card["mark_for_removal"] = 1
-            card_set["source_cards"].append(source_card)
-
-        if "source-options" in card_settings:
-            has_options = True
-            for option_index in card_settings["source-options"]:
-                source_option = kwd_data["options"][int(option_index)]
-                option = copy.deepcopy(source_option)
-                for card in option["cards"]:
-                    card_index += 1
-                    card["index"] = card_index
-                if "options" not in card_set:
-                    card_set["options"] = [option]
-                else:
-                    card_set["options"].extend([option])
-                source_option["mark_for_removal"] = 1
-
-        card = {
-            "set": {
-                "name": card_settings["name"]
-            },
-            "fields": [],
-            "index": card_settings["target-index"],
-            "target_index": card_settings["target-index"],
-            "length_func": card_settings.get("length-func", ""),
-            "active_func": card_settings.get("active-func", "")
-        }
-        insertion = Insertion(card_settings["target-index"], card_settings.get("target-name", ""), card)
-        kwd_data["card_insertions"].append(insertion)
-        card_sets.append(card_set)
-    kwd_data["card_sets"] = {"sets": card_sets, "options": has_options}
-
-
-def handle_replace_cards(kwd_data, settings):
-    for card_settings in settings:
-        index = card_settings["index"]
-        replacement = get_card(card_settings["card"])
-        replacement["index"] = index
-        kwd_data["cards"][index] = replacement
-
-
-def handle_insert_cards(kwd_data, settings):
-    for card_settings in settings:
-        index = card_settings["index"]
-        card = get_card(card_settings["card"])
-        insertion = Insertion(index, "", card)
-        kwd_data["card_insertions"].append(insertion)
-
-
-def handle_conditional_cards(kwd_data, settings):
-    for setting in settings:
-        index = setting["index"]
-        card = kwd_data["cards"][index]
-        card["func"] = setting["func"]
-
-
-def handle_duplicate_card_group(kwd_data, settings):
-    """group them and remove the originals"""
-    kwd_data["duplicate_group"] = True
-    for card_settings in settings:
-        indices = card_settings["indices"]
-        # build the card group
-        group = {
-            "duplicate_group": True,
-            "sub_cards": [],
-            "overall_name": card_settings["overall-name"],
-            "length_func": card_settings.get("length-func", ""),
-            "active_func": card_settings.get("active-func", ""),
-        }
-        for index in indices:
-            sub_card = kwd_data["cards"][index]
-            sub_card["mark_for_removal"] = 1
-            group["sub_cards"].append(sub_card)
-        # remove all the sub-cards
-        indices.sort(reverse=True)
-        for index in indices:
-            kwd_data["cards"][index]["mark_for_removal"] = 1
-        insertion = Insertion(min(indices), "", group)
-        kwd_data["card_insertions"].append(insertion)
-
-
-def handle_skipped_cards(kwd_data, settings):
-    """skip the indices or index from settings"""
-    if type(settings) == int:
-        skipped_card_indices = [settings]
-    else:
-        skipped_card_indices = settings
-    for index in skipped_card_indices:
-        kwd_data["cards"][index]["mark_for_removal"] = 1
-
-
-def handle_override_field(kwd_data, settings):
-    """override some fields"""
-    for setting in settings:
-        index = setting["index"]
-        name = setting["name"]
-        card = kwd_data["cards"][index]
-        for field in card["fields"]:
-            if field["name"].lower() == name:
-                if "readonly" in setting:
-                    field["readonly"] = setting["readonly"]
-                if "type" in setting:
-                    field["type"] = setting["type"]
-                if "position" in setting:
-                    field["position"] = setting["position"]
-                if "width" in setting:
-                    field["width"] = setting["width"]
-                if "default" in setting:
-                    field["default"] = setting["default"]
-                if "options" in setting:
-                    field["options"] = setting["options"]
-                if "new-name" in setting:
-                    field["name"] = setting["new-name"]
-
-
-def handle_rename_property(kwd_data, settings):
-    for setting in settings:
-        index = setting["index"]
-        name = setting["name"]
-        property_name = setting["property-name"]
-        card = kwd_data["cards"][index]
-        for field in card["fields"]:
-            if field["name"].lower() == name:
-                field["property_name"] = property_name
-
-
-def handle_override_subkeyword(kwd_data, settings) -> None:
-    kwd_data["subkeyword"] = settings
-
-
-def handle_add_option(kwd_data, settings):
-    def expand(card):
-        card = get_card(card)
-        if "active" in card:
-            card["func"] = card["active"]
-        return card
-
-    new_options = []
-    for setting in settings:
-        cards = [expand(card) for card in setting["cards"]]
-        new_option = {
-            "card_order": setting["card-order"],
-            "title_order": setting["title-order"],
-            "name": setting["option-name"],
-            "cards": cards,
-        }
-        new_options.append(new_option)
-    kwd_data["options"] = new_options
-
-
 # functions which return a copy of keyword data after applying the handling specified by the configuration
 HANDLERS = collections.OrderedDict(
     {
-        "reorder-card": handle_reorder_cards,
-        "table-card": handle_duplicate_cards,
-        "override-field": handle_override_field,
-        "replace-card": handle_replace_cards,
-        "insert-card": handle_insert_cards,
+        "reorder-card": ReorderCardHandler(),
+        "table-card": TableCardHandler(),
+        "override-field": OverrideFieldHandler(),
+        "replace-card": ReplaceCardHandler(),
+        "insert-card": InsertCardHandler(),
         "variable-card": SeriesCardHandler(),
-        "add-option": handle_add_option,
-        "card-set": handle_card_sets,
-        "conditional-card": handle_conditional_cards,
-        "rename-property": handle_rename_property,
-        "skip-card": handle_skipped_cards,
-        "table-card-group": handle_duplicate_card_group,
+        "add-option": AddOptionHandler(),
+        "card-set": CardSetHandler(),
+        "conditional-card": ConditionalCardHandler(),
+        "rename-property": RenamePropertyHandler(),
+        "skip-card": SkipCardHandler(),
+        "table-card-group": TableCardGroupHandler(),
         "external-card-implementation": ExternalCardHandler(),
         "shared-field": SharedFieldHandler(),
-        "override-subkeyword": handle_override_subkeyword,
+        "override-subkeyword": OverrideSubkeywordHandler(),
     }
 )
 
@@ -558,7 +369,7 @@ def get_keyword_data(keyword_name, keyword, settings):
     and with default transformations that are needed to produce
     valid python code.
     """
-    kwd_data = {"cards": KWDM_INSTANCE.get_keyword_data_dict(keyword)}
+    kwd_data = {"cards": data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)}
 
     set_keyword_identity(kwd_data, keyword_name, settings)
 
@@ -616,7 +427,7 @@ def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> None:
 def has_duplicate_fields(keyword: str, print_names: bool) -> bool:
     logging.info(f"checking {keyword} for duplicate fields")
     try:
-        cards = KWDM_INSTANCE.get_keyword_data_dict(keyword)
+        cards = data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)
     except Exception as e:
         logging.error(f"error handling keyword {keyword}")
         raise e
@@ -745,7 +556,7 @@ def handle_wildcards(keyword_options: typing.Dict, keyword: str) -> None:
         return
     if "wildcards_handled" in keyword_options.keys():
         return
-    for wildcard in MANIFEST["WILDCARDS"]:
+    for wildcard in data_model.MANIFEST["WILDCARDS"]:
         if match_wildcard(keyword, wildcard):
             merge_options(keyword_options, wildcard["generation-options"])
     keyword_options["wildcards_handled"] = True
@@ -755,7 +566,7 @@ def get_keyword_options(keyword: str, wildcards: bool = True) -> typing.Dict:
     """Returns the generation options of the given keyword from the manifest.  If apply_wildcards is True,
     this will return the generataion options of the keyword merged with the generation options of the
     wildard that matches this keyword, if any."""
-    keyword_options = MANIFEST.get(keyword, {})
+    keyword_options = data_model.MANIFEST.get(keyword, {})
     if wildcards:
         handle_wildcards(keyword_options, keyword)
     return keyword_options
@@ -800,7 +611,7 @@ def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.Li
     """Get keywords to generate. If a kwd name is not none, only generate
     it and its generations."""
     keywords = []
-    kwd_list = KWDM_INSTANCE.get_keywords_list()
+    kwd_list = data_model.KWDM_INSTANCE.get_keywords_list()
 
     # first get all aliases
     add_aliases(kwd_list)
@@ -848,19 +659,18 @@ def clean(output):
         print("Cleaning failed, files not found. Might be cleaned already")
 
 def load_inputs(this_folder, args):
-    global KWDM_INSTANCE, MANIFEST, ADDITIONAL_CARDS
     if args.kwd_file == "":
-        KWDM_INSTANCE = KWDM(os.path.join(this_folder, "kwd.json"))
+        data_model.KWDM_INSTANCE = KWDM(os.path.join(this_folder, "kwd.json"))
     else:
-        KWDM_INSTANCE = KWDM(args.kwd_file)
+        data_model.KWDM_INSTANCE = KWDM(args.kwd_file)
     if args.manifest == "":
-        MANIFEST = load_manifest(this_folder / "manifest.json")
+        data_model.MANIFEST = load_manifest(this_folder / "manifest.json")
     else:
-        MANIFEST = load_manifest(args.manifest)
+        data_model.MANIFEST = load_manifest(args.manifest)
     if args.additional_cards == "":
-        ADDITIONAL_CARDS = AdditionalCards(this_folder / "additional-cards.json")
+        data_model.ADDITIONAL_CARDS = AdditionalCards(this_folder / "additional-cards.json")
     else:
-        ADDITIONAL_CARDS = AdditionalCards(args.additional_cards)
+        data_model.ADDITIONAL_CARDS = AdditionalCards(args.additional_cards)
 
 
 def run_codegen(args):
