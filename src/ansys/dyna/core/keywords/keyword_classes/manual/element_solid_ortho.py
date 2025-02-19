@@ -23,9 +23,9 @@
 import typing
 
 from ansys.dyna.core.lib.card import Card, Field
-from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
+from ansys.dyna.core.lib.table_card_group import TableCardGroup
 
 
 class ElementSolidOrtho(KeywordBase):

@@ -28,11 +28,11 @@ import pandas as pd
 
 from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.card_interface import CardInterface
-from ansys.dyna.core.lib.table_card import TableCard, get_first_row, try_initialize_table
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 from ansys.dyna.core.lib.parameters import ParameterSet
+from ansys.dyna.core.lib.table_card import TableCard, get_first_row, try_initialize_table
 
 
 def _to_table_card(card: Card, length_func: typing.Callable) -> TableCard:
