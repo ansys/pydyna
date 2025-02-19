@@ -23,7 +23,6 @@
 """This script generates the keyword classes for the LSPP.  It uses the kwd.json file to get the keyword"""
 import argparse
 import copy
-import json
 import logging
 import os
 import shutil
@@ -34,7 +33,7 @@ from jinja2 import Environment, FileSystemLoader
 import keyword_generation.data_model as data_model
 from keyword_generation.generators import generate_class, generate_entrypoints
 
-from keyword_generation.utils import get_classname, get_this_folder, get_license_header, fix_keyword, handle_single_word_keyword
+from keyword_generation.utils import get_classname, get_this_folder, fix_keyword, handle_single_word_keyword
 
 
 SKIPPED_KEYWORDS = set(
@@ -51,35 +50,6 @@ SKIPPED_KEYWORDS = set(
     ]
 )
 
-
-class KWDM:
-    def __init__(self, filename):
-        with open(filename, encoding="utf-8") as f:
-            self._data: typing.Dict = json.load(f)
-
-    def get_keywords_list(self) -> typing.List[str]:
-        return list(self._data.keys())
-
-    def get_keyword_data_dict(self, name: str) -> typing.Dict:
-        return copy.deepcopy(self[name])
-
-    def __getitem__(self, name: str) -> typing.Dict:
-        return self._data[name]
-
-
-def load_manifest(filename) -> typing.Dict:
-    with open(filename) as f:
-        manifest = json.load(f)
-    return manifest
-
-class AdditionalCards:
-    def __init__(self, filename):
-        with open(filename) as f:
-            self._cards = json.load(f)
-
-    def __getitem__(self, name):
-        """return a copy of the additional card, since the client may mutate it."""
-        return copy.deepcopy(self._cards[name])
 
 def get_loader():
     template_folder = get_this_folder() / "templates"
@@ -238,18 +208,7 @@ def clean(output):
         print("Cleaning failed, files not found. Might be cleaned already")
 
 def load_inputs(this_folder, args):
-    if args.kwd_file == "":
-        data_model.KWDM_INSTANCE = KWDM(os.path.join(this_folder, "kwd.json"))
-    else:
-        data_model.KWDM_INSTANCE = KWDM(args.kwd_file)
-    if args.manifest == "":
-        data_model.MANIFEST = load_manifest(this_folder / "manifest.json")
-    else:
-        data_model.MANIFEST = load_manifest(args.manifest)
-    if args.additional_cards == "":
-        data_model.ADDITIONAL_CARDS = AdditionalCards(this_folder / "additional-cards.json")
-    else:
-        data_model.ADDITIONAL_CARDS = AdditionalCards(args.additional_cards)
+    return data_model.load(this_folder, args.kwd_file, args.manifest, args.additional_cards)
 
 def run_codegen(args):
     output = args.output
