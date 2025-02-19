@@ -34,6 +34,8 @@ import typing
 
 from jinja2 import Environment, FileSystemLoader
 
+import keyword_generation.data_model as data_model
+
 from keyword_generation.handlers.handler_base import KeywordHandler
 from keyword_generation.handlers.external_card import ExternalCardHandler
 from keyword_generation.handlers.series_card import SeriesCardHandler
@@ -51,6 +53,11 @@ from keyword_generation.handlers.replace_card import ReplaceCardHandler
 from keyword_generation.handlers.card_set import CardSetHandler
 from keyword_generation.handlers.reorder_card import ReorderCardHandler
 
+from keyword_generation.generators import generate_class
+
+from keyword_generation.utils import get_classname, get_this_folder, get_license_header, fix_keyword, handle_single_word_keyword
+
+
 SKIPPED_KEYWORDS = set(
     [
         # defined manually because of the variable length text card
@@ -64,15 +71,6 @@ SKIPPED_KEYWORDS = set(
         #"CONTROL_TIMESTEP",CONTROL_TIMESTEP is in the kwd.json now and should be generated issue #629
     ]
 )
-
-
-def get_this_folder():
-    return pathlib.Path(__file__).parent
-
-
-def get_license_header() -> str:
-    with open(get_this_folder() / "license_header.txt", "r", encoding="utf-8") as f:
-        return f.read()
 
 
 class KWDM:
@@ -104,26 +102,6 @@ class AdditionalCards:
     def __getitem__(self, name):
         """return a copy of the additional card, since the client may mutate it."""
         return copy.deepcopy(self._cards[name])
-
-import keyword_generation.data_model as data_model
-from keyword_generation.data_model import get_card
-from keyword_generation.data_model.insertion import Insertion
-
-
-def get_classname(keyword: str):
-    """convert CLASS_NAME_FOO to ClassNameFoo"""
-    tokens = keyword.split("_")
-    return "".join([word.title() for word in tokens])
-
-
-def get_duplicate_field_names(cards) -> typing.List[str]:
-    """returns names of duplicate fields in the cards or an empty list if there are none"""
-    field_names = []
-    for card in cards:
-        for field in card["fields"]:
-            field_names.append(field["name"])
-    duplicates = [item for item, count in collections.Counter(field_names).items() if count > 1]
-    return duplicates
 
 
 # functions which return a copy of keyword data after applying the handling specified by the configuration
@@ -188,7 +166,7 @@ def do_insertions(kwd_data):
     # [(a,b,c)] => insert b into c at index a
     insertion_targets: typing.List[typing.Tuple[int, typing.Dict, typing.List]] = []
     for insertion in kwd_data["card_insertions"]:
-        insertion: Insertion = insertion
+        insertion: data_model.Insertion = insertion
         insertion_index = insertion.target_index
         insertion_name = insertion.target_class
         insertion_card = insertion.card
@@ -345,17 +323,6 @@ def transform_data(data: typing.Dict[str, typing.Any]):
         [fix_card(card) for card in option["cards"]]
 
 
-def get_source_keyword(keyword, settings):
-    """Get the 'source' keyword to look up in LSPP structs.  Usually
-     its the keyword that its passed in, but in cases where one LSPP
-    keyword is generated into multiple classes - such as for
-    LOAD_SEGMENT => (LOAD_SEGMENT, LOAD_SEGMENT_ID) - this could be
-    overwritten by the "source-keyword" property.
-    """
-    source_keyword = settings.get("source-keyword", keyword)
-    return source_keyword
-
-
 def set_keyword_identity(kwd_data:  typing.Dict, keyword_name: str, settings: typing.Dict) -> None:
     tokens = keyword_name.split("_")
     kwd_data["keyword"] = tokens[0]
@@ -379,81 +346,6 @@ def get_keyword_data(keyword_name, keyword, settings):
     # default transformations to a valid format we need for jinja
     transform_data(kwd_data)
     return kwd_data
-
-
-def get_jinja_variable(base_variable: typing.Dict) -> typing.Dict:
-    jinja_variable = base_variable.copy()
-    jinja_variable.update(
-        {
-            "license": get_license_header(),
-            "openbrace": "{",
-            "closebrace": "}",
-            "repeated_element_types": {"int": "pd.Int32Dtype()", "float": "np.float64", "str": "str"},
-        }
-    )
-    return jinja_variable
-
-
-def get_base_variable(classname: str, keyword: str, keyword_options: typing.Dict) -> typing.Dict:
-    source_keyword = get_source_keyword(keyword, keyword_options)
-    generation_settings = keyword_options.get("generation-options", {})
-    keyword_data = get_keyword_data(keyword, source_keyword, generation_settings)
-    keyword_data["classname"] = classname
-    alias = get_alias(keyword)
-    alias_subkeyword = None
-    if alias:
-        alias_tokens = alias.split("_")
-        alias = get_classname(fix_keyword(alias))
-        alias_subkeyword = "_".join(alias_tokens[1:])
-    data = {
-        "keyword_data": keyword_data,
-        "alias": alias,
-        "alias_subkeyword": alias_subkeyword,
-    }
-    return data
-
-
-def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> None:
-    keyword = item["name"]
-    fixed_keyword = fix_keyword(keyword)
-    classname = item["options"].get("classname", get_classname(fixed_keyword))
-    base_variable = get_base_variable(classname, keyword, item["options"])
-    jinja_variable = get_jinja_variable(base_variable)
-    filename = os.path.join(lib_path, "auto", fixed_keyword.lower() + ".py")
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(env.get_template("keyword.j2").render(**jinja_variable))
-
-
-def has_duplicate_fields(keyword: str, print_names: bool) -> bool:
-    logging.info(f"checking {keyword} for duplicate fields")
-    try:
-        cards = data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)
-    except Exception as e:
-        logging.error(f"error handling keyword {keyword}")
-        raise e
-    duplicates = get_duplicate_field_names(cards)
-    if print_names and len(duplicates) > 0:
-        print(f"duplicates: {duplicates}")
-    return len(duplicates) > 0
-
-
-def handle_single_word_keyword(keyword: str) -> typing.Tuple[str, bool]:
-    tokens = keyword.split("_")
-    if len(tokens) == 2 and tokens[0] == tokens[1]:
-        return tokens[0]
-    return keyword
-
-
-def fix_keyword(keyword: str) -> str:
-    """returns a "fixed" keyword in two ways:
-    - a single word keyword will be defined from the kwdm as NAME_NAME,
-      and the fixed keyword is just NAME
-    - some keywords are not python and filesystem friendly, for example:
-      MAT_BILKHU/DUBOIS_FOAM becomes MAT_BILKHU_DUBOIS_FOAM"""
-    keyword = handle_single_word_keyword(keyword)
-    for bad_char in ["/", "-", " ", "(", ")"]:
-        keyword = keyword.replace(bad_char, "_")
-    return keyword
 
 
 def generate_entry_points(env: Environment, lib_path: str, keywords_list: typing.List[typing.Dict]) -> None:
@@ -494,30 +386,9 @@ def skip_generate_keyword_class(keyword: str) -> bool:
     return False
 
 
-KWD_TO_ALIAS: typing.Dict[str, str] = {}
-ALIAS_TO_KWD: typing.Dict[str, str] = {}
-
-
-def add_alias(keyword: str, alias: str):
-    KWD_TO_ALIAS[keyword] = alias
-    ALIAS_TO_KWD[alias] = keyword
-
-
-def get_alias(keyword: str) -> typing.Optional[str]:
-    return KWD_TO_ALIAS.get(keyword, None)
-
-
-def get_aliased_by(keyword: str):
-    return ALIAS_TO_KWD.get(keyword, None)
-
-
-def is_aliased(keyword: str):
-    return keyword in ALIAS_TO_KWD.keys()
-
-
 def get_undefined_alias_keywords(keywords_list: typing.List[typing.Dict]) -> typing.List[typing.Dict]:
     undefined_aliases: typing.List[typing.Dict] = []
-    for alias, kwd in ALIAS_TO_KWD.items():
+    for alias, kwd in data_model.ALIAS_TO_KWD.items():
         if alias not in [kwd["name"] for kwd in keywords_list]:
             fixed_keyword = fix_keyword(alias).lower()
             classname = get_classname(fixed_keyword)
@@ -576,7 +447,7 @@ def get_keyword_item(keyword: str) -> None:
     keyword_options = get_keyword_options(keyword)
     fixed_keyword = fix_keyword(keyword).lower()
     classname = keyword_options.get("classname", get_classname(fixed_keyword))
-    aliased_by = get_aliased_by(keyword)
+    aliased_by = data_model.get_aliased_by(keyword)
     if aliased_by:
         filename = fix_keyword(aliased_by).lower()
     else:
@@ -604,7 +475,7 @@ def add_aliases(kwd_list: typing.List[str]) -> None:
     for keyword in kwd_list:
         keyword_options = get_keyword_options(keyword, False)
         if "alias" in keyword_options:
-            add_alias(keyword, keyword_options["alias"])
+            data_model.add_alias(keyword, keyword_options["alias"])
 
 
 def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.List[typing.Dict]:
@@ -640,9 +511,9 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None) -> No
         name = item["name"]
         if skip_generate_keyword_class(name):
             continue
-        if is_aliased(name):
+        if data_model.is_aliased(name):
             continue
-        generate_class(env, lib_path, item)
+        generate_class(get_keyword_data, env, lib_path, item)
     keywords_list.extend(get_undefined_alias_keywords(keywords_list))
     if kwd_name == None:
         generate_entry_points(env, lib_path, keywords_list)

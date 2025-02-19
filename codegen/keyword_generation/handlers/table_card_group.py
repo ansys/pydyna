@@ -27,7 +27,7 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
             indices.sort(reverse=True)
             for index in indices:
                 kwd_data["cards"][index]["mark_for_removal"] = 1
-            insertion = gen.insertion.Insertion(min(indices), "", group)
+            insertion = gen.Insertion(min(indices), "", group)
             kwd_data["card_insertions"].append(insertion)
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
