@@ -148,7 +148,7 @@ def write_fields(
         fields to write
     values: List
         optional - list of values for the field. If not set, use the value property of each field.
-        used by DuplicateCard
+        used by TableCard
     format: format_type
         optional - format to write
 

@@ -43,7 +43,7 @@ def _check_type(value):
 
 
 def try_initialize_table(card, name: str, **kwargs):
-    """card is a DuplicateCard or a DuplicateCardGroup"""
+    """card is a TableCard or a TableCardGroup"""
     if name is not None:
         data = kwargs.get(name, None)
         if data is not None:
@@ -63,7 +63,7 @@ def get_first_row(fields: typing.List[Field], **kwargs) -> typing.Dict[str, typi
     return result
 
 
-class DuplicateCard(Card):
+class TableCard(Card):
     def __init__(
         self,
         fields: typing.List[Field],
@@ -101,8 +101,8 @@ class DuplicateCard(Card):
         if the constructor **kwargs included any of the fields used by
         the table. This is called the "first row"
 
-        Since DuplicateCard is used internally by DuplicateCardGroup,
-        it could be initialized by the duplicate card group, the first
+        Since TableCard is used internally by TableCardGroup,
+        it could be initialized by the table card group, the first
         row may contain fields used by other tables in the group.
         """
         handle_first_row = self._first_row is not None
@@ -276,4 +276,6 @@ class DuplicateCard(Card):
         content_lines = []
         content_lines.append(self._get_comment(self._format_type))
         output = "\n".join(content_lines)
-        return "DuplicateCard: \n" + output
+        return "TableCard: \n" + output
+
+DuplicateCard = TableCard

@@ -1,0 +1,1 @@
+from ansys.dyna.core.lib.duplicate_card import TableCard, get_first_row, try_initialize_table
