@@ -25,8 +25,6 @@ from keyword_generation.handlers.reorder_card import ReorderCardHandler
 
 from keyword_generation.utils import fix_keyword, get_license_header, get_classname, handle_single_word_keyword
 
-
-
 def _get_source_keyword(keyword, settings):
     """Get the 'source' keyword to look up in LSPP structs.  Usually
      its the keyword that its passed in, but in cases where one LSPP
@@ -146,9 +144,6 @@ def _set_keyword_identity(kwd_data:  typing.Dict, keyword_name: str, settings: t
     kwd_data["subkeyword"] = "_".join(tokens[1:])
     kwd_data["title"] = handle_single_word_keyword(keyword_name)
 
-
-##########################
-
 # functions which return a copy of keyword data after applying the handling specified by the configuration
 HANDLERS = collections.OrderedDict(
     {
@@ -240,6 +235,7 @@ def _add_option_indices(kwd_data):
         index += 1
 
 def _after_handle(kwd_data):
+    # TODO - move these to their respective handler
     _do_insertions(kwd_data)
     _delete_marked_indices(kwd_data)
     _add_option_indices(kwd_data)
@@ -251,7 +247,6 @@ def _before_handle(kwd_data):
     _add_indices(kwd_data)
     _prepare_for_insertion(kwd_data)
 
-
 def _handle_keyword_data(kwd_data, settings):
     _before_handle(kwd_data)
     # we have to iterate in the order of the handlers because right now the order still matters
@@ -262,9 +257,6 @@ def _handle_keyword_data(kwd_data, settings):
             continue
         handler.handle(kwd_data, handler_settings)
     _after_handle(kwd_data)
-##############################
-
-
 
 def _get_keyword_data(keyword_name, keyword, settings):
     """Gets the keyword data dict from kwdm.  Transforms it
