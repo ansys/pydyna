@@ -22,7 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.duplicate_card import DuplicateCard
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ParameterExpressionLocal(KeywordBase):
@@ -34,7 +34,7 @@ class ParameterExpressionLocal(KeywordBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._cards = [
-            DuplicateCard(
+            TableCard(
                 [
                     Field("prmr", str, 0, 10, None),
                     Field("expression", str, 10, 70, None),

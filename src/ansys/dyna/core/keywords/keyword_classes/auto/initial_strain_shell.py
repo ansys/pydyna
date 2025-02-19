@@ -22,7 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.duplicate_card import DuplicateCard
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.card_set import CardSet
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -96,7 +96,7 @@ class InitialStrainShellCardSet(Cards):
                     ),
                 ],
             ),
-            DuplicateCard(
+            TableCard(
                 [
                     Field("epsxx", float, 0, 10, 0.0),
                     Field("epsyy", float, 10, 10, 0.0),

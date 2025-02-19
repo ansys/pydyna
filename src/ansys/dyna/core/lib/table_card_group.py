@@ -28,18 +28,18 @@ import pandas as pd
 
 from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.card_interface import CardInterface
-from ansys.dyna.core.lib.duplicate_card import DuplicateCard, get_first_row, try_initialize_table
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 from ansys.dyna.core.lib.parameters import ParameterSet
+from ansys.dyna.core.lib.table_card import TableCard, get_first_row, try_initialize_table
 
 
-def _to_duplicate_card(card: Card, length_func: typing.Callable) -> DuplicateCard:
-    return DuplicateCard(card._fields, length_func, card._active_func)
+def _to_table_card(card: Card, length_func: typing.Callable) -> TableCard:
+    return TableCard(card._fields, length_func, card._active_func)
 
 
-class DuplicateCardGroup(CardInterface):
+class TableCardGroup(CardInterface):
     def __init__(
         self,
         cards: typing.List[Card],
@@ -49,7 +49,7 @@ class DuplicateCardGroup(CardInterface):
         format: format_type = format_type.default,
         **kwargs,
     ):
-        self._cards = [_to_duplicate_card(card, length_func) for card in cards]
+        self._cards = [_to_table_card(card, length_func) for card in cards]
         self._length_func = length_func
         self._active_func = active_func
         self.format = format
@@ -143,7 +143,7 @@ class DuplicateCardGroup(CardInterface):
         if format == None:
             format = self.format
 
-        def _as_buffer(card: DuplicateCard, add_newline: bool) -> io.StringIO:
+        def _as_buffer(card: TableCard, add_newline: bool) -> io.StringIO:
             card_buf = io.StringIO()
             card.write(format, card_buf, True)
             if add_newline:
@@ -200,7 +200,7 @@ class DuplicateCardGroup(CardInterface):
             return card._active_func()
         return True
 
-    def _get_active_cards(self) -> typing.List[DuplicateCard]:
+    def _get_active_cards(self) -> typing.List[TableCard]:
         return [card for card in self._cards if self._is_card_active(card)]
 
     def _get_unbounded_length(self) -> int:
@@ -226,4 +226,4 @@ class DuplicateCardGroup(CardInterface):
         for card in self._get_active_cards():
             content_lines.append(card._get_comment(self._format))
         output = "\n".join(content_lines)
-        return "DuplicateCardGroup: \n" + output
+        return "TableCardGroup: \n" + output

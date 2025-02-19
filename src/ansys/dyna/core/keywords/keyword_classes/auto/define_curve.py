@@ -22,7 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.duplicate_card import DuplicateCard
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -106,7 +106,7 @@ class DefineCurve(KeywordBase):
                     ),
                 ],
             ),
-            DuplicateCard(
+            TableCard(
                 [
                     Field("a1", float, 0, 20, 0.0),
                     Field("o1", float, 20, 20, 0.0),

@@ -25,14 +25,14 @@ import pandas as pd
 import pytest
 
 from ansys.dyna.core.lib.card import Field
-from ansys.dyna.core.lib.duplicate_card import DuplicateCard
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.format_type import format_type
 
 
 @pytest.mark.keywords
-def test_duplicate_card_read_bounded(string_utils):
+def test_table_card_read_bounded(string_utils):
     """test reading fixed number of lines"""
-    d = DuplicateCard(
+    d = TableCard(
         [
             Field("nid", int, 0, 8),
             Field("x", float, 8, 16),
@@ -60,9 +60,9 @@ def test_duplicate_card_read_bounded(string_utils):
 
 
 @pytest.mark.keywords
-def test_duplicate_card_read_unbounded(string_utils):
+def test_table_card_read_unbounded(string_utils):
     """test reading an unknown number of lines into an unbounded card"""
-    d = DuplicateCard(
+    d = TableCard(
         [
             Field("nid", int, 0, 8),
             Field("x", float, 8, 16),
@@ -89,9 +89,9 @@ def test_duplicate_card_read_unbounded(string_utils):
 
 
 @pytest.mark.keywords
-def test_duplicate_card_assign():
-    """test assigning dataframe to duplicate card"""
-    d = DuplicateCard(
+def test_table_card_assign():
+    """test assigning dataframe to table card"""
+    d = TableCard(
         [
             Field("nid", int, 0, 8),
             Field("x", float, 8, 16),
@@ -121,11 +121,11 @@ def test_duplicate_card_assign():
 
 
 @pytest.mark.keywords
-def test_duplicate_card_assign_wrong_types():
-    """test assigning wrong type as dataframe to duplicate card"""
+def test_table_card_assign_wrong_types():
+    """test assigning wrong type as dataframe to table card"""
 
     def assign():
-        d = DuplicateCard(
+        d = TableCard(
             [
                 Field("nid", int, 0, 8),
                 Field("x", float, 8, 16),
@@ -143,9 +143,9 @@ def test_duplicate_card_assign_wrong_types():
 
 
 @pytest.mark.keywords
-def test_duplicate_card_write_long_format(string_utils, ref_string):
-    """Test writing a duplicate card with the long format."""
-    d = DuplicateCard(
+def test_table_card_write_long_format(string_utils, ref_string):
+    """Test writing a table card with the long format."""
+    d = TableCard(
         [
             Field("nid", int, 0, 8),
             Field("x", float, 8, 16),
@@ -165,9 +165,9 @@ def test_duplicate_card_write_long_format(string_utils, ref_string):
 
 
 @pytest.mark.keywords
-def test_duplicate_card_read_long(string_utils, ref_string):
-    """Test writing a duplicate card with the long format."""
-    d = DuplicateCard(
+def test_table_card_read_long(string_utils, ref_string):
+    """Test writing a table card with the long format."""
+    d = TableCard(
         [
             Field("nid", int, 0, 8),
             Field("x", float, 8, 16),
@@ -187,8 +187,8 @@ def test_duplicate_card_read_long(string_utils, ref_string):
 
 
 @pytest.mark.keywords
-def test_write_inactive_duplicate_card():
-    card = DuplicateCard(
+def test_table_card_write_inactive():
+    card = TableCard(
         [
             Field("nid", int, 0, 8),
             Field("x", float, 8, 16),
@@ -204,8 +204,8 @@ def test_write_inactive_duplicate_card():
 
 
 @pytest.mark.keywords
-def test_write_empty_duplicate_card():
-    card = DuplicateCard(
+def test_table_card_write_empty():
+    card = TableCard(
         [
             Field("nid", int, 0, 8),
             Field("x", float, 8, 16),
@@ -220,7 +220,7 @@ def test_write_empty_duplicate_card():
     assert card.write() == ""
 
 @pytest.mark.keywords
-def test_duplicate_card_init_data_table():
+def test_table_card_init_data_table():
     node_ids = np.arange(30) + 1
     xs = np.zeros(30) + 0.1
     ys = np.zeros(30) + 0.2
@@ -230,7 +230,7 @@ def test_duplicate_card_init_data_table():
     data = {
         "foo": df
     }
-    card = DuplicateCard(
+    card = TableCard(
         [
             Field("nid", int, 0, 8),
             Field("x", float, 8, 16),
@@ -252,7 +252,7 @@ def test_duplicate_card_init_data_table():
 
 
 @pytest.mark.keywords
-def test_duplicate_card_init_data_scalar():
+def test_table_card_init_data_scalar():
 
     def _verify_dataframe(df):
         assert (len(df)) == 1
@@ -276,7 +276,7 @@ def test_duplicate_card_init_data_scalar():
     ]
 
     # bounded with a length of 0
-    card = DuplicateCard(
+    card = TableCard(
         fields,
         lambda: 0,
         lambda: True,
@@ -286,7 +286,7 @@ def test_duplicate_card_init_data_scalar():
     assert len(card.table) == 0
 
     # bounded with a length of 1
-    card = DuplicateCard(
+    card = TableCard(
         fields,
         lambda: 1,
         lambda: True,
@@ -296,7 +296,7 @@ def test_duplicate_card_init_data_scalar():
     _verify_dataframe(card.table)
 
     # unbounded
-    card = DuplicateCard(
+    card = TableCard(
         fields,
         None,
         **data

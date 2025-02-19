@@ -23,9 +23,9 @@
 import typing
 
 from ansys.dyna.core.lib.card import Card, Field
-from ansys.dyna.core.lib.duplicate_card_group import DuplicateCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
+from ansys.dyna.core.lib.table_card_group import TableCardGroup
 
 
 class ElementSolidOrtho(KeywordBase):
@@ -37,7 +37,7 @@ class ElementSolidOrtho(KeywordBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._cards = [
-            DuplicateCardGroup(
+            TableCardGroup(
                 [
                     Card(
                         [
@@ -182,7 +182,7 @@ class ElementSolidOrtho(KeywordBase):
 
     def set_legacy_format(self):
         self._cards = [
-            DuplicateCardGroup(
+            TableCardGroup(
                 [
                     Card(
                         [
