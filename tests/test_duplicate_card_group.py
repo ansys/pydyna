@@ -25,19 +25,19 @@ import io
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field
-from ansys.dyna.core.lib.duplicate_card_group import DuplicateCard, DuplicateCardGroup
+from ansys.dyna.core.lib.table_card_group import TableCard, TableCardGroup
 from ansys.dyna.core.lib.field_writer import write_fields
 from ansys.dyna.core.lib.format_type import format_type
 
 import pytest
 
 
-def _get_test_duplicate_group(bounded: bool, default_size: int=2, name = None, **kwargs) -> DuplicateCardGroup:
+def _get_test_table_card_group(bounded: bool, default_size: int=2, name = None, **kwargs) -> TableCardGroup:
     if bounded:
         lengthfunc = lambda: default_size
     else:
         lengthfunc = None
-    return DuplicateCardGroup(
+    return TableCardGroup(
         [
             Card(
                 [
@@ -74,12 +74,12 @@ def _get_test_duplicate_group(bounded: bool, default_size: int=2, name = None, *
     )
 
 
-def _get_row_data(dcg: DuplicateCardGroup, index: int) -> str:
+def _get_row_data(dcg: TableCardGroup, index: int) -> str:
     which_card_index = dcg._get_index_of_which_card(index)
     card_index = dcg._get_index_of_given_card(index)
     card = dcg._get_active_cards()[which_card_index]
 
-    def _get_card_row_data(card: DuplicateCard, index: int, format: format_type) -> str:
+    def _get_card_row_data(card: TableCard, index: int, format: format_type) -> str:
         """this is not optimized - used only by test cases"""
         values = card._get_row_values(index)
         s = io.StringIO()
@@ -90,9 +90,9 @@ def _get_row_data(dcg: DuplicateCardGroup, index: int) -> str:
 
 
 @pytest.mark.keywords
-def test_duplicate_card_group_bounded_empty():
-    """test bounded duplicate group"""
-    d = _get_test_duplicate_group(True)
+def test_table_card_group_bounded_empty():
+    """test bounded table group"""
+    d = _get_test_table_card_group(True)
     # the length is 6 even before data is assigned
     assert d._num_rows() == 6
 
@@ -106,9 +106,9 @@ def test_duplicate_card_group_bounded_empty():
 
 
 @pytest.mark.keywords
-def test_duplicate_card_group_unbounded_read(string_utils):
-    """test reading row data into duplicate group"""
-    d = _get_test_duplicate_group(False)
+def test_table_card_group_unbounded_read(string_utils):
+    """test reading row data into table group"""
+    d = _get_test_table_card_group(False)
     card_text = """       1       2       1       2       3       4       5       6       7       8
              0.1             0.2             0.3
              0.3             0.4             0.5
@@ -134,9 +134,9 @@ def test_duplicate_card_group_unbounded_read(string_utils):
 
 
 @pytest.mark.keywords
-def test_duplicate_card_group_unbounded_empty():
-    """test unbounded duplicate group"""
-    d = _get_test_duplicate_group(False)
+def test_table_card_group_unbounded_empty():
+    """test unbounded table group"""
+    d = _get_test_table_card_group(False)
     d.table = pd.DataFrame(
         {
             "eid": [1, 1],
@@ -163,10 +163,10 @@ def test_duplicate_card_group_unbounded_empty():
 
 
 @pytest.mark.keywords
-def test_duplicate_card_group_unbounded_read_long(string_utils, ref_string):
-    """test reading long row data into duplicate group"""
-    d = _get_test_duplicate_group(False)
-    card_text = ref_string.test_duplicate_card_group_long
+def test_table_card_group_unbounded_read_long(string_utils, ref_string):
+    """test reading long row data into table group"""
+    d = _get_test_table_card_group(False)
+    card_text = ref_string.test_table_card_group_long
     d.format = format_type.long
     d.read(string_utils.as_buffer(card_text))
     tables = [card.table for card in d._cards]
@@ -187,8 +187,8 @@ def test_duplicate_card_group_unbounded_read_long(string_utils, ref_string):
 
 
 @pytest.mark.keywords
-def test_duplicate_card_group_assign_column():
-    d = _get_test_duplicate_group(False)
+def test_table_card_group_assign_column():
+    d = _get_test_table_card_group(False)
     d.table = pd.DataFrame(
         {
             "eid": [1, 1],
@@ -215,23 +215,23 @@ def test_duplicate_card_group_assign_column():
 
 
 @pytest.mark.keywords
-def test_write_inactive_duplicate_card_group():
-    card = _get_test_duplicate_group(False)
+def test_write_inactive_table_card_group():
+    card = _get_test_table_card_group(False)
     card._active_func = lambda: False
     assert card.write() == ""
-    card = _get_test_duplicate_group(True)
+    card = _get_test_table_card_group(True)
     card._active_func = lambda: False
     assert card.write() == ""
 
 
 @pytest.mark.keywords
-def test_write_empty_duplicate_card_group():
-    d = _get_test_duplicate_group(False)
+def test_write_empty_table_card_group():
+    d = _get_test_table_card_group(False)
     assert d.write() == ""
 
 
 @pytest.mark.keywords
-def test_duplicate_card_group_init_data_table():
+def test_table_card_group_init_data_table():
     df = pd.DataFrame(
         {
             "eid": [1, 1],
@@ -256,7 +256,7 @@ def test_duplicate_card_group_init_data_table():
     data = {
         "foo": df
     }
-    card = _get_test_duplicate_group(False, name="foo", **data)
+    card = _get_test_table_card_group(False, name="foo", **data)
     table = card.table
     assert (len(table)) == 2
     for column in ["eid", "n7", "a1", "d2"]:
@@ -264,7 +264,7 @@ def test_duplicate_card_group_init_data_table():
         assert len(df[column].compare(table[column])) == 0, f"{column} column values don't match"
 
 @pytest.mark.keywords
-def test_duplicate_card_group_init_data_scalar():
+def test_table_card_group_init_data_scalar():
 
     def _verify_dataframe(df):
         assert (len(df)) == 1
@@ -280,15 +280,15 @@ def test_duplicate_card_group_init_data_scalar():
     }
 
     # bounded with a length of 0
-    card = _get_test_duplicate_group(True, default_size=0, **data)
+    card = _get_test_table_card_group(True, default_size=0, **data)
     assert len(card.table) == 0
 
     # bounded with a length of 1
-    card = _get_test_duplicate_group(True, default_size=1, **data)
+    card = _get_test_table_card_group(True, default_size=1, **data)
 
     _verify_dataframe(card.table)
 
     # unbounded
-    card = _get_test_duplicate_group(False, **data)
+    card = _get_test_table_card_group(False, **data)
 
     _verify_dataframe(card.table)

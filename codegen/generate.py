@@ -319,7 +319,7 @@ def handle_add_option(kwd_data, settings):
 HANDLERS = collections.OrderedDict(
     {
         "reorder-card": handle_reorder_cards,
-        "duplicate-card": handle_duplicate_cards,
+        "table-card": handle_duplicate_cards,
         "override-field": handle_override_field,
         "replace-card": handle_replace_cards,
         "insert-card": handle_insert_cards,
@@ -329,7 +329,7 @@ HANDLERS = collections.OrderedDict(
         "conditional-card": handle_conditional_cards,
         "rename-property": handle_rename_property,
         "skip-card": handle_skipped_cards,
-        "duplicate-card-group": handle_duplicate_card_group,
+        "table-card-group": handle_duplicate_card_group,
         "external-card-implementation": ExternalCardHandler(),
         "shared-field": SharedFieldHandler(),
         "override-subkeyword": handle_override_subkeyword,

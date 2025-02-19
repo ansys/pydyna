@@ -22,7 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.duplicate_card import DuplicateCard
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -50,7 +50,7 @@ class DefineTransformation(KeywordBase):
                     ),
                 ],
             ),
-            DuplicateCard(
+            TableCard(
                 [
                     Field("option", str, 0, 10, "MIRROR"),
                     Field("a1", float, 10, 10, None),

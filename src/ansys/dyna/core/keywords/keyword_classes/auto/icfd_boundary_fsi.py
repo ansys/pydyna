@@ -22,7 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.duplicate_card import DuplicateCard
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class IcfdBoundaryFsi(KeywordBase):
@@ -34,7 +34,7 @@ class IcfdBoundaryFsi(KeywordBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._cards = [
-            DuplicateCard(
+            TableCard(
                 [
                     Field("pid", int, 0, 10, None),
                 ],

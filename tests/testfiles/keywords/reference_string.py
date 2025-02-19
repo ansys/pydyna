@@ -260,7 +260,7 @@ $#             secid              elform                shrf                 nip
 
 test_text_card_long = "$#                                                                                                                                                      function"
 
-test_duplicate_card_group_long = """                   1                   2                   1                   2                   3                   4                   5                   6                   7                   8
+test_table_card_group_long = """                   1                   2                   1                   2                   3                   4                   5                   6                   7                   8
                  0.1                 0.2                 0.3
                  0.3                 0.4                 0.5
                    1                   2                   5                   6                   7                   8                   1                   3                   2                   4

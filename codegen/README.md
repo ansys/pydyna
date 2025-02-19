@@ -52,11 +52,11 @@ Corrections include:
 
 Supplements include:
     - adding aliases - see `Appendix A - Aliasing`
-    - cards that repeat, handled as a two dimensional table ("duplicate-card")
+    - cards that repeat, handled as a two dimensional table ("table-card")
     - A field represented as a one-dimensional array that repeat across cards ("variable-card")
     - A set of adjacent cards with their own specification. These may repeat ("card-set")
     - A card that is only active under a condition ("conditional-card")
-    - A set of adjacent cards that repeat, handled as a two dimensional table ("duplicate-card-group")
+    - A set of adjacent cards that repeat, handled as a two dimensional table ("table-card-group")
     - Adding option cards ("add-option")
     - A field shared across multiple cards with only one meaning ("shared-field")
 
