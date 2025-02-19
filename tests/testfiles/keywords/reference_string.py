@@ -1152,21 +1152,29 @@ test_set_part_list_generate_ref2 = """*SET_PART_LIST_GENERATE
    2000000   2000025   2000100   2000200   2000500   2000600
    2000700   2000800   2000900   2001000"""
 
-test_contact_1d_id_mpp1_mpp2 = """*CONTACT_1D_ID_MPP
+test_contact_automatic_single_surface_id_mpp1_mpp2 = """*CONTACT_AUTOMATIC_SINGLE_SURFACE_ID_MPP
 $#     cid                                                               heading
                                                                                 
 $#  ignore      bckt    lcbckt    ns2trk   inititr    parmax    unused    cparm8
          0       200                   3         2    1.0005                   0
 $#    mpp2   chksegs     pensf   grpable
 &                  0       1.0         0
-$#   nsidr     nsidc       err      sigc        gb      smax       exp
-                           0.0       0.0       0.0       0.0       0.0"""
+$#    ssid      msid     sstyp     mstyp    sboxid    mboxid       spr       mpr
+                                                                                
+$#      fs        fd        dc        vc       vdc    penchk        bt        dt
+       0.0       0.0       0.0       0.0       0.0         0       0.0       0.0
+$#     sfs       sfm       sst       mst      sfst      sfmt       fsf       vsf
+       1.0       1.0                           1.0       1.0       1.0       1.0"""
 
-test_contact_1d_mpp1 = """*CONTACT_1D_MPP
+test_contact_automatic_single_surface_1d_mpp1 = """*CONTACT_AUTOMATIC_SINGLE_SURFACE_MPP
 $#  ignore      bckt    lcbckt    ns2trk   inititr    parmax    unused    cparm8
          0       200                   3         2    1.0005                   0
-$#   nsidr     nsidc       err      sigc        gb      smax       exp
-                           0.0       0.0       0.0       0.0       0.0"""
+$#    ssid      msid     sstyp     mstyp    sboxid    mboxid       spr       mpr
+                                                                                
+$#      fs        fd        dc        vc       vdc    penchk        bt        dt
+       0.0       0.0       0.0       0.0       0.0         0       0.0       0.0
+$#     sfs       sfm       sst       mst      sfst      sfmt       fsf       vsf
+       1.0       1.0                           1.0       1.0       1.0       1.0"""
 
 test_contact_automatic_single_surface = """*CONTACT_AUTOMATIC_SINGLE_SURFACE
 $#    ssid      msid     sstyp     mstyp    sboxid    mboxid       spr       mpr
