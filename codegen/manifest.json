@@ -208,7 +208,7 @@
     },
     "DEFINE_TRANSFORMATION": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 1,
                     "property-name": "transforms"
@@ -239,7 +239,7 @@
     },
     "PARAMETER_LOCAL": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "parameters"
@@ -249,7 +249,7 @@
     },
     "PARAMETER_EXPRESSION": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "parameters"
@@ -259,7 +259,7 @@
     },
     "PARAMETER_EXPRESSION_LOCAL": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "parameters"
@@ -306,7 +306,7 @@
                     }
                 }
             ],
-            "duplicate-card-group":[
+            "table-card-group":[
                 {
                     "indices": [0, 1],
                     "overall-name": "parts"
@@ -545,7 +545,7 @@
                     "func": "self.elform in [101, 102, 103, 104, 105]"
                 }
             ],
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 4,
                     "property-name": "integration_points",
@@ -564,7 +564,7 @@
                     "func": "not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT']"
                 }
             ],
-            "duplicate-card-group": [
+            "table-card-group": [
                 {
                     "indices": [0, 1],
                     "overall-name": "transformation"
@@ -630,7 +630,7 @@
     },
     "ELEMENT_SOLID_ORTHO": {
         "generation-options": {
-            "duplicate-card-group": [
+            "table-card-group": [
                 {
                     "indices": [0, 1, 2],
                     "overall-name": "elements"
@@ -640,7 +640,7 @@
     },
     "SECTION_SOLID": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 2,
                     "property-name": "integration_points",
@@ -692,7 +692,7 @@
     },
     "DEFINE_CURVE": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 1,
                     "property-name": "curves"
@@ -770,7 +770,7 @@
                     "func": "self.n == 0"
                 }
             ],
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 4,
                     "property-name": "constants"
@@ -799,7 +799,7 @@
                     "func": "self.n == 0 or self.n == -1"
                 }
             ],
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 5,
                     "property-name": "constants"
@@ -829,7 +829,7 @@
     "MAT_124": {
         "alias": "MAT_PLASTICITY_COMPRESSION_TENSION",
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 4,
                     "property-name": "constants"
@@ -841,7 +841,7 @@
         "alias": "MAT_SIMPLIFIED_RUBBER/FOAM",
         "generation-options": {
             "skip-card": 2,
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 4,
                     "property-name": "constants"
@@ -851,7 +851,7 @@
     },
     "MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 4,
                     "property-name": "constants"
@@ -861,7 +861,7 @@
     },
     "MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 3,
                     "property-name": "constants"
@@ -871,7 +871,7 @@
     },
     "MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE_LOG_LOG_INTERPOLATION": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 4,
                     "property-name": "constants"
@@ -881,7 +881,7 @@
     },
     "MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION_WITH_FAILURE": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 4,
                     "property-name": "constants"
@@ -905,7 +905,7 @@
     "MAT_196" : {
         "alias": "MAT_GENERAL_SPRING_DISCRETE_BEAM",
         "generation-options": {
-            "duplicate-card-group": [
+            "table-card-group": [
                 {
                     "indices": [1, 2],
                     "overall-name": "springs"
@@ -1043,7 +1043,7 @@
                     "func": "self.atype and abs(self.atype) == 1"
                 }
             ],
-            "duplicate-card-group": [
+            "table-card-group": [
                 {
                     "indices": [7, 8, 9],
                     "overall-name": "anisotropic_settings",
@@ -1542,7 +1542,7 @@
                     "name": "InitialStrainShellCardSet"
                 }
             ],
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 1,
                     "property-name": "strains",
@@ -1586,7 +1586,7 @@
     },
     "ELEMENT_SHELL": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "elements"
@@ -1596,7 +1596,7 @@
     },
     "ELEMENT_SHELL_THICKNESS": {
         "generation-options": {
-            "duplicate-card-group": [
+            "table-card-group": [
                 {
                     "indices": [0, 1, 2],
                     "overall-name": "elements"
@@ -1612,7 +1612,7 @@
     },
     "ELEMENT_SOLID": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "elements"
@@ -1622,7 +1622,7 @@
     },
     "NODE_NODE": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "nodes"
@@ -1632,7 +1632,7 @@
     },
     "SET_SEGMENT": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 1,
                     "property-name": "segments"
@@ -1642,7 +1642,7 @@
     },
     "DEFINE_SD_ORIENTATION": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "vectors"
@@ -1652,7 +1652,7 @@
     },
     "ELEMENT_BEAM": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "elements"
@@ -1662,7 +1662,7 @@
     },
     "ELEMENT_DISCRETE": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "elements"
@@ -1672,7 +1672,7 @@
     },
     "BOUNDARY_SPC_NODE": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "nodes"
@@ -1924,7 +1924,7 @@
     },
     "MESH_NODE":{
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "nodes"
@@ -1934,7 +1934,7 @@
     },
     "MESH_SURFACE_NODE":{
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "nodes"
@@ -1944,7 +1944,7 @@
     },
     "MESH_SURFACE_ELEMENT":{
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "elements"
@@ -1954,7 +1954,7 @@
     },
     "ICFD_DATABASE_FLUX":{
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "boundaries"
@@ -1964,7 +1964,7 @@
     },
     "ICFD_BOUNDARY_FREESLIP":{
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "boundaries"
@@ -1974,7 +1974,7 @@
     },
     "ICFD_BOUNDARY_NONSLIP":{
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "boundaries"
@@ -1984,7 +1984,7 @@
     },
     "ICFD_BOUNDARY_FSI":{
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "boundaries"
@@ -1994,7 +1994,7 @@
     },
     "ICFD_BOUNDARY_FSI_EXCLUDE":{
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "boundaries"
@@ -2004,7 +2004,7 @@
     },
     "ICFD_BOUNDARY_PRESCRIBED_PRE":{
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "boundaries"
@@ -2027,7 +2027,7 @@
                         "option-name": "TITLE"
                     }
                 ],
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "nodes"
@@ -2050,7 +2050,7 @@
                         "option-name": "TITLE"
                     }
                 ],
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 1,
                     "property-name": "nodes"
@@ -2060,7 +2060,7 @@
     },
     "CONSTRAINED_ADAPTIVITY": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "constrains"
@@ -2070,7 +2070,7 @@
     },
     "CONSTRAINED_NODAL_RIGID_BODY": {
         "generation-options": {
-            "duplicate-card-group": [
+            "table-card-group": [
                 {
                     "indices": [0],
                     "overall-name": "constrained_nodal_rigid_bodies"
@@ -2168,7 +2168,7 @@
     },
     "ELEMENT_SOLID (ten nodes format)": {
         "generation-options": {
-            "duplicate-card-group":[
+            "table-card-group":[
                 {
                     "indices": [0, 1],
                     "overall-name": "elements"
@@ -2178,7 +2178,7 @@
     },
     "LOAD_NODE_POINT": {
         "generation-options": {
-            "duplicate-card": [
+            "table-card": [
                 {
                     "index": 0,
                     "property-name": "nodes"
