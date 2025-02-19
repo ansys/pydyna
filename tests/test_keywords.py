@@ -841,14 +841,14 @@ def test_set_node_list(ref_string):
 
 
 @pytest.mark.keywords
-def test_contact_1d(ref_string):
-    c = kwd.Contact1D()
+def test_contact_id_options(ref_string):
+    c = kwd.ContactAutomaticSingleSurface()
     c.options["ID"].active = True
     c.options["MPP"].active = True
-    assert c.write() == ref_string.test_contact_1d_id_mpp1_mpp2
+    assert c.write() == ref_string.test_contact_automatic_single_surface_id_mpp1_mpp2
     c.options["ID"].active = False
     c.mpp2 = False
-    assert c.write() == ref_string.test_contact_1d_mpp1
+    assert c.write() == ref_string.test_contact_automatic_single_surface_1d_mpp1
 
 
 @pytest.mark.keywords
