@@ -22,7 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.duplicate_card_group import DuplicateCardGroup
+from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -298,7 +298,7 @@ class Mat295(KeywordBase):
                 ],
                 lambda: self.atype and abs(self.atype) == 1,
             ),
-            DuplicateCardGroup(
+            TableCardGroup(
                 [
                     Card(
                             [

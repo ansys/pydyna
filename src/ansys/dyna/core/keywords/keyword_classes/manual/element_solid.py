@@ -25,8 +25,8 @@
 import typing
 
 from ansys.dyna.core.lib.card import Card, Field
-from ansys.dyna.core.lib.duplicate_card import DuplicateCard
-from ansys.dyna.core.lib.duplicate_card_group import DuplicateCardGroup
+from ansys.dyna.core.lib.table_card import TableCard
+from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 
@@ -41,7 +41,7 @@ class ElementSolid(KeywordBase):
         """Initialize the ElementSolid class"""
         super().__init__(**kwargs)
         self._cards = [
-            DuplicateCardGroup(
+            TableCardGroup(
                 [
                     Card(
                         [
@@ -144,7 +144,7 @@ class ElementSolid(KeywordBase):
     def set_legacy_format(self):
         """Sets the legacy format."""
         self._cards = [
-            DuplicateCard(
+            TableCard(
                 [
                     Field("eid", int, 0, 8),
                     Field("pid", int, 8, 8),

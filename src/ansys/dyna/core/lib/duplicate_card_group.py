@@ -227,5 +227,3 @@ class TableCardGroup(CardInterface):
             content_lines.append(card._get_comment(self._format))
         output = "\n".join(content_lines)
         return "TableCardGroup: \n" + output
-
-DuplicateCardGroup = TableCardGroup

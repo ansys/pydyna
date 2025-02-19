@@ -22,7 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.duplicate_card import DuplicateCard
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -298,7 +298,7 @@ class Mat077O(KeywordBase):
                 ],
                 lambda: self.n == 0 or self.n == -1,
             ),
-            DuplicateCard(
+            TableCard(
                 [
                     Field("gi", float, 0, 10, None),
                     Field("betai", float, 10, 10, None),

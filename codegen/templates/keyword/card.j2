@@ -30,7 +30,7 @@
                 **kwargs
             ),
 {% elif card.duplicate %}
-            DuplicateCard(
+            TableCard(
                 [
 {% for field in card.fields %}
                     Field("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {{field.default}}),
@@ -48,7 +48,7 @@
                 **kwargs,
             ),
 {% elif card.duplicate_group %}
-            DuplicateCardGroup(
+            TableCardGroup(
                 [
 {% for sub_card in card.sub_cards %}
                     Card(

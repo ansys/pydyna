@@ -277,5 +277,3 @@ class TableCard(Card):
         content_lines.append(self._get_comment(self._format_type))
         output = "\n".join(content_lines)
         return "TableCard: \n" + output
-
-DuplicateCard = TableCard
