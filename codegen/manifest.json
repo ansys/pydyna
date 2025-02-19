@@ -126,6 +126,20 @@
         {
             "type": "prefix",
             "patterns": ["CONTACT"],
+            "exclusions": ["CONTACT_ADD_WEAR",
+                "CONTACT_AUTO_MOVE",
+                "CONTACT_COUPLING",
+                "CONTACT_ENTITY",
+                "CONTACT_EXCLUDE_INTERACTION",
+                "CONTACT_FORCE_TRANSDUCER",
+                "CONTACT_GEBOND",
+                "CONTACT_GUIDED_CABLE",
+                "CONTACT_INTERIOR",
+                "CONTACT_RIGID_SURFACE",
+                "CONTACT_SPG",
+                "CONTACT_1D",
+                "CONTACT_2D"
+            ],
             "generation-options": {
                 "add-option": [
                     {
@@ -153,6 +167,83 @@
                             }
                         ],
                         "option-name": "MPP"
+                    },
+                    {
+                        "card-order": 1,
+                        "title-order": 0,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "CONTACT_CARD_A"
+                            }
+                        ],
+                        "option-name": "A"
+                    },
+                    {
+                        "card-order": 2,
+                        "title-order": 0,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "CONTACT_CARD_B"
+                            }
+                        ],
+                        "option-name": "B"
+                    },
+                    {
+                        "card-order": 3,
+                        "title-order": 0,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "CONTACT_CARD_C"
+                            }
+                        ],
+                        "option-name": "C"
+                    },
+                    {
+                        "card-order": 4,
+                        "title-order": 0,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "CONTACT_CARD_D"
+                            }
+                        ],
+                        "option-name": "D"
+                    },
+                    {
+                        "card-order": 5,
+                        "title-order": 0,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "CONTACT_CARD_E"
+                            }
+                        ],
+                        "option-name": "E"
+                    },
+                    {
+                        "card-order": 6,
+                        "title-order": 0,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "CONTACT_CARD_F"
+                            }
+                        ],
+                        "option-name": "F"
+                    },
+                    {
+                        "card-order": 7,
+                        "title-order": 0,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "CONTACT_CARD_G"
+                            }
+                        ],
+                        "option-name": "G"
                     }
                 ]
             }
@@ -323,89 +414,6 @@
                     "source-options": [0],
                     "target-index": 0,
                     "name": "HourglassCardSet"
-                }
-            ]
-        }
-    },
-    "CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET": {
-        "generation-options": {
-            "add-option": [
-                {
-                    "card-order": 1,
-                    "title-order": 0,
-                    "cards": [
-                        {
-                            "source": "additional-cards",
-                            "card-name": "CONTACT_CARD_A"
-                        }
-                    ],
-                    "option-name": "A"
-                },
-                {
-                    "card-order": 2,
-                    "title-order": 0,
-                    "cards": [
-                        {
-                            "source": "additional-cards",
-                            "card-name": "CONTACT_CARD_B"
-                        }
-                    ],
-                    "option-name": "B"
-                },
-                {
-                    "card-order": 3,
-                    "title-order": 0,
-                    "cards": [
-                        {
-                            "source": "additional-cards",
-                            "card-name": "CONTACT_CARD_C"
-                        }
-                    ],
-                    "option-name": "C"
-                },
-                {
-                    "card-order": 4,
-                    "title-order": 0,
-                    "cards": [
-                        {
-                            "source": "additional-cards",
-                            "card-name": "CONTACT_CARD_D"
-                        }
-                    ],
-                    "option-name": "D"
-                },
-                {
-                    "card-order": 5,
-                    "title-order": 0,
-                    "cards": [
-                        {
-                            "source": "additional-cards",
-                            "card-name": "CONTACT_CARD_E"
-                        }
-                    ],
-                    "option-name": "E"
-                },
-                {
-                    "card-order": 6,
-                    "title-order": 0,
-                    "cards": [
-                        {
-                            "source": "additional-cards",
-                            "card-name": "CONTACT_CARD_F"
-                        }
-                    ],
-                    "option-name": "F"
-                },
-                {
-                    "card-order": 7,
-                    "title-order": 0,
-                    "cards": [
-                        {
-                            "source": "additional-cards",
-                            "card-name": "CONTACT_CARD_G"
-                        }
-                    ],
-                    "option-name": "G"
                 }
             ]
         }
