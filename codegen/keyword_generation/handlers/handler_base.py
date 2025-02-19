@@ -1,6 +1,7 @@
 import abc
 import typing
 
+
 class KeywordHandler(metaclass=abc.ABCMeta):
     """Abstract base class for keyword handlers."""
 

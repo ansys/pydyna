@@ -25,6 +25,7 @@ from keyword_generation.handlers.reorder_card import ReorderCardHandler
 
 from keyword_generation.utils import fix_keyword, get_license_header, get_classname, handle_single_word_keyword
 
+
 def _get_source_keyword(keyword, settings):
     """Get the 'source' keyword to look up in LSPP structs.  Usually
      its the keyword that its passed in, but in cases where one LSPP
@@ -34,6 +35,7 @@ def _get_source_keyword(keyword, settings):
     """
     source_keyword = settings.get("source-keyword", keyword)
     return source_keyword
+
 
 def _get_jinja_variable(base_variable: typing.Dict) -> typing.Dict:
     jinja_variable = base_variable.copy()
@@ -47,6 +49,7 @@ def _get_jinja_variable(base_variable: typing.Dict) -> typing.Dict:
     )
     return jinja_variable
 
+
 def _get_fields(card: typing.Dict) -> typing.List[typing.Dict[str, typing.Any]]:
     if "duplicate_group" in card:
         fields = []
@@ -54,6 +57,7 @@ def _get_fields(card: typing.Dict) -> typing.List[typing.Dict[str, typing.Any]]:
             fields.extend(sub_card["fields"])
         return fields
     return card["fields"]
+
 
 def _transform_data(data: typing.Dict[str, typing.Any]):
     """applies the following transformations to data:
@@ -138,11 +142,13 @@ def _transform_data(data: typing.Dict[str, typing.Any]):
     for option in data.get("options", []):
         [fix_card(card) for card in option["cards"]]
 
-def _set_keyword_identity(kwd_data:  typing.Dict, keyword_name: str, settings: typing.Dict) -> None:
+
+def _set_keyword_identity(kwd_data: typing.Dict, keyword_name: str, settings: typing.Dict) -> None:
     tokens = keyword_name.split("_")
     kwd_data["keyword"] = tokens[0]
     kwd_data["subkeyword"] = "_".join(tokens[1:])
     kwd_data["title"] = handle_single_word_keyword(keyword_name)
+
 
 # functions which return a copy of keyword data after applying the handling specified by the configuration
 HANDLERS = collections.OrderedDict(
@@ -164,6 +170,7 @@ HANDLERS = collections.OrderedDict(
         "override-subkeyword": OverrideSubkeywordHandler(),
     }
 )
+
 
 def _do_insertions(kwd_data):
     # [(a,b,c)] => insert b into c at index a
@@ -197,6 +204,7 @@ def _do_insertions(kwd_data):
     for index, item, container in insertion_targets:
         container.insert(index, item)
 
+
 def _delete_marked_indices(kwd_data):
     marked_indices = []
     for index, card in enumerate(kwd_data["cards"]):
@@ -219,13 +227,16 @@ def _delete_marked_indices(kwd_data):
         if len(options_list) == 0:
             del kwd_data["options"]
 
+
 def _add_indices(kwd_data):
     # handlers might point to cards by a specific index.
     for index, card in enumerate(kwd_data["cards"]):
         card["index"] = index
 
+
 def _prepare_for_insertion(kwd_data):
     kwd_data["card_insertions"] = []
+
 
 def _add_option_indices(kwd_data):
     index = len(kwd_data["cards"])
@@ -233,6 +244,7 @@ def _add_option_indices(kwd_data):
         for card in options["cards"]:
             card["index"] = index
         index += 1
+
 
 def _after_handle(kwd_data):
     # TODO - move these to their respective handler
@@ -243,9 +255,11 @@ def _after_handle(kwd_data):
         if isinstance(handler, KeywordHandler):
             handler.post_process(kwd_data)
 
+
 def _before_handle(kwd_data):
     _add_indices(kwd_data)
     _prepare_for_insertion(kwd_data)
+
 
 def _handle_keyword_data(kwd_data, settings):
     _before_handle(kwd_data)
@@ -257,6 +271,7 @@ def _handle_keyword_data(kwd_data, settings):
             continue
         handler.handle(kwd_data, handler_settings)
     _after_handle(kwd_data)
+
 
 def _get_keyword_data(keyword_name, keyword, settings):
     """Gets the keyword data dict from kwdm.  Transforms it
@@ -275,6 +290,7 @@ def _get_keyword_data(keyword_name, keyword, settings):
     _transform_data(kwd_data)
     return kwd_data
 
+
 def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dict) -> typing.Dict:
     source_keyword = _get_source_keyword(keyword, keyword_options)
     generation_settings = keyword_options.get("generation-options", {})
@@ -292,6 +308,7 @@ def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dic
         "alias_subkeyword": alias_subkeyword,
     }
     return data
+
 
 def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> None:
     keyword = item["name"]

@@ -1,4 +1,3 @@
-
 import copy
 import json
 import os
@@ -13,6 +12,7 @@ ALIAS_TO_KWD: typing.Dict[str, str] = {}
 
 from .insertion import Insertion
 
+
 def get_card(setting: typing.Dict[str, str]):
     source = setting["source"]
     if source == "kwd-data":
@@ -24,6 +24,7 @@ def get_card(setting: typing.Dict[str, str]):
         return ADDITIONAL_CARDS[setting["card-name"]]
 
     raise Exception()
+
 
 def add_alias(keyword: str, alias: str):
     KWD_TO_ALIAS[keyword] = alias
@@ -41,10 +42,12 @@ def get_aliased_by(keyword: str):
 def is_aliased(keyword: str):
     return keyword in ALIAS_TO_KWD.keys()
 
+
 def _load_manifest(filename) -> typing.Dict:
     with open(filename) as f:
         manifest = json.load(f)
     return manifest
+
 
 class AdditionalCards:
     def __init__(self, filename):
@@ -54,6 +57,7 @@ class AdditionalCards:
     def __getitem__(self, name):
         """return a copy of the additional card, since the client may mutate it."""
         return copy.deepcopy(self._cards[name])
+
 
 class KWDM:
     def __init__(self, filename):
@@ -68,6 +72,7 @@ class KWDM:
 
     def __getitem__(self, name: str) -> typing.Dict:
         return self._data[name]
+
 
 def load(this_folder: str, kwd_file: str, manifest: str, additional_cards: str):
     global KWDM_INSTANCE, MANIFEST, ADDITIONAL_CARDS

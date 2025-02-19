@@ -5,7 +5,6 @@ import keyword_generation.data_model as gen
 
 
 class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHandler):
-
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
         """Transform `kwd_data` based on `settings`."""
         kwd_data["duplicate_group"] = True

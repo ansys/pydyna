@@ -2,8 +2,8 @@ import typing
 
 import keyword_generation.handlers.handler_base
 
-class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
 
+class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
         """Transform `kwd_data` based on `settings`."""
         kwd_data["variable"] = True
@@ -15,10 +15,7 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             if type_name == "struct":
                 struct_info = card_settings["struct-info"]
                 struct_name = struct_info["name"]
-                dataclass = {
-                    "name": struct_name,
-                    "fields": struct_info["fields"]
-                }
+                dataclass = {"name": struct_name, "fields": struct_info["fields"]}
                 dataclasses.append(dataclass)
                 type_name = f"self.{struct_name}"
 

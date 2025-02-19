@@ -5,17 +5,14 @@ from keyword_generation.data_model import get_card
 import keyword_generation.data_model as gen
 import keyword_generation.handlers.handler_base
 
-class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
 
+class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
         """Transform `kwd_data` based on `settings`."""
         card_sets = []
         has_options = False
         for card_settings in settings:
-            card_set = {
-                "name": card_settings["name"],
-                "source_cards": []
-            }
+            card_set = {"name": card_settings["name"], "source_cards": []}
 
             for card_index, source_index in enumerate(card_settings["source-indices"]):
                 source_card = kwd_data["cards"][source_index]
@@ -39,20 +36,19 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                     source_option["mark_for_removal"] = 1
 
             card = {
-                "set": {
-                    "name": card_settings["name"]
-                },
+                "set": {"name": card_settings["name"]},
                 "fields": [],
                 "index": card_settings["target-index"],
                 "target_index": card_settings["target-index"],
                 "length_func": card_settings.get("length-func", ""),
-                "active_func": card_settings.get("active-func", "")
+                "active_func": card_settings.get("active-func", ""),
             }
-            insertion = gen.insertion.Insertion(card_settings["target-index"], card_settings.get("target-name", ""), card)
+            insertion = gen.insertion.Insertion(
+                card_settings["target-index"], card_settings.get("target-name", ""), card
+            )
             kwd_data["card_insertions"].append(insertion)
             card_sets.append(card_set)
         kwd_data["card_sets"] = {"sets": card_sets, "options": has_options}
-
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
         """Run after all handlers have run."""
