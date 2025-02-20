@@ -1,7 +1,7 @@
 import typing
 
-import keyword_generation.handlers.handler_base
 import keyword_generation.data_model as gen
+import keyword_generation.handlers.handler_base
 
 
 class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHandler):

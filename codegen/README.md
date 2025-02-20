@@ -29,7 +29,7 @@ The class generator uses Jinja templates to generate three distinct things:
 The python classes are what users of PyDyna interact with directly. The import machinery produces
 `auto_keywords.py`, which contains a list of import statements that import classes from the
 Python files where they are defined. The keyword to type mapping produces a dictionary mapping the
-keyword name witht he python class that defines it.
+keyword name with the python class that defines it.
 
 The primary specification for keywords is found in `kwd.json`. It contains basic definitions
 for most keywords, including their cards and fields (which are defined by offset, name, default

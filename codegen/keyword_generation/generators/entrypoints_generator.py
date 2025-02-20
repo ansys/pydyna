@@ -3,8 +3,7 @@ import pathlib
 import typing
 
 from jinja2 import Environment
-
-from keyword_generation.utils import fix_keyword, get_license_header
+from keyword_generation.utils import get_license_header
 
 
 def generate_entrypoints(env: Environment, lib_path: str, keywords_list: typing.List[typing.Dict]) -> None:
