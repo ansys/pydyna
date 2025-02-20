@@ -390,12 +390,12 @@ class Deck:
         self._check_unique("SECTION", "secid")
         self._check_valid()
 
-    def get_kwds_by_type(self, type: str) -> typing.Iterator[KeywordBase]:
+    def get_kwds_by_type(self, str_type: str) -> typing.Iterator[KeywordBase]:
         """Get all keywords for a given type.
 
         Parameters
         ----------
-        type : str
+        str_type : str
             Keyword type.
 
         Returns
@@ -404,11 +404,33 @@ class Deck:
 
         Examples
         --------
-        Get all SECTION keyword instances in the collection.
+        Get all *SECTION_* keywords in the deck.
 
         >>>deck.get_kwds_by_type("SECTION")
         """
-        return filter(lambda kwd: isinstance(kwd, KeywordBase) and kwd.keyword == type, self._keywords)
+        return filter(lambda kwd: isinstance(kwd, KeywordBase) and kwd.keyword == str_type, self._keywords)
+
+    def get_kwds_by_full_type(self, str_type: str, str_subtype: str) -> typing.Iterator[KeywordBase]:
+        """Get all keywords for a given full type.
+
+        Parameters
+        ----------
+        str_type : str
+            Keyword type.
+        str_subtype : str
+            Keyword subtype.
+
+        Returns
+        -------
+        typing.Iterator[KeywordBase]
+
+        Examples
+        --------
+        Get all *SECTION_SHELL keyword instances in the deck.
+
+        >>>deck.get_kwds_by_full_type("SECTION", "SHELL")
+        """
+        return filter(lambda kwd: isinstance(kwd, KeywordBase) and kwd.keyword == str_type and kwd.subkeyword == str_subtype, self._keywords)
 
     def get_section_by_id(self, id: int) -> typing.Optional[KeywordBase]:
         """Get the SECTION keyword in the collection for a given section ID.
