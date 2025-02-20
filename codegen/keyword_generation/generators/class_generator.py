@@ -272,6 +272,50 @@ def _handle_keyword_data(kwd_data, settings):
         handler.handle(kwd_data, handler_settings)
     _after_handle(kwd_data)
 
+def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+    print(f"adding define transform links! {link_fields}")
+    transform_link_data = {
+        "classname": "DefineTransformation",
+        "modulename": "define_transformation",
+        "keyword_type": "DEFINE",
+        "keyword_subtype": "TRANSFORMATION",
+        "fields": link_fields,
+        "linkid": "tranid",
+    }
+    link_data.append(transform_link_data)
+
+class LinkIdentity:
+    DEFINE_TRANSFORMATION=40
+
+def _get_links(kwd_data) -> typing.Optional[typing.Dict]:
+    links = {
+        LinkIdentity.DEFINE_TRANSFORMATION: []
+    }
+    has_link = False
+    for card in kwd_data["cards"]:
+        for field in card["fields"]:
+            if "link" not in field:
+                continue
+            link = field["link"]
+            if link not in links.keys():
+                continue
+            has_link = True
+            links[link].append(field["name"])
+    if not has_link:
+        return None
+    return links
+
+def _add_links(kwd_data):
+    """Add "links", or properties that link one keyword to another."""
+    links = _get_links(kwd_data)
+    if links is None:
+        return
+    link_data = []
+    for link_type, link_fields in links.items():
+        if link_type == LinkIdentity.DEFINE_TRANSFORMATION:
+            _add_define_transform_link_data(link_data, link_fields)
+    print(link_data)
+    kwd_data["links"] = link_data
 
 def _get_keyword_data(keyword_name, keyword, settings):
     """Gets the keyword data dict from kwdm.  Transforms it
@@ -288,6 +332,8 @@ def _get_keyword_data(keyword_name, keyword, settings):
 
     # default transformations to a valid format we need for jinja
     _transform_data(kwd_data)
+
+    _add_links(kwd_data)
     return kwd_data
 
 
