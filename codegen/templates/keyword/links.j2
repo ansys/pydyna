@@ -4,7 +4,7 @@
     def {{field}}_link(self) -> {{link.classname}}:
         if self.deck is None:
             return None
-        for kwd in deck.get_kwds_by_full_type("{{link.keyword_type}}", "{{link.keyword_subtype}}"):
+        for kwd in self.deck.get_kwds_by_full_type("{{link.keyword_type}}", "{{link.keyword_subtype}}"):
             if kwd.{{link.linkid}} == self.{{field}}:
                 return kwd
         return None

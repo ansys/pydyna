@@ -273,7 +273,6 @@ def _handle_keyword_data(kwd_data, settings):
     _after_handle(kwd_data)
 
 def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
-    print(f"adding define transform links! {link_fields}")
     transform_link_data = {
         "classname": "DefineTransformation",
         "modulename": "define_transformation",
@@ -293,7 +292,7 @@ def _get_links(kwd_data) -> typing.Optional[typing.Dict]:
     }
     has_link = False
     for card in kwd_data["cards"]:
-        for field in card["fields"]:
+        for field in _get_fields(card):
             if "link" not in field:
                 continue
             link = field["link"]
@@ -314,7 +313,6 @@ def _add_links(kwd_data):
     for link_type, link_fields in links.items():
         if link_type == LinkIdentity.DEFINE_TRANSFORMATION:
             _add_define_transform_link_data(link_data, link_fields)
-    print(link_data)
     kwd_data["links"] = link_data
 
 def _get_keyword_data(keyword_name, keyword, settings):
@@ -360,8 +358,12 @@ def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> None:
     keyword = item["name"]
     fixed_keyword = fix_keyword(keyword)
     classname = item["options"].get("classname", get_classname(fixed_keyword))
-    base_variable = _get_base_variable(classname, keyword, item["options"])
-    jinja_variable = _get_jinja_variable(base_variable)
-    filename = os.path.join(lib_path, "auto", fixed_keyword.lower() + ".py")
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(env.get_template("keyword.j2").render(**jinja_variable))
+    try:
+        base_variable = _get_base_variable(classname, keyword, item["options"])
+        jinja_variable = _get_jinja_variable(base_variable)
+        filename = os.path.join(lib_path, "auto", fixed_keyword.lower() + ".py")
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(env.get_template("keyword.j2").render(**jinja_variable))
+    except Exception as e:
+        print(f"Failure in generating {classname}")
+        raise e

@@ -398,7 +398,7 @@ class IncludeTransform(KeywordBase):
     def tranid_link(self) -> DefineTransformation:
         if self.deck is None:
             return None
-        for kwd in deck.get_kwds_by_full_type("DEFINE", "TRANSFORMATION"):
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TRANSFORMATION"):
             if kwd.tranid == self.tranid:
                 return kwd
         return None
