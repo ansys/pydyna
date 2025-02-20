@@ -58,6 +58,9 @@ class Deck:
 
     def clear(self):
         """Clear all keywords from the deck."""
+        for keyword in self._keywords:
+            if isinstance(keyword, KeywordBase):
+                keyword.deck = None
         self._keywords = []
         self.comment_header = None
         self.title = None
@@ -101,8 +104,17 @@ class Deck:
         ), "Only keywords, encrypted keywords, or strings can be included in a deck."
         if isinstance(keyword, str):
             self._keywords.append(self._formatstring(keyword, check))
+        elif isinstance(keyword, KeywordBase):
+            keyword.deck = self
+            self._keywords.append(keyword)
         else:
             self._keywords.append(keyword)
+
+    def _remove_at(self, index: int) -> None:
+        kwd = self._keywords[index]
+        if isinstance(kwd, KeywordBase):
+            kwd.deck = None
+        del self._keywords[index]
 
     def remove(self, index: int | list[int]) -> None:
         """Remove a keyword from the collection by index.
@@ -113,10 +125,10 @@ class Deck:
         """
         try:
             if isinstance(index, int):
-                del self._keywords[index]
+                self._remove_at(index)
             elif isinstance(index, list):
                 for i in sorted(index, reverse=True):
-                    del self._keywords[i]
+                    self._remove_at(i)
             else:
                 raise TypeError("Input must be an integer or a list of integers.")
         except IndexError:

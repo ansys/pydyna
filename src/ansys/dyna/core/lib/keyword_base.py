@@ -29,6 +29,9 @@ from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.parameters import ParameterSet
 
+# protected due to circular import
+if typing.TYPE_CHECKING:
+    from ansys.dyna.core.lib.deck import Deck
 
 class KeywordBase(Cards):
     """Base class for all keywords.
@@ -43,6 +46,19 @@ class KeywordBase(Cards):
         super().__init__(self)
         self.user_comment = kwargs.get("user_comment", "")
         self._format_type: format_type = kwargs.get("format", format_type.default)
+        self._deck: "Deck" = kwargs.get("deck", None)
+
+    @property
+    def deck(self) -> typing.Optional["Deck"]:
+        """Get the deck that this keyword is associated to.
+        """
+        return self._deck
+
+    @deck.setter
+    def deck(self, deck: "Deck") -> None:
+        """Get the deck that this keyword is associated to.
+        """
+        self._deck = deck
 
     @property
     def format(self) -> format_type:
