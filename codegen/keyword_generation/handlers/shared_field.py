@@ -2,6 +2,7 @@ import typing
 
 import keyword_generation.handlers.handler_base
 
+
 def do_negative_shared_fields(kwd_data: typing.Dict):
     negative_shared_fields = kwd_data.get("negative_shared_fields", [])
     num_cards = len(kwd_data["cards"])
@@ -57,7 +58,6 @@ def handle_shared_field(kwd_data, settings):
 
 
 class SharedFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler):
-
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
         """Transform `kwd_data` based on `settings`."""
         return handle_shared_field(kwd_data, settings)

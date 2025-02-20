@@ -1,0 +1,2 @@
+from .class_generator import generate_class
+from .entrypoints_generator import generate_entrypoints
