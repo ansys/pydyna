@@ -29,12 +29,9 @@ import shutil
 import typing
 
 from jinja2 import Environment, FileSystemLoader
-
 import keyword_generation.data_model as data_model
 from keyword_generation.generators import generate_class, generate_entrypoints
-
-from keyword_generation.utils import get_classname, get_this_folder, fix_keyword, handle_single_word_keyword
-
+from keyword_generation.utils import fix_keyword, get_classname, get_this_folder, handle_single_word_keyword
 
 SKIPPED_KEYWORDS = set(
     [
@@ -44,7 +41,7 @@ SKIPPED_KEYWORDS = set(
         "ELEMENT_SOLID (ten nodes format)",
         "ELEMENT_SOLID",
         "ELEMENT_SOLID_ORTHO (ten nodes format)",
-        "ELEMENT_SOLID_ORTHO"
+        "ELEMENT_SOLID_ORTHO",
         # issue #184 - this is not documented in the manual
         # "CONTROL_TIMESTEP",CONTROL_TIMESTEP is in the kwd.json now and should be generated issue #629
     ]
@@ -253,7 +250,7 @@ def parse_args():
         "--output",
         "-o",
         default="",
-        help="Output folder."
+        help="Output folder.",
         # help="Output folder. Defaults to the location of generated code in pydyna."
     )
     parser.add_argument(

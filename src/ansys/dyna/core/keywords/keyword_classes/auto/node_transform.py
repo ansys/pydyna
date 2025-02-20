@@ -23,6 +23,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.keywords.keyword_classes.auto.define_transformation import DefineTransformation
 
 class NodeTransform(KeywordBase):
     """DYNA NODE_TRANSFORM keyword"""
@@ -94,4 +95,17 @@ class NodeTransform(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""immed must be `None` or one of {0,1}""")
         self._cards[0].set_value("immed", value)
+
+    @property
+    def trsid_link(self) -> DefineTransformation:
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TRANSFORMATION"):
+            if kwd.tranid == self.trsid:
+                return kwd
+        return None
+
+    @trsid_link.setter
+    def trsid_link(self, value: DefineTransformation) -> None:
+        self.trsid = value.tranid
 

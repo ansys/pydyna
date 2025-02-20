@@ -1,7 +1,7 @@
 import typing
 
-from keyword_generation.data_model import get_card
 import keyword_generation.data_model as gen
+from keyword_generation.data_model import get_card
 import keyword_generation.handlers.handler_base
 
 

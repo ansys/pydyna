@@ -223,6 +223,7 @@ def test_kwdeck_basic_001(file_utils):
     deck = Deck()
     deck.title = "Basic 001"
     curve1 = kwd.DefineCurve()
+    assert curve1.deck is None
     curve1.user_comment = "My first curve"
     curve2 = kwd.DefineCurve(offa=2.0)
     curve2.curves = pd.DataFrame({"a1": [1, 3, 5], "o1": [2, 4, 6]})
@@ -253,6 +254,7 @@ def test_kwdeck_basic_001(file_utils):
             boundary3,
         ]
     )
+    assert curve1.deck == deck
     deck_string = deck.write()
     file_utils.compare_string_with_file(deck_string, "test.k")
 
@@ -369,6 +371,21 @@ def test_deck_read_long_deck_standard_keyword():
     assert deck.format == format_type.long
     assert len(deck.keywords) == 1
     assert deck.keywords[0].area == 1.0
+
+
+@pytest.mark.keywords
+def test_deck_links():
+    deck = Deck()
+    deck.append(kwd.DefineTransformation(tranid=10, option="POINT", a1=1, a2=2.0, a3=0.0, a4=1.0))
+    i_c = kwd.IncludeTransform(tranid=10)
+    deck.append(i_c)
+    xforms = i_c.tranid_link.transforms
+    assert len(xforms) == 1
+    assert xforms["option"][0] == "POINT"
+    assert xforms["a1"][0] == 1
+    assert xforms["a2"][0] == 2.0
+    assert xforms["a3"][0] == 0.0
+    assert xforms["a4"][0] == 1.0
 
 
 @pytest.mark.keywords

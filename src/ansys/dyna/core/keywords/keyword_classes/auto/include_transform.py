@@ -23,6 +23,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.keywords.keyword_classes.auto.define_transformation import DefineTransformation
 
 class IncludeTransform(KeywordBase):
     """DYNA INCLUDE_TRANSFORM keyword"""
@@ -392,4 +393,17 @@ class IncludeTransform(KeywordBase):
     @tranid.setter
     def tranid(self, value: int) -> None:
         self._cards[4].set_value("tranid", value)
+
+    @property
+    def tranid_link(self) -> DefineTransformation:
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TRANSFORMATION"):
+            if kwd.tranid == self.tranid:
+                return kwd
+        return None
+
+    @tranid_link.setter
+    def tranid_link(self, value: DefineTransformation) -> None:
+        self.tranid = value.tranid
 

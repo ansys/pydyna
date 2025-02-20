@@ -3,27 +3,24 @@ import os
 import typing
 
 from jinja2 import Environment
-
 import keyword_generation.data_model as data_model
-
-from keyword_generation.handlers.handler_base import KeywordHandler
+from keyword_generation.handlers.add_option import AddOptionHandler
+from keyword_generation.handlers.card_set import CardSetHandler
+from keyword_generation.handlers.conditional_card import ConditionalCardHandler
 from keyword_generation.handlers.external_card import ExternalCardHandler
+from keyword_generation.handlers.handler_base import KeywordHandler
+from keyword_generation.handlers.insert_card import InsertCardHandler
+from keyword_generation.handlers.override_field import OverrideFieldHandler
+from keyword_generation.handlers.override_subkeyword import OverrideSubkeywordHandler
+from keyword_generation.handlers.rename_property import RenamePropertyHandler
+from keyword_generation.handlers.reorder_card import ReorderCardHandler
+from keyword_generation.handlers.replace_card import ReplaceCardHandler
 from keyword_generation.handlers.series_card import SeriesCardHandler
 from keyword_generation.handlers.shared_field import SharedFieldHandler
+from keyword_generation.handlers.skip_card import SkipCardHandler
 from keyword_generation.handlers.table_card import TableCardHandler
 from keyword_generation.handlers.table_card_group import TableCardGroupHandler
-from keyword_generation.handlers.override_field import OverrideFieldHandler
-from keyword_generation.handlers.rename_property import RenamePropertyHandler
-from keyword_generation.handlers.conditional_card import ConditionalCardHandler
-from keyword_generation.handlers.add_option import AddOptionHandler
-from keyword_generation.handlers.override_subkeyword import OverrideSubkeywordHandler
-from keyword_generation.handlers.skip_card import SkipCardHandler
-from keyword_generation.handlers.insert_card import InsertCardHandler
-from keyword_generation.handlers.replace_card import ReplaceCardHandler
-from keyword_generation.handlers.card_set import CardSetHandler
-from keyword_generation.handlers.reorder_card import ReorderCardHandler
-
-from keyword_generation.utils import fix_keyword, get_license_header, get_classname, handle_single_word_keyword
+from keyword_generation.utils import fix_keyword, get_classname, get_license_header, handle_single_word_keyword
 
 
 def _get_source_keyword(keyword, settings):
@@ -273,6 +270,51 @@ def _handle_keyword_data(kwd_data, settings):
     _after_handle(kwd_data)
 
 
+def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+    transform_link_data = {
+        "classname": "DefineTransformation",
+        "modulename": "define_transformation",
+        "keyword_type": "DEFINE",
+        "keyword_subtype": "TRANSFORMATION",
+        "fields": link_fields,
+        "linkid": "tranid",
+    }
+    link_data.append(transform_link_data)
+
+
+class LinkIdentity:
+    DEFINE_TRANSFORMATION = 40
+
+
+def _get_links(kwd_data) -> typing.Optional[typing.Dict]:
+    links = {LinkIdentity.DEFINE_TRANSFORMATION: []}
+    has_link = False
+    for card in kwd_data["cards"]:
+        for field in _get_fields(card):
+            if "link" not in field:
+                continue
+            link = field["link"]
+            if link not in links.keys():
+                continue
+            has_link = True
+            links[link].append(field["name"])
+    if not has_link:
+        return None
+    return links
+
+
+def _add_links(kwd_data):
+    """Add "links", or properties that link one keyword to another."""
+    links = _get_links(kwd_data)
+    if links is None:
+        return
+    link_data = []
+    for link_type, link_fields in links.items():
+        if link_type == LinkIdentity.DEFINE_TRANSFORMATION:
+            _add_define_transform_link_data(link_data, link_fields)
+    kwd_data["links"] = link_data
+
+
 def _get_keyword_data(keyword_name, keyword, settings):
     """Gets the keyword data dict from kwdm.  Transforms it
     based on the generation settings that are passed in, if any,
@@ -288,6 +330,8 @@ def _get_keyword_data(keyword_name, keyword, settings):
 
     # default transformations to a valid format we need for jinja
     _transform_data(kwd_data)
+
+    _add_links(kwd_data)
     return kwd_data
 
 
@@ -314,8 +358,12 @@ def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> None:
     keyword = item["name"]
     fixed_keyword = fix_keyword(keyword)
     classname = item["options"].get("classname", get_classname(fixed_keyword))
-    base_variable = _get_base_variable(classname, keyword, item["options"])
-    jinja_variable = _get_jinja_variable(base_variable)
-    filename = os.path.join(lib_path, "auto", fixed_keyword.lower() + ".py")
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(env.get_template("keyword.j2").render(**jinja_variable))
+    try:
+        base_variable = _get_base_variable(classname, keyword, item["options"])
+        jinja_variable = _get_jinja_variable(base_variable)
+        filename = os.path.join(lib_path, "auto", fixed_keyword.lower() + ".py")
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(env.get_template("keyword.j2").render(**jinja_variable))
+    except Exception as e:
+        print(f"Failure in generating {classname}")
+        raise e

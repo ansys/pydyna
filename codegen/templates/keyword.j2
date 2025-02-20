@@ -32,6 +32,9 @@ from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 {% endif %}
 {% endif %}
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+{% for link in keyword_data.links %}
+from ansys.dyna.core.keywords.keyword_classes.auto.{{link.modulename}} import {{link.classname}}
+{% endfor %}
 
 {% if keyword_data.card_sets %}
 {% for card_set in keyword_data.card_sets.sets %}
@@ -141,4 +144,7 @@ class {{keyword_data.classname}}(KeywordBase):
 {% include 'keyword/option_card_properties.j2' %}
 {% endfor %}{# option in keyword_data.options #}
 {% endif %}{# keyword_data.options #}
+{% with links = keyword_data.links %}
+{% include 'keyword/links.j2' %}
+{% endwith %}
 {% include 'keyword/alias.j2' %}
