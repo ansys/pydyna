@@ -227,6 +227,9 @@ class Deck:
                     keywords.extend(include_deck.all_keywords)
             else:
                 keywords.append(keyword)
+        for keyword in keywords:
+            if isinstance(keyword, KeywordBase):
+                keyword.deck = None
         return keywords
 
     def expand(self, cwd=None, recurse=True):

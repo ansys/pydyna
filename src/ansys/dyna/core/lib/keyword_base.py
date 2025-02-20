@@ -46,7 +46,7 @@ class KeywordBase(Cards):
         super().__init__(self)
         self.user_comment = kwargs.get("user_comment", "")
         self._format_type: format_type = kwargs.get("format", format_type.default)
-        self._deck: "Deck" = kwargs.get("deck", None)
+        self._deck = None
 
     @property
     def deck(self) -> typing.Optional["Deck"]:
@@ -58,6 +58,12 @@ class KeywordBase(Cards):
     def deck(self, deck: "Deck") -> None:
         """Get the deck that this keyword is associated to.
         """
+        if deck is None:
+            self._deck = None
+            return
+
+        if self._deck is not None:
+            raise Exception("This keyword is already associated with a deck!")
         self._deck = deck
 
     @property
