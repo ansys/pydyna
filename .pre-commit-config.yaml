@@ -1,11 +1,14 @@
 files: |
     (?x)(
+        ^codegen/ |
         ^src/ansys/ |
         ^examples |
         ^.github/
     )
 exclude: |
     (?x)^(
+        codegen/kwd.json|
+        codegen/additional-cards.json|
         doc/source/|
         src/ansys/dyna/core/pre/Server/|
         src/ansys/dyna/core/pre/doc/|

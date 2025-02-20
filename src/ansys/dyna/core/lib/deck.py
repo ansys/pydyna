@@ -58,6 +58,9 @@ class Deck:
 
     def clear(self):
         """Clear all keywords from the deck."""
+        for keyword in self._keywords:
+            if isinstance(keyword, KeywordBase):
+                keyword.deck = None
         self._keywords = []
         self.comment_header = None
         self.title = None
@@ -101,8 +104,17 @@ class Deck:
         ), "Only keywords, encrypted keywords, or strings can be included in a deck."
         if isinstance(keyword, str):
             self._keywords.append(self._formatstring(keyword, check))
+        elif isinstance(keyword, KeywordBase):
+            keyword.deck = self
+            self._keywords.append(keyword)
         else:
             self._keywords.append(keyword)
+
+    def _remove_at(self, index: int) -> None:
+        kwd = self._keywords[index]
+        if isinstance(kwd, KeywordBase):
+            kwd.deck = None
+        del self._keywords[index]
 
     def remove(self, index: int | list[int]) -> None:
         """Remove a keyword from the collection by index.
@@ -113,10 +125,10 @@ class Deck:
         """
         try:
             if isinstance(index, int):
-                del self._keywords[index]
+                self._remove_at(index)
             elif isinstance(index, list):
                 for i in sorted(index, reverse=True):
-                    del self._keywords[i]
+                    self._remove_at(i)
             else:
                 raise TypeError("Input must be an integer or a list of integers.")
         except IndexError:
@@ -215,6 +227,9 @@ class Deck:
                     keywords.extend(include_deck.all_keywords)
             else:
                 keywords.append(keyword)
+        for keyword in keywords:
+            if isinstance(keyword, KeywordBase):
+                keyword.deck = None
         return keywords
 
     def expand(self, cwd=None, recurse=True):
@@ -378,12 +393,12 @@ class Deck:
         self._check_unique("SECTION", "secid")
         self._check_valid()
 
-    def get_kwds_by_type(self, type: str) -> typing.Iterator[KeywordBase]:
+    def get_kwds_by_type(self, str_type: str) -> typing.Iterator[KeywordBase]:
         """Get all keywords for a given type.
 
         Parameters
         ----------
-        type : str
+        str_type : str
             Keyword type.
 
         Returns
@@ -392,11 +407,36 @@ class Deck:
 
         Examples
         --------
-        Get all SECTION keyword instances in the collection.
+        Get all *SECTION_* keywords in the deck.
 
         >>>deck.get_kwds_by_type("SECTION")
         """
-        return filter(lambda kwd: isinstance(kwd, KeywordBase) and kwd.keyword == type, self._keywords)
+        return filter(lambda kwd: isinstance(kwd, KeywordBase) and kwd.keyword == str_type, self._keywords)
+
+    def get_kwds_by_full_type(self, str_type: str, str_subtype: str) -> typing.Iterator[KeywordBase]:
+        """Get all keywords for a given full type.
+
+        Parameters
+        ----------
+        str_type : str
+            Keyword type.
+        str_subtype : str
+            Keyword subtype.
+
+        Returns
+        -------
+        typing.Iterator[KeywordBase]
+
+        Examples
+        --------
+        Get all *SECTION_SHELL keyword instances in the deck.
+
+        >>>deck.get_kwds_by_full_type("SECTION", "SHELL")
+        """
+        return filter(
+            lambda kwd: isinstance(kwd, KeywordBase) and kwd.keyword == str_type and kwd.subkeyword == str_subtype,
+            self._keywords,
+        )
 
     def get_section_by_id(self, id: int) -> typing.Optional[KeywordBase]:
         """Get the SECTION keyword in the collection for a given section ID.
