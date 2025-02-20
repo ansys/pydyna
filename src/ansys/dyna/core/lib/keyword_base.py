@@ -33,6 +33,7 @@ from ansys.dyna.core.lib.parameters import ParameterSet
 if typing.TYPE_CHECKING:
     from ansys.dyna.core.lib.deck import Deck
 
+
 class KeywordBase(Cards):
     """Base class for all keywords.
 
@@ -50,14 +51,12 @@ class KeywordBase(Cards):
 
     @property
     def deck(self) -> typing.Optional["Deck"]:
-        """Get the deck that this keyword is associated to.
-        """
+        """Get the deck that this keyword is associated to."""
         return self._deck
 
     @deck.setter
     def deck(self, deck: "Deck") -> None:
-        """Get the deck that this keyword is associated to.
-        """
+        """Get the deck that this keyword is associated to."""
         if deck is None:
             self._deck = None
             return
