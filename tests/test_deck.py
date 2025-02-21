@@ -460,6 +460,35 @@ def test_deck_expand_transform_custom_handler(file_utils):
     assert deck.keywords[1].elements["pid"][0] == 44
     assert deck.keywords[1].elements["pid"][3] == 44
 
+
+@pytest.mark.keywords
+def test_deck_expand_with_define_transform(file_utils):
+    """Test using a custom transform handler as an override."""
+    deck = Deck()
+    include_path = file_utils.get_asset_file_path("transform")
+    define_transform_kwd = kwd.DefineTransformation(tranid=1)
+    define_transform_kwd.transforms = pd.DataFrame(
+        {
+            "option": ["TRANSL"],
+            "a1": [-100.0],
+            "a2": [0.0],
+            "a3": [0.0]
+        }
+    )
+    deck.append(define_transform_kwd)
+    xform = kwd.IncludeTransform(filename = os.path.join(include_path, "test.k"))
+    xform.tranid_link = define_transform_kwd
+    xform.idnoff = 10
+    xform.ideoff = 40
+    xform.idpoff = 100
+    deck.append(xform)
+
+    deck = deck.expand(recurse=True)
+    assert len(deck.keywords) == 4
+    assert deck.keywords[3].nodes["nid"][0] == 11
+    assert deck.keywords[3].nodes["nid"][20] == 31
+    assert deck.keywords[3].nodes["x"][0] == -600
+
 @pytest.mark.keywords
 def test_deck_unprocessed(ref_string):
     deck = Deck()
