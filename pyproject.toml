@@ -32,7 +32,8 @@ dependencies = ["ansys-dpf-core>=0.7.2",
                 "hollerith>=0.6.0",
                 "numpy>=1",
                 "pandas>=2.0",
-                "appdirs>=1.4.4"
+                "appdirs>=1.4.4",
+                "transformations==2025.1.1",
 ]
 
 [project.optional-dependencies]
