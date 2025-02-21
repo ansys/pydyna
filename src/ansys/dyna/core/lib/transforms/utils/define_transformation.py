@@ -22,17 +22,32 @@
 
 """Algorithms to compute 4x4 transformation matrices from a *DEFINE_TRANSFORMATION keyword."""
 
+import math
 import typing
 import warnings
 
-from ansys.dyna.core.keywords.keyword_classes.auto.define_transformation import DefineTransformation
-
-import transformations as tfm
 import numpy as np
 import pandas as pd
+import transformations as tfm
+
+from ansys.dyna.core.keywords.keyword_classes.auto.define_transformation import DefineTransformation
+
 
 def _get_translation_matrix(a1: float, a2: float, a3: float) -> np.ndarray:
     return tfm.translation_matrix((a1, a2, a3))
+
+
+def _get_rotation_matrix(a1: float, a2: float, a3: float, a4: float, a5: float, a6: float, a7: float) -> np.ndarray:
+    if (a4, a5, a6) == (0.0, 0.0, 0.0):
+        if a7 != 0.0:
+            # simple rotation about an axis going through the origin
+            assert (a1, a2, a3) != (0.0, 0.0, 0.0), "Direction vector A1, A2, A3 cannot be all zero!"
+            return tfm.rotation_matrix(math.radians(a7), [a1, a2, a3])
+
+    parameters = (a1, a2, a3, a4, a5, a6, a7)
+    warnings.warn(f"DEFINE_TRANFORMATION ROTATE option with parameters {parameters} not handled yet by pydyna!")
+    return None
+
 
 def _get_row_transform_matrix(transform: pd.Series) -> np.ndarray:
     """Transform is of a series of the form:
@@ -49,18 +64,35 @@ def _get_row_transform_matrix(transform: pd.Series) -> np.ndarray:
     whose behavior is according to the rules of *DEFINE_TRANSFORM
     """
     mtx = tfm.identity_matrix()
-    option, a1, a2, a3, a4, a5, a6, a7 = transform['option'],  transform['a1'], transform['a2'], transform['a3'], transform['a4'], transform['a5'], transform['a6'], transform['a7']
-    if option == 'TRANSL':
+    xf = transform.fillna(0.0)
+    option, a1, a2, a3, a4, a5, a6, a7 = (
+        xf["option"],
+        xf["a1"],
+        xf["a2"],
+        xf["a3"],
+        xf["a4"],
+        xf["a5"],
+        xf["a6"],
+        xf["a7"],
+    )
+    if option == "TRANSL":
         return _get_translation_matrix(a1, a2, a3)
+    elif option == "ROTATE":
+        return _get_rotation_matrix(a1, a2, a3, a4, a5, a6, a7)
     else:
         warnings.warn(f"DEFINE_TRANFORMATION option {option} not handled yet by pydyna!")
         return None
 
+
 def _get_transform_matrix(transforms: pd.DataFrame) -> np.ndarray:
     mtx = tfm.identity_matrix()
     for index, transform in transforms.iterrows():
-        mtx = tfm.concatenate_matrices(mtx, _get_row_transform_matrix(transform))
+        row_mtx = _get_row_transform_matrix(transform)
+        if row_mtx is None:
+            return None
+        mtx = tfm.concatenate_matrices(mtx, row_mtx)
     return mtx
+
 
 def get_transform_matrix(kwd: typing.Optional[DefineTransformation]) -> typing.Optional[np.ndarray]:
     if kwd is None:

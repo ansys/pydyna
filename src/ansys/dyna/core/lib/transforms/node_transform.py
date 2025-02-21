@@ -21,38 +21,45 @@
 # SOFTWARE.
 
 """Transformation handler for *NODE."""
+import warnings
+
+import numpy as np
+import pandas as pd
 
 from ansys.dyna.core import keywords as kwd
 from ansys.dyna.core.lib.transforms.base_transform import Transform
 from ansys.dyna.core.lib.transforms.utils.define_transformation import get_transform_matrix
 
-import numpy as np
-import pandas as pd
 
-def apply_rigid_transform(mtx: np.ndarray, nodes: pd.DataFrame):
+def apply_rigid_transform(mtx: np.ndarray, nodes: pd.DataFrame) -> None:
     locations = nodes[["x", "y", "z"]]
     locations = locations.fillna(0.0)
     locations["w"] = 1.0
     locs = locations.to_numpy()
     for i, loc in enumerate(locs):
-        res = np.dot(mtx, loc) # transform the point
+        res = np.dot(mtx, loc)  # transform the point
         locs[i] = res
 
     locations[["x", "y", "z", "w"]] = locs
     nodes[["x", "y", "z"]] = locations[["x", "y", "z"]]
 
+
 class TransformNode(Transform):
     def transform(self, keyword: kwd.Node) -> None:
         self._apply_offset(keyword)
-        self._apply_transform(keyword)
+        try:
+            self._apply_transform(keyword)
+        except Exception as e:
+            warnings.warn(f"Error applying transformation to *NODE: {e}")
+            raise e
 
-    def _apply_offset(self, keyword: kwd.Node):
+    def _apply_offset(self, keyword: kwd.Node) -> None:
         offset = self._xform.idnoff
         if offset is None or offset == 0:
             return
         keyword.nodes["nid"] = keyword.nodes["nid"] + offset
 
-    def _apply_transform(self, keyword: kwd.Node):
+    def _apply_transform(self, keyword: kwd.Node) -> None:
         define_transform = self._xform.tranid_link
         mtx = get_transform_matrix(define_transform)
         if mtx is None:

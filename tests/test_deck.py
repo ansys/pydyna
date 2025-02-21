@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import os
+import re
 
 import pandas as pd
 
@@ -464,30 +465,79 @@ def test_deck_expand_transform_custom_handler(file_utils):
 @pytest.mark.keywords
 def test_deck_expand_with_define_transform(file_utils):
     """Test using a custom transform handler as an override."""
-    deck = Deck()
+
+    # single translation
     include_path = file_utils.get_asset_file_path("transform")
-    define_transform_kwd = kwd.DefineTransformation(tranid=1)
-    define_transform_kwd.transforms = pd.DataFrame(
-        {
-            "option": ["TRANSL"],
-            "a1": [-100.0],
-            "a2": [0.0],
-            "a3": [0.0]
-        }
-    )
-    deck.append(define_transform_kwd)
+    define_transform_kwd = kwd.DefineTransformation(tranid=1, option="TRANSL", a1=-100.0)
     xform = kwd.IncludeTransform(filename = os.path.join(include_path, "test.k"))
     xform.tranid_link = define_transform_kwd
-    xform.idnoff = 10
-    xform.ideoff = 40
-    xform.idpoff = 100
-    deck.append(xform)
 
-    deck = deck.expand(recurse=True)
-    assert len(deck.keywords) == 4
-    assert deck.keywords[3].nodes["nid"][0] == 11
-    assert deck.keywords[3].nodes["nid"][20] == 31
-    assert deck.keywords[3].nodes["x"][0] == -600
+    deck = Deck()
+    deck.extend([define_transform_kwd, xform])
+    expanded = deck.expand()
+    assert len(expanded.keywords) == 4
+    assert expanded.keywords[3].nodes["x"][0] == -600
+
+    # error case
+    deck = Deck()
+    define_transform_kwd = kwd.DefineTransformation(tranid=1, option="ROTATE", a1=0.0, a2=0.0, a3=0.0, a7=45.0)
+    xform = kwd.IncludeTransform(filename = os.path.join(include_path, "test.k"))
+    xform.tranid_link = define_transform_kwd
+    deck.extend([define_transform_kwd, xform])
+    expected_warning = "Error applying transformation to *NODE: Direction vector A1, A2, A3 cannot be all zero!"
+    expected_warning_expression = re.escape(expected_warning)
+    with pytest.warns(UserWarning, match=expected_warning_expression):
+        deck.expand()
+
+    # unhandled case
+    deck = Deck()
+    define_transform_kwd = kwd.DefineTransformation(tranid=1, option="ROTATE", a4=1.0)
+    xform = kwd.IncludeTransform(filename = os.path.join(include_path, "test.k"))
+    xform.tranid_link = define_transform_kwd
+    deck.extend([define_transform_kwd, xform])
+    with pytest.warns(UserWarning, match="DEFINE_TRANFORMATION ROTATE option with parameters"):
+        deck.expand()
+
+    # multiple transforms
+    deck = Deck()
+    define_transform_kwd = kwd.DefineTransformation()
+    define_transform_kwd.transforms = pd.DataFrame(
+        {
+            "option": ["ROTATE", "TRANSL"],
+            "a1": [0.0, -100.0],
+            "a2": [0.0, 0.0],
+            "a3": [1.0, 0.0],
+            "a4": [0.0, 0.0],
+            "a5": [0.0, 0.0],
+            "a6": [0.0, 0.0],
+            "a7": [25.0, 0.0],
+        }
+    )
+    xform = kwd.IncludeTransform(filename = os.path.join(include_path, "test.k"))
+    xform.tranid_link = define_transform_kwd
+    deck.extend([define_transform_kwd, xform])
+    expanded = deck.expand()
+    assert len(expanded.keywords) == 4
+    print(expanded.keywords[3].nodes)
+    assert expanded.keywords[3].nodes["x"][0] == pytest.approx(-543.784672)
+    assert expanded.keywords[3].nodes["y"][0] == pytest.approx(-253.570957)
+
+
+@pytest.mark.keywords
+def test_deck_clear():
+    node = kwd.Node()
+    deck = Deck()
+    deck.append(node)
+    deck.clear()
+    # ok after clear
+    deck = Deck()
+    deck.append(node)
+
+    # not ok without clear
+    deck2 = Deck()
+    with pytest.raises(Exception):
+        deck2.append(node)
+
 
 @pytest.mark.keywords
 def test_deck_unprocessed(ref_string):
