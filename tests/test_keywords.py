@@ -1069,7 +1069,6 @@ def test_contact_force_transducer_penalty(ref_string):
     assert val == ref_string.test_contact_force_transducer_penalty_id
 
 
-@pytest.mark.skip(reason="Skipped until issue 738 is fixed")
 @pytest.mark.keywords
 def test_contact_automatic_general_id_mpp(ref_string):
     c = kwd.ContactAutomaticGeneral()
@@ -1077,10 +1076,15 @@ def test_contact_automatic_general_id_mpp(ref_string):
     c.options["MPP"].active = True
     val = c.write()
     assert val == ref_string.test_contact_automatic_general_id_mpp
-    c.mpp2 = False
     c = kwd.ContactAutomaticGeneral()
     c.loads(ref_string.test_contact_automatic_general_id_mpp)
     assert c.options["MPP"].active is True
+
+    c = kwd.ContactAutomaticGeneral()
+    c.loads(ref_string.test_contact_automatic_general_id_mpp1)
+    assert c.options["MPP"].active is True
+    assert c.mpp2 is False
+    assert c.surfa == 11
 
 
 @pytest.mark.keywords

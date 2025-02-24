@@ -133,7 +133,6 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
     >>> load_dataline([(0,10, int),(10,10, str)], '         1     hello')
     (1, 'hello')
     """
-
     def seek_text_block(line_data: str, position: int, width: int) -> str:
         """Returns the text block from the line at the given position and width
         If the position is past the end, it will return an empty string"""
