@@ -39,3 +39,9 @@ def test_repr(ref_string):
     n.nodes = df
     value = repr(n)
     assert value == ref_string.test_repr_truncate
+
+@pytest.mark.keywords
+def test_repr_options(ref_string):
+    c = kwd.ContactAutomaticSingleSurface()
+    value = repr(c.options)
+    assert value == ref_string.test_repr_options
