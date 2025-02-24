@@ -125,6 +125,25 @@
         },
         {
             "type": "prefix",
+            "patterns": ["CONTACT_FORCE_TRANSDUCER"],
+            "generation-options": {
+                "add-option": [
+                    {
+                        "card-order": -2,
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "CONTACT_ID"
+                            }
+                        ],
+                        "option-name": "ID"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "prefix",
             "patterns": ["CONTACT"],
             "exclusions": ["CONTACT_ADD_WEAR",
                 "CONTACT_AUTO_MOVE",

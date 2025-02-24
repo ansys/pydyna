@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ContactForceTransducerConstraint(KeywordBase):
@@ -29,9 +30,13 @@ class ContactForceTransducerConstraint(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "FORCE_TRANSDUCER_CONSTRAINT"
+    option_specs = [
+        OptionSpec("ID", -2, 1),
+    ]
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card(
                 [
@@ -217,6 +222,30 @@ class ContactForceTransducerConstraint(KeywordBase):
                     ),
                 ],
             ),
+            OptionCardSet(
+                option_spec = ContactForceTransducerConstraint.option_specs[0],
+                cards = [
+                    Card(
+                        [
+                            Field(
+                                "cid",
+                                int,
+                                0,
+                                10,
+                                kwargs.get("cid")
+                            ),
+                            Field(
+                                "heading",
+                                str,
+                                10,
+                                70,
+                                kwargs.get("heading")
+                            ),
+                        ],
+                    ),
+                ],
+                **kwargs
+            ),
         ]
 
     @property
@@ -329,4 +358,24 @@ class ContactForceTransducerConstraint(KeywordBase):
         if value not in [0, 1, 2, None]:
             raise Exception("""sbpr must be `None` or one of {0,1,2}""")
         self._cards[0].set_value("sbpr", value)
+
+    @property
+    def cid(self) -> typing.Optional[int]:
+        """Get or set the ID keyword option
+        """ # nopep8
+        return self._cards[3].cards[0].get_value("cid")
+
+    @cid.setter
+    def cid(self, value: int) -> None:
+        self._cards[3].cards[0].set_value("cid", value)
+
+    @property
+    def heading(self) -> typing.Optional[str]:
+        """Get or set the Interface descriptor. We suggest using unique descriptions.
+        """ # nopep8
+        return self._cards[3].cards[0].get_value("heading")
+
+    @heading.setter
+    def heading(self, value: str) -> None:
+        self._cards[3].cards[0].set_value("heading", value)
 

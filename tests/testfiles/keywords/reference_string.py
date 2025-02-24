@@ -1163,6 +1163,24 @@ test_set_part_list_generate_ref2 = """*SET_PART_LIST_GENERATE
    2000000   2000025   2000100   2000200   2000500   2000600
    2000700   2000800   2000900   2001000"""
 
+test_contact_force_transducer_penalty = """*CONTACT_FORCE_TRANSDUCER_PENALTY
+$#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
+                             0         0                             0         0
+$#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                
+$#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                """
+
+test_contact_force_transducer_penalty_id = """*CONTACT_FORCE_TRANSDUCER_PENALTY_ID
+$#     cid                                                               heading
+                                                                                
+$#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
+                             0         0                             0         0
+$#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                
+$#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                """
+
 test_contact_automatic_single_surface_id_mpp1_mpp2 = """*CONTACT_AUTOMATIC_SINGLE_SURFACE_ID_MPP
 $#     cid                                                               heading
                                                                                 
