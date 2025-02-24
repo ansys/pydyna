@@ -1177,6 +1177,18 @@ $#      fs        fd        dc        vc       vdc    penchk        bt        dt
 $#    sfsa      sfsb      sast      sbst     sfsat     sfsbt       fsf       vsf
        1.0       1.0                           1.0       1.0       1.0       1.0"""
 
+test_contact_automatic_general_id_mpp1 = """*CONTACT_AUTOMATIC_GENERAL_ID_MPP
+$#     cid                                                               heading
+                                                                                
+$#  ignore      bckt    lcbckt    ns2trk   inititr    parmax    unused    cparm8
+         0       200                   3         2    1.0005                   0
+$#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
+        11                   0         0                             0         0
+$#      fs        fd        dc        vc       vdc    penchk        bt        dt
+       0.0       0.0       0.0       0.0       0.0                 0.0     1e+20
+$#    sfsa      sfsb      sast      sbst     sfsat     sfsbt       fsf       vsf
+       1.0       1.0                           1.0       1.0       1.0       1.0"""
+
 test_contact_force_transducer_penalty = """*CONTACT_FORCE_TRANSDUCER_PENALTY
 $#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
                              0         0                             0         0
