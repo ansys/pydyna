@@ -202,7 +202,7 @@ class Cards(OptionsInterface):
         else:
             # emit warnings caught while reading the card
             for caught_warning in caught:
-                warnings.warn(caught_warning)
+                warnings.warn(caught_warning.message)
         return True
 
     def _read_data(self, buf: typing.TextIO, parameters: ParameterSet) -> None:
