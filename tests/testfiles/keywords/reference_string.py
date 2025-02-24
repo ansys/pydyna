@@ -335,6 +335,17 @@ $#      pi        pi        pi        pi        pi        pi        pi        pi
       22.0                                                                      
        3.7"""
 
+test_repr_options = """Options:
+    ID option is not active.
+    MPP option is not active.
+    A option is not active.
+    B option is not active.
+    C option is not active.
+    D option is not active.
+    E option is not active.
+    F option is not active.
+    G option is not active."""
+
 test_repr_truncate = """*NODE
 $#   nid               x               y               z      tc      rc
        1             0.1             0.2             0.3       0       0
