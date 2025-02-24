@@ -161,7 +161,9 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
                 return False
             if len(item_type.true_value) == 0:
                 return True
-            raise Exception("No input data for flag. Expected true or false value because neither uses `no input` as a value!")
+            raise Exception(
+                "No input data for flag. Expected true or false value because neither uses `no input` as a value!"
+            )
         return None
 
     def has_parameter(text_block: str) -> bool:
