@@ -24,8 +24,6 @@ import copy
 import dataclasses
 import typing
 
-import pandas as pd
-
 from ansys.dyna.core.lib.config import use_lspp_defaults
 
 
