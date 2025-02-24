@@ -42,6 +42,11 @@ class TextCard(CardInterface):
         return False
 
     @property
+    def active(self) -> bool:
+        """Text cards are always active."""
+        return True
+
+    @property
     def format(self) -> format_type:
         return self._format_type
 

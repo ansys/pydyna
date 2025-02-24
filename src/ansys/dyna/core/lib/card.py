@@ -56,7 +56,7 @@ class Card(CardInterface):
         return fields
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
-        if not self._is_active():
+        if not self.active:
             return False
         line, to_exit = read_line(buf)
         if to_exit:
@@ -85,7 +85,7 @@ class Card(CardInterface):
             format = self._format_type
 
         def _write(buf: typing.TextIO):
-            if self._is_active():
+            if self.active:
                 if comment:
                     write_comment_line(buf, self._fields, format)
                     buf.write("\n")
@@ -93,7 +93,8 @@ class Card(CardInterface):
 
         return write_or_return(buf, _write)
 
-    def _is_active(self) -> bool:
+    @property
+    def active(self) -> bool:
         if self._active_func == None:
             return True
         return True if self._active_func() else False

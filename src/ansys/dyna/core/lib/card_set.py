@@ -70,7 +70,7 @@ class CardSet(CardInterface):
     def _initialize(self):
         if self._initialized:
             return
-        if self._bounded and self._active:
+        if self._bounded and self.active:
             self._initialize_data(self._length_func())
         self._initialized = True
 
@@ -82,7 +82,7 @@ class CardSet(CardInterface):
         return self._option_specs
 
     @property
-    def _active(self) -> bool:
+    def active(self) -> bool:
         if self._active_func == None:
             return True
         return self._active_func()
