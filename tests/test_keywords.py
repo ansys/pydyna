@@ -1059,6 +1059,31 @@ def test_em_isopotential_connect(ref_string):
 
 
 @pytest.mark.keywords
+def test_contact_force_transducer_penalty(ref_string):
+    c = kwd.ContactForceTransducerPenalty()
+    c.loads(ref_string.test_contact_force_transducer_penalty)
+    val = c.write()
+    assert val == ref_string.test_contact_force_transducer_penalty
+    c.options["ID"].active = True
+    val = c.write()
+    assert val == ref_string.test_contact_force_transducer_penalty_id
+
+
+@pytest.mark.skip(reason="Skipped until issue 738 is fixed")
+@pytest.mark.keywords
+def test_contact_automatic_general_id_mpp(ref_string):
+    c = kwd.ContactAutomaticGeneral()
+    c.options["ID"].active = True
+    c.options["MPP"].active = True
+    val = c.write()
+    assert val == ref_string.test_contact_automatic_general_id_mpp
+    c.mpp2 = False
+    c = kwd.ContactAutomaticGeneral()
+    c.loads(ref_string.test_contact_automatic_general_id_mpp)
+    assert c.options["MPP"].active is True
+
+
+@pytest.mark.keywords
 def test_contact_tied_shell_edge_to_surface_beam_offset_opt_cards(ref_string):
     """Test to read optional contact cards"""
     # These are for the option A, B, C, D, E, F, G

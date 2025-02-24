@@ -223,7 +223,7 @@ class Options:
         for option_spec in option_specs:
             active = self._api.is_option_active(option_spec.name)
             active_string = "active" if active else "not active"
-            sio.write(f"\n    {option_name} option is {active_string}.")
+            sio.write(f"\n    {option_spec.name} option is {active_string}.")
         return sio.getvalue()
 
     @property
