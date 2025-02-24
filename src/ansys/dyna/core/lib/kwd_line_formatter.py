@@ -24,6 +24,7 @@ import dataclasses
 import typing
 import warnings
 
+from ansys.dyna.core.lib.field import Flag
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 
@@ -83,11 +84,19 @@ def buffer_to_lines(buf: typing.TextIO, max_num_lines: int = -1) -> typing.List[
     return data_lines
 
 
+def _is_flag(item_type: typing.Union[type, Flag]):
+    if isinstance(item_type, Flag):
+        return True
+    return False
+
+
 def _expand_spec(spec: typing.List[tuple]) -> typing.List[tuple]:
     specs = []
     for item in spec:
         position, width, item_type = item
-        if dataclasses.is_dataclass(item_type):
+        if _is_flag(item_type):
+            specs.append(item)
+        elif dataclasses.is_dataclass(item_type):
             offset = position
             for field in dataclasses.fields(item_type):
                 item_spec = (offset, width, field.type)
@@ -104,7 +113,9 @@ def _contract_data(spec: typing.List[tuple], data: typing.List) -> typing.Iterab
     while True:
         try:
             _, _, item_type = next(iterspec)
-            if dataclasses.is_dataclass(item_type):
+            if _is_flag(item_type):
+                yield next(iterdata)
+            elif dataclasses.is_dataclass(item_type):
                 args = [next(iterdata) for f in dataclasses.fields(item_type)]
                 yield item_type(*args)
             else:
@@ -116,6 +127,7 @@ def _contract_data(spec: typing.List[tuple], data: typing.List) -> typing.Iterab
 def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None) -> typing.List:
     """loads a keyword card line with fixed column offsets and width from string
     spec: list of tuples representing the (offset, width, type) of each field
+          type can be a Flag which represents the True and False value
     line_data: string with keyword data
     example:
     >>> load_dataline([(0,10, int),(10,10, str)], '         1     hello')
@@ -144,6 +156,12 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
     def get_none_value(item_type):
         if item_type is float:
             return float("nan")
+        if _is_flag(item_type):
+            if len(item_type.false_value) == 0:
+                return False
+            if len(item_type.true_value) == 0:
+                return True
+            raise Exception("No input data for flag. Expected true or false value because neither uses `no input` as a value!")
         return None
 
     def has_parameter(text_block: str) -> bool:
@@ -171,6 +189,21 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         end_position, text_block = seek_text_block(line_data, position, width)
         if not has_value(text_block):
             value = get_none_value(item_type)
+        elif _is_flag(item_type):
+            flag: Flag = item_type
+            true_value = flag.true_value
+            false_value = flag.false_value
+            # check  the true value first, empty text may be false but not true
+            if true_value in text_block:
+                value = True
+            else:
+                if len(false_value) == 0:
+                    warnings.warn("value detected in field where false value was an empty string")
+                    value = False
+                else:
+                    if false_value in text_block:
+                        value = False
+                    raise Exception("Failed to find true or false value in flag")
         elif has_parameter(text_block):
             assert parameter_set != None
             value = get_parameter(text_block, item_type)
@@ -187,6 +220,5 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
     if end_position < len(line_data):
         warning_message = f'Detected out of bound card characters:\n"{line_data[end_position:]}"\n"Ignoring.'
         warnings.warn(warning_message)
-
     data = list(_contract_data(spec, data))
     return tuple(data)

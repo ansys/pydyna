@@ -1070,6 +1070,19 @@ def test_contact_force_transducer_penalty(ref_string):
 
 
 @pytest.mark.keywords
+def test_contact_automatic_general_id_mpp(ref_string):
+    c = kwd.ContactAutomaticGeneral()
+    c.options["ID"].active = True
+    c.options["MPP"].active = True
+    val = c.write()
+    assert val == ref_string.test_contact_automatic_general_id_mpp
+    c.mpp2 = False
+    c = kwd.ContactAutomaticGeneral()
+    c.loads(ref_string.test_contact_automatic_general_id_mpp)
+    assert c.options["MPP"].active is True
+
+
+@pytest.mark.keywords
 def test_contact_tied_shell_edge_to_surface_beam_offset_opt_cards(ref_string):
     """Test to read optional contact cards"""
     # These are for the option A, B, C, D, E, F, G

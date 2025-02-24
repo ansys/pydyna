@@ -27,6 +27,7 @@ import pytest
 
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline
 from ansys.dyna.core.lib.parameters import ParameterSet
+from ansys.dyna.core.lib.field import Flag
 
 @dataclasses.dataclass
 class bi:
@@ -119,3 +120,18 @@ def test_load_dataline_010():
     assert res[0].bar == 50
     assert res[1].foo == 1
     assert math.isnan(res[1].bar)
+
+@pytest.mark.keywords
+def test_load_dataline_011():
+    """Test reading flags"""
+    dataline = "         1&         "
+    spec = [(0, 10, int), (10, 10, Flag(True, "&", ""))]
+    res = load_dataline(spec, dataline)
+    assert len(res) == 2
+    assert res[0] == 1
+    assert res[1] == True
+    dataline = "         1          "
+    res = load_dataline(spec, dataline)
+    assert len(res) == 2
+    assert res[0] == 1
+    assert res[1] == False

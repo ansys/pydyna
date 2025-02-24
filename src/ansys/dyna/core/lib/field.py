@@ -89,7 +89,7 @@ class Field:
 
     @property
     def value(self) -> typing.Any:
-        if self._truthy_value(self._value) and type(self._value) == Flag:
+        if type(self._value) == Flag:
             return self._value.value
         return self._value
 
@@ -103,18 +103,18 @@ class Field:
 
     @value.setter
     def value(self, value: typing.Any) -> None:
-        no_value_flag = self._no_value_flag(value)
-        if no_value_flag:
+        if type(self._value) == Flag:
             self._value.value = value
         else:
             self._value = value
 
     def io_info(self) -> typing.Tuple[str, typing.Type]:
         """Return the value and type used for io."""
-        no_value_flag = self._no_value_flag(self._value)
-        if no_value_flag:
-            value = self._value.true_value if self._value.value else self._value.false_value
-            return value, str
+        if type(self._value) == Flag:
+            if self._value.value:
+                return self._value.true_value, str
+            else:
+                return self._value.false_value, str
         return self.value, self.type
 
 
