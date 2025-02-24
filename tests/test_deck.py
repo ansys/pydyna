@@ -279,8 +279,8 @@ def test_kwdeck_basic_002(file_utils, ref_string):
     deck.extend([curve1, curve2, include1, volume1, volume2, volume3, tshell1, seatbelt1] + string)
     deck_string = deck.write()
     file_utils.compare_string_with_file(deck_string, "test.k")
-    assert deck.keywords_names[0] == "*DEFINE_CURVE"
-    assert deck.keywords_names[2] == "*INCLUDE"
+    assert deck.keyword_names[0] == "*DEFINE_CURVE"
+    assert deck.keyword_names[2] == "*INCLUDE"
 
 
 @pytest.mark.keywords
