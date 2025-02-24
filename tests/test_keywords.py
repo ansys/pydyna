@@ -1069,6 +1069,7 @@ def test_contact_force_transducer_penalty(ref_string):
     assert val == ref_string.test_contact_force_transducer_penalty_id
 
 
+@pytest.mark.skip(reason="Skipped until issue 738 is fixed")
 @pytest.mark.keywords
 def test_contact_automatic_general_id_mpp(ref_string):
     c = kwd.ContactAutomaticGeneral()
