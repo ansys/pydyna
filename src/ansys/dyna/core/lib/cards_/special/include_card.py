@@ -73,7 +73,7 @@ class IncludeCard(Card):
             format = self._format_type
 
         def _write(buf: typing.TextIO):
-            if self._is_active():
+            if self.active:
                 if comment:
                     write_comment_line(buf, self._fields, format)
                     buf.write("\n")

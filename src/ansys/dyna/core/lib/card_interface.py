@@ -37,6 +37,8 @@ class CardInterface(metaclass=abc.ABCMeta):
             and callable(subclass.write)
             and hasattr(subclass, "read")
             and callable(subclass.read)
+            and hasattr(subclass, "active")
+            and callable(subclass.active)
         )
 
     @abc.abstractmethod
@@ -64,4 +66,10 @@ class CardInterface(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def format(self, value: format_type) -> None:
         """Set the card format type."""
+        raise NotImplementedError
+
+    @property
+    @abc.abstractmethod
+    def active(self) -> bool:
+        """Return whether the card is active."""
         raise NotImplementedError

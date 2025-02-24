@@ -171,7 +171,8 @@ class SeriesCard(CardInterface):
             return math.nan
         return None
 
-    def _is_active(self) -> bool:
+    @property
+    def active(self) -> bool:
         if self._active_func == None:
             return True
         return self._active_func()
@@ -299,7 +300,7 @@ class SeriesCard(CardInterface):
         if format == None:
             format = self._format_type
         output = ""
-        if self._is_active():
+        if self.active:
             lines = [row for row in self._get_lines(format, comment) if row]
             output = "\n".join(lines)
         if buf == None:

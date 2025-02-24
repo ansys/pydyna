@@ -24,8 +24,6 @@ import copy
 import dataclasses
 import typing
 
-import pandas as pd
-
 from ansys.dyna.core.lib.config import use_lspp_defaults
 
 
@@ -52,8 +50,15 @@ class Field:
         else:
             self._value = kwargs.get(name, value) if use_lspp_defaults() else None
 
+    def _is_flag(self) -> bool:
+        return type(self._value) == Flag
+
     def __repr__(self) -> str:
-        return f"Field({self.name}, {self.type}, {self.offset}, {self.width}, {self.value})"
+        if self._is_flag():
+            valuestr = f"Flag({self.value})"
+        else:
+            valuestr = self.value
+        return f"Field({self.name}, {self.type}, {self.offset}, {self.width}, {valuestr})"
 
     @property
     def name(self) -> str:
@@ -89,28 +94,20 @@ class Field:
 
     @property
     def value(self) -> typing.Any:
-        if type(self._value) == Flag:
+        if self._is_flag():
             return self._value.value
         return self._value
 
-    def _truthy_value(self, value) -> bool:
-        if pd.isna(value):
-            return False
-        return True if value else False
-
-    def _no_value_flag(self, value) -> bool:
-        return self._truthy_value(value) and type(value) is Flag
-
     @value.setter
     def value(self, value: typing.Any) -> None:
-        if type(self._value) == Flag:
+        if self._is_flag():
             self._value.value = value
         else:
             self._value = value
 
     def io_info(self) -> typing.Tuple[str, typing.Type]:
         """Return the value and type used for io."""
-        if type(self._value) == Flag:
+        if self._is_flag():
             if self._value.value:
                 return self._value.true_value, str
             else:

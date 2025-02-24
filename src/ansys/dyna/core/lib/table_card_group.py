@@ -136,7 +136,7 @@ class TableCardGroup(CardInterface):
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
     ) -> str:
-        if self._is_active():
+        if self.active:
             self._initialize()
             self._propagate()
 
@@ -190,7 +190,8 @@ class TableCardGroup(CardInterface):
         index into the card given by _get_index_of_which_card"""
         return math.floor(overall_index / len(self._get_active_cards()))
 
-    def _is_active(self) -> bool:
+    @property
+    def active(self) -> bool:
         if self._active_func == None:
             return True
         return self._active_func()
@@ -214,7 +215,7 @@ class TableCardGroup(CardInterface):
         return self._bounded
 
     def _num_rows(self) -> int:
-        if not self._is_active():
+        if not self.active:
             return 0
         num_active_cards = len(self._get_active_cards())
         return self._length_func() * num_active_cards

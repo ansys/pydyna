@@ -267,7 +267,7 @@ class TableCard(Card):
         return self._bounded
 
     def _num_rows(self) -> int:
-        if not self._is_active():
+        if not self.active:
             return 0
         return self._length_func()
 
