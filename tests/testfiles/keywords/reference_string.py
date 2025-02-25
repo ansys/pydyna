@@ -335,6 +335,17 @@ $#      pi        pi        pi        pi        pi        pi        pi        pi
       22.0                                                                      
        3.7"""
 
+test_repr_options = """Options:
+    ID option is not active.
+    MPP option is not active.
+    A option is not active.
+    B option is not active.
+    C option is not active.
+    D option is not active.
+    E option is not active.
+    F option is not active.
+    G option is not active."""
+
 test_repr_truncate = """*NODE
 $#   nid               x               y               z      tc      rc
        1             0.1             0.2             0.3       0       0
@@ -1151,6 +1162,50 @@ test_set_part_list_generate_ref2 = """*SET_PART_LIST_GENERATE
          3       0.0       0.0       0.0       0.0
    2000000   2000025   2000100   2000200   2000500   2000600
    2000700   2000800   2000900   2001000"""
+
+test_contact_automatic_general_id_mpp = """*CONTACT_AUTOMATIC_GENERAL_ID_MPP
+$#     cid                                                               heading
+                                                                                
+$#  ignore      bckt    lcbckt    ns2trk   inititr    parmax    unused    cparm8
+         0       200                   3         2    1.0005                   0
+$#    mpp2   chksegs     pensf   grpable
+&                  0       1.0         0
+$#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
+                             0         0                             0         0
+$#      fs        fd        dc        vc       vdc    penchk        bt        dt
+       0.0       0.0       0.0       0.0       0.0                 0.0     1e+20
+$#    sfsa      sfsb      sast      sbst     sfsat     sfsbt       fsf       vsf
+       1.0       1.0                           1.0       1.0       1.0       1.0"""
+
+test_contact_automatic_general_id_mpp1 = """*CONTACT_AUTOMATIC_GENERAL_ID_MPP
+$#     cid                                                               heading
+                                                                                
+$#  ignore      bckt    lcbckt    ns2trk   inititr    parmax    unused    cparm8
+         0       200                   3         2    1.0005                   0
+$#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
+        11                   0         0                             0         0
+$#      fs        fd        dc        vc       vdc    penchk        bt        dt
+       0.0       0.0       0.0       0.0       0.0                 0.0     1e+20
+$#    sfsa      sfsb      sast      sbst     sfsat     sfsbt       fsf       vsf
+       1.0       1.0                           1.0       1.0       1.0       1.0"""
+
+test_contact_force_transducer_penalty = """*CONTACT_FORCE_TRANSDUCER_PENALTY
+$#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
+                             0         0                             0         0
+$#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                
+$#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                """
+
+test_contact_force_transducer_penalty_id = """*CONTACT_FORCE_TRANSDUCER_PENALTY_ID
+$#     cid                                                               heading
+                                                                                
+$#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
+                             0         0                             0         0
+$#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                
+$#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                """
 
 test_contact_automatic_single_surface_id_mpp1_mpp2 = """*CONTACT_AUTOMATIC_SINGLE_SURFACE_ID_MPP
 $#     cid                                                               heading

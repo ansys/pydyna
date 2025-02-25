@@ -23,6 +23,7 @@
 """Base class for cards and I/O."""
 
 import typing
+import warnings
 
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.card_writer import write_cards
@@ -188,12 +189,28 @@ class Cards(OptionsInterface):
         if not any_options_read:
             buf.seek(pos)
 
+    def _read_card(self, card: CardInterface, buf: typing.TextIO, parameters: ParameterSet) -> bool:
+        pos = buf.tell()
+        with warnings.catch_warnings(record=True) as w:
+            card.read(buf, parameters)
+            caught = list(w)
+
+        # the card is not active after reading it. THat means we should *not* read it. Rewinding back to the buffer
+        # start position. In this case any warnings caused by reading the card can be ignored.
+        if not card.active:
+            buf.seek(pos)
+        else:
+            # emit warnings caught while reading the card
+            for caught_warning in caught:
+                warnings.warn(caught_warning.message)
+        return True
+
     def _read_data(self, buf: typing.TextIO, parameters: ParameterSet) -> None:
         for card in self._get_pre_option_cards():
-            card.read(buf, parameters)
+            self._read_card(card, buf, parameters)
         for card in self._get_non_option_cards():
-            card.read(buf, parameters)
+            self._read_card(card, buf, parameters)
         for card in self._get_post_option_cards():
-            card.read(buf, parameters)
+            self._read_card(card, buf, parameters)
 
         self._try_read_options_with_no_title(buf)

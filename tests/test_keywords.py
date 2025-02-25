@@ -593,11 +593,11 @@ def test_mat_hyperelastic_rubber_read(ref_string):
     m.loads(ref_mat_hyperelastic_rubber_string)
     assert m.write() == ref_mat_hyperelastic_rubber_string
     m.pr = -1
-    assert m.cards[1]._is_active()
+    assert m.cards[1].active
     m.n = 1
-    assert m.cards[2]._is_active()
+    assert m.cards[2].active
     m.n = 0
-    assert m.cards[3]._is_active()
+    assert m.cards[3].active
 
 
 @pytest.mark.keywords
@@ -607,11 +607,11 @@ def test_mat_ogden_rubber_read(ref_string):
     m.loads(ref_mat_ogden_rubber_string)
     assert m.write() == ref_mat_ogden_rubber_string
     m.pr = -1
-    assert m.cards[1]._is_active()
+    assert m.cards[1].active
     m.n = 1
-    assert m.cards[2]._is_active()
+    assert m.cards[2].active
     m.n = 0
-    assert m.cards[3]._is_active()
+    assert m.cards[3].active
 
 
 @pytest.mark.keywords
@@ -1056,6 +1056,35 @@ def test_em_isopotential_connect(ref_string):
     assert s.write() == ref_string.test_default_card_em_isopotential_connect_string
     s.contype = 6
     assert s.write() == ref_string.test_conditional_card_em_isopotential_connect_string
+
+
+@pytest.mark.keywords
+def test_contact_force_transducer_penalty(ref_string):
+    c = kwd.ContactForceTransducerPenalty()
+    c.loads(ref_string.test_contact_force_transducer_penalty)
+    val = c.write()
+    assert val == ref_string.test_contact_force_transducer_penalty
+    c.options["ID"].active = True
+    val = c.write()
+    assert val == ref_string.test_contact_force_transducer_penalty_id
+
+
+@pytest.mark.keywords
+def test_contact_automatic_general_id_mpp(ref_string):
+    c = kwd.ContactAutomaticGeneral()
+    c.options["ID"].active = True
+    c.options["MPP"].active = True
+    val = c.write()
+    assert val == ref_string.test_contact_automatic_general_id_mpp
+    c = kwd.ContactAutomaticGeneral()
+    c.loads(ref_string.test_contact_automatic_general_id_mpp)
+    assert c.options["MPP"].active is True
+
+    c = kwd.ContactAutomaticGeneral()
+    c.loads(ref_string.test_contact_automatic_general_id_mpp1)
+    assert c.options["MPP"].active is True
+    assert c.mpp2 is False
+    assert c.surfa == 11
 
 
 @pytest.mark.keywords

@@ -56,7 +56,7 @@ class Card(CardInterface):
         return fields
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
-        if not self._is_active():
+        if not self.active:
             return False
         line, to_exit = read_line(buf)
         if to_exit:
@@ -64,13 +64,23 @@ class Card(CardInterface):
         self._load(line, parameter_set)
         return False
 
+    def _get_format_spec(self, fields):
+        format_spec = []
+        for field in fields:
+            if field._is_flag():
+                field_type = field._value
+            else:
+                field_type = field.type
+            format_spec.append((field.offset, field.width, field_type))
+        return format_spec
+
     def _load(self, data_line: str, parameter_set: ParameterSet) -> None:
         """loads the card data from a list of strings"""
         fields = self._fields
         if self.format == format_type.long:
             fields = self._convert_fields_to_long_format()
-        format = [(field.offset, field.width, field.type) for field in fields]
-        values = load_dataline(format, data_line, parameter_set)
+        format_spec = self._get_format_spec(fields)
+        values = load_dataline(format_spec, data_line, parameter_set)
         num_fields = len(fields)
         for field_index in range(num_fields):
             self._fields[field_index].value = values[field_index]
@@ -85,7 +95,7 @@ class Card(CardInterface):
             format = self._format_type
 
         def _write(buf: typing.TextIO):
-            if self._is_active():
+            if self.active:
                 if comment:
                     write_comment_line(buf, self._fields, format)
                     buf.write("\n")
@@ -93,7 +103,8 @@ class Card(CardInterface):
 
         return write_or_return(buf, _write)
 
-    def _is_active(self) -> bool:
+    @property
+    def active(self) -> bool:
         if self._active_func == None:
             return True
         return True if self._active_func() else False
