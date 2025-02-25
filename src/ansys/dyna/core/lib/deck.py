@@ -539,6 +539,19 @@ class Deck:
     def title(self, value: str) -> None:
         self._title = value
 
+    @property
+    def keyword_names(self) -> typing.List[str]:
+        names = []
+        for kw in self.all_keywords:
+            if isinstance(kw, KeywordBase):
+                names.append(f"{kw.get_title()}")
+            elif isinstance(kw, str):
+                try_title = kw.split("\n")[0]
+                names.append(f"str({try_title}...)")
+            elif isinstance(kw, EncryptedKeyword):
+                names.append(f"Encrypted")
+        return names
+
     def __repr__(self) -> str:
         """Get a console-friendly representation of a list of all keywords in the deck."""
         kwlist = self.all_keywords
