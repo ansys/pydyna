@@ -575,6 +575,20 @@ def test_deck_encrypted_import_expand(file_utils):
     _verify_encrypted_deck(deck)
     assert len(deck.get(type="NODE")) == 1
 
+
+@pytest.mark.keywords
+def test_deck_encrypted_import_expand_transform(file_utils):
+    """Import an encrypted file as a deck."""
+    deck = Deck()
+    filename = file_utils.assets_folder / "test_input_deck_1_1024bit.asc"
+    deck.append(kwd.DefineTransformation(tranid=10, option="POINT", a1=1, a2=2.0, a3=0.0, a4=1.0))
+    i_c = kwd.IncludeTransform(filename = filename, tranid=10)
+    deck.append(i_c)
+    deck = deck.expand()
+    _verify_encrypted_deck(deck)
+    assert len(deck.get(type="DEFINE")) == 1
+
+
 @pytest.mark.keywords
 def test_deck_remove_superfluous_newlines(ref_string):
     deck = Deck()
