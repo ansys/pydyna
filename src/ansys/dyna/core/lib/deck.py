@@ -186,6 +186,16 @@ class Deck:
         for kw in kwlist:
             self.append(kw)
 
+    def _detect_encoding(self, path: str) -> str:
+        try:
+            import chardet
+
+            with open(path, "rb") as f:
+                return chardet.detect(f.read())["encoding"]
+        except Exception as e:
+            warnings.warn("Failed to detect encoding of deck in `expand`, defaulting to utf-8!")
+            return "utf-8"
+
     def _expand_helper(self, search_paths: typing.List[str], recurse: bool) -> typing.List[KeywordBase]:
         """Recursively outputs a list of keywords within Includes."""
         keywords = []
@@ -206,18 +216,17 @@ class Deck:
                 include_deck = Deck(format=keyword.format)
                 for import_handler in self._import_handlers:
                     include_deck.register_import_handler(import_handler)
-                try:
-                    xform = None
-                    if keyword.subkeyword == "TRANSFORM":
-                        xform = keyword
-                        include_deck.register_import_handler(self.transform_handler)
-                    context = ImportContext(xform, self, include_file)
-                    encoding = "utf-8"  # TODO - how to control encoding in expand?
-                    include_deck._import_file(include_file, "utf-8", context)
-                    success = True
-                    break
-                except FileNotFoundError:
-                    pass
+                if not os.path.isfile(include_file):
+                    continue
+                xform = None
+                if keyword.subkeyword == "TRANSFORM":
+                    xform = keyword
+                    include_deck.register_import_handler(self.transform_handler)
+                context = ImportContext(xform, self, include_file)
+                encoding = self._detect_encoding(include_file)
+                include_deck._import_file(include_file, encoding, context)
+                success = True
+                break
             if success:
                 if recurse:
                     # TODO: merge the parameters if the "LOCAL" option is not used!
