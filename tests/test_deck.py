@@ -401,6 +401,17 @@ def test_deck_expand(file_utils):
     assert len(expanded_deck.keywords) == 12
     assert expanded_deck.keywords[1].format == format_type.standard
 
+
+@pytest.mark.keywords
+def test_deck_expand_encoding(file_utils):
+    """Test that a long deck can read a standard deck."""
+    deck = Deck(format=format_type.long)
+    deck.append(kwd.Include(filename=file_utils.get_asset_file_path("encoding_sample.k"), format=format_type.standard))
+    expanded_deck = deck.expand()
+
+    # check all_keywords instead of keywords because the deck has comma-delimited cards which is not yet supported
+    assert len(expanded_deck.all_keywords) == 1
+
 @pytest.mark.keywords
 def test_deck_expand_recursive_include_path(file_utils):
     deck = Deck()
@@ -520,7 +531,6 @@ def test_deck_expand_with_define_transform(file_utils):
     deck.extend([define_transform_kwd, xform])
     expanded = deck.expand()
     assert len(expanded.keywords) == 4
-    print(expanded.keywords[3].nodes)
     assert expanded.keywords[3].nodes["x"][0] == pytest.approx(-543.784672)
     assert expanded.keywords[3].nodes["y"][0] == pytest.approx(-253.570957)
 
