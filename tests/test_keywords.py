@@ -404,6 +404,16 @@ def test_initial_stress_shell(ref_string):
 
 
 @pytest.mark.keywords
+def test_initial_temperature(ref_string):
+    tin = kwd.InitialTemperatureNode()
+    tin.loads(ref_string.test_initial_temperature_node_string)
+    assert tin.write == ref_string.test_initial_temperature_node_string
+    tis = kwd.InitialTemperatureNode()
+    tis.loads(ref_string.test_initial_temperature_node_string)
+    assert tis.write == ref_string.test_initial_temperature_set_string
+
+
+@pytest.mark.keywords
 def test_element_shell_thickness(ref_string):
     ref_element = """*ELEMENT_SHELL_THICKNESS
        1       1       1     105       2       2

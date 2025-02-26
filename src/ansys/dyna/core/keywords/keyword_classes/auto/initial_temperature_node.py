@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialTemperatureNode(KeywordBase):
@@ -33,67 +34,25 @@ class InitialTemperatureNode(KeywordBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._cards = [
-            Card(
+            TableCard(
                 [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temp",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "loc",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
+                    Field("nid", int, 0, 10, None),
+                    Field("temp", float, 10, 10, 0.0),
+                    Field("loc", int, 20, 10, 0),
                 ],
+                None,
+                name="nodes",
+                **kwargs,
             ),
         ]
 
     @property
-    def nid(self) -> typing.Optional[int]:
-        """Get or set the Node ID.
-        """ # nopep8
-        return self._cards[0].get_value("nid")
+    def nodes(self):
+        '''Gets the table of nodes'''
+        return self._cards[0].table
 
-    @nid.setter
-    def nid(self, value: int) -> None:
-        self._cards[0].set_value("nid", value)
-
-    @property
-    def temp(self) -> float:
-        """Get or set the Temperature at node.
-        """ # nopep8
-        return self._cards[0].get_value("temp")
-
-    @temp.setter
-    def temp(self, value: float) -> None:
-        self._cards[0].set_value("temp", value)
-
-    @property
-    def loc(self) -> int:
-        """Get or set the Application of surface for thermal shell elements, see parameter, TSHELL, in the *CONTROL_SHELL input.
-        EQ.-1: lower surface of thermal shell element.
-        EQ. 0 middle surface of thermal shell element.
-        EQ. 1: upper surface of thermal shell element.
-        """ # nopep8
-        return self._cards[0].get_value("loc")
-
-    @loc.setter
-    def loc(self, value: int) -> None:
-        if value not in [0, -1, 1, None]:
-            raise Exception("""loc must be `None` or one of {0,-1,1}""")
-        self._cards[0].set_value("loc", value)
+    @nodes.setter
+    def nodes(self, df):
+        '''sets nodes from the dataframe df'''
+        self._cards[0].table = df
 

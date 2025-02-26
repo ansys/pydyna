@@ -696,6 +696,30 @@ test_initial_stress_shell_string = """*INITIAL_STRESS_SHELL
      0.209       0.0       0.0       0.0       0.0       1.0       0.0       0.0
        0.0    1.0E-4     0.837"""
 
+test_initial_temperature_node_string = """*INITIAL_TEMPERATURE_NODE
+$#     nid      temp       loc
+         1     298.0         0
+         2     298.0         0
+         3     298.0         0
+         4     298.0         0
+         5     298.0         0
+         6     298.0         0
+         7     298.0         0
+         8     298.0         0
+         9     298.0         0"""
+
+test_initial_temperature_set_string = """*INITIAL_TEMPERATURE_SET
+$#     nid      temp       loc
+         1     298.0         0
+         2     298.0         0
+         3     298.0         0
+         4     298.0         0
+         5     298.0         0
+         6     298.0         0
+         7     298.0         0
+         8     298.0         0
+         9     298.0         0"""
+
 test_define_function_string = """*DEFINE_FUNCTION
 $#     fid                                                               heading
                                                                                 
