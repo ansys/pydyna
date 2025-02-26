@@ -344,4 +344,4 @@ def get_polydata(deck: Deck, cwd=None):
 def plot_deck(deck, **args):
     """Plot the deck."""
     plot_data = get_polydata(deck, args.pop("cwd", ""))
-    return plot_data.plot()
+    return plot_data.plot(**args)
