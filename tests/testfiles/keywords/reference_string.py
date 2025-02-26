@@ -709,7 +709,7 @@ $#     nid      temp       loc
          9     298.0         0"""
 
 test_initial_temperature_set_string = """*INITIAL_TEMPERATURE_SET
-$#     nid      temp       loc
+$#    nsid      temp       loc
          1     298.0         0
          2     298.0         0
          3     298.0         0
