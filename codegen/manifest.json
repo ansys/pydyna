@@ -1611,6 +1611,26 @@
         },
         "comment": "TODO(1) - self.large==1 has different cards that aren't defined here."
     },
+    "INITIAL_TEMPERATURE_NODE": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "index": 0,
+                    "property-name": "nodes"
+                }
+            ]
+        }
+    },
+    "INITIAL_TEMPERATURE_SET": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "index": 0,
+                    "property-name": "sets"
+                }
+            ]
+        }
+    },
     "ELEMENT_SHELL": {
         "generation-options": {
             "table-card": [
