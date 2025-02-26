@@ -162,7 +162,7 @@ def run_post(filepath):
 
 shutil.copy(mesh_file, os.path.join(rundir.name, mesh_file_name))
 deck = write_deck(os.path.join(rundir.name, dynafile))
-deck.plot(cwd=rundir.name)
+deck.plot(cwd=rundir.name, show_edges=True)
 
 ###############################################################################
 # Run the Dyna solver
