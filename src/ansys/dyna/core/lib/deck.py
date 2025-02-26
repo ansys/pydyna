@@ -187,14 +187,22 @@ class Deck:
             self.append(kw)
 
     def _detect_encoding(self, path: str) -> str:
-        try:
-            import chardet
+        import chardet
 
+        try:
             with open(path, "rb") as f:
                 return chardet.detect(f.read())["encoding"]
         except Exception as e:
-            warnings.warn("Failed to detect encoding of deck in `expand`, defaulting to utf-8!")
-            return "utf-8"
+            raise Exception("Failed to detect encoding of deck in `expand`: " + str(e))
+
+    def _prepare_deck_for_expand(self, keyword: KeywordBase):
+        """Prepare deck for expansion by adding import handlers."""
+        include_deck = Deck(format=keyword.format)
+        for import_handler in self._import_handlers:
+            include_deck.register_import_handler(import_handler)
+        if keyword.subkeyword == "TRANSFORM":
+            include_deck.register_import_handler(self.transform_handler)
+        return include_deck
 
     def _expand_helper(self, search_paths: typing.List[str], recurse: bool) -> typing.List[KeywordBase]:
         """Recursively outputs a list of keywords within Includes."""
@@ -213,18 +221,19 @@ class Deck:
             success = False
             for search_path in search_paths:
                 include_file = os.path.join(search_path, keyword.filename)
-                include_deck = Deck(format=keyword.format)
-                for import_handler in self._import_handlers:
-                    include_deck.register_import_handler(import_handler)
                 if not os.path.isfile(include_file):
                     continue
                 xform = None
                 if keyword.subkeyword == "TRANSFORM":
                     xform = keyword
-                    include_deck.register_import_handler(self.transform_handler)
                 context = ImportContext(xform, self, include_file)
-                encoding = self._detect_encoding(include_file)
-                include_deck._import_file(include_file, encoding, context)
+                try:
+                    include_deck = self._prepare_deck_for_expand(keyword)
+                    include_deck._import_file(include_file, "utf-8", context)
+                except UnicodeDecodeError as e:
+                    encoding = self._detect_encoding(include_file)
+                    include_deck = self._prepare_deck_for_expand(keyword)
+                    include_deck._import_file(include_file, encoding, context)
                 success = True
                 break
             if success:
