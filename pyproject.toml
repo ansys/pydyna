@@ -34,6 +34,7 @@ dependencies = ["ansys-dpf-core>=0.7.2",
                 "pandas>=2.0",
                 "appdirs>=1.4.4",
                 "transformations==2025.1.1",
+                "chardet==5.2.0",
 ]
 
 [project.optional-dependencies]
