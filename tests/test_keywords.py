@@ -410,8 +410,6 @@ def test_initial_temperature(ref_string):
     assert tin.write() == ref_string.test_initial_temperature_node_string
     tis = kwd.InitialTemperatureSet()
     tis.loads(ref_string.test_initial_temperature_set_string)
-    print(tis.write())
-    print(ref_string.test_initial_temperature_set_string)
     assert tis.write() == ref_string.test_initial_temperature_set_string
 
 
