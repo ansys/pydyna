@@ -249,7 +249,7 @@ class SeriesCard(CardInterface):
             last_real_index = max(loc, last_real_index)
         if last_real_index == -1:
             return []
-        values = values[:last_real_index+1]
+        values = values[: last_real_index + 1]
         return values
 
     def _load_bounded_from_buffer(self, buf: typing.TextIO) -> None:
