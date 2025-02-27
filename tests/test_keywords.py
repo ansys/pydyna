@@ -278,7 +278,7 @@ def test_section_tshell(ref_string):
     tshell.format = format_type.standard
     assert tshell.write(format=format_type.long) == ref_string.test_section_shell_long
 
-    # check that the variable card is saved and loaded correctly
+    # check that the series card is saved and loaded correctly
     tshell = kwd.SectionTShell(icomp=1, nip=9)
     tshell.bi[0] = 1.0
     tshell.bi[1] = 2.0
@@ -912,7 +912,7 @@ def test_set_shell_intersect(ref_string):
 
 @pytest.mark.keywords
 def test_set_part_list(ref_string):
-    """Test formatting of set part list (uses variable card with ints)."""
+    """Test formatting of set part list (uses series card with ints)."""
     s = kwd.SetPartList()
     s.sid = 1
     s.parts = [1, 2, 3]
@@ -923,7 +923,7 @@ def test_set_part_list(ref_string):
 # uncomment when duplicate card groups can be assigned in this way
 #@pytest.mark.keywords
 #def test_part_assign(ref_string):
-#    """Test formatting of set part list (uses variable card with ints)."""
+#    """Test formatting of set part list (uses series card with ints)."""
 #    part = kwd.Part(heading="My part", pid=1, secid=1, mid=1, eosid=0)
 #    ref = ref_string.test_part_assign_ref
 #    test = part.write()
@@ -931,7 +931,7 @@ def test_set_part_list(ref_string):
 
 @pytest.mark.keywords
 def test_element_beam_assign(ref_string):
-    """Test formatting of set part list (uses variable card with ints)."""
+    """Test formatting of set part list (uses series card with ints)."""
     beam = kwd.ElementBeam(pid=1, n1=1, n2=0, local=1)
     ref = ref_string.test_element_beam_assign_ref
     assert beam.write() == ref
