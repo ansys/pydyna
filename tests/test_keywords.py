@@ -968,6 +968,10 @@ def test_set_part_list_generate(ref_string):
     for block_range in s.block_ranges:
         assert block_range.bbeg < block_range.bend
 
+    s.loads(ref_string.test_set_part_list_generate_ref3)
+    assert len(s.block_ranges) == 3
+    assert s.block_ranges[2].bbeg == 15010000
+
 
 @pytest.mark.keywords
 def test_contact_tied_shell_edge_to_surface_id(ref_string):
