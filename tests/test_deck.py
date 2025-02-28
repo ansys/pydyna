@@ -607,9 +607,9 @@ def test_deck_remove_superfluous_newlines(ref_string):
 
 
 @pytest.mark.keywords
-def test_variable_card_read_write_set(ref_string):
-    """test to read and write variable cards, especially checking case where last card contains all fields"""
-    set_string = ref_string.test_variable_card_sets_string
+def test_series_card_read_write_set(ref_string):
+    """test to read and write set cards, especially checking case where last card contains all fields"""
+    set_string = ref_string.test_series_card_sets_string
     input_deck = Deck()
     input_deck.loads(set_string)
     assert input_deck.write() == set_string

@@ -34,8 +34,8 @@ class bi:
     bar: float = None
 
 @pytest.mark.keywords
-def test_variable_card_length_function():
-    """test variable card"""
+def test_series_card_length_function():
+    """test series card"""
     v = SeriesCard("bi", 8, 10, float, lambda: 4)
     assert len(v) == 4
     assert (0, 4) == v._get_card_range(0), "card range incorrect"
@@ -52,7 +52,7 @@ def test_variable_card_length_function():
 
 
 @pytest.mark.keywords
-def test_variable_card_read(string_utils):
+def test_series_card_read(string_utils):
     """test loading from buffer"""
     string = "       1.0       2.0          "
     v = SeriesCard("bi", 8, 10, float, lambda: 3)
@@ -62,8 +62,18 @@ def test_variable_card_read(string_utils):
     assert math.isnan(v[2])
 
 @pytest.mark.keywords
-def test_variable_card_read_struct(string_utils):
-    """Test a variable card using the struct type definition."""
+def test_series_card_read_out_of_bounds(string_utils):
+    """test loading from buffer"""
+    string = "       1.0       2.0          "
+    v = SeriesCard("bi", 8, 10, float)
+    v.read(string_utils.as_buffer(string))
+    assert len(v) == 2
+    assert v[0] == 1.0
+    assert v[1] == 2.0
+
+@pytest.mark.keywords
+def test_series_card_read_struct(string_utils):
+    """Test a series card using the struct type definition."""
     v = SeriesCard("bi", 8, 10, bi)
     string = "     113.2    -50.01"
     v.read(string_utils.as_buffer(string))
@@ -72,14 +82,14 @@ def test_variable_card_read_struct(string_utils):
     assert v[0].bar == -50.01
 
 @pytest.mark.keywords
-def test_variable_card_unbounded(string_utils):
-    """test unbounded variable card"""
+def test_series_card_unbounded(string_utils):
+    """test unbounded series card"""
     v = SeriesCard("bi", 8, 10, float)
     string = "       1.0       2.0          "
     v.read(string_utils.as_buffer(string))
     assert v._num_rows() == 1
-    assert len(v) == 3
-    v[2] = 3.0
+    assert len(v) == 2
+    v.append(3.0)
     assert v.write(format_type.default) == "$#      bi        bi        bi\n       1.0       2.0       3.0"
     for i in range(10):
         v.append(i)
@@ -88,28 +98,28 @@ def test_variable_card_unbounded(string_utils):
 
 
 @pytest.mark.keywords
-def test_write_inactive_variable_card():
+def test_write_inactive_series_card():
     card = SeriesCard("bi", 8, 10, float, None, lambda: False)
     assert card.write() == ""
 
 
 @pytest.mark.keywords
-def test_write_empty_variable_card():
+def test_write_empty_series_card():
     card = SeriesCard("bi", 8, 10, float, lambda: 0)
     assert card.write() == ""
 
 
 @pytest.mark.keywords
-def test_variable_card_set_single_value():
-    """test setting single value of bounded variable card"""
+def test_series_card_set_single_value():
+    """test setting single value of bounded series card"""
     v = SeriesCard("pi", 8, 10, float, lambda: 3)
     v[0] = 22
     rowdata = v._get_row_data(0, format_type.default)
     assert rowdata.startswith("      22.0"), f"incorrect rowdata: {rowdata}"
 
 @pytest.mark.keywords
-def test_variable_card_set_single_value_struct():
-    """test setting single value of bounded variable card"""
+def test_series_card_set_single_value_struct():
+    """test setting single value of bounded series card"""
     v = SeriesCard("bi", 8, 10, bi, lambda: 3)
     v[0] = bi(0.8, 0.9)
     rowdata = v._get_row_data(0, format_type.default)
@@ -122,8 +132,8 @@ def test_variable_card_set_single_value_struct():
     assert rowdata.startswith("       0.6          "), f"incorrect rowdata: {rowdata}"
 
 @pytest.mark.keywords
-def test_variable_card_append_value_struct():
-    """test setting single value of bounded variable card"""
+def test_series_card_append_value_struct():
+    """test setting single value of bounded series card"""
     v = SeriesCard("bi", 8, 10, bi)
     v.append(bi(0.8, 0.9))
     v.extend([
@@ -136,20 +146,20 @@ def test_variable_card_append_value_struct():
     assert v[2] == bi(math.nan,0.2)
 
 @pytest.mark.keywords
-def test_variable_card_write_long(ref_string):
-    """test writing unbounded long variable card with two rows."""
+def test_series_card_write_long(ref_string):
+    """test writing unbounded long series card with two rows."""
     v = SeriesCard("bi", 8, 10, float)
     for i in range(10):
         v.append(i)
     assert v._num_rows() == 2
-    assert v.write(format_type.long) == ref_string.test_variable_card_string_long
+    assert v.write(format_type.long) == ref_string.test_series_card_string_long
     v.format = format_type.long
-    assert v.write() == ref_string.test_variable_card_string_long
-    assert v.write(format_type.default) == ref_string.test_variable_card_string
+    assert v.write() == ref_string.test_series_card_string_long
+    assert v.write(format_type.default) == ref_string.test_series_card_string
 
 @pytest.mark.keywords
-def test_variable_card_write_long_struct(ref_string):
-    """Test a variable card using the struct type definition."""
+def test_series_card_write_long_struct(ref_string):
+    """Test a series card using the struct type definition."""
     v = SeriesCard("bi", 8, 10, bi)
     for i in range(9):
         val = i+1
@@ -159,26 +169,25 @@ def test_variable_card_write_long_struct(ref_string):
     v_comment = "$#     foo       bar       foo       bar       foo       bar       foo       bar"
     assert v._get_comment(format_type.default) == v_comment
     standard_output = v.write()
-    assert standard_output == ref_string.test_variable_card_struct_string
+    assert standard_output == ref_string.test_series_card_struct_string
     long_output = v.write(format = format_type.long)
-    assert long_output == ref_string.test_variable_card_struct_string_long
+    assert long_output == ref_string.test_series_card_struct_string_long
 
 @pytest.mark.keywords
-def test_variable_card_read_long(string_utils):
-    """test reading unbounded long variable card with one row."""
+def test_series_card_read_long(string_utils):
+    """test reading unbounded long series card with one row."""
     v = SeriesCard("bi", 8, 10, float)
     v.format = format_type.long
     string = "                 1.0                 2.0                    "
     v.read(string_utils.as_buffer(string))
     assert v._num_rows() == 1
-    assert len(v) == 3
+    assert len(v) == 2
     assert v[0] == 1.0
     assert v[1] == 2.0
-    assert math.isnan(v[2])
 
 @pytest.mark.keywords
-def test_variable_card_read_long_struct(ref_string, string_utils):
-    """Test a variable card using the struct type definition."""
+def test_series_card_read_long_struct(ref_string, string_utils):
+    """Test a series card using the struct type definition."""
     v = SeriesCard("bi", 8, 10, bi)
     v.format = format_type.long
     string = "               113.2              -50.01                                        "
@@ -190,17 +199,17 @@ def test_variable_card_read_long_struct(ref_string, string_utils):
     assert math.isnan(v[1].bar)
 
     v = SeriesCard("bi", 8, 10, bi)
-    v.read(string_utils.as_buffer(ref_string.test_variable_card_struct_string))
+    v.read(string_utils.as_buffer(ref_string.test_series_card_struct_string))
     assert len(v) == 9
 
     v = SeriesCard("bi", 8, 10, bi)
     v.format = format_type.long
-    v.read(string_utils.as_buffer(ref_string.test_variable_card_struct_string_long))
+    v.read(string_utils.as_buffer(ref_string.test_series_card_struct_string_long))
     assert len(v) == 9
 
 @pytest.mark.keywords
-def test_variable_card_write_struct(string_utils):
-    """Test a variable card using the struct type definition."""
+def test_series_card_write_struct(string_utils):
+    """Test a series card using the struct type definition."""
 
     string = "       1.0       2.0       3.0"
     v = SeriesCard("bi", 8, 10, bi, lambda: 2)
