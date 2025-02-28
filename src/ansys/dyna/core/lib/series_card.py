@@ -231,11 +231,25 @@ class SeriesCard(CardInterface):
             width = 20
         return width
 
+    def _check_null(self, value) -> bool:
+        if self._type == float:
+            return math.isnan(value)
+        return value is None
+
     def _read_line(self, size, line):
         num_fields = self._num_fields()
         width = self._get_width()
         read_format = [(i * width * num_fields, width, self._type) for i in range(size)]
         values = load_dataline(read_format, line)
+        assert len(values) > 0, f"Didn't read any values from line {line}"
+        last_real_index = -1
+        for loc, val in enumerate(values):
+            if self._check_null(val):
+                continue
+            last_real_index = max(loc, last_real_index)
+        if last_real_index == -1:
+            return []
+        values = values[: last_real_index + 1]
         return values
 
     def _load_bounded_from_buffer(self, buf: typing.TextIO) -> None:
@@ -271,7 +285,7 @@ class SeriesCard(CardInterface):
             self.extend(values)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
-        # parameter sets are ignored for variable cards
+        # parameter sets are ignored for series cards
         if self.bounded:
             self._load_bounded_from_buffer(buf)
             return False
@@ -308,7 +322,7 @@ class SeriesCard(CardInterface):
         buf.write(output)
 
     def _write_row(self, format: format_type, start_index: int, end_index: int) -> str:
-        """Fields aren't really the right abstraction for a variable card,
+        """Fields aren't really the right abstraction for a series card,
         but its an easy way to reuse the code in write_fields so we create fields
         on the fly here. TODO - reuse less of the code without creating fields on the fly"""
         row_values = self[start_index:end_index]
