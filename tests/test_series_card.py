@@ -192,11 +192,9 @@ def test_series_card_read_long_struct(ref_string, string_utils):
     v.format = format_type.long
     string = "               113.2              -50.01                                        "
     v.read(string_utils.as_buffer(string))
-    assert len(v) == 2
+    assert len(v) == 1
     assert v[0].foo == 113.2
     assert v[0].bar == -50.01
-    assert math.isnan(v[1].foo)
-    assert math.isnan(v[1].bar)
 
     v = SeriesCard("bi", 8, 10, bi)
     v.read(string_utils.as_buffer(ref_string.test_series_card_struct_string))

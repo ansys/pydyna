@@ -1181,11 +1181,17 @@ $#     sid       da1       da2       da3       da4    solver
          1       0.0       0.0       0.0       0.0MECH      
 $#    bbeg      bend      bbeg      bend      bbeg      bend
    2000000   2000025   2000100   2000200   2000500   2000600"""
-   
+
 test_set_part_list_generate_ref2 = """*SET_PART_LIST_GENERATE
          3       0.0       0.0       0.0       0.0
    2000000   2000025   2000100   2000200   2000500   2000600
    2000700   2000800   2000900   2001000"""
+
+test_set_part_list_generate_ref3 = """*SET_PART_LIST_GENERATE
+       101
+   7010001   7089999
+  12010000  12489999  
+  15010000  15989999"""
 
 test_contact_automatic_general_id_mpp = """*CONTACT_AUTOMATIC_GENERAL_ID_MPP
 $#     cid                                                               heading
