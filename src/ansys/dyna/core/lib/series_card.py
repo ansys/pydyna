@@ -231,10 +231,22 @@ class SeriesCard(CardInterface):
             width = 20
         return width
 
-    def _check_null(self, value) -> bool:
-        if self._type == float:
+    def _empty_struture(self, value) -> bool:
+        for field in dataclasses.fields(self._type):
+            field_value = getattr(value, field.name)
+            if not self._check_null_by_type(field_value, field.type):
+                return False
+        return True
+
+    def _check_null_by_type(self, value, t) -> bool:
+        if t == float:
             return math.isnan(value)
         return value is None
+
+    def _check_null(self, value) -> bool:
+        if self._uses_structure():
+            return self._empty_struture(value)
+        return self._check_null_by_type(value, self._type)
 
     def _read_line(self, size, line):
         num_fields = self._num_fields()
