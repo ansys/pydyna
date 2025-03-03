@@ -44,7 +44,7 @@ pim = [
 tests = [
     "matplotlib==3.10.0",
     "numpy==2.2.3",
-    "pytest==8.3.4",
+    "pytest==8.3.5",
     "pytest-cov==6.0.0",
     "joblib==1.4.2",
     "pandas==2.2.3",
