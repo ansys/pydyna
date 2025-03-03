@@ -34,7 +34,7 @@ repos:
     additional_dependencies: [black==23.3.0]
 
 - repo: https://github.com/pycqa/isort
-  rev: 6.0.0
+  rev: 6.0.1
   hooks:
   - id: isort
 
