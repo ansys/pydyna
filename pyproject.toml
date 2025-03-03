@@ -42,7 +42,7 @@ pim = [
     "ansys-platform-instancemanagement~=1.0",
 ]
 tests = [
-    "matplotlib==3.10.0",
+    "matplotlib==3.10.1",
     "numpy==2.2.3",
     "pytest==8.3.5",
     "pytest-cov==6.0.0",
@@ -59,7 +59,7 @@ codegen = [
 ]
 doc = [
     "recommonmark==0.7.1",
-    "matplotlib==3.10.0",
+    "matplotlib==3.10.1",
     "imageio==2.37.0",
     "imageio-ffmpeg==0.6.0",
     "numpydoc==1.8.0",
