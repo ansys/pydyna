@@ -1,0 +1,510 @@
+:py:mod:`ansys.dyna.core.pre.dynasale`
+======================================
+
+.. py:module:: ansys.dyna.core.pre.dynasale
+
+.. autoapi-nested-parse::
+
+   Airbag API
+   ==========
+
+   Module for creating a S-ALE (Structured ALE) DYNA input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynasale.AdvectionMethod
+   ansys.dyna.core.pre.dynasale.FillDirection
+   ansys.dyna.core.pre.dynasale.ControlPoint
+   ansys.dyna.core.pre.dynasale.StructuredMesh
+   ansys.dyna.core.pre.dynasale.DynaSALE
+
+
+
+
+.. py:class:: AdvectionMethod
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: DONOR_CELL_WITH_HALF_INDEX_SHIFT
+      :value: 1
+
+      
+
+   .. py:attribute:: VAN_LEER_WITH_HIS
+      :value: 2
+
+      
+
+   .. py:attribute:: DONOR_CELL_WITH_HIS
+      :value: 3
+
+      
+
+   .. py:attribute:: FINITE_VOLUME_METHOD
+      :value: 6
+
+      
+
+
+.. py:class:: FillDirection
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: INSIDE_THE_GEOMETRY
+      :value: 0
+
+      
+
+   .. py:attribute:: OUTSIDE_THE_GEOMETRY
+      :value: 1
+
+      
+
+
+.. py:class:: ControlPoint(number, position, ratio)
+
+
+   
+   Provides spacing information for generating a 3D S-ALE mesh.
+
+
+   :Parameters:
+
+       **number** : :class:`python:int`
+           Control point node number.
+
+       **position** : :class:`python:float`
+           Control point position.
+
+       **ratio** : :class:`python:float`
+           Ratio for progressive mesh spacing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: StructuredMesh(control_points_x, control_points_y, control_points_z)
+
+
+   
+   Generates a structured 2D or 3D mesh and invokes the S-ALE solver.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: fill(material, geometry_type='NULL', nsample=4, define_geometry_parameters=[0, 0, 0, 0, 0], inout=FillDirection.INSIDE_THE_GEOMETRY, vid=0, reference_pressure=0)
+
+      
+      Perform volume-filling operations on a S-ALE mesh.
+
+
+      :Parameters:
+
+          **material_name** : :class:`python:str`
+              Material name.
+
+          **geometry_type** : :class:`python:str`
+              Geometry type. The default is ``"Null"``. Options are:
+              
+              - BOXCOR
+              - BOXCPT
+              - CYLINDER
+              - PARTSET
+              - PART
+              - PLANE
+              - SEGSET
+              - SPHERE
+
+          **nsample** : :class:`python:int`, :obj:`optional`
+              Number of sampling points. The default is ``4``.
+
+          **define_geometry_parameters** : :class:`python:list`
+              List of values having different definitions for different options.
+              The default is ``[0, 0, 0, 0, 0]``.
+
+          **in_out** : :class:`python:int`, :obj:`optional`
+              Flag for whether to fill inside or outside of the geometry. The
+              default is ``INSIDE_THE_GEOMETRY``.
+
+          **vid** : :class:`python:int`, :obj:`optional`
+              Flag for assigning the initial velocity to the material filling the domain.
+              The default is ``0``.
+
+          **reference_pressure**
+              ..
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: refine(refine_factor_x=1, refine_factor_y=1, refine_factor_z=1)
+
+      
+      Refine existing S-ALE meshes.
+
+
+      :Parameters:
+
+          **refine_factor_x** : :class:`python:int`, :obj:`optional`
+              Refinement factor for the x-direction. The default is ``1``.
+
+          **refine_factor_y** : :class:`python:int`, :obj:`optional`
+              Refinement factor for the y-direction. The default is ``1``.
+
+          **refine_factor_z** : :class:`python:int`, :obj:`optional`
+              Refinement factor for the z-direction. The default is ``1``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: initial_detonation(detonation_point)
+
+      
+      Define a point for initiating the location of a high-explosive detonation.
+
+
+      :Parameters:
+
+          **detonation_point** : :obj:`Point`
+              Coordinates (x,y,z) of the detonation point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create a mesh.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: DynaSALE
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.DynaBase`
+
+   
+   Sets up the S-ALE simulation process.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_termination(endtime)
+
+      
+      Set the time for ending the simulation.
+
+
+      :Parameters:
+
+          **endtime** : :class:`python:float`
+              Time for ending the simulation.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_output_interval(database_plot_interval)
+
+      
+      Request binary output.
+
+
+      :Parameters:
+
+          **database_plot_interval** : :class:`python:float`
+              Time interval between output states.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_analysis_type(num_of_cycle=1, method=AdvectionMethod.DONOR_CELL_WITH_HALF_INDEX_SHIFT, background_pressure=0)
+
+      
+      Set the analysis type.
+
+
+      :Parameters:
+
+          **num_of_cycle** : :class:`python:float`, :obj:`optional`
+              Total time of simulation for the fluid problem. The
+              default is ``1``.
+
+          **method** : :class:`python:float`, :obj:`optional`
+              Time step for the fluid problem. The default is
+              ``DONOR_CELL_WITH_HALF_INDEX_SHIFT``.
+
+          **background_pressure** : :class:`python:int`, :obj:`optional`
+              Reference pressure for computing the internal forces.
+              The default is ``0``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_output_database(matsum=0, glstat=0)
+
+      
+      Obtain output files containing the results.
+
+
+      :Parameters:
+
+          **matsum** : :class:`python:float`, :obj:`optional`
+              Time interval between outputs of part energies. The
+              default is ``0``.
+
+          **glstat** : :class:`python:float`, :obj:`optional`
+              Time interval between outputs of global statistics and energies.
+              The default is ``0``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: save_file()
+
+      
+      Save keyword files.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
