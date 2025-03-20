@@ -48,6 +48,7 @@ class KeywordBase(Cards):
         self.user_comment = kwargs.get("user_comment", "")
         self._format_type: format_type = kwargs.get("format", format_type.default)
         self._deck = None
+        self._included_from = None
 
     @property
     def deck(self) -> typing.Optional["Deck"]:
@@ -108,6 +109,19 @@ class KeywordBase(Cards):
     def cards(self) -> typing.List[CardInterface]:
         """Gets the cards of the keyword"""
         return self._get_all_cards()
+
+    @property
+    def included_from(self) -> str:
+        """Get the filename this was included from.
+
+        If the keyword was not read from a file,
+        return None.
+        """
+        return self._included_from
+
+    @included_from.setter
+    def included_from(self, value: str):
+        self._included_from = value
 
     def _get_user_comment_lines(self) -> typing.List[str]:
         user_comment = self.user_comment

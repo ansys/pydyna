@@ -218,33 +218,32 @@ class Deck:
                 search_paths.append(keyword.filename)
                 keywords.append(keyword)
                 continue
-            success = False
+            expand_include_file = None
             for search_path in search_paths:
                 include_file = os.path.join(search_path, keyword.filename)
-                if not os.path.isfile(include_file):
-                    continue
-                xform = None
-                if keyword.subkeyword == "TRANSFORM":
-                    xform = keyword
-                context = ImportContext(xform, self, include_file)
-                try:
-                    include_deck = self._prepare_deck_for_expand(keyword)
-                    include_deck._import_file(include_file, "utf-8", context)
-                except UnicodeDecodeError as e:
-                    encoding = self._detect_encoding(include_file)
-                    include_deck = self._prepare_deck_for_expand(keyword)
-                    include_deck._import_file(include_file, encoding, context)
-                success = True
-                break
-            if success:
-                if recurse:
-                    # TODO: merge the parameters if the "LOCAL" option is not used!
-                    expanded = include_deck._expand_helper(search_paths, True)
-                    keywords.extend(expanded)
-                else:
-                    keywords.extend(include_deck.all_keywords)
-            else:
+                if os.path.isfile(include_file):
+                    expand_include_file = include_file
+                    break
+            if expand_include_file is None:
                 keywords.append(keyword)
+                continue
+            xform = None
+            if keyword.subkeyword == "TRANSFORM":
+                xform = keyword
+            context = ImportContext(xform, self, expand_include_file)
+            try:
+                include_deck = self._prepare_deck_for_expand(keyword)
+                include_deck._import_file(expand_include_file, "utf-8", context)
+            except UnicodeDecodeError as e:
+                encoding = self._detect_encoding(expand_include_file)
+                include_deck = self._prepare_deck_for_expand(keyword)
+                include_deck._import_file(expand_include_file, encoding, context)
+            if recurse:
+                # TODO: merge the parameters if the "LOCAL" option is not used!
+                expanded = include_deck._expand_helper(search_paths, True)
+                keywords.extend(expanded)
+            else:
+                keywords.extend(include_deck.all_keywords)
         for keyword in keywords:
             if isinstance(keyword, KeywordBase):
                 keyword.deck = None
@@ -505,7 +504,10 @@ class Deck:
         from ansys.dyna.core.lib.deck_loader import load_deck_from_buffer
 
         with open(path, encoding=encoding) as f:
-            return load_deck_from_buffer(self, f, context, self._import_handlers)
+            loader_result = load_deck_from_buffer(self, f, context, self._import_handlers)
+        for keyword in self.keywords:
+            keyword.included_from = path
+        return loader_result
 
     def import_file(
         self, path: str, encoding: str = "utf-8"

@@ -100,6 +100,7 @@ def test_deck_003(file_utils):
     assert import_handler._num_keywords == 12
     assert len(deck.keywords) == 11
     assert len(deck.all_keywords) == 11
+    assert deck.keywords[0].included_from == filepath
     assert deck.get(type="ALE")[0].nid1 == 1
 
 
@@ -178,6 +179,7 @@ def test_deck_copy():
     x.append(kwd.Mat001(mid=99))
     y = copy.deepcopy(x)
     y.keywords[0].mid = 100
+    assert y.keywords[0].included_from is None
     assert x.keywords[0].mid == 99
     assert y.keywords[0].mid == 100
 
@@ -396,10 +398,12 @@ def test_deck_expand(file_utils):
     """Test that a long deck can read a standard deck."""
     # I think there are more corner cases related to this to iron out..
     deck = Deck(format=format_type.long)
+    include_path = file_utils.get_asset_file_path("test.k")
     deck.append(kwd.Include(filename=file_utils.get_asset_file_path("test.k"), format=format_type.standard))
     expanded_deck = deck.expand()
     assert len(expanded_deck.keywords) == 12
     assert expanded_deck.keywords[1].format == format_type.standard
+    assert expanded_deck.keywords[0].included_from == include_path
 
 
 @pytest.mark.keywords
