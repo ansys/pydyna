@@ -25,21 +25,32 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 
-dependencies = ["ansys-dpf-core>=0.7.2",
-                "ansys-api-dyna==0.4.2",
-                "ansys-tools-path>=0.6.0",
-                "pyvista>=0.43.4",
-                "hollerith>=0.6.0",
-                "numpy>=1",
-                "pandas>=2.0",
-                "appdirs>=1.4.4",
-                "transformations==2025.1.1",
-                "chardet==5.2.0",
+dependencies = [
+    "ansys-dpf-core>=0.7.2",
+    "ansys-api-dyna==0.4.2",
+    "ansys-tools-path>=0.6.0",
+    "hollerith>=0.6.0",
+    "numpy>=1",
+    "pandas>=2.0",
+    "appdirs>=1.4.4",
+    "transformations==2025.1.1",
+    "chardet==5.2.0",
 ]
 
 [project.optional-dependencies]
+all = [
+    "ansys-platform-instancemanagement~=1.0",
+    "pyvista>=0.43.4",
+    "Jinja2",
+]
+graphics = [
+    "pyvista>=0.43.4",
+]
 pim = [
     "ansys-platform-instancemanagement~=1.0",
+]
+codegen = [
+    "Jinja2"
 ]
 tests = [
     "matplotlib==3.10.1",
@@ -53,9 +64,6 @@ tests = [
     "pytest-xdist==3.6.1",
     "ipython==8.32.0",
     "pyvista==0.44.2",
-]
-codegen = [
-    "Jinja2"
 ]
 doc = [
     "recommonmark==0.7.1",
