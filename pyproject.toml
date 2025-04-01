@@ -41,12 +41,10 @@ dependencies = [
 all = [
     "ansys-platform-instancemanagement~=1.0",
     "pyvista>=0.43.4",
-    "matplotlib>=3",
     "Jinja2",
 ]
 graphics = [
     "pyvista>=0.43.4",
-    "matplotlib>=3",
 ]
 pim = [
     "ansys-platform-instancemanagement~=1.0",
