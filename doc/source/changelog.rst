@@ -7,6 +7,95 @@ This document contains the release notes for the PyDyna project.
 
 .. towncrier release notes start
 
+`0.8.0 <https://github.com/ansys/pydyna/releases/tag/v0.8.0>`_ - April 02, 2025
+===============================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore: bump pytest from 8.3.4 to 8.3.5
+          - `#763 <https://github.com/ansys/pydyna/pull/763>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore: update version
+          - `#748 <https://github.com/ansys/pydyna/pull/748>`_
+
+        * - chore: bump matplotlib from 3.10.0 to 3.10.1
+          - `#762 <https://github.com/ansys/pydyna/pull/762>`_
+
+        * - chore: [pre-commit.ci] pre-commit autoupdate
+          - `#764 <https://github.com/ansys/pydyna/pull/764>`_
+
+        * - [pre-commit.ci] pre-commit autoupdate
+          - `#766 <https://github.com/ansys/pydyna/pull/766>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - fix: handle initial_temperature_node/set correct with table-card
+          - `#754 <https://github.com/ansys/pydyna/pull/754>`_
+
+        * - fix: part set list generate gap
+          - `#760 <https://github.com/ansys/pydyna/pull/760>`_
+
+        * - feat: remove pyvista hard dependency
+          - `#774 <https://github.com/ansys/pydyna/pull/774>`_
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore: update CHANGELOG for v0.7.1
+          - `#746 <https://github.com/ansys/pydyna/pull/746>`_
+
+        * - fix: encrypted deck in expand
+          - `#751 <https://github.com/ansys/pydyna/pull/751>`_
+
+        * - fix: try to detect encoding when expanding decks
+          - `#753 <https://github.com/ansys/pydyna/pull/753>`_
+
+        * - fix pass **args to plotter object
+          - `#755 <https://github.com/ansys/pydyna/pull/755>`_
+
+        * - fix: try utf-8 before attempt encoding detection
+          - `#756 <https://github.com/ansys/pydyna/pull/756>`_
+
+        * - fix: issue reading series card with trailing whitespace
+          - `#759 <https://github.com/ansys/pydyna/pull/759>`_
+
+        * - feat: add include name property to keyword
+          - `#768 <https://github.com/ansys/pydyna/pull/768>`_
+
+
+  .. tab-item:: Test
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - fix: remove print statement from test_initial_temperature
+          - `#757 <https://github.com/ansys/pydyna/pull/757>`_
+
+
 `0.7.1 <https://github.com/ansys/pydyna/releases/tag/v0.7.1>`_ - 2025-02-25
 ===========================================================================
 
