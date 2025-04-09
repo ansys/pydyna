@@ -936,6 +936,17 @@ def test_element_beam_assign(ref_string):
     ref = ref_string.test_element_beam_assign_ref
     assert beam.write() == ref
 
+
+@pytest.mark.keywords
+def test_define_table(ref_string):
+    """Test formatting of set part list (uses series card with ints)."""
+    table = kwd.DefineTable()
+    table.loads(ref_string.test_define_table_ref)
+    assert len(table.points) == 5
+    assert table.points[2] == 0.001
+    assert table.tbid == 10000001
+
+
 @pytest.mark.keywords
 def test_set_part_list_generate(ref_string):
     s = kwd.SetPartListGenerate()
