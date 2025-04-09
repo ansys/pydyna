@@ -1201,6 +1201,12 @@ test_define_table_ref = """*DEFINE_TABLE
         0.0099999998
                  0.1"""
 
+test_icfd_part_ref = """*ICFD_PART_TITLE
+$#                                                                         title
+PART TITLE                                                                      
+$#     pid     secid       mid
+         1         2         3"""
+
 test_contact_automatic_general_id_mpp = """*CONTACT_AUTOMATIC_GENERAL_ID_MPP
 $#     cid                                                               heading
                                                                                 

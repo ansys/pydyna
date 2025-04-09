@@ -948,6 +948,16 @@ def test_define_table(ref_string):
 
 
 @pytest.mark.keywords
+def test_icfd_part(ref_string):
+    """Test formatting of set part list (uses series card with ints)."""
+    part = kwd.IcfdPart(pid=1,secid=2,mid=3)
+    part.options["TITLE"].active = True
+    part.title = "PART TITLE"
+    s = part.write()
+    assert s == ref_string.test_icfd_part_ref
+
+
+@pytest.mark.keywords
 def test_set_part_list_generate(ref_string):
     s = kwd.SetPartListGenerate()
     s.loads(ref_string.test_set_part_list_generate_ref1)
