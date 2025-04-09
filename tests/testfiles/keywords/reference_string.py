@@ -1193,6 +1193,14 @@ test_set_part_list_generate_ref3 = """*SET_PART_LIST_GENERATE
   12010000  12489999  
   15010000  15989999"""
 
+test_define_table_ref = """*DEFINE_TABLE
+  10000001
+              1.0E-6
+        9.9999997E-5
+               0.001
+        0.0099999998
+                 0.1"""
+
 test_contact_automatic_general_id_mpp = """*CONTACT_AUTOMATIC_GENERAL_ID_MPP
 $#     cid                                                               heading
                                                                                 
