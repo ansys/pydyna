@@ -316,6 +316,20 @@
             ]
         }
     },
+    "DEFINE_TABLE" : {
+        "generation-options": {
+            "series-card": [
+                {
+                    "index": 1,
+                    "name": "points",
+                    "card-size": 1,
+                    "element-width": 20,
+                    "type": "float",
+                    "help": "Interpolation points for subsequent DEFINE_CURVE keywords."
+                }
+            ]
+        }
+    },
     "DEFINE_TRANSFORMATION": {
         "generation-options": {
             "table-card": [
@@ -328,7 +342,7 @@
     },
     "PARAMETER_PARAMETER": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 0,
                     "name": "parameters",
@@ -544,7 +558,7 @@
             "reorder-card": {
                 "order": [0, 1, 4, 2, 3, 5]
             },
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 2,
                     "name": "angle",
@@ -611,7 +625,7 @@
     "SECTION_TSHELL": {
         "classname": "SectionTShell",
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                     {
                     "index": 1,
                     "name": "bi",
@@ -703,7 +717,7 @@
                     "default": 0
                 }
             ],
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 3,
                     "name": "pi",
@@ -1597,7 +1611,7 @@
                     "name": "InitialStressShellCardSet"
                 }
             ],
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 2,
                     "name": "hisv",
@@ -1729,7 +1743,7 @@
     },
     "SET_NODE_ADD": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "nodes",
@@ -1753,7 +1767,7 @@
     },
     "SET_NODE_INTERSECT": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "nodes",
@@ -1768,7 +1782,7 @@
     "SET_NODE_LIST": {
         "alias": "SET_NODE",
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "nodes",
@@ -1782,7 +1796,7 @@
     },
     "SET_SEGMENT_ADD": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "sets",
@@ -1796,7 +1810,7 @@
     },
     "SET_PART_ADD": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "parts",
@@ -1810,7 +1824,7 @@
     },
     "SET_PART": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "parts",
@@ -1824,7 +1838,7 @@
     },
     "SET_PART_LIST": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "parts",
@@ -1838,7 +1852,7 @@
     },
     "SET_PART_LIST_COLLECT": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "parts",
@@ -1852,7 +1866,7 @@
     },
     "SET_PART_LIST_GENERATE": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "block_ranges",
@@ -1873,7 +1887,7 @@
     },
     "SET_BEAM": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "element",
@@ -1887,7 +1901,7 @@
     },
     "SET_BEAM_ADD": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "beams",
@@ -1901,7 +1915,7 @@
     },
     "SET_BEAM_INTERSECT": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "beams",
@@ -1915,7 +1929,7 @@
     },
     "SET_BOX":{
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "box",
@@ -1929,7 +1943,7 @@
     },
     "SET_SHELL_ADD":{
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "shells",
@@ -1943,7 +1957,7 @@
     },
     "SET_SHELL_INTERSECT":{
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "shells",
@@ -1957,7 +1971,7 @@
     },
     "SET_SHELL_LIST": {
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "shells",
@@ -2155,7 +2169,7 @@
     },
     "MESH_VOLUME":{
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "elements",
@@ -2169,7 +2183,7 @@
     },
     "MESH_EMBEDSHELL":{
         "generation-options": {
-            "variable-card": [
+            "series-card": [
                 {
                     "index": 1,
                     "name": "elements",
