@@ -316,6 +316,20 @@
             ]
         }
     },
+    "DEFINE_TABLE" : {
+        "generation-options": {
+            "series-card": [
+                {
+                    "index": 1,
+                    "name": "points",
+                    "card-size": 1,
+                    "element-width": 20,
+                    "type": "float",
+                    "help": "Interpolation points for subsequent DEFINE_CURVE keywords."
+                }
+            ]
+        }
+    },
     "DEFINE_TRANSFORMATION": {
         "generation-options": {
             "table-card": [
