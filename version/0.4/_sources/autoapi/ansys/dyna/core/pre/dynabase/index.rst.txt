@@ -1,0 +1,5515 @@
+:py:mod:`ansys.dyna.core.pre.dynabase`
+======================================
+
+.. py:module:: ansys.dyna.core.pre.dynabase
+
+.. autoapi-nested-parse::
+
+   Base
+   ====
+
+   Module for creating a DYNA input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynabase.Motion
+   ansys.dyna.core.pre.dynabase.RWMotion
+   ansys.dyna.core.pre.dynabase.DOF
+   ansys.dyna.core.pre.dynabase.Switch
+   ansys.dyna.core.pre.dynabase.InvariantNode
+   ansys.dyna.core.pre.dynabase.EnergyFlag
+   ansys.dyna.core.pre.dynabase.HourglassControl
+   ansys.dyna.core.pre.dynabase.BulkViscosity
+   ansys.dyna.core.pre.dynabase.CaseType
+   ansys.dyna.core.pre.dynabase.OutputEcho
+   ansys.dyna.core.pre.dynabase.Box
+   ansys.dyna.core.pre.dynabase.Curve
+   ansys.dyna.core.pre.dynabase.Function
+   ansys.dyna.core.pre.dynabase.Table2D
+   ansys.dyna.core.pre.dynabase.Point
+   ansys.dyna.core.pre.dynabase.Direction
+   ansys.dyna.core.pre.dynabase.Transform
+   ansys.dyna.core.pre.dynabase.Velocity
+   ansys.dyna.core.pre.dynabase.RotVelocity
+   ansys.dyna.core.pre.dynabase.BaseObj
+   ansys.dyna.core.pre.dynabase.ParameterType
+   ansys.dyna.core.pre.dynabase.DynaBase
+   ansys.dyna.core.pre.dynabase.BaseSet
+   ansys.dyna.core.pre.dynabase.NodeSet
+   ansys.dyna.core.pre.dynabase.SetType
+   ansys.dyna.core.pre.dynabase.NodesetGeneral
+   ansys.dyna.core.pre.dynabase.NodeSetBox
+   ansys.dyna.core.pre.dynabase.PartSet
+   ansys.dyna.core.pre.dynabase.SegmentSet
+   ansys.dyna.core.pre.dynabase.BeamFormulation
+   ansys.dyna.core.pre.dynabase.ShellFormulation
+   ansys.dyna.core.pre.dynabase.IGAFormulation
+   ansys.dyna.core.pre.dynabase.SolidFormulation
+   ansys.dyna.core.pre.dynabase.HourglassType
+   ansys.dyna.core.pre.dynabase.BeamSection
+   ansys.dyna.core.pre.dynabase.ShellSection
+   ansys.dyna.core.pre.dynabase.IGASection
+   ansys.dyna.core.pre.dynabase.Part
+   ansys.dyna.core.pre.dynabase.BeamPart
+   ansys.dyna.core.pre.dynabase.ShellPart
+   ansys.dyna.core.pre.dynabase.IGAPart
+   ansys.dyna.core.pre.dynabase.SolidPart
+   ansys.dyna.core.pre.dynabase.DRO
+   ansys.dyna.core.pre.dynabase.DiscretePart
+   ansys.dyna.core.pre.dynabase.Parts
+   ansys.dyna.core.pre.dynabase.AnalysisType
+   ansys.dyna.core.pre.dynabase.TimestepCtrol
+   ansys.dyna.core.pre.dynabase.Integration
+   ansys.dyna.core.pre.dynabase.ImplicitAnalysis
+   ansys.dyna.core.pre.dynabase.ThermalAnalysisType
+   ansys.dyna.core.pre.dynabase.ThermalAnalysisTimestep
+   ansys.dyna.core.pre.dynabase.ThermalAnalysis
+   ansys.dyna.core.pre.dynabase.ContactCategory
+   ansys.dyna.core.pre.dynabase.ContactType
+   ansys.dyna.core.pre.dynabase.OffsetType
+   ansys.dyna.core.pre.dynabase.ContactFormulation
+   ansys.dyna.core.pre.dynabase.SBOPT
+   ansys.dyna.core.pre.dynabase.ContactSurface
+   ansys.dyna.core.pre.dynabase.Contact
+   ansys.dyna.core.pre.dynabase.ContactGroup
+   ansys.dyna.core.pre.dynabase.Constraint
+   ansys.dyna.core.pre.dynabase.BoundaryCondition
+   ansys.dyna.core.pre.dynabase.InitialCondition
+   ansys.dyna.core.pre.dynabase.RigidwallCylinder
+   ansys.dyna.core.pre.dynabase.RigidwallSphere
+   ansys.dyna.core.pre.dynabase.RigidwallPlanar
+   ansys.dyna.core.pre.dynabase.GravityOption
+   ansys.dyna.core.pre.dynabase.Gravity
+
+
+
+
+.. py:class:: Motion
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: VELOCITY
+      :value: 0
+
+      
+
+   .. py:attribute:: ACCELERATION
+      :value: 1
+
+      
+
+   .. py:attribute:: DISPLACEMENT
+      :value: 2
+
+      
+
+
+.. py:class:: RWMotion
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: VELOCITY
+      :value: 0
+
+      
+
+   .. py:attribute:: DISPLACEMENT
+      :value: 1
+
+      
+
+
+.. py:class:: DOF
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: X_TRANSLATIONAL
+      :value: 1
+
+      
+
+   .. py:attribute:: Y_TRANSLATIONAL
+      :value: 2
+
+      
+
+   .. py:attribute:: Z_TRANSLATIONAL
+      :value: 3
+
+      
+
+   .. py:attribute:: X_ROTATIONAL
+      :value: 5
+
+      
+
+   .. py:attribute:: Y_ROTATIONAL
+      :value: 6
+
+      
+
+   .. py:attribute:: Z_ROTATIONAL
+      :value: 7
+
+      
+
+
+.. py:class:: Switch
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: OFF
+      :value: 0
+
+      
+
+   .. py:attribute:: ON
+      :value: 1
+
+      
+
+
+.. py:class:: InvariantNode
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: OFF
+      :value: 1
+
+      
+
+   .. py:attribute:: ON_FOR_SHELL_TSHELL
+      :value: 2
+
+      
+
+   .. py:attribute:: ON_FOR_SOLID
+      :value: 3
+
+      
+
+   .. py:attribute:: ON_FOR_SHELL_TSHELL_SOLID
+      :value: 4
+
+      
+
+
+.. py:class:: EnergyFlag
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: NOT_COMPUTED
+      :value: 1
+
+      
+
+   .. py:attribute:: COMPUTED
+      :value: 2
+
+      
+
+
+.. py:class:: HourglassControl
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: STANDARD_VISCOSITY_FORM
+      :value: 1
+
+      
+
+   .. py:attribute:: FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID
+      :value: 2
+
+      
+
+
+.. py:class:: BulkViscosity
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: STANDARD_BULK_VISCOSITY
+      :value: 1
+
+      
+
+   .. py:attribute:: RICHARDS_WILKINS_BULK_VISCOSITY
+      :value: 2
+
+      
+
+   .. py:attribute:: COMPUTE_INTERNAL_ENERGY_DISSIPATED
+
+      
+
+
+.. py:class:: CaseType
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: STRUCTURE
+      :value: 1
+
+      
+
+   .. py:attribute:: ICFD
+      :value: 2
+
+      
+
+   .. py:attribute:: SALE
+      :value: 3
+
+      
+
+   .. py:attribute:: EM
+      :value: 4
+
+      
+
+   .. py:attribute:: IGA
+      :value: 5
+
+      
+
+
+.. py:class:: OutputEcho
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: ALL_DATA_PRINTED
+      :value: 0
+
+      
+
+   .. py:attribute:: SUPPRESSED_NODAL_PRINTING
+      :value: 1
+
+      
+
+   .. py:attribute:: SUPPRESSED_ELEMENT_PRINTING
+      :value: 2
+
+      
+
+   .. py:attribute:: SUPPRESSED_NODAL_AND_ELEMENT_PRINTING
+      :value: 3
+
+      
+
+
+.. py:class:: Box(xmin=0, xmax=0, ymin=0, ymax=0, zmin=0, zmax=0)
+
+
+   
+   Defines a box-shaped volume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create(stub)
+
+      
+      Create box.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Curve(sfo=1, x=[], y=[], func=None, title='')
+
+
+   
+   Defines a curve as a function of time.
+
+   For example, ``load (ordinate value)``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create(stub=None)
+
+      
+      Create a curve.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Function(Function=None)
+
+
+   
+   Defines a function that can be referenced by a limited number of keyword options.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_tabulated(heading='', function='', x=[], y=[])
+
+
+   .. py:method:: create(stub)
+
+      
+      Create function.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Table2D(title='')
+
+
+   
+   Define a table,a curve ID is specified for each value defined in the table.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: append(value=0, curve=None)
+
+
+   .. py:method:: create(stub=None)
+
+      
+      Create Table2D.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Point(x=0, y=0, z=0)
+
+
+   
+   Defines a point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: Direction(x=0, y=0, z=0)
+
+
+   
+   Defines a direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: Transform(option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0)
+
+
+   
+   Defines a transformation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: add_transform(option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0)
+
+      
+      Defines a transformation matrix.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create(stub)
+
+      
+      Create a transformation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Velocity(x=0, y=0, z=0)
+
+
+   
+   Defines a translational velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: RotVelocity(x=0, y=0, z=0)
+
+
+   
+   Defines a rotational velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: BaseObj
+
+
+   
+   Define the base object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: get_data() -> List
+
+      
+      Get the data of the object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ParameterType
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Contains the parameter types.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: R
+      :value: 1
+
+      
+
+   .. py:attribute:: I
+      :value: 2
+
+      
+
+   .. py:attribute:: C
+      :value: 3
+
+      
+
+
+.. py:class:: DynaBase
+
+
+   
+   Contains methods for creating a general LS-DYNA keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: get_stub()
+
+      
+      Get the stub of the ``DynaBase`` object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_parent(parent=None)
+
+
+   .. py:method:: set_timestep(tssfac=0.9, isdo=0, timestep_size_for_mass_scaled=0.0, max_timestep=None)
+
+      
+      Set the structural time step size control using different options.
+
+
+      :Parameters:
+
+          **tssfac** : :class:`python:float`, :obj:`optional`
+              Scale factor for computed time step. The default is ``0.9``.
+
+          **isdo** : :class:`python:int`, :obj:`optional`
+              Basis of the time size calculation for four-node shell elements.
+              The default is ``0``.
+
+          **timestep_size_for_mass_scaled** : :class:`python:float`, :obj:`optional`
+              Time step size for mass scaled solutions. The default is ``0.0``.
+
+          **max_timestep** : :obj:`Curve`, :obj:`optional`
+              Load curve that limits the maximum time step size. The default
+              is ``None``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_accuracy(objective_stress_updates=Switch.OFF, invariant_node_number=InvariantNode.OFF, partsetid_for_objective_stress_updates=0, implicit_accuracy_flag=Switch.OFF, explicit_accuracy_flag=Switch.OFF)
+
+      
+      Define control parameters that can improve the accuracy of the calculation.
+
+
+      :Parameters:
+
+          **objective_stress_updates** : :class:`python:int`
+              Global flag for 2nd order objective stress updates.
+
+          **invariant_node_number** : :class:`python:int`
+              Invariant node numbering for shell and solid elements.
+
+          **partsetid_for_objective_stress_updates** : :class:`python:int`, :obj:`optional`
+              Part set ID for objective stress updates. The default is ``0``.
+
+          **implicit_accuracy_flag** : :class:`python:int`
+              Implicit accuracy flag.
+
+          **explicit_accuracy_flag** : :class:`python:float`
+              Explicit accuracy parameter.
+              
+              - EQ.0.0: Off
+              - GT.0.0: On
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_energy(hourglass_energy=EnergyFlag.NOT_COMPUTED, rigidwall_energy=EnergyFlag.COMPUTED, sliding_interface_energy=EnergyFlag.NOT_COMPUTED, rayleigh_energy=EnergyFlag.NOT_COMPUTED, initial_reference_geometry_energy=EnergyFlag.COMPUTED)
+
+      
+      Provide controls for energy dissipation options.
+
+
+      :Parameters:
+
+          **hourglass_energy** : :obj:`enum`
+              Hourglass energy calculation option.
+
+          **rigidwall_energy** : :class:`python:int`
+              Rigidwall energy dissipation option.
+              
+              - EQ.1: Energy dissipation is not computed.
+              - EQ.2: Energy dissipation is computed.
+
+          **sliding_interface_energy** : :class:`python:int`
+              Sliding interface energy dissipation option.
+              
+              - EQ.1: Energy dissipation is not computed.
+              - EQ.2: Energy dissipation is computed.
+
+          **rayleigh_energy** : :class:`python:int`
+              Rayleigh energy dissipation option.
+              
+              - EQ.1: Energy dissipation is not computed.
+              - EQ.2: Energy dissipation is computed.
+
+          **initial_reference_geometry_energy** : :class:`python:int`
+              Initial reference geometry energy option.
+              
+              - EQ.1: Initial reference geometry energy is not computed.
+              - EQ.2: Initial reference geometry energy is computed.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_output(print_suppression_d3hsp=False, print_suppression_echo=OutputEcho.ALL_DATA_PRINTED)
+
+      
+      Set miscellaneous output parameters.
+
+
+      :Parameters:
+
+          **print_suppression_d3hsp** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+              Whether to suppress printing during the input phase flag for the D3HSP file.
+              The default is ``True``, which means that none of these are printed: nodal
+              coordinates, element connectivities, rigid wall definitions, nodal SPCs,
+              initial velocities, initial strains, adaptive constraints, and SPR2/SPR3
+              constraints. If ``False``, no suppression occurs.
+
+          **print_suppression_echo** : :obj:`OutputEcho`
+              Print suppression setting during the input phase flag for the echo file.
+              Options are:
+              
+              - ALL_DATA_PRINTED: All data is printed.
+              - SUPPRESSED_NODAL_PRINTING: Nodal printing is suppressed.
+              - SUPPRESSED_ELEMENT_PRINTING: Element printing is suppressed.
+              - SUPPRESSED_NODAL_AND_ELEMENT_PRINTING : Both nodal and element printing is suppressed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_hourglass(controltype=HourglassControl.STANDARD_VISCOSITY_FORM, coefficient=0.1)
+
+      
+      Redefine the default values for the hourglass control type and coefficient.
+
+
+      :Parameters:
+
+          **controltype** : :obj:`enum`
+              Default hourglass control type.
+
+          **coefficient** : :class:`python:float`, :obj:`optional`
+              Default hourglass coefficient. The default is ``0.``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_bulk_viscosity(quadratic_viscosity_coeff=1.5, linear_viscosity_coeff=0.06, bulk_viscosity_type=BulkViscosity.STANDARD_BULK_VISCOSITY)
+
+      
+      Reset the default values of the bulk viscosity coefficients globally.
+
+
+      :Parameters:
+
+          **quadratic_viscosity_coeff** : :class:`python:float`, :obj:`optional`
+              Default quadratic viscosity coefficient. The default is ``1.5``.
+
+          **linear_viscosity_coeff** : :class:`python:float`, :obj:`optional`
+              Default linear viscosity coefficient. The default is ``0.06``.
+
+          **bulk_viscosity_type** : :obj:`enum`
+              Default bulk viscosity type.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_init_temperature(temp=0)
+
+      
+      Define initial nodal point temperatures on all nodes.
+
+
+      :Parameters:
+
+          **temp** : :class:`python:float`, :obj:`optional`
+              Temperature at node. The default is ``0``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_control_shell(wrpang=20, esort=0, irnxx=-1, istupd=0, theory=2, bwc=2, miter=1, proj=0, irquad=0)
+
+      
+      Provide controls for computing shell response.
+
+
+      :Parameters:
+
+          **wrpang** : :class:`python:int`, :obj:`optional`
+              Shell element warpage angle in degrees. The default is ``20``.
+
+          **esort** : :class:`python:int`
+              Sorting of triangular shell elements to automatically switch
+              degenerate quadrilateral shell formulations to more suitable
+              triangular shell formulations. The default is ``0``.
+
+          **irnxx** : :class:`python:int`, :obj:`optional`
+              Shell normal update option. The default is ``1``.
+
+          **istupd** : :class:`python:int`, :obj:`optional`
+              Shell thickness change option for deformable shells. The
+              default is ``0``.
+
+          **theory** : :class:`python:int`, :obj:`optional`
+              Default shell formulation. The default is ``2``.
+
+          **bwc** : :class:`python:int`, :obj:`optional`
+              Warping stiffness for Belytschko-Tsay shells. The
+              default is ``2``.
+
+          **miter** : :class:`python:int`, :obj:`optional`
+              Plane stress plasticity option. The default is ``1``.
+
+          **proj** : :class:`python:int`, :obj:`optional`
+              Projection method for the warping stiffness in the Belytschko-Tsay
+              shell and the Belytschko-Wong-Chiang elements. The default is
+              ``0``.
+
+          **irquad** : :class:`python:int`, :obj:`optional`
+              In-plane integration rule for the eight-node quadratic shell element.
+              The default is ``0``.
+              
+              - EQ.2: 2*2 Gauss quadrature
+              - EQ.3: 3*3 Gauss quadrature
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_control_solid(esort=0, fmatrx=0, niptets=4, swlocl=1, psfail=0, t10jtol=0.0, icoh=0, tet13k=0)
+
+      
+      Provide controls for a solid element response.
+
+
+      :Parameters:
+
+          **esort** : :class:`python:int`, :obj:`optional`
+              Automatic sorting of tetrahedral and pentahedral elements to avoid
+              use of degenerate formulations for these shapes. The default is ``0``.
+              
+              - EQ.0: No sorting
+              - EQ.1: Sort
+
+          **fmatrx** : :class:`python:int`, :obj:`optional`
+              Method to use in the calculation of the deformation gradient matrix.
+              The default is ``1``.
+
+          **niptets** : :class:`python:int`, :obj:`optional`
+              Number of integration points used in the quadratic tetrahedron elements.
+              The default is ``4``.
+
+          **swlocl** : :class:`python:int`, :obj:`optional`
+              Output option for stresses in solid elements used as spot welds with
+              material ``\*MAT_SPOTWELD``. The default is ``1``.
+
+          **psfail** : :class:`python:int`, :obj:`optional`
+              Solid element erosion from negative volume is limited only to solid elements in
+              the part set indicated by PSFAIL. The default is ``0``.
+
+          **t10jtol** : :class:`python:float`, :obj:`optional`
+              Tolerance for Jacobian in four-point, 10-noded quadratic tetrahedra. The
+              default is ``0.0``.
+
+          **icoh** : :class:`python:int`, :obj:`optional`
+              Breaking LS-DYNA convention ICOH is interpreted digit-wise. The default
+              is ``0``.
+
+          **tet13k** : :class:`python:int`, :obj:`optional`
+              Flag for whether to invoke a consistent tangent stiffness matrix
+              for the pressure averaged tetrahedron. The default is ``0``, in which
+              case this matrix is not invoked. If this parameter is set to ``1``,
+              this matrix is invoked.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_control_contact(rwpnal, shlthk=0, orien=1, ssthk=0, ignore=0, igactc=0)
+
+      
+      Change defaults for computation with contact surfaces.
+
+
+      :Parameters:
+
+          **rwpnal** : :class:`python:float`
+              Scale factor for rigid wall penalties, which treat nodal points interacting
+              with rigid walls.
+
+          **shlthk** : :class:`python:int`, :obj:`optional`
+              Flag for whether to consider shell thickness offsets in non-automatic
+              surface-to-surface and non-automatic nodes-to-surface type contacts.
+              The default is ``0``, in which case these offsets are not considered.
+              If this parameter is set to ``1``, these offsets are considered.
+
+          **orien** : :class:`python:int`, :obj:`optional`
+              Flag for whether to automatically reorient contact interface segments
+              during initialization. The default is ``1``, in which case reorientation
+              automatically occurs. If this parameter is set to ``0``, reorientation
+              does not occur.
+
+          **ssthk** : :class:`python:int`, :obj:`optional`
+              Flag for whether to determine default contact thickness for shells in single
+              surface contact types. The default is ``0``, in which case default contact
+              thickness is not determined. If this parameter is set to ``1``, default
+              contact thickness is determined.
+
+          **ignore** : :class:`python:int`, :obj:`optional`
+              Flag for whether to ignore initial penetrations in the ``\*CONTACT_AUTOMATIC``
+              options. The default is ``0``, in which case initial penetrations are ignored.
+              If this parameter is set to ``1``, initial penetrations are not ignored.
+
+          **igactc** : :class:`python:int`, :obj:`optional`
+              Flag for whether to use isogeometric shells for contact detection when the
+              contact involves isogeometric shells. The default is ``0``, which means
+              isogeometric shells are not used. If this parameter is set to ``1``, isogeometric
+              shells are used.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_damping_global(lcid=0, valdmp=0.0)
+
+      
+      Define mass-weighted nodal damping.
+
+      Mass-weighted nodal damping applies globally to the
+      nodes of deformable bodies and to the mass center of
+      rigid bodies.
+
+      :Parameters:
+
+          **lcid** : :class:`python:int`, :obj:`optional`
+              Load curve ID, which specifies the system damping constant
+              versus the time. The default is ``0``.
+
+          **valdmp** : :class:`python:float`, :obj:`optional`
+              System damping constant. The default is ``0.0``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: get_solid_elements()
+
+      
+      Get solid elements.
+
+
+
+      :Returns:
+
+          :class:`python:list`
+              list[0],solid element connectivity,list[0] = [[n1,n2,n3,n4,n5,n6,n7,n8],[...],...]
+              list[1],node coordinates,list[1] = [[x1,y1,z1],[x2,y2,z2],...]
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_general_keyword(opcode, keyworddata)
+
+      
+      Create general keyword.
+
+
+      :Parameters:
+
+          **opcode** : :class:`python:str`
+              Keyword card name.
+
+          **keyworddata** : :class:`python:str`
+              Keyword data.
+
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+              Create a ``\*INITIAL_VELOCITY`` keyword.
+
+              \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+              \*INITIAL_VELOCITY
+
+              &       vx        vy        vz       vxr       vyr       vzr
+              1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
+              \$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+              opcode = "INITIAL_VELOCITY"
+              keyworddata = "0
+      1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00"
+              create_general_keyword(opcode = opcode,keyworddata=keyworddata)
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: add(obj)
+
+      
+      Add entities to an object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_transform(filename=None, idnoff=0, ideoff=0, idpoff=0, idmoff=0, idsoff=0, idfoff=0, transform=None)
+
+      
+      Include independent input files containing model data, allow for node, element, and set
+      IDs to be offset and for coordinates and constitutive parameters to be transformed and scaled.
+
+
+      :Parameters:
+
+          **filename** : :class:`python:str`
+              Name of file to include in the keyword file.
+
+          **idnoff** : :class:`python:int`
+              Offset to node ID.
+
+          **ideoff** : :class:`python:int`
+              Offset to element ID.
+
+          **idpoff** : :class:`python:int`
+              Offset to part ID.
+
+          **idmoff** : :class:`python:int`
+              Offset to material ID.
+
+          **idsoff** : :class:`python:int`
+              Offset to set ID.
+
+          **idfoff** : :class:`python:int`
+              Offset to function ID, table ID, and curve ID.
+
+          **transform** : :obj:`Transform`
+              Definition for the transformation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: save_file()
+
+      
+      Save keyword files.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: BaseSet
+
+
+   
+   Defines the base class for all set classes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: NodeSet(nodes=[])
+
+
+   
+   Defines a nodal set with some identical or unique attributes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create(stub)
+
+      
+      Create a node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: num()
+
+      
+      Get the number of nodes in the node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: id(pos)
+
+      
+      Get the node ID by position.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: get_nid()
+
+      
+      Get the node ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: SetType
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Contains the enums for setting types.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: SHELL
+      :value: 'SET_SHELL'
+
+      
+
+   .. py:attribute:: SOLID
+      :value: 'SET_SOLID'
+
+      
+
+   .. py:attribute:: BEAM
+      :value: 'SET_BEAM'
+
+      
+
+   .. py:attribute:: TSHELL
+      :value: 'SET_TSHELL'
+
+      
+
+   .. py:attribute:: DISCRETE
+      :value: 'SET_DISCRETE'
+
+      
+
+
+.. py:class:: NodesetGeneral(settype=SetType.SHELL, setids=[])
+
+
+   Bases: :py:obj:`BaseSet`
+
+   
+   Includes nodal points of element sets.
+
+   Element sets are defined by ``SET_XXXX_LIST``,
+   where ``XXXX`` can be ``SHELL``, ``SOLID``, ``BEAM``,
+   ``TSHELL`` or ``DISCRETE``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create(stub)
+
+      
+      Create a node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: NodeSetBox(boxes=[])
+
+
+   Bases: :py:obj:`BaseSet`
+
+   
+   include the nodes inside boxes.
+
+
+   :Parameters:
+
+       **boxes** : :class:`python:list`
+           A list of BOX.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create(stub)
+
+      
+      Create a node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: PartSet(parts=[])
+
+
+   Bases: :py:obj:`BaseSet`
+
+   
+   Defines a set of parts with optional attributes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create(stub)
+
+      
+      Create a part set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: num()
+
+      
+      Get the number of parts in the part set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: pos(pos)
+
+      
+      Get a part ID by position.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: get_pid()
+
+      
+      Get the part ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: SegmentSet(segments=[])
+
+
+   Bases: :py:obj:`BaseSet`
+
+   
+   Defines a set of segments with optional identical or unique attributes.
+
+
+   :Parameters:
+
+       **segments** : :class:`python:list` [[point1,point2,point3,point4],[point5,point6,point7,point8]...]
+           Define segments.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create(stub)
+
+      
+      Create a segment set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: BeamFormulation
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: SPOTWELD
+      :value: 9
+
+      
+
+
+.. py:class:: ShellFormulation
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: FULLY_INTEGRATED
+
+      
+
+   .. py:attribute:: BELYTSCHKO_TSAY
+      :value: 2
+
+      
+
+   .. py:attribute:: SR_HUGHES_LIU
+      :value: 6
+
+      
+
+   .. py:attribute:: FULLY_INTEGRATED_BELYTSCHKO_TSAY_MEMBRANE
+      :value: 9
+
+      
+
+   .. py:attribute:: PLANE_STRESS
+      :value: 12
+
+      
+
+
+.. py:class:: IGAFormulation
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: REISSNER_MINDLIN_FIBERS_AT_CONTROL_POINTS
+      :value: 0
+
+      
+
+   .. py:attribute:: KIRCHHOFF_LOVE_FIBERS_AT_CONTROL_POINTS
+      :value: 1
+
+      
+
+   .. py:attribute:: KIRCHHOFF_LOVE_FIBERS_AT_INTEGRATION_POINTS
+      :value: 2
+
+      
+
+   .. py:attribute:: REISSNER_MINDLIN_FIBERS_AT_INTEGRATION_POINTS
+      :value: 3
+
+      
+
+
+.. py:class:: SolidFormulation
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: EIGHT_POINT_ENHANCED_STRAIN_SOLID_ELEMENT
+
+      
+
+   .. py:attribute:: CONSTANT_STRESS_SOLID_ELEMENT
+      :value: 1
+
+      
+
+   .. py:attribute:: EIGHT_POINT_HEXAHEDRON
+      :value: 2
+
+      
+
+   .. py:attribute:: FULLY_INTEGRATED_QUADRATIC_EIGHT_NODE_ELEMENT
+      :value: 3
+
+      
+
+   .. py:attribute:: ONE_POINT_COROTATIONAL
+      :value: 0
+
+      
+
+   .. py:attribute:: IMPLICIT_9_POINT_ENHANCED_STRAIN
+      :value: 18
+
+      
+
+
+.. py:class:: HourglassType
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: STANDARD_LSDYNA_VISCOUS
+      :value: 1
+
+      
+
+   .. py:attribute:: FLANAGAN_BELYTSCHKO_VISOCOUS
+      :value: 2
+
+      
+
+   .. py:attribute:: FLANAGAN_BELYTSCHKO_VISOCOUS_WITH_EXTRA_VOLUME_INTEGRATION
+      :value: 3
+
+      
+
+   .. py:attribute:: FLANAGAN_BELYTSCHKO_STIFFNESS
+      :value: 4
+
+      
+
+   .. py:attribute:: FLANAGAN_BELYTSCHKO_STIFFNESS_WITH_EXTRA_VOLUME_INTEGRATION
+      :value: 5
+
+      
+
+   .. py:attribute:: BELYTSCHKO_BINDEMAN
+      :value: 6
+
+      
+
+   .. py:attribute:: ACTIVATES_FULL_PROJECTION_WARPING_STIFFNESS
+      :value: 8
+
+      
+
+
+.. py:class:: BeamSection(element_formulation, shear_factor=1, cross_section=0, thickness_n1=0, thickness_n2=0)
+
+
+   
+   Defines cross-sectional properties for beams, trusses, discrete beams, and cable elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: ShellSection(element_formulation, shear_factor=1, integration_points=5, printout=0, thickness1=0, thickness2=0, thickness3=0, thickness4=0)
+
+
+   
+   Defines section properties for shell elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: IGASection(element_formulation, shear_factor=1, thickness=1)
+
+
+   
+   Defines section properties for isogeometric shell elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: Part(id)
+
+
+   
+   Defines the part object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_material(mat, mat_thermal=None)
+
+      
+      Set the material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_element_formulation(formulation)
+
+      
+      Set the element formulation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_stiffness_damping_coefficient(coefficient)
+
+      
+      Set the stiffness damping coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_extra_nodes(nodeset)
+
+      
+      Set extra nodes for the rigid body.
+
+
+      :Parameters:
+
+          **nodeset** : :obj:`NodeSet`
+              Extra nodes list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_rigidbody_initial_velocity(translation=Velocity(0, 0, 0), rotation=RotVelocity(0, 0, 0))
+
+      
+      Set initial translational and rotational velocities for the rigid body.
+
+      Initial translational and rotational velocities are set
+      at the center of gravity for a rigid body or a nodal rigid body.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_property()
+
+      
+      Set properties for the part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: BeamPart(pid)
+
+
+   Bases: :py:obj:`Part`
+
+   
+   Defines a beam part.
+
+   A beam part definition consists of the combined material information,
+   section properties, hourglass type, thermal properties, and a flag
+   for part adaptivity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_cross_type(cross)
+
+      
+      Set the type for the cross section.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_diameter(diameter)
+
+      
+      Set the outer diameter for the cross section.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_property()
+
+      
+      Set properties for the beam part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ShellPart(pid)
+
+
+   Bases: :py:obj:`Part`
+
+   
+   Defines a shell part.
+
+   A shell part definition consists of the combined material information,
+   section properties, hourglass type, thermal properties, and a flag
+   for part adaptivity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_hourglass(type=HourglassType.STANDARD_LSDYNA_VISCOUS, coefficient=0.1)
+
+      
+      Set the hourglass type, which identifies the bulk viscosity.
+
+
+      :Parameters:
+
+          **type** : :obj:`enum`
+              Default hourglass control type.
+
+          **coefficient** : :class:`python:float`, :obj:`optional`
+              Default hourglass coefficient. The default is ``0.``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_shear_factor(factor)
+
+      
+      Set the shear correction factor, which scales the transverse shear stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_integration_points(points=5)
+
+      
+      Set the number of through thickness integration points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_printout(print)
+
+      
+      Set the printout option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_thickness(thickness)
+
+      
+      Set the shell thickness.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_des_surface(despid=0, desxid=0, nquad=1, nsid=0, rsf=-1)
+
+      
+      Generate and place discrete element sphere (DES) elements on the surface of shell elements.
+
+
+      :Parameters:
+
+          **despid** : :class:`python:int`, :obj:`optional`
+              Part ID for the generated DES elements. The default is ``0``.
+
+          **desxid** : :class:`python:int`, :obj:`optional`
+              Section ID for the generated DES elements. The default is ``0``.
+
+          **nquad** : :class:`python:int`, :obj:`optional`
+              Number of equally spaced DES elements to create on a shell element in each local shell direction.
+              The default is ``1``.
+
+          **nsid** : :class:`python:int`, :obj:`optional`
+              If defined, this card creates a node set with ID NSID for the nodes generated by this card.
+              The default is ``0``.
+
+          **rsf** : :class:`python:float`, :obj:`optional`
+              Scale factor for determining the DES radius. The default is ``1``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_property()
+
+      
+      Set properties for the shell part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: IGAPart(pid)
+
+
+   Bases: :py:obj:`Part`
+
+   
+   Defines an isogeometric shell part.
+
+   The part definition consists of the combined material information,
+   section properties, hourglass type, thermal properties, and a flag
+   for part adaptivity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_shear_factor(factor)
+
+      
+      Set the shear correction factor, which scales the transverse shear stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_thickness(thickness)
+
+      
+      Set the shell thickness.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_property()
+
+      
+      Set properties for the IGA part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: SolidPart(pid)
+
+
+   Bases: :py:obj:`Part`
+
+   
+   Defines a solid part.
+
+   The part definition consists of the combined material information,
+   section properties, hourglass type, thermal properties, and a flag
+   for part adaptivity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_hourglass(type=HourglassType.STANDARD_LSDYNA_VISCOUS, coefficient=0.1)
+
+      
+      Set the hourglass type, which identifies the bulk viscosity.
+
+
+      :Parameters:
+
+          **type** : :obj:`enum`
+              Default hourglass control type.
+
+          **coefficient** : :class:`python:float`, :obj:`optional`
+              Default hourglass coefficient. The default is ``0.``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_property()
+
+      
+      Set the properties for the solid part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: DRO
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: DESCRIBES_TRANSLATIONAL_SPRING
+      :value: 0
+
+      
+
+   .. py:attribute:: DESCRIBES_TORSIONAL_SPRING
+      :value: 1
+
+      
+
+
+.. py:class:: DiscretePart(pid)
+
+
+   Bases: :py:obj:`Part`
+
+   
+   Defines a discrete part.
+
+   The part definition consists of the combined material information,
+   section properties, hourglass type, thermal properties, and a flag
+   for part adaptivity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_displacement_option(displacement_option=DRO.DESCRIBES_TRANSLATIONAL_SPRING)
+
+      
+      Set the displacement, which defines the rotation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_property()
+
+      
+      Set properties for the discrete part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Parts
+
+
+   
+   Stores the part list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: add(part)
+
+      
+      Add a part to the part list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: get_num_shellpart()
+
+      
+      Get the number of shell parts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_property()
+
+      
+      Set properties for added parts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: AnalysisType
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: EXPLICIT
+      :value: 0
+
+      
+
+   .. py:attribute:: IMPLICIT
+      :value: 1
+
+      
+
+   .. py:attribute:: EXPLICIT_FOLLOWED_BY_IMPLICIT
+      :value: 2
+
+      
+
+
+.. py:class:: TimestepCtrol
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: CONSTANT_TIMESTEP_SIZE
+      :value: 0
+
+      
+
+   .. py:attribute:: AUTOMATICALLY_ADJUST_TIMESTEP_SIZE
+      :value: 1
+
+      
+
+
+.. py:class:: Integration
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: NEWMARK_TIME_INTEGRATION
+      :value: 1
+
+      
+
+   .. py:attribute:: MODAL_SUPERPOSITION_FOLLOWING_EIGENVALUE
+      :value: 2
+
+      
+
+
+.. py:class:: ImplicitAnalysis(analysis_type=AnalysisType.IMPLICIT, initial_timestep_size=0)
+
+
+   
+   Activates implicit analysis and defines associated control parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_initial_timestep_size(size=0)
+
+      
+      Define the initial time step size.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_timestep(control_flag=TimestepCtrol.CONSTANT_TIMESTEP_SIZE, Optimum_equilibrium_iteration_count=11)
+
+      
+      Define parameters for automatic time step control during implicit analysis.
+
+
+      :Parameters:
+
+          **control_flag** : :class:`python:int`
+              Automatic time step control flag.
+
+          **Optimum_equilibrium_iteration_count** : :class:`python:int`, :obj:`optional`
+              Optimum equilibrium iteration count per time step. The default is ``11``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_dynamic(integration_method=Integration.NEWMARK_TIME_INTEGRATION, gamma=0.5, beta=0.25)
+
+      
+      Activate implicit dynamic analysis and define time integration constants.
+
+
+      :Parameters:
+
+          **integration_method** : :obj:`enum`
+              Implicit analysis type.
+
+          **gamma** : :class:`python:float`, :obj:`optional`
+              Newmark time integration constant. The default is ``0.5``.
+
+          **beta** : :class:`python:float`, :obj:`optional`
+              Newmark time integration constant. The default is ``0.25``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_eigenvalue(number_eigenvalues=0, shift_scale=0)
+
+      
+      Activate implicit eigenvalue analysis and define associated input parameters.
+
+
+      :Parameters:
+
+          **number_eigenvalues** : :class:`python:int`, :obj:`optional`
+              Number of eigenvalues to extract. The default is ``0``.
+
+          **shift_scale** : :class:`python:float`, :obj:`optional`
+              Shift scale. The default is ``0``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_solution(solution_method=12, iteration_limit=11, stiffness_reformation_limit=55, absolute_convergence_tolerance=1e-10)
+
+      
+      Specify whether a linear or nonlinear solution is desired.
+
+
+      :Parameters:
+
+          **solution_method** : :class:`python:int`, :obj:`optional`
+              Solution method for implicit analysis. The default is ``12``.
+
+          **iteration_limit** : :class:`python:int`, :obj:`optional`
+              Iteration limit between automatic stiffness reformations.
+              The default is ``11``.
+
+          **stiffness_reformation_limit** : :class:`python:int`, :obj:`optional`
+              Stiffness reformation limit per time step. The default is
+              ``55``.
+
+          **absolute_convergence_tolerance** : :class:`python:float`, :obj:`optional`
+              Absolute convergence tolerance. The default is ``1e-10``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_consistent_mass_matrix()
+
+      
+      Use the consistent mass matrix in implicit dynamics and eigenvalue solutions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create an implicit analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ThermalAnalysisType
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: STEADY_STATE
+      :value: 0
+
+      
+
+   .. py:attribute:: TRANSIENT
+      :value: 1
+
+      
+
+
+.. py:class:: ThermalAnalysisTimestep
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: FIXED
+      :value: 0
+
+      
+
+   .. py:attribute:: VARIABLE
+      :value: 1
+
+      
+
+
+.. py:class:: ThermalAnalysis
+
+
+   Bases: :py:obj:`BaseObj`
+
+   
+   Activates thermal analysis and defines associated control parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_timestep(timestep_control=ThermalAnalysisTimestep.FIXED, initial_timestep=0)
+
+      
+      Set time step controls for the thermal solution in a thermal only or coupled structural/thermal analysis.
+
+
+      :Parameters:
+
+          **timestep_control** : :obj:`ThermalAnalysisTimestep`
+              Time step control.
+
+          **initial_timestep** : :class:`python:float`, :obj:`optional`
+              Initial thermal time step. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_solver(analysis_type=ThermalAnalysisType.STEADY_STATE)
+
+      
+      Set options for the thermal solution in a thermal only or coupled structural-thermal analysis.
+
+
+      :Parameters:
+
+          **analysis_type** : :obj:`ImplicitAnalysis`
+              Thermal analysis type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_nonlinear(convergence_tol=0.0001, divergence=0.5)
+
+      
+      Set parameters for a nonlinear thermal or coupled structural/thermal analysis.
+
+
+      :Parameters:
+
+          **convergence_tol** : :class:`python:float`
+              Convergence tolerance for temperature.
+
+          **divergence** : :class:`python:float`
+              Divergence control parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create a thermal analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ContactCategory
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: SURFACE_TO_SURFACE_CONTACT
+      :value: 2
+
+      
+
+   .. py:attribute:: SINGLE_SURFACE_CONTACT
+      :value: 3
+
+      
+
+   .. py:attribute:: SHELL_EDGE_TO_SURFACE_CONTACT
+      :value: 4
+
+      
+
+   .. py:attribute:: NODES_TO_SURFACE
+      :value: 5
+
+      
+
+
+.. py:class:: ContactType
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: NULL
+      :value: 0
+
+      
+
+   .. py:attribute:: AUTOMATIC
+      :value: 1
+
+      
+
+   .. py:attribute:: GENERAL
+      :value: 2
+
+      
+
+   .. py:attribute:: RIGID
+      :value: 3
+
+      
+
+   .. py:attribute:: TIED
+      :value: 4
+
+      
+
+   .. py:attribute:: TIED_WITH_FAILURE
+      :value: 5
+
+      
+
+   .. py:attribute:: ERODING
+      :value: 6
+
+      
+
+   .. py:attribute:: EDGE
+      :value: 7
+
+      
+
+
+.. py:class:: OffsetType
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: NULL
+      :value: ''
+
+      
+
+   .. py:attribute:: OFFSET
+      :value: 'OFFSET'
+
+      
+
+   .. py:attribute:: BEAM_OFFSET
+      :value: 'BEAM_OFFSET'
+
+      
+
+   .. py:attribute:: CONSTRAINED_OFFSET
+      :value: 'CONSTRAINED_OFFSET'
+
+      
+
+
+.. py:class:: ContactFormulation
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: STANDARD_PENALTY
+      :value: 0
+
+      
+
+   .. py:attribute:: SOFT_CONSTRAINT_PENALTY
+      :value: 1
+
+      
+
+   .. py:attribute:: SEGMENT_BASED_CONTACT_PENALTY
+      :value: 2
+
+      
+
+
+.. py:class:: SBOPT
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: ASSUME_PLANER_SEGMENTS
+      :value: 2
+
+      
+
+   .. py:attribute:: WRAPED_SEGMENT_CHECKING
+      :value: 3
+
+      
+
+   .. py:attribute:: SLDING_OPTION
+      :value: 4
+
+      
+
+
+.. py:class:: ContactSurface(set)
+
+
+   
+   Defines a contact interface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_contact_region(box)
+
+      
+      Include in the contact definition only those SURFA nodes/segments within a box.
+
+
+      :Parameters:
+
+          **box** : :obj:`Box`
+              Box-shaped volume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_contact_thickness(thickness)
+
+      
+      Set the contact thickness for the SURFA surface.
+
+
+      :Parameters:
+
+          **thickness** : :class:`python:float`
+              Contact thickness.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_penalty_stiffness_scale_factor(scalefactor=1.0)
+
+      
+      Set the scale factor on the default surface penalty stiffness.
+
+
+      :Parameters:
+
+          **scalefactor** : :class:`python:int`, :obj:`optional`
+              Scale factor. The default is ``1.0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Contact(type=ContactType.NULL, category=ContactCategory.SINGLE_SURFACE_CONTACT, offset=OffsetType.NULL)
+
+
+   
+   Provide a way of treating interaction between disjoint parts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_mortar()
+
+      
+      Set the mortar contact.
+
+      A mort contact is a segment-to-segment, penalty-based contact.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_tiebreak()
+
+      
+      Set the contact allow for failure.
+
+      A tieback is a special case of this. After failure, the contact
+      usually becomes a normal one-way, two-way, or single surface version.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_friction_coefficient(static=0, dynamic=0)
+
+      
+      Set the coefficient of friction.
+
+
+      :Parameters:
+
+          **static** : :class:`python:float`, :obj:`optional`
+              Static coefficient of friction. The default is ``0``.
+
+          **dynamic** : :class:`python:float`, :obj:`optional`
+              Dynamic coefficient of friction.  The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_active_time(birth_time=0, death_time=1e+20)
+
+      
+      Set the birth and death time to active and deactivate the contact.
+
+
+      :Parameters:
+
+          **birth_time** : :class:`python:int`, :obj:`optional`
+              Time to activate the contact. The default is ``0``.
+
+          **death_time** : :class:`python:float`, :obj:`optional`
+              Time to deactivate the contact. The default is ``1e20``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_initial_penetration()
+
+      
+      Ignore initial penetrations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_slave_surface(surface)
+
+      
+      Set the slave contact interface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_master_surface(surface)
+
+      
+      Set the master contact interface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_penalty_algorithm(formulation=ContactFormulation.STANDARD_PENALTY, segment_based_contact_option=SBOPT.ASSUME_PLANER_SEGMENTS)
+
+      
+      Set the contact formulation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create a contact.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ContactGroup
+
+
+   
+   Create a contact group.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: add(contact)
+
+      
+      Add a contact in the group.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create contacts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: num()
+
+      
+      Get the number of contact objects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Constraint
+
+
+   
+   Provides a way of constraining degrees of freedom to move together in some way.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create_spotweld(nodeid1, nodeid2)
+
+      
+      Define massless spot welds between non-contiguous nodal pairs.
+
+
+      :Parameters:
+
+          **nodeid1** : :class:`python:int`
+              ID for the first node.
+
+          **nodeid2** : :class:`python:int`
+              ID for the second node.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_cnrb(nodeset)
+
+      
+      Create a nodal rigid body, which is a rigid body that consists of defined nodes.
+
+
+      :Parameters:
+
+          **nodeset** : :obj:`NodeSet`
+              Node set that defines the rigid body.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_joint_spherical(nodes, relative_penalty_stiffness=1.0, damping_scale_factor=1.0)
+
+      
+      Create a joint between two rigid bodies.
+
+
+      :Parameters:
+
+          **nodes** : :class:`python:list`
+              List of nodes for creating the joint.
+
+          **relative_penalty_stiffness** : :class:`python:int`, :obj:`optional`
+              Relative penalty stiffness. The default is ``1.0``.
+
+          **damping_scale_factor** : :class:`python:int`, :obj:`optional`
+              Damping scale factor on the default damping value.
+              The default is ``1.0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: merge_two_rigid_bodies(lead_rigidbody=0, constrained_rigidbody=0)
+
+      
+      Merge two rigid bodies.
+
+      One rigid body, called the constrained rigid body,
+      is merged into another rigid body, called the lead rigid body.
+
+      :Parameters:
+
+          **lead_rigidbody** : :class:`python:int`, :obj:`optional`
+              Part ID for the lead rigid body. The default is ``0``.
+
+          **constrained_rigidbody** : :class:`python:int`
+              Part ID for the constrained rigid body. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create a constraint.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: BoundaryCondition
+
+
+   
+   Provides a way of defining imposed motions on boundary nodes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: assign_model(model)
+
+
+   .. py:method:: create_spc(nodeset, tx=True, ty=True, tz=True, rx=True, ry=True, rz=True, cid=0, birth=0, death=1e+20)
+
+      
+      Define nodal single point constraints.
+
+
+      :Parameters:
+
+          **nodeset** : NodeSet.
+              Node set.
+
+          **contraint_x/y/z_direction** : :class:`python:int`
+              Translational constraint in local x/y/z-direction.
+
+          **contraint_x/y/zaxis_rotate** : :class:`python:int`
+              Rotational constraint about local x/y/z-axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_imposed_motion(set, curve, motion=Motion.DISPLACEMENT, dof=DOF.X_TRANSLATIONAL, scalefactor=1, birthtime=0)
+
+      
+      Create an imposed nodal motion on a node or set of nodes.
+
+      An imposed nodal motion can be a velocity, acceleration, or displacement.
+
+      :Parameters:
+
+          **partset** : PartSet.
+              Part set.
+
+          **curve** : :obj:`Curve`
+              Curve ID or function ID to describe the motion value as a function of time.
+
+          **motion** : :obj:`enum`
+              Velocity/Acceleration/Displacement flag.
+
+          **dof** : :obj:`enum`
+              Applicable degrees of freedom.
+
+          **scalefactor** : :class:`python:int`, :obj:`optional`
+              Load curve scale factor. The default is ``1``.
+
+          **birthtime** : :class:`python:int`, :obj:`optional`
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_temperature(nodeset, curve=None, scalefactor=1)
+
+      
+      Create temperature boundary conditions for a thermal or coupled thermal/structural analysis.
+
+
+      :Parameters:
+
+          **nodeset** : NodeSet.
+              Node set.
+
+          **curve** : :obj:`Curve`, :obj:`optional`
+              Temperature, T, specification. The default is ``None``.
+
+          **scalefactor** : :class:`python:float`, :obj:`optional`
+              Temperature, T, curve multiplier. The default is ``1``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_convection(segmentset=None, convection_heat_transfer_coefficient=None, convection_heat_transfer_coefficient_multiplier=0.0, environment_temperature=None, environment_temperature_multiplier=0.0)
+
+      
+      Apply a convection boundary condition on SEGMENT_SET for a thermal analysis.
+
+
+      :Parameters:
+
+          **segmentset** : SegmentSet.
+              Segment set.
+
+          **convection_heat_transfer_coefficient** : :obj:`Curve`
+              Convection heat transfer coefficient.
+
+          **convection_heat_transfer_coefficient_multiplier** : :class:`python:float`
+              Curve multiplier for convection heat transfer coefficient.
+
+          **environment_temperature** : :obj:`Curve`
+              Environment temperature.
+
+          **environment_temperature_multiplier** : :class:`python:float`
+              Curve multiplier for environment temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create a boundary condition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: InitialCondition
+
+
+   
+   Provides a way of initializing velocities and detonation points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: assign_model(model)
+
+
+   .. py:method:: create_velocity(velocityset, angular_velocity=0, velocity=Velocity(0, 0, 0), direction=Direction(0, 0, 0), stime=0)
+
+      
+      Create initial velocities for rotating and/or translating bodies.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_velocity_node(nodeid, trans=Velocity(0, 0, 0), rot=RotVelocity(0, 0, 0))
+
+      
+      Define initial nodal point velocities for a node.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_temperature(nodeset=None, temperature=0)
+
+      
+      Create an initial nodal point temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create an initial condition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: RigidwallCylinder(tail=Point(0, 0, 0), head=Point(0, 0, 0), radius=1, length=10)
+
+
+   Bases: :py:obj:`BaseObj`
+
+   
+   Defines a rigid wall with a cylinder form.
+
+
+   :Parameters:
+
+       **tail** : :obj:`Point`, :obj:`optional`
+           Coordinates of the tail of the normal vector.
+           The default is ``(0, 0, 0)``.
+
+       **head** : :obj:`Point`, :obj:`optional`
+           Coordinates of the head of the normal vector.
+           The default is ``(0, 0, 0)``.
+
+       **radius** : :class:`python:float`, :obj:`optional`
+           Radius of the cylinder. The default is ``1``.
+
+       **length** : :class:`python:float`, :obj:`optional`
+           Length of cylinder. The default is ``10``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_motion(curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0))
+
+      
+      Set the prescribed motion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: get_data() -> List
+
+      
+      Get the rigidwall data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create a rigidwall cylinder.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: RigidwallSphere(center=Point(0, 0, 0), orient=Point(0, 0, 0), radius=1)
+
+
+   Bases: :py:obj:`BaseObj`
+
+   
+   Defines a rigid wall with a sphere form.
+
+
+   :Parameters:
+
+       **center** : :obj:`Point`, :obj:`optional`
+           The center of sphere.
+           The default is ``(0, 0, 0)``.
+
+       **orient** : :obj:`Point`, :obj:`optional`
+           Vector n determines the orintation of the rigidwall,the center define the tail of normal n,
+           the orient define the head of normal n.
+           The default is ``(0, 0, 0)``.
+
+       **radius** : :class:`python:float`, :obj:`optional`
+           Radius of the sphere. The default is ``1``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_motion(curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0))
+
+      
+      Set the prescribed motion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: get_data() -> List
+
+      
+      Get the rigidwall data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create a rigidwall sphere.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: RigidwallPlanar(tail=Point(0, 0, 0), head=Point(0, 0, 0), coulomb_friction_coefficient=0.5)
+
+
+   Bases: :py:obj:`BaseObj`
+
+   
+   Defines planar rigid walls with either finite or infinite size.
+
+
+   :Parameters:
+
+       **tail** : :obj:`Point`
+           Coordinate of the tail of the normal vector.
+           The default is ``(0, 0, 0)``.
+
+       **head** : :obj:`Point`
+           Coordinate of the head of the normal vector.
+           The default is ``(0, 0, 0)``.
+
+       **coulomb_friction_coefficient** : :class:`python:float`, :obj:`optional`
+           Friction coefficieint in coulomb units. The default is ``0.5``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: get_data() -> List
+
+      
+      Get the rigidwall data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create planar rigid walls.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: GravityOption
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: DIR_X
+      :value: 'X'
+
+      
+
+   .. py:attribute:: DIR_Y
+      :value: 'Y'
+
+      
+
+   .. py:attribute:: DIR_Z
+      :value: 'Z'
+
+      
+
+
+.. py:class:: Gravity(dir=GravityOption.DIR_Z, load=Curve(x=[0, 0], y=[0, 0]))
+
+
+   Bases: :py:obj:`BaseObj`
+
+   
+   Defines body force loads using global axes directions.
+
+   Body force loads are due to a prescribed base acceleration or
+   angular velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create()
+
+      
+      Define a body force.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
