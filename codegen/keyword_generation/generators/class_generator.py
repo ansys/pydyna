@@ -155,7 +155,7 @@ HANDLERS = collections.OrderedDict(
         "override-field": OverrideFieldHandler(),
         "replace-card": ReplaceCardHandler(),
         "insert-card": InsertCardHandler(),
-        "variable-card": SeriesCardHandler(),
+        "series-card": SeriesCardHandler(),
         "add-option": AddOptionHandler(),
         "card-set": CardSetHandler(),
         "conditional-card": ConditionalCardHandler(),

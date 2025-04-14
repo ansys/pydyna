@@ -22,6 +22,7 @@
 
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -65,25 +66,13 @@ class DefineTable(KeywordBase):
                     ),
                 ],
             ),
-            Card(
-                [
-                    Field(
-                        "value",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
+            SeriesCard(
+                "points",
+                1,
+                20,
+                float,
+                None,
+                data = kwargs.get("points")),
             OptionCardSet(
                 option_spec = DefineTable.option_specs[0],
                 cards = [
@@ -134,24 +123,13 @@ class DefineTable(KeywordBase):
         self._cards[0].set_value("offa", value)
 
     @property
-    def value(self) -> float:
-        """Get or set the Load curve will be defined corresponding to this value, e.g., this value could be a strain rate, see purpose above.
-        """ # nopep8
-        return self._cards[1].get_value("value")
+    def points(self) -> SeriesCard:
+        """Interpolation points for subsequent DEFINE_CURVE keywords."""
+        return self._cards[1]
 
-    @value.setter
-    def value(self, value: float) -> None:
-        self._cards[1].set_value("value", value)
-
-    @property
-    def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID used by this value, but you can ignore this field since LS-DYNA does not use this field.
-        """ # nopep8
-        return self._cards[1].get_value("lcid")
-
-    @lcid.setter
-    def lcid(self, value: int) -> None:
-        self._cards[1].set_value("lcid", value)
+    @points.setter
+    def points(self, value: typing.List) -> None:
+        self._cards[1].data = value
 
     @property
     def title(self) -> typing.Optional[str]:
