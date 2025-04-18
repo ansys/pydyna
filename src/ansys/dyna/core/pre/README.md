@@ -1,6 +1,6 @@
 # PyDYNA ``pre`` service
 
-The PyDYNA ``pre`` service provide the ability to create keyword input decks through the gRPC framework. 
+The PyDYNA ``pre`` service provide the ability to create keyword input decks through the gRPC framework.
 
 ## Run the ``pre`` service in a virtual environment
 
@@ -18,14 +18,14 @@ Create a Python virtual environment of the same version as ``virtualenv``, insta
 virtualenv venv
 ```
 
-On Windows, activate the ``venv`` environment by running these commands: 
+On Windows, activate the ``venv`` environment by running these commands:
 
 ```
 cd venv
 ./Scripts/activate
 ```
 
-On Linux, activate the ``venv`` environment by running these commands: 
+On Linux, activate the ``venv`` environment by running these commands:
 
 ```
 cd venv
@@ -44,7 +44,7 @@ venv/
 		  .flake8
 		  LICENSE
 		  ...
-	
+
 ```
 
 ## Requirements
@@ -67,7 +67,7 @@ these commands:
 Python 3.6.8
 ```
 
-Here is the minimal content in the ``Server`` folder: 
+Here is the minimal content in the ``Server`` folder:
 ```
 Server/
       kwserver.py
@@ -77,9 +77,9 @@ Server/
 	     linux/
 		       keywordreader.so
          windows/
-               	cp36/keywordreader.pyd	
+               	cp36/keywordreader.pyd
                 cp38/keywordreader.pyd
-                cp39/keywordreader.pyd				
+                cp39/keywordreader.pyd
 ```
 
 ### Start the server on Windows
