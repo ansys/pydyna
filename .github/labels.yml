@@ -33,3 +33,7 @@
 - name: 'testing'
   description: Anything related to testing
   color: 5802B8
+
+- name: 'ci'
+  description: Pipelines maintenance related
+  color: a9a9a9
