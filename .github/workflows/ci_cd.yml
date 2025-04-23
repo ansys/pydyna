@@ -59,6 +59,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ansys/actions/doc-changelog@4f15ff3ab1183912ce862d51b8c66ea124b052a1 # v9.0.2
+        if: ${{ github.event_name == 'pull_request' }}
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           use-conventional-commits: true
