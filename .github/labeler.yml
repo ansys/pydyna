@@ -22,7 +22,7 @@
       - changed-files:
           - any-glob-to-any-file: ['pyproject.toml']
 'testing':
-  -all:
+  - all:
       - changed-files:
           - any-glob-to-any-file: ['_unittest/conftest.py', 'tests/*']
 'ci':
