@@ -31,13 +31,14 @@ PyDYNA documentation  |version|
          detailed descriptions of classes, methods, and functions.
 
       {% endif %}
+      
       {% if build_examples %}
       .. grid-item-card:: :fa:`clone` Examples
-      :link: examples/index
-      :link-type: doc
+         :link: examples/index
+         :link-type: doc
 
-      Browse a collection of examples that demonstrate how to use PyDYNA
-      for various applications.
+         Browse a collection of examples that demonstrate how to use PyDYNA
+         for various applications.
       {% endif %}
 
    .. grid-item-card:: :fa:`user-group` Contribute
