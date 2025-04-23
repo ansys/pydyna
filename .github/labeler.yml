@@ -1,12 +1,31 @@
-documentation:
-- changed-files:
-  - any-glob-to-any-file: ['doc/**/*', 'README.rst']
-maintenance:
-- changed-files:
-  - any-glob-to-any-file: ['.github/**/*', 'pyproject.toml', '.flake8']
-dependencies:
-- changed-files:
-  - any-glob-to-any-file: ['pyproject.toml']
-testing:
-- changed-files:
-  - any-glob-to-any-file: ['_unittest/conftest.py', 'tests/*']
+# -- Labels based on PR title ------------------------------------------------
+
+'fix':
+  - head-branch: ['fix']
+
+'enhancement':
+  - head-branch: ['feat']
+
+# -- Documentation labels ----------------------------------------------------
+
+'documentation':
+  - all:
+      - changed-files:
+          - any-glob-to-any-file: ['doc/source/**/*.rst', 'README.rst']
+
+'maintenance':
+  - all:
+      - changed-files:
+          - any-glob-to-any-file: ['.github/**/*', 'pyproject.toml', '.flake8']
+'dependencies':
+  - all:
+      - changed-files:
+          - any-glob-to-any-file: ['pyproject.toml']
+'testing':
+  -all:
+      - changed-files:
+          - any-glob-to-any-file: ['_unittest/conftest.py', 'tests/*']
+'ci':
+  - any:
+      - changed-files:
+          - any-glob-to-any-file: ['.github/workflows/**']
