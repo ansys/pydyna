@@ -15,7 +15,7 @@ To clone and install the latest PyDYNA release in development mode, run these co
 
 .. code::
 
-    git clone https://github.com/pyansys/pydyna
+    git clone https://github.com/ansys/pydyna
     cd pydyna
     python -m pip install --upgrade pip
     pip install -e .
@@ -24,7 +24,7 @@ To clone and install the latest PyDYNA release in development mode, run these co
 Post issues
 -----------
 
-Use the `PyDYNA Issues <https://github.com/pyansys/pydyna/issues>`_
+Use the `PyDYNA Issues <https://github.com/ansys/pydyna/issues>`_
 page to report bugs and request new features. When possible,
 use these issue templates:
 
