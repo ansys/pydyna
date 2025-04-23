@@ -1,10 +1,7 @@
 User guide
 ----------
 
-In the PyDYNA installation, the ``docker`` directory has two child
-directories:
-
-In the PyDYNA installation, the ``docker`` directory has two child
+In the PyDYNA installation, the ``docker`` directory has three child
 directories:
 
 - ``pre``: Contains the package with the ``pre`` Docker image for the
@@ -20,6 +17,8 @@ directories:
   service, you can push input files to the container, start LS-DYNA
   and monitor its progress, and then retrieve Ansys solver results (RST)
   files.
+- ``run``: This module provides the ability to start the LS-DYNA solver. This does not require any
+  client-server library or Docker container.
 
 Once you have results, you can use the Ansys Data Processing Framework (DPF),
 which is designed to provide numerical simulation users and engineers

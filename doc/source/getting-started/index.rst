@@ -57,7 +57,7 @@ Start by cloning and installing the repository with these commands:
 
 .. code::
 
-   git clone https://github.com/pyansys/pyDyna
+   git clone https://github.com/ansys/pydyna
    cd pyDyna
    pip install -e .
 
@@ -66,7 +66,7 @@ Install in offline mode
 
 If you lack an internet connection on your installation machine, you should install
 PyDYNA by downloading the wheelhouse archive for your corresponding machine
-architecture from the `Releases Page <https://github.com/pyansys/pydyna/releases>`_.
+architecture from the `Releases Page <https://github.com/ansys/pydyna/releases>`_.
 
 Each wheelhouse archive contains all the Python wheels necessary to install
 PyDYNA from scratch on Windows and Linux for Python 3.9 through 3.12. You can install
