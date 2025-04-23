@@ -11,7 +11,7 @@ Prerequisites
 
   .. code:: console
 
-   git clone https://github.com/pyansys/pydyna.git
+   git clone https://github.com/ansys/pydyna.git
    cd pydyna
 
   The ``docker`` file in the  ``docker/pre`` directory is used to build the
