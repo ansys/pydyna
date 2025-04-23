@@ -136,8 +136,13 @@ name = "Added"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory = "dependencies"
-name = "Dependencies"
+directory = "changed"
+name = "Changed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "fixed"
+name = "Fixed"
 showcontent = true
 
 [[tool.towncrier.type]]
@@ -146,8 +151,13 @@ name = "Documentation"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory = "fixed"
-name = "Fixed"
+directory = "test"
+name = "Test"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "dependencies"
+name = "Dependencies"
 showcontent = true
 
 [[tool.towncrier.type]]
@@ -158,19 +168,4 @@ showcontent = true
 [[tool.towncrier.type]]
 directory = "miscellaneous"
 name = "Miscellaneous"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "documentation"
-name = "Documentation"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "maintenance"
-name = "Maintenance"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "test"
-name = "Test"
 showcontent = true
