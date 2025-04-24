@@ -132,7 +132,7 @@ class DownloadManager(metaclass=DownloadManagerMeta):
         return base
 
     def _get_default_server_and_joiner(self):
-        return "https://github.com/ansys/example-data/raw/master", self._joinurl
+        return "https://github.com/ansys/example-data/raw/main", self._joinurl
 
     def _get_filepath_on_default_server(self, filename: str, *directory: str):
         server, joiner = self._get_default_server_and_joiner()
