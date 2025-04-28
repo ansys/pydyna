@@ -188,12 +188,23 @@ jinja_contexts = {
 
 
 def skip_run_subpackage(app, what, name, obj, skip, options):
-    """Skip the run subpackage other than local solver and options."""
+    """Skip specific members of the 'run' subpackage during documentation generation.
+
+    This function skips:
+    - All modules under 'ansys.dyna.core.run' except 'local_solver' and 'options'.
+    - Within 'local_solver', skips all members except the 'run_dyna' function.
+    """
+    
+    
     if name.startswith("ansys.dyna.core.run.") and not (name.startswith("ansys.dyna.core.run.local_solver") or name.startswith("ansys.dyna.core.run.options")):
-        skip = True
-    if name.startswith("ansys.dyna.core.run.local_solver") and name!= "ansys.dyna.core.run.local_solver.run_dyna":
-        skip = True
+            skip = True
+
+    if name.startswith("ansys.dyna.core.run.local_solver"):
+        if what == "function" and name!= "ansys.dyna.core.run.local_solver.run_dyna":
+            skip = True
+
     return skip
 
 def setup(sphinx):
-   sphinx.connect("autoapi-skip-member", skip_run_subpackage)
+    """Add custom extensions to Sphinx."""
+    sphinx.connect("autoapi-skip-member", skip_run_subpackage)
