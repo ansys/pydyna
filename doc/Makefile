@@ -7,6 +7,7 @@ SPHINXOPTS    = -j auto
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = _build
+APIDIR       = api
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -22,7 +23,7 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 	rm -rf source/examples/gallery_examples
-	find . -type d -name "_autosummary" -exec rm -rf {} +
+	find . -type d -name $(APIDIR) -exec rm -rf {} +
 
 pdf:
 	@$(SPHINXBUILD) -M latex "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)

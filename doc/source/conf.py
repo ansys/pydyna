@@ -18,7 +18,7 @@ project = 'ansys-dyna-core'
 copyright = f"(c) {datetime.datetime.now().year} ANSYS, Inc. All rights reserved"
 author = 'ANSYS Inc.'
 release = version = __version__
-cname = os.getenv("DOCUMENTATION_CNAME", default="nocname.com")
+cname = os.getenv("DOCUMENTATION_CNAME", default="dyna.docs.pyansys.com")
 
 # Sphinx extensions
 extensions = [
@@ -31,7 +31,7 @@ extensions = [
     "sphinx_jinja",
     "pyvista.ext.plot_directive",
     "sphinx_design",
-    "ansys_sphinx_theme.extension.autoapi"
+    "ansys_sphinx_theme.extension.autoapi",
 ]
 
 # Intersphinx mapping
@@ -129,7 +129,10 @@ html_theme_options = {
     "use_edit_page_button": True,
     "ansys_sphinx_theme_autoapi": {
         "project": project,
-        "ignore": ["*core/keywords/keyword_classes/auto*",],
+        "ignore": [
+            "*core/keywords/keyword_classes/auto*",
+        ],
+        "output": "api",
     },
 }
 
@@ -139,8 +142,6 @@ html_static_path = ['_static']
 
 # -- Declare the Jinja context -----------------------------------------------
 BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
-if not BUILD_API:
-    exclude_patterns.append("_autoapi_templates")
 
 suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
 
@@ -190,10 +191,8 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
     """Skip the run subpackage other than local solver and options."""
     if name.startswith("ansys.dyna.core.run.") and not (name.startswith("ansys.dyna.core.run.local_solver") or name.startswith("ansys.dyna.core.run.options")):
         skip = True
-    # add only the function run_dyna in the local_solver
-    if obj is not None and hasattr(obj, "__name__") and obj.__name__ == "run_dyna":
-        skip = False
-    else:
+        
+    if name.startswith("ansys.dyna.core.run.local_solver") and obj == "ansys.dyna.core.run.local_solver.run_dyna":
         skip = True
     return skip
 
