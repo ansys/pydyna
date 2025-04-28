@@ -332,7 +332,7 @@ class DynaSolver:
         return fsize
 
     def push(self, fname, workdir):
-        """Provide an alias for the ``upload` method for backward compatibility."""
+        """Provide an alias for the ``upload`` method for backward compatibility."""
         request = dynasolver_pb2.DynaSolverWorkDir()
         request.dirname = bytes(workdir, "utf-8")
         self.stub.set_working_directory(request)

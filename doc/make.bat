@@ -9,6 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=source
 set BUILDDIR=_build
+set APIDIR=source\api
 
 if "%1" == "" goto help
 if "%1" == "clean" goto clean
@@ -32,7 +33,7 @@ goto end
 
 :clean
 rmdir /s /q %BUILDDIR% > /NUL 2>&1 
-for /d /r %SOURCEDIR% %%d in (_autosummary) do @if exist "%%d" rmdir /s /q "%%d"
+rmdir /s /q %APIDIR% > /NUL 2>&1
 goto end
 
 :help

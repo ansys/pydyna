@@ -252,10 +252,10 @@ class Deck:
     def expand(self, cwd=None, recurse=True):
         """Get a new deck that is flattened copy of `self`.
 
-        A flattened deck is one where the *INCLUDE keywords are replaced
+        A flattened deck is one where the ``*INCLUDE`` keywords are replaced
         by the contents of the file that is included.
         `cwd` is a working directory used to resolve the filename
-        If `recurse` is true, *INCLUDE keywords within included decks
+        If `recurse` is true, ``*INCLUDE`` keywords within included decks
         are expanded, recursively.
         """
         cwd = cwd or os.getcwd()
@@ -424,7 +424,7 @@ class Deck:
 
         Examples
         --------
-        Get all *SECTION_* keywords in the deck.
+        Get all ``*SECTION_*`` keywords in the deck.
 
         >>>deck.get_kwds_by_type("SECTION")
         """
@@ -446,7 +446,7 @@ class Deck:
 
         Examples
         --------
-        Get all *SECTION_SHELL keyword instances in the deck.
+        Get all ``*SECTION_SHELL`` keyword instances in the deck.
 
         >>>deck.get_kwds_by_full_type("SECTION", "SHELL")
         """
@@ -485,10 +485,11 @@ class Deck:
 
         Parameters
         ----------
-        :Keyword Arguments:
-        * *type* (``str``) --
+        - *kwargs* (``dict``) --
+            Keyword arguments.
+            * *type* (``str``) --
             The type of keyword to get. For example, "SECTION" returns all section keywords.
-        * *filter* (``callable``) --
+            * *filter* (``callable``) --
             The filter to apply to the result. Only keywords which pass the filter will be returned.
 
         """

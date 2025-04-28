@@ -328,7 +328,7 @@ class DynaEM(DynaBase):
 
             - EQ.0: No output
             - EQ.1: Global information at each FEM iteration
-            0 EQ.2: Detailed information at each FEM iteration
+            - EQ.2: Detailed information at each FEM iteration
 
         Returns
         -------
