@@ -191,8 +191,7 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
     """Skip the run subpackage other than local solver and options."""
     if name.startswith("ansys.dyna.core.run.") and not (name.startswith("ansys.dyna.core.run.local_solver") or name.startswith("ansys.dyna.core.run.options")):
         skip = True
-        
-    if name.startswith("ansys.dyna.core.run.local_solver") and obj == "ansys.dyna.core.run.local_solver.run_dyna":
+    if name.startswith("ansys.dyna.core.run.local_solver") and what == "function" and name!= "ansys.dyna.core.run.local_solver.run_dyna":
         skip = True
     return skip
 
