@@ -18,7 +18,7 @@ project = 'ansys-dyna-core'
 copyright = f"(c) {datetime.datetime.now().year} ANSYS, Inc. All rights reserved"
 author = 'ANSYS Inc.'
 release = version = __version__
-cname = os.getenv("DOCUMENTATION_CNAME", default="nocname.com")
+cname = os.getenv("DOCUMENTATION_CNAME", default="dyna.docs.pyansys.com")
 
 # Sphinx extensions
 extensions = [
@@ -31,6 +31,7 @@ extensions = [
     "sphinx_jinja",
     "pyvista.ext.plot_directive",
     "sphinx_design",
+    "ansys_sphinx_theme.extension.autoapi",
 ]
 
 # Intersphinx mapping
@@ -126,6 +127,13 @@ html_theme_options = {
     ],
     "collapse_navigation": True,
     "use_edit_page_button": True,
+    "ansys_sphinx_theme_autoapi": {
+        "project": project,
+        "ignore": [
+            "*core/keywords/keyword_classes/auto*",
+        ],
+        "output": "api",
+    },
 }
 
 # static path
@@ -134,25 +142,8 @@ html_static_path = ['_static']
 
 # -- Declare the Jinja context -----------------------------------------------
 BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
-if not BUILD_API:
-    exclude_patterns.append("_autoapi_templates")
-else:
-    # Configuration for Sphinx autoapi
-    extensions.append("autoapi.extension")
-    autoapi_dirs = ["../../src/ansys"]
-    autoapi_ignore = ["*core/keywords/keyword_classes/auto*"]
-    autoapi_type = "python"
-    autoapi_options = [
-        "members",
-        "undoc-members",
-        "show-inheritance",
-        "show-module-summary",
-        "special-members",
-    ]
-    autoapi_template_dir = "_autoapi_templates"
-    suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
-    exclude_patterns.append("_autoapi_templates/index.rst")
-    autoapi_python_use_implicit_namespaces = True
+
+suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
 
 BUILD_EXAMPLES = (
     True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
@@ -194,3 +185,26 @@ jinja_contexts = {
         "build_examples": BUILD_EXAMPLES,
     },
 }
+
+
+def skip_run_subpackage(app, what, name, obj, skip, options):
+    """Skip specific members of the 'run' subpackage during documentation generation.
+
+    This function skips:
+    - All modules under 'ansys.dyna.core.run' except 'local_solver' and 'options'.
+    - Within 'local_solver', skips all members except the 'run_dyna' function.
+    """
+    
+    
+    if name.startswith("ansys.dyna.core.run.") and not (name.startswith("ansys.dyna.core.run.local_solver") or name.startswith("ansys.dyna.core.run.options")):
+            skip = True
+
+    if name.startswith("ansys.dyna.core.run.local_solver"):
+        if what == "function" and name!= "ansys.dyna.core.run.local_solver.run_dyna":
+            skip = True
+
+    return skip
+
+def setup(sphinx):
+    """Add custom extensions to Sphinx."""
+    sphinx.connect("autoapi-skip-member", skip_run_subpackage)
