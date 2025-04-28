@@ -129,7 +129,7 @@ html_theme_options = {
     "use_edit_page_button": True,
     "ansys_sphinx_theme_autoapi": {
         "project": project,
-        "ignore": ["*core/keywords/keyword_classes/auto*"],
+        "ignore": ["*core/keywords/keyword_classes/auto*",],
     },
 }
 
@@ -184,3 +184,18 @@ jinja_contexts = {
         "build_examples": BUILD_EXAMPLES,
     },
 }
+
+
+def skip_run_subpackage(app, what, name, obj, skip, options):
+    """Skip the run subpackage other than local solver and options."""
+    if name.startswith("ansys.dyna.core.run.") and not (name.startswith("ansys.dyna.core.run.local_solver") or name.startswith("ansys.dyna.core.run.options")):
+        skip = True
+    # add only the function run_dyna in the local_solver
+    if obj is not None and hasattr(obj, "__name__") and obj.__name__ == "run_dyna":
+        skip = False
+    else:
+        skip = True
+    return skip
+
+def setup(sphinx):
+   sphinx.connect("autoapi-skip-member", skip_run_subpackage)
