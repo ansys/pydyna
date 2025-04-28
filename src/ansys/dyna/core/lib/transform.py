@@ -32,7 +32,7 @@ from ansys.dyna.core.lib.transforms.node_transform import TransformNode
 
 
 class TransformHandler(ImportHandler):
-    
+
     def __init__(self):
         self._handlers: typing.Dict[typing.Union[str, typing.Tuple[str, str]], Transform] = {
             "NODE": TransformNode,
