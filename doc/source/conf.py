@@ -31,6 +31,7 @@ extensions = [
     "sphinx_jinja",
     "pyvista.ext.plot_directive",
     "sphinx_design",
+    "ansys_sphinx_theme.extension.autoapi"
 ]
 
 # Intersphinx mapping
@@ -126,6 +127,10 @@ html_theme_options = {
     ],
     "collapse_navigation": True,
     "use_edit_page_button": True,
+    "ansys_sphinx_theme_autoapi": {
+        "project": project,
+        "ignore": ["*core/keywords/keyword_classes/auto*"],
+    },
 }
 
 # static path
@@ -136,23 +141,8 @@ html_static_path = ['_static']
 BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
 if not BUILD_API:
     exclude_patterns.append("_autoapi_templates")
-else:
-    # Configuration for Sphinx autoapi
-    extensions.append("autoapi.extension")
-    autoapi_dirs = ["../../src/ansys"]
-    autoapi_ignore = ["*core/keywords/keyword_classes/auto*"]
-    autoapi_type = "python"
-    autoapi_options = [
-        "members",
-        "undoc-members",
-        "show-inheritance",
-        "show-module-summary",
-        "special-members",
-    ]
-    autoapi_template_dir = "_autoapi_templates"
-    suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
-    exclude_patterns.append("_autoapi_templates/index.rst")
-    autoapi_python_use_implicit_namespaces = True
+
+suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
 
 BUILD_EXAMPLES = (
     True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
