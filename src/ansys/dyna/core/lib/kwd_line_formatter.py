@@ -129,7 +129,7 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
     spec: list of tuples representing the (offset, width, type) of each field
     type can be a Flag which represents the True and False value
     line_data: string with keyword data
-    
+
     Example
     -------
     >>> load_dataline([(0,10, int),(10,10, str)], '         1     hello')
