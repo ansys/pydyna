@@ -142,6 +142,16 @@ html_static_path = ['_static']
 
 # -- Declare the Jinja context -----------------------------------------------
 BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
+if not BUILD_API:
+    exclude_patterns.append("api")
+    html_theme_options.pop("ansys_sphinx_theme_autoapi")
+    extensions.remove("ansys_sphinx_theme.extension.autoapi")
+
+BUILD_AUTOKEYWORD = True if os.environ.get("BUILD_AUTOKEYWORD", "true") == "true" else False
+if not BUILD_AUTOKEYWORD:
+    exclude_patterns.append("api")
+    html_theme_options["ansys_sphinx_theme_autoapi"].pop("ignore")
+    extensions.remove("ansys_sphinx_theme.extension.autoapi")
 
 suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
 

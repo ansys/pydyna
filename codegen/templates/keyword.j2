@@ -1,4 +1,5 @@
 {{license}}
+"""Module for the {{keyword_data.keyword}} keyword."""
 {% if keyword_data.dataclasses %}
 import dataclasses
 {% endif %}
@@ -94,7 +95,7 @@ class {{keyword_data.classname}}(
 {% else %}
 class {{keyword_data.classname}}(KeywordBase):
 {% endif %}
-    """DYNA {{keyword_data.title}} keyword"""
+    """DYNA {{keyword_data.title}} keyword."""
 
     keyword = "{{keyword_data.keyword}}"
     subkeyword = "{{keyword_data.subkeyword}}"
