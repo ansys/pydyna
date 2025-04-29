@@ -129,9 +129,9 @@ html_theme_options = {
     "use_edit_page_button": True,
     "ansys_sphinx_theme_autoapi": {
         "project": project,
-        "ignore": [
-            "*core/keywords/keyword_classes/auto*",
-        ],
+        # "ignore": [
+        #     "*core/keywords/keyword_classes/auto*",
+        # ],
         "output": "api",
     },
 }
