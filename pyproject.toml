@@ -62,7 +62,7 @@ tests = [
     "openpyxl==3.1.5",
     "scikit-learn==1.6.1",
     "pytest-xdist==3.6.1",
-    "ipython==8.32.0",
+    "ipython==8.36.0",
     "pyvista==0.45.0",
 ]
 doc = [
@@ -83,11 +83,12 @@ doc = [
     "ansys-sphinx-theme==1.4.2",
     "pypandoc==1.15",
     "nbsphinx==0.9.6",
+
     "ipywidgets==8.1.6",
     "joblib==1.4.2",
     "scikit-learn==1.6.1",
-    "ipython==8.32.0",
-    "jupyterlab==4.3.5",
+    "ipython==8.36.0",
+    "jupyterlab==4.4.1",
     "sphinx-jinja==2.0.2",
     "sphinx-autoapi==3.6.0",
     "pyvista==0.45.0",
