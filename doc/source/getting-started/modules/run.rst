@@ -10,14 +10,13 @@ Run LS-DYNA using ansys.dyna.core.run
 
    .. code:: python
 
-       import os
-       from ansys.dyna.core.run import run_dyna
+    import os
+    from ansys.dyna.core.run import run_dyna
 
-       dynafile = "input.k"
-       working_directory = os.path.getcwd()
-       filepath = run_dyna(dynafile, working_directory=dynadir)
-
-           ......
+    dynafile = "input.k"
+    dynadir = os.getcwd()
+    filepath = run_dyna(dynafile, working_directory=dynadir)
+    ......
 
 How it works
 ************

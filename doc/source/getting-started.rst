@@ -13,36 +13,32 @@ page on the Ansys website.
 
 
    .. grid-item-card:: Installation
-      :link: installation
+      :link: getting-started/installation
       :link-type: doc
       
 
       Install PyDYNA and learn about the different installation modes.
 
    .. grid-item-card:: PyDYNA modules
-      :link: modules
+      :link: getting-started/modules
       :link-type: doc
 
       Learn about the different modules in PyDYNA.
 
+   .. grid-item-card:: PyDYNA examples
+      :link: getting-started/example
+      :link-type: doc
+
+      Run a working example of different modules in PyDYNA.
+
 
 .. toctree::
    :hidden:
+   :maxdepth: 2
 
-   installation
-   modules
-
-
-
-Keyword and run example
------------------------
-
-.. include:: ./example1.rst
-
-Pre and solver example
-----------------------
-
-.. include:: ./example.rst
+   getting-started/installation
+   getting-started/modules
+   getting-started/example
 
 .. LINKS
 .. _pydyna_pypi: https://pypi.org/projects/ansys-dyna-core/

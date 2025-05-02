@@ -7,7 +7,7 @@ PyDYNA documentation  |version|
    :padding: 1 2 3 3
 
    .. grid-item-card:: :fa:`power-off` Getting started
-      :link: getting-started/index
+      :link: getting-started
       :link-type: doc
 
       Learn how to install and use PyDYNA, including how to set up the
@@ -62,8 +62,9 @@ PyDYNA documentation  |version|
 
     .. toctree::
        :hidden:
+       :maxdepth: 3
 
-       getting-started/index
+       getting-started
        user-guide/index
        {% if build_api %}
        api/index
