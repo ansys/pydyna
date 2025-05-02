@@ -143,7 +143,8 @@ def test_series_card_append_value_struct():
     assert len(v) == 3
     assert v[0] == bi(0.8,0.9)
     assert v[1] == bi(0.1,1.2)
-    assert v[2] == bi(math.nan,0.2)
+    assert math.isnan(v[2].foo)
+    assert v[2].bar == 0.2
 
 @pytest.mark.keywords
 def test_series_card_write_long(ref_string):
