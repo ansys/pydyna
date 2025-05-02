@@ -1,6 +1,10 @@
 Use PyDYNA to run LSDYNA locally
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Run DYNA using ``ansys.dyna.core.run`` on a local machine,
+this does not require Docker.
+
+
 Run LS-DYNA using ansys.dyna.core.run
 *************************************
 
