@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleFsiToLoadNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleFsiToLoadNode(KeywordBase):
     subkeyword = "FSI_TO_LOAD_NODE"
 
     def __init__(self, **kwargs):
+        """Initialize the AleFsiToLoadNode class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -80,6 +82,7 @@ class AleFsiToLoadNode(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -90,6 +93,7 @@ class AleFsiToLoadNode(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -106,8 +110,9 @@ class AleFsiToLoadNode(KeywordBase):
 
     @iopt.setter
     def iopt(self, value: int) -> None:
+        """Set the iopt property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""iopt must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""iopt must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("iopt", value)
 
     @property
@@ -118,5 +123,6 @@ class AleFsiToLoadNode(KeywordBase):
 
     @path.setter
     def path(self, value: str) -> None:
+        """Set the path property."""
         self._cards[1].set_value("path", value)
 

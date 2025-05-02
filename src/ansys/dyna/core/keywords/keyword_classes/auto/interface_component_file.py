@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceComponentFile class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceComponentFile(KeywordBase):
     subkeyword = "COMPONENT_FILE"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceComponentFile class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -66,6 +68,7 @@ class InterfaceComponentFile(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -78,5 +81,6 @@ class InterfaceComponentFile(KeywordBase):
 
     @format.setter
     def format(self, value: int) -> None:
+        """Set the format property."""
         self._cards[1].set_value("format", value)
 

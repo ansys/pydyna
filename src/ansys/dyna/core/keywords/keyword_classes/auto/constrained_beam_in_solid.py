@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedBeamInSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -36,6 +37,7 @@ class ConstrainedBeamInSolid(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedBeamInSolid class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -222,6 +224,7 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @bside.setter
     def bside(self, value: int) -> None:
+        """Set the bside property."""
         self._cards[0].set_value("bside", value)
 
     @property
@@ -232,6 +235,7 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -244,8 +248,9 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @bstyp.setter
     def bstyp(self, value: int) -> None:
+        """Set the bstyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""bstyp must be `None` or one of {0,1}""")
+            raise Exception("""bstyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("bstyp", value)
 
     @property
@@ -258,8 +263,9 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
+        """Set the sstyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sstyp must be `None` or one of {0,1}""")
+            raise Exception("""sstyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sstyp", value)
 
     @property
@@ -270,6 +276,7 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @ncoup.setter
     def ncoup(self, value: int) -> None:
+        """Set the ncoup property."""
         self._cards[0].set_value("ncoup", value)
 
     @property
@@ -282,6 +289,7 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @cdir.setter
     def cdir(self, value: int) -> None:
+        """Set the cdir property."""
         self._cards[0].set_value("cdir", value)
 
     @property
@@ -294,6 +302,7 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @start.setter
     def start(self, value: float) -> None:
+        """Set the start property."""
         self._cards[1].set_value("start", value)
 
     @property
@@ -306,6 +315,7 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @end.setter
     def end(self, value: float) -> None:
+        """Set the end property."""
         self._cards[1].set_value("end", value)
 
     @property
@@ -318,6 +328,7 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @axfor_.setter
     def axfor_(self, value: int) -> None:
+        """Set the axfor_ property."""
         self._cards[1].set_value("axfor ", value)
 
     @property
@@ -328,6 +339,7 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @pssf.setter
     def pssf(self, value: float) -> None:
+        """Set the pssf property."""
         self._cards[1].set_value("pssf", value)
 
     @property
@@ -343,6 +355,7 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @xint.setter
     def xint(self, value: int) -> None:
+        """Set the xint property."""
         self._cards[1].set_value("xint", value)
 
     @property
@@ -353,6 +366,7 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @coupid.setter
     def coupid(self, value: int) -> None:
+        """Set the coupid property."""
         self._cards[2].cards[0].set_value("coupid", value)
         self._cards[3].cards[0].set_value("coupid", value)
 
@@ -364,6 +378,7 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
         self._cards[3].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseTracer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseTracer(KeywordBase):
     subkeyword = "TRACER"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseTracer class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class DatabaseTracer(KeywordBase):
 
     @time.setter
     def time(self, value: float) -> None:
+        """Set the time property."""
         self._cards[0].set_value("time", value)
 
     @property
@@ -122,8 +125,9 @@ class DatabaseTracer(KeywordBase):
 
     @track.setter
     def track(self, value: int) -> None:
+        """Set the track property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""track must be `None` or one of {0,1,2}""")
+            raise Exception("""track must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("track", value)
 
     @property
@@ -134,6 +138,7 @@ class DatabaseTracer(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[0].set_value("x", value)
 
     @property
@@ -144,6 +149,7 @@ class DatabaseTracer(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[0].set_value("y", value)
 
     @property
@@ -154,6 +160,7 @@ class DatabaseTracer(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[0].set_value("z", value)
 
     @property
@@ -164,6 +171,7 @@ class DatabaseTracer(KeywordBase):
 
     @ammgid.setter
     def ammgid(self, value: int) -> None:
+        """Set the ammgid property."""
         self._cards[0].set_value("ammgid", value)
 
     @property
@@ -176,6 +184,7 @@ class DatabaseTracer(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -189,5 +198,6 @@ class DatabaseTracer(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[0].set_value("radius", value)
 

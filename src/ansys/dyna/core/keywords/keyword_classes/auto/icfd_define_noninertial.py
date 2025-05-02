@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdDefineNoninertial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdDefineNoninertial(KeywordBase):
     subkeyword = "DEFINE_NONINERTIAL"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdDefineNoninertial class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -104,6 +106,7 @@ class IcfdDefineNoninertial(KeywordBase):
 
     @w1.setter
     def w1(self, value: float) -> None:
+        """Set the w1 property."""
         self._cards[0].set_value("w1", value)
 
     @property
@@ -114,6 +117,7 @@ class IcfdDefineNoninertial(KeywordBase):
 
     @w2.setter
     def w2(self, value: float) -> None:
+        """Set the w2 property."""
         self._cards[0].set_value("w2", value)
 
     @property
@@ -124,6 +128,7 @@ class IcfdDefineNoninertial(KeywordBase):
 
     @w3.setter
     def w3(self, value: float) -> None:
+        """Set the w3 property."""
         self._cards[0].set_value("w3", value)
 
     @property
@@ -134,6 +139,7 @@ class IcfdDefineNoninertial(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[0].set_value("r", value)
 
     @property
@@ -144,6 +150,7 @@ class IcfdDefineNoninertial(KeywordBase):
 
     @ptid.setter
     def ptid(self, value: int) -> None:
+        """Set the ptid property."""
         self._cards[0].set_value("ptid", value)
 
     @property
@@ -154,6 +161,7 @@ class IcfdDefineNoninertial(KeywordBase):
 
     @l.setter
     def l(self, value: float) -> None:
+        """Set the l property."""
         self._cards[0].set_value("l", value)
 
     @property
@@ -164,6 +172,7 @@ class IcfdDefineNoninertial(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -176,7 +185,8 @@ class IcfdDefineNoninertial(KeywordBase):
 
     @relv.setter
     def relv(self, value: int) -> None:
+        """Set the relv property."""
         if value not in [0, 1, None]:
-            raise Exception("""relv must be `None` or one of {0,1}""")
+            raise Exception("""relv must be `None` or one of {0,1}.""")
         self._cards[0].set_value("relv", value)
 

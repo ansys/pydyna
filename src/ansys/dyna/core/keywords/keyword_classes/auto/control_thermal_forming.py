@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlThermalForming class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlThermalForming(KeywordBase):
     subkeyword = "THERMAL_FORMING"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlThermalForming class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -226,6 +228,7 @@ class ControlThermalForming(KeywordBase):
 
     @its.setter
     def its(self, value: float) -> None:
+        """Set the its property."""
         self._cards[0].set_value("its", value)
 
     @property
@@ -241,8 +244,9 @@ class ControlThermalForming(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
+        """Set the ptype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ptype must be `None` or one of {0,1,2}""")
+            raise Exception("""ptype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -258,6 +262,7 @@ class ControlThermalForming(KeywordBase):
 
     @tsf.setter
     def tsf(self, value: float) -> None:
+        """Set the tsf property."""
         self._cards[0].set_value("tsf", value)
 
     @property
@@ -271,8 +276,9 @@ class ControlThermalForming(KeywordBase):
 
     @thshel.setter
     def thshel(self, value: int) -> None:
+        """Set the thshel property."""
         if value not in [0, 1, None]:
-            raise Exception("""thshel must be `None` or one of {0,1}""")
+            raise Exception("""thshel must be `None` or one of {0,1}.""")
         self._cards[0].set_value("thshel", value)
 
     @property
@@ -288,8 +294,9 @@ class ControlThermalForming(KeywordBase):
 
     @ithoff.setter
     def ithoff(self, value: int) -> None:
+        """Set the ithoff property."""
         if value not in [0, 1, None]:
-            raise Exception("""ithoff must be `None` or one of {0,1}""")
+            raise Exception("""ithoff must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ithoff", value)
 
     @property
@@ -314,8 +321,9 @@ class ControlThermalForming(KeywordBase):
 
     @solver.setter
     def solver(self, value: int) -> None:
+        """Set the solver property."""
         if value not in [3, 1, 2, 4, 5, 11, 12, 13, 14, 15, 16, 17, None]:
-            raise Exception("""solver must be `None` or one of {3,1,2,4,5,11,12,13,14,15,16,17}""")
+            raise Exception("""solver must be `None` or one of {3,1,2,4,5,11,12,13,14,15,16,17}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -326,6 +334,7 @@ class ControlThermalForming(KeywordBase):
 
     @fwork.setter
     def fwork(self, value: float) -> None:
+        """Set the fwork property."""
         self._cards[0].set_value("fwork", value)
 
     @property
@@ -336,6 +345,7 @@ class ControlThermalForming(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[1].set_value("k", value)
 
     @property
@@ -346,6 +356,7 @@ class ControlThermalForming(KeywordBase):
 
     @frad.setter
     def frad(self, value: float) -> None:
+        """Set the frad property."""
         self._cards[1].set_value("frad", value)
 
     @property
@@ -357,6 +368,7 @@ class ControlThermalForming(KeywordBase):
 
     @h0.setter
     def h0(self, value: float) -> None:
+        """Set the h0 property."""
         self._cards[1].set_value("h0", value)
 
     @property
@@ -369,6 +381,7 @@ class ControlThermalForming(KeywordBase):
 
     @lmin.setter
     def lmin(self, value: float) -> None:
+        """Set the lmin property."""
         self._cards[1].set_value("lmin", value)
 
     @property
@@ -379,6 +392,7 @@ class ControlThermalForming(KeywordBase):
 
     @lmax.setter
     def lmax(self, value: float) -> None:
+        """Set the lmax property."""
         self._cards[1].set_value("lmax", value)
 
     @property
@@ -391,6 +405,7 @@ class ControlThermalForming(KeywordBase):
 
     @ftoslv.setter
     def ftoslv(self, value: float) -> None:
+        """Set the ftoslv property."""
         self._cards[1].set_value("ftoslv", value)
 
     @property
@@ -403,8 +418,9 @@ class ControlThermalForming(KeywordBase):
 
     @bc_flg.setter
     def bc_flg(self, value: int) -> None:
+        """Set the bc_flg property."""
         if value not in [0, 1, None]:
-            raise Exception("""bc_flg must be `None` or one of {0,1}""")
+            raise Exception("""bc_flg must be `None` or one of {0,1}.""")
         self._cards[1].set_value("bc_flg", value)
 
     @property
@@ -418,8 +434,9 @@ class ControlThermalForming(KeywordBase):
 
     @algo.setter
     def algo(self, value: int) -> None:
+        """Set the algo property."""
         if value not in [0, 1, None]:
-            raise Exception("""algo must be `None` or one of {0,1}""")
+            raise Exception("""algo must be `None` or one of {0,1}.""")
         self._cards[1].set_value("algo", value)
 
     @property
@@ -431,6 +448,7 @@ class ControlThermalForming(KeywordBase):
 
     @lcfst.setter
     def lcfst(self, value: int) -> None:
+        """Set the lcfst property."""
         self._cards[2].set_value("lcfst", value)
 
     @property
@@ -442,6 +460,7 @@ class ControlThermalForming(KeywordBase):
 
     @lcfdt.setter
     def lcfdt(self, value: int) -> None:
+        """Set the lcfdt property."""
         self._cards[2].set_value("lcfdt", value)
 
     @property
@@ -454,8 +473,9 @@ class ControlThermalForming(KeywordBase):
 
     @formula.setter
     def formula(self, value: int) -> None:
+        """Set the formula property."""
         if value not in [1, 2, 3, 4, 5, None]:
-            raise Exception("""formula must be `None` or one of {1,2,3,4,5}""")
+            raise Exception("""formula must be `None` or one of {1,2,3,4,5}.""")
         self._cards[2].set_value("formula", value)
 
     @property
@@ -466,6 +486,7 @@ class ControlThermalForming(KeywordBase):
 
     @a.setter
     def a(self, value: int) -> None:
+        """Set the a property."""
         self._cards[2].set_value("a", value)
 
     @property
@@ -476,6 +497,7 @@ class ControlThermalForming(KeywordBase):
 
     @b.setter
     def b(self, value: int) -> None:
+        """Set the b property."""
         self._cards[2].set_value("b", value)
 
     @property
@@ -486,6 +508,7 @@ class ControlThermalForming(KeywordBase):
 
     @c.setter
     def c(self, value: int) -> None:
+        """Set the c property."""
         self._cards[2].set_value("c", value)
 
     @property
@@ -496,6 +519,7 @@ class ControlThermalForming(KeywordBase):
 
     @d.setter
     def d(self, value: int) -> None:
+        """Set the d property."""
         self._cards[2].set_value("d", value)
 
     @property
@@ -512,5 +536,6 @@ class ControlThermalForming(KeywordBase):
 
     @lch.setter
     def lch(self, value: int) -> None:
+        """Set the lch property."""
         self._cards[2].set_value("lch", value)
 

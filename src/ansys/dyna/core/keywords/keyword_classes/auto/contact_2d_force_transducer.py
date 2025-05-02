@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Contact2DForceTransducer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Contact2DForceTransducer(KeywordBase):
     subkeyword = "2D_FORCE_TRANSDUCER"
 
     def __init__(self, **kwargs):
+        """Initialize the Contact2DForceTransducer class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -176,6 +178,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @surfa.setter
     def surfa(self, value: int) -> None:
+        """Set the surfa property."""
         self._cards[0].set_value("surfa", value)
 
     @property
@@ -186,6 +189,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @surfb.setter
     def surfb(self, value: int) -> None:
+        """Set the surfb property."""
         self._cards[0].set_value("surfb", value)
 
     @property
@@ -196,6 +200,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @sfact.setter
     def sfact(self, value: float) -> None:
+        """Set the sfact property."""
         self._cards[0].set_value("sfact", value)
 
     @property
@@ -206,6 +211,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @freq.setter
     def freq(self, value: int) -> None:
+        """Set the freq property."""
         self._cards[0].set_value("freq", value)
 
     @property
@@ -216,6 +222,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[0].set_value("fs", value)
 
     @property
@@ -226,6 +233,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[0].set_value("fd", value)
 
     @property
@@ -236,6 +244,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[0].set_value("dc", value)
 
     @property
@@ -246,6 +255,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[1].set_value("tbirth", value)
 
     @property
@@ -256,6 +266,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[1].set_value("tdeath", value)
 
     @property
@@ -269,6 +280,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @soa.setter
     def soa(self, value: float) -> None:
+        """Set the soa property."""
         self._cards[1].set_value("soa", value)
 
     @property
@@ -282,6 +294,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @sob.setter
     def sob(self, value: float) -> None:
+        """Set the sob property."""
         self._cards[1].set_value("sob", value)
 
     @property
@@ -295,8 +308,9 @@ class Contact2DForceTransducer(KeywordBase):
 
     @nda.setter
     def nda(self, value: int) -> None:
+        """Set the nda property."""
         if value not in [0, 1, -1, None]:
-            raise Exception("""nda must be `None` or one of {0,1,-1}""")
+            raise Exception("""nda must be `None` or one of {0,1,-1}.""")
         self._cards[1].set_value("nda", value)
 
     @property
@@ -310,8 +324,9 @@ class Contact2DForceTransducer(KeywordBase):
 
     @ndb.setter
     def ndb(self, value: int) -> None:
+        """Set the ndb property."""
         if value not in [0, 1, -1, None]:
-            raise Exception("""ndb must be `None` or one of {0,1,-1}""")
+            raise Exception("""ndb must be `None` or one of {0,1,-1}.""")
         self._cards[1].set_value("ndb", value)
 
     @property
@@ -324,8 +339,9 @@ class Contact2DForceTransducer(KeywordBase):
 
     @cof.setter
     def cof(self, value: int) -> None:
+        """Set the cof property."""
         if value not in [0, 1, None]:
-            raise Exception("""cof must be `None` or one of {0,1}""")
+            raise Exception("""cof must be `None` or one of {0,1}.""")
         self._cards[1].set_value("cof", value)
 
     @property
@@ -338,7 +354,8 @@ class Contact2DForceTransducer(KeywordBase):
 
     @init.setter
     def init(self, value: int) -> None:
+        """Set the init property."""
         if value not in [0, 1, None]:
-            raise Exception("""init must be `None` or one of {0,1}""")
+            raise Exception("""init must be `None` or one of {0,1}.""")
         self._cards[1].set_value("init", value)
 

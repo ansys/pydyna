@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeHbond class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeHbond(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeHbond class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -199,6 +201,7 @@ class DefineDeHbond(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -213,8 +216,9 @@ class DefineDeHbond(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2,3}""")
+            raise Exception("""stype must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -227,8 +231,9 @@ class DefineDeHbond(KeywordBase):
 
     @hbdfm.setter
     def hbdfm(self, value: int) -> None:
+        """Set the hbdfm property."""
         if value not in [1, 2, None]:
-            raise Exception("""hbdfm must be `None` or one of {1,2}""")
+            raise Exception("""hbdfm must be `None` or one of {1,2}.""")
         self._cards[0].set_value("hbdfm", value)
 
     @property
@@ -241,8 +246,9 @@ class DefineDeHbond(KeywordBase):
 
     @idim.setter
     def idim(self, value: int) -> None:
+        """Set the idim property."""
         if value not in [3, 2, None]:
-            raise Exception("""idim must be `None` or one of {3,2}""")
+            raise Exception("""idim must be `None` or one of {3,2}.""")
         self._cards[0].set_value("idim", value)
 
     @property
@@ -253,6 +259,7 @@ class DefineDeHbond(KeywordBase):
 
     @pbk_sf.setter
     def pbk_sf(self, value: float) -> None:
+        """Set the pbk_sf property."""
         self._cards[1].set_value("pbk_sf", value)
 
     @property
@@ -263,6 +270,7 @@ class DefineDeHbond(KeywordBase):
 
     @pbs_sf.setter
     def pbs_sf(self, value: float) -> None:
+        """Set the pbs_sf property."""
         self._cards[1].set_value("pbs_sf", value)
 
     @property
@@ -278,6 +286,7 @@ class DefineDeHbond(KeywordBase):
 
     @frgk.setter
     def frgk(self, value: float) -> None:
+        """Set the frgk property."""
         self._cards[1].set_value("frgk", value)
 
     @property
@@ -290,6 +299,7 @@ class DefineDeHbond(KeywordBase):
 
     @frgs.setter
     def frgs(self, value: float) -> None:
+        """Set the frgs property."""
         self._cards[1].set_value("frgs", value)
 
     @property
@@ -300,6 +310,7 @@ class DefineDeHbond(KeywordBase):
 
     @bondr.setter
     def bondr(self, value: float) -> None:
+        """Set the bondr property."""
         self._cards[1].set_value("bondr", value)
 
     @property
@@ -310,6 +321,7 @@ class DefineDeHbond(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[1].set_value("alpha", value)
 
     @property
@@ -324,6 +336,7 @@ class DefineDeHbond(KeywordBase):
 
     @dmg.setter
     def dmg(self, value: float) -> None:
+        """Set the dmg property."""
         self._cards[1].set_value("dmg", value)
 
     @property
@@ -345,8 +358,9 @@ class DefineDeHbond(KeywordBase):
 
     @frmdl.setter
     def frmdl(self, value: int) -> None:
+        """Set the frmdl property."""
         if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""frmdl must be `None` or one of {1,2,3,4,5,6}""")
+            raise Exception("""frmdl must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[1].set_value("frmdl", value)
 
     @property
@@ -357,6 +371,7 @@ class DefineDeHbond(KeywordBase):
 
     @precrk.setter
     def precrk(self, value: int) -> None:
+        """Set the precrk property."""
         self._cards[2].set_value("precrk", value)
 
     @property
@@ -368,8 +383,9 @@ class DefineDeHbond(KeywordBase):
 
     @cktype.setter
     def cktype(self, value: int) -> None:
+        """Set the cktype property."""
         if value not in [0, 1, None]:
-            raise Exception("""cktype must be `None` or one of {0,1}""")
+            raise Exception("""cktype must be `None` or one of {0,1}.""")
         self._cards[2].set_value("cktype", value)
 
     @property
@@ -381,6 +397,7 @@ class DefineDeHbond(KeywordBase):
 
     @itfid.setter
     def itfid(self, value: int) -> None:
+        """Set the itfid property."""
         self._cards[2].set_value("itfid", value)
 
     @property
@@ -391,5 +408,6 @@ class DefineDeHbond(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

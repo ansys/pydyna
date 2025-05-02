@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleRefine class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleRefine(KeywordBase):
     subkeyword = "REFINE"
 
     def __init__(self, **kwargs):
+        """Initialize the AleRefine class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -190,6 +192,7 @@ class AleRefine(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -206,8 +209,9 @@ class AleRefine(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""type must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""type must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -218,6 +222,7 @@ class AleRefine(KeywordBase):
 
     @nlvl.setter
     def nlvl(self, value: int) -> None:
+        """Set the nlvl property."""
         self._cards[0].set_value("nlvl", value)
 
     @property
@@ -230,6 +235,7 @@ class AleRefine(KeywordBase):
 
     @mmsid.setter
     def mmsid(self, value: int) -> None:
+        """Set the mmsid property."""
         self._cards[0].set_value("mmsid", value)
 
     @property
@@ -240,6 +246,7 @@ class AleRefine(KeywordBase):
 
     @ntotrf.setter
     def ntotrf(self, value: int) -> None:
+        """Set the ntotrf property."""
         self._cards[1].set_value("ntotrf", value)
 
     @property
@@ -250,6 +257,7 @@ class AleRefine(KeywordBase):
 
     @ncycrf.setter
     def ncycrf(self, value: int) -> None:
+        """Set the ncycrf property."""
         self._cards[1].set_value("ncycrf", value)
 
     @property
@@ -264,8 +272,9 @@ class AleRefine(KeywordBase):
 
     @critrf.setter
     def critrf(self, value: int) -> None:
+        """Set the critrf property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""critrf must be `None` or one of {0,1,2,3}""")
+            raise Exception("""critrf must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("critrf", value)
 
     @property
@@ -276,6 +285,7 @@ class AleRefine(KeywordBase):
 
     @valrf.setter
     def valrf(self, value: float) -> None:
+        """Set the valrf property."""
         self._cards[1].set_value("valrf", value)
 
     @property
@@ -286,6 +296,7 @@ class AleRefine(KeywordBase):
 
     @begrf.setter
     def begrf(self, value: float) -> None:
+        """Set the begrf property."""
         self._cards[1].set_value("begrf", value)
 
     @property
@@ -296,6 +307,7 @@ class AleRefine(KeywordBase):
 
     @endrf.setter
     def endrf(self, value: float) -> None:
+        """Set the endrf property."""
         self._cards[1].set_value("endrf", value)
 
     @property
@@ -306,6 +318,7 @@ class AleRefine(KeywordBase):
 
     @layrf.setter
     def layrf(self, value: int) -> None:
+        """Set the layrf property."""
         self._cards[1].set_value("layrf", value)
 
     @property
@@ -318,6 +331,7 @@ class AleRefine(KeywordBase):
 
     @maxrm.setter
     def maxrm(self, value: int) -> None:
+        """Set the maxrm property."""
         self._cards[2].set_value("maxrm", value)
 
     @property
@@ -328,6 +342,7 @@ class AleRefine(KeywordBase):
 
     @ncycrm.setter
     def ncycrm(self, value: int) -> None:
+        """Set the ncycrm property."""
         self._cards[2].set_value("ncycrm", value)
 
     @property
@@ -342,8 +357,9 @@ class AleRefine(KeywordBase):
 
     @critrm.setter
     def critrm(self, value: int) -> None:
+        """Set the critrm property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""critrm must be `None` or one of {0,1,2,3}""")
+            raise Exception("""critrm must be `None` or one of {0,1,2,3}.""")
         self._cards[2].set_value("critrm", value)
 
     @property
@@ -354,6 +370,7 @@ class AleRefine(KeywordBase):
 
     @valrm.setter
     def valrm(self, value: float) -> None:
+        """Set the valrm property."""
         self._cards[2].set_value("valrm", value)
 
     @property
@@ -364,6 +381,7 @@ class AleRefine(KeywordBase):
 
     @begrm.setter
     def begrm(self, value: float) -> None:
+        """Set the begrm property."""
         self._cards[2].set_value("begrm", value)
 
     @property
@@ -374,5 +392,6 @@ class AleRefine(KeywordBase):
 
     @endrm.setter
     def endrm(self, value: float) -> None:
+        """Set the endrm property."""
         self._cards[2].set_value("endrm", value)
 

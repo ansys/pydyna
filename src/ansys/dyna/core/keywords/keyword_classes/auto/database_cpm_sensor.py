@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseCpmSensor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseCpmSensor(KeywordBase):
     subkeyword = "CPM_SENSOR"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseCpmSensor class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -101,6 +103,7 @@ class DatabaseCpmSensor(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -114,8 +117,9 @@ class DatabaseCpmSensor(KeywordBase):
 
     @binary.setter
     def binary(self, value: int) -> None:
+        """Set the binary property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""binary must be `None` or one of {1,2,3}""")
+            raise Exception("""binary must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("binary", value)
 
     @property
@@ -126,6 +130,7 @@ class DatabaseCpmSensor(KeywordBase):
 
     @segsid.setter
     def segsid(self, value: int) -> None:
+        """Set the segsid property."""
         self._cards[1].set_value("segsid", value)
 
     @property
@@ -136,6 +141,7 @@ class DatabaseCpmSensor(KeywordBase):
 
     @offset.setter
     def offset(self, value: float) -> None:
+        """Set the offset property."""
         self._cards[1].set_value("offset", value)
 
     @property
@@ -146,6 +152,7 @@ class DatabaseCpmSensor(KeywordBase):
 
     @r_lx.setter
     def r_lx(self, value: float) -> None:
+        """Set the r_lx property."""
         self._cards[1].set_value("r/lx", value)
 
     @property
@@ -156,6 +163,7 @@ class DatabaseCpmSensor(KeywordBase):
 
     @len_ly.setter
     def len_ly(self, value: float) -> None:
+        """Set the len_ly property."""
         self._cards[1].set_value("len/ly", value)
 
     @property
@@ -166,5 +174,6 @@ class DatabaseCpmSensor(KeywordBase):
 
     @lz.setter
     def lz(self, value: float) -> None:
+        """Set the lz property."""
         self._cards[1].set_value("lz", value)
 

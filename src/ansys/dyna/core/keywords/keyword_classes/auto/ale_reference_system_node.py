@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleReferenceSystemNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleReferenceSystemNode(KeywordBase):
     subkeyword = "REFERENCE_SYSTEM_NODE"
 
     def __init__(self, **kwargs):
+        """Initialize the AleReferenceSystemNode class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -146,6 +148,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -156,6 +159,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid1.setter
     def nid1(self, value: int) -> None:
+        """Set the nid1 property."""
         self._cards[1].set_value("nid1", value)
 
     @property
@@ -166,6 +170,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[1].set_value("nid2", value)
 
     @property
@@ -176,6 +181,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid3.setter
     def nid3(self, value: int) -> None:
+        """Set the nid3 property."""
         self._cards[1].set_value("nid3", value)
 
     @property
@@ -186,6 +192,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid4.setter
     def nid4(self, value: int) -> None:
+        """Set the nid4 property."""
         self._cards[1].set_value("nid4", value)
 
     @property
@@ -196,6 +203,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid5.setter
     def nid5(self, value: int) -> None:
+        """Set the nid5 property."""
         self._cards[1].set_value("nid5", value)
 
     @property
@@ -206,6 +214,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid6.setter
     def nid6(self, value: int) -> None:
+        """Set the nid6 property."""
         self._cards[1].set_value("nid6", value)
 
     @property
@@ -216,6 +225,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid7.setter
     def nid7(self, value: int) -> None:
+        """Set the nid7 property."""
         self._cards[1].set_value("nid7", value)
 
     @property
@@ -226,6 +236,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid8.setter
     def nid8(self, value: int) -> None:
+        """Set the nid8 property."""
         self._cards[1].set_value("nid8", value)
 
     @property
@@ -236,6 +247,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid9.setter
     def nid9(self, value: int) -> None:
+        """Set the nid9 property."""
         self._cards[2].set_value("nid9", value)
 
     @property
@@ -246,6 +258,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid10.setter
     def nid10(self, value: int) -> None:
+        """Set the nid10 property."""
         self._cards[2].set_value("nid10", value)
 
     @property
@@ -256,6 +269,7 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid11.setter
     def nid11(self, value: int) -> None:
+        """Set the nid11 property."""
         self._cards[2].set_value("nid11", value)
 
     @property
@@ -266,5 +280,6 @@ class AleReferenceSystemNode(KeywordBase):
 
     @nid12.setter
     def nid12(self, value: int) -> None:
+        """Set the nid12 property."""
         self._cards[2].set_value("nid12", value)
 

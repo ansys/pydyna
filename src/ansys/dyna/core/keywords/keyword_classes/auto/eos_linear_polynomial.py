@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EosLinearPolynomial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EosLinearPolynomial(KeywordBase):
     subkeyword = "LINEAR_POLYNOMIAL"
 
     def __init__(self, **kwargs):
+        """Initialize the EosLinearPolynomial class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -128,6 +130,7 @@ class EosLinearPolynomial(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -138,6 +141,7 @@ class EosLinearPolynomial(KeywordBase):
 
     @c0.setter
     def c0(self, value: float) -> None:
+        """Set the c0 property."""
         self._cards[0].set_value("c0", value)
 
     @property
@@ -148,6 +152,7 @@ class EosLinearPolynomial(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[0].set_value("c1", value)
 
     @property
@@ -158,6 +163,7 @@ class EosLinearPolynomial(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[0].set_value("c2", value)
 
     @property
@@ -168,6 +174,7 @@ class EosLinearPolynomial(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[0].set_value("c3", value)
 
     @property
@@ -178,6 +185,7 @@ class EosLinearPolynomial(KeywordBase):
 
     @c4.setter
     def c4(self, value: float) -> None:
+        """Set the c4 property."""
         self._cards[0].set_value("c4", value)
 
     @property
@@ -188,6 +196,7 @@ class EosLinearPolynomial(KeywordBase):
 
     @c5.setter
     def c5(self, value: float) -> None:
+        """Set the c5 property."""
         self._cards[0].set_value("c5", value)
 
     @property
@@ -198,6 +207,7 @@ class EosLinearPolynomial(KeywordBase):
 
     @c6.setter
     def c6(self, value: float) -> None:
+        """Set the c6 property."""
         self._cards[0].set_value("c6", value)
 
     @property
@@ -208,6 +218,7 @@ class EosLinearPolynomial(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[1].set_value("e0", value)
 
     @property
@@ -218,5 +229,6 @@ class EosLinearPolynomial(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[1].set_value("v0", value)
 

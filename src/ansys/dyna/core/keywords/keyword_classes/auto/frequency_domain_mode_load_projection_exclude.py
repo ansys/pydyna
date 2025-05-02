@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainModeLoadProjectionExclude class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainModeLoadProjectionExclude(KeywordBase):
     subkeyword = "DOMAIN_MODE_LOAD_PROJECTION_EXCLUDE"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainModeLoadProjectionExclude class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class FrequencyDomainModeLoadProjectionExclude(KeywordBase):
 
     @nmsort.setter
     def nmsort(self, value: int) -> None:
+        """Set the nmsort property."""
         self._cards[0].set_value("nmsort", value)
 
     @property
@@ -71,5 +74,6 @@ class FrequencyDomainModeLoadProjectionExclude(KeywordBase):
 
     @dskip.setter
     def dskip(self, value: float) -> None:
+        """Set the dskip property."""
         self._cards[0].set_value("dskip", value)
 

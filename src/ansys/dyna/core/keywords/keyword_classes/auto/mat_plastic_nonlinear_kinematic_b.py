@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatPlasticNonlinearKinematicB class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatPlasticNonlinearKinematicB class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -164,6 +166,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -174,6 +177,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -184,6 +188,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -194,6 +199,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -204,6 +210,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @re.setter
     def re(self, value: float) -> None:
+        """Set the re property."""
         self._cards[0].set_value("re", value)
 
     @property
@@ -214,6 +221,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[0].set_value("b", value)
 
     @property
@@ -224,6 +232,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @q.setter
     def q(self, value: float) -> None:
+        """Set the q property."""
         self._cards[0].set_value("q", value)
 
     @property
@@ -234,6 +243,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[0].set_value("c1", value)
 
     @property
@@ -244,6 +254,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @gamma1.setter
     def gamma1(self, value: float) -> None:
+        """Set the gamma1 property."""
         self._cards[1].set_value("gamma1", value)
 
     @property
@@ -254,6 +265,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[1].set_value("c2", value)
 
     @property
@@ -264,6 +276,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @gamma2.setter
     def gamma2(self, value: float) -> None:
+        """Set the gamma2 property."""
         self._cards[1].set_value("gamma2", value)
 
     @property
@@ -274,6 +287,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[1].set_value("c3", value)
 
     @property
@@ -284,6 +298,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @gamma3.setter
     def gamma3(self, value: float) -> None:
+        """Set the gamma3 property."""
         self._cards[1].set_value("gamma3", value)
 
     @property
@@ -294,5 +309,6 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

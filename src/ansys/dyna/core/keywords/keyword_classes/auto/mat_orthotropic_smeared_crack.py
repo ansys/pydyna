@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatOrthotropicSmearedCrack class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatOrthotropicSmearedCrack class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -320,6 +322,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -330,6 +333,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -340,6 +344,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @ea.setter
     def ea(self, value: float) -> None:
+        """Set the ea property."""
         self._cards[0].set_value("ea", value)
 
     @property
@@ -350,6 +355,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @eb.setter
     def eb(self, value: float) -> None:
+        """Set the eb property."""
         self._cards[0].set_value("eb", value)
 
     @property
@@ -360,6 +366,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @ec.setter
     def ec(self, value: float) -> None:
+        """Set the ec property."""
         self._cards[0].set_value("ec", value)
 
     @property
@@ -370,6 +377,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @prba.setter
     def prba(self, value: float) -> None:
+        """Set the prba property."""
         self._cards[0].set_value("prba", value)
 
     @property
@@ -380,6 +388,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @prca.setter
     def prca(self, value: float) -> None:
+        """Set the prca property."""
         self._cards[0].set_value("prca", value)
 
     @property
@@ -390,6 +399,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @prcb.setter
     def prcb(self, value: float) -> None:
+        """Set the prcb property."""
         self._cards[0].set_value("prcb", value)
 
     @property
@@ -400,6 +410,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @uins.setter
     def uins(self, value: float) -> None:
+        """Set the uins property."""
         self._cards[1].set_value("uins", value)
 
     @property
@@ -410,6 +421,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @uiss.setter
     def uiss(self, value: float) -> None:
+        """Set the uiss property."""
         self._cards[1].set_value("uiss", value)
 
     @property
@@ -420,6 +432,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @cerrmi.setter
     def cerrmi(self, value: float) -> None:
+        """Set the cerrmi property."""
         self._cards[1].set_value("cerrmi", value)
 
     @property
@@ -430,6 +443,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @cerrmii.setter
     def cerrmii(self, value: float) -> None:
+        """Set the cerrmii property."""
         self._cards[1].set_value("cerrmii", value)
 
     @property
@@ -440,8 +454,9 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @ind.setter
     def ind(self, value: float) -> None:
+        """Set the ind property."""
         if value not in [1.0, 2.0, 3.0, None]:
-            raise Exception("""ind must be `None` or one of {1.0,2.0,3.0}""")
+            raise Exception("""ind must be `None` or one of {1.0,2.0,3.0}.""")
         self._cards[1].set_value("ind", value)
 
     @property
@@ -452,8 +467,9 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @isd.setter
     def isd(self, value: float) -> None:
+        """Set the isd property."""
         if value not in [4.0, 5.0, 6.0, None]:
-            raise Exception("""isd must be `None` or one of {4.0,5.0,6.0}""")
+            raise Exception("""isd must be `None` or one of {4.0,5.0,6.0}.""")
         self._cards[1].set_value("isd", value)
 
     @property
@@ -464,6 +480,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @gab.setter
     def gab(self, value: float) -> None:
+        """Set the gab property."""
         self._cards[2].set_value("gab", value)
 
     @property
@@ -474,6 +491,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @gbc.setter
     def gbc(self, value: float) -> None:
+        """Set the gbc property."""
         self._cards[2].set_value("gbc", value)
 
     @property
@@ -484,6 +502,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @gca.setter
     def gca(self, value: float) -> None:
+        """Set the gca property."""
         self._cards[2].set_value("gca", value)
 
     @property
@@ -500,6 +519,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[2].set_value("aopt", value)
 
     @property
@@ -510,6 +530,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[3].set_value("xp", value)
 
     @property
@@ -520,6 +541,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[3].set_value("yp", value)
 
     @property
@@ -530,6 +552,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[3].set_value("zp", value)
 
     @property
@@ -540,6 +563,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[3].set_value("a1", value)
 
     @property
@@ -550,6 +574,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[3].set_value("a2", value)
 
     @property
@@ -560,6 +585,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[3].set_value("a3", value)
 
     @property
@@ -578,8 +604,9 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, -4, -3, -2, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}.""")
         self._cards[3].set_value("macf", value)
 
     @property
@@ -590,6 +617,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[4].set_value("v1", value)
 
     @property
@@ -600,6 +628,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[4].set_value("v2", value)
 
     @property
@@ -610,6 +639,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[4].set_value("v3", value)
 
     @property
@@ -620,6 +650,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[4].set_value("d1", value)
 
     @property
@@ -630,6 +661,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[4].set_value("d2", value)
 
     @property
@@ -640,6 +672,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[4].set_value("d3", value)
 
     @property
@@ -650,6 +683,7 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[4].set_value("beta", value)
 
     @property
@@ -662,8 +696,9 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
+        """Set the ref property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
+            raise Exception("""ref must be `None` or one of {0.0,1.0}.""")
         self._cards[4].set_value("ref", value)
 
     @property
@@ -674,5 +709,6 @@ class MatOrthotropicSmearedCrack(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

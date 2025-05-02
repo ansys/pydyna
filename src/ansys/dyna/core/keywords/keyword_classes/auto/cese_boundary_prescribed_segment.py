@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseBoundaryPrescribedSegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
     subkeyword = "BOUNDARY_PRESCRIBED_SEGMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseBoundaryPrescribedSegment class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -180,6 +182,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -190,6 +193,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @n2_.setter
     def n2_(self, value: int) -> None:
+        """Set the n2_ property."""
         self._cards[0].set_value("n2 ", value)
 
     @property
@@ -200,6 +204,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -210,6 +215,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[0].set_value("n4", value)
 
     @property
@@ -220,6 +226,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @idcomp.setter
     def idcomp(self, value: int) -> None:
+        """Set the idcomp property."""
         self._cards[0].set_value("idcomp", value)
 
     @property
@@ -230,6 +237,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @lc_u.setter
     def lc_u(self, value: int) -> None:
+        """Set the lc_u property."""
         self._cards[1].set_value("lc_u", value)
 
     @property
@@ -240,6 +248,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @lc_v_.setter
     def lc_v_(self, value: int) -> None:
+        """Set the lc_v_ property."""
         self._cards[1].set_value("lc_v ", value)
 
     @property
@@ -250,6 +259,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @lc_w.setter
     def lc_w(self, value: int) -> None:
+        """Set the lc_w property."""
         self._cards[1].set_value("lc_w", value)
 
     @property
@@ -260,6 +270,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @lc_rho.setter
     def lc_rho(self, value: int) -> None:
+        """Set the lc_rho property."""
         self._cards[1].set_value("lc_rho", value)
 
     @property
@@ -270,6 +281,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @lc_p_.setter
     def lc_p_(self, value: int) -> None:
+        """Set the lc_p_ property."""
         self._cards[1].set_value("lc_p ", value)
 
     @property
@@ -280,6 +292,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @lc_t.setter
     def lc_t(self, value: int) -> None:
+        """Set the lc_t property."""
         self._cards[1].set_value("lc_t", value)
 
     @property
@@ -290,6 +303,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @sf_u.setter
     def sf_u(self, value: float) -> None:
+        """Set the sf_u property."""
         self._cards[2].set_value("sf_u", value)
 
     @property
@@ -300,6 +314,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @sf_v_.setter
     def sf_v_(self, value: float) -> None:
+        """Set the sf_v_ property."""
         self._cards[2].set_value("sf_v ", value)
 
     @property
@@ -310,6 +325,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @sf_w.setter
     def sf_w(self, value: float) -> None:
+        """Set the sf_w property."""
         self._cards[2].set_value("sf_w", value)
 
     @property
@@ -320,6 +336,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @sf_rho.setter
     def sf_rho(self, value: float) -> None:
+        """Set the sf_rho property."""
         self._cards[2].set_value("sf_rho", value)
 
     @property
@@ -330,6 +347,7 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @sf_p_.setter
     def sf_p_(self, value: float) -> None:
+        """Set the sf_p_ property."""
         self._cards[2].set_value("sf_p ", value)
 
     @property
@@ -340,5 +358,6 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
 
     @sf_t.setter
     def sf_t(self, value: float) -> None:
+        """Set the sf_t property."""
         self._cards[2].set_value("sf_t", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseHistoryNodeLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseHistoryNodeLocal(KeywordBase):
     subkeyword = "HISTORY_NODE_LOCAL"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseHistoryNodeLocal class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class DatabaseHistoryNodeLocal(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -87,6 +90,7 @@ class DatabaseHistoryNodeLocal(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -100,8 +104,9 @@ class DatabaseHistoryNodeLocal(KeywordBase):
 
     @ref.setter
     def ref(self, value: int) -> None:
+        """Set the ref property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ref must be `None` or one of {0,1,2}""")
+            raise Exception("""ref must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("ref", value)
 
     @property
@@ -114,7 +119,8 @@ class DatabaseHistoryNodeLocal(KeywordBase):
 
     @hfo.setter
     def hfo(self, value: int) -> None:
+        """Set the hfo property."""
         if value not in [0, 1, None]:
-            raise Exception("""hfo must be `None` or one of {0,1}""")
+            raise Exception("""hfo must be `None` or one of {0,1}.""")
         self._cards[0].set_value("hfo", value)
 

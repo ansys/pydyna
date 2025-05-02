@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadNurbsShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadNurbsShell(KeywordBase):
     subkeyword = "NURBS_SHELL"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadNurbsShell class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -340,6 +342,7 @@ class LoadNurbsShell(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -350,6 +353,7 @@ class LoadNurbsShell(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -360,6 +364,7 @@ class LoadNurbsShell(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[1].set_value("ssid", value)
 
     @property
@@ -370,6 +375,7 @@ class LoadNurbsShell(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -380,6 +386,7 @@ class LoadNurbsShell(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[1].set_value("sf", value)
 
     @property
@@ -390,6 +397,7 @@ class LoadNurbsShell(KeywordBase):
 
     @at.setter
     def at(self, value: float) -> None:
+        """Set the at property."""
         self._cards[1].set_value("at", value)
 
     @property
@@ -400,6 +408,7 @@ class LoadNurbsShell(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -415,8 +424,9 @@ class LoadNurbsShell(KeywordBase):
 
     @ltype.setter
     def ltype(self, value: str) -> None:
+        """Set the ltype property."""
         if value not in ["PRESS", "CRV", "CRVS", "CRVT", "CRVN", "TRACT", None]:
-            raise Exception("""ltype must be `None` or one of {"PRESS","CRV","CRVS","CRVT","CRVN","TRACT"}""")
+            raise Exception("""ltype must be `None` or one of {"PRESS","CRV","CRVS","CRVT","CRVN","TRACT"}.""")
         self._cards[1].set_value("ltype", value)
 
     @property
@@ -427,8 +437,9 @@ class LoadNurbsShell(KeywordBase):
 
     @regdef.setter
     def regdef(self, value: str) -> None:
+        """Set the regdef property."""
         if value not in ["RS", "NBEW", "NBEP", None]:
-            raise Exception("""regdef must be `None` or one of {"RS","NBEW","NBEP"}""")
+            raise Exception("""regdef must be `None` or one of {"RS","NBEW","NBEP"}.""")
         self._cards[1].set_value("regdef", value)
 
     @property
@@ -439,6 +450,7 @@ class LoadNurbsShell(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[2].set_value("cid", value)
 
     @property
@@ -449,6 +461,7 @@ class LoadNurbsShell(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[2].set_value("v1", value)
 
     @property
@@ -459,6 +472,7 @@ class LoadNurbsShell(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[2].set_value("v2", value)
 
     @property
@@ -469,6 +483,7 @@ class LoadNurbsShell(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[2].set_value("v3", value)
 
     @property
@@ -479,6 +494,7 @@ class LoadNurbsShell(KeywordBase):
 
     @rmin.setter
     def rmin(self, value: float) -> None:
+        """Set the rmin property."""
         self._cards[3].set_value("rmin", value)
 
     @property
@@ -489,6 +505,7 @@ class LoadNurbsShell(KeywordBase):
 
     @smin.setter
     def smin(self, value: float) -> None:
+        """Set the smin property."""
         self._cards[3].set_value("smin", value)
 
     @property
@@ -499,6 +516,7 @@ class LoadNurbsShell(KeywordBase):
 
     @rmax.setter
     def rmax(self, value: float) -> None:
+        """Set the rmax property."""
         self._cards[3].set_value("rmax", value)
 
     @property
@@ -509,6 +527,7 @@ class LoadNurbsShell(KeywordBase):
 
     @smax.setter
     def smax(self, value: float) -> None:
+        """Set the smax property."""
         self._cards[3].set_value("smax", value)
 
     @property
@@ -519,6 +538,7 @@ class LoadNurbsShell(KeywordBase):
 
     @ne1.setter
     def ne1(self, value: int) -> None:
+        """Set the ne1 property."""
         self._cards[4].set_value("ne1", value)
 
     @property
@@ -529,6 +549,7 @@ class LoadNurbsShell(KeywordBase):
 
     @ne2.setter
     def ne2(self, value: int) -> None:
+        """Set the ne2 property."""
         self._cards[4].set_value("ne2", value)
 
     @property
@@ -539,6 +560,7 @@ class LoadNurbsShell(KeywordBase):
 
     @ne3.setter
     def ne3(self, value: int) -> None:
+        """Set the ne3 property."""
         self._cards[4].set_value("ne3", value)
 
     @property
@@ -549,6 +571,7 @@ class LoadNurbsShell(KeywordBase):
 
     @ne4.setter
     def ne4(self, value: int) -> None:
+        """Set the ne4 property."""
         self._cards[4].set_value("ne4", value)
 
     @property
@@ -559,6 +582,7 @@ class LoadNurbsShell(KeywordBase):
 
     @ne5.setter
     def ne5(self, value: int) -> None:
+        """Set the ne5 property."""
         self._cards[4].set_value("ne5", value)
 
     @property
@@ -569,6 +593,7 @@ class LoadNurbsShell(KeywordBase):
 
     @ne6.setter
     def ne6(self, value: int) -> None:
+        """Set the ne6 property."""
         self._cards[4].set_value("ne6", value)
 
     @property
@@ -579,6 +604,7 @@ class LoadNurbsShell(KeywordBase):
 
     @ne7.setter
     def ne7(self, value: int) -> None:
+        """Set the ne7 property."""
         self._cards[4].set_value("ne7", value)
 
     @property
@@ -589,6 +615,7 @@ class LoadNurbsShell(KeywordBase):
 
     @ne8.setter
     def ne8(self, value: int) -> None:
+        """Set the ne8 property."""
         self._cards[4].set_value("ne8", value)
 
     @property
@@ -599,6 +626,7 @@ class LoadNurbsShell(KeywordBase):
 
     @nt1.setter
     def nt1(self, value: int) -> None:
+        """Set the nt1 property."""
         self._cards[5].set_value("nt1", value)
 
     @property
@@ -609,6 +637,7 @@ class LoadNurbsShell(KeywordBase):
 
     @nt2.setter
     def nt2(self, value: int) -> None:
+        """Set the nt2 property."""
         self._cards[5].set_value("nt2", value)
 
     @property
@@ -619,6 +648,7 @@ class LoadNurbsShell(KeywordBase):
 
     @nt3.setter
     def nt3(self, value: int) -> None:
+        """Set the nt3 property."""
         self._cards[5].set_value("nt3", value)
 
     @property
@@ -629,6 +659,7 @@ class LoadNurbsShell(KeywordBase):
 
     @nt4.setter
     def nt4(self, value: int) -> None:
+        """Set the nt4 property."""
         self._cards[5].set_value("nt4", value)
 
     @property
@@ -639,6 +670,7 @@ class LoadNurbsShell(KeywordBase):
 
     @nte.setter
     def nte(self, value: int) -> None:
+        """Set the nte property."""
         self._cards[5].set_value("nte", value)
 
     @property
@@ -649,6 +681,7 @@ class LoadNurbsShell(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[6].set_value("r1", value)
 
     @property
@@ -659,6 +692,7 @@ class LoadNurbsShell(KeywordBase):
 
     @s1.setter
     def s1(self, value: float) -> None:
+        """Set the s1 property."""
         self._cards[6].set_value("s1", value)
 
     @property
@@ -669,6 +703,7 @@ class LoadNurbsShell(KeywordBase):
 
     @r2.setter
     def r2(self, value: float) -> None:
+        """Set the r2 property."""
         self._cards[6].set_value("r2", value)
 
     @property
@@ -679,6 +714,7 @@ class LoadNurbsShell(KeywordBase):
 
     @s2.setter
     def s2(self, value: float) -> None:
+        """Set the s2 property."""
         self._cards[6].set_value("s2", value)
 
     @property
@@ -689,6 +725,7 @@ class LoadNurbsShell(KeywordBase):
 
     @nc1.setter
     def nc1(self, value: int) -> None:
+        """Set the nc1 property."""
         self._cards[7].set_value("nc1", value)
 
     @property
@@ -699,6 +736,7 @@ class LoadNurbsShell(KeywordBase):
 
     @nc2.setter
     def nc2(self, value: int) -> None:
+        """Set the nc2 property."""
         self._cards[7].set_value("nc2", value)
 
     @property
@@ -709,5 +747,6 @@ class LoadNurbsShell(KeywordBase):
 
     @nce.setter
     def nce(self, value: int) -> None:
+        """Set the nce property."""
         self._cards[7].set_value("nce", value)
 

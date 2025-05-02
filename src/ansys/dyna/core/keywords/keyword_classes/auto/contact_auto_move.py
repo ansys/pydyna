@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ContactAutoMove class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ContactAutoMove(KeywordBase):
     subkeyword = "AUTO_MOVE"
 
     def __init__(self, **kwargs):
+        """Initialize the ContactAutoMove class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -90,6 +92,7 @@ class ContactAutoMove(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -100,6 +103,7 @@ class ContactAutoMove(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -110,6 +114,7 @@ class ContactAutoMove(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -120,6 +125,7 @@ class ContactAutoMove(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -130,6 +136,7 @@ class ContactAutoMove(KeywordBase):
 
     @atime.setter
     def atime(self, value: float) -> None:
+        """Set the atime property."""
         self._cards[0].set_value("atime", value)
 
     @property
@@ -144,5 +151,6 @@ class ContactAutoMove(KeywordBase):
 
     @offset.setter
     def offset(self, value: float) -> None:
+        """Set the offset property."""
         self._cards[0].set_value("offset", value)
 

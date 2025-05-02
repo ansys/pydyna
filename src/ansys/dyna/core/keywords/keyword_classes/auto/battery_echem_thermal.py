@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BatteryEchemThermal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BatteryEchemThermal(KeywordBase):
     subkeyword = "ECHEM_THERMAL"
 
     def __init__(self, **kwargs):
+        """Initialize the BatteryEchemThermal class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -107,6 +109,7 @@ class BatteryEchemThermal(KeywordBase):
 
     @thame.setter
     def thame(self, value: str) -> None:
+        """Set the thame property."""
         self._cards[0].set_value("thame", value)
 
     @property
@@ -120,6 +123,7 @@ class BatteryEchemThermal(KeywordBase):
 
     @tid.setter
     def tid(self, value: int) -> None:
+        """Set the tid property."""
         self._cards[0].set_value("tid", value)
 
     @property
@@ -133,6 +137,7 @@ class BatteryEchemThermal(KeywordBase):
 
     @iprt.setter
     def iprt(self, value: int) -> None:
+        """Set the iprt property."""
         self._cards[0].set_value("iprt", value)
 
     @property
@@ -143,6 +148,7 @@ class BatteryEchemThermal(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[0].set_value("cp", value)
 
     @property
@@ -153,6 +159,7 @@ class BatteryEchemThermal(KeywordBase):
 
     @hconv.setter
     def hconv(self, value: float) -> None:
+        """Set the hconv property."""
         self._cards[0].set_value("hconv", value)
 
     @property
@@ -163,6 +170,7 @@ class BatteryEchemThermal(KeywordBase):
 
     @temp.setter
     def temp(self, value: float) -> None:
+        """Set the temp property."""
         self._cards[0].set_value("temp", value)
 
     @property
@@ -175,6 +183,7 @@ class BatteryEchemThermal(KeywordBase):
 
     @dudt.setter
     def dudt(self, value: float) -> None:
+        """Set the dudt property."""
         self._cards[0].set_value("dudt", value)
 
     @property
@@ -185,5 +194,6 @@ class BatteryEchemThermal(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[1].set_value("filename", value)
 

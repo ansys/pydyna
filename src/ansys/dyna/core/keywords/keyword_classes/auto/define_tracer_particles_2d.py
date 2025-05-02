@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineTracerParticles2D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineTracerParticles2D(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineTracerParticles2D class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -83,6 +85,7 @@ class DefineTracerParticles2D(KeywordBase):
 
     @nset.setter
     def nset(self, value: int) -> None:
+        """Set the nset property."""
         self._cards[0].set_value("nset", value)
 
     @property
@@ -95,6 +98,7 @@ class DefineTracerParticles2D(KeywordBase):
 
     @pset.setter
     def pset(self, value: int) -> None:
+        """Set the pset property."""
         self._cards[0].set_value("pset", value)
 
     @property
@@ -105,5 +109,6 @@ class DefineTracerParticles2D(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

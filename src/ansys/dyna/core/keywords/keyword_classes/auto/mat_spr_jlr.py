@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSprJlr class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSprJlr(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSprJlr class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -309,6 +311,7 @@ class MatSprJlr(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -319,6 +322,7 @@ class MatSprJlr(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -329,6 +333,7 @@ class MatSprJlr(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -339,6 +344,7 @@ class MatSprJlr(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -351,8 +357,9 @@ class MatSprJlr(KeywordBase):
 
     @helas.setter
     def helas(self, value: float) -> None:
+        """Set the helas property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""helas must be `None` or one of {0.0,1.0}""")
+            raise Exception("""helas must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("helas", value)
 
     @property
@@ -365,8 +372,9 @@ class MatSprJlr(KeywordBase):
 
     @telas.setter
     def telas(self, value: float) -> None:
+        """Set the telas property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""telas must be `None` or one of {0.0,1.0}""")
+            raise Exception("""telas must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("telas", value)
 
     @property
@@ -378,6 +386,7 @@ class MatSprJlr(KeywordBase):
 
     @lcaxh.setter
     def lcaxh(self, value: int) -> None:
+        """Set the lcaxh property."""
         self._cards[1].set_value("lcaxh", value)
 
     @property
@@ -389,6 +398,7 @@ class MatSprJlr(KeywordBase):
 
     @lcshh.setter
     def lcshh(self, value: int) -> None:
+        """Set the lcshh property."""
         self._cards[1].set_value("lcshh", value)
 
     @property
@@ -400,6 +410,7 @@ class MatSprJlr(KeywordBase):
 
     @lcbmh.setter
     def lcbmh(self, value: int) -> None:
+        """Set the lcbmh property."""
         self._cards[1].set_value("lcbmh", value)
 
     @property
@@ -410,6 +421,7 @@ class MatSprJlr(KeywordBase):
 
     @sfaxh.setter
     def sfaxh(self, value: float) -> None:
+        """Set the sfaxh property."""
         self._cards[1].set_value("sfaxh", value)
 
     @property
@@ -420,6 +432,7 @@ class MatSprJlr(KeywordBase):
 
     @sfshh.setter
     def sfshh(self, value: float) -> None:
+        """Set the sfshh property."""
         self._cards[1].set_value("sfshh", value)
 
     @property
@@ -430,6 +443,7 @@ class MatSprJlr(KeywordBase):
 
     @sfbmh.setter
     def sfbmh(self, value: float) -> None:
+        """Set the sfbmh property."""
         self._cards[1].set_value("sfbmh", value)
 
     @property
@@ -440,6 +454,7 @@ class MatSprJlr(KeywordBase):
 
     @dfakh.setter
     def dfakh(self, value: float) -> None:
+        """Set the dfakh property."""
         self._cards[2].set_value("dfakh", value)
 
     @property
@@ -450,6 +465,7 @@ class MatSprJlr(KeywordBase):
 
     @dfshh.setter
     def dfshh(self, value: float) -> None:
+        """Set the dfshh property."""
         self._cards[2].set_value("dfshh", value)
 
     @property
@@ -460,6 +476,7 @@ class MatSprJlr(KeywordBase):
 
     @rfbmh.setter
     def rfbmh(self, value: float) -> None:
+        """Set the rfbmh property."""
         self._cards[2].set_value("rfbmh", value)
 
     @property
@@ -470,6 +487,7 @@ class MatSprJlr(KeywordBase):
 
     @dmfaxh.setter
     def dmfaxh(self, value: float) -> None:
+        """Set the dmfaxh property."""
         self._cards[2].set_value("dmfaxh", value)
 
     @property
@@ -480,6 +498,7 @@ class MatSprJlr(KeywordBase):
 
     @dmfshh.setter
     def dmfshh(self, value: float) -> None:
+        """Set the dmfshh property."""
         self._cards[2].set_value("dmfshh", value)
 
     @property
@@ -490,6 +509,7 @@ class MatSprJlr(KeywordBase):
 
     @dmfbmh.setter
     def dmfbmh(self, value: float) -> None:
+        """Set the dmfbmh property."""
         self._cards[2].set_value("dmfbmh", value)
 
     @property
@@ -500,6 +520,7 @@ class MatSprJlr(KeywordBase):
 
     @lcaxt.setter
     def lcaxt(self, value: int) -> None:
+        """Set the lcaxt property."""
         self._cards[3].set_value("lcaxt", value)
 
     @property
@@ -510,6 +531,7 @@ class MatSprJlr(KeywordBase):
 
     @lcsht.setter
     def lcsht(self, value: int) -> None:
+        """Set the lcsht property."""
         self._cards[3].set_value("lcsht", value)
 
     @property
@@ -520,6 +542,7 @@ class MatSprJlr(KeywordBase):
 
     @lcbmt.setter
     def lcbmt(self, value: int) -> None:
+        """Set the lcbmt property."""
         self._cards[3].set_value("lcbmt", value)
 
     @property
@@ -530,6 +553,7 @@ class MatSprJlr(KeywordBase):
 
     @sfaxt.setter
     def sfaxt(self, value: float) -> None:
+        """Set the sfaxt property."""
         self._cards[3].set_value("sfaxt", value)
 
     @property
@@ -540,6 +564,7 @@ class MatSprJlr(KeywordBase):
 
     @sfsht.setter
     def sfsht(self, value: float) -> None:
+        """Set the sfsht property."""
         self._cards[3].set_value("sfsht", value)
 
     @property
@@ -550,6 +575,7 @@ class MatSprJlr(KeywordBase):
 
     @sbfmt.setter
     def sbfmt(self, value: float) -> None:
+        """Set the sbfmt property."""
         self._cards[3].set_value("sbfmt", value)
 
     @property
@@ -560,6 +586,7 @@ class MatSprJlr(KeywordBase):
 
     @dfaxt.setter
     def dfaxt(self, value: float) -> None:
+        """Set the dfaxt property."""
         self._cards[4].set_value("dfaxt", value)
 
     @property
@@ -570,6 +597,7 @@ class MatSprJlr(KeywordBase):
 
     @dfsht.setter
     def dfsht(self, value: float) -> None:
+        """Set the dfsht property."""
         self._cards[4].set_value("dfsht", value)
 
     @property
@@ -580,6 +608,7 @@ class MatSprJlr(KeywordBase):
 
     @rfbmt.setter
     def rfbmt(self, value: float) -> None:
+        """Set the rfbmt property."""
         self._cards[4].set_value("rfbmt", value)
 
     @property
@@ -590,6 +619,7 @@ class MatSprJlr(KeywordBase):
 
     @dfmaxt.setter
     def dfmaxt(self, value: float) -> None:
+        """Set the dfmaxt property."""
         self._cards[4].set_value("dfmaxt", value)
 
     @property
@@ -600,6 +630,7 @@ class MatSprJlr(KeywordBase):
 
     @dmfsht.setter
     def dmfsht(self, value: float) -> None:
+        """Set the dmfsht property."""
         self._cards[4].set_value("dmfsht", value)
 
     @property
@@ -610,6 +641,7 @@ class MatSprJlr(KeywordBase):
 
     @dmfbmt.setter
     def dmfbmt(self, value: float) -> None:
+        """Set the dmfbmt property."""
         self._cards[4].set_value("dmfbmt", value)
 
     @property
@@ -620,5 +652,6 @@ class MatSprJlr(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

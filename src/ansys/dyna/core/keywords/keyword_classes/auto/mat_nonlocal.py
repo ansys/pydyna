@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatNonlocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatNonlocal(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatNonlocal class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -224,6 +226,7 @@ class MatNonlocal(KeywordBase):
 
     @idnl.setter
     def idnl(self, value: int) -> None:
+        """Set the idnl property."""
         self._cards[0].set_value("idnl", value)
 
     @property
@@ -234,6 +237,7 @@ class MatNonlocal(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -244,6 +248,7 @@ class MatNonlocal(KeywordBase):
 
     @p.setter
     def p(self, value: int) -> None:
+        """Set the p property."""
         self._cards[0].set_value("p", value)
 
     @property
@@ -254,6 +259,7 @@ class MatNonlocal(KeywordBase):
 
     @q.setter
     def q(self, value: int) -> None:
+        """Set the q property."""
         self._cards[0].set_value("q", value)
 
     @property
@@ -264,6 +270,7 @@ class MatNonlocal(KeywordBase):
 
     @l.setter
     def l(self, value: float) -> None:
+        """Set the l property."""
         self._cards[0].set_value("l", value)
 
     @property
@@ -274,6 +281,7 @@ class MatNonlocal(KeywordBase):
 
     @nfreq.setter
     def nfreq(self, value: int) -> None:
+        """Set the nfreq property."""
         self._cards[0].set_value("nfreq", value)
 
     @property
@@ -284,6 +292,7 @@ class MatNonlocal(KeywordBase):
 
     @nhv.setter
     def nhv(self, value: int) -> None:
+        """Set the nhv property."""
         self._cards[0].set_value("nhv", value)
 
     @property
@@ -294,6 +303,7 @@ class MatNonlocal(KeywordBase):
 
     @nl1.setter
     def nl1(self, value: int) -> None:
+        """Set the nl1 property."""
         self._cards[1].set_value("nl1", value)
 
     @property
@@ -304,6 +314,7 @@ class MatNonlocal(KeywordBase):
 
     @nl2.setter
     def nl2(self, value: int) -> None:
+        """Set the nl2 property."""
         self._cards[1].set_value("nl2", value)
 
     @property
@@ -314,6 +325,7 @@ class MatNonlocal(KeywordBase):
 
     @nl3.setter
     def nl3(self, value: int) -> None:
+        """Set the nl3 property."""
         self._cards[1].set_value("nl3", value)
 
     @property
@@ -324,6 +336,7 @@ class MatNonlocal(KeywordBase):
 
     @nl4.setter
     def nl4(self, value: int) -> None:
+        """Set the nl4 property."""
         self._cards[1].set_value("nl4", value)
 
     @property
@@ -334,6 +347,7 @@ class MatNonlocal(KeywordBase):
 
     @nl5.setter
     def nl5(self, value: int) -> None:
+        """Set the nl5 property."""
         self._cards[1].set_value("nl5", value)
 
     @property
@@ -344,6 +358,7 @@ class MatNonlocal(KeywordBase):
 
     @nl6.setter
     def nl6(self, value: int) -> None:
+        """Set the nl6 property."""
         self._cards[1].set_value("nl6", value)
 
     @property
@@ -354,6 +369,7 @@ class MatNonlocal(KeywordBase):
 
     @nl7.setter
     def nl7(self, value: int) -> None:
+        """Set the nl7 property."""
         self._cards[1].set_value("nl7", value)
 
     @property
@@ -364,6 +380,7 @@ class MatNonlocal(KeywordBase):
 
     @nl8.setter
     def nl8(self, value: int) -> None:
+        """Set the nl8 property."""
         self._cards[1].set_value("nl8", value)
 
     @property
@@ -374,6 +391,7 @@ class MatNonlocal(KeywordBase):
 
     @xc1.setter
     def xc1(self, value: float) -> None:
+        """Set the xc1 property."""
         self._cards[2].set_value("xc1", value)
 
     @property
@@ -384,6 +402,7 @@ class MatNonlocal(KeywordBase):
 
     @yc1.setter
     def yc1(self, value: float) -> None:
+        """Set the yc1 property."""
         self._cards[2].set_value("yc1", value)
 
     @property
@@ -394,6 +413,7 @@ class MatNonlocal(KeywordBase):
 
     @zc1.setter
     def zc1(self, value: float) -> None:
+        """Set the zc1 property."""
         self._cards[2].set_value("zc1", value)
 
     @property
@@ -404,6 +424,7 @@ class MatNonlocal(KeywordBase):
 
     @xc2.setter
     def xc2(self, value: float) -> None:
+        """Set the xc2 property."""
         self._cards[2].set_value("xc2", value)
 
     @property
@@ -414,6 +435,7 @@ class MatNonlocal(KeywordBase):
 
     @yc2.setter
     def yc2(self, value: float) -> None:
+        """Set the yc2 property."""
         self._cards[2].set_value("yc2", value)
 
     @property
@@ -424,6 +446,7 @@ class MatNonlocal(KeywordBase):
 
     @zc2.setter
     def zc2(self, value: float) -> None:
+        """Set the zc2 property."""
         self._cards[2].set_value("zc2", value)
 
     @property
@@ -434,5 +457,6 @@ class MatNonlocal(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

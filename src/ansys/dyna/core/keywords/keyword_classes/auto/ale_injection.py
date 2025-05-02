@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleInjection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleInjection(KeywordBase):
     subkeyword = "INJECTION"
 
     def __init__(self, **kwargs):
+        """Initialize the AleInjection class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -221,6 +223,7 @@ class AleInjection(KeywordBase):
 
     @mmgset.setter
     def mmgset(self, value: int) -> None:
+        """Set the mmgset property."""
         self._cards[0].set_value("mmgset", value)
 
     @property
@@ -232,6 +235,7 @@ class AleInjection(KeywordBase):
 
     @segset.setter
     def segset(self, value: int) -> None:
+        """Set the segset property."""
         self._cards[0].set_value("segset", value)
 
     @property
@@ -257,6 +261,7 @@ class AleInjection(KeywordBase):
 
     @global_.setter
     def global_(self, value: int) -> None:
+        """Set the global_ property."""
         self._cards[0].set_value("global", value)
 
     @property
@@ -272,6 +277,7 @@ class AleInjection(KeywordBase):
 
     @lce.setter
     def lce(self, value: int) -> None:
+        """Set the lce property."""
         self._cards[0].set_value("lce", value)
 
     @property
@@ -287,6 +293,7 @@ class AleInjection(KeywordBase):
 
     @lcrvl.setter
     def lcrvl(self, value: int) -> None:
+        """Set the lcrvl property."""
         self._cards[0].set_value("lcrvl", value)
 
     @property
@@ -301,6 +308,7 @@ class AleInjection(KeywordBase):
 
     @lcvt.setter
     def lcvt(self, value: int) -> None:
+        """Set the lcvt property."""
         self._cards[1].set_value("lcvt", value)
 
     @property
@@ -311,6 +319,7 @@ class AleInjection(KeywordBase):
 
     @vect.setter
     def vect(self, value: int) -> None:
+        """Set the vect property."""
         self._cards[1].set_value("vect", value)
 
     @property
@@ -325,6 +334,7 @@ class AleInjection(KeywordBase):
 
     @lcvr.setter
     def lcvr(self, value: int) -> None:
+        """Set the lcvr property."""
         self._cards[1].set_value("lcvr", value)
 
     @property
@@ -335,6 +345,7 @@ class AleInjection(KeywordBase):
 
     @vecr.setter
     def vecr(self, value: int) -> None:
+        """Set the vecr property."""
         self._cards[1].set_value("vecr", value)
 
     @property
@@ -345,6 +356,7 @@ class AleInjection(KeywordBase):
 
     @boxv.setter
     def boxv(self, value: int) -> None:
+        """Set the boxv property."""
         self._cards[1].set_value("boxv", value)
 
     @property
@@ -355,6 +367,7 @@ class AleInjection(KeywordBase):
 
     @xg.setter
     def xg(self, value: float) -> None:
+        """Set the xg property."""
         self._cards[1].set_value("xg", value)
 
     @property
@@ -365,6 +378,7 @@ class AleInjection(KeywordBase):
 
     @yg.setter
     def yg(self, value: float) -> None:
+        """Set the yg property."""
         self._cards[1].set_value("yg", value)
 
     @property
@@ -375,6 +389,7 @@ class AleInjection(KeywordBase):
 
     @zg.setter
     def zg(self, value: float) -> None:
+        """Set the zg property."""
         self._cards[1].set_value("zg", value)
 
     @property
@@ -396,6 +411,7 @@ class AleInjection(KeywordBase):
 
     @surfct.setter
     def surfct(self, value: int) -> None:
+        """Set the surfct property."""
         self._cards[2].set_value("surfct", value)
 
     @property
@@ -407,6 +423,7 @@ class AleInjection(KeywordBase):
 
     @ndiv.setter
     def ndiv(self, value: int) -> None:
+        """Set the ndiv property."""
         self._cards[2].set_value("ndiv", value)
 
     @property
@@ -417,6 +434,7 @@ class AleInjection(KeywordBase):
 
     @xl.setter
     def xl(self, value: float) -> None:
+        """Set the xl property."""
         self._cards[2].set_value("xl", value)
 
     @property
@@ -427,6 +445,7 @@ class AleInjection(KeywordBase):
 
     @yl.setter
     def yl(self, value: float) -> None:
+        """Set the yl property."""
         self._cards[2].set_value("yl", value)
 
     @property
@@ -438,6 +457,7 @@ class AleInjection(KeywordBase):
 
     @zd.setter
     def zd(self, value: float) -> None:
+        """Set the zd property."""
         self._cards[2].set_value("zd", value)
 
     @property
@@ -448,6 +468,7 @@ class AleInjection(KeywordBase):
 
     @zu.setter
     def zu(self, value: float) -> None:
+        """Set the zu property."""
         self._cards[2].set_value("zu", value)
 
     @property
@@ -458,6 +479,7 @@ class AleInjection(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[2].set_value("xc", value)
 
     @property
@@ -468,5 +490,6 @@ class AleInjection(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[2].set_value("yc", value)
 

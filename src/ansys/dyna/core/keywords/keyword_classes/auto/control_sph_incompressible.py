@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlSphIncompressible class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlSphIncompressible(KeywordBase):
     subkeyword = "SPH_INCOMPRESSIBLE"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlSphIncompressible class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -97,8 +99,9 @@ class ControlSphIncompressible(KeywordBase):
 
     @ibndp.setter
     def ibndp(self, value: int) -> None:
+        """Set the ibndp property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibndp must be `None` or one of {0,1}""")
+            raise Exception("""ibndp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ibndp", value)
 
     @property
@@ -109,6 +112,7 @@ class ControlSphIncompressible(KeywordBase):
 
     @tavg.setter
     def tavg(self, value: float) -> None:
+        """Set the tavg property."""
         self._cards[0].set_value("tavg", value)
 
     @property
@@ -119,6 +123,7 @@ class ControlSphIncompressible(KeywordBase):
 
     @tmax.setter
     def tmax(self, value: float) -> None:
+        """Set the tmax property."""
         self._cards[0].set_value("tmax", value)
 
     @property
@@ -129,6 +134,7 @@ class ControlSphIncompressible(KeywordBase):
 
     @rol.setter
     def rol(self, value: float) -> None:
+        """Set the rol property."""
         self._cards[0].set_value("rol", value)
 
     @property
@@ -141,8 +147,9 @@ class ControlSphIncompressible(KeywordBase):
 
     @ihtc.setter
     def ihtc(self, value: int) -> None:
+        """Set the ihtc property."""
         if value not in [0, 1, None]:
-            raise Exception("""ihtc must be `None` or one of {0,1}""")
+            raise Exception("""ihtc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ihtc", value)
 
     @property
@@ -155,7 +162,8 @@ class ControlSphIncompressible(KeywordBase):
 
     @imat.setter
     def imat(self, value: int) -> None:
+        """Set the imat property."""
         if value not in [0, 1, None]:
-            raise Exception("""imat must be `None` or one of {0,1}""")
+            raise Exception("""imat must be `None` or one of {0,1}.""")
         self._cards[0].set_value("imat", value)
 

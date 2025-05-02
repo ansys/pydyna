@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat127 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat127(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat127 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -149,6 +151,7 @@ class Mat127(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -159,6 +162,7 @@ class Mat127(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -169,6 +173,7 @@ class Mat127(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -179,6 +184,7 @@ class Mat127(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -189,6 +195,7 @@ class Mat127(KeywordBase):
 
     @n.setter
     def n(self, value: int) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -200,6 +207,7 @@ class Mat127(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: float) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -210,6 +218,7 @@ class Mat127(KeywordBase):
 
     @tramp.setter
     def tramp(self, value: float) -> None:
+        """Set the tramp property."""
         self._cards[1].set_value("tramp", value)
 
     @property
@@ -220,6 +229,7 @@ class Mat127(KeywordBase):
 
     @nt.setter
     def nt(self, value: float) -> None:
+        """Set the nt property."""
         self._cards[1].set_value("nt", value)
 
     @property
@@ -230,6 +240,7 @@ class Mat127(KeywordBase):
 
     @gi.setter
     def gi(self, value: float) -> None:
+        """Set the gi property."""
         self._cards[2].set_value("gi", value)
 
     @property
@@ -240,6 +251,7 @@ class Mat127(KeywordBase):
 
     @betai.setter
     def betai(self, value: float) -> None:
+        """Set the betai property."""
         self._cards[2].set_value("betai", value)
 
     @property
@@ -250,5 +262,6 @@ class Mat127(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SetNodeAddAdvanced class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetNodeAddAdvanced(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SetNodeAddAdvanced class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -172,6 +174,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -182,6 +185,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @da1.setter
     def da1(self, value: float) -> None:
+        """Set the da1 property."""
         self._cards[0].set_value("da1", value)
 
     @property
@@ -192,6 +196,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @da2.setter
     def da2(self, value: float) -> None:
+        """Set the da2 property."""
         self._cards[0].set_value("da2", value)
 
     @property
@@ -202,6 +207,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @da3.setter
     def da3(self, value: float) -> None:
+        """Set the da3 property."""
         self._cards[0].set_value("da3", value)
 
     @property
@@ -212,6 +218,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @da4.setter
     def da4(self, value: float) -> None:
+        """Set the da4 property."""
         self._cards[0].set_value("da4", value)
 
     @property
@@ -222,6 +229,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @sid1.setter
     def sid1(self, value: int) -> None:
+        """Set the sid1 property."""
         self._cards[1].set_value("sid1", value)
 
     @property
@@ -232,8 +240,9 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @type1.setter
     def type1(self, value: int) -> None:
+        """Set the type1 property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""type1 must be `None` or one of {1,2,3,4,5,6,7}""")
+            raise Exception("""type1 must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("type1", value)
 
     @property
@@ -244,6 +253,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @sid2.setter
     def sid2(self, value: int) -> None:
+        """Set the sid2 property."""
         self._cards[1].set_value("sid2", value)
 
     @property
@@ -254,8 +264,9 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @type2.setter
     def type2(self, value: int) -> None:
+        """Set the type2 property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""type2 must be `None` or one of {1,2,3,4,5,6,7}""")
+            raise Exception("""type2 must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("type2", value)
 
     @property
@@ -266,6 +277,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @sid3.setter
     def sid3(self, value: int) -> None:
+        """Set the sid3 property."""
         self._cards[1].set_value("sid3", value)
 
     @property
@@ -276,8 +288,9 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @type3.setter
     def type3(self, value: int) -> None:
+        """Set the type3 property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""type3 must be `None` or one of {1,2,3,4,5,6,7}""")
+            raise Exception("""type3 must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("type3", value)
 
     @property
@@ -288,6 +301,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @sid4.setter
     def sid4(self, value: int) -> None:
+        """Set the sid4 property."""
         self._cards[1].set_value("sid4", value)
 
     @property
@@ -298,8 +312,9 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @type4.setter
     def type4(self, value: int) -> None:
+        """Set the type4 property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""type4 must be `None` or one of {1,2,3,4,5,6,7}""")
+            raise Exception("""type4 must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("type4", value)
 
     @property
@@ -310,5 +325,6 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

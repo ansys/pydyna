@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat120Rcdc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat120Rcdc(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat120Rcdc class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -454,6 +456,7 @@ class Mat120Rcdc(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -464,6 +467,7 @@ class Mat120Rcdc(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -474,6 +478,7 @@ class Mat120Rcdc(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -484,6 +489,7 @@ class Mat120Rcdc(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -494,6 +500,7 @@ class Mat120Rcdc(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -504,6 +511,7 @@ class Mat120Rcdc(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -514,6 +522,7 @@ class Mat120Rcdc(KeywordBase):
 
     @q1.setter
     def q1(self, value: float) -> None:
+        """Set the q1 property."""
         self._cards[0].set_value("q1", value)
 
     @property
@@ -524,6 +533,7 @@ class Mat120Rcdc(KeywordBase):
 
     @q2.setter
     def q2(self, value: float) -> None:
+        """Set the q2 property."""
         self._cards[0].set_value("q2", value)
 
     @property
@@ -534,6 +544,7 @@ class Mat120Rcdc(KeywordBase):
 
     @fc.setter
     def fc(self, value: float) -> None:
+        """Set the fc property."""
         self._cards[1].set_value("fc", value)
 
     @property
@@ -544,6 +555,7 @@ class Mat120Rcdc(KeywordBase):
 
     @f0.setter
     def f0(self, value: float) -> None:
+        """Set the f0 property."""
         self._cards[1].set_value("f0", value)
 
     @property
@@ -556,6 +568,7 @@ class Mat120Rcdc(KeywordBase):
 
     @en.setter
     def en(self, value: float) -> None:
+        """Set the en property."""
         self._cards[1].set_value("en", value)
 
     @property
@@ -568,6 +581,7 @@ class Mat120Rcdc(KeywordBase):
 
     @sn.setter
     def sn(self, value: float) -> None:
+        """Set the sn property."""
         self._cards[1].set_value("sn", value)
 
     @property
@@ -578,6 +592,7 @@ class Mat120Rcdc(KeywordBase):
 
     @fn.setter
     def fn(self, value: float) -> None:
+        """Set the fn property."""
         self._cards[1].set_value("fn", value)
 
     @property
@@ -588,6 +603,7 @@ class Mat120Rcdc(KeywordBase):
 
     @etan.setter
     def etan(self, value: float) -> None:
+        """Set the etan property."""
         self._cards[1].set_value("etan", value)
 
     @property
@@ -601,8 +617,9 @@ class Mat120Rcdc(KeywordBase):
 
     @atyp.setter
     def atyp(self, value: float) -> None:
+        """Set the atyp property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""atyp must be `None` or one of {1,2,3}""")
+            raise Exception("""atyp must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("atyp", value)
 
     @property
@@ -613,6 +630,7 @@ class Mat120Rcdc(KeywordBase):
 
     @ff0.setter
     def ff0(self, value: float) -> None:
+        """Set the ff0 property."""
         self._cards[1].set_value("ff0", value)
 
     @property
@@ -623,6 +641,7 @@ class Mat120Rcdc(KeywordBase):
 
     @eps1.setter
     def eps1(self, value: float) -> None:
+        """Set the eps1 property."""
         self._cards[2].set_value("eps1", value)
 
     @property
@@ -633,6 +652,7 @@ class Mat120Rcdc(KeywordBase):
 
     @eps2.setter
     def eps2(self, value: float) -> None:
+        """Set the eps2 property."""
         self._cards[2].set_value("eps2", value)
 
     @property
@@ -643,6 +663,7 @@ class Mat120Rcdc(KeywordBase):
 
     @eps3.setter
     def eps3(self, value: float) -> None:
+        """Set the eps3 property."""
         self._cards[2].set_value("eps3", value)
 
     @property
@@ -653,6 +674,7 @@ class Mat120Rcdc(KeywordBase):
 
     @eps4.setter
     def eps4(self, value: float) -> None:
+        """Set the eps4 property."""
         self._cards[2].set_value("eps4", value)
 
     @property
@@ -663,6 +685,7 @@ class Mat120Rcdc(KeywordBase):
 
     @eps5.setter
     def eps5(self, value: float) -> None:
+        """Set the eps5 property."""
         self._cards[2].set_value("eps5", value)
 
     @property
@@ -673,6 +696,7 @@ class Mat120Rcdc(KeywordBase):
 
     @eps6.setter
     def eps6(self, value: float) -> None:
+        """Set the eps6 property."""
         self._cards[2].set_value("eps6", value)
 
     @property
@@ -683,6 +707,7 @@ class Mat120Rcdc(KeywordBase):
 
     @eps7.setter
     def eps7(self, value: float) -> None:
+        """Set the eps7 property."""
         self._cards[2].set_value("eps7", value)
 
     @property
@@ -693,6 +718,7 @@ class Mat120Rcdc(KeywordBase):
 
     @eps8.setter
     def eps8(self, value: float) -> None:
+        """Set the eps8 property."""
         self._cards[2].set_value("eps8", value)
 
     @property
@@ -703,6 +729,7 @@ class Mat120Rcdc(KeywordBase):
 
     @es1.setter
     def es1(self, value: float) -> None:
+        """Set the es1 property."""
         self._cards[3].set_value("es1", value)
 
     @property
@@ -713,6 +740,7 @@ class Mat120Rcdc(KeywordBase):
 
     @es2.setter
     def es2(self, value: float) -> None:
+        """Set the es2 property."""
         self._cards[3].set_value("es2", value)
 
     @property
@@ -723,6 +751,7 @@ class Mat120Rcdc(KeywordBase):
 
     @es3.setter
     def es3(self, value: float) -> None:
+        """Set the es3 property."""
         self._cards[3].set_value("es3", value)
 
     @property
@@ -733,6 +762,7 @@ class Mat120Rcdc(KeywordBase):
 
     @es4.setter
     def es4(self, value: float) -> None:
+        """Set the es4 property."""
         self._cards[3].set_value("es4", value)
 
     @property
@@ -743,6 +773,7 @@ class Mat120Rcdc(KeywordBase):
 
     @es5.setter
     def es5(self, value: float) -> None:
+        """Set the es5 property."""
         self._cards[3].set_value("es5", value)
 
     @property
@@ -753,6 +784,7 @@ class Mat120Rcdc(KeywordBase):
 
     @es6.setter
     def es6(self, value: float) -> None:
+        """Set the es6 property."""
         self._cards[3].set_value("es6", value)
 
     @property
@@ -763,6 +795,7 @@ class Mat120Rcdc(KeywordBase):
 
     @es7.setter
     def es7(self, value: float) -> None:
+        """Set the es7 property."""
         self._cards[3].set_value("es7", value)
 
     @property
@@ -773,6 +806,7 @@ class Mat120Rcdc(KeywordBase):
 
     @es8.setter
     def es8(self, value: float) -> None:
+        """Set the es8 property."""
         self._cards[3].set_value("es8", value)
 
     @property
@@ -783,6 +817,7 @@ class Mat120Rcdc(KeywordBase):
 
     @l1.setter
     def l1(self, value: float) -> None:
+        """Set the l1 property."""
         self._cards[4].set_value("l1", value)
 
     @property
@@ -793,6 +828,7 @@ class Mat120Rcdc(KeywordBase):
 
     @l2.setter
     def l2(self, value: float) -> None:
+        """Set the l2 property."""
         self._cards[4].set_value("l2", value)
 
     @property
@@ -803,6 +839,7 @@ class Mat120Rcdc(KeywordBase):
 
     @l3.setter
     def l3(self, value: float) -> None:
+        """Set the l3 property."""
         self._cards[4].set_value("l3", value)
 
     @property
@@ -813,6 +850,7 @@ class Mat120Rcdc(KeywordBase):
 
     @l4.setter
     def l4(self, value: float) -> None:
+        """Set the l4 property."""
         self._cards[4].set_value("l4", value)
 
     @property
@@ -823,6 +861,7 @@ class Mat120Rcdc(KeywordBase):
 
     @ff1.setter
     def ff1(self, value: float) -> None:
+        """Set the ff1 property."""
         self._cards[4].set_value("ff1", value)
 
     @property
@@ -833,6 +872,7 @@ class Mat120Rcdc(KeywordBase):
 
     @ff2.setter
     def ff2(self, value: float) -> None:
+        """Set the ff2 property."""
         self._cards[4].set_value("ff2", value)
 
     @property
@@ -843,6 +883,7 @@ class Mat120Rcdc(KeywordBase):
 
     @ff3.setter
     def ff3(self, value: float) -> None:
+        """Set the ff3 property."""
         self._cards[4].set_value("ff3", value)
 
     @property
@@ -853,6 +894,7 @@ class Mat120Rcdc(KeywordBase):
 
     @ff4.setter
     def ff4(self, value: float) -> None:
+        """Set the ff4 property."""
         self._cards[4].set_value("ff4", value)
 
     @property
@@ -863,6 +905,7 @@ class Mat120Rcdc(KeywordBase):
 
     @lcss.setter
     def lcss(self, value: int) -> None:
+        """Set the lcss property."""
         self._cards[5].set_value("lcss", value)
 
     @property
@@ -873,6 +916,7 @@ class Mat120Rcdc(KeywordBase):
 
     @lclf.setter
     def lclf(self, value: int) -> None:
+        """Set the lclf property."""
         self._cards[5].set_value("lclf", value)
 
     @property
@@ -883,6 +927,7 @@ class Mat120Rcdc(KeywordBase):
 
     @numint.setter
     def numint(self, value: float) -> None:
+        """Set the numint property."""
         self._cards[5].set_value("numint", value)
 
     @property
@@ -893,6 +938,7 @@ class Mat120Rcdc(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[6].set_value("alpha", value)
 
     @property
@@ -903,6 +949,7 @@ class Mat120Rcdc(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[6].set_value("beta", value)
 
     @property
@@ -913,6 +960,7 @@ class Mat120Rcdc(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[6].set_value("gamma", value)
 
     @property
@@ -923,6 +971,7 @@ class Mat120Rcdc(KeywordBase):
 
     @d0.setter
     def d0(self, value: float) -> None:
+        """Set the d0 property."""
         self._cards[6].set_value("d0", value)
 
     @property
@@ -933,6 +982,7 @@ class Mat120Rcdc(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[6].set_value("b", value)
 
     @property
@@ -943,6 +993,7 @@ class Mat120Rcdc(KeywordBase):
 
     @lambda_.setter
     def lambda_(self, value: float) -> None:
+        """Set the lambda_ property."""
         self._cards[6].set_value("lambda", value)
 
     @property
@@ -953,6 +1004,7 @@ class Mat120Rcdc(KeywordBase):
 
     @ds.setter
     def ds(self, value: float) -> None:
+        """Set the ds property."""
         self._cards[6].set_value("ds", value)
 
     @property
@@ -963,6 +1015,7 @@ class Mat120Rcdc(KeywordBase):
 
     @l.setter
     def l(self, value: float) -> None:
+        """Set the l property."""
         self._cards[6].set_value("l", value)
 
     @property
@@ -973,5 +1026,6 @@ class Mat120Rcdc(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
 

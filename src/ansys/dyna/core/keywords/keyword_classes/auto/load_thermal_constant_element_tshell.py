@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadThermalConstantElementTshell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadThermalConstantElementTshell(KeywordBase):
     subkeyword = "THERMAL_CONSTANT_ELEMENT_TSHELL"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadThermalConstantElementTshell class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -62,6 +64,7 @@ class LoadThermalConstantElementTshell(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -72,5 +75,6 @@ class LoadThermalConstantElementTshell(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[0].set_value("t", value)
 

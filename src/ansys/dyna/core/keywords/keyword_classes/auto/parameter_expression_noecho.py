@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ParameterExpressionNoecho class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ParameterExpressionNoecho(KeywordBase):
     subkeyword = "EXPRESSION_NOECHO"
 
     def __init__(self, **kwargs):
+        """Initialize the ParameterExpressionNoecho class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class ParameterExpressionNoecho(KeywordBase):
 
     @prmr.setter
     def prmr(self, value: str) -> None:
+        """Set the prmr property."""
         self._cards[0].set_value("prmr", value)
 
     @property
@@ -71,5 +74,6 @@ class ParameterExpressionNoecho(KeywordBase):
 
     @expression.setter
     def expression(self, value: str) -> None:
+        """Set the expression property."""
         self._cards[0].set_value("expression", value)
 

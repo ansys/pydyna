@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EosJwlAfterburn class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EosJwlAfterburn(KeywordBase):
     subkeyword = "JWL_AFTERBURN"
 
     def __init__(self, **kwargs):
+        """Initialize the EosJwlAfterburn class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -202,6 +204,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -212,6 +215,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -222,6 +226,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[0].set_value("b", value)
 
     @property
@@ -232,6 +237,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[0].set_value("r1", value)
 
     @property
@@ -242,6 +248,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @r2.setter
     def r2(self, value: float) -> None:
+        """Set the r2 property."""
         self._cards[0].set_value("r2", value)
 
     @property
@@ -252,6 +259,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @omeg.setter
     def omeg(self, value: float) -> None:
+        """Set the omeg property."""
         self._cards[0].set_value("omeg", value)
 
     @property
@@ -262,6 +270,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[0].set_value("e0", value)
 
     @property
@@ -272,6 +281,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @vo.setter
     def vo(self, value: float) -> None:
+        """Set the vo property."""
         self._cards[0].set_value("vo", value)
 
     @property
@@ -285,8 +295,9 @@ class EosJwlAfterburn(KeywordBase):
 
     @opt.setter
     def opt(self, value: float) -> None:
+        """Set the opt property."""
         if value not in [0.0, 1.0, 2.0, 3.0, None]:
-            raise Exception("""opt must be `None` or one of {0.0,1.0,2.0,3.0}""")
+            raise Exception("""opt must be `None` or one of {0.0,1.0,2.0,3.0}.""")
         self._cards[1].set_value("opt", value)
 
     @property
@@ -297,6 +308,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @qt.setter
     def qt(self, value: float) -> None:
+        """Set the qt property."""
         self._cards[1].set_value("qt", value)
 
     @property
@@ -307,6 +319,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @t1.setter
     def t1(self, value: float) -> None:
+        """Set the t1 property."""
         self._cards[1].set_value("t1", value)
 
     @property
@@ -317,6 +330,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @t2.setter
     def t2(self, value: float) -> None:
+        """Set the t2 property."""
         self._cards[1].set_value("t2", value)
 
     @property
@@ -330,8 +344,9 @@ class EosJwlAfterburn(KeywordBase):
 
     @opt.setter
     def opt(self, value: float) -> None:
+        """Set the opt property."""
         if value not in [0.0, 1.0, 2.0, 3.0, None]:
-            raise Exception("""opt must be `None` or one of {0.0,1.0,2.0,3.0}""")
+            raise Exception("""opt must be `None` or one of {0.0,1.0,2.0,3.0}.""")
         self._cards[2].set_value("opt", value)
 
     @property
@@ -342,6 +357,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @q0.setter
     def q0(self, value: float) -> None:
+        """Set the q0 property."""
         self._cards[2].set_value("q0", value)
 
     @property
@@ -352,6 +368,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @qa.setter
     def qa(self, value: float) -> None:
+        """Set the qa property."""
         self._cards[2].set_value("qa", value)
 
     @property
@@ -362,6 +379,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @qm.setter
     def qm(self, value: float) -> None:
+        """Set the qm property."""
         self._cards[2].set_value("qm", value)
 
     @property
@@ -372,6 +390,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @qn.setter
     def qn(self, value: float) -> None:
+        """Set the qn property."""
         self._cards[2].set_value("qn", value)
 
     @property
@@ -391,6 +410,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @conm.setter
     def conm(self, value: float) -> None:
+        """Set the conm property."""
         self._cards[2].set_value("conm", value)
 
     @property
@@ -402,6 +422,7 @@ class EosJwlAfterburn(KeywordBase):
 
     @conl.setter
     def conl(self, value: float) -> None:
+        """Set the conl property."""
         self._cards[2].set_value("conl", value)
 
     @property
@@ -413,5 +434,6 @@ class EosJwlAfterburn(KeywordBase):
 
     @cont.setter
     def cont(self, value: float) -> None:
+        """Set the cont property."""
         self._cards[2].set_value("cont", value)
 

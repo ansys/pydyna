@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleStructuredMultiMaterialGroupPlneps class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleStructuredMultiMaterialGroupPlneps(KeywordBase):
     subkeyword = "STRUCTURED_MULTI-MATERIAL_GROUP_PLNEPS"
 
     def __init__(self, **kwargs):
+        """Initialize the AleStructuredMultiMaterialGroupPlneps class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -104,6 +106,7 @@ class AleStructuredMultiMaterialGroupPlneps(KeywordBase):
 
     @ammg_name.setter
     def ammg_name(self, value: str) -> None:
+        """Set the ammg_name property."""
         self._cards[0].set_value("ammg_name", value)
 
     @property
@@ -114,6 +117,7 @@ class AleStructuredMultiMaterialGroupPlneps(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -124,6 +128,7 @@ class AleStructuredMultiMaterialGroupPlneps(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -134,5 +139,6 @@ class AleStructuredMultiMaterialGroupPlneps(KeywordBase):
 
     @pref.setter
     def pref(self, value: float) -> None:
+        """Set the pref property."""
         self._cards[0].set_value("pref", value)
 

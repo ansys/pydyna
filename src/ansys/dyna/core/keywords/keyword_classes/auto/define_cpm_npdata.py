@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCpmNpdata class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCpmNpdata(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCpmNpdata class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -136,6 +138,7 @@ class DefineCpmNpdata(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -147,6 +150,7 @@ class DefineCpmNpdata(KeywordBase):
 
     @hconv.setter
     def hconv(self, value: float) -> None:
+        """Set the hconv property."""
         self._cards[0].set_value("hconv", value)
 
     @property
@@ -159,6 +163,7 @@ class DefineCpmNpdata(KeywordBase):
 
     @pfric.setter
     def pfric(self, value: float) -> None:
+        """Set the pfric property."""
         self._cards[0].set_value("pfric", value)
 
     @property
@@ -169,6 +174,7 @@ class DefineCpmNpdata(KeywordBase):
 
     @sdfblk.setter
     def sdfblk(self, value: float) -> None:
+        """Set the sdfblk property."""
         self._cards[0].set_value("sdfblk", value)
 
     @property
@@ -179,6 +185,7 @@ class DefineCpmNpdata(KeywordBase):
 
     @kp.setter
     def kp(self, value: float) -> None:
+        """Set the kp property."""
         self._cards[0].set_value("kp", value)
 
     @property
@@ -192,6 +199,7 @@ class DefineCpmNpdata(KeywordBase):
 
     @inip.setter
     def inip(self, value: int) -> None:
+        """Set the inip property."""
         self._cards[0].set_value("inip", value)
 
     @property
@@ -202,6 +210,7 @@ class DefineCpmNpdata(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[0].set_value("cp", value)
 
     @property
@@ -212,6 +221,7 @@ class DefineCpmNpdata(KeywordBase):
 
     @psfdcf.setter
     def psfdcf(self, value: float) -> None:
+        """Set the psfdcf property."""
         self._cards[0].set_value("psfdcf", value)
 
     @property
@@ -222,6 +232,7 @@ class DefineCpmNpdata(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[1].set_value("id", value)
 
     @property
@@ -232,5 +243,6 @@ class DefineCpmNpdata(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

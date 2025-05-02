@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAddDamageDiem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddDamageDiem(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAddDamageDiem class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -203,6 +205,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -213,6 +216,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @ndiemc.setter
     def ndiemc(self, value: float) -> None:
+        """Set the ndiemc property."""
         self._cards[0].set_value("ndiemc", value)
 
     @property
@@ -225,8 +229,9 @@ class MatAddDamageDiem(KeywordBase):
 
     @dinit.setter
     def dinit(self, value: int) -> None:
+        """Set the dinit property."""
         if value not in [0, 1, None]:
-            raise Exception("""dinit must be `None` or one of {0,1}""")
+            raise Exception("""dinit must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dinit", value)
 
     @property
@@ -237,6 +242,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @deps.setter
     def deps(self, value: float) -> None:
+        """Set the deps property."""
         self._cards[0].set_value("deps", value)
 
     @property
@@ -250,6 +256,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @numfip.setter
     def numfip(self, value: float) -> None:
+        """Set the numfip property."""
         self._cards[0].set_value("numfip", value)
 
     @property
@@ -265,8 +272,9 @@ class MatAddDamageDiem(KeywordBase):
 
     @dityp.setter
     def dityp(self, value: float) -> None:
+        """Set the dityp property."""
         if value not in [0.0, 1.0, 2.0, 3.0, 4.0, None]:
-            raise Exception("""dityp must be `None` or one of {0.0,1.0,2.0,3.0,4.0}""")
+            raise Exception("""dityp must be `None` or one of {0.0,1.0,2.0,3.0,4.0}.""")
         self._cards[1].set_value("dityp", value)
 
     @property
@@ -282,6 +290,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[1].set_value("p1", value)
 
     @property
@@ -301,6 +310,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[1].set_value("p2", value)
 
     @property
@@ -320,6 +330,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[1].set_value("p3", value)
 
     @property
@@ -332,6 +343,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[1].set_value("p4", value)
 
     @property
@@ -342,6 +354,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[1].set_value("p5", value)
 
     @property
@@ -354,8 +367,9 @@ class MatAddDamageDiem(KeywordBase):
 
     @detyp.setter
     def detyp(self, value: float) -> None:
+        """Set the detyp property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""detyp must be `None` or one of {0.0,1.0}""")
+            raise Exception("""detyp must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("detyp", value)
 
     @property
@@ -369,8 +383,9 @@ class MatAddDamageDiem(KeywordBase):
 
     @dctyp.setter
     def dctyp(self, value: float) -> None:
+        """Set the dctyp property."""
         if value not in [0.0, -1.0, 1.0, None]:
-            raise Exception("""dctyp must be `None` or one of {0.0,-1.0,1.0}""")
+            raise Exception("""dctyp must be `None` or one of {0.0,-1.0,1.0}.""")
         self._cards[2].set_value("dctyp", value)
 
     @property
@@ -383,6 +398,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @q1.setter
     def q1(self, value: float) -> None:
+        """Set the q1 property."""
         self._cards[2].set_value("q1", value)
 
     @property
@@ -393,6 +409,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @q2.setter
     def q2(self, value: float) -> None:
+        """Set the q2 property."""
         self._cards[2].set_value("q2", value)
 
     @property
@@ -405,6 +422,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @q3.setter
     def q3(self, value: float) -> None:
+        """Set the q3 property."""
         self._cards[2].set_value("q3", value)
 
     @property
@@ -415,6 +433,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @q4.setter
     def q4(self, value: float) -> None:
+        """Set the q4 property."""
         self._cards[2].set_value("q4", value)
 
     @property
@@ -425,5 +444,6 @@ class MatAddDamageDiem(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EfControl class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EfControl(KeywordBase):
     subkeyword = "CONTROL"
 
     def __init__(self, **kwargs):
+        """Initialize the EfControl class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -128,6 +130,7 @@ class EfControl(KeywordBase):
 
     @nphton.setter
     def nphton(self, value: int) -> None:
+        """Set the nphton property."""
         self._cards[0].set_value("nphton", value)
 
     @property
@@ -138,6 +141,7 @@ class EfControl(KeywordBase):
 
     @nrefs.setter
     def nrefs(self, value: int) -> None:
+        """Set the nrefs property."""
         self._cards[0].set_value("nrefs", value)
 
     @property
@@ -148,6 +152,7 @@ class EfControl(KeywordBase):
 
     @nwarns.setter
     def nwarns(self, value: int) -> None:
+        """Set the nwarns property."""
         self._cards[0].set_value("nwarns", value)
 
     @property
@@ -158,6 +163,7 @@ class EfControl(KeywordBase):
 
     @nlost.setter
     def nlost(self, value: int) -> None:
+        """Set the nlost property."""
         self._cards[0].set_value("nlost", value)
 
     @property
@@ -168,6 +174,7 @@ class EfControl(KeywordBase):
 
     @nloops.setter
     def nloops(self, value: int) -> None:
+        """Set the nloops property."""
         self._cards[0].set_value("nloops", value)
 
     @property
@@ -178,6 +185,7 @@ class EfControl(KeywordBase):
 
     @errodef.setter
     def errodef(self, value: float) -> None:
+        """Set the errodef property."""
         self._cards[0].set_value("errodef", value)
 
     @property
@@ -191,6 +199,7 @@ class EfControl(KeywordBase):
 
     @inseed.setter
     def inseed(self, value: int) -> None:
+        """Set the inseed property."""
         self._cards[0].set_value("inseed", value)
 
     @property
@@ -201,6 +210,7 @@ class EfControl(KeywordBase):
 
     @nphton.setter
     def nphton(self, value: int) -> None:
+        """Set the nphton property."""
         self._cards[1].set_value("nphton", value)
 
     @property
@@ -211,6 +221,7 @@ class EfControl(KeywordBase):
 
     @nrefs.setter
     def nrefs(self, value: int) -> None:
+        """Set the nrefs property."""
         self._cards[1].set_value("nrefs", value)
 
     @property
@@ -221,6 +232,7 @@ class EfControl(KeywordBase):
 
     @nwarns.setter
     def nwarns(self, value: int) -> None:
+        """Set the nwarns property."""
         self._cards[1].set_value("nwarns", value)
 
     @property
@@ -231,5 +243,6 @@ class EfControl(KeywordBase):
 
     @nlost.setter
     def nlost(self, value: int) -> None:
+        """Set the nlost property."""
         self._cards[1].set_value("nlost", value)
 

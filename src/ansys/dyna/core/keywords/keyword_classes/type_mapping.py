@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module containing mapping from keywords to classes."""
 TypeMapping = {
     "*AIRBAG_ADIABATIC_GAS_MODEL": "AirbagAdiabaticGasModel",
     "*AIRBAG_ADIABATIC_GAS_MODEL_ID": "AirbagAdiabaticGasModelId",

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdBoundaryPeriodic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdBoundaryPeriodic(KeywordBase):
     subkeyword = "BOUNDARY_PERIODIC"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdBoundaryPeriodic class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -97,6 +99,7 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -111,8 +114,9 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
+        """Set the ptype property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""ptype must be `None` or one of {1,2,3}""")
+            raise Exception("""ptype must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -123,6 +127,7 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     @pid2.setter
     def pid2(self, value: int) -> None:
+        """Set the pid2 property."""
         self._cards[0].set_value("pid2", value)
 
     @property
@@ -133,6 +138,7 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     @pdlcid.setter
     def pdlcid(self, value: int) -> None:
+        """Set the pdlcid property."""
         self._cards[0].set_value("pdlcid", value)
 
     @property
@@ -150,6 +156,7 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     @axe.setter
     def axe(self, value: int) -> None:
+        """Set the axe property."""
         self._cards[0].set_value("axe", value)
 
     @property
@@ -160,6 +167,7 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     @ptid.setter
     def ptid(self, value: int) -> None:
+        """Set the ptid property."""
         self._cards[0].set_value("ptid", value)
 
     @property
@@ -170,5 +178,6 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     @angle.setter
     def angle(self, value: int) -> None:
+        """Set the angle property."""
         self._cards[0].set_value("angle", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitAuto class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitAuto(KeywordBase):
     subkeyword = "IMPLICIT_AUTO"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitAuto class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -172,6 +174,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @iauto.setter
     def iauto(self, value: int) -> None:
+        """Set the iauto property."""
         self._cards[0].set_value("iauto", value)
 
     @property
@@ -182,6 +185,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @iteopt.setter
     def iteopt(self, value: int) -> None:
+        """Set the iteopt property."""
         self._cards[0].set_value("iteopt", value)
 
     @property
@@ -192,6 +196,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @itewin.setter
     def itewin(self, value: int) -> None:
+        """Set the itewin property."""
         self._cards[0].set_value("itewin", value)
 
     @property
@@ -203,6 +208,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @dtmin.setter
     def dtmin(self, value: float) -> None:
+        """Set the dtmin property."""
         self._cards[0].set_value("dtmin", value)
 
     @property
@@ -213,6 +219,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @dtmax.setter
     def dtmax(self, value: float) -> None:
+        """Set the dtmax property."""
         self._cards[0].set_value("dtmax", value)
 
     @property
@@ -226,6 +233,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @dtexp.setter
     def dtexp(self, value: float) -> None:
+        """Set the dtexp property."""
         self._cards[0].set_value("dtexp", value)
 
     @property
@@ -239,6 +247,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @kfail.setter
     def kfail(self, value: int) -> None:
+        """Set the kfail property."""
         self._cards[0].set_value("kfail", value)
 
     @property
@@ -251,6 +260,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @kcycle.setter
     def kcycle(self, value: int) -> None:
+        """Set the kcycle property."""
         self._cards[0].set_value("kcycle", value)
 
     @property
@@ -262,6 +272,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @hcmin.setter
     def hcmin(self, value: float) -> None:
+        """Set the hcmin property."""
         self._cards[1].set_value("hcmin", value)
 
     @property
@@ -273,6 +284,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @hcmax.setter
     def hcmax(self, value: float) -> None:
+        """Set the hcmax property."""
         self._cards[1].set_value("hcmax", value)
 
     @property
@@ -284,6 +296,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @hmmin.setter
     def hmmin(self, value: float) -> None:
+        """Set the hmmin property."""
         self._cards[1].set_value("hmmin", value)
 
     @property
@@ -295,6 +308,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @hmmax.setter
     def hmmax(self, value: float) -> None:
+        """Set the hmmax property."""
         self._cards[1].set_value("hmmax", value)
 
     @property
@@ -306,6 +320,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @hntmax.setter
     def hntmax(self, value: float) -> None:
+        """Set the hntmax property."""
         self._cards[1].set_value("hntmax", value)
 
     @property
@@ -317,6 +332,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @hnrmax.setter
     def hnrmax(self, value: float) -> None:
+        """Set the hnrmax property."""
         self._cards[1].set_value("hnrmax", value)
 
     @property
@@ -328,6 +344,7 @@ class ControlImplicitAuto(KeywordBase):
 
     @hrtmax.setter
     def hrtmax(self, value: float) -> None:
+        """Set the hrtmax property."""
         self._cards[1].set_value("hrtmax", value)
 
     @property
@@ -339,5 +356,6 @@ class ControlImplicitAuto(KeywordBase):
 
     @hrrmax.setter
     def hrrmax(self, value: float) -> None:
+        """Set the hrrmax property."""
         self._cards[1].set_value("hrrmax", value)
 

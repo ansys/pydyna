@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SetSolidAdd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetSolidAdd(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SetSolidAdd class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -144,6 +146,7 @@ class SetSolidAdd(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -156,8 +159,9 @@ class SetSolidAdd(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         if value not in ["MECH", "CESE", "ICFD", None]:
-            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -168,6 +172,7 @@ class SetSolidAdd(KeywordBase):
 
     @dsid1.setter
     def dsid1(self, value: int) -> None:
+        """Set the dsid1 property."""
         self._cards[1].set_value("dsid1", value)
 
     @property
@@ -178,6 +183,7 @@ class SetSolidAdd(KeywordBase):
 
     @dsid2.setter
     def dsid2(self, value: int) -> None:
+        """Set the dsid2 property."""
         self._cards[1].set_value("dsid2", value)
 
     @property
@@ -188,6 +194,7 @@ class SetSolidAdd(KeywordBase):
 
     @dsid3.setter
     def dsid3(self, value: int) -> None:
+        """Set the dsid3 property."""
         self._cards[1].set_value("dsid3", value)
 
     @property
@@ -198,6 +205,7 @@ class SetSolidAdd(KeywordBase):
 
     @dsid4.setter
     def dsid4(self, value: int) -> None:
+        """Set the dsid4 property."""
         self._cards[1].set_value("dsid4", value)
 
     @property
@@ -208,6 +216,7 @@ class SetSolidAdd(KeywordBase):
 
     @dsid5.setter
     def dsid5(self, value: int) -> None:
+        """Set the dsid5 property."""
         self._cards[1].set_value("dsid5", value)
 
     @property
@@ -218,6 +227,7 @@ class SetSolidAdd(KeywordBase):
 
     @dsid6.setter
     def dsid6(self, value: int) -> None:
+        """Set the dsid6 property."""
         self._cards[1].set_value("dsid6", value)
 
     @property
@@ -228,6 +238,7 @@ class SetSolidAdd(KeywordBase):
 
     @dsid7.setter
     def dsid7(self, value: int) -> None:
+        """Set the dsid7 property."""
         self._cards[1].set_value("dsid7", value)
 
     @property
@@ -238,6 +249,7 @@ class SetSolidAdd(KeywordBase):
 
     @dsid8.setter
     def dsid8(self, value: int) -> None:
+        """Set the dsid8 property."""
         self._cards[1].set_value("dsid8", value)
 
     @property
@@ -248,5 +260,6 @@ class SetSolidAdd(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

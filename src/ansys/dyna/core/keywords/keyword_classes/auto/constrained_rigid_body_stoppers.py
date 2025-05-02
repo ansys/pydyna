@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedRigidBodyStoppers class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
     subkeyword = "RIGID_BODY_STOPPERS"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedRigidBodyStoppers class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -145,6 +147,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -158,6 +161,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @lcmax.setter
     def lcmax(self, value: int) -> None:
+        """Set the lcmax property."""
         self._cards[0].set_value("lcmax", value)
 
     @property
@@ -171,6 +175,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @lcmin.setter
     def lcmin(self, value: int) -> None:
+        """Set the lcmin property."""
         self._cards[0].set_value("lcmin", value)
 
     @property
@@ -181,6 +186,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @psidmx.setter
     def psidmx(self, value: int) -> None:
+        """Set the psidmx property."""
         self._cards[0].set_value("psidmx", value)
 
     @property
@@ -191,6 +197,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @psidmn.setter
     def psidmn(self, value: int) -> None:
+        """Set the psidmn property."""
         self._cards[0].set_value("psidmn", value)
 
     @property
@@ -202,6 +209,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @lcvmnx.setter
     def lcvmnx(self, value: int) -> None:
+        """Set the lcvmnx property."""
         self._cards[0].set_value("lcvmnx", value)
 
     @property
@@ -220,8 +228,9 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @dir.setter
     def dir(self, value: int) -> None:
+        """Set the dir property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, None]:
-            raise Exception("""dir must be `None` or one of {1,2,3,4,5,6,7,8}""")
+            raise Exception("""dir must be `None` or one of {1,2,3,4,5,6,7,8}.""")
         self._cards[0].set_value("dir", value)
 
     @property
@@ -232,6 +241,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -242,6 +252,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @tb.setter
     def tb(self, value: float) -> None:
+        """Set the tb property."""
         self._cards[1].set_value("tb", value)
 
     @property
@@ -252,6 +263,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @td.setter
     def td(self, value: float) -> None:
+        """Set the td property."""
         self._cards[1].set_value("td", value)
 
     @property
@@ -262,5 +274,6 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @stiff.setter
     def stiff(self, value: float) -> None:
+        """Set the stiff property."""
         self._cards[1].set_value("stiff", value)
 

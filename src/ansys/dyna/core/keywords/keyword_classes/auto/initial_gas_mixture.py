@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialGasMixture class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialGasMixture(KeywordBase):
     subkeyword = "GAS_MIXTURE"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialGasMixture class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -144,6 +146,7 @@ class InitialGasMixture(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -156,8 +159,9 @@ class InitialGasMixture(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, None]:
-            raise Exception("""stype must be `None` or one of {0,1}""")
+            raise Exception("""stype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -169,6 +173,7 @@ class InitialGasMixture(KeywordBase):
 
     @mmgid.setter
     def mmgid(self, value: int) -> None:
+        """Set the mmgid property."""
         self._cards[0].set_value("mmgid", value)
 
     @property
@@ -179,6 +184,7 @@ class InitialGasMixture(KeywordBase):
 
     @temp.setter
     def temp(self, value: float) -> None:
+        """Set the temp property."""
         self._cards[0].set_value("temp", value)
 
     @property
@@ -189,6 +195,7 @@ class InitialGasMixture(KeywordBase):
 
     @ro1.setter
     def ro1(self, value: float) -> None:
+        """Set the ro1 property."""
         self._cards[1].set_value("ro1", value)
 
     @property
@@ -199,6 +206,7 @@ class InitialGasMixture(KeywordBase):
 
     @ro2.setter
     def ro2(self, value: float) -> None:
+        """Set the ro2 property."""
         self._cards[1].set_value("ro2", value)
 
     @property
@@ -209,6 +217,7 @@ class InitialGasMixture(KeywordBase):
 
     @ro3.setter
     def ro3(self, value: float) -> None:
+        """Set the ro3 property."""
         self._cards[1].set_value("ro3", value)
 
     @property
@@ -219,6 +228,7 @@ class InitialGasMixture(KeywordBase):
 
     @ro4.setter
     def ro4(self, value: float) -> None:
+        """Set the ro4 property."""
         self._cards[1].set_value("ro4", value)
 
     @property
@@ -229,6 +239,7 @@ class InitialGasMixture(KeywordBase):
 
     @ro5.setter
     def ro5(self, value: float) -> None:
+        """Set the ro5 property."""
         self._cards[1].set_value("ro5", value)
 
     @property
@@ -239,6 +250,7 @@ class InitialGasMixture(KeywordBase):
 
     @ro6.setter
     def ro6(self, value: float) -> None:
+        """Set the ro6 property."""
         self._cards[1].set_value("ro6", value)
 
     @property
@@ -249,6 +261,7 @@ class InitialGasMixture(KeywordBase):
 
     @ro7.setter
     def ro7(self, value: float) -> None:
+        """Set the ro7 property."""
         self._cards[1].set_value("ro7", value)
 
     @property
@@ -259,5 +272,6 @@ class InitialGasMixture(KeywordBase):
 
     @ro8.setter
     def ro8(self, value: float) -> None:
+        """Set the ro8 property."""
         self._cards[1].set_value("ro8", value)
 

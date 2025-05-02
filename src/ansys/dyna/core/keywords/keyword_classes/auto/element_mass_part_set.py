@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementMassPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementMassPartSet(KeywordBase):
     subkeyword = "MASS_PART_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementMassPartSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -70,6 +72,7 @@ class ElementMassPartSet(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -80,6 +83,7 @@ class ElementMassPartSet(KeywordBase):
 
     @addmass.setter
     def addmass(self, value: float) -> None:
+        """Set the addmass property."""
         self._cards[0].set_value("addmass", value)
 
     @property
@@ -90,5 +94,6 @@ class ElementMassPartSet(KeywordBase):
 
     @finmass.setter
     def finmass(self, value: float) -> None:
+        """Set the finmass property."""
         self._cards[0].set_value("finmass", value)
 

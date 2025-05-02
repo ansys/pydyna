@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceSsiAux class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceSsiAux(KeywordBase):
     subkeyword = "SSI_AUX"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceSsiAux class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class InterfaceSsiAux(KeywordBase):
 
     @gmset.setter
     def gmset(self, value: int) -> None:
+        """Set the gmset property."""
         self._cards[0].set_value("gmset", value)
 
     @property
@@ -71,5 +74,6 @@ class InterfaceSsiAux(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 

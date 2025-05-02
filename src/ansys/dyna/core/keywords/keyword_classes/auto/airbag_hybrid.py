@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AirbagHybrid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagHybrid(KeywordBase):
     subkeyword = "HYBRID"
 
     def __init__(self, **kwargs):
+        """Initialize the AirbagHybrid class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -341,6 +343,7 @@ class AirbagHybrid(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -353,8 +356,9 @@ class AirbagHybrid(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
+        """Set the sidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}""")
+            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sidtyp", value)
 
     @property
@@ -368,6 +372,7 @@ class AirbagHybrid(KeywordBase):
 
     @rbid.setter
     def rbid(self, value: int) -> None:
+        """Set the rbid property."""
         self._cards[0].set_value("rbid", value)
 
     @property
@@ -378,6 +383,7 @@ class AirbagHybrid(KeywordBase):
 
     @vsca.setter
     def vsca(self, value: float) -> None:
+        """Set the vsca property."""
         self._cards[0].set_value("vsca", value)
 
     @property
@@ -388,6 +394,7 @@ class AirbagHybrid(KeywordBase):
 
     @psca.setter
     def psca(self, value: float) -> None:
+        """Set the psca property."""
         self._cards[0].set_value("psca", value)
 
     @property
@@ -398,6 +405,7 @@ class AirbagHybrid(KeywordBase):
 
     @vini.setter
     def vini(self, value: float) -> None:
+        """Set the vini property."""
         self._cards[0].set_value("vini", value)
 
     @property
@@ -408,6 +416,7 @@ class AirbagHybrid(KeywordBase):
 
     @mwd.setter
     def mwd(self, value: float) -> None:
+        """Set the mwd property."""
         self._cards[0].set_value("mwd", value)
 
     @property
@@ -418,6 +427,7 @@ class AirbagHybrid(KeywordBase):
 
     @spsf.setter
     def spsf(self, value: float) -> None:
+        """Set the spsf property."""
         self._cards[0].set_value("spsf", value)
 
     @property
@@ -428,6 +438,7 @@ class AirbagHybrid(KeywordBase):
 
     @atmost.setter
     def atmost(self, value: float) -> None:
+        """Set the atmost property."""
         self._cards[1].set_value("atmost", value)
 
     @property
@@ -438,6 +449,7 @@ class AirbagHybrid(KeywordBase):
 
     @atmosp.setter
     def atmosp(self, value: float) -> None:
+        """Set the atmosp property."""
         self._cards[1].set_value("atmosp", value)
 
     @property
@@ -448,6 +460,7 @@ class AirbagHybrid(KeywordBase):
 
     @atmosd.setter
     def atmosd(self, value: float) -> None:
+        """Set the atmosd property."""
         self._cards[1].set_value("atmosd", value)
 
     @property
@@ -458,6 +471,7 @@ class AirbagHybrid(KeywordBase):
 
     @gc.setter
     def gc(self, value: float) -> None:
+        """Set the gc property."""
         self._cards[1].set_value("gc", value)
 
     @property
@@ -468,6 +482,7 @@ class AirbagHybrid(KeywordBase):
 
     @cc.setter
     def cc(self, value: float) -> None:
+        """Set the cc property."""
         self._cards[1].set_value("cc", value)
 
     @property
@@ -479,6 +494,7 @@ class AirbagHybrid(KeywordBase):
 
     @hconv.setter
     def hconv(self, value: float) -> None:
+        """Set the hconv property."""
         self._cards[1].set_value("hconv", value)
 
     @property
@@ -489,6 +505,7 @@ class AirbagHybrid(KeywordBase):
 
     @c23.setter
     def c23(self, value: float) -> None:
+        """Set the c23 property."""
         self._cards[2].set_value("c23", value)
 
     @property
@@ -499,6 +516,7 @@ class AirbagHybrid(KeywordBase):
 
     @lcc23.setter
     def lcc23(self, value: int) -> None:
+        """Set the lcc23 property."""
         self._cards[2].set_value("lcc23", value)
 
     @property
@@ -509,6 +527,7 @@ class AirbagHybrid(KeywordBase):
 
     @a23.setter
     def a23(self, value: float) -> None:
+        """Set the a23 property."""
         self._cards[2].set_value("a23", value)
 
     @property
@@ -519,6 +538,7 @@ class AirbagHybrid(KeywordBase):
 
     @lca23.setter
     def lca23(self, value: int) -> None:
+        """Set the lca23 property."""
         self._cards[2].set_value("lca23", value)
 
     @property
@@ -529,6 +549,7 @@ class AirbagHybrid(KeywordBase):
 
     @cp23.setter
     def cp23(self, value: float) -> None:
+        """Set the cp23 property."""
         self._cards[2].set_value("cp23", value)
 
     @property
@@ -539,6 +560,7 @@ class AirbagHybrid(KeywordBase):
 
     @lcp23.setter
     def lcp23(self, value: int) -> None:
+        """Set the lcp23 property."""
         self._cards[2].set_value("lcp23", value)
 
     @property
@@ -549,6 +571,7 @@ class AirbagHybrid(KeywordBase):
 
     @ap23.setter
     def ap23(self, value: float) -> None:
+        """Set the ap23 property."""
         self._cards[2].set_value("ap23", value)
 
     @property
@@ -559,6 +582,7 @@ class AirbagHybrid(KeywordBase):
 
     @lcap23.setter
     def lcap23(self, value: int) -> None:
+        """Set the lcap23 property."""
         self._cards[2].set_value("lcap23", value)
 
     @property
@@ -577,8 +601,9 @@ class AirbagHybrid(KeywordBase):
 
     @opt.setter
     def opt(self, value: int) -> None:
+        """Set the opt property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, None]:
-            raise Exception("""opt must be `None` or one of {0,1,2,3,4,5,6,7,8}""")
+            raise Exception("""opt must be `None` or one of {0,1,2,3,4,5,6,7,8}.""")
         self._cards[3].set_value("opt", value)
 
     @property
@@ -589,6 +614,7 @@ class AirbagHybrid(KeywordBase):
 
     @pvent.setter
     def pvent(self, value: float) -> None:
+        """Set the pvent property."""
         self._cards[3].set_value("pvent", value)
 
     @property
@@ -599,6 +625,7 @@ class AirbagHybrid(KeywordBase):
 
     @ngas.setter
     def ngas(self, value: int) -> None:
+        """Set the ngas property."""
         self._cards[3].set_value("ngas", value)
 
     @property
@@ -609,6 +636,7 @@ class AirbagHybrid(KeywordBase):
 
     @lcefr.setter
     def lcefr(self, value: int) -> None:
+        """Set the lcefr property."""
         self._cards[3].set_value("lcefr", value)
 
     @property
@@ -619,6 +647,7 @@ class AirbagHybrid(KeywordBase):
 
     @lcidm0.setter
     def lcidm0(self, value: int) -> None:
+        """Set the lcidm0 property."""
         self._cards[3].set_value("lcidm0", value)
 
     @property
@@ -634,6 +663,7 @@ class AirbagHybrid(KeywordBase):
 
     @vntopt.setter
     def vntopt(self, value: int) -> None:
+        """Set the vntopt property."""
         self._cards[3].set_value("vntopt", value)
 
     @property
@@ -646,6 +676,7 @@ class AirbagHybrid(KeywordBase):
 
     @lcidm.setter
     def lcidm(self, value: int) -> None:
+        """Set the lcidm property."""
         self._cards[4].set_value("lcidm", value)
 
     @property
@@ -658,6 +689,7 @@ class AirbagHybrid(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[4].set_value("lcidt", value)
 
     @property
@@ -668,6 +700,7 @@ class AirbagHybrid(KeywordBase):
 
     @mw.setter
     def mw(self, value: float) -> None:
+        """Set the mw property."""
         self._cards[4].set_value("mw", value)
 
     @property
@@ -678,6 +711,7 @@ class AirbagHybrid(KeywordBase):
 
     @initm.setter
     def initm(self, value: float) -> None:
+        """Set the initm property."""
         self._cards[4].set_value("initm", value)
 
     @property
@@ -688,6 +722,7 @@ class AirbagHybrid(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[4].set_value("a", value)
 
     @property
@@ -698,6 +733,7 @@ class AirbagHybrid(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[4].set_value("b", value)
 
     @property
@@ -708,6 +744,7 @@ class AirbagHybrid(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[4].set_value("c", value)
 
     @property
@@ -718,5 +755,6 @@ class AirbagHybrid(KeywordBase):
 
     @fmass.setter
     def fmass(self, value: float) -> None:
+        """Set the fmass property."""
         self._cards[5].set_value("fmass", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineContactExclusion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineContactExclusion(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineContactExclusion class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -203,6 +205,7 @@ class DefineContactExclusion(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -213,6 +216,7 @@ class DefineContactExclusion(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -225,6 +229,7 @@ class DefineContactExclusion(KeywordBase):
 
     @target.setter
     def target(self, value: int) -> None:
+        """Set the target property."""
         self._cards[1].set_value("target", value)
 
     @property
@@ -245,6 +250,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c1.setter
     def c1(self, value: int) -> None:
+        """Set the c1 property."""
         self._cards[1].set_value("c1", value)
 
     @property
@@ -265,6 +271,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c2.setter
     def c2(self, value: int) -> None:
+        """Set the c2 property."""
         self._cards[1].set_value("c2", value)
 
     @property
@@ -285,6 +292,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c3.setter
     def c3(self, value: int) -> None:
+        """Set the c3 property."""
         self._cards[1].set_value("c3", value)
 
     @property
@@ -305,6 +313,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c4.setter
     def c4(self, value: int) -> None:
+        """Set the c4 property."""
         self._cards[1].set_value("c4", value)
 
     @property
@@ -325,6 +334,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c5.setter
     def c5(self, value: int) -> None:
+        """Set the c5 property."""
         self._cards[1].set_value("c5", value)
 
     @property
@@ -345,6 +355,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c6.setter
     def c6(self, value: int) -> None:
+        """Set the c6 property."""
         self._cards[1].set_value("c6", value)
 
     @property
@@ -365,6 +376,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c7.setter
     def c7(self, value: int) -> None:
+        """Set the c7 property."""
         self._cards[1].set_value("c7", value)
 
     @property
@@ -385,6 +397,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c8.setter
     def c8(self, value: int) -> None:
+        """Set the c8 property."""
         self._cards[2].set_value("c8", value)
 
     @property
@@ -405,6 +418,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c9.setter
     def c9(self, value: int) -> None:
+        """Set the c9 property."""
         self._cards[2].set_value("c9", value)
 
     @property
@@ -425,6 +439,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c10.setter
     def c10(self, value: int) -> None:
+        """Set the c10 property."""
         self._cards[2].set_value("c10", value)
 
     @property
@@ -445,6 +460,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c11.setter
     def c11(self, value: int) -> None:
+        """Set the c11 property."""
         self._cards[2].set_value("c11", value)
 
     @property
@@ -465,6 +481,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c12.setter
     def c12(self, value: int) -> None:
+        """Set the c12 property."""
         self._cards[2].set_value("c12", value)
 
     @property
@@ -485,6 +502,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c13.setter
     def c13(self, value: int) -> None:
+        """Set the c13 property."""
         self._cards[2].set_value("c13", value)
 
     @property
@@ -505,6 +523,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c14.setter
     def c14(self, value: int) -> None:
+        """Set the c14 property."""
         self._cards[2].set_value("c14", value)
 
     @property
@@ -525,6 +544,7 @@ class DefineContactExclusion(KeywordBase):
 
     @c15.setter
     def c15(self, value: int) -> None:
+        """Set the c15 property."""
         self._cards[2].set_value("c15", value)
 
     @property
@@ -535,5 +555,6 @@ class DefineContactExclusion(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

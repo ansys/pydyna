@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmControlSolution class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmControlSolution(KeywordBase):
     subkeyword = "CONTROL_SOLUTION"
 
     def __init__(self, **kwargs):
+        """Initialize the EmControlSolution class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -111,6 +113,7 @@ class EmControlSolution(KeywordBase):
 
     @ncylfem.setter
     def ncylfem(self, value: int) -> None:
+        """Set the ncylfem property."""
         self._cards[0].set_value("ncylfem", value)
 
     @property
@@ -121,6 +124,7 @@ class EmControlSolution(KeywordBase):
 
     @ncylbem.setter
     def ncylbem(self, value: int) -> None:
+        """Set the ncylbem property."""
         self._cards[0].set_value("ncylbem", value)
 
     @property
@@ -133,6 +137,7 @@ class EmControlSolution(KeywordBase):
 
     @autofem.setter
     def autofem(self, value: int) -> None:
+        """Set the autofem property."""
         self._cards[0].set_value("autofem", value)
 
     @property
@@ -145,6 +150,7 @@ class EmControlSolution(KeywordBase):
 
     @autobem.setter
     def autobem(self, value: int) -> None:
+        """Set the autobem property."""
         self._cards[0].set_value("autobem", value)
 
     @property
@@ -155,6 +161,7 @@ class EmControlSolution(KeywordBase):
 
     @tol1fem.setter
     def tol1fem(self, value: float) -> None:
+        """Set the tol1fem property."""
         self._cards[0].set_value("tol1fem", value)
 
     @property
@@ -165,6 +172,7 @@ class EmControlSolution(KeywordBase):
 
     @tol2fem.setter
     def tol2fem(self, value: float) -> None:
+        """Set the tol2fem property."""
         self._cards[0].set_value("tol2fem", value)
 
     @property
@@ -175,6 +183,7 @@ class EmControlSolution(KeywordBase):
 
     @tol1bem.setter
     def tol1bem(self, value: float) -> None:
+        """Set the tol1bem property."""
         self._cards[0].set_value("tol1bem", value)
 
     @property
@@ -185,5 +194,6 @@ class EmControlSolution(KeywordBase):
 
     @tol2bem.setter
     def tol2bem(self, value: float) -> None:
+        """Set the tol2bem property."""
         self._cards[0].set_value("tol2bem", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat075 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat075(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat075 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -179,6 +181,7 @@ class Mat075(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -189,6 +192,7 @@ class Mat075(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -199,6 +203,7 @@ class Mat075(KeywordBase):
 
     @ym.setter
     def ym(self, value: float) -> None:
+        """Set the ym property."""
         self._cards[0].set_value("ym", value)
 
     @property
@@ -209,6 +214,7 @@ class Mat075(KeywordBase):
 
     @lcpy.setter
     def lcpy(self, value: int) -> None:
+        """Set the lcpy property."""
         self._cards[0].set_value("lcpy", value)
 
     @property
@@ -219,6 +225,7 @@ class Mat075(KeywordBase):
 
     @lcuys.setter
     def lcuys(self, value: int) -> None:
+        """Set the lcuys property."""
         self._cards[0].set_value("lcuys", value)
 
     @property
@@ -229,6 +236,7 @@ class Mat075(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[0].set_value("vc", value)
 
     @property
@@ -239,6 +247,7 @@ class Mat075(KeywordBase):
 
     @pc.setter
     def pc(self, value: float) -> None:
+        """Set the pc property."""
         self._cards[0].set_value("pc", value)
 
     @property
@@ -249,6 +258,7 @@ class Mat075(KeywordBase):
 
     @vpc.setter
     def vpc(self, value: float) -> None:
+        """Set the vpc property."""
         self._cards[0].set_value("vpc", value)
 
     @property
@@ -259,6 +269,7 @@ class Mat075(KeywordBase):
 
     @tsc.setter
     def tsc(self, value: float) -> None:
+        """Set the tsc property."""
         self._cards[1].set_value("tsc", value)
 
     @property
@@ -269,6 +280,7 @@ class Mat075(KeywordBase):
 
     @vtsc.setter
     def vtsc(self, value: float) -> None:
+        """Set the vtsc property."""
         self._cards[1].set_value("vtsc", value)
 
     @property
@@ -279,6 +291,7 @@ class Mat075(KeywordBase):
 
     @lcrate.setter
     def lcrate(self, value: int) -> None:
+        """Set the lcrate property."""
         self._cards[1].set_value("lcrate", value)
 
     @property
@@ -289,6 +302,7 @@ class Mat075(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[1].set_value("pr", value)
 
     @property
@@ -302,6 +316,7 @@ class Mat075(KeywordBase):
 
     @kcon.setter
     def kcon(self, value: float) -> None:
+        """Set the kcon property."""
         self._cards[1].set_value("kcon", value)
 
     @property
@@ -314,8 +329,9 @@ class Mat075(KeywordBase):
 
     @isflg.setter
     def isflg(self, value: int) -> None:
+        """Set the isflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""isflg must be `None` or one of {0,1}""")
+            raise Exception("""isflg must be `None` or one of {0,1}.""")
         self._cards[1].set_value("isflg", value)
 
     @property
@@ -326,6 +342,7 @@ class Mat075(KeywordBase):
 
     @ncycle.setter
     def ncycle(self, value: float) -> None:
+        """Set the ncycle property."""
         self._cards[1].set_value("ncycle", value)
 
     @property
@@ -336,5 +353,6 @@ class Mat075(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

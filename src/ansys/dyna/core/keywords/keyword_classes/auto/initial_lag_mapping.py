@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialLagMapping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialLagMapping(KeywordBase):
     subkeyword = "LAG_MAPPING"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialLagMapping class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class InitialLagMapping(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 
     @property
@@ -113,6 +116,7 @@ class InitialLagMapping(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[1].set_value("xp", value)
 
     @property
@@ -123,6 +127,7 @@ class InitialLagMapping(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[1].set_value("yp", value)
 
     @property
@@ -133,6 +138,7 @@ class InitialLagMapping(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[1].set_value("zp", value)
 
     @property
@@ -143,6 +149,7 @@ class InitialLagMapping(KeywordBase):
 
     @vecid.setter
     def vecid(self, value: int) -> None:
+        """Set the vecid property."""
         self._cards[1].set_value("vecid", value)
 
     @property
@@ -153,6 +160,7 @@ class InitialLagMapping(KeywordBase):
 
     @angle.setter
     def angle(self, value: float) -> None:
+        """Set the angle property."""
         self._cards[1].set_value("angle", value)
 
     @property
@@ -167,5 +175,6 @@ class InitialLagMapping(KeywordBase):
 
     @nelangl.setter
     def nelangl(self, value: int) -> None:
+        """Set the nelangl property."""
         self._cards[1].set_value("nelangl", value)
 

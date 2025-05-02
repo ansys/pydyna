@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdSolverTolPre class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdSolverTolPre(KeywordBase):
     subkeyword = "SOLVER_TOL_PRE"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdSolverTolPre class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -78,6 +80,7 @@ class IcfdSolverTolPre(KeywordBase):
 
     @atol.setter
     def atol(self, value: float) -> None:
+        """Set the atol property."""
         self._cards[0].set_value("atol", value)
 
     @property
@@ -88,6 +91,7 @@ class IcfdSolverTolPre(KeywordBase):
 
     @rtol.setter
     def rtol(self, value: float) -> None:
+        """Set the rtol property."""
         self._cards[0].set_value("rtol", value)
 
     @property
@@ -98,5 +102,6 @@ class IcfdSolverTolPre(KeywordBase):
 
     @maxit.setter
     def maxit(self, value: int) -> None:
+        """Set the maxit property."""
         self._cards[0].set_value("maxit", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MeshVolumePart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class MeshVolumePart(KeywordBase):
     subkeyword = "VOLUME_PART"
 
     def __init__(self, **kwargs):
+        """Initialize the MeshVolumePart class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class MeshVolumePart(KeywordBase):
 
     @volprt.setter
     def volprt(self, value: int) -> None:
+        """Set the volprt property."""
         self._cards[0].set_value("volprt", value)
 
     @property
@@ -78,6 +81,7 @@ class MeshVolumePart(KeywordBase):
 
     @solprt.setter
     def solprt(self, value: int) -> None:
+        """Set the solprt property."""
         self._cards[0].set_value("solprt", value)
 
     @property
@@ -88,5 +92,6 @@ class MeshVolumePart(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         self._cards[0].set_value("solver", value)
 

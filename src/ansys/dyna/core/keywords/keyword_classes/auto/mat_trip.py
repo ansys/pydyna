@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatTrip class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatTrip(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatTrip class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -245,6 +247,7 @@ class MatTrip(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -255,6 +258,7 @@ class MatTrip(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -265,6 +269,7 @@ class MatTrip(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -275,6 +280,7 @@ class MatTrip(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -287,6 +293,7 @@ class MatTrip(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[0].set_value("cp", value)
 
     @property
@@ -297,6 +304,7 @@ class MatTrip(KeywordBase):
 
     @t0.setter
     def t0(self, value: float) -> None:
+        """Set the t0 property."""
         self._cards[0].set_value("t0", value)
 
     @property
@@ -307,6 +315,7 @@ class MatTrip(KeywordBase):
 
     @tref.setter
     def tref(self, value: float) -> None:
+        """Set the tref property."""
         self._cards[0].set_value("tref", value)
 
     @property
@@ -317,6 +326,7 @@ class MatTrip(KeywordBase):
 
     @ta0.setter
     def ta0(self, value: float) -> None:
+        """Set the ta0 property."""
         self._cards[0].set_value("ta0", value)
 
     @property
@@ -327,6 +337,7 @@ class MatTrip(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[1].set_value("a", value)
 
     @property
@@ -337,6 +348,7 @@ class MatTrip(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[1].set_value("b", value)
 
     @property
@@ -347,6 +359,7 @@ class MatTrip(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[1].set_value("c", value)
 
     @property
@@ -357,6 +370,7 @@ class MatTrip(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[1].set_value("d", value)
 
     @property
@@ -367,6 +381,7 @@ class MatTrip(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[1].set_value("p", value)
 
     @property
@@ -377,6 +392,7 @@ class MatTrip(KeywordBase):
 
     @q.setter
     def q(self, value: float) -> None:
+        """Set the q property."""
         self._cards[1].set_value("q", value)
 
     @property
@@ -387,6 +403,7 @@ class MatTrip(KeywordBase):
 
     @e0mart.setter
     def e0mart(self, value: float) -> None:
+        """Set the e0mart property."""
         self._cards[1].set_value("e0mart", value)
 
     @property
@@ -399,6 +416,7 @@ class MatTrip(KeywordBase):
 
     @vm0.setter
     def vm0(self, value: float) -> None:
+        """Set the vm0 property."""
         self._cards[1].set_value("vm0", value)
 
     @property
@@ -409,6 +427,7 @@ class MatTrip(KeywordBase):
 
     @ahs.setter
     def ahs(self, value: float) -> None:
+        """Set the ahs property."""
         self._cards[2].set_value("ahs", value)
 
     @property
@@ -419,6 +438,7 @@ class MatTrip(KeywordBase):
 
     @bhs.setter
     def bhs(self, value: float) -> None:
+        """Set the bhs property."""
         self._cards[2].set_value("bhs", value)
 
     @property
@@ -429,6 +449,7 @@ class MatTrip(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[2].set_value("m", value)
 
     @property
@@ -439,6 +460,7 @@ class MatTrip(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[2].set_value("n", value)
 
     @property
@@ -449,6 +471,7 @@ class MatTrip(KeywordBase):
 
     @eps0.setter
     def eps0(self, value: float) -> None:
+        """Set the eps0 property."""
         self._cards[2].set_value("eps0", value)
 
     @property
@@ -459,6 +482,7 @@ class MatTrip(KeywordBase):
 
     @hmart.setter
     def hmart(self, value: float) -> None:
+        """Set the hmart property."""
         self._cards[2].set_value("hmart", value)
 
     @property
@@ -469,6 +493,7 @@ class MatTrip(KeywordBase):
 
     @k1.setter
     def k1(self, value: float) -> None:
+        """Set the k1 property."""
         self._cards[2].set_value("k1", value)
 
     @property
@@ -479,6 +504,7 @@ class MatTrip(KeywordBase):
 
     @k2.setter
     def k2(self, value: float) -> None:
+        """Set the k2 property."""
         self._cards[2].set_value("k2", value)
 
     @property
@@ -489,5 +515,6 @@ class MatTrip(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitModalDynamicDampingFrequencyRange class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
     subkeyword = "IMPLICIT_MODAL_DYNAMIC_DAMPING_FREQUENCY_RANGE"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitModalDynamicDampingFrequencyRange class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
 
     @freq1.setter
     def freq1(self, value: float) -> None:
+        """Set the freq1 property."""
         self._cards[0].set_value("freq1", value)
 
     @property
@@ -113,6 +116,7 @@ class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
 
     @zeta1.setter
     def zeta1(self, value: float) -> None:
+        """Set the zeta1 property."""
         self._cards[0].set_value("zeta1", value)
 
     @property
@@ -123,6 +127,7 @@ class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
 
     @freq2.setter
     def freq2(self, value: float) -> None:
+        """Set the freq2 property."""
         self._cards[0].set_value("freq2", value)
 
     @property
@@ -133,6 +138,7 @@ class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
 
     @zeta2.setter
     def zeta2(self, value: float) -> None:
+        """Set the zeta2 property."""
         self._cards[0].set_value("zeta2", value)
 
     @property
@@ -143,6 +149,7 @@ class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
 
     @freq3.setter
     def freq3(self, value: float) -> None:
+        """Set the freq3 property."""
         self._cards[0].set_value("freq3", value)
 
     @property
@@ -153,6 +160,7 @@ class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
 
     @zeta3.setter
     def zeta3(self, value: float) -> None:
+        """Set the zeta3 property."""
         self._cards[0].set_value("zeta3", value)
 
     @property
@@ -163,6 +171,7 @@ class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
 
     @freq4.setter
     def freq4(self, value: float) -> None:
+        """Set the freq4 property."""
         self._cards[0].set_value("freq4", value)
 
     @property
@@ -173,5 +182,6 @@ class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
 
     @zeta4.setter
     def zeta4(self, value: float) -> None:
+        """Set the zeta4 property."""
         self._cards[0].set_value("zeta4", value)
 

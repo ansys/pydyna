@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseControlSolver class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseControlSolver(KeywordBase):
     subkeyword = "CONTROL_SOLVER"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseControlSolver class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -81,8 +83,9 @@ class CeseControlSolver(KeywordBase):
 
     @icese.setter
     def icese(self, value: int) -> None:
+        """Set the icese property."""
         if value not in [0, 100, 200, None]:
-            raise Exception("""icese must be `None` or one of {0,100,200}""")
+            raise Exception("""icese must be `None` or one of {0,100,200}.""")
         self._cards[0].set_value("icese", value)
 
     @property
@@ -96,8 +99,9 @@ class CeseControlSolver(KeywordBase):
 
     @iflow.setter
     def iflow(self, value: int) -> None:
+        """Set the iflow property."""
         if value not in [0, 1, None]:
-            raise Exception("""iflow must be `None` or one of {0,1}""")
+            raise Exception("""iflow must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iflow", value)
 
     @property
@@ -113,8 +117,9 @@ class CeseControlSolver(KeywordBase):
 
     @igeom.setter
     def igeom(self, value: int) -> None:
+        """Set the igeom property."""
         if value not in [0, 2, 3, 101, None]:
-            raise Exception("""igeom must be `None` or one of {0,2,3,101}""")
+            raise Exception("""igeom must be `None` or one of {0,2,3,101}.""")
         self._cards[0].set_value("igeom", value)
 
     @property
@@ -127,7 +132,8 @@ class CeseControlSolver(KeywordBase):
 
     @iframe.setter
     def iframe(self, value: int) -> None:
+        """Set the iframe property."""
         if value not in [0, 1000, None]:
-            raise Exception("""iframe must be `None` or one of {0,1000}""")
+            raise Exception("""iframe must be `None` or one of {0,1000}.""")
         self._cards[0].set_value("iframe", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseProfile class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseProfile(KeywordBase):
     subkeyword = "PROFILE"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseProfile class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -100,6 +102,7 @@ class DatabaseProfile(KeywordBase):
 
     @dt.setter
     def dt(self, value: int) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -110,6 +113,7 @@ class DatabaseProfile(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -126,8 +130,9 @@ class DatabaseProfile(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""stype must be `None` or one of {1,2,3,4,5,6}""")
+            raise Exception("""stype must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -165,8 +170,9 @@ class DatabaseProfile(KeywordBase):
 
     @data.setter
     def data(self, value: int) -> None:
+        """Set the data property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, None]:
-            raise Exception("""data must be `None` or one of {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27}""")
+            raise Exception("""data must be `None` or one of {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27}.""")
         self._cards[0].set_value("data", value)
 
     @property
@@ -181,8 +187,9 @@ class DatabaseProfile(KeywordBase):
 
     @dir.setter
     def dir(self, value: int) -> None:
+        """Set the dir property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""dir must be `None` or one of {1,2,3,4}""")
+            raise Exception("""dir must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("dir", value)
 
     @property
@@ -195,8 +202,9 @@ class DatabaseProfile(KeywordBase):
 
     @updloc.setter
     def updloc(self, value: int) -> None:
+        """Set the updloc property."""
         if value not in [0, 1, None]:
-            raise Exception("""updloc must be `None` or one of {0,1}""")
+            raise Exception("""updloc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("updloc", value)
 
     @property
@@ -209,5 +217,6 @@ class DatabaseProfile(KeywordBase):
 
     @mmg.setter
     def mmg(self, value: int) -> None:
+        """Set the mmg property."""
         self._cards[0].set_value("mmg", value)
 

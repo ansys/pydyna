@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ContactAutomaticSurfaceToSurfaceTiedWeld class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -43,6 +44,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the ContactAutomaticSurfaceToSurfaceTiedWeld class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -901,6 +903,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @surfa.setter
     def surfa(self, value: int) -> None:
+        """Set the surfa property."""
         self._cards[0].set_value("surfa", value)
 
     @property
@@ -912,6 +915,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @surfb.setter
     def surfb(self, value: int) -> None:
+        """Set the surfb property."""
         self._cards[0].set_value("surfb", value)
 
     @property
@@ -930,8 +934,9 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @surfatyp.setter
     def surfatyp(self, value: int) -> None:
+        """Set the surfatyp property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""surfatyp must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""surfatyp must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("surfatyp", value)
 
     @property
@@ -949,8 +954,9 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @surfbtyp.setter
     def surfbtyp(self, value: int) -> None:
+        """Set the surfbtyp property."""
         if value not in [0, 1, 2, 3, 5, 6, 7, None]:
-            raise Exception("""surfbtyp must be `None` or one of {0,1,2,3,5,6,7}""")
+            raise Exception("""surfbtyp must be `None` or one of {0,1,2,3,5,6,7}.""")
         self._cards[0].set_value("surfbtyp", value)
 
     @property
@@ -961,6 +967,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @saboxid.setter
     def saboxid(self, value: int) -> None:
+        """Set the saboxid property."""
         self._cards[0].set_value("saboxid", value)
 
     @property
@@ -971,6 +978,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sbboxid.setter
     def sbboxid(self, value: int) -> None:
+        """Set the sbboxid property."""
         self._cards[0].set_value("sbboxid", value)
 
     @property
@@ -984,8 +992,9 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sapr.setter
     def sapr(self, value: int) -> None:
+        """Set the sapr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sapr must be `None` or one of {0,1,2}""")
+            raise Exception("""sapr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sapr", value)
 
     @property
@@ -999,8 +1008,9 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sbpr.setter
     def sbpr(self, value: int) -> None:
+        """Set the sbpr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sbpr must be `None` or one of {0,1,2}""")
+            raise Exception("""sbpr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sbpr", value)
 
     @property
@@ -1014,6 +1024,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[1].set_value("fs", value)
 
     @property
@@ -1025,6 +1036,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[1].set_value("fd", value)
 
     @property
@@ -1035,6 +1047,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[1].set_value("dc", value)
 
     @property
@@ -1045,6 +1058,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[1].set_value("vc", value)
 
     @property
@@ -1055,6 +1069,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @vdc.setter
     def vdc(self, value: float) -> None:
+        """Set the vdc property."""
         self._cards[1].set_value("vdc", value)
 
     @property
@@ -1065,6 +1080,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @penchk.setter
     def penchk(self, value: int) -> None:
+        """Set the penchk property."""
         self._cards[1].set_value("penchk", value)
 
     @property
@@ -1075,6 +1091,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[1].set_value("bt", value)
 
     @property
@@ -1085,6 +1102,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -1095,6 +1113,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sfsa.setter
     def sfsa(self, value: float) -> None:
+        """Set the sfsa property."""
         self._cards[2].set_value("sfsa", value)
 
     @property
@@ -1105,6 +1124,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sfsb.setter
     def sfsb(self, value: float) -> None:
+        """Set the sfsb property."""
         self._cards[2].set_value("sfsb", value)
 
     @property
@@ -1115,6 +1135,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sast.setter
     def sast(self, value: float) -> None:
+        """Set the sast property."""
         self._cards[2].set_value("sast", value)
 
     @property
@@ -1125,6 +1146,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sbst.setter
     def sbst(self, value: float) -> None:
+        """Set the sbst property."""
         self._cards[2].set_value("sbst", value)
 
     @property
@@ -1137,6 +1159,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sfsat.setter
     def sfsat(self, value: float) -> None:
+        """Set the sfsat property."""
         self._cards[2].set_value("sfsat", value)
 
     @property
@@ -1149,6 +1172,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sfsbt.setter
     def sfsbt(self, value: float) -> None:
+        """Set the sfsbt property."""
         self._cards[2].set_value("sfsbt", value)
 
     @property
@@ -1159,6 +1183,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @fsf.setter
     def fsf(self, value: float) -> None:
+        """Set the fsf property."""
         self._cards[2].set_value("fsf", value)
 
     @property
@@ -1169,6 +1194,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @vsf.setter
     def vsf(self, value: float) -> None:
+        """Set the vsf property."""
         self._cards[2].set_value("vsf", value)
 
     @property
@@ -1179,6 +1205,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @temp.setter
     def temp(self, value: float) -> None:
+        """Set the temp property."""
         self._cards[3].set_value("temp", value)
 
     @property
@@ -1192,6 +1219,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @close.setter
     def close(self, value: float) -> None:
+        """Set the close property."""
         self._cards[3].set_value("close", value)
 
     @property
@@ -1203,6 +1231,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @hclose.setter
     def hclose(self, value: float) -> None:
+        """Set the hclose property."""
         self._cards[3].set_value("hclose", value)
 
     @property
@@ -1214,6 +1243,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @ntprm.setter
     def ntprm(self, value: int) -> None:
+        """Set the ntprm property."""
         self._cards[3].set_value("ntprm", value)
 
     @property
@@ -1226,6 +1256,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @nmhis.setter
     def nmhis(self, value: int) -> None:
+        """Set the nmhis property."""
         self._cards[3].set_value("nmhis", value)
 
     @property
@@ -1237,6 +1268,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @nstwh.setter
     def nstwh(self, value: int) -> None:
+        """Set the nstwh property."""
         self._cards[3].set_value("nstwh", value)
 
     @property
@@ -1248,6 +1280,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @nmtwh.setter
     def nmtwh(self, value: int) -> None:
+        """Set the nmtwh property."""
         self._cards[3].set_value("nmtwh", value)
 
     @property
@@ -1258,6 +1291,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @tprm1.setter
     def tprm1(self, value: float) -> None:
+        """Set the tprm1 property."""
         self._cards[4].set_value("tprm1", value)
 
     @property
@@ -1268,6 +1302,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @tprm2.setter
     def tprm2(self, value: float) -> None:
+        """Set the tprm2 property."""
         self._cards[4].set_value("tprm2", value)
 
     @property
@@ -1278,6 +1313,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @tprm3.setter
     def tprm3(self, value: float) -> None:
+        """Set the tprm3 property."""
         self._cards[4].set_value("tprm3", value)
 
     @property
@@ -1288,6 +1324,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @tprm4.setter
     def tprm4(self, value: float) -> None:
+        """Set the tprm4 property."""
         self._cards[4].set_value("tprm4", value)
 
     @property
@@ -1298,6 +1335,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @tprmi.setter
     def tprmi(self, value: float) -> None:
+        """Set the tprmi property."""
         self._cards[4].set_value("tprmi", value)
 
     @property
@@ -1308,6 +1346,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @tprmi.setter
     def tprmi(self, value: float) -> None:
+        """Set the tprmi property."""
         self._cards[4].set_value("tprmi", value)
 
     @property
@@ -1318,6 +1357,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @tprmi.setter
     def tprmi(self, value: float) -> None:
+        """Set the tprmi property."""
         self._cards[4].set_value("tprmi", value)
 
     @property
@@ -1328,6 +1368,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @tprmi.setter
     def tprmi(self, value: float) -> None:
+        """Set the tprmi property."""
         self._cards[4].set_value("tprmi", value)
 
     @property
@@ -1338,6 +1379,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[5].cards[0].set_value("cid", value)
 
     @property
@@ -1348,6 +1390,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[5].cards[0].set_value("heading", value)
 
     @property
@@ -1358,6 +1401,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
+        """Set the ignore property."""
         self._cards[6].cards[0].set_value("ignore", value)
 
     @property
@@ -1368,6 +1412,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @bckt.setter
     def bckt(self, value: int) -> None:
+        """Set the bckt property."""
         self._cards[6].cards[0].set_value("bckt", value)
 
     @property
@@ -1378,6 +1423,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @lcbckt.setter
     def lcbckt(self, value: int) -> None:
+        """Set the lcbckt property."""
         self._cards[6].cards[0].set_value("lcbckt", value)
 
     @property
@@ -1388,6 +1434,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @ns2trk.setter
     def ns2trk(self, value: int) -> None:
+        """Set the ns2trk property."""
         self._cards[6].cards[0].set_value("ns2trk", value)
 
     @property
@@ -1398,6 +1445,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @inititr.setter
     def inititr(self, value: int) -> None:
+        """Set the inititr property."""
         self._cards[6].cards[0].set_value("inititr", value)
 
     @property
@@ -1408,6 +1456,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @parmax.setter
     def parmax(self, value: float) -> None:
+        """Set the parmax property."""
         self._cards[6].cards[0].set_value("parmax", value)
 
     @property
@@ -1427,6 +1476,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
+        """Set the cparm8 property."""
         if value not in [0, 1, 2, 10, 11, 12]:
             raise Exception("""cparm8 must be one of {0,1,2,10,11,12}""")
         self._cards[6].cards[0].set_value("cparm8", value)
@@ -1439,6 +1489,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @mpp2.setter
     def mpp2(self, value: bool) -> None:
+        """Set the mpp2 property."""
         self._cards[6].cards[1].set_value("mpp2", value)
 
     @property
@@ -1449,6 +1500,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @chksegs.setter
     def chksegs(self, value: int) -> None:
+        """Set the chksegs property."""
         self._cards[6].cards[1].set_value("chksegs", value)
 
     @property
@@ -1459,6 +1511,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @pensf.setter
     def pensf(self, value: float) -> None:
+        """Set the pensf property."""
         self._cards[6].cards[1].set_value("pensf", value)
 
     @property
@@ -1469,6 +1522,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @grpable.setter
     def grpable(self, value: int) -> None:
+        """Set the grpable property."""
         self._cards[6].cards[1].set_value("grpable", value)
 
     @property
@@ -1484,6 +1538,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @soft.setter
     def soft(self, value: int) -> None:
+        """Set the soft property."""
         if value not in [0, 1, 2, 4, 6]:
             raise Exception("""soft must be one of {0,1,2,4,6}""")
         self._cards[7].cards[0].set_value("soft", value)
@@ -1496,6 +1551,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sofscl.setter
     def sofscl(self, value: float) -> None:
+        """Set the sofscl property."""
         self._cards[7].cards[0].set_value("sofscl", value)
 
     @property
@@ -1506,6 +1562,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @lcidab.setter
     def lcidab(self, value: int) -> None:
+        """Set the lcidab property."""
         self._cards[7].cards[0].set_value("lcidab", value)
 
     @property
@@ -1516,6 +1573,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @maxpar.setter
     def maxpar(self, value: float) -> None:
+        """Set the maxpar property."""
         self._cards[7].cards[0].set_value("maxpar", value)
 
     @property
@@ -1532,6 +1590,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sbopt.setter
     def sbopt(self, value: int) -> None:
+        """Set the sbopt property."""
         if value not in [2, 0, 1, 3, 4, 5]:
             raise Exception("""sbopt must be one of {2,0,1,3,4,5}""")
         self._cards[7].cards[0].set_value("sbopt", value)
@@ -1545,6 +1604,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @depth.setter
     def depth(self, value: int) -> None:
+        """Set the depth property."""
         self._cards[7].cards[0].set_value("depth", value)
 
     @property
@@ -1556,6 +1616,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @bsort.setter
     def bsort(self, value: int) -> None:
+        """Set the bsort property."""
         self._cards[7].cards[0].set_value("bsort", value)
 
     @property
@@ -1567,6 +1628,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @frcfrq.setter
     def frcfrq(self, value: int) -> None:
+        """Set the frcfrq property."""
         self._cards[7].cards[0].set_value("frcfrq", value)
 
     @property
@@ -1580,6 +1642,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @penmax.setter
     def penmax(self, value: float) -> None:
+        """Set the penmax property."""
         self._cards[8].cards[0].set_value("penmax", value)
 
     @property
@@ -1593,6 +1656,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @thkopt.setter
     def thkopt(self, value: int) -> None:
+        """Set the thkopt property."""
         if value not in [0, 1, 2]:
             raise Exception("""thkopt must be one of {0,1,2}""")
         self._cards[8].cards[0].set_value("thkopt", value)
@@ -1608,6 +1672,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @shlthk.setter
     def shlthk(self, value: int) -> None:
+        """Set the shlthk property."""
         if value not in [0, 1, 2]:
             raise Exception("""shlthk must be one of {0,1,2}""")
         self._cards[8].cards[0].set_value("shlthk", value)
@@ -1622,6 +1687,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @snlog.setter
     def snlog(self, value: int) -> None:
+        """Set the snlog property."""
         if value not in [0, 1]:
             raise Exception("""snlog must be one of {0,1}""")
         self._cards[8].cards[0].set_value("snlog", value)
@@ -1637,6 +1703,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @isym.setter
     def isym(self, value: int) -> None:
+        """Set the isym property."""
         if value not in [0, 1]:
             raise Exception("""isym must be one of {0,1}""")
         self._cards[8].cards[0].set_value("isym", value)
@@ -1651,6 +1718,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @i2d3d.setter
     def i2d3d(self, value: int) -> None:
+        """Set the i2d3d property."""
         if value not in [0, 1]:
             raise Exception("""i2d3d must be one of {0,1}""")
         self._cards[8].cards[0].set_value("i2d3d", value)
@@ -1663,6 +1731,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sldthk.setter
     def sldthk(self, value: float) -> None:
+        """Set the sldthk property."""
         self._cards[8].cards[0].set_value("sldthk", value)
 
     @property
@@ -1673,6 +1742,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sldstf.setter
     def sldstf(self, value: float) -> None:
+        """Set the sldstf property."""
         self._cards[8].cards[0].set_value("sldstf", value)
 
     @property
@@ -1691,6 +1761,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @igap.setter
     def igap(self, value: int) -> None:
+        """Set the igap property."""
         self._cards[9].cards[0].set_value("igap", value)
 
     @property
@@ -1707,6 +1778,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
+        """Set the ignore property."""
         self._cards[9].cards[0].set_value("ignore", value)
 
     @property
@@ -1721,6 +1793,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @dprfac.setter
     def dprfac(self, value: float) -> None:
+        """Set the dprfac property."""
         self._cards[9].cards[0].set_value("dprfac", value)
 
     @property
@@ -1736,6 +1809,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @dtstif.setter
     def dtstif(self, value: float) -> None:
+        """Set the dtstif property."""
         self._cards[9].cards[0].set_value("dtstif", value)
 
     @property
@@ -1748,6 +1822,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @edgek.setter
     def edgek(self, value: float) -> None:
+        """Set the edgek property."""
         self._cards[9].cards[0].set_value("edgek", value)
 
     @property
@@ -1760,6 +1835,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @flangl.setter
     def flangl(self, value: float) -> None:
+        """Set the flangl property."""
         self._cards[9].cards[0].set_value("flangl", value)
 
     @property
@@ -1770,6 +1846,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @cid_rcf.setter
     def cid_rcf(self, value: int) -> None:
+        """Set the cid_rcf property."""
         self._cards[9].cards[0].set_value("cid_rcf", value)
 
     @property
@@ -1785,6 +1862,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @q2tri.setter
     def q2tri(self, value: int) -> None:
+        """Set the q2tri property."""
         if value not in [0, 1, 2, 3, 4]:
             raise Exception("""q2tri must be one of {0,1,2,3,4}""")
         self._cards[10].cards[0].set_value("q2tri", value)
@@ -1800,6 +1878,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @dtpchk.setter
     def dtpchk(self, value: float) -> None:
+        """Set the dtpchk property."""
         self._cards[10].cards[0].set_value("dtpchk", value)
 
     @property
@@ -1812,6 +1891,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sfnbr.setter
     def sfnbr(self, value: float) -> None:
+        """Set the sfnbr property."""
         self._cards[10].cards[0].set_value("sfnbr", value)
 
     @property
@@ -1822,6 +1902,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @fnlscl.setter
     def fnlscl(self, value: float) -> None:
+        """Set the fnlscl property."""
         self._cards[10].cards[0].set_value("fnlscl", value)
 
     @property
@@ -1832,6 +1913,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @dnlscl.setter
     def dnlscl(self, value: float) -> None:
+        """Set the dnlscl property."""
         self._cards[10].cards[0].set_value("dnlscl", value)
 
     @property
@@ -1845,6 +1927,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @tcso.setter
     def tcso(self, value: int) -> None:
+        """Set the tcso property."""
         if value not in [0, 1]:
             raise Exception("""tcso must be one of {0,1}""")
         self._cards[10].cards[0].set_value("tcso", value)
@@ -1858,6 +1941,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @tiedid.setter
     def tiedid(self, value: int) -> None:
+        """Set the tiedid property."""
         if value not in [0, 1]:
             raise Exception("""tiedid must be one of {0,1}""")
         self._cards[10].cards[0].set_value("tiedid", value)
@@ -1873,6 +1957,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @shledg.setter
     def shledg(self, value: int) -> None:
+        """Set the shledg property."""
         if value not in [0, 1, 2]:
             raise Exception("""shledg must be one of {0,1,2}""")
         self._cards[10].cards[0].set_value("shledg", value)
@@ -1887,6 +1972,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @sharec.setter
     def sharec(self, value: int) -> None:
+        """Set the sharec property."""
         if value not in [0, 1]:
             raise Exception("""sharec must be one of {0,1}""")
         self._cards[11].cards[0].set_value("sharec", value)
@@ -1901,6 +1987,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
+        """Set the cparm8 property."""
         if value not in [0, 2]:
             raise Exception("""cparm8 must be one of {0,2}""")
         self._cards[11].cards[0].set_value("cparm8", value)
@@ -1914,6 +2001,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @ipback.setter
     def ipback(self, value: int) -> None:
+        """Set the ipback property."""
         self._cards[11].cards[0].set_value("ipback", value)
 
     @property
@@ -1926,6 +2014,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @srnde.setter
     def srnde(self, value: int) -> None:
+        """Set the srnde property."""
         self._cards[11].cards[0].set_value("srnde", value)
 
     @property
@@ -1936,6 +2025,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @fricsf.setter
     def fricsf(self, value: float) -> None:
+        """Set the fricsf property."""
         self._cards[11].cards[0].set_value("fricsf", value)
 
     @property
@@ -1949,6 +2039,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @icor.setter
     def icor(self, value: int) -> None:
+        """Set the icor property."""
         self._cards[11].cards[0].set_value("icor", value)
 
     @property
@@ -1961,6 +2052,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @ftorq.setter
     def ftorq(self, value: int) -> None:
+        """Set the ftorq property."""
         self._cards[11].cards[0].set_value("ftorq", value)
 
     @property
@@ -1972,6 +2064,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @region.setter
     def region(self, value: int) -> None:
+        """Set the region property."""
         self._cards[11].cards[0].set_value("region", value)
 
     @property
@@ -1985,6 +2078,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @pstiff.setter
     def pstiff(self, value: int) -> None:
+        """Set the pstiff property."""
         if value not in [0, 1, 2]:
             raise Exception("""pstiff must be one of {0,1,2}""")
         self._cards[12].cards[0].set_value("pstiff", value)
@@ -2002,6 +2096,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @ignroff.setter
     def ignroff(self, value: int) -> None:
+        """Set the ignroff property."""
         if value not in [0, 1, 2, 3]:
             raise Exception("""ignroff must be one of {0,1,2,3}""")
         self._cards[12].cards[0].set_value("ignroff", value)
@@ -2014,6 +2109,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @fstol.setter
     def fstol(self, value: float) -> None:
+        """Set the fstol property."""
         self._cards[12].cards[0].set_value("fstol", value)
 
     @property
@@ -2026,6 +2122,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @_2dbinr.setter
     def _2dbinr(self, value: int) -> None:
+        """Set the _2dbinr property."""
         if value not in [0, 1]:
             raise Exception("""_2dbinr must be one of {0,1}""")
         self._cards[12].cards[0].set_value("2dbinr", value)
@@ -2040,6 +2137,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @ssftyp.setter
     def ssftyp(self, value: int) -> None:
+        """Set the ssftyp property."""
         if value not in [0, 1]:
             raise Exception("""ssftyp must be one of {0,1}""")
         self._cards[12].cards[0].set_value("ssftyp", value)
@@ -2054,6 +2152,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @swtpr.setter
     def swtpr(self, value: int) -> None:
+        """Set the swtpr property."""
         if value not in [0, 1]:
             raise Exception("""swtpr must be one of {0,1}""")
         self._cards[12].cards[0].set_value("swtpr", value)
@@ -2066,6 +2165,7 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @tetfac.setter
     def tetfac(self, value: float) -> None:
+        """Set the tetfac property."""
         self._cards[12].cards[0].set_value("tetfac", value)
 
     @property
@@ -2078,5 +2178,6 @@ class ContactAutomaticSurfaceToSurfaceTiedWeld(KeywordBase):
 
     @shloff.setter
     def shloff(self, value: float) -> None:
+        """Set the shloff property."""
         self._cards[13].cards[0].set_value("shloff", value)
 

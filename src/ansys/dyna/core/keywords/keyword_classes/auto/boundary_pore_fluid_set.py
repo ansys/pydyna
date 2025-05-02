@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryPoreFluidSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPoreFluidSet(KeywordBase):
     subkeyword = "PORE_FLUID_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryPoreFluidSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -104,6 +106,7 @@ class BoundaryPoreFluidSet(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -114,6 +117,7 @@ class BoundaryPoreFluidSet(KeywordBase):
 
     @wtable.setter
     def wtable(self, value: float) -> None:
+        """Set the wtable property."""
         self._cards[0].set_value("wtable", value)
 
     @property
@@ -124,6 +128,7 @@ class BoundaryPoreFluidSet(KeywordBase):
 
     @pf_rho.setter
     def pf_rho(self, value: float) -> None:
+        """Set the pf_rho property."""
         self._cards[0].set_value("pf_rho", value)
 
     @property
@@ -140,8 +145,9 @@ class BoundaryPoreFluidSet(KeywordBase):
 
     @atype.setter
     def atype(self, value: int) -> None:
+        """Set the atype property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""atype must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""atype must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("atype", value)
 
     @property
@@ -152,6 +158,7 @@ class BoundaryPoreFluidSet(KeywordBase):
 
     @pf_bulk.setter
     def pf_bulk(self, value: float) -> None:
+        """Set the pf_bulk property."""
         self._cards[0].set_value("pf_bulk", value)
 
     @property
@@ -162,6 +169,7 @@ class BoundaryPoreFluidSet(KeywordBase):
 
     @acurve.setter
     def acurve(self, value: int) -> None:
+        """Set the acurve property."""
         self._cards[0].set_value("acurve", value)
 
     @property
@@ -172,6 +180,7 @@ class BoundaryPoreFluidSet(KeywordBase):
 
     @wtcur.setter
     def wtcur(self, value: int) -> None:
+        """Set the wtcur property."""
         self._cards[0].set_value("wtcur", value)
 
     @property
@@ -182,5 +191,6 @@ class BoundaryPoreFluidSet(KeywordBase):
 
     @suclim.setter
     def suclim(self, value: float) -> None:
+        """Set the suclim property."""
         self._cards[0].set_value("suclim", value)
 

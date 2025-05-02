@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialDetonationGeometry class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialDetonationGeometry(KeywordBase):
     subkeyword = "DETONATION_GEOMETRY"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialDetonationGeometry class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -130,6 +132,7 @@ class InitialDetonationGeometry(KeywordBase):
 
     @heid.setter
     def heid(self, value: int) -> None:
+        """Set the heid property."""
         self._cards[0].set_value("heid", value)
 
     @property
@@ -141,6 +144,7 @@ class InitialDetonationGeometry(KeywordBase):
 
     @hetyp.setter
     def hetyp(self, value: float) -> None:
+        """Set the hetyp property."""
         self._cards[0].set_value("hetyp", value)
 
     @property
@@ -151,6 +155,7 @@ class InitialDetonationGeometry(KeywordBase):
 
     @mmgse.setter
     def mmgse(self, value: float) -> None:
+        """Set the mmgse property."""
         self._cards[0].set_value("mmgse", value)
 
     @property
@@ -162,6 +167,7 @@ class InitialDetonationGeometry(KeywordBase):
 
     @geotyp.setter
     def geotyp(self, value: int) -> None:
+        """Set the geotyp property."""
         self._cards[1].set_value("geotyp", value)
 
     @property
@@ -172,6 +178,7 @@ class InitialDetonationGeometry(KeywordBase):
 
     @lt.setter
     def lt(self, value: float) -> None:
+        """Set the lt property."""
         self._cards[1].set_value("lt", value)
 
     @property
@@ -182,6 +189,7 @@ class InitialDetonationGeometry(KeywordBase):
 
     @dgeo.setter
     def dgeo(self, value: float) -> None:
+        """Set the dgeo property."""
         self._cards[1].set_value("dgeo", value)
 
     @property
@@ -193,6 +201,7 @@ class InitialDetonationGeometry(KeywordBase):
 
     @v1.setter
     def v1(self, value: int) -> None:
+        """Set the v1 property."""
         self._cards[2].set_value("v1", value)
 
     @property
@@ -204,6 +213,7 @@ class InitialDetonationGeometry(KeywordBase):
 
     @v2.setter
     def v2(self, value: int) -> None:
+        """Set the v2 property."""
         self._cards[2].set_value("v2", value)
 
     @property
@@ -215,6 +225,7 @@ class InitialDetonationGeometry(KeywordBase):
 
     @v3.setter
     def v3(self, value: int) -> None:
+        """Set the v3 property."""
         self._cards[2].set_value("v3", value)
 
     @property
@@ -226,5 +237,6 @@ class InitialDetonationGeometry(KeywordBase):
 
     @v4.setter
     def v4(self, value: int) -> None:
+        """Set the v4 property."""
         self._cards[2].set_value("v4", value)
 

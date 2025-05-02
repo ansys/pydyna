@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineElementDeathSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineElementDeathSolid(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineElementDeathSolid class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -123,6 +125,7 @@ class DefineElementDeathSolid(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -133,6 +136,7 @@ class DefineElementDeathSolid(KeywordBase):
 
     @time.setter
     def time(self, value: float) -> None:
+        """Set the time property."""
         self._cards[0].set_value("time", value)
 
     @property
@@ -143,6 +147,7 @@ class DefineElementDeathSolid(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -155,8 +160,9 @@ class DefineElementDeathSolid(KeywordBase):
 
     @inout.setter
     def inout(self, value: int) -> None:
+        """Set the inout property."""
         if value not in [0, 1, None]:
-            raise Exception("""inout must be `None` or one of {0,1}""")
+            raise Exception("""inout must be `None` or one of {0,1}.""")
         self._cards[0].set_value("inout", value)
 
     @property
@@ -174,6 +180,7 @@ class DefineElementDeathSolid(KeywordBase):
 
     @idgrp.setter
     def idgrp(self, value: int) -> None:
+        """Set the idgrp property."""
         self._cards[0].set_value("idgrp", value)
 
     @property
@@ -187,6 +194,7 @@ class DefineElementDeathSolid(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -199,6 +207,7 @@ class DefineElementDeathSolid(KeywordBase):
 
     @percent.setter
     def percent(self, value: float) -> None:
+        """Set the percent property."""
         self._cards[0].set_value("percent", value)
 
     @property
@@ -209,5 +218,6 @@ class DefineElementDeathSolid(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadVolumeLoss class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadVolumeLoss(KeywordBase):
     subkeyword = "VOLUME_LOSS"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadVolumeLoss class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class LoadVolumeLoss(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -119,6 +122,7 @@ class LoadVolumeLoss(KeywordBase):
 
     @coord.setter
     def coord(self, value: int) -> None:
+        """Set the coord property."""
         self._cards[0].set_value("coord", value)
 
     @property
@@ -129,6 +133,7 @@ class LoadVolumeLoss(KeywordBase):
 
     @lcur.setter
     def lcur(self, value: int) -> None:
+        """Set the lcur property."""
         self._cards[0].set_value("lcur", value)
 
     @property
@@ -139,6 +144,7 @@ class LoadVolumeLoss(KeywordBase):
 
     @fx.setter
     def fx(self, value: float) -> None:
+        """Set the fx property."""
         self._cards[0].set_value("fx", value)
 
     @property
@@ -149,6 +155,7 @@ class LoadVolumeLoss(KeywordBase):
 
     @fy.setter
     def fy(self, value: float) -> None:
+        """Set the fy property."""
         self._cards[0].set_value("fy", value)
 
     @property
@@ -159,6 +166,7 @@ class LoadVolumeLoss(KeywordBase):
 
     @fz.setter
     def fz(self, value: float) -> None:
+        """Set the fz property."""
         self._cards[0].set_value("fz", value)
 
     @property
@@ -169,6 +177,7 @@ class LoadVolumeLoss(KeywordBase):
 
     @pmin.setter
     def pmin(self, value: float) -> None:
+        """Set the pmin property."""
         self._cards[0].set_value("pmin", value)
 
     @property
@@ -179,5 +188,6 @@ class LoadVolumeLoss(KeywordBase):
 
     @factor.setter
     def factor(self, value: float) -> None:
+        """Set the factor property."""
         self._cards[0].set_value("factor", value)
 

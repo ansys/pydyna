@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceCompensation3D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceCompensation3D(KeywordBase):
     subkeyword = "COMPENSATION_3D"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceCompensation3D class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -121,6 +123,7 @@ class InterfaceCompensation3D(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         self._cards[0].set_value("method", value)
 
     @property
@@ -133,6 +136,7 @@ class InterfaceCompensation3D(KeywordBase):
 
     @sl.setter
     def sl(self, value: float) -> None:
+        """Set the sl property."""
         self._cards[0].set_value("sl", value)
 
     @property
@@ -165,6 +169,7 @@ class InterfaceCompensation3D(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -177,8 +182,9 @@ class InterfaceCompensation3D(KeywordBase):
 
     @elref.setter
     def elref(self, value: int) -> None:
+        """Set the elref property."""
         if value not in [1, 2, None]:
-            raise Exception("""elref must be `None` or one of {1,2}""")
+            raise Exception("""elref must be `None` or one of {1,2}.""")
         self._cards[0].set_value("elref", value)
 
     @property
@@ -190,6 +196,7 @@ class InterfaceCompensation3D(KeywordBase):
 
     @psidp.setter
     def psidp(self, value: float) -> None:
+        """Set the psidp property."""
         self._cards[0].set_value("psidp", value)
 
     @property
@@ -202,6 +209,7 @@ class InterfaceCompensation3D(KeywordBase):
 
     @undct.setter
     def undct(self, value: float) -> None:
+        """Set the undct property."""
         self._cards[0].set_value("undct", value)
 
     @property
@@ -212,6 +220,7 @@ class InterfaceCompensation3D(KeywordBase):
 
     @angle.setter
     def angle(self, value: float) -> None:
+        """Set the angle property."""
         self._cards[0].set_value("angle", value)
 
     @property
@@ -222,6 +231,7 @@ class InterfaceCompensation3D(KeywordBase):
 
     @nlinear.setter
     def nlinear(self, value: int) -> None:
+        """Set the nlinear property."""
         self._cards[0].set_value("nlinear", value)
 
     @property
@@ -232,5 +242,6 @@ class InterfaceCompensation3D(KeywordBase):
 
     @tangent.setter
     def tangent(self, value: int) -> None:
+        """Set the tangent property."""
         self._cards[1].set_value("tangent", value)
 

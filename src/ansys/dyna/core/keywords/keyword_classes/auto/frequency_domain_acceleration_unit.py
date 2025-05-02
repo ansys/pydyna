@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainAccelerationUnit class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainAccelerationUnit(KeywordBase):
     subkeyword = "DOMAIN_ACCELERATION_UNIT"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainAccelerationUnit class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,8 +70,9 @@ class FrequencyDomainAccelerationUnit(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
+        """Set the unit property."""
         if value not in [0, 1, 2, 3, 4, -1, None]:
-            raise Exception("""unit must be `None` or one of {0,1,2,3,4,-1}""")
+            raise Exception("""unit must be `None` or one of {0,1,2,3,4,-1}.""")
         self._cards[0].set_value("unit", value)
 
     @property
@@ -80,5 +83,6 @@ class FrequencyDomainAccelerationUnit(KeywordBase):
 
     @umlt.setter
     def umlt(self, value: float) -> None:
+        """Set the umlt property."""
         self._cards[0].set_value("umlt", value)
 

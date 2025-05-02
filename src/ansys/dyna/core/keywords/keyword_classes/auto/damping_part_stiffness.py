@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DampingPartStiffness class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DampingPartStiffness(KeywordBase):
     subkeyword = "PART_STIFFNESS"
 
     def __init__(self, **kwargs):
+        """Initialize the DampingPartStiffness class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class DampingPartStiffness(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -74,5 +77,6 @@ class DampingPartStiffness(KeywordBase):
 
     @coef.setter
     def coef(self, value: float) -> None:
+        """Set the coef property."""
         self._cards[0].set_value("coef", value)
 

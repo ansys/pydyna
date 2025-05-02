@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Iga2DBrep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Iga2DBrep(KeywordBase):
     subkeyword = "2D_BREP"
 
     def __init__(self, **kwargs):
+        """Initialize the Iga2DBrep class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class Iga2DBrep(KeywordBase):
 
     @brid.setter
     def brid(self, value: int) -> None:
+        """Set the brid property."""
         self._cards[0].set_value("brid", value)
 
     @property
@@ -124,6 +127,7 @@ class Iga2DBrep(KeywordBase):
 
     @fid1.setter
     def fid1(self, value: int) -> None:
+        """Set the fid1 property."""
         self._cards[1].set_value("fid1", value)
 
     @property
@@ -134,6 +138,7 @@ class Iga2DBrep(KeywordBase):
 
     @fid2.setter
     def fid2(self, value: int) -> None:
+        """Set the fid2 property."""
         self._cards[1].set_value("fid2", value)
 
     @property
@@ -144,6 +149,7 @@ class Iga2DBrep(KeywordBase):
 
     @fid3.setter
     def fid3(self, value: int) -> None:
+        """Set the fid3 property."""
         self._cards[1].set_value("fid3", value)
 
     @property
@@ -154,6 +160,7 @@ class Iga2DBrep(KeywordBase):
 
     @fid4.setter
     def fid4(self, value: int) -> None:
+        """Set the fid4 property."""
         self._cards[1].set_value("fid4", value)
 
     @property
@@ -164,6 +171,7 @@ class Iga2DBrep(KeywordBase):
 
     @fid5.setter
     def fid5(self, value: int) -> None:
+        """Set the fid5 property."""
         self._cards[1].set_value("fid5", value)
 
     @property
@@ -174,6 +182,7 @@ class Iga2DBrep(KeywordBase):
 
     @fid6.setter
     def fid6(self, value: int) -> None:
+        """Set the fid6 property."""
         self._cards[1].set_value("fid6", value)
 
     @property
@@ -184,6 +193,7 @@ class Iga2DBrep(KeywordBase):
 
     @fid7.setter
     def fid7(self, value: int) -> None:
+        """Set the fid7 property."""
         self._cards[1].set_value("fid7", value)
 
     @property
@@ -194,5 +204,6 @@ class Iga2DBrep(KeywordBase):
 
     @fid8.setter
     def fid8(self, value: int) -> None:
+        """Set the fid8 property."""
         self._cards[1].set_value("fid8", value)
 

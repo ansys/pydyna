@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAcoustic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAcoustic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAcoustic class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -165,6 +167,7 @@ class MatAcoustic(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -175,6 +178,7 @@ class MatAcoustic(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -185,6 +189,7 @@ class MatAcoustic(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -195,6 +200,7 @@ class MatAcoustic(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -207,8 +213,9 @@ class MatAcoustic(KeywordBase):
 
     @cf.setter
     def cf(self, value: float) -> None:
+        """Set the cf property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""cf must be `None` or one of {0.0,1.0}""")
+            raise Exception("""cf must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("cf", value)
 
     @property
@@ -219,6 +226,7 @@ class MatAcoustic(KeywordBase):
 
     @atmos.setter
     def atmos(self, value: float) -> None:
+        """Set the atmos property."""
         self._cards[0].set_value("atmos", value)
 
     @property
@@ -229,6 +237,7 @@ class MatAcoustic(KeywordBase):
 
     @grav.setter
     def grav(self, value: float) -> None:
+        """Set the grav property."""
         self._cards[0].set_value("grav", value)
 
     @property
@@ -239,6 +248,7 @@ class MatAcoustic(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[1].set_value("xp", value)
 
     @property
@@ -249,6 +259,7 @@ class MatAcoustic(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[1].set_value("yp", value)
 
     @property
@@ -259,6 +270,7 @@ class MatAcoustic(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[1].set_value("zp", value)
 
     @property
@@ -269,6 +281,7 @@ class MatAcoustic(KeywordBase):
 
     @xn.setter
     def xn(self, value: float) -> None:
+        """Set the xn property."""
         self._cards[1].set_value("xn", value)
 
     @property
@@ -279,6 +292,7 @@ class MatAcoustic(KeywordBase):
 
     @yn.setter
     def yn(self, value: float) -> None:
+        """Set the yn property."""
         self._cards[1].set_value("yn", value)
 
     @property
@@ -289,6 +303,7 @@ class MatAcoustic(KeywordBase):
 
     @zn.setter
     def zn(self, value: float) -> None:
+        """Set the zn property."""
         self._cards[1].set_value("zn", value)
 
     @property
@@ -299,5 +314,6 @@ class MatAcoustic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementShellBetaOffsetComposite class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
     subkeyword = "SHELL_BETA_OFFSET_COMPOSITE"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementShellBetaOffsetComposite class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -262,6 +264,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -272,6 +275,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -282,6 +286,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -292,6 +297,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -302,6 +308,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -312,6 +319,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[0].set_value("n4", value)
 
     @property
@@ -322,6 +330,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @n5.setter
     def n5(self, value: int) -> None:
+        """Set the n5 property."""
         self._cards[0].set_value("n5", value)
 
     @property
@@ -332,6 +341,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @n6.setter
     def n6(self, value: int) -> None:
+        """Set the n6 property."""
         self._cards[0].set_value("n6", value)
 
     @property
@@ -342,6 +352,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @n7.setter
     def n7(self, value: int) -> None:
+        """Set the n7 property."""
         self._cards[0].set_value("n7", value)
 
     @property
@@ -352,6 +363,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @n8.setter
     def n8(self, value: int) -> None:
+        """Set the n8 property."""
         self._cards[0].set_value("n8", value)
 
     @property
@@ -362,6 +374,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @thic1.setter
     def thic1(self, value: float) -> None:
+        """Set the thic1 property."""
         self._cards[1].set_value("thic1", value)
 
     @property
@@ -372,6 +385,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @thic2.setter
     def thic2(self, value: float) -> None:
+        """Set the thic2 property."""
         self._cards[1].set_value("thic2", value)
 
     @property
@@ -382,6 +396,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @thic3.setter
     def thic3(self, value: float) -> None:
+        """Set the thic3 property."""
         self._cards[1].set_value("thic3", value)
 
     @property
@@ -392,6 +407,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @thic4.setter
     def thic4(self, value: float) -> None:
+        """Set the thic4 property."""
         self._cards[1].set_value("thic4", value)
 
     @property
@@ -402,6 +418,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[1].set_value("beta", value)
 
     @property
@@ -412,6 +429,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @thic5.setter
     def thic5(self, value: float) -> None:
+        """Set the thic5 property."""
         self._cards[2].set_value("thic5", value)
 
     @property
@@ -422,6 +440,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @thic6.setter
     def thic6(self, value: float) -> None:
+        """Set the thic6 property."""
         self._cards[2].set_value("thic6", value)
 
     @property
@@ -432,6 +451,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @thic7.setter
     def thic7(self, value: float) -> None:
+        """Set the thic7 property."""
         self._cards[2].set_value("thic7", value)
 
     @property
@@ -442,6 +462,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @thic8.setter
     def thic8(self, value: float) -> None:
+        """Set the thic8 property."""
         self._cards[2].set_value("thic8", value)
 
     @property
@@ -452,6 +473,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @offset.setter
     def offset(self, value: float) -> None:
+        """Set the offset property."""
         self._cards[3].set_value("offset", value)
 
     @property
@@ -462,6 +484,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @mid1.setter
     def mid1(self, value: int) -> None:
+        """Set the mid1 property."""
         self._cards[4].set_value("mid1", value)
 
     @property
@@ -472,6 +495,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @thick1.setter
     def thick1(self, value: float) -> None:
+        """Set the thick1 property."""
         self._cards[4].set_value("thick1", value)
 
     @property
@@ -482,6 +506,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[4].set_value("b1", value)
 
     @property
@@ -492,6 +517,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @mid2.setter
     def mid2(self, value: int) -> None:
+        """Set the mid2 property."""
         self._cards[4].set_value("mid2", value)
 
     @property
@@ -502,6 +528,7 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @thick2.setter
     def thick2(self, value: float) -> None:
+        """Set the thick2 property."""
         self._cards[4].set_value("thick2", value)
 
     @property
@@ -512,5 +539,6 @@ class ElementShellBetaOffsetComposite(KeywordBase):
 
     @b2.setter
     def b2(self, value: float) -> None:
+        """Set the b2 property."""
         self._cards[4].set_value("b2", value)
 

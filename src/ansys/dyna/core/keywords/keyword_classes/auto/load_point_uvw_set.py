@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadPointUvwSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadPointUvwSet(KeywordBase):
     subkeyword = "POINT_UVW_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadPointUvwSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -76,6 +78,7 @@ class LoadPointUvwSet(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -92,6 +95,7 @@ class LoadPointUvwSet(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         self._cards[0].set_value("dof", value)
 
     @property
@@ -102,6 +106,7 @@ class LoadPointUvwSet(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -112,5 +117,6 @@ class LoadPointUvwSet(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 

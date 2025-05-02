@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatThermoElastoViscoplasticCreep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatThermoElastoViscoplasticCreep class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -317,6 +319,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -327,6 +330,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -337,6 +341,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -347,6 +352,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -357,6 +363,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -367,6 +374,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[0].set_value("alpha", value)
 
     @property
@@ -377,6 +385,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @lcss.setter
     def lcss(self, value: int) -> None:
+        """Set the lcss property."""
         self._cards[0].set_value("lcss", value)
 
     @property
@@ -387,6 +396,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @reftem.setter
     def reftem(self, value: float) -> None:
+        """Set the reftem property."""
         self._cards[0].set_value("reftem", value)
 
     @property
@@ -397,6 +407,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @qr1.setter
     def qr1(self, value: float) -> None:
+        """Set the qr1 property."""
         self._cards[1].set_value("qr1", value)
 
     @property
@@ -407,6 +418,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @cr1.setter
     def cr1(self, value: float) -> None:
+        """Set the cr1 property."""
         self._cards[1].set_value("cr1", value)
 
     @property
@@ -417,6 +429,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @qr2.setter
     def qr2(self, value: float) -> None:
+        """Set the qr2 property."""
         self._cards[1].set_value("qr2", value)
 
     @property
@@ -427,6 +440,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @cr2.setter
     def cr2(self, value: float) -> None:
+        """Set the cr2 property."""
         self._cards[1].set_value("cr2", value)
 
     @property
@@ -437,6 +451,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @qx1.setter
     def qx1(self, value: float) -> None:
+        """Set the qx1 property."""
         self._cards[1].set_value("qx1", value)
 
     @property
@@ -447,6 +462,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @cx1.setter
     def cx1(self, value: float) -> None:
+        """Set the cx1 property."""
         self._cards[1].set_value("cx1", value)
 
     @property
@@ -457,6 +473,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @qx2.setter
     def qx2(self, value: float) -> None:
+        """Set the qx2 property."""
         self._cards[1].set_value("qx2", value)
 
     @property
@@ -467,6 +484,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @cx2.setter
     def cx2(self, value: float) -> None:
+        """Set the cx2 property."""
         self._cards[1].set_value("cx2", value)
 
     @property
@@ -477,6 +495,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[2].set_value("c", value)
 
     @property
@@ -487,6 +506,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[2].set_value("p", value)
 
     @property
@@ -497,6 +517,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @lce.setter
     def lce(self, value: float) -> None:
+        """Set the lce property."""
         self._cards[2].set_value("lce", value)
 
     @property
@@ -507,6 +528,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @lcpr.setter
     def lcpr(self, value: float) -> None:
+        """Set the lcpr property."""
         self._cards[2].set_value("lcpr", value)
 
     @property
@@ -517,6 +539,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @lcsigy.setter
     def lcsigy(self, value: float) -> None:
+        """Set the lcsigy property."""
         self._cards[2].set_value("lcsigy", value)
 
     @property
@@ -527,6 +550,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @lcqr.setter
     def lcqr(self, value: float) -> None:
+        """Set the lcqr property."""
         self._cards[2].set_value("lcqr", value)
 
     @property
@@ -537,6 +561,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @lcqx.setter
     def lcqx(self, value: float) -> None:
+        """Set the lcqx property."""
         self._cards[2].set_value("lcqx", value)
 
     @property
@@ -547,6 +572,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @lcalph.setter
     def lcalph(self, value: float) -> None:
+        """Set the lcalph property."""
         self._cards[2].set_value("lcalph", value)
 
     @property
@@ -557,6 +583,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @lcc.setter
     def lcc(self, value: float) -> None:
+        """Set the lcc property."""
         self._cards[3].set_value("lcc", value)
 
     @property
@@ -567,6 +594,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @lcp.setter
     def lcp(self, value: float) -> None:
+        """Set the lcp property."""
         self._cards[3].set_value("lcp", value)
 
     @property
@@ -577,6 +605,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @lccr.setter
     def lccr(self, value: float) -> None:
+        """Set the lccr property."""
         self._cards[3].set_value("lccr", value)
 
     @property
@@ -587,6 +616,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @lccx.setter
     def lccx(self, value: float) -> None:
+        """Set the lccx property."""
         self._cards[3].set_value("lccx", value)
 
     @property
@@ -597,6 +627,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @crpa.setter
     def crpa(self, value: float) -> None:
+        """Set the crpa property."""
         self._cards[3].set_value("crpa", value)
 
     @property
@@ -607,6 +638,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @crpb.setter
     def crpb(self, value: float) -> None:
+        """Set the crpb property."""
         self._cards[3].set_value("crpb", value)
 
     @property
@@ -617,6 +649,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @crpq.setter
     def crpq(self, value: float) -> None:
+        """Set the crpq property."""
         self._cards[3].set_value("crpq", value)
 
     @property
@@ -627,6 +660,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @crpm.setter
     def crpm(self, value: float) -> None:
+        """Set the crpm property."""
         self._cards[3].set_value("crpm", value)
 
     @property
@@ -639,8 +673,9 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @crplaw.setter
     def crplaw(self, value: float) -> None:
+        """Set the crplaw property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""crplaw must be `None` or one of {0.0,1.0}""")
+            raise Exception("""crplaw must be `None` or one of {0.0,1.0}.""")
         self._cards[4].set_value("crplaw", value)
 
     @property
@@ -651,5 +686,6 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

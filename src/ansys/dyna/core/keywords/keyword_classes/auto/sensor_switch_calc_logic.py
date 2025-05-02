@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SensorSwitchCalcLogic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SensorSwitchCalcLogic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SensorSwitchCalcLogic class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -125,6 +127,7 @@ class SensorSwitchCalcLogic(KeywordBase):
 
     @switid.setter
     def switid(self, value: int) -> None:
+        """Set the switid property."""
         self._cards[0].set_value("switid", value)
 
     @property
@@ -135,6 +138,7 @@ class SensorSwitchCalcLogic(KeywordBase):
 
     @swit1.setter
     def swit1(self, value: int) -> None:
+        """Set the swit1 property."""
         self._cards[0].set_value("swit1", value)
 
     @property
@@ -145,6 +149,7 @@ class SensorSwitchCalcLogic(KeywordBase):
 
     @swit2.setter
     def swit2(self, value: int) -> None:
+        """Set the swit2 property."""
         self._cards[0].set_value("swit2", value)
 
     @property
@@ -155,6 +160,7 @@ class SensorSwitchCalcLogic(KeywordBase):
 
     @swit3.setter
     def swit3(self, value: int) -> None:
+        """Set the swit3 property."""
         self._cards[0].set_value("swit3", value)
 
     @property
@@ -165,6 +171,7 @@ class SensorSwitchCalcLogic(KeywordBase):
 
     @swit4.setter
     def swit4(self, value: int) -> None:
+        """Set the swit4 property."""
         self._cards[0].set_value("swit4", value)
 
     @property
@@ -175,6 +182,7 @@ class SensorSwitchCalcLogic(KeywordBase):
 
     @swit5.setter
     def swit5(self, value: int) -> None:
+        """Set the swit5 property."""
         self._cards[0].set_value("swit5", value)
 
     @property
@@ -185,6 +193,7 @@ class SensorSwitchCalcLogic(KeywordBase):
 
     @swit6.setter
     def swit6(self, value: int) -> None:
+        """Set the swit6 property."""
         self._cards[0].set_value("swit6", value)
 
     @property
@@ -195,6 +204,7 @@ class SensorSwitchCalcLogic(KeywordBase):
 
     @swit7.setter
     def swit7(self, value: int) -> None:
+        """Set the swit7 property."""
         self._cards[0].set_value("swit7", value)
 
     @property
@@ -205,5 +215,6 @@ class SensorSwitchCalcLogic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

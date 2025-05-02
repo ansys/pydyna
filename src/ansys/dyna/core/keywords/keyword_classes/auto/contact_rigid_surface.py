@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ContactRigidSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ContactRigidSurface(KeywordBase):
     subkeyword = "RIGID_SURFACE"
 
     def __init__(self, **kwargs):
+        """Initialize the ContactRigidSurface class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -204,6 +206,7 @@ class ContactRigidSurface(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -214,6 +217,7 @@ class ContactRigidSurface(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -225,6 +229,7 @@ class ContactRigidSurface(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -235,6 +240,7 @@ class ContactRigidSurface(KeywordBase):
 
     @segid.setter
     def segid(self, value: int) -> None:
+        """Set the segid property."""
         self._cards[0].set_value("segid", value)
 
     @property
@@ -245,6 +251,7 @@ class ContactRigidSurface(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[0].set_value("fs", value)
 
     @property
@@ -255,6 +262,7 @@ class ContactRigidSurface(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[0].set_value("fd", value)
 
     @property
@@ -265,6 +273,7 @@ class ContactRigidSurface(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[0].set_value("dc", value)
 
     @property
@@ -275,6 +284,7 @@ class ContactRigidSurface(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[0].set_value("vc", value)
 
     @property
@@ -286,6 +296,7 @@ class ContactRigidSurface(KeywordBase):
 
     @lcidx.setter
     def lcidx(self, value: int) -> None:
+        """Set the lcidx property."""
         self._cards[1].set_value("lcidx", value)
 
     @property
@@ -297,6 +308,7 @@ class ContactRigidSurface(KeywordBase):
 
     @lcidy.setter
     def lcidy(self, value: int) -> None:
+        """Set the lcidy property."""
         self._cards[1].set_value("lcidy", value)
 
     @property
@@ -308,6 +320,7 @@ class ContactRigidSurface(KeywordBase):
 
     @lcidz.setter
     def lcidz(self, value: int) -> None:
+        """Set the lcidz property."""
         self._cards[1].set_value("lcidz", value)
 
     @property
@@ -318,6 +331,7 @@ class ContactRigidSurface(KeywordBase):
 
     @fslcid.setter
     def fslcid(self, value: int) -> None:
+        """Set the fslcid property."""
         self._cards[1].set_value("fslcid", value)
 
     @property
@@ -328,6 +342,7 @@ class ContactRigidSurface(KeywordBase):
 
     @fdlcid.setter
     def fdlcid(self, value: int) -> None:
+        """Set the fdlcid property."""
         self._cards[1].set_value("fdlcid", value)
 
     @property
@@ -339,6 +354,7 @@ class ContactRigidSurface(KeywordBase):
 
     @sfs.setter
     def sfs(self, value: float) -> None:
+        """Set the sfs property."""
         self._cards[2].set_value("sfs", value)
 
     @property
@@ -350,6 +366,7 @@ class ContactRigidSurface(KeywordBase):
 
     @stthk.setter
     def stthk(self, value: float) -> None:
+        """Set the stthk property."""
         self._cards[2].set_value("stthk", value)
 
     @property
@@ -361,6 +378,7 @@ class ContactRigidSurface(KeywordBase):
 
     @sfthk.setter
     def sfthk(self, value: float) -> None:
+        """Set the sfthk property."""
         self._cards[2].set_value("sfthk", value)
 
     @property
@@ -372,6 +390,7 @@ class ContactRigidSurface(KeywordBase):
 
     @xpene.setter
     def xpene(self, value: float) -> None:
+        """Set the xpene property."""
         self._cards[2].set_value("xpene", value)
 
     @property
@@ -382,6 +401,7 @@ class ContactRigidSurface(KeywordBase):
 
     @bsort.setter
     def bsort(self, value: float) -> None:
+        """Set the bsort property."""
         self._cards[2].set_value("bsort", value)
 
     @property
@@ -392,7 +412,8 @@ class ContactRigidSurface(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
+        """Set the ctype property."""
         if value not in [0, 1, None]:
-            raise Exception("""ctype must be `None` or one of {0,1}""")
+            raise Exception("""ctype must be `None` or one of {0,1}.""")
         self._cards[2].set_value("ctype", value)
 

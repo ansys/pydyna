@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmIsopotential class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmIsopotential(KeywordBase):
     subkeyword = "ISOPOTENTIAL"
 
     def __init__(self, **kwargs):
+        """Initialize the EmIsopotential class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class EmIsopotential(KeywordBase):
 
     @isoid.setter
     def isoid(self, value: int) -> None:
+        """Set the isoid property."""
         self._cards[0].set_value("isoid", value)
 
     @property
@@ -90,8 +93,9 @@ class EmIsopotential(KeywordBase):
 
     @settype.setter
     def settype(self, value: int) -> None:
+        """Set the settype property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""settype must be `None` or one of {1,2,3}""")
+            raise Exception("""settype must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("settype", value)
 
     @property
@@ -102,6 +106,7 @@ class EmIsopotential(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 
     @property
@@ -119,5 +124,6 @@ class EmIsopotential(KeywordBase):
 
     @rdltype.setter
     def rdltype(self, value: int) -> None:
+        """Set the rdltype property."""
         self._cards[0].set_value("rdltype", value)
 

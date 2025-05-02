@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementBeamOffset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementBeamOffset(KeywordBase):
     subkeyword = "BEAM_OFFSET"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementBeamOffset class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -174,6 +176,7 @@ class ElementBeamOffset(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -184,6 +187,7 @@ class ElementBeamOffset(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -194,6 +198,7 @@ class ElementBeamOffset(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -204,6 +209,7 @@ class ElementBeamOffset(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -214,6 +220,7 @@ class ElementBeamOffset(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -233,8 +240,9 @@ class ElementBeamOffset(KeywordBase):
 
     @rt1.setter
     def rt1(self, value: int) -> None:
+        """Set the rt1 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rt1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rt1 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rt1", value)
 
     @property
@@ -254,8 +262,9 @@ class ElementBeamOffset(KeywordBase):
 
     @rr1.setter
     def rr1(self, value: int) -> None:
+        """Set the rr1 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rr1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rr1 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rr1", value)
 
     @property
@@ -275,8 +284,9 @@ class ElementBeamOffset(KeywordBase):
 
     @rt2.setter
     def rt2(self, value: int) -> None:
+        """Set the rt2 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rt2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rt2 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rt2", value)
 
     @property
@@ -296,8 +306,9 @@ class ElementBeamOffset(KeywordBase):
 
     @rr2.setter
     def rr2(self, value: int) -> None:
+        """Set the rr2 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rr2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rr2 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rr2", value)
 
     @property
@@ -310,8 +321,9 @@ class ElementBeamOffset(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
+        """Set the local property."""
         if value not in [2, 1, None]:
-            raise Exception("""local must be `None` or one of {2,1}""")
+            raise Exception("""local must be `None` or one of {2,1}.""")
         self._cards[0].set_value("local", value)
 
     @property
@@ -322,6 +334,7 @@ class ElementBeamOffset(KeywordBase):
 
     @wx1.setter
     def wx1(self, value: float) -> None:
+        """Set the wx1 property."""
         self._cards[1].set_value("wx1", value)
 
     @property
@@ -332,6 +345,7 @@ class ElementBeamOffset(KeywordBase):
 
     @wy1.setter
     def wy1(self, value: float) -> None:
+        """Set the wy1 property."""
         self._cards[1].set_value("wy1", value)
 
     @property
@@ -342,6 +356,7 @@ class ElementBeamOffset(KeywordBase):
 
     @wz1.setter
     def wz1(self, value: float) -> None:
+        """Set the wz1 property."""
         self._cards[1].set_value("wz1", value)
 
     @property
@@ -352,6 +367,7 @@ class ElementBeamOffset(KeywordBase):
 
     @wx2.setter
     def wx2(self, value: float) -> None:
+        """Set the wx2 property."""
         self._cards[1].set_value("wx2", value)
 
     @property
@@ -362,6 +378,7 @@ class ElementBeamOffset(KeywordBase):
 
     @wy2.setter
     def wy2(self, value: float) -> None:
+        """Set the wy2 property."""
         self._cards[1].set_value("wy2", value)
 
     @property
@@ -372,5 +389,6 @@ class ElementBeamOffset(KeywordBase):
 
     @wz2.setter
     def wz2(self, value: float) -> None:
+        """Set the wz2 property."""
         self._cards[1].set_value("wz2", value)
 

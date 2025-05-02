@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseFrequencyBinaryD3Rms class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseFrequencyBinaryD3Rms(KeywordBase):
     subkeyword = "FREQUENCY_BINARY_D3RMS"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseFrequencyBinaryD3Rms class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -60,5 +62,6 @@ class DatabaseFrequencyBinaryD3Rms(KeywordBase):
 
     @binary.setter
     def binary(self, value: int) -> None:
+        """Set the binary property."""
         self._cards[0].set_value("binary", value)
 

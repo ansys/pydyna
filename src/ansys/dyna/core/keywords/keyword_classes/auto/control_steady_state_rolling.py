@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlSteadyStateRolling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlSteadyStateRolling(KeywordBase):
     subkeyword = "STEADY_STATE_ROLLING"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlSteadyStateRolling class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -89,8 +91,9 @@ class ControlSteadyStateRolling(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
+        """Set the imass property."""
         if value not in [0, 1, None]:
-            raise Exception("""imass must be `None` or one of {0,1}""")
+            raise Exception("""imass must be `None` or one of {0,1}.""")
         self._cards[0].set_value("imass", value)
 
     @property
@@ -101,6 +104,7 @@ class ControlSteadyStateRolling(KeywordBase):
 
     @lcdmu.setter
     def lcdmu(self, value: int) -> None:
+        """Set the lcdmu property."""
         self._cards[0].set_value("lcdmu", value)
 
     @property
@@ -111,6 +115,7 @@ class ControlSteadyStateRolling(KeywordBase):
 
     @lcdmur.setter
     def lcdmur(self, value: int) -> None:
+        """Set the lcdmur property."""
         self._cards[0].set_value("lcdmur", value)
 
     @property
@@ -123,6 +128,7 @@ class ControlSteadyStateRolling(KeywordBase):
 
     @ivel.setter
     def ivel(self, value: int) -> None:
+        """Set the ivel property."""
         self._cards[0].set_value("ivel", value)
 
     @property
@@ -133,5 +139,6 @@ class ControlSteadyStateRolling(KeywordBase):
 
     @scl_k.setter
     def scl_k(self, value: int) -> None:
+        """Set the scl_k property."""
         self._cards[0].set_value("scl_k", value)
 

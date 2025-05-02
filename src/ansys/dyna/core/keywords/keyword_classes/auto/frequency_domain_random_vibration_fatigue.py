@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainRandomVibrationFatigue class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
     subkeyword = "DOMAIN_RANDOM_VIBRATION_FATIGUE"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainRandomVibrationFatigue class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -510,6 +512,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @mdmin.setter
     def mdmin(self, value: int) -> None:
+        """Set the mdmin property."""
         self._cards[0].set_value("mdmin", value)
 
     @property
@@ -520,6 +523,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @mdmax.setter
     def mdmax(self, value: int) -> None:
+        """Set the mdmax property."""
         self._cards[0].set_value("mdmax", value)
 
     @property
@@ -530,6 +534,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @fnmin.setter
     def fnmin(self, value: float) -> None:
+        """Set the fnmin property."""
         self._cards[0].set_value("fnmin", value)
 
     @property
@@ -540,6 +545,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @fnmax.setter
     def fnmax(self, value: float) -> None:
+        """Set the fnmax property."""
         self._cards[0].set_value("fnmax", value)
 
     @property
@@ -552,8 +558,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
+        """Set the restrt property."""
         if value not in [0, 1, None]:
-            raise Exception("""restrt must be `None` or one of {0,1}""")
+            raise Exception("""restrt must be `None` or one of {0,1}.""")
         self._cards[0].set_value("restrt", value)
 
     @property
@@ -564,6 +571,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @dampf.setter
     def dampf(self, value: float) -> None:
+        """Set the dampf property."""
         self._cards[1].set_value("dampf", value)
 
     @property
@@ -574,6 +582,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @lcdam.setter
     def lcdam(self, value: int) -> None:
+        """Set the lcdam property."""
         self._cards[1].set_value("lcdam", value)
 
     @property
@@ -586,8 +595,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @lctyp.setter
     def lctyp(self, value: int) -> None:
+        """Set the lctyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""lctyp must be `None` or one of {0,1}""")
+            raise Exception("""lctyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("lctyp", value)
 
     @property
@@ -598,6 +608,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @dmpmas.setter
     def dmpmas(self, value: float) -> None:
+        """Set the dmpmas property."""
         self._cards[1].set_value("dmpmas", value)
 
     @property
@@ -608,6 +619,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @dmpstf.setter
     def dmpstf(self, value: float) -> None:
+        """Set the dmpstf property."""
         self._cards[1].set_value("dmpstf", value)
 
     @property
@@ -620,8 +632,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @dmptyp.setter
     def dmptyp(self, value: int) -> None:
+        """Set the dmptyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""dmptyp must be `None` or one of {0,1}""")
+            raise Exception("""dmptyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("dmptyp", value)
 
     @property
@@ -641,8 +654,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @vaflag.setter
     def vaflag(self, value: int) -> None:
+        """Set the vaflag property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, None]:
-            raise Exception("""vaflag must be `None` or one of {0,1,2,3,4,5,6,7,8}""")
+            raise Exception("""vaflag must be `None` or one of {0,1,2,3,4,5,6,7,8}.""")
         self._cards[2].set_value("vaflag", value)
 
     @property
@@ -657,8 +671,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""method must be `None` or one of {0,1,2,3}""")
+            raise Exception("""method must be `None` or one of {0,1,2,3}.""")
         self._cards[2].set_value("method", value)
 
     @property
@@ -678,8 +693,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
+        """Set the unit property."""
         if value not in [0, 1, 2, 3, 4, -1, None]:
-            raise Exception("""unit must be `None` or one of {0,1,2,3,4,-1}""")
+            raise Exception("""unit must be `None` or one of {0,1,2,3,4,-1}.""")
         self._cards[2].set_value("unit", value)
 
     @property
@@ -690,6 +706,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @umlt.setter
     def umlt(self, value: float) -> None:
+        """Set the umlt property."""
         self._cards[2].set_value("umlt", value)
 
     @property
@@ -702,8 +719,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @vapsd.setter
     def vapsd(self, value: int) -> None:
+        """Set the vapsd property."""
         if value not in [0, 1, None]:
-            raise Exception("""vapsd must be `None` or one of {0,1}""")
+            raise Exception("""vapsd must be `None` or one of {0,1}.""")
         self._cards[2].set_value("vapsd", value)
 
     @property
@@ -716,8 +734,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @varms.setter
     def varms(self, value: int) -> None:
+        """Set the varms property."""
         if value not in [0, 1, None]:
-            raise Exception("""varms must be `None` or one of {0,1}""")
+            raise Exception("""varms must be `None` or one of {0,1}.""")
         self._cards[2].set_value("varms", value)
 
     @property
@@ -728,6 +747,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @napsd.setter
     def napsd(self, value: int) -> None:
+        """Set the napsd property."""
         self._cards[2].set_value("napsd", value)
 
     @property
@@ -738,6 +758,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ncpsd.setter
     def ncpsd(self, value: int) -> None:
+        """Set the ncpsd property."""
         self._cards[2].set_value("ncpsd", value)
 
     @property
@@ -751,8 +772,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ldtyp.setter
     def ldtyp(self, value: int) -> None:
+        """Set the ldtyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ldtyp must be `None` or one of {0,1,2}""")
+            raise Exception("""ldtyp must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("ldtyp", value)
 
     @property
@@ -763,6 +785,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ipanelu.setter
     def ipanelu(self, value: int) -> None:
+        """Set the ipanelu property."""
         self._cards[3].set_value("ipanelu", value)
 
     @property
@@ -773,6 +796,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ipanelv.setter
     def ipanelv(self, value: int) -> None:
+        """Set the ipanelv property."""
         self._cards[3].set_value("ipanelv", value)
 
     @property
@@ -783,6 +807,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @temper.setter
     def temper(self, value: float) -> None:
+        """Set the temper property."""
         self._cards[3].set_value("temper", value)
 
     @property
@@ -797,8 +822,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ldflag.setter
     def ldflag(self, value: int) -> None:
+        """Set the ldflag property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ldflag must be `None` or one of {0,1,2}""")
+            raise Exception("""ldflag must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("ldflag", value)
 
     @property
@@ -812,8 +838,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @icoarse.setter
     def icoarse(self, value: int) -> None:
+        """Set the icoarse property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""icoarse must be `None` or one of {0,1,2}""")
+            raise Exception("""icoarse must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("icoarse", value)
 
     @property
@@ -824,6 +851,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @tcoarse.setter
     def tcoarse(self, value: float) -> None:
+        """Set the tcoarse property."""
         self._cards[3].set_value("tcoarse", value)
 
     @property
@@ -835,6 +863,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[4].set_value("sid", value)
 
     @property
@@ -851,6 +880,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         self._cards[4].set_value("stype", value)
 
     @property
@@ -865,8 +895,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""dof must be `None` or one of {0,1,2,3}""")
+            raise Exception("""dof must be `None` or one of {0,1,2,3}.""")
         self._cards[4].set_value("dof", value)
 
     @property
@@ -877,6 +908,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ldpsd.setter
     def ldpsd(self, value: int) -> None:
+        """Set the ldpsd property."""
         self._cards[4].set_value("ldpsd", value)
 
     @property
@@ -887,6 +919,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ldvel.setter
     def ldvel(self, value: int) -> None:
+        """Set the ldvel property."""
         self._cards[4].set_value("ldvel", value)
 
     @property
@@ -897,6 +930,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ldflw.setter
     def ldflw(self, value: int) -> None:
+        """Set the ldflw property."""
         self._cards[4].set_value("ldflw", value)
 
     @property
@@ -907,6 +941,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ldspn.setter
     def ldspn(self, value: int) -> None:
+        """Set the ldspn property."""
         self._cards[4].set_value("ldspn", value)
 
     @property
@@ -919,6 +954,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[4].set_value("cid", value)
 
     @property
@@ -929,6 +965,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @load_i.setter
     def load_i(self, value: int) -> None:
+        """Set the load_i property."""
         self._cards[5].set_value("load_i", value)
 
     @property
@@ -939,6 +976,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @load_j.setter
     def load_j(self, value: int) -> None:
+        """Set the load_j property."""
         self._cards[5].set_value("load_j", value)
 
     @property
@@ -951,8 +989,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @lctyp2.setter
     def lctyp2(self, value: int) -> None:
+        """Set the lctyp2 property."""
         if value not in [0, 1, None]:
-            raise Exception("""lctyp2 must be `None` or one of {0,1}""")
+            raise Exception("""lctyp2 must be `None` or one of {0,1}.""")
         self._cards[5].set_value("lctyp2", value)
 
     @property
@@ -963,6 +1002,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ldpsd1.setter
     def ldpsd1(self, value: int) -> None:
+        """Set the ldpsd1 property."""
         self._cards[5].set_value("ldpsd1", value)
 
     @property
@@ -973,6 +1013,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ldpsd2.setter
     def ldpsd2(self, value: int) -> None:
+        """Set the ldpsd2 property."""
         self._cards[5].set_value("ldpsd2", value)
 
     @property
@@ -991,8 +1032,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @mftg.setter
     def mftg(self, value: int) -> None:
+        """Set the mftg property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""mftg must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""mftg must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[6].set_value("mftg", value)
 
     @property
@@ -1006,6 +1048,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @nftg.setter
     def nftg(self, value: int) -> None:
+        """Set the nftg property."""
         self._cards[6].set_value("nftg", value)
 
     @property
@@ -1020,6 +1063,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @sntype.setter
     def sntype(self, value: int) -> None:
+        """Set the sntype property."""
         self._cards[6].set_value("sntype", value)
 
     @property
@@ -1030,6 +1074,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @texpos.setter
     def texpos(self, value: float) -> None:
+        """Set the texpos property."""
         self._cards[6].set_value("texpos", value)
 
     @property
@@ -1042,8 +1087,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @strsf.setter
     def strsf(self, value: float) -> None:
+        """Set the strsf property."""
         if value not in [1, 2, None]:
-            raise Exception("""strsf must be `None` or one of {1,2}""")
+            raise Exception("""strsf must be `None` or one of {1,2}.""")
         self._cards[6].set_value("strsf", value)
 
     @property
@@ -1056,6 +1102,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @inftg.setter
     def inftg(self, value: int) -> None:
+        """Set the inftg property."""
         self._cards[6].set_value("inftg", value)
 
     @property
@@ -1066,6 +1113,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[7].set_value("pid", value)
 
     @property
@@ -1079,6 +1127,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[7].set_value("lcid", value)
 
     @property
@@ -1095,8 +1144,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
+        """Set the ptype property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""ptype must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""ptype must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[7].set_value("ptype", value)
 
     @property
@@ -1109,8 +1159,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @ltype.setter
     def ltype(self, value: int) -> None:
+        """Set the ltype property."""
         if value not in [0, 1, None]:
-            raise Exception("""ltype must be `None` or one of {0,1}""")
+            raise Exception("""ltype must be `None` or one of {0,1}.""")
         self._cards[7].set_value("ltype", value)
 
     @property
@@ -1121,6 +1172,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[7].set_value("a", value)
 
     @property
@@ -1131,6 +1183,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[7].set_value("b", value)
 
     @property
@@ -1141,6 +1194,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @sthres.setter
     def sthres(self, value: float) -> None:
+        """Set the sthres property."""
         self._cards[7].set_value("sthres", value)
 
     @property
@@ -1158,8 +1212,9 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @snlimt.setter
     def snlimt(self, value: int) -> None:
+        """Set the snlimt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""snlimt must be `None` or one of {0,1,2}""")
+            raise Exception("""snlimt must be `None` or one of {0,1,2}.""")
         self._cards[7].set_value("snlimt", value)
 
     @property
@@ -1170,5 +1225,6 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[8].set_value("filename", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdControlFsi class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlFsi(KeywordBase):
     subkeyword = "CONTROL_FSI"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdControlFsi class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,8 +111,9 @@ class IcfdControlFsi(KeywordBase):
 
     @owc.setter
     def owc(self, value: int) -> None:
+        """Set the owc property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""owc must be `None` or one of {0,1,2,3}""")
+            raise Exception("""owc must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("owc", value)
 
     @property
@@ -121,6 +124,7 @@ class IcfdControlFsi(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[0].set_value("bt", value)
 
     @property
@@ -131,6 +135,7 @@ class IcfdControlFsi(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -141,6 +146,7 @@ class IcfdControlFsi(KeywordBase):
 
     @idc.setter
     def idc(self, value: float) -> None:
+        """Set the idc property."""
         self._cards[0].set_value("idc", value)
 
     @property
@@ -153,6 +159,7 @@ class IcfdControlFsi(KeywordBase):
 
     @lcidsf.setter
     def lcidsf(self, value: int) -> None:
+        """Set the lcidsf property."""
         self._cards[0].set_value("lcidsf", value)
 
     @property
@@ -165,8 +172,9 @@ class IcfdControlFsi(KeywordBase):
 
     @xproj.setter
     def xproj(self, value: int) -> None:
+        """Set the xproj property."""
         if value not in [0, 1, None]:
-            raise Exception("""xproj must be `None` or one of {0,1}""")
+            raise Exception("""xproj must be `None` or one of {0,1}.""")
         self._cards[0].set_value("xproj", value)
 
     @property
@@ -177,5 +185,6 @@ class IcfdControlFsi(KeywordBase):
 
     @nsub.setter
     def nsub(self, value: int) -> None:
+        """Set the nsub property."""
         self._cards[1].set_value("nsub", value)
 

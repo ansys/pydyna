@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadThermalVariableBeamSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
     subkeyword = "THERMAL_VARIABLE_BEAM_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadThermalVariableBeamSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -117,6 +119,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -127,6 +130,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -137,6 +141,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
 
     @ipolar.setter
     def ipolar(self, value: int) -> None:
+        """Set the ipolar property."""
         self._cards[0].set_value("ipolar", value)
 
     @property
@@ -147,6 +152,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
 
     @tbase.setter
     def tbase(self, value: float) -> None:
+        """Set the tbase property."""
         self._cards[1].set_value("tbase", value)
 
     @property
@@ -157,6 +163,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
 
     @tscale.setter
     def tscale(self, value: float) -> None:
+        """Set the tscale property."""
         self._cards[1].set_value("tscale", value)
 
     @property
@@ -167,6 +174,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
 
     @tcurve.setter
     def tcurve(self, value: int) -> None:
+        """Set the tcurve property."""
         self._cards[1].set_value("tcurve", value)
 
     @property
@@ -177,6 +185,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
 
     @tcurdr.setter
     def tcurdr(self, value: int) -> None:
+        """Set the tcurdr property."""
         self._cards[1].set_value("tcurdr", value)
 
     @property
@@ -187,6 +196,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
 
     @scoor.setter
     def scoor(self, value: float) -> None:
+        """Set the scoor property."""
         self._cards[1].set_value("scoor", value)
 
     @property
@@ -197,5 +207,6 @@ class LoadThermalVariableBeamSet(KeywordBase):
 
     @tcoor.setter
     def tcoor(self, value: float) -> None:
+        """Set the tcoor property."""
         self._cards[1].set_value("tcoor", value)
 

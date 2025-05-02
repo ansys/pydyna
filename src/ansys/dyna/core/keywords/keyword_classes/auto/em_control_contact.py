@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmControlContact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmControlContact(KeywordBase):
     subkeyword = "CONTROL_CONTACT"
 
     def __init__(self, **kwargs):
+        """Initialize the EmControlContact class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -112,8 +114,9 @@ class EmControlContact(KeywordBase):
 
     @emct.setter
     def emct(self, value: int) -> None:
+        """Set the emct property."""
         if value not in [0, 1, None]:
-            raise Exception("""emct must be `None` or one of {0,1}""")
+            raise Exception("""emct must be `None` or one of {0,1}.""")
         self._cards[0].set_value("emct", value)
 
     @property
@@ -126,8 +129,9 @@ class EmControlContact(KeywordBase):
 
     @cconly.setter
     def cconly(self, value: int) -> None:
+        """Set the cconly property."""
         if value not in [0, 1, None]:
-            raise Exception("""cconly must be `None` or one of {0,1}""")
+            raise Exception("""cconly must be `None` or one of {0,1}.""")
         self._cards[0].set_value("cconly", value)
 
     @property
@@ -142,8 +146,9 @@ class EmControlContact(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
+        """Set the ctype property."""
         if value not in [0, -1, 1, 2, None]:
-            raise Exception("""ctype must be `None` or one of {0,-1,1,2}""")
+            raise Exception("""ctype must be `None` or one of {0,-1,1,2}.""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -156,8 +161,9 @@ class EmControlContact(KeywordBase):
 
     @cotype.setter
     def cotype(self, value: int) -> None:
+        """Set the cotype property."""
         if value not in [0, 1, None]:
-            raise Exception("""cotype must be `None` or one of {0,1}""")
+            raise Exception("""cotype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("cotype", value)
 
     @property
@@ -168,6 +174,7 @@ class EmControlContact(KeywordBase):
 
     @eps1.setter
     def eps1(self, value: float) -> None:
+        """Set the eps1 property."""
         self._cards[0].set_value("eps1", value)
 
     @property
@@ -178,6 +185,7 @@ class EmControlContact(KeywordBase):
 
     @eps2.setter
     def eps2(self, value: float) -> None:
+        """Set the eps2 property."""
         self._cards[0].set_value("eps2", value)
 
     @property
@@ -188,6 +196,7 @@ class EmControlContact(KeywordBase):
 
     @eps3.setter
     def eps3(self, value: float) -> None:
+        """Set the eps3 property."""
         self._cards[0].set_value("eps3", value)
 
     @property
@@ -198,5 +207,6 @@ class EmControlContact(KeywordBase):
 
     @d0.setter
     def d0(self, value: float) -> None:
+        """Set the d0 property."""
         self._cards[0].set_value("d0", value)
 

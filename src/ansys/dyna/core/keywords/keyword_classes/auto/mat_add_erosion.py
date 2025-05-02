@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAddErosion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddErosion(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAddErosion class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -341,6 +343,7 @@ class MatAddErosion(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -358,6 +361,7 @@ class MatAddErosion(KeywordBase):
 
     @excl.setter
     def excl(self, value: float) -> None:
+        """Set the excl property."""
         self._cards[0].set_value("excl", value)
 
     @property
@@ -368,6 +372,7 @@ class MatAddErosion(KeywordBase):
 
     @mxpres.setter
     def mxpres(self, value: float) -> None:
+        """Set the mxpres property."""
         self._cards[0].set_value("mxpres", value)
 
     @property
@@ -378,6 +383,7 @@ class MatAddErosion(KeywordBase):
 
     @mneps.setter
     def mneps(self, value: float) -> None:
+        """Set the mneps property."""
         self._cards[0].set_value("mneps", value)
 
     @property
@@ -388,6 +394,7 @@ class MatAddErosion(KeywordBase):
 
     @effeps.setter
     def effeps(self, value: float) -> None:
+        """Set the effeps property."""
         self._cards[0].set_value("effeps", value)
 
     @property
@@ -398,6 +405,7 @@ class MatAddErosion(KeywordBase):
 
     @voleps.setter
     def voleps(self, value: float) -> None:
+        """Set the voleps property."""
         self._cards[0].set_value("voleps", value)
 
     @property
@@ -412,6 +420,7 @@ class MatAddErosion(KeywordBase):
 
     @numfip.setter
     def numfip(self, value: float) -> None:
+        """Set the numfip property."""
         self._cards[0].set_value("numfip", value)
 
     @property
@@ -422,6 +431,7 @@ class MatAddErosion(KeywordBase):
 
     @ncs.setter
     def ncs(self, value: float) -> None:
+        """Set the ncs property."""
         self._cards[0].set_value("ncs", value)
 
     @property
@@ -432,6 +442,7 @@ class MatAddErosion(KeywordBase):
 
     @mnpres.setter
     def mnpres(self, value: float) -> None:
+        """Set the mnpres property."""
         self._cards[1].set_value("mnpres", value)
 
     @property
@@ -442,6 +453,7 @@ class MatAddErosion(KeywordBase):
 
     @sigp1.setter
     def sigp1(self, value: float) -> None:
+        """Set the sigp1 property."""
         self._cards[1].set_value("sigp1", value)
 
     @property
@@ -452,6 +464,7 @@ class MatAddErosion(KeywordBase):
 
     @sigvm.setter
     def sigvm(self, value: float) -> None:
+        """Set the sigvm property."""
         self._cards[1].set_value("sigvm", value)
 
     @property
@@ -465,6 +478,7 @@ class MatAddErosion(KeywordBase):
 
     @mxeps.setter
     def mxeps(self, value: float) -> None:
+        """Set the mxeps property."""
         self._cards[1].set_value("mxeps", value)
 
     @property
@@ -475,6 +489,7 @@ class MatAddErosion(KeywordBase):
 
     @epssh.setter
     def epssh(self, value: float) -> None:
+        """Set the epssh property."""
         self._cards[1].set_value("epssh", value)
 
     @property
@@ -485,6 +500,7 @@ class MatAddErosion(KeywordBase):
 
     @sigth.setter
     def sigth(self, value: float) -> None:
+        """Set the sigth property."""
         self._cards[1].set_value("sigth", value)
 
     @property
@@ -495,6 +511,7 @@ class MatAddErosion(KeywordBase):
 
     @impulse.setter
     def impulse(self, value: float) -> None:
+        """Set the impulse property."""
         self._cards[1].set_value("impulse", value)
 
     @property
@@ -507,6 +524,7 @@ class MatAddErosion(KeywordBase):
 
     @failtm.setter
     def failtm(self, value: float) -> None:
+        """Set the failtm property."""
         self._cards[1].set_value("failtm", value)
 
     @property
@@ -521,6 +539,7 @@ class MatAddErosion(KeywordBase):
 
     @idam.setter
     def idam(self, value: int) -> None:
+        """Set the idam property."""
         self._cards[2].set_value("idam", value)
 
     @property
@@ -531,6 +550,7 @@ class MatAddErosion(KeywordBase):
 
     @lcregd.setter
     def lcregd(self, value: int) -> None:
+        """Set the lcregd property."""
         self._cards[2].set_value("lcregd", value)
 
     @property
@@ -541,6 +561,7 @@ class MatAddErosion(KeywordBase):
 
     @lcfld.setter
     def lcfld(self, value: int) -> None:
+        """Set the lcfld property."""
         self._cards[3].set_value("lcfld", value)
 
     @property
@@ -551,6 +572,7 @@ class MatAddErosion(KeywordBase):
 
     @nsff.setter
     def nsff(self, value: int) -> None:
+        """Set the nsff property."""
         self._cards[3].set_value("nsff", value)
 
     @property
@@ -563,6 +585,7 @@ class MatAddErosion(KeywordBase):
 
     @epsthin.setter
     def epsthin(self, value: float) -> None:
+        """Set the epsthin property."""
         self._cards[3].set_value("epsthin", value)
 
     @property
@@ -573,6 +596,7 @@ class MatAddErosion(KeywordBase):
 
     @engcrt.setter
     def engcrt(self, value: float) -> None:
+        """Set the engcrt property."""
         self._cards[3].set_value("engcrt", value)
 
     @property
@@ -583,6 +607,7 @@ class MatAddErosion(KeywordBase):
 
     @radcrt.setter
     def radcrt(self, value: float) -> None:
+        """Set the radcrt property."""
         self._cards[3].set_value("radcrt", value)
 
     @property
@@ -593,6 +618,7 @@ class MatAddErosion(KeywordBase):
 
     @lceps12.setter
     def lceps12(self, value: int) -> None:
+        """Set the lceps12 property."""
         self._cards[3].set_value("lceps12", value)
 
     @property
@@ -603,6 +629,7 @@ class MatAddErosion(KeywordBase):
 
     @lceps13.setter
     def lceps13(self, value: int) -> None:
+        """Set the lceps13 property."""
         self._cards[3].set_value("lceps13", value)
 
     @property
@@ -613,6 +640,7 @@ class MatAddErosion(KeywordBase):
 
     @lcepsmx.setter
     def lcepsmx(self, value: int) -> None:
+        """Set the lcepsmx property."""
         self._cards[3].set_value("lcepsmx", value)
 
     @property
@@ -624,6 +652,7 @@ class MatAddErosion(KeywordBase):
 
     @dteflt.setter
     def dteflt(self, value: float) -> None:
+        """Set the dteflt property."""
         self._cards[4].set_value("dteflt", value)
 
     @property
@@ -634,6 +663,7 @@ class MatAddErosion(KeywordBase):
 
     @volfrac.setter
     def volfrac(self, value: float) -> None:
+        """Set the volfrac property."""
         self._cards[4].set_value("volfrac", value)
 
     @property
@@ -644,6 +674,7 @@ class MatAddErosion(KeywordBase):
 
     @mxtmp.setter
     def mxtmp(self, value: float) -> None:
+        """Set the mxtmp property."""
         self._cards[4].set_value("mxtmp", value)
 
     @property
@@ -654,6 +685,7 @@ class MatAddErosion(KeywordBase):
 
     @dtmin.setter
     def dtmin(self, value: float) -> None:
+        """Set the dtmin property."""
         self._cards[4].set_value("dtmin", value)
 
     @property
@@ -664,5 +696,6 @@ class MatAddErosion(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

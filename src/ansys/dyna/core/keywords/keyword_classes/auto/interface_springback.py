@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceSpringback class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceSpringback(KeywordBase):
     subkeyword = "SPRINGBACK"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceSpringback class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -163,6 +165,7 @@ class InterfaceSpringback(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -173,6 +176,7 @@ class InterfaceSpringback(KeywordBase):
 
     @nshv.setter
     def nshv(self, value: int) -> None:
+        """Set the nshv property."""
         self._cards[0].set_value("nshv", value)
 
     @property
@@ -189,8 +193,9 @@ class InterfaceSpringback(KeywordBase):
 
     @ftype.setter
     def ftype(self, value: int) -> None:
+        """Set the ftype property."""
         if value not in [0, 1, 2, 3, 10, 11, 12, None]:
-            raise Exception("""ftype must be `None` or one of {0,1,2,3,10,11,12}""")
+            raise Exception("""ftype must be `None` or one of {0,1,2,3,10,11,12}.""")
         self._cards[0].set_value("ftype", value)
 
     @property
@@ -204,8 +209,9 @@ class InterfaceSpringback(KeywordBase):
 
     @ftensr.setter
     def ftensr(self, value: int) -> None:
+        """Set the ftensr property."""
         if value not in [0, 1, None]:
-            raise Exception("""ftensr must be `None` or one of {0,1}""")
+            raise Exception("""ftensr must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ftensr", value)
 
     @property
@@ -216,6 +222,7 @@ class InterfaceSpringback(KeywordBase):
 
     @nthhsv.setter
     def nthhsv(self, value: int) -> None:
+        """Set the nthhsv property."""
         self._cards[0].set_value("nthhsv", value)
 
     @property
@@ -228,6 +235,7 @@ class InterfaceSpringback(KeywordBase):
 
     @rflag.setter
     def rflag(self, value: int) -> None:
+        """Set the rflag property."""
         self._cards[0].set_value("rflag", value)
 
     @property
@@ -238,6 +246,7 @@ class InterfaceSpringback(KeywordBase):
 
     @intstrn.setter
     def intstrn(self, value: int) -> None:
+        """Set the intstrn property."""
         self._cards[0].set_value("intstrn", value)
 
     @property
@@ -248,8 +257,9 @@ class InterfaceSpringback(KeywordBase):
 
     @optc.setter
     def optc(self, value: str) -> None:
+        """Set the optc property."""
         if value not in ["OPTCARD", None]:
-            raise Exception("""optc must be `None` or one of {"OPTCARD"}""")
+            raise Exception("""optc must be `None` or one of {"OPTCARD"}.""")
         self._cards[1].set_value("optc", value)
 
     @property
@@ -262,8 +272,9 @@ class InterfaceSpringback(KeywordBase):
 
     @sldo.setter
     def sldo(self, value: int) -> None:
+        """Set the sldo property."""
         if value not in [0, 1, None]:
-            raise Exception("""sldo must be `None` or one of {0,1}""")
+            raise Exception("""sldo must be `None` or one of {0,1}.""")
         self._cards[1].set_value("sldo", value)
 
     @property
@@ -274,6 +285,7 @@ class InterfaceSpringback(KeywordBase):
 
     @ncyc.setter
     def ncyc(self, value: int) -> None:
+        """Set the ncyc property."""
         self._cards[1].set_value("ncyc", value)
 
     @property
@@ -286,8 +298,9 @@ class InterfaceSpringback(KeywordBase):
 
     @fsplit.setter
     def fsplit(self, value: int) -> None:
+        """Set the fsplit property."""
         if value not in [0, 1, None]:
-            raise Exception("""fsplit must be `None` or one of {0,1}""")
+            raise Exception("""fsplit must be `None` or one of {0,1}.""")
         self._cards[1].set_value("fsplit", value)
 
     @property
@@ -300,8 +313,9 @@ class InterfaceSpringback(KeywordBase):
 
     @ndflag.setter
     def ndflag(self, value: int) -> None:
+        """Set the ndflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""ndflag must be `None` or one of {0,1}""")
+            raise Exception("""ndflag must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ndflag", value)
 
     @property
@@ -314,8 +328,9 @@ class InterfaceSpringback(KeywordBase):
 
     @cflag.setter
     def cflag(self, value: int) -> None:
+        """Set the cflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""cflag must be `None` or one of {0,1}""")
+            raise Exception("""cflag must be `None` or one of {0,1}.""")
         self._cards[1].set_value("cflag", value)
 
     @property
@@ -328,5 +343,6 @@ class InterfaceSpringback(KeywordBase):
 
     @hflag.setter
     def hflag(self, value: int) -> None:
+        """Set the hflag property."""
         self._cards[1].set_value("hflag", value)
 

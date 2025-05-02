@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadSurfaceStressSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadSurfaceStressSet(KeywordBase):
     subkeyword = "SURFACE_STRESS_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadSurfaceStressSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -174,6 +176,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -184,6 +187,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @lscid1.setter
     def lscid1(self, value: int) -> None:
+        """Set the lscid1 property."""
         self._cards[1].set_value("lscid1", value)
 
     @property
@@ -194,6 +198,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @lscid2.setter
     def lscid2(self, value: int) -> None:
+        """Set the lscid2 property."""
         self._cards[1].set_value("lscid2", value)
 
     @property
@@ -204,6 +209,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @lscid3.setter
     def lscid3(self, value: int) -> None:
+        """Set the lscid3 property."""
         self._cards[1].set_value("lscid3", value)
 
     @property
@@ -214,6 +220,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @lscid4.setter
     def lscid4(self, value: int) -> None:
+        """Set the lscid4 property."""
         self._cards[1].set_value("lscid4", value)
 
     @property
@@ -224,6 +231,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @lscid5.setter
     def lscid5(self, value: int) -> None:
+        """Set the lscid5 property."""
         self._cards[1].set_value("lscid5", value)
 
     @property
@@ -234,6 +242,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @lscid6.setter
     def lscid6(self, value: int) -> None:
+        """Set the lscid6 property."""
         self._cards[1].set_value("lscid6", value)
 
     @property
@@ -244,6 +253,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @lscid7.setter
     def lscid7(self, value: int) -> None:
+        """Set the lscid7 property."""
         self._cards[1].set_value("lscid7", value)
 
     @property
@@ -254,6 +264,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @lscid8.setter
     def lscid8(self, value: int) -> None:
+        """Set the lscid8 property."""
         self._cards[1].set_value("lscid8", value)
 
     @property
@@ -264,6 +275,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @uscid1.setter
     def uscid1(self, value: int) -> None:
+        """Set the uscid1 property."""
         self._cards[2].set_value("uscid1", value)
 
     @property
@@ -274,6 +286,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @uscid2.setter
     def uscid2(self, value: int) -> None:
+        """Set the uscid2 property."""
         self._cards[2].set_value("uscid2", value)
 
     @property
@@ -284,6 +297,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @uscid3.setter
     def uscid3(self, value: int) -> None:
+        """Set the uscid3 property."""
         self._cards[2].set_value("uscid3", value)
 
     @property
@@ -294,6 +308,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @uscid4.setter
     def uscid4(self, value: int) -> None:
+        """Set the uscid4 property."""
         self._cards[2].set_value("uscid4", value)
 
     @property
@@ -304,6 +319,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @uscid5.setter
     def uscid5(self, value: int) -> None:
+        """Set the uscid5 property."""
         self._cards[2].set_value("uscid5", value)
 
     @property
@@ -314,6 +330,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @uscid6.setter
     def uscid6(self, value: int) -> None:
+        """Set the uscid6 property."""
         self._cards[2].set_value("uscid6", value)
 
     @property
@@ -324,6 +341,7 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @uscid7.setter
     def uscid7(self, value: int) -> None:
+        """Set the uscid7 property."""
         self._cards[2].set_value("uscid7", value)
 
     @property
@@ -334,5 +352,6 @@ class LoadSurfaceStressSet(KeywordBase):
 
     @uscid8.setter
     def uscid8(self, value: int) -> None:
+        """Set the uscid8 property."""
         self._cards[2].set_value("uscid8", value)
 

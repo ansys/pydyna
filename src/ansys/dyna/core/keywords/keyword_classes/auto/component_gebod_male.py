@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ComponentGebodMale class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ComponentGebodMale(KeywordBase):
     subkeyword = "GEBOD_MALE"
 
     def __init__(self, **kwargs):
+        """Initialize the ComponentGebodMale class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -121,6 +123,7 @@ class ComponentGebodMale(KeywordBase):
 
     @did.setter
     def did(self, value: int) -> None:
+        """Set the did property."""
         self._cards[0].set_value("did", value)
 
     @property
@@ -136,8 +139,9 @@ class ComponentGebodMale(KeywordBase):
 
     @units.setter
     def units(self, value: int) -> None:
+        """Set the units property."""
         if value not in [1, 2, 3, 4, 5, None]:
-            raise Exception("""units must be `None` or one of {1,2,3,4,5}""")
+            raise Exception("""units must be `None` or one of {1,2,3,4,5}.""")
         self._cards[0].set_value("units", value)
 
     @property
@@ -148,6 +152,7 @@ class ComponentGebodMale(KeywordBase):
 
     @size.setter
     def size(self, value: float) -> None:
+        """Set the size property."""
         self._cards[0].set_value("size", value)
 
     @property
@@ -158,6 +163,7 @@ class ComponentGebodMale(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[1].set_value("vx", value)
 
     @property
@@ -168,6 +174,7 @@ class ComponentGebodMale(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[1].set_value("vy", value)
 
     @property
@@ -178,6 +185,7 @@ class ComponentGebodMale(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[1].set_value("vz", value)
 
     @property
@@ -188,6 +196,7 @@ class ComponentGebodMale(KeywordBase):
 
     @gx.setter
     def gx(self, value: float) -> None:
+        """Set the gx property."""
         self._cards[1].set_value("gx", value)
 
     @property
@@ -198,6 +207,7 @@ class ComponentGebodMale(KeywordBase):
 
     @gy.setter
     def gy(self, value: float) -> None:
+        """Set the gy property."""
         self._cards[1].set_value("gy", value)
 
     @property
@@ -208,5 +218,6 @@ class ComponentGebodMale(KeywordBase):
 
     @gz.setter
     def gz(self, value: float) -> None:
+        """Set the gz property."""
         self._cards[1].set_value("gz", value)
 

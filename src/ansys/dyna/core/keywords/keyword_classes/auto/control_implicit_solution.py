@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitSolution class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitSolution(KeywordBase):
     subkeyword = "IMPLICIT_SOLUTION"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitSolution class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -366,8 +368,9 @@ class ControlImplicitSolution(KeywordBase):
 
     @nsolvr.setter
     def nsolvr(self, value: int) -> None:
+        """Set the nsolvr property."""
         if value not in [12, -1, 1, 6, 7, 8, 9, None]:
-            raise Exception("""nsolvr must be `None` or one of {12,-1,1,6,7,8,9}""")
+            raise Exception("""nsolvr must be `None` or one of {12,-1,1,6,7,8,9}.""")
         self._cards[0].set_value("nsolvr", value)
 
     @property
@@ -379,6 +382,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @ilimit.setter
     def ilimit(self, value: int) -> None:
+        """Set the ilimit property."""
         self._cards[0].set_value("ilimit", value)
 
     @property
@@ -390,6 +394,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @maxref.setter
     def maxref(self, value: int) -> None:
+        """Set the maxref property."""
         self._cards[0].set_value("maxref", value)
 
     @property
@@ -401,6 +406,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @dctol.setter
     def dctol(self, value: float) -> None:
+        """Set the dctol property."""
         self._cards[0].set_value("dctol", value)
 
     @property
@@ -412,6 +418,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @ectol.setter
     def ectol(self, value: float) -> None:
+        """Set the ectol property."""
         self._cards[0].set_value("ectol", value)
 
     @property
@@ -423,6 +430,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @rctol.setter
     def rctol(self, value: float) -> None:
+        """Set the rctol property."""
         self._cards[0].set_value("rctol", value)
 
     @property
@@ -435,6 +443,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @lstol.setter
     def lstol(self, value: float) -> None:
+        """Set the lstol property."""
         self._cards[0].set_value("lstol", value)
 
     @property
@@ -446,6 +455,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @abstol.setter
     def abstol(self, value: float) -> None:
+        """Set the abstol property."""
         self._cards[0].set_value("abstol", value)
 
     @property
@@ -459,6 +469,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @dnorm.setter
     def dnorm(self, value: int) -> None:
+        """Set the dnorm property."""
         self._cards[1].set_value("dnorm", value)
 
     @property
@@ -471,8 +482,9 @@ class ControlImplicitSolution(KeywordBase):
 
     @diverg.setter
     def diverg(self, value: int) -> None:
+        """Set the diverg property."""
         if value not in [1, 2, None]:
-            raise Exception("""diverg must be `None` or one of {1,2}""")
+            raise Exception("""diverg must be `None` or one of {1,2}.""")
         self._cards[1].set_value("diverg", value)
 
     @property
@@ -485,6 +497,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @istif.setter
     def istif(self, value: int) -> None:
+        """Set the istif property."""
         self._cards[1].set_value("istif", value)
 
     @property
@@ -500,8 +513,9 @@ class ControlImplicitSolution(KeywordBase):
 
     @nlprint.setter
     def nlprint(self, value: int) -> None:
+        """Set the nlprint property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""nlprint must be `None` or one of {0,1,2,3}""")
+            raise Exception("""nlprint must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("nlprint", value)
 
     @property
@@ -516,6 +530,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @nlnorm.setter
     def nlnorm(self, value: float) -> None:
+        """Set the nlnorm property."""
         self._cards[1].set_value("nlnorm", value)
 
     @property
@@ -526,6 +541,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @d3itctl.setter
     def d3itctl(self, value: int) -> None:
+        """Set the d3itctl property."""
         self._cards[1].set_value("d3itctl", value)
 
     @property
@@ -540,8 +556,9 @@ class ControlImplicitSolution(KeywordBase):
 
     @cpchk.setter
     def cpchk(self, value: int) -> None:
+        """Set the cpchk property."""
         if value not in [0, 1, None]:
-            raise Exception("""cpchk must be `None` or one of {0,1}""")
+            raise Exception("""cpchk must be `None` or one of {0,1}.""")
         self._cards[1].set_value("cpchk", value)
 
     @property
@@ -552,6 +569,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @dmtol.setter
     def dmtol(self, value: float) -> None:
+        """Set the dmtol property."""
         self._cards[2].set_value("dmtol", value)
 
     @property
@@ -562,6 +580,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @emtol.setter
     def emtol(self, value: float) -> None:
+        """Set the emtol property."""
         self._cards[2].set_value("emtol", value)
 
     @property
@@ -572,6 +591,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @rmtol.setter
     def rmtol(self, value: float) -> None:
+        """Set the rmtol property."""
         self._cards[2].set_value("rmtol", value)
 
     @property
@@ -582,6 +602,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @nttol.setter
     def nttol(self, value: float) -> None:
+        """Set the nttol property."""
         self._cards[2].set_value("nttol", value)
 
     @property
@@ -592,6 +613,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @nrtol.setter
     def nrtol(self, value: float) -> None:
+        """Set the nrtol property."""
         self._cards[2].set_value("nrtol", value)
 
     @property
@@ -602,6 +624,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @rttol.setter
     def rttol(self, value: float) -> None:
+        """Set the rttol property."""
         self._cards[2].set_value("rttol", value)
 
     @property
@@ -612,6 +635,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @rrtol.setter
     def rrtol(self, value: float) -> None:
+        """Set the rrtol property."""
         self._cards[2].set_value("rrtol", value)
 
     @property
@@ -623,6 +647,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @arcctl.setter
     def arcctl(self, value: int) -> None:
+        """Set the arcctl property."""
         self._cards[3].set_value("arcctl", value)
 
     @property
@@ -636,8 +661,9 @@ class ControlImplicitSolution(KeywordBase):
 
     @arcdir.setter
     def arcdir(self, value: int) -> None:
+        """Set the arcdir property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""arcdir must be `None` or one of {0,1,2,3}""")
+            raise Exception("""arcdir must be `None` or one of {0,1,2,3}.""")
         self._cards[3].set_value("arcdir", value)
 
     @property
@@ -650,6 +676,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @arclen.setter
     def arclen(self, value: float) -> None:
+        """Set the arclen property."""
         self._cards[3].set_value("arclen", value)
 
     @property
@@ -663,8 +690,9 @@ class ControlImplicitSolution(KeywordBase):
 
     @arcmth.setter
     def arcmth(self, value: int) -> None:
+        """Set the arcmth property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""arcmth must be `None` or one of {1,2,3}""")
+            raise Exception("""arcmth must be `None` or one of {1,2,3}.""")
         self._cards[3].set_value("arcmth", value)
 
     @property
@@ -677,8 +705,9 @@ class ControlImplicitSolution(KeywordBase):
 
     @arcdmp.setter
     def arcdmp(self, value: int) -> None:
+        """Set the arcdmp property."""
         if value not in [2, 1, None]:
-            raise Exception("""arcdmp must be `None` or one of {2,1}""")
+            raise Exception("""arcdmp must be `None` or one of {2,1}.""")
         self._cards[3].set_value("arcdmp", value)
 
     @property
@@ -691,6 +720,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @arcpsi.setter
     def arcpsi(self, value: float) -> None:
+        """Set the arcpsi property."""
         self._cards[3].set_value("arcpsi", value)
 
     @property
@@ -703,6 +733,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @arcalf.setter
     def arcalf(self, value: float) -> None:
+        """Set the arcalf property."""
         self._cards[3].set_value("arcalf", value)
 
     @property
@@ -713,6 +744,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @arctim.setter
     def arctim(self, value: float) -> None:
+        """Set the arctim property."""
         self._cards[3].set_value("arctim", value)
 
     @property
@@ -728,8 +760,9 @@ class ControlImplicitSolution(KeywordBase):
 
     @lsmtd.setter
     def lsmtd(self, value: int) -> None:
+        """Set the lsmtd property."""
         if value not in [4, 1, 2, 3, 5, 6, None]:
-            raise Exception("""lsmtd must be `None` or one of {4,1,2,3,5,6}""")
+            raise Exception("""lsmtd must be `None` or one of {4,1,2,3,5,6}.""")
         self._cards[4].set_value("lsmtd", value)
 
     @property
@@ -744,8 +777,9 @@ class ControlImplicitSolution(KeywordBase):
 
     @lsdir.setter
     def lsdir(self, value: int) -> None:
+        """Set the lsdir property."""
         if value not in [2, 1, 3, 4, None]:
-            raise Exception("""lsdir must be `None` or one of {2,1,3,4}""")
+            raise Exception("""lsdir must be `None` or one of {2,1,3,4}.""")
         self._cards[4].set_value("lsdir", value)
 
     @property
@@ -756,6 +790,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @irad.setter
     def irad(self, value: float) -> None:
+        """Set the irad property."""
         self._cards[4].set_value("irad", value)
 
     @property
@@ -766,6 +801,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @srad.setter
     def srad(self, value: float) -> None:
+        """Set the srad property."""
         self._cards[4].set_value("srad", value)
 
     @property
@@ -776,6 +812,7 @@ class ControlImplicitSolution(KeywordBase):
 
     @awgt.setter
     def awgt(self, value: float) -> None:
+        """Set the awgt property."""
         self._cards[4].set_value("awgt", value)
 
     @property
@@ -786,5 +823,6 @@ class ControlImplicitSolution(KeywordBase):
 
     @sred.setter
     def sred(self, value: float) -> None:
+        """Set the sred property."""
         self._cards[4].set_value("sred", value)
 

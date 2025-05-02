@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatQuasilinearViscoelastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatQuasilinearViscoelastic class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -419,6 +421,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -429,6 +432,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -439,6 +443,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -449,6 +454,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @lc1.setter
     def lc1(self, value: int) -> None:
+        """Set the lc1 property."""
         self._cards[0].set_value("lc1", value)
 
     @property
@@ -459,6 +465,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @lc2.setter
     def lc2(self, value: int) -> None:
+        """Set the lc2 property."""
         self._cards[0].set_value("lc2", value)
 
     @property
@@ -469,6 +476,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -479,6 +487,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @gstart.setter
     def gstart(self, value: float) -> None:
+        """Set the gstart property."""
         self._cards[0].set_value("gstart", value)
 
     @property
@@ -489,6 +498,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[0].set_value("m", value)
 
     @property
@@ -502,8 +512,9 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @so.setter
     def so(self, value: float) -> None:
+        """Set the so property."""
         if value not in [0.0, 1.0, 2.0, None]:
-            raise Exception("""so must be `None` or one of {0.0,1.0,2.0}""")
+            raise Exception("""so must be `None` or one of {0.0,1.0,2.0}.""")
         self._cards[1].set_value("so", value)
 
     @property
@@ -514,6 +525,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @e_min.setter
     def e_min(self, value: float) -> None:
+        """Set the e_min property."""
         self._cards[1].set_value("e_min", value)
 
     @property
@@ -524,6 +536,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @e_max.setter
     def e_max(self, value: float) -> None:
+        """Set the e_max property."""
         self._cards[1].set_value("e_max", value)
 
     @property
@@ -534,6 +547,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @gama1.setter
     def gama1(self, value: float) -> None:
+        """Set the gama1 property."""
         self._cards[1].set_value("gama1", value)
 
     @property
@@ -544,6 +558,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @gama2.setter
     def gama2(self, value: float) -> None:
+        """Set the gama2 property."""
         self._cards[1].set_value("gama2", value)
 
     @property
@@ -556,6 +571,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[1].set_value("k", value)
 
     @property
@@ -566,6 +582,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @eh.setter
     def eh(self, value: float) -> None:
+        """Set the eh property."""
         self._cards[1].set_value("eh", value)
 
     @property
@@ -576,6 +593,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
+        """Set the form property."""
         self._cards[1].set_value("form", value)
 
     @property
@@ -586,6 +604,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g1.setter
     def g1(self, value: float) -> None:
+        """Set the g1 property."""
         self._cards[2].set_value("g1", value)
 
     @property
@@ -596,6 +615,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta1.setter
     def beta1(self, value: float) -> None:
+        """Set the beta1 property."""
         self._cards[2].set_value("beta1", value)
 
     @property
@@ -606,6 +626,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g2.setter
     def g2(self, value: float) -> None:
+        """Set the g2 property."""
         self._cards[2].set_value("g2", value)
 
     @property
@@ -616,6 +637,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta2.setter
     def beta2(self, value: float) -> None:
+        """Set the beta2 property."""
         self._cards[2].set_value("beta2", value)
 
     @property
@@ -626,6 +648,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g3.setter
     def g3(self, value: float) -> None:
+        """Set the g3 property."""
         self._cards[2].set_value("g3", value)
 
     @property
@@ -636,6 +659,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta3.setter
     def beta3(self, value: float) -> None:
+        """Set the beta3 property."""
         self._cards[2].set_value("beta3", value)
 
     @property
@@ -646,6 +670,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g4.setter
     def g4(self, value: float) -> None:
+        """Set the g4 property."""
         self._cards[2].set_value("g4", value)
 
     @property
@@ -656,6 +681,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta4.setter
     def beta4(self, value: float) -> None:
+        """Set the beta4 property."""
         self._cards[2].set_value("beta4", value)
 
     @property
@@ -666,6 +692,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g5.setter
     def g5(self, value: float) -> None:
+        """Set the g5 property."""
         self._cards[3].set_value("g5", value)
 
     @property
@@ -676,6 +703,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta5.setter
     def beta5(self, value: float) -> None:
+        """Set the beta5 property."""
         self._cards[3].set_value("beta5", value)
 
     @property
@@ -686,6 +714,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g6.setter
     def g6(self, value: float) -> None:
+        """Set the g6 property."""
         self._cards[3].set_value("g6", value)
 
     @property
@@ -696,6 +725,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta6.setter
     def beta6(self, value: float) -> None:
+        """Set the beta6 property."""
         self._cards[3].set_value("beta6", value)
 
     @property
@@ -706,6 +736,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g7.setter
     def g7(self, value: float) -> None:
+        """Set the g7 property."""
         self._cards[3].set_value("g7", value)
 
     @property
@@ -716,6 +747,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta7.setter
     def beta7(self, value: float) -> None:
+        """Set the beta7 property."""
         self._cards[3].set_value("beta7", value)
 
     @property
@@ -726,6 +758,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g8.setter
     def g8(self, value: float) -> None:
+        """Set the g8 property."""
         self._cards[3].set_value("g8", value)
 
     @property
@@ -736,6 +769,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta8.setter
     def beta8(self, value: float) -> None:
+        """Set the beta8 property."""
         self._cards[3].set_value("beta8", value)
 
     @property
@@ -746,6 +780,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g9.setter
     def g9(self, value: float) -> None:
+        """Set the g9 property."""
         self._cards[4].set_value("g9", value)
 
     @property
@@ -756,6 +791,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta9.setter
     def beta9(self, value: float) -> None:
+        """Set the beta9 property."""
         self._cards[4].set_value("beta9", value)
 
     @property
@@ -766,6 +802,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g10.setter
     def g10(self, value: float) -> None:
+        """Set the g10 property."""
         self._cards[4].set_value("g10", value)
 
     @property
@@ -776,6 +813,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta10.setter
     def beta10(self, value: float) -> None:
+        """Set the beta10 property."""
         self._cards[4].set_value("beta10", value)
 
     @property
@@ -786,6 +824,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g11.setter
     def g11(self, value: float) -> None:
+        """Set the g11 property."""
         self._cards[4].set_value("g11", value)
 
     @property
@@ -796,6 +835,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta11.setter
     def beta11(self, value: float) -> None:
+        """Set the beta11 property."""
         self._cards[4].set_value("beta11", value)
 
     @property
@@ -806,6 +846,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @g12.setter
     def g12(self, value: float) -> None:
+        """Set the g12 property."""
         self._cards[4].set_value("g12", value)
 
     @property
@@ -816,6 +857,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @beta12.setter
     def beta12(self, value: float) -> None:
+        """Set the beta12 property."""
         self._cards[4].set_value("beta12", value)
 
     @property
@@ -826,6 +868,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[5].set_value("c1", value)
 
     @property
@@ -836,6 +879,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[5].set_value("c2", value)
 
     @property
@@ -846,6 +890,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[5].set_value("c3", value)
 
     @property
@@ -856,6 +901,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @c4.setter
     def c4(self, value: float) -> None:
+        """Set the c4 property."""
         self._cards[5].set_value("c4", value)
 
     @property
@@ -866,6 +912,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @c5.setter
     def c5(self, value: float) -> None:
+        """Set the c5 property."""
         self._cards[5].set_value("c5", value)
 
     @property
@@ -876,6 +923,7 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @c6.setter
     def c6(self, value: float) -> None:
+        """Set the c6 property."""
         self._cards[5].set_value("c6", value)
 
     @property
@@ -886,5 +934,6 @@ class MatQuasilinearViscoelastic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 

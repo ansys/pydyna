@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdControlEmbedshell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlEmbedshell(KeywordBase):
     subkeyword = "CONTROL_EMBEDSHELL"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdControlEmbedshell class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -73,8 +75,9 @@ class IcfdControlEmbedshell(KeywordBase):
 
     @gtype.setter
     def gtype(self, value: int) -> None:
+        """Set the gtype property."""
         if value not in [0, 1, None]:
-            raise Exception("""gtype must be `None` or one of {0,1}""")
+            raise Exception("""gtype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("gtype", value)
 
     @property
@@ -85,6 +88,7 @@ class IcfdControlEmbedshell(KeywordBase):
 
     @dist.setter
     def dist(self, value: float) -> None:
+        """Set the dist property."""
         self._cards[0].set_value("dist", value)
 
     @property
@@ -97,7 +101,8 @@ class IcfdControlEmbedshell(KeywordBase):
 
     @tps.setter
     def tps(self, value: int) -> None:
+        """Set the tps property."""
         if value not in [0, 1, None]:
-            raise Exception("""tps must be `None` or one of {0,1}""")
+            raise Exception("""tps must be `None` or one of {0,1}.""")
         self._cards[0].set_value("tps", value)
 

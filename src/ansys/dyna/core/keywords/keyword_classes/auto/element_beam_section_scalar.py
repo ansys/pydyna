@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementBeamSectionScalar class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementBeamSectionScalar(KeywordBase):
     subkeyword = "BEAM_SECTION_SCALAR"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementBeamSectionScalar class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -217,6 +219,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -227,6 +230,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -237,6 +241,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -247,6 +252,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -257,6 +263,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -276,8 +283,9 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @rt1.setter
     def rt1(self, value: int) -> None:
+        """Set the rt1 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rt1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rt1 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rt1", value)
 
     @property
@@ -297,8 +305,9 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @rr1.setter
     def rr1(self, value: int) -> None:
+        """Set the rr1 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rr1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rr1 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rr1", value)
 
     @property
@@ -318,8 +327,9 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @rt2.setter
     def rt2(self, value: int) -> None:
+        """Set the rt2 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rt2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rt2 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rt2", value)
 
     @property
@@ -339,8 +349,9 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @rr2.setter
     def rr2(self, value: int) -> None:
+        """Set the rr2 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rr2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rr2 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rr2", value)
 
     @property
@@ -353,8 +364,9 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
+        """Set the local property."""
         if value not in [2, 1, None]:
-            raise Exception("""local must be `None` or one of {2,1}""")
+            raise Exception("""local must be `None` or one of {2,1}.""")
         self._cards[0].set_value("local", value)
 
     @property
@@ -376,8 +388,9 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @stype.setter
     def stype(self, value: str) -> None:
+        """Set the stype property."""
         if value not in ["SECTION_01", "SECTION_02", "SECTION_03", "SECTION_04", "SECTION_05", "SECTION_06", "SECTION_07", "SECTION_08", "SECTION_09", "SECTION_10", "SECTION_11", "SECTION_12", "SECTION_13", "SECTION_14", "SECTION_15", "SECTION_16", "SECTION_17", "SECTION_18", "SECTION_19", "SECTION_20", "SECTION_21", "SECTION_22", None]:
-            raise Exception("""stype must be `None` or one of {"SECTION_01","SECTION_02","SECTION_03","SECTION_04","SECTION_05","SECTION_06","SECTION_07","SECTION_08","SECTION_09","SECTION_10","SECTION_11","SECTION_12","SECTION_13","SECTION_14","SECTION_15","SECTION_16","SECTION_17","SECTION_18","SECTION_19","SECTION_20","SECTION_21","SECTION_22"}""")
+            raise Exception("""stype must be `None` or one of {"SECTION_01","SECTION_02","SECTION_03","SECTION_04","SECTION_05","SECTION_06","SECTION_07","SECTION_08","SECTION_09","SECTION_10","SECTION_11","SECTION_12","SECTION_13","SECTION_14","SECTION_15","SECTION_16","SECTION_17","SECTION_18","SECTION_19","SECTION_20","SECTION_21","SECTION_22"}.""")
         self._cards[1].set_value("stype", value)
 
     @property
@@ -388,6 +401,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[1].set_value("d1", value)
 
     @property
@@ -398,6 +412,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[1].set_value("d2", value)
 
     @property
@@ -408,6 +423,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[1].set_value("d3", value)
 
     @property
@@ -418,6 +434,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @d4.setter
     def d4(self, value: float) -> None:
+        """Set the d4 property."""
         self._cards[1].set_value("d4", value)
 
     @property
@@ -428,6 +445,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @d5.setter
     def d5(self, value: float) -> None:
+        """Set the d5 property."""
         self._cards[1].set_value("d5", value)
 
     @property
@@ -438,6 +456,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @d6.setter
     def d6(self, value: float) -> None:
+        """Set the d6 property."""
         self._cards[1].set_value("d6", value)
 
     @property
@@ -448,6 +467,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @vol.setter
     def vol(self, value: float) -> None:
+        """Set the vol property."""
         self._cards[2].set_value("vol", value)
 
     @property
@@ -458,6 +478,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @iner.setter
     def iner(self, value: float) -> None:
+        """Set the iner property."""
         self._cards[2].set_value("iner", value)
 
     @property
@@ -468,6 +489,7 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[2].set_value("cid", value)
 
     @property
@@ -478,8 +500,9 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @dofn1.setter
     def dofn1(self, value: float) -> None:
+        """Set the dofn1 property."""
         if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""dofn1 must be `None` or one of {1,2,3,4,5,6}""")
+            raise Exception("""dofn1 must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[2].set_value("dofn1", value)
 
     @property
@@ -490,7 +513,8 @@ class ElementBeamSectionScalar(KeywordBase):
 
     @dofn2.setter
     def dofn2(self, value: float) -> None:
+        """Set the dofn2 property."""
         if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""dofn2 must be `None` or one of {1,2,3,4,5,6}""")
+            raise Exception("""dofn2 must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[2].set_value("dofn2", value)
 

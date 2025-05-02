@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the KeywordKeywordId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class KeywordKeywordId(KeywordBase):
     subkeyword = "KEYWORD_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the KeywordKeywordId class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -93,6 +95,7 @@ class KeywordKeywordId(KeywordBase):
 
     @memory.setter
     def memory(self, value: str) -> None:
+        """Set the memory property."""
         self._cards[0].set_value("memory", value)
 
     @property
@@ -103,6 +106,7 @@ class KeywordKeywordId(KeywordBase):
 
     @memory2.setter
     def memory2(self, value: str) -> None:
+        """Set the memory2 property."""
         self._cards[0].set_value("memory2", value)
 
     @property
@@ -113,6 +117,7 @@ class KeywordKeywordId(KeywordBase):
 
     @ncpu.setter
     def ncpu(self, value: int) -> None:
+        """Set the ncpu property."""
         self._cards[0].set_value("ncpu", value)
 
     @property
@@ -123,6 +128,7 @@ class KeywordKeywordId(KeywordBase):
 
     @project.setter
     def project(self, value: str) -> None:
+        """Set the project property."""
         self._cards[1].set_value("project", value)
 
     @property
@@ -133,6 +139,7 @@ class KeywordKeywordId(KeywordBase):
 
     @num.setter
     def num(self, value: str) -> None:
+        """Set the num property."""
         self._cards[1].set_value("num", value)
 
     @property
@@ -143,5 +150,6 @@ class KeywordKeywordId(KeywordBase):
 
     @stage.setter
     def stage(self, value: str) -> None:
+        """Set the stage property."""
         self._cards[1].set_value("stage", value)
 

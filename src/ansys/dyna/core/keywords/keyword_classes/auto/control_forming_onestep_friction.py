@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingOnestepFriction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingOnestepFriction(KeywordBase):
     subkeyword = "FORMING_ONESTEP_FRICTION"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingOnestepFriction class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -70,6 +72,7 @@ class ControlFormingOnestepFriction(KeywordBase):
 
     @ndset.setter
     def ndset(self, value: int) -> None:
+        """Set the ndset property."""
         self._cards[0].set_value("ndset", value)
 
     @property
@@ -80,6 +83,7 @@ class ControlFormingOnestepFriction(KeywordBase):
 
     @bdton.setter
     def bdton(self, value: float) -> None:
+        """Set the bdton property."""
         self._cards[0].set_value("bdton", value)
 
     @property
@@ -90,5 +94,6 @@ class ControlFormingOnestepFriction(KeywordBase):
 
     @frict.setter
     def frict(self, value: float) -> None:
+        """Set the frict property."""
         self._cards[0].set_value("frict", value)
 

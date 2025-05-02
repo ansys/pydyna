@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatWood class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatWood(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatWood class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -472,6 +474,7 @@ class MatWood(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -482,6 +485,7 @@ class MatWood(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -494,8 +498,9 @@ class MatWood(KeywordBase):
 
     @nplot.setter
     def nplot(self, value: int) -> None:
+        """Set the nplot property."""
         if value not in [1, 2, None]:
-            raise Exception("""nplot must be `None` or one of {1,2}""")
+            raise Exception("""nplot must be `None` or one of {1,2}.""")
         self._cards[0].set_value("nplot", value)
 
     @property
@@ -508,6 +513,7 @@ class MatWood(KeywordBase):
 
     @iters.setter
     def iters(self, value: int) -> None:
+        """Set the iters property."""
         self._cards[0].set_value("iters", value)
 
     @property
@@ -521,8 +527,9 @@ class MatWood(KeywordBase):
 
     @irate.setter
     def irate(self, value: int) -> None:
+        """Set the irate property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""irate must be `None` or one of {0,1,2}""")
+            raise Exception("""irate must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("irate", value)
 
     @property
@@ -533,6 +540,7 @@ class MatWood(KeywordBase):
 
     @ghard.setter
     def ghard(self, value: float) -> None:
+        """Set the ghard property."""
         self._cards[0].set_value("ghard", value)
 
     @property
@@ -545,8 +553,9 @@ class MatWood(KeywordBase):
 
     @ifail.setter
     def ifail(self, value: int) -> None:
+        """Set the ifail property."""
         if value not in [0, 1, None]:
-            raise Exception("""ifail must be `None` or one of {0,1}""")
+            raise Exception("""ifail must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ifail", value)
 
     @property
@@ -559,8 +568,9 @@ class MatWood(KeywordBase):
 
     @ivol.setter
     def ivol(self, value: int) -> None:
+        """Set the ivol property."""
         if value not in [0, 1, None]:
-            raise Exception("""ivol must be `None` or one of {0,1}""")
+            raise Exception("""ivol must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ivol", value)
 
     @property
@@ -571,6 +581,7 @@ class MatWood(KeywordBase):
 
     @el.setter
     def el(self, value: float) -> None:
+        """Set the el property."""
         self._cards[1].set_value("el", value)
 
     @property
@@ -581,6 +592,7 @@ class MatWood(KeywordBase):
 
     @et.setter
     def et(self, value: float) -> None:
+        """Set the et property."""
         self._cards[1].set_value("et", value)
 
     @property
@@ -591,6 +603,7 @@ class MatWood(KeywordBase):
 
     @glt.setter
     def glt(self, value: float) -> None:
+        """Set the glt property."""
         self._cards[1].set_value("glt", value)
 
     @property
@@ -601,6 +614,7 @@ class MatWood(KeywordBase):
 
     @gtr.setter
     def gtr(self, value: float) -> None:
+        """Set the gtr property."""
         self._cards[1].set_value("gtr", value)
 
     @property
@@ -611,6 +625,7 @@ class MatWood(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[1].set_value("pr", value)
 
     @property
@@ -621,6 +636,7 @@ class MatWood(KeywordBase):
 
     @xt.setter
     def xt(self, value: float) -> None:
+        """Set the xt property."""
         self._cards[2].set_value("xt", value)
 
     @property
@@ -631,6 +647,7 @@ class MatWood(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[2].set_value("xc", value)
 
     @property
@@ -641,6 +658,7 @@ class MatWood(KeywordBase):
 
     @yt.setter
     def yt(self, value: float) -> None:
+        """Set the yt property."""
         self._cards[2].set_value("yt", value)
 
     @property
@@ -651,6 +669,7 @@ class MatWood(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[2].set_value("yc", value)
 
     @property
@@ -661,6 +680,7 @@ class MatWood(KeywordBase):
 
     @sxy.setter
     def sxy(self, value: float) -> None:
+        """Set the sxy property."""
         self._cards[2].set_value("sxy", value)
 
     @property
@@ -671,6 +691,7 @@ class MatWood(KeywordBase):
 
     @syz.setter
     def syz(self, value: float) -> None:
+        """Set the syz property."""
         self._cards[2].set_value("syz", value)
 
     @property
@@ -681,6 +702,7 @@ class MatWood(KeywordBase):
 
     @gf1__.setter
     def gf1__(self, value: float) -> None:
+        """Set the gf1__ property."""
         self._cards[3].set_value("gf1||", value)
 
     @property
@@ -691,6 +713,7 @@ class MatWood(KeywordBase):
 
     @gf2__.setter
     def gf2__(self, value: float) -> None:
+        """Set the gf2__ property."""
         self._cards[3].set_value("gf2||", value)
 
     @property
@@ -701,6 +724,7 @@ class MatWood(KeywordBase):
 
     @bfit.setter
     def bfit(self, value: float) -> None:
+        """Set the bfit property."""
         self._cards[3].set_value("bfit", value)
 
     @property
@@ -711,6 +735,7 @@ class MatWood(KeywordBase):
 
     @dmax__.setter
     def dmax__(self, value: float) -> None:
+        """Set the dmax__ property."""
         self._cards[3].set_value("dmax||", value)
 
     @property
@@ -721,6 +746,7 @@ class MatWood(KeywordBase):
 
     @gf1p.setter
     def gf1p(self, value: float) -> None:
+        """Set the gf1p property."""
         self._cards[3].set_value("gf1p", value)
 
     @property
@@ -731,6 +757,7 @@ class MatWood(KeywordBase):
 
     @gf2p.setter
     def gf2p(self, value: float) -> None:
+        """Set the gf2p property."""
         self._cards[3].set_value("gf2p", value)
 
     @property
@@ -741,6 +768,7 @@ class MatWood(KeywordBase):
 
     @dfit.setter
     def dfit(self, value: float) -> None:
+        """Set the dfit property."""
         self._cards[3].set_value("dfit", value)
 
     @property
@@ -751,6 +779,7 @@ class MatWood(KeywordBase):
 
     @dmaxp.setter
     def dmaxp(self, value: float) -> None:
+        """Set the dmaxp property."""
         self._cards[3].set_value("dmaxp", value)
 
     @property
@@ -761,6 +790,7 @@ class MatWood(KeywordBase):
 
     @flpar.setter
     def flpar(self, value: float) -> None:
+        """Set the flpar property."""
         self._cards[4].set_value("flpar", value)
 
     @property
@@ -771,6 +801,7 @@ class MatWood(KeywordBase):
 
     @flparc.setter
     def flparc(self, value: float) -> None:
+        """Set the flparc property."""
         self._cards[4].set_value("flparc", value)
 
     @property
@@ -781,6 +812,7 @@ class MatWood(KeywordBase):
 
     @powpar.setter
     def powpar(self, value: float) -> None:
+        """Set the powpar property."""
         self._cards[4].set_value("powpar", value)
 
     @property
@@ -791,6 +823,7 @@ class MatWood(KeywordBase):
 
     @flper.setter
     def flper(self, value: float) -> None:
+        """Set the flper property."""
         self._cards[4].set_value("flper", value)
 
     @property
@@ -801,6 +834,7 @@ class MatWood(KeywordBase):
 
     @flperc.setter
     def flperc(self, value: float) -> None:
+        """Set the flperc property."""
         self._cards[4].set_value("flperc", value)
 
     @property
@@ -811,6 +845,7 @@ class MatWood(KeywordBase):
 
     @powper.setter
     def powper(self, value: float) -> None:
+        """Set the powper property."""
         self._cards[4].set_value("powper", value)
 
     @property
@@ -821,6 +856,7 @@ class MatWood(KeywordBase):
 
     @npar.setter
     def npar(self, value: float) -> None:
+        """Set the npar property."""
         self._cards[5].set_value("npar", value)
 
     @property
@@ -831,6 +867,7 @@ class MatWood(KeywordBase):
 
     @cpar.setter
     def cpar(self, value: float) -> None:
+        """Set the cpar property."""
         self._cards[5].set_value("cpar", value)
 
     @property
@@ -841,6 +878,7 @@ class MatWood(KeywordBase):
 
     @nper.setter
     def nper(self, value: float) -> None:
+        """Set the nper property."""
         self._cards[5].set_value("nper", value)
 
     @property
@@ -851,6 +889,7 @@ class MatWood(KeywordBase):
 
     @cper.setter
     def cper(self, value: float) -> None:
+        """Set the cper property."""
         self._cards[5].set_value("cper", value)
 
     @property
@@ -867,6 +906,7 @@ class MatWood(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[6].set_value("aopt", value)
 
     @property
@@ -885,8 +925,9 @@ class MatWood(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, -4, -3, -2, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}.""")
         self._cards[6].set_value("macf", value)
 
     @property
@@ -897,6 +938,7 @@ class MatWood(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[6].set_value("beta", value)
 
     @property
@@ -907,6 +949,7 @@ class MatWood(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[7].set_value("xp", value)
 
     @property
@@ -917,6 +960,7 @@ class MatWood(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[7].set_value("yp", value)
 
     @property
@@ -927,6 +971,7 @@ class MatWood(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[7].set_value("zp", value)
 
     @property
@@ -937,6 +982,7 @@ class MatWood(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[7].set_value("a1", value)
 
     @property
@@ -947,6 +993,7 @@ class MatWood(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[7].set_value("a2", value)
 
     @property
@@ -957,6 +1004,7 @@ class MatWood(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[7].set_value("a3", value)
 
     @property
@@ -967,6 +1015,7 @@ class MatWood(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[8].set_value("d1", value)
 
     @property
@@ -977,6 +1026,7 @@ class MatWood(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[8].set_value("d2", value)
 
     @property
@@ -987,6 +1037,7 @@ class MatWood(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[8].set_value("d3", value)
 
     @property
@@ -997,6 +1048,7 @@ class MatWood(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[8].set_value("v1", value)
 
     @property
@@ -1007,6 +1059,7 @@ class MatWood(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[8].set_value("v2", value)
 
     @property
@@ -1017,6 +1070,7 @@ class MatWood(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[8].set_value("v3", value)
 
     @property
@@ -1027,5 +1081,6 @@ class MatWood(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[9].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseBoundaryPrescribedVnSegmentSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
     subkeyword = "BOUNDARY_PRESCRIBED_VN_SEGMENT_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseBoundaryPrescribedVnSegmentSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -178,6 +180,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -188,6 +191,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @idcomp.setter
     def idcomp(self, value: int) -> None:
+        """Set the idcomp property."""
         self._cards[0].set_value("idcomp", value)
 
     @property
@@ -198,6 +202,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @dirx.setter
     def dirx(self, value: float) -> None:
+        """Set the dirx property."""
         self._cards[0].set_value("dirx", value)
 
     @property
@@ -208,6 +213,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @diry.setter
     def diry(self, value: float) -> None:
+        """Set the diry property."""
         self._cards[0].set_value("diry", value)
 
     @property
@@ -218,6 +224,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @dirz.setter
     def dirz(self, value: float) -> None:
+        """Set the dirz property."""
         self._cards[0].set_value("dirz", value)
 
     @property
@@ -230,6 +237,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @lc_vn.setter
     def lc_vn(self, value: int) -> None:
+        """Set the lc_vn property."""
         self._cards[1].set_value("lc_vn", value)
 
     @property
@@ -240,6 +248,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @lc_rho.setter
     def lc_rho(self, value: int) -> None:
+        """Set the lc_rho property."""
         self._cards[1].set_value("lc_rho", value)
 
     @property
@@ -250,6 +259,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @lc_p.setter
     def lc_p(self, value: int) -> None:
+        """Set the lc_p property."""
         self._cards[1].set_value("lc_p", value)
 
     @property
@@ -260,6 +270,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @lc_t.setter
     def lc_t(self, value: int) -> None:
+        """Set the lc_t property."""
         self._cards[1].set_value("lc_t", value)
 
     @property
@@ -270,6 +281,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @sf_vn.setter
     def sf_vn(self, value: float) -> None:
+        """Set the sf_vn property."""
         self._cards[2].set_value("sf_vn", value)
 
     @property
@@ -280,6 +292,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @sf_rho.setter
     def sf_rho(self, value: float) -> None:
+        """Set the sf_rho property."""
         self._cards[2].set_value("sf_rho", value)
 
     @property
@@ -290,6 +303,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @sf_p.setter
     def sf_p(self, value: float) -> None:
+        """Set the sf_p property."""
         self._cards[2].set_value("sf_p", value)
 
     @property
@@ -300,5 +314,6 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
 
     @sf_t.setter
     def sf_t(self, value: float) -> None:
+        """Set the sf_t property."""
         self._cards[2].set_value("sf_t", value)
 

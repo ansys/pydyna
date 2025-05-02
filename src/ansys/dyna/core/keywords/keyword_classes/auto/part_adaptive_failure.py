@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the PartAdaptiveFailure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartAdaptiveFailure(KeywordBase):
     subkeyword = "ADAPTIVE_FAILURE"
 
     def __init__(self, **kwargs):
+        """Initialize the PartAdaptiveFailure class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class PartAdaptiveFailure(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -79,6 +82,7 @@ class PartAdaptiveFailure(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[0].set_value("t", value)
 
     @property
@@ -92,7 +96,8 @@ class PartAdaptiveFailure(KeywordBase):
 
     @term.setter
     def term(self, value: int) -> None:
+        """Set the term property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""term must be `None` or one of {0,1,2}""")
+            raise Exception("""term must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("term", value)
 

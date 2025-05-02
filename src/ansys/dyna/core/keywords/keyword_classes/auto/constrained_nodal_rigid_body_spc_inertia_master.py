@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedNodalRigidBodySpcInertiaMaster class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedNodalRigidBodySpcInertiaMaster class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -357,6 +359,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -367,6 +370,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -377,6 +381,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -387,6 +392,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @pnode.setter
     def pnode(self, value: int) -> None:
+        """Set the pnode property."""
         self._cards[0].set_value("pnode", value)
 
     @property
@@ -400,6 +406,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @iprt.setter
     def iprt(self, value: int) -> None:
+        """Set the iprt property."""
         self._cards[0].set_value("iprt", value)
 
     @property
@@ -425,8 +432,9 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @drflag.setter
     def drflag(self, value: int) -> None:
+        """Set the drflag property."""
         if value not in [0, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""drflag must be `None` or one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}""")
+            raise Exception("""drflag must be `None` or one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("drflag", value)
 
     @property
@@ -452,8 +460,9 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @rrflag.setter
     def rrflag(self, value: int) -> None:
+        """Set the rrflag property."""
         if value not in [0, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rrflag must be `None` or one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}""")
+            raise Exception("""rrflag must be `None` or one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rrflag", value)
 
     @property
@@ -467,8 +476,9 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @cmo.setter
     def cmo(self, value: float) -> None:
+        """Set the cmo property."""
         if value not in [0.0, -1.0, 1.0, None]:
-            raise Exception("""cmo must be `None` or one of {0.0,-1.0,1.0}""")
+            raise Exception("""cmo must be `None` or one of {0.0,-1.0,1.0}.""")
         self._cards[1].set_value("cmo", value)
 
     @property
@@ -489,6 +499,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @con1.setter
     def con1(self, value: float) -> None:
+        """Set the con1 property."""
         self._cards[1].set_value("con1", value)
 
     @property
@@ -516,6 +527,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @con2.setter
     def con2(self, value: float) -> None:
+        """Set the con2 property."""
         self._cards[1].set_value("con2", value)
 
     @property
@@ -526,6 +538,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[2].set_value("xc", value)
 
     @property
@@ -536,6 +549,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[2].set_value("yc", value)
 
     @property
@@ -546,6 +560,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[2].set_value("zc", value)
 
     @property
@@ -556,6 +571,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @tm.setter
     def tm(self, value: float) -> None:
+        """Set the tm property."""
         self._cards[2].set_value("tm", value)
 
     @property
@@ -568,8 +584,9 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @ircs.setter
     def ircs(self, value: int) -> None:
+        """Set the ircs property."""
         if value not in [0, 1, None]:
-            raise Exception("""ircs must be `None` or one of {0,1}""")
+            raise Exception("""ircs must be `None` or one of {0,1}.""")
         self._cards[2].set_value("ircs", value)
 
     @property
@@ -580,6 +597,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @nodeid.setter
     def nodeid(self, value: int) -> None:
+        """Set the nodeid property."""
         self._cards[2].set_value("nodeid", value)
 
     @property
@@ -590,6 +608,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @ixx.setter
     def ixx(self, value: float) -> None:
+        """Set the ixx property."""
         self._cards[3].set_value("ixx", value)
 
     @property
@@ -600,6 +619,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @ixy.setter
     def ixy(self, value: float) -> None:
+        """Set the ixy property."""
         self._cards[3].set_value("ixy", value)
 
     @property
@@ -610,6 +630,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @ixz.setter
     def ixz(self, value: float) -> None:
+        """Set the ixz property."""
         self._cards[3].set_value("ixz", value)
 
     @property
@@ -620,6 +641,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @iyy.setter
     def iyy(self, value: float) -> None:
+        """Set the iyy property."""
         self._cards[3].set_value("iyy", value)
 
     @property
@@ -630,6 +652,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @iyz.setter
     def iyz(self, value: float) -> None:
+        """Set the iyz property."""
         self._cards[3].set_value("iyz", value)
 
     @property
@@ -640,6 +663,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @izz.setter
     def izz(self, value: float) -> None:
+        """Set the izz property."""
         self._cards[3].set_value("izz", value)
 
     @property
@@ -650,6 +674,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @vtx.setter
     def vtx(self, value: float) -> None:
+        """Set the vtx property."""
         self._cards[4].set_value("vtx", value)
 
     @property
@@ -660,6 +685,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @vty.setter
     def vty(self, value: float) -> None:
+        """Set the vty property."""
         self._cards[4].set_value("vty", value)
 
     @property
@@ -670,6 +696,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @vtz.setter
     def vtz(self, value: float) -> None:
+        """Set the vtz property."""
         self._cards[4].set_value("vtz", value)
 
     @property
@@ -680,6 +707,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @vrx.setter
     def vrx(self, value: float) -> None:
+        """Set the vrx property."""
         self._cards[4].set_value("vrx", value)
 
     @property
@@ -690,6 +718,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @vry.setter
     def vry(self, value: float) -> None:
+        """Set the vry property."""
         self._cards[4].set_value("vry", value)
 
     @property
@@ -700,6 +729,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @vrz.setter
     def vrz(self, value: float) -> None:
+        """Set the vrz property."""
         self._cards[4].set_value("vrz", value)
 
     @property
@@ -710,6 +740,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @xl.setter
     def xl(self, value: float) -> None:
+        """Set the xl property."""
         self._cards[5].set_value("xl", value)
 
     @property
@@ -720,6 +751,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @yl.setter
     def yl(self, value: float) -> None:
+        """Set the yl property."""
         self._cards[5].set_value("yl", value)
 
     @property
@@ -730,6 +762,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @zl.setter
     def zl(self, value: float) -> None:
+        """Set the zl property."""
         self._cards[5].set_value("zl", value)
 
     @property
@@ -740,6 +773,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @xlip.setter
     def xlip(self, value: float) -> None:
+        """Set the xlip property."""
         self._cards[5].set_value("xlip", value)
 
     @property
@@ -750,6 +784,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @ylip.setter
     def ylip(self, value: float) -> None:
+        """Set the ylip property."""
         self._cards[5].set_value("ylip", value)
 
     @property
@@ -760,6 +795,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @zlip.setter
     def zlip(self, value: float) -> None:
+        """Set the zlip property."""
         self._cards[5].set_value("zlip", value)
 
     @property
@@ -770,6 +806,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @cid2.setter
     def cid2(self, value: int) -> None:
+        """Set the cid2 property."""
         self._cards[5].set_value("cid2", value)
 
     @property
@@ -780,5 +817,6 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 

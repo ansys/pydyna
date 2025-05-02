@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatS07 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatS07(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatS07 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -119,6 +121,7 @@ class MatS07(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -129,6 +132,7 @@ class MatS07(KeywordBase):
 
     @k0.setter
     def k0(self, value: float) -> None:
+        """Set the k0 property."""
         self._cards[0].set_value("k0", value)
 
     @property
@@ -139,6 +143,7 @@ class MatS07(KeywordBase):
 
     @ki.setter
     def ki(self, value: float) -> None:
+        """Set the ki property."""
         self._cards[0].set_value("ki", value)
 
     @property
@@ -149,6 +154,7 @@ class MatS07(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -159,6 +165,7 @@ class MatS07(KeywordBase):
 
     @tc.setter
     def tc(self, value: float) -> None:
+        """Set the tc property."""
         self._cards[0].set_value("tc", value)
 
     @property
@@ -169,6 +176,7 @@ class MatS07(KeywordBase):
 
     @fc.setter
     def fc(self, value: float) -> None:
+        """Set the fc property."""
         self._cards[0].set_value("fc", value)
 
     @property
@@ -181,6 +189,7 @@ class MatS07(KeywordBase):
 
     @copt.setter
     def copt(self, value: float) -> None:
+        """Set the copt property."""
         self._cards[0].set_value("copt", value)
 
     @property
@@ -191,5 +200,6 @@ class MatS07(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

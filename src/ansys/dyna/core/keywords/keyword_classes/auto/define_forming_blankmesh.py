@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineFormingBlankmesh class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineFormingBlankmesh(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineFormingBlankmesh class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -188,6 +190,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @idmsh.setter
     def idmsh(self, value: int) -> None:
+        """Set the idmsh property."""
         self._cards[0].set_value("idmsh", value)
 
     @property
@@ -198,6 +201,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @eleng.setter
     def eleng(self, value: float) -> None:
+        """Set the eleng property."""
         self._cards[0].set_value("eleng", value)
 
     @property
@@ -208,6 +212,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @xleng.setter
     def xleng(self, value: float) -> None:
+        """Set the xleng property."""
         self._cards[0].set_value("xleng", value)
 
     @property
@@ -218,6 +223,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @yleng.setter
     def yleng(self, value: float) -> None:
+        """Set the yleng property."""
         self._cards[0].set_value("yleng", value)
 
     @property
@@ -229,6 +235,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @anglex.setter
     def anglex(self, value: float) -> None:
+        """Set the anglex property."""
         self._cards[0].set_value("anglex", value)
 
     @property
@@ -242,6 +249,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @nplane.setter
     def nplane(self, value: int) -> None:
+        """Set the nplane property."""
         self._cards[0].set_value("nplane", value)
 
     @property
@@ -252,6 +260,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -262,6 +271,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @pidbk.setter
     def pidbk(self, value: int) -> None:
+        """Set the pidbk property."""
         self._cards[1].set_value("pidbk", value)
 
     @property
@@ -272,6 +282,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -282,6 +293,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[1].set_value("eid", value)
 
     @property
@@ -292,6 +304,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @xcent.setter
     def xcent(self, value: float) -> None:
+        """Set the xcent property."""
         self._cards[1].set_value("xcent", value)
 
     @property
@@ -302,6 +315,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @ycent.setter
     def ycent(self, value: float) -> None:
+        """Set the ycent property."""
         self._cards[1].set_value("ycent", value)
 
     @property
@@ -312,6 +326,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @zcent.setter
     def zcent(self, value: float) -> None:
+        """Set the zcent property."""
         self._cards[1].set_value("zcent", value)
 
     @property
@@ -322,6 +337,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @xshift.setter
     def xshift(self, value: float) -> None:
+        """Set the xshift property."""
         self._cards[1].set_value("xshift", value)
 
     @property
@@ -332,6 +348,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @yshift.setter
     def yshift(self, value: float) -> None:
+        """Set the yshift property."""
         self._cards[1].set_value("yshift", value)
 
     @property
@@ -342,5 +359,6 @@ class DefineFormingBlankmesh(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingBestfit class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingBestfit(KeywordBase):
     subkeyword = "FORMING_BESTFIT"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingBestfit class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,8 +116,9 @@ class ControlFormingBestfit(KeywordBase):
 
     @ifit.setter
     def ifit(self, value: int) -> None:
+        """Set the ifit property."""
         if value not in [0, 1, None]:
-            raise Exception("""ifit must be `None` or one of {0,1}""")
+            raise Exception("""ifit must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ifit", value)
 
     @property
@@ -126,6 +129,7 @@ class ControlFormingBestfit(KeywordBase):
 
     @nskip.setter
     def nskip(self, value: int) -> None:
+        """Set the nskip property."""
         self._cards[0].set_value("nskip", value)
 
     @property
@@ -139,8 +143,9 @@ class ControlFormingBestfit(KeywordBase):
 
     @gaponly.setter
     def gaponly(self, value: int) -> None:
+        """Set the gaponly property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""gaponly must be `None` or one of {0,1,2}""")
+            raise Exception("""gaponly must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("gaponly", value)
 
     @property
@@ -153,8 +158,9 @@ class ControlFormingBestfit(KeywordBase):
 
     @ifast.setter
     def ifast(self, value: int) -> None:
+        """Set the ifast property."""
         if value not in [1, 0, None]:
-            raise Exception("""ifast must be `None` or one of {1,0}""")
+            raise Exception("""ifast must be `None` or one of {1,0}.""")
         self._cards[0].set_value("ifast", value)
 
     @property
@@ -168,6 +174,7 @@ class ControlFormingBestfit(KeywordBase):
 
     @ifset.setter
     def ifset(self, value: int) -> None:
+        """Set the ifset property."""
         self._cards[0].set_value("ifset", value)
 
     @property
@@ -178,6 +185,7 @@ class ControlFormingBestfit(KeywordBase):
 
     @nsets.setter
     def nsets(self, value: int) -> None:
+        """Set the nsets property."""
         self._cards[0].set_value("nsets", value)
 
     @property
@@ -188,6 +196,7 @@ class ControlFormingBestfit(KeywordBase):
 
     @nsett.setter
     def nsett(self, value: int) -> None:
+        """Set the nsett property."""
         self._cards[0].set_value("nsett", value)
 
     @property
@@ -198,5 +207,6 @@ class ControlFormingBestfit(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[1].set_value("filename", value)
 

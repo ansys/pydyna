@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitDynamicsSpr class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitDynamicsSpr(KeywordBase):
     subkeyword = "IMPLICIT_DYNAMICS_SPR"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitDynamicsSpr class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -135,6 +137,7 @@ class ControlImplicitDynamicsSpr(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
+        """Set the imass property."""
         self._cards[0].set_value("imass", value)
 
     @property
@@ -145,6 +148,7 @@ class ControlImplicitDynamicsSpr(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[0].set_value("gamma", value)
 
     @property
@@ -155,6 +159,7 @@ class ControlImplicitDynamicsSpr(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -165,6 +170,7 @@ class ControlImplicitDynamicsSpr(KeywordBase):
 
     @tdybir.setter
     def tdybir(self, value: float) -> None:
+        """Set the tdybir property."""
         self._cards[0].set_value("tdybir", value)
 
     @property
@@ -175,6 +181,7 @@ class ControlImplicitDynamicsSpr(KeywordBase):
 
     @tdydth.setter
     def tdydth(self, value: float) -> None:
+        """Set the tdydth property."""
         self._cards[0].set_value("tdydth", value)
 
     @property
@@ -185,6 +192,7 @@ class ControlImplicitDynamicsSpr(KeywordBase):
 
     @tdybur.setter
     def tdybur(self, value: float) -> None:
+        """Set the tdybur property."""
         self._cards[0].set_value("tdybur", value)
 
     @property
@@ -199,6 +207,7 @@ class ControlImplicitDynamicsSpr(KeywordBase):
 
     @irate.setter
     def irate(self, value: int) -> None:
+        """Set the irate property."""
         self._cards[0].set_value("irate", value)
 
     @property
@@ -212,6 +221,7 @@ class ControlImplicitDynamicsSpr(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[0].set_value("alpha", value)
 
     @property
@@ -222,6 +232,7 @@ class ControlImplicitDynamicsSpr(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[1].set_value("psid", value)
 
     @property
@@ -232,5 +243,6 @@ class ControlImplicitDynamicsSpr(KeywordBase):
 
     @angle.setter
     def angle(self, value: float) -> None:
+        """Set the angle property."""
         self._cards[1].set_value("angle", value)
 

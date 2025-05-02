@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainAcousticIncidentWave class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainAcousticIncidentWave(KeywordBase):
     subkeyword = "DOMAIN_ACOUSTIC_INCIDENT_WAVE"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainAcousticIncidentWave class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -85,8 +87,9 @@ class FrequencyDomainAcousticIncidentWave(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [1, 2, None]:
-            raise Exception("""type must be `None` or one of {1,2}""")
+            raise Exception("""type must be `None` or one of {1,2}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -97,6 +100,7 @@ class FrequencyDomainAcousticIncidentWave(KeywordBase):
 
     @mag.setter
     def mag(self, value: float) -> None:
+        """Set the mag property."""
         self._cards[0].set_value("mag", value)
 
     @property
@@ -107,6 +111,7 @@ class FrequencyDomainAcousticIncidentWave(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[0].set_value("xc", value)
 
     @property
@@ -117,6 +122,7 @@ class FrequencyDomainAcousticIncidentWave(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[0].set_value("yc", value)
 
     @property
@@ -127,5 +133,6 @@ class FrequencyDomainAcousticIncidentWave(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[0].set_value("zc", value)
 

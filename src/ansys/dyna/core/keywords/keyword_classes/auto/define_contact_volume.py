@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineContactVolume class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineContactVolume(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineContactVolume class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -231,6 +233,7 @@ class DefineContactVolume(KeywordBase):
 
     @cvid.setter
     def cvid(self, value: int) -> None:
+        """Set the cvid property."""
         self._cards[0].set_value("cvid", value)
 
     @property
@@ -241,6 +244,7 @@ class DefineContactVolume(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -251,8 +255,9 @@ class DefineContactVolume(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""type must be `None` or one of {0,1,2}""")
+            raise Exception("""type must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -263,6 +268,7 @@ class DefineContactVolume(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[0].set_value("xc", value)
 
     @property
@@ -273,6 +279,7 @@ class DefineContactVolume(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[0].set_value("yc", value)
 
     @property
@@ -283,6 +290,7 @@ class DefineContactVolume(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[0].set_value("zc", value)
 
     @property
@@ -293,6 +301,7 @@ class DefineContactVolume(KeywordBase):
 
     @xmn.setter
     def xmn(self, value: float) -> None:
+        """Set the xmn property."""
         self._cards[1].set_value("xmn", value)
 
     @property
@@ -303,6 +312,7 @@ class DefineContactVolume(KeywordBase):
 
     @xmx.setter
     def xmx(self, value: float) -> None:
+        """Set the xmx property."""
         self._cards[1].set_value("xmx", value)
 
     @property
@@ -313,6 +323,7 @@ class DefineContactVolume(KeywordBase):
 
     @ymn.setter
     def ymn(self, value: float) -> None:
+        """Set the ymn property."""
         self._cards[1].set_value("ymn", value)
 
     @property
@@ -323,6 +334,7 @@ class DefineContactVolume(KeywordBase):
 
     @ymx.setter
     def ymx(self, value: float) -> None:
+        """Set the ymx property."""
         self._cards[1].set_value("ymx", value)
 
     @property
@@ -333,6 +345,7 @@ class DefineContactVolume(KeywordBase):
 
     @zmn.setter
     def zmn(self, value: float) -> None:
+        """Set the zmn property."""
         self._cards[1].set_value("zmn", value)
 
     @property
@@ -343,6 +356,7 @@ class DefineContactVolume(KeywordBase):
 
     @zmx.setter
     def zmx(self, value: float) -> None:
+        """Set the zmx property."""
         self._cards[1].set_value("zmx", value)
 
     @property
@@ -353,6 +367,7 @@ class DefineContactVolume(KeywordBase):
 
     @length.setter
     def length(self, value: float) -> None:
+        """Set the length property."""
         self._cards[2].set_value("length", value)
 
     @property
@@ -363,6 +378,7 @@ class DefineContactVolume(KeywordBase):
 
     @rinner.setter
     def rinner(self, value: float) -> None:
+        """Set the rinner property."""
         self._cards[2].set_value("rinner", value)
         self._cards[3].set_value("rinner", value)
 
@@ -374,6 +390,7 @@ class DefineContactVolume(KeywordBase):
 
     @router.setter
     def router(self, value: float) -> None:
+        """Set the router property."""
         self._cards[2].set_value("router", value)
         self._cards[3].set_value("router", value)
 
@@ -385,6 +402,7 @@ class DefineContactVolume(KeywordBase):
 
     @d_angc.setter
     def d_angc(self, value: float) -> None:
+        """Set the d_angc property."""
         self._cards[2].set_value("d_angc", value)
 
     @property
@@ -395,6 +413,7 @@ class DefineContactVolume(KeywordBase):
 
     @d_angs.setter
     def d_angs(self, value: float) -> None:
+        """Set the d_angs property."""
         self._cards[3].set_value("d_angs", value)
 
     @property
@@ -405,5 +424,6 @@ class DefineContactVolume(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

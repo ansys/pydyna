@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlAcousticSpectral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlAcousticSpectral(KeywordBase):
     subkeyword = "ACOUSTIC_SPECTRAL"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlAcousticSpectral class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -78,6 +80,7 @@ class ControlAcousticSpectral(KeywordBase):
 
     @maseord.setter
     def maseord(self, value: int) -> None:
+        """Set the maseord property."""
         self._cards[0].set_value("maseord", value)
 
     @property
@@ -92,8 +95,9 @@ class ControlAcousticSpectral(KeywordBase):
 
     @masehrf.setter
     def masehrf(self, value: int) -> None:
+        """Set the masehrf property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""masehrf must be `None` or one of {0,1,2,3}""")
+            raise Exception("""masehrf must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("masehrf", value)
 
     @property
@@ -107,6 +111,7 @@ class ControlAcousticSpectral(KeywordBase):
 
     @masekfl.setter
     def masekfl(self, value: int) -> None:
+        """Set the masekfl property."""
         self._cards[0].set_value("masekfl", value)
 
     @property
@@ -119,7 +124,8 @@ class ControlAcousticSpectral(KeywordBase):
 
     @maseigx.setter
     def maseigx(self, value: int) -> None:
+        """Set the maseigx property."""
         if value not in [1, 2, None]:
-            raise Exception("""maseigx must be `None` or one of {1,2}""")
+            raise Exception("""maseigx must be `None` or one of {1,2}.""")
         self._cards[0].set_value("maseigx", value)
 

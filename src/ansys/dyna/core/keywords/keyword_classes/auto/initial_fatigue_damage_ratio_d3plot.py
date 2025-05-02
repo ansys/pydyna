@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialFatigueDamageRatioD3Plot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialFatigueDamageRatioD3Plot(KeywordBase):
     subkeyword = "FATIGUE_DAMAGE_RATIO_D3PLOT"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialFatigueDamageRatioD3Plot class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class InitialFatigueDamageRatioD3Plot(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -89,6 +92,7 @@ class InitialFatigueDamageRatioD3Plot(KeywordBase):
 
     @nstate.setter
     def nstate(self, value: int) -> None:
+        """Set the nstate property."""
         self._cards[1].set_value("nstate", value)
 
     @property
@@ -99,6 +103,7 @@ class InitialFatigueDamageRatioD3Plot(KeywordBase):
 
     @neiphd.setter
     def neiphd(self, value: int) -> None:
+        """Set the neiphd property."""
         self._cards[1].set_value("neiphd", value)
 
     @property
@@ -109,5 +114,6 @@ class InitialFatigueDamageRatioD3Plot(KeywordBase):
 
     @neipsd.setter
     def neipsd(self, value: int) -> None:
+        """Set the neipsd property."""
         self._cards[1].set_value("neipsd", value)
 

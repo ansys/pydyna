@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryAcousticPrescribedMotion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryAcousticPrescribedMotion(KeywordBase):
     subkeyword = "ACOUSTIC_PRESCRIBED_MOTION"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryAcousticPrescribedMotion class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -76,6 +78,7 @@ class BoundaryAcousticPrescribedMotion(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -89,6 +92,7 @@ class BoundaryAcousticPrescribedMotion(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
+        """Set the vad property."""
         self._cards[0].set_value("vad", value)
 
     @property
@@ -99,6 +103,7 @@ class BoundaryAcousticPrescribedMotion(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -109,5 +114,6 @@ class BoundaryAcousticPrescribedMotion(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 

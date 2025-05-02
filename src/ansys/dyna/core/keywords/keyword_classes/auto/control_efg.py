@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlEfg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlEfg(KeywordBase):
     subkeyword = "EFG"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlEfg class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -93,6 +95,7 @@ class ControlEfg(KeywordBase):
 
     @isplane.setter
     def isplane(self, value: int) -> None:
+        """Set the isplane property."""
         self._cards[0].set_value("isplane", value)
 
     @property
@@ -105,6 +108,7 @@ class ControlEfg(KeywordBase):
 
     @idila.setter
     def idila(self, value: int) -> None:
+        """Set the idila property."""
         self._cards[0].set_value("idila", value)
 
     @property
@@ -115,6 +119,7 @@ class ControlEfg(KeywordBase):
 
     @inint.setter
     def inint(self, value: int) -> None:
+        """Set the inint property."""
         self._cards[0].set_value("inint", value)
 
     @property
@@ -127,6 +132,7 @@ class ControlEfg(KeywordBase):
 
     @imlm.setter
     def imlm(self, value: int) -> None:
+        """Set the imlm property."""
         self._cards[1].set_value("imlm", value)
 
     @property
@@ -137,5 +143,6 @@ class ControlEfg(KeywordBase):
 
     @etol.setter
     def etol(self, value: float) -> None:
+        """Set the etol property."""
         self._cards[1].set_value("etol", value)
 

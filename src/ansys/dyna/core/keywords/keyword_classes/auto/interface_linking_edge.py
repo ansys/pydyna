@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceLinkingEdge class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceLinkingEdge(KeywordBase):
     subkeyword = "LINKING_EDGE"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceLinkingEdge class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class InterfaceLinkingEdge(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -71,5 +74,6 @@ class InterfaceLinkingEdge(KeywordBase):
 
     @ifid.setter
     def ifid(self, value: int) -> None:
+        """Set the ifid property."""
         self._cards[0].set_value("ifid", value)
 

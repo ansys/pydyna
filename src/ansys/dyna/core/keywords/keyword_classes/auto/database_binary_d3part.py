@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseBinaryD3Part class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseBinaryD3Part(KeywordBase):
     subkeyword = "BINARY_D3PART"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseBinaryD3Part class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -119,6 +121,7 @@ class DatabaseBinaryD3Part(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -129,6 +132,7 @@ class DatabaseBinaryD3Part(KeywordBase):
 
     @lcdt.setter
     def lcdt(self, value: int) -> None:
+        """Set the lcdt property."""
         self._cards[0].set_value("lcdt", value)
 
     @property
@@ -145,6 +149,7 @@ class DatabaseBinaryD3Part(KeywordBase):
 
     @beam.setter
     def beam(self, value: int) -> None:
+        """Set the beam property."""
         self._cards[0].set_value("beam", value)
 
     @property
@@ -155,6 +160,7 @@ class DatabaseBinaryD3Part(KeywordBase):
 
     @npltc.setter
     def npltc(self, value: int) -> None:
+        """Set the npltc property."""
         self._cards[0].set_value("npltc", value)
 
     @property
@@ -165,6 +171,7 @@ class DatabaseBinaryD3Part(KeywordBase):
 
     @psetid.setter
     def psetid(self, value: int) -> None:
+        """Set the psetid property."""
         self._cards[0].set_value("psetid", value)
 
     @property
@@ -175,6 +182,7 @@ class DatabaseBinaryD3Part(KeywordBase):
 
     @hsetid.setter
     def hsetid(self, value: int) -> None:
+        """Set the hsetid property."""
         self._cards[1].set_value("hsetid", value)
 
     @property
@@ -185,6 +193,7 @@ class DatabaseBinaryD3Part(KeywordBase):
 
     @bsetid.setter
     def bsetid(self, value: int) -> None:
+        """Set the bsetid property."""
         self._cards[1].set_value("bsetid", value)
 
     @property
@@ -195,6 +204,7 @@ class DatabaseBinaryD3Part(KeywordBase):
 
     @ssetid.setter
     def ssetid(self, value: int) -> None:
+        """Set the ssetid property."""
         self._cards[1].set_value("ssetid", value)
 
     @property
@@ -205,5 +215,6 @@ class DatabaseBinaryD3Part(KeywordBase):
 
     @tsetid.setter
     def tsetid(self, value: int) -> None:
+        """Set the tsetid property."""
         self._cards[1].set_value("tsetid", value)
 

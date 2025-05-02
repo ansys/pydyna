@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceBlanksizeInitialAdaptive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceBlanksizeInitialAdaptive(KeywordBase):
     subkeyword = "BLANKSIZE_INITIAL_ADAPTIVE"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceBlanksizeInitialAdaptive class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -88,6 +90,7 @@ class InterfaceBlanksizeInitialAdaptive(KeywordBase):
 
     @filename9.setter
     def filename9(self, value: str) -> None:
+        """Set the filename9 property."""
         self._cards[0].set_value("filename9", value)
 
     @property
@@ -101,6 +104,7 @@ class InterfaceBlanksizeInitialAdaptive(KeywordBase):
 
     @filename10.setter
     def filename10(self, value: str) -> None:
+        """Set the filename10 property."""
         self._cards[1].set_value("filename10", value)
 
     @property
@@ -111,6 +115,7 @@ class InterfaceBlanksizeInitialAdaptive(KeywordBase):
 
     @filename11.setter
     def filename11(self, value: str) -> None:
+        """Set the filename11 property."""
         self._cards[2].set_value("filename11", value)
 
     @property
@@ -121,5 +126,6 @@ class InterfaceBlanksizeInitialAdaptive(KeywordBase):
 
     @filename12.setter
     def filename12(self, value: str) -> None:
+        """Set the filename12 property."""
         self._cards[3].set_value("filename12", value)
 

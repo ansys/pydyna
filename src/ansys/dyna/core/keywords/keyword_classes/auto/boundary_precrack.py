@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryPrecrack class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPrecrack(KeywordBase):
     subkeyword = "PRECRACK"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryPrecrack class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -94,6 +96,7 @@ class BoundaryPrecrack(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -105,6 +108,7 @@ class BoundaryPrecrack(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
+        """Set the ctype property."""
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -115,6 +119,7 @@ class BoundaryPrecrack(KeywordBase):
 
     @np.setter
     def np(self, value: int) -> None:
+        """Set the np property."""
         self._cards[0].set_value("np", value)
 
     @property
@@ -125,6 +130,7 @@ class BoundaryPrecrack(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -135,6 +141,7 @@ class BoundaryPrecrack(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[1].set_value("y", value)
 
     @property
@@ -145,5 +152,6 @@ class BoundaryPrecrack(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 

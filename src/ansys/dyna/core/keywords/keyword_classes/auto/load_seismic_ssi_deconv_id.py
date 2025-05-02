@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadSeismicSsiDeconvId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
     subkeyword = "SEISMIC_SSI_DECONV_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadSeismicSsiDeconvId class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -184,6 +186,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -194,6 +197,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -204,6 +208,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[1].set_value("ssid", value)
 
     @property
@@ -214,6 +219,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[1].set_value("xp", value)
 
     @property
@@ -224,6 +230,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[1].set_value("yp", value)
 
     @property
@@ -234,6 +241,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[1].set_value("zp", value)
 
     @property
@@ -244,6 +252,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @gmx.setter
     def gmx(self, value: int) -> None:
+        """Set the gmx property."""
         self._cards[1].set_value("gmx", value)
 
     @property
@@ -254,6 +263,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @gmy.setter
     def gmy(self, value: int) -> None:
+        """Set the gmy property."""
         self._cards[1].set_value("gmy", value)
 
     @property
@@ -264,6 +274,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @gmz.setter
     def gmz(self, value: int) -> None:
+        """Set the gmz property."""
         self._cards[1].set_value("gmz", value)
 
     @property
@@ -274,6 +285,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[2].set_value("sf", value)
 
     @property
@@ -284,6 +296,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[2].set_value("cid", value)
 
     @property
@@ -294,6 +307,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[2].set_value("birth", value)
 
     @property
@@ -304,6 +318,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[2].set_value("death", value)
 
     @property
@@ -316,8 +331,9 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @isg.setter
     def isg(self, value: int) -> None:
+        """Set the isg property."""
         if value not in [0, 1, None]:
-            raise Exception("""isg must be `None` or one of {0,1}""")
+            raise Exception("""isg must be `None` or one of {0,1}.""")
         self._cards[2].set_value("isg", value)
 
     @property
@@ -331,8 +347,9 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @igm.setter
     def igm(self, value: int) -> None:
+        """Set the igm property."""
         if value not in [0, 1, None]:
-            raise Exception("""igm must be `None` or one of {0,1}""")
+            raise Exception("""igm must be `None` or one of {0,1}.""")
         self._cards[2].set_value("igm", value)
 
     @property
@@ -343,6 +360,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @pset.setter
     def pset(self, value: int) -> None:
+        """Set the pset property."""
         self._cards[2].set_value("pset", value)
 
     @property
@@ -359,7 +377,8 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @vdir.setter
     def vdir(self, value: int) -> None:
+        """Set the vdir property."""
         if value not in [3, -1, -2, -3, 1, 2, None]:
-            raise Exception("""vdir must be `None` or one of {3,-1,-2,-3,1,2}""")
+            raise Exception("""vdir must be `None` or one of {3,-1,-2,-3,1,2}.""")
         self._cards[2].set_value("vdir", value)
 

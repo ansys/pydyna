@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlVibroAcoustic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlVibroAcoustic(KeywordBase):
     subkeyword = "VIBRO_ACOUSTIC"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlVibroAcoustic class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -138,8 +140,9 @@ class ControlVibroAcoustic(KeywordBase):
 
     @vaflag.setter
     def vaflag(self, value: int) -> None:
+        """Set the vaflag property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, None]:
-            raise Exception("""vaflag must be `None` or one of {0,1,2,3,4,5,6,7,8,9}""")
+            raise Exception("""vaflag must be `None` or one of {0,1,2,3,4,5,6,7,8,9}.""")
         self._cards[0].set_value("vaflag", value)
 
     @property
@@ -154,8 +157,9 @@ class ControlVibroAcoustic(KeywordBase):
 
     @vaprld.setter
     def vaprld(self, value: int) -> None:
+        """Set the vaprld property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""vaprld must be `None` or one of {0,1,2,3}""")
+            raise Exception("""vaprld must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("vaprld", value)
 
     @property
@@ -168,8 +172,9 @@ class ControlVibroAcoustic(KeywordBase):
 
     @vastrs.setter
     def vastrs(self, value: int) -> None:
+        """Set the vastrs property."""
         if value not in [0, 1, None]:
-            raise Exception("""vastrs must be `None` or one of {0,1}""")
+            raise Exception("""vastrs must be `None` or one of {0,1}.""")
         self._cards[0].set_value("vastrs", value)
 
     @property
@@ -182,8 +187,9 @@ class ControlVibroAcoustic(KeywordBase):
 
     @vapsd.setter
     def vapsd(self, value: int) -> None:
+        """Set the vapsd property."""
         if value not in [0, 1, None]:
-            raise Exception("""vapsd must be `None` or one of {0,1}""")
+            raise Exception("""vapsd must be `None` or one of {0,1}.""")
         self._cards[0].set_value("vapsd", value)
 
     @property
@@ -196,8 +202,9 @@ class ControlVibroAcoustic(KeywordBase):
 
     @varms.setter
     def varms(self, value: int) -> None:
+        """Set the varms property."""
         if value not in [0, 1, None]:
-            raise Exception("""varms must be `None` or one of {0,1}""")
+            raise Exception("""varms must be `None` or one of {0,1}.""")
         self._cards[0].set_value("varms", value)
 
     @property
@@ -210,8 +217,9 @@ class ControlVibroAcoustic(KeywordBase):
 
     @vaplot.setter
     def vaplot(self, value: int) -> None:
+        """Set the vaplot property."""
         if value not in [0, 1, None]:
-            raise Exception("""vaplot must be `None` or one of {0,1}""")
+            raise Exception("""vaplot must be `None` or one of {0,1}.""")
         self._cards[0].set_value("vaplot", value)
 
     @property
@@ -222,6 +230,7 @@ class ControlVibroAcoustic(KeywordBase):
 
     @ipanelu.setter
     def ipanelu(self, value: int) -> None:
+        """Set the ipanelu property."""
         self._cards[0].set_value("ipanelu", value)
 
     @property
@@ -232,6 +241,7 @@ class ControlVibroAcoustic(KeywordBase):
 
     @ipanelv.setter
     def ipanelv(self, value: int) -> None:
+        """Set the ipanelv property."""
         self._cards[0].set_value("ipanelv", value)
 
     @property
@@ -245,8 +255,9 @@ class ControlVibroAcoustic(KeywordBase):
 
     @restart.setter
     def restart(self, value: int) -> None:
+        """Set the restart property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""restart must be `None` or one of {0,1,2,3}""")
+            raise Exception("""restart must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("restart", value)
 
     @property
@@ -257,5 +268,6 @@ class ControlVibroAcoustic(KeywordBase):
 
     @nmodstr.setter
     def nmodstr(self, value: int) -> None:
+        """Set the nmodstr property."""
         self._cards[1].set_value("nmodstr", value)
 

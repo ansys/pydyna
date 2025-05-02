@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmEosBurgess class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEosBurgess(KeywordBase):
     subkeyword = "EOS_BURGESS"
 
     def __init__(self, **kwargs):
+        """Initialize the EmEosBurgess class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -158,6 +160,7 @@ class EmEosBurgess(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -168,6 +171,7 @@ class EmEosBurgess(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[0].set_value("v0", value)
 
     @property
@@ -178,6 +182,7 @@ class EmEosBurgess(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[0].set_value("gamma", value)
 
     @property
@@ -188,6 +193,7 @@ class EmEosBurgess(KeywordBase):
 
     @theta.setter
     def theta(self, value: float) -> None:
+        """Set the theta property."""
         self._cards[0].set_value("theta", value)
 
     @property
@@ -198,6 +204,7 @@ class EmEosBurgess(KeywordBase):
 
     @lf.setter
     def lf(self, value: float) -> None:
+        """Set the lf property."""
         self._cards[0].set_value("lf", value)
 
     @property
@@ -208,6 +215,7 @@ class EmEosBurgess(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[0].set_value("c1", value)
 
     @property
@@ -218,6 +226,7 @@ class EmEosBurgess(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[0].set_value("c2", value)
 
     @property
@@ -228,6 +237,7 @@ class EmEosBurgess(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[0].set_value("c3", value)
 
     @property
@@ -238,6 +248,7 @@ class EmEosBurgess(KeywordBase):
 
     @c4.setter
     def c4(self, value: float) -> None:
+        """Set the c4 property."""
         self._cards[1].set_value("c4", value)
 
     @property
@@ -248,6 +259,7 @@ class EmEosBurgess(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[1].set_value("k", value)
 
     @property
@@ -258,6 +270,7 @@ class EmEosBurgess(KeywordBase):
 
     @expon.setter
     def expon(self, value: int) -> None:
+        """Set the expon property."""
         self._cards[1].set_value("expon", value)
 
     @property
@@ -268,6 +281,7 @@ class EmEosBurgess(KeywordBase):
 
     @lgtunit.setter
     def lgtunit(self, value: float) -> None:
+        """Set the lgtunit property."""
         self._cards[1].set_value("lgtunit", value)
 
     @property
@@ -278,6 +292,7 @@ class EmEosBurgess(KeywordBase):
 
     @timunit.setter
     def timunit(self, value: float) -> None:
+        """Set the timunit property."""
         self._cards[1].set_value("timunit", value)
 
     @property
@@ -291,8 +306,9 @@ class EmEosBurgess(KeywordBase):
 
     @temuni.setter
     def temuni(self, value: int) -> None:
+        """Set the temuni property."""
         if value not in [1, 2, None]:
-            raise Exception("""temuni must be `None` or one of {1,2}""")
+            raise Exception("""temuni must be `None` or one of {1,2}.""")
         self._cards[1].set_value("temuni", value)
 
     @property
@@ -306,7 +322,8 @@ class EmEosBurgess(KeywordBase):
 
     @adjust.setter
     def adjust(self, value: int) -> None:
+        """Set the adjust property."""
         if value not in [0, 1, None]:
-            raise Exception("""adjust must be `None` or one of {0,1}""")
+            raise Exception("""adjust must be `None` or one of {0,1}.""")
         self._cards[1].set_value("adjust", value)
 
