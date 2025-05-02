@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the AIRBAG keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
     subkeyword = "ADIABATIC_GAS_MODEL_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the AIRBAG keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -175,6 +177,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -185,6 +188,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -195,6 +199,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[1].set_value("sid", value)
 
     @property
@@ -207,8 +212,9 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
+        """Set the sidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}""")
+            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("sidtyp", value)
 
     @property
@@ -222,6 +228,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @rbid.setter
     def rbid(self, value: int) -> None:
+        """Set the rbid property."""
         self._cards[1].set_value("rbid", value)
 
     @property
@@ -232,6 +239,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @vsca.setter
     def vsca(self, value: float) -> None:
+        """Set the vsca property."""
         self._cards[1].set_value("vsca", value)
 
     @property
@@ -242,6 +250,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @psca.setter
     def psca(self, value: float) -> None:
+        """Set the psca property."""
         self._cards[1].set_value("psca", value)
 
     @property
@@ -252,6 +261,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @vini.setter
     def vini(self, value: float) -> None:
+        """Set the vini property."""
         self._cards[1].set_value("vini", value)
 
     @property
@@ -262,6 +272,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @mwd.setter
     def mwd(self, value: float) -> None:
+        """Set the mwd property."""
         self._cards[1].set_value("mwd", value)
 
     @property
@@ -272,6 +283,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @spsf.setter
     def spsf(self, value: float) -> None:
+        """Set the spsf property."""
         self._cards[1].set_value("spsf", value)
 
     @property
@@ -282,6 +294,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @psf.setter
     def psf(self, value: float) -> None:
+        """Set the psf property."""
         self._cards[2].set_value("psf", value)
 
     @property
@@ -292,6 +305,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[2].set_value("lcid", value)
 
     @property
@@ -302,6 +316,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[2].set_value("gamma", value)
 
     @property
@@ -312,6 +327,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @po.setter
     def po(self, value: float) -> None:
+        """Set the po property."""
         self._cards[2].set_value("po", value)
 
     @property
@@ -322,6 +338,7 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @pe.setter
     def pe(self, value: float) -> None:
+        """Set the pe property."""
         self._cards[2].set_value("pe", value)
 
     @property
@@ -332,5 +349,6 @@ class AirbagAdiabaticGasModelId(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[2].set_value("ro", value)
 
