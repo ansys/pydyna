@@ -43,20 +43,34 @@ class WindowsRunner(BaseRunner):
         """Initialize WindowsRunner."""
         super().__init__(**kwargs)
         version = kwargs.get("version", None)
-        self._find_solver(version)
+        executable = kwargs.get("executable", None)
+        self._find_solver(version, executable)
 
     def set_input(self, input_file: str, working_directory: str) -> None:
         """Set input file and working directory."""
         self.input_file = input_file
         self.working_directory = working_directory
 
-    def _find_solver(self, version: int) -> None:
+    def _find_solver(self, version: int, executable: str = None) -> None:
         """Find LS-DYNA solver location."""
-        if version is not None:
+        if executable is not None:
+            # User passed in executable directly. Use that.
+            if os.path.isfile(executable):
+                self.solver= f'"{executable}"'
+                self.solver_location = os.path.dirname(executable)
+            else:
+                raise FileNotFoundError(f"Executable not found: {executable}")
+    
+        
+        elif version is not None:
             install_loc, _ = _get_unified_install_base_for_version(version)
+            self.solver_location = os.path.join(install_loc, "ansys", "bin", "winx64")
+            self.solver = f'"{self._get_executable()}"'
         else:
             _, install_loc = get_latest_ansys_installation()
-        self.solver_location = os.path.join(install_loc, "ansys", "bin", "winx64")
+            self.solver_location = os.path.join(install_loc, "ansys", "bin", "winx64")
+            self.solver = f'"{self._get_executable()}"'
+
 
     def _get_env_script(self) -> str:
         """Get env script when running using lsrun from workbench."""
@@ -108,19 +122,18 @@ class WindowsRunner(BaseRunner):
     def _get_command_line(self) -> str:
         """Get the command line to run LS-DYNA."""
         script = f'call "{self._get_env_script()}"'
-        solver = f'"{self._get_executable()}"'
         ncpu = self.ncpu
         mem = self.get_memory_string()
         input_file = self.input_file
         if self.mpi_option == MpiOption.SMP:
-            command = f"{solver} i={input_file} ncpu={ncpu} memory={mem}"
+            command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem}"
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
             # -wdir is used here because sometimes mpiexec does not pass its working directory
             # to dyna on windows when run from python subprocess
             command = (
-                f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {solver} i={input_file} memory={mem}'
+                f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}'
             )
         elif self.mpi_option == MpiOption.MPP_MS_MPI:
-            command = f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {solver} i={input_file} memory={mem}'
+            command = f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}'
 
         return f"{script} && {command} > lsrun.out.txt 2>&1"
