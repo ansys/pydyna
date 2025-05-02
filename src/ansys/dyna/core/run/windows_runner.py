@@ -24,6 +24,7 @@
 
 import os
 import subprocess
+from pathlib import Path
 
 from ansys.tools.path import get_latest_ansys_installation
 from ansys.tools.path.path import _get_unified_install_base_for_version
@@ -52,24 +53,33 @@ class WindowsRunner(BaseRunner):
         self.working_directory = working_directory
 
     def _find_solver(self, version: int, executable: str = None) -> None:
-        """Find LS-DYNA solver location."""
-        if executable is not None:
-            # User passed in executable directly. Use that.
-            if os.path.isfile(executable):
-                self.solver= f'"{executable}"'
-                self.solver_location = os.path.dirname(executable)
-            else:
-                raise FileNotFoundError(f"Executable not found: {executable}")
-    
+        """Find LS-DYNA solver location.
         
-        elif version is not None:
-            install_loc, _ = _get_unified_install_base_for_version(version)
-            self.solver_location = os.path.join(install_loc, "ansys", "bin", "winx64")
-            self.solver = f'"{self._get_executable()}"'
+        Priority:
+        1. if an executable path is explicitly passed,validate it and use it.
+        2. if version is passed, use the version to find the solver location.
+        3. if no version is passed, use the latest version installed on the system.
+        """
+        if executable:
+            exe_path = Path(executable)
+            if exe_path.is_file():
+                self.solver_location = str(exe_path.parent)
+                self.solver = f'"{str(exe_path)}"'
+                return
+            raise FileNotFoundError(f"Specified executable not found: {executable}")
+        
+        if version:
+            install_base, _ = _get_unified_install_base_for_version(version)
         else:
-            _, install_loc = get_latest_ansys_installation()
-            self.solver_location = os.path.join(install_loc, "ansys", "bin", "winx64")
-            self.solver = f'"{self._get_executable()}"'
+            _, install_base = get_latest_ansys_installation()
+            
+        solver_dir = Path(install_base) / "ansys" / "bin" / "winx64"
+        solver_exe = solver_dir / self._get_exe_name()
+        if not solver_exe.is_file():
+            raise FileNotFoundError(f"LS-DYNA executable not found: {solver_exe}")
+        
+        self.solver_location = str(solver_dir)
+        self.solver = f'"{str(solver_exe)}"'
 
 
     def _get_env_script(self) -> str:
@@ -93,9 +103,6 @@ class WindowsRunner(BaseRunner):
             (MpiOption.MPP_MS_MPI, Precision.DOUBLE): "lsdyna_mpp_dp_msmpi.exe",
         }[(self.mpi_option, self.precision)]
         return exe_name
-
-    def _get_executable(self) -> str:
-        return os.path.join(self.solver_location, self._get_exe_name())
 
     def _write_runscript(self) -> None:
         with open(os.path.join(self.working_directory, self._scriptname), "w") as f:
