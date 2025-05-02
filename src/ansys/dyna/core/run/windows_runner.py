@@ -56,12 +56,11 @@ class WindowsRunner(BaseRunner):
         if executable is not None:
             # User passed in executable directly. Use that.
             if os.path.isfile(executable):
-                self.solver= f'"{executable}"'
+                self.solver = f'"{executable}"'
                 self.solver_location = os.path.dirname(executable)
             else:
                 raise FileNotFoundError(f"Executable not found: {executable}")
-    
-        
+
         elif version is not None:
             install_loc, _ = _get_unified_install_base_for_version(version)
             self.solver_location = os.path.join(install_loc, "ansys", "bin", "winx64")
@@ -70,7 +69,6 @@ class WindowsRunner(BaseRunner):
             _, install_loc = get_latest_ansys_installation()
             self.solver_location = os.path.join(install_loc, "ansys", "bin", "winx64")
             self.solver = f'"{self._get_executable()}"'
-
 
     def _get_env_script(self) -> str:
         """Get env script when running using lsrun from workbench."""
@@ -130,10 +128,10 @@ class WindowsRunner(BaseRunner):
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
             # -wdir is used here because sometimes mpiexec does not pass its working directory
             # to dyna on windows when run from python subprocess
-            command = (
-                f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}'
-            )
+            command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}'
         elif self.mpi_option == MpiOption.MPP_MS_MPI:
-            command = f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}'
+            command = (
+                f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}'
+            )
 
         return f"{script} && {command} > lsrun.out.txt 2>&1"
