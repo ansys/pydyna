@@ -1,7 +1,7 @@
 .. _getting_started_pydyna_keywords:
 
-PyDyna Keywords
-===============
+Keywords
+=========
 
 The ``keywords`` module can be used to interact with LS-DYNA keywords.
 

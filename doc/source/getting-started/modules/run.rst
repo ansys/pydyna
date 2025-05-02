@@ -1,5 +1,5 @@
-PyDYNA run
-==========
+Run
+====
 
 Use PyDYNA to run LSDYNA locally
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

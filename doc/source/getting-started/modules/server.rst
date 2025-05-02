@@ -1,5 +1,5 @@
-PyDYNA Server
-=============
+Server
+=======
 
 Run PyDYNA server locally
 -------------------------
