@@ -17,6 +17,7 @@
 
     @{{card.variable.name}}.setter
     def {{card.variable.name}}(self, value: typing.List) -> None:
+        """Sets the {{card.variable.name}} from the list value."""
         self._cards[{{card.index}}].data = value
 
 {% elif card.set %}
@@ -32,12 +33,12 @@
 {% elif card.duplicate_group %}
     @property
     def {{card.overall_name}}(self):
-        """Gets the full table of {{card.overall_name}}"""
+        """Gets the full table of {{card.overall_name}}."""
         return self._cards[{{card.index}}].table
 
     @{{card.overall_name}}.setter
     def {{card.overall_name}}(self, df):
-        """sets {{card.overall_name}} from the dataframe df"""
+        """sets {{card.overall_name}} from the dataframe df."""
         self._cards[{{card.index}}].table = df
 
 {% elif card.external %}
@@ -56,9 +57,7 @@
 {% if not field.readonly %}
     @{{field.property_name}}.setter
     def {{field.property_name}}(self, value: {{field.type}}) -> None:
-        """Set the {% filter indent(width=8) %}{{field.help}}
-        {% endfilter %}
-        """ # nopep8
+        """Set the {{field.property_name}} to the value."""
         {% if field.options is defined %}
         if value not in [{{ field.options|join(', ')}}, None]:
             raise Exception("""{{field.property_name}} must be `None` or one of {{openbrace}}{{ field.options|join(',')}}{{closebrace}}""")
