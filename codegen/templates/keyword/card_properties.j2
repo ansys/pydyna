@@ -1,12 +1,12 @@
 {% if card.duplicate %}
     @property
     def {{card.duplicate.name}}(self):
-        """Gets the table of {{card.duplicate.name}}."""
+        """Get the table of {{card.duplicate.name}}."""
         return self._cards[{{card.index}}].table
 
     @{{card.duplicate.name}}.setter
     def {{card.duplicate.name}}(self, df):
-        """sets {{card.duplicate.name}} from the dataframe df"""
+        """Set {{card.duplicate.name}} from the dataframe df"""
         self._cards[{{card.index}}].table = df
 
 {% elif card.variable %}

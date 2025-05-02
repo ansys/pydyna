@@ -40,7 +40,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.{{link.modulename}} import {{
 {% if keyword_data.card_sets %}
 {% for card_set in keyword_data.card_sets.sets %}
 class {{card_set.name}}(Cards):
-    """DYNA {{card_set.title}} keyword."""
+    """{{card_set.title}} CardSet."""
 {% if card_set.options %}
 
     option_specs = [
@@ -51,7 +51,7 @@ class {{card_set.name}}(Cards):
 {% endif %}
 
     def __init__(self, **kwargs):
-        """Initialize the {{card_set.name}} keyword."""
+        """Initialize the {{card_set.name}} CardSet."""
         super().__init__(kwargs["keyword"])
         self._parent = kwargs["parent"]
         kwargs["parent"] = self

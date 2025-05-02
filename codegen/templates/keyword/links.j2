@@ -12,7 +12,7 @@
 
     @{{field}}_link.setter
     def {{field}}_link(self, value: {{link.classname}}) -> None:
-        """Set the {{field}} property from the {{link.classname}} object."""
+        """Set the {{link.classname}} object for {{field}}."""
         self.{{field}} = value.{{link.linkid}}
 
 {% endfor %}{# field in link.fields #}
