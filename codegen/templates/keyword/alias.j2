@@ -1,5 +1,6 @@
 {% if alias %}
 
 class {{alias}}({{keyword_data.classname}}):
+    """Alias for {{keyword_data.keyword}} keyword."""
     subkeyword = "{{alias_subkeyword}}"
 {% endif %}
